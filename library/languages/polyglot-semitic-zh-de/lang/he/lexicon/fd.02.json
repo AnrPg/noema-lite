@@ -48,8 +48,8 @@
     ],
     "examples": [
      {
-      "text": "שָׁלוֹם, אֲנִי דָּוִד.",
-      "tr": "Hello, I’m David.",
+      "text": "שָׁלוֹם, אֲנִי יוֹסִי.",
+      "tr": "Hello, I’m Yossi.",
       "register": "neutral",
       "context": "introductions",
       "sense": "s1"
@@ -267,8 +267,8 @@
     ],
     "examples": [
      {
-      "text": "בֹּקֶר טוֹב, שָׂרָה! בֹּקֶר אוֹר, דָּוִד!",
-      "tr": "Good morning, Sarah! — Good morning, David!",
+      "text": "בֹּקֶר טוֹב, שָׂרָה! בֹּקֶר אוֹר, יוֹסִי!",
+      "tr": "Good morning, Sarah! — Good morning, Yossi!",
       "register": "neutral",
       "context": "meeting",
       "sense": "s1"
@@ -493,8 +493,8 @@
       "sense": "s1"
      },
      {
-      "text": "לְהִתְרָאוֹת, דָּוִד!",
-      "tr": "Goodbye, David!",
+      "text": "לְהִתְרָאוֹת, יוֹסִי!",
+      "tr": "Goodbye, Yossi!",
       "register": "neutral",
       "context": "leaving",
       "sense": "s1"
@@ -672,8 +672,8 @@
     ],
     "examples": [
      {
-      "text": "שָׁלוֹם, דָּוִד! מַה שְּׁלוֹמְךָ?",
-      "tr": "Hello, David! How are you?",
+      "text": "שָׁלוֹם, יוֹסִי! מַה שְּׁלוֹמְךָ?",
+      "tr": "Hello, Yossi! How are you?",
       "register": "neutral",
       "context": "meeting",
       "sense": "s1"
@@ -898,6 +898,7 @@
    "senses": [
     "greet.fine"
    ],
+   "class": "inv",
    "translit": "beseder",
    "note": "Invariable: the same form for a man, a woman and a group.",
    "ref": {
@@ -1061,8 +1062,8 @@
       "sense": "s1"
      },
      {
-      "text": "שָׁלוֹם, קוֹרְאִים לִי דָּוִד, אֲנִי סְטוּדֶנְט.",
-      "tr": "Hi, my name is David, I’m a student.",
+      "text": "שָׁלוֹם, קוֹרְאִים לִי יוֹסִי, אֲנִי סְטוּדֶנְט.",
+      "tr": "Hi, my name is Yossi, I’m a student.",
       "register": "neutral",
       "context": "class",
       "sense": "s1"
@@ -1142,8 +1143,8 @@
     ],
     "examples": [
      {
-      "text": "שְׁמִי דָּוִד כֹּהֵן.",
-      "tr": "My name is David Cohen.",
+      "text": "שְׁמִי יוֹסִי כֹּהֵן.",
+      "tr": "My name is Yossi Cohen.",
       "register": "formal",
       "context": "formal letter",
       "sense": "s1"
@@ -1232,8 +1233,8 @@
       "sense": "s1"
      },
      {
-      "text": "זֶה דָּוִד. נָעִים מְאוֹד!",
-      "tr": "This is David. — Nice to meet you!",
+      "text": "זֶה יוֹסִי. נָעִים מְאוֹד!",
+      "tr": "This is Yossi. — Nice to meet you!",
       "register": "neutral",
       "context": "party",
       "sense": "s1"

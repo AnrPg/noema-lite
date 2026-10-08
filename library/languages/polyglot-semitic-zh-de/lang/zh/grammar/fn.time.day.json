@@ -1,0 +1,368 @@
+{
+ "function": "fn.time.day",
+ "status": "realized",
+ "summary": "The time of an action stands BEFORE the verb — at the very start of the sentence or right after the subject, never at the end: 我明天去北京 or 明天我去北京 ‘I’m going to Beijing tomorrow’. No preposition is needed: 星期一我工作 ‘on Monday I work’, 晚上我们在家 ‘in the evening we’re at home’. Several time words go from big to small: 明天下午三点 ‘tomorrow at 3 p.m.’, 星期五晚上 ‘Friday evening’. Days are numbered from Monday: 星期一 (1) … 星期六 (6), and Sunday is 星期天 / 星期日; ‘which day?’ is 星期几. A day or date can be the predicate without 是: 今天星期三. Frequency words — 总是 always, 常常 / 经常 often, 有时候 sometimes, 每天 every day — also stand before the verb, and so do 现在 now, 马上 at once, 等一下 / 以后 later. The verb itself never changes: 昨天, 今天 and 明天 alone place the action in time.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "(time)",
+    "subject",
+    "(time)",
+    "(how often)",
+    "verb",
+    "object"
+   ],
+   "caption": "明天 我 去北京 · 我 明天 去北京 · 我 常常 去公园"
+  },
+  {
+   "t": "table",
+   "head": [
+    "English / Greek",
+    "Chinese",
+    "Note"
+   ],
+   "rows": [
+    [
+     "I’m going to Beijing tomorrow. — Πάω στο Πεκίνο αύριο.",
+     "我明天去北京。 / 明天我去北京。",
+     "time before the verb — never at the end"
+    ],
+    [
+     "On Monday I work. — Τη Δευτέρα δουλεύω.",
+     "星期一我工作。",
+     "no word for ‘on’ (Greek, too, says just τη Δευτέρα)"
+    ],
+    [
+     "In the evening we eat at home. — Το βράδυ τρώμε στο σπίτι.",
+     "晚上我们在家吃饭。",
+     "time before place: 晚上 + 在家"
+    ],
+    [
+     "tomorrow at 3 p.m. — αύριο στις τρεις το απόγευμα",
+     "明天下午三点",
+     "big → small"
+    ],
+    [
+     "Today is Wednesday. — Σήμερα είναι Τετάρτη.",
+     "今天星期三。",
+     "是 can drop with days and dates"
+    ],
+    [
+     "I often go to the park. — Πηγαίνω συχνά στο πάρκο.",
+     "我常常去公园。",
+     "how often: before the verb"
+    ],
+    [
+     "I’m busy now. — Είμαι απασχολημένος τώρα.",
+     "我现在很忙。",
+     "现在 before the predicate"
+    ]
+   ],
+   "caption": "When: before the verb"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
+   ],
+   "rows": [
+    [
+     "星期一",
+     "星期二",
+     "星期三",
+     "星期四",
+     "星期五",
+     "星期六",
+     "星期天 / 星期日"
+    ],
+    [
+     "周一",
+     "周二",
+     "周三",
+     "周四",
+     "周五",
+     "周六",
+     "周日"
+    ]
+   ],
+   "caption": "The week: numbered from Monday (周一 … is the written short form)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Part of the day",
+    "Chinese",
+    "Roughly"
+   ],
+   "rows": [
+    [
+     "early morning",
+     "早上",
+     "getting up – 9"
+    ],
+    [
+     "morning (a.m.)",
+     "上午",
+     "9 – 12"
+    ],
+    [
+     "noon",
+     "中午",
+     "11 – 13"
+    ],
+    [
+     "afternoon (p.m.)",
+     "下午",
+     "13 – 18"
+    ],
+    [
+     "evening, night",
+     "晚上",
+     "18 – bedtime"
+    ],
+    [
+     "in the night",
+     "夜里",
+     "the late hours"
+    ]
+   ],
+   "caption": "The day"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Monday is ONE",
+   "text": "Greek Δευτέρα ‘second’, Hebrew יוֹם שֵׁנִי and Arabic الاثنين count from Sunday; Chinese counts from Monday: 星期一 = Monday, 星期二 = Tuesday. Russian вторник ‘second’ = 星期二 — the same count as Chinese."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Never at the end",
+   "text": "*我去北京明天 copies English ‘I go to Beijing tomorrow’. Chinese: 我明天去北京. The time frames the action, so it comes first."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "每天 / 天天 — every day",
+     "points": [
+      "我每天跑步。 I run every day.",
+      "每 + 天 / 个 + noun: 每个星期一"
+     ]
+    },
+    {
+     "title": "常常 / 经常 — often",
+     "points": [
+      "我常常去公园。",
+      "negation: 不常 ‘not often’"
+     ]
+    },
+    {
+     "title": "有时候 — sometimes",
+     "points": [
+      "有时候我走路。",
+      "有时候 … 有时候 … ‘sometimes … sometimes …’"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No tense: the time word does the work",
+   "text": "昨天我在家 ‘yesterday I was at home’, 今天我在家 ‘today I’m at home’, 明天我在家 ‘tomorrow I’ll be at home’ — 在 never changes. (For a completed action Chinese adds 了 — see the aspect page.)"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking about time",
+   "text": "今天星期几？ ‘what day is it?’ — 星期四。 · 你什么时候去？ — 明天下午。 · 你常常来吗？ The question word stands where the answer stands."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Does my sentence say when? → put the time word before the verb — at the start or after the subject.",
+   "Several time words? → big to small: day → part of the day → hour (明天下午三点).",
+   "Time and place? → time first, then 在 + place, then the verb (晚上我们在家吃饭).",
+   "Which day? → 星期 + 1–6, Sunday 星期天 / 星期日; ask 星期几.",
+   "Did I add ‘on / in / at’? → remove it: 星期一我工作.",
+   "How often? → 总是 / 常常 / 经常 / 有时候 / 每天 before the verb (after the subject).",
+   "Did I put the time at the end, as in English or Greek? → move it forward."
+  ],
+  "steps": [
+   "Subject and time (either order).",
+   "Frequency word.",
+   "(Place.)",
+   "Verb + object."
+  ]
+ },
+ "traps": [
+  "*我去北京明天 → 我明天去北京.",
+  "*在星期一我工作 (in speech) → 星期一我工作.",
+  "星期一 is Monday — not Greek Δευτέρα ‘second’ = *星期二.",
+  "*星期七 → 星期天 / 星期日.",
+  "*星期两 → 星期二.",
+  "*我们在家晚上吃饭 → 晚上我们在家吃饭 (time before place).",
+  "*三个天 → 三天 (天 counts by itself).",
+  "早上好 is the greeting; ‘in the morning’ is just 早上: 我早上喝茶."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:xingqiyi",
+   "zh:xingqier",
+   "zh:xingqisan",
+   "zh:xingqisi",
+   "zh:xingqiwu",
+   "zh:xingqiliu",
+   "zh:xingqitian",
+   "zh:xingqiri",
+   "zh:xingqi",
+   "zh:zhoumo",
+   "zh:tian",
+   "zh:yeli",
+   "zh:zaoshang",
+   "zh:shangwu",
+   "zh:zhongwu",
+   "zh:xiawu",
+   "zh:wanshang",
+   "zh:jintian",
+   "zh:mingtian",
+   "zh:zuotian",
+   "zh:xianzai",
+   "zh:yihou",
+   "zh:dengyixia",
+   "zh:mashang",
+   "zh:yihui",
+   "zh:zao",
+   "zh:wan.late",
+   "zh:zongshi",
+   "zh:changchang",
+   "zh:jingchang",
+   "zh:youshihou",
+   "zh:mei.every"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘I’m going to Beijing tomorrow.’",
+   "options": [
+    "我明天去北京。",
+    "我去北京明天。",
+    "我去明天北京。"
+   ],
+   "answer": "我明天去北京。",
+   "why": "Time before the verb, never at the end."
+  },
+  {
+   "q": "Which day is 星期一?",
+   "options": [
+    "Monday",
+    "Sunday",
+    "Tuesday"
+   ],
+   "answer": "Monday",
+   "why": "Chinese counts from Monday = 1."
+  },
+  {
+   "q": "‘What day is it today?’",
+   "options": [
+    "今天星期几？",
+    "今天几星期？",
+    "星期几今天是？"
+   ],
+   "answer": "今天星期几？",
+   "why": "几 takes the place of the day’s number."
+  },
+  {
+   "q": "‘On Sunday I’m at home.’",
+   "options": [
+    "星期天我在家。",
+    "在星期天我在家。",
+    "我在家星期天。"
+   ],
+   "answer": "星期天我在家。",
+   "why": "No preposition; the day stands first (or after 我)."
+  },
+  {
+   "q": "‘tomorrow at 3 p.m.’",
+   "options": [
+    "明天下午三点",
+    "三点下午明天",
+    "下午三点明天"
+   ],
+   "answer": "明天下午三点",
+   "why": "Big to small: day, part of the day, hour."
+  },
+  {
+   "q": "‘I often take the bus.’",
+   "options": [
+    "我常常坐公共汽车。",
+    "我坐公共汽车常常。",
+    "常常坐我公共汽车。"
+   ],
+   "answer": "我常常坐公共汽车。",
+   "why": "Frequency words stand before the verb."
+  },
+  {
+   "q": "‘In the evening we eat at home.’",
+   "options": [
+    "晚上我们在家吃饭。",
+    "我们在家吃饭晚上。",
+    "我们在家晚上吃饭。"
+   ],
+   "answer": "晚上我们在家吃饭。",
+   "why": "Time first, then the place, then the verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.time.day",
+   "note": "German uses am (am Montag, am Abend) and in der Nacht but nothing with heute / morgen / gestern; it often opens with the time and keeps the verb second (Morgen fahre ich nach Peking). Chinese needs no preposition and puts the verb after the time: 明天我去北京."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.time.day",
+   "note": "Arabic days count from Sunday (الأحد ‘the first’, الاثنين ‘the second’ = Monday), so الاثنين = 星期一; ‘on Monday’ is يَوْمَ الِاثْنَيْنِ, an accusative of time without a preposition — like Chinese, but with a case ending."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.time.day",
+   "note": "Hebrew days are numbered from Sunday (יוֹם רִאשׁוֹן … יוֹם שִׁשִּׁי, then שַׁבָּת), so יוֹם שֵׁנִי ‘the second day’ = 星期一 ‘week-one’; ‘on Monday’ is בְּיוֹם שֵׁנִי with בְּ־, where Chinese uses nothing."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.aspect",
+   "note": "Time words say WHEN; 了 / 过 / 在 say whether the action is done, experienced or going on."
+  }
+ ]
+}

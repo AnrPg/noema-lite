@@ -1,0 +1,479 @@
+{
+ "function": "fn.numerals",
+ "status": "realized",
+ "summary": "Hebrew numbers have gender. From 1 to 19 every number has a masculine and a feminine form, chosen by the gender of the noun you count: שְׁלוֹשָׁה סְפָרִים “three books” (סֵפֶר is masculine), שָׁלוֹשׁ מִטּוֹת “three beds” (מִטָּה is feminine). Surprisingly, for 3–10 the form with the ending -ָה, which looks feminine, goes with masculine nouns — an old Semitic pattern that Arabic shares. When you simply count (and in phone numbers, prices and sums) you use the feminine: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ, אַרְבַּע … The number stands before the noun, except אֶחָד / אַחַת, which follows it like an adjective (סֵפֶר אֶחָד). Two has a short (construct) form before nouns: שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת. Before a definite masculine noun, 3–10 take a construct form in -ֶת: שְׁלוֹשֶׁת הַסְּפָרִים “the three books”. The tens (עֶשְׂרִים, שְׁלוֹשִׁים …) never change, and 21 is said ten first: עֶשְׂרִים וְאַחַת. מֵאָה “100” and אֶלֶף “1000” have a dual for 200 and 2000 (מָאתַיִם, אַלְפַּיִם): the dual ending -ַיִם is still alive for “two” of a few things (יוֹמַיִם “two days”). From 2 on, the counted noun is plural.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "with a masculine noun",
+    "with a feminine noun",
+    "before a definite masculine noun"
+   ],
+   "rows": [
+    [
+     "1",
+     "סֵפֶר אֶחָד (after the noun)",
+     "מִטָּה אַחַת (after the noun)",
+     "—"
+    ],
+    [
+     "2",
+     "שְׁנֵי סְפָרִים (alone: שְׁנַיִם)",
+     "שְׁתֵּי מִטּוֹת (alone: שְׁתַּיִם)",
+     "שְׁנֵי הַסְּפָרִים"
+    ],
+    [
+     "3",
+     "שְׁלוֹשָׁה סְפָרִים",
+     "שָׁלוֹשׁ מִטּוֹת",
+     "שְׁלוֹשֶׁת הַסְּפָרִים"
+    ],
+    [
+     "4",
+     "אַרְבָּעָה",
+     "אַרְבַּע",
+     "אַרְבַּעַת"
+    ],
+    [
+     "5",
+     "חֲמִשָּׁה",
+     "חָמֵשׁ",
+     "חֲמֵשֶׁת"
+    ],
+    [
+     "6",
+     "שִׁשָּׁה",
+     "שֵׁשׁ",
+     "שֵׁשֶׁת"
+    ],
+    [
+     "7",
+     "שִׁבְעָה",
+     "שֶׁבַע",
+     "שִׁבְעַת"
+    ],
+    [
+     "8",
+     "שְׁמוֹנָה",
+     "שְׁמוֹנֶה",
+     "שְׁמוֹנַת"
+    ],
+    [
+     "9",
+     "תִּשְׁעָה",
+     "תֵּשַׁע",
+     "תִּשְׁעַת"
+    ],
+    [
+     "10",
+     "עֲשָׂרָה",
+     "עֶשֶׂר",
+     "עֲשֶׂרֶת"
+    ]
+   ],
+   "caption": "Zero is אֶפֶס. The feminine column is also the counting form: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "11",
+     "אַחַד עָשָׂר",
+     "אַחַת עֶשְׂרֵה"
+    ],
+    [
+     "12",
+     "שְׁנֵים עָשָׂר",
+     "שְׁתֵּים עֶשְׂרֵה"
+    ],
+    [
+     "13",
+     "שְׁלוֹשָׁה עָשָׂר",
+     "שְׁלוֹשׁ עֶשְׂרֵה"
+    ],
+    [
+     "14",
+     "אַרְבָּעָה עָשָׂר",
+     "אַרְבַּע עֶשְׂרֵה"
+    ],
+    [
+     "15",
+     "חֲמִשָּׁה עָשָׂר",
+     "חֲמֵשׁ עֶשְׂרֵה"
+    ],
+    [
+     "16",
+     "שִׁשָּׁה עָשָׂר",
+     "שֵׁשׁ עֶשְׂרֵה"
+    ],
+    [
+     "17",
+     "שִׁבְעָה עָשָׂר",
+     "שְׁבַע עֶשְׂרֵה"
+    ],
+    [
+     "18",
+     "שְׁמוֹנָה עָשָׂר",
+     "שְׁמוֹנֶה עֶשְׂרֵה"
+    ],
+    [
+     "19",
+     "תִּשְׁעָה עָשָׂר",
+     "תְּשַׁע עֶשְׂרֵה"
+    ]
+   ],
+   "caption": "11–19: the unit + עָשָׂר (masculine) or עֶשְׂרֵה (feminine). In the feminine some units shorten: שְׁלוֹשׁ, חֲמֵשׁ, שְׁבַע, תְּשַׁע."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "number",
+    "how it works"
+   ],
+   "rows": [
+    [
+     "20 · 30 · 40",
+     "עֶשְׂרִים · שְׁלוֹשִׁים · אַרְבָּעִים",
+     "one form for both genders"
+    ],
+    [
+     "50 · 60 · 70",
+     "חֲמִשִּׁים · שִׁשִּׁים · שִׁבְעִים",
+     "the plural ending -ִים on the unit"
+    ],
+    [
+     "80 · 90",
+     "שְׁמוֹנִים · תִּשְׁעִים",
+     ""
+    ],
+    [
+     "21",
+     "עֶשְׂרִים וְאֶחָד / עֶשְׂרִים וְאַחַת",
+     "ten first, then וְ + the unit (agreeing)"
+    ],
+    [
+     "100 · 200 · 300",
+     "מֵאָה · מָאתַיִם · שְׁלוֹשׁ מֵאוֹת",
+     "מֵאָה is feminine; 200 is a dual"
+    ],
+    [
+     "1000 · 2000 · 3000",
+     "אֶלֶף · אַלְפַּיִם · שְׁלוֹשֶׁת אֲלָפִים",
+     "אֶלֶף is masculine; 2000 is a dual"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Ask the noun, not the number",
+   "text": "First find the gender of the noun — from its singular. חַלּוֹן is masculine, so שְׁלוֹשָׁה חַלּוֹנוֹת, although the plural ends in -וֹת; נָשִׁים is feminine, so שָׁלוֹשׁ נָשִׁים."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The ending -ָה lies",
+   "text": "From 3 to 10 the form in -ָה goes with masculine nouns: שְׁלוֹשָׁה יְלָדִים “three boys”, but שָׁלוֹשׁ יְלָדוֹת “three girls”. Arabic does exactly the same: ثَلَاثَةُ أَوْلَادٍ, ثَلَاثُ بَنَاتٍ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One after, two shortened, “the” in -ֶת",
+   "text": "סֵפֶר אֶחָד, מִטָּה אַחַת — one follows the noun. Two before a noun is always שְׁנֵי / שְׁתֵּי. Before a definite masculine noun 3–10 end in -ֶת / -ַת: שְׁלוֹשֶׁת הַיְּלָדִים, עֲשֶׂרֶת הַתַּלְמִידִים."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Counting, prices, phone numbers",
+   "text": "Israelis count in the feminine: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ … In casual speech you will also hear feminine numbers with masculine nouns; the standard — and what this course teaches — is to match the noun: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The dual is alive",
+   "text": "A few words keep the old dual ending -ַיִם for exactly two: יוֹמַיִם “two days”, שְׁבוּעַיִם “two weeks”, שְׁנָתַיִם “two years”, פַּעֲמַיִם “twice”, מָאתַיִם “200”, אַלְפַּיִם “2000”. Paired body parts use it as their plural: עֵינַיִם “eyes”, יָדַיִם “hands”, רַגְלַיִם “legs”."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "Age is feminine",
+   "text": "Age in years is said with בֶּן / בַּת and the feminine number, because שָׁנִים “years” is feminine: הוּא בֶּן שָׁלוֹשׁ, הִיא בַּת עֶשְׂרִים."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "find the noun",
+    "its gender (from the singular)",
+    "one? → after the noun",
+    "two? → שְׁנֵי / שְׁתֵּי",
+    "definite? → construct (-ֶת)",
+    "noun in the plural"
+   ],
+   "caption": "Choosing the number word"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "gender on 1–19; 3–10 in -ָה with masculine nouns",
+      "the noun is plural from 2 on",
+      "21 = עֶשְׂרִים וְאַחַת (ten first)"
+     ]
+    },
+    {
+     "title": "Arabic",
+     "points": [
+      "the same reversed gender for 3–10",
+      "a living dual: كِتَابَانِ “two books”",
+      "after 11–99 the noun is singular"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "only ein / eine agrees",
+      "drei Bücher, drei Betten — one form",
+      "21 = einundzwanzig (the unit first)"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you say a number",
+   "questions": [
+    "What is the gender of the noun (look at the singular)?",
+    "Is it one (after the noun) or two (שְׁנֵי / שְׁתֵּי)?",
+    "Is the noun definite — then the construct form?",
+    "Am I just counting — then the feminine?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What is the gender of the noun I count — from its singular (חַלּוֹן m., כּוֹס f.)?",
+   "Is it one? → אֶחָד / אַחַת after the noun.",
+   "Is it two? → שְׁנֵי / שְׁתֵּי before the noun (שְׁנַיִם / שְׁתַּיִם only alone).",
+   "3–10 with a masculine noun? → the form in -ָה; with a feminine noun → the short form.",
+   "Is the noun definite (“the three …”)? → masculine 3–10 take the construct: שְׁלוֹשֶׁת הַ…",
+   "Am I just counting, or saying a phone number or a price? → the feminine form.",
+   "From two on: is my noun in the plural?"
+  ],
+  "steps": [
+   "Find the noun and its gender.",
+   "Pick the masculine or feminine number.",
+   "Use the construct form before a definite noun (and always for 2).",
+   "Put one after the noun, every other number before it.",
+   "Make the noun plural."
+  ]
+ },
+ "traps": [
+  "*שָׁלוֹשׁ סְפָרִים — סֵפֶר is masculine: שְׁלוֹשָׁה סְפָרִים.",
+  "חַלּוֹנוֹת looks feminine but is masculine: שְׁלוֹשָׁה חַלּוֹנוֹת, not *שָׁלוֹשׁ חַלּוֹנוֹת.",
+  "*אֶחָד סֵפֶר — one comes after the noun: סֵפֶר אֶחָד.",
+  "*שְׁנַיִם סְפָרִים — before a noun: שְׁנֵי סְפָרִים.",
+  "*שְׁלוֹשָׁה הַסְּפָרִים — before a definite noun: שְׁלוֹשֶׁת הַסְּפָרִים.",
+  "*עֶשְׂרִים סֵפֶר — after a number the noun is plural: עֶשְׂרִים סְפָרִים (a few nouns such as שָׁנָה may stay singular after big numbers: עֶשְׂרִים שָׁנָה).",
+  "In 21–99 the unit follows the ten with וְ and still agrees with the noun: עֶשְׂרִים וּשְׁלוֹשָׁה סְפָרִים, עֶשְׂרִים וְשָׁלוֹשׁ מִטּוֹת (וְ becomes וּ before a shva).",
+  "Age in years is feminine, because שָׁנִים is feminine: הוּא בֶּן שָׁלוֹשׁ “he is three” — but בֶּן שְׁלוֹשָׁה חֳדָשִׁים “three months old” (חֹדֶשׁ is masculine)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:efes",
+   "he:echad",
+   "he:shnayim",
+   "he:shlosha",
+   "he:arbaa",
+   "he:chamisha",
+   "he:shisha",
+   "he:shiva",
+   "he:shmona",
+   "he:tisha",
+   "he:asara",
+   "he:achad-asar",
+   "he:shneim-asar",
+   "he:shlosha-asar",
+   "he:arbaa-asar",
+   "he:chamisha-asar",
+   "he:shisha-asar",
+   "he:shiva-asar",
+   "he:shmona-asar",
+   "he:tisha-asar",
+   "he:esrim",
+   "he:shloshim",
+   "he:arbaim",
+   "he:chamishim",
+   "he:shishim",
+   "he:shivim",
+   "he:shmonim",
+   "he:tishim",
+   "he:mea",
+   "he:elef"
+  ]
+ },
+ "paradigmCells": [
+  "NUM;MASC",
+  "NUM;FEM",
+  "NUM;MASC;CONST",
+  "NUM;FEM;CONST",
+  "NUM;SG",
+  "NUM;DU",
+  "NUM;PL"
+ ],
+ "needs": {
+  "NUM": 10
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NUM",
+   "cells": [
+    "NUM;FEM"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "NUM",
+   "cells": [
+    "NUM;MASC;CONST",
+    "NUM;FEM;CONST"
+   ],
+   "count": 8
+  },
+  {
+   "type": "inflect",
+   "pos": "NUM",
+   "class": "dual",
+   "cells": [
+    "NUM;DU",
+    "NUM;PL"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Three books (סֵפֶר is masculine):",
+   "options": [
+    "שְׁלוֹשָׁה סְפָרִים",
+    "שָׁלוֹשׁ סְפָרִים",
+    "שְׁלוֹשֶׁת סְפָרִים"
+   ],
+   "answer": "שְׁלוֹשָׁה סְפָרִים",
+   "why": "A masculine noun takes the form in -ָה (3–10); the construct שְׁלוֹשֶׁת is only for a definite noun (שְׁלוֹשֶׁת הַסְּפָרִים)."
+  },
+  {
+   "q": "One bed (מִטָּה):",
+   "options": [
+    "מִטָּה אַחַת",
+    "אַחַת מִטָּה",
+    "מִטָּה אֶחָד"
+   ],
+   "answer": "מִטָּה אַחַת",
+   "why": "One follows the noun and agrees with it: מִטָּה is feminine, so אַחַת."
+  },
+  {
+   "q": "Two glasses (כּוֹס is feminine):",
+   "options": [
+    "שְׁתֵּי כּוֹסוֹת",
+    "שְׁתַּיִם כּוֹסוֹת",
+    "שְׁנֵי כּוֹסוֹת"
+   ],
+   "answer": "שְׁתֵּי כּוֹסוֹת",
+   "why": "Before a noun two is always the construct form, and כּוֹס is feminine: שְׁתֵּי. שְׁתַּיִם stands alone."
+  },
+  {
+   "q": "The three children:",
+   "options": [
+    "שְׁלוֹשֶׁת הַיְּלָדִים",
+    "שְׁלוֹשָׁה הַיְּלָדִים",
+    "הַשְּׁלוֹשָׁה יְלָדִים"
+   ],
+   "answer": "שְׁלוֹשֶׁת הַיְּלָדִים",
+   "why": "Before a definite masculine noun 3–10 take the construct form in -ֶת: שְׁלוֹשֶׁת הַ…"
+  },
+  {
+   "q": "You count aloud: 1, 2, 3 …",
+   "options": [
+    "אַחַת, שְׁתַּיִם, שָׁלוֹשׁ",
+    "אֶחָד, שְׁנַיִם, שְׁלוֹשָׁה",
+    "אַחַת, שְׁתֵּי, שָׁלוֹשׁ"
+   ],
+   "answer": "אַחַת, שְׁתַּיִם, שָׁלוֹשׁ",
+   "why": "Counting uses the feminine forms, and the absolute שְׁתַּיִם (שְׁתֵּי needs a noun after it)."
+  },
+  {
+   "q": "Seven windows (חַלּוֹן, plural חַלּוֹנוֹת):",
+   "options": [
+    "שִׁבְעָה חַלּוֹנוֹת",
+    "שֶׁבַע חַלּוֹנוֹת"
+   ],
+   "answer": "שִׁבְעָה חַלּוֹנוֹת",
+   "why": "חַלּוֹן is masculine — the plural ending -וֹת does not change that — so the masculine שִׁבְעָה."
+  },
+  {
+   "q": "200 is …",
+   "options": [
+    "מָאתַיִם",
+    "שְׁתֵּי מֵאוֹת",
+    "שְׁנֵי מֵאָה"
+   ],
+   "answer": "מָאתַיִם",
+   "why": "Two hundred is the dual of מֵאָה: מָאתַיִם (as 2000 is אַלְפַּיִם)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "Arabic has the same reversed gender for 3–10 (ثَلَاثَةُ أَوْلَادٍ, ثَلَاثُ بَنَاتٍ) and a living dual; after 11–99 the Arabic noun is singular, the Hebrew one plural."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.numerals",
+   "note": "German has one form for each number (only ein / eine agrees) and puts the unit first (einundzwanzig); Hebrew says עֶשְׂרִים וְאֶחָד, like English twenty-one."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.measure.word",
+   "note": "Chinese needs a measure word between the number and the noun (三本书) and has two words for two (二 / 两); the noun never changes."
+  }
+ ]
+}

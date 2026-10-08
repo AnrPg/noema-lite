@@ -40,19 +40,6 @@
    }
   },
   {
-   "id": "zh:tiao",
-   "lemma": "条",
-   "trad": "條",
-   "pinyin": "tiáo",
-   "pos": "CLF",
-   "senses": [],
-   "role": "measure word for long, narrow (often flexible) things: 一条茄子, 一条鱼, 一条路",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   }
-  },
-  {
    "id": "zh:tou",
    "lemma": "头",
    "trad": "頭",

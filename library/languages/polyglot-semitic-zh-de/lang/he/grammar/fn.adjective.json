@@ -1,0 +1,440 @@
+{
+ "function": "fn.adjective",
+ "status": "realized",
+ "summary": "A Hebrew adjective comes AFTER its noun and agrees with it in three things: gender, number and definiteness. Every adjective has four forms — masculine and feminine, singular and plural: גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת “big”. The endings are those of the nouns (-ָה or -ֶת or -ִית for the feminine, -ִים and -וֹת for the plural), and what counts is the noun’s grammatical gender, not its ending: שֻׁלְחָנוֹת גְּדוֹלִים “big tables” (a masculine noun with -וֹת), עִיר יָפָה “a beautiful city” (a feminine noun without -ָה). The article decides between a phrase and a sentence. Attributive — “the big house” — repeats the article on the adjective: הַבַּיִת הַגָּדוֹל. Predicative — “the house is big” — leaves the adjective bare, and, as in every Hebrew present-tense sentence, there is no verb “is”: הַבַּיִת גָּדוֹל. So one ה turns a sentence into a phrase. In the past and the future the verb הָיָה appears (הַבַּיִת הָיָה גָּדוֹל). Often the first vowel shortens in the longer forms (גָּדוֹל → גְּדוֹלָה, יָקָר → יְקָרָה); short adjectives double their last letter (קַל → קַלָּה, קָטָן → קְטַנָּה). Feelings of heat and cold, and easy and hard, are said impersonally with לְ: חַם לִי “I’m hot”, קַר לָהּ “she is cold”, קָשֶׁה לִי “it is hard for me” — the adjective stays masculine singular. There are no cases, so nothing else changes.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "m. plural",
+    "f. plural"
+   ],
+   "rows": [
+    [
+     "big",
+     "גָּדוֹל",
+     "גְּדוֹלָה",
+     "גְּדוֹלִים",
+     "גְּדוֹלוֹת"
+    ],
+    [
+     "small",
+     "קָטָן",
+     "קְטַנָּה",
+     "קְטַנִּים",
+     "קְטַנּוֹת"
+    ],
+    [
+     "new",
+     "חָדָשׁ",
+     "חֲדָשָׁה",
+     "חֲדָשִׁים",
+     "חֲדָשׁוֹת"
+    ],
+    [
+     "good",
+     "טוֹב",
+     "טוֹבָה",
+     "טוֹבִים",
+     "טוֹבוֹת"
+    ],
+    [
+     "tired",
+     "עָיֵף",
+     "עֲיֵפָה",
+     "עֲיֵפִים",
+     "עֲיֵפוֹת"
+    ],
+    [
+     "beautiful",
+     "יָפֶה",
+     "יָפָה",
+     "יָפִים",
+     "יָפוֹת"
+    ],
+    [
+     "hot",
+     "חַם",
+     "חַמָּה",
+     "חַמִּים",
+     "חַמּוֹת"
+    ],
+    [
+     "elderly",
+     "מְבֻגָּר",
+     "מְבֻגֶּרֶת",
+     "מְבֻגָּרִים",
+     "מְבֻגָּרוֹת"
+    ],
+    [
+     "slow",
+     "אִטִּי",
+     "אִטִּית",
+     "אִטִּיִּים",
+     "אִטִּיּוֹת"
+    ]
+   ],
+   "caption": "Four forms; the endings are the noun endings -ָה / -ֶת / -ִית, -ִים, -וֹת. Adjectives in -ֶה turn it into -ָה; ־ִי takes ־ִית."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Attributive: “the big house” (a phrase)",
+     "points": [
+      "בַּיִת גָּדוֹל — a big house",
+      "הַבַּיִת הַגָּדוֹל — the big house: the article on both words",
+      "בַּבַּיִת הַגָּדוֹל — in the big house: the adjective keeps its הַ"
+     ]
+    },
+    {
+     "title": "Predicative: “the house is big” (a sentence)",
+     "points": [
+      "הַבַּיִת גָּדוֹל — the house is big: no article on the adjective, no “is”",
+      "הַבַּיִת לֹא גָּדוֹל — the house is not big",
+      "הַבַּיִת הָיָה גָּדוֹל — the house was big"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One ה makes the difference",
+   "text": "הַבַּיִת הַגָּדוֹל = “the big house” (a phrase, waiting for a verb). הַבַּיִת גָּדוֹל = “the house is big” (a complete sentence). Read the article on the adjective before you translate."
+  },
+  {
+   "t": "table",
+   "head": [
+    "the article before the adjective",
+    "example"
+   ],
+   "rows": [
+    [
+     "הַ + doubled letter (most letters)",
+     "הַגָּדוֹל, הַקְּטַנָּה, הַטּוֹב, הַיָּפֶה, הַזָּקֵן"
+    ],
+    [
+     "הָ before א, ע, ר",
+     "הָאָדֹם, הָאִטִּי, הָרַע, הָרָעֵב, הָעֲיֵפָה"
+    ],
+    [
+     "הַ (no doubling) before ה, ח",
+     "הַחַם, הַחֲדָשָׁה, הַחוּם"
+    ],
+    [
+     "הֶ before an unstressed חָ or עָ",
+     "הֶחָדָשׁ, הֶחָמִים, הֶעָצוּב, הֶעָיֵף"
+    ]
+   ],
+   "caption": "The same rules as for nouns (lesson 4)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "masculine → feminine",
+    "examples"
+   ],
+   "rows": [
+    [
+     "קָטָל, קָטִיל, קָטוּל, קָטֵל",
+     "the first vowel shortens: -ָ- → -ְ-",
+     "יָקָר → יְקָרָה, צָעִיר → צְעִירָה, עָצוּב → עֲצוּבָה, זָקֵן → זְקֵנָה"
+    ],
+    [
+     "short words",
+     "the last letter doubles",
+     "קַל → קַלָּה, חַם → חַמָּה, קָטָן → קְטַנָּה"
+    ],
+    [
+     "-ֶה",
+     "-ֶה → -ָה",
+     "יָפֶה → יָפָה, קָשֶׁה → קָשָׁה"
+    ],
+    [
+     "מְ…ָ… (participles)",
+     "-ֶת",
+     "מְבֻגָּר → מְבֻגֶּרֶת, מְכֹעָר → מְכֹעֶרֶת"
+    ],
+    [
+     "־ִי",
+     "־ִית",
+     "אִטִּי → אִטִּית"
+    ]
+   ],
+   "caption": "You do not have to predict the forms: learn each adjective with its feminine — the drills ask for exactly that."
+  },
+  {
+   "t": "table",
+   "head": [
+    "impersonal (with לְ)",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "חַם לִי / קַר לִי",
+     "I’m hot / I’m cold"
+    ],
+    [
+     "קָשֶׁה לִי לָקוּם",
+     "it is hard for me to get up"
+    ],
+    [
+     "קַל לוֹ",
+     "it is easy for him"
+    ],
+    [
+     "טוֹב לָנוּ פֹּה",
+     "we are fine (happy) here"
+    ]
+   ],
+   "caption": "The adjective stays masculine singular; the person is in לְ: never *אֲנִי חַם for “I’m hot”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The noun’s gender, not its ending",
+   "text": "שֻׁלְחָנוֹת גְּדוֹלִים (m., although -וֹת), נָשִׁים יָפוֹת (f., although -ִים), עִיר יָפָה (f., no ending), עֵינַיִם כְּחֻלּוֹת (f.). Check the gender of the noun in its word card."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Several adjectives",
+   "text": "They follow one another, each agreeing: בַּיִת גָּדוֹל וְיָפֶה “a big and beautiful house”, הַבַּיִת הַגָּדוֹל וְהַיָּפֶה. “Very” (מְאוֹד) comes after the adjective: יָפֶה מְאוֹד."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "With a possessive",
+   "text": "שֶׁלִּי can stand after the adjective or between: הַבַּיִת הֶחָדָשׁ שֶׁלִּי = הַבַּיִת שֶׁלִּי הֶחָדָשׁ “my new house” — the adjective keeps its article."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you write an adjective",
+   "questions": [
+    "Is it a phrase (“the big …”) or a sentence (“… is big”)?",
+    "What is the gender of the noun — and is it singular or plural?",
+    "Is the noun definite (הַ, a name, שֶׁל…)? Then the adjective takes הַ too."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Where does the adjective go? → after the noun: בַּיִת גָּדוֹל.",
+   "Masculine or feminine noun (its gender, not its ending)? → גָּדוֹל or גְּדוֹלָה.",
+   "One or more? → גְּדוֹלִים / גְּדוֹלוֹת.",
+   "Is the noun definite? → in a phrase the adjective takes the article too: הַבַּיִת הַגָּדוֹל.",
+   "Is it a statement “X is Y”? → no article on the adjective and no verb in the present: הַבַּיִת גָּדוֹל.",
+   "A feeling (hot, cold, easy, hard) of a person? → adjective + לְ: חַם לִי."
+  ],
+  "steps": [
+   "Find the noun and its gender and number.",
+   "Choose the form of the adjective.",
+   "Decide phrase or sentence: article on the adjective only in the phrase."
+  ]
+ },
+ "traps": [
+  "*הַבַּיִת גָּדוֹל for “the big house” — that is “the house is big”; the phrase is הַבַּיִת הַגָּדוֹל.",
+  "*בַּיִת הַגָּדוֹל — the article goes on both words or on none.",
+  "*הַשֻּׁלְחָנוֹת הַגְּדוֹלוֹת → הַשֻּׁלְחָנוֹת הַגְּדוֹלִים (שֻׁלְחָן is masculine).",
+  "*אֲנִי חַם for “I’m hot” → חַם לִי.",
+  "*גָּדוֹל בַּיִת → בַּיִת גָּדוֹל (the adjective follows).",
+  "יָשָׁן is “old” for things; for people זָקֵן or, politely, מְבֻגָּר.",
+  "יָפֶה (m.) and יָפָה (f.) are written the same way; so are קָשֶׁה / קָשָׁה and כֵּהֶה / כֵּהָה."
+ ],
+ "evidence": {
+  "tags": [
+   "ADJ"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;SG;MASC",
+  "ADJ;SG;FEM",
+  "ADJ;PL;MASC",
+  "ADJ;PL;FEM",
+  "ADJ;SG;MASC;DEF",
+  "ADJ;SG;FEM;DEF",
+  "ADJ;PL;MASC;DEF",
+  "ADJ;PL;FEM;DEF"
+ ],
+ "needs": {
+  "ADJ": 6,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;SG;FEM",
+    "ADJ;PL;MASC",
+    "ADJ;PL;FEM"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;SG;MASC;DEF",
+    "ADJ;SG;FEM;DEF",
+    "ADJ;PL;MASC;DEF",
+    "ADJ;PL;FEM;DEF"
+   ],
+   "count": 8
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“The big house” (a phrase):",
+   "options": [
+    "הַבַּיִת הַגָּדוֹל",
+    "הַבַּיִת גָּדוֹל",
+    "גָּדוֹל הַבַּיִת"
+   ],
+   "answer": "הַבַּיִת הַגָּדוֹל",
+   "why": "In a phrase the adjective repeats the article. הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
+  },
+  {
+   "q": "הַבַּיִת גָּדוֹל means:",
+   "options": [
+    "The house is big.",
+    "the big house",
+    "a big house"
+   ],
+   "answer": "The house is big.",
+   "why": "No article on the adjective = a sentence; Hebrew has no “is” in the present."
+  },
+  {
+   "q": "“A beautiful city” (עִיר is feminine):",
+   "options": [
+    "עִיר יָפָה",
+    "עִיר יָפֶה",
+    "יָפָה עִיר"
+   ],
+   "answer": "עִיר יָפָה",
+   "why": "The adjective follows the noun and takes its gender — עִיר is feminine although it has no -ָה."
+  },
+  {
+   "q": "“Big tables” (שֻׁלְחָן, plural שֻׁלְחָנוֹת):",
+   "options": [
+    "שֻׁלְחָנוֹת גְּדוֹלִים",
+    "שֻׁלְחָנוֹת גְּדוֹלוֹת",
+    "שֻׁלְחָנוֹת גָּדוֹל"
+   ],
+   "answer": "שֻׁלְחָנוֹת גְּדוֹלִים",
+   "why": "שֻׁלְחָן is masculine; the -וֹת of its plural does not make it feminine."
+  },
+  {
+   "q": "“I’m cold”:",
+   "options": [
+    "קַר לִי.",
+    "אֲנִי קַר.",
+    "אֲנִי קָרָה."
+   ],
+   "answer": "קַר לִי.",
+   "why": "Feeling hot or cold is impersonal: the adjective + לְ."
+  },
+  {
+   "q": "“The new book” — which article?",
+   "options": [
+    "הַסֵּפֶר הֶחָדָשׁ",
+    "הַסֵּפֶר הַחָדָשׁ",
+    "הַסֵּפֶר הָחָדָשׁ"
+   ],
+   "answer": "הַסֵּפֶר הֶחָדָשׁ",
+   "why": "Before an unstressed חָ the article is הֶ: הֶחָדָשׁ (but הַחֲדָשָׁה)."
+  },
+  {
+   "q": "An old person, said politely:",
+   "options": [
+    "מְבֻגָּר",
+    "יָשָׁן",
+    "עָתִיק"
+   ],
+   "answer": "מְבֻגָּר",
+   "why": "יָשָׁן is for things; for people זָקֵן, or politely מְבֻגָּר."
+  },
+  {
+   "q": "The feminine of אִטִּי “slow”:",
+   "options": [
+    "אִטִּית",
+    "אִטִּיָּה",
+    "אִטָּה"
+   ],
+   "answer": "אִטִּית",
+   "why": "Adjectives in ־ִי take ־ִית in the feminine."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.adjective",
+   "note": "Arabic is Hebrew’s twin here: the adjective follows the noun and copies its gender, number and definiteness (الْبَيْتُ الْكَبِيرُ “the big house”, الْبَيْتُ كَبِيرٌ “the house is big”) — and also its case; non-human plurals take a feminine singular adjective."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.adjective",
+   "note": "German puts the adjective before the noun and gives it an ending only there (das große Haus, ein großes Haus); after sein it never changes (das Haus ist groß) — Hebrew changes it in both places, but only for gender and number."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.adjective",
+   "note": "Chinese adjectives are verbs: 房子很大 “the house is big” needs no 是, like Hebrew needs no “is”; before a noun they take 的 (很大的房子) and never change."
+  }
+ ]
+}

@@ -1,0 +1,414 @@
+{
+ "function": "fn.present",
+ "status": "realized",
+ "summary": "A German verb changes its ending for every person: you take the stem (the infinitive without -en: koch-en, trink-en, kauf-en) and add -e, -st, -t for ich, du, er/sie/es and -en, -t, -en for wir, ihr, sie/Sie. Polite Sie always takes the plural form (Sie trinken). A group of strong verbs also changes the stem vowel, but only in the du and er/sie/es forms: essen → du isst, er isst (e → i); later you will meet a → ä (fahren → du fährst). The modal verbs wollen and mögen are irregular: no ending in ich and er (ich will, er will; ich mag, er mag) and another vowel in the singular. Their polite cousin möchte (would like) is a form of mögen used like a present: ich möchte, du möchtest, er möchte, wir möchten. sein and haben are irregular too (ich bin, du bist, er ist …; du hast, er hat). German has one present tense for “I eat”, “I am eating” and often “I will eat” – there is no -ing form. The finite verb always stands in second place in a statement (Ich trinke Tee. Vielleicht trinke ich Tee.); with a modal, the second verb goes to the very end as an infinitive (Ich will Tee trinken).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "person",
+    "ending",
+    "kaufen (buy)",
+    "kochen (cook)",
+    "trinken (drink)"
+   ],
+   "rows": [
+    [
+     "ich",
+     "-e",
+     "kaufe",
+     "koche",
+     "trinke"
+    ],
+    [
+     "du",
+     "-st",
+     "kaufst",
+     "kochst",
+     "trinkst"
+    ],
+    [
+     "er / sie / es",
+     "-t",
+     "kauft",
+     "kocht",
+     "trinkt"
+    ],
+    [
+     "wir",
+     "-en",
+     "kaufen",
+     "kochen",
+     "trinken"
+    ],
+    [
+     "ihr",
+     "-t",
+     "kauft",
+     "kocht",
+     "trinkt"
+    ],
+    [
+     "sie / Sie",
+     "-en",
+     "kaufen",
+     "kochen",
+     "trinken"
+    ]
+   ],
+   "caption": "The regular present: stem + ending (the same for almost every verb)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "essen (eat): e → i",
+    "mögen (like)",
+    "wollen (want)",
+    "möchte (would like)"
+   ],
+   "rows": [
+    [
+     "ich",
+     "esse",
+     "mag",
+     "will",
+     "möchte"
+    ],
+    [
+     "du",
+     "isst (!)",
+     "magst",
+     "willst",
+     "möchtest"
+    ],
+    [
+     "er / sie / es",
+     "isst (!)",
+     "mag",
+     "will",
+     "möchte"
+    ],
+    [
+     "wir",
+     "essen",
+     "mögen",
+     "wollen",
+     "möchten"
+    ],
+    [
+     "ihr",
+     "esst",
+     "mögt",
+     "wollt",
+     "möchtet"
+    ],
+    [
+     "sie / Sie",
+     "essen",
+     "mögen",
+     "wollen",
+     "möchten"
+    ]
+   ],
+   "caption": "The verbs of this lesson that change: essen changes its vowel only for du and er; the modals have no ending in ich and er"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "sein (be)",
+    "haben (have)"
+   ],
+   "rows": [
+    [
+     "ich",
+     "bin",
+     "habe"
+    ],
+    [
+     "du",
+     "bist",
+     "hast"
+    ],
+    [
+     "er / sie / es",
+     "ist",
+     "hat"
+    ],
+    [
+     "wir",
+     "sind",
+     "haben"
+    ],
+    [
+     "ihr",
+     "seid",
+     "habt"
+    ],
+    [
+     "sie / Sie",
+     "sind",
+     "haben"
+    ]
+   ],
+   "caption": "sein and haben again – the two most frequent verbs, both irregular"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Verb second",
+   "text": "In a statement the conjugated verb is always the second element: Ich trinke Tee. – Natürlich trinke ich Tee. – Vielleicht kocht er. Whatever comes first (subject, adverb, object), the verb stays in place two and the subject moves behind it if needed."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Ich",
+    "will",
+    "Tee",
+    "trinken."
+   ],
+   "caption": "With a modal (wollen, mögen, möchte): the modal is second, the other verb waits at the end in the infinitive"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No -ing form",
+   "text": "Ich esse = I eat and I am eating. Never *Ich bin essen. The present also covers plans: Morgen koche ich (I’ll cook tomorrow)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "du isst = er isst",
+   "text": "A stem ending in s, ss, ß or z adds only -t for du: du isst (not *issst), du heißt. So du and er look the same: du isst, er isst."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Ich will is not “I will”",
+   "text": "wollen means “to want”: Ich will Kaffee = I want coffee. In a shop or café möchte is more polite: Ich möchte einen Kaffee, bitte."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek, Russian, Turkish",
+     "points": [
+      "also one ending per person: τρώω, τρως, τρώει …; ем, ешь, ест …; yerim, yersin, yer …",
+      "German is the same idea with fewer distinct endings (wir and sie are alike: kaufen)"
+     ]
+    },
+    {
+     "title": "English",
+     "points": [
+      "only one ending (-s): he eats",
+      "and a separate -ing form (I am eating) that German does not have"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the subject? ich, du, er/sie/es, wir, ihr, sie or polite Sie (= the plural form)?",
+   "What is the stem? Drop -en from the infinitive (koch-en → koch-).",
+   "Which ending? -e, -st, -t, -en, -t, -en.",
+   "Is it a vowel-changing verb (essen) with du or er/sie/es? → isst.",
+   "Is it a modal (wollen, mögen)? → ich will / er will, ich mag / er mag – no ending; polite wish: möchte.",
+   "Is it sein or haben? → learn the forms by heart.",
+   "Is the verb in second place? Is a second verb at the end in the infinitive?"
+  ],
+  "steps": [
+   "Find the subject.",
+   "Take the stem and add the ending (or the irregular form).",
+   "Put the verb in second place; a second verb goes to the end."
+  ]
+ },
+ "traps": [
+  "du isst, er isst – the same form; not *du esst (esst is ihr).",
+  "ich will, er will, ich mag, er mag: modals have no -e and no -t.",
+  "er möchte, not *er möchtet.",
+  "Polite Sie takes the plural: Sie trinken, Sie möchten, Sie sind.",
+  "No progressive: Ich esse (I am eating), not *Ich bin essen.",
+  "Verb second: Vielleicht trinke ich Tee – not *Vielleicht ich trinke Tee.",
+  "With a modal the second verb is an infinitive at the end: Ich will Tee trinken – not *Ich will trinke Tee."
+ ],
+ "evidence": {
+  "tags": [
+   "V",
+   "PRS"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;1;SG",
+  "V;PRS;2;SG",
+  "V;PRS;3;SG",
+  "V;PRS;1;PL",
+  "V;PRS;2;PL",
+  "V;PRS;3;PL"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;1;PL",
+    "V;PRS;2;PL",
+    "V;PRS;3;PL"
+   ],
+   "count": 16,
+   "exclude": [
+    "de:zurückkommen",
+    "de:hereinkommen",
+    "de:hineingehen",
+    "de:weggehen",
+    "de:ankommen"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:essen",
+    "de:mögen",
+    "de:wollen"
+   ],
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;2;PL"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Formality"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "du ___ (essen)",
+   "options": [
+    "isst",
+    "esst",
+    "esse",
+    "issst"
+   ],
+   "answer": "isst",
+   "why": "essen changes e → i for du and er/sie/es; after ss only -t: du isst."
+  },
+  {
+   "q": "ihr ___ (essen)",
+   "options": [
+    "esst",
+    "isst",
+    "essen"
+   ],
+   "answer": "esst",
+   "why": "No vowel change in the plural: ihr esst."
+  },
+  {
+   "q": "er ___ (wollen)",
+   "options": [
+    "will",
+    "willt",
+    "wollt",
+    "wolle"
+   ],
+   "answer": "will",
+   "why": "Modals have no ending in the er-form: er will."
+  },
+  {
+   "q": "Sie (polite) ___ Kaffee. (trinken)",
+   "options": [
+    "trinken",
+    "trinkt",
+    "trinkst"
+   ],
+   "answer": "trinken",
+   "why": "Polite Sie takes the plural form."
+  },
+  {
+   "q": "“Tea – that’s what I drink.” (Tee first)",
+   "options": [
+    "Tee trinke ich.",
+    "Tee ich trinke.",
+    "Tee trinken ich."
+   ],
+   "answer": "Tee trinke ich.",
+   "why": "Verb second: when the object comes first, the subject moves behind the verb."
+  },
+  {
+   "q": "“I want to cook.”",
+   "options": [
+    "Ich will kochen.",
+    "Ich will koche.",
+    "Ich koche will."
+   ],
+   "answer": "Ich will kochen.",
+   "why": "The modal is second and conjugated; the other verb is an infinitive at the end."
+  },
+  {
+   "q": "er ___ einen Tee (would like)",
+   "options": [
+    "möchte",
+    "möchtet",
+    "mag"
+   ],
+   "answer": "möchte",
+   "why": "er möchte – like ich möchte, no -t."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "Arabic marks the person with prefixes and endings on the imperfect: آكُلُ ʾākulu (I eat), تَأْكُلُ taʾkulu (you eat, to a man), يَأْكُلُ yaʾkulu (he eats)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.present",
+   "note": "The Hebrew present changes for gender and number, not for person: אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת – so the pronoun is always needed."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.present",
+   "note": "Chinese verbs never change: 我吃, 你吃, 他吃; time words and particles (在, 了) do the work German does with endings and context."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "The verbs of this lesson take an object in the accusative: Ich trinke einen Kaffee."
+  }
+ ]
+}

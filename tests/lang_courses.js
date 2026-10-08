@@ -19,7 +19,8 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
     const bad = [];
     for (const s of X.sentences) {
       const flat = [], names = new Set(); const walk = ks => ks.forEach(t => t.parts && t.parts.some(x => x.name) ? names.add(t.t) : t.parts ? walk(t.parts) : t.name ? names.add(t.t) : !t.p && flat.push(t.l)); walk(s.tokens);
-      const got = []; for (const t of N.tokenize(C, code, s.text)) { if (t.p || (t.unknown && names.has(t.t))) continue; if (t.parts) t.parts.forEach(p => got.push(p.matches.map(m => m.l))); else got.push(t.matches.map(m => m.l)); }
+      let text = s.text; for (const nm of names) if (nm.includes(' ')) text = text.split(nm).join(' ');   // a multi-word name (תֵּל אָבִיב) is not read as words
+      const got = []; for (const t of N.tokenize(C, code, text)) { if (t.p || (t.unknown && names.has(t.t))) continue; if (t.parts) t.parts.forEach(p => got.push(p.matches.map(m => m.l))); else got.push(t.matches.map(m => m.l)); }
       if (got.length !== flat.length || got.some((alts, i) => !alts.includes(flat[i]))) bad.push(s.id);
     }
     ok(!bad.length, `${code}: ${X.sentences.length} sentences tokenize back to their words` + (bad.length ? ' — not: ' + bad.slice(0, 8).join(', ') : ''));

@@ -1,0 +1,349 @@
+{
+ "function": "fn.prep.place",
+ "status": "realized",
+ "summary": "Where things are: עַל “on”, מִתַּחַת לְ “under”, לְיַד “next to”, לִפְנֵי “in front of”, מֵאֲחוֹרֵי “behind”, בֵּין … לְ… “between … and …”, and בְּ “in” (בַּמְּקָרֵר). In the present there is no verb: הַסֵּפֶר עַל הַשֻּׁלְחָן “the book (is) on the table”. Several of them are built from body and space words: לִפְנֵי “to the face of”, לְיַד “at the hand of”, מִתַּחַת “from under”, מֵאֲחוֹרֵי “from the back of”. Two of them take a second preposition: מִתַּחַת לְ… and בֵּין X לְY. Near and far are adjectives that agree with their noun and take different prepositions: קָרוֹב לְ… “close to”, רָחוֹק מִ… “far from” (הַתַּחֲנָה קְרוֹבָה לַבַּיִת). Without a noun: בִּפְנִים “inside”, בַּחוּץ “outside”, מִשְּׂמֹאל “on the left”, מִיָּמִין “on the right” — and with movement the ending ־ָה: פְּנִימָה, הַחוּצָה, שְׂמֹאלָה, יָמִינָה. The noun after a preposition never changes (no cases): only the article fuses with לְ and בְּ (מִתַּחַת לַשֻּׁלְחָן, בַּמִּטְבָּח).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Hebrew",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "עַל",
+     "on",
+     "הַסֵּפֶר עַל הַשֻּׁלְחָן."
+    ],
+    [
+     "מִתַּחַת לְ…",
+     "under",
+     "הַמַּפְתֵּחַ מִתַּחַת לַסַּפָּה."
+    ],
+    [
+     "לְיַד",
+     "next to",
+     "הַמְּנוֹרָה לְיַד הַמִּטָּה."
+    ],
+    [
+     "לִפְנֵי",
+     "in front of",
+     "הַשֻּׁלְחָן לִפְנֵי הַסַּפָּה."
+    ],
+    [
+     "מֵאֲחוֹרֵי",
+     "behind",
+     "הַגִּנָּה מֵאֲחוֹרֵי הַבַּיִת."
+    ],
+    [
+     "בֵּין … לְ…",
+     "between … and …",
+     "הַשֻּׁלְחָן בֵּין הַסַּפָּה לַחַלּוֹן."
+    ],
+    [
+     "בְּ",
+     "in",
+     "הֶחָלָב בַּמְּקָרֵר."
+    ],
+    [
+     "קָרוֹב לְ… · רָחוֹק מִ…",
+     "near (to) · far (from)",
+     "הַתַּחֲנָה קְרוֹבָה לַבַּיִת. · זֶה רָחוֹק מִכָּאן."
+    ]
+   ],
+   "caption": "No verb “is” in the present: thing + preposition + place."
+  },
+  {
+   "t": "table",
+   "head": [
+    "where?",
+    "where to?",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "בִּפְנִים",
+     "פְּנִימָה",
+     "inside · in(wards)"
+    ],
+    [
+     "בַּחוּץ",
+     "הַחוּצָה",
+     "outside · out(wards)"
+    ],
+    [
+     "מִשְּׂמֹאל",
+     "שְׂמֹאלָה",
+     "on the left · to the left"
+    ],
+    [
+     "מִיָּמִין",
+     "יָמִינָה",
+     "on the right · to the right"
+    ]
+   ],
+   "caption": "Without a noun: a “where” word and a “where to” word with the old ending ־ָה."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "m. sg.",
+    "f. sg.",
+    "m. pl.",
+    "f. pl."
+   ],
+   "rows": [
+    [
+     "near",
+     "קָרוֹב",
+     "קְרוֹבָה",
+     "קְרוֹבִים",
+     "קְרוֹבוֹת"
+    ],
+    [
+     "far",
+     "רָחוֹק",
+     "רְחוֹקָה",
+     "רְחוֹקִים",
+     "רְחוֹקוֹת"
+    ]
+   ],
+   "caption": "Near and far are adjectives: they agree with the noun (הַתַּחֲנָה קְרוֹבָה)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Thing — preposition — place",
+   "text": "הַסֵּפֶר עַל הַשֻּׁלְחָן. The present needs no verb; in the past or future add הָיָה / יִהְיֶה (הַסֵּפֶר הָיָה עַל הַשֻּׁלְחָן)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "מִתַּחַת needs לְ",
+   "text": "מִתַּחַת לַשֻּׁלְחָן “under the table” — never *מִתַּחַת הַשֻּׁלְחָן. (Formal written Hebrew also has תַּחַת הַשֻּׁלְחָן, without לְ.)"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Behind is not after",
+   "text": "מֵאֲחוֹרֵי הַבַּיִת “behind the house”; אַחֲרֵי is “after” in time (אַחֲרֵי הָאֲרוּחָה)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "לְ near, מִ far",
+   "text": "קָרוֹב לַבַּיִת “close to the house” but רָחוֹק מֵהַבַּיִת “far from the house” — as in English “close to / far from”."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "לִפְנֵי is also “before” and “ago”",
+   "text": "לִפְנֵי הַבַּיִת “in front of the house”, לִפְנֵי הָאֲרוּחָה “before the meal” (lesson 15), לִפְנֵי שָׁנָה “a year ago” — like German vor."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "הַסֵּפֶר עַל הַשֻּׁלְחָן.",
+      "preposition before the noun; no verb; the noun never changes"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "Das Buch liegt auf dem Tisch.",
+      "a verb (liegt); dative for where, accusative for where to (auf den Tisch)"
+     ]
+    },
+    {
+     "title": "Chinese",
+     "points": [
+      "书在桌子上。",
+      "在 … + a place word after the noun (上 “on”)"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "Greek builds the same picture with two words: πάνω στο τραπέζι (עַל), κάτω από (מִתַּחַת לְ), δίπλα σε (לְיַד), μπροστά από (לִפְנֵי), πίσω από (מֵאֲחוֹרֵי), ανάμεσα σε (בֵּין). Hebrew needs no case after them, unlike German auf dem / auf den."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Where exactly: on, under, next to, in front of, behind, between, in?",
+    "Does it need a second preposition? (מִתַּחַת לְ, בֵּין … לְ)",
+    "Near or far? → קָרוֹב לְ… / רָחוֹק מִ…, agreeing with the noun.",
+    "No noun after it? → בִּפְנִים, בַּחוּץ, מִשְּׂמֹאל, מִיָּמִין."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which relation: on → עַל; under → מִתַּחַת לְ; next to → לְיַד; in front of → לִפְנֵי; behind → מֵאֲחוֹרֵי; between → בֵּין … לְ; in → בְּ.",
+   "Does the preposition need לְ after it (מִתַּחַת, בֵּין)? → add לְ and fuse it with the article: לַשֻּׁלְחָן.",
+   "Is it near or far? → קָרוֹב לְ… / רָחוֹק מִ…; make it agree: קְרוֹבָה, רְחוֹקִים …",
+   "Is there no noun after it? → בִּפְנִים / בַּחוּץ / מִשְּׂמֹאל / מִיָּמִין; with movement פְּנִימָה / הַחוּצָה / שְׂמֹאלָה / יָמִינָה.",
+   "Present tense? → no verb: הַסֵּפֶר עַל הַשֻּׁלְחָן.",
+   "Behind or after? → place מֵאֲחוֹרֵי, time אַחֲרֵי."
+  ],
+  "steps": [
+   "Name the thing.",
+   "Choose the preposition (and its לְ).",
+   "Name the place; no verb in the present."
+  ]
+ },
+ "traps": [
+  "*מִתַּחַת הַשֻּׁלְחָן → מִתַּחַת לַשֻּׁלְחָן.",
+  "אַחֲרֵי is “after”; “behind” is מֵאֲחוֹרֵי.",
+  "קָרוֹב / רָחוֹק agree: הַתַּחֲנָה קְרוֹבָה, הַכְּפָרִים רְחוֹקִים.",
+  "“Close to” takes לְ, “far from” takes מִ.",
+  "לְיַד takes no לְ after it: לְיַד הַבַּיִת.",
+  "“On the left” is מִשְּׂמֹאל (where), “to the left” שְׂמֹאלָה (where to).",
+  "“Opposite, facing” is מוּל, not לִפְנֵי."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:al",
+   "he:mitachat",
+   "he:leyad",
+   "he:lifnei",
+   "he:meachorei",
+   "he:bein",
+   "he:karov",
+   "he:rachok",
+   "he:bifnim",
+   "he:bachuts",
+   "he:smol",
+   "he:yamin",
+   "he:be"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;SG;MASC",
+  "ADJ;SG;FEM",
+  "ADJ;PL;MASC",
+  "ADJ;PL;FEM"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "lemmas": [
+    "he:karov",
+    "he:rachok"
+   ],
+   "cells": [
+    "ADJ;SG;FEM",
+    "ADJ;PL;MASC",
+    "ADJ;PL;FEM"
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“The key is under the sofa”:",
+   "options": [
+    "הַמַּפְתֵּחַ מִתַּחַת לַסַּפָּה.",
+    "הַמַּפְתֵּחַ מִתַּחַת הַסַּפָּה.",
+    "הַמַּפְתֵּחַ אַחֲרֵי הַסַּפָּה."
+   ],
+   "answer": "הַמַּפְתֵּחַ מִתַּחַת לַסַּפָּה.",
+   "why": "מִתַּחַת needs לְ, fused with the article: לַסַּפָּה. אַחֲרֵי means “after”."
+  },
+  {
+   "q": "“behind the house”:",
+   "options": [
+    "מֵאֲחוֹרֵי הַבַּיִת",
+    "אַחֲרֵי הַבַּיִת",
+    "לִפְנֵי הַבַּיִת"
+   ],
+   "answer": "מֵאֲחוֹרֵי הַבַּיִת",
+   "why": "מֵאֲחוֹרֵי is “behind”; אַחֲרֵי “after”; לִפְנֵי “in front of”."
+  },
+  {
+   "q": "הַתַּחֲנָה ___ לַבַּיִת. (The stop is close to the house.)",
+   "options": [
+    "קְרוֹבָה",
+    "קָרוֹב",
+    "קְרוֹבִים"
+   ],
+   "answer": "קְרוֹבָה",
+   "why": "תַּחֲנָה is feminine singular, so קְרוֹבָה."
+  },
+  {
+   "q": "“far from here”:",
+   "options": [
+    "רָחוֹק מִכָּאן",
+    "רָחוֹק לְכָאן",
+    "רָחוֹק בְּכָאן"
+   ],
+   "answer": "רָחוֹק מִכָּאן",
+   "why": "Far takes מִ “from”; near takes לְ “to”."
+  },
+  {
+   "q": "“The kitchen is on the left”:",
+   "options": [
+    "הַמִּטְבָּח מִשְּׂמֹאל.",
+    "הַמִּטְבָּח שְׂמֹאלָה הוּא.",
+    "הַמִּטְבָּח עַל שְׂמֹאל."
+   ],
+   "answer": "הַמִּטְבָּח מִשְּׂמֹאל.",
+   "why": "Location: מִשְּׂמֹאל; שְׂמֹאלָה is the direction “to the left”."
+  },
+  {
+   "q": "Which word also means “before” and “ago”?",
+   "options": [
+    "לִפְנֵי",
+    "לְיַד",
+    "בֵּין"
+   ],
+   "answer": "לִפְנֵי",
+   "why": "לִפְנֵי is “in front of”, “before” (time) and “ago” — like German vor."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.place",
+   "note": "Arabic عَلَى, تَحْتَ and بَيْنَ are the same words as Hebrew עַל, תַּחַת and בֵּין; Arabic puts the noun after them in the genitive."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.place",
+   "note": "German auf, unter, neben, vor, hinter, zwischen take the dative for “where” and the accusative for “where to”; Hebrew nouns never change, and “where to” uses other words (שְׂמֹאלָה, הַחוּצָה)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.place",
+   "note": "Chinese puts the place word after the noun (桌子上 “on the table”, 床下 “under the bed”) with 在 before it; Hebrew puts the preposition before the noun."
+  }
+ ]
+}

@@ -1,45 +1,181 @@
 {
  "function": "fn.plural.noun",
  "status": "absent",
- "summary": "Chinese nouns do not change for number: 一个西红柿, 三个西红柿. Quantity is shown by numbers with measure words (三个西红柿), by 些 (这些西红柿 ‘these tomatoes’), by words like 很多 (‘many’), or simply by context. The suffix 们 makes pronouns plural (我们, 他们) and can follow nouns for people (学生们), but never things.",
+ "summary": "Chinese nouns have no plural: 书 is ‘book’ and ‘books’, 一本书 → 三本书. When the amount matters, Chinese says it with a number and a measure word (三本书), with 些 (这些书 ‘these books’), with quantity words (很多书 ‘many books’, 一些书 ‘some books’) or with 都 ‘all’ before the verb; otherwise the context decides. The suffix 们 marks a group of people (我们, 孩子们, 朋友们) but never things and never after a number.",
  "blocks": [
   {
    "t": "table",
    "head": [
     "English",
-    "Chinese"
+    "Chinese",
+    "How"
    ],
    "rows": [
     [
-     "a tomato / tomatoes",
-     "西红柿"
+     "a book / books",
+     "书",
+     "context"
     ],
     [
-     "three tomatoes",
-     "三个西红柿"
+     "three books",
+     "三本书",
+     "number + measure word"
     ],
     [
-     "these tomatoes",
-     "这些西红柿"
+     "these books",
+     "这些书",
+     "些 after 这 / 那"
     ],
     [
-     "many tomatoes",
-     "很多西红柿"
+     "many books",
+     "很多书",
+     "quantity word"
+    ],
+    [
+     "some books",
+     "一些书",
+     "quantity word"
+    ],
+    [
+     "the books are all here",
+     "书都在这里",
+     "都 before the verb"
+    ],
+    [
+     "the children (as a group)",
+     "孩子们",
+     "们 — people only"
     ],
     [
      "we, they",
-     "我们, 他们 (们 only for people)"
+     "我们, 他们",
+     "们 on pronouns"
     ]
    ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "们 is not a plural ending",
+   "text": "们 marks a group of people you have in mind — 孩子们，早上好！ ‘Good morning, children!’ It is never used with things (*书们) and never together with a number (三个学生, not *三个学生们)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German, Greek, Russian",
+     "points": [
+      "the noun changes: Buch → Bücher, βιβλίο → βιβλία, книга → книги",
+      "also after numbers: drei Bücher"
+     ]
+    },
+    {
+     "title": "Chinese",
+     "points": [
+      "the noun never changes: 书",
+      "numbers + measure words: 三本书",
+      "quantity words: 很多书, 一些书"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "analogy",
+   "title": "Like Turkish after numbers",
+   "text": "Turkish says iki kitap ‘two book’ — no plural after a number. Chinese treats every noun like that, all the time."
   }
  ],
+ "procedure": {
+  "askYourself": [
+   "Do I need to say how many? → number + measure word + noun (三本书).",
+   "Am I pointing at several? → 这些 / 那些 + noun, no measure word (这些书).",
+   "Is it ‘many / some / all’? → 很多 / 一些 + noun; 都 before the verb.",
+   "Is it a group of people I am addressing or talking about? → 们 is possible (孩子们) — but not after a number and never with things.",
+   "Is the amount clear from the context? → leave the noun bare: 我有书 ‘I have books / a book’."
+  ]
+ },
  "traps": [
-  "Never add 们 to things: *西红柿们.",
+  "Never add 们 to things: *书们, *椅子们.",
   "Never combine 们 with a number: 三个学生, not *三个学生们.",
-  "A number always needs a measure word: 三个西红柿, not *三西红柿."
+  "A number always needs a measure word: 三本书, not *三书.",
+  "No measure word after 这些 / 那些: 这些书, not *这些本书."
  ],
  "needs": {},
- "generators": [],
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘three books’",
+   "options": [
+    "三本书",
+    "三本书们",
+    "三书们"
+   ],
+   "answer": "三本书",
+   "why": "The noun never changes; the number and the measure word say how many."
+  },
+  {
+   "q": "Which noun can take 们?",
+   "options": [
+    "学生",
+    "书",
+    "椅子"
+   ],
+   "answer": "学生",
+   "why": "们 is only for groups of people."
+  },
+  {
+   "q": "*三个学生们 — what is wrong?",
+   "options": [
+    "们 cannot follow a number",
+    "the measure word is wrong",
+    "nothing"
+   ],
+   "answer": "们 cannot follow a number",
+   "why": "The number already gives the amount: 三个学生."
+  },
+  {
+   "q": "‘these tables’",
+   "options": [
+    "这些桌子",
+    "这些张桌子",
+    "这桌子们"
+   ],
+   "answer": "这些桌子",
+   "why": "After 这些 no measure word, and the noun stays as it is."
+  },
+  {
+   "q": "In 我有书, is 书 one book or several?",
+   "options": [
+    "either — the context decides",
+    "one",
+    "several"
+   ],
+   "answer": "either — the context decides",
+   "why": "Chinese nouns have no singular or plural form."
+  }
+ ],
  "seeAlso": [
   {
    "lang": "de",
@@ -54,7 +190,7 @@
   {
    "lang": "he",
    "fn": "fn.plural.noun",
-   "note": "Hebrew adds -im or -ot (with vowel changes); Chinese adds nothing — 们 only for groups of people."
+   "note": "Hebrew adds -im or -ot (often with vowel changes) and has a dual for pairs; Chinese adds nothing — 们 only for groups of people."
   }
  ]
 }

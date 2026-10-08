@@ -13,7 +13,7 @@ Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a
 import json, os, sys
 from collections import defaultdict
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from langlib import (nfc, canon, cell_errors, cell_parts, UD_POS, strip_marks, has_marks, letters, is_han,
+from langlib import (pinyin_tone, nfc, canon, cell_errors, cell_parts, UD_POS, strip_marks, has_marks, letters, is_han,
                      pinyin_split, pinyin_syllable_errors, join_tokens, cap_first)
 
 GENERATORS = {  # exercise types a function may ask for (docs/LANGUAGES.md §6)
@@ -382,6 +382,7 @@ def validate(root, only=None, strict=True, batch=None):
                 if not isinstance(senses, list): v.E(w, '“senses” must be a list (empty for a word with no shared concept)'); senses = []
                 for si, s in enumerate(senses):
                     if s not in concepts: v.E(w, f'unknown concept “{s}”')
+                    elif si == 0 and owner.get(s) != nid and x.get('role') and owner.get(s) in order and order.index(owner[s]) > order.index(nid): later_cov.add(s); continue   # a grammar word met early (לְ) whose concept is taught later
                     elif si == 0 and owner.get(s) != nid: v.E(w, f'concept “{s}” belongs to node {owner.get(s)} in {L}, not {nid}')
                     elif si > 0 and owner.get(s) and order.index(owner[s]) < order.index(nid): v.E(w, f'its other sense “{s}” is taught earlier ({owner[s]}): put the word in that node, with that sense first')
                     if si == 0: covered.add(s)
@@ -421,10 +422,11 @@ def validate(root, only=None, strict=True, batch=None):
                     if not x.get('trad') or len(x['trad']) != len(lemma): v.E(w, 'the traditional form (trad) is required, with as many characters as the lemma')
                     syl = pinyin_split(x.get('pinyin', ''))
                     if not syl: v.E(w, 'pinyin is required (syllables separated by spaces)')
-                    elif len(syl) != len(lemma) - (1 if lemma.endswith('儿') and syl[-1].endswith('r') and len(lemma) > 1 else 0):   # erhua: 哪儿 nǎr
+                    elif len(syl) != len(lemma) - (1 if lemma.endswith('儿') and syl[-1].endswith('r') and len(lemma) > 1 and pinyin_tone(syl[-1])[0] != 'er' else 0):   # erhua: 哪儿 nǎr
                         v.E(w, f'{len(syl)} pinyin syllables for {len(lemma)} characters')
-                    for s in syl:
-                        for e in pinyin_syllable_errors(s): v.E(w, e)
+                    erhua = lemma.endswith('儿') and len(lemma) > 1 and syl and syl[-1].endswith('r') and pinyin_tone(syl[-1])[0] != 'er' and len(syl) == len(lemma) - 1
+                    for i_, s in enumerate(syl):
+                        for e in pinyin_syllable_errors(s[:-1] if erhua and i_ == len(syl) - 1 else s): v.E(w, e)   # huìr, nǎr: the syllable without its r
                     if x.get('pos') == 'NOUN' and not x.get('measure') and not x.get('measureNone'): v.E(w, 'a noun needs its measure word(s) (measure), or measureNone with the reason (人们)')
             for a in d.get('absent') or []:
                 cid = a.get('concept'); w = f'{where} · absent {cid}'
@@ -506,6 +508,8 @@ def validate(root, only=None, strict=True, batch=None):
                 want = x.get('lemma')
             got = k.get('t')
             if not f and got in (x.get('alts') or []): return [(l, f)]   # another spelling of an invariant word (וּ for וְ)
+            if L == 'ar' and not first and got != want and len(want) > 2 and want[0] == 'ا' and want[1] in '\u0650\u064f\u064e' and got in ('\u0671' + want[2:], 'ا' + want[2:]):
+                return [(l, f)]   # hamzat al-waṣl: inside a sentence the alif loses its vowel (ٱبْنُ / ابْنُ), at the start it is said with it (اِبْنُ)
             if got != want and not (first and lj.get('capitalizeFirst') and got == cap_first(want)):
                 v.E(w, f'“{got}” is not the {f or "lemma"} form of {l} (“{want}”)')
             return [(l, f)]
@@ -543,7 +547,9 @@ def validate(root, only=None, strict=True, batch=None):
                     if g.get('status') == 'absent': v.E(w, f'{fid} is absent in {L}; a sentence cannot show it'); continue
                     ev = g.get('evidence') or {}
                     if not (ev.get('tags') or ev.get('lemmas') or ev.get('punct')): v.E(w, f'{fid} has no evidence in its realization (tags, lemmas or punct): a sentence cannot show it'); continue
-                    ok = (any(l in (ev.get('lemmas') or []) for l, _ in used) or any(f and all(t in cell_parts(f) for t in ev.get('tags') or ['∅']) for _, f in used)
+                    tagsets = ev.get('tags') or []
+                    tagsets = tagsets if tagsets and isinstance(tagsets[0], list) else [tagsets] if tagsets else []   # [["CMPR"], ["SPRL"]] = either
+                    ok = (any(l in (ev.get('lemmas') or []) for l, _ in used) or any(f and ts and all(t in cell_parts(f) for t in ts) for _, f in used for ts in tagsets)
                           or any(k.get('p') and k.get('t') in (ev.get('punct') or []) for k in toks))   # e.g. a question mark
                     if ok and any(l in (ev.get('exclude') or []) for l, _ in used): ok = False   # e.g. a wh-word: not a yes/no question
                     if not ok: v.E(w, f'listed as {fid}, but no word shows it (evidence {ev})')

@@ -643,10 +643,24 @@
      "type": "object",
      "properties": {
       "tags": {
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
+       "description": "cell tags a token must all have — or a list of such tag lists (any of them)",
+       "oneOf": [
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        }
+       ]
       },
       "lemmas": {
        "type": "array",

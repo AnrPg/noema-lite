@@ -1,21 +1,164 @@
 {
  "function": "fn.plural.noun",
  "status": "realized",
- "summary": "Arabic has singular, dual and plural. Plurals are sound (masculine -ūna/-īna, mostly for male humans; feminine -ātun) or broken (a new vowel pattern, كِتَاب → كُتُب). Most vegetables are collective nouns: the collective (جَزَر “carrots” as food or in general) is grammatically masculine singular; one piece is the unit noun in -a (جَزَرَة “a carrot”); counted pieces take the sound feminine plural -āt (جَزَرَات). Mass nouns without a unit noun (طَمَاطِم، سَبَانِخ، ذُرَة) are counted with حَبَّة “a piece” or رَأْس “a head”. Non-human plurals take feminine singular agreement: هٰذِهِ جَزَرَاتٌ (these are carrots).",
+ "summary": "Arabic has three numbers: singular, dual (exactly two) and plural. The dual is regular for every noun: -āni (subject) / -ayni (object, after a preposition), with ة turning into t: كِتَابَانِ, غُرْفَتَانِ. The plural comes in three kinds. Sound masculine -ūna / -īna, mostly for men described by a participle-like word (مُعَلِّمُونَ). Sound feminine -ātun / -ātin, for women and many nouns in ة (طَالِبَاتٌ, طَاوِلَاتٌ). And the broken plural — the most common kind — a new vowel pattern inside the root: كِتَاب → كُتُب, قَلَم → أَقْلَام, بَيْت → بُيُوت, رَجُل → رِجَال. Learn every noun with its plural. Plurals of things agree as feminine singular (هٰذِهِ كُتُبٌ); plurals of people take plural agreement (هٰؤُلَاءِ طُلَّابٌ).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "singular",
+    "dual (2)",
+    "plural (3+)",
+    "kind"
+   ],
+   "rows": [
+    [
+     "كِتَابٌ book",
+     "كِتَابَانِ",
+     "كُتُبٌ",
+     "broken"
+    ],
+    [
+     "غُرْفَةٌ room",
+     "غُرْفَتَانِ",
+     "غُرَفٌ",
+     "broken"
+    ],
+    [
+     "مُعَلِّمٌ teacher",
+     "مُعَلِّمَانِ",
+     "مُعَلِّمُونَ",
+     "sound masculine"
+    ],
+    [
+     "طَالِبَةٌ student (f.)",
+     "طَالِبَتَانِ",
+     "طَالِبَاتٌ",
+     "sound feminine"
+    ],
+    [
+     "طَاوِلَةٌ table",
+     "طَاوِلَتَانِ",
+     "طَاوِلَاتٌ",
+     "sound feminine"
+    ]
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "plurals of the nouns you know"
+   ],
+   "rows": [
+    [
+     "-ūna (sound m.)",
+     "مُعَلِّمُونَ (مُعَلِّم)"
+    ],
+    [
+     "-āt (sound f.)",
+     "طَالِبَات، مُعَلِّمَات، صَدِيقَات، طَاوِلَات، بَنَات (بِنْت)"
+    ],
+    [
+     "فُعُل",
+     "كُتُب (كِتَاب)"
+    ],
+    [
+     "فُعَل",
+     "غُرَف (غُرْفَة)، شُقَق (شَقَّة)"
+    ],
+    [
+     "أَفْعَال",
+     "أَقْلَام، أَبْوَاب، أَوْلَاد، أَطْفَال، أَشْخَاص، أَوْرَاق"
+    ],
+    [
+     "فُعُول",
+     "بُيُوت، صُحُون، كُؤُوس"
+    ],
+    [
+     "فِعَال / فُعَّال / فُعْلَان",
+     "رِجَال (رَجُل)، طُلَّاب (طَالِب)، جُدْرَان (جِدَار)"
+    ],
+    [
+     "أَفْعِلَة / أَفْعِلَاء",
+     "أَسِرَّة (سَرِير)، أَصْدِقَاء (صَدِيق)"
+    ],
+    [
+     "مَفَاعِيل / فَعَالِيل",
+     "مَفَاتِيح، مَصَابِيح، فَنَاجِين"
+    ],
+    [
+     "فَوَاعِل / فَعَائِل / فَعَالِيّ",
+     "نَوَافِذ، هَوَاتِف، حَقَائِب، خَزَائِن، كَرَاسِيّ"
+    ],
+    [
+     "another word",
+     "نِسَاء (اِمْرَأَة)، نَاس (people)"
+    ]
+   ],
+   "caption": "The patterns are written with the model root ف ع ل: كُتُب is فُعُل, أَقْلَام is أَفْعَال."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Things in the plural are “she”.",
+   "text": "Any plural that is not people agrees as one feminine thing: هٰذِهِ كُتُبٌ, الْمَفَاتِيحُ؟ هِيَ هُنَا, كُتُبٌ كَثِيرَةٌ. People keep the plural: هٰؤُلَاءِ طُلَّابٌ, أَصْدِقَاءُ كَثِيرُونَ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The dual is always regular.",
+   "text": "Singular + -āni (subject) / -ayni (object, after prepositions): بَيْتٌ → بَيْتَانِ / بَيْتَيْنِ; ة becomes t: غُرْفَةٌ → غُرْفَتَانِ. With the article: الْكِتَابَانِ. People agree in the dual: الطَّالِبَانِ هُنَا."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Plurals with two endings only.",
+   "text": "The sound feminine plural has -i in the accusative: رَأَيْتُ الطَّالِبَاتِ, never *الطَّالِبَاتَ. Many long broken plurals (مَفَاتِيحُ, نَوَافِذُ, حَقَائِبُ, أَصْدِقَاءُ, كَرَاسِيُّ) are diptotes: no tanwīn, and -a for both accusative and genitive when indefinite: ثَلَاثَةُ مَفَاتِيحَ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "sound plural",
+     "points": [
+      "an ending on the unchanged singular",
+      "-ūna / -īna (men), -āt (women, many nouns in ة)",
+      "predictable once you know which one"
+     ]
+    },
+    {
+     "title": "broken plural",
+     "points": [
+      "a new vowel pattern inside the root",
+      "most nouns, many people too (رِجَال, طُلَّاب)",
+      "learn it with the noun, like a German plural"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Collective nouns are a fourth group: وَرَق (paper, the material) is grammatically singular; one sheet is the unit noun وَرَقَة, and sheets are أَوْرَاق. Many fruits and vegetables work the same way (later lessons)."
+  }
+ ],
  "procedure": {
   "askYourself": [
-   "Do I mean the vegetable in general or as food (→ collective, no plural needed) or counted pieces (→ unit noun, then -āt)?",
-   "Is it a sound feminine plural in -āt? → accusative and genitive both end in -i (-ātin / -āti), never -a.",
-   "Is the plural non-human? → feminine singular agreement: هٰذِهِ (not هٰؤُلَاءِ), هِيَ (not هُمْ).",
-   "Is there a unit noun at all? If not, count with حَبَّةُ … or رَأْسُ …",
-   "Exactly two? → dual (-āni / -ayni), not plural."
+   "Exactly two? → the dual: -āni (subject) / -ayni (object, after a preposition); ة becomes t.",
+   "A man or men described by a participle-like word (مُعَلِّم)? → maybe the sound masculine -ūna / -īna — check the word.",
+   "A woman (طَالِبَة) or a noun in ة (طَاوِلَة)? → often the sound feminine -āt.",
+   "Otherwise → a broken plural: learn it with the noun (كِتَاب / كُتُب).",
+   "Is the plural a thing, not people? → feminine singular agreement: هٰذِهِ، هِيَ، كَثِيرَةٌ.",
+   "Is it a long pattern (مَفَاعِيل، فَوَاعِل، فَعَائِل، أَفْعِلَاء)? → a diptote: no tanwīn (مَفَاتِيحُ)."
   ]
  },
  "traps": [
-  "Sound feminine plural: الْجَزَرَاتِ in the accusative (with -i), not *الْجَزَرَاتَ.",
-  "Non-human plurals are “she”: الْبَصَلَاتُ؟ هِيَ هُنَا.",
-  "A collective is singular: الْبَصَلُ رَخِيصٌ (onions are cheap).",
-  "From 3 to 10 the number takes the opposite gender and the counted noun is a genitive plural: ثَلَاثُ جَزَرَاتٍ."
+  "Sound feminine plural: the accusative ends in -i: الطَّاوِلَاتِ, طَاوِلَاتٍ — never *طَاوِلَاتًا.",
+  "Things in the plural are “she”: الْكُتُبُ؟ هِيَ هُنَا — not *هُمْ.",
+  "Not every masculine person noun takes -ūna: طَالِب → طُلَّاب, صَدِيق → أَصْدِقَاء, رَجُل → رِجَال.",
+  "The plural can come from another word: اِمْرَأَة → نِسَاء.",
+  "A collective is singular: الْوَرَقُ هُنَا (the paper is here).",
+  "Two of something is the dual, not the plural: كِتَابَانِ."
  ],
  "evidence": {
   "tags": [
@@ -27,49 +170,118 @@
   "N;NOM;PL;DEF",
   "N;ACC;PL;INDF",
   "N;ACC;PL;DEF",
-  "N;GEN;PL;DEF"
+  "N;GEN;PL;INDF",
+  "N;GEN;PL;DEF",
+  "N;NOM;DU;INDF"
  ],
  "needs": {
-  "NOUN": 5
+  "NOUN": 8
  },
  "generators": [
   {
-   "type": "inflect",
+   "type": "principal_parts",
    "pos": "NOUN",
    "cells": [
-    "N;NOM;PL;INDF",
-    "N;NOM;PL;DEF",
-    "N;ACC;PL;DEF"
+    "N;NOM;PL;INDF"
    ],
    "count": 10
   },
   {
-   "type": "principal_parts",
+   "type": "inflect",
    "pos": "NOUN",
-   "count": 8
+   "cells": [
+    "N;NOM;PL;DEF",
+    "N;ACC;PL;INDF",
+    "N;GEN;PL;INDF"
+   ],
+   "count": 10
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
   },
   {
    "type": "transform",
    "bank": {
     "functions": [
      "fn.plural.noun"
-    ]
+    ],
+    "variant": "Number"
    }
   },
   {
-   "type": "agree",
-   "bank": {
-    "functions": [
-     "fn.plural.noun"
-    ]
-   }
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "The plural of كِتَاب:",
+   "options": [
+    "كُتُب",
+    "كِتَابَات",
+    "كِتَابُونَ"
+   ],
+   "answer": "كُتُب",
+   "why": "A broken plural (pattern فُعُل); كِتَابَات means “writings”."
+  },
+  {
+   "q": "The plural of مُعَلِّمَة (female teacher):",
+   "options": [
+    "مُعَلِّمَات",
+    "مُعَلِّمُونَ",
+    "مَعَالِم"
+   ],
+   "answer": "مُعَلِّمَات",
+   "why": "Women → the sound feminine plural -āt."
+  },
+  {
+   "q": "The plural of طَالِب (student):",
+   "options": [
+    "طُلَّاب",
+    "طَالِبُونَ",
+    "طَالِبَات"
+   ],
+   "answer": "طُلَّاب",
+   "why": "A broken plural, even though it is a person."
+  },
+  {
+   "q": "“These are keys.”",
+   "options": [
+    "هٰذِهِ مَفَاتِيحُ",
+    "هٰؤُلَاءِ مَفَاتِيحُ",
+    "هٰذَا مَفَاتِيحُ"
+   ],
+   "answer": "هٰذِهِ مَفَاتِيحُ",
+   "why": "Things in the plural agree as feminine singular."
+  },
+  {
+   "q": "“two rooms” (as the subject):",
+   "options": [
+    "غُرْفَتَانِ",
+    "غُرْفَتَيْنِ",
+    "غُرَفَانِ"
+   ],
+   "answer": "غُرْفَتَانِ",
+   "why": "The dual of the singular, ة → t, -āni for the subject."
+  },
+  {
+   "q": "Which ending can the plural طَاوِلَات NOT take?",
+   "options": [
+    "طَاوِلَاتًا",
+    "طَاوِلَاتٍ",
+    "طَاوِلَاتٌ"
+   ],
+   "answer": "طَاوِلَاتًا",
+   "why": "The sound feminine plural has only -un and -in: the accusative is -in too."
   }
  ],
  "seeAlso": [
   {
    "lang": "he",
    "fn": "fn.plural.noun",
-   "note": "Hebrew plurals are mostly regular (-ִים / -וֹת) with few broken plurals; Hebrew also keeps a dual for some nouns (יוֹמַיִם, two days)."
+   "note": "Hebrew plurals are mostly regular (-ִים / -וֹת) with few broken ones; Hebrew also keeps a dual for some nouns (יוֹמַיִם, two days; עֵינַיִם, eyes)."
   },
   {
    "lang": "de",
@@ -80,6 +292,11 @@
    "lang": "zh",
    "fn": "fn.plural.noun",
    "note": "Chinese nouns have no plural: 们 is added only for people; things are counted with a number and a measure word."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "After 3–10 the noun is plural, after 11–99 singular again — see the numbers."
   }
  ]
 }

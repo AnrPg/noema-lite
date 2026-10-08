@@ -1,0 +1,385 @@
+{
+ "function": "fn.connectors",
+ "status": "realized",
+ "summary": "German linking words come in three groups, and each group does something different to the word order. (1) und, oder, aber, denn (and sondern) stand between two main clauses and change nothing: Ich bin müde, aber ich gehe zur Arbeit. (2) Adverbs such as deshalb, deswegen, also, dann (and trotzdem) take the first place of their clause, so the verb follows at once: Ich habe Hunger, deshalb esse ich ein Brot. (3) Subordinating conjunctions – weil, dass, wenn, als, ob, obwohl – send the conjugated verb to the END of their clause: …, weil ich Durst habe. If the subordinate clause comes first, it fills the first place of the sentence and the main clause starts with its verb: Weil es kalt ist, trinken wir Tee (verb – comma – verb). A comma always separates the clauses. A separable verb joins up again at the end (…, weil der Zug um acht ankommt) and a modal verb comes last (…, weil ich Tee trinken will). Three English words split in German: “because” is weil (verb last) or denn (normal order); “when” is wenn (present, future, every time), als (one event in the past) or the question word wann; “if” is wenn (a condition) or ob (whether).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "group",
+    "words",
+    "word order",
+    "example"
+   ],
+   "rows": [
+    [
+     "joining (position 0)",
+     "und, oder, aber, denn, sondern",
+     "unchanged: subject – verb",
+     "Ich bin müde, aber ich gehe zur Arbeit."
+    ],
+    [
+     "adverb (position 1)",
+     "deshalb, deswegen, also, dann, trotzdem",
+     "the verb follows at once",
+     "Ich habe Hunger, deshalb esse ich jetzt."
+    ],
+    [
+     "subordinating",
+     "weil, dass, wenn, als, ob, obwohl",
+     "the verb goes to the END",
+     "Ich trinke Wasser, weil ich Durst habe."
+    ]
+   ],
+   "caption": "Three groups, three word orders"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Weil es kalt ist",
+    ",",
+    "trinken",
+    "wir Tee."
+   ],
+   "caption": "A subordinate clause first: it counts as position 1, so the main verb comes right after the comma (verb – comma – verb)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "German",
+    "when"
+   ],
+   "rows": [
+    [
+     "because",
+     "weil",
+     "verb last; the usual spoken word; the answer to Warum? (Weil …)"
+    ],
+    [
+     "because, for",
+     "denn",
+     "normal order; never at the start of a sentence"
+    ],
+    [
+     "so, that’s why",
+     "deshalb / deswegen",
+     "points back to the reason; verb next"
+    ],
+    [
+     "so, therefore",
+     "also",
+     "a conclusion; verb next – NOT English “also” (= auch)"
+    ],
+    [
+     "then",
+     "dann",
+     "the next step; verb next"
+    ]
+   ],
+   "caption": "Reasons and results"
+  },
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "German",
+    "use"
+   ],
+   "rows": [
+    [
+     "when (?)",
+     "wann",
+     "question word: Wann kommst du?"
+    ],
+    [
+     "when",
+     "wenn",
+     "present and future, and every time (also in the past): Wenn ich Hunger habe, esse ich."
+    ],
+    [
+     "when",
+     "als",
+     "one event or period in the past: Als mein Opa jung war, war er Bauer."
+    ],
+    [
+     "if",
+     "wenn",
+     "a condition: Wenn es warm ist, gehen wir in den Park."
+    ],
+    [
+     "if, whether",
+     "ob",
+     "an indirect yes/no question: Ich weiß nicht, ob er kommt."
+    ]
+   ],
+   "caption": "“when” and “if”"
+  },
+  {
+   "t": "table",
+   "head": [
+    "conjunction",
+    "example"
+   ],
+   "rows": [
+    [
+     "dass",
+     "Ich bin froh, dass ihr hier seid."
+    ],
+    [
+     "obwohl",
+     "Wir gehen in den Park, obwohl es kalt ist."
+    ],
+    [
+     "weil + modal verb",
+     "…, weil ich Tee trinken will. (modal last)"
+    ],
+    [
+     "weil + separable verb",
+     "…, weil der Zug um acht ankommt. (an + kommt joined again)"
+    ]
+   ],
+   "caption": "More verb-final clauses"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Spoken “weil” with normal order",
+   "text": "In fast speech you will hear weil ich habe Durst. It is common colloquially but wrong in writing: weil ich Durst habe."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "also is a false friend",
+   "text": "German also = so, therefore. English “also” is auch: Ich komme auch (I’m coming too)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "das or dass?",
+   "text": "If you can say dieses or welches instead, write das (article / pronoun); otherwise it is the conjunction dass."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself when you join two clauses",
+   "questions": [
+    "Which group is the linking word in: und / oder / aber / denn, deshalb / also / dann, or weil / dass / wenn / als / ob / obwohl?",
+    "Group 1 → keep the normal order. Group 2 → verb right after it. Group 3 → verb to the end.",
+    "Does the subordinate clause come first? → the main clause starts with its verb.",
+    "“when”: a question (wann), one past event (als) or present / repeated (wenn)?",
+    "“if”: a condition (wenn) or “whether” (ob)?",
+    "Did I put a comma between the clauses?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the linking word und, oder, aber, denn or sondern? → normal order after it.",
+   "Is it deshalb, deswegen, also, dann or trotzdem? → it takes the first place, the verb comes next.",
+   "Is it weil, dass, wenn, als, ob or obwohl? → the conjugated verb goes to the end.",
+   "Does the subordinate clause come first? → verb – comma – verb.",
+   "“when”: one event in the past (als), present / future / every time (wenn), or a question (wann)?",
+   "“if”: a condition (wenn) or “whether” (ob)?",
+   "“because”: verb last (weil) or normal order (denn)?",
+   "A separable or modal verb in a verb-final clause? → ankommt joined; the modal last.",
+   "Is there a comma between the two clauses?"
+  ],
+  "steps": [
+   "Choose the linking word by meaning.",
+   "Check its group.",
+   "Put the verb in second place, right after the adverb, or at the end.",
+   "Set the comma."
+  ]
+ },
+ "traps": [
+  "weil sends the verb to the end: weil ich müde bin (not *weil ich bin müde in writing).",
+  "denn keeps normal order and never starts a sentence: Warum? – Weil … (not *Denn …).",
+  "deshalb / also / dann + verb next: deshalb esse ich (not *deshalb ich esse).",
+  "Subordinate clause first → the main clause starts with the verb: Wenn es kalt ist, bleiben wir zu Hause.",
+  "als for one event in the past, wenn for present / future / repeated, wann for questions.",
+  "if = whether → ob; if = condition → wenn.",
+  "also = so, therefore – not English “also” (auch).",
+  "dass (conjunction) vs das (article / pronoun).",
+  "A comma before weil, dass, wenn, ob, obwohl, aber, denn."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:und",
+   "de:oder",
+   "de:aber",
+   "de:denn",
+   "de:weil",
+   "de:deshalb",
+   "de:deswegen",
+   "de:also",
+   "de:dann",
+   "de:wenn",
+   "de:als",
+   "de:ob",
+   "de:dass",
+   "de:obwohl"
+  ]
+ },
+ "needs": {
+  "VERB": 6,
+  "SCONJ": 3
+ },
+ "generators": [
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich trinke Wasser, weil ich Durst ___.",
+   "options": [
+    "habe",
+    "hat",
+    "haben"
+   ],
+   "answer": "habe",
+   "why": "After weil the verb goes to the end – and it is still conjugated (ich habe)."
+  },
+  {
+   "q": "Which is correct?",
+   "options": [
+    "…, weil ich müde bin.",
+    "…, weil ich bin müde.",
+    "…, weil bin ich müde."
+   ],
+   "answer": "…, weil ich müde bin.",
+   "why": "weil: verb at the end."
+  },
+  {
+   "q": "Which is correct?",
+   "options": [
+    "Ich habe Hunger, deshalb esse ich.",
+    "Ich habe Hunger, deshalb ich esse.",
+    "Ich habe Hunger, deshalb ich esse jetzt."
+   ],
+   "answer": "Ich habe Hunger, deshalb esse ich.",
+   "why": "deshalb takes the first place; the verb follows at once."
+  },
+  {
+   "q": "Which is correct?",
+   "options": [
+    "Ich trinke Wasser, denn ich habe Durst.",
+    "Ich trinke Wasser, denn ich Durst habe.",
+    "Ich trinke Wasser, denn habe ich Durst."
+   ],
+   "answer": "Ich trinke Wasser, denn ich habe Durst.",
+   "why": "denn keeps the normal order."
+  },
+  {
+   "q": "___ mein Opa jung war, war er Bauer.",
+   "options": [
+    "Als",
+    "Wenn",
+    "Wann"
+   ],
+   "answer": "Als",
+   "why": "One period in the past → als."
+  },
+  {
+   "q": "___ es kalt ist, trinken wir Tee. (every time)",
+   "options": [
+    "Wenn",
+    "Als",
+    "Wann"
+   ],
+   "answer": "Wenn",
+   "why": "Present and repeated → wenn."
+  },
+  {
+   "q": "Ich weiß nicht, ___ er heute kommt.",
+   "options": [
+    "ob",
+    "wenn",
+    "dass"
+   ],
+   "answer": "ob",
+   "why": "“if” = “whether” → ob."
+  },
+  {
+   "q": "Weil es kalt ist, ___",
+   "options": [
+    "bleiben wir zu Hause.",
+    "wir bleiben zu Hause.",
+    "wir zu Hause bleiben."
+   ],
+   "answer": "bleiben wir zu Hause.",
+   "why": "The weil-clause fills the first place → the main clause starts with its verb."
+  },
+  {
+   "q": "German “also” means …",
+   "options": [
+    "so, therefore",
+    "also, too",
+    "always"
+   ],
+   "answer": "so, therefore",
+   "why": "False friend: English “also” is auch."
+  },
+  {
+   "q": "Wir gehen in den Park, ___ es kalt ist. (although)",
+   "options": [
+    "obwohl",
+    "trotzdem",
+    "aber"
+   ],
+   "answer": "obwohl",
+   "why": "obwohl + verb at the end; trotzdem is an adverb (…, trotzdem gehen wir)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.connectors",
+   "note": "Arabic: لٰكِنَّ (but), لِأَنَّ (because) and أَنَّ (that) take a noun in the accusative or a suffix (لِأَنَّهُ …); لِذٰلِكَ (therefore), عِنْدَمَا (when), إِذَا (if). The word order inside the clause does not change."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.connectors",
+   "note": "Hebrew: אֲבָל (but), כִּי (because), לָכֵן (therefore), שֶׁ (that) written onto the next word, כְּשֶׁ (when), אִם (if), אַף עַל פִּי שֶׁ (although) – no change of word order."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.connectors",
+   "note": "Chinese uses pairs: 因为 … 所以 … (because … so …), 虽然 … 但是 … (although … but …), 如果 …(的话) … 就 … (if … then …), and …的时候 (when …) before the main clause – no verb movement."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.wh",
+   "note": "wann (when?) is the question word of S10; wenn and als are the linking words."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "The verb-first order of a yes/no question (Bleibst du zu Hause?) stays the same when a weil-clause follows: Bleibst du zu Hause, weil du müde bist?"
+  }
+ ]
+}

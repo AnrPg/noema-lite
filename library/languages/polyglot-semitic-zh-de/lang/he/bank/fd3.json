@@ -1,0 +1,4537 @@
+{
+ "sentences": [
+  {
+   "id": "he.f3.001",
+   "frame": "fr.eat",
+   "text": "אֲנִי אוֹכֵל לֶחֶם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I (m.) eat bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.002",
+   "frame": "fr.eat",
+   "text": "אֲנִי אוֹכֶלֶת לֶחֶם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I (f.) eat bread.",
+   "variantOf": "he.f3.001",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.003",
+   "frame": "fr.eat",
+   "text": "הוּא שׁוֹתֶה תֵּה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "He drinks tea.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.004",
+   "frame": "fr.eat",
+   "text": "הִיא שׁוֹתָה תֵּה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "She drinks tea.",
+   "variantOf": "he.f3.003",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.005",
+   "frame": "fr.eat",
+   "text": "הֵם שׁוֹתִים תֵּה.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "They drink tea.",
+   "variantOf": "he.f3.003",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.006",
+   "frame": "fr.eat",
+   "text": "אַתָּה שׁוֹתֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "You (m.) drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.007",
+   "frame": "fr.eat",
+   "text": "אַתְּ שׁוֹתָה קָפֶה.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "You (f.) drink coffee.",
+   "variantOf": "he.f3.006",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.008",
+   "frame": "fr.eat",
+   "text": "אֲנַחְנוּ אוֹכְלִים אֲרוּחַת בֹּקֶר.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֲרוּחַת בֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "We are having breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.009",
+   "frame": "fr.eat",
+   "text": "אֲנַחְנוּ אוֹכְלוֹת אֲרוּחַת בֹּקֶר.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹכְלוֹת",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "אֲרוּחַת בֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "We (f.) are having breakfast.",
+   "variantOf": "he.f3.008",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.010",
+   "frame": "fr.eat",
+   "text": "הַיְּלָדִים שׁוֹתִים חָלָב.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "חָלָב",
+     "l": "he:chalav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children drink milk.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.011",
+   "frame": "fr.eat",
+   "text": "הַיְּלָדוֹת שׁוֹתוֹת חָלָב.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדוֹת",
+     "l": "he:yalda",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שׁוֹתוֹת",
+     "l": "he:shata",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "חָלָב",
+     "l": "he:chalav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The girls drink milk.",
+   "variantOf": "he.f3.010",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.012",
+   "frame": "fr.eat",
+   "text": "הַיֶּלֶד שׁוֹתֶה חָלָב.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "חָלָב",
+     "l": "he:chalav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The child drinks milk.",
+   "variantOf": "he.f3.010",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.013",
+   "frame": "fr.eat",
+   "text": "אִמָּא מְבַשֶּׁלֶת מָרָק.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מָרָק",
+     "l": "he:marak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "Mum is cooking soup.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.014",
+   "frame": "fr.eat",
+   "text": "אַבָּא מְבַשֵּׁל מָרָק.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מָרָק",
+     "l": "he:marak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "Dad is cooking soup.",
+   "variantOf": "he.f3.013",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.015",
+   "frame": "fr.eat",
+   "text": "אַבָּא מְבַשֵּׁל אֲרוּחַת עֶרֶב.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֲרוּחַת עֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "Dad is cooking dinner.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.016",
+   "frame": "fr.eat",
+   "text": "אַבָּא מְבַשֵּׁל אֶת אֲרוּחַת הָעֶרֶב.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "אֲרוּחַת הָעֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.root.pattern",
+    "fn.definite"
+   ],
+   "gloss": "Dad is cooking the dinner.",
+   "variantOf": "he.f3.015",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.017",
+   "frame": "fr.eat",
+   "text": "הַיַּלְדָּה אוֹכֶלֶת תַּפּוּחַ.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תַּפּוּחַ",
+     "l": "he:tapuach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The girl is eating an apple.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.018",
+   "frame": "fr.eat",
+   "text": "הַיַּלְדָּה אוֹכֶלֶת אֶת הַתַּפּוּחַ.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַתַּפּוּחַ",
+     "l": "he:tapuach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "The girl is eating the apple.",
+   "variantOf": "he.f3.017",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.019",
+   "frame": "fr.eat",
+   "text": "הוּא קוֹנֶה גְּבִינָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "גְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "He is buying cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.020",
+   "frame": "fr.eat",
+   "text": "הוּא קוֹנֶה אֶת הַגְּבִינָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַגְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "He is buying the cheese.",
+   "variantOf": "he.f3.019",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.021",
+   "frame": "fr.eat",
+   "text": "הִיא שׁוֹתָה מִיץ.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מִיץ",
+     "l": "he:mits",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "She is drinking juice.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.022",
+   "frame": "fr.eat",
+   "text": "הִיא שׁוֹתָה אֶת הַמִּיץ.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמִּיץ",
+     "l": "he:mits",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "She is drinking the juice.",
+   "variantOf": "he.f3.021",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.023",
+   "frame": "fr.eat",
+   "text": "הַמּוֹרֶה שׁוֹתֶה אֶת הַקָּפֶה שֶׁלּוֹ.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַקָּפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "The teacher is drinking his coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.024",
+   "frame": "fr.eat",
+   "text": "אֲנִי קוֹנָה שְׁתֵּי בֵּיצִים.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "בֵּיצִים",
+     "l": "he:beitsa",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "I (f.) am buying two eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.025",
+   "frame": "fr.eat",
+   "text": "הוּא אוֹכֵל שָׁלוֹשׁ בֵּיצִים.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "בֵּיצִים",
+     "l": "he:beitsa",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "He eats three eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.026",
+   "frame": "fr.eat",
+   "text": "אֲנַחְנוּ קוֹנִים שְׁלוֹשָׁה תַּפּוּחִים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "קוֹנִים",
+     "l": "he:kana",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "שְׁלוֹשָׁה",
+     "l": "he:shlosha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "תַּפּוּחִים",
+     "l": "he:tapuach",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "We are buying three apples.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.027",
+   "frame": "fr.eat",
+   "text": "אַתֶּם אוֹכְלִים דָּגִים.",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "You (pl.) eat fish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.028",
+   "frame": "fr.eat",
+   "text": "אַתֶּן אוֹכְלוֹת דָּגִים.",
+   "tokens": [
+    {
+     "t": "אַתֶּן",
+     "l": "he:aten"
+    },
+    {
+     "t": "אוֹכְלוֹת",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "You (f. pl.) eat fish.",
+   "variantOf": "he.f3.027",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.029",
+   "frame": "fr.eat",
+   "text": "הַסְּטוּדֶנְטִים מְבַשְּׁלִים אֹרֶז.",
+   "tokens": [
+    {
+     "t": "הַסְּטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "מְבַשְּׁלִים",
+     "l": "he:bishel",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֹרֶז",
+     "l": "he:orez",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The students are cooking rice.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.030",
+   "frame": "fr.eat",
+   "text": "הַסְּטוּדֶנְטִים מְבַשְּׁלִים אֶת הָאֹרֶז.",
+   "tokens": [
+    {
+     "t": "הַסְּטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "מְבַשְּׁלִים",
+     "l": "he:bishel",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָאֹרֶז",
+     "l": "he:orez",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.root.pattern",
+    "fn.definite"
+   ],
+   "gloss": "The students are cooking the rice.",
+   "variantOf": "he.f3.029",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.031",
+   "frame": "fr.eat",
+   "text": "הַחֲבֵרוֹת מְבַשְּׁלוֹת עוֹף.",
+   "tokens": [
+    {
+     "t": "הַחֲבֵרוֹת",
+     "l": "he:chavera",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "מְבַשְּׁלוֹת",
+     "l": "he:bishel",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "עוֹף",
+     "l": "he:of",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The (female) friends are cooking chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.032",
+   "frame": "fr.eat",
+   "text": "הָאִשָּׁה קוֹנָה פֵּרוֹת.",
+   "tokens": [
+    {
+     "t": "הָאִשָּׁה",
+     "l": "he:isha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "פֵּרוֹת",
+     "l": "he:pri",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The woman is buying fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.033",
+   "frame": "fr.eat",
+   "text": "הַנָּשִׁים קוֹנוֹת פֵּרוֹת.",
+   "tokens": [
+    {
+     "t": "הַנָּשִׁים",
+     "l": "he:isha",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "קוֹנוֹת",
+     "l": "he:kana",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "פֵּרוֹת",
+     "l": "he:pri",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The women are buying fruit.",
+   "variantOf": "he.f3.032",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.034",
+   "frame": "fr.eat",
+   "text": "הַגֶּבֶר שׁוֹתֶה בִּירָה.",
+   "tokens": [
+    {
+     "t": "הַגֶּבֶר",
+     "l": "he:gever",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בִּירָה",
+     "l": "he:bira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The man is drinking a beer.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.035",
+   "frame": "fr.eat",
+   "text": "הַגְּבָרִים שׁוֹתִים בִּירָה.",
+   "tokens": [
+    {
+     "t": "הַגְּבָרִים",
+     "l": "he:gever",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בִּירָה",
+     "l": "he:bira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The men are drinking beer.",
+   "variantOf": "he.f3.034",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.036",
+   "frame": "fr.eat",
+   "text": "הֵם שׁוֹתִים יַיִן.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "They drink wine.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.037",
+   "frame": "fr.eat",
+   "text": "הֵן אוֹכְלוֹת אֲרוּחַת צָהֳרַיִם.",
+   "tokens": [
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "אוֹכְלוֹת",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "אֲרוּחַת צָהֳרַיִם",
+     "l": "he:aruchat-tsohorayim",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "They (f.) are having lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.038",
+   "frame": "fr.eat",
+   "text": "סַבָּא שׁוֹתֶה מַיִם.",
+   "tokens": [
+    {
+     "t": "סַבָּא",
+     "l": "he:saba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Grandpa is drinking water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.039",
+   "frame": "fr.want",
+   "text": "אֲנִי רוֹצֶה מַיִם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I (m.) want water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.040",
+   "frame": "fr.want",
+   "text": "אֲנִי רוֹצָה מַיִם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I (f.) want water.",
+   "variantOf": "he.f3.039",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.041",
+   "frame": "fr.want",
+   "text": "הַיְּלָדִים רוֹצִים לֶאֱכֹל.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "רוֹצִים",
+     "l": "he:ratsa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לֶאֱכֹל",
+     "l": "he:akhal",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children want to eat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.042",
+   "frame": "fr.want",
+   "text": "הִיא אוֹהֶבֶת לְבַשֵּׁל.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "She likes to cook.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.043",
+   "frame": "fr.want",
+   "text": "הוּא אוֹהֵב לְבַשֵּׁל.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "He likes to cook.",
+   "variantOf": "he.f3.042",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.044",
+   "frame": "fr.want",
+   "text": "אֲנַחְנוּ אוֹהֲבִים סָלָט.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "סָלָט",
+     "l": "he:salat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "We like salad.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.045",
+   "frame": "fr.want",
+   "text": "הוּא אוֹהֵב אֶת הַמָּרָק שֶׁל אִמָּא.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "He loves Mum’s soup.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.046",
+   "frame": "fr.want",
+   "text": "אֲנִי רוֹצֶה לִשְׁתּוֹת קָפֶה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לִשְׁתּוֹת",
+     "l": "he:shata",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "I (m.) want to drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.047",
+   "frame": "fr.want",
+   "text": "הִיא רוֹצָה לִקְנוֹת לֶחֶם.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לִקְנוֹת",
+     "l": "he:kana",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "She wants to buy bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.048",
+   "frame": "fr.want",
+   "text": "הַיְּלָדִים אוֹהֲבִים סֻכָּר.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "סֻכָּר",
+     "l": "he:sukar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children like sugar.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.049",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ מֶלַח.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מֶלַח",
+     "l": "he:melach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have salt.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.050",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ לֶחֶם וְחָלָב.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְחָלָב",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "חָלָב",
+       "l": "he:chalav",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have bread and milk.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.051",
+   "frame": "fr.this.is",
+   "text": "זֶה הַקָּפֶה שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַקָּפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is my coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.052",
+   "frame": "fr.this.is",
+   "text": "זֹאת הַבִּירָה שֶׁלּוֹ.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַבִּירָה",
+     "l": "he:bira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is his beer.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.053",
+   "frame": "fr.thing.here",
+   "text": "הַמַּיִם פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמַּיִם",
+     "l": "he:mayim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The water is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.054",
+   "frame": "fr.eat",
+   "text": "אִמָּא קוֹנָה מֶלַח וְסֻכָּר.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֶלַח",
+     "l": "he:melach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְסֻכָּר",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "סֻכָּר",
+       "l": "he:sukar",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Mum is buying salt and sugar.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.055",
+   "frame": "fr.want",
+   "text": "הַתַּלְמִידִים רוֹצִים אֹרֶז וְעוֹף.",
+   "tokens": [
+    {
+     "t": "הַתַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "רוֹצִים",
+     "l": "he:ratsa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֹרֶז",
+     "l": "he:orez",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְעוֹף",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "עוֹף",
+       "l": "he:of",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The pupils want rice and chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.056",
+   "frame": "fr.eat",
+   "text": "הַמִּשְׁפָּחָה אוֹכֶלֶת אֲרוּחַת עֶרֶב.",
+   "tokens": [
+    {
+     "t": "הַמִּשְׁפָּחָה",
+     "l": "he:mishpacha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֲרוּחַת עֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The family is having dinner.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.057",
+   "frame": "fr.eat",
+   "text": "הַדּוֹד שֶׁלִּי קוֹנֶה בָּשָׂר.",
+   "tokens": [
+    {
+     "t": "הַדּוֹד",
+     "l": "he:dod",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My uncle is buying meat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.058",
+   "frame": "fr.eat",
+   "text": "הִיא מְבַשֶּׁלֶת דָּג.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "דָּג",
+     "l": "he:dag",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "She is cooking fish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.059",
+   "frame": "fr.eat",
+   "text": "הִיא מְבַשֶּׁלֶת אֶת הַדָּג.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַדָּג",
+     "l": "he:dag",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.root.pattern",
+    "fn.definite"
+   ],
+   "gloss": "She is cooking the fish.",
+   "variantOf": "he.f3.058",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.060",
+   "frame": "fr.want",
+   "text": "הַיְּלָדִים אוֹהֲבִים אֶת הַמִּיץ הַזֶּה.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמִּיץ",
+     "l": "he:mits",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "The children like this juice.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.061",
+   "frame": "fr.eat",
+   "text": "אֲנִי קוֹנֶה אֶת הַיַּיִן הַזֶּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַיַּיִן",
+     "l": "he:yayin",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "I (m.) am buying this wine.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.062",
+   "frame": "fr.eat",
+   "text": "הַתִּינוֹק אוֹכֵל אֹרֶז.",
+   "tokens": [
+    {
+     "t": "הַתִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֹרֶז",
+     "l": "he:orez",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The baby is eating rice.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.063",
+   "frame": "fr.eat",
+   "text": "הֵם אוֹכְלִים אֶת אֲרוּחַת הַצָּהֳרַיִם.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "אֲרוּחַת הַצָּהֳרַיִם",
+     "l": "he:aruchat-tsohorayim",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "They are eating the lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.064",
+   "frame": "fr.want",
+   "text": "הַתַּלְמִידָה רוֹצָה לִשְׁתּוֹת מַיִם.",
+   "tokens": [
+    {
+     "t": "הַתַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לִשְׁתּוֹת",
+     "l": "he:shata",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.root.pattern",
+    "fn.definite"
+   ],
+   "gloss": "The pupil (f.) wants to drink water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.065",
+   "frame": "fr.eat",
+   "text": "סָבְתָא מְבַשֶּׁלֶת אֶת אֲרוּחַת הַבֹּקֶר.",
+   "tokens": [
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "אֲרוּחַת הַבֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.root.pattern",
+    "fn.definite"
+   ],
+   "gloss": "Grandma is cooking the breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.066",
+   "frame": "fr.eat",
+   "text": "אֲנִי לֹא אוֹכֵל לֶחֶם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) don’t eat bread.",
+   "variantOf": "he.f3.001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.067",
+   "frame": "fr.eat",
+   "text": "הוּא לֹא שׁוֹתֶה תֵּה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "He doesn’t drink tea.",
+   "variantOf": "he.f3.003",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.068",
+   "frame": "fr.want",
+   "text": "אֲנַחְנוּ לֹא אוֹהֲבִים סָלָט.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "סָלָט",
+     "l": "he:salat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "We don’t like salad.",
+   "variantOf": "he.f3.044",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.069",
+   "frame": "fr.want",
+   "text": "אֲנִי לֹא רוֹצֶה מַיִם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) don’t want water.",
+   "variantOf": "he.f3.039",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.070",
+   "frame": "fr.eat",
+   "text": "הֵם לֹא שׁוֹתִים יַיִן.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "They don’t drink wine.",
+   "variantOf": "he.f3.036",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.071",
+   "frame": "fr.have",
+   "text": "אֵין לָנוּ מֶלַח.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מֶלַח",
+     "l": "he:melach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "We have no salt.",
+   "variantOf": "he.f3.049",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.072",
+   "frame": "fr.thing.here",
+   "text": "הַמַּיִם לֹא פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמַּיִם",
+     "l": "he:mayim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.definite"
+   ],
+   "gloss": "The water isn’t here.",
+   "variantOf": "he.f3.053",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.073",
+   "frame": "fr.want",
+   "text": "הַיְּלָדִים לֹא רוֹצִים לֶאֱכֹל.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "רוֹצִים",
+     "l": "he:ratsa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לֶאֱכֹל",
+     "l": "he:akhal",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The children don’t want to eat.",
+   "variantOf": "he.f3.041",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.074",
+   "frame": "fr.eat",
+   "text": "אַבָּא לֹא מְבַשֵּׁל אֶת אֲרוּחַת הָעֶרֶב.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "אֲרוּחַת הָעֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Dad isn’t cooking the dinner.",
+   "variantOf": "he.f3.016",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.075",
+   "frame": "fr.eat",
+   "text": "הִיא לֹא אוֹכֶלֶת בָּשָׂר.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "She doesn’t eat meat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.076",
+   "frame": "fr.eat",
+   "text": "אֲנִי לֹא אוֹכֵל שׁוּם בָּשָׂר.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "שׁוּם",
+     "l": "he:shum-det"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) don’t eat any meat at all.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.077",
+   "frame": "fr.want",
+   "text": "אֲנִי לֹא רוֹצָה כְּלוּם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "כְּלוּם",
+     "l": "he:klum"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (f.) don’t want anything.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.078",
+   "frame": "fr.eat",
+   "text": "הוּא לֹא אוֹכֵל שׁוּם דָּבָר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "שׁוּם דָּבָר",
+     "l": "he:shum-davar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "He isn’t eating anything.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.079",
+   "frame": "fr.eat",
+   "text": "אַף אֶחָד לֹא שׁוֹתֶה חָלָב.",
+   "tokens": [
+    {
+     "t": "אַף אֶחָד",
+     "l": "he:af-echad"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "חָלָב",
+     "l": "he:chalav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "Nobody drinks milk.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.080",
+   "frame": "fr.eat",
+   "text": "אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אַף פַּעַם",
+     "l": "he:af-paam"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) never drink coffee.",
+   "alts": [
+    "אֲנִי לֹא שׁוֹתֶה קָפֶה אַף פַּעַם."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.081",
+   "frame": "fr.eat",
+   "text": "הִיא אַף פַּעַם לֹא אוֹכֶלֶת דָּגִים.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אַף פַּעַם",
+     "l": "he:af-paam"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "She never eats fish.",
+   "alts": [
+    "הִיא לֹא אוֹכֶלֶת דָּגִים אַף פַּעַם."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.082",
+   "frame": "fr.have",
+   "text": "אֵין לִי כְּלוּם.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "כְּלוּם",
+     "l": "he:klum"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "I have nothing.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.083",
+   "frame": "fr.have",
+   "text": "אֵין לָהֶם לֶחֶם.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "They have no bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.084",
+   "frame": "fr.be.where",
+   "text": "אֵין פֹּה אַף אֶחָד.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "אַף אֶחָד",
+     "l": "he:af-echad"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "There is nobody here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.085",
+   "frame": "fr.have",
+   "text": "אֵין לָנוּ שׁוּם יַיִן.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "שׁוּם",
+     "l": "he:shum-det"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "We have no wine at all.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.086",
+   "frame": "fr.notlike.generic",
+   "text": "הַיְּלָדִים לֹא אוֹהֲבִים דָּגִים.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children don’t like fish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.087",
+   "frame": "fr.want",
+   "text": "אֲנִי לֹא רוֹצֶה תֵּה וְלֹא קָפֶה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְלֹא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "לֹא",
+       "l": "he:lo"
+      }
+     ]
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) want neither tea nor coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.088",
+   "frame": "fr.eat",
+   "text": "הוּא לֹא אוֹכֵל בָּשָׂר וְלֹא דָּגִים.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְלֹא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "לֹא",
+       "l": "he:lo"
+      }
+     ]
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "He eats neither meat nor fish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.089",
+   "frame": "fr.eat",
+   "text": "אַף אֶחָד לֹא מְבַשֵּׁל פֹּה.",
+   "tokens": [
+    {
+     "t": "אַף אֶחָד",
+     "l": "he:af-echad"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "Nobody cooks here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.090",
+   "frame": "fr.eat",
+   "text": "אֲנַחְנוּ אַף פַּעַם לֹא קוֹנִים בִּירָה.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אַף פַּעַם",
+     "l": "he:af-paam"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "קוֹנִים",
+     "l": "he:kana",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בִּירָה",
+     "l": "he:bira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "We never buy beer.",
+   "alts": [
+    "אֲנַחְנוּ לֹא קוֹנִים בִּירָה אַף פַּעַם."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.091",
+   "frame": "fr.notlike.generic",
+   "text": "הִיא לֹא אוֹהֶבֶת גְּבִינָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "גְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "She doesn’t like cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.092",
+   "frame": "fr.have",
+   "text": "אֵין לִי מִיץ וְאֵין לִי מַיִם.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מִיץ",
+     "l": "he:mits",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְאֵין",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אֵין",
+       "l": "he:ein"
+      }
+     ]
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "I have no juice and no water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.093",
+   "frame": "fr.eat",
+   "text": "אַף אֶחָד לֹא אוֹכֵל אֶת הַסָּלָט.",
+   "tokens": [
+    {
+     "t": "אַף אֶחָד",
+     "l": "he:af-echad"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַסָּלָט",
+     "l": "he:salat",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Nobody is eating the salad.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.094",
+   "frame": "fr.eat",
+   "text": "הַאִם אַתָּה שׁוֹתֶה קָפֶה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) drink coffee?",
+   "variantOf": "he.f3.006",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "אַתָּה שׁוֹתֶה קָפֶה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.095",
+   "frame": "fr.eat",
+   "text": "הַאִם אַתְּ שׁוֹתָה קָפֶה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (f.) drink coffee?",
+   "variantOf": "he.f3.007",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "אַתְּ שׁוֹתָה קָפֶה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.096",
+   "frame": "fr.eat",
+   "text": "הַאִם אַתֶּם אוֹכְלִים דָּגִים?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "דָּגִים",
+     "l": "he:dag",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you (pl.) eat fish?",
+   "variantOf": "he.f3.027",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "אַתֶּם אוֹכְלִים דָּגִים?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.097",
+   "frame": "fr.have",
+   "text": "הַאִם יֵשׁ לָנוּ מֶלַח?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מֶלַח",
+     "l": "he:melach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.have"
+   ],
+   "gloss": "Do we have salt?",
+   "variantOf": "he.f3.049",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "יֵשׁ לָנוּ מֶלַח?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.098",
+   "frame": "fr.eat",
+   "text": "הַאִם הִיא לֹא אוֹכֶלֶת בָּשָׂר?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "Doesn’t she eat meat?",
+   "variantOf": "he.f3.075",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הִיא לֹא אוֹכֶלֶת בָּשָׂר?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.099",
+   "frame": "fr.thing.here",
+   "text": "הַאִם הַמַּיִם פֹּה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "הַמַּיִם",
+     "l": "he:mayim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.definite"
+   ],
+   "gloss": "Is the water here?",
+   "variantOf": "he.f3.053",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הַמַּיִם פֹּה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.100",
+   "frame": "fr.eat",
+   "text": "הַאִם הֵם שׁוֹתִים יַיִן?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do they drink wine?",
+   "variantOf": "he.f3.036",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הֵם שׁוֹתִים יַיִן?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.101",
+   "frame": "fr.want",
+   "text": "הַאִם הַיְּלָדִים רוֹצִים לֶאֱכֹל?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "רוֹצִים",
+     "l": "he:ratsa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לֶאֱכֹל",
+     "l": "he:akhal",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "Do the children want to eat?",
+   "variantOf": "he.f3.041",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הַיְּלָדִים רוֹצִים לֶאֱכֹל?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.102",
+   "frame": "fr.want.q",
+   "text": "אַתְּ רוֹצָה מִיץ?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מִיץ",
+     "l": "he:mits",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (f.) want juice?",
+   "alts": [
+    "הַאִם אַתְּ רוֹצָה מִיץ?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.103",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתָּה רוֹצֶה סֻכָּר?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "סֻכָּר",
+     "l": "he:sukar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) want sugar?",
+   "alts": [
+    "אַתָּה רוֹצֶה סֻכָּר?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.104",
+   "frame": "fr.want.q",
+   "text": "אַתָּה רוֹצֶה קָפֶה? כֵּן, בְּבַקָּשָׁה.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "כֵּן",
+     "l": "he:ken"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) want coffee? — Yes, please.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.105",
+   "frame": "fr.want.q",
+   "text": "אַתְּ רוֹצָה תֵּה? לֹא, תּוֹדָה.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo-no"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.negation"
+   ],
+   "gloss": "Do you (f.) want tea? — No, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.106",
+   "frame": "fr.alt.q",
+   "text": "אַתָּה רוֹצֶה תֵּה אוֹ קָפֶה?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) want tea or coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.107",
+   "frame": "fr.alt.q",
+   "text": "אַתְּ שׁוֹתָה יַיִן אוֹ בִּירָה?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "בִּירָה",
+     "l": "he:bira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Do you (f.) drink wine or beer?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.108",
+   "frame": "fr.alt.q",
+   "text": "דָּג אוֹ עוֹף?",
+   "tokens": [
+    {
+     "t": "דָּג",
+     "l": "he:dag",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "עוֹף",
+     "l": "he:of",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Fish or chicken?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.109",
+   "frame": "fr.alt.q",
+   "text": "אַתֶּם רוֹצִים אֹרֶז אוֹ לֶחֶם?",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "רוֹצִים",
+     "l": "he:ratsa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֹרֶז",
+     "l": "he:orez",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Do you (pl.) want rice or bread?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.110",
+   "frame": "fr.want",
+   "text": "גַּם אֲנִי רוֹצֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "גַּם",
+     "l": "he:gam"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I (m.) want coffee too.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.111",
+   "frame": "fr.want",
+   "text": "רַק מַיִם, בְּבַקָּשָׁה.",
+   "tokens": [
+    {
+     "t": "רַק",
+     "l": "he:rak"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Just water, please.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.112",
+   "frame": "fr.eat",
+   "text": "הוּא אוֹכֵל רַק פֵּרוֹת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "רַק",
+     "l": "he:rak"
+    },
+    {
+     "t": "פֵּרוֹת",
+     "l": "he:pri",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.plural.noun"
+   ],
+   "gloss": "He eats only fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.113",
+   "frame": "fr.want.q",
+   "text": "אוּלַי תֵּה?",
+   "tokens": [
+    {
+     "t": "אוּלַי",
+     "l": "he:ulay"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Maybe some tea?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.114",
+   "frame": "fr.eat",
+   "text": "אֲנִי לֹא אוֹכֵל בָּשָׂר. בֶּאֱמֶת?",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "בֶּאֱמֶת",
+     "l": "he:beemet"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "I (m.) don’t eat meat. — Really?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.115",
+   "frame": "fr.want",
+   "text": "אַתָּה אוֹהֵב פֵּרוֹת? כַּמּוּבָן!",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "פֵּרוֹת",
+     "l": "he:pri",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "כַּמּוּבָן",
+     "l": "he:kamuvan"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) like fruit? — Of course!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.116",
+   "frame": "fr.want.q",
+   "text": "גַּם אַתְּ רוֹצָה מִיץ? בָּרוּר!",
+   "tokens": [
+    {
+     "t": "גַּם",
+     "l": "he:gam"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מִיץ",
+     "l": "he:mits",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "בָּרוּר",
+     "l": "he:barur",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (f.) want juice too? — Sure!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.117",
+   "frame": "fr.eat",
+   "text": "אוּלַי הֵם אוֹכְלִים אֲרוּחַת צָהֳרַיִם.",
+   "tokens": [
+    {
+     "t": "אוּלַי",
+     "l": "he:ulay"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֲרוּחַת צָהֳרַיִם",
+     "l": "he:aruchat-tsohorayim",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Maybe they are having lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.118",
+   "frame": "fr.eat",
+   "text": "אַבָּא בֶּאֱמֶת מְבַשֵּׁל?",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בֶּאֱמֶת",
+     "l": "he:beemet"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.root.pattern"
+   ],
+   "gloss": "Is Dad really cooking?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.119",
+   "frame": "fr.eat",
+   "text": "גַּם הִיא לֹא אוֹכֶלֶת בָּשָׂר.",
+   "tokens": [
+    {
+     "t": "גַּם",
+     "l": "he:gam"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בָּשָׂר",
+     "l": "he:basar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "She doesn’t eat meat either.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.120",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי רַק תֵּה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "רַק",
+     "l": "he:rak"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I only have tea.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.121",
+   "frame": "fr.want.q",
+   "text": "אַתָּה רוֹצֶה מַיִם? אוּלַי.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "אוּלַי",
+     "l": "he:ulay"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) want water? — Maybe.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.122",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָךְ חָלָב? לֹא, אֵין לִי.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָךְ",
+     "l": "he:le",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": "חָלָב",
+     "l": "he:chalav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo-no"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.have",
+    "fn.negation"
+   ],
+   "gloss": "Do you (f.) have milk? — No, I don’t.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f3.123",
+   "frame": "fr.eat",
+   "text": "גַּם הוּא שׁוֹתֶה תֵּה?",
+   "tokens": [
+    {
+     "t": "גַּם",
+     "l": "he:gam"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Does he drink tea too?",
+   "level": "A1"
+  }
+ ]
+}

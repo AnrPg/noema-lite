@@ -1,0 +1,4380 @@
+{
+ "lexemes": [
+  {
+   "id": "de:in",
+   "lemma": "in",
+   "pos": "ADP",
+   "senses": [
+    "prep.in",
+    "prep.inmonth"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Inside four walls, a city, a country – the most frequent preposition.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in, inside, at (where? + dative: in der Küche, im Büro)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.in"
+     },
+     {
+      "id": "s2",
+      "def": "into, to (where to? + accusative: in die Stadt, ins Café)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "in, within (time: in einer Stunde, im Mai)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "in (a month, a season, a year, a week: im Mai, im Sommer, in diesem Jahr)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.inmonth"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder sind in der Schule.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen in einer kleinen Stadt.",
+      "tr": "We live in a small town.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Samstag fahren wir in die Stadt.",
+      "tr": "On Saturday we’re going into town.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Zug kommt in zehn Minuten.",
+      "tr": "The train arrives in ten minutes.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     },
+     {
+      "text": "In diesem Jahr fahren wir nicht in Urlaub.",
+      "tr": "This year we’re not going on holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s4"
+     },
+     {
+      "text": "Im Winter fahren wir in die Berge.",
+      "tr": "In winter we go to the mountains.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im (= in dem)",
+      "tr": "in the (masc./neut. dative)"
+     },
+     {
+      "text": "ins (= in das)",
+      "tr": "into the (neut. accusative)"
+     },
+     {
+      "text": "in der Nähe",
+      "tr": "nearby"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German in, from Old High German in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German in and English in are one Germanic word, related to Greek ἐν (en) and Latin in."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? → dative (Ich bin in der Küche), Wohin? → accusative (Ich gehe in die Küche).",
+     "in dem → im and in das → ins: Ich bin im Park. – not *in dem Park (unless “in that park”).",
+     "A city or a country without article: in Berlin, in Griechenland; with an article: in der Türkei, in der Schweiz.",
+     "Months and seasons take im (in + dem): im Mai, im Sommer; a year takes no preposition (2026) or im Jahr 2026 – not *in 2026."
+    ],
+    "subtleties": [
+     "in for buildings you go inside (im Café, im Supermarkt); an open market or a square takes auf: auf dem Markt, auf dem Platz."
+    ]
+   }
+  },
+  {
+   "id": "de:an",
+   "lemma": "an",
+   "pos": "ADP",
+   "senses": [
+    "prep.at",
+    "prep.onday"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The concept gloss lists the examples “at home, at school”; Wiktionary glosses an as “at, upon, by, near, next to” (local) – the at-sense of a place."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Touching an edge or a side: at the window, at the station, on the wall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at, by, on (at an edge or side; where? + dative: am Fenster, an der Wand, am Bahnhof)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s2",
+      "def": "to, onto (where to? + accusative: ans Fenster, an die Wand)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "on (days, parts of the day, dates: am Montag, am Abend, am 3. Mai – usually as am = an dem)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.onday"
+     },
+     {
+      "id": "s4",
+      "def": "at (a school or university: an der Uni, an der Schule)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich warte an der Tür.",
+      "tr": "I’m waiting at the door.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Bild hängt an der Wand.",
+      "tr": "The picture hangs on the wall.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Schwester studiert an der Uni.",
+      "tr": "My sister studies at university.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s4"
+     },
+     {
+      "text": "An diesem Tag war es sehr kalt.",
+      "tr": "On that day it was very cold.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s3"
+     },
+     {
+      "text": "An diesem Montag habe ich frei.",
+      "tr": "This Monday I’m off.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "An Feiertagen sind die Geschäfte zu.",
+      "tr": "On public holidays the shops are closed.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am (= an dem)",
+      "tr": "at the, on the"
+     },
+     {
+      "text": "ans (= an das)",
+      "tr": "to the, onto the"
+     },
+     {
+      "text": "am Bahnhof",
+      "tr": "at the station"
+     },
+     {
+      "text": "an der Uni",
+      "tr": "at university"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German an(e), from Old High German ana, from Proto-West Germanic *ana, from Proto-Germanic *ana.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "an is the same word as English on and Greek ἀνά (aná, “up, on”)."
+    ],
+    "pitfalls": [
+     "an = at the side or edge (an der Wand, am Fenster); auf = on top of a surface (auf dem Tisch).",
+     "an dem → am, an das → ans: am Bahnhof, ans Meer.",
+     "Two-way preposition: Wo? + dative (am Fenster), Wohin? + accusative (ans Fenster).",
+     "Days, parts of the day and dates take an + dative, nearly always as am: am Montag, am Morgen, am Wochenende, am 3. Mai – but in der Nacht."
+    ],
+    "subtleties": [
+     "“At” a place is three words in German: an (an edge: am Bahnhof), bei (a person or firm: beim Arzt) and in (inside: in der Schule)."
+    ]
+   }
+  },
+  {
+   "id": "de:bei",
+   "lemma": "bei",
+   "pos": "ADP",
+   "senses": [
+    "prep.at"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The concept gloss lists the examples “at home, at school”; Wiktionary glosses bei as “(with a person, family, shop) at” – the at-sense of a place."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "At someone’s place – at the doctor’s, at grandma’s, at work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at (a person’s home, a shop, a doctor; a company: bei meiner Oma, beim Arzt, bei Siemens) + dative",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s2",
+      "def": "near, by (bei Berlin = near Berlin)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "during, while (beim Essen = while eating)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin heute bei meiner Oma.",
+      "tr": "Today I’m at my grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Vater ist beim Arzt.",
+      "tr": "My father is at the doctor’s.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Potsdam liegt bei Berlin.",
+      "tr": "Potsdam is near Berlin.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s2"
+     },
+     {
+      "text": "Beim Essen spricht man nicht.",
+      "tr": "You don’t talk while eating.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "beim (= bei dem)",
+      "tr": "at the (masc./neut.)"
+     },
+     {
+      "text": "bei der Arbeit",
+      "tr": "at work"
+     },
+     {
+      "text": "bei uns",
+      "tr": "at our place; in our country"
+     },
+     {
+      "text": "beim Arzt",
+      "tr": "at the doctor’s"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German bī, from Old High German bī, from Proto-West Germanic *bī, from Proto-Germanic *bi. Compare English by.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like French chez, bei + a person means “at someone’s home”: bei Anna = chez Anna; Greek says στης Άννας."
+    ],
+    "pitfalls": [
+     "bei is only for where you ARE: Ich bin bei meiner Mutter. Going there is zu: Ich gehe zu meiner Mutter (not *bei meiner Mutter gehen).",
+     "bei always takes the dative: bei dem → beim."
+    ],
+    "subtleties": [
+     "bei uns can mean “at our home” or “in our country”: Bei uns isst man spät. (In our country people eat late.)"
+    ]
+   }
+  },
+  {
+   "id": "de:zu",
+   "lemma": "zu",
+   "pos": "ADP",
+   "senses": [
+    "prep.to"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heading somewhere – to a person, to a building, to an event.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to (a person, a building, an event; + dative: zum Arzt, zur Schule, zu meiner Oma)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to"
+     },
+     {
+      "id": "s2",
+      "def": "at (in fixed phrases: zu Hause, zu Weihnachten)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "too (before an adjective: zu groß)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to (before an infinitive: Ich habe keine Zeit zu kochen)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe zum Arzt.",
+      "tr": "I’m going to the doctor.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder gehen zur Schule.",
+      "tr": "The children go to school.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren zu meiner Tante.",
+      "tr": "We’re going to my aunt’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Kaffee ist zu heiß.",
+      "tr": "The coffee is too hot.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zum (= zu dem)",
+      "tr": "to the (masc./neut.)"
+     },
+     {
+      "text": "zur (= zu der)",
+      "tr": "to the (fem.)"
+     },
+     {
+      "text": "zu Hause",
+      "tr": "at home"
+     },
+     {
+      "text": "zu Fuß",
+      "tr": "on foot"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From a merger of Middle High German ze (Old High German za, zi) and zuo (Old High German zuo, from Proto-West Germanic *tō). Cognate with Dutch toe, English to, too.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zu is English to and too – one German word does both jobs: zu Hause (at home), zu groß (too big)."
+    ],
+    "pitfalls": [
+     "zu always takes the dative, even for movement: zu dem Arzt → zum Arzt; zu der Post → zur Post.",
+     "zu Hause = at home (where), nach Hause = home (where to): Ich bin zu Hause. – Ich gehe nach Hause.",
+     "Cities and countries take nach, not zu: nach Berlin, nach Griechenland."
+    ],
+    "subtleties": [
+     "zu is for going to a person or a place you visit for its purpose (zum Arzt, zur Post, zur Arbeit); in + accusative is for going inside (in die Küche, ins Kino)."
+    ]
+   }
+  },
+  {
+   "id": "de:nach",
+   "lemma": "nach",
+   "pos": "ADP",
+   "senses": [
+    "prep.to",
+    "prep.after"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On the road to a city or a country – and home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to (cities, countries without article, directions, home: nach Berlin, nach Griechenland, nach links, nach Hause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to"
+     },
+     {
+      "id": "s2",
+      "def": "after (time and order, + dative: nach dem Essen, nach acht Uhr)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.after"
+     },
+     {
+      "id": "s3",
+      "def": "according to (meiner Meinung nach)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir fliegen nach Athen.",
+      "tr": "We’re flying to Athens.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug fährt nach München.",
+      "tr": "The train goes to Munich.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach dem Essen trinken wir Kaffee.",
+      "tr": "After the meal we drink coffee.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s2"
+     },
+     {
+      "text": "Meiner Meinung nach ist das richtig.",
+      "tr": "In my opinion that’s right.",
+      "register": "formal",
+      "context": "discussion",
+      "sense": "s3"
+     },
+     {
+      "text": "Nach der Arbeit gehe ich nach Hause.",
+      "tr": "After work I go home.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nach Hause",
+      "tr": "home (where to)"
+     },
+     {
+      "text": "nach links / nach rechts",
+      "tr": "to the left / right"
+     },
+     {
+      "text": "nach dem Essen",
+      "tr": "after the meal"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German nāh, from Old High German nāh; related to nah (“near”). Cognate with Dutch na, English nigh.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nach and nah (near) are one word historically – “going near” became “going to”."
+    ],
+    "pitfalls": [
+     "nach for cities and countries WITHOUT article (nach Spanien); with an article use in + accusative: in die Türkei, in die Schweiz, in die USA.",
+     "nach is never used for going to a person or a building: zum Arzt, zur Schule (not *nach der Schule, which means “after school”).",
+     "Two meanings, both with the dative: nach Berlin / nach Hause (to) and nach dem Essen / nach der Arbeit (after)."
+    ],
+    "subtleties": [
+     "nach Hause has the old dative Hause; nach always takes the dative.",
+     "after + a verb is the conjunction nachdem (Nachdem ich gegessen habe, …); after = afterwards is danach."
+    ]
+   }
+  },
+  {
+   "id": "de:aus",
+   "lemma": "aus",
+   "pos": "ADP",
+   "senses": [
+    "prep.from"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming out of something – a house, a cup, a country.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (origin: a country, a city; out of a place: aus Griechenland, aus dem Haus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "out of, made of (aus Holz = made of wood)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "out of, for (a reason: aus Liebe)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich komme aus Griechenland.",
+      "tr": "I come from Greece.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kommt gerade aus dem Haus.",
+      "tr": "He is just coming out of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Tisch ist aus Holz.",
+      "tr": "The table is made of wood.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "aus Griechenland kommen",
+      "tr": "to come from Greece"
+     },
+     {
+      "text": "aus dem Haus",
+      "tr": "out of the house"
+     },
+     {
+      "text": "aus Holz",
+      "tr": "made of wood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German ūȥ, from Old High German ūȥ (“out”), from Proto-West Germanic *ūt. Compare Dutch uit, English out.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "aus and English out are the same word – compare Der Ball ist im Aus (the ball is out) and Licht aus! (lights off!)."
+    ],
+    "pitfalls": [
+     "Origin is aus: Ich bin aus Griechenland. (not *von Griechenland)",
+     "aus always takes the dative: aus dem Haus, aus der Schule."
+    ],
+    "subtleties": [
+     "aus = out of an inside (aus dem Haus, aus der Stadt); von = from a point, a person or the surface (vom Arzt, von der Arbeit)."
+    ]
+   }
+  },
+  {
+   "id": "de:von",
+   "lemma": "von",
+   "pos": "ADP",
+   "senses": [
+    "prep.from"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Starting point and owner: from a person, from work – and “of”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (a person, a starting point: von meiner Mutter, von der Arbeit, vom Arzt)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "of (owner, instead of the genitive: das Buch von meinem Bruder)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "by (the doer in the passive: von Goethe geschrieben)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "about, of (a topic: von etwas erzählen)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Geschenk ist von meiner Mutter.",
+      "tr": "The present is from my mother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kommt gerade von der Arbeit.",
+      "tr": "He is just coming from work.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist das Auto von meinem Bruder.",
+      "tr": "That is my brother’s car.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Buch ist von Goethe.",
+      "tr": "The book is by Goethe.",
+      "register": "neutral",
+      "context": "literature",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "vom (= von dem)",
+      "tr": "from the, of the"
+     },
+     {
+      "text": "von zu Hause",
+      "tr": "from home"
+     },
+     {
+      "text": "Von wem ist das?",
+      "tr": "Who is it from? / Whose is it?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German von(e) (“from”), from Old High German fon(a). Cognate with Old Dutch fan (modern van), Old Frisian fon, fan.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "von + dative is the everyday answer to wessen?: Wessen Buch ist das? – Von wem ist das Buch?"
+    ],
+    "pitfalls": [
+     "Origin of a person is aus, not von: Ich bin aus Athen. – von is for a starting point or a person (ein Brief von Anna).",
+     "von always takes the dative: von dem → vom."
+    ],
+    "subtleties": [
+     "In speech von + dative replaces the genitive: das Auto von meinem Bruder = das Auto meines Bruders.",
+     "von in names (Johann Wolfgang von Goethe) is the noble particle, like Dutch van."
+    ]
+   }
+  },
+  {
+   "id": "de:mit",
+   "lemma": "mit",
+   "pos": "ADP",
+   "senses": [
+    "prep.with"
+   ],
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Company and tools: with a friend, with milk, with the bus.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with (together with; having: mit meinem Bruder, Tee mit Milch)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with"
+     },
+     {
+      "id": "s2",
+      "def": "with, by (an instrument or transport: mit dem Messer, mit dem Bus)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke Tee mit Milch.",
+      "tr": "I drink tea with milk.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie wohnt mit ihrer Schwester zusammen.",
+      "tr": "She lives with her sister.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren mit dem Bus zur Schule.",
+      "tr": "We go to school by bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit Milch",
+      "tr": "with milk"
+     },
+     {
+      "text": "mit wem",
+      "tr": "with whom"
+     },
+     {
+      "text": "mit dem Bus / Zug",
+      "tr": "by bus / train"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German mite, mit, from Old High German miti, mit, from Proto-West Germanic *midi. Cognate with Middle English mid (“with”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mit is related to Greek μετά (metá, “with, among, after”) – the meta- of metaphor."
+    ],
+    "pitfalls": [
+     "mit always takes the dative – also in the plural, where the noun adds -n: mit meinen Brüdern, mit den Kindern.",
+     "Transport is mit + dative: mit dem Bus, mit dem Auto (not *mit Bus)."
+    ],
+    "subtleties": [
+     "mit as an adverb means “along, too”: Kommst du mit? (Are you coming along?)"
+    ]
+   }
+  },
+  {
+   "id": "de:ohne",
+   "lemma": "ohne",
+   "pos": "ADP",
+   "senses": [
+    "prep.without"
+   ],
+   "governs": "ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Something missing: coffee without sugar, a day without phone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "without (+ accusative: ohne Zucker, ohne meinen Bruder)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.without"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke Kaffee ohne Zucker.",
+      "tr": "I drink coffee without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Ohne dich gehe ich nicht.",
+      "tr": "I’m not going without you.",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kommt ohne seinen Bruder.",
+      "tr": "He’s coming without his brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ohne Zucker",
+      "tr": "without sugar"
+     },
+     {
+      "text": "ohne mich",
+      "tr": "count me out"
+     },
+     {
+      "text": "ohne Weiteres",
+      "tr": "easily, just like that"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ohne Fleiß kein Preis.",
+      "tr": "Without diligence, no prize.",
+      "kind": "proverb",
+      "meaning": "no pain, no gain",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German āne, from Old High German āna, āno (“without”), from Proto-Germanic *ēnu, *ēnō. Possibly cognate with Ancient Greek ἄνευ (áneu, “without”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ohne may be a cousin of Greek ἄνευ – both mean “without”."
+    ],
+    "pitfalls": [
+     "ohne takes the accusative: ohne meinen Bruder (not *ohne meinem Bruder).",
+     "No article is common: ohne Zucker, ohne Milch."
+    ],
+    "subtleties": [
+     "Ohne mich! – a whole answer: “Count me out!”"
+    ]
+   }
+  },
+  {
+   "id": "de:für",
+   "lemma": "für",
+   "pos": "ADP",
+   "senses": [
+    "prep.for"
+   ],
+   "governs": "ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A present, a purpose, a person: this is for you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "for (a person, a purpose, a price: für dich, für das Abendessen)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     },
+     {
+      "id": "s2",
+      "def": "for, in favour of (für oder gegen)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Kaffee ist für meine Mutter.",
+      "tr": "The coffee is for my mother.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist das für mich?",
+      "tr": "Is that for me?",
+      "register": "informal",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen Fisch für das Abendessen.",
+      "tr": "We’re buying fish for dinner.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Bist du für oder gegen den Plan?",
+      "tr": "Are you for or against the plan?",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "für dich",
+      "tr": "for you"
+     },
+     {
+      "text": "für wen",
+      "tr": "for whom"
+     },
+     {
+      "text": "danke für …",
+      "tr": "thanks for …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German vür, from Old High German furi, from Proto-West Germanic *furi, from Proto-Germanic *furi. Historically interchangeable with vor; the split dates from the 18th century.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek για covers both “for” and “about”; German splits them: für (for) and über (about)."
+    ],
+    "pitfalls": [
+     "für takes the accusative: für meinen Vater (masculine -en), für dich, für ihn.",
+     "A period of time often needs no für: Ich bleibe zwei Wochen (für zwei Wochen is also fine for a planned stay); a time still going on takes seit (S15)."
+    ],
+    "subtleties": [
+     "für vs vor: für = for; vor = in front of / before – they were once the same word."
+    ]
+   }
+  },
+  {
+   "id": "de:über",
+   "lemma": "über",
+   "pos": "ADP",
+   "senses": [
+    "prep.about"
+   ],
+   "governs": "ACC|DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A topic you talk, read or write about – and above, over, across.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "about (a topic, + accusative: ein Buch über die Stadt)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     },
+     {
+      "id": "s2",
+      "def": "over, above (Wo? + dative: Die Lampe hängt über dem Tisch.)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "over, across (Wohin? + accusative: über die Straße)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "via (über München nach Wien)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist ein Buch über Griechenland.",
+      "tr": "That is a book about Greece.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sprechen über die Arbeit.",
+      "tr": "We’re talking about work.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Lampe hängt über dem Tisch.",
+      "tr": "The lamp hangs above the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir fahren über München nach Wien.",
+      "tr": "We’re going to Vienna via Munich.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "über etwas sprechen",
+      "tr": "to talk about something"
+     },
+     {
+      "text": "ein Buch über …",
+      "tr": "a book about …"
+     },
+     {
+      "text": "über die Straße gehen",
+      "tr": "to cross the street"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German über, from Old High German ubiri, ubari, from Proto-Germanic *ubiri, from Proto-Indo-European *upéri. Cognate with Ancient Greek ὑπέρ (hupér, “above”), Latin super, English over.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "über is Greek ὑπέρ (hupér) – the hyper- of hyperactive – and Latin super."
+    ],
+    "pitfalls": [
+     "über meaning “about” always takes the accusative: über den Film, über die Stadt.",
+     "über = above without touching (Die Lampe ist über dem Tisch); auf = on, touching (Das Buch ist auf dem Tisch)."
+    ],
+    "subtleties": [
+     "über is a two-way preposition for place (S12): über dem Tisch (where) – über den Tisch (across, where to)."
+    ]
+   }
+  },
+  {
+   "id": "de:im",
+   "lemma": "im",
+   "pos": "ADP",
+   "senses": [],
+   "role": "in + dem: in the (masc./neut. dative, where?) – im Park, im Büro; in time: im Mai, im Sommer, im Jahr 2026",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files im as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:ins",
+   "lemma": "ins",
+   "pos": "ADP",
+   "senses": [],
+   "role": "in + das: into the (neut. accusative, where to?) – ins Café",
+   "governs": "ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files ins as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:am",
+   "lemma": "am",
+   "pos": "ADP",
+   "senses": [],
+   "role": "an + dem: at the, on the (masc./neut. dative) – am Bahnhof, am Fenster; in time: am Montag, am Abend, am Wochenende",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "de:ans",
+   "lemma": "ans",
+   "pos": "ADP",
+   "senses": [],
+   "role": "an + das: to the, onto the (neut. accusative) – ans Fenster",
+   "governs": "ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files ans as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:zum",
+   "lemma": "zum",
+   "pos": "ADP",
+   "senses": [],
+   "role": "zu + dem: to the (masc./neut.) – zum Arzt, zum Bahnhof",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files zum as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:zur",
+   "lemma": "zur",
+   "pos": "ADP",
+   "senses": [],
+   "role": "zu + der: to the (fem.) – zur Schule, zur Post",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files zur as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:beim",
+   "lemma": "beim",
+   "pos": "ADP",
+   "senses": [],
+   "role": "bei + dem: at the (masc./neut.) – beim Arzt",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files beim as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:vom",
+   "lemma": "vom",
+   "pos": "ADP",
+   "senses": [],
+   "role": "von + dem: from the, of the (masc./neut.) – vom Markt, vom Arzt",
+   "governs": "DAT",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files vom as a “contraction” (preposition + article); in the course it is a preposition fused with the article (UD: ADP)."
+    }
+   }
+  },
+  {
+   "id": "de:zu_Hause",
+   "lemma": "zu Hause",
+   "pos": "ADV",
+   "senses": [
+    "place.home"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Your own four walls – being at home, relaxed.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at home (where?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
+     },
+     {
+      "id": "s2",
+      "def": "at home, at ease (figurative: sich wie zu Hause fühlen)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin heute zu Hause.",
+      "tr": "I’m at home today.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Bist du zu Hause?",
+      "tr": "Are you at home?",
+      "register": "informal",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "Fühl dich wie zu Hause!",
+      "tr": "Make yourself at home!",
+      "register": "informal",
+      "context": "hospitality",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Hause bleiben",
+      "tr": "to stay at home"
+     },
+     {
+      "text": "von zu Hause arbeiten",
+      "tr": "to work from home"
+     },
+     {
+      "text": "bei uns zu Hause",
+      "tr": "at our place"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Fühl dich wie zu Hause!",
+      "tr": "Feel as if at home!",
+      "kind": "fixed expression",
+      "meaning": "make yourself at home",
+      "register": "informal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "daheim",
+      "register": "regional",
+      "nuance": "at home – warm and homely; everyday word in southern Germany, Austria and Switzerland"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ze hūse, from Old High German za hūse, zi hūse, equivalent to zu (“to”) + Hause, the old-fashioned dative of Haus (“house”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian splits it exactly like German: дома (at home) – домой (home, where to); Greek uses one phrase for both: στο σπίτι."
+    ],
+    "pitfalls": [
+     "zu Hause = where (at home); nach Hause = where to (home): Ich bin zu Hause. – Ich will nach Hause.",
+     "Not *in Hause, *bei Hause, and not *zu Hause gehen."
+    ],
+    "subtleties": [
+     "The -e of Hause is an old dative ending kept only in these phrases; elsewhere: im Haus.",
+     "The spelling zuhause (one word) is also accepted; das Zuhause is a noun: “home” as a place you belong to."
+    ]
+   }
+  },
+  {
+   "id": "de:nach_Hause",
+   "lemma": "nach Hause",
+   "pos": "ADV",
+   "senses": [
+    "place.home"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The way home after a long day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "home, homeward (where to?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich will nach Hause.",
+      "tr": "I want to go home.",
+      "register": "informal",
+      "context": "evening",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann kommst du nach Hause?",
+      "tr": "When are you coming home?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Komm gut nach Hause!",
+      "tr": "Get home safely!",
+      "register": "informal",
+      "context": "saying goodbye",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nach Hause gehen / fahren / kommen",
+      "tr": "to go / drive / come home"
+     },
+     {
+      "text": "jemanden nach Hause bringen",
+      "tr": "to take someone home"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Komm gut nach Hause!",
+      "tr": "Come home well!",
+      "kind": "fixed expression",
+      "meaning": "get home safely (said when someone leaves)",
+      "register": "informal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "heim",
+      "register": "regional",
+      "nuance": "home(wards) – common in southern German speech: Ich gehe heim."
+     }
+    ],
+    "etymology": {
+     "text": "From nach (“to”) + Hause, old dative of Haus (“house”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “home” works without a preposition (go home) – German needs nach, Greek στο σπίτι, Turkish the dative eve."
+    ],
+    "pitfalls": [
+     "nach Hause is movement (where to); being at home is zu Hause.",
+     "Not *zu Hause gehen: going home is always nach Hause gehen."
+    ],
+    "subtleties": [
+     "The spelling nachhause (one word) is also accepted; nach Haus (without -e) is heard in speech and songs."
+    ]
+   }
+  },
+  {
+   "id": "de:Schule",
+   "lemma": "Schule",
+   "pos": "NOUN",
+   "senses": [
+    "place.school"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Schule",
+    "N;ACC;SG": "Schule",
+    "N;DAT;SG": "Schule",
+    "N;GEN;SG": "Schule",
+    "N;NOM;PL": "Schulen",
+    "N;ACC;PL": "Schulen",
+    "N;DAT;PL": "Schulen",
+    "N;GEN;PL": "Schulen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "School bags, the bell, the schoolyard – and the first day with a Schultüte.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "school (the institution, the building, lessons)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.school"
+     },
+     {
+      "id": "s2",
+      "def": "school (of thought, art: die Frankfurter Schule)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "school, shoal (of fish)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder sind in der Schule.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Tochter geht schon zur Schule.",
+      "tr": "My daughter already goes to school.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach der Schule essen wir zu Mittag.",
+      "tr": "After school we have lunch.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er gehört zur Frankfurter Schule.",
+      "tr": "He belongs to the Frankfurt School.",
+      "register": "formal",
+      "context": "philosophy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zur Schule gehen",
+      "tr": "to go to school, attend school"
+     },
+     {
+      "text": "in der Schule",
+      "tr": "at school"
+     },
+     {
+      "text": "die Grundschule",
+      "tr": "primary school"
+     },
+     {
+      "text": "die Schule schwänzen",
+      "tr": "to skip school"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Nicht für die Schule, sondern für das Leben lernen wir.",
+      "tr": "We learn not for school but for life.",
+      "kind": "saying",
+      "meaning": "learning is for life (a reversal of Seneca’s complaint “non vitae sed scholae discimus”)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Penne",
+      "register": "slang",
+      "nuance": "school – old student slang"
+     },
+     {
+      "word": "Lehranstalt",
+      "register": "dated",
+      "nuance": "educational establishment – official, old-fashioned"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German schuole, from Old High German scuola, from Latin schola, from Ancient Greek σχολή (skholḗ, “leisure”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek σχολή first meant “leisure” – learning was what free people did with their free time; σχολείο and Schule are the same word.",
+     "On the first school day German children get a Schultüte, a big paper cone full of sweets."
+    ],
+    "pitfalls": [
+     "in der Schule (at school – where) vs zur Schule / in die Schule (to school – where to).",
+     "False friend: das Gymnasium is an academic secondary school, not a gym."
+    ],
+    "subtleties": [
+     "zur Schule gehen also means “to be a pupil”: Mein Sohn geht noch zur Schule."
+    ]
+   }
+  },
+  {
+   "id": "de:Universität",
+   "lemma": "Universität",
+   "pos": "NOUN",
+   "senses": [
+    "place.university"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Universität",
+    "N;ACC;SG": "Universität",
+    "N;DAT;SG": "Universität",
+    "N;GEN;SG": "Universität",
+    "N;NOM;PL": "Universitäten",
+    "N;ACC;PL": "Universitäten",
+    "N;DAT;PL": "Universitäten",
+    "N;GEN;PL": "Universitäten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lecture halls, libraries, student life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "university",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.university"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie studiert an der Universität Wien.",
+      "tr": "She studies at the University of Vienna.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Universität ist sehr alt.",
+      "tr": "The university is very old.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Die älteste Universität Deutschlands ist in Heidelberg.",
+      "tr": "The oldest university in Germany is in Heidelberg.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "an der Universität studieren",
+      "tr": "to study at university"
+     },
+     {
+      "text": "die Technische Universität (TU)",
+      "tr": "technical university"
+     },
+     {
+      "text": "die Universitätsbibliothek",
+      "tr": "university library"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Uni",
+      "register": "colloquial",
+      "nuance": "the everyday short form"
+     },
+     {
+      "word": "Hochschule",
+      "register": "neutral",
+      "nuance": "any institution of higher education (also universities of applied sciences)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Latin ūniversitās (“the whole; a community, guild”). Compare Dutch universiteit.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Heidelberg University, founded in 1386, is the oldest in present-day Germany.",
+     "Latin universitas meant a guild – the “whole body” of teachers and students."
+    ],
+    "pitfalls": [
+     "an der Universität for studying or working there: Ich studiere an der Uni. – in der Universität only for being inside the building.",
+     "Stress on the last syllable: Uni-ver-si-TÄT; plural Universitäten."
+    ],
+    "subtleties": [
+     "Students say Uni; Universität sounds official or written."
+    ]
+   }
+  },
+  {
+   "id": "de:Uni",
+   "lemma": "Uni",
+   "pos": "NOUN",
+   "senses": [
+    "place.university"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Uni",
+    "N;ACC;SG": "Uni",
+    "N;DAT;SG": "Uni",
+    "N;GEN;SG": "Uni",
+    "N;NOM;PL": "Unis",
+    "N;ACC;PL": "Unis",
+    "N;DAT;PL": "Unis",
+    "N;GEN;PL": "Unis"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "Student life: lectures, the Mensa, friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uni, university (short form)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "place.university"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin heute an der Uni.",
+      "tr": "I’m at uni today.",
+      "register": "colloquial",
+      "context": "student life",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach der Uni gehen wir ins Café.",
+      "tr": "After uni we’re going to the café.",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Uni beginnt im Oktober.",
+      "tr": "The university term starts in October.",
+      "register": "colloquial",
+      "context": "education",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "an der Uni",
+      "tr": "at uni"
+     },
+     {
+      "text": "zur Uni gehen",
+      "tr": "to go to uni"
+     },
+     {
+      "text": "die Uni-Bibliothek",
+      "tr": "the university library"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Universität",
+      "register": "neutral",
+      "nuance": "the full, official word"
+     },
+     {
+      "word": "Hochschule",
+      "register": "neutral",
+      "nuance": "institution of higher education in general"
+     }
+    ],
+    "etymology": {
+     "text": "Clipping of Universität.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German loves clipped words: die Uni, die Kita (Kindertagesstätte), der Prof, die Mensa (the university canteen, Latin “table”)."
+    ],
+    "pitfalls": [
+     "Plural with -s: die Unis (no -n in the dative: an den Unis)."
+    ],
+    "subtleties": [
+     "Uni is everyday speech, not slang – even professors say it."
+    ]
+   }
+  },
+  {
+   "id": "de:Arbeit",
+   "lemma": "Arbeit",
+   "pos": "NOUN",
+   "senses": [
+    "place.work"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Arbeit",
+    "N;ACC;SG": "Arbeit",
+    "N;DAT;SG": "Arbeit",
+    "N;GEN;SG": "Arbeit",
+    "N;NOM;PL": "Arbeiten",
+    "N;ACC;PL": "Arbeiten",
+    "N;DAT;PL": "Arbeiten",
+    "N;GEN;PL": "Arbeiten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The daily grind – the job and the place you go to every morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "work, job; the workplace (bei der Arbeit, zur Arbeit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.work"
+     },
+     {
+      "id": "s2",
+      "def": "a piece of work: a test at school, a paper (eine Arbeit schreiben)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "work (physics)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Vater ist noch bei der Arbeit.",
+      "tr": "My father is still at work.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie fährt jeden Tag mit dem Bus zur Arbeit.",
+      "tr": "She goes to work by bus every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich suche Arbeit.",
+      "tr": "I’m looking for work.",
+      "register": "neutral",
+      "context": "job search",
+      "sense": "s1"
+     },
+     {
+      "text": "Morgen schreiben wir eine Arbeit in Mathe.",
+      "tr": "Tomorrow we’re writing a maths test.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zur Arbeit gehen / fahren",
+      "tr": "to go to work"
+     },
+     {
+      "text": "bei der Arbeit",
+      "tr": "at work"
+     },
+     {
+      "text": "Arbeit suchen",
+      "tr": "to look for a job"
+     },
+     {
+      "text": "an die Arbeit!",
+      "tr": "let’s get to work!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Erst die Arbeit, dann das Vergnügen.",
+      "tr": "First work, then pleasure.",
+      "kind": "saying",
+      "meaning": "business before pleasure",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Job",
+      "register": "colloquial",
+      "nuance": "a job – often a temporary or side job"
+     },
+     {
+      "word": "Beruf",
+      "register": "neutral",
+      "nuance": "profession, occupation (a trained calling)"
+     },
+     {
+      "word": "Stelle",
+      "register": "neutral",
+      "nuance": "a position, a post (eine Stelle suchen)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German arbeit, from Old High German arbeit, from Proto-West Germanic *arbaiþi, from Proto-Germanic *arbaidiz, ultimately from Proto-Indo-European *h₃órbʰos (“orphan, servant, slave”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arbeit comes from the same root as Russian работа (rabota) – and “robot”, from Czech robota (forced labour)."
+    ],
+    "pitfalls": [
+     "At work = bei der Arbeit (colloquially auf der Arbeit; in Austria and Bavaria also in der Arbeit); to work = zur Arbeit.",
+     "Plural Arbeiten only for pieces of work (Klassenarbeiten); “jobs” are Stellen or Jobs."
+    ],
+    "subtleties": [
+     "die Arbeit is both the activity and the workplace: Ich habe viel Arbeit. – Ich bin bei der Arbeit."
+    ]
+   }
+  },
+  {
+   "id": "de:Büro",
+   "lemma": "Büro",
+   "pos": "NOUN",
+   "senses": [
+    "place.office"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Büro",
+    "N;ACC;SG": "Büro",
+    "N;DAT;SG": "Büro",
+    "N;GEN;SG": "Büros",
+    "N;NOM;PL": "Büros",
+    "N;ACC;PL": "Büros",
+    "N;DAT;PL": "Büros",
+    "N;GEN;PL": "Büros"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Desks, screens, coffee machine – nine to five.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "office (a room or building for desk work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.office"
+     },
+     {
+      "id": "s2",
+      "def": "office, bureau, agency (Reisebüro = travel agency)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin bis fünf im Büro.",
+      "tr": "I’m at the office until five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Büro ist im dritten Stock.",
+      "tr": "My office is on the third floor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir buchen die Reise im Reisebüro.",
+      "tr": "We book the trip at the travel agency.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Büro arbeiten",
+      "tr": "to work in an office"
+     },
+     {
+      "text": "ins Büro gehen",
+      "tr": "to go to the office"
+     },
+     {
+      "text": "das Großraumbüro",
+      "tr": "open-plan office"
+     },
+     {
+      "text": "das Reisebüro",
+      "tr": "travel agency"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Homeoffice",
+      "register": "colloquial",
+      "nuance": "working from home – a German pseudo-anglicism"
+     },
+     {
+      "word": "Kanzlei",
+      "register": "formal",
+      "nuance": "a lawyer’s or notary’s office"
+     }
+    ],
+    "etymology": {
+     "text": "From French bureau (“desk, office”), borrowed around 1700.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian бюро and Turkish büro are the same French word; French bureau first meant a desk covered with coarse woollen cloth (bure)."
+    ],
+    "pitfalls": [
+     "Stress on the last syllable: Bü-RO; plural die Büros (with -s, so no -n in the dative: in den Büros)."
+    ],
+    "subtleties": [
+     "Homeoffice looks English but is German: in English you “work from home”."
+    ]
+   }
+  },
+  {
+   "id": "de:Geschäft",
+   "lemma": "Geschäft",
+   "pos": "NOUN",
+   "senses": [
+    "place.shop"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Geschäft",
+    "N;ACC;SG": "Geschäft",
+    "N;DAT;SG": "Geschäft",
+    "N;GEN;SG": "Geschäfts",
+    "N;NOM;PL": "Geschäfte",
+    "N;ACC;PL": "Geschäfte",
+    "N;DAT;PL": "Geschäften",
+    "N;GEN;PL": "Geschäfte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Geschäftes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shop windows, opening hours – and the world of business deals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop, store",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.shop"
+     },
+     {
+      "id": "s2",
+      "def": "business, deal, transaction",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "business (going to the toilet: sein Geschäft machen)",
+      "register": [
+       "euphemistic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Geschäft ist am Sonntag geschlossen.",
+      "tr": "The shop is closed on Sunday.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen Wein in einem kleinen Geschäft.",
+      "tr": "We buy wine in a small shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist ein gutes Geschäft.",
+      "tr": "That’s a good deal.",
+      "register": "neutral",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Geschäft gehen",
+      "tr": "to go into the shop"
+     },
+     {
+      "text": "Geschäfte machen",
+      "tr": "to do business"
+     },
+     {
+      "text": "das Lebensmittelgeschäft",
+      "tr": "grocery store"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Geschäft ist Geschäft.",
+      "tr": "Business is business.",
+      "kind": "saying",
+      "meaning": "in business there is no room for sentiment",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Laden",
+      "register": "neutral",
+      "nuance": "shop – a little more everyday, often a small shop"
+     },
+     {
+      "word": "Shop",
+      "register": "colloquial",
+      "nuance": "shop – anglicism, especially online shops and brand stores"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German gescheft, from Old High German giscaft, from Proto-West Germanic *gaskafti. Cognate with Yiddish געשעפֿט (gesheft).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Geschäft is related to schaffen (to manage, to create): a Geschäft is “what one manages”."
+    ],
+    "pitfalls": [
+     "das Geschäft is neuter (not *die).",
+     "Geschäft also means business: Wie gehen die Geschäfte? (How’s business?)"
+    ],
+    "subtleties": [
+     "Geschäft is the general word; Laden often sounds smaller and more everyday."
+    ]
+   }
+  },
+  {
+   "id": "de:Laden",
+   "lemma": "Laden",
+   "pos": "NOUN",
+   "senses": [
+    "place.shop"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Laden",
+    "N;ACC;SG": "Laden",
+    "N;DAT;SG": "Laden",
+    "N;GEN;SG": "Ladens",
+    "N;NOM;PL": "Läden",
+    "N;ACC;PL": "Läden",
+    "N;DAT;PL": "Läden",
+    "N;GEN;PL": "Läden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The little shop on the corner that has everything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop, store (often small)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.shop"
+     },
+     {
+      "id": "s2",
+      "def": "place, outfit, joint (a firm, a pub)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "shutter (Fensterladen)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Laden an der Ecke hat alles.",
+      "tr": "The shop on the corner has everything.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "Um acht macht der Laden zu.",
+      "tr": "The shop closes at eight.",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Mach bitte die Läden zu, es ist kalt.",
+      "tr": "Please close the shutters, it’s cold.",
+      "register": "informal",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Tante-Emma-Laden",
+      "tr": "corner shop, mom-and-pop store"
+     },
+     {
+      "text": "der Bioladen",
+      "tr": "organic shop"
+     },
+     {
+      "text": "der Ladenschluss",
+      "tr": "closing time"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "den Laden schmeißen",
+      "tr": "to throw the shop",
+      "kind": "idiom",
+      "meaning": "to run the whole show, to manage everything",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Geschäft",
+      "register": "neutral",
+      "nuance": "shop – the general word"
+     },
+     {
+      "word": "Shop",
+      "register": "colloquial",
+      "nuance": "shop – anglicism"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German laden, lade (“board; plank; shutter; shop”), from Old High German *lado. Probably akin to German Latte, English lath; unrelated to Lade.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German shop-closing laws (Ladenschluss) keep most shops closed on Sundays."
+    ],
+    "pitfalls": [
+     "der Laden (shop) vs laden (to load) – same spelling, different words.",
+     "Plural with umlaut: die Läden."
+    ],
+    "subtleties": [
+     "In Middle High German laden meant a board or a shutter – and also the shop behind it."
+    ]
+   }
+  },
+  {
+   "id": "de:Supermarkt",
+   "lemma": "Supermarkt",
+   "pos": "NOUN",
+   "senses": [
+    "place.supermarket"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Supermarkt",
+    "N;ACC;SG": "Supermarkt",
+    "N;DAT;SG": "Supermarkt",
+    "N;GEN;SG": "Supermarkts",
+    "N;NOM;PL": "Supermärkte",
+    "N;ACC;PL": "Supermärkte",
+    "N;DAT;PL": "Supermärkten",
+    "N;GEN;PL": "Supermärkte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Supermarktes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trolleys, long shelves, the checkout queue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "supermarket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.supermarket"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe Milch im Supermarkt.",
+      "tr": "I buy milk at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Supermarkt ist bis 22 Uhr offen.",
+      "tr": "The supermarket is open until 10 p.m.",
+      "register": "neutral",
+      "context": "opening hours",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo ist hier ein Supermarkt?",
+      "tr": "Where is there a supermarket around here?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Supermarkt einkaufen",
+      "tr": "to shop at the supermarket"
+     },
+     {
+      "text": "zum Supermarkt gehen",
+      "tr": "to go to the supermarket"
+     },
+     {
+      "text": "die Supermarktkasse",
+      "tr": "supermarket checkout"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Discounter",
+      "register": "neutral",
+      "nuance": "discount supermarket (Aldi, Lidl)"
+     },
+     {
+      "word": "Lebensmittelgeschäft",
+      "register": "formal",
+      "nuance": "grocery store"
+     }
+    ],
+    "etymology": {
+     "text": "From super- + Markt.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The German discounters Aldi and Lidl have supermarkets all over Europe – Lidl also in Greece."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Supermärkte.",
+     "im Supermarkt (in a building) – but auf dem Markt (an open-air market)."
+    ],
+    "subtleties": [
+     "At German supermarket checkouts you pack your shopping yourself – and quickly."
+    ]
+   }
+  },
+  {
+   "id": "de:Markt",
+   "lemma": "Markt",
+   "pos": "NOUN",
+   "senses": [
+    "place.market"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Markt",
+    "N;ACC;SG": "Markt",
+    "N;DAT;SG": "Markt",
+    "N;GEN;SG": "Marktes",
+    "N;NOM;PL": "Märkte",
+    "N;ACC;PL": "Märkte",
+    "N;DAT;PL": "Märkten",
+    "N;GEN;PL": "Märkte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Markts"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Stalls of fruit and flowers on the town square on Saturday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "market (open-air: stalls on a square)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.market"
+     },
+     {
+      "id": "s2",
+      "def": "market (economy)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "market square; market town",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Samstags kaufen wir Obst auf dem Markt.",
+      "tr": "On Saturdays we buy fruit at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Käse ist vom Markt.",
+      "tr": "The cheese is from the market.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Markt für Elektroautos wächst.",
+      "tr": "The market for electric cars is growing.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf den Markt gehen",
+      "tr": "to go to the market"
+     },
+     {
+      "text": "der Wochenmarkt",
+      "tr": "weekly market"
+     },
+     {
+      "text": "der Flohmarkt",
+      "tr": "flea market"
+     },
+     {
+      "text": "der Weihnachtsmarkt",
+      "tr": "Christmas market"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wochenmarkt",
+      "register": "neutral",
+      "nuance": "the weekly open-air market"
+     },
+     {
+      "word": "Basar",
+      "register": "neutral",
+      "nuance": "bazaar – an oriental market or a charity sale"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German market, from Old High German marchat, from Proto-West Germanic *markat, from Latin mercātus (“trade, market”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Christmas markets (the Nuremberg Christkindlesmarkt, the Dresden Striezelmarkt) are famous and copied around the world."
+    ],
+    "pitfalls": [
+     "auf dem Markt (not *im Markt) for the open-air market; im Supermarkt for the shop.",
+     "Plural with umlaut: die Märkte."
+    ],
+    "subtleties": [
+     "der Markt is also the economy: die Marktwirtschaft (market economy)."
+    ]
+   }
+  },
+  {
+   "id": "de:Restaurant",
+   "lemma": "Restaurant",
+   "pos": "NOUN",
+   "senses": [
+    "place.restaurant"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Restaurant",
+    "N;ACC;SG": "Restaurant",
+    "N;DAT;SG": "Restaurant",
+    "N;GEN;SG": "Restaurants",
+    "N;NOM;PL": "Restaurants",
+    "N;ACC;PL": "Restaurants",
+    "N;DAT;PL": "Restaurants",
+    "N;GEN;PL": "Restaurants"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A table for two, a menu, the bill at the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "restaurant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.restaurant"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir essen heute im Restaurant.",
+      "tr": "We’re eating at a restaurant today.",
+      "register": "neutral",
+      "context": "going out",
+      "sense": "s1"
+     },
+     {
+      "text": "Kennst du ein gutes griechisches Restaurant?",
+      "tr": "Do you know a good Greek restaurant?",
+      "register": "informal",
+      "context": "going out",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Restaurant ist am Montag geschlossen.",
+      "tr": "The restaurant is closed on Monday.",
+      "register": "neutral",
+      "context": "opening hours",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Restaurant gehen",
+      "tr": "to go to a restaurant"
+     },
+     {
+      "text": "im Restaurant essen",
+      "tr": "to eat at a restaurant"
+     },
+     {
+      "text": "einen Tisch reservieren",
+      "tr": "to book a table"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Gaststätte",
+      "register": "formal",
+      "nuance": "a traditional German restaurant-pub"
+     },
+     {
+      "word": "Lokal",
+      "register": "neutral",
+      "nuance": "a place to eat or drink"
+     },
+     {
+      "word": "Wirtshaus",
+      "register": "regional",
+      "nuance": "a traditional inn, especially in Bavaria and Austria"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French restaurant, from restaurer (“to restore”): first a restoring broth, then the place that served it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek εστιατόριο and German Restaurant both name the place after what it does: εστιάζω (to feast), restaurer (to restore)."
+    ],
+    "pitfalls": [
+     "das Restaurant (neuter), plural die Restaurants.",
+     "Said the French way: the -ant is nasal, like in French."
+    ],
+    "subtleties": [
+     "In Germany you usually wait to be seated only in better restaurants; in a pub you choose a free table."
+    ]
+   }
+  },
+  {
+   "id": "de:Café",
+   "lemma": "Café",
+   "pos": "NOUN",
+   "senses": [
+    "place.cafe"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Café",
+    "N;ACC;SG": "Café",
+    "N;DAT;SG": "Café",
+    "N;GEN;SG": "Cafés",
+    "N;NOM;PL": "Cafés",
+    "N;ACC;PL": "Cafés",
+    "N;DAT;PL": "Cafés",
+    "N;GEN;PL": "Cafés"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee and cake in the afternoon – Kaffee und Kuchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "café, coffee house",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.cafe"
+     },
+     {
+      "id": "s2",
+      "def": "coffee",
+      "register": [
+       "obsolete"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir trinken Kaffee im Café.",
+      "tr": "We drink coffee in the café.",
+      "register": "neutral",
+      "context": "going out",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Café an der Ecke hat guten Kuchen.",
+      "tr": "The café on the corner has good cake.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "Treffen wir uns im Café?",
+      "tr": "Shall we meet at the café?",
+      "register": "informal",
+      "context": "making plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Café gehen",
+      "tr": "to go to a café"
+     },
+     {
+      "text": "das Straßencafé",
+      "tr": "pavement café"
+     },
+     {
+      "text": "Kaffee und Kuchen",
+      "tr": "coffee and cake (the afternoon ritual)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kaffeehaus",
+      "register": "regional",
+      "nuance": "coffee house – the word of Vienna’s classic cafés"
+     },
+     {
+      "word": "Konditorei",
+      "register": "neutral",
+      "nuance": "cake shop with a café"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French café. Doublet of Kaffee.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Café and Kaffee go back to Ottoman Turkish kahve and Arabic قَهْوَة (qahwa)."
+    ],
+    "pitfalls": [
+     "das Café (the place) vs der Kaffee (the drink): different spelling, gender and stress – Ca-FÉ vs KAF-fee (in Austria Kaf-FEE).",
+     "Plural Cafés with -s."
+    ],
+    "subtleties": [
+     "Many German cafés are also bakeries or cake shops (Konditorei); a Kneipe is a pub."
+    ]
+   }
+  },
+  {
+   "id": "de:Krankenhaus",
+   "lemma": "Krankenhaus",
+   "pos": "NOUN",
+   "senses": [
+    "place.hospital"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Krankenhaus",
+    "N;ACC;SG": "Krankenhaus",
+    "N;DAT;SG": "Krankenhaus",
+    "N;GEN;SG": "Krankenhauses",
+    "N;NOM;PL": "Krankenhäuser",
+    "N;ACC;PL": "Krankenhäuser",
+    "N;DAT;PL": "Krankenhäusern",
+    "N;GEN;PL": "Krankenhäuser"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wards, nurses, visiting hours – a place you hope to leave soon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hospital",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hospital"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Oma ist im Krankenhaus.",
+      "tr": "My grandma is in hospital.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Krankenwagen fährt ins Krankenhaus.",
+      "tr": "The ambulance drives to the hospital.",
+      "register": "neutral",
+      "context": "emergency",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie arbeitet als Ärztin im Krankenhaus.",
+      "tr": "She works as a doctor in the hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Krankenhaus kommen",
+      "tr": "to be taken to hospital"
+     },
+     {
+      "text": "im Krankenhaus liegen",
+      "tr": "to be in hospital (as a patient)"
+     },
+     {
+      "text": "aus dem Krankenhaus entlassen werden",
+      "tr": "to be discharged from hospital"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Klinik",
+      "register": "neutral",
+      "nuance": "clinic – also a specialised hospital"
+     },
+     {
+      "word": "Spital",
+      "register": "regional",
+      "nuance": "hospital – the word in Austria and Switzerland"
+     },
+     {
+      "word": "Klinikum",
+      "register": "formal",
+      "nuance": "a large hospital, often a university hospital"
+     }
+    ],
+    "etymology": {
+     "text": "From Kranker (“sick person, patient”) + -en- + Haus (“house”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek νοσοκομείο (“place for tending the sick”) and German Krankenhaus (“house of the sick”) are built on the same idea."
+    ],
+    "pitfalls": [
+     "das Hospital exists but sounds old-fashioned; the normal word is Krankenhaus.",
+     "Plural with umlaut: die Krankenhäuser."
+    ],
+    "subtleties": [
+     "im Krankenhaus liegen = to be in hospital as a patient; im Krankenhaus arbeiten = to work there."
+    ]
+   }
+  },
+  {
+   "id": "de:Apotheke",
+   "lemma": "Apotheke",
+   "pos": "NOUN",
+   "senses": [
+    "place.pharmacy"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Apotheke",
+    "N;ACC;SG": "Apotheke",
+    "N;DAT;SG": "Apotheke",
+    "N;GEN;SG": "Apotheke",
+    "N;NOM;PL": "Apotheken",
+    "N;ACC;PL": "Apotheken",
+    "N;DAT;PL": "Apotheken",
+    "N;GEN;PL": "Apotheken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The red A sign on the street – medicines, advice, cough drops.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pharmacy, chemist’s",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.pharmacy"
+     },
+     {
+      "id": "s2",
+      "def": "an overpriced shop",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Apotheke ist an der Ecke.",
+      "tr": "The pharmacy is on the corner.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich hole Tabletten aus der Apotheke.",
+      "tr": "I’m getting tablets from the pharmacy.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Welche Apotheke hat heute Notdienst?",
+      "tr": "Which pharmacy is on duty today?",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in der Apotheke",
+      "tr": "at the pharmacy"
+     },
+     {
+      "text": "die Notapotheke",
+      "tr": "duty pharmacy"
+     },
+     {
+      "text": "rezeptfrei in der Apotheke",
+      "tr": "over the counter at the pharmacy"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Apothekenpreise",
+      "tr": "pharmacy prices",
+      "kind": "colloquial",
+      "meaning": "outrageously high prices",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: the shop with medicines is always die Apotheke (a Drogerie is a different shop).",
+    "etymology": {
+     "text": "Ultimately from Ancient Greek ἀποθήκη (apothḗkē, “storehouse”). Doublet of Bodega, Bottich and Boutique.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian аптека (apteka) is the same Greek word; Turkish says eczane."
+    ],
+    "pitfalls": [
+     "False friend for Greeks: German Apotheke = pharmacy (φαρμακείο), not a storeroom (αποθήκη).",
+     "A Drogerie (dm, Rossmann) sells soap, cosmetics and household goods – medicines are in der Apotheke."
+    ],
+    "subtleties": [
+     "German pharmacies take turns staying open at night and on Sundays (Notdienst); a sign on the door says which one is open."
+    ]
+   }
+  },
+  {
+   "id": "de:Bank",
+   "lemma": "Bank",
+   "pos": "NOUN",
+   "senses": [
+    "place.bank"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Bank",
+    "N;ACC;SG": "Bank",
+    "N;DAT;SG": "Bank",
+    "N;GEN;SG": "Bank",
+    "N;NOM;PL": "Banken",
+    "N;ACC;PL": "Banken",
+    "N;DAT;PL": "Banken",
+    "N;GEN;PL": "Banken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Accounts, cards and cash machines – or a bench in the park (plural Bänke).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bank (financial institution; plural Banken)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.bank"
+     },
+     {
+      "id": "s2",
+      "def": "bench (a different plural: Bänke)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich muss noch zur Bank.",
+      "tr": "I still have to go to the bank.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "Er arbeitet bei einer Bank.",
+      "tr": "He works for a bank.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sitzen auf einer Bank im Park.",
+      "tr": "We’re sitting on a bench in the park.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zur Bank gehen",
+      "tr": "to go to the bank"
+     },
+     {
+      "text": "ein Konto bei der Bank",
+      "tr": "an account at the bank"
+     },
+     {
+      "text": "Geld von der Bank holen",
+      "tr": "to get money from the bank"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Sparkasse",
+      "register": "neutral",
+      "nuance": "savings bank – a public regional bank; many Germans simply say “zur Sparkasse”"
+     },
+     {
+      "word": "Geldinstitut",
+      "register": "formal",
+      "nuance": "financial institution"
+     }
+    ],
+    "etymology": {
+     "text": "From Old High German bank (“bench”); the money sense came in the 15th century after Italian banco, banca (“bench; money-changer’s table, bank”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek τράπεζα means both “table” and “bank” – just as the Italian banco (bench) that gave German Bank its money sense; English bankrupt is Italian banca rotta, “broken bench”."
+    ],
+    "pitfalls": [
+     "Same singular, two plurals: die Banken (banks) – die Bänke (benches).",
+     "bei der Bank arbeiten = to work for a bank; zur Bank gehen = to go to the bank."
+    ],
+    "subtleties": [
+     "In Germany many people still pay cash; the Sparkasse is in almost every town."
+    ]
+   }
+  },
+  {
+   "id": "de:Post",
+   "lemma": "Post",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "place.postoffice"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Post",
+    "N;ACC;SG": "Post",
+    "N;DAT;SG": "Post",
+    "N;GEN;SG": "Post"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Letters, parcels, stamps – the yellow sign of the post.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "post office",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.postoffice"
+     },
+     {
+      "id": "s2",
+      "def": "post, mail (letters and parcels)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the postal service",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bringe das Paket zur Post.",
+      "tr": "I’m taking the parcel to the post office.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Post ist neben dem Bahnhof.",
+      "tr": "The post office is next to the station.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist heute Post für mich da?",
+      "tr": "Is there any post for me today?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zur Post gehen",
+      "tr": "to go to the post office"
+     },
+     {
+      "text": "mit der Post schicken",
+      "tr": "to send by post"
+     },
+     {
+      "text": "die Post öffnen",
+      "tr": "to open the post"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Postfiliale",
+      "register": "formal",
+      "nuance": "post-office branch – often inside another shop today"
+     },
+     {
+      "word": "Postamt",
+      "register": "dated",
+      "nuance": "post office (the old stand-alone building)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Italian posta, from posto, from Latin positus (“placed”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin posita “placed” refers to the relay stations along the road where fresh horses were placed for the messengers."
+    ],
+    "pitfalls": [
+     "die Post means both the post office and the mail: Ich gehe zur Post. – Ich lese meine Post.",
+     "A job “post” is die Stelle, not die Post."
+    ],
+    "subtleties": [
+     "Used in the singular; Postämter or Postfilialen when you count post offices."
+    ]
+   }
+  },
+  {
+   "id": "de:Bahnhof",
+   "lemma": "Bahnhof",
+   "pos": "NOUN",
+   "senses": [
+    "place.station"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Bahnhof",
+    "N;ACC;SG": "Bahnhof",
+    "N;DAT;SG": "Bahnhof",
+    "N;GEN;SG": "Bahnhofs",
+    "N;NOM;PL": "Bahnhöfe",
+    "N;ACC;PL": "Bahnhöfe",
+    "N;DAT;PL": "Bahnhöfen",
+    "N;GEN;PL": "Bahnhöfe"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Bahnhofes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Platforms, announcements, a delayed train – and a meeting point.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "railway station, train station (also Busbahnhof = bus station)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.station"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wo ist der Bahnhof?",
+      "tr": "Where is the station?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir treffen uns am Bahnhof.",
+      "tr": "Let’s meet at the station.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug steht im Bahnhof.",
+      "tr": "The train is standing in the station.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Hauptbahnhof (Hbf)",
+      "tr": "main station"
+     },
+     {
+      "text": "am Bahnhof",
+      "tr": "at the station"
+     },
+     {
+      "text": "zum Bahnhof",
+      "tr": "to the station"
+     },
+     {
+      "text": "der Busbahnhof",
+      "tr": "bus station"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ich verstehe nur Bahnhof.",
+      "tr": "I only understand “station”.",
+      "kind": "idiom",
+      "meaning": "I don’t understand a thing – it’s all Greek to me",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Hauptbahnhof",
+      "register": "neutral",
+      "nuance": "the main station of a city"
+     },
+     {
+      "word": "Haltestelle",
+      "register": "neutral",
+      "nuance": "a bus or tram stop – not a station"
+     }
+    ],
+    "etymology": {
+     "text": "From Bahn (“track, railway”) + Hof (“yard, court”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Ich verstehe nur Bahnhof means “It’s all Greek to me”."
+    ],
+    "pitfalls": [
+     "am Bahnhof = at the station (around it, meeting point); im Bahnhof = inside the station.",
+     "Plural with umlaut: die Bahnhöfe."
+    ],
+    "subtleties": [
+     "A bus station is der Busbahnhof (ZOB); a stop is die Haltestelle."
+    ]
+   }
+  },
+  {
+   "id": "de:Flughafen",
+   "lemma": "Flughafen",
+   "pos": "NOUN",
+   "senses": [
+    "place.airport"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Flughafen",
+    "N;ACC;SG": "Flughafen",
+    "N;DAT;SG": "Flughafen",
+    "N;GEN;SG": "Flughafens",
+    "N;NOM;PL": "Flughäfen",
+    "N;ACC;PL": "Flughäfen",
+    "N;DAT;PL": "Flughäfen",
+    "N;GEN;PL": "Flughäfen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departure boards, suitcases, goodbyes and hellos.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "airport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.airport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir fahren zum Flughafen.",
+      "tr": "We’re going to the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Flughafen warten wir auf meine Tante.",
+      "tr": "At the airport we wait for my aunt.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Flughafen ist weit von der Stadt.",
+      "tr": "The airport is far from the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zum Flughafen fahren",
+      "tr": "to go to the airport"
+     },
+     {
+      "text": "am Flughafen",
+      "tr": "at the airport"
+     },
+     {
+      "text": "der Flughafen Frankfurt",
+      "tr": "Frankfurt Airport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Airport",
+      "register": "colloquial",
+      "nuance": "mostly in names and advertising"
+     },
+     {
+      "word": "Flugplatz",
+      "register": "neutral",
+      "nuance": "a small airfield"
+     }
+    ],
+    "etymology": {
+     "text": "From Flug (“flight”) + Hafen (“port”). Compare Icelandic flughöfn.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same picture in other languages: Greek αερολιμένας (air harbour), Turkish havalimanı (hava + liman), Russian аэропорт."
+    ],
+    "pitfalls": [
+     "der Hafen is masculine, so der Flughafen; plural die Flughäfen.",
+     "At the airport = am Flughafen (not *im Flughafen, unless inside the building)."
+    ],
+    "subtleties": [
+     "Flughafen is literally “flight harbour”."
+    ]
+   }
+  },
+  {
+   "id": "de:Straße",
+   "lemma": "Straße",
+   "pos": "NOUN",
+   "senses": [
+    "place.street"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Straße",
+    "N;ACC;SG": "Straße",
+    "N;DAT;SG": "Straße",
+    "N;GEN;SG": "Straße",
+    "N;NOM;PL": "Straßen",
+    "N;ACC;PL": "Straßen",
+    "N;DAT;PL": "Straßen",
+    "N;GEN;PL": "Straßen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Traffic, pavements, house numbers – and the street you live in.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "street, road",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.street"
+     },
+     {
+      "id": "s2",
+      "def": "strait (Straße von Gibraltar)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder spielen auf der Straße.",
+      "tr": "The children are playing in the street.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "In welcher Straße wohnst du?",
+      "tr": "Which street do you live in?",
+      "register": "informal",
+      "context": "addresses",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Straße ist sehr lang.",
+      "tr": "The street is very long.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf der Straße",
+      "tr": "in the street, on the road"
+     },
+     {
+      "text": "über die Straße gehen",
+      "tr": "to cross the street"
+     },
+     {
+      "text": "die Hauptstraße",
+      "tr": "main street"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "auf der Straße sitzen",
+      "tr": "to sit on the street",
+      "kind": "idiom",
+      "meaning": "to be out of a job or without a home",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Gasse",
+      "register": "regional",
+      "nuance": "lane, small street – in Vienna the normal word for many streets"
+     },
+     {
+      "word": "Weg",
+      "register": "neutral",
+      "nuance": "path, way"
+     },
+     {
+      "word": "Allee",
+      "register": "neutral",
+      "nuance": "avenue lined with trees"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German strāȥe, from Old High German strāȥa, from Proto-West Germanic *strātu, from Latin (via) strāta (“paved road”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin strata also gave English street, Italian strada – and colloquial Greek στράτα."
+    ],
+    "pitfalls": [
+     "auf der Straße (on the open street) – but addresses use in: Ich wohne in der Goethestraße.",
+     "Written with ß in Germany and Austria; in Switzerland Strasse."
+    ],
+    "subtleties": [
+     "auf der Straße stehen / sitzen can mean to be out of work or homeless."
+    ]
+   }
+  },
+  {
+   "id": "de:Platz",
+   "lemma": "Platz",
+   "pos": "NOUN",
+   "senses": [
+    "place.square"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Platz",
+    "N;ACC;SG": "Platz",
+    "N;DAT;SG": "Platz",
+    "N;GEN;SG": "Platzes",
+    "N;NOM;PL": "Plätze",
+    "N;ACC;PL": "Plätze",
+    "N;DAT;PL": "Plätzen",
+    "N;GEN;PL": "Plätze"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A town square with a fountain, cafés and pigeons.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "square, plaza (in a town)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.square"
+     },
+     {
+      "id": "s2",
+      "def": "space, room",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "seat, place",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "pitch, court, field (sport)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Café ist am Marktplatz.",
+      "tr": "The café is on the market square.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Leute sind auf dem Platz.",
+      "tr": "Many people are in the square.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Hier ist kein Platz mehr.",
+      "tr": "There’s no more room here.",
+      "register": "neutral",
+      "context": "space",
+      "sense": "s2"
+     },
+     {
+      "text": "Nehmen Sie bitte Platz!",
+      "tr": "Please take a seat!",
+      "register": "formal",
+      "context": "reception",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Platz",
+      "tr": "in the square"
+     },
+     {
+      "text": "der Marktplatz",
+      "tr": "market square"
+     },
+     {
+      "text": "Platz nehmen",
+      "tr": "to take a seat"
+     },
+     {
+      "text": "Platz machen",
+      "tr": "to make room"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Platz nehmen",
+      "tr": "to take place",
+      "kind": "fixed expression",
+      "meaning": "to sit down (polite)",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Marktplatz",
+      "register": "neutral",
+      "nuance": "the market square, the main square of many German towns"
+     },
+     {
+      "word": "Piazza",
+      "register": "colloquial",
+      "nuance": "an Italian-style square"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German plaz, from Old French place, from Latin platēa, from Ancient Greek πλατεῖα (plateîa), short for πλατεῖα ὁδός (plateîa hodós, “broad way”). Cognate with English place.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Platz is Greek πλατεία (square) – borrowed via Latin and French."
+    ],
+    "pitfalls": [
+     "auf dem Platz (in the square), not *in dem Platz.",
+     "Platz also means space or seat: Wir haben keinen Platz. – Ist der Platz frei?"
+    ],
+    "subtleties": [
+     "Nehmen Sie Platz! is the polite “sit down”."
+    ]
+   }
+  },
+  {
+   "id": "de:Park",
+   "lemma": "Park",
+   "pos": "NOUN",
+   "senses": [
+    "place.park"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Park",
+    "N;ACC;SG": "Park",
+    "N;DAT;SG": "Park",
+    "N;GEN;SG": "Parks",
+    "N;NOM;PL": "Parks",
+    "N;ACC;PL": "Parks",
+    "N;DAT;PL": "Parks",
+    "N;GEN;PL": "Parks"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Parkes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grass, trees, a bench, children playing – a Sunday walk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "park",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.park"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder spielen im Park.",
+      "tr": "The children are playing in the park.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir gehen im Park spazieren.",
+      "tr": "We’re going for a walk in the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Englische Garten in München ist ein großer Park.",
+      "tr": "The English Garden in Munich is a big park.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Park spazieren gehen",
+      "tr": "to go for a walk in the park"
+     },
+     {
+      "text": "der Stadtpark",
+      "tr": "city park"
+     },
+     {
+      "text": "der Nationalpark",
+      "tr": "national park"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Grünanlage",
+      "register": "formal",
+      "nuance": "public green space"
+     },
+     {
+      "word": "Garten",
+      "register": "neutral",
+      "nuance": "garden – in names also a park: der Englische Garten"
+     }
+    ],
+    "etymology": {
+     "text": "A doublet of inherited Pferch (“pen”); borrowed from Middle Dutch park and reinforced from French parc and English park in the 17th century.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Munich’s Englischer Garten is bigger than New York’s Central Park."
+    ],
+    "pitfalls": [
+     "Plural die Parks (no -n in the dative: in den Parks).",
+     "im Park (in dem Park): where? – in den Park: where to?"
+    ],
+    "subtleties": [
+     "Many German parks are called Garten: der Englische Garten (Munich), der Große Garten (Dresden)."
+    ]
+   }
+  },
+  {
+   "id": "de:Stadt",
+   "lemma": "Stadt",
+   "pos": "NOUN",
+   "senses": [
+    "place.city"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Stadt",
+    "N;ACC;SG": "Stadt",
+    "N;DAT;SG": "Stadt",
+    "N;GEN;SG": "Stadt",
+    "N;NOM;PL": "Städte",
+    "N;ACC;PL": "Städte",
+    "N;DAT;PL": "Städten",
+    "N;GEN;PL": "Städte"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Streets, shops, noise – town life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "city, town",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.city"
+     },
+     {
+      "id": "s2",
+      "def": "town centre (in die Stadt gehen)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the town council",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich wohne in der Stadt.",
+      "tr": "I live in the city.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Athen ist eine große Stadt.",
+      "tr": "Athens is a big city.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Samstag fahren wir in die Stadt.",
+      "tr": "On Saturday we’re going into town.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in der Stadt",
+      "tr": "in town"
+     },
+     {
+      "text": "die Hauptstadt",
+      "tr": "capital"
+     },
+     {
+      "text": "die Altstadt",
+      "tr": "old town"
+     },
+     {
+      "text": "in die Stadt gehen",
+      "tr": "to go into town"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Stadtluft macht frei.",
+      "tr": "City air makes you free.",
+      "kind": "saying",
+      "meaning": "medieval rule: a serf who lived in a town for a year and a day became free",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Großstadt",
+      "register": "neutral",
+      "nuance": "city with more than 100,000 inhabitants"
+     },
+     {
+      "word": "Kleinstadt",
+      "register": "neutral",
+      "nuance": "small town"
+     },
+     {
+      "word": "Metropole",
+      "register": "formal",
+      "nuance": "metropolis"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German stat, from Old High German stat, from Proto-West Germanic *stadi, from Proto-Germanic *stadiz, from Proto-Indo-European *stéh₂tis. Cognate with English stead.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Stadt and English stead (instead, homestead) come from the same root as stehen (to stand): a town is “where one stands”."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Städte; dative plural den Städten.",
+     "German has one word for city and town: Stadt (Großstadt / Kleinstadt if needed)."
+    ],
+    "subtleties": [
+     "in die Stadt gehen often means “to go downtown”, even if you live in the city."
+    ]
+   }
+  },
+  {
+   "id": "de:Dorf",
+   "lemma": "Dorf",
+   "pos": "NOUN",
+   "senses": [
+    "place.village"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Dorf",
+    "N;ACC;SG": "Dorf",
+    "N;DAT;SG": "Dorf",
+    "N;GEN;SG": "Dorfes",
+    "N;NOM;PL": "Dörfer",
+    "N;ACC;PL": "Dörfer",
+    "N;DAT;PL": "Dörfern",
+    "N;GEN;PL": "Dörfer"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Dorfs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A church, a few farms, everybody knows everybody.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "village",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.village"
+     },
+     {
+      "id": "s2",
+      "def": "backwater (figurative)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Großeltern wohnen in einem kleinen Dorf.",
+      "tr": "My grandparents live in a small village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Dorf kennt jeder jeden.",
+      "tr": "In the village everybody knows everybody.",
+      "register": "neutral",
+      "context": "village life",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Dorf hat nur eine Straße.",
+      "tr": "The village has only one street.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Dorf leben",
+      "tr": "to live in the country, in a village"
+     },
+     {
+      "text": "das Bergdorf",
+      "tr": "mountain village"
+     },
+     {
+      "text": "das Dorffest",
+      "tr": "village fair"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das sind für mich böhmische Dörfer.",
+      "tr": "Those are Bohemian villages to me.",
+      "kind": "idiom",
+      "meaning": "I don’t understand any of it – it’s all Greek to me",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Ortschaft",
+      "register": "formal",
+      "nuance": "locality, place"
+     },
+     {
+      "word": "Kaff",
+      "register": "colloquial",
+      "nuance": "dump, one-horse town – pejorative"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German dorf, from Old High German dorf, thorph, from Proto-West Germanic *þorp, from Proto-Germanic *þurpą. Cognate with Dutch dorp, Old English þorp.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English place names in -thorpe (Scunthorpe) contain the same word as Dorf."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Dörfer, dative den Dörfern.",
+     "auf dem Dorf (village life, in the country) vs im Dorf (inside the village)."
+    ],
+    "subtleties": [
+     "Dorf can be figurative: Berlin ist doch ein Dorf! (everyone knows each other)."
+    ]
+   }
+  },
+  {
+   "id": "de:Land",
+   "lemma": "Land",
+   "pos": "NOUN",
+   "senses": [
+    "place.country"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Land",
+    "N;ACC;SG": "Land",
+    "N;DAT;SG": "Land",
+    "N;GEN;SG": "Landes",
+    "N;NOM;PL": "Länder",
+    "N;ACC;PL": "Länder",
+    "N;DAT;PL": "Ländern",
+    "N;GEN;PL": "Länder"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Lands"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Borders, flags – and the green countryside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "country (a state, a nation)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.country"
+     },
+     {
+      "id": "s2",
+      "def": "federal state (Bundesland)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the countryside (auf dem Land)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "land (as opposed to the sea)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Griechenland ist ein schönes Land.",
+      "tr": "Greece is a beautiful country.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Aus welchem Land kommst du?",
+      "tr": "Which country do you come from?",
+      "register": "informal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen auf dem Land.",
+      "tr": "We live in the countryside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "Bayern ist ein Bundesland.",
+      "tr": "Bavaria is a federal state.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "aus welchem Land",
+      "tr": "from which country"
+     },
+     {
+      "text": "auf dem Land",
+      "tr": "in the countryside"
+     },
+     {
+      "text": "das Bundesland",
+      "tr": "federal state"
+     },
+     {
+      "text": "das Ausland",
+      "tr": "abroad, foreign countries"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Andere Länder, andere Sitten.",
+      "tr": "Other countries, other customs.",
+      "kind": "proverb",
+      "meaning": "customs differ from place to place – when in Rome, do as the Romans do",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Staat",
+      "register": "formal",
+      "nuance": "the state as a political body"
+     },
+     {
+      "word": "Heimat",
+      "register": "literary",
+      "nuance": "homeland – emotional"
+     },
+     {
+      "word": "Nation",
+      "register": "formal",
+      "nuance": "nation"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German lant, from Old High German lant, from Proto-West Germanic *land, from Proto-Germanic *landą, from Proto-Indo-European *lendʰ- (“land, heath”). Compare Dutch, English and Danish land.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Germans call Greece Griechenland after the Latin Graeci; Greeks call it Ελλάδα, and Turks Yunanistan (from Ionia)."
+    ],
+    "pitfalls": [
+     "Country names in -land are neuter and take no article: in Griechenland, nach Deutschland. With an article: die Türkei, die Schweiz → in der Türkei, in die Türkei.",
+     "auf dem Land = in the countryside, not “on the country”."
+    ],
+    "subtleties": [
+     "Plural die Länder; the poetic plural Lande survives in phrases like in deutschen Landen."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

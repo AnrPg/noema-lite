@@ -15,7 +15,18 @@
     "V;PRS;SG;MASC": "אוֹכֵל",
     "V;PRS;SG;FEM": "אוֹכֶלֶת",
     "V;PRS;PL;MASC": "אוֹכְלִים",
-    "V;PRS;PL;FEM": "אוֹכְלוֹת"
+    "V;PRS;PL;FEM": "אוֹכְלוֹת",
+    "V;NFIN": "לֶאֱכֹל",
+    "V;IMP;2;SG;MASC": "אֱכֹל",
+    "V;IMP;2;SG;FEM": "אִכְלִי",
+    "V;IMP;2;PL;MASC": "אִכְלוּ",
+    "V;FUT;2;SG;MASC": "תֹּאכַל",
+    "V;FUT;2;SG;FEM": "תֹּאכְלִי",
+    "V;FUT;2;PL;MASC": "תֹּאכְלוּ"
+   },
+   "plene": {
+    "V;NFIN": "לאכול",
+    "V;IMP;2;SG;MASC": "אכול"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -144,7 +155,14 @@
     "V;PRS;SG;MASC": "שׁוֹתֶה",
     "V;PRS;SG;FEM": "שׁוֹתָה",
     "V;PRS;PL;MASC": "שׁוֹתִים",
-    "V;PRS;PL;FEM": "שׁוֹתוֹת"
+    "V;PRS;PL;FEM": "שׁוֹתוֹת",
+    "V;NFIN": "לִשְׁתּוֹת",
+    "V;IMP;2;SG;MASC": "שְׁתֵה",
+    "V;IMP;2;SG;FEM": "שְׁתִי",
+    "V;IMP;2;PL;MASC": "שְׁתוּ",
+    "V;FUT;2;SG;MASC": "תִּשְׁתֶּה",
+    "V;FUT;2;SG;FEM": "תִּשְׁתִּי",
+    "V;FUT;2;PL;MASC": "תִּשְׁתּוּ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -252,7 +270,14 @@
     "V;PRS;SG;MASC": "קוֹנֶה",
     "V;PRS;SG;FEM": "קוֹנָה",
     "V;PRS;PL;MASC": "קוֹנִים",
-    "V;PRS;PL;FEM": "קוֹנוֹת"
+    "V;PRS;PL;FEM": "קוֹנוֹת",
+    "V;NFIN": "לִקְנוֹת",
+    "V;IMP;2;SG;MASC": "קְנֵה",
+    "V;IMP;2;SG;FEM": "קְנִי",
+    "V;IMP;2;PL;MASC": "קְנוּ",
+    "V;FUT;2;SG;MASC": "תִּקְנֶה",
+    "V;FUT;2;SG;FEM": "תִּקְנִי",
+    "V;FUT;2;PL;MASC": "תִּקְנוּ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -379,7 +404,11 @@
     "V;PRS;SG;MASC": "אוֹהֵב",
     "V;PRS;SG;FEM": "אוֹהֶבֶת",
     "V;PRS;PL;MASC": "אוֹהֲבִים",
-    "V;PRS;PL;FEM": "אוֹהֲבוֹת"
+    "V;PRS;PL;FEM": "אוֹהֲבוֹת",
+    "V;NFIN": "לֶאֱהֹב"
+   },
+   "plene": {
+    "V;NFIN": "לאהוב"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -518,7 +547,8 @@
     "V;PRS;SG;MASC": "רוֹצֶה",
     "V;PRS;SG;FEM": "רוֹצָה",
     "V;PRS;PL;MASC": "רוֹצִים",
-    "V;PRS;PL;FEM": "רוֹצוֹת"
+    "V;PRS;PL;FEM": "רוֹצוֹת",
+    "V;NFIN": "לִרְצוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -630,6 +660,2652 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:bishel",
+   "lemma": "בִּשֵּׁל",
+   "pos": "VERB",
+   "senses": [
+    "verb.cook"
+   ],
+   "root": "ב־שׁ־ל",
+   "binyan": "piel",
+   "translit": "bishel",
+   "forms": {
+    "V;PST;3;SG;MASC": "בִּשֵּׁל",
+    "V;PRS;SG;MASC": "מְבַשֵּׁל",
+    "V;PRS;SG;FEM": "מְבַשֶּׁלֶת",
+    "V;PRS;PL;MASC": "מְבַשְּׁלִים",
+    "V;PRS;PL;FEM": "מְבַשְּׁלוֹת",
+    "V;NFIN": "לְבַשֵּׁל"
+   },
+   "plene": {
+    "V;PST;3;SG;MASC": "בישל"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Pots on the stove on a Friday afternoon, before the Shabbat dinner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to cook (to make food with heat)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.cook"
+     },
+     {
+      "id": "s2",
+      "def": "to boil, to stew (food in water — as opposed to frying or baking)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת מָרָק.",
+      "tr": "Mum is cooking soup.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי מְבַשֵּׁל הַיּוֹם?",
+      "tr": "Who is cooking today?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹהֵב לְבַשֵּׁל לַחֲבֵרִים.",
+      "tr": "I (m.) love cooking for friends.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת הָאֹרֶז מְבַשְּׁלִים עֶשְׂרִים דַּקּוֹת.",
+      "tr": "You boil the rice for twenty minutes.",
+      "register": "neutral",
+      "context": "recipes",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְבַשֵּׁל אֲרוּחַת עֶרֶב",
+      "tr": "to cook dinner"
+     },
+     {
+      "text": "לְבַשֵּׁל מָרָק",
+      "tr": "to cook soup"
+     },
+     {
+      "text": "סֵפֶר בִּשּׁוּל",
+      "tr": "a cookbook (בִּשּׁוּל “cooking”, from the same root)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא תְבַשֵּׁל גְּדִי בַּחֲלֵב אִמּוֹ",
+      "tr": "you shall not cook a kid in its mother’s milk",
+      "kind": "quote",
+      "meaning": "the verse behind the Jewish rule never to cook or eat meat together with milk",
+      "register": "religious",
+      "source": "Exodus 23:19"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "הֵכִין",
+      "register": "neutral",
+      "nuance": "“to prepare” — any food, also cold dishes: הֵכִין סָלָט"
+     },
+     {
+      "word": "עָשָׂה אֹכֶל",
+      "register": "colloquial",
+      "nuance": "“to make food” — the everyday way to say “cook” at home: מִי עוֹשֶׂה אֹכֶל?"
+     }
+    ],
+    "etymology": {
+     "text": "Piʿel of the root ב־שׁ־ל (Wiktionary; verbal noun בִּשּׁוּל “cooking”). The same root gives the adjective בָּשֵׁל “ripe, mature”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Ripe fruit is “cooked” by the sun: בָּשֵׁל “ripe” has the same root ב־שׁ־ל.",
+     "Because of Exodus 23:19, kosher kitchens keep separate dishes for meat (בְּשָׂרִי) and for milk products (חָלָבִי)."
+    ],
+    "pitfalls": [
+     "The piʿel present starts with מְ־: מְבַשֵּׁל, מְבַשֶּׁלֶת, מְבַשְּׁלִים, מְבַשְּׁלוֹת — never *בּוֹשֵׁל.",
+     "The ב has a dot (b) at the start of בִּשֵּׁל (bishel) but not after מְ: מְבַשֵּׁל (mevashel, with v)."
+    ],
+    "subtleties": [
+     "English “cook” covers every way of making food; בִּשֵּׁל is first of all cooking with heat, in a pot. Baking is אָפָה, frying טִגֵּן.",
+     "A cook (the job) is a different word: טַבָּח."
+    ]
+   }
+  },
+  {
+   "id": "he:lechem",
+   "lemma": "לֶחֶם",
+   "pos": "NOUN",
+   "senses": [
+    "food.bread"
+   ],
+   "gender": "MASC",
+   "root": "ל־ח־ם",
+   "translit": "lechem",
+   "forms": {
+    "N;SG;INDF": "לֶחֶם",
+    "N;SG;DEF": "הַלֶּחֶם",
+    "N;PL;INDF": "לְחָמִים",
+    "N;PL;DEF": "הַלְּחָמִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Fresh bread from the bakery — the basic food; in old texts, food and livelihood itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bread",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.bread"
+     },
+     {
+      "id": "s2",
+      "def": "food, sustenance; one’s livelihood",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹנֶה לֶחֶם.",
+      "tr": "I (m.) am buying bread.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹכְלִים לֶחֶם עִם גְּבִינָה.",
+      "tr": "The children eat bread with cheese.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "הַלֶּחֶם פֹּה טָרִי.",
+      "tr": "The bread here is fresh.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּזֵעַת אַפֶּיךָ תֹּאכַל לֶחֶם.",
+      "tr": "By the sweat of your brow you shall eat bread.",
+      "register": "literary",
+      "context": "Bible (Genesis 3:19)",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פְּרוּסַת לֶחֶם",
+      "tr": "a slice of bread"
+     },
+     {
+      "text": "כִּכַּר לֶחֶם",
+      "tr": "a loaf of bread"
+     },
+     {
+      "text": "לֶחֶם מָלֵא",
+      "tr": "wholemeal bread"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא עַל הַלֶּחֶם לְבַדּוֹ יִחְיֶה הָאָדָם",
+      "tr": "man does not live by bread alone",
+      "kind": "quote",
+      "meaning": "people need more than food",
+      "register": "literary",
+      "source": "Deuteronomy 8:3"
+     },
+     {
+      "text": "לֶחֶם חֻקּוֹ",
+      "tr": "his allotted bread",
+      "kind": "idiom",
+      "meaning": "his daily routine, something he does or meets all the time",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "פַּת",
+      "register": "literary",
+      "nuance": "“bread, a piece of bread” — old and formal (פַּת שַׁחֲרִית “morning bread”, the Rabbinic word for breakfast)"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic لَحْم (laḥm, “meat”), with the varying semantic developments being due to the differing agriculture and diets of the Arabian Peninsula and the Fertile Crescent (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bethlehem is בֵּית לֶחֶם, “house of bread”.",
+     "In Arabic the same word, لَحْم (laḥm), means “meat”: the staple of the farmers of the Fertile Crescent was bread, that of the herders of Arabia meat.",
+     "The blessing before a meal with bread ends with הַמּוֹצִיא לֶחֶם מִן הָאָרֶץ “who brings forth bread from the earth”."
+    ],
+    "pitfalls": [
+     "As food it is uncountable: אֲנִי אוֹכֵל לֶחֶם (no “a”). One loaf is כִּכַּר לֶחֶם, or in a shop simply לֶחֶם אֶחָד; the plural לְחָמִים means loaves or kinds of bread.",
+     "Stress on the first syllable: LE-chem (like יֶלֶד, סֵפֶר)."
+    ],
+    "subtleties": [
+     "A bread roll is לַחְמָנִיָּה (from the same word); pitta is פִּתָּה; the plaited Shabbat bread is חַלָּה."
+    ]
+   }
+  },
+  {
+   "id": "he:gvina",
+   "lemma": "גְּבִינָה",
+   "pos": "NOUN",
+   "senses": [
+    "food.cheese"
+   ],
+   "gender": "FEM",
+   "root": "ג־ב־ן",
+   "translit": "gvina",
+   "forms": {
+    "N;SG;INDF": "גְּבִינָה",
+    "N;SG;DEF": "הַגְּבִינָה",
+    "N;PL;INDF": "גְּבִינוֹת",
+    "N;PL;DEF": "הַגְּבִינוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Breakfast tables full of white cheeses — the soft גְּבִינָה לְבָנָה is an Israeli staple.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheese",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.cheese"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹכֶלֶת לֶחֶם עִם גְּבִינָה.",
+      "tr": "I (f.) eat bread with cheese.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "הַגְּבִינָה הַזֹּאת טְעִימָה מְאֹד.",
+      "tr": "This cheese is very tasty.",
+      "register": "neutral",
+      "context": "tasting",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה גְּבִינוֹת.",
+      "tr": "There are lots of cheeses here.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גְּבִינָה לְבָנָה",
+      "tr": "soft white cheese (like German Quark)"
+     },
+     {
+      "text": "גְּבִינָה צְהֻבָּה",
+      "tr": "hard cheese (“yellow cheese”)"
+     },
+     {
+      "text": "גְּבִינַת עִזִּים",
+      "tr": "goat’s cheese"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: kinds of cheese are named with גְּבִינָה + a word (גְּבִינָה צְהֻבָּה) or with loanwords (קוֹטֶג׳).",
+    "etymology": {
+     "text": "From the same root as Arabic جُبْن (jubn, “cheese”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In a kosher kitchen cheese (חָלָבִי, dairy) is never eaten with meat (בְּשָׂרִי) — so a kosher restaurant serves no cheeseburgers.",
+     "In 2011 a consumer boycott over the price of קוֹטֶג׳ (cottage cheese) became a forerunner of Israel’s large social protests that summer."
+    ],
+    "pitfalls": [
+     "Stress on the last syllable: g’vi-NA.",
+     "Feminine: גְּבִינָה טְעִימָה, הַגְּבִינָה הַזֹּאת."
+    ],
+    "subtleties": [
+     "גְּבִינָה לְבָנָה is a soft spread, not a white hard cheese; hard cheese is גְּבִינָה צְהֻבָּה “yellow cheese”."
+    ]
+   }
+  },
+  {
+   "id": "he:beitsa",
+   "lemma": "בֵּיצָה",
+   "pos": "NOUN",
+   "senses": [
+    "food.egg"
+   ],
+   "gender": "FEM",
+   "translit": "beitsa",
+   "forms": {
+    "N;SG;INDF": "בֵּיצָה",
+    "N;SG;DEF": "הַבֵּיצָה",
+    "N;PL;INDF": "בֵּיצִים",
+    "N;PL;DEF": "הַבֵּיצִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The egg of the Israeli breakfast — fried, boiled or in a shakshuka.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "egg (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.egg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אוֹכֵל שְׁתֵּי בֵּיצִים בַּבֹּקֶר.",
+      "tr": "He eats two eggs in the morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי קוֹנָה בֵּיצִים בַּשּׁוּק.",
+      "tr": "I (f.) buy eggs at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבֵּיצָה קָשָׁה מִדַּי.",
+      "tr": "The egg is too hard.",
+      "register": "colloquial",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּיצָה קָשָׁה",
+      "tr": "a hard-boiled egg"
+     },
+     {
+      "text": "בֵּיצָה רַכָּה",
+      "tr": "a soft-boiled egg"
+     },
+     {
+      "text": "בֵּיצַת עַיִן",
+      "tr": "a fried egg, sunny side up (“eye egg”)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לָלֶכֶת עַל בֵּיצִים",
+      "tr": "to walk on eggs",
+      "kind": "idiom",
+      "meaning": "to tread very carefully (“walk on eggshells”)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use (an omelette is a different word, חֲבִיתָה).",
+    "etymology": {
+     "text": "Uncertain, possibly named after its whiteness from the same root as أَبْيَض (ʔabyaḍ, “white”). Cognate with Arabic بَيْض (bayḍ) and Classical Syriac ܒܝܥܬܐ (bēʿṯā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Shakshuka (שַׁקְשׁוּקָה), eggs poached in tomato sauce, came to Israel with the Jews of North Africa.",
+     "Arabic بَيْض (bayḍ) “eggs” is the same word."
+    ],
+    "pitfalls": [
+     "Feminine, but the plural ends in -ִים: בֵּיצָה → בֵּיצִים — and it stays feminine: שְׁתֵּי בֵּיצִים, שָׁלוֹשׁ בֵּיצִים.",
+     "Same letters, another word: בִּצָּה “swamp” (unvowelled, both can be written ביצה).",
+     "In slang the plural בֵּיצִים also means “testicles” (vulgar) — context makes it clear."
+    ],
+    "subtleties": [
+     "With a number it takes the feminine form: שָׁלוֹשׁ בֵּיצִים (not *שְׁלוֹשָׁה)."
+    ]
+   }
+  },
+  {
+   "id": "he:basar",
+   "lemma": "בָּשָׂר",
+   "pos": "NOUN",
+   "senses": [
+    "food.meat"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "root": "ב־שׂ־ר",
+   "translit": "basar",
+   "note": "Used as a mass noun; the plural בְּשָׂרִים (kinds of meat) is rare.",
+   "forms": {
+    "N;SG;INDF": "בָּשָׂר",
+    "N;SG;DEF": "הַבָּשָׂר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grilled meat at a holiday barbecue; in old texts “flesh” — the body and human frailty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "meat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.meat"
+     },
+     {
+      "id": "s2",
+      "def": "flesh, body; humankind (בָּשָׂר וָדָם “flesh and blood”)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ לֹא אוֹכְלִים בָּשָׂר.",
+      "tr": "We don’t eat meat.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא קוֹנֶה בָּשָׂר לָאֲרוּחָה.",
+      "tr": "He is buying meat for the meal.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבָּשָׂר מוּכָן!",
+      "tr": "The meat is ready!",
+      "register": "colloquial",
+      "context": "barbecue",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא רַק בָּשָׂר וָדָם.",
+      "tr": "He is only flesh and blood.",
+      "register": "literary",
+      "context": "sayings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּשַׂר בָּקָר",
+      "tr": "beef (“meat of cattle”)"
+     },
+     {
+      "text": "בָּשָׂר טָחוּן",
+      "tr": "minced meat"
+     },
+     {
+      "text": "בָּשָׂר עַל הָאֵשׁ",
+      "tr": "grilled meat, a barbecue (“meat on the fire”)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בָּשָׂר וָדָם",
+      "tr": "flesh and blood",
+      "kind": "fixed expression",
+      "meaning": "a mortal human being (as opposed to God)",
+      "register": "literary"
+     },
+     {
+      "text": "עֶצֶם מֵעֲצָמַי וּבָשָׂר מִבְּשָׂרִי",
+      "tr": "bone of my bones and flesh of my flesh",
+      "kind": "quote",
+      "meaning": "someone as close as one’s own body",
+      "register": "literary",
+      "source": "Genesis 2:23"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No general synonym: kinds of meat are construct phrases (בְּשַׂר בָּקָר “beef”, בְּשַׂר כֶּבֶשׂ “lamb”).",
+    "etymology": {
+     "text": "From Proto-West Semitic *baśar-. Cognate to Arabic بَشَر (bašar, “human”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Arabic cognate بَشَر (bašar) means “human being” — Hebrew keeps that sense in בָּשָׂר וָדָם “a mortal”.",
+     "In kosher food בְּשָׂרִי “meaty” is a category: a בְּשָׂרִי meal has no milk products at all."
+    ],
+    "pitfalls": [
+     "In a phrase the vowels change: בָּשָׂר → בְּשַׂר בָּקָר “beef”.",
+     "The letter is שׂ (sin, dot on the left): basar, not bashar."
+    ],
+    "subtleties": [
+     "On menus בָּשָׂר usually means red meat; chicken (עוֹף) and fish (דָּגִים) are listed apart."
+    ]
+   }
+  },
+  {
+   "id": "he:dag",
+   "lemma": "דָּג",
+   "pos": "NOUN",
+   "senses": [
+    "food.fish"
+   ],
+   "gender": "MASC",
+   "translit": "dag",
+   "forms": {
+    "N;SG;INDF": "דָּג",
+    "N;SG;DEF": "הַדָּג",
+    "N;PL;INDF": "דָּגִים",
+    "N;PL;DEF": "הַדָּגִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fish by the sea — grilled in a Jaffa restaurant, or gefilte fish on a holiday table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fish (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fish"
+     },
+     {
+      "id": "s2",
+      "def": "fish (the animal)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא לֹא אוֹכֶלֶת דָּגִים.",
+      "tr": "She doesn’t eat fish.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא מְבַשֵּׁל דָּג לַאֲרוּחַת עֶרֶב.",
+      "tr": "Dad is cooking fish for dinner.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה דָּגִים.",
+      "tr": "There are lots of fish here.",
+      "register": "neutral",
+      "context": "sea",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דָּג עַל הָאֵשׁ",
+      "tr": "grilled fish"
+     },
+     {
+      "text": "דְּגֵי יָם",
+      "tr": "sea fish"
+     },
+     {
+      "text": "דָּג מָלוּחַ",
+      "tr": "salted fish"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הַדָּג מַסְרִיחַ מֵהָרֹאשׁ",
+      "tr": "the fish stinks from the head",
+      "kind": "saying",
+      "meaning": "corruption starts at the top",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "דָּגָה",
+      "register": "archaic",
+      "nuance": "a Biblical collective noun, “the fish (of a river)”: וְהַדָּגָה אֲשֶׁר בַּיְאֹר מֵתָה (Exodus 7:21)"
+     }
+    ],
+    "etymology": {
+     "text": "Related to Ugaritic 𐎄𐎂 (dg), of unknown ultimate origin (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Jonah was swallowed by a דָּג גָּדוֹל, “a big fish” — the Hebrew Bible never says “whale”.",
+     "The same letters are the verb דָּג “he fishes”; a fisherman is a דַּיָּג."
+    ],
+    "pitfalls": [
+     "As a dish Hebrew often uses the plural: אֲנִי לֹא אוֹכֵל דָּגִים “I don’t eat fish”.",
+     "In a phrase the plural becomes דְּגֵי: דְּגֵי יָם “sea fish”."
+    ],
+    "subtleties": [
+     "One fish on the plate is דָּג (אֲנִי אוֹכֵל דָּג); fish in general is דָּגִים."
+    ]
+   }
+  },
+  {
+   "id": "he:of",
+   "lemma": "עוֹף",
+   "pos": "NOUN",
+   "senses": [
+    "food.chicken"
+   ],
+   "gender": "MASC",
+   "translit": "of",
+   "forms": {
+    "N;SG;INDF": "עוֹף",
+    "N;SG;DEF": "הָעוֹף",
+    "N;PL;INDF": "עוֹפוֹת",
+    "N;PL;DEF": "הָעוֹפוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Chicken — the most common meat at Israeli tables: schnitzel, soup, the grill.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicken, poultry (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.chicken"
+     },
+     {
+      "id": "s2",
+      "def": "bird, fowl (formal and zoological)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ אוֹכְלִים עוֹף וְאֹרֶז.",
+      "tr": "We are eating chicken and rice.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְבַשֶּׁלֶת מְרַק עוֹף.",
+      "tr": "She is cooking chicken soup.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעוֹף בַּתַּנּוּר.",
+      "tr": "The chicken is in the oven.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנֶּשֶׁר הוּא עוֹף גָּדוֹל.",
+      "tr": "The eagle is a big bird.",
+      "register": "formal",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק עוֹף",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "חֲזֵה עוֹף",
+      "tr": "chicken breast"
+     },
+     {
+      "text": "עוֹף צָלוּי",
+      "tr": "roast chicken"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עוֹף מוּזָר",
+      "tr": "a strange bird",
+      "kind": "idiom",
+      "meaning": "an odd, eccentric person",
+      "register": "colloquial"
+     },
+     {
+      "text": "עוֹף הַחוֹל",
+      "tr": "the bird of sand",
+      "kind": "fixed expression",
+      "meaning": "the phoenix",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תַּרְנְגֹלֶת",
+      "register": "neutral",
+      "nuance": "“hen” — the live bird; for the meat Israelis say עוֹף"
+     },
+     {
+      "word": "צִפּוֹר",
+      "register": "neutral",
+      "nuance": "“bird” in everyday speech; עוֹף for “bird” is formal or zoological"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Ge’ez ዖፍ (ʿof, “bird”) (Wiktionary). The verb עָף “to fly” has the same root ע־ו־ף.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its basic meaning is “a flyer”: עָף “(he) flies” has the same root.",
+     "The phoenix is עוֹף הַחוֹל in Hebrew."
+    ],
+    "pitfalls": [
+     "Masculine, with a plural in -וֹת: עוֹפוֹת.",
+     "With the article: הָעוֹף (hā-, before ע).",
+     "The live chicken is תַּרְנְגֹלֶת (hen) or תַּרְנְגוֹל (rooster); עוֹף is above all the meat."
+    ],
+    "subtleties": [
+     "On a menu or in a recipe עוֹף is chicken meat in general: מְרַק עוֹף, שְׁנִיצֶל עוֹף."
+    ]
+   }
+  },
+  {
+   "id": "he:orez",
+   "lemma": "אֹרֶז",
+   "pos": "NOUN",
+   "senses": [
+    "food.rice"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "orez",
+   "note": "A mass noun with no everyday plural.",
+   "forms": {
+    "N;SG;INDF": "אֹרֶז",
+    "N;SG;DEF": "הָאֹרֶז"
+   },
+   "plene": {
+    "N;SG;INDF": "אורז",
+    "N;SG;DEF": "האורז"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rice beside chicken and salad — an everyday side dish.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rice (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.rice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים אוֹכְלִים אֹרֶז עִם עוֹף.",
+      "tr": "The children eat rice with chicken.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְבַשֵּׁל אֶת הָאֹרֶז.",
+      "tr": "I (m.) am cooking the rice.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ אֹרֶז?",
+      "tr": "Do we have rice?",
+      "register": "colloquial",
+      "context": "shopping list",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֹרֶז לָבָן",
+      "tr": "white rice"
+     },
+     {
+      "text": "אֹרֶז מָלֵא",
+      "tr": "brown (whole-grain) rice"
+     },
+     {
+      "text": "שַׂקִּית אֹרֶז",
+      "tr": "a bag of rice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; it is a mass noun.",
+    "etymology": {
+     "text": "From Ancient Greek ὄρυζα (óruza), from an Eastern Iranian language (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word you know: it comes from Greek ὄρυζα, like German Reis, English rice and Russian рис."
+    ],
+    "pitfalls": [
+     "Everyday spelling with ו: אורז. Without it, ארז reads as אֶרֶז “cedar”.",
+     "With the article: הָאֹרֶז (hā- before א)."
+    ],
+    "subtleties": [
+     "Uncountable: אֲנִי אוֹכֵל אֹרֶז, קְצָת אֹרֶז — no plural in everyday use."
+    ]
+   }
+  },
+  {
+   "id": "he:marak",
+   "lemma": "מָרָק",
+   "pos": "NOUN",
+   "senses": [
+    "food.soup"
+   ],
+   "gender": "MASC",
+   "translit": "marak",
+   "forms": {
+    "N;SG;INDF": "מָרָק",
+    "N;SG;DEF": "הַמָּרָק",
+    "N;PL;INDF": "מְרָקִים",
+    "N;PL;DEF": "הַמְּרָקִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A warm pot on a winter evening; chicken soup as comfort food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soup, broth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.soup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת מָרָק.",
+      "tr": "Mum is cooking soup.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמָּרָק חַם מְאֹד.",
+      "tr": "The soup is very hot.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף אֲנַחְנוּ אוֹכְלִים הַרְבֵּה מְרָקִים.",
+      "tr": "In winter we eat a lot of soups.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק עוֹף",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "מְרַק יְרָקוֹת",
+      "tr": "vegetable soup"
+     },
+     {
+      "text": "מְרַק עֲדָשִׁים",
+      "tr": "lentil soup"
+     },
+     {
+      "text": "צַלַּחַת מָרָק",
+      "tr": "a bowl (“plate”) of soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צִיר",
+      "register": "neutral",
+      "nuance": "“broth, stock” — the clear liquid (צִיר עוֹף), not a whole soup"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic مَرَق (maraq) and the more common Arabic مَرَقَة (maraqa) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic مَرَق (maraq) “broth” is the same word.",
+     "Hebrew “eats” soup, like Greek (τρώω σούπα), Russian (есть суп) and German (Suppe essen)."
+    ],
+    "pitfalls": [
+     "Soup is eaten, not drunk: אוֹכְלִים מָרָק (as German Suppe essen).",
+     "In a phrase the vowels shorten: מָרָק → מְרַק עוֹף; plural מְרָקִים."
+    ],
+    "subtleties": [
+     "In Israeli winters soup is often the whole supper, and מְרַק עוֹף is the classic home remedy for a cold."
+    ]
+   }
+  },
+  {
+   "id": "he:salat",
+   "lemma": "סָלָט",
+   "pos": "NOUN",
+   "senses": [
+    "food.salad"
+   ],
+   "gender": "MASC",
+   "translit": "salat",
+   "forms": {
+    "N;SG;INDF": "סָלָט",
+    "N;SG;DEF": "הַסָּלָט",
+    "N;PL;INDF": "סָלָטִים",
+    "N;PL;DEF": "הַסָּלָטִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Chopped cucumber and tomato — the “Israeli salad” at every meal, even at breakfast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salad (the dish)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salad"
+     },
+     {
+      "id": "s2",
+      "def": "a mess, a mix-up",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹכֵל סָלָט כָּל יוֹם.",
+      "tr": "I (m.) eat salad every day.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּלָט הַזֶּה טָעִים מְאֹד.",
+      "tr": "This salad is very tasty.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמִּסְעָדָה מְבִיאִים קֹדֶם הַרְבֵּה סָלָטִים.",
+      "tr": "At the restaurant they first bring lots of salads.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי סָלָט בָּרֹאשׁ.",
+      "tr": "I’m all mixed up (“I have a salad in my head”).",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סָלָט יִשְׂרְאֵלִי",
+      "tr": "Israeli (chopped vegetable) salad"
+     },
+     {
+      "text": "סָלַט פֵּרוֹת",
+      "tr": "fruit salad"
+     },
+     {
+      "text": "סָלַט חֲצִילִים",
+      "tr": "aubergine salad (a dip)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: it is the general word for any salad (סָלָט יִשְׂרְאֵלִי, סָלַט חֲצִילִים).",
+    "etymology": {
+     "text": "Ultimately from Latin sal (Wiktionary) — “salted” greens.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word in all your languages: from Latin sal “salt”, like German Salat, Greek σαλάτα, Russian салат, Turkish salata and Arabic سَلَطَة (salaṭa)."
+    ],
+    "pitfalls": [
+     "Masculine: סָלָט טָעִים, הַסָּלָט הַזֶּה (not *טְעִימָה).",
+     "Before another noun the vowel shortens: סָלָט → סָלַט פֵּרוֹת “fruit salad”."
+    ],
+    "subtleties": [
+     "The plural סָלָטִים is the array of small salads and dips served first in Israeli restaurants."
+    ]
+   }
+  },
+  {
+   "id": "he:pri",
+   "lemma": "פְּרִי",
+   "pos": "NOUN",
+   "senses": [
+    "food.fruit"
+   ],
+   "gender": "MASC",
+   "translit": "pri",
+   "forms": {
+    "N;SG;INDF": "פְּרִי",
+    "N;SG;DEF": "הַפְּרִי",
+    "N;PL;INDF": "פֵּרוֹת",
+    "N;PL;DEF": "הַפֵּרוֹת"
+   },
+   "plene": {
+    "N;PL;INDF": "פירות",
+    "N;PL;DEF": "הפירות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Watermelon, figs and oranges — the sweet end of a meal in a sunny country.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fruit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fruit"
+     },
+     {
+      "id": "s2",
+      "def": "fruit, result (of work or effort)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא קוֹנָה פֵּרוֹת בַּשּׁוּק.",
+      "tr": "She buys fruit at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹהֵב פֵּרוֹת.",
+      "tr": "I (m.) like fruit.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה פְּרִי טָעִים.",
+      "tr": "This is a tasty fruit.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֵּפֶר הוּא פְּרִי שֶׁל עֲבוֹדָה קָשָׁה.",
+      "tr": "The book is the fruit of hard work.",
+      "register": "formal",
+      "context": "writing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פֵּרוֹת וִירָקוֹת",
+      "tr": "fruit and vegetables"
+     },
+     {
+      "text": "פְּרִי הָדָר",
+      "tr": "a citrus fruit"
+     },
+     {
+      "text": "מִיץ פֵּרוֹת",
+      "tr": "fruit juice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בּוֹרֵא פְּרִי הָעֵץ",
+      "tr": "who creates the fruit of the tree",
+      "kind": "fixed expression",
+      "meaning": "the end of the blessing said before eating fruit",
+      "register": "religious"
+     },
+     {
+      "text": "פְּרִי הַגָּפֶן",
+      "tr": "the fruit of the vine",
+      "kind": "fixed expression",
+      "meaning": "wine, in the blessing over wine",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym (תְּנוּבָה “produce, yield” is formal and collective).",
+    "etymology": {
+     "text": "From Proto-Semitic *piry-. Cognate with Ge’ez ፍሬ (fəre) and Ugaritic 𐎔𐎗 (pr /pirû/) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Bible’s first commandment, פְּרוּ וּרְבוּ “be fruitful and multiply” (Genesis 1:28), comes from the same root פ־ר־ה.",
+     "Tu BiShvat, the “New Year of the Trees”, is celebrated by eating fruit, especially dried fruit (פֵּרוֹת יְבֵשִׁים)."
+    ],
+    "pitfalls": [
+     "The plural changes its vowels and ends in -וֹת although the word is masculine: פְּרִי → פֵּרוֹת.",
+     "English uses “fruit” as a mass noun; Hebrew uses the plural: אֲנִי אוֹכֵל פֵּרוֹת “I eat fruit”.",
+     "Everyday spelling of the plural: פירות."
+    ],
+    "subtleties": [
+     "One piece of fruit is פְּרִי אֶחָד; in botany a tomato is also a פְּרִי."
+    ]
+   }
+  },
+  {
+   "id": "he:tapuach",
+   "lemma": "תַּפּוּחַ",
+   "pos": "NOUN",
+   "senses": [
+    "food.apple"
+   ],
+   "gender": "MASC",
+   "translit": "tapuach",
+   "forms": {
+    "N;SG;INDF": "תַּפּוּחַ",
+    "N;SG;DEF": "הַתַּפּוּחַ",
+    "N;PL;INDF": "תַּפּוּחִים",
+    "N;PL;DEF": "הַתַּפּוּחִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Crisp apples — and apple dipped in honey for a sweet New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "apple",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.apple"
+     },
+     {
+      "id": "s2",
+      "def": "apple tree",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיַּלְדָּה אוֹכֶלֶת תַּפּוּחַ.",
+      "tr": "The girl is eating an apple.",
+      "register": "neutral",
+      "context": "snack",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי קוֹנֶה שְׁלוֹשָׁה תַּפּוּחִים.",
+      "tr": "I (m.) am buying three apples.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּרֹאשׁ הַשָּׁנָה אוֹכְלִים תַּפּוּחַ בִּדְבַשׁ.",
+      "tr": "At Rosh Hashanah people eat apple dipped in honey.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיץ תַּפּוּחִים",
+      "tr": "apple juice"
+     },
+     {
+      "text": "עוּגַת תַּפּוּחִים",
+      "tr": "apple cake"
+     },
+     {
+      "text": "תַּפּוּחַ יָרֹק",
+      "tr": "a green apple"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הַתַּפּוּחַ לֹא נוֹפֵל רָחוֹק מֵהָעֵץ",
+      "tr": "the apple does not fall far from the tree",
+      "kind": "saying",
+      "meaning": "children resemble their parents",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תַּפּוּחַ עֵץ",
+      "register": "formal",
+      "nuance": "“tree apple” — the full name, which keeps it apart from תַּפּוּחַ אֲדָמָה “potato”"
+     }
+    ],
+    "etymology": {
+     "text": "Uncertain; if derived from a verbal root then either named after its scent (נָפַח “to blow, to scent”) or from תָּפַח “to swell, become round”. Cognates include Arabic تُفَّاح (tuffāḥ) and Ugaritic tpḥ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "תַּפּוּחַ אֲדָמָה “earth apple” is a potato — like French pomme de terre and Austrian German Erdapfel.",
+     "תַּפּוּז “orange” is a modern blend of תַּפּוּחַ זָהָב “golden apple”.",
+     "Arabic تُفَّاح (tuffāḥ) is the same word."
+    ],
+    "pitfalls": [
+     "The final ח is said after an extra a: ta-pu-ach (a “stolen patah”).",
+     "Do not mix it up with תַּפּוּחַ אֲדָמָה “potato” (in speech often shortened to תַּפּוּד)."
+    ],
+    "subtleties": [
+     "Masculine: תַּפּוּחַ אֶחָד, שְׁנֵי תַּפּוּחִים, שְׁלוֹשָׁה תַּפּוּחִים."
+    ]
+   }
+  },
+  {
+   "id": "he:sukar",
+   "lemma": "סֻכָּר",
+   "pos": "NOUN",
+   "senses": [
+    "food.sugar"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "sukar",
+   "note": "A mass noun with no everyday plural.",
+   "forms": {
+    "N;SG;INDF": "סֻכָּר",
+    "N;SG;DEF": "הַסֻּכָּר"
+   },
+   "plene": {
+    "N;SG;INDF": "סוכר",
+    "N;SG;DEF": "הסוכר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A spoonful in the tea — and, colloquially, diabetes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sugar",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.sugar"
+     },
+     {
+      "id": "s2",
+      "def": "diabetes (יֵשׁ לוֹ סֻכָּר “he has diabetes”)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַתָּה רוֹצֶה סֻכָּר?",
+      "tr": "Do you (m.) want sugar?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי שׁוֹתָה תֵּה בְּלִי סֻכָּר.",
+      "tr": "I (f.) drink tea without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "לְסַבָּא יֵשׁ סֻכָּר.",
+      "tr": "Grandpa has diabetes.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כַּפִּית סֻכָּר",
+      "tr": "a teaspoon of sugar"
+     },
+     {
+      "text": "בְּלִי סֻכָּר",
+      "tr": "without sugar, sugar-free"
+     },
+     {
+      "text": "סֻכָּר חוּם",
+      "tr": "brown sugar"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the medical word for diabetes, סֻכֶּרֶת, is built from it.",
+    "etymology": {
+     "text": "Borrowed from Arabic سُكَّر (sukkar), borrowed from Middle Persian šakar, from Gandhari śakara, from Sanskrit शर्करा (śárkarā), ultimately from Proto-Indo-European *ḱorkeh₂ (“gravel”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word through all your languages: Sanskrit śárkarā → Persian šakar → Arabic sukkar → Hebrew סֻכָּר; the same journey gave German Zucker, English sugar, Greek ζάχαρη, Russian сахар and Turkish şeker.",
+     "Diabetes is סֻכֶּרֶת, with the ending of names of illnesses, as in צַהֶבֶת “jaundice”."
+    ],
+    "pitfalls": [
+     "Everyday spelling with ו: סוכר. Without it, סכר reads as סֶכֶר “dam”.",
+     "The ֻ (kubbutz) is an u: su-KAR."
+    ],
+    "subtleties": [
+     "Uncountable: קְצָת סֻכָּר, הַרְבֵּה סֻכָּר; sugar cubes are קֻבִּיּוֹת סֻכָּר."
+    ]
+   }
+  },
+  {
+   "id": "he:melach",
+   "lemma": "מֶלַח",
+   "pos": "NOUN",
+   "senses": [
+    "food.salt"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "melach",
+   "note": "A mass noun; the plural מְלָחִים is the chemists’ “salts”.",
+   "forms": {
+    "N;SG;INDF": "מֶלַח",
+    "N;SG;DEF": "הַמֶּלַח"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Salt on the table — and the salty Dead Sea, יָם הַמֶּלַח.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salt",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salt"
+     },
+     {
+      "id": "s2",
+      "def": "permanence, continuity (בְּרִית מֶלַח “a covenant of salt”)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אוֹכֵל הַרְבֵּה מֶלַח.",
+      "tr": "He eats a lot of salt.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין פֹּה מֶלַח.",
+      "tr": "There is no salt here.",
+      "register": "neutral",
+      "context": "table",
+      "sense": "s1"
+     },
+     {
+      "text": "יָם הַמֶּלַח הוּא הַמָּקוֹם הַנָּמוּךְ בְּיוֹתֵר בָּעוֹלָם.",
+      "tr": "The Dead Sea is the lowest place in the world.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֶלַח וּפִלְפֵּל",
+      "tr": "salt and pepper"
+     },
+     {
+      "text": "קְצָת מֶלַח",
+      "tr": "a little salt"
+     },
+     {
+      "text": "מֶלַח יָם",
+      "tr": "sea salt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מֶלַח הָאָרֶץ",
+      "tr": "the salt of the earth",
+      "kind": "idiom",
+      "meaning": "the best, most valuable people",
+      "register": "neutral"
+     },
+     {
+      "text": "בְּרִית מֶלַח",
+      "tr": "a covenant of salt",
+      "kind": "fixed expression",
+      "meaning": "an eternal, unbreakable bond",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use.",
+    "etymology": {
+     "text": "From Proto-West Semitic *milḥ-. Compare Aramaic מִלְחָא (milḥā), Arabic مِلْح (milḥ), Maltese melħ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Dead Sea is יָם הַמֶּלַח, “the Salt Sea”.",
+     "Arabic مِلْح (milḥ) is the same word; מַלָּח “sailor” only looks related — it comes from Akkadian."
+    ],
+    "pitfalls": [
+     "Stress on the first syllable: ME-lach.",
+     "The plural מְלָחִים exists only in chemistry (“salts”); in the kitchen it is uncountable."
+    ],
+    "subtleties": [
+     "Salt preserves, so בְּרִית מֶלַח, a “covenant of salt” (Numbers 18:19), is one that lasts for ever."
+    ]
+   }
+  },
+  {
+   "id": "he:mayim",
+   "lemma": "מַיִם",
+   "pos": "NOUN",
+   "senses": [
+    "drink.water"
+   ],
+   "class": "plt",
+   "gender": "MASC",
+   "translit": "mayim",
+   "note": "Used only in the plural (masculine): הַמַּיִם קָרִים.",
+   "forms": {
+    "N;PL;INDF": "מַיִם",
+    "N;PL;DEF": "הַמַּיִם"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Water in a hot climate: a bottle is always in the bag.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "water",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.water"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה הַרְבֵּה מַיִם.",
+      "tr": "I (m.) drink a lot of water.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמַּיִם קָרִים.",
+      "tr": "The water is cold.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶפְשָׁר כּוֹס מַיִם, בְּבַקָּשָׁה?",
+      "tr": "Could I have a glass of water, please?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כּוֹס מַיִם",
+      "tr": "a glass of water"
+     },
+     {
+      "text": "בַּקְבּוּק מַיִם",
+      "tr": "a bottle of water"
+     },
+     {
+      "text": "מֵי בֶּרֶז",
+      "tr": "tap water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מַיִם רַבִּים לֹא יוּכְלוּ לְכַבּוֹת אֶת הָאַהֲבָה",
+      "tr": "many waters cannot quench love",
+      "kind": "quote",
+      "meaning": "true love cannot be destroyed",
+      "register": "literary",
+      "source": "Song of Songs 8:7"
+     },
+     {
+      "text": "מַיִם שְׁקֵטִים חוֹדְרִים עָמֹק",
+      "tr": "still waters run deep",
+      "kind": "saying",
+      "meaning": "quiet people can be deep",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use.",
+    "etymology": {
+     "text": "From Proto-Semitic *māy-. Compare Aramaic מַיָּא (mayyā), Arabic مَاء (māʔ). Doublet of מ״ם (the letter mem) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It looks like a dual (-ַיִם, like שָׁמַיִם “sky”), but it is simply a noun used only in the plural.",
+     "The letter מ (mem) has the same name as water: its oldest shape was a wavy line of water.",
+     "Arabic مَاء (māʔ) is the same word."
+    ],
+    "pitfalls": [
+     "Always plural: הַמַּיִם קָרִים “the water is cold” — never a singular.",
+     "Before another noun it becomes מֵי: מֵי בֶּרֶז “tap water”."
+    ],
+    "subtleties": [
+     "In a café “a water” is כּוֹס מַיִם or בַּקְבּוּק מַיִם; “some water” is just מַיִם or קְצָת מַיִם."
+    ]
+   }
+  },
+  {
+   "id": "he:te",
+   "lemma": "תֵּה",
+   "pos": "NOUN",
+   "senses": [
+    "drink.tea"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "te",
+   "forms": {
+    "N;SG;INDF": "תֵּה",
+    "N;SG;DEF": "הַתֵּה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A glass of tea with fresh mint (נַעְנַע) in the afternoon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tea",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.tea"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא שׁוֹתֶה תֵּה בַּבֹּקֶר.",
+      "tr": "Dad drinks tea in the morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתְּ רוֹצָה תֵּה אוֹ קָפֶה?",
+      "tr": "Do you (f.) want tea or coffee?",
+      "register": "neutral",
+      "context": "hosting",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתֵּה חַם מְאֹד.",
+      "tr": "The tea is very hot.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תֵּה עִם נַעְנַע",
+      "tr": "tea with mint"
+     },
+     {
+      "text": "כּוֹס תֵּה",
+      "tr": "a glass (cup) of tea"
+     },
+     {
+      "text": "תֵּה יָרֹק",
+      "tr": "green tea"
+     },
+     {
+      "text": "שַׂקִּית תֵּה",
+      "tr": "a tea bag"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֲלִיטָה",
+      "register": "formal",
+      "nuance": "“an infusion” — herbal tea, the word on packets and menus"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Western European languages, compare French thé and German Tee (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One Chinese word (茶) travelled two ways: by sea as “te” (Hebrew תֵּה, German Tee, English tea), overland as “cha” (Russian чай, Turkish çay, Greek τσάι, Arabic شَاي)."
+    ],
+    "pitfalls": [
+     "One short syllable: te (not “tea”).",
+     "Masculine: תֵּה חַם."
+    ],
+    "subtleties": [
+     "Israelis often drink tea from a glass: כּוֹס תֵּה."
+    ]
+   }
+  },
+  {
+   "id": "he:kafe",
+   "lemma": "קָפֶה",
+   "pos": "NOUN",
+   "senses": [
+    "drink.coffee"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "kafe",
+   "forms": {
+    "N;SG;INDF": "קָפֶה",
+    "N;SG;DEF": "הַקָּפֶה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Israeli café culture: a הָפוּךְ in the morning, black “mud” coffee with cardamom.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "coffee",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.coffee"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתָה קָפֶה כָּל בֹּקֶר.",
+      "tr": "I (f.) drink coffee every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה אוֹהֵב קָפֶה שָׁחוֹר?",
+      "tr": "Do you (m.) like black coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקָּפֶה פֹּה טוֹב מְאֹד.",
+      "tr": "The coffee here is very good.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קָפֶה הָפוּךְ",
+      "tr": "a latte (“upside-down coffee”)"
+     },
+     {
+      "text": "קָפֶה שָׁחוֹר",
+      "tr": "black (Turkish-style) coffee"
+     },
+     {
+      "text": "כּוֹס קָפֶה",
+      "tr": "a cup of coffee"
+     },
+     {
+      "text": "בֵּית קָפֶה",
+      "tr": "a café"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קָפֶה בּוֹץ",
+      "tr": "mud coffee",
+      "kind": "colloquial",
+      "meaning": "ground coffee brewed straight in the cup, Turkish style",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym; kinds of coffee are named with loans (אֶסְפְּרֶסּוֹ) or Hebrew phrases (קָפֶה הָפוּךְ).",
+    "etymology": {
+     "text": "Borrowed from French café, from Italian caffè, from Ottoman Turkish قهوه (kahve), from Arabic قَهْوَة (qahwa, “coffee”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Arabic قَهْوَة (qahwa) via Turkish kahve, Italian caffè and French café — the same chain gave German Kaffee, Greek καφές and Russian кофе.",
+     "קָפֶה הָפוּךְ, “upside-down coffee”, is the Israeli name for a latte."
+    ],
+    "pitfalls": [
+     "Masculine: קָפֶה חַם, הַקָּפֶה הַזֶּה.",
+     "No plural in everyday use: “two coffees” is שְׁתֵּי כּוֹסוֹת קָפֶה."
+    ],
+    "subtleties": [
+     "בֵּית קָפֶה “house of coffee” is a café."
+    ]
+   }
+  },
+  {
+   "id": "he:chalav",
+   "lemma": "חָלָב",
+   "pos": "NOUN",
+   "senses": [
+    "drink.milk"
+   ],
+   "class": "mass",
+   "gender": "MASC",
+   "translit": "chalav",
+   "forms": {
+    "N;SG;INDF": "חָלָב",
+    "N;SG;DEF": "הֶחָלָב"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Milk in coffee and cereal; in the Bible, the promised land “flowing with milk and honey”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "milk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.milk"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים שׁוֹתִים חָלָב.",
+      "tr": "The children drink milk.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתְּ רוֹצָה קָפֶה עִם חָלָב?",
+      "tr": "Do you (f.) want coffee with milk?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הֶחָלָב קַר.",
+      "tr": "The milk is cold.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קָפֶה עִם חָלָב",
+      "tr": "coffee with milk"
+     },
+     {
+      "text": "חֲלֵב סוֹיָה",
+      "tr": "soy milk"
+     },
+     {
+      "text": "קַרְטוֹן חָלָב",
+      "tr": "a carton of milk"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֶרֶץ זָבַת חָלָב וּדְבָשׁ",
+      "tr": "a land flowing with milk and honey",
+      "kind": "quote",
+      "meaning": "a land of plenty",
+      "register": "literary",
+      "source": "Exodus 3:8"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Cognate with Aramaic חַלְבָּא and sharing its root with Arabic حَلِيب (ḥalīb) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From the same word comes חָלָבִי “dairy” — in kosher food a category kept apart from meat.",
+     "Arabic حَلِيب (ḥalīb) “milk” shares the root."
+    ],
+    "pitfalls": [
+     "With the article: הֶחָלָב (he-, not ha-).",
+     "Same letters, another word: חֵלֶב “animal fat” (forbidden in the Torah)."
+    ],
+    "subtleties": [
+     "Before another noun the vowels shorten: חֲלֵב סוֹיָה, חֲלֵב שְׁקֵדִים."
+    ]
+   }
+  },
+  {
+   "id": "he:mits",
+   "lemma": "מִיץ",
+   "pos": "NOUN",
+   "senses": [
+    "drink.juice"
+   ],
+   "gender": "MASC",
+   "translit": "mits",
+   "forms": {
+    "N;SG;INDF": "מִיץ",
+    "N;SG;DEF": "הַמִּיץ",
+    "N;PL;INDF": "מִיצִים",
+    "N;PL;DEF": "הַמִּיצִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Fresh orange juice squeezed at a market stall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "juice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.juice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדוֹת שׁוֹתוֹת מִיץ.",
+      "tr": "The girls drink juice.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רוֹצֶה מִיץ תַּפּוּזִים, בְּבַקָּשָׁה.",
+      "tr": "I (m.) would like orange juice, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּיץ הַזֶּה טִבְעִי.",
+      "tr": "This juice is freshly squeezed.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיץ תַּפּוּזִים",
+      "tr": "orange juice"
+     },
+     {
+      "text": "מִיץ תַּפּוּחִים",
+      "tr": "apple juice"
+     },
+     {
+      "text": "מִיץ סָחוּט",
+      "tr": "freshly squeezed juice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הוֹצִיא לוֹ אֶת הַמִּיץ",
+      "tr": "took the juice out of him",
+      "kind": "idiom",
+      "meaning": "wore him out completely",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תִּירוֹשׁ",
+      "register": "literary",
+      "nuance": "“must, new wine” — Biblical; today also the sweet grape juice used for kiddush"
+     }
+    ],
+    "etymology": {
+     "text": "From Biblical Hebrew מִיץ (miṣ, “squeezing, pressing”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible מִיץ meant “pressing, squeezing”; Modern Hebrew made it the word for juice."
+    ],
+    "pitfalls": [
+     "Masculine: מִיץ קַר; plural מִיצִים.",
+     "The fruit after it is plural: מִיץ תַּפּוּזִים (“juice of oranges”)."
+    ],
+    "subtleties": [
+     "מִיץ טִבְעִי “natural juice” is the freshly squeezed kind; plain מִיץ may come from a carton."
+    ]
+   }
+  },
+  {
+   "id": "he:yayin",
+   "lemma": "יַיִן",
+   "pos": "NOUN",
+   "senses": [
+    "drink.wine"
+   ],
+   "gender": "MASC",
+   "translit": "yayin",
+   "forms": {
+    "N;SG;INDF": "יַיִן",
+    "N;SG;DEF": "הַיַּיִן",
+    "N;PL;INDF": "יֵינוֹת",
+    "N;PL;DEF": "הַיֵּינוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Wine for Kiddush on Friday night and four cups at the Passover Seder.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.wine"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם שׁוֹתִים יַיִן אָדֹם.",
+      "tr": "They drink red wine.",
+      "register": "neutral",
+      "context": "dinner",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ קוֹנִים בַּקְבּוּק יַיִן.",
+      "tr": "We are buying a bottle of wine.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּלֵיל הַסֵּדֶר שׁוֹתִים אַרְבַּע כּוֹסוֹת יַיִן.",
+      "tr": "On Seder night people drink four cups of wine.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יַיִן אָדֹם",
+      "tr": "red wine"
+     },
+     {
+      "text": "יַיִן לָבָן",
+      "tr": "white wine"
+     },
+     {
+      "text": "כּוֹס יַיִן",
+      "tr": "a glass of wine"
+     },
+     {
+      "text": "בַּקְבּוּק יַיִן",
+      "tr": "a bottle of wine"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "נִכְנַס יַיִן, יָצָא סוֹד",
+      "tr": "wine goes in, a secret comes out",
+      "kind": "saying",
+      "meaning": "drink loosens the tongue",
+      "register": "neutral",
+      "source": "Talmud, Eruvin 65a"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use (Biblical poetry also has תִּירוֹשׁ “new wine”).",
+    "etymology": {
+     "text": "From Proto-West Semitic *wayn- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "*wayn- belongs to an old Mediterranean wine word, usually connected with Greek οἶνος and Latin vinum (→ German Wein, English wine).",
+     "The blessing over wine ends with בּוֹרֵא פְּרִי הַגָּפֶן “who creates the fruit of the vine”."
+    ],
+    "pitfalls": [
+     "The plural ends in -וֹת and changes the vowels: יַיִן → יֵינוֹת (kinds of wine).",
+     "Stress on the first syllable: YA-yin."
+    ],
+    "subtleties": [
+     "As a drink it is uncountable: כּוֹס יַיִן; יֵינוֹת are kinds of wine (יֵינוֹת מֵהַגָּלִיל)."
+    ]
+   }
+  },
+  {
+   "id": "he:bira",
+   "lemma": "בִּירָה",
+   "pos": "NOUN",
+   "senses": [
+    "drink.beer"
+   ],
+   "gender": "FEM",
+   "translit": "bira",
+   "forms": {
+    "N;SG;INDF": "בִּירָה",
+    "N;SG;DEF": "הַבִּירָה",
+    "N;PL;INDF": "בִּירוֹת",
+    "N;PL;DEF": "הַבִּירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cold beer on the beach in Tel Aviv.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.beer"
+     },
+     {
+      "id": "s2",
+      "def": "a glass, bottle or can of beer",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא שׁוֹתֶה בִּירָה.",
+      "tr": "He is drinking beer.",
+      "register": "neutral",
+      "context": "bar",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבִּירָה קָרָה?",
+      "tr": "Is the beer cold?",
+      "register": "colloquial",
+      "context": "picnic",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ רוֹצִים שְׁתֵּי בִּירוֹת, בְּבַקָּשָׁה.",
+      "tr": "We would like two beers, please.",
+      "register": "neutral",
+      "context": "bar",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּירָה קָרָה",
+      "tr": "a cold beer"
+     },
+     {
+      "text": "בַּקְבּוּק בִּירָה",
+      "tr": "a bottle of beer"
+     },
+     {
+      "text": "בִּירָה מֵהֶחָבִית",
+      "tr": "draught beer (“from the barrel”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use.",
+    "etymology": {
+     "text": "Borrowed from German Bier. The final ־ָה (-a) could have been added under the influence of Arabic بِيرَة (bīra) or Ottoman Turkish بیرا (bira) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word you know: it is German Bier, with an -a perhaps from Arabic or Turkish bira."
+    ],
+    "pitfalls": [
+     "Homograph: בִּירָה is also “capital city” (bi-RA, as in בִּירַת צָרְפַת “the capital of France”); beer is BI-ra.",
+     "Feminine: בִּירָה קָרָה, שְׁתֵּי בִּירוֹת."
+    ],
+    "subtleties": [
+     "Ordering, “a beer” is simply בִּירָה; “two beers” is שְׁתֵּי בִּירוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:aruchat-boker",
+   "lemma": "אֲרוּחַת בֹּקֶר",
+   "pos": "NOUN",
+   "senses": [
+    "meal.breakfast"
+   ],
+   "gender": "FEM",
+   "translit": "aruchat boker",
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "forms": {
+    "N;SG;INDF": "אֲרוּחַת בֹּקֶר",
+    "N;SG;DEF": "אֲרוּחַת הַבֹּקֶר",
+    "N;PL;INDF": "אֲרוּחוֹת בֹּקֶר",
+    "N;PL;DEF": "אֲרוּחוֹת הַבֹּקֶר"
+   },
+   "plene": {
+    "N;SG;INDF": "ארוחת בוקר",
+    "N;SG;DEF": "ארוחת הבוקר",
+    "N;PL;INDF": "ארוחות בוקר",
+    "N;PL;DEF": "ארוחות הבוקר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The famous Israeli breakfast: eggs, salad, white cheese, olives and bread.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.breakfast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ אוֹכְלִים אֲרוּחַת בֹּקֶר.",
+      "tr": "We are having breakfast.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲרוּחַת הַבֹּקֶר מוּכָנָה!",
+      "tr": "Breakfast is ready!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמָּלוֹן יֵשׁ אֲרוּחַת בֹּקֶר יִשְׂרְאֵלִית.",
+      "tr": "The hotel has an Israeli breakfast.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֶאֱכֹל אֲרוּחַת בֹּקֶר",
+      "tr": "to have breakfast"
+     },
+     {
+      "text": "לְהָכִין אֲרוּחַת בֹּקֶר",
+      "tr": "to make breakfast"
+     },
+     {
+      "text": "אֲרוּחַת בֹּקֶר יִשְׂרְאֵלִית",
+      "tr": "an Israeli breakfast"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פַּת שַׁחֲרִית",
+      "register": "literary",
+      "nuance": "“morning bread” — the old Rabbinic name for breakfast"
+     }
+    ],
+    "etymology": {
+     "text": "Built from אֲרוּחָה “meal” (Wiktionary) in its construct form אֲרוּחַת “meal of”. + בֹּקֶר “morning” — “the meal of the morning”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The “Israeli breakfast” of the kibbutz dining halls — eggs, chopped salad, white cheese, olives, bread — became a hotel classic."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: אֲרוּחַת הַבֹּקֶר “the breakfast” (in speech you also hear the non-standard הָאֲרוּחַת בֹּקֶר).",
+     "Feminine, because of אֲרוּחָה: אֲרוּחַת בֹּקֶר טוֹבָה."
+    ],
+    "subtleties": [
+     "“To have breakfast” is לֶאֱכֹל אֲרוּחַת בֹּקֶר — Hebrew has no verb like German frühstücken."
+    ]
+   }
+  },
+  {
+   "id": "he:aruchat-tsohorayim",
+   "lemma": "אֲרוּחַת צָהֳרַיִם",
+   "pos": "NOUN",
+   "senses": [
+    "meal.lunch"
+   ],
+   "gender": "FEM",
+   "translit": "aruchat tsohorayim",
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "forms": {
+    "N;SG;INDF": "אֲרוּחַת צָהֳרַיִם",
+    "N;SG;DEF": "אֲרוּחַת הַצָּהֳרַיִם",
+    "N;PL;INDF": "אֲרוּחוֹת צָהֳרַיִם",
+    "N;PL;DEF": "אֲרוּחוֹת הַצָּהֳרַיִם"
+   },
+   "plene": {
+    "N;SG;INDF": "ארוחת צהריים",
+    "N;SG;DEF": "ארוחת הצהריים",
+    "N;PL;INDF": "ארוחות צהריים",
+    "N;PL;DEF": "ארוחות הצהריים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The main hot meal of the day in Israel — at work, at school, at grandma’s.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lunch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.lunch"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם אוֹכְלִים אֲרוּחַת צָהֳרַיִם.",
+      "tr": "They are having lunch.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת אֶת אֲרוּחַת הַצָּהֳרַיִם.",
+      "tr": "Mum is cooking the lunch.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יֵשׁ לַאֲרוּחַת צָהֳרַיִם?",
+      "tr": "What is there for lunch?",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַפְסָקַת צָהֳרַיִם",
+      "tr": "lunch break"
+     },
+     {
+      "text": "אֲרוּחַת צָהֳרַיִם עִסְקִית",
+      "tr": "a set business lunch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צָהֳרַיִם",
+      "register": "colloquial",
+      "nuance": "“noon” — alone it also means lunch: מָה יֵשׁ לַצָּהֳרַיִם? “what’s for lunch?”"
+     }
+    ],
+    "etymology": {
+     "text": "Built from אֲרוּחָה “meal” (Wiktionary) in its construct form אֲרוּחַת “meal of”. + צָהֳרַיִם “noon”, cognate with Arabic ظُهْر (ẓuhr) and, in form, the dual of צֹהַר “opening for light”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "צָהֳרַיִם “noon” has the dual ending -ַיִם; Arabic ظُهْر (ẓuhr), also the name of the noon prayer, is the same word."
+    ],
+    "pitfalls": [
+     "Pronounced tso-ho-RA-yim: the first vowel is o (a “short qamats”).",
+     "The article goes on the second word: אֲרוּחַת הַצָּהֳרַיִם."
+    ],
+    "subtleties": [
+     "In Israel lunch is traditionally the main hot meal; supper is often lighter, much like breakfast."
+    ]
+   }
+  },
+  {
+   "id": "he:aruchat-erev",
+   "lemma": "אֲרוּחַת עֶרֶב",
+   "pos": "NOUN",
+   "senses": [
+    "meal.dinner"
+   ],
+   "gender": "FEM",
+   "translit": "aruchat erev",
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "forms": {
+    "N;SG;INDF": "אֲרוּחַת עֶרֶב",
+    "N;SG;DEF": "אֲרוּחַת הָעֶרֶב",
+    "N;PL;INDF": "אֲרוּחוֹת עֶרֶב",
+    "N;PL;DEF": "אֲרוּחוֹת הָעֶרֶב"
+   },
+   "plene": {
+    "N;SG;INDF": "ארוחת ערב",
+    "N;SG;DEF": "ארוחת הערב",
+    "N;PL;INDF": "ארוחות ערב",
+    "N;PL;DEF": "ארוחות הערב"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Friday-night dinner with the family — the big meal of the week.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dinner, supper",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.dinner"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא מְבַשֵּׁל אֲרוּחַת עֶרֶב.",
+      "tr": "Dad is cooking dinner.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲרוּחַת הָעֶרֶב עַל הַשֻּׁלְחָן.",
+      "tr": "Dinner is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם שִׁשִּׁי יֵשׁ אֲרוּחַת עֶרֶב מִשְׁפַּחְתִּית.",
+      "tr": "On Friday there is a family dinner.",
+      "register": "neutral",
+      "context": "Shabbat",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲרוּחַת עֶרֶב מִשְׁפַּחְתִּית",
+      "tr": "a family dinner"
+     },
+     {
+      "text": "לְהַזְמִין לַאֲרוּחַת עֶרֶב",
+      "tr": "to invite to dinner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סְעוּדָה",
+      "register": "formal",
+      "nuance": "a festive or ritual meal at any hour (סְעוּדַת שַׁבָּת, סְעוּדַת חַג)"
+     }
+    ],
+    "etymology": {
+     "text": "Built from אֲרוּחָה “meal” (Wiktionary) in its construct form אֲרוּחַת “meal of”. + עֶרֶב “evening” (Wiktionary: עֶרֶב is cognate with Arabic غَرْب “west”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "עֶרֶב “evening” and Arabic غَرْب (ḡarb) “west” are cognates: evening is when the sun goes west — the root behind “Maghreb”."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: אֲרוּחַת הָעֶרֶב (hā- before ע).",
+     "עֶרֶב is “evening”, the same word as in עֶרֶב טוֹב."
+    ],
+    "subtleties": [
+     "The Friday-night meal opens with the blessing over wine (קִדּוּשׁ) and bread — the biggest family dinner of the week."
+    ]
    }
   }
  ],

@@ -82,11 +82,67 @@
     ],
     [
      "杯 bēi",
-     "‘a cup of’ — a container as a measure",
-     "一杯茶 (S07), but the cup itself: 一个杯子"
+     "‘a cup of, a glass of’ — a container as a measure (S07)",
+     "一杯茶, 一杯水; but the cup itself: 一个杯子"
+    ],
+    [
+     "碗 wǎn",
+     "‘a bowl of’ (S07)",
+     "一碗米饭, 一碗汤"
+    ],
+    [
+     "瓶 píng",
+     "‘a bottle of’ (S07)",
+     "一瓶水, 一瓶啤酒"
+    ],
+    [
+     "块 kuài",
+     "pieces and chunks (S07)",
+     "一块肉, 一块面包, 一块奶酪"
+    ],
+    [
+     "份 fèn",
+     "portions, servings (S07)",
+     "一份沙拉"
+    ],
+    [
+     "口 kǒu",
+     "members of a family (S06)",
+     "我家有四口人"
+    ],
+    [
+     "岁 suì",
+     "years of age (S05)",
+     "我二十岁, 两岁"
+    ],
+    [
+     "名 míng",
+     "people with a role or job — formal, official counts (S10)",
+     "一名医生, 三名工人"
+    ],
+    [
+     "家 jiā",
+     "businesses and institutions: shops, restaurants, banks, hospitals (S11)",
+     "一家超市, 这家饭馆, 两家银行"
+    ],
+    [
+     "所 suǒ",
+     "schools, universities, hospitals (S11)",
+     "一所学校, 这所大学"
+    ],
+    [
+     "条 tiáo",
+     "long, narrow things: streets, roads, fish (S11)",
+     "一条街, 一条鱼"
     ]
    ],
-   "caption": "The measure words of S03 and S04"
+   "caption": "The measure words of S03–S11"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "With numbers (S05)",
+   "text": "Every number takes the measure word too: 两个人, 三本书, 十二把椅子 — and ‘two’ before a measure word is 两, not 二."
   },
   {
    "t": "callout",
@@ -124,6 +180,12 @@
      ]
     }
    ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Vehicles (S13)",
+   "text": "辆 for everything on wheels (一辆车, 一辆公共汽车, 一辆自行车) · 架 for planes (一架飞机) · 列 or 趟 for trains (一列火车) · 条, 只 or 艘 for boats and ships (一条船, 一艘船) · 张 for tickets (两张票)."
   }
  ],
  "procedure": {
@@ -133,6 +195,7 @@
    "Is it a book? → 本. Flat (table, bed, paper)? → 张. Held by a handle (chair, key)? → 把. Long and thin (pen)? → 支.",
    "A door or window? → 扇. A wall? → 面. A room? → 间. A building? → 栋. A lamp? → 盏. A phone? → 部.",
    "Do I mean ‘a cup OF something’? → 杯; the cup itself → 一个杯子.",
+   "A person with a job, in a formal count? → 名. A shop, restaurant, bank? → 家. A school or university? → 所. A street? → 条.",
    "Is it 这些 / 那些, or 这 / 那 alone as the subject? → no measure word."
   ],
   "steps": [
@@ -167,7 +230,20 @@
    "zh:ke.round",
    "zh:ke.plant",
    "zh:tiao",
-   "zh:tou"
+   "zh:tou",
+   "zh:kou",
+   "zh:sui",
+   "zh:wan",
+   "zh:kuai",
+   "zh:ping",
+   "zh:fen",
+   "zh:ming",
+   "zh:jia.clf",
+   "zh:suo",
+   "zh:liang.clf",
+   "zh:jia.frame",
+   "zh:lie",
+   "zh:sou"
   ]
  },
  "needs": {
@@ -263,6 +339,28 @@
    ],
    "answer": "扇",
    "why": "Doors and windows take 扇."
+  },
+  {
+   "q": "一 __ 银行",
+   "options": [
+    "家",
+    "本",
+    "张",
+    "支"
+   ],
+   "answer": "家",
+   "why": "Businesses and institutions such as banks take 家."
+  },
+  {
+   "q": "一 __ 学校",
+   "options": [
+    "所",
+    "张",
+    "把",
+    "盏"
+   ],
+   "answer": "所",
+   "why": "Schools and universities take 所 (一个学校 is also heard)."
   }
  ],
  "seeAlso": [

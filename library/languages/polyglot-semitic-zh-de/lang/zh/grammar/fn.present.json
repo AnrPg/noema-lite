@@ -1,0 +1,205 @@
+{
+ "function": "fn.present",
+ "status": "absent",
+ "summary": "Chinese has no present tense — it has no tenses at all. The verb never changes: 我吃, 你吃, 他吃, 我们吃, 他们吃 — one form for every person and number, where German has ich esse, du isst, er isst. Whether something happens now, as a habit or later is shown by the situation and by time words (今天 ‘today’, 现在 ‘now’ — S14); a finished action or an experience gets an aspect particle, 了 or 过 (S14), not a past tense. So 我喝茶 is ‘I drink tea’, ‘I’m having tea’ or ‘I’ll have tea’ — whichever the moment makes clear.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Person",
+    "Chinese",
+    "German",
+    "Greek"
+   ],
+   "rows": [
+    [
+     "I",
+     "我吃",
+     "ich esse",
+     "τρώω"
+    ],
+    [
+     "you",
+     "你吃 / 您吃",
+     "du isst / Sie essen",
+     "τρως"
+    ],
+    [
+     "he, she",
+     "他吃 / 她吃",
+     "er / sie isst",
+     "τρώει"
+    ],
+    [
+     "we",
+     "我们吃",
+     "wir essen",
+     "τρώμε"
+    ],
+    [
+     "you (pl)",
+     "你们吃",
+     "ihr esst",
+     "τρώτε"
+    ],
+    [
+     "they",
+     "他们吃",
+     "sie essen",
+     "τρώνε"
+    ]
+   ],
+   "caption": "One form for all six persons — compare the German and Greek endings"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No tense, only time",
+   "text": "我喝茶 can be ‘I drink tea’ (a habit), ‘I’m having tea’ (now) or ‘I’ll have tea’ (a plan). When it matters, a time word before the verb says when: 我今天喝茶 ‘I’m having tea today’ — the time words come in S14."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Aspect instead of tense (S14)",
+   "text": "What English does with tenses Chinese does with small particles: 了 for a completed action (我喝了茶 ‘I had the tea’), 过 for an experience (我喝过 ‘I have had it before’), 在 for an action in progress (我在喝茶 ‘I’m drinking tea’). They come in S14 with the days and the times of day."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German and Greek: the verb carries person and tense",
+     "points": [
+      "ich trinke — du trinkst — er trinkt",
+      "ich trank (past), ich werde trinken (future)",
+      "πίνω — πίνεις — πίνει"
+     ]
+    },
+    {
+     "title": "Chinese: the verb is a bare word",
+     "points": [
+      "我喝 — 你喝 — 他喝",
+      "person = the subject word only",
+      "time and aspect = separate words: 今天, 了, 过"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Nothing goes on the verb — and no 是",
+   "text": "There is no ending for ‘he’ or ‘they’ (他喝, 他们喝), and 是 is not a helping verb: ‘I drink tea’ is 我喝茶, never *我是喝茶. 是 links nouns (S01)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who does it? → the subject comes first; the verb is the same for every person.",
+   "Now, a habit or a plan? → the same sentence; add a time word only if it is needed (S14).",
+   "Finished, or ever experienced? → that is aspect (了 / 过), not a tense — S14.",
+   "Did I put 是 before the verb? → take it out: 我喝茶."
+  ],
+  "steps": [
+   "Subject",
+   "verb (always the same form)",
+   "object — and a time word before the verb when needed (S14)"
+  ]
+ },
+ "traps": [
+  "Don’t look for an ending: 他喝 ‘he drinks’, 你们喝 ‘you drink’ — the same 喝.",
+  "*我是喝茶 for ‘I drink tea’ → 我喝茶.",
+  "Don’t look for a future tense either: ‘I’ll drink tea tomorrow’ is just 我明天喝茶 (a time word, S14).",
+  "了 is not a past tense ending to put on every verb: it marks completion or a change (S14)."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "frames": [
+     "fr.eat",
+     "fr.want"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "frames": [
+     "fr.eat",
+     "fr.want"
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘They eat bread.’",
+   "options": [
+    "他们吃面包。",
+    "他们是吃面包。",
+    "他们吃们面包。"
+   ],
+   "answer": "他们吃面包。",
+   "why": "The verb never changes and needs no 是."
+  },
+  {
+   "q": "Which form of 喝 goes with 我们 ‘we’?",
+   "options": [
+    "喝",
+    "喝们",
+    "喝了"
+   ],
+   "answer": "喝",
+   "why": "One form for every person; 了 is aspect (S14), not agreement."
+  },
+  {
+   "q": "我喝茶。 can mean …",
+   "options": [
+    "I drink tea / I’m having tea / I’ll have tea",
+    "only ‘I drank tea’",
+    "only ‘I am drinking tea at this moment’"
+   ],
+   "answer": "I drink tea / I’m having tea / I’ll have tea",
+   "why": "There is no tense: the situation (or a time word) decides."
+  },
+  {
+   "q": "How does Chinese say when something happens?",
+   "options": [
+    "with time words before the verb (S14)",
+    "with endings on the verb",
+    "with a different form of the verb"
+   ],
+   "answer": "with time words before the verb (S14)",
+   "why": "Time is a separate word, not a verb form."
+  },
+  {
+   "q": "‘She likes coffee.’",
+   "options": [
+    "她喜欢咖啡。",
+    "她是喜欢咖啡。",
+    "她们喜欢咖啡。"
+   ],
+   "answer": "她喜欢咖啡。",
+   "why": "Bare verb, no 是 — and 她们 would be ‘they’."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "German conjugates: ich trinke, du trinkst, er trinkt, wir trinken, ihr trinkt, sie trinken — six forms where Chinese has one, 喝."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "Arabic marks person, number and gender with prefixes and suffixes (أَشْرَبُ ‘I drink’, يَشْرَبُ ‘he drinks’, تَشْرَبُ ‘she drinks’); Chinese 喝 never changes."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.present",
+   "note": "The Hebrew present agrees in gender and number, not in person (שׁוֹתֶה, שׁוֹתָה, שׁוֹתִים, שׁוֹתוֹת); Chinese marks neither."
+  }
+ ]
+}

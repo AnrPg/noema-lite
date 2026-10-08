@@ -1,0 +1,5237 @@
+{
+ "sentences": [
+  {
+   "id": "he.f2.001",
+   "frame": "fr.count",
+   "text": "אַחַת, שְׁתַּיִם, שָׁלוֹשׁ, אַרְבַּע, חָמֵשׁ!",
+   "tokens": [
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שְׁתַּיִם",
+     "l": "he:shnayim",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַרְבַּע",
+     "l": "he:arbaa",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "One, two, three, four, five!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.002",
+   "frame": "fr.count",
+   "text": "שֵׁשׁ, שֶׁבַע, שְׁמוֹנֶה, תֵּשַׁע, עֶשֶׂר!",
+   "tokens": [
+    {
+     "t": "שֵׁשׁ",
+     "l": "he:shisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שֶׁבַע",
+     "l": "he:shiva",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שְׁמוֹנֶה",
+     "l": "he:shmona",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תֵּשַׁע",
+     "l": "he:tisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "עֶשֶׂר",
+     "l": "he:asara",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Six, seven, eight, nine, ten!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.003",
+   "frame": "fr.count",
+   "text": "שָׁלוֹשׁ, שְׁתַּיִם, אַחַת, אֶפֶס!",
+   "tokens": [
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שְׁתַּיִם",
+     "l": "he:shnayim",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֶפֶס",
+     "l": "he:efes"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Three, two, one, zero!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.004",
+   "frame": "fr.count",
+   "text": "הָיָה שָׁם יֶלֶד אֶחָד.",
+   "tokens": [
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "יֶלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אֶחָד",
+     "l": "he:echad",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.agreement"
+   ],
+   "gloss": "There was one child there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.005",
+   "frame": "fr.count",
+   "text": "הָיְתָה שָׁם יַלְדָּה אַחַת.",
+   "tokens": [
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "יַלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.agreement"
+   ],
+   "gloss": "There was one girl there.",
+   "variantOf": "he.f2.004",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.006",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה שְׁנֵי סְפָרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are two books.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.007",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה שְׁנֵי הַסְּפָרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "These are the two books.",
+   "variantOf": "he.f2.006",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.008",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה שְׁתֵּי מִטּוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "מִטּוֹת",
+     "l": "he:mita",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are two beds.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.009",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה שְׁתֵּי הַמִּטּוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "הַמִּטּוֹת",
+     "l": "he:mita",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "These are the two beds.",
+   "variantOf": "he.f2.008",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.010",
+   "frame": "fr.count",
+   "text": "שְׁנֵי הַחֲבֵרִים פֹּה.",
+   "tokens": [
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "הַחֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The two friends are here.",
+   "alts": [
+    "שְׁנֵי הַחֲבֵרִים כָּאן."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.011",
+   "frame": "fr.count",
+   "text": "שְׁתֵּי הַחֲבֵרוֹת פֹּה.",
+   "tokens": [
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "הַחֲבֵרוֹת",
+     "l": "he:chavera",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The two (female) friends are here.",
+   "variantOf": "he.f2.010",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "alts": [
+    "שְׁתֵּי הַחֲבֵרוֹת כָּאן."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.012",
+   "frame": "fr.count",
+   "text": "אֲנַחְנוּ שְׁנַיִם.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "שְׁנַיִם",
+     "l": "he:shnayim",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are two of us.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.013",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁלוֹשָׁה יְלָדִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁלוֹשָׁה",
+     "l": "he:shlosha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were three children there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.014",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שָׁלוֹשׁ יְלָדוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "יְלָדוֹת",
+     "l": "he:yalda",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were three girls there.",
+   "variantOf": "he.f2.013",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.015",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה שְׁלוֹשָׁה סְפָרִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "שְׁלוֹשָׁה",
+     "l": "he:shlosha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were three books here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.016",
+   "frame": "fr.count",
+   "text": "שְׁלוֹשֶׁת הַסְּפָרִים הָיוּ פֹּה.",
+   "tokens": [
+    {
+     "t": "שְׁלוֹשֶׁת",
+     "l": "he:shlosha",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The three books were here.",
+   "variantOf": "he.f2.015",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "alts": [
+    "הָיוּ פֹּה שְׁלוֹשֶׁת הַסְּפָרִים."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.017",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה אַרְבָּעָה כִּסְּאוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "אַרְבָּעָה",
+     "l": "he:arbaa",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "כִּסְּאוֹת",
+     "l": "he:kise",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are four chairs.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.018",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה אַרְבַּעַת הַכִּסְּאוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "אַרְבַּעַת",
+     "l": "he:arbaa",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "הַכִּסְּאוֹת",
+     "l": "he:kise",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "These are the four chairs.",
+   "variantOf": "he.f2.017",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.019",
+   "frame": "fr.be.person",
+   "text": "הֵם חֲמִשָּׁה תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "חֲמִשָּׁה",
+     "l": "he:chamisha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "They are five pupils.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.020",
+   "frame": "fr.be.person",
+   "text": "הֵן חָמֵשׁ תַּלְמִידוֹת.",
+   "tokens": [
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "תַּלְמִידוֹת",
+     "l": "he:talmida",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "They (f.) are five pupils.",
+   "variantOf": "he.f2.019",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.021",
+   "frame": "fr.count",
+   "text": "אֲנַחְנוּ חֲמִשָּׁה.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "חֲמִשָּׁה",
+     "l": "he:chamisha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are five of us.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.022",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שֵׁשׁ כּוֹסוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שֵׁשׁ",
+     "l": "he:shisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "כּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were six glasses there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.023",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שִׁשָּׁה כִּסְּאוֹת וְשֵׁשׁ צַלָּחוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שִׁשָּׁה",
+     "l": "he:shisha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "כִּסְּאוֹת",
+     "l": "he:kise",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "וְשֵׁשׁ",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "שֵׁשׁ",
+       "l": "he:shisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "צַלָּחוֹת",
+     "l": "he:tsalachat",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were six chairs and six plates there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.024",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שִׁבְעָה חַלּוֹנוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שִׁבְעָה",
+     "l": "he:shiva",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "חַלּוֹנוֹת",
+     "l": "he:chalon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were seven windows there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.025",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה שְׁמוֹנָה מוֹרִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "שְׁמוֹנָה",
+     "l": "he:shmona",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "מוֹרִים",
+     "l": "he:more",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were eight teachers here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.026",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה שְׁמוֹנֶה מוֹרוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "שְׁמוֹנֶה",
+     "l": "he:shmona",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "מוֹרוֹת",
+     "l": "he:mora",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were eight (female) teachers here.",
+   "variantOf": "he.f2.025",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.027",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם תִּשְׁעָה חֲבֵרִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "תִּשְׁעָה",
+     "l": "he:tisha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were nine friends there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.028",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה עֲשָׂרָה אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "עֲשָׂרָה",
+     "l": "he:asara",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were ten people here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.029",
+   "frame": "fr.count",
+   "text": "עֲשֶׂרֶת הַתַּלְמִידִים פֹּה.",
+   "tokens": [
+    {
+     "t": "עֲשֶׂרֶת",
+     "l": "he:asara",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "הַתַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The ten pupils are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.030",
+   "frame": "fr.be.person",
+   "text": "אֲנַחְנוּ אַחַד עָשָׂר תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אַחַד עָשָׂר",
+     "l": "he:achad-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "We are eleven pupils.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.031",
+   "frame": "fr.be.person",
+   "text": "אֲנַחְנוּ אַחַת עֶשְׂרֵה תַּלְמִידוֹת.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אַחַת עֶשְׂרֵה",
+     "l": "he:achad-asar",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "תַּלְמִידוֹת",
+     "l": "he:talmida",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "We (f.) are eleven pupils.",
+   "variantOf": "he.f2.030",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.032",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה שְׁתֵּים עֶשְׂרֵה כּוֹסוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "שְׁתֵּים עֶשְׂרֵה",
+     "l": "he:shneim-asar",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "כּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are twelve glasses.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.033",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁנֵים עָשָׂר יְלָדִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁנֵים עָשָׂר",
+     "l": "he:shneim-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were twelve children there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.034",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁלוֹשׁ עֶשְׂרֵה יְלָדוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁלוֹשׁ עֶשְׂרֵה",
+     "l": "he:shlosha-asar",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "יְלָדוֹת",
+     "l": "he:yalda",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were thirteen girls there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.035",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה אַרְבָּעָה עָשָׂר סְטוּדֶנְטִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "אַרְבָּעָה עָשָׂר",
+     "l": "he:arbaa-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were fourteen students here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.036",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה חֲמִשָּׁה עָשָׂר סְפָרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "חֲמִשָּׁה עָשָׂר",
+     "l": "he:chamisha-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are fifteen books.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.037",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שֵׁשׁ עֶשְׂרֵה תַּלְמִידוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שֵׁשׁ עֶשְׂרֵה",
+     "l": "he:shisha-asar",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "תַּלְמִידוֹת",
+     "l": "he:talmida",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were sixteen (girl) pupils there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.038",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה שִׁבְעָה עָשָׂר יְלָדִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "שִׁבְעָה עָשָׂר",
+     "l": "he:shiva-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were seventeen children here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.039",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁמוֹנֶה עֶשְׂרֵה מוֹרוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁמוֹנֶה עֶשְׂרֵה",
+     "l": "he:shmona-asar",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "מוֹרוֹת",
+     "l": "he:mora",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were eighteen (female) teachers there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.040",
+   "frame": "fr.count",
+   "text": "אֲנַחְנוּ תִּשְׁעָה עָשָׂר אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "תִּשְׁעָה עָשָׂר",
+     "l": "he:tisha-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "We are nineteen people.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.041",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה עֶשְׂרִים סְפָרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "עֶשְׂרִים",
+     "l": "he:esrim"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are twenty books.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.042",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁלוֹשִׁים תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁלוֹשִׁים",
+     "l": "he:shloshim"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were thirty pupils there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.043",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה אַרְבָּעִים אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "אַרְבָּעִים",
+     "l": "he:arbaim"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were forty people here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.044",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם חֲמִשִּׁים כִּסְּאוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "חֲמִשִּׁים",
+     "l": "he:chamishim"
+    },
+    {
+     "t": "כִּסְּאוֹת",
+     "l": "he:kise",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were fifty chairs there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.045",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שִׁשִּׁים צַלָּחוֹת.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שִׁשִּׁים",
+     "l": "he:shishim"
+    },
+    {
+     "t": "צַלָּחוֹת",
+     "l": "he:tsalachat",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were sixty plates there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.046",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה שִׁבְעִים סְטוּדֶנְטִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "שִׁבְעִים",
+     "l": "he:shivim"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were seventy students here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.047",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם שְׁמוֹנִים יְלָדִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "שְׁמוֹנִים",
+     "l": "he:shmonim"
+    },
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were eighty children there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.048",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם תִּשְׁעִים מוֹרִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "תִּשְׁעִים",
+     "l": "he:tishim"
+    },
+    {
+     "t": "מוֹרִים",
+     "l": "he:more",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were ninety teachers there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.049",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם מֵאָה אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "מֵאָה",
+     "l": "he:mea",
+     "f": "NUM;SG"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were a hundred people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.050",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם מָאתַיִם אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "מָאתַיִם",
+     "l": "he:mea",
+     "f": "NUM;DU"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were two hundred people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.051",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם מֵאוֹת אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "מֵאוֹת",
+     "l": "he:mea",
+     "f": "NUM;PL"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were hundreds of people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.052",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם אֶלֶף אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "אֶלֶף",
+     "l": "he:elef",
+     "f": "NUM;SG"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were a thousand people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.053",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם אַלְפַּיִם אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "אַלְפַּיִם",
+     "l": "he:elef",
+     "f": "NUM;DU"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were two thousand people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.054",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם הַרְבֵּה אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "הַרְבֵּה",
+     "l": "he:harbe"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were a lot of people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.055",
+   "frame": "fr.count",
+   "text": "הָיוּ שָׁם מְעַט אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": "מְעַט",
+     "l": "he:meat"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were few people there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.056",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה כַּמָּה סְטוּדֶנְטִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "כַּמָּה",
+     "l": "he:kama"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were a few students here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.057",
+   "frame": "fr.count",
+   "text": "הָיָה פֹּה קְצָת נְיָר.",
+   "tokens": [
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "קְצָת",
+     "l": "he:ktsat"
+    },
+    {
+     "t": "נְיָר",
+     "l": "he:neyar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.agreement"
+   ],
+   "gloss": "There was a little paper here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.058",
+   "frame": "fr.count",
+   "text": "הָיוּ פֹּה הַרְבֵּה סְפָרִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "הַרְבֵּה",
+     "l": "he:harbe"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were a lot of books here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.059",
+   "frame": "fr.thing.here",
+   "text": "כָּל הַתַּלְמִידִים פֹּה.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַתַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "All the pupils are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.060",
+   "frame": "fr.thing.here",
+   "text": "כָּל הַסְּפָרִים הָיוּ שָׁם.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "All the books were there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.061",
+   "frame": "fr.be.where",
+   "text": "כֻּלָּם פֹּה.",
+   "tokens": [
+    {
+     "t": "כֻּלָּם",
+     "l": "he:kulam",
+     "f": "PRON;3;PL;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Everyone is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.062",
+   "frame": "fr.be.person",
+   "text": "כֻּלָּנוּ תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "כֻּלָּנוּ",
+     "l": "he:kulam",
+     "f": "PRON;1;PL"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "We are all pupils.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.063",
+   "frame": "fr.thing.here",
+   "text": "הַמַּפְתֵּחַ שָׁם.",
+   "tokens": [
+    {
+     "t": "הַמַּפְתֵּחַ",
+     "l": "he:mafteach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The key is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.064",
+   "frame": "fr.thing.here",
+   "text": "הַמַּפְתְּחוֹת שָׁם.",
+   "tokens": [
+    {
+     "t": "הַמַּפְתְּחוֹת",
+     "l": "he:mafteach",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The keys are there.",
+   "variantOf": "he.f2.063",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.065",
+   "frame": "fr.this.is",
+   "text": "זֹאת כּוֹס.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "כּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a glass.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.066",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה כּוֹסוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "כּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.agreement"
+   ],
+   "gloss": "These are glasses.",
+   "variantOf": "he.f2.065",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.067",
+   "frame": "fr.this.is",
+   "text": "זֶה חַלּוֹן.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "חַלּוֹן",
+     "l": "he:chalon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a window.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.068",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה חַלּוֹנוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "חַלּוֹנוֹת",
+     "l": "he:chalon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.agreement"
+   ],
+   "gloss": "These are windows.",
+   "variantOf": "he.f2.067",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.069",
+   "frame": "fr.thing.here",
+   "text": "הַבַּיִת הָיָה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "The house was there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.070",
+   "frame": "fr.thing.here",
+   "text": "הַבָּתִּים הָיוּ שָׁם.",
+   "tokens": [
+    {
+     "t": "הַבָּתִּים",
+     "l": "he:bayit",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "The houses were there.",
+   "variantOf": "he.f2.069",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.071",
+   "frame": "fr.be.person",
+   "text": "הַיַּלְדָּה הַהִיא תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהִיא",
+     "l": "he:hahu",
+     "f": "DET;SG;FEM"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "That girl is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.072",
+   "frame": "fr.be.person",
+   "text": "הַיְּלָדוֹת הָהֵן תַּלְמִידוֹת.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדוֹת",
+     "l": "he:yalda",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָהֵן",
+     "l": "he:hahu",
+     "f": "DET;PL;FEM"
+    },
+    {
+     "t": "תַּלְמִידוֹת",
+     "l": "he:talmida",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "Those girls are pupils.",
+   "variantOf": "he.f2.071",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.073",
+   "frame": "fr.thing.here",
+   "text": "הַדֶּלֶת הַזֹּאת הָיְתָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַדֶּלֶת",
+     "l": "he:delet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "This door was here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.074",
+   "frame": "fr.thing.here",
+   "text": "הַדְּלָתוֹת הָאֵלֶּה הָיוּ פֹּה.",
+   "tokens": [
+    {
+     "t": "הַדְּלָתוֹת",
+     "l": "he:delet",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָאֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "These doors were here.",
+   "variantOf": "he.f2.073",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.075",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי אָח וְאָחוֹת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "אָח",
+     "l": "he:ach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְאָחוֹת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אָחוֹת",
+       "l": "he:achot",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a brother and a sister.",
+   "alts": [
+    "לִי יֵשׁ אָח וְאָחוֹת."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.076",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי שְׁנֵי אַחִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "אַחִים",
+     "l": "he:ach",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have two brothers.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.077",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהּ שָׁלוֹשׁ אֲחָיוֹת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "אֲחָיוֹת",
+     "l": "he:achot",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "She has three sisters.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.078",
+   "frame": "fr.have",
+   "text": "יֵשׁ לְךָ אַחִים?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "אַחִים",
+     "l": "he:ach",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you have brothers and sisters? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.079",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָךְ אַחִים?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָךְ",
+     "l": "he:le",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": "אַחִים",
+     "l": "he:ach",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you have brothers and sisters? (to a woman)",
+   "variantOf": "he.f2.078",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.080",
+   "frame": "fr.have",
+   "text": "יֵשׁ לְךָ טֶלֶפוֹן?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "טֶלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "Do you have a phone? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.081",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָךְ טֶלֶפוֹן?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָךְ",
+     "l": "he:le",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": "טֶלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "Do you have a phone? (to a woman)",
+   "variantOf": "he.f2.080",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.082",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ תִּינוֹק.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "תִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have a baby.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.083",
+   "frame": "fr.have",
+   "text": "יִהְיֶה לָנוּ תִּינוֹק.",
+   "tokens": [
+    {
+     "t": "יִהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "תִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.agreement"
+   ],
+   "gloss": "We are going to have a baby.",
+   "variantOf": "he.f2.082",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.084",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהֶם תִּינֹקֶת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "תִּינֹקֶת",
+     "l": "he:tinoket",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "They have a baby girl.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.085",
+   "frame": "fr.have",
+   "text": "תִּהְיֶה לָהֶם תִּינֹקֶת.",
+   "tokens": [
+    {
+     "t": "תִּהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;FEM"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "תִּינֹקֶת",
+     "l": "he:tinoket",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.agreement"
+   ],
+   "gloss": "They are going to have a baby girl.",
+   "variantOf": "he.f2.084",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.086",
+   "frame": "fr.have",
+   "text": "יֵשׁ לוֹ דִּירָה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לוֹ",
+     "l": "he:le",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "דִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "He has a flat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.087",
+   "frame": "fr.have",
+   "text": "הָיְתָה לוֹ דִּירָה.",
+   "tokens": [
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "לוֹ",
+     "l": "he:le",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "דִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.agreement"
+   ],
+   "gloss": "He had a flat.",
+   "variantOf": "he.f2.086",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.088",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי מַפְתֵּחַ.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מַפְתֵּחַ",
+     "l": "he:mafteach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a key.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.089",
+   "frame": "fr.have",
+   "text": "הָיָה לִי מַפְתֵּחַ.",
+   "tokens": [
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מַפְתֵּחַ",
+     "l": "he:mafteach",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.agreement"
+   ],
+   "gloss": "I had a key.",
+   "variantOf": "he.f2.088",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.090",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהּ שְׁנֵי טֶלֶפוֹנִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "טֶלֶפוֹנִים",
+     "l": "he:telefon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "She has two phones.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.091",
+   "frame": "fr.have",
+   "text": "הָיוּ לָהּ שְׁנֵי טֶלֶפוֹנִים.",
+   "tokens": [
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "טֶלֶפוֹנִים",
+     "l": "he:telefon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.agreement"
+   ],
+   "gloss": "She had two phones.",
+   "variantOf": "he.f2.090",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.092",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהֶם שְׁתֵּי בָּנוֹת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "בָּנוֹת",
+     "l": "he:bat",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "They have two daughters.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.093",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהֶם נֶכֶד וְנֶכְדָּה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "נֶכֶד",
+     "l": "he:neched",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְנֶכְדָּה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "נֶכְדָּה",
+       "l": "he:nechda",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "They have a grandson and a granddaughter.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.094",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהּ שְׁנֵי אַחְיָנִים וְאַחְיָנִית אַחַת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "אַחְיָנִים",
+     "l": "he:achyan",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "וְאַחְיָנִית",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אַחְיָנִית",
+       "l": "he:achyanit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "She has two nephews and one niece.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.095",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי בַּת דּוֹד אַחַת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "בַּת דּוֹד",
+     "l": "he:bat-dod",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "I have one (female) cousin.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.096",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ כַּמָּה בְּנֵי דּוֹדִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "כַּמָּה",
+     "l": "he:kama"
+    },
+    {
+     "t": "בְּנֵי דּוֹדִים",
+     "l": "he:ben-dod",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "We have a few cousins.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.097",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָכֶם הַרְבֵּה קְרוֹבֵי מִשְׁפָּחָה?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָכֶם",
+     "l": "he:le",
+     "f": "ADP;2;PL;MASC"
+    },
+    {
+     "t": "הַרְבֵּה",
+     "l": "he:harbe"
+    },
+    {
+     "t": "קְרוֹבֵי מִשְׁפָּחָה",
+     "l": "he:krov-mishpacha",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you (pl.) have many relatives?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.098",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהֶן שְׁלוֹשָׁה דּוֹדִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהֶן",
+     "l": "he:le",
+     "f": "ADP;3;PL;FEM"
+    },
+    {
+     "t": "שְׁלוֹשָׁה",
+     "l": "he:shlosha",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "דּוֹדִים",
+     "l": "he:dod",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "They (f.) have three uncles.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.099",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָהּ סָב וְסָבָה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "סָב",
+     "l": "he:sav",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְסָבָה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "סָבָה",
+       "l": "he:sava",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "She has a grandfather and a grandmother.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.100",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי קְצָת נְיָר.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "קְצָת",
+     "l": "he:ktsat"
+    },
+    {
+     "t": "נְיָר",
+     "l": "he:neyar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a little paper.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.101",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָכֶן תִּיק?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָכֶן",
+     "l": "he:le",
+     "f": "ADP;2;PL;FEM"
+    },
+    {
+     "t": "תִּיק",
+     "l": "he:tik",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "Do you (f. pl.) have a bag?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.102",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ שְׁתֵּי דּוֹדוֹת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "שְׁתֵּי",
+     "l": "he:shnayim",
+     "f": "NUM;FEM;CONST"
+    },
+    {
+     "t": "דּוֹדוֹת",
+     "l": "he:doda",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "We have two aunts.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.103",
+   "frame": "fr.poss",
+   "text": "זֹאת הַמִּשְׁפָּחָה שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַמִּשְׁפָּחָה",
+     "l": "he:mishpacha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is my family.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.104",
+   "frame": "fr.poss",
+   "text": "אֵלֶּה הַהוֹרִים שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "הַהוֹרִים",
+     "l": "he:horim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "These are my parents.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.105",
+   "frame": "fr.poss",
+   "text": "זֹאת אִמָּא שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my mum.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.106",
+   "frame": "fr.poss",
+   "text": "זֶה אַבָּא שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my dad.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.107",
+   "frame": "fr.be.person",
+   "text": "אִמָּא שֶׁלִּי מוֹרָה.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My mother is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.108",
+   "frame": "fr.be.person",
+   "text": "אִמִּי מוֹרָה.",
+   "tokens": [
+    {
+     "t": "אִמִּי",
+     "l": "he:em",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My mother is a teacher.",
+   "variantOf": "he.f2.107",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.109",
+   "frame": "fr.be.person",
+   "text": "אַבָּא שֶׁלִּי מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My father is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.110",
+   "frame": "fr.be.person",
+   "text": "אָבִי מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "אָבִי",
+     "l": "he:av",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My father is a teacher.",
+   "variantOf": "he.f2.109",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.111",
+   "frame": "fr.be.person",
+   "text": "הַבֵּן שֶׁלִּי סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "הַבֵּן",
+     "l": "he:ben",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My son is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.112",
+   "frame": "fr.be.person",
+   "text": "בְּנִי סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "בְּנִי",
+     "l": "he:ben",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My son is a student.",
+   "variantOf": "he.f2.111",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.113",
+   "frame": "fr.be.person",
+   "text": "הַבַּת שֶׁלָּנוּ תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "הַבַּת",
+     "l": "he:bat",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Our daughter is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.114",
+   "frame": "fr.be.person",
+   "text": "בִּתֵּנוּ תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "בִּתֵּנוּ",
+     "l": "he:bat",
+     "f": "N;POSS;1;PL"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Our daughter is a pupil.",
+   "variantOf": "he.f2.113",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.115",
+   "frame": "fr.poss",
+   "text": "זֶה הָאָח שֶׁלְּךָ?",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָאָח",
+     "l": "he:ach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלְּךָ",
+     "l": "he:shelcha"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Is this your brother? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.116",
+   "frame": "fr.poss",
+   "text": "זֶה הָאָח שֶׁלָּךְ?",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָאָח",
+     "l": "he:ach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּךְ",
+     "l": "he:shelach"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Is this your brother? (to a woman)",
+   "variantOf": "he.f2.115",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.117",
+   "frame": "fr.poss",
+   "text": "זֹאת הָאָחוֹת שֶׁלּוֹ.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הָאָחוֹת",
+     "l": "he:achot",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is his sister.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.118",
+   "frame": "fr.poss",
+   "text": "זֹאת הָאָחוֹת שֶׁלָּהּ.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הָאָחוֹת",
+     "l": "he:achot",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is her sister.",
+   "variantOf": "he.f2.117",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.119",
+   "frame": "fr.be.person",
+   "text": "הוּא קְרוֹב מִשְׁפָּחָה שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "קְרוֹב מִשְׁפָּחָה",
+     "l": "he:krov-mishpacha",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "He is a relative of mine.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.120",
+   "frame": "fr.be.person",
+   "text": "הִיא קְרוֹבַת מִשְׁפָּחָה שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "קְרוֹבַת מִשְׁפָּחָה",
+     "l": "he:krovat-mishpacha",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "She is a relative of mine.",
+   "variantOf": "he.f2.119",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.121",
+   "frame": "fr.be.person",
+   "text": "הוּא בֶּן דּוֹד שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "בֶּן דּוֹד",
+     "l": "he:ben-dod",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "He is my cousin.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.122",
+   "frame": "fr.be.person",
+   "text": "הִיא בַּת דּוֹד שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "בַּת דּוֹד",
+     "l": "he:bat-dod",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "She is my cousin.",
+   "variantOf": "he.f2.121",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.123",
+   "frame": "fr.thing.here",
+   "text": "הַבֵּן שֶׁלָּהֶם פֹּה.",
+   "tokens": [
+    {
+     "t": "הַבֵּן",
+     "l": "he:ben",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Their son is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.124",
+   "frame": "fr.thing.here",
+   "text": "הַבָּנִים שֶׁלָּהֶם פֹּה.",
+   "tokens": [
+    {
+     "t": "הַבָּנִים",
+     "l": "he:ben",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "Their sons are here.",
+   "variantOf": "he.f2.123",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.125",
+   "frame": "fr.thing.here",
+   "text": "הַחֲבֵרָה שֶׁלִּי פֹּה.",
+   "tokens": [
+    {
+     "t": "הַחֲבֵרָה",
+     "l": "he:chavera",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My (girl)friend is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.126",
+   "frame": "fr.thing.here",
+   "text": "הַחֲבֵרוֹת שֶׁלִּי פֹּה.",
+   "tokens": [
+    {
+     "t": "הַחֲבֵרוֹת",
+     "l": "he:chavera",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "My (female) friends are here.",
+   "variantOf": "he.f2.125",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.127",
+   "frame": "fr.be.person",
+   "text": "הָאָח שֶׁלָּהּ סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "הָאָח",
+     "l": "he:ach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Her brother is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.128",
+   "frame": "fr.be.person",
+   "text": "הָאַחִים שֶׁלָּהּ סְטוּדֶנְטִים.",
+   "tokens": [
+    {
+     "t": "הָאַחִים",
+     "l": "he:ach",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "Her brothers are students.",
+   "variantOf": "he.f2.127",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.129",
+   "frame": "fr.be.person",
+   "text": "הַדּוֹד שֶׁלִּי מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "הַדּוֹד",
+     "l": "he:dod",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My uncle is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.130",
+   "frame": "fr.be.person",
+   "text": "הַדּוֹדָה שֶׁלִּי מוֹרָה.",
+   "tokens": [
+    {
+     "t": "הַדּוֹדָה",
+     "l": "he:doda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My aunt is a teacher.",
+   "variantOf": "he.f2.129",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.131",
+   "frame": "fr.be.person",
+   "text": "אָחִי סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "אָחִי",
+     "l": "he:ach",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My brother is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.132",
+   "frame": "fr.be.person",
+   "text": "אֲחוֹתִי סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "אֲחוֹתִי",
+     "l": "he:achot",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My sister is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.133",
+   "frame": "fr.poss",
+   "text": "זֹאת אִשְׁתִּי.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "אִשְׁתִּי",
+     "l": "he:isha",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my wife.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.134",
+   "frame": "fr.poss",
+   "text": "זֶה בַּעֲלִי.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "בַּעֲלִי",
+     "l": "he:baal",
+     "f": "N;POSS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my husband.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.135",
+   "frame": "fr.be.person",
+   "text": "הוּא הַבַּעַל שֶׁלָּהּ.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַבַּעַל",
+     "l": "he:baal",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "He is her husband.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.136",
+   "frame": "fr.be.person",
+   "text": "הִיא הָאִשָּׁה שֶׁלּוֹ.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הָאִשָּׁה",
+     "l": "he:isha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "She is his wife.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.137",
+   "frame": "fr.poss",
+   "text": "זֶה סַבָּא שֶׁלָּהֶם.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "סַבָּא",
+     "l": "he:saba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is their grandpa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.138",
+   "frame": "fr.poss",
+   "text": "זֹאת סָבְתָא שֶׁלָּהֶן.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלָּהֶן",
+     "l": "he:shelahen"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is their (f.) grandma.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.139",
+   "frame": "fr.thing.here",
+   "text": "הַסָּבִים שֶׁלִּי פֹּה.",
+   "tokens": [
+    {
+     "t": "הַסָּבִים",
+     "l": "he:sabim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "My grandparents are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.140",
+   "frame": "fr.be.person",
+   "text": "הַנֶּכֶד שֶׁלָּהּ תִּינוֹק.",
+   "tokens": [
+    {
+     "t": "הַנֶּכֶד",
+     "l": "he:neched",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "תִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Her grandson is a baby.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.141",
+   "frame": "fr.be.person",
+   "text": "הַנֶּכְדָּה שֶׁלּוֹ סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "הַנֶּכְדָּה",
+     "l": "he:nechda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "His granddaughter is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.142",
+   "frame": "fr.poss",
+   "text": "זֹאת הָאַחְיָנִית שֶׁלִּי.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הָאַחְיָנִית",
+     "l": "he:achyanit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is my niece.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.143",
+   "frame": "fr.be.person",
+   "text": "הָאַחְיָן שֶׁלָּנוּ תַּלְמִיד.",
+   "tokens": [
+    {
+     "t": "הָאַחְיָן",
+     "l": "he:achyan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": "תַּלְמִיד",
+     "l": "he:talmid",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Our nephew is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.144",
+   "frame": "fr.poss",
+   "text": "אֵלֶּה הַיְּלָדִים שֶׁלָּכֶם?",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלָּכֶם",
+     "l": "he:shelachem"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "Are these your children? (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.145",
+   "frame": "fr.poss",
+   "text": "אֵלֶּה הַבָּנוֹת שֶׁלָּכֶן?",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "הַבָּנוֹת",
+     "l": "he:bat",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלָּכֶן",
+     "l": "he:shelachen"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "Are these your daughters? (to several women)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.146",
+   "frame": "fr.poss",
+   "text": "זֶה הַתִּיק שֶׁל דָּנָה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַתִּיק",
+     "l": "he:tik",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "דָּנָה",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is Dana’s bag.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.147",
+   "frame": "fr.thing.here",
+   "text": "הַטֶּלֶפוֹן שֶׁלָּהּ שָׁם.",
+   "tokens": [
+    {
+     "t": "הַטֶּלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "Her phone is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.148",
+   "frame": "fr.poss",
+   "text": "זֶה הַחֶדֶר שֶׁלָּנוּ.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַחֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is our room.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.149",
+   "frame": "fr.poss",
+   "text": "זֹאת הַדִּירָה שֶׁלָּהֶם.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.definite"
+   ],
+   "gloss": "This is their flat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.150",
+   "frame": "fr.thing.here",
+   "text": "הַסְּפָרִים שֶׁלְּךָ פֹּה.",
+   "tokens": [
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלְּךָ",
+     "l": "he:shelcha"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "Your books are here. (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.151",
+   "frame": "fr.adj.pred",
+   "text": "הָאֵם וְהַתִּינוֹק בְּסֵדֶר.",
+   "tokens": [
+    {
+     "t": "הָאֵם",
+     "l": "he:em",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְהַתִּינוֹק",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַתִּינוֹק",
+       "l": "he:tinok",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Mother and baby are fine.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.152",
+   "frame": "fr.thing.here",
+   "text": "הַסָּב וְהַנֶּכֶד הָיוּ שָׁם.",
+   "tokens": [
+    {
+     "t": "הַסָּב",
+     "l": "he:sav",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְהַנֶּכֶד",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַנֶּכֶד",
+       "l": "he:neched",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "The grandfather and the grandson were there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.153",
+   "frame": "fr.thing.here",
+   "text": "כָּל הַמִּשְׁפָּחָה פֹּה.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַמִּשְׁפָּחָה",
+     "l": "he:mishpacha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The whole family is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f2.154",
+   "frame": "fr.be.person",
+   "text": "כֻּלָּנוּ מִשְׁפָּחָה.",
+   "tokens": [
+    {
+     "t": "כֻּלָּנוּ",
+     "l": "he:kulam",
+     "f": "PRON;1;PL"
+    },
+    {
+     "t": "מִשְׁפָּחָה",
+     "l": "he:mishpacha",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We are all family.",
+   "level": "A1"
+  }
+ ]
+}

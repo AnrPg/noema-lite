@@ -1,0 +1,473 @@
+{
+ "function": "fn.numerals",
+ "status": "realized",
+ "summary": "German numbers are built like a kit. 0–12 are single words (null, eins, zwei … elf, zwölf); 13–19 are unit + zehn (dreizehn, vierzehn); the tens end in -zig (zwanzig, vierzig … neunzig – but dreißig with ß); then hundert and tausend. Between the tens German says the unit first, joined with und, all in one word: 21 = einundzwanzig (“one-and-twenty”), 45 = fünfundvierzig. Watch three short cuts: sechzehn and sechzig drop the s of sechs, siebzehn and siebzig drop the -en of sieben. Counting, you say eins; before a noun the number one is the article ein / eine / ein with its endings – in everyday German the only number that changes its form (rare old forms like zweier, dreier aside). After zwei and above the noun is plural: zwei Stühle, zehn Kinder. Amounts without a number: viel / viele (much / many), wenig / wenige (little / few), ein bisschen / ein wenig (a little), alle (all), einige / manche (some): the forms without -e go with a singular uncountable noun (viel Papier), the forms with -e with a plural (viele Bücher). Age is said with sein: Ich bin achtzehn.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "0–6",
+    "",
+    "7–12",
+    ""
+   ],
+   "rows": [
+    [
+     "0",
+     "null",
+     "7",
+     "sieben"
+    ],
+    [
+     "1",
+     "eins",
+     "8",
+     "acht"
+    ],
+    [
+     "2",
+     "zwei (spoken also zwo)",
+     "9",
+     "neun"
+    ],
+    [
+     "3",
+     "drei",
+     "10",
+     "zehn"
+    ],
+    [
+     "4",
+     "vier",
+     "11",
+     "elf"
+    ],
+    [
+     "5",
+     "fünf",
+     "12",
+     "zwölf"
+    ],
+    [
+     "6",
+     "sechs",
+     "",
+     ""
+    ]
+   ],
+   "caption": "The first thirteen numbers – single words to learn by heart"
+  },
+  {
+   "t": "table",
+   "head": [
+    "teens (unit + zehn)",
+    "tens (-zig)"
+   ],
+   "rows": [
+    [
+     "13 dreizehn",
+     "20 zwanzig"
+    ],
+    [
+     "14 vierzehn",
+     "30 dreißig (!)"
+    ],
+    [
+     "15 fünfzehn",
+     "40 vierzig"
+    ],
+    [
+     "16 sechzehn (!)",
+     "50 fünfzig"
+    ],
+    [
+     "17 siebzehn (!)",
+     "60 sechzig (!)"
+    ],
+    [
+     "18 achtzehn",
+     "70 siebzig (!)"
+    ],
+    [
+     "19 neunzehn",
+     "80 achtzig"
+    ],
+    [
+     "",
+     "90 neunzig"
+    ],
+    [
+     "",
+     "100 hundert · 1000 tausend"
+    ]
+   ],
+   "caption": "(!) = an irregular spelling: sech-, sieb-, dreißig"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "ein (1)",
+    "und",
+    "zwanzig (20)",
+    "= einundzwanzig (21)"
+   ],
+   "caption": "From 21 on: the unit first, then und, then the ten – one word"
+  },
+  {
+   "t": "table",
+   "head": [
+    "number",
+    "German",
+    "how it is built"
+   ],
+   "rows": [
+    [
+     "21",
+     "einundzwanzig",
+     "ein (no s!) + und + zwanzig"
+    ],
+    [
+     "26",
+     "sechsundzwanzig",
+     "sechs keeps its s here"
+    ],
+    [
+     "27",
+     "siebenundzwanzig",
+     "sieben keeps -en here"
+    ],
+    [
+     "45",
+     "fünfundvierzig",
+     "five-and-forty"
+    ],
+    [
+     "99",
+     "neunundneunzig",
+     "nine-and-ninety"
+    ],
+    [
+     "101",
+     "hunderteins",
+     "hundred + eins (with s at the end)"
+    ],
+    [
+     "120",
+     "hundertzwanzig",
+     "hundred + twenty"
+    ],
+    [
+     "365",
+     "dreihundertfünfundsechzig",
+     "three-hundred + five-and-sixty"
+    ],
+    [
+     "2026",
+     "zweitausendsechsundzwanzig",
+     "two-thousand + six-and-twenty"
+    ]
+   ],
+   "caption": "Bigger numbers – written as one word up to a million"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "eins or ein?",
+   "text": "eins is the number standing alone: Eins, zwei, drei! · Eins und eins ist zwei. Before a noun the number “one” is the article: ein Stuhl, eine Tasse, ein Buch (and einen Stuhl in the accusative). In compounds: einundzwanzig (no s), but hunderteins (with s)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "zwo",
+   "text": "zwei and drei sound alike on a bad line, so on the phone, on the radio and in the army Germans say zwo. It is the old feminine form of “two” and is perfectly correct in speech."
+  },
+  {
+   "t": "table",
+   "head": [
+    "meaning",
+    "with a singular uncountable noun",
+    "with a plural noun",
+    "dative plural"
+   ],
+   "rows": [
+    [
+     "much / many",
+     "viel Papier",
+     "viele Bücher",
+     "vielen"
+    ],
+    [
+     "little / few",
+     "wenig Papier",
+     "wenige Stühle",
+     "wenigen"
+    ],
+    [
+     "a little",
+     "ein bisschen Papier · ein wenig Papier",
+     "–",
+     "–"
+    ],
+    [
+     "all",
+     "–",
+     "alle Kinder",
+     "allen"
+    ],
+    [
+     "some",
+     "(etwas Papier)",
+     "einige Studenten · manche Bücher",
+     "einigen · manchen"
+    ]
+   ],
+   "caption": "Amount words: no -e with an uncountable singular, -e with a plural (genitive plural -er: vieler, aller)"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Age: sein, not haben",
+   "text": "Ich bin achtzehn (Jahre alt). – I am eighteen. Never *Ich habe achtzehn: German, like Greek, English and Turkish, uses “to be” for age."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Points and commas",
+   "text": "German writes 1.000 for a thousand and 1,5 for one and a half – the opposite of English. 2,50 € = zwei Euro fünfzig."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "English, Greek, Russian, Turkish",
+     "points": [
+      "say the tens first: twenty-one, είκοσι ένα, двадцать один, yirmi bir",
+      "German turns it round: einundzwanzig – like Arabic, and like old English “four-and-twenty”"
+     ]
+    },
+    {
+     "title": "The noun after a number",
+     "points": [
+      "German: plural from zwei on (zwei Stühle) – as in Greek and English",
+      "Turkish keeps the singular (iki sandalye); Russian changes the case (два стула, пять стульев)"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I counting or naming the number alone? → eins. Is it before a noun? → ein / eine / ein with endings.",
+   "Is it 13–19? → unit + zehn; careful with sechzehn and siebzehn.",
+   "Is it a round ten? → -zig (dreißig with ß; sechzig, siebzig shortened).",
+   "Is it between two tens? → unit + und + ten, one word: dreiundvierzig. Does the unit keep its full form? Yes: sechsundzwanzig, siebenundzwanzig.",
+   "Is the number 2 or more? → the noun goes in the plural: zwei Stühle.",
+   "Is the noun uncountable (Papier, Zeit) or plural (Bücher)? → viel / wenig or viele / wenige.",
+   "Am I saying someone’s age? → sein: Ich bin zwanzig."
+  ],
+  "steps": [
+   "Find the unit and the ten.",
+   "Say the unit first, then und, then the ten.",
+   "Write it as one word.",
+   "Put the noun in the plural after 2 or more."
+  ]
+ },
+ "traps": [
+  "sechzehn, sechzig (no s) – but sechsundzwanzig (with s).",
+  "siebzehn, siebzig (no -en) – but siebenundzwanzig.",
+  "dreißig is the only ten with -ßig.",
+  "einundzwanzig, not *einsundzwanzig; but hunderteins.",
+  "The noun after a number above one is plural: zwei Bücher, not *zwei Buch (Turkish speakers beware: iki kitap).",
+  "viel / wenig with an uncountable singular, viele / wenige with a plural: viel Papier, viele Stühle.",
+  "Age with sein: Ich bin fünfzehn, not *Ich habe fünfzehn."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:null",
+   "de:eins",
+   "de:zwei",
+   "de:drei",
+   "de:vier",
+   "de:fünf",
+   "de:sechs",
+   "de:sieben",
+   "de:acht",
+   "de:neun",
+   "de:zehn",
+   "de:elf",
+   "de:zwölf",
+   "de:dreizehn",
+   "de:vierzehn",
+   "de:fünfzehn",
+   "de:sechzehn",
+   "de:siebzehn",
+   "de:achtzehn",
+   "de:neunzehn",
+   "de:zwanzig",
+   "de:dreißig",
+   "de:vierzig",
+   "de:fünfzig",
+   "de:sechzig",
+   "de:siebzig",
+   "de:achtzig",
+   "de:neunzig",
+   "de:hundert",
+   "de:tausend",
+   "de:viel",
+   "de:wenig",
+   "de:ein_bisschen",
+   "de:ein_wenig",
+   "de:alle",
+   "de:einige",
+   "de:manche"
+  ]
+ },
+ "needs": {
+  "NUM": 10
+ },
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "21 in German?",
+   "options": [
+    "einundzwanzig",
+    "zwanzigeins",
+    "einsundzwanzig"
+   ],
+   "answer": "einundzwanzig",
+   "why": "The unit first, then und, then the ten – and ein without s."
+  },
+  {
+   "q": "16 in German?",
+   "options": [
+    "sechzehn",
+    "sechszehn",
+    "sechzig"
+   ],
+   "answer": "sechzehn",
+   "why": "sechzehn drops the s of sechs; sechzig is 60."
+  },
+  {
+   "q": "70 in German?",
+   "options": [
+    "siebzig",
+    "siebenzig",
+    "siebzehn"
+   ],
+   "answer": "siebzig",
+   "why": "siebzig drops the -en of sieben; siebzehn is 17."
+  },
+  {
+   "q": "30 in German?",
+   "options": [
+    "dreißig",
+    "dreizig",
+    "dreizehn"
+   ],
+   "answer": "dreißig",
+   "why": "The only ten with -ßig; dreizehn is 13."
+  },
+  {
+   "q": "45 in German?",
+   "options": [
+    "fünfundvierzig",
+    "vierundfünfzig",
+    "vierzigfünf"
+   ],
+   "answer": "fünfundvierzig",
+   "why": "five-and-forty: the unit first."
+  },
+  {
+   "q": "Hier ist ___ Stuhl. (one chair)",
+   "options": [
+    "ein",
+    "eins",
+    "einen"
+   ],
+   "answer": "ein",
+   "why": "Before a noun “one” is the article ein (masculine nominative); eins only stands alone."
+  },
+  {
+   "q": "Which is right?",
+   "options": [
+    "zwei Stühle",
+    "zwei Stuhl",
+    "zwei Stuhls"
+   ],
+   "answer": "zwei Stühle",
+   "why": "After zwei the noun is plural: der Stuhl – die Stühle."
+  },
+  {
+   "q": "Hier ist ___ Papier. (a lot of)",
+   "options": [
+    "viel",
+    "viele",
+    "vielen"
+   ],
+   "answer": "viel",
+   "why": "Papier is an uncountable singular here: viel, no ending."
+  },
+  {
+   "q": "Hier sind ___ Leute. (many)",
+   "options": [
+    "viele",
+    "viel",
+    "vieler"
+   ],
+   "answer": "viele",
+   "why": "Leute is plural: viele."
+  },
+  {
+   "q": "Why do Germans often say zwo on the phone?",
+   "options": [
+    "so that it is not confused with drei",
+    "because it is the plural of zwei",
+    "because it is more polite"
+   ],
+   "answer": "so that it is not confused with drei",
+   "why": "zwei and drei sound alike; zwo is the old feminine form of two."
+  },
+  {
+   "q": "“I am eighteen.”",
+   "options": [
+    "Ich bin achtzehn.",
+    "Ich habe achtzehn.",
+    "Ich habe achtzehn Jahre."
+   ],
+   "answer": "Ich bin achtzehn.",
+   "why": "Age is said with sein in German."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "Arabic also says the units first (wāḥid wa-ʿišrūn, “one and twenty”), but 3–10 take the opposite gender of the noun, and after 11–99 the noun is singular."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.numerals",
+   "note": "Hebrew numbers come in a masculine and a feminine set and say the tens first (עֶשְׂרִים וְאֶחָד, twenty and one)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.numerals",
+   "note": "Chinese numbers are perfectly regular (十一, 二十一) but need a measure word before the noun (三本书); before a measure word 两 replaces 二."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.plural.noun",
+   "note": "After zwei and above the German noun is plural – learn each noun with its plural."
+  }
+ ]
+}

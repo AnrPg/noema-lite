@@ -5,7 +5,8 @@
    "lemma": "بَيْت",
    "pos": "NOUN",
    "senses": [
-    "home.house"
+    "home.house",
+    "place.home"
    ],
    "gender": "MASC",
    "root": "ب ي ت",
@@ -22,11 +23,35 @@
     "N;GEN;SG;INDF": "بَيْتٍ",
     "N;GEN;PL;INDF": "بُيُوتٍ",
     "N;GEN;SG;DEF": "الْبَيْتِ",
-    "N;GEN;PL;DEF": "الْبُيُوتِ"
+    "N;GEN;PL;DEF": "الْبُيُوتِ",
+    "N;NOM;DU;INDF": "بَيْتَانِ",
+    "N;ACC;DU;INDF": "بَيْتَيْنِ",
+    "N;GEN;DU;INDF": "بَيْتَيْنِ",
+    "N;NOM;DU;DEF": "الْبَيْتَانِ",
+    "N;ACC;DU;DEF": "الْبَيْتَيْنِ",
+    "N;GEN;DU;DEF": "الْبَيْتَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "بَيْتِي",
+    "N;NOM;SG;POSS;PSS2SM": "بَيْتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "بَيْتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "بَيْتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "بَيْتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "بَيْتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "بَيْتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "بَيْتُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -39,11 +64,19 @@
     "senses": [
      {
       "id": "s1",
-      "def": "house; home",
+      "def": "house",
       "register": [
        "neutral"
       ],
       "concept": "home.house"
+     },
+     {
+      "id": "s4",
+      "def": "home — فِي الْبَيْتِ (at home), إِلَى الْبَيْتِ (home, homewards)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
      },
      {
       "id": "s2",
@@ -69,11 +102,25 @@
       "sense": "s1"
      },
      {
+      "text": "بَيْتُنَا كَبِيرٌ.",
+      "tr": "Our house is big.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
       "text": "أَنَا فِي الْبَيْتِ الْآنَ.",
       "tr": "I am at home now.",
       "register": "neutral",
       "context": "everyday",
-      "sense": "s1"
+      "sense": "s4"
+     },
+     {
+      "text": "أَعُودُ إِلَى الْبَيْتِ مَسَاءً.",
+      "tr": "I go back home in the evening.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s4"
      },
      {
       "text": "هٰذَا بَيْتٌ مِنْ قَصِيدَةٍ لِلْمُتَنَبِّي.",
@@ -171,7 +218,13 @@
     "N;GEN;SG;INDF": "شَقَّةٍ",
     "N;GEN;PL;INDF": "شُقَقٍ",
     "N;GEN;SG;DEF": "الشَّقَّةِ",
-    "N;GEN;PL;DEF": "الشُّقَقِ"
+    "N;GEN;PL;DEF": "الشُّقَقِ",
+    "N;NOM;DU;INDF": "شَقَّتَانِ",
+    "N;ACC;DU;INDF": "شَقَّتَيْنِ",
+    "N;GEN;DU;INDF": "شَقَّتَيْنِ",
+    "N;NOM;DU;DEF": "الشَّقَّتَانِ",
+    "N;ACC;DU;DEF": "الشَّقَّتَيْنِ",
+    "N;GEN;DU;DEF": "الشَّقَّتَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -289,11 +342,35 @@
     "N;GEN;SG;INDF": "غُرْفَةٍ",
     "N;GEN;PL;INDF": "غُرَفٍ",
     "N;GEN;SG;DEF": "الْغُرْفَةِ",
-    "N;GEN;PL;DEF": "الْغُرَفِ"
+    "N;GEN;PL;DEF": "الْغُرَفِ",
+    "N;NOM;DU;INDF": "غُرْفَتَانِ",
+    "N;ACC;DU;INDF": "غُرْفَتَيْنِ",
+    "N;GEN;DU;INDF": "غُرْفَتَيْنِ",
+    "N;NOM;DU;DEF": "الْغُرْفَتَانِ",
+    "N;ACC;DU;DEF": "الْغُرْفَتَيْنِ",
+    "N;GEN;DU;DEF": "الْغُرْفَتَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "غُرْفَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "غُرْفَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "غُرْفَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "غُرْفَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "غُرْفَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "غُرْفَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "غُرْفَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "غُرْفَتُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -409,7 +486,13 @@
     "N;GEN;SG;INDF": "بَابٍ",
     "N;GEN;PL;INDF": "أَبْوَابٍ",
     "N;GEN;SG;DEF": "الْبَابِ",
-    "N;GEN;PL;DEF": "الْأَبْوَابِ"
+    "N;GEN;PL;DEF": "الْأَبْوَابِ",
+    "N;NOM;DU;INDF": "بَابَانِ",
+    "N;ACC;DU;INDF": "بَابَيْنِ",
+    "N;GEN;DU;INDF": "بَابَيْنِ",
+    "N;NOM;DU;DEF": "الْبَابَانِ",
+    "N;ACC;DU;DEF": "الْبَابَيْنِ",
+    "N;GEN;DU;DEF": "الْبَابَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -544,7 +627,13 @@
     "N;GEN;SG;INDF": "نَافِذَةٍ",
     "N;GEN;PL;INDF": "نَوَافِذَ",
     "N;GEN;SG;DEF": "النَّافِذَةِ",
-    "N;GEN;PL;DEF": "النَّوَافِذِ"
+    "N;GEN;PL;DEF": "النَّوَافِذِ",
+    "N;NOM;DU;INDF": "نَافِذَتَانِ",
+    "N;ACC;DU;INDF": "نَافِذَتَيْنِ",
+    "N;GEN;DU;INDF": "نَافِذَتَيْنِ",
+    "N;NOM;DU;DEF": "النَّافِذَتَانِ",
+    "N;ACC;DU;DEF": "النَّافِذَتَيْنِ",
+    "N;GEN;DU;DEF": "النَّافِذَتَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -658,7 +747,13 @@
     "N;GEN;SG;INDF": "جِدَارٍ",
     "N;GEN;PL;INDF": "جُدْرَانٍ",
     "N;GEN;SG;DEF": "الْجِدَارِ",
-    "N;GEN;PL;DEF": "الْجُدْرَانِ"
+    "N;GEN;PL;DEF": "الْجُدْرَانِ",
+    "N;NOM;DU;INDF": "جِدَارَانِ",
+    "N;ACC;DU;INDF": "جِدَارَيْنِ",
+    "N;GEN;DU;INDF": "جِدَارَيْنِ",
+    "N;NOM;DU;DEF": "الْجِدَارَانِ",
+    "N;ACC;DU;DEF": "الْجِدَارَيْنِ",
+    "N;GEN;DU;DEF": "الْجِدَارَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -777,7 +872,13 @@
     "N;GEN;SG;INDF": "طَاوِلَةٍ",
     "N;GEN;PL;INDF": "طَاوِلَاتٍ",
     "N;GEN;SG;DEF": "الطَّاوِلَةِ",
-    "N;GEN;PL;DEF": "الطَّاوِلَاتِ"
+    "N;GEN;PL;DEF": "الطَّاوِلَاتِ",
+    "N;NOM;DU;INDF": "طَاوِلَتَانِ",
+    "N;ACC;DU;INDF": "طَاوِلَتَيْنِ",
+    "N;GEN;DU;INDF": "طَاوِلَتَيْنِ",
+    "N;NOM;DU;DEF": "الطَّاوِلَتَانِ",
+    "N;ACC;DU;DEF": "الطَّاوِلَتَيْنِ",
+    "N;GEN;DU;DEF": "الطَّاوِلَتَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -902,7 +1003,13 @@
     "N;GEN;SG;INDF": "كُرْسِيٍّ",
     "N;GEN;PL;INDF": "كَرَاسِيَّ",
     "N;GEN;SG;DEF": "الْكُرْسِيِّ",
-    "N;GEN;PL;DEF": "الْكَرَاسِيِّ"
+    "N;GEN;PL;DEF": "الْكَرَاسِيِّ",
+    "N;NOM;DU;INDF": "كُرْسِيَّانِ",
+    "N;ACC;DU;INDF": "كُرْسِيَّيْنِ",
+    "N;GEN;DU;INDF": "كُرْسِيَّيْنِ",
+    "N;NOM;DU;DEF": "الْكُرْسِيَّانِ",
+    "N;ACC;DU;DEF": "الْكُرْسِيَّيْنِ",
+    "N;GEN;DU;DEF": "الْكُرْسِيَّيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1030,7 +1137,13 @@
     "N;GEN;SG;INDF": "سَرِيرٍ",
     "N;GEN;PL;INDF": "أَسِرَّةٍ",
     "N;GEN;SG;DEF": "السَّرِيرِ",
-    "N;GEN;PL;DEF": "الْأَسِرَّةِ"
+    "N;GEN;PL;DEF": "الْأَسِرَّةِ",
+    "N;NOM;DU;INDF": "سَرِيرَانِ",
+    "N;ACC;DU;INDF": "سَرِيرَيْنِ",
+    "N;GEN;DU;INDF": "سَرِيرَيْنِ",
+    "N;NOM;DU;DEF": "السَّرِيرَانِ",
+    "N;ACC;DU;DEF": "السَّرِيرَيْنِ",
+    "N;GEN;DU;DEF": "السَّرِيرَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1150,7 +1263,13 @@
     "N;GEN;SG;INDF": "خِزَانَةٍ",
     "N;GEN;PL;INDF": "خَزَائِنَ",
     "N;GEN;SG;DEF": "الْخِزَانَةِ",
-    "N;GEN;PL;DEF": "الْخَزَائِنِ"
+    "N;GEN;PL;DEF": "الْخَزَائِنِ",
+    "N;NOM;DU;INDF": "خِزَانَتَانِ",
+    "N;ACC;DU;INDF": "خِزَانَتَيْنِ",
+    "N;GEN;DU;INDF": "خِزَانَتَيْنِ",
+    "N;NOM;DU;DEF": "الْخِزَانَتَانِ",
+    "N;ACC;DU;DEF": "الْخِزَانَتَيْنِ",
+    "N;GEN;DU;DEF": "الْخِزَانَتَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1264,7 +1383,13 @@
     "N;GEN;SG;INDF": "مِصْبَاحٍ",
     "N;GEN;PL;INDF": "مَصَابِيحَ",
     "N;GEN;SG;DEF": "الْمِصْبَاحِ",
-    "N;GEN;PL;DEF": "الْمَصَابِيحِ"
+    "N;GEN;PL;DEF": "الْمَصَابِيحِ",
+    "N;NOM;DU;INDF": "مِصْبَاحَانِ",
+    "N;ACC;DU;INDF": "مِصْبَاحَيْنِ",
+    "N;GEN;DU;INDF": "مِصْبَاحَيْنِ",
+    "N;NOM;DU;DEF": "الْمِصْبَاحَانِ",
+    "N;ACC;DU;DEF": "الْمِصْبَاحَيْنِ",
+    "N;GEN;DU;DEF": "الْمِصْبَاحَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1397,11 +1522,35 @@
     "N;GEN;SG;INDF": "كِتَابٍ",
     "N;GEN;PL;INDF": "كُتُبٍ",
     "N;GEN;SG;DEF": "الْكِتَابِ",
-    "N;GEN;PL;DEF": "الْكُتُبِ"
+    "N;GEN;PL;DEF": "الْكُتُبِ",
+    "N;NOM;DU;INDF": "كِتَابَانِ",
+    "N;ACC;DU;INDF": "كِتَابَيْنِ",
+    "N;GEN;DU;INDF": "كِتَابَيْنِ",
+    "N;NOM;DU;DEF": "الْكِتَابَانِ",
+    "N;ACC;DU;DEF": "الْكِتَابَيْنِ",
+    "N;GEN;DU;DEF": "الْكِتَابَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "كِتَابِي",
+    "N;NOM;SG;POSS;PSS2SM": "كِتَابُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "كِتَابُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "كِتَابُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "كِتَابُهَا",
+    "N;NOM;SG;POSS;PSS1P": "كِتَابُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "كِتَابُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "كِتَابُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -1540,11 +1689,35 @@
     "N;GEN;SG;INDF": "قَلَمٍ",
     "N;GEN;PL;INDF": "أَقْلَامٍ",
     "N;GEN;SG;DEF": "الْقَلَمِ",
-    "N;GEN;PL;DEF": "الْأَقْلَامِ"
+    "N;GEN;PL;DEF": "الْأَقْلَامِ",
+    "N;NOM;DU;INDF": "قَلَمَانِ",
+    "N;ACC;DU;INDF": "قَلَمَيْنِ",
+    "N;GEN;DU;INDF": "قَلَمَيْنِ",
+    "N;NOM;DU;DEF": "الْقَلَمَانِ",
+    "N;ACC;DU;DEF": "الْقَلَمَيْنِ",
+    "N;GEN;DU;DEF": "الْقَلَمَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "قَلَمِي",
+    "N;NOM;SG;POSS;PSS2SM": "قَلَمُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "قَلَمُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "قَلَمُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "قَلَمُهَا",
+    "N;NOM;SG;POSS;PSS1P": "قَلَمُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "قَلَمُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "قَلَمُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -1793,13 +1966,35 @@
     "N;GEN;SG;INDF": "هَاتِفٍ",
     "N;GEN;PL;INDF": "هَوَاتِفَ",
     "N;GEN;SG;DEF": "الْهَاتِفِ",
-    "N;GEN;PL;DEF": "الْهَوَاتِفِ"
+    "N;GEN;PL;DEF": "الْهَوَاتِفِ",
+    "N;NOM;DU;INDF": "هَاتِفَانِ",
+    "N;ACC;DU;INDF": "هَاتِفَيْنِ",
+    "N;GEN;DU;INDF": "هَاتِفَيْنِ",
+    "N;NOM;DU;DEF": "الْهَاتِفَانِ",
+    "N;ACC;DU;DEF": "الْهَاتِفَيْنِ",
+    "N;GEN;DU;DEF": "الْهَاتِفَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "هَاتِفِي",
+    "N;NOM;SG;POSS;PSS2SM": "هَاتِفُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "هَاتِفُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "هَاتِفُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "هَاتِفُهَا",
+    "N;NOM;SG;POSS;PSS1P": "هَاتِفُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "هَاتِفُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "هَاتِفُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
     "override": {
-     "meaning": "Wiktionary glosses هَاتِف as “telephone”; the course gloss says “phone”."
+     "meaning": "Wiktionary glosses هَاتِف as “telephone”; the course gloss says “phone”.",
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
     }
    },
    "profile": {
@@ -1922,11 +2117,35 @@
     "N;GEN;SG;INDF": "مِفْتَاحٍ",
     "N;GEN;PL;INDF": "مَفَاتِيحَ",
     "N;GEN;SG;DEF": "الْمِفْتَاحِ",
-    "N;GEN;PL;DEF": "الْمَفَاتِيحِ"
+    "N;GEN;PL;DEF": "الْمَفَاتِيحِ",
+    "N;NOM;DU;INDF": "مِفْتَاحَانِ",
+    "N;ACC;DU;INDF": "مِفْتَاحَيْنِ",
+    "N;GEN;DU;INDF": "مِفْتَاحَيْنِ",
+    "N;NOM;DU;DEF": "الْمِفْتَاحَانِ",
+    "N;ACC;DU;DEF": "الْمِفْتَاحَيْنِ",
+    "N;GEN;DU;DEF": "الْمِفْتَاحَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "مِفْتَاحِي",
+    "N;NOM;SG;POSS;PSS2SM": "مِفْتَاحُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "مِفْتَاحُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "مِفْتَاحُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "مِفْتَاحُهَا",
+    "N;NOM;SG;POSS;PSS1P": "مِفْتَاحُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "مِفْتَاحُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "مِفْتَاحُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -2054,11 +2273,35 @@
     "N;GEN;SG;INDF": "حَقِيبَةٍ",
     "N;GEN;PL;INDF": "حَقَائِبَ",
     "N;GEN;SG;DEF": "الْحَقِيبَةِ",
-    "N;GEN;PL;DEF": "الْحَقَائِبِ"
+    "N;GEN;PL;DEF": "الْحَقَائِبِ",
+    "N;NOM;DU;INDF": "حَقِيبَتَانِ",
+    "N;ACC;DU;INDF": "حَقِيبَتَيْنِ",
+    "N;GEN;DU;INDF": "حَقِيبَتَيْنِ",
+    "N;NOM;DU;DEF": "الْحَقِيبَتَانِ",
+    "N;ACC;DU;DEF": "الْحَقِيبَتَيْنِ",
+    "N;GEN;DU;DEF": "الْحَقِيبَتَيْنِ",
+    "N;NOM;SG;POSS;PSS1S": "حَقِيبَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "حَقِيبَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "حَقِيبَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "حَقِيبَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "حَقِيبَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "حَقِيبَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "حَقِيبَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "حَقِيبَتُهُمْ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -2172,7 +2415,13 @@
     "N;GEN;SG;INDF": "فِنْجَانٍ",
     "N;GEN;PL;INDF": "فَنَاجِينَ",
     "N;GEN;SG;DEF": "الْفِنْجَانِ",
-    "N;GEN;PL;DEF": "الْفَنَاجِينِ"
+    "N;GEN;PL;DEF": "الْفَنَاجِينِ",
+    "N;NOM;DU;INDF": "فِنْجَانَانِ",
+    "N;ACC;DU;INDF": "فِنْجَانَيْنِ",
+    "N;GEN;DU;INDF": "فِنْجَانَيْنِ",
+    "N;NOM;DU;DEF": "الْفِنْجَانَانِ",
+    "N;ACC;DU;DEF": "الْفِنْجَانَيْنِ",
+    "N;GEN;DU;DEF": "الْفِنْجَانَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2292,7 +2541,13 @@
     "N;GEN;SG;INDF": "كَأْسٍ",
     "N;GEN;PL;INDF": "كُؤُوسٍ",
     "N;GEN;SG;DEF": "الْكَأْسِ",
-    "N;GEN;PL;DEF": "الْكُؤُوسِ"
+    "N;GEN;PL;DEF": "الْكُؤُوسِ",
+    "N;NOM;DU;INDF": "كَأْسَانِ",
+    "N;ACC;DU;INDF": "كَأْسَيْنِ",
+    "N;GEN;DU;INDF": "كَأْسَيْنِ",
+    "N;NOM;DU;DEF": "الْكَأْسَانِ",
+    "N;ACC;DU;DEF": "الْكَأْسَيْنِ",
+    "N;GEN;DU;DEF": "الْكَأْسَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2413,7 +2668,13 @@
     "N;GEN;SG;INDF": "صَحْنٍ",
     "N;GEN;PL;INDF": "صُحُونٍ",
     "N;GEN;SG;DEF": "الصَّحْنِ",
-    "N;GEN;PL;DEF": "الصُّحُونِ"
+    "N;GEN;PL;DEF": "الصُّحُونِ",
+    "N;NOM;DU;INDF": "صَحْنَانِ",
+    "N;ACC;DU;INDF": "صَحْنَيْنِ",
+    "N;GEN;DU;INDF": "صَحْنَيْنِ",
+    "N;NOM;DU;DEF": "الصَّحْنَانِ",
+    "N;ACC;DU;DEF": "الصَّحْنَيْنِ",
+    "N;GEN;DU;DEF": "الصَّحْنَيْنِ"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

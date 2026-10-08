@@ -78,7 +78,7 @@ def entries_for(lang, lx, offline):
             for sn in e.get('senses', []):
                 for g in sn.get('glosses', []):
                     m = re.match(r'(?:defective|plene|alternative) (?:spelling|form) of (\S+)', g)
-                    if m: more += fetch(lang, m.group(1), offline) or []
+                    if m: more += fetch(lang, m.group(1).rstrip('.,;:)'), offline) or []
         es = es + more
     if lang == 'zh':   # the simplified page only redirects; read the traditional one too
         extra = []

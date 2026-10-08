@@ -1,0 +1,3860 @@
+{
+ "lexemes": [
+  {
+   "id": "de:gehen",
+   "lemma": "gehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.go"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "gehen",
+    "V;PRS;1;SG": "gehe",
+    "V;PRS;2;SG": "gehst",
+    "V;PRS;3;SG": "geht",
+    "V;PRS;1;PL": "gehen",
+    "V;PRS;2;PL": "geht",
+    "V;PRS;3;PL": "gehen",
+    "V;PST;3;SG": "ging",
+    "V;PTCP;PST": "gegangen",
+    "V;IMP;2;SG": "geh",
+    "V;IMP;2;PL": "geht",
+    "V;IMP;FORM": "gehen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "gehe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One foot in front of the other – to work, to school, home; and the everyday “going” of plans and things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go (on foot), to walk somewhere",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.go"
+     },
+     {
+      "id": "s2",
+      "def": "to leave, to go (Ich gehe jetzt.)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to work, to be possible (Das geht nicht.)",
+      "register": [
+       "informal"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to be (impersonal: Wie geht es dir? – How are you?)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe jeden Morgen zur Arbeit.",
+      "tr": "I walk to work every morning.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Gehen wir heute Abend ins Kino?",
+      "tr": "Shall we go to the cinema tonight?",
+      "register": "informal",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist spät, ich gehe jetzt.",
+      "tr": "It’s late, I’m leaving now.",
+      "register": "informal",
+      "context": "leaving a party",
+      "sense": "s2"
+     },
+     {
+      "text": "Am Montag geht es leider nicht.",
+      "tr": "Monday doesn’t work, unfortunately.",
+      "register": "informal",
+      "context": "making plans",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Fuß gehen",
+      "tr": "to walk, to go on foot"
+     },
+     {
+      "text": "nach Hause gehen",
+      "tr": "to go home"
+     },
+     {
+      "text": "ins Bett gehen",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "einkaufen gehen",
+      "tr": "to go shopping"
+     },
+     {
+      "text": "spazieren gehen",
+      "tr": "to go for a walk"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wie geht’s?",
+      "tr": "How goes it?",
+      "kind": "fixed expression",
+      "meaning": "How are you? How is it going?",
+      "register": "informal"
+     },
+     {
+      "text": "Das geht nicht.",
+      "tr": "That doesn’t go.",
+      "kind": "fixed expression",
+      "meaning": "That’s not possible / that doesn’t work.",
+      "register": "informal"
+     },
+     {
+      "text": "Es geht um …",
+      "tr": "It goes about …",
+      "kind": "fixed expression",
+      "meaning": "It’s about … / the point is …",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "weggehen",
+      "tr": "to go away; to go out (in the evening)"
+     },
+     {
+      "text": "hineingehen",
+      "tr": "to go in"
+     },
+     {
+      "text": "ausgehen",
+      "tr": "to go out (for the evening)"
+     },
+     {
+      "text": "mitgehen",
+      "tr": "to go along"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "laufen",
+      "register": "colloquial",
+      "nuance": "to walk, to go on foot – everyday speech: Ich laufe zur Arbeit; also “to run”"
+     },
+     {
+      "word": "spazieren gehen",
+      "register": "neutral",
+      "nuance": "to go for a walk, to stroll – for pleasure, with no goal"
+     },
+     {
+      "word": "sich begeben",
+      "register": "formal",
+      "nuance": "to proceed to (a place) – officialese: Bitte begeben Sie sich zum Ausgang."
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "kommen",
+      "note": "to come (towards the speaker)"
+     },
+     {
+      "word": "bleiben",
+      "note": "to stay"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German gān, gēn, from Old High German gān, gēn, from Proto-West Germanic *gān, from Proto-Germanic *gāną. Cognate with Dutch gaan, English go, Swedish and Danish gå, Yiddish גיין (geyn).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "gehen and English go are one Germanic verb (Dutch gaan, Swedish gå).",
+     "Greek πηγαίνω and Turkish gitmek do not care how you travel; German splits it into gehen (on foot) and fahren (by vehicle) – exactly like Russian идти / ехать."
+    ],
+    "pitfalls": [
+     "gehen is going on foot; by car, bus, train or ship you fahren: Ich fahre mit dem Bus. “Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
+     "Irregular in the past: ging – gegangen, and the perfect takes sein: Ich bin nach Hause gegangen.",
+     "Imperative: Geh! (du) – Geht! (ihr) – Gehen Sie! (polite)."
+    ],
+    "subtleties": [
+     "Without a destination gehen often means “to leave”: Ich gehe jetzt. = I’m off now.",
+     "Wie geht es dir? – literally “how does it go for you?”: gehen is impersonal here, with the dative dir / Ihnen."
+    ]
+   }
+  },
+  {
+   "id": "de:kommen",
+   "lemma": "kommen",
+   "pos": "VERB",
+   "senses": [
+    "verb.come"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "kommen",
+    "V;PRS;1;SG": "komme",
+    "V;PRS;2;SG": "kommst",
+    "V;PRS;3;SG": "kommt",
+    "V;PRS;1;PL": "kommen",
+    "V;PRS;2;PL": "kommt",
+    "V;PRS;3;PL": "kommen",
+    "V;PST;3;SG": "kam",
+    "V;PTCP;PST": "gekommen",
+    "V;IMP;2;SG": "komm",
+    "V;IMP;2;PL": "kommt",
+    "V;IMP;FORM": "kommen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "komme"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Movement towards you – a friend at the door, the bus round the corner, where someone is from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come (towards the speaker or the place talked about)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.come"
+     },
+     {
+      "id": "s2",
+      "def": "to come from, to be from (origin: Ich komme aus Griechenland)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to get to (a place): Wie komme ich zum Bahnhof?",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to be on (TV, radio): Was kommt heute im Fernsehen?",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Kommst du heute Abend?",
+      "tr": "Are you coming tonight?",
+      "register": "informal",
+      "context": "making plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bus kommt in fünf Minuten.",
+      "tr": "The bus is coming in five minutes.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich komme aus Griechenland.",
+      "tr": "I’m from Greece.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "Entschuldigung, wie komme ich zum Bahnhof?",
+      "tr": "Excuse me, how do I get to the station?",
+      "register": "formal",
+      "context": "asking the way",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "aus … kommen",
+      "tr": "to come from …"
+     },
+     {
+      "text": "nach Hause kommen",
+      "tr": "to come home"
+     },
+     {
+      "text": "zu spät kommen",
+      "tr": "to be late"
+     },
+     {
+      "text": "mit dem Bus kommen",
+      "tr": "to come by bus"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Komm schon!",
+      "tr": "Come already!",
+      "kind": "colloquial",
+      "meaning": "Come on! (urging someone)",
+      "register": "colloquial"
+     },
+     {
+      "text": "Wer zuerst kommt, mahlt zuerst.",
+      "tr": "Who comes first grinds first (at the mill).",
+      "kind": "proverb",
+      "meaning": "First come, first served.",
+      "register": "neutral"
+     },
+     {
+      "text": "Kommt Zeit, kommt Rat.",
+      "tr": "Comes time, comes advice.",
+      "kind": "proverb",
+      "meaning": "Give it time and a solution will turn up.",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "ankommen",
+      "tr": "to arrive"
+     },
+     {
+      "text": "zurückkommen",
+      "tr": "to come back"
+     },
+     {
+      "text": "hereinkommen",
+      "tr": "to come in"
+     },
+     {
+      "text": "mitkommen",
+      "tr": "to come along"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "erscheinen",
+      "register": "formal",
+      "nuance": "to appear, to turn up – meetings, court, official texts"
+     },
+     {
+      "word": "eintreffen",
+      "register": "formal",
+      "nuance": "to arrive – news, guests, trains in announcements"
+     },
+     {
+      "word": "vorbeikommen",
+      "register": "informal",
+      "nuance": "to drop by: Komm doch mal vorbei!"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "gehen",
+      "note": "to go (away from the speaker)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German quëmen, komen, kumen, from Old High German quëman, from Proto-West Germanic *kweman, from Proto-Germanic *kwemaną, from Proto-Indo-European *gʷem-. Cognate with Dutch komen, English come, Danish komme.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "kommen goes back to the same Indo-European root *gʷem- as Greek βαίνω (to go, step) and Latin venire – the gʷ became k in Germanic, b in Greek and v in Latin."
+    ],
+    "pitfalls": [
+     "kommen is movement towards the speaker (or the place in the story): Kommst du zu mir? – but Ich komme! (“I’m coming!”) also answers someone who calls you, as in English.",
+     "Irregular past kam – gekommen; perfect with sein: Er ist gekommen.",
+     "Origin with aus: Ich komme aus Athen (not *von Athen)."
+    ],
+    "subtleties": [
+     "Woher kommst du? asks for your origin; the colloquial split form is Wo kommst du her?",
+     "Imperative Komm! / Kommt! / Kommen Sie! – softened with doch or mal: Komm doch mit!"
+    ]
+   }
+  },
+  {
+   "id": "de:laufen",
+   "lemma": "laufen",
+   "pos": "VERB",
+   "senses": [
+    "verb.walk",
+    "verb.run"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "laufen",
+    "V;PRS;1;SG": "laufe",
+    "V;PRS;2;SG": "läufst",
+    "V;PRS;3;SG": "läuft",
+    "V;PRS;1;PL": "laufen",
+    "V;PRS;2;PL": "lauft",
+    "V;PRS;3;PL": "laufen",
+    "V;PST;3;SG": "lief",
+    "V;PTCP;PST": "gelaufen",
+    "V;IMP;2;SG": "lauf",
+    "V;IMP;2;PL": "lauft",
+    "V;IMP;FORM": "laufen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "laufe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Legs in motion: in everyday speech simply walking somewhere – in sport, running a race.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to walk, to go on foot (everyday speech: Ich laufe zur Arbeit)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.walk"
+     },
+     {
+      "id": "s2",
+      "def": "to run, to jog (sport, speed)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run"
+     },
+     {
+      "id": "s3",
+      "def": "to run, to be on, to go (a film, a machine, a plan: Wie läuft’s?)",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich laufe jeden Tag zur Arbeit.",
+      "tr": "I walk to work every day.",
+      "register": "colloquial",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren nicht, wir laufen – es ist nicht weit.",
+      "tr": "We’re not driving, we’re walking – it isn’t far.",
+      "register": "colloquial",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie läuft jeden Morgen fünf Kilometer.",
+      "tr": "She runs five kilometres every morning.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     },
+     {
+      "text": "Er läuft schnell zum Bus.",
+      "tr": "He runs quickly to the bus.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s2"
+     },
+     {
+      "text": "Wie läuft’s bei der Arbeit?",
+      "tr": "How’s it going at work?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Fuß laufen",
+      "tr": "to walk, to go on foot"
+     },
+     {
+      "text": "schnell laufen",
+      "tr": "to run fast"
+     },
+     {
+      "text": "einen Marathon laufen",
+      "tr": "to run a marathon"
+     },
+     {
+      "text": "Ski laufen",
+      "tr": "to ski"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wie läuft’s?",
+      "tr": "How does it run?",
+      "kind": "colloquial",
+      "meaning": "How’s it going?",
+      "register": "colloquial"
+     },
+     {
+      "text": "Das läuft wie geschmiert.",
+      "tr": "That runs as if greased.",
+      "kind": "idiom",
+      "meaning": "It’s going like clockwork.",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "weglaufen",
+      "tr": "to run away"
+     },
+     {
+      "text": "loslaufen",
+      "tr": "to start running, to set off"
+     },
+     {
+      "text": "ablaufen",
+      "tr": "to expire; to run off (water)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zu Fuß gehen",
+      "register": "neutral",
+      "nuance": "to walk, to go on foot – the neutral, unambiguous phrase"
+     },
+     {
+      "word": "rennen",
+      "register": "neutral",
+      "nuance": "to run fast, to dash – always speed"
+     },
+     {
+      "word": "joggen",
+      "register": "neutral",
+      "nuance": "to jog – running for exercise"
+     },
+     {
+      "word": "spazieren gehen",
+      "register": "neutral",
+      "nuance": "to go for a walk – for pleasure"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German loufen, from Old High German hloufan, loufan, from Proto-West Germanic *hlaupan. Cognate with Dutch lopen, English leap and lope, Danish løbe.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "laufen is English leap and lope; the noun der Lauf (run, course) gives Lebenslauf – “life-run” = CV.",
+     "The Dutch cognate lopen also means “to walk” – Dutch and German keep the walking sense that English leap lost."
+    ],
+    "pitfalls": [
+     "Two meanings: in everyday speech laufen is “to walk, to go on foot” (Ich laufe nach Hause); in sport and with speed it is “to run”. When it must be clear, say zu Fuß gehen (walk) or rennen (run).",
+     "Stem change a → äu in du and er/sie/es: du läufst, er läuft – but the imperative has no umlaut: Lauf! (not *Läuf!).",
+     "Perfect with sein: Ich bin nach Hause gelaufen."
+    ],
+    "subtleties": [
+     "Ski laufen (to ski) and Schlittschuh laufen (to skate) are also built with laufen.",
+     "laufen also says that things work or are on: Der Film läuft im Kino. Der Motor läuft."
+    ]
+   }
+  },
+  {
+   "id": "de:rennen",
+   "lemma": "rennen",
+   "pos": "VERB",
+   "senses": [
+    "verb.run"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "rennen",
+    "V;PRS;1;SG": "renne",
+    "V;PRS;2;SG": "rennst",
+    "V;PRS;3;SG": "rennt",
+    "V;PRS;1;PL": "rennen",
+    "V;PRS;2;PL": "rennt",
+    "V;PRS;3;PL": "rennen",
+    "V;PST;3;SG": "rannte",
+    "V;PTCP;PST": "gerannt",
+    "V;IMP;2;SG": "renn",
+    "V;IMP;2;PL": "rennt",
+    "V;IMP;FORM": "rennen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "renne"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Full speed – late for the train, chasing the bus, children racing in the park.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to run, to race, to dash (fast)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run"
+     },
+     {
+      "id": "s2",
+      "def": "to run into, to bump into (gegen …)",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir rennen zum Bahnhof, der Zug kommt gleich!",
+      "tr": "We’re running to the station, the train is coming any minute!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder rennen im Park.",
+      "tr": "The children are running in the park.",
+      "register": "neutral",
+      "context": "playing",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist gegen die Tür gerannt.",
+      "tr": "He ran into the door.",
+      "register": "informal",
+      "context": "accident",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "schnell rennen",
+      "tr": "to run fast"
+     },
+     {
+      "text": "um die Wette rennen",
+      "tr": "to race each other"
+     },
+     {
+      "text": "zum Bus rennen",
+      "tr": "to run for the bus"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "um die Wette rennen",
+      "tr": "to run for the bet",
+      "kind": "fixed expression",
+      "meaning": "to race each other",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "wegrennen",
+      "tr": "to run away"
+     },
+     {
+      "text": "losrennen",
+      "tr": "to dash off"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "laufen",
+      "register": "neutral",
+      "nuance": "to run – sport and steady running; in everyday speech also “to walk”"
+     },
+     {
+      "word": "sprinten",
+      "register": "neutral",
+      "nuance": "to sprint – a short burst at top speed"
+     },
+     {
+      "word": "flitzen",
+      "register": "colloquial",
+      "nuance": "to dash, to whizz – quick and light"
+     }
+    ],
+    "etymology": {
+     "text": "From a merger of transitive / causative Old High German rennan (“to make something run or flow”) and intransitive Old High German rinnan (“to run or flow”). A similar merger shows in Dutch rennen and English run.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "rennen and English run come from the same pair of old verbs (“to run” and “to make run”), which merged in both languages."
+    ],
+    "pitfalls": [
+     "rennen is always fast; for jogging or a race distance German usually says laufen: Ich laufe zehn Kilometer.",
+     "Mixed verb: rannte – gerannt (vowel change and -te like a weak verb); perfect with sein."
+    ],
+    "subtleties": [
+     "das Rennen is a race (Autorennen = car race); der Rennwagen = racing car."
+    ]
+   }
+  },
+  {
+   "id": "de:fahren",
+   "lemma": "fahren",
+   "pos": "VERB",
+   "senses": [
+    "verb.drive"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "fahren",
+    "V;PRS;1;SG": "fahre",
+    "V;PRS;2;SG": "fährst",
+    "V;PRS;3;SG": "fährt",
+    "V;PRS;1;PL": "fahren",
+    "V;PRS;2;PL": "fahrt",
+    "V;PRS;3;PL": "fahren",
+    "V;PST;3;SG": "fuhr",
+    "V;PTCP;PST": "gefahren",
+    "V;IMP;2;SG": "fahr",
+    "V;IMP;2;PL": "fahrt",
+    "V;IMP;FORM": "fahren"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "fahre"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Anything with wheels or a hull: the car, the bus to work, the ferry to the island.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drive (a car); to ride (a bicycle)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drive"
+     },
+     {
+      "id": "s2",
+      "def": "to go, to travel (by any vehicle: mit dem Zug fahren)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to run, to go (of a vehicle: Der Bus fährt um acht.)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Mutter fährt jeden Tag Auto.",
+      "tr": "My mother drives every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Fahr bitte langsam!",
+      "tr": "Please drive slowly!",
+      "register": "informal",
+      "context": "in the car",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren im Sommer mit dem Schiff nach Kreta.",
+      "tr": "In summer we’re going to Crete by ship.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Zug fährt um acht Uhr.",
+      "tr": "The train leaves at eight o’clock.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Auto fahren",
+      "tr": "to drive (a car)"
+     },
+     {
+      "text": "Fahrrad fahren",
+      "tr": "to ride a bike"
+     },
+     {
+      "text": "mit dem Bus fahren",
+      "tr": "to go by bus"
+     },
+     {
+      "text": "in Urlaub fahren",
+      "tr": "to go on holiday"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "aus der Haut fahren",
+      "tr": "to drive out of one’s skin",
+      "kind": "idiom",
+      "meaning": "to fly off the handle, to lose one’s temper",
+      "register": "colloquial"
+     },
+     {
+      "text": "Gute Fahrt!",
+      "tr": "Good drive!",
+      "kind": "fixed expression",
+      "meaning": "Have a safe trip! (said to someone driving)",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "abfahren",
+      "tr": "to leave, to depart"
+     },
+     {
+      "text": "losfahren",
+      "tr": "to set off"
+     },
+     {
+      "text": "mitfahren",
+      "tr": "to get a lift, to go along"
+     },
+     {
+      "text": "zurückfahren",
+      "tr": "to drive back"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "lenken",
+      "register": "neutral",
+      "nuance": "to steer – the hands on the wheel, not the trip"
+     },
+     {
+      "word": "reisen",
+      "register": "neutral",
+      "nuance": "to travel – a longer journey, not the means"
+     },
+     {
+      "word": "düsen",
+      "register": "colloquial",
+      "nuance": "to zoom, to dash (by car)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German varn, varen, from Old High German faran, from Proto-West Germanic *faran. Cognate with Dutch varen, English fare, Danish fare.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "fahren is English fare (as in farewell = “travel well!” and the bus fare): both once meant simply “to travel”.",
+     "The noun family is huge: der Fahrer (driver), die Fahrkarte (ticket), das Fahrrad (bicycle), die Fahrt (trip), die Erfahrung (experience – what you get by travelling)."
+    ],
+    "pitfalls": [
+     "gehen is going on foot; by car, bus, train or ship you fahren: Ich fahre mit dem Bus. “Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
+     "Stem change a → ä in du and er/sie/es (du fährst, er fährt) – but not in the imperative: Fahr! (not *Fähr!).",
+     "Perfect: Ich bin nach Berlin gefahren (movement, sein) – Ich habe das Auto gefahren (driving something, haben)."
+    ],
+    "subtleties": [
+     "German does not mark who drives: Ich fahre nach Berlin = I go to Berlin (by train, car, bus …). To say you are the driver: Ich fahre (das Auto) / Ich sitze am Steuer.",
+     "For planes German uses fliegen: Wir fliegen nach Athen."
+    ]
+   }
+  },
+  {
+   "id": "de:reisen",
+   "lemma": "reisen",
+   "pos": "VERB",
+   "senses": [
+    "verb.travel"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "reisen",
+    "V;PRS;1;SG": "reise",
+    "V;PRS;2;SG": "reist",
+    "V;PRS;3;SG": "reist",
+    "V;PRS;1;PL": "reisen",
+    "V;PRS;2;PL": "reist",
+    "V;PRS;3;PL": "reisen",
+    "V;PST;3;SG": "reiste",
+    "V;PTCP;PST": "gereist",
+    "V;IMP;2;SG": "reise",
+    "V;IMP;2;PL": "reist",
+    "V;IMP;FORM": "reisen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "reis"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Suitcases, timetables and new places – travelling for pleasure or for work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to travel, to make a journey",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.travel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir reisen im Sommer nach Italien.",
+      "tr": "We’re travelling to Italy in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich reise gern mit dem Zug.",
+      "tr": "I like travelling by train.",
+      "register": "neutral",
+      "context": "preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie reist oft beruflich.",
+      "tr": "She often travels for work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Ausland reisen",
+      "tr": "to travel abroad"
+     },
+     {
+      "text": "mit dem Zug reisen",
+      "tr": "to travel by train"
+     },
+     {
+      "text": "allein reisen",
+      "tr": "to travel alone"
+     },
+     {
+      "text": "um die Welt reisen",
+      "tr": "to travel around the world"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wenn jemand eine Reise tut, so kann er was erzählen.",
+      "tr": "When someone makes a journey, he has something to tell.",
+      "kind": "saying",
+      "meaning": "Travel gives you stories to tell.",
+      "register": "neutral",
+      "source": "after Matthias Claudius, “Urians Reise um die Welt” (1786)"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "abreisen",
+      "tr": "to depart (on a journey)"
+     },
+     {
+      "text": "anreisen",
+      "tr": "to arrive, to travel there"
+     },
+     {
+      "text": "verreisen",
+      "tr": "to go away on a trip"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "fahren",
+      "register": "neutral",
+      "nuance": "to go (by vehicle) – the everyday word, also for short trips"
+     },
+     {
+      "word": "verreisen",
+      "register": "neutral",
+      "nuance": "to go away (on a trip): Wir verreisen im August. – stresses being away"
+     },
+     {
+      "word": "eine Reise machen",
+      "register": "neutral",
+      "nuance": "to make a trip"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German reisen, from Old High German reisōn, from Proto-West Germanic *raisōn, further from Proto-West Germanic *raisu (akin to Proto-Germanic *raizijaną).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "das Reisebüro is a travel agency and der Reisepass a passport – literally a “travel pass”."
+    ],
+    "pitfalls": [
+     "du reist, er reist: the -s- of the stem swallows the -st ending (not *reisst).",
+     "reisen takes sein in the perfect: Wir sind nach Spanien gereist.",
+     "Do not confuse reisen (to travel) with reißen (to tear) – ß!"
+    ],
+    "subtleties": [
+     "reisen sounds like longer journeys; for an everyday trip Germans say fahren: Ich fahre am Wochenende zu meinen Eltern."
+    ]
+   }
+  },
+  {
+   "id": "de:zurückkommen",
+   "lemma": "zurückkommen",
+   "pos": "VERB",
+   "senses": [
+    "verb.return"
+   ],
+   "separable": "zurück",
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "zurückkommen",
+    "V;PRS;1;SG": "komme",
+    "V;PRS;2;SG": "kommst",
+    "V;PRS;3;SG": "kommt",
+    "V;PRS;1;PL": "kommen",
+    "V;PRS;2;PL": "kommt",
+    "V;PRS;3;PL": "kommen",
+    "V;PTCP;PST": "zurückgekommen",
+    "V;IMP;2;SG": "komm",
+    "V;IMP;2;PL": "kommt",
+    "V;IMP;FORM": "kommen",
+    "V;SEP": "zurück"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "komme"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Home again – back from holiday, back from work, back to a question.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come back, to return",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.return"
+     },
+     {
+      "id": "s2",
+      "def": "to come back to (a topic): auf etwas zurückkommen",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wann kommst du zurück?",
+      "tr": "When are you coming back?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kommen am Sonntag aus dem Urlaub zurück.",
+      "tr": "We come back from holiday on Sunday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich komme gleich zurück.",
+      "tr": "I’ll be right back.",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich komme später auf Ihre Frage zurück.",
+      "tr": "I’ll come back to your question later.",
+      "register": "formal",
+      "context": "meeting",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nach Hause zurückkommen",
+      "tr": "to come back home"
+     },
+     {
+      "text": "aus dem Urlaub zurückkommen",
+      "tr": "to come back from holiday"
+     },
+     {
+      "text": "gleich zurückkommen",
+      "tr": "to be right back"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "auf etwas zurückkommen",
+      "tr": "to come back onto something",
+      "kind": "fixed expression",
+      "meaning": "to return to a topic or an offer",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zurückkehren",
+      "register": "formal",
+      "nuance": "to return – written, solemn"
+     },
+     {
+      "word": "wiederkommen",
+      "register": "neutral",
+      "nuance": "to come again, to come back"
+     },
+     {
+      "word": "zurückfahren",
+      "register": "neutral",
+      "nuance": "to go back (by vehicle)"
+     },
+     {
+      "word": "zurückgehen",
+      "register": "neutral",
+      "nuance": "to go back (on foot)"
+     }
+    ],
+    "etymology": {
+     "text": "zurück- (“back”) + kommen (“to come”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zurück is literally “to the back” (zu + Rück-, as in der Rücken, the back) – the same picture as English “back”."
+    ],
+    "pitfalls": [
+     "Separable: the particle zurück goes to the end of the clause: Ich komme morgen zurück. – Komm bald zurück!",
+     "zurückkommen = come back (towards here); to go back (away from here) is zurückgehen or zurückfahren."
+    ],
+    "subtleties": [
+     "In the infinitive and the participle the verb is one word: Ich will zurückkommen. – Ich bin zurückgekommen.",
+     "Ich bin gleich zurück (sein + zurück) is an everyday way to say “back in a minute”."
+    ]
+   }
+  },
+  {
+   "id": "de:hereinkommen",
+   "lemma": "hereinkommen",
+   "pos": "VERB",
+   "senses": [
+    "verb.enter"
+   ],
+   "separable": "herein",
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "hereinkommen",
+    "V;PRS;1;SG": "komme",
+    "V;PRS;2;SG": "kommst",
+    "V;PRS;3;SG": "kommt",
+    "V;PRS;1;PL": "kommen",
+    "V;PRS;2;PL": "kommt",
+    "V;PRS;3;PL": "kommen",
+    "V;PTCP;PST": "hereingekommen",
+    "V;IMP;2;SG": "komm",
+    "V;IMP;2;PL": "kommt",
+    "V;IMP;FORM": "kommen",
+    "V;SEP": "herein"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "komme"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses hereinkommen as “to come in (when the speaker is inside)” – to enter; the check looks for the word “enter”.",
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A knock at the door – “Come in!” – someone entering the room where you are.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come in, to enter (towards the speaker, who is inside)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.enter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Kommen Sie bitte herein!",
+      "tr": "Please come in!",
+      "register": "formal",
+      "context": "at the door",
+      "sense": "s1"
+     },
+     {
+      "text": "Komm herein, es ist kalt!",
+      "tr": "Come in, it’s cold!",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Schüler kommen in die Klasse herein.",
+      "tr": "The pupils come into the classroom.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Haus hereinkommen",
+      "tr": "to come into the house"
+     },
+     {
+      "text": "Kommen Sie herein!",
+      "tr": "Come in! (polite)"
+     },
+     {
+      "text": "zur Tür hereinkommen",
+      "tr": "to come in through the door"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Herein!",
+      "tr": "In here!",
+      "kind": "fixed expression",
+      "meaning": "Come in! – the answer to a knock at the door",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "reinkommen",
+      "register": "colloquial",
+      "nuance": "to come in – the everyday spoken form: Komm rein!"
+     },
+     {
+      "word": "eintreten",
+      "register": "formal",
+      "nuance": "to enter, to step in: Bitte treten Sie ein."
+     },
+     {
+      "word": "betreten",
+      "register": "formal",
+      "nuance": "to enter (a room, a building) – transitive: Er betritt den Raum; also on signs: Betreten verboten!"
+     }
+    ],
+    "etymology": {
+     "text": "herein- (“in, hither”) + kommen (“to come”); herein is her (“towards the speaker”) + ein (“in”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "her and hin work like old English “hither” and “thither”: English lost them, German uses them every day (woher, wohin, herein, hinein)."
+    ],
+    "pitfalls": [
+     "her- = towards the speaker, hin- = away from the speaker: herein (in here, you are inside) – hinein (in there, you are outside).",
+     "Separable: Kommen Sie herein! – Ich komme herein. – but: Darf ich hereinkommen?"
+    ],
+    "subtleties": [
+     "Spoken German shortens both herein and hinein to rein: Komm rein! – Geh rein! – so the her/hin difference is mostly kept in writing.",
+     "The one-word answer to a knock is Herein! (Come in!)."
+    ]
+   }
+  },
+  {
+   "id": "de:hineingehen",
+   "lemma": "hineingehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.enter"
+   ],
+   "separable": "hinein",
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "hineingehen",
+    "V;PRS;1;SG": "gehe",
+    "V;PRS;2;SG": "gehst",
+    "V;PRS;3;SG": "geht",
+    "V;PRS;1;PL": "gehen",
+    "V;PRS;2;PL": "geht",
+    "V;PRS;3;PL": "gehen",
+    "V;PTCP;PST": "hineingegangen",
+    "V;IMP;2;SG": "geh",
+    "V;IMP;2;PL": "geht",
+    "V;IMP;FORM": "gehen",
+    "V;SEP": "hinein"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "gehe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses hineingehen as “to go in, to go inside” – to enter; the check looks for the word “enter”.",
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Through the door into a shop, a house, a room – you are outside, going in.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go in, to enter (away from the speaker, who is outside)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.enter"
+     },
+     {
+      "id": "s2",
+      "def": "to fit in (a container, a room): In das Auto gehen fünf Leute hinein.",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe in den Laden hinein.",
+      "tr": "I’m going into the shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Geh doch hinein, ich warte hier.",
+      "tr": "Go on in, I’ll wait here.",
+      "register": "informal",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "In das Auto gehen fünf Leute hinein.",
+      "tr": "Five people fit into the car.",
+      "register": "informal",
+      "context": "cars",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Haus hineingehen",
+      "tr": "to go into the house"
+     },
+     {
+      "text": "in den Laden hineingehen",
+      "tr": "to go into the shop"
+     },
+     {
+      "text": "durch die Tür hineingehen",
+      "tr": "to go in through the door"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "reingehen",
+      "register": "colloquial",
+      "nuance": "to go in – the everyday spoken form"
+     },
+     {
+      "word": "betreten",
+      "register": "formal",
+      "nuance": "to enter (a room, a building) – transitive and formal: Sie betritt das Büro."
+     },
+     {
+      "word": "eintreten",
+      "register": "formal",
+      "nuance": "to enter, to step in"
+     }
+    ],
+    "etymology": {
+     "text": "hinein- (“in, thither”) + gehen (“to go”); hinein is hin (“away from the speaker”) + ein (“in”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek μπαίνω and Turkish girmek are one verb for “enter”; German builds it from a direction word + a verb of motion: hinein + gehen, herein + kommen, rein + fahren."
+    ],
+    "pitfalls": [
+     "hinein (in there – away from you) vs herein (in here – towards you): Ich gehe hinein. – Kommen Sie herein!",
+     "Separable: Ich gehe hinein. – Geh hinein! – but in the infinitive one word: Ich will hineingehen."
+    ],
+    "subtleties": [
+     "In everyday German you mostly hear the short form rein: Ich geh mal rein.",
+     "Often the prepositional phrase is enough and hinein is left out: Ich gehe in den Laden."
+    ]
+   }
+  },
+  {
+   "id": "de:weggehen",
+   "lemma": "weggehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave"
+   ],
+   "separable": "weg",
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "weggehen",
+    "V;PRS;1;SG": "gehe",
+    "V;PRS;2;SG": "gehst",
+    "V;PRS;3;SG": "geht",
+    "V;PRS;1;PL": "gehen",
+    "V;PRS;2;PL": "geht",
+    "V;PRS;3;PL": "gehen",
+    "V;PTCP;PST": "weggegangen",
+    "V;IMP;2;SG": "geh",
+    "V;IMP;2;PL": "geht",
+    "V;IMP;FORM": "gehen",
+    "V;SEP": "weg"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "gehe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Leaving a place – going away; and, for young people, going out at night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go away, to leave (a place) – intransitive",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to go out (in the evening, to bars or clubs)",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe um fünf Uhr weg.",
+      "tr": "I’m leaving at five o’clock.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Geh nicht weg, ich komme gleich!",
+      "tr": "Don’t go away, I’ll be right there!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Samstag gehen wir weg.",
+      "tr": "On Saturday we’re going out.",
+      "register": "informal",
+      "context": "leisure",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "von zu Hause weggehen",
+      "tr": "to leave home"
+     },
+     {
+      "text": "früh weggehen",
+      "tr": "to leave early"
+     },
+     {
+      "text": "am Wochenende weggehen",
+      "tr": "to go out at the weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "verlassen",
+      "register": "neutral",
+      "nuance": "to leave (a place, a person) – transitive, needs an object: Ich verlasse das Haus."
+     },
+     {
+      "word": "losgehen",
+      "register": "neutral",
+      "nuance": "to set off, to start walking"
+     },
+     {
+      "word": "abhauen",
+      "register": "colloquial",
+      "nuance": "to clear off, to beat it – rude in the imperative: Hau ab!"
+     }
+    ],
+    "etymology": {
+     "text": "From weg- (“away”) + gehen (“to go”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "weg comes from in Weg (“on the way”) – the same as English away = on way."
+    ],
+    "pitfalls": [
+     "weggehen has no object: Ich gehe weg. – To name the place you leave, use verlassen: Ich verlasse das Büro (or: Ich gehe aus dem Büro).",
+     "Separable: Ich gehe jetzt weg. – Geh weg! (Go away! – can sound rude)."
+    ],
+    "subtleties": [
+     "Wann gehst du weg? can mean “When are you leaving?” or “When are you going out tonight?” – context decides."
+    ]
+   }
+  },
+  {
+   "id": "de:verlassen",
+   "lemma": "verlassen",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "verlassen",
+    "V;PRS;1;SG": "verlasse",
+    "V;PRS;2;SG": "verlässt",
+    "V;PRS;3;SG": "verlässt",
+    "V;PRS;1;PL": "verlassen",
+    "V;PRS;2;PL": "verlasst",
+    "V;PRS;3;PL": "verlassen",
+    "V;PST;3;SG": "verließ",
+    "V;PTCP;PST": "verlassen",
+    "V;IMP;2;SG": "verlass",
+    "V;IMP;2;PL": "verlasst",
+    "V;IMP;FORM": "verlassen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "verlasse"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Walking out of a door, a city, a person – leaving something or someone behind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to leave (a place) – transitive: das Haus verlassen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to leave, to abandon (a person)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "sich verlassen auf: to rely on",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich verlasse das Haus um sieben Uhr.",
+      "tr": "I leave the house at seven o’clock.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Bitte verlassen Sie den Zug.",
+      "tr": "Please leave the train.",
+      "register": "formal",
+      "context": "announcement",
+      "sense": "s1"
+     },
+     {
+      "text": "Er hat seine Familie verlassen.",
+      "tr": "He left his family.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     },
+     {
+      "text": "Du kannst dich auf mich verlassen.",
+      "tr": "You can rely on me.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Haus verlassen",
+      "tr": "to leave the house"
+     },
+     {
+      "text": "die Stadt verlassen",
+      "tr": "to leave the city"
+     },
+     {
+      "text": "sich auf jemanden verlassen",
+      "tr": "to rely on someone"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich auf jemanden verlassen",
+      "tr": "to leave oneself onto someone",
+      "kind": "fixed expression",
+      "meaning": "to rely on someone",
+      "register": "neutral"
+     },
+     {
+      "text": "von allen guten Geistern verlassen sein",
+      "tr": "to be abandoned by all good spirits",
+      "kind": "idiom",
+      "meaning": "to have taken leave of one’s senses",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "weggehen",
+      "register": "neutral",
+      "nuance": "to go away – intransitive, no object: Ich gehe weg."
+     },
+     {
+      "word": "gehen aus",
+      "register": "neutral",
+      "nuance": "to go out of: Ich gehe aus dem Haus. – everyday alternative"
+     },
+     {
+      "word": "abfahren",
+      "register": "neutral",
+      "nuance": "to depart (vehicles, travellers)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German verlāzen, Old High German firlāzan, from Proto-West Germanic *fralātan, from Proto-Germanic *fralētaną. Cognate with Dutch verlaten and archaic English forlet. Equivalent to ver- (“for-”) + lassen (“let, leave”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ver- is the German twin of English for- (forget, forsake): verlassen is literally “for-let”, to let go away."
+    ],
+    "pitfalls": [
+     "verlassen needs an object (what you leave): Ich verlasse das Büro. – Without an object say weggehen or gehen: Ich gehe jetzt.",
+     "Not separable: ver- stays on the verb: Ich verlasse … – and the participle has no ge-: verlassen.",
+     "Stem change in du and er: du verlässt, er verlässt; perfect with haben: Ich habe das Haus verlassen."
+    ],
+    "subtleties": [
+     "The participle is also an adjective: ein verlassenes Dorf (a deserted village), Ich fühle mich verlassen (I feel abandoned).",
+     "In announcements and signs it is the formal word: Bitte verlassen Sie das Gebäude."
+    ]
+   }
+  },
+  {
+   "id": "de:ankommen",
+   "lemma": "ankommen",
+   "pos": "VERB",
+   "senses": [
+    "verb.arrive"
+   ],
+   "separable": "an",
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "ankommen",
+    "V;PRS;1;SG": "komme",
+    "V;PRS;2;SG": "kommst",
+    "V;PRS;3;SG": "kommt",
+    "V;PRS;1;PL": "kommen",
+    "V;PRS;2;PL": "kommt",
+    "V;PRS;3;PL": "kommen",
+    "V;PTCP;PST": "angekommen",
+    "V;IMP;2;SG": "komm",
+    "V;IMP;2;PL": "kommt",
+    "V;IMP;FORM": "kommen",
+    "V;SEP": "an"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "komme"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”).",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP (“Ich komme morgen an”). Wiktionary lists the two together (“komme an”) or the subordinate-clause form (“ankomme”)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the journey – the train pulls in, the plane lands, a message reaches you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to arrive",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.arrive"
+     },
+     {
+      "id": "s2",
+      "def": "es kommt auf … an: it depends on …",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "gut ankommen: to be well received",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Zug kommt um acht Uhr an.",
+      "tr": "The train arrives at eight o’clock.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann kommst du in Berlin an?",
+      "tr": "When do you arrive in Berlin?",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sind gut angekommen.",
+      "tr": "We arrived safely.",
+      "register": "neutral",
+      "context": "message to family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kommt darauf an.",
+      "tr": "That depends.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in Berlin ankommen",
+      "tr": "to arrive in Berlin"
+     },
+     {
+      "text": "am Bahnhof ankommen",
+      "tr": "to arrive at the station"
+     },
+     {
+      "text": "pünktlich ankommen",
+      "tr": "to arrive on time"
+     },
+     {
+      "text": "gut ankommen",
+      "tr": "to arrive safely; to go down well"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Es kommt darauf an.",
+      "tr": "It comes onto that.",
+      "kind": "fixed expression",
+      "meaning": "It depends.",
+      "register": "neutral"
+     },
+     {
+      "text": "bei jemandem gut ankommen",
+      "tr": "to arrive well with someone",
+      "kind": "fixed expression",
+      "meaning": "to go down well with someone",
+      "register": "informal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "eintreffen",
+      "register": "formal",
+      "nuance": "to arrive – announcements, official language"
+     },
+     {
+      "word": "landen",
+      "register": "neutral",
+      "nuance": "to land – planes (and people on a plane)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German anekomen, from Old High German anaqueman, from Proto-West Germanic *anakweman, from Proto-Germanic *anakwemaną (“to come to, come at, arrive”). Compare Dutch aankomen, English oncome.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "an + kommen is the same build as English “on-come” (oncoming) and Dutch aankomen."
+    ],
+    "pitfalls": [
+     "Separable: the particle an goes to the end: Der Zug kommt um acht Uhr an. – Not *Der Zug ankommt.",
+     "Where you arrive is wo? + dative: in Berlin, am Bahnhof, in der Stadt – not the accusative (it is a place, not a direction)."
+    ],
+    "subtleties": [
+     "Es kommt darauf an (it depends) is one of the most frequent uses of the verb.",
+     "Die Ankunft (arrival) is the noun on timetables, opposite die Abfahrt (departure)."
+    ]
+   }
+  },
+  {
+   "id": "de:bleiben",
+   "lemma": "bleiben",
+   "pos": "VERB",
+   "senses": [
+    "verb.stay"
+   ],
+   "aux": "sein",
+   "forms": {
+    "V;NFIN": "bleiben",
+    "V;PRS;1;SG": "bleibe",
+    "V;PRS;2;SG": "bleibst",
+    "V;PRS;3;SG": "bleibt",
+    "V;PRS;1;PL": "bleiben",
+    "V;PRS;2;PL": "bleibt",
+    "V;PRS;3;PL": "bleiben",
+    "V;PST;3;SG": "blieb",
+    "V;PTCP;PST": "geblieben",
+    "V;IMP;2;SG": "bleib",
+    "V;IMP;2;PL": "bleibt",
+    "V;IMP;FORM": "bleiben"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "bleibe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not moving on – staying at home, staying a week, staying calm.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to stay, to remain (in a place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.stay"
+     },
+     {
+      "id": "s2",
+      "def": "to remain, to stay (+ adjective or noun: Bleib ruhig!)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute bleibe ich zu Hause.",
+      "tr": "Today I’m staying at home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir bleiben eine Woche in Athen.",
+      "tr": "We’re staying in Athens for a week.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Bleib ruhig, alles ist gut.",
+      "tr": "Stay calm, everything is fine.",
+      "register": "informal",
+      "context": "comforting",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Hause bleiben",
+      "tr": "to stay at home"
+     },
+     {
+      "text": "im Bett bleiben",
+      "tr": "to stay in bed"
+     },
+     {
+      "text": "eine Woche bleiben",
+      "tr": "to stay for a week"
+     },
+     {
+      "text": "ruhig bleiben",
+      "tr": "to stay calm"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Alles bleibt beim Alten.",
+      "tr": "Everything stays with the old.",
+      "kind": "idiom",
+      "meaning": "Nothing changes, everything stays the same.",
+      "register": "neutral"
+     },
+     {
+      "text": "Bleiben Sie dran!",
+      "tr": "Stay on it!",
+      "kind": "fixed expression",
+      "meaning": "Hold the line! / Stay tuned!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich aufhalten",
+      "register": "formal",
+      "nuance": "to stay, to be (somewhere) – official language"
+     },
+     {
+      "word": "übernachten",
+      "register": "neutral",
+      "nuance": "to stay the night"
+     },
+     {
+      "word": "verweilen",
+      "register": "literary",
+      "nuance": "to linger, to tarry"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "weggehen",
+      "note": "to go away"
+     },
+     {
+      "word": "verlassen",
+      "note": "to leave (a place)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German blīben, belīben, from Old High German bilīban (“to remain”), from Proto-Germanic *bilībaną, from Proto-Indo-European *leyp- (“to stick, glue”). Cognate with Dutch blijven, archaic English belive.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "bleiben comes from the root *leyp- (“to stick”), as does Greek λίπος (fat) and German Leben (life) – staying is “sticking” to a place."
+    ],
+    "pitfalls": [
+     "bleiben takes sein in the perfect, although nothing moves: Ich bin zu Hause geblieben.",
+     "Where you stay is dative (wo?): Ich bleibe im Hotel – not *ins Hotel.",
+     "English “stay at a hotel” as a guest is often übernachten or wohnen: Wir wohnen im Hotel Sonne."
+    ],
+    "subtleties": [
+     "Duration takes the plain accusative: Ich bleibe eine Woche. – Wir bleiben zwei Tage.",
+     "stehen bleiben = to stop (walking); Bleiben Sie dran! = Hold the line! (on the phone)."
+    ]
+   }
+  },
+  {
+   "id": "de:warten",
+   "lemma": "warten",
+   "pos": "VERB",
+   "senses": [
+    "verb.wait"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "warten",
+    "V;PRS;1;SG": "warte",
+    "V;PRS;2;SG": "wartest",
+    "V;PRS;3;SG": "wartet",
+    "V;PRS;1;PL": "warten",
+    "V;PRS;2;PL": "wartet",
+    "V;PRS;3;PL": "warten",
+    "V;PST;3;SG": "wartete",
+    "V;PTCP;PST": "gewartet",
+    "V;IMP;2;SG": "warte",
+    "V;IMP;2;PL": "wartet",
+    "V;IMP;FORM": "warten"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "wart"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Standing at the bus stop, looking at the clock – waiting for someone or something.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wait (for: auf + accusative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wait"
+     },
+     {
+      "id": "s2",
+      "def": "to service, to maintain (a machine)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich warte auf den Bus.",
+      "tr": "I’m waiting for the bus.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Warte bitte hier!",
+      "tr": "Please wait here!",
+      "register": "informal",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir warten schon zwanzig Minuten.",
+      "tr": "We’ve been waiting for twenty minutes already.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Heizung wird jedes Jahr gewartet.",
+      "tr": "The heating is serviced every year.",
+      "register": "technical",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf den Bus warten",
+      "tr": "to wait for the bus"
+     },
+     {
+      "text": "lange warten",
+      "tr": "to wait a long time"
+     },
+     {
+      "text": "Warte mal!",
+      "tr": "Wait a minute!"
+     },
+     {
+      "text": "vor der Tür warten",
+      "tr": "to wait outside the door"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Abwarten und Tee trinken.",
+      "tr": "Wait and drink tea.",
+      "kind": "saying",
+      "meaning": "Be patient and see what happens.",
+      "register": "colloquial"
+     },
+     {
+      "text": "Da kannst du lange warten!",
+      "tr": "There you can wait long!",
+      "kind": "idiom",
+      "meaning": "That will never happen!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "abwarten",
+      "register": "neutral",
+      "nuance": "to wait and see, to wait for something to end: Abwarten und Tee trinken!"
+     },
+     {
+      "word": "sich gedulden",
+      "register": "formal",
+      "nuance": "to be patient: Bitte gedulden Sie sich einen Moment."
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German warten, from Old High German wartēn, from Proto-West Germanic *wardēn, from Proto-Germanic *wardāną. Cognate with Old Saxon wardōn, Swedish vårda, English ward.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "warten is English ward (to guard, watch over) and warden; German still has der Wärter (attendant, guard) – waiting was once “keeping watch”."
+    ],
+    "pitfalls": [
+     "Wait FOR = warten AUF + accusative: Ich warte auf dich (not *für dich).",
+     "Stem in -t: an -e- comes before -st and -t: du wartest, er wartet, ihr wartet; imperative Warte! (with -e).",
+     "English “I have been waiting for 20 minutes” = present tense in German: Ich warte seit zwanzig Minuten."
+    ],
+    "subtleties": [
+     "das Wartezimmer (waiting room at the doctor’s), die Warteschlange (queue).",
+     "Na warte! (Just you wait!) is a playful threat."
+    ]
+   }
+  },
+  {
+   "id": "de:wohin",
+   "lemma": "wohin",
+   "pos": "ADV",
+   "senses": [],
+   "role": "where to? – the question of direction (Wohin gehst du? → nach Hause, in die Stadt, zum Bahnhof)",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing ahead on the map – the destination.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where (to)? – asking for a destination",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "where (to) – relative: Ich weiß nicht, wohin er fährt.",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wohin fährst du im Sommer?",
+      "tr": "Where are you going in the summer?",
+      "register": "informal",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Wohin gehen wir heute Abend?",
+      "tr": "Where are we going tonight?",
+      "register": "informal",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Wohin fährt dieser Bus?",
+      "tr": "Where does this bus go?",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich weiß nicht, wohin er geht.",
+      "tr": "I don’t know where he’s going.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wohin gehst du?",
+      "tr": "Where are you going?"
+     },
+     {
+      "text": "Wo gehst du hin?",
+      "tr": "Where are you going? (colloquial split form)"
+     },
+     {
+      "text": "irgendwohin",
+      "tr": "somewhere (to)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "wo … hin",
+      "register": "colloquial",
+      "nuance": "the split spoken form: Wo fährst du hin?"
+     }
+    ],
+    "etymology": {
+     "text": "wo (“where”) + hin (“thither, away from the speaker”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English once had the same three words: where, whither (= wohin), whence (= woher); German still uses all three every day.",
+     "Hebrew has the same three questions: אֵיפֹה (where), לְאָן (where to), מֵאֵיפֹה (where from)."
+    ],
+    "pitfalls": [
+     "wo asks for a place (Wo bist du? – Im Park), wohin for a direction (Wohin gehst du? – In den Park). English uses “where” for both!",
+     "The answer to wohin takes the accusative after the two-way prepositions: in den Park, auf den Markt – and nach / zu + dative."
+    ],
+    "subtleties": [
+     "Spoken German often splits it: Wo gehst du hin? – the hin goes to the end like a separable particle."
+    ]
+   }
+  },
+  {
+   "id": "de:woher",
+   "lemma": "woher",
+   "pos": "ADV",
+   "senses": [],
+   "role": "where from? – the question of origin (Woher kommst du? → aus Griechenland, vom Bahnhof)",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Looking back down the road – where someone comes from, where a thing comes from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where from? – asking for origin or starting point",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "how (do you know)? – Woher weißt du das?",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Woher kommst du?",
+      "tr": "Where are you from?",
+      "register": "informal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Woher kommen Sie?",
+      "tr": "Where are you from? (polite)",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Woher kommt der Zug?",
+      "tr": "Where is the train coming from?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Woher weißt du das?",
+      "tr": "How do you know that?",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Woher kommst du?",
+      "tr": "Where are you from?"
+     },
+     {
+      "text": "Wo kommst du her?",
+      "tr": "Where are you from? (colloquial split form)"
+     },
+     {
+      "text": "irgendwoher",
+      "tr": "from somewhere"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "wo … her",
+      "register": "colloquial",
+      "nuance": "the split spoken form: Wo kommst du her?"
+     },
+     {
+      "word": "von wo",
+      "register": "colloquial",
+      "nuance": "from where – informal: Von wo kommst du?"
+     }
+    ],
+    "etymology": {
+     "text": "wo (“where”) + her (“hither, towards the speaker”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "woher is English “whence”, wohin is “whither” – words English has almost lost.",
+     "Turkish builds the same idea with a case suffix: nereden? (where from?) – nere-den, the ablative."
+    ],
+    "pitfalls": [
+     "The answer: aus + dative for countries, cities, buildings (aus Griechenland, aus dem Haus); von + dative for people and points (vom Bahnhof, von meiner Mutter).",
+     "Woher kommst du? asks for your origin – the present tense is used, as in English “Where are you from?”."
+    ],
+    "subtleties": [
+     "Woher weißt du das? is not about places: “How do you know that?”."
+    ]
+   }
+  },
+  {
+   "id": "de:Bus",
+   "lemma": "Bus",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bus"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Bus",
+    "N;ACC;SG": "Bus",
+    "N;DAT;SG": "Bus",
+    "N;GEN;SG": "Busses",
+    "N;NOM;PL": "Busse",
+    "N;ACC;PL": "Busse",
+    "N;DAT;PL": "Bussen",
+    "N;GEN;PL": "Busse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The city bus at the stop, the school bus, the long-distance coach.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bus, coach",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     },
+     {
+      "id": "s2",
+      "def": "bus (computing: a data line)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich fahre mit dem Bus zur Arbeit.",
+      "tr": "I go to work by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bus kommt in fünf Minuten.",
+      "tr": "The bus is coming in five minutes.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Busse fahren am Sonntag nicht so oft.",
+      "tr": "The buses don’t run so often on Sundays.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit dem Bus fahren",
+      "tr": "to go by bus"
+     },
+     {
+      "text": "den Bus nehmen",
+      "tr": "to take the bus"
+     },
+     {
+      "text": "den Bus verpassen",
+      "tr": "to miss the bus"
+     },
+     {
+      "text": "die Bushaltestelle",
+      "tr": "the bus stop"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Omnibus",
+      "register": "dated",
+      "nuance": "the full old word – now on old signs and in officialese"
+     },
+     {
+      "word": "Reisebus",
+      "register": "neutral",
+      "nuance": "coach – for trips and tours"
+     },
+     {
+      "word": "Fernbus",
+      "register": "neutral",
+      "nuance": "long-distance coach"
+     }
+    ],
+    "etymology": {
+     "text": "From Omnibus, with influence from English bus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bus is short for Latin omnibus, “for all” – a vehicle for everybody; the word went from French to German and English in the 19th century."
+    ],
+    "pitfalls": [
+     "By bus = mit dem Bus (dative), not *mit Bus: Ich fahre mit dem Bus.",
+     "Plural with double s: der Bus – die Busse; genitive des Busses."
+    ],
+    "subtleties": [
+     "im Bus = inside the bus (Ich lese im Bus.); mit dem Bus = by bus.",
+     "You get on einsteigen and off aussteigen: Ich steige am Bahnhof aus."
+    ]
+   }
+  },
+  {
+   "id": "de:Zug",
+   "lemma": "Zug",
+   "pos": "NOUN",
+   "senses": [
+    "tr.train"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Zug",
+    "N;ACC;SG": "Zug",
+    "N;DAT;SG": "Zug",
+    "N;GEN;SG": "Zuges",
+    "N;NOM;PL": "Züge",
+    "N;ACC;PL": "Züge",
+    "N;DAT;PL": "Zügen",
+    "N;GEN;PL": "Züge"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Zugs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Platforms, timetables, the ICE racing across the country – and a few other “pulls”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "train",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.train"
+     },
+     {
+      "id": "s2",
+      "def": "draught (of air)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "move (in chess, in a game)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "feature, trait (of a face, a character)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s5",
+      "def": "procession, march",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir fahren mit dem Zug nach München.",
+      "tr": "We’re going to Munich by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug kommt heute zu spät.",
+      "tr": "The train is late today.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Zug ist es sehr warm.",
+      "tr": "It’s very warm on the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Du bist am Zug.",
+      "tr": "It’s your move.",
+      "register": "neutral",
+      "context": "games",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit dem Zug fahren",
+      "tr": "to go by train"
+     },
+     {
+      "text": "den Zug verpassen",
+      "tr": "to miss the train"
+     },
+     {
+      "text": "in den Zug einsteigen",
+      "tr": "to get on the train"
+     },
+     {
+      "text": "im Zug",
+      "tr": "on the train"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Der Zug ist abgefahren.",
+      "tr": "The train has left.",
+      "kind": "idiom",
+      "meaning": "It’s too late, the opportunity is gone.",
+      "register": "colloquial"
+     },
+     {
+      "text": "in vollen Zügen genießen",
+      "tr": "to enjoy in full draughts",
+      "kind": "idiom",
+      "meaning": "to enjoy something to the full",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Bahn",
+      "register": "neutral",
+      "nuance": "the railway, the train (Ich fahre mit der Bahn) – also short for Straßenbahn / S-Bahn / U-Bahn"
+     },
+     {
+      "word": "Regionalzug",
+      "register": "neutral",
+      "nuance": "local / regional train"
+     },
+     {
+      "word": "ICE",
+      "register": "neutral",
+      "nuance": "the German high-speed train (Intercity-Express)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German zuc, zug, from Old High German zug, from Proto-West Germanic *tugi, from Proto-Germanic *tugiz, an abstract noun belonging to Proto-Germanic *teuhaną, from Proto-Indo-European *dewk- (“to pull, lead”). Cognate with Dutch teug, English tug. Related to ziehen (“to pull”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Zug belongs to ziehen (to pull), like English tug and tow – the train is literally “the pulled thing”."
+    ],
+    "pitfalls": [
+     "On the train = im Zug (not *auf dem Zug); by train = mit dem Zug.",
+     "Plural with umlaut: die Züge, dative den Zügen."
+    ],
+    "subtleties": [
+     "Zug is “a pull”: a train is what is pulled; a draught is air that pulls; a chess move pulls a piece. Context tells the meaning."
+    ]
+   }
+  },
+  {
+   "id": "de:Flugzeug",
+   "lemma": "Flugzeug",
+   "pos": "NOUN",
+   "senses": [
+    "tr.plane"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Flugzeug",
+    "N;ACC;SG": "Flugzeug",
+    "N;DAT;SG": "Flugzeug",
+    "N;GEN;SG": "Flugzeugs",
+    "N;NOM;PL": "Flugzeuge",
+    "N;ACC;PL": "Flugzeuge",
+    "N;DAT;PL": "Flugzeugen",
+    "N;GEN;PL": "Flugzeuge"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Flugzeuges"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Flugzeug as “aeroplane”; the concept gloss is “plane” – the same thing."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Airport queues, the window seat, the holiday island two hours away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aeroplane, airplane, plane",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.plane"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir fliegen mit dem Flugzeug nach Athen.",
+      "tr": "We’re flying to Athens by plane.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Flugzeug landet um zehn Uhr.",
+      "tr": "The plane lands at ten o’clock.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Flugzeug trinke ich nur Wasser.",
+      "tr": "On the plane I only drink water.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit dem Flugzeug fliegen",
+      "tr": "to fly, to go by plane"
+     },
+     {
+      "text": "ins Flugzeug steigen",
+      "tr": "to board the plane"
+     },
+     {
+      "text": "das Flugzeug landet / startet",
+      "tr": "the plane lands / takes off"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Flieger",
+      "register": "colloquial",
+      "nuance": "plane – everyday speech: Ich nehme den Flieger."
+     },
+     {
+      "word": "Maschine",
+      "register": "neutral",
+      "nuance": "aircraft – in airport and airline language"
+     },
+     {
+      "word": "Jet",
+      "register": "neutral",
+      "nuance": "jet (plane)"
+     }
+    ],
+    "etymology": {
+     "text": "From Flug (“flight”) + Zeug (“stuff, gear, device”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Flugzeug is a native German compound, “flight gear”, while Greek αεροπλάνο and English aeroplane go back to French aéroplane – German often builds its own word where other languages borrow."
+    ],
+    "pitfalls": [
+     "With a plane the verb is fliegen, not fahren: Ich fliege nach Berlin.",
+     "Neuter: das Flugzeug (because das Zeug is neuter)."
+    ],
+    "subtleties": [
+     "das Zeug (stuff, gear) builds many devices: das Fahrzeug (vehicle), das Werkzeug (tool), das Spielzeug (toy)."
+    ]
+   }
+  },
+  {
+   "id": "de:Taxi",
+   "lemma": "Taxi",
+   "pos": "NOUN",
+   "senses": [
+    "tr.taxi"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Taxi",
+    "N;ACC;SG": "Taxi",
+    "N;DAT;SG": "Taxi",
+    "N;GEN;SG": "Taxis",
+    "N;NOM;PL": "Taxis",
+    "N;ACC;PL": "Taxis",
+    "N;DAT;PL": "Taxis",
+    "N;GEN;PL": "Taxis"
+   },
+   "formsAlt": {
+    "N;NOM;PL": [
+     "Taxen"
+    ],
+    "N;ACC;PL": [
+     "Taxen"
+    ],
+    "N;DAT;PL": [
+     "Taxen"
+    ],
+    "N;GEN;PL": [
+     "Taxen"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A cream-coloured Mercedes at the station rank – German taxis are traditionally light beige.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taxi, cab",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.taxi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir nehmen ein Taxi zum Flughafen.",
+      "tr": "We’re taking a taxi to the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Können Sie mir bitte ein Taxi rufen?",
+      "tr": "Could you call me a taxi, please?",
+      "register": "formal",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Taxi wartet vor dem Haus.",
+      "tr": "The taxi is waiting in front of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Taxi nehmen",
+      "tr": "to take a taxi"
+     },
+     {
+      "text": "ein Taxi rufen",
+      "tr": "to call a taxi"
+     },
+     {
+      "text": "mit dem Taxi fahren",
+      "tr": "to go by taxi"
+     },
+     {
+      "text": "der Taxifahrer",
+      "tr": "the taxi driver"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Taxe",
+      "register": "dated",
+      "nuance": "the older word, still on some official signs"
+     },
+     {
+      "word": "Uber",
+      "register": "colloquial",
+      "nuance": "a ride-hailing car (brand name)"
+     }
+    ],
+    "etymology": {
+     "text": "20th century, from French taxi.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Taxi is short for taximeter (French taximètre), the meter that counts the fare (taxe = charge); the device is still called das Taxameter in German."
+    ],
+    "pitfalls": [
+     "Neuter: das Taxi (in Switzerland occasionally der Taxi).",
+     "Plural die Taxis (also die Taxen in official language)."
+    ],
+    "subtleties": [
+     "Taxi drivers in Germany are tipped by rounding up the fare (aufrunden)."
+    ]
+   }
+  },
+  {
+   "id": "de:Auto",
+   "lemma": "Auto",
+   "pos": "NOUN",
+   "senses": [
+    "tr.car"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Auto",
+    "N;ACC;SG": "Auto",
+    "N;DAT;SG": "Auto",
+    "N;GEN;SG": "Autos",
+    "N;NOM;PL": "Autos",
+    "N;ACC;PL": "Autos",
+    "N;DAT;PL": "Autos",
+    "N;GEN;PL": "Autos"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The family car, the Autobahn, a country that builds and loves cars.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "car, automobile",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.car"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Vater fährt jeden Tag Auto.",
+      "tr": "My father drives every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren mit dem Auto nach Italien.",
+      "tr": "We’re driving to Italy.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Auto steht vor dem Haus.",
+      "tr": "The car is (parked) in front of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Auto fahren",
+      "tr": "to drive (a car)"
+     },
+     {
+      "text": "mit dem Auto",
+      "tr": "by car"
+     },
+     {
+      "text": "ein neues Auto",
+      "tr": "a new car"
+     },
+     {
+      "text": "das Auto parken",
+      "tr": "to park the car"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wagen",
+      "register": "neutral",
+      "nuance": "car – a little more formal or technical: Ihr Wagen ist fertig."
+     },
+     {
+      "word": "PKW",
+      "register": "technical",
+      "nuance": "passenger car (Personenkraftwagen) – official language"
+     },
+     {
+      "word": "Karre",
+      "register": "colloquial",
+      "nuance": "car – often an old one, “jalopy”"
+     }
+    ],
+    "etymology": {
+     "text": "Clipping of Automobil, from French automobile.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Automobil is half Greek, half Latin: αὐτός (self) + mobilis (movable) – “self-moving”.",
+     "The first petrol car was patented in Germany by Carl Benz in 1886."
+    ],
+    "pitfalls": [
+     "Neuter: das Auto, plural die Autos (with -s, as many short loanwords).",
+     "Auto fahren is written as two words."
+    ],
+    "subtleties": [
+     "mit dem Auto = by car; im Auto = inside the car.",
+     "German says Auto in speech and writing; Automobil is old-fashioned or technical."
+    ]
+   }
+  },
+  {
+   "id": "de:Fahrrad",
+   "lemma": "Fahrrad",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bicycle"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Fahrrad",
+    "N;ACC;SG": "Fahrrad",
+    "N;DAT;SG": "Fahrrad",
+    "N;GEN;SG": "Fahrrads",
+    "N;NOM;PL": "Fahrräder",
+    "N;ACC;PL": "Fahrräder",
+    "N;DAT;PL": "Fahrrädern",
+    "N;GEN;PL": "Fahrräder"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Fahrrades"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bike lanes, Sunday rides along the river, a basket full of shopping.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bicycle, bike",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bicycle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich fahre mit dem Fahrrad zur Uni.",
+      "tr": "I cycle to university.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Fahrrad steht im Garten.",
+      "tr": "My bike is in the garden.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Sonntag fahren wir Fahrrad.",
+      "tr": "On Sunday we go cycling.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Fahrrad fahren",
+      "tr": "to ride a bike, to cycle"
+     },
+     {
+      "text": "mit dem Fahrrad",
+      "tr": "by bike"
+     },
+     {
+      "text": "der Fahrradweg",
+      "tr": "the cycle path"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Rad",
+      "register": "neutral",
+      "nuance": "bike (short form): Ich fahre Rad."
+     },
+     {
+      "word": "Velo",
+      "register": "regional",
+      "nuance": "bike – the Swiss word"
+     },
+     {
+      "word": "Drahtesel",
+      "register": "humorous",
+      "nuance": "“wire donkey” – a jokey word for a bike"
+     }
+    ],
+    "etymology": {
+     "text": "From fahren (“drive/ride”) + Rad (“wheel”). Compare Dutch rijwiel.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ancestor of the bicycle, Karl Drais’s “Laufmaschine” (running machine), was ridden for the first time in Mannheim in 1817."
+    ],
+    "pitfalls": [
+     "You “drive” a bike in German: Fahrrad fahren (not *reiten, which is for horses).",
+     "Plural with umlaut: die Fahrräder, dative den Fahrrädern."
+    ],
+    "subtleties": [
+     "Radfahren / Rad fahren (cycling) and der Radfahrer (cyclist) use the short form Rad."
+    ]
+   }
+  },
+  {
+   "id": "de:Schiff",
+   "lemma": "Schiff",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Schiff",
+    "N;ACC;SG": "Schiff",
+    "N;DAT;SG": "Schiff",
+    "N;GEN;SG": "Schiffes",
+    "N;NOM;PL": "Schiffe",
+    "N;ACC;PL": "Schiffe",
+    "N;DAT;PL": "Schiffen",
+    "N;GEN;PL": "Schiffe"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Schiffs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A big ship: the ferry to the islands, a cruise liner, cargo ships in the port of Hamburg.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ship (a large vessel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     },
+     {
+      "id": "s2",
+      "def": "nave (of a church)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir fahren mit dem Schiff nach Kreta.",
+      "tr": "We’re going to Crete by ship.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Schiff kommt um sechs Uhr an.",
+      "tr": "The ship arrives at six o’clock.",
+      "register": "neutral",
+      "context": "port",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Hafen liegen viele Schiffe.",
+      "tr": "There are many ships in the harbour.",
+      "register": "neutral",
+      "context": "port",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit dem Schiff fahren",
+      "tr": "to go by ship"
+     },
+     {
+      "text": "auf dem Schiff",
+      "tr": "on (board) the ship"
+     },
+     {
+      "text": "das Schiff legt an",
+      "tr": "the ship docks"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "klar Schiff machen",
+      "tr": "to make the ship clear",
+      "kind": "idiom",
+      "meaning": "to clean up, to sort things out",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Boot",
+      "register": "neutral",
+      "nuance": "boat – a small vessel"
+     },
+     {
+      "word": "Fähre",
+      "register": "neutral",
+      "nuance": "ferry"
+     },
+     {
+      "word": "Dampfer",
+      "register": "dated",
+      "nuance": "steamer – also used jokingly for a big ship"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German schif, from Old High German skif (“ship, barrel, vessel”), from Proto-West Germanic *skip, from Proto-Germanic *skipą. Cognate with Dutch schip, Yiddish שיף (shif), English ship, Danish skib.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Schiff and English ship are the same word; English skipper comes from Dutch schipper, “ship-man”."
+    ],
+    "pitfalls": [
+     "Schiff (ship) is big, Boot (boat) is small – German keeps them apart like English.",
+     "On board = auf dem Schiff (not *im Schiff, unless you mean below deck)."
+    ],
+    "subtleties": [
+     "The ferry to an island is die Fähre; for it Germans also just say Schiff: Wir nehmen das Schiff nach Mykonos."
+    ]
+   }
+  },
+  {
+   "id": "de:Boot",
+   "lemma": "Boot",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Boot",
+    "N;ACC;SG": "Boot",
+    "N;DAT;SG": "Boot",
+    "N;GEN;SG": "Bootes",
+    "N;NOM;PL": "Boote",
+    "N;ACC;PL": "Boote",
+    "N;DAT;PL": "Booten",
+    "N;GEN;PL": "Boote"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Boots"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small boat: rowing on a lake, a fishing boat in a Greek harbour.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boat (a small vessel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Wochenende fahren wir Boot auf dem See.",
+      "tr": "At the weekend we go boating on the lake.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Boot ist klein, aber schnell.",
+      "tr": "The boat is small but fast.",
+      "register": "neutral",
+      "context": "sea",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Fischer kommen mit dem Boot zurück.",
+      "tr": "The fishermen come back in their boat.",
+      "register": "neutral",
+      "context": "harbour",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Boot fahren",
+      "tr": "to go boating"
+     },
+     {
+      "text": "mit dem Boot",
+      "tr": "by boat"
+     },
+     {
+      "text": "das Ruderboot",
+      "tr": "the rowing boat"
+     },
+     {
+      "text": "das Segelboot",
+      "tr": "the sailing boat"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wir sitzen alle im selben Boot.",
+      "tr": "We all sit in the same boat.",
+      "kind": "idiom",
+      "meaning": "We are all in the same situation.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Schiff",
+      "register": "neutral",
+      "nuance": "ship – a large vessel"
+     },
+     {
+      "word": "Kahn",
+      "register": "colloquial",
+      "nuance": "small flat boat, punt; jokingly any old boat"
+     }
+    ],
+    "etymology": {
+     "text": "Via Middle Low German bōt, from Middle English bot (compare modern English boat).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Boot was borrowed from English boat via Low German – one of the early English loanwords in German.",
+     "Das Boot (1981), the film about a German submarine, made the word known worldwide."
+    ],
+    "pitfalls": [
+     "Neuter: das Boot; plural die Boote.",
+     "Boot (small) ≠ Schiff (large): Mit dem Boot fährt man auf dem See, mit dem Schiff über das Meer."
+    ],
+    "subtleties": [
+     "Boot fahren is “to go boating” for fun; to get somewhere you fahren mit dem Boot."
+    ]
+   }
+  },
+  {
+   "id": "de:zu_Fuß",
+   "lemma": "zu Fuß",
+   "pos": "ADV",
+   "senses": [
+    "tr.onfoot"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "No wheels at all – walking to school, to the bakery, through the old town.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on foot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.onfoot"
+     },
+     {
+      "id": "s2",
+      "def": "gut zu Fuß sein: to be a good walker, to be able to walk well",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe zu Fuß zur Arbeit.",
+      "tr": "I walk to work.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Bahnhof sind es zu Fuß zehn Minuten.",
+      "tr": "It’s ten minutes on foot to the station.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Oma ist noch gut zu Fuß.",
+      "tr": "My grandma still walks well.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Fuß gehen",
+      "tr": "to walk, to go on foot"
+     },
+     {
+      "text": "zehn Minuten zu Fuß",
+      "tr": "ten minutes’ walk"
+     },
+     {
+      "text": "gut zu Fuß sein",
+      "tr": "to be a good walker"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "laufen",
+      "register": "colloquial",
+      "nuance": "to walk (verb): Ich laufe. = Ich gehe zu Fuß."
+     },
+     {
+      "word": "per pedes",
+      "register": "humorous",
+      "nuance": "on foot – jokey Latin"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ze vuoze (literally “to foot”). Compare Dutch te voet.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek says με τα πόδια (with the feet), Turkish yürüyerek (walking) – German uses the old dative of one foot: zu Fuß."
+    ],
+    "pitfalls": [
+     "zu Fuß, not *mit dem Fuß or *mit Fuß: Ich gehe zu Fuß. (mit is for vehicles: mit dem Bus).",
+     "zu Fuß gehen is usually just gehen: Ich gehe zur Arbeit already means on foot; zu Fuß stresses it."
+    ],
+    "subtleties": [
+     "Fuß is spelt with ß (long vowel); in Switzerland, which does not use ß, it is zu Fuss."
+    ]
+   }
+  },
+  {
+   "id": "de:Fahrkarte",
+   "lemma": "Fahrkarte",
+   "pos": "NOUN",
+   "senses": [
+    "tr.ticket"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Fahrkarte",
+    "N;ACC;SG": "Fahrkarte",
+    "N;DAT;SG": "Fahrkarte",
+    "N;GEN;SG": "Fahrkarte",
+    "N;NOM;PL": "Fahrkarten",
+    "N;ACC;PL": "Fahrkarten",
+    "N;DAT;PL": "Fahrkarten",
+    "N;GEN;PL": "Fahrkarten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The ticket machine at the station, the conductor’s “Ihre Fahrkarte, bitte!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ticket (for a bus, train, tram – a fare)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.ticket"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe eine Fahrkarte nach Hamburg.",
+      "tr": "I’m buying a ticket to Hamburg.",
+      "register": "neutral",
+      "context": "station",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Fahrkarten, bitte!",
+      "tr": "Tickets, please!",
+      "register": "formal",
+      "context": "on the train",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo kauft man hier eine Fahrkarte?",
+      "tr": "Where do you buy a ticket here?",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Fahrkarte kaufen",
+      "tr": "to buy a ticket"
+     },
+     {
+      "text": "eine Fahrkarte nach …",
+      "tr": "a ticket to …"
+     },
+     {
+      "text": "der Fahrkartenautomat",
+      "tr": "the ticket machine"
+     },
+     {
+      "text": "hin und zurück",
+      "tr": "return (ticket)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Ticket",
+      "register": "neutral",
+      "nuance": "ticket – now the everyday word, also for trains (Deutsche Bahn sells “Tickets”)"
+     },
+     {
+      "word": "Fahrschein",
+      "register": "formal",
+      "nuance": "ticket – the word of transport companies and signs"
+     },
+     {
+      "word": "Billett",
+      "register": "regional",
+      "nuance": "ticket – Swiss"
+     }
+    ],
+    "etymology": {
+     "text": "fahren (“to travel”) + Karte (“card”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fahrkarte is literally a “travel card”; die Karte comes from Latin charta, from Greek χάρτης (a leaf of papyrus) – also the source of English card and chart."
+    ],
+    "pitfalls": [
+     "Fahrkarte is for buses, trams and trains; for a plane, a concert or a film say Ticket (Flugticket) or Karte (Kinokarte).",
+     "Feminine because of die Karte: die Fahrkarte, plural die Fahrkarten."
+    ],
+    "subtleties": [
+     "Riding without a ticket is schwarzfahren (“to ride black”), and the fine is heavy."
+    ]
+   }
+  },
+  {
+   "id": "de:Ticket",
+   "lemma": "Ticket",
+   "pos": "NOUN",
+   "senses": [
+    "tr.ticket"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Ticket",
+    "N;ACC;SG": "Ticket",
+    "N;DAT;SG": "Ticket",
+    "N;GEN;SG": "Tickets",
+    "N;NOM;PL": "Tickets",
+    "N;ACC;PL": "Tickets",
+    "N;DAT;PL": "Tickets",
+    "N;GEN;PL": "Tickets"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plane tickets, concert tickets, an app on the phone – the modern, international word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ticket (plane, train, concert, match)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.ticket"
+     },
+     {
+      "id": "s2",
+      "def": "ticket (in IT support: a request)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hast du schon ein Ticket für das Konzert?",
+      "tr": "Do you already have a ticket for the concert?",
+      "register": "informal",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kaufe die Tickets online.",
+      "tr": "I buy the tickets online.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Ticket ist auf meinem Handy.",
+      "tr": "The ticket is on my phone.",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Ticket kaufen",
+      "tr": "to buy a ticket"
+     },
+     {
+      "text": "das Flugticket",
+      "tr": "the plane ticket"
+     },
+     {
+      "text": "das Online-Ticket",
+      "tr": "the e-ticket"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Fahrkarte",
+      "register": "neutral",
+      "nuance": "ticket for bus, tram and train – the traditional word"
+     },
+     {
+      "word": "Eintrittskarte",
+      "register": "neutral",
+      "nuance": "admission ticket (museum, concert)"
+     },
+     {
+      "word": "Karte",
+      "register": "neutral",
+      "nuance": "ticket (short): zwei Karten für heute Abend"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from English ticket.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English ticket comes from Old French estiquet (a label) – the same word as étiquette and as German Etikett (label)."
+    ],
+    "pitfalls": [
+     "Neuter: das Ticket; plural die Tickets.",
+     "A parking or speeding ticket is not Ticket but der Strafzettel."
+    ],
+    "subtleties": [
+     "Ticket is spreading fast: Deutsche Bahn now sells “Tickets”, but older people and signs still say Fahrkarte."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

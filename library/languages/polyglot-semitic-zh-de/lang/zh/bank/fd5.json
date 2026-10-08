@@ -1,0 +1,6728 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f5.001",
+   "frame": "fr.go.to",
+   "text": "我去学校。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going to school.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.002",
+   "frame": "fr.go.to",
+   "text": "你去哪里？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where are you going?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.003",
+   "frame": "fr.go.to",
+   "text": "我坐公共汽车去学校。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I go to school by bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.004",
+   "frame": "fr.go.to",
+   "text": "我爸爸开车去超市。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.possessive"
+   ],
+   "gloss": "My dad drives to the supermarket.",
+   "alts": [
+    "我的爸爸开车去超市。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.005",
+   "frame": "fr.go.to",
+   "text": "我爸爸不开车去超市。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.possessive",
+    "fn.negation"
+   ],
+   "gloss": "My dad doesn’t drive to the supermarket.",
+   "variantOf": "zh.f5.004",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "我的爸爸不开车去超市。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.006",
+   "frame": "fr.go.to",
+   "text": "我们坐飞机去北京。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "飞机",
+     "l": "zh:feiji"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are flying to Beijing.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.007",
+   "frame": "fr.go.to",
+   "text": "她骑自行车去公园。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "骑",
+     "l": "zh:qi.ride"
+    },
+    {
+     "t": "自行车",
+     "l": "zh:zixingche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She cycles to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.008",
+   "frame": "fr.go.to",
+   "text": "他们坐火车去中国。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are going to China by train.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.009",
+   "frame": "fr.go.to",
+   "text": "我走路去银行。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "走路",
+     "l": "zh:zoulu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I walk to the bank.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.010",
+   "frame": "fr.go.to",
+   "text": "他们坐船去。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "船",
+     "l": "zh:chuan"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are going by boat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.011",
+   "frame": "fr.go.to",
+   "text": "他坐公共汽车去学校。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He goes to school by bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.012",
+   "frame": "fr.go.to",
+   "text": "他怎么去学校？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "怎么",
+     "l": "zh:zenme"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How does he get to school?",
+   "variantOf": "zh.f5.011",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.013",
+   "frame": "fr.go.to",
+   "text": "我坐公交车去，我妈妈走路去。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公交车",
+     "l": "zh:gongjiaoche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "走路",
+     "l": "zh:zoulu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I take the bus, my mum walks.",
+   "alts": [
+    "我妈妈走路去，我坐公交车去。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.014",
+   "frame": "fr.from",
+   "text": "他从北京来。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He comes from Beijing.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.015",
+   "frame": "fr.from",
+   "text": "他从哪里来？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where does he come from?",
+   "variantOf": "zh.f5.014",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.016",
+   "frame": "fr.from",
+   "text": "我们从学校回家。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We come home from school.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.017",
+   "frame": "fr.from",
+   "text": "从这里到机场很远吗？",
+   "tokens": [
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.prep.place",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is it far from here to the airport?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.018",
+   "frame": "fr.go.to",
+   "text": "妈妈什么时候回来？",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "什么时候",
+     "l": "zh:shenmeshihou"
+    },
+    {
+     "t": "回来",
+     "l": "zh:huilai"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh"
+   ],
+   "gloss": "When is Mum coming back?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.019",
+   "frame": "fr.go.to",
+   "text": "我们回家。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are going home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.020",
+   "frame": "fr.go.to",
+   "text": "我们回家吧。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s go home.",
+   "variantOf": "zh.f5.019",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.021",
+   "frame": "fr.go.to",
+   "text": "你来我家。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject",
+    "fn.possessive"
+   ],
+   "gloss": "You are coming to my place.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.022",
+   "frame": "fr.go.to",
+   "text": "你来我家吧！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.pronoun.subject",
+    "fn.possessive"
+   ],
+   "gloss": "Come to my place!",
+   "variantOf": "zh.f5.021",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.023",
+   "frame": "fr.go.to",
+   "text": "你坐出租车去机场。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You are taking a taxi to the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.024",
+   "frame": "fr.go.to",
+   "text": "你坐出租车去机场吧！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Take a taxi to the airport!",
+   "variantOf": "zh.f5.023",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.025",
+   "frame": "fr.go.to",
+   "text": "我们出去。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "出",
+     "l": "zh:chu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are going out.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.026",
+   "frame": "fr.go.to",
+   "text": "我们出去吧！",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "出",
+     "l": "zh:chu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s go out!",
+   "variantOf": "zh.f5.025",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.027",
+   "frame": "fr.command",
+   "text": "你在这里等我。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You wait for me here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.028",
+   "frame": "fr.command",
+   "text": "请在这里等我。",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Please wait for me here.",
+   "variantOf": "zh.f5.027",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.029",
+   "frame": "fr.command",
+   "text": "请不要在这里等我。",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "Please don’t wait for me here.",
+   "variantOf": "zh.f5.028",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.030",
+   "frame": "fr.command",
+   "text": "请进来！",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "进",
+     "l": "zh:jin.enter"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Please come in!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.031",
+   "frame": "fr.command",
+   "text": "我们走吧！",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "走",
+     "l": "zh:zou"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s go!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.032",
+   "frame": "fr.command",
+   "text": "你走吧！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "走",
+     "l": "zh:zou"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Go on, off you go!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.033",
+   "frame": "fr.command",
+   "text": "你别走！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "别",
+     "l": "zh:bie"
+    },
+    {
+     "t": "走",
+     "l": "zh:zou"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Don’t go!",
+   "variantOf": "zh.f5.032",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "别走！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.034",
+   "frame": "fr.command",
+   "text": "跑！",
+   "tokens": [
+    {
+     "t": "跑",
+     "l": "zh:pao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Run!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.035",
+   "frame": "fr.command",
+   "text": "别跑！",
+   "tokens": [
+    {
+     "t": "别",
+     "l": "zh:bie"
+    },
+    {
+     "t": "跑",
+     "l": "zh:pao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Don’t run!",
+   "variantOf": "zh.f5.034",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.036",
+   "frame": "fr.command",
+   "text": "你开车吧！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You drive!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.037",
+   "frame": "fr.command",
+   "text": "你别开车，坐出租车吧！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "别",
+     "l": "zh:bie"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Don’t drive — take a taxi!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.038",
+   "frame": "fr.command",
+   "text": "请留在家里。",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "留",
+     "l": "zh:liu.stay"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.place"
+   ],
+   "gloss": "Please stay at home.",
+   "alts": [
+    "请留在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.039",
+   "frame": "fr.command",
+   "text": "我们待在家里吧。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.place",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s stay at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.040",
+   "frame": "fr.from",
+   "text": "我们不想离开这里。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "离开",
+     "l": "zh:likai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We don’t want to leave here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.041",
+   "frame": "fr.go.to",
+   "text": "我们从这个门进去。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "进",
+     "l": "zh:jin.enter"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We go in through this door.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.042",
+   "frame": "fr.at.place",
+   "text": "我在车站等公共汽车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m waiting for the bus at the station.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.043",
+   "frame": "fr.go.to",
+   "text": "我不开车，我坐公交车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公交车",
+     "l": "zh:gongjiaoche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I don’t drive, I take the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.044",
+   "frame": "fr.go.to",
+   "text": "我们去中国旅行。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "旅行",
+     "l": "zh:lvxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are travelling to China.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.045",
+   "frame": "fr.want",
+   "text": "你喜欢旅游吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "旅游",
+     "l": "zh:lvyou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you like travelling?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.046",
+   "frame": "fr.at.place",
+   "text": "孩子们在公园里跑。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "跑",
+     "l": "zh:pao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.prep.place"
+   ],
+   "gloss": "The children are running in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.047",
+   "frame": "fr.who",
+   "text": "他开出租车。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "开",
+     "l": "zh:kai"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He drives a taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.048",
+   "frame": "fr.count",
+   "text": "我买两张票。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "票",
+     "l": "zh:piao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m buying two tickets.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.049",
+   "frame": "fr.have",
+   "text": "你有票吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "票",
+     "l": "zh:piao"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you have a ticket?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.050",
+   "frame": "fr.have",
+   "text": "我有一辆自行车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "自行车",
+     "l": "zh:zixingche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a bicycle.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.051",
+   "frame": "fr.poss",
+   "text": "那辆汽车是我哥哥的。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "汽车",
+     "l": "zh:qiche"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.possessive",
+    "fn.copula"
+   ],
+   "gloss": "That car is my older brother’s.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.052",
+   "frame": "fr.place.on",
+   "text": "街上有很多车。",
+   "tokens": [
+    {
+     "t": "街",
+     "l": "zh:jie"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.prep.place",
+    "fn.numerals"
+   ],
+   "gloss": "There are lots of cars in the street.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.053",
+   "frame": "fr.at.place",
+   "text": "机场有很多飞机。",
+   "tokens": [
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "飞机",
+     "l": "zh:feiji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "There are many planes at the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.054",
+   "frame": "fr.count",
+   "text": "车站有两列火车。",
+   "tokens": [
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "列",
+     "l": "zh:lie"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "There are two trains at the station.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.055",
+   "frame": "fr.go.to",
+   "text": "这架飞机去北京吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "架",
+     "l": "zh:jia.frame"
+    },
+    {
+     "t": "飞机",
+     "l": "zh:feiji"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.question.yesno"
+   ],
+   "gloss": "Does this plane go to Beijing?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.056",
+   "frame": "fr.count",
+   "text": "那里有一艘船。",
+   "tokens": [
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "艘",
+     "l": "zh:sou"
+    },
+    {
+     "t": "船",
+     "l": "zh:chuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.demonstrative"
+   ],
+   "gloss": "There is a ship over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.057",
+   "frame": "fr.day",
+   "text": "今天星期一。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "星期一",
+     "l": "zh:xingqiyi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Today is Monday.",
+   "alts": [
+    "今天是星期一。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.058",
+   "frame": "fr.day",
+   "text": "今天星期几？",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What day is it today?",
+   "variantOf": "zh.f5.057",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "今天是星期几？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.059",
+   "frame": "fr.day",
+   "text": "明天星期二。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "星期二",
+     "l": "zh:xingqier"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Tomorrow is Tuesday.",
+   "alts": [
+    "明天是星期二。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.060",
+   "frame": "fr.day",
+   "text": "昨天是星期天。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "星期天",
+     "l": "zh:xingqitian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula"
+   ],
+   "gloss": "Yesterday was Sunday.",
+   "alts": [
+    "昨天星期天。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.061",
+   "frame": "fr.day",
+   "text": "星期三我去学校。",
+   "tokens": [
+    {
+     "t": "星期三",
+     "l": "zh:xingqisan"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On Wednesday I go to school.",
+   "alts": [
+    "我星期三去学校。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.062",
+   "frame": "fr.day",
+   "text": "我星期四工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "星期四",
+     "l": "zh:xingqisi"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I work on Thursday.",
+   "alts": [
+    "星期四我工作。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.063",
+   "frame": "fr.day",
+   "text": "星期五晚上我们去饭馆吃饭。",
+   "tokens": [
+    {
+     "t": "星期五",
+     "l": "zh:xingqiwu"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On Friday evening we go out to eat at a restaurant.",
+   "alts": [
+    "我们星期五晚上去饭馆吃饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.064",
+   "frame": "fr.day",
+   "text": "星期六我们去公园。",
+   "tokens": [
+    {
+     "t": "星期六",
+     "l": "zh:xingqiliu"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On Saturday we go to the park.",
+   "alts": [
+    "我们星期六去公园。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.065",
+   "frame": "fr.day",
+   "text": "星期日我在家。",
+   "tokens": [
+    {
+     "t": "星期日",
+     "l": "zh:xingqiri"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On Sunday I’m at home.",
+   "alts": [
+    "我星期日在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.066",
+   "frame": "fr.day",
+   "text": "周末你去哪里？",
+   "tokens": [
+    {
+     "t": "周末",
+     "l": "zh:zhoumo"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where are you going at the weekend?",
+   "alts": [
+    "你周末去哪里？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.067",
+   "frame": "fr.day",
+   "text": "我每天早上喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "早上",
+     "l": "zh:zaoshang"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I drink coffee every morning.",
+   "alts": [
+    "每天早上我喝咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.068",
+   "frame": "fr.day",
+   "text": "上午我在办公室，下午我在家。",
+   "tokens": [
+    {
+     "t": "上午",
+     "l": "zh:shangwu"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "办公室",
+     "l": "zh:bangongshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "下午",
+     "l": "zh:xiawu"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In the morning I’m at the office, in the afternoon I’m at home.",
+   "alts": [
+    "我上午在办公室，下午在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.069",
+   "frame": "fr.day",
+   "text": "中午我们在学校吃午饭。",
+   "tokens": [
+    {
+     "t": "中午",
+     "l": "zh:zhongwu"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "At noon we have lunch at school.",
+   "alts": [
+    "我们中午在学校吃午饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.070",
+   "frame": "fr.day",
+   "text": "晚上我们在家。",
+   "tokens": [
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In the evening we’re at home.",
+   "alts": [
+    "我们晚上在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.071",
+   "frame": "fr.day",
+   "text": "他夜里回家。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "夜里",
+     "l": "zh:yeli"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He comes home in the night.",
+   "alts": [
+    "夜里他回家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.072",
+   "frame": "fr.day",
+   "text": "现在我在车站。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m at the station now.",
+   "alts": [
+    "我现在在车站。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.073",
+   "frame": "fr.day",
+   "text": "我们等一下去超市。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "等一下",
+     "l": "zh:dengyixia"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’ll go to the supermarket in a bit.",
+   "alts": [
+    "等一下我们去超市。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.074",
+   "frame": "fr.day",
+   "text": "我马上来！",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "马上",
+     "l": "zh:mashang"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m coming right away!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.075",
+   "frame": "fr.day",
+   "text": "一会我们去公园。",
+   "tokens": [
+    {
+     "t": "一会",
+     "l": "zh:yihui"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In a moment we’re going to the park.",
+   "alts": [
+    "我们一会去公园。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.076",
+   "frame": "fr.day",
+   "text": "我以后想去中国。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "以后",
+     "l": "zh:yihou"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Later on I want to go to China.",
+   "alts": [
+    "以后我想去中国。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.077",
+   "frame": "fr.day",
+   "text": "我们明天早一点去吧。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "早",
+     "l": "zh:zao"
+    },
+    {
+     "t": "一点",
+     "l": "zh:yidian"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.imperative",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s go a bit earlier tomorrow.",
+   "alts": [
+    "明天我们早一点去吧。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.078",
+   "frame": "fr.day",
+   "text": "你来晚了！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "晚",
+     "l": "zh:wan.late"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You’re late!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.079",
+   "frame": "fr.day",
+   "text": "现在很晚了，我们回家吧。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "晚",
+     "l": "zh:wan.late"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.aspect",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "It’s late now — let’s go home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.080",
+   "frame": "fr.day",
+   "text": "他总是坐公共汽车。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "总是",
+     "l": "zh:zongshi"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He always takes the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.081",
+   "frame": "fr.day",
+   "text": "我常常去公园。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I often go to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.082",
+   "frame": "fr.day",
+   "text": "我们经常在这家饭馆吃饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "经常",
+     "l": "zh:jingchang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.measure.word",
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We often eat at this restaurant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.083",
+   "frame": "fr.day",
+   "text": "有时候我走路去学校。",
+   "tokens": [
+    {
+     "t": "有时候",
+     "l": "zh:youshihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "走路",
+     "l": "zh:zoulu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Sometimes I walk to school.",
+   "alts": [
+    "我有时候走路去学校。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.084",
+   "frame": "fr.day",
+   "text": "我早上总是喝茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "早上",
+     "l": "zh:zaoshang"
+    },
+    {
+     "t": "总是",
+     "l": "zh:zongshi"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In the morning I always drink tea.",
+   "alts": [
+    "早上我总是喝茶。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.085",
+   "frame": "fr.count",
+   "text": "一个星期有七天。",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "七",
+     "l": "zh:qi"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "A week has seven days.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.086",
+   "frame": "fr.day",
+   "text": "我每天走路去学校。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "走路",
+     "l": "zh:zoulu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I walk to school every day.",
+   "alts": [
+    "每天我走路去学校。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.087",
+   "frame": "fr.day",
+   "text": "我下个星期去北京。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "下",
+     "l": "zh:xia"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going to Beijing next week.",
+   "alts": [
+    "下个星期我去北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.088",
+   "frame": "fr.day",
+   "text": "昨天我在家。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Yesterday I was at home.",
+   "alts": [
+    "我昨天在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.089",
+   "frame": "fr.count",
+   "text": "我买三张票。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "票",
+     "l": "zh:piao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ll buy three tickets.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.090",
+   "frame": "fr.count",
+   "text": "我买了三张票。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "票",
+     "l": "zh:piao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I bought three tickets.",
+   "variantOf": "zh.f5.089",
+   "variant": {
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.091",
+   "frame": "fr.go.to",
+   "text": "我们坐火车去北京。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are going to Beijing by train.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.092",
+   "frame": "fr.go.to",
+   "text": "我们坐火车去北京了。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have gone to Beijing by train.",
+   "variantOf": "zh.f5.091",
+   "variant": {
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.093",
+   "frame": "fr.eat",
+   "text": "他吃两个苹果。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats two apples.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.094",
+   "frame": "fr.eat",
+   "text": "他吃了两个苹果。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He ate two apples.",
+   "variantOf": "zh.f5.093",
+   "variant": {
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.095",
+   "frame": "fr.eat",
+   "text": "爷爷喝三杯咖啡。",
+   "tokens": [
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "Grandpa drinks three cups of coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.096",
+   "frame": "fr.eat",
+   "text": "爷爷喝了三杯咖啡。",
+   "tokens": [
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "Grandpa drank three cups of coffee.",
+   "variantOf": "zh.f5.095",
+   "variant": {
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.097",
+   "frame": "fr.at.place",
+   "text": "我们在北京待三天。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’re staying in Beijing for three days.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.098",
+   "frame": "fr.at.place",
+   "text": "我们在北京待了三天。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.prep.core",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We stayed in Beijing for three days.",
+   "variantOf": "zh.f5.097",
+   "variant": {
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.099",
+   "frame": "fr.go.to",
+   "text": "他来了。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He’s here (he has come).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.100",
+   "frame": "fr.go.to",
+   "text": "他没来。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He didn’t come.",
+   "variantOf": "zh.f5.099",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.101",
+   "frame": "fr.go.to",
+   "text": "我们走了！",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "走",
+     "l": "zh:zou"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’re off!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.102",
+   "frame": "fr.day",
+   "text": "星期天我们去奶奶家了。",
+   "tokens": [
+    {
+     "t": "星期天",
+     "l": "zh:xingqitian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On Sunday we went to Grandma’s.",
+   "alts": [
+    "我们星期天去奶奶家了。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.103",
+   "frame": "fr.day",
+   "text": "昨天晚上你去哪里了？",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.aspect",
+    "fn.question.wh",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where did you go last night?",
+   "alts": [
+    "你昨天晚上去哪里了？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.104",
+   "frame": "fr.go.to",
+   "text": "我去过北京。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve been to Beijing.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.105",
+   "frame": "fr.go.to",
+   "text": "我没去过北京。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.negation",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve never been to Beijing.",
+   "variantOf": "zh.f5.104",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.106",
+   "frame": "fr.go.to",
+   "text": "你坐过飞机吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "飞机",
+     "l": "zh:feiji"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Have you ever flown?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.107",
+   "frame": "fr.go.to",
+   "text": "我没坐过船。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "船",
+     "l": "zh:chuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.negation",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve never been on a boat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.108",
+   "frame": "fr.eat",
+   "text": "妈妈做饭。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.word.order"
+   ],
+   "gloss": "Mum cooks.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.109",
+   "frame": "fr.eat",
+   "text": "妈妈在做饭。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect"
+   ],
+   "gloss": "Mum is cooking.",
+   "variantOf": "zh.f5.108",
+   "variant": {
+    "Aspect": "IPFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.110",
+   "frame": "fr.eat",
+   "text": "他们吃早饭。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They have breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.111",
+   "frame": "fr.eat",
+   "text": "他们正在吃早饭。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "正在",
+     "l": "zh:zhengzai"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are having breakfast.",
+   "variantOf": "zh.f5.110",
+   "variant": {
+    "Aspect": "IPFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.112",
+   "frame": "fr.at.place",
+   "text": "我等公共汽车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I wait for the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.113",
+   "frame": "fr.at.place",
+   "text": "我在等公共汽车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m waiting for the bus.",
+   "variantOf": "zh.f5.112",
+   "variant": {
+    "Aspect": "IPFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.114",
+   "frame": "fr.at.place",
+   "text": "他正在开车。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "正在",
+     "l": "zh:zhengzai"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is driving.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.115",
+   "frame": "fr.at.place",
+   "text": "他没在开车。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "开车",
+     "l": "zh:kaiche"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.aspect",
+    "fn.negation",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He isn’t driving.",
+   "variantOf": "zh.f5.114",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.116",
+   "frame": "fr.command",
+   "text": "别等我了。",
+   "tokens": [
+    {
+     "t": "别",
+     "l": "zh:bie"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.aspect"
+   ],
+   "gloss": "Don’t wait for me any more.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.117",
+   "frame": "fr.time",
+   "text": "我一月去北京。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "一月",
+     "l": "zh:yiyue"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going to Beijing in January.",
+   "alts": [
+    "一月我去北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.118",
+   "frame": "fr.time",
+   "text": "我的生日在二月。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "二月",
+     "l": "zh:eryue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My birthday is in February.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.119",
+   "frame": "fr.time",
+   "text": "我们三月去中国旅行。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "三月",
+     "l": "zh:sanyue"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "旅行",
+     "l": "zh:lvxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’re travelling to China in March.",
+   "alts": [
+    "三月我们去中国旅行。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.120",
+   "frame": "fr.time",
+   "text": "四月我们去希腊。",
+   "tokens": [
+    {
+     "t": "四月",
+     "l": "zh:siyue"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "希腊",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In April we’re going to Greece.",
+   "alts": [
+    "我们四月去希腊。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.121",
+   "frame": "fr.time",
+   "text": "五月一号放假。",
+   "tokens": [
+    {
+     "t": "五月",
+     "l": "zh:wuyue"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "放假",
+     "l": "zh:fangjia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time"
+   ],
+   "gloss": "There is a holiday on May 1st.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.122",
+   "frame": "fr.time",
+   "text": "六月一号是我妹妹的生日。",
+   "tokens": [
+    {
+     "t": "六月",
+     "l": "zh:liuyue"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "June 1st is my younger sister’s birthday.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.123",
+   "frame": "fr.time",
+   "text": "学校七月放假。",
+   "tokens": [
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "七月",
+     "l": "zh:qiyue"
+    },
+    {
+     "t": "放假",
+     "l": "zh:fangjia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time"
+   ],
+   "gloss": "School breaks up in July.",
+   "alts": [
+    "七月学校放假。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.124",
+   "frame": "fr.time",
+   "text": "八月我们去旅游。",
+   "tokens": [
+    {
+     "t": "八月",
+     "l": "zh:bayue"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "旅游",
+     "l": "zh:lvyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In August we go on holiday.",
+   "alts": [
+    "我们八月去旅游。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.125",
+   "frame": "fr.time",
+   "text": "九月我回学校。",
+   "tokens": [
+    {
+     "t": "九月",
+     "l": "zh:jiuyue"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In September I go back to school.",
+   "alts": [
+    "我九月回学校。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.126",
+   "frame": "fr.time",
+   "text": "十月一号我们放假。",
+   "tokens": [
+    {
+     "t": "十月",
+     "l": "zh:shiyue"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "放假",
+     "l": "zh:fangjia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have a holiday on October 1st.",
+   "alts": [
+    "我们十月一号放假。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.127",
+   "frame": "fr.time",
+   "text": "他十一月回中国。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "十一月",
+     "l": "zh:shiyiyue"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He goes back to China in November.",
+   "alts": [
+    "十一月他回中国。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.128",
+   "frame": "fr.time",
+   "text": "十二月我回家。",
+   "tokens": [
+    {
+     "t": "十二月",
+     "l": "zh:shieryue"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In December I go home.",
+   "alts": [
+    "我十二月回家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.129",
+   "frame": "fr.time",
+   "text": "春天我们去公园。",
+   "tokens": [
+    {
+     "t": "春天",
+     "l": "zh:chuntian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In spring we go to the park.",
+   "alts": [
+    "我们春天去公园。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.130",
+   "frame": "fr.want",
+   "text": "我喜欢夏天。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "夏天",
+     "l": "zh:xiatian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like summer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.131",
+   "frame": "fr.time",
+   "text": "秋天我们去北京旅游。",
+   "tokens": [
+    {
+     "t": "秋天",
+     "l": "zh:qiutian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "旅游",
+     "l": "zh:lvyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In autumn we go to Beijing on holiday.",
+   "alts": [
+    "我们秋天去北京旅游。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.132",
+   "frame": "fr.time",
+   "text": "冬天我常常在家。",
+   "tokens": [
+    {
+     "t": "冬天",
+     "l": "zh:dongtian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In winter I’m often at home.",
+   "alts": [
+    "我冬天常常在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.133",
+   "frame": "fr.count",
+   "text": "一年有十二个月。",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "年",
+     "l": "zh:nian"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "十二",
+     "l": "zh:shier"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "A year has twelve months.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.134",
+   "frame": "fr.count",
+   "text": "一周有七天。",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "周",
+     "l": "zh:zhou"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "七",
+     "l": "zh:qi"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "There are seven days in a week.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.135",
+   "frame": "fr.count",
+   "text": "一个小时有六十分钟。",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小时",
+     "l": "zh:xiaoshi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "六十",
+     "l": "zh:liushi"
+    },
+    {
+     "t": "分钟",
+     "l": "zh:fenzhong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "An hour has sixty minutes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.136",
+   "frame": "fr.time",
+   "text": "我等了你一个钟头！",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "钟头",
+     "l": "zh:zhongtou"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I waited an hour for you!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.137",
+   "frame": "fr.time",
+   "text": "现在八点半。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "半",
+     "l": "zh:ban"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day"
+   ],
+   "gloss": "It’s half past eight now.",
+   "alts": [
+    "现在是八点半。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.138",
+   "frame": "fr.time",
+   "text": "现在几点？",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What time is it now?",
+   "variantOf": "zh.f5.137",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.139",
+   "frame": "fr.time",
+   "text": "我七点吃早饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "七",
+     "l": "zh:qi"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have breakfast at seven.",
+   "alts": [
+    "七点我吃早饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.140",
+   "frame": "fr.time",
+   "text": "我们下午三点十分到北京。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "下午",
+     "l": "zh:xiawu"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "十",
+     "l": "zh:shi.num"
+    },
+    {
+     "t": "分",
+     "l": "zh:fen.minute"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We arrive in Beijing at 3:10 p.m.",
+   "alts": [
+    "下午三点十分我们到北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.141",
+   "frame": "fr.time",
+   "text": "今天五月八号。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "五月",
+     "l": "zh:wuyue"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day"
+   ],
+   "gloss": "Today is May 8th.",
+   "alts": [
+    "今天是五月八号。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.142",
+   "frame": "fr.time",
+   "text": "今天几号？",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What’s the date today?",
+   "variantOf": "zh.f5.141",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "今天是几号？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.143",
+   "frame": "fr.time",
+   "text": "我的生日是三月九号。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "三月",
+     "l": "zh:sanyue"
+    },
+    {
+     "t": "九",
+     "l": "zh:jiu"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.copula"
+   ],
+   "gloss": "My birthday is March 9th.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.144",
+   "frame": "fr.time",
+   "text": "你的生日是几月几号？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.question.wh",
+    "fn.possessive",
+    "fn.copula"
+   ],
+   "gloss": "When is your birthday?",
+   "variantOf": "zh.f5.143",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.145",
+   "frame": "fr.place.on",
+   "text": "票上的日期不对。",
+   "tokens": [
+    {
+     "t": "票",
+     "l": "zh:piao"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "日期",
+     "l": "zh:riqi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "对",
+     "l": "zh:dui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.prep.place"
+   ],
+   "gloss": "The date on the ticket is wrong.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.146",
+   "frame": "fr.time",
+   "text": "八点以前我在家。",
+   "tokens": [
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Before eight I’m at home.",
+   "alts": [
+    "我八点以前在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.147",
+   "frame": "fr.time",
+   "text": "星期五之前我回北京。",
+   "tokens": [
+    {
+     "t": "星期五",
+     "l": "zh:xingqiwu"
+    },
+    {
+     "t": "之前",
+     "l": "zh:zhiqian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going back to Beijing before Friday.",
+   "alts": [
+    "我星期五之前回北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.148",
+   "frame": "fr.time",
+   "text": "吃饭以后我们去公园。",
+   "tokens": [
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "以后",
+     "l": "zh:yihou"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "After eating we go to the park.",
+   "alts": [
+    "我们吃饭以后去公园。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.149",
+   "frame": "fr.time",
+   "text": "吃饭之后我喝一杯茶。",
+   "tokens": [
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "之后",
+     "l": "zh:zhihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "After the meal I drink a cup of tea.",
+   "alts": [
+    "我吃饭之后喝一杯茶。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.150",
+   "frame": "fr.time",
+   "text": "我们工作到六点。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We work until six.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.151",
+   "frame": "fr.time",
+   "text": "我们直到星期五都在北京。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "直到",
+     "l": "zh:zhidao"
+    },
+    {
+     "t": "星期五",
+     "l": "zh:xingqiwu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are in Beijing right up to Friday.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.152",
+   "frame": "fr.time",
+   "text": "自从他来北京，我们常常一起吃饭。",
+   "tokens": [
+    {
+     "t": "自从",
+     "l": "zh:zicong"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Since he came to Beijing, we often eat together.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.153",
+   "frame": "fr.time",
+   "text": "三年以来他都在北京工作。",
+   "tokens": [
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "年",
+     "l": "zh:nian"
+    },
+    {
+     "t": "以来",
+     "l": "zh:yilai"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "For the past three years he has worked in Beijing.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.154",
+   "frame": "fr.time",
+   "text": "假期期间我在家。",
+   "tokens": [
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "期间",
+     "l": "zh:qijian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "During the holidays I’m at home.",
+   "alts": [
+    "我假期期间在家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.155",
+   "frame": "fr.time",
+   "text": "我们吃饭的时候不喝咖啡。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We don’t drink coffee while we eat.",
+   "alts": [
+    "吃饭的时候我们不喝咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.156",
+   "frame": "fr.wh",
+   "text": "你什么时候放假？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "什么时候",
+     "l": "zh:shenmeshihou"
+    },
+    {
+     "t": "放假",
+     "l": "zh:fangjia"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When are your holidays?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.157",
+   "frame": "fr.time",
+   "text": "这个假期我们去旅游。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "旅游",
+     "l": "zh:lvyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "This holiday we’re going travelling.",
+   "alts": [
+    "我们这个假期去旅游。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.158",
+   "frame": "fr.day",
+   "text": "明天是我妈妈的生日。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Tomorrow is my mother’s birthday.",
+   "alts": [
+    "明天是我的妈妈的生日。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.159",
+   "frame": "fr.time",
+   "text": "我去三个月。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going for three months.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.160",
+   "frame": "fr.time",
+   "text": "我五月去中国。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "五月",
+     "l": "zh:wuyue"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going to China in May.",
+   "alts": [
+    "五月我去中国。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.161",
+   "frame": "fr.time",
+   "text": "我五月不去中国。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "五月",
+     "l": "zh:wuyue"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.negation",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m not going to China in May.",
+   "variantOf": "zh.f5.160",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "五月我不去中国。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.162",
+   "frame": "fr.time",
+   "text": "从星期一到星期五我工作。",
+   "tokens": [
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "星期一",
+     "l": "zh:xingqiyi"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "星期五",
+     "l": "zh:xingqiwu"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I work from Monday to Friday.",
+   "alts": [
+    "我从星期一到星期五工作。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.163",
+   "frame": "fr.time",
+   "text": "我在北京待了两周。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "周",
+     "l": "zh:zhou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.aspect",
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I stayed in Beijing for two weeks.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.164",
+   "frame": "fr.time",
+   "text": "每个月我都回家。",
+   "tokens": [
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I go home every month.",
+   "alts": [
+    "我每个月都回家。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.165",
+   "frame": "fr.time",
+   "text": "我每天工作八个小时。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小时",
+     "l": "zh:xiaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I work eight hours a day.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.166",
+   "frame": "fr.command",
+   "text": "请等五分钟。",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "分钟",
+     "l": "zh:fenzhong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.time"
+   ],
+   "gloss": "Please wait five minutes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.167",
+   "frame": "fr.time",
+   "text": "两点半我们离开。",
+   "tokens": [
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "半",
+     "l": "zh:ban"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "离开",
+     "l": "zh:likai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We leave at half past two.",
+   "alts": [
+    "我们两点半离开。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.168",
+   "frame": "fr.time",
+   "text": "上个月我去了北京。",
+   "tokens": [
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Last month I went to Beijing.",
+   "alts": [
+    "我上个月去了北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.169",
+   "frame": "fr.time",
+   "text": "现在八点十分。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "十",
+     "l": "zh:shi.num"
+    },
+    {
+     "t": "分",
+     "l": "zh:fen.minute"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.time.day"
+   ],
+   "gloss": "It’s ten past eight now.",
+   "alts": [
+    "现在是八点十分。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.170",
+   "frame": "fr.time",
+   "text": "你们几号放假？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "放假",
+     "l": "zh:fangjia"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "What date do your holidays start?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f5.171",
+   "frame": "fr.time",
+   "text": "日期是十二月二十号。",
+   "tokens": [
+    {
+     "t": "日期",
+     "l": "zh:riqi"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "十二月",
+     "l": "zh:shieryue"
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.copula"
+   ],
+   "gloss": "The date is December 20th.",
+   "level": "A1"
+  }
+ ]
+}

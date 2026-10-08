@@ -827,7 +827,3018 @@
      "想 = a wish (softer, may not happen); 要 = a firmer intention. 我想去 ‘I’d like to go’, 我要去 ‘I’m going to go’."
     ]
    }
+  },
+  {
+   "id": "zh:zuofan",
+   "lemma": "做饭",
+   "trad": "做飯",
+   "pinyin": "zuò fàn",
+   "pos": "VERB",
+   "senses": [
+    "verb.cook"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The kitchen at home: rice in the cooker, a wok, someone cooking for the family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to cook, to make a meal",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我妈妈每天做饭。",
+      "py": "Wǒ māma měitiān zuòfàn.",
+      "tr": "My mother cooks every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "今天谁做饭？",
+      "py": "Jīntiān shéi zuòfàn?",
+      "tr": "Who’s cooking today?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他不会做饭。",
+      "py": "Tā bú huì zuòfàn.",
+      "tr": "He can’t cook.",
+      "register": "neutral",
+      "context": "skills",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在家做饭",
+      "tr": "to cook at home"
+     },
+     {
+      "text": "学做饭",
+      "tr": "to learn to cook"
+     },
+     {
+      "text": "给孩子做饭",
+      "tr": "to cook for the children"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "巧妇难为无米之炊",
+      "tr": "even a clever housewife cannot cook a meal without rice",
+      "kind": "proverb",
+      "meaning": "you cannot do a job without the means to do it",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "烧饭",
+      "register": "regional",
+      "nuance": "shāofàn: the same, common in the south (Shanghai and the Yangtze region)"
+     },
+     {
+      "word": "煮饭",
+      "register": "regional",
+      "nuance": "zhǔfàn: ‘boil rice’ — also ‘to cook’ in the south and in Taiwan"
+     },
+     {
+      "word": "下厨",
+      "register": "literary",
+      "nuance": "xiàchú: ‘go down to the kitchen’ — to do the cooking (often said of someone who rarely does)"
+     },
+     {
+      "word": "烹饪",
+      "register": "formal",
+      "nuance": "pēngrèn: cooking, cuisine as an art or subject (烹饪学校 cookery school)"
+     }
+    ],
+    "etymology": {
+     "text": "做 ‘to do, to make’ (originally a colloquial variant of 作) + 饭 ‘cooked rice; meal’: ‘to make the meal’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Turkish yemek yapmak and Greek φτιάχνω φαγητό, Chinese says ‘make the meal’ — 做饭.",
+     "The proverb about the housewife without rice is how Chinese say ‘you can’t make bricks without straw’."
+    ],
+    "pitfalls": [
+     "做饭 already contains its object 饭: say 我做饭 ‘I cook’, but for a dish use 做 + the dish: 做鱼 ‘cook fish’, 做汤 ‘make soup’ (not *做饭鱼).",
+     "It is a separable verb: other words can come between 做 and 饭 (做了饭 ‘cooked’, 做什么饭 ‘cook what?’) — this comes later."
+    ],
+    "subtleties": [
+     "做饭 is cooking a meal in general; the technique has its own verb: 炒 ‘stir-fry’, 煮 ‘boil’, 蒸 ‘steam’, 烤 ‘roast, bake’."
+    ]
+   }
+  },
+  {
+   "id": "zh:mianbao",
+   "lemma": "面包",
+   "trad": "麵包",
+   "pinyin": "miàn bāo",
+   "pos": "NOUN",
+   "senses": [
+    "food.bread"
+   ],
+   "measure": [
+    "个",
+    "片",
+    "块"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bakeries, breakfast toast, soft sweet buns — Western-style food in China.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bread",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.bread"
+     },
+     {
+      "id": "s2",
+      "def": "a bun, a roll (any Western-style baked bread product)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我早上吃面包。",
+      "py": "Wǒ zǎoshang chī miànbāo.",
+      "tr": "I eat bread in the morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "我去超市买个面包。",
+      "py": "Wǒ qù chāoshì mǎi ge miànbāo.",
+      "tr": "I’m going to the supermarket to buy a loaf of bread.",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "这家店的面包很好吃。",
+      "py": "Zhè jiā diàn de miànbāo hěn hǎochī.",
+      "tr": "The bread in this shop is very good.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一片面包",
+      "tr": "a slice of bread"
+     },
+     {
+      "text": "烤面包",
+      "tr": "toast, toasted bread"
+     },
+     {
+      "text": "面包店",
+      "tr": "bakery"
+     },
+     {
+      "text": "全麦面包",
+      "tr": "wholemeal bread"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "吐司",
+      "register": "colloquial",
+      "nuance": "tǔsī: sliced white bread, toast (from English toast)"
+     },
+     {
+      "word": "馒头",
+      "register": "neutral",
+      "nuance": "mántou: the Chinese steamed bun — the traditional northern staple, not ‘bread’"
+     }
+    ],
+    "etymology": {
+     "text": "麵 ‘flour; noodles’ (麥 ‘wheat’ + phonetic 面) + 包 ‘bundle; bun’: a ‘flour bun’. Simplified 面 merges 麵 with 面 ‘face’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In simplified script 麵 ‘flour’ and 面 ‘face’ became one character, so 面包 looks like ‘face bun’ — the traditional 麵包 shows the wheat 麥."
+    ],
+    "pitfalls": [
+     "面包 is Western-style bread; Chinese steamed buns are 馒头 (plain) and 包子 (filled) — not 面包.",
+     "Slices take 片: 一片面包 ‘a slice of bread’; a loaf or a roll takes 个."
+    ],
+    "subtleties": [
+     "In mainland usage 面包 also covers soft sweet rolls and buns from the bakery, not only loaves."
+    ]
+   }
+  },
+  {
+   "id": "zh:nailao",
+   "lemma": "奶酪",
+   "trad": "奶酪",
+   "pinyin": "nǎi lào",
+   "pos": "NOUN",
+   "senses": [
+    "food.cheese"
+   ],
+   "measure": [
+    "块"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A Western import on the Chinese table: pizza, cheesecake, a piece of Gouda.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheese",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.cheese"
+     },
+     {
+      "id": "s2",
+      "def": "(figurative) vested interests (from the book title ‘Who Moved My Cheese?’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(Taiwan) panna cotta",
+      "register": [
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢吃奶酪。",
+      "py": "Wǒ xǐhuan chī nǎilào.",
+      "tr": "I like cheese.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "给我一块奶酪。",
+      "py": "Gěi wǒ yí kuài nǎilào.",
+      "tr": "Give me a piece of cheese.",
+      "register": "informal",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "这个改革动了很多人的奶酪。",
+      "py": "Zhège gǎigé dòngle hěn duō rén de nǎilào.",
+      "tr": "This reform touched many people’s vested interests.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一块奶酪",
+      "tr": "a piece of cheese"
+     },
+     {
+      "text": "奶酪蛋糕",
+      "tr": "cheesecake"
+     },
+     {
+      "text": "吃奶酪",
+      "tr": "to eat cheese"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "谁动了我的奶酪？",
+      "tr": "who moved my cheese?",
+      "kind": "saying",
+      "meaning": "who is threatening my interests? — from the Chinese title of Spencer Johnson’s book Who Moved My Cheese?",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "芝士",
+      "register": "colloquial",
+      "nuance": "zhīshì: from Cantonese (cheese) — very common on menus: 芝士蛋糕, 芝士披萨"
+     },
+     {
+      "word": "起司",
+      "register": "regional",
+      "nuance": "qǐsī: the Taiwan word, also from English cheese",
+      "region": "Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "奶 ‘milk’ + 酪 ‘curd, fermented milk product’ (酉 ‘fermented drink’ + phonetic 各). Pulleyblank compared 酪 with Mongolian айраг and Turkish ayran.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "酪 may be related to Turkish ayran and Mongolian airag (Pulleyblank’s proposal) — a memory of the dairy cultures of the steppe.",
+     "Dairy is not traditional in Han Chinese cooking, but Yunnan has its own cheeses: 乳饼 and the Bai people’s 乳扇."
+    ],
+    "pitfalls": [
+     "Three words, one food: 奶酪 (standard), 芝士 (menus, from Cantonese), 起司 (Taiwan).",
+     "In Taiwan the second syllable is read luò (nǎiluò)."
+    ],
+    "subtleties": [
+     "Pieces take 块 (一块奶酪); slices take 片 (一片奶酪)."
+    ]
+   }
+  },
+  {
+   "id": "zh:jidan",
+   "lemma": "鸡蛋",
+   "trad": "雞蛋",
+   "pinyin": "jī dàn",
+   "pos": "NOUN",
+   "senses": [
+    "food.egg"
+   ],
+   "measure": [
+    "个",
+    "颗"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Breakfast, tomato-and-egg, the simplest home cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(hen’s) egg",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.egg"
+     },
+     {
+      "id": "s2",
+      "def": "(regional) a zero score, a ‘goose egg’",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我早上吃两个鸡蛋。",
+      "py": "Wǒ zǎoshang chī liǎng ge jīdàn.",
+      "tr": "I eat two eggs in the morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈去市场买鸡蛋。",
+      "py": "Māma qù shìchǎng mǎi jīdàn.",
+      "tr": "Mum goes to the market to buy eggs.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "西红柿炒鸡蛋是一道家常菜。",
+      "py": "Xīhóngshì chǎo jīdàn shì yí dào jiāchángcài.",
+      "tr": "Stir-fried tomato and egg is an everyday home dish.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个鸡蛋",
+      "tr": "an egg"
+     },
+     {
+      "text": "煮鸡蛋",
+      "tr": "a boiled egg; to boil eggs"
+     },
+     {
+      "text": "炒鸡蛋",
+      "tr": "scrambled eggs"
+     },
+     {
+      "text": "西红柿炒鸡蛋",
+      "tr": "stir-fried tomato and egg"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "鸡蛋里挑骨头",
+      "tr": "to look for bones in an egg",
+      "kind": "idiom",
+      "meaning": "to nitpick, to find fault where there is none",
+      "register": "colloquial"
+     },
+     {
+      "text": "拿鸡蛋碰石头",
+      "tr": "to knock an egg against a stone",
+      "kind": "saying",
+      "meaning": "to take on a much stronger opponent; a hopeless fight",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "蛋",
+      "register": "colloquial",
+      "nuance": "dàn: egg in general, mostly in compounds — 鸭蛋 duck egg, 蛋糕 cake"
+     },
+     {
+      "word": "卵",
+      "register": "technical",
+      "nuance": "luǎn: egg, ovum — in biology and the old written language"
+     }
+    ],
+    "etymology": {
+     "text": "鸡 ‘chicken’ + 蛋 ‘egg’. 蛋 (虫 ‘snake, insect’ + phonetic 延, abbreviated) first meant snake eggs; it is a late character.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "蛋 is a late character: it is found neither on the oracle bones nor in the Shuowen dictionary; the old word for ‘egg’ is 卵."
+    ],
+    "pitfalls": [
+     "蛋 alone is colloquial — and it appears in insults: 笨蛋 ‘idiot’, 坏蛋 ‘bad guy’. For food say 鸡蛋.",
+     "Eggs are counted with 个: 两个鸡蛋 (not *两鸡蛋)."
+    ],
+    "subtleties": [
+     "Other eggs name the bird: 鸭蛋 ‘duck egg’, 鹅蛋 ‘goose egg’ — 鸡蛋 is literally ‘chicken egg’."
+    ]
+   }
+  },
+  {
+   "id": "zh:rou",
+   "lemma": "肉",
+   "trad": "肉",
+   "pinyin": "ròu",
+   "pos": "NOUN",
+   "senses": [
+    "food.meat"
+   ],
+   "measure": [
+    "块",
+    "片"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The centre of a festive meal — and in China, by default, pork.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "meat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.meat"
+     },
+     {
+      "id": "s2",
+      "def": "(specifically) pork",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "flesh, pulp (of fruit)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不吃肉。",
+      "py": "Wǒ bù chī ròu.",
+      "tr": "I don’t eat meat.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "这块肉很好吃。",
+      "py": "Zhè kuài ròu hěn hǎochī.",
+      "tr": "This piece of meat is delicious.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "饺子里是肉还是菜？",
+      "py": "Jiǎozi lǐ shì ròu háishi cài?",
+      "tr": "Are the dumplings filled with meat (pork) or vegetables?",
+      "register": "colloquial",
+      "context": "dumplings",
+      "sense": "s2"
+     },
+     {
+      "text": "芒果的果肉很甜。",
+      "py": "Mángguǒ de guǒròu hěn tián.",
+      "tr": "The flesh of the mango is very sweet.",
+      "register": "neutral",
+      "context": "fruit",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "猪肉",
+      "tr": "pork"
+     },
+     {
+      "text": "牛肉",
+      "tr": "beef"
+     },
+     {
+      "text": "羊肉",
+      "tr": "lamb, mutton"
+     },
+     {
+      "text": "一块肉",
+      "tr": "a piece of meat"
+     },
+     {
+      "text": "吃肉",
+      "tr": "to eat meat"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "挂羊头卖狗肉",
+      "tr": "hang up a sheep’s head and sell dog meat",
+      "kind": "idiom",
+      "meaning": "to advertise one thing and sell another; false advertising",
+      "register": "colloquial"
+     },
+     {
+      "text": "肉包子打狗",
+      "tr": "to throw a meat bun at a dog",
+      "kind": "saying",
+      "meaning": "gone for good (said of a loan or gift that will never come back)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "荤",
+      "register": "neutral",
+      "nuance": "hūn: meat or fish dishes, as opposed to 素 vegetarian food — 吃荤, 荤菜"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "素",
+      "note": "sù: vegetarian food"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a slice of meat (or ribs). Probably from Proto-Sino-Tibetan *now ‘tender, soft’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "As a component 肉 is squeezed into 月, the ‘meat moon’: most body-part characters with 月 on the left — 肚 belly, 脸 face, 胖 fat — are ‘meat’, not ‘moon’."
+    ],
+    "pitfalls": [
+     "肉 on its own often means pork; say 牛肉 (beef), 羊肉 (lamb), 鸡肉 (chicken) to be clear — important for Muslim or vegetarian guests.",
+     "Not *一个肉: pieces take 块, slices take 片."
+    ],
+    "subtleties": [
+     "At the market meat is sold by weight, by the 斤 jīn (500 g)."
+    ]
+   }
+  },
+  {
+   "id": "zh:yu",
+   "lemma": "鱼",
+   "trad": "魚",
+   "pinyin": "yú",
+   "pos": "NOUN",
+   "senses": [
+    "food.fish"
+   ],
+   "measure": [
+    "条"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A whole steamed fish on the table — and wishes for plenty at New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fish (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fish"
+     },
+     {
+      "id": "s2",
+      "def": "fish (the animal)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们今天吃鱼。",
+      "py": "Wǒmen jīntiān chī yú.",
+      "tr": "We’re having fish today.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "我爸爸会做鱼。",
+      "py": "Wǒ bàba huì zuò yú.",
+      "tr": "My dad knows how to cook fish.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "河里有很多鱼。",
+      "py": "Hé lǐ yǒu hěn duō yú.",
+      "tr": "There are many fish in the river.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一条鱼",
+      "tr": "a fish"
+     },
+     {
+      "text": "红烧鱼",
+      "tr": "fish braised in soy sauce"
+     },
+     {
+      "text": "鱼汤",
+      "tr": "fish soup"
+     },
+     {
+      "text": "钓鱼",
+      "tr": "to go fishing"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "如鱼得水",
+      "tr": "like a fish that finds water",
+      "kind": "idiom",
+      "meaning": "in one’s element",
+      "register": "neutral"
+     },
+     {
+      "text": "鱼与熊掌不可兼得",
+      "tr": "you cannot have both the fish and the bear’s paw",
+      "kind": "proverb",
+      "meaning": "you can’t have it both ways (after Mencius)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "鱼肉",
+      "register": "neutral",
+      "nuance": "yúròu: the flesh of the fish, as an ingredient"
+     },
+     {
+      "word": "海鲜",
+      "register": "neutral",
+      "nuance": "hǎixiān: seafood in general — fish, shrimp, crab, shellfish"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a fish. From Proto-Sino-Tibetan *s-ŋja; related to 渔 ‘to fish’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "鱼 yú sounds like 余 yú ‘surplus’: 年年有余 ‘may every year bring plenty’ — that is why a whole fish is served on New Year’s Eve."
+    ],
+    "pitfalls": [
+     "A whole fish is 一条鱼; a piece of fish is 一块鱼.",
+     "鱼 yú (2nd tone) — not 雨 yǔ ‘rain’ (3rd tone)."
+    ],
+    "subtleties": [
+     "At banquets fish is usually served whole, with the head and the tail."
+    ]
+   }
+  },
+  {
+   "id": "zh:jirou",
+   "lemma": "鸡肉",
+   "trad": "雞肉",
+   "pinyin": "jī ròu",
+   "pos": "NOUN",
+   "senses": [
+    "food.chicken"
+   ],
+   "measure": [
+    "块"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday meat: soups, rice dishes, fast food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicken (the meat)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.chicken"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不吃猪肉，只吃鸡肉。",
+      "py": "Wǒ bù chī zhūròu, zhǐ chī jīròu.",
+      "tr": "I don’t eat pork, only chicken.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "这个汤里有鸡肉。",
+      "py": "Zhège tāng lǐ yǒu jīròu.",
+      "tr": "There is chicken in this soup.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "鸡肉比牛肉便宜。",
+      "py": "Jīròu bǐ niúròu piányi.",
+      "tr": "Chicken is cheaper than beef.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一块鸡肉",
+      "tr": "a piece of chicken"
+     },
+     {
+      "text": "鸡肉饭",
+      "tr": "chicken rice"
+     },
+     {
+      "text": "鸡肉沙拉",
+      "tr": "chicken salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "鸡",
+      "register": "neutral",
+      "nuance": "jī: the bird — and the dish when it is cooked whole or in pieces: 吃鸡, 宫保鸡丁 (kung pao chicken)"
+     }
+    ],
+    "etymology": {
+     "text": "鸡 ‘chicken’ (隹 ‘bird’ + phonetic 奚; possibly onomatopoeic) + 肉 ‘meat’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "鸡 jī may imitate the bird’s call (Schuessler); Wiktionary compares Vietnamese gà and Proto-Tai *kaj.",
+     "吃鸡 ‘to eat chicken’ is also gamers’ slang for winning a battle-royale game (from ‘winner winner, chicken dinner’)."
+    ],
+    "pitfalls": [
+     "On menus chicken dishes just say 鸡 (宫保鸡丁); 鸡肉 is the meat as an ingredient.",
+     "In slang 鸡 can also mean ‘prostitute’; 鸡肉 is never ambiguous."
+    ],
+    "subtleties": [
+     "A piece is 一块鸡肉; a whole bird is 一只鸡."
+    ]
+   }
+  },
+  {
+   "id": "zh:mifan",
+   "lemma": "米饭",
+   "trad": "米飯",
+   "pinyin": "mǐ fàn",
+   "pos": "NOUN",
+   "senses": [
+    "food.rice"
+   ],
+   "measure": [
+    "碗"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bowl of steaming white rice — the base of the southern Chinese meal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cooked rice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.rice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我要一碗米饭。",
+      "py": "Wǒ yào yì wǎn mǐfàn.",
+      "tr": "I’d like a bowl of rice.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "南方人每天吃米饭。",
+      "py": "Nánfāngrén měitiān chī mǐfàn.",
+      "tr": "Southerners eat rice every day.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "米饭好了，吃饭吧！",
+      "py": "Mǐfàn hǎo le, chīfàn ba!",
+      "tr": "The rice is ready — let’s eat!",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一碗米饭",
+      "tr": "a bowl of rice"
+     },
+     {
+      "text": "白米饭",
+      "tr": "plain white rice"
+     },
+     {
+      "text": "米饭和菜",
+      "tr": "rice and dishes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "饭",
+      "register": "neutral",
+      "nuance": "fàn: cooked rice — and also ‘meal’"
+     },
+     {
+      "word": "白饭",
+      "register": "regional",
+      "nuance": "báifàn: plain rice (common in the south and in Taiwan)"
+     }
+    ],
+    "etymology": {
+     "text": "米 ‘husked rice grain’ (pictogram of grains; from Proto-Sino-Tibetan *mej ‘grain’) + 饭 ‘cooked grain’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "米 also means ‘metre’ (short for 米突, from French mètre): 一米 ‘one metre’."
+    ],
+    "pitfalls": [
+     "Uncooked rice is 大米 or 米; cooked rice is 米饭 — and rice growing in the field is 稻 or 水稻."
+    ],
+    "subtleties": [
+     "Rice is ordered and counted by the bowl: 两碗米饭 ‘two bowls of rice’."
+    ]
+   }
+  },
+  {
+   "id": "zh:fan",
+   "lemma": "饭",
+   "trad": "飯",
+   "pinyin": "fàn",
+   "pos": "NOUN",
+   "senses": [
+    "food.rice"
+   ],
+   "measure": [
+    "碗",
+    "顿"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Rice and the meal itself — 吃饭 ‘eat rice’ means to eat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cooked rice (or other cooked grain)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.rice"
+     },
+     {
+      "id": "s2",
+      "def": "a meal",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(slang, neologism) fans, from English fan (饭圈 ‘fandom’)",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "饭在锅里。",
+      "py": "Fàn zài guō lǐ.",
+      "tr": "The rice is in the pot.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "他吃了两碗饭。",
+      "py": "Tā chīle liǎng wǎn fàn.",
+      "tr": "He ate two bowls of rice.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "你吃饭了吗？",
+      "py": "Nǐ chīfàn le ma?",
+      "tr": "Have you eaten? (a greeting)",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s2"
+     },
+     {
+      "text": "我们一起吃饭吧。",
+      "py": "Wǒmen yìqǐ chīfàn ba.",
+      "tr": "Let’s have a meal together.",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃饭",
+      "tr": "to eat, have a meal"
+     },
+     {
+      "text": "做饭",
+      "tr": "to cook"
+     },
+     {
+      "text": "一碗饭",
+      "tr": "a bowl of rice"
+     },
+     {
+      "text": "一顿饭",
+      "tr": "a meal"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "铁饭碗",
+      "tr": "an iron rice bowl",
+      "kind": "idiom",
+      "meaning": "a secure job for life (traditionally in the state sector)",
+      "register": "colloquial"
+     },
+     {
+      "text": "吃软饭",
+      "tr": "to eat soft rice",
+      "kind": "slang",
+      "meaning": "to live off a woman (said of a man)",
+      "register": [
+       "colloquial",
+       "pejorative"
+      ]
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "米饭",
+      "register": "neutral",
+      "nuance": "mǐfàn: rice specifically — never ‘meal’"
+     },
+     {
+      "word": "餐",
+      "register": "formal",
+      "nuance": "cān: meal, in compounds and on menus — 早餐, 午餐, 西餐 ‘Western food’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 食 ‘food’ + phonetic 反. Compare Proto-Mon-Khmer *puuŋ ‘cooked rice’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "饭 is also internet slang for ‘fan’ (from English fan): 饭圈 ‘fandom’.",
+     "你吃饭了吗？ ‘Have you eaten (rice)?’ is a greeting — like ‘How are you?’, not an invitation."
+    ],
+    "pitfalls": [
+     "吃饭 means ‘to eat, have a meal’ even when there is no rice: you can 吃饭 with noodles or dumplings.",
+     "饭 is the meal or the rice, not a dish: ‘a dish’ is 菜."
+    ],
+    "subtleties": [
+     "A bowl of rice is 一碗饭; a whole meal is 一顿饭."
+    ]
+   }
+  },
+  {
+   "id": "zh:tang",
+   "lemma": "汤",
+   "trad": "湯",
+   "pinyin": "tāng",
+   "pos": "NOUN",
+   "senses": [
+    "food.soup"
+   ],
+   "measure": [
+    "碗"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Warmth and care: a slow-cooked soup made by mother.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soup",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.soup"
+     },
+     {
+      "id": "s2",
+      "def": "broth, stock",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a decoction of medicinal herbs",
+      "register": [
+       "technical"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(literary) hot or boiling water",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喝一碗汤。",
+      "py": "Wǒ hē yì wǎn tāng.",
+      "tr": "I’ll have a bowl of soup.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "这个汤太咸了。",
+      "py": "Zhège tāng tài xián le.",
+      "tr": "This soup is too salty.",
+      "register": "colloquial",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "用鸡骨头熬汤。",
+      "py": "Yòng jī gǔtou áo tāng.",
+      "tr": "Simmer the chicken bones to make a stock.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s2"
+     },
+     {
+      "text": "这碗中药汤很苦。",
+      "py": "Zhè wǎn zhōngyào tāng hěn kǔ.",
+      "tr": "This bowl of herbal decoction is very bitter.",
+      "register": "neutral",
+      "context": "medicine",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喝汤",
+      "tr": "to have soup"
+     },
+     {
+      "text": "一碗汤",
+      "tr": "a bowl of soup"
+     },
+     {
+      "text": "鸡汤",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "西红柿鸡蛋汤",
+      "tr": "tomato and egg soup"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "赴汤蹈火",
+      "tr": "to go into boiling water and tread on fire",
+      "kind": "idiom",
+      "meaning": "to brave any danger for someone",
+      "register": "literary"
+     },
+     {
+      "text": "换汤不换药",
+      "tr": "to change the broth but not the medicine",
+      "kind": "idiom",
+      "meaning": "a change in name only",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "羹",
+      "register": "neutral",
+      "nuance": "gēng: a thick soup, potage — on menus: 鸡蛋羹 steamed egg custard"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 氵 ‘water’ + phonetic 昜. From Proto-Sino-Tibetan *r-la(w)ŋ ‘steam; hot liquid’; the old meaning is ‘hot water’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Japanese the same character 湯 (yu) still means ‘hot water’ — the old Chinese meaning.",
+     "鸡汤 ‘chicken soup’ also means feel-good, inspirational talk (心灵鸡汤 ‘chicken soup for the soul’)."
+    ],
+    "pitfalls": [
+     "Soup is drunk: 喝汤, not *吃汤.",
+     "汤 tāng (1st tone) vs 糖 táng (2nd tone) ‘sugar’."
+    ],
+    "subtleties": [
+     "In many southern families soup comes at the start of the meal; in the north it often ends it."
+    ]
+   }
+  },
+  {
+   "id": "zh:shala",
+   "lemma": "沙拉",
+   "trad": "沙拉",
+   "pinyin": "shā lā",
+   "pos": "NOUN",
+   "senses": [
+    "food.salad"
+   ],
+   "measure": [
+    "份",
+    "盘"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light, Western, ‘healthy eating’ — office lunches and hotel buffets.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salad (the dish)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我要一份沙拉。",
+      "py": "Wǒ yào yí fèn shālā.",
+      "tr": "I’d like a salad.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "她中午只吃沙拉。",
+      "py": "Tā zhōngwǔ zhǐ chī shālā.",
+      "tr": "She only eats salad at lunchtime.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "水果沙拉很好吃。",
+      "py": "Shuǐguǒ shālā hěn hǎochī.",
+      "tr": "Fruit salad is delicious.",
+      "register": "neutral",
+      "context": "desserts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一份沙拉",
+      "tr": "a (portion of) salad"
+     },
+     {
+      "text": "水果沙拉",
+      "tr": "fruit salad"
+     },
+     {
+      "text": "蔬菜沙拉",
+      "tr": "vegetable salad"
+     },
+     {
+      "text": "沙拉酱",
+      "tr": "salad dressing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "色拉",
+      "register": "regional",
+      "nuance": "sèlā: the same loanword in its Shanghai form, also on older menus"
+     },
+     {
+      "word": "凉菜",
+      "register": "neutral",
+      "nuance": "liángcài: Chinese cold dishes — cooked or dressed vegetables; the Chinese counterpart, not the same thing"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from English salad.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English salad, German Salat, Greek σαλάτα, Russian салат and Turkish salata all go back to Latin sal ‘salt’ (salted greens); 沙拉 brings the same word in through English."
+    ],
+    "pitfalls": [
+     "沙拉酱 is often a creamy, mayonnaise-like dressing — not oil and vinegar.",
+     "Salads are counted by the portion (一份沙拉) or the plate (一盘沙拉), not with 个."
+    ],
+    "subtleties": [
+     "Raw salads are a Western import; the Chinese table has 凉菜 ‘cold dishes’ instead."
+    ]
+   }
+  },
+  {
+   "id": "zh:shuiguo",
+   "lemma": "水果",
+   "trad": "水果",
+   "pinyin": "shuǐ guǒ",
+   "pos": "NOUN",
+   "senses": [
+    "food.fruit"
+   ],
+   "measure": [
+    "个",
+    "种"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A plate of cut fruit after the meal; fruit baskets as gifts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fruit (juicy or fleshy, like an apple or a banana)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fruit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我每天吃水果。",
+      "py": "Wǒ měitiān chī shuǐguǒ.",
+      "tr": "I eat fruit every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "你喜欢什么水果？",
+      "py": "Nǐ xǐhuan shénme shuǐguǒ?",
+      "tr": "What fruit do you like?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "饭后吃点儿水果吧。",
+      "py": "Fàn hòu chī diǎnr shuǐguǒ ba.",
+      "tr": "Have some fruit after the meal.",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃水果",
+      "tr": "to eat fruit"
+     },
+     {
+      "text": "买水果",
+      "tr": "to buy fruit"
+     },
+     {
+      "text": "水果店",
+      "tr": "fruit shop"
+     },
+     {
+      "text": "水果沙拉",
+      "tr": "fruit salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "果子",
+      "register": "regional",
+      "nuance": "guǒzi: fruit (colloquial in some regions; also some pastries)"
+     },
+     {
+      "word": "果实",
+      "register": "technical",
+      "nuance": "guǒshí: fruit in botany; figuratively ‘the fruits’ of one’s work"
+     }
+    ],
+    "etymology": {
+     "text": "水 ‘water’ + 果 ‘fruit’ (pictogram of fruits on a tree): ‘water-fruit’, juicy fruit.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "水果 is literally ‘water fruit’ — the juicy kind; dried fruit and nuts are 干果 ‘dry fruit’."
+    ],
+    "pitfalls": [
+     "‘The fruits of one’s labour’ is 果实 or 成果, never 水果.",
+     "一种水果 is ‘a kind of fruit’; 一个水果 ‘one piece of fruit’."
+    ],
+    "subtleties": [
+     "Fruit is often served at the end of a meal instead of a sweet dessert."
+    ]
+   }
+  },
+  {
+   "id": "zh:pingguo",
+   "lemma": "苹果",
+   "trad": "蘋果",
+   "pinyin": "píng guǒ",
+   "pos": "NOUN",
+   "senses": [
+    "food.apple"
+   ],
+   "measure": [
+    "个",
+    "颗"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Crisp, red, healthy — and a wish for peace.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "apple",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.apple"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) an iPhone, Apple products",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我买三个苹果。",
+      "py": "Wǒ mǎi sān ge píngguǒ.",
+      "tr": "I’ll buy three apples.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "这个苹果很甜。",
+      "py": "Zhège píngguǒ hěn tián.",
+      "tr": "This apple is very sweet.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "他的手机是苹果。",
+      "py": "Tā de shǒujī shì Píngguǒ.",
+      "tr": "His phone is an iPhone.",
+      "register": "colloquial",
+      "context": "technology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个苹果",
+      "tr": "an apple"
+     },
+     {
+      "text": "红苹果",
+      "tr": "a red apple"
+     },
+     {
+      "text": "苹果汁",
+      "tr": "apple juice"
+     },
+     {
+      "text": "苹果手机",
+      "tr": "iPhone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "There is no everyday synonym; kinds are named with a word in front: 青苹果 ‘green apple’, 红富士 ‘Red Fuji’.",
+    "etymology": {
+     "text": "A shortening of 频婆 (an old Buddhist-era transcription of a Sanskrit fruit name) + 果 ‘fruit’; the grass radical 艹 was added to 頻, giving 蘋.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "On Christmas Eve, 平安夜 ‘the night of peace’, people in China give each other apples: 苹 píng sounds like 平 píng ‘peace’."
+    ],
+    "pitfalls": [
+     "苹果 can mean an iPhone in conversation: 我的苹果 may be ‘my iPhone’.",
+     "Traditional script writes 蘋果; 苹 alone is a different, rare character in traditional texts."
+    ],
+    "subtleties": [
+     "In fast speech the second syllable is often light: píngguo."
+    ]
+   }
+  },
+  {
+   "id": "zh:tang.sugar",
+   "lemma": "糖",
+   "trad": "糖",
+   "pinyin": "táng",
+   "pos": "NOUN",
+   "senses": [
+    "food.sugar"
+   ],
+   "measureNone": "sugar as a substance is measured, not counted: 一点儿糖, 一勺糖 ‘a spoonful’; a lump or a sweet is 一块糖 / 一颗糖",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sweetness, children, and the sweets handed out at weddings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sugar",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.sugar"
+     },
+     {
+      "id": "s2",
+      "def": "sweets, candy",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(chemistry) a sugar, carbohydrate",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你的咖啡要糖吗？",
+      "py": "Nǐ de kāfēi yào táng ma?",
+      "tr": "Do you want sugar in your coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "我喝茶不放糖。",
+      "py": "Wǒ hē chá bú fàng táng.",
+      "tr": "I take my tea without sugar.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们喜欢吃糖。",
+      "py": "Háizimen xǐhuan chī táng.",
+      "tr": "Children love sweets.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "放糖",
+      "tr": "to put sugar in"
+     },
+     {
+      "text": "白糖",
+      "tr": "white sugar"
+     },
+     {
+      "text": "红糖",
+      "tr": "brown sugar"
+     },
+     {
+      "text": "吃糖",
+      "tr": "to eat sweets"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "糖衣炮弹",
+      "tr": "sugar-coated shells",
+      "kind": "idiom",
+      "meaning": "bribes and flattery used to corrupt someone",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "白糖",
+      "register": "neutral",
+      "nuance": "báitáng: white (granulated) sugar specifically"
+     },
+     {
+      "word": "糖果",
+      "register": "neutral",
+      "nuance": "tángguǒ: sweets, candy — not the cooking ingredient"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 米 ‘rice’ + phonetic 唐. The original meaning was ‘sweet rice cake’ or ‘sugar syrup’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Guests at a Chinese wedding get 喜糖 ‘happy sweets’ — and 什么时候请我们吃喜糖？ ‘When will you treat us to wedding sweets?’ asks when you’ll marry."
+    ],
+    "pitfalls": [
+     "糖 táng (2nd tone) vs 汤 tāng (1st tone) ‘soup’ and 躺 tǎng ‘to lie down’.",
+     "吃糖 means ‘to eat sweets’; sugar in a drink is 放糖 ‘put sugar in’ or 加糖 ‘add sugar’."
+    ],
+    "subtleties": [
+     "Sugar is a mass noun: it is measured, not counted — 一点儿糖 ‘a little sugar’, 一勺糖 ‘a spoonful’; 一块糖 is a lump of sugar or a sweet."
+    ]
+   }
+  },
+  {
+   "id": "zh:yan",
+   "lemma": "盐",
+   "trad": "鹽",
+   "pinyin": "yán",
+   "pos": "NOUN",
+   "senses": [
+    "food.salt"
+   ],
+   "measureNone": "a mass noun, measured rather than counted: 一点儿盐 ‘a little salt’, 一勺盐 ‘a spoonful’, 一袋盐 ‘a bag of salt’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The plain necessity of every kitchen — and, in old China, a state monopoly.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salt, table salt",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salt"
+     },
+     {
+      "id": "s2",
+      "def": "(chemistry) a salt",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "汤里放一点儿盐。",
+      "py": "Tāng lǐ fàng yìdiǎnr yán.",
+      "tr": "Put a little salt in the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "医生说我要少吃盐。",
+      "py": "Yīshēng shuō wǒ yào shǎo chī yán.",
+      "tr": "The doctor says I should eat less salt.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "请把盐递给我。",
+      "py": "Qǐng bǎ yán dì gěi wǒ.",
+      "tr": "Please pass me the salt.",
+      "register": "formal",
+      "context": "at table",
+      "sense": "s1"
+     },
+     {
+      "text": "氯化钠是一种盐。",
+      "py": "Lǜhuànà shì yì zhǒng yán.",
+      "tr": "Sodium chloride is a salt.",
+      "register": "technical",
+      "context": "chemistry",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "放盐",
+      "tr": "to add salt"
+     },
+     {
+      "text": "少放盐",
+      "tr": "to use less salt"
+     },
+     {
+      "text": "一点儿盐",
+      "tr": "a little salt"
+     },
+     {
+      "text": "食盐",
+      "tr": "table salt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "我吃的盐比你吃的饭还多",
+      "tr": "I have eaten more salt than you have eaten rice",
+      "kind": "saying",
+      "meaning": "I am far more experienced than you (said by elders)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "食盐",
+      "register": "formal",
+      "nuance": "shíyán: table salt — on packaging and in official language"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 監 + semantic 鹵 ‘salt’ (traditional 鹽). From Proto-Sino-Tibetan *g-rjum ‘salt’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Salt was a state monopoly in China for some two thousand years; the Han-dynasty ‘Discourses on Salt and Iron’ (盐铁论) record the debate about it."
+    ],
+    "pitfalls": [
+     "盐 yán (2nd tone) vs 烟 yān ‘smoke; cigarette’ and 眼 yǎn ‘eye’.",
+     "The adjective ‘salty’ is 咸 xián: 太咸了 ‘too salty’ — 盐 is only the noun."
+    ],
+    "subtleties": [
+     "Salt is measured, not counted: 一点儿盐, 一勺盐 ‘a spoonful of salt’, 一袋盐 ‘a bag of salt’."
+    ]
+   }
+  },
+  {
+   "id": "zh:shui",
+   "lemma": "水",
+   "trad": "水",
+   "pinyin": "shuǐ",
+   "pos": "NOUN",
+   "senses": [
+    "drink.water"
+   ],
+   "measure": [
+    "杯",
+    "瓶"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most basic drink — often warm or boiled in China.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "water",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.water"
+     },
+     {
+      "id": "s2",
+      "def": "liquid, juice (in compounds: 药水 liquid medicine)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a body of water; rivers (as in 山水 ‘landscape’)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我想喝水。",
+      "py": "Wǒ xiǎng hē shuǐ.",
+      "tr": "I’d like to drink some water.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "请给我一杯水。",
+      "py": "Qǐng gěi wǒ yì bēi shuǐ.",
+      "tr": "A glass of water, please.",
+      "register": "formal",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "我买两瓶水。",
+      "py": "Wǒ mǎi liǎng píng shuǐ.",
+      "tr": "I’ll buy two bottles of water.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "这是一幅山水画。",
+      "py": "Zhè shì yì fú shānshuǐhuà.",
+      "tr": "This is a landscape painting (‘mountains and water’).",
+      "register": "neutral",
+      "context": "art",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喝水",
+      "tr": "to drink water"
+     },
+     {
+      "text": "一杯水",
+      "tr": "a glass of water"
+     },
+     {
+      "text": "开水",
+      "tr": "boiled water"
+     },
+     {
+      "text": "矿泉水",
+      "tr": "mineral water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "水滴石穿",
+      "tr": "dripping water wears through stone",
+      "kind": "idiom",
+      "meaning": "persistence wins in the end",
+      "register": "neutral"
+     },
+     {
+      "text": "一碗水端平",
+      "tr": "to carry a bowl of water level",
+      "kind": "saying",
+      "meaning": "to treat everyone equally fairly",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "开水",
+      "register": "neutral",
+      "nuance": "kāishuǐ: boiled water, often drunk hot"
+     },
+     {
+      "word": "白开水",
+      "register": "colloquial",
+      "nuance": "báikāishuǐ: plain boiled water (also ‘something bland’)"
+     },
+     {
+      "word": "凉水",
+      "register": "neutral",
+      "nuance": "liángshuǐ: cold water"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of flowing water; as a component it is written 氵. From Proto-Sino-Tibetan *lwi(j) ‘to flow’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The three dots 氵 on the left of 汤 ‘soup’, 汁 ‘juice’ and 酒 ‘alcohol’ are ‘water’: they mark liquids."
+    ],
+    "pitfalls": [
+     "Water is measured by its container: 一杯水, 一瓶水 — not *一个水.",
+     "Warm or boiled water (热水, 开水) is a usual drink in China; for cold water say 冰水 or 凉水."
+    ],
+    "subtleties": [
+     "水 can mean money or profit in a few words: 薪水 ‘salary’, 油水 ‘perks’."
+    ]
+   }
+  },
+  {
+   "id": "zh:cha",
+   "lemma": "茶",
+   "trad": "茶",
+   "pinyin": "chá",
+   "pos": "NOUN",
+   "senses": [
+    "drink.tea"
+   ],
+   "measure": [
+    "杯",
+    "壶"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Hospitality and calm: a pot of tea for a guest, teahouses, tea ceremony.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tea (the drink)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.tea"
+     },
+     {
+      "id": "s2",
+      "def": "tea (the plant, the leaves)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你喝茶吗？",
+      "py": "Nǐ hē chá ma?",
+      "tr": "Would you like some tea?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "我们喝一壶茶吧。",
+      "py": "Wǒmen hē yì hú chá ba.",
+      "tr": "Let’s have a pot of tea.",
+      "register": "neutral",
+      "context": "teahouse",
+      "sense": "s1"
+     },
+     {
+      "text": "这是今年的新茶。",
+      "py": "Zhè shì jīnnián de xīn chá.",
+      "tr": "This is this year’s new tea.",
+      "register": "neutral",
+      "context": "tea shop",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喝茶",
+      "tr": "to drink tea"
+     },
+     {
+      "text": "一杯茶",
+      "tr": "a cup of tea"
+     },
+     {
+      "text": "绿茶",
+      "tr": "green tea"
+     },
+     {
+      "text": "红茶",
+      "tr": "black tea (‘red tea’)"
+     },
+     {
+      "text": "泡茶",
+      "tr": "to make (steep) tea"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "茶余饭后",
+      "tr": "after tea and meals",
+      "kind": "idiom",
+      "meaning": "at leisure; small talk",
+      "register": "neutral"
+     },
+     {
+      "text": "人走茶凉",
+      "tr": "when the guest leaves, the tea goes cold",
+      "kind": "saying",
+      "meaning": "friendships fade once a person loses power or leaves",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "茶水",
+      "register": "neutral",
+      "nuance": "cháshuǐ: tea (or hot water) served as a drink"
+     },
+     {
+      "word": "茗",
+      "register": "literary",
+      "nuance": "míng: tea, in poetry and shop names"
+     }
+    ],
+    "etymology": {
+     "text": "From archaic 荼 ‘bitter plant’; possibly borrowed from Proto-Loloish *la ‘tea’ (Sagart) or from an Austroasiatic word for ‘leaf’ (Schuessler).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Most languages took their word for tea from Chinese: tea, Tee and Hebrew תֵּה from coastal Min tê; çay, чай, τσάι and Arabic شَاي from chá."
+    ],
+    "pitfalls": [
+     "红茶 ‘red tea’ is what English and German call black tea (Schwarztee); 黑茶 ‘black tea’ is a fermented tea like pu’er.",
+     "Tea is counted by the cup or the pot: 一杯茶, 一壶茶."
+    ],
+    "subtleties": [
+     "喝茶 can also mean a relaxed meeting: 有空来喝茶 ‘come over for tea some time’."
+    ]
+   }
+  },
+  {
+   "id": "zh:kafei",
+   "lemma": "咖啡",
+   "trad": "咖啡",
+   "pinyin": "kā fēi",
+   "pos": "NOUN",
+   "senses": [
+    "drink.coffee"
+   ],
+   "measure": [
+    "杯"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cafés, offices, the new urban habit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "coffee",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.coffee"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我要一杯咖啡。",
+      "py": "Wǒ yào yì bēi kāfēi.",
+      "tr": "I’d like a cup of coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "你喝咖啡还是喝茶？",
+      "py": "Nǐ hē kāfēi háishi hē chá?",
+      "tr": "Do you drink coffee or tea?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "早上不喝咖啡，我没有精神。",
+      "py": "Zǎoshang bù hē kāfēi, wǒ méiyǒu jīngshen.",
+      "tr": "Without coffee in the morning I have no energy.",
+      "register": "colloquial",
+      "context": "morning",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一杯咖啡",
+      "tr": "a cup of coffee"
+     },
+     {
+      "text": "黑咖啡",
+      "tr": "black coffee"
+     },
+     {
+      "text": "咖啡馆",
+      "tr": "café"
+     },
+     {
+      "text": "速溶咖啡",
+      "tr": "instant coffee"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No native synonym; coffee drinks keep their own loan names: 拿铁 latte, 美式 americano, 卡布奇诺 cappuccino.",
+    "etymology": {
+     "text": "A loanword; the word goes back to Italian caffè, from Ottoman Turkish kahve, from Arabic قَهْوَة qahwa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word through the learner’s languages: Arabic قَهْوَة → Turkish kahve → Italian caffè → German Kaffee, Greek καφές, Russian кофе — and Chinese 咖啡."
+    ],
+    "pitfalls": [
+     "Both characters were made for the sound (口 + a phonetic); 咖 is also read gā in 咖喱 ‘curry’.",
+     "Coffee is counted by the cup: 一杯咖啡."
+    ],
+    "subtleties": [
+     "咖啡色 ‘coffee colour’ is a common word for brown."
+    ]
+   }
+  },
+  {
+   "id": "zh:niunai",
+   "lemma": "牛奶",
+   "trad": "牛奶",
+   "pinyin": "niú nǎi",
+   "pos": "NOUN",
+   "senses": [
+    "drink.milk"
+   ],
+   "measure": [
+    "杯",
+    "瓶",
+    "盒"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Breakfast, growing children, health.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(cow’s) milk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.milk"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子每天喝牛奶。",
+      "py": "Háizi měitiān hē niúnǎi.",
+      "tr": "The child drinks milk every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我买一盒牛奶。",
+      "py": "Wǒ mǎi yì hé niúnǎi.",
+      "tr": "I’m buying a carton of milk.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "咖啡里加点儿牛奶。",
+      "py": "Kāfēi lǐ jiā diǎnr niúnǎi.",
+      "tr": "Put a little milk in the coffee.",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喝牛奶",
+      "tr": "to drink milk"
+     },
+     {
+      "text": "一杯牛奶",
+      "tr": "a glass of milk"
+     },
+     {
+      "text": "热牛奶",
+      "tr": "hot milk"
+     },
+     {
+      "text": "一盒牛奶",
+      "tr": "a carton of milk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "奶",
+      "register": "colloquial",
+      "nuance": "nǎi: milk in general — 奶茶 ‘milk tea’, 酸奶 ‘yoghurt’"
+     },
+     {
+      "word": "鲜奶",
+      "register": "neutral",
+      "nuance": "xiānnǎi: fresh milk — on packaging and menus"
+     }
+    ],
+    "etymology": {
+     "text": "牛 ‘cow, ox’ (pictogram of a bull’s head; from Proto-Sino-Tibetan *ŋwə) + 奶 ‘milk’: ‘cow’s milk’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "牛 ‘cow’ is also slang for ‘awesome’: 太牛了! ‘amazing!’"
+    ],
+    "pitfalls": [
+     "奶 alone is colloquial (and also ‘breast’) and it is part of 奶奶 ‘grandma’: for the drink say 牛奶.",
+     "Milk is counted by its container: 一杯 / 一瓶 / 一盒牛奶."
+    ],
+    "subtleties": [
+     "Other milks name the animal or the source: 羊奶 ‘goat’s milk’, but soy milk is 豆浆 ‘bean liquid’."
+    ]
+   }
+  },
+  {
+   "id": "zh:guozhi",
+   "lemma": "果汁",
+   "trad": "果汁",
+   "pinyin": "guǒ zhī",
+   "pos": "NOUN",
+   "senses": [
+    "drink.juice"
+   ],
+   "measure": [
+    "杯",
+    "瓶"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sweet, fresh, for children and for guests who do not drink alcohol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fruit juice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.juice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你要果汁吗？",
+      "py": "Nǐ yào guǒzhī ma?",
+      "tr": "Would you like some juice?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们喝果汁，大人喝茶。",
+      "py": "Háizimen hē guǒzhī, dàrén hē chá.",
+      "tr": "The children drink juice, the adults drink tea.",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢喝苹果汁。",
+      "py": "Wǒ xǐhuan hē píngguǒzhī.",
+      "tr": "I like apple juice.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一杯果汁",
+      "tr": "a glass of juice"
+     },
+     {
+      "text": "苹果汁",
+      "tr": "apple juice"
+     },
+     {
+      "text": "鲜榨果汁",
+      "tr": "freshly squeezed juice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "汁",
+      "register": "neutral",
+      "nuance": "zhī: juice in compounds — 橙汁 ‘orange juice’, 西瓜汁 ‘watermelon juice’"
+     },
+     {
+      "word": "饮料",
+      "register": "neutral",
+      "nuance": "yǐnliào: any soft drink — the broader word"
+     }
+    ],
+    "etymology": {
+     "text": "果 ‘fruit’ + 汁 ‘juice, sap’ (氵 ‘water’ + 十; the origin of the word is unclear).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "For one fruit the 果 is dropped: 苹果汁 ‘apple juice’, 橙汁 ‘orange juice’ — fruit + 汁."
+    ],
+    "pitfalls": [
+     "Vegetable and meat juices are just 汁: 番茄汁 ‘tomato juice’, 肉汁 ‘meat juices, gravy’.",
+     "Juice is counted by the glass or the bottle: 一杯果汁, 一瓶果汁."
+    ],
+    "subtleties": [
+     "Packaged ‘juice’ is often a 果汁饮料 ‘juice drink’ with little real juice — the label says so."
+    ]
+   }
+  },
+  {
+   "id": "zh:putaojiu",
+   "lemma": "葡萄酒",
+   "trad": "葡萄酒",
+   "pinyin": "pú tao jiǔ",
+   "pos": "NOUN",
+   "senses": [
+    "drink.wine"
+   ],
+   "measure": [
+    "杯",
+    "瓶"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Dinners, gifts, a touch of luxury — and Tang-dynasty poetry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wine (from grapes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.wine"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们喝一瓶葡萄酒吧。",
+      "py": "Wǒmen hē yì píng pútaojiǔ ba.",
+      "tr": "Let’s have a bottle of wine.",
+      "register": "informal",
+      "context": "dinner",
+      "sense": "s1"
+     },
+     {
+      "text": "这是希腊的葡萄酒。",
+      "py": "Zhè shì Xīlà de pútaojiǔ.",
+      "tr": "This is Greek wine.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "法国葡萄酒很有名。",
+      "py": "Fǎguó pútaojiǔ hěn yǒumíng.",
+      "tr": "French wine is famous.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一瓶葡萄酒",
+      "tr": "a bottle of wine"
+     },
+     {
+      "text": "红葡萄酒",
+      "tr": "red wine"
+     },
+     {
+      "text": "白葡萄酒",
+      "tr": "white wine"
+     },
+     {
+      "text": "喝葡萄酒",
+      "tr": "to drink wine"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "葡萄美酒夜光杯",
+      "tr": "fine grape wine in cups that glow at night",
+      "kind": "quote",
+      "meaning": "the opening line of a famous frontier poem",
+      "register": "poetic",
+      "source": "Wang Han (王翰), Liangzhou Song (凉州词), Tang dynasty"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "红酒",
+      "register": "colloquial",
+      "nuance": "hóngjiǔ: ‘red wine’ — loosely used for wine in general"
+     },
+     {
+      "word": "酒",
+      "register": "neutral",
+      "nuance": "jiǔ: any alcoholic drink — often Chinese spirits"
+     }
+    ],
+    "etymology": {
+     "text": "葡萄 ‘grape’ (borrowed around 130 BC, perhaps from Bactrian *bādāwa ‘wine’, compare Persian bâde) + 酒 ‘alcoholic drink’ (氵 + phonetic 酉, a wine jar).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "If 葡萄 really comes from an Iranian word for ‘wine’, then 葡萄酒 is ‘wine-wine’ — the grape reached China along the Silk Road."
+    ],
+    "pitfalls": [
+     "酒 alone is any alcoholic drink, very often Chinese spirits (白酒): for wine say 葡萄酒 or 红酒.",
+     "Wine is counted by the glass or the bottle: 一杯 / 一瓶葡萄酒."
+    ],
+    "subtleties": [
+     "On the mainland 葡萄 is said pútao, with a light second syllable; Taiwan says pútáo."
+    ]
+   }
+  },
+  {
+   "id": "zh:pijiu",
+   "lemma": "啤酒",
+   "trad": "啤酒",
+   "pinyin": "pí jiǔ",
+   "pos": "NOUN",
+   "senses": [
+    "drink.beer"
+   ],
+   "measure": [
+    "杯",
+    "瓶",
+    "罐"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Summer evenings, street barbecue, football on TV.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.beer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我要一瓶啤酒。",
+      "py": "Wǒ yào yì píng píjiǔ.",
+      "tr": "I’d like a bottle of beer.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "夏天喝冰啤酒很舒服。",
+      "py": "Xiàtiān hē bīng píjiǔ hěn shūfu.",
+      "tr": "Ice-cold beer is great in summer.",
+      "register": "colloquial",
+      "context": "summer",
+      "sense": "s1"
+     },
+     {
+      "text": "青岛啤酒很有名。",
+      "py": "Qīngdǎo píjiǔ hěn yǒumíng.",
+      "tr": "Tsingtao beer is famous.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一瓶啤酒",
+      "tr": "a bottle of beer"
+     },
+     {
+      "text": "一杯啤酒",
+      "tr": "a glass of beer"
+     },
+     {
+      "text": "冰啤酒",
+      "tr": "cold beer"
+     },
+     {
+      "text": "喝啤酒",
+      "tr": "to drink beer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "啤",
+      "register": "colloquial",
+      "nuance": "pí: short for beer in compounds — 生啤, 扎啤 ‘draught beer’"
+     }
+    ],
+    "etymology": {
+     "text": "啤 (a character made for the sound, from English beer or German Bier, via Shanghainese) + 酒 ‘alcoholic drink’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tsingtao (青岛) beer was founded in 1903 by German and British settlers in the German-leased territory of Qingdao — German Bier is behind both the word and the brewery."
+    ],
+    "pitfalls": [
+     "啤 has no meaning of its own: it exists only for the sound pí in 啤酒.",
+     "Beer is counted by glass, bottle or can: 一杯 / 一瓶 / 一罐啤酒."
+    ],
+    "subtleties": [
+     "Restaurants may serve beer at room temperature: ask for 冰的 ‘a cold one’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zaofan",
+   "lemma": "早饭",
+   "trad": "早飯",
+   "pinyin": "zǎo fàn",
+   "pos": "NOUN",
+   "senses": [
+    "meal.breakfast"
+   ],
+   "measure": [
+    "顿"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Soy milk and fried dough sticks, steamed buns, rice porridge.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.breakfast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你吃早饭了吗？",
+      "py": "Nǐ chī zǎofàn le ma?",
+      "tr": "Have you had breakfast?",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "我早饭吃面包和鸡蛋。",
+      "py": "Wǒ zǎofàn chī miànbāo hé jīdàn.",
+      "tr": "For breakfast I have bread and eggs.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "很多中国人早饭喝粥。",
+      "py": "Hěn duō Zhōngguórén zǎofàn hē zhōu.",
+      "tr": "Many Chinese people have rice porridge for breakfast.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃早饭",
+      "tr": "to have breakfast"
+     },
+     {
+      "text": "做早饭",
+      "tr": "to make breakfast"
+     },
+     {
+      "text": "一顿早饭",
+      "tr": "a breakfast"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "早餐",
+      "register": "formal",
+      "nuance": "zǎocān: the written word — menus, hotels (含早餐 ‘breakfast included’)"
+     },
+     {
+      "word": "早点",
+      "register": "regional",
+      "nuance": "zǎodiǎn: breakfast, breakfast snacks (northern colloquial)"
+     }
+    ],
+    "etymology": {
+     "text": "早 ‘early; morning’ + 饭 ‘meal’: ‘the morning meal’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A classic northern breakfast is 豆浆 ‘soy milk’ with 油条 ‘fried dough sticks’."
+    ],
+    "pitfalls": [
+     "Hotels and menus write 早餐; at home people say 早饭 — the same meal."
+    ],
+    "subtleties": [
+     "我早饭吃面包 ‘for breakfast I eat bread’: the meal can stand before the verb as the topic."
+    ]
+   }
+  },
+  {
+   "id": "zh:wufan",
+   "lemma": "午饭",
+   "trad": "午飯",
+   "pinyin": "wǔ fàn",
+   "pos": "NOUN",
+   "senses": [
+    "meal.lunch"
+   ],
+   "measure": [
+    "顿"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The midday break: canteens, lunch boxes, and a short nap afterwards.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lunch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.lunch"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们一起吃午饭吧。",
+      "py": "Wǒmen yìqǐ chī wǔfàn ba.",
+      "tr": "Let’s have lunch together.",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "午饭吃什么？",
+      "py": "Wǔfàn chī shénme?",
+      "tr": "What’s for lunch?",
+      "register": "colloquial",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "学生在学校吃午饭。",
+      "py": "Xuésheng zài xuéxiào chī wǔfàn.",
+      "tr": "The students have lunch at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃午饭",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "午饭时间",
+      "tr": "lunchtime"
+     },
+     {
+      "text": "一顿午饭",
+      "tr": "a lunch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "午餐",
+      "register": "formal",
+      "nuance": "wǔcān: the written word — menus, ‘business lunch’ 商务午餐"
+     },
+     {
+      "word": "中饭",
+      "register": "regional",
+      "nuance": "zhōngfàn: ‘the middle meal’, colloquial in many regions"
+     }
+    ],
+    "etymology": {
+     "text": "午 ‘noon’ (the seventh of the twelve earthly branches; originally a pictogram of a pestle) + 饭 ‘meal’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "午 is the hour of the Horse, 11:00–13:00, in the old twelve-hour day; 中午 ‘noon’ and 下午 ‘afternoon’ come from it."
+    ],
+    "pitfalls": [
+     "午饭 is the meal, 中午 the time: 中午吃午饭 ‘have lunch at noon’."
+    ],
+    "subtleties": [
+     "After lunch many people take a short nap, 午睡."
+    ]
+   }
+  },
+  {
+   "id": "zh:wanfan",
+   "lemma": "晚饭",
+   "trad": "晚飯",
+   "pinyin": "wǎn fàn",
+   "pos": "NOUN",
+   "senses": [
+    "meal.dinner"
+   ],
+   "measure": [
+    "顿"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The family meal of the day, often early in the evening.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dinner, supper (the evening meal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.dinner"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你们几点吃晚饭？",
+      "py": "Nǐmen jǐ diǎn chī wǎnfàn?",
+      "tr": "What time do you have dinner?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "今天我做晚饭。",
+      "py": "Jīntiān wǒ zuò wǎnfàn.",
+      "tr": "Today I’m making dinner.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们请朋友来家里吃晚饭。",
+      "py": "Wǒmen qǐng péngyou lái jiā lǐ chī wǎnfàn.",
+      "tr": "We’re inviting friends home for dinner.",
+      "register": "neutral",
+      "context": "social life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃晚饭",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "做晚饭",
+      "tr": "to make dinner"
+     },
+     {
+      "text": "一顿晚饭",
+      "tr": "a dinner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "晚餐",
+      "register": "formal",
+      "nuance": "wǎncān: the written word — restaurants, invitations; 最后的晚餐 ‘the Last Supper’"
+     },
+     {
+      "word": "夜宵",
+      "register": "colloquial",
+      "nuance": "yèxiāo: a late-night snack — not dinner"
+     }
+    ],
+    "etymology": {
+     "text": "晚 ‘evening; late’ (日 ‘sun’ + phonetic 免) + 饭 ‘meal’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Leonardo’s Last Supper is 最后的晚餐 ‘the last evening meal’ in Chinese."
+    ],
+    "pitfalls": [
+     "晚饭 ‘dinner’, 晚上 ‘evening’, 晚安 ‘good night’: all begin with 晚 ‘evening, late’ — don’t mix them up."
+    ],
+    "subtleties": [
+     "Dinner in China is often eaten early, around six o’clock."
+    ]
+   }
+  },
+  {
+   "id": "zh:wan",
+   "lemma": "碗",
+   "trad": "碗",
+   "pinyin": "wǎn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "a bowl as a measure: ‘a bowl of’ — 一碗米饭, 一碗汤; the bowl itself is 一个碗",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:kuai",
+   "lemma": "块",
+   "trad": "塊",
+   "pinyin": "kuài",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for pieces and chunks: 一块肉, 一块面包, 一块奶酪; in money talk ‘yuan’ (五块钱)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:ping",
+   "lemma": "瓶",
+   "trad": "瓶",
+   "pinyin": "píng",
+   "pos": "CLF",
+   "senses": [],
+   "role": "a bottle as a measure: ‘a bottle of’ — 一瓶水, 一瓶啤酒, 一瓶葡萄酒",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:fen",
+   "lemma": "份",
+   "trad": "份",
+   "pinyin": "fèn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for portions and servings: 一份沙拉; also for copies: 一份报纸 ‘a newspaper’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
   }
- ],
- "absent": []
+ ]
 }

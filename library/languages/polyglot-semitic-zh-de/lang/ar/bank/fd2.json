@@ -1,0 +1,3950 @@
+{
+ "sentences": [
+  {
+   "id": "ar.f2.001",
+   "frame": "fr.count",
+   "text": "هُنَا كِتَابٌ وَاحِدٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "كِتَابٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَاحِدٌ",
+     "l": "ar:wahid",
+     "f": "NUM;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There is one book here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.002",
+   "frame": "fr.count",
+   "text": "هُنَا كِتَابٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "كِتَابٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "There is a book here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.003",
+   "frame": "fr.count",
+   "text": "هُنَا كِتَابَانِ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "كِتَابَانِ",
+     "l": "ar:kitab",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are two books here.",
+   "level": "A1",
+   "variantOf": "ar.f2.002",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.004",
+   "frame": "fr.thing.here",
+   "text": "الْمِفْتَاحُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمِفْتَاحُ",
+     "l": "ar:miftah",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The key is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.005",
+   "frame": "fr.thing.here",
+   "text": "الْمِفْتَاحَانِ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمِفْتَاحَانِ",
+     "l": "ar:miftah",
+     "f": "N;NOM;DU;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "The two keys are here.",
+   "level": "A1",
+   "variantOf": "ar.f2.004",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.006",
+   "frame": "fr.be.where",
+   "text": "هُنَاكَ طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "There is a (female) student there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.007",
+   "frame": "fr.be.where",
+   "text": "هُنَاكَ طَالِبَتَانِ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "طَالِبَتَانِ",
+     "l": "ar:talib",
+     "f": "N;NOM;DU;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are two (female) students there.",
+   "level": "A1",
+   "variantOf": "ar.f2.006",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.008",
+   "frame": "fr.count",
+   "text": "هُنَا غُرْفَةٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "غُرْفَةٌ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "There is a room here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.009",
+   "frame": "fr.count",
+   "text": "هُنَا غُرْفَتَانِ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "غُرْفَتَانِ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are two rooms here.",
+   "level": "A1",
+   "variantOf": "ar.f2.008",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.010",
+   "frame": "fr.count",
+   "text": "هُنَا وَلَدَانِ وَبِنْتَانِ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "وَلَدَانِ",
+     "l": "ar:walad",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": "وَبِنْتَانِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "بِنْتَانِ",
+       "l": "ar:bint",
+       "f": "N;NOM;DU;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are two boys and two girls here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.011",
+   "frame": "fr.be.where",
+   "text": "الطِّفْلَانِ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الطِّفْلَانِ",
+     "l": "ar:tifl",
+     "f": "N;NOM;DU;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "The two children are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.012",
+   "frame": "fr.thing.here",
+   "text": "الْبَيْتُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْبَيْتُ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The house is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.013",
+   "frame": "fr.thing.here",
+   "text": "الْبُيُوتُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْبُيُوتُ",
+     "l": "ar:bayt",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "The houses are over there.",
+   "level": "A1",
+   "variantOf": "ar.f2.012",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.014",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The teacher is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.015",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمُونَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُونَ",
+     "l": "ar:muallim",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "The teachers are here.",
+   "level": "A1",
+   "variantOf": "ar.f2.014",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.016",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمَةُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمَةُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The (female) teacher is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.017",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمَاتُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمَاتُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;PL;FEM;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "The (female) teachers are over there.",
+   "level": "A1",
+   "variantOf": "ar.f2.016",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.018",
+   "frame": "fr.this.is",
+   "text": "هٰذَا قَلَمٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "قَلَمٌ",
+     "l": "ar:qalam",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a pen.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.019",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ أَقْلَامٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "أَقْلَامٌ",
+     "l": "ar:qalam",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "These are pens.",
+   "level": "A1",
+   "variantOf": "ar.f2.018",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.020",
+   "frame": "fr.this.is",
+   "text": "هٰذَا طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.021",
+   "frame": "fr.this.is",
+   "text": "هٰؤُلَاءِ طُلَّابٌ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "طُلَّابٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "These are students.",
+   "level": "A1",
+   "variantOf": "ar.f2.020",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.022",
+   "frame": "fr.thing.here",
+   "text": "الْكُرْسِيُّ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْكُرْسِيُّ",
+     "l": "ar:kursi",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The chair is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.023",
+   "frame": "fr.thing.here",
+   "text": "الْكَرَاسِيُّ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْكَرَاسِيُّ",
+     "l": "ar:kursi",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "The chairs are over there.",
+   "level": "A1",
+   "variantOf": "ar.f2.022",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.024",
+   "frame": "fr.count",
+   "text": "هُنَا ثَلَاثَةُ كُتُبٍ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "ثَلَاثَةُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "كُتُبٍ",
+     "l": "ar:kitab",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are three books here.",
+   "level": "A1",
+   "alts": [
+    "ثَلَاثَةُ كُتُبٍ هُنَا."
+   ]
+  },
+  {
+   "id": "ar.f2.025",
+   "frame": "fr.count",
+   "text": "هُنَاكَ ثَلَاثُ غُرَفٍ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "ثَلَاثُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "غُرَفٍ",
+     "l": "ar:ghurfa",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are three rooms over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.026",
+   "frame": "fr.count",
+   "text": "هٰؤُلَاءِ ثَلَاثَةُ أَصْدِقَاءَ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "ثَلَاثَةُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَصْدِقَاءَ",
+     "l": "ar:sadiq",
+     "f": "N;GEN;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are three friends.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.027",
+   "frame": "fr.count",
+   "text": "هٰؤُلَاءِ أَرْبَعَةُ رِجَالٍ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "أَرْبَعَةُ",
+     "l": "ar:arbaa",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "رِجَالٍ",
+     "l": "ar:rajul",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are four men.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.028",
+   "frame": "fr.count",
+   "text": "هُنَا خَمْسُ نِسَاءٍ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "خَمْسُ",
+     "l": "ar:khamsa",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "نِسَاءٍ",
+     "l": "ar:imraa",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are five women here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.029",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ سِتَّةُ أَطْفَالٍ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "سِتَّةُ",
+     "l": "ar:sitta",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَطْفَالٍ",
+     "l": "ar:tifl",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There were six children there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.030",
+   "frame": "fr.count",
+   "text": "هٰذِهِ سَبْعُ حَقَائِبَ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "سَبْعُ",
+     "l": "ar:saba",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "حَقَائِبَ",
+     "l": "ar:haqiba",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are seven bags.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.031",
+   "frame": "fr.count",
+   "text": "هُنَا ثَمَانِيَةُ كَرَاسِيَّ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "ثَمَانِيَةُ",
+     "l": "ar:thamaniya",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "كَرَاسِيَّ",
+     "l": "ar:kursi",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are eight chairs here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.032",
+   "frame": "fr.count",
+   "text": "هُنَاكَ ثَمَانِي طَاوِلَاتٍ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "ثَمَانِي",
+     "l": "ar:thamaniya",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "طَاوِلَاتٍ",
+     "l": "ar:tawila",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are eight tables over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.033",
+   "frame": "fr.count",
+   "text": "هُنَا تِسْعَةُ أَقْلَامٍ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "تِسْعَةُ",
+     "l": "ar:tisa",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَقْلَامٍ",
+     "l": "ar:qalam",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "There are nine pens here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.034",
+   "frame": "fr.count",
+   "text": "هٰؤُلَاءِ عَشْرُ طَالِبَاتٍ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "عَشْرُ",
+     "l": "ar:ashara",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "طَالِبَاتٍ",
+     "l": "ar:talib",
+     "f": "N;GEN;PL;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "These are ten (female) students.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.035",
+   "frame": "fr.count",
+   "text": "نَحْنُ عَشَرَةٌ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "عَشَرَةٌ",
+     "l": "ar:ashara",
+     "f": "NUM;NOM;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "We are ten.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.036",
+   "frame": "fr.count",
+   "text": "هُمْ خَمْسَةٌ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "خَمْسَةٌ",
+     "l": "ar:khamsa",
+     "f": "NUM;NOM;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "They are five.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.037",
+   "frame": "fr.count",
+   "text": "هُنَا أَحَدَ عَشَرَ طَالِبًا.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "أَحَدَ عَشَرَ",
+     "l": "ar:ahada_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "طَالِبًا",
+     "l": "ar:talib",
+     "f": "N;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are eleven students here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.038",
+   "frame": "fr.count",
+   "text": "هُنَاكَ إِحْدَى عَشْرَةَ غُرْفَةً.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "إِحْدَى عَشْرَةَ",
+     "l": "ar:ahada_ashar",
+     "f": "NUM;NOM;FEM"
+    },
+    {
+     "t": "غُرْفَةً",
+     "l": "ar:ghurfa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are eleven rooms over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.039",
+   "frame": "fr.count",
+   "text": "اِثْنَا عَشَرَ رَجُلًا هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "اِثْنَا عَشَرَ",
+     "l": "ar:ithna_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "رَجُلًا",
+     "l": "ar:rajul",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Twelve men are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.040",
+   "frame": "fr.count",
+   "text": "اِثْنَتَا عَشْرَةَ بِنْتًا هُنَا.",
+   "tokens": [
+    {
+     "t": "اِثْنَتَا عَشْرَةَ",
+     "l": "ar:ithna_ashar",
+     "f": "NUM;NOM;FEM"
+    },
+    {
+     "t": "بِنْتًا",
+     "l": "ar:bint",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Twelve girls are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.041",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَا ثَلَاثَةَ عَشَرَ رَجُلًا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "ثَلَاثَةَ عَشَرَ",
+     "l": "ar:thalathata_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "رَجُلًا",
+     "l": "ar:rajul",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Thirteen men were here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.042",
+   "frame": "fr.count",
+   "text": "هُنَا أَرْبَعَ عَشْرَةَ بِنْتًا.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "أَرْبَعَ عَشْرَةَ",
+     "l": "ar:arbaata_ashar",
+     "f": "NUM;NOM;FEM"
+    },
+    {
+     "t": "بِنْتًا",
+     "l": "ar:bint",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are fourteen girls here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.043",
+   "frame": "fr.count",
+   "text": "هُنَاكَ خَمْسَةَ عَشَرَ كُرْسِيًّا.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "خَمْسَةَ عَشَرَ",
+     "l": "ar:khamsata_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "كُرْسِيًّا",
+     "l": "ar:kursi",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are fifteen chairs over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.044",
+   "frame": "fr.count",
+   "text": "هُنَا سِتَّ عَشْرَةَ نَافِذَةً.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "سِتَّ عَشْرَةَ",
+     "l": "ar:sittata_ashar",
+     "f": "NUM;NOM;FEM"
+    },
+    {
+     "t": "نَافِذَةً",
+     "l": "ar:nafidha",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are sixteen windows here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.045",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ سَبْعَةَ عَشَرَ شَخْصًا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "سَبْعَةَ عَشَرَ",
+     "l": "ar:sabata_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "شَخْصًا",
+     "l": "ar:shakhs",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There were seventeen people there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.046",
+   "frame": "fr.count",
+   "text": "هُنَا ثَمَانِيَ عَشْرَةَ طَاوِلَةً.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "ثَمَانِيَ عَشْرَةَ",
+     "l": "ar:thamaniyata_ashar",
+     "f": "NUM;NOM;FEM"
+    },
+    {
+     "t": "طَاوِلَةً",
+     "l": "ar:tawila",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are eighteen tables here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.047",
+   "frame": "fr.count",
+   "text": "هُنَاكَ تِسْعَةَ عَشَرَ مِفْتَاحًا.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "تِسْعَةَ عَشَرَ",
+     "l": "ar:tisata_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "مِفْتَاحًا",
+     "l": "ar:miftah",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are nineteen keys over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.048",
+   "frame": "fr.count",
+   "text": "هُنَا عِشْرُونَ طَالِبًا.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "عِشْرُونَ",
+     "l": "ar:ishrun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "طَالِبًا",
+     "l": "ar:talib",
+     "f": "N;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are twenty students here.",
+   "level": "A1",
+   "alts": [
+    "عِشْرُونَ طَالِبًا هُنَا."
+   ]
+  },
+  {
+   "id": "ar.f2.049",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ ثَلَاثُونَ شَخْصًا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "ثَلَاثُونَ",
+     "l": "ar:thalathun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "شَخْصًا",
+     "l": "ar:shakhs",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There were thirty people there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.050",
+   "frame": "fr.count",
+   "text": "هُنَا أَرْبَعُونَ كِتَابًا.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "أَرْبَعُونَ",
+     "l": "ar:arbaun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "كِتَابًا",
+     "l": "ar:kitab",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are forty books here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.051",
+   "frame": "fr.count",
+   "text": "هُنَاكَ خَمْسُونَ كُرْسِيًّا.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "خَمْسُونَ",
+     "l": "ar:khamsun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "كُرْسِيًّا",
+     "l": "ar:kursi",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are fifty chairs over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.052",
+   "frame": "fr.count",
+   "text": "هُنَا سِتُّونَ قَلَمًا.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "سِتُّونَ",
+     "l": "ar:sittun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "قَلَمًا",
+     "l": "ar:qalam",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are sixty pens here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.053",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَا سَبْعُونَ طِفْلًا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "سَبْعُونَ",
+     "l": "ar:sabun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "طِفْلًا",
+     "l": "ar:tifl",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Seventy children were here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.054",
+   "frame": "fr.count",
+   "text": "هُنَاكَ ثَمَانُونَ بَيْتًا.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "ثَمَانُونَ",
+     "l": "ar:thamanun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "بَيْتًا",
+     "l": "ar:bayt",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are eighty houses over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.055",
+   "frame": "fr.count",
+   "text": "هُنَا تِسْعُونَ طَالِبَةً.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "تِسْعُونَ",
+     "l": "ar:tisun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "طَالِبَةً",
+     "l": "ar:talib",
+     "f": "N;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are ninety (female) students here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.056",
+   "frame": "fr.count",
+   "text": "هُنَا مِائَةُ كِتَابٍ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "مِائَةُ",
+     "l": "ar:mia",
+     "f": "NUM;NOM;SG;CONST"
+    },
+    {
+     "t": "كِتَابٍ",
+     "l": "ar:kitab",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are a hundred books here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.057",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ أَلْفُ شَخْصٍ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "أَلْفُ",
+     "l": "ar:alf",
+     "f": "NUM;NOM;SG;CONST"
+    },
+    {
+     "t": "شَخْصٍ",
+     "l": "ar:shakhs",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There were a thousand people there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.058",
+   "frame": "fr.count",
+   "text": "ثَلَاثَةٌ، اِثْنَانِ، وَاحِدٌ، صِفْرٌ!",
+   "tokens": [
+    {
+     "t": "ثَلَاثَةٌ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "اِثْنَانِ",
+     "l": "ar:ithnan",
+     "f": "NUM;NOM;DU;MASC;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَاحِدٌ",
+     "l": "ar:wahid",
+     "f": "NUM;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "صِفْرٌ",
+     "l": "ar:sifr",
+     "f": "NUM;NOM;SG;INDF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Three, two, one, zero!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.059",
+   "frame": "fr.count",
+   "text": "هُنَا كُتُبٌ كَثِيرَةٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "كُتُبٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "كَثِيرَةٌ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There are many books here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.060",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ نَاسٌ كَثِيرُونَ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "نَاسٌ",
+     "l": "ar:nas",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "كَثِيرُونَ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were many people there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.061",
+   "frame": "fr.count",
+   "text": "الْكُتُبُ هُنَا قَلِيلَةٌ.",
+   "tokens": [
+    {
+     "t": "الْكُتُبُ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "قَلِيلَةٌ",
+     "l": "ar:qalil",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There are few books here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.062",
+   "frame": "fr.count",
+   "text": "كَانَ هُنَاكَ طُلَّابٌ قَلِيلُونَ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "طُلَّابٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": "قَلِيلُونَ",
+     "l": "ar:qalil",
+     "f": "ADJ;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "There were few students there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.063",
+   "frame": "fr.be.where",
+   "text": "كُلُّ الطُّلَّابِ هُنَا.",
+   "tokens": [
+    {
+     "t": "كُلُّ",
+     "l": "ar:kull",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "الطُّلَّابِ",
+     "l": "ar:talib",
+     "f": "N;GEN;PL;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "All the students are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.064",
+   "frame": "fr.be.where",
+   "text": "كُلُّ النَّاسِ هُنَا.",
+   "tokens": [
+    {
+     "t": "كُلُّ",
+     "l": "ar:kull",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "النَّاسِ",
+     "l": "ar:nas",
+     "f": "N;GEN;PL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "Everybody is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.065",
+   "frame": "fr.thing.here",
+   "text": "بَعْضُ الْكُتُبِ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "بَعْضُ",
+     "l": "ar:bad",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "الْكُتُبِ",
+     "l": "ar:kitab",
+     "f": "N;GEN;PL;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "Some of the books are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.066",
+   "frame": "fr.be.where",
+   "text": "بَعْضُ الْأَطْفَالِ هُنَا.",
+   "tokens": [
+    {
+     "t": "بَعْضُ",
+     "l": "ar:bad",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "الْأَطْفَالِ",
+     "l": "ar:tifl",
+     "f": "N;GEN;PL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "Some of the children are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.067",
+   "frame": "fr.greet",
+   "text": "أَنْتِ آسِفَةٌ؟ نَعَمْ، قَلِيلًا.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آسِفَةٌ",
+     "l": "ar:asif",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "قَلِيلًا",
+     "l": "ar:qalilan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Are you sorry? Yes, a little.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.068",
+   "frame": "fr.adj.pred",
+   "text": "هُوَ آسِفٌ قَلِيلًا.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آسِفٌ",
+     "l": "ar:asif",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": "قَلِيلًا",
+     "l": "ar:qalilan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He is a little sorry.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.069",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَخٌ وَأُخْتٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخٌ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَأُخْتٌ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "أُخْتٌ",
+       "l": "ar:ukht",
+       "f": "N;NOM;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a brother and a sister.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.070",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَخٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخٌ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a brother.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.071",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَخَوَانِ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخَوَانِ",
+     "l": "ar:akh",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "I have two brothers.",
+   "level": "A1",
+   "variantOf": "ar.f2.070",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.072",
+   "frame": "fr.have",
+   "text": "عِنْدِي ثَلَاثَةُ إِخْوَةٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "ثَلَاثَةُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "إِخْوَةٍ",
+     "l": "ar:akh",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have three brothers.",
+   "level": "A1",
+   "variantOf": "ar.f2.070",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f2.073",
+   "frame": "fr.have",
+   "text": "عِنْدَهَا بِنْتٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "بِنْتٌ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "She has a daughter.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.074",
+   "frame": "fr.have",
+   "text": "عِنْدَهَا بِنْتَانِ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "بِنْتَانِ",
+     "l": "ar:bint",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "She has two daughters.",
+   "level": "A1",
+   "variantOf": "ar.f2.073",
+   "variant": {
+    "Number": "DU"
+   }
+  },
+  {
+   "id": "ar.f2.075",
+   "frame": "fr.have",
+   "text": "عِنْدَهُ زَوْجَةٌ وَطِفْلٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُ",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "زَوْجَةٌ",
+     "l": "ar:zawja",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَطِفْلٌ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "طِفْلٌ",
+       "l": "ar:tifl",
+       "f": "N;NOM;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "He has a wife and a child.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.076",
+   "frame": "fr.have",
+   "text": "عِنْدَنَا بَيْتٌ هُنَا.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "بَيْتٌ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have a house here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.077",
+   "frame": "fr.have",
+   "text": "كَانَ عِنْدَنَا بَيْتٌ هُنَا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "بَيْتٌ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We had a house here.",
+   "level": "A1",
+   "variantOf": "ar.f2.076",
+   "variant": {
+    "Tense": "PST"
+   }
+  },
+  {
+   "id": "ar.f2.078",
+   "frame": "fr.have",
+   "text": "عِنْدَكَ إِخْوَةٌ؟ نَعَمْ، عِنْدِي أَخَوَانِ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "إِخْوَةٌ",
+     "l": "ar:akh",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخَوَانِ",
+     "l": "ar:akh",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you have brothers and sisters? Yes, I have two brothers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.079",
+   "frame": "fr.have",
+   "text": "عِنْدَكِ إِخْوَةٌ؟ نَعَمْ، عِنْدِي أَخَوَانِ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكِ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": "إِخْوَةٌ",
+     "l": "ar:akh",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخَوَانِ",
+     "l": "ar:akh",
+     "f": "N;NOM;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you (to a woman) have brothers and sisters? Yes, I have two brothers.",
+   "level": "A1",
+   "variantOf": "ar.f2.078",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.080",
+   "frame": "fr.have",
+   "text": "عِنْدَكُمْ أَطْفَالٌ؟ لَا.",
+   "tokens": [
+    {
+     "t": "عِنْدَكُمْ",
+     "l": "ar:inda",
+     "f": "ADP;2;PL;MASC"
+    },
+    {
+     "t": "أَطْفَالٌ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la_no"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you (pl.) have children? No.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.081",
+   "frame": "fr.have",
+   "text": "عِنْدَهُمْ أَرْبَعَةُ أَحْفَادٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُمْ",
+     "l": "ar:inda",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "أَرْبَعَةُ",
+     "l": "ar:arbaa",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَحْفَادٍ",
+     "l": "ar:hafid",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "They have four grandchildren.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.082",
+   "frame": "fr.have",
+   "text": "عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدَ",
+     "l": "ar:inda",
+     "f": "ADP"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "ثَلَاثَةُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "إِخْوَةٍ",
+     "l": "ar:akh",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "My father has three brothers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.083",
+   "frame": "fr.have",
+   "text": "عِنْدَ جَدَّتِي أَحْفَادٌ كَثِيرُونَ.",
+   "tokens": [
+    {
+     "t": "عِنْدَ",
+     "l": "ar:inda",
+     "f": "ADP"
+    },
+    {
+     "t": "جَدَّتِي",
+     "l": "ar:jadda",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "أَحْفَادٌ",
+     "l": "ar:hafid",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "كَثِيرُونَ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.plural.noun"
+   ],
+   "gloss": "My grandmother has many grandchildren.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.084",
+   "frame": "fr.have",
+   "text": "كَانَ عِنْدَ جَدِّي بَيْتٌ هُنَا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَ",
+     "l": "ar:inda",
+     "f": "ADP"
+    },
+    {
+     "t": "جَدِّي",
+     "l": "ar:jadd",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "بَيْتٌ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive"
+   ],
+   "gloss": "My grandfather had a house here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.085",
+   "frame": "fr.have",
+   "text": "عِنْدَهَا رَضِيعٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "رَضِيعٌ",
+     "l": "ar:radi",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "She has a baby.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.086",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَقْرِبَاءُ هُنَا.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَقْرِبَاءُ",
+     "l": "ar:qarib_relative",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have relatives here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.087",
+   "frame": "fr.have",
+   "text": "عِنْدِي ثَلَاثَةُ أَعْمَامٍ وَخَالَتَانِ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "ثَلَاثَةُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَعْمَامٍ",
+     "l": "ar:amm",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": "وَخَالَتَانِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "خَالَتَانِ",
+       "l": "ar:khala",
+       "f": "N;NOM;DU;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have three uncles on my father's side and two aunts on my mother's side.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.088",
+   "frame": "fr.have",
+   "text": "عِنْدِي زَوْجٌ وَثَلَاثُ بَنَاتٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "زَوْجٌ",
+     "l": "ar:zawj",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَثَلَاثُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "ثَلَاثُ",
+       "l": "ar:thalatha",
+       "f": "NUM;NOM;FEM;CONST"
+      }
+     ]
+    },
+    {
+     "t": "بَنَاتٍ",
+     "l": "ar:bint",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have a husband and three daughters.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.089",
+   "frame": "fr.have",
+   "text": "عِنْدَهُمْ أَوْلَادٌ كَثِيرُونَ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُمْ",
+     "l": "ar:inda",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "أَوْلَادٌ",
+     "l": "ar:walad",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "كَثِيرُونَ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "They have many children.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.090",
+   "frame": "fr.have",
+   "text": "عِنْدَكَ كِتَابٌ؟ نَعَمْ، عِنْدِي كُتُبٌ كَثِيرَةٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "كِتَابٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "كُتُبٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": "كَثِيرَةٌ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you have a book? Yes, I have many books.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.091",
+   "frame": "fr.poss",
+   "text": "هٰذَا أَبِي.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my father.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.092",
+   "frame": "fr.poss",
+   "text": "هٰذِهِ أُمِّي.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my mother.",
+   "level": "A1",
+   "variantOf": "ar.f2.091",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.093",
+   "frame": "fr.poss",
+   "text": "هٰذَا أَخِي، وَهٰذِهِ أُخْتِي.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَهٰذِهِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "هٰذِهِ",
+       "l": "ar:hadha",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my brother, and this is my sister.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.094",
+   "frame": "fr.poss",
+   "text": "أَبُوكَ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "أَبُوكَ",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS2SM"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Your father is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.095",
+   "frame": "fr.poss",
+   "text": "أَبُوكِ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "أَبُوكِ",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS2SF"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Your (to a woman) father is a teacher.",
+   "level": "A1",
+   "variantOf": "ar.f2.094",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.096",
+   "frame": "fr.poss",
+   "text": "أُمُّهُ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "أُمُّهُ",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS3SM"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "His mother is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.097",
+   "frame": "fr.poss",
+   "text": "أُمُّهَا مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "أُمُّهَا",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS3SF"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Her mother is a teacher.",
+   "level": "A1",
+   "variantOf": "ar.f2.096",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.098",
+   "frame": "fr.poss",
+   "text": "اِبْنِي طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "اِبْنِي",
+     "l": "ar:ibn",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My son is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.099",
+   "frame": "fr.poss",
+   "text": "اِبْنَتُهُ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "اِبْنَتُهُ",
+     "l": "ar:ibna",
+     "f": "N;NOM;SG;POSS;PSS3SM"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "His daughter is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.100",
+   "frame": "fr.poss",
+   "text": "اِبْنَتُهَا مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "اِبْنَتُهَا",
+     "l": "ar:ibna",
+     "f": "N;NOM;SG;POSS;PSS3SF"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Her daughter is a teacher.",
+   "level": "A1",
+   "variantOf": "ar.f2.099",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.101",
+   "frame": "fr.poss",
+   "text": "بِنْتِي طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "بِنْتِي",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My daughter is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.102",
+   "frame": "fr.poss",
+   "text": "زَوْجَتِي مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "زَوْجَتِي",
+     "l": "ar:zawja",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My wife is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.103",
+   "frame": "fr.poss",
+   "text": "زَوْجِي مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "زَوْجِي",
+     "l": "ar:zawj",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My husband is a teacher.",
+   "level": "A1",
+   "variantOf": "ar.f2.102",
+   "variant": {
+    "Gender": "MASC"
+   }
+  },
+  {
+   "id": "ar.f2.104",
+   "frame": "fr.poss",
+   "text": "جَدِّي وَجَدَّتِي هُنَا.",
+   "tokens": [
+    {
+     "t": "جَدِّي",
+     "l": "ar:jadd",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "وَجَدَّتِي",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "جَدَّتِي",
+       "l": "ar:jadda",
+       "f": "N;NOM;SG;POSS;PSS1S"
+      }
+     ]
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My grandfather and my grandmother are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.105",
+   "frame": "fr.poss",
+   "text": "أَجْدَادِي هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "أَجْدَادِي",
+     "l": "ar:ajdad",
+     "f": "N;NOM;PL;POSS;PSS1S"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.plural.noun"
+   ],
+   "gloss": "My grandparents are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.106",
+   "frame": "fr.poss",
+   "text": "هٰذِهِ أُسْرَتِي.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "أُسْرَتِي",
+     "l": "ar:usra",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my family.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.107",
+   "frame": "fr.poss",
+   "text": "عَائِلَتُكُمْ هُنَا؟",
+   "tokens": [
+    {
+     "t": "عَائِلَتُكُمْ",
+     "l": "ar:aila",
+     "f": "N;NOM;SG;POSS;PSS2PM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Is your family here?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.108",
+   "frame": "fr.poss",
+   "text": "وَالِدَايَ هُنَا.",
+   "tokens": [
+    {
+     "t": "وَالِدَايَ",
+     "l": "ar:walidan",
+     "f": "N;NOM;DU;POSS;PSS1S"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My parents are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.109",
+   "frame": "fr.poss",
+   "text": "اِبْنُ عَمِّي طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "اِبْنُ",
+     "l": "ar:ibn",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "عَمِّي",
+     "l": "ar:amm",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My cousin (my father's brother's son) is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.110",
+   "frame": "fr.poss",
+   "text": "بِنْتُ خَالَتِي مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "بِنْتُ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "خَالَتِي",
+     "l": "ar:khala",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My cousin (my mother's sister's daughter) is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.111",
+   "frame": "fr.poss",
+   "text": "اِبْنُ أَخِي هُنَا.",
+   "tokens": [
+    {
+     "t": "اِبْنُ",
+     "l": "ar:ibn",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My nephew (my brother's son) is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.112",
+   "frame": "fr.poss",
+   "text": "هٰذِهِ بِنْتُ أُخْتِي.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "بِنْتُ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my niece (my sister's daughter).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.113",
+   "frame": "fr.poss",
+   "text": "هٰذِهِ عَمَّتِي، وَتِلْكَ خَالَتِي.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "عَمَّتِي",
+     "l": "ar:amma",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَتِلْكَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "تِلْكَ",
+       "l": "ar:dhalika",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "خَالَتِي",
+     "l": "ar:khala",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my aunt (my father's sister), and that is my aunt (my mother's sister).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.114",
+   "frame": "fr.poss",
+   "text": "عَمِّي وَخَالِي هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "عَمِّي",
+     "l": "ar:amm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "وَخَالِي",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "خَالِي",
+       "l": "ar:khal",
+       "f": "N;NOM;SG;POSS;PSS1S"
+      }
+     ]
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My uncles — my father's brother and my mother's brother — are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.115",
+   "frame": "fr.poss",
+   "text": "حَفِيدِي طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "حَفِيدِي",
+     "l": "ar:hafid",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My grandson is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.116",
+   "frame": "fr.poss",
+   "text": "حَفِيدَتِي طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "حَفِيدَتِي",
+     "l": "ar:hafida",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My granddaughter is a student.",
+   "level": "A1",
+   "variantOf": "ar.f2.115",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.117",
+   "frame": "fr.poss",
+   "text": "هُوَ قَرِيبِي.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "قَرِيبِي",
+     "l": "ar:qarib_relative",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "He is my relative.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.118",
+   "frame": "fr.poss",
+   "text": "أَخُوكَ هُنَا؟",
+   "tokens": [
+    {
+     "t": "أَخُوكَ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS2SM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Is your brother here?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.119",
+   "frame": "fr.poss",
+   "text": "أَخُوكِ هُنَا؟",
+   "tokens": [
+    {
+     "t": "أَخُوكِ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS2SF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Is your (to a woman) brother here?",
+   "level": "A1",
+   "variantOf": "ar.f2.118",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f2.120",
+   "frame": "fr.poss",
+   "text": "صَدِيقِي هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "صَدِيقِي",
+     "l": "ar:sadiq",
+     "f": "N;NOM;SG;MASC;POSS;PSS1S"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "My friend is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.121",
+   "frame": "fr.poss",
+   "text": "هٰذَا كِتَابِي.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "كِتَابِي",
+     "l": "ar:kitab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is my book.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.122",
+   "frame": "fr.poss",
+   "text": "هٰذِهِ حَقِيبَتُهَا.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "حَقِيبَتُهَا",
+     "l": "ar:haqiba",
+     "f": "N;NOM;SG;POSS;PSS3SF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "This is her bag.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.123",
+   "frame": "fr.poss",
+   "text": "بَيْتُنَا هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "بَيْتُنَا",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;POSS;PSS1P"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Our house is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.124",
+   "frame": "fr.poss",
+   "text": "مِفْتَاحُكَ هُنَا.",
+   "tokens": [
+    {
+     "t": "مِفْتَاحُكَ",
+     "l": "ar:miftah",
+     "f": "N;NOM;SG;POSS;PSS2SM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Your key is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.125",
+   "frame": "fr.poss",
+   "text": "غُرْفَتُهُمْ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "غُرْفَتُهُمْ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;SG;POSS;PSS3PM"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "gloss": "Their room is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.126",
+   "frame": "fr.thing.here",
+   "text": "الرَّضِيعُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الرَّضِيعُ",
+     "l": "ar:radi",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The baby is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f2.127",
+   "frame": "fr.be.where",
+   "text": "كُلُّ الْعَائِلَةِ هُنَا.",
+   "tokens": [
+    {
+     "t": "كُلُّ",
+     "l": "ar:kull",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "الْعَائِلَةِ",
+     "l": "ar:aila",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The whole family is here.",
+   "level": "A1"
+  }
+ ]
+}

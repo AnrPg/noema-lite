@@ -1,0 +1,3218 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:dao",
+   "lemma": "到",
+   "trad": "到",
+   "pinyin": "dào",
+   "pos": "VERB",
+   "senses": [
+    "prep.to",
+    "verb.arrive",
+    "prep.until"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Getting somewhere: the goal of a trip, the end of a stretch of road or time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to (a place); to go to (a place) — 到 + place (+ verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to"
+     },
+     {
+      "id": "s2",
+      "def": "to arrive, to reach, to get to (S13)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.arrive"
+     },
+     {
+      "id": "s3",
+      "def": "until, up to (a time) (S15): 工作到六点",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     },
+     {
+      "id": "s4",
+      "def": "(after a verb) result: managed to — 买到 ‘manage to buy’, 找到 ‘find’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们到超市买牛奶。",
+      "py": "Wǒmen dào chāoshì mǎi niúnǎi.",
+      "tr": "We go to the supermarket to buy milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "从我家到学校很近。",
+      "py": "Cóng wǒ jiā dào xuéxiào hěn jìn.",
+      "tr": "It is very close from my home to the school.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我到了！",
+      "py": "Wǒ dào le!",
+      "tr": "I’m here! (I’ve arrived)",
+      "register": "colloquial",
+      "context": "phone",
+      "sense": "s2"
+     },
+     {
+      "text": "火车几点到北京？",
+      "py": "Huǒchē jǐ diǎn dào Běijīng?",
+      "tr": "What time does the train get to Beijing?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "我们等到明天吧。",
+      "py": "Wǒmen děng dào míngtiān ba.",
+      "tr": "Let’s wait until tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s3"
+     },
+     {
+      "text": "我每天工作到晚上六点。",
+      "py": "Wǒ měitiān gōngzuò dào wǎnshang liù diǎn.",
+      "tr": "I work until six in the evening every day.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "我买到了！",
+      "py": "Wǒ mǎi dào le!",
+      "tr": "I managed to buy it!",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "从…到…",
+      "tr": "from … to …"
+     },
+     {
+      "text": "到…去 / 到…来",
+      "tr": "go / come to …"
+     },
+     {
+      "text": "到家",
+      "tr": "to get home"
+     },
+     {
+      "text": "到了",
+      "tr": "here we are; I’ve arrived"
+     },
+     {
+      "text": "到北京",
+      "tr": "to arrive in Beijing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "去",
+      "register": "neutral",
+      "nuance": "qù: ‘to go (to)’ — the verb of movement (S13): 去学校 ‘go to school’, no ‘to’ needed"
+     },
+     {
+      "word": "往",
+      "register": "neutral",
+      "nuance": "wǎng: ‘towards’ — the direction, not the goal: 往前走 ‘go straight on’"
+     },
+     {
+      "word": "至",
+      "register": "formal",
+      "nuance": "zhì: written ‘to, until’: 北京至上海 ‘Beijing to Shanghai’ (timetables)"
+     },
+     {
+      "word": "到达",
+      "register": "formal",
+      "nuance": "dàodá: to arrive (timetables, announcements): 到达北京"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 至 ‘to arrive’ + phonetic 刀.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "到！ is what Chinese pupils answer at roll call — ‘present!’ (‘arrived’)."
+    ],
+    "pitfalls": [
+     "‘Go to school’ is simply 我去学校: the verb 去 already contains the ‘to’, no extra word is needed.",
+     "到 + place + verb means ‘go to … to do …’: 到超市买牛奶. The place comes BEFORE the action, the order in which things happen."
+    ],
+    "subtleties": [
+     "到学校 stresses reaching the place; 去学校 tells where you are heading.",
+     "At the start of a phone call 我到了 means ‘I’m here, I’ve arrived’.",
+     "‘Arrive’ takes the place directly: 到北京 ‘arrive in Beijing’ — no ‘in’ word; ‘until’ follows the verb: 工作到六点 ‘work until six’, 从早到晚 ‘from morning till night’."
+    ]
+   }
+  },
+  {
+   "id": "zh:cong.from",
+   "lemma": "从",
+   "trad": "從",
+   "pinyin": "cóng",
+   "pos": "ADP",
+   "senses": [
+    "prep.from"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The starting point — of a trip, of a time, of a thing you got.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (a place, a time, a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "through, by way of",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(从来 / 从不) ever, never (S08)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这些苹果是从市场买的。",
+      "py": "Zhèxiē píngguǒ shì cóng shìchǎng mǎi de.",
+      "tr": "These apples were bought at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "他是从中国来的。",
+      "py": "Tā shì cóng Zhōngguó lái de.",
+      "tr": "He comes from China.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "从这里到那里很远。",
+      "py": "Cóng zhèli dào nàli hěn yuǎn.",
+      "tr": "It’s a long way from here to there.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我们从这个门进去。",
+      "py": "Wǒmen cóng zhège mén jìnqu.",
+      "tr": "We go in through this door.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "从…到…",
+      "tr": "from … to …"
+     },
+     {
+      "text": "从…来",
+      "tr": "to come from …"
+     },
+     {
+      "text": "从小",
+      "tr": "since childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "自",
+      "register": "formal",
+      "nuance": "zì: written ‘from’: 来自中国 ‘from China’"
+     },
+     {
+      "word": "打",
+      "register": "colloquial",
+      "nuance": "dǎ: northern colloquial ‘from’: 你打哪儿来？",
+      "region": "northern China"
+     },
+     {
+      "word": "离",
+      "register": "neutral",
+      "nuance": "lí: ‘from’ for DISTANCE (S12): 我家离学校很近 — not for movement"
+     }
+    ],
+    "etymology": {
+     "text": "Originally written 从, two people one behind the other (‘to follow’); the traditional 從 adds 辵 ‘walk’. The simplified form went back to the original.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The simplified 从 is older than the traditional 從: it was the original drawing of one person following another."
+    ],
+    "pitfalls": [
+     "从 + place stands before the verb: 我从家来 — not *我来从家.",
+     "‘Where are you from?’ (origin) is 你是哪里人？; 从 is for where someone or something comes from now: 你从哪里来？"
+    ],
+    "subtleties": [
+     "从…到… works for place and time: 从家到学校, 从早到晚 ‘from morning till night’.",
+     "For distance Chinese uses 离, not 从: 超市离我家很近 (S12)."
+    ]
+   }
+  },
+  {
+   "id": "zh:gen.with",
+   "lemma": "跟",
+   "trad": "跟",
+   "pinyin": "gēn",
+   "pos": "ADP",
+   "senses": [
+    "prep.with"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Company: doing something together with someone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with, together with (a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with"
+     },
+     {
+      "id": "s2",
+      "def": "to (speak to someone): 跟他说",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "and (joins nouns, colloquial)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(verb) to follow",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s5",
+      "def": "(noun) heel",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我跟朋友一起吃饭。",
+      "py": "Wǒ gēn péngyou yìqǐ chīfàn.",
+      "tr": "I’m eating with friends.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "你跟谁一起喝咖啡？",
+      "py": "Nǐ gēn shéi yìqǐ hē kāfēi?",
+      "tr": "Who are you having coffee with?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "我跟你说一件事。",
+      "py": "Wǒ gēn nǐ shuō yí jiàn shì.",
+      "tr": "Let me tell you something.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "我哥哥跟我都是学生。",
+      "py": "Wǒ gēge gēn wǒ dōu shì xuésheng.",
+      "tr": "My brother and I are both students.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s3"
+     },
+     {
+      "text": "跟我来！",
+      "py": "Gēn wǒ lái!",
+      "tr": "Follow me!",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "跟…一起",
+      "tr": "together with …"
+     },
+     {
+      "text": "跟…说",
+      "tr": "to say to …, tell …"
+     },
+     {
+      "text": "高跟鞋",
+      "tr": "high-heeled shoes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "和",
+      "register": "neutral",
+      "nuance": "hé: ‘and; with’ — the same in 和…一起, a little more neutral and written"
+     },
+     {
+      "word": "同",
+      "register": "formal",
+      "nuance": "tóng: ‘with’ in formal or southern usage"
+     },
+     {
+      "word": "与",
+      "register": "formal",
+      "nuance": "yǔ: written ‘and, with’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 足 ‘foot’ + phonetic 艮; cognate with 根 ‘root’ (Wang 1982).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "跟 still means ‘heel’ (高跟鞋 ‘high-heeled shoes’) and ‘to follow’ (跟我来 ‘follow me’); ‘with’ is the one who follows at your side."
+    ],
+    "pitfalls": [
+     "跟 + person + 一起 + verb: 我跟他一起吃饭 — the verb comes last; *我吃饭跟他 is wrong.",
+     "跟 is ‘with’ for people only. ‘With chopsticks’ is 用筷子 (用 ‘to use’), ‘coffee with milk’ 加牛奶的咖啡 (加 ‘to add’)."
+    ],
+    "subtleties": [
+     "跟 is the everyday spoken ‘with’ in the north; 和 is more neutral; writing uses 与."
+    ]
+   }
+  },
+  {
+   "id": "zh:gei",
+   "lemma": "给",
+   "trad": "給",
+   "pinyin": "gěi",
+   "pos": "ADP",
+   "senses": [
+    "prep.for"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Doing something for someone — and the giving itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "for, for the benefit of (给 + person + verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     },
+     {
+      "id": "s2",
+      "def": "to (the receiver): 给我打电话",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(verb) to give",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是给你的。",
+      "py": "Zhè shì gěi nǐ de.",
+      "tr": "This is for you.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "我给妈妈买水果。",
+      "py": "Wǒ gěi māma mǎi shuǐguǒ.",
+      "tr": "I’m buying fruit for Mum.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "明天给我打电话。",
+      "py": "Míngtiān gěi wǒ dǎ diànhuà.",
+      "tr": "Call me tomorrow.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s2"
+     },
+     {
+      "text": "我给你一本书。",
+      "py": "Wǒ gěi nǐ yì běn shū.",
+      "tr": "I’ll give you a book.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "给…买",
+      "tr": "to buy for …"
+     },
+     {
+      "text": "给…打电话",
+      "tr": "to phone …"
+     },
+     {
+      "text": "送给",
+      "tr": "to give (as a present) to"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "为",
+      "register": "formal",
+      "nuance": "wèi: ‘for (the sake of)’ — causes, toasts, written style"
+     },
+     {
+      "word": "替",
+      "register": "neutral",
+      "nuance": "tì: ‘for, on behalf of, instead of’: 我替你去 ‘I’ll go for you’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 糸 ‘silk’ + phonetic 合. In Mandarin gěi is the colloquial reading, jǐ the literary one, of the same word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "给 has a second, literary reading jǐ, kept in 供给 gōngjǐ ‘supply’ and 自给自足 ‘self-sufficient’."
+    ],
+    "pitfalls": [
+     "给 + person comes before the verb: 我给妈妈买水果 ‘I buy fruit for Mum’.",
+     "这是给你的 ‘this is for you’ needs the final 的."
+    ],
+    "subtleties": [
+     "给 is both a verb (‘to give’) and a coverb (‘for, to’): 我给你 ‘I give you’ — 我给你做饭 ‘I cook for you’."
+    ]
+   }
+  },
+  {
+   "id": "zh:wei.for",
+   "lemma": "为",
+   "trad": "為",
+   "pinyin": "wèi",
+   "pos": "ADP",
+   "senses": [
+    "prep.for"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dedication: for a person, a cause, a toast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "for, for the sake of",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.for"
+     },
+     {
+      "id": "s2",
+      "def": "because of",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(read wéi) to be, to act as, to become (in written words)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "妈妈为我们做饭。",
+      "py": "Māma wèi wǒmen zuòfàn.",
+      "tr": "Mum cooks for us.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我为你高兴。",
+      "py": "Wǒ wèi nǐ gāoxìng.",
+      "tr": "I’m happy for you.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "为我们的友谊干杯！",
+      "py": "Wèi wǒmen de yǒuyì gānbēi!",
+      "tr": "To our friendship — cheers!",
+      "register": "formal",
+      "context": "toasts",
+      "sense": "s1"
+     },
+     {
+      "text": "他成为了一名医生。",
+      "py": "Tā chéngwéi le yì míng yīshēng.",
+      "tr": "He became a doctor.",
+      "register": "formal",
+      "context": "careers",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "为…干杯",
+      "tr": "to drink to …"
+     },
+     {
+      "text": "为了",
+      "tr": "in order to; for the sake of"
+     },
+     {
+      "text": "为…服务",
+      "tr": "to serve …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "为人民服务",
+      "tr": "wèi rénmín fúwù — serve the people",
+      "kind": "quote",
+      "meaning": "the slogan of service to the people, written on government buildings",
+      "register": "formal",
+      "source": "Mao Zedong, title of a speech (1944)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "给",
+      "register": "colloquial",
+      "nuance": "gěi: the everyday ‘for’: 妈妈给我们做饭"
+     },
+     {
+      "word": "为了",
+      "register": "neutral",
+      "nuance": "wèile: ‘for the sake of; in order to’ — purpose"
+     }
+    ],
+    "etymology": {
+     "text": "Simplified from 爲. In the oracle-bone script a hand leading an elephant — ‘to do, to make’; wèi ‘for’ is a derivative of wéi ‘to do, to be’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The oldest form of 为 shows a hand leading an elephant."
+    ],
+    "pitfalls": [
+     "Two readings: wèi ‘for’ (为你) and wéi ‘to be, to act as’ (成为 ‘to become’, 认为 ‘to think’)."
+    ],
+    "subtleties": [
+     "为 sounds more formal than 给: in speech 妈妈给我们做饭; 为 for causes and toasts: 为人民服务, 为…干杯."
+    ]
+   }
+  },
+  {
+   "id": "zh:guanyu",
+   "lemma": "关于",
+   "trad": "關於",
+   "pinyin": "guān yú",
+   "pos": "ADP",
+   "senses": [
+    "prep.about"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Naming the topic: a book, a talk, a question about something.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "about, concerning, on (a topic)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是一本关于家庭的书。",
+      "py": "Zhè shì yì běn guānyú jiātíng de shū.",
+      "tr": "This is a book about the family.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "关于这个问题，我们明天再说。",
+      "py": "Guānyú zhège wèntí, wǒmen míngtiān zài shuō.",
+      "tr": "About this question — let’s talk tomorrow.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s1"
+     },
+     {
+      "text": "我想买一本关于中国的书。",
+      "py": "Wǒ xiǎng mǎi yì běn guānyú Zhōngguó de shū.",
+      "tr": "I’d like to buy a book about China.",
+      "register": "neutral",
+      "context": "bookshop",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "关于…的书",
+      "tr": "a book about …"
+     },
+     {
+      "text": "关于…的问题",
+      "tr": "a question about …"
+     },
+     {
+      "text": "关于这件事",
+      "tr": "about this matter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "有关",
+      "register": "neutral",
+      "nuance": "yǒuguān: ‘related to, about’: 和家庭有关的书"
+     },
+     {
+      "word": "对于",
+      "register": "neutral",
+      "nuance": "duìyú: ‘with regard to, towards’ — how someone treats or sees something"
+     }
+    ],
+    "etymology": {
+     "text": "关 ‘to concern, to bear on’ + 于 ‘at, to’ (the classical preposition).",
+     "src": "morphemes: 关 + 于"
+    },
+    "funFacts": [
+     "关于我们 ‘About us’ is the heading of the ‘about’ page on Chinese websites."
+    ],
+    "pitfalls": [
+     "A 关于 phrase stands BEFORE the noun with 的 (关于家庭的书 ‘a book about the family’) or opens the sentence — never after the noun as in English."
+    ],
+    "subtleties": [
+     "关于 names the subject matter; 对于 says how someone treats or regards it."
+    ]
+   }
+  },
+  {
+   "id": "zh:yiqi",
+   "lemma": "一起",
+   "trad": "一起",
+   "pinyin": "yī qǐ",
+   "pos": "ADV",
+   "senses": [],
+   "role": "together — 跟 / 和 + person + 一起 + verb: 我跟朋友一起吃饭 ‘I eat with friends’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Company and sharing — eating, going, being together.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "together, with each other",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "in the same place",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "altogether, in all",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们一起吃饭吧。",
+      "py": "Wǒmen yìqǐ chīfàn ba.",
+      "tr": "Let’s eat together.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "我跟朋友一起喝咖啡。",
+      "py": "Wǒ gēn péngyou yìqǐ hē kāfēi.",
+      "tr": "I’m having coffee with a friend.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "他们住在一起。",
+      "py": "Tāmen zhù zài yìqǐ.",
+      "tr": "They live together.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "一起多少钱？",
+      "py": "Yìqǐ duōshao qián?",
+      "tr": "How much is it altogether?",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "跟…一起",
+      "tr": "together with …"
+     },
+     {
+      "text": "和…一起",
+      "tr": "together with …"
+     },
+     {
+      "text": "在一起",
+      "tr": "to be together (also: to be a couple)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一块儿",
+      "register": "colloquial",
+      "nuance": "yíkuàir: northern ‘together’",
+      "region": "northern China"
+     },
+     {
+      "word": "一同",
+      "register": "formal",
+      "nuance": "yìtóng: written ‘together’"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 起, which also counts batches and events (一起事故 ‘an accident’): ‘as one lot’ — together.",
+     "src": "morphemes: 一 + 起"
+    },
+    "funFacts": [
+     "在一起 ‘to be together’ also means ‘to be in a relationship’: 他们在一起了 ‘they’re a couple now’."
+    ],
+    "pitfalls": [
+     "一起 stands before the verb: 我们一起吃饭 — not *我们吃饭一起.",
+     "With a partner the pattern is 跟 / 和 + person + 一起 + verb."
+    ],
+    "subtleties": [
+     "The 一 is said yì before 起 (yìqǐ), by the tone rule of 一."
+    ]
+   }
+  },
+  {
+   "id": "zh:jia.clf",
+   "lemma": "家",
+   "trad": "家",
+   "pinyin": "jiā",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for businesses and institutions — shops, restaurants, banks, hospitals, companies: 一家超市, 这家饭馆, 两家银行 (the same character as 家 ‘home, family’)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:tiao",
+   "lemma": "条",
+   "trad": "條",
+   "pinyin": "tiáo",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for long, narrow (often flexible) things: 一条街 ‘a street’, 一条路 ‘a road’, 一条鱼 ‘a fish’, 一条茄子 ‘an aubergine’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:suo",
+   "lemma": "所",
+   "trad": "所",
+   "pinyin": "suǒ",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for schools, universities, hospitals and houses (institutions with buildings): 一所学校, 这所大学, 一所医院",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:xuexiao",
+   "lemma": "学校",
+   "trad": "學校",
+   "pinyin": "xué xiào",
+   "pos": "NOUN",
+   "senses": [
+    "place.school"
+   ],
+   "measure": [
+    "所",
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Classrooms, uniforms, the school gate at four o’clock.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "school",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.school"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在学校。",
+      "py": "Háizimen zài xuéxiào.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我们学校有一千个学生。",
+      "py": "Wǒmen xuéxiào yǒu yìqiān ge xuésheng.",
+      "tr": "Our school has a thousand pupils.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "学校离我家很近。",
+      "py": "Xuéxiào lí wǒ jiā hěn jìn.",
+      "tr": "The school is very close to my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在学校",
+      "tr": "at school"
+     },
+     {
+      "text": "去学校",
+      "tr": "to go to the school"
+     },
+     {
+      "text": "学校门口",
+      "tr": "the school gate"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "校园",
+      "register": "neutral",
+      "nuance": "xiàoyuán: campus, the school grounds"
+     },
+     {
+      "word": "学堂",
+      "register": "dated",
+      "nuance": "xuétáng: school (old-style)"
+     }
+    ],
+    "etymology": {
+     "text": "学 ‘to study’ + 校 ‘school’ (semantic 木 ‘wood’ + phonetic 交).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "小学 ‘small study’ is primary school, 中学 secondary school, 大学 ‘big study’ university."
+    ],
+    "pitfalls": [
+     "‘To go to school’ as a pupil is 上学; 去学校 is going to the school building."
+    ],
+    "subtleties": [
+     "我们学校 ‘our school’ — no 的 with an institution you belong to."
+    ]
+   }
+  },
+  {
+   "id": "zh:daxue",
+   "lemma": "大学",
+   "trad": "大學",
+   "pinyin": "dà xué",
+   "pos": "NOUN",
+   "senses": [
+    "place.university"
+   ],
+   "measure": [
+    "所"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Campus life, the entrance exam, a step up in life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "university, college",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.university"
+     },
+     {
+      "id": "s2",
+      "def": "《大学》 the Great Learning, one of the Four Books of Confucianism",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我哥哥在大学学习。",
+      "py": "Wǒ gēge zài dàxué xuéxí.",
+      "tr": "My older brother studies at university.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这所大学很有名。",
+      "py": "Zhè suǒ dàxué hěn yǒumíng.",
+      "tr": "This university is very famous.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "《大学》是四书之一。",
+      "py": "“Dàxué” shì Sìshū zhī yī.",
+      "tr": "The Great Learning is one of the Four Books.",
+      "register": "literary",
+      "context": "classics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "上大学",
+      "tr": "to go to university"
+     },
+     {
+      "text": "大学生",
+      "tr": "university student"
+     },
+     {
+      "text": "大学老师",
+      "tr": "university teacher"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "学院",
+      "register": "neutral",
+      "nuance": "xuéyuàn: college, institute, faculty"
+     },
+     {
+      "word": "高校",
+      "register": "formal",
+      "nuance": "gāoxiào: institution of higher education"
+     }
+    ],
+    "etymology": {
+     "text": "大 ‘big’ + 学 ‘learning’; also the title of a Confucian classic, the Great Learning.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "《大学》 ‘the Great Learning’ was a Confucian classic long before 大学 meant ‘university’."
+    ],
+    "pitfalls": [
+     "上大学 means ‘to be at / go to university’; 考大学 ‘to take the university entrance exam’ (高考)."
+    ],
+    "subtleties": [
+     "The measure word is 所: 一所大学; 个 is also heard."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongzuo",
+   "lemma": "工作",
+   "trad": "工作",
+   "pinyin": "gōng zuò",
+   "pos": "NOUN",
+   "senses": [
+    "place.work"
+   ],
+   "measure": [
+    "份",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Work and the workplace — where you go every day, and the job itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "work, one’s job — where one goes every day (在工作 ‘at work’, 去工作 ‘go to work’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.work"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to work; to have a job",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(verb, of a machine) to work, to function",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不在家，我在工作。",
+      "py": "Wǒ bú zài jiā, wǒ zài gōngzuò.",
+      "tr": "I’m not at home, I’m at work.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "他找到了一份新工作。",
+      "py": "Tā zhǎodào le yí fèn xīn gōngzuò.",
+      "tr": "He has found a new job.",
+      "register": "neutral",
+      "context": "careers",
+      "sense": "s1"
+     },
+     {
+      "text": "你在哪里工作？",
+      "py": "Nǐ zài nǎli gōngzuò?",
+      "tr": "Where do you work?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "电脑不工作了。",
+      "py": "Diànnǎo bù gōngzuò le.",
+      "tr": "The computer has stopped working.",
+      "register": "colloquial",
+      "context": "office",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "找工作",
+      "tr": "to look for a job"
+     },
+     {
+      "text": "去工作",
+      "tr": "to go to work"
+     },
+     {
+      "text": "工作日",
+      "tr": "working day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "上班",
+      "register": "neutral",
+      "nuance": "shàngbān: ‘to be on duty, to go to work’ — 我在上班 ‘I’m at work’"
+     },
+     {
+      "word": "活儿",
+      "register": "colloquial",
+      "nuance": "huór: ‘work, a job to do’"
+     },
+     {
+      "word": "职业",
+      "register": "formal",
+      "nuance": "zhíyè: occupation, profession"
+     }
+    ],
+    "etymology": {
+     "text": "工 ‘work’ + 作 ‘to do, to make’.",
+     "src": "morphemes: 工 + 作"
+    },
+    "funFacts": [
+     "工作 is said of machines too: 电脑不工作了 ‘the computer isn’t working’."
+    ],
+    "pitfalls": [
+     "‘I’m at work’ is 我在工作 or 我在上班 — not *我在工作里; ‘my workplace’ is 我的单位 or 我们公司."
+    ],
+    "subtleties": [
+     "With 在 + place, 工作 is the verb: 他在医院工作 ‘he works at a hospital’.",
+     "A job is counted with 份: 一份工作 ‘a job’."
+    ]
+   }
+  },
+  {
+   "id": "zh:bangongshi",
+   "lemma": "办公室",
+   "trad": "辦公室",
+   "pinyin": "bàn gōng shì",
+   "pos": "NOUN",
+   "senses": [
+    "place.office"
+   ],
+   "measure": [
+    "间"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Desks, computers, colleagues.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "office (a room or a department)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.office"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我在办公室工作。",
+      "py": "Wǒ zài bàngōngshì gōngzuò.",
+      "tr": "I work in an office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "老师在办公室。",
+      "py": "Lǎoshī zài bàngōngshì.",
+      "tr": "The teacher is in the staff room.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "他的办公室在三楼。",
+      "py": "Tā de bàngōngshì zài sān lóu.",
+      "tr": "His office is on the third floor.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在办公室",
+      "tr": "in the office"
+     },
+     {
+      "text": "办公室主任",
+      "tr": "office manager"
+     },
+     {
+      "text": "去办公室",
+      "tr": "to go to the office"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "写字楼",
+      "register": "neutral",
+      "nuance": "xiězìlóu: office building"
+     },
+     {
+      "word": "办事处",
+      "register": "formal",
+      "nuance": "bànshìchù: (branch) office, agency"
+     }
+    ],
+    "etymology": {
+     "text": "办公 ‘to handle official business’ + 室 ‘room’.",
+     "src": "morphemes: 办公 + 室"
+    },
+    "funFacts": [
+     "室 ‘room’ is in many rooms: 卧室 bedroom (S12), 教室 classroom, 浴室 bathroom."
+    ],
+    "pitfalls": [
+     "办公室 is the room or the department; a company is 公司, an office block 写字楼."
+    ],
+    "subtleties": [
+     "In a school, 办公室 is the teachers’ room."
+    ]
+   }
+  },
+  {
+   "id": "zh:shangdian",
+   "lemma": "商店",
+   "trad": "商店",
+   "pinyin": "shāng diàn",
+   "pos": "NOUN",
+   "senses": [
+    "place.shop"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shop windows and shop signs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop, store",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.shop"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这条街有很多商店。",
+      "py": "Zhè tiáo jiē yǒu hěn duō shāngdiàn.",
+      "tr": "This street has lots of shops.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "这家商店几点开门？",
+      "py": "Zhè jiā shāngdiàn jǐ diǎn kāimén?",
+      "tr": "What time does this shop open?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "我在商店买水。",
+      "py": "Wǒ zài shāngdiàn mǎi shuǐ.",
+      "tr": "I buy water at the shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小商店",
+      "tr": "a small shop"
+     },
+     {
+      "text": "去商店",
+      "tr": "to go to the shop"
+     },
+     {
+      "text": "商店开门",
+      "tr": "the shop opens"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "店",
+      "register": "neutral",
+      "nuance": "diàn: ‘shop’ — mostly in compounds: 书店 bookshop, 药店 pharmacy"
+     },
+     {
+      "word": "小卖部",
+      "register": "colloquial",
+      "nuance": "xiǎomàibù: a tiny shop or kiosk selling drinks and snacks"
+     },
+     {
+      "word": "便利店",
+      "register": "neutral",
+      "nuance": "biànlìdiàn: convenience store"
+     }
+    ],
+    "etymology": {
+     "text": "商 ‘trade, commerce’ + 店 ‘shop’ (semantic 广 ‘building’ + phonetic 占).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Shops are named with 店: 书店 bookshop, 药店 pharmacy, 花店 florist, 饭店 restaurant."
+    ],
+    "pitfalls": [
+     "Count shops with 家: 一家商店, 两家商店."
+    ],
+    "subtleties": [
+     "商店 is a general, slightly formal word: people usually name the kind (超市, 便利店, 书店)."
+    ]
+   }
+  },
+  {
+   "id": "zh:chaoshi",
+   "lemma": "超市",
+   "trad": "超市",
+   "pinyin": "chāo shì",
+   "pos": "NOUN",
+   "senses": [
+    "place.supermarket"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trolleys, long shelves, the weekly shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "supermarket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.supermarket"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们到超市买牛奶。",
+      "py": "Wǒmen dào chāoshì mǎi niúnǎi.",
+      "tr": "We go to the supermarket to buy milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "超市在哪里？",
+      "py": "Chāoshì zài nǎli?",
+      "tr": "Where is the supermarket?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "这家超市有很多水果。",
+      "py": "Zhè jiā chāoshì yǒu hěn duō shuǐguǒ.",
+      "tr": "This supermarket has lots of fruit.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去超市",
+      "tr": "to go to the supermarket"
+     },
+     {
+      "text": "大超市",
+      "tr": "a big supermarket"
+     },
+     {
+      "text": "在超市",
+      "tr": "at the supermarket"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "超级市场",
+      "register": "formal",
+      "nuance": "chāojí shìchǎng: the full form"
+     },
+     {
+      "word": "便利店",
+      "register": "neutral",
+      "nuance": "biànlìdiàn: convenience store — small and open late"
+     }
+    ],
+    "etymology": {
+     "text": "Short for 超级市场 ‘super-level market’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "超市 is a calque of ‘supermarket’ — 超级 ‘super’ + 市场 ‘market’ — then shortened."
+    ],
+    "pitfalls": [
+     "‘At the supermarket’ is just 在超市: no word for ‘at’ and no 里 needed with places like this."
+    ],
+    "subtleties": [
+     "超 means ‘to exceed’: 超人 ‘Superman’."
+    ]
+   }
+  },
+  {
+   "id": "zh:shichang",
+   "lemma": "市场",
+   "trad": "市場",
+   "pinyin": "shì chǎng",
+   "pos": "NOUN",
+   "senses": [
+    "place.market"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Stalls, haggling, fresh fish and greens in the morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "market, marketplace",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.market"
+     },
+     {
+      "id": "s2",
+      "def": "(economics) market, demand",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "妈妈在市场买鱼。",
+      "py": "Māma zài shìchǎng mǎi yú.",
+      "tr": "Mum buys fish at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "这个市场很大。",
+      "py": "Zhège shìchǎng hěn dà.",
+      "tr": "This market is very big.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "中国是一个很大的市场。",
+      "py": "Zhōngguó shì yí ge hěn dà de shìchǎng.",
+      "tr": "China is a very big market.",
+      "register": "formal",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "菜市场",
+      "tr": "food market"
+     },
+     {
+      "text": "去市场",
+      "tr": "to go to the market"
+     },
+     {
+      "text": "市场经济",
+      "tr": "market economy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "菜市场",
+      "register": "neutral",
+      "nuance": "càishìchǎng: the everyday fresh-food market"
+     },
+     {
+      "word": "集市",
+      "register": "neutral",
+      "nuance": "jíshì: a country fair, a periodic market"
+     },
+     {
+      "word": "农贸市场",
+      "register": "formal",
+      "nuance": "nóngmào shìchǎng: farmers’ market"
+     }
+    ],
+    "etymology": {
+     "text": "市 ‘market; city’ + 场 ‘open ground’ (semantic 土 ‘earth’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "市 means both ‘market’ and ‘city’: 北京市 ‘Beijing City’."
+    ],
+    "pitfalls": [
+     "市场 is the place and the economic ‘market’; a supermarket is 超市."
+    ],
+    "subtleties": [
+     "Vegetables, meat and fish are bought at the 菜市场 ‘vegetable market’."
+    ]
+   }
+  },
+  {
+   "id": "zh:fanguan",
+   "lemma": "饭馆",
+   "trad": "飯館",
+   "pinyin": "fàn guǎn",
+   "pos": "NOUN",
+   "senses": [
+    "place.restaurant"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Round tables, shared dishes, a noisy happy meal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "restaurant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.restaurant"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们在饭馆吃晚饭。",
+      "py": "Wǒmen zài fànguǎn chī wǎnfàn.",
+      "tr": "We have dinner at a restaurant.",
+      "register": "neutral",
+      "context": "eating out",
+      "sense": "s1"
+     },
+     {
+      "text": "这家饭馆很有名。",
+      "py": "Zhè jiā fànguǎn hěn yǒumíng.",
+      "tr": "This restaurant is famous.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "附近有饭馆吗？",
+      "py": "Fùjìn yǒu fànguǎn ma?",
+      "tr": "Is there a restaurant nearby?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小饭馆",
+      "tr": "a small restaurant"
+     },
+     {
+      "text": "去饭馆吃饭",
+      "tr": "to eat out"
+     },
+     {
+      "text": "开饭馆",
+      "tr": "to run a restaurant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "餐厅",
+      "register": "neutral",
+      "nuance": "cāntīng: restaurant — sounds more modern or upscale; also a dining hall"
+     },
+     {
+      "word": "饭店",
+      "register": "neutral",
+      "nuance": "fàndiàn: restaurant — but also a hotel (北京饭店 is a hotel)"
+     },
+     {
+      "word": "酒楼",
+      "register": "regional",
+      "nuance": "jiǔlóu: a large (Cantonese) restaurant",
+      "region": "southern China"
+     }
+    ],
+    "etymology": {
+     "text": "饭 ‘meal, rice’ (S07) + 馆 ‘house, hall for guests’ (semantic 食 ‘food’ + phonetic 官).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "馆 names public houses: 饭馆 restaurant, 咖啡馆 café, 图书馆 library, 博物馆 museum."
+    ],
+    "pitfalls": [
+     "饭店 can be a hotel: check before you go there to eat."
+    ],
+    "subtleties": [
+     "饭馆 sounds homely; an elegant restaurant is a 餐厅."
+    ]
+   }
+  },
+  {
+   "id": "zh:kafeiguan",
+   "lemma": "咖啡馆",
+   "trad": "咖啡館",
+   "pinyin": "kā fēi guǎn",
+   "pos": "NOUN",
+   "senses": [
+    "place.cafe"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A quiet corner, a laptop, a cup of coffee.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "café, coffee shop",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.cafe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我在咖啡馆喝咖啡。",
+      "py": "Wǒ zài kāfēiguǎn hē kāfēi.",
+      "tr": "I’m having coffee at a café.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "这家咖啡馆在哪里？",
+      "py": "Zhè jiā kāfēiguǎn zài nǎli?",
+      "tr": "Where is this café?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在咖啡馆见面吧。",
+      "py": "Wǒmen zài kāfēiguǎn jiànmiàn ba.",
+      "tr": "Let’s meet at the café.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去咖啡馆",
+      "tr": "to go to a café"
+     },
+     {
+      "text": "在咖啡馆",
+      "tr": "at the café"
+     },
+     {
+      "text": "网红咖啡馆",
+      "tr": "a trendy café (popular online)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "咖啡厅",
+      "register": "neutral",
+      "nuance": "kāfēitīng: café — a little more upmarket"
+     },
+     {
+      "word": "咖啡店",
+      "register": "neutral",
+      "nuance": "kāfēidiàn: coffee shop, also takeaway"
+     }
+    ],
+    "etymology": {
+     "text": "咖啡 ‘coffee’ (S07) + 馆 ‘house, hall’.",
+     "src": "morphemes: 咖啡 + 馆"
+    },
+    "funFacts": [
+     "咖啡 goes back, through European languages and Turkish kahve, to Arabic قَهْوَة qahwa."
+    ],
+    "pitfalls": [
+     "A cheap diner is not a 咖啡馆: for a quick meal say 小饭馆 or 快餐店."
+    ],
+    "subtleties": [
+     "咖 and 啡 carry the 口 radical, a common sign of a word borrowed for its sound (咖啡, 啤酒)."
+    ]
+   }
+  },
+  {
+   "id": "zh:yiyuan",
+   "lemma": "医院",
+   "trad": "醫院",
+   "pinyin": "yī yuàn",
+   "pos": "NOUN",
+   "senses": [
+    "place.hospital"
+   ],
+   "measure": [
+    "家",
+    "所",
+    "座"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "White corridors, queues, care.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hospital",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hospital"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我妈妈在医院工作。",
+      "py": "Wǒ māma zài yīyuàn gōngzuò.",
+      "tr": "My mother works at the hospital.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "医院在哪里？",
+      "py": "Yīyuàn zài nǎli?",
+      "tr": "Where is the hospital?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "他在医院。",
+      "py": "Tā zài yīyuàn.",
+      "tr": "He’s in hospital.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去医院",
+      "tr": "to go to the hospital (also: to see a doctor)"
+     },
+     {
+      "text": "住院",
+      "tr": "to be in hospital"
+     },
+     {
+      "text": "儿童医院",
+      "tr": "children’s hospital"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "诊所",
+      "register": "neutral",
+      "nuance": "zhěnsuǒ: clinic, a doctor’s practice"
+     },
+     {
+      "word": "卫生院",
+      "register": "neutral",
+      "nuance": "wèishēngyuàn: local (rural) health centre"
+     }
+    ],
+    "etymology": {
+     "text": "医 ‘medicine’ + 院 ‘courtyard; institution’ (semantic 阝 + phonetic 完).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "院 ‘courtyard’ names institutions: 医院 hospital, 学院 college, 法院 court, 电影院 cinema."
+    ],
+    "pitfalls": [
+     "Chinese go to the hospital for everyday illnesses too: 去医院 often just means ‘go to the doctor’."
+    ],
+    "subtleties": [
+     "住院 ‘to stay in hospital’: 他住院了 ‘he has been admitted to hospital’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yaodian",
+   "lemma": "药店",
+   "trad": "藥店",
+   "pinyin": "yào diàn",
+   "pos": "NOUN",
+   "senses": [
+    "place.pharmacy"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A green cross, a counter of medicines.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pharmacy, chemist’s",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.pharmacy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "劳驾，药店在哪里？",
+      "py": "Láojià, yàodiàn zài nǎli?",
+      "tr": "Excuse me, where is the pharmacy?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我在药店买药。",
+      "py": "Wǒ zài yàodiàn mǎi yào.",
+      "tr": "I buy medicine at the pharmacy.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "附近有药店吗？",
+      "py": "Fùjìn yǒu yàodiàn ma?",
+      "tr": "Is there a pharmacy nearby?",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去药店",
+      "tr": "to go to the pharmacy"
+     },
+     {
+      "text": "买药",
+      "tr": "to buy medicine"
+     },
+     {
+      "text": "二十四小时药店",
+      "tr": "24-hour pharmacy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "药房",
+      "register": "neutral",
+      "nuance": "yàofáng: pharmacy; also the dispensary of a hospital"
+     },
+     {
+      "word": "药铺",
+      "register": "dated",
+      "nuance": "yàopù: (traditional) medicine shop"
+     }
+    ],
+    "etymology": {
+     "text": "药 ‘medicine’ (semantic 艹 ‘grass’ + phonetic 乐) + 店 ‘shop’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "药 has the grass radical 艹 — a reminder that Chinese medicine is largely herbal."
+    ],
+    "pitfalls": [
+     "药 is any medicine; illegal drugs are 毒品."
+    ],
+    "subtleties": [
+     "Chinese ‘eat’ medicine: 吃药 ‘to take medicine’, even syrup."
+    ]
+   }
+  },
+  {
+   "id": "zh:yinhang",
+   "lemma": "银行",
+   "trad": "銀行",
+   "pinyin": "yín háng",
+   "pos": "NOUN",
+   "senses": [
+    "place.bank"
+   ],
+   "measure": [
+    "家",
+    "所"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Counters, queues, numbers called out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bank (money)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.bank"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸在银行工作。",
+      "py": "Wǒ bàba zài yínháng gōngzuò.",
+      "tr": "My father works at a bank.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "银行几点开门？",
+      "py": "Yínháng jǐ diǎn kāimén?",
+      "tr": "What time does the bank open?",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "这家银行在哪里？",
+      "py": "Zhè jiā yínháng zài nǎli?",
+      "tr": "Where is this bank?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去银行",
+      "tr": "to go to the bank"
+     },
+     {
+      "text": "银行卡",
+      "tr": "bank card"
+     },
+     {
+      "text": "中国银行",
+      "tr": "Bank of China"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "钱庄",
+      "register": "dated",
+      "nuance": "qiánzhuāng: an old-style private bank"
+     }
+    ],
+    "etymology": {
+     "text": "银 ‘silver’ + 行 háng ‘firm, trading house’.",
+     "src": "morphemes: 银 + 行"
+    },
+    "funFacts": [
+     "银行 is a ‘silver firm’: silver was China’s money for centuries."
+    ],
+    "pitfalls": [
+     "行 is read háng here (a firm, a trade), not xíng ‘to walk’."
+    ],
+    "subtleties": [
+     "A river bank is something else: 河岸 hé’àn."
+    ]
+   }
+  },
+  {
+   "id": "zh:youju",
+   "lemma": "邮局",
+   "trad": "郵局",
+   "pinyin": "yóu jú",
+   "pos": "NOUN",
+   "senses": [
+    "place.postoffice"
+   ],
+   "measure": [
+    "家"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Stamps, parcels, the green sign of China Post.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "post office",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.postoffice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "邮局在哪里？",
+      "py": "Yóujú zài nǎli?",
+      "tr": "Where is the post office?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我去邮局寄信。",
+      "py": "Wǒ qù yóujú jì xìn.",
+      "tr": "I’m going to the post office to send a letter.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "这个村子没有邮局。",
+      "py": "Zhège cūnzi méiyǒu yóujú.",
+      "tr": "This village has no post office.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去邮局",
+      "tr": "to go to the post office"
+     },
+     {
+      "text": "在邮局寄包裹",
+      "tr": "to send a parcel at the post office"
+     },
+     {
+      "text": "邮局的人",
+      "tr": "the post-office staff"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "邮政局",
+      "register": "formal",
+      "nuance": "yóuzhèngjú: the full official form"
+     }
+    ],
+    "etymology": {
+     "text": "邮 ‘post’ (traditional 郵: 垂 ‘remote’ + 邑 ‘city’ — a relay station) + 局 ‘office, bureau’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "邮 first meant a relay station on the imperial roads (traditional 郵: ‘remote’ + ‘town’)."
+    ],
+    "pitfalls": [
+     "局 is a public ‘bureau’: 邮局 post office, 公安局 police headquarters."
+    ],
+    "subtleties": [
+     "Mail is 邮件 — and e-mail 电子邮件 ‘electronic mail’."
+    ]
+   }
+  },
+  {
+   "id": "zh:chezhan",
+   "lemma": "车站",
+   "trad": "車站",
+   "pinyin": "chē zhàn",
+   "pos": "NOUN",
+   "senses": [
+    "place.station"
+   ],
+   "measure": [
+    "个",
+    "座"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Arrivals and departures, crowds before the holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "station; bus or train stop",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.station"
+     }
+    ],
+    "examples": [
+     {
+      "text": "车站在哪里？",
+      "py": "Chēzhàn zài nǎli?",
+      "tr": "Where is the station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我在车站。",
+      "py": "Wǒ zài chēzhàn.",
+      "tr": "I’m at the station.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "火车站离这里很远。",
+      "py": "Huǒchēzhàn lí zhèli hěn yuǎn.",
+      "tr": "The railway station is far from here.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "火车站",
+      "tr": "railway station"
+     },
+     {
+      "text": "公交车站",
+      "tr": "bus stop"
+     },
+     {
+      "text": "汽车站",
+      "tr": "coach station"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "站",
+      "register": "neutral",
+      "nuance": "zhàn: stop, station — 下一站 ‘next stop’"
+     },
+     {
+      "word": "地铁站",
+      "register": "neutral",
+      "nuance": "dìtiězhàn: underground (metro) station"
+     }
+    ],
+    "etymology": {
+     "text": "车 ‘vehicle’ + 站 ‘station’; 站 in this sense comes from Middle Mongol ǰam ‘post station’ of the Yuan relay system.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "站 ‘station’ is a Mongol word of the Yuan dynasty (ǰam, ‘post station’); the same word reached Russian as ям, whence ямщик ‘coachman’."
+    ],
+    "pitfalls": [
+     "车站 is a bus or train station, or a stop; a metro station is 地铁站."
+    ],
+    "subtleties": [
+     "站 also means ‘to stand’: 站在门口 ‘to stand at the door’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jichang",
+   "lemma": "机场",
+   "trad": "機場",
+   "pinyin": "jī chǎng",
+   "pos": "NOUN",
+   "senses": [
+    "place.airport"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departures, flights, long journeys.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "airport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.airport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我在机场。",
+      "py": "Wǒ zài jīchǎng.",
+      "tr": "I’m at the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "机场离城市很远。",
+      "py": "Jīchǎng lí chéngshì hěn yuǎn.",
+      "tr": "The airport is far from the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我们几点去机场？",
+      "py": "Wǒmen jǐ diǎn qù jīchǎng?",
+      "tr": "What time do we go to the airport?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去机场",
+      "tr": "to go to the airport"
+     },
+     {
+      "text": "机场大巴",
+      "tr": "airport bus"
+     },
+     {
+      "text": "国际机场",
+      "tr": "international airport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "飞机场",
+      "register": "colloquial",
+      "nuance": "fēijīchǎng: the full form, ‘aeroplane field’"
+     },
+     {
+      "word": "空港",
+      "register": "technical",
+      "nuance": "kōnggǎng: airport (in names)"
+     }
+    ],
+    "etymology": {
+     "text": "Short for 飞机场 ‘aeroplane field’ (飞机 ‘flying machine’ + 场 ‘field’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "飞机 ‘aeroplane’ is a ‘flying machine’, so 机场 is the ‘machine field’ for short."
+    ],
+    "pitfalls": [
+     "机场 jīchǎng and 鸡场 jīchǎng ‘chicken farm’ sound the same — the characters tell them apart."
+    ],
+    "subtleties": [
+     "In slang 机场 is a provider of tools to get round internet censorship (from a paper-plane logo)."
+    ]
+   }
+  },
+  {
+   "id": "zh:jie",
+   "lemma": "街",
+   "trad": "街",
+   "pinyin": "jiē",
+   "pos": "NOUN",
+   "senses": [
+    "place.street"
+   ],
+   "measure": [
+    "条"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shops and stalls, people strolling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "street",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.street"
+     },
+     {
+      "id": "s2",
+      "def": "(逛街) shopping streets; going shopping",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这条街有很多商店。",
+      "py": "Zhè tiáo jiē yǒu hěn duō shāngdiàn.",
+      "tr": "This street has many shops.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家在这条街上。",
+      "py": "Wǒmen jiā zài zhè tiáo jiē shang.",
+      "tr": "Our home is on this street.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我们去逛街吧！",
+      "py": "Wǒmen qù guàngjiē ba!",
+      "tr": "Let’s go shopping!",
+      "register": "colloquial",
+      "context": "free time",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "街上",
+      "tr": "in the street"
+     },
+     {
+      "text": "大街",
+      "tr": "main street"
+     },
+     {
+      "text": "逛街",
+      "tr": "to stroll the streets, go shopping"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "大街小巷",
+      "tr": "big streets and small lanes",
+      "kind": "idiom",
+      "meaning": "everywhere in town",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "街道",
+      "register": "formal",
+      "nuance": "jiēdào: street; also a city subdistrict"
+     },
+     {
+      "word": "马路",
+      "register": "neutral",
+      "nuance": "mǎlù: road, street (for traffic)"
+     },
+     {
+      "word": "胡同",
+      "register": "regional",
+      "nuance": "hútòng: lane, alley (Beijing)",
+      "region": "Beijing"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 行 ‘road’ + phonetic 圭. From Proto-Sino-Tibetan *r/g-wa ‘village’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The character 街 is 行 ‘road’ opened in the middle to hold 圭 — the street running between."
+    ],
+    "pitfalls": [
+     "‘In the street’ takes 上 (S12): 在街上."
+    ],
+    "subtleties": [
+     "逛街 ‘to stroll the streets’ means going shopping."
+    ]
+   }
+  },
+  {
+   "id": "zh:guangchang",
+   "lemma": "广场",
+   "trad": "廣場",
+   "pinyin": "guǎng chǎng",
+   "pos": "NOUN",
+   "senses": [
+    "place.square"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Open space, evening dancers, kites.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "square, plaza (in a town)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.square"
+     },
+     {
+      "id": "s2",
+      "def": "(in names) shopping centre",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "广场上有很多人。",
+      "py": "Guǎngchǎng shang yǒu hěn duō rén.",
+      "tr": "There are lots of people in the square.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在广场见面。",
+      "py": "Wǒmen zài guǎngchǎng jiànmiàn.",
+      "tr": "We meet in the square.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这个广场里有很多商店。",
+      "py": "Zhège guǎngchǎng li yǒu hěn duō shāngdiàn.",
+      "tr": "This shopping centre has many shops.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "天安门广场",
+      "tr": "Tiananmen Square"
+     },
+     {
+      "text": "广场舞",
+      "tr": "square dancing"
+     },
+     {
+      "text": "购物广场",
+      "tr": "shopping mall"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "购物中心",
+      "register": "neutral",
+      "nuance": "gòuwù zhōngxīn: shopping centre — 广场 in names often means this"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed in writing from Japanese 広場 hiroba ‘open place’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "广场舞 ‘square dancing’: in the evening groups of (mostly retired) people dance to music in squares all over China."
+    ],
+    "pitfalls": [
+     "In a name, 广场 is often a shopping centre, not an open square."
+    ],
+    "subtleties": [
+     "‘In the square’ is 在广场上, with 上 (S12)."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongyuan",
+   "lemma": "公园",
+   "trad": "公園",
+   "pinyin": "gōng yuán",
+   "pos": "NOUN",
+   "senses": [
+    "place.park"
+   ],
+   "measure": [
+    "座"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Morning tai chi, lakes, old men with birdcages.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "park",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.park"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在公园。",
+      "py": "Háizimen zài gōngyuán.",
+      "tr": "The children are in the park.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我家前面有一个公园。",
+      "py": "Wǒ jiā qiánmian yǒu yí ge gōngyuán.",
+      "tr": "There is a park in front of my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "周末我们去公园。",
+      "py": "Zhōumò wǒmen qù gōngyuán.",
+      "tr": "At the weekend we go to the park.",
+      "register": "neutral",
+      "context": "free time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去公园",
+      "tr": "to go to the park"
+     },
+     {
+      "text": "公园里",
+      "tr": "in the park"
+     },
+     {
+      "text": "国家公园",
+      "tr": "national park"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "花园",
+      "register": "neutral",
+      "nuance": "huāyuán: garden (also a small park)"
+     },
+     {
+      "word": "园",
+      "register": "neutral",
+      "nuance": "yuán: garden, park — in names: 动物园 ‘zoo’"
+     }
+    ],
+    "etymology": {
+     "text": "公 ‘public’ + 园 ‘garden’ (semantic 囗 ‘enclosure’ + phonetic 袁).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "园 ‘garden’ makes 动物园 ‘animal garden’ (zoo) and 幼儿园 ‘little children’s garden’ — a kindergarten, as in German Kindergarten."
+    ],
+    "pitfalls": [
+     "在公园 and 在公园里 are both fine; 里 stresses ‘inside the park’."
+    ],
+    "subtleties": [
+     "公 ‘public’ is also in 公共汽车 ‘bus’ and 公司 ‘company’."
+    ]
+   }
+  },
+  {
+   "id": "zh:chengshi",
+   "lemma": "城市",
+   "trad": "城市",
+   "pinyin": "chéng shì",
+   "pos": "NOUN",
+   "senses": [
+    "place.city"
+   ],
+   "measure": [
+    "座",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Skylines, traffic, millions of people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "city, town",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.city"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢这个城市。",
+      "py": "Wǒ xǐhuan zhège chéngshì.",
+      "tr": "I like this city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "上海是一座大城市。",
+      "py": "Shànghǎi shì yí zuò dà chéngshì.",
+      "tr": "Shanghai is a big city.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "我住在城市，我爷爷住在农村。",
+      "py": "Wǒ zhù zài chéngshì, wǒ yéye zhù zài nóngcūn.",
+      "tr": "I live in the city, my grandfather in the countryside.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大城市",
+      "tr": "a big city"
+     },
+     {
+      "text": "城市生活",
+      "tr": "city life"
+     },
+     {
+      "text": "城市和农村",
+      "tr": "town and country"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "城",
+      "register": "neutral",
+      "nuance": "chéng: town; city wall — 进城 ‘to go into town’"
+     },
+     {
+      "word": "都市",
+      "register": "formal",
+      "nuance": "dūshì: metropolis"
+     }
+    ],
+    "etymology": {
+     "text": "城 ‘city wall’ (semantic 土 ‘earth’ — walls of stamped earth) + 市 ‘market’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "城 first meant the city wall of stamped earth; 长城 ‘the long wall’ is the Great Wall."
+    ],
+    "pitfalls": [
+     "In names ‘city’ is 市: 北京市; 城市 is the general noun."
+    ],
+    "subtleties": [
+     "座 is the elegant measure word for cities: 一座城市."
+    ]
+   }
+  },
+  {
+   "id": "zh:cunzi",
+   "lemma": "村子",
+   "trad": "村子",
+   "pinyin": "cūn zi",
+   "pos": "NOUN",
+   "senses": [
+    "place.village"
+   ],
+   "measure": [
+    "个",
+    "座"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fields, a few houses, everyone knows everyone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "village",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.village"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个村子没有超市。",
+      "py": "Zhège cūnzi méiyǒu chāoshì.",
+      "tr": "This village has no supermarket.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     },
+     {
+      "text": "我爷爷住在一个小村子里。",
+      "py": "Wǒ yéye zhù zài yí ge xiǎo cūnzi li.",
+      "tr": "My grandfather lives in a small village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "村子里的人都认识他。",
+      "py": "Cūnzi li de rén dōu rènshi tā.",
+      "tr": "Everyone in the village knows him.",
+      "register": "neutral",
+      "context": "community",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小村子",
+      "tr": "a small village"
+     },
+     {
+      "text": "村子里",
+      "tr": "in the village"
+     },
+     {
+      "text": "山村",
+      "tr": "mountain village"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "村",
+      "register": "neutral",
+      "nuance": "cūn: village — in names: 王家村"
+     },
+     {
+      "word": "农村",
+      "register": "neutral",
+      "nuance": "nóngcūn: the countryside, rural areas"
+     },
+     {
+      "word": "乡下",
+      "register": "colloquial",
+      "nuance": "xiāngxia: the country, one’s rural home"
+     },
+     {
+      "word": "村庄",
+      "register": "literary",
+      "nuance": "cūnzhuāng: village (written)"
+     }
+    ],
+    "etymology": {
+     "text": "村 (semantic 木 ‘tree’ + phonetic 寸) + the noun suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Villages are often named after a family: 王家村 ‘the Wangs’ village’."
+    ],
+    "pitfalls": [
+     "‘In the village’ is 在村子里 — 村子 is an ordinary noun and takes 里 (S12)."
+    ],
+    "subtleties": [
+     "农村 is the countryside as opposed to the city; 村子 is one village."
+    ]
+   }
+  },
+  {
+   "id": "zh:guojia",
+   "lemma": "国家",
+   "trad": "國家",
+   "pinyin": "guó jiā",
+   "pos": "NOUN",
+   "senses": [
+    "place.country"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Maps, flags, the state.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "country, nation, state",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.country"
+     }
+    ],
+    "examples": [
+     {
+      "text": "中国是一个很大的国家。",
+      "py": "Zhōngguó shì yí ge hěn dà de guójiā.",
+      "tr": "China is a very big country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "你们国家有多少人？",
+      "py": "Nǐmen guójiā yǒu duōshao rén?",
+      "tr": "How many people does your country have?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "你去过哪些国家？",
+      "py": "Nǐ qùguo nǎxiē guójiā?",
+      "tr": "Which countries have you been to?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "国家公园",
+      "tr": "national park"
+     },
+     {
+      "text": "发展中国家",
+      "tr": "developing countries"
+     },
+     {
+      "text": "我们国家",
+      "tr": "our country"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "国",
+      "register": "neutral",
+      "nuance": "guó: country — in compounds: 中国, 外国 ‘foreign country’, 哪国人"
+     },
+     {
+      "word": "祖国",
+      "register": "formal",
+      "nuance": "zǔguó: the motherland (emotional)"
+     }
+    ],
+    "etymology": {
+     "text": "In ancient China the fief of a feudal lord was a 国 and that of a minister a 家; together they came to mean ‘country, state’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "国家 joins the old words for a lord’s fief (国) and a minister’s (家)."
+    ],
+    "pitfalls": [
+     "‘Which country are you from?’ is 你是哪国人？ (哪 + 国 + 人)."
+    ],
+    "subtleties": [
+     "国家 is the state or nation; ‘the country(side)’ is 农村."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "prep.in",
+   "reason": "Chinese has no preposition ‘in’. 在 (known since S01) + a place says where something is: 在学校 ‘at / in school’, 在北京 ‘in Beijing’. An ordinary noun becomes a place with 里 ‘inside’ after it (S12): 在房间里 ‘in the room’.",
+   "use": "在 + place noun (学校, 医院, 超市 …) or 在 + noun + 里: 我在家; 牛奶在冰箱里"
+  },
+  {
+   "concept": "prep.at",
+   "reason": "Chinese has no separate ‘at’: 在 (known since S01) + place does the job — 在家 ‘at home’, 在学校 ‘at school’, 在车站 ‘at the station’. Greek σε, English at / in and German in / an / bei all become 在.",
+   "use": "在 + place, before the verb: 我在银行工作 ‘I work at a bank’"
+  },
+  {
+   "concept": "prep.without",
+   "reason": "There is no everyday preposition ‘without’: Chinese negates — 没有 ‘there is no / not having’ (没 S08 + 有 S06) + noun, or 不 + a verb such as 要 / 加 ‘add’.",
+   "use": "没有 + noun: 没有糖的咖啡 ‘coffee without sugar’, 没有你，我… ‘without you, I…’; 不 + verb: 我喝咖啡不要糖 ‘I take coffee without sugar’; written 无: 无糖 ‘sugar-free’"
+  }
+ ]
+}

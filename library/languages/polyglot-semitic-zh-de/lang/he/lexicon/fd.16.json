@@ -1,0 +1,3882 @@
+{
+ "lexemes": [
+  {
+   "id": "he:gadol",
+   "lemma": "גָּדוֹל",
+   "pos": "ADJ",
+   "senses": [
+    "adj.big"
+   ],
+   "translit": "gadol",
+   "forms": {
+    "ADJ;SG;MASC": "גָּדוֹל",
+    "ADJ;SG;FEM": "גְּדוֹלָה",
+    "ADJ;PL;MASC": "גְּדוֹלִים",
+    "ADJ;PL;FEM": "גְּדוֹלוֹת",
+    "ADJ;SG;MASC;DEF": "הַגָּדוֹל",
+    "ADJ;SG;FEM;DEF": "הַגְּדוֹלָה",
+    "ADJ;PL;MASC;DEF": "הַגְּדוֹלִים",
+    "ADJ;PL;FEM;DEF": "הַגְּדוֹלוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A big house, a big city, a big brother — and, said to a friend, “you’re great!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "big, large",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.big"
+     },
+     {
+      "id": "s2",
+      "def": "great, important",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "grown-up, older (of children and siblings)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "great, awesome (of a person: אַתָּה גָּדוֹל!)",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהֶם בַּיִת גָּדוֹל עִם גִּנָּה.",
+      "tr": "They have a big house with a garden.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדִּירָה הַחֲדָשָׁה גְּדוֹלָה מְאוֹד.",
+      "tr": "The new flat is very big.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "תֵּל אָבִיב הִיא עִיר גְּדוֹלָה.",
+      "tr": "Tel Aviv is a big city.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּשֶׁאֶהְיֶה גָּדוֹל, אֶהְיֶה רוֹפֵא.",
+      "tr": "When I grow up, I’ll be a doctor.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s3"
+     },
+     {
+      "text": "הוּא סוֹפֵר גָּדוֹל.",
+      "tr": "He is a great writer.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s2"
+     },
+     {
+      "text": "אַתָּה גָּדוֹל! תּוֹדָה רַבָּה.",
+      "tr": "You’re the best! Thanks a lot.",
+      "register": "slang",
+      "context": "praise",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיִת גָּדוֹל",
+      "tr": "a big house"
+     },
+     {
+      "text": "עִיר גְּדוֹלָה",
+      "tr": "a big city"
+     },
+     {
+      "text": "הָאָח הַגָּדוֹל",
+      "tr": "the big (older) brother"
+     },
+     {
+      "text": "גָּדוֹל מְאוֹד",
+      "tr": "very big"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בְּגָדוֹל",
+      "tr": "in a big way",
+      "kind": "colloquial",
+      "meaning": "big-time, in a big way: עָשִׂינוּ אֶת זֶה בְּגָדוֹל",
+      "register": "colloquial"
+     },
+     {
+      "text": "אַתָּה גָּדוֹל!",
+      "tr": "you are big!",
+      "kind": "slang",
+      "meaning": "you’re great, you’re the best (praise to a friend)",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עֲנָקִי",
+      "register": "neutral",
+      "nuance": "“huge, giant” — much stronger"
+     },
+     {
+      "word": "רַב",
+      "register": "formal",
+      "nuance": "“great, much” — before or after a noun in set phrases: תּוֹדָה רַבָּה"
+     },
+     {
+      "word": "מְרֻוָּח",
+      "register": "neutral",
+      "nuance": "“spacious” — of rooms and flats"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קָטָן",
+      "note": "small"
+     }
+    ],
+    "etymology": {
+     "text": "Root ג־ד־ל, pattern קָטוֹל; related to Arabic جَدِل (jadil, “hard, strong, firm”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives לְגַדֵּל “to raise (children), to grow (plants)”, גֹּדֶל “size” and מִגְדָּל “tower” — the name of Magdala, the town of Mary Magdalene, means “tower”."
+    ],
+    "pitfalls": [
+     "The first vowel shortens in the other forms: גָּדוֹל → גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת (ga- → g’-).",
+     "After a definite noun it takes the article too: הַבַּיִת הַגָּדוֹל “the big house”. Without it, הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
+    ],
+    "subtleties": [
+     "Of people גָּדוֹל means “older, grown-up” (הָאָח הַגָּדוֹל “the older brother”), not “tall” — that is גָּבֹהַּ.",
+     "It also means “great, important” (סוֹפֵר גָּדוֹל), like German groß and Greek μεγάλος."
+    ]
+   }
+  },
+  {
+   "id": "he:katan",
+   "lemma": "קָטָן",
+   "pos": "ADJ",
+   "senses": [
+    "adj.small"
+   ],
+   "translit": "katan",
+   "forms": {
+    "ADJ;SG;MASC": "קָטָן",
+    "ADJ;SG;FEM": "קְטַנָּה",
+    "ADJ;PL;MASC": "קְטַנִּים",
+    "ADJ;PL;FEM": "קְטַנּוֹת",
+    "ADJ;SG;MASC;DEF": "הַקָּטָן",
+    "ADJ;SG;FEM;DEF": "הַקְּטַנָּה",
+    "ADJ;PL;MASC;DEF": "הַקְּטַנִּים",
+    "ADJ;PL;FEM;DEF": "הַקְּטַנּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small flat, a little child, a small question — and “small world!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "small, little",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.small"
+     },
+     {
+      "id": "s2",
+      "def": "young, little; younger (of children and siblings)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "little, unimportant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֹאת דִּירָה קְטַנָּה בַּמֶּרְכָּז.",
+      "tr": "This is a small flat in the centre.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּיק שֶׁלִּי קָטָן מְאוֹד.",
+      "tr": "My bag is very small.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאָח הַקָּטָן שֶׁלִּי בֶּן חָמֵשׁ.",
+      "tr": "My little brother is five.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "יֵשׁ לִי שְׁאֵלָה קְטַנָּה.",
+      "tr": "I have a small question.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיִת קָטָן",
+      "tr": "a small house"
+     },
+     {
+      "text": "יֶלֶד קָטָן",
+      "tr": "a little boy"
+     },
+     {
+      "text": "הָאָחוֹת הַקְּטַנָּה",
+      "tr": "the younger sister"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עוֹלָם קָטָן!",
+      "tr": "a small world!",
+      "kind": "saying",
+      "meaning": "small world! (said when you meet someone unexpectedly)",
+      "register": "colloquial"
+     },
+     {
+      "text": "קָטָן עָלַי",
+      "tr": "small on me",
+      "kind": "slang",
+      "meaning": "it’s a piece of cake for me, no problem",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "זָעִיר",
+      "register": "formal",
+      "nuance": "“tiny, minute” — written style"
+     },
+     {
+      "word": "קְטַנְטַן",
+      "register": "colloquial",
+      "nuance": "“teeny, tiny” — affectionate"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "גָּדוֹל",
+      "note": "big"
+     }
+    ],
+    "etymology": {
+     "text": "Root ק־ט־ן; compare Ge’ez ቀጢን (ḳäṭin) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "קְטַנְטַנִּים “the little ones” is the everyday word for toddlers and their activities (a toddlers’ club, toddlers’ songs)."
+    ],
+    "pitfalls": [
+     "The feminine and plural double the נ: קְטַנָּה (ktaná), קְטַנִּים, קְטַנּוֹת."
+    ],
+    "subtleties": [
+     "Of family members קָטָן means “younger”: הָאָחוֹת הַקְּטַנָּה “the younger sister”.",
+     "קְטַנְטַן “teeny” repeats the last syllable — a common Hebrew way to make a diminutive."
+    ]
+   }
+  },
+  {
+   "id": "he:arokh",
+   "lemma": "אָרֹךְ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.long"
+   ],
+   "translit": "arokh",
+   "forms": {
+    "ADJ;SG;MASC": "אָרֹךְ",
+    "ADJ;SG;FEM": "אֲרֻכָּה",
+    "ADJ;PL;MASC": "אֲרֻכִּים",
+    "ADJ;PL;FEM": "אֲרֻכּוֹת",
+    "ADJ;SG;MASC;DEF": "הָאָרֹךְ",
+    "ADJ;SG;FEM;DEF": "הָאֲרֻכָּה",
+    "ADJ;PL;MASC;DEF": "הָאֲרֻכִּים",
+    "ADJ;PL;FEM;DEF": "הָאֲרֻכּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "ארוך",
+    "ADJ;SG;FEM": "ארוכה",
+    "ADJ;PL;MASC": "ארוכים",
+    "ADJ;PL;FEM": "ארוכות",
+    "ADJ;SG;MASC;DEF": "הארוך",
+    "ADJ;SG;FEM;DEF": "הארוכה",
+    "ADJ;PL;MASC;DEF": "הארוכים",
+    "ADJ;PL;FEM;DEF": "הארוכות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long street, long hair, a long day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "long (in length)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.long"
+     },
+     {
+      "id": "s2",
+      "def": "long (in time)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָרְחוֹב הַזֶּה אָרֹךְ מְאוֹד.",
+      "tr": "This street is very long.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ שֵׂעָר אָרֹךְ.",
+      "tr": "She has long hair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשִּׂמְלָה אֲרֻכָּה מִדַּי.",
+      "tr": "The dress is too long.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה הָיָה יוֹם אָרֹךְ.",
+      "tr": "It was a long day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֵׂעָר אָרֹךְ",
+      "tr": "long hair"
+     },
+     {
+      "text": "יוֹם אָרֹךְ",
+      "tr": "a long day"
+     },
+     {
+      "text": "דֶּרֶךְ אֲרֻכָּה",
+      "tr": "a long way"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֶרֶךְ אַפַּיִם",
+      "tr": "long of nostrils",
+      "kind": "fixed expression",
+      "meaning": "patient, slow to anger — said of God (Exodus 34:6)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מִתְמַשֵּׁךְ",
+      "register": "formal",
+      "nuance": "“lengthy, drawn-out” — of time only"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קָצָר",
+      "note": "short"
+     }
+    ],
+    "etymology": {
+     "text": "Pattern קָטֹל; from the same root as Aramaic אריכא (’ariḵa, “long”) (Wiktionary). The root א־ר־ךְ also gives אֹרֶךְ “length”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Biblical אֶרֶךְ אַפַּיִם “slow to anger” is literally “long of nostrils” — a nose that takes long to grow hot; German says langmütig."
+    ],
+    "pitfalls": [
+     "The other forms take u and a doubled כּ: אֲרֻכָּה, אֲרֻכִּים, אֲרֻכּוֹת (arukà) — unpointed ארוכה, ארוכים.",
+     "Pointed with a short o (אָרֹךְ), written with ו: ארוך; the final letter is ךְ."
+    ],
+    "subtleties": [
+     "It measures time too: שָׁבוּעַ אָרֹךְ “a long week”, שִׂיחָה אֲרֻכָּה “a long conversation”."
+    ]
+   }
+  },
+  {
+   "id": "he:katsar",
+   "lemma": "קָצָר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.short"
+   ],
+   "translit": "katsar",
+   "forms": {
+    "ADJ;SG;MASC": "קָצָר",
+    "ADJ;SG;FEM": "קְצָרָה",
+    "ADJ;PL;MASC": "קְצָרִים",
+    "ADJ;PL;FEM": "קְצָרוֹת",
+    "ADJ;SG;MASC;DEF": "הַקָּצָר",
+    "ADJ;SG;FEM;DEF": "הַקְּצָרָה",
+    "ADJ;PL;MASC;DEF": "הַקְּצָרִים",
+    "ADJ;PL;FEM;DEF": "הַקְּצָרוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A short dress, a short story, a short winter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "short (in length or in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.short"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשִּׂמְלָה קְצָרָה.",
+      "tr": "The dress is short.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה סִפּוּר קָצָר.",
+      "tr": "It’s a short story.",
+      "register": "neutral",
+      "context": "literature",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֹרֶף פֹּה קָצָר.",
+      "tr": "Winter here is short.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סִפּוּר קָצָר",
+      "tr": "a short story"
+     },
+     {
+      "text": "שֵׂעָר קָצָר",
+      "tr": "short hair"
+     },
+     {
+      "text": "דֶּרֶךְ קְצָרָה",
+      "tr": "a short way"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קְצַר רוּחַ",
+      "tr": "short of spirit",
+      "kind": "fixed expression",
+      "meaning": "impatient, short-tempered (Proverbs 14:29)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תַּמְצִיתִי",
+      "register": "formal",
+      "nuance": "“concise” — of a text or an answer"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "אָרֹךְ",
+      "note": "long"
+     }
+    ],
+    "etymology": {
+     "text": "Root ק־צ־ר, pattern קָטָל; compare Arabic قَصِير (qaṣīr, “short”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic قَصِير “short” is the same word; Turkish kusur “fault, shortcoming” comes from Arabic قُصُور, from this root."
+    ],
+    "pitfalls": [
+     "A short PERSON is נָמוּךְ (“low”), not קָצָר: הוּא נָמוּךְ “he is short”."
+    ],
+    "subtleties": [
+     "The construct form קְצַר appears in set phrases: קְצַר רוּחַ “impatient”.",
+     "The noun קֶצֶר “short circuit” is written with the same letters (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:gavoha",
+   "lemma": "גָּבֹהַּ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.tall"
+   ],
+   "translit": "gavoha",
+   "forms": {
+    "ADJ;SG;MASC": "גָּבֹהַּ",
+    "ADJ;SG;FEM": "גְּבֹהָה",
+    "ADJ;PL;MASC": "גְּבֹהִים",
+    "ADJ;PL;FEM": "גְּבֹהוֹת",
+    "ADJ;SG;MASC;DEF": "הַגָּבֹהַּ",
+    "ADJ;SG;FEM;DEF": "הַגְּבֹהָה",
+    "ADJ;PL;MASC;DEF": "הַגְּבֹהִים",
+    "ADJ;PL;FEM;DEF": "הַגְּבֹהוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "גבוה",
+    "ADJ;SG;FEM": "גבוהה",
+    "ADJ;PL;MASC": "גבוהים",
+    "ADJ;PL;FEM": "גבוהות",
+    "ADJ;SG;MASC;DEF": "הגבוה",
+    "ADJ;SG;FEM;DEF": "הגבוהה",
+    "ADJ;PL;MASC;DEF": "הגבוהים",
+    "ADJ;PL;FEM;DEF": "הגבוהות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A tall son, tall buildings, high prices.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tall (of people, buildings, trees)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.tall"
+     },
+     {
+      "id": "s2",
+      "def": "high (a level, a price, a fever, a voice)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבֵּן שֶׁלָּהֶם גָּבֹהַּ מְאוֹד.",
+      "tr": "Their son is very tall.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה בִּנְיָנִים גְּבֹהִים.",
+      "tr": "There are tall buildings here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּחִירִים בָּעִיר גְּבֹהִים.",
+      "tr": "Prices in the city are high.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּנְיָן גָּבֹהַּ",
+      "tr": "a tall building"
+     },
+     {
+      "text": "מְחִיר גָּבֹהַּ",
+      "tr": "a high price"
+     },
+     {
+      "text": "חֹם גָּבֹהַּ",
+      "tr": "a high fever"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "רָם",
+      "register": "literary",
+      "nuance": "“high, lofty” — also “loud”: בְּקוֹל רָם “aloud”"
+     },
+     {
+      "word": "תָּמִיר",
+      "register": "literary",
+      "nuance": "“tall and slender” — of a person or a palm"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "נָמוּךְ",
+      "note": "short, low"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ג־ב־הּ, which forms words about height; pattern קָטֹל (Wiktionary). The same root gives גֹּבַהּ “height”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The opposite is נָמוּךְ “low, short” — Hebrew measures people the way it measures walls: high or low."
+    ],
+    "pitfalls": [
+     "The last letter is a sounded h: ה with a dot (mappiq) and a “stolen” a before it — gavóha. Unpointed: גבוה.",
+     "Of people גָּבֹהַּ is “tall”; גָּדוֹל of a person means “older, grown-up”."
+    ],
+    "subtleties": [
+     "One word for “tall” and “high”: a tall man and a high price are both גָּבֹהַּ — where German says groß and hoch."
+    ]
+   }
+  },
+  {
+   "id": "he:tov",
+   "lemma": "טוֹב",
+   "pos": "ADJ",
+   "senses": [
+    "adj.good"
+   ],
+   "translit": "tov",
+   "forms": {
+    "ADJ;SG;MASC": "טוֹב",
+    "ADJ;SG;FEM": "טוֹבָה",
+    "ADJ;PL;MASC": "טוֹבִים",
+    "ADJ;PL;FEM": "טוֹבוֹת",
+    "ADJ;SG;MASC;DEF": "הַטּוֹב",
+    "ADJ;SG;FEM;DEF": "הַטּוֹבָה",
+    "ADJ;PL;MASC;DEF": "הַטּוֹבִים",
+    "ADJ;PL;FEM;DEF": "הַטּוֹבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Good morning, good luck, a good friend — and the everyday “OK, fine”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.good"
+     },
+     {
+      "id": "s2",
+      "def": "kind, good-hearted",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "OK, fine, well (as a reply or an adverb)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה סֵפֶר טוֹב מְאוֹד.",
+      "tr": "This is a very good book.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמָּרָק טוֹב!",
+      "tr": "The soup is good!",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא חֲבֵרָה טוֹבָה.",
+      "tr": "She is a good friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s2"
+     },
+     {
+      "text": "טוֹב, אֲנִי בָּא.",
+      "tr": "OK, I’m coming.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֹּקֶר טוֹב",
+      "tr": "good morning"
+     },
+     {
+      "text": "מַזָּל טוֹב",
+      "tr": "congratulations (good luck)"
+     },
+     {
+      "text": "טוֹב מְאוֹד",
+      "tr": "very good"
+     },
+     {
+      "text": "יוֹם טוֹב",
+      "tr": "a good day; a (religious) holiday"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מַזָּל טוֹב!",
+      "tr": "good luck!",
+      "kind": "fixed expression",
+      "meaning": "congratulations! (on a birth, a wedding, a birthday)",
+      "register": "neutral"
+     },
+     {
+      "text": "וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב",
+      "tr": "and God saw the light, that it was good",
+      "kind": "quote",
+      "meaning": "the first “good” of the Bible",
+      "register": "literary",
+      "source": "Genesis 1:4"
+     },
+     {
+      "text": "טוֹב שֵׁם מִשֶּׁמֶן טוֹב",
+      "tr": "a good name is better than good oil",
+      "kind": "proverb",
+      "meaning": "a good reputation is worth more than riches",
+      "register": "literary",
+      "source": "Ecclesiastes 7:1"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מְצֻיָּן",
+      "register": "neutral",
+      "nuance": "“excellent” — stronger"
+     },
+     {
+      "word": "נֶהְדָּר",
+      "register": "neutral",
+      "nuance": "“wonderful”"
+     },
+     {
+      "word": "סַבָּבָה",
+      "register": "slang",
+      "nuance": "“cool, fine, OK”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "רַע",
+      "note": "bad"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ṭāb- (“good”); cognate with Akkadian ṭābum and Arabic طَيِّب (ṭayyib) (Wiktionary). Root ט־ו־ב.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic طَيِّب is the same word (Turkish has it as the name Tayyip); German Masel and English mazel tov come from מַזָּל טוֹב."
+    ],
+    "pitfalls": [
+     "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”: הוּא מְבַשֵּׁל טוֹב “he cooks well”.",
+     "“Better” has no special form: טוֹב יוֹתֵר or יוֹתֵר טוֹב (lesson 17)."
+    ],
+    "subtleties": [
+     "טוֹב לִי means “I feel good / I’m fine (here)”; טוֹב שֶׁ… “it is good that …” (lesson 18)."
+    ]
+   }
+  },
+  {
+   "id": "he:ra",
+   "lemma": "רַע",
+   "pos": "ADJ",
+   "senses": [
+    "adj.bad"
+   ],
+   "translit": "ra",
+   "forms": {
+    "ADJ;SG;MASC": "רַע",
+    "ADJ;SG;FEM": "רָעָה",
+    "ADJ;PL;MASC": "רָעִים",
+    "ADJ;PL;FEM": "רָעוֹת",
+    "ADJ;SG;MASC;DEF": "הָרַע",
+    "ADJ;SG;FEM;DEF": "הָרָעָה",
+    "ADJ;PL;MASC;DEF": "הָרָעִים",
+    "ADJ;PL;FEM;DEF": "הָרָעוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Bad coffee, a bad day, “not bad at all”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bad",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.bad"
+     },
+     {
+      "id": "s2",
+      "def": "evil, wicked",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה לֹא רַע בִּכְלָל!",
+      "tr": "That’s not bad at all!",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקָּפֶה פֹּה רַע.",
+      "tr": "The coffee here is bad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "רַע לִי הַיּוֹם.",
+      "tr": "I feel bad today.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לֹא אָדָם רַע.",
+      "tr": "He is not a bad person.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֹא רַע",
+      "tr": "not bad"
+     },
+     {
+      "text": "רַע לִי",
+      "tr": "I feel bad"
+     },
+     {
+      "text": "חֲלוֹם רַע",
+      "tr": "a bad dream"
+     },
+     {
+      "text": "מֶזֶג אֲוִיר רַע",
+      "tr": "bad weather"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא רַע",
+      "tr": "not bad",
+      "kind": "colloquial",
+      "meaning": "quite good, not bad",
+      "register": "colloquial"
+     },
+     {
+      "text": "עֵץ הַדַּעַת טוֹב וָרָע",
+      "tr": "the tree of the knowledge of good and evil",
+      "kind": "quote",
+      "meaning": "the forbidden tree of Eden (here in its pausal form רָע)",
+      "register": "literary",
+      "source": "Genesis 2:9"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "גָּרוּעַ",
+      "register": "neutral",
+      "nuance": "“bad, poor (in quality)”; also “worse”"
+     },
+     {
+      "word": "נוֹרָא",
+      "register": "neutral",
+      "nuance": "“terrible” — stronger"
+     },
+     {
+      "word": "רָשָׁע",
+      "register": "neutral",
+      "nuance": "“wicked; a villain” — of people"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "טוֹב",
+      "note": "good"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary files it under the roots ר־ע־ע and ר־ע־ה; the noun רַע “an evil, trouble” has the same form.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Good and evil” in Hebrew is טוֹב וָרָע — the first two adjectives of this lesson, side by side in Genesis 2:9."
+    ],
+    "pitfalls": [
+     "The feminine has a long a: רָעָה (raá) — and רָעָה is also a noun, “evil, misfortune”.",
+     "Do not confuse it with רֵעַ “friend, fellow” (Wiktionary): the same letters רע."
+    ],
+    "subtleties": [
+     "Everyday Hebrew often says לֹא טוֹב “not good”: רַע sounds stronger, close to “evil”."
+    ]
+   }
+  },
+  {
+   "id": "he:chadash",
+   "lemma": "חָדָשׁ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.new"
+   ],
+   "translit": "chadash",
+   "forms": {
+    "ADJ;SG;MASC": "חָדָשׁ",
+    "ADJ;SG;FEM": "חֲדָשָׁה",
+    "ADJ;PL;MASC": "חֲדָשִׁים",
+    "ADJ;PL;FEM": "חֲדָשׁוֹת",
+    "ADJ;SG;MASC;DEF": "הֶחָדָשׁ",
+    "ADJ;SG;FEM;DEF": "הַחֲדָשָׁה",
+    "ADJ;PL;MASC;DEF": "הַחֲדָשִׁים",
+    "ADJ;PL;FEM;DEF": "הַחֲדָשׁוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A new phone, a new flat, “what’s new?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "new",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.new"
+     },
+     {
+      "id": "s2",
+      "def": "the news (feminine plural חֲדָשׁוֹת)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "קָנִיתִי טֶלֶפוֹן חָדָשׁ.",
+      "tr": "I bought a new phone.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדִּירָה הַחֲדָשָׁה שֶׁלָּנוּ גְּדוֹלָה.",
+      "tr": "Our new flat is big.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה חָדָשׁ?",
+      "tr": "What’s new?",
+      "register": "colloquial",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רוֹאֶה אֶת הַחֲדָשׁוֹת בָּעֶרֶב.",
+      "tr": "I watch the news in the evening.",
+      "register": "neutral",
+      "context": "media",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׁנָה חֲדָשָׁה",
+      "tr": "a new year"
+     },
+     {
+      "text": "חָבֵר חָדָשׁ",
+      "tr": "a new friend"
+     },
+     {
+      "text": "הַבַּיִת הֶחָדָשׁ",
+      "tr": "the new house"
+     },
+     {
+      "text": "מַה חָדָשׁ?",
+      "tr": "what’s new?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְאֵין כָּל חָדָשׁ תַּחַת הַשָּׁמֶשׁ",
+      "tr": "and there is nothing new under the sun",
+      "kind": "quote",
+      "meaning": "everything has happened before",
+      "register": "literary",
+      "source": "Ecclesiastes 1:9"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "טָרִי",
+      "register": "neutral",
+      "nuance": "“fresh” — of food and news"
+     },
+     {
+      "word": "חַדְשָׁנִי",
+      "register": "neutral",
+      "nuance": "“innovative, novel”"
+     },
+     {
+      "word": "עַדְכָּנִי",
+      "register": "neutral",
+      "nuance": "“up to date”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יָשָׁן",
+      "note": "old (of things)"
+     }
+    ],
+    "etymology": {
+     "text": "Related to Arabic حَدِيث (ḥadīṯ) and Amharic አዲስ (ʾäddis); ultimately from Proto-Semitic *ḥdṯ- (“to be new”) (Wiktionary). Root ח־ד־שׁ, pattern קָטָל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives חֹדֶשׁ “month” (the “new” moon, lesson 15); Amharic አዲስ “new” is in Addis Ababa, “new flower”."
+    ],
+    "pitfalls": [
+     "With the article it is הֶחָדָשׁ (הֶ, because ח cannot be doubled and its a is unstressed) — but הַחֲדָשָׁה, הַחֲדָשִׁים."
+    ],
+    "subtleties": [
+     "חֲדָשׁוֹת, the feminine plural, also means “the news”."
+    ]
+   }
+  },
+  {
+   "id": "he:yashan",
+   "lemma": "יָשָׁן",
+   "pos": "ADJ",
+   "senses": [
+    "adj.old.thing"
+   ],
+   "translit": "yashan",
+   "forms": {
+    "ADJ;SG;MASC": "יָשָׁן",
+    "ADJ;SG;FEM": "יְשָׁנָה",
+    "ADJ;PL;MASC": "יְשָׁנִים",
+    "ADJ;PL;FEM": "יְשָׁנוֹת",
+    "ADJ;SG;MASC;DEF": "הַיָּשָׁן",
+    "ADJ;SG;FEM;DEF": "הַיְּשָׁנָה",
+    "ADJ;PL;MASC;DEF": "הַיְּשָׁנִים",
+    "ADJ;PL;FEM;DEF": "הַיְּשָׁנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An old car, old books, an old friend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "old (of things)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.thing"
+     },
+     {
+      "id": "s2",
+      "def": "former, previous; long-standing",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לִי מְכוֹנִית יְשָׁנָה.",
+      "tr": "I have an old car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּפָרִים הָאֵלֶּה יְשָׁנִים מְאוֹד.",
+      "tr": "These books are very old.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּבַּיִת הַיָּשָׁן שֶׁלָּנוּ הָיָה חֶדֶר גָּדוֹל.",
+      "tr": "In our old house there was a big room.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא חָבֵר יָשָׁן.",
+      "tr": "He is an old friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיִת יָשָׁן",
+      "tr": "an old house"
+     },
+     {
+      "text": "בְּגָדִים יְשָׁנִים",
+      "tr": "old clothes"
+     },
+     {
+      "text": "חָבֵר יָשָׁן",
+      "tr": "an old (long-standing) friend"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יָשָׁן נוֹשָׁן",
+      "tr": "old, very old",
+      "kind": "idiom",
+      "meaning": "age-old, ancient (Leviticus 26:10)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עַתִּיק",
+      "register": "neutral",
+      "nuance": "“ancient, antique” — very old and valuable"
+     },
+     {
+      "word": "מְשֻׁמָּשׁ",
+      "register": "neutral",
+      "nuance": "“used, second-hand”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "חָדָשׁ",
+      "note": "new"
+     }
+    ],
+    "etymology": {
+     "text": "Pattern קָטָל (Wiktionary, which gives no further etymology). Its letters are those of the verb יָשֵׁן “is asleep”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Old City of Jerusalem is not “הָעִיר הַיְּשָׁנָה” but הָעִיר הָעַתִּיקָה, “the ancient city”."
+    ],
+    "pitfalls": [
+     "Use יָשָׁן for things, זָקֵן (or politely מְבֻגָּר) for people: סֵפֶר יָשָׁן, but אִישׁ זָקֵן.",
+     "יָשָׁן “old” and יָשֵׁן “asleep, sleeps” are both written ישן: הַבַּיִת יָשָׁן “the house is old”, הַיֶּלֶד יָשֵׁן “the child is sleeping”."
+    ],
+    "subtleties": [
+     "חָבֵר יָשָׁן is “an old (long-standing) friend”, not an elderly one."
+    ]
+   }
+  },
+  {
+   "id": "he:tsair",
+   "lemma": "צָעִיר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.young"
+   ],
+   "translit": "tsair",
+   "forms": {
+    "ADJ;SG;MASC": "צָעִיר",
+    "ADJ;SG;FEM": "צְעִירָה",
+    "ADJ;PL;MASC": "צְעִירִים",
+    "ADJ;PL;FEM": "צְעִירוֹת",
+    "ADJ;SG;MASC;DEF": "הַצָּעִיר",
+    "ADJ;SG;FEM;DEF": "הַצְּעִירָה",
+    "ADJ;PL;MASC;DEF": "הַצְּעִירִים",
+    "ADJ;PL;FEM;DEF": "הַצְּעִירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A young doctor, a young couple, young people going out at night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "young",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.young"
+     },
+     {
+      "id": "s2",
+      "def": "a young man; (plural) young people",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמּוֹרָה צְעִירָה מְאוֹד.",
+      "tr": "The teacher is very young.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא רוֹפֵא צָעִיר.",
+      "tr": "He is a young doctor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצְּעִירִים יוֹצְאִים בַּלַּיְלָה.",
+      "tr": "Young people go out at night.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אִשָּׁה צְעִירָה",
+      "tr": "a young woman"
+     },
+     {
+      "text": "זוּג צָעִיר",
+      "tr": "a young couple"
+     },
+     {
+      "text": "בְּגִיל צָעִיר",
+      "tr": "at a young age"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "צָעִיר בְּרוּחוֹ",
+      "tr": "young in his spirit",
+      "kind": "saying",
+      "meaning": "young at heart",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "רַךְ בְּשָׁנִים",
+      "register": "literary",
+      "nuance": "“tender in years” — very young"
+     },
+     {
+      "word": "קָטָן",
+      "register": "colloquial",
+      "nuance": "of children: “little, young”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "זָקֵן",
+      "note": "old (of people)"
+     },
+     {
+      "word": "מְבֻגָּר",
+      "note": "older, adult"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ṣaɣir- (“to be small, young”); cognate with Akkadian ṣeḫrum (“small, young”) and Arabic صَغِير (ṣaḡīr) (Wiktionary). Pattern קָטִיל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic صَغِير means “small”; Hebrew kept the sense “young”. Lot’s refuge town צוֹעַר (Zoar) was named “the small one” (Genesis 19:20–22)."
+    ],
+    "pitfalls": [
+     "The first vowel shortens: צְעִירָה (tse’irá), צְעִירִים."
+    ],
+    "subtleties": [
+     "As a noun: צָעִיר “a young man”, הַצְּעִירִים “young people, the young”."
+    ]
+   }
+  },
+  {
+   "id": "he:zaken",
+   "lemma": "זָקֵן",
+   "pos": "ADJ",
+   "senses": [
+    "adj.old.person"
+   ],
+   "translit": "zaken",
+   "forms": {
+    "ADJ;SG;MASC": "זָקֵן",
+    "ADJ;SG;FEM": "זְקֵנָה",
+    "ADJ;PL;MASC": "זְקֵנִים",
+    "ADJ;PL;FEM": "זְקֵנוֹת",
+    "ADJ;SG;MASC;DEF": "הַזָּקֵן",
+    "ADJ;SG;FEM;DEF": "הַזְּקֵנָה",
+    "ADJ;PL;MASC;DEF": "הַזְּקֵנִים",
+    "ADJ;PL;FEM;DEF": "הַזְּקֵנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandpa, old and still driving; the old dog on the sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "old, elderly (of people and animals)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.person"
+     },
+     {
+      "id": "s2",
+      "def": "an old man; an elder (noun)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבָּא שֶׁלִּי זָקֵן, אֲבָל הוּא עוֹד נוֹהֵג.",
+      "tr": "My grandpa is old, but he still drives.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכֶּלֶב שֶׁלָּנוּ כְּבָר זָקֵן.",
+      "tr": "Our dog is already old.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְפַנֶּה מָקוֹם לְאִשָּׁה זְקֵנָה.",
+      "tr": "I give up my seat to an old woman.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אִישׁ זָקֵן",
+      "tr": "an old man"
+     },
+     {
+      "text": "אִשָּׁה זְקֵנָה",
+      "tr": "an old woman"
+     },
+     {
+      "text": "זָקֵן וְחָכָם",
+      "tr": "old and wise"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מִפְּנֵי שֵׂיבָה תָּקוּם וְהָדַרְתָּ פְּנֵי זָקֵן",
+      "tr": "rise before the grey head and honour the face of the old",
+      "kind": "quote",
+      "meaning": "respect for the old",
+      "register": "literary",
+      "source": "Leviticus 19:32"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מְבֻגָּר",
+      "register": "neutral",
+      "nuance": "“elderly, older” — the polite word"
+     },
+     {
+      "word": "קָשִׁישׁ",
+      "register": "formal",
+      "nuance": "“aged, a senior”"
+     },
+     {
+      "word": "אֶזְרָח וָתִיק",
+      "register": "euphemistic",
+      "nuance": "“senior citizen” — official and polite"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "צָעִיר",
+      "note": "young"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ḏaḳan- (“beard”); cognate with Akkadian ziqnum and Arabic ذَقَن (ḏaqan) (Wiktionary) — the old man is “the bearded one”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "זָקֵן comes from זָקָן “beard” — and Arabic ذَقَن means “chin”."
+    ],
+    "pitfalls": [
+     "זָקֵן “old” and זָקָן “beard” differ only in the last vowel — both are written זקן.",
+     "To someone’s face זָקֵן can sound blunt; say מְבֻגָּר."
+    ],
+    "subtleties": [
+     "In the Bible זְקֵנִים are the elders, a title of honour: זִקְנֵי יִשְׂרָאֵל (Exodus 3:16)."
+    ]
+   }
+  },
+  {
+   "id": "he:mevugar",
+   "lemma": "מְבֻגָּר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.old.person"
+   ],
+   "translit": "mevugar",
+   "forms": {
+    "ADJ;SG;MASC": "מְבֻגָּר",
+    "ADJ;SG;FEM": "מְבֻגֶּרֶת",
+    "ADJ;PL;MASC": "מְבֻגָּרִים",
+    "ADJ;PL;FEM": "מְבֻגָּרוֹת",
+    "ADJ;SG;MASC;DEF": "הַמְּבֻגָּר",
+    "ADJ;SG;FEM;DEF": "הַמְּבֻגֶּרֶת",
+    "ADJ;PL;MASC;DEF": "הַמְּבֻגָּרִים",
+    "ADJ;PL;FEM;DEF": "הַמְּבֻגָּרוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "מבוגר",
+    "ADJ;SG;FEM": "מבוגרת",
+    "ADJ;PL;MASC": "מבוגרים",
+    "ADJ;PL;FEM": "מבוגרות",
+    "ADJ;SG;MASC;DEF": "המבוגר",
+    "ADJ;SG;FEM;DEF": "המבוגרת",
+    "ADJ;PL;MASC;DEF": "המבוגרים",
+    "ADJ;PL;FEM;DEF": "המבוגרות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses מְבֻגָּר as “adult, grown up, mature”; in Modern Hebrew it is also the polite everyday word for an old person (אָדָם מְבֻגָּר “an elderly person”), the reason it is taught here next to זָקֵן."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The tactful word: an elderly lady on the bus; “adults only”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "elderly, older (the polite word for old people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.person"
+     },
+     {
+      "id": "s2",
+      "def": "adult, grown-up",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "older (than): מְבֻגָּר מִ…",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָא שֶׁלִּי אִשָּׁה מְבֻגֶּרֶת.",
+      "tr": "My grandmother is an elderly woman.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ מְקוֹמוֹת לַאֲנָשִׁים מְבֻגָּרִים בָּאוֹטוֹבּוּס.",
+      "tr": "There are seats for elderly people on the bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֶּרֶט הַזֶּה לִמְבֻגָּרִים בִּלְבַד.",
+      "tr": "This film is for adults only.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא מְבֻגָּר מִמֶּנִּי בְּשָׁנָה.",
+      "tr": "He is a year older than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אָדָם מְבֻגָּר",
+      "tr": "an elderly person"
+     },
+     {
+      "text": "מְבֻגָּר אַחְרָאִי",
+      "tr": "a responsible adult"
+     },
+     {
+      "text": "מְבֻגָּר מִ…",
+      "tr": "older than …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "זָקֵן",
+      "register": "neutral",
+      "nuance": "“old” — blunter"
+     },
+     {
+      "word": "קָשִׁישׁ",
+      "register": "formal",
+      "nuance": "“aged, a senior”"
+     },
+     {
+      "word": "בּוֹגֵר",
+      "register": "neutral",
+      "nuance": "“grown-up; a graduate”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "צָעִיר",
+      "note": "young"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it files the word under the root ב־ג־ר (“to mature”). The form is a pu‘al participle: “matured”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives בַּגְרוּת “maturity” — and the Israeli school-leaving exams, the בַּגְרוּת (bagrut)."
+    ],
+    "pitfalls": [
+     "The feminine ends in -et: מְבֻגֶּרֶת, not *מְבֻגָּרָה.",
+     "Pointed with u (ֻ), written with ו: מבוגר, מבוגרת."
+    ],
+    "subtleties": [
+     "It is the tactful word: לְאָדָם מְבֻגָּר “for an elderly person”, where זָקֵן could sound rude.",
+     "As “older than” it fits anyone: הִיא מְבֻגֶּרֶת מִמֶּנִּי בְּשָׁנָתַיִם “she is two years older than me”."
+    ]
+   }
+  },
+  {
+   "id": "he:cham",
+   "lemma": "חַם",
+   "pos": "ADJ",
+   "senses": [
+    "adj.hot"
+   ],
+   "translit": "cham",
+   "forms": {
+    "ADJ;SG;MASC": "חַם",
+    "ADJ;SG;FEM": "חַמָּה",
+    "ADJ;PL;MASC": "חַמִּים",
+    "ADJ;PL;FEM": "חַמּוֹת",
+    "ADJ;SG;MASC;DEF": "הַחַם",
+    "ADJ;SG;FEM;DEF": "הַחַמָּה",
+    "ADJ;PL;MASC;DEF": "הַחַמִּים",
+    "ADJ;PL;FEM;DEF": "הַחַמּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hot tea in winter; an Israeli summer: חַם!",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hot; warm",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.hot"
+     },
+     {
+      "id": "s2",
+      "def": "warm, heated (of feelings, a debate)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה תֵּה חַם.",
+      "tr": "I’m drinking hot tea.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "חַם הַיּוֹם!",
+      "tr": "It’s hot today!",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "חַם לִי, אֲנִי פּוֹתֵחַ אֶת הַחַלּוֹן.",
+      "tr": "I’m hot, I’m opening the window.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הָיָה וִכּוּחַ חַם.",
+      "tr": "There was a heated argument.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַיִם חַמִּים",
+      "tr": "hot water"
+     },
+     {
+      "text": "קָפֶה חַם",
+      "tr": "hot coffee"
+     },
+     {
+      "text": "חַם לִי",
+      "tr": "I’m hot"
+     },
+     {
+      "text": "מֶזֶג אֲוִיר חַם",
+      "tr": "hot weather"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "חַם לִי",
+      "tr": "it is hot to me",
+      "kind": "fixed expression",
+      "meaning": "I’m hot (I feel hot)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לוֹהֵט",
+      "register": "neutral",
+      "nuance": "“scorching, burning hot”"
+     },
+     {
+      "word": "רוֹתֵחַ",
+      "register": "neutral",
+      "nuance": "“boiling”"
+     },
+     {
+      "word": "חָמִים",
+      "register": "neutral",
+      "nuance": "“pleasantly warm”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קַר",
+      "note": "cold"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic حَمِيم (ḥamīm, “hot”) and Eblaite ḥammūtum (“hot”) (Wiktionary). Pattern קֶטֶל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic حَمَّام “bath” (Turkish hamam) is built on the same Semitic root of heat, ח־מ־ם / ح-م-م."
+    ],
+    "pitfalls": [
+     "“I am hot” is חַם לִי (“it is hot to me”), not *אֲנִי חַם.",
+     "The other forms double the מ: חַמָּה, חַמִּים, חַמּוֹת."
+    ],
+    "subtleties": [
+     "With לְ the adjective stays masculine singular and tells how someone feels: חַם לָנוּ, חַם לָהּ."
+    ]
+   }
+  },
+  {
+   "id": "he:kar",
+   "lemma": "קַר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.cold"
+   ],
+   "translit": "kar",
+   "forms": {
+    "ADJ;SG;MASC": "קַר",
+    "ADJ;SG;FEM": "קָרָה",
+    "ADJ;PL;MASC": "קָרִים",
+    "ADJ;PL;FEM": "קָרוֹת",
+    "ADJ;SG;MASC;DEF": "הַקַּר",
+    "ADJ;SG;FEM;DEF": "הַקָּרָה",
+    "ADJ;PL;MASC;DEF": "הַקָּרִים",
+    "ADJ;PL;FEM;DEF": "הַקָּרוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold water from the fridge, a cold winter night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cold",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.cold"
+     },
+     {
+      "id": "s2",
+      "def": "cold, distant (of a person)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "קַר בַּחוּץ.",
+      "tr": "It’s cold outside.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רוֹצֶה מַיִם קָרִים.",
+      "tr": "I want cold water.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "קַר לִי, אֵיפֹה הַמְּעִיל?",
+      "tr": "I’m cold, where is the coat?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא הָיְתָה קָרָה אֵלַי.",
+      "tr": "She was cold to me.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַיִם קָרִים",
+      "tr": "cold water"
+     },
+     {
+      "text": "בִּירָה קָרָה",
+      "tr": "a cold beer"
+     },
+     {
+      "text": "קַר לִי",
+      "tr": "I’m cold"
+     },
+     {
+      "text": "חֹרֶף קַר",
+      "tr": "a cold winter"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קַר כְּמוֹ קֶרַח",
+      "tr": "cold as ice",
+      "kind": "colloquial",
+      "meaning": "ice-cold",
+      "register": "colloquial"
+     },
+     {
+      "text": "קַר רוּחַ",
+      "tr": "cold of spirit",
+      "kind": "fixed expression",
+      "meaning": "cool-headed, calm (Proverbs 17:27)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "קָרִיר",
+      "register": "neutral",
+      "nuance": "“cool, chilly”"
+     },
+     {
+      "word": "צוֹנֵן",
+      "register": "formal",
+      "nuance": "“cool, chilled”"
+     },
+     {
+      "word": "קָפוּא",
+      "register": "neutral",
+      "nuance": "“frozen, freezing”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "חַם",
+      "note": "hot"
+     }
+    ],
+    "etymology": {
+     "text": "Root ק־ר־ר, pattern קֶטֶל; cognate with Arabic قَرّ (qarr) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives קֹר “cold(ness)” and מְקָרֵר “fridge” (lesson 12) — “the cooler”."
+    ],
+    "pitfalls": [
+     "The feminine has a long a: קָרָה (kará); plural קָרִים.",
+     "“I’m cold” is קַר לִי, not *אֲנִי קַר."
+    ],
+    "subtleties": [
+     "It describes people too: “cold, distant”."
+    ]
+   }
+  },
+  {
+   "id": "he:chamim",
+   "lemma": "חָמִים",
+   "pos": "ADJ",
+   "senses": [
+    "adj.warm"
+   ],
+   "translit": "chamim",
+   "forms": {
+    "ADJ;SG;MASC": "חָמִים",
+    "ADJ;SG;FEM": "חֲמִימָה",
+    "ADJ;PL;MASC": "חֲמִימִים",
+    "ADJ;PL;FEM": "חֲמִימוֹת",
+    "ADJ;SG;MASC;DEF": "הֶחָמִים",
+    "ADJ;SG;FEM;DEF": "הַחֲמִימָה",
+    "ADJ;PL;MASC;DEF": "הַחֲמִימִים",
+    "ADJ;PL;FEM;DEF": "הַחֲמִימוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A warm room in winter, warm soup, a warm welcome.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "warm (pleasantly)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.warm"
+     },
+     {
+      "id": "s2",
+      "def": "warm, friendly (of people and atmosphere)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַחֶדֶר חָמִים וְנָעִים.",
+      "tr": "The room is warm and pleasant.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף אֲנִי אוֹהֵב מָרָק חָמִים.",
+      "tr": "In winter I like warm soup.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "קִבַּלְנוּ קַבָּלַת פָּנִים חֲמִימָה.",
+      "tr": "We got a warm welcome.",
+      "register": "neutral",
+      "context": "social",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיִת חָמִים",
+      "tr": "a warm (cosy) home"
+     },
+     {
+      "text": "קַבָּלַת פָּנִים חֲמִימָה",
+      "tr": "a warm welcome"
+     },
+     {
+      "text": "בְּגָדִים חֲמִימִים",
+      "tr": "warm clothes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פּוֹשֵׁר",
+      "register": "neutral",
+      "nuance": "“lukewarm, tepid” — not pleasant"
+     },
+     {
+      "word": "חַם",
+      "register": "neutral",
+      "nuance": "“hot”, or plainly warm"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קָרִיר",
+      "note": "cool"
+     }
+    ],
+    "etymology": {
+     "text": "Root ח־מ־ם, pattern קָטִיל (Wiktionary) — the same root as חַם “hot”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German warm / heiß = Hebrew חָמִים / חַם: one root, a gentler pattern. The Sabbath stew חַמִּין (hamin) is named for being kept hot."
+    ],
+    "pitfalls": [
+     "חָמִים “warm” and חַמִּים “hot” (plural of חַם) are both written חמים: מַיִם חַמִּים “hot water”, but בַּיִת חָמִים “a warm home”.",
+     "With the article: הֶחָמִים, but הַחֲמִימָה."
+    ],
+    "subtleties": [
+     "It is a positive word — the warmth you like; for the weather Israelis mostly just say חַם."
+    ]
+   }
+  },
+  {
+   "id": "he:yafe",
+   "lemma": "יָפֶה",
+   "pos": "ADJ",
+   "senses": [
+    "adj.beautiful"
+   ],
+   "translit": "yafe",
+   "forms": {
+    "ADJ;SG;MASC": "יָפֶה",
+    "ADJ;SG;FEM": "יָפָה",
+    "ADJ;PL;MASC": "יָפִים",
+    "ADJ;PL;FEM": "יָפוֹת",
+    "ADJ;SG;MASC;DEF": "הַיָּפֶה",
+    "ADJ;SG;FEM;DEF": "הַיָּפָה",
+    "ADJ;PL;MASC;DEF": "הַיָּפִים",
+    "ADJ;PL;FEM;DEF": "הַיָּפוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A beautiful day, a beautiful city — and “nice! well done!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beautiful, pretty, nice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.beautiful"
+     },
+     {
+      "id": "s2",
+      "def": "nice, good (of an act): well done!",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "nicely, well (adverb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיזֶה יוֹם יָפֶה!",
+      "tr": "What a beautiful day!",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אִשָּׁה יָפָה מְאוֹד.",
+      "tr": "She is a very beautiful woman.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "יָפֶה מְאוֹד, כָּל הַכָּבוֹד!",
+      "tr": "Very nice, well done!",
+      "register": "neutral",
+      "context": "praise",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא כּוֹתֵב יָפֶה.",
+      "tr": "He writes nicely.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹם יָפֶה",
+      "tr": "a beautiful day"
+     },
+     {
+      "text": "עִיר יָפָה",
+      "tr": "a beautiful city"
+     },
+     {
+      "text": "נוֹף יָפֶה",
+      "tr": "a beautiful view"
+     },
+     {
+      "text": "יָפֶה מְאוֹד",
+      "tr": "very nice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יָפֶה שָׁעָה אַחַת קֹדֶם",
+      "tr": "one hour earlier is better",
+      "kind": "saying",
+      "meaning": "the sooner the better",
+      "register": "neutral"
+     },
+     {
+      "text": "יְפֵה נֶפֶשׁ",
+      "tr": "beautiful of soul",
+      "kind": "idiom",
+      "meaning": "an idealist, a do-gooder (often ironic)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "נֶחְמָד",
+      "register": "neutral",
+      "nuance": "“nice, pretty” — milder"
+     },
+     {
+      "word": "מַקְסִים",
+      "register": "neutral",
+      "nuance": "“charming, lovely”"
+     },
+     {
+      "word": "יְפֵהפֶה",
+      "register": "neutral",
+      "nuance": "“gorgeous” — very beautiful"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "מְכֹעָר",
+      "note": "ugly"
+     }
+    ],
+    "etymology": {
+     "text": "Pattern קָטָל; cognate with Phoenician 𐤉𐤐 (yp, “proper, good”) and Ugaritic yp (“dignity, honour”); compare also Arabic وَفَى (wafā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The port of Jaffa, יָפוֹ, is popularly explained as “the beautiful one”, from יָפֶה."
+    ],
+    "pitfalls": [
+     "Masculine יָפֶה ends in -e, feminine יָפָה in -a: the same letters יפה — only the vowel (and the context) tells them apart."
+    ],
+    "subtleties": [
+     "יָפֶה also praises an action (“nice!, well done!”) and works as an adverb: הִיא שָׁרָה יָפֶה “she sings beautifully”."
+    ]
+   }
+  },
+  {
+   "id": "he:mechoar",
+   "lemma": "מְכֹעָר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.ugly"
+   ],
+   "translit": "mechoar",
+   "forms": {
+    "ADJ;SG;MASC": "מְכֹעָר",
+    "ADJ;SG;FEM": "מְכֹעֶרֶת",
+    "ADJ;PL;MASC": "מְכֹעָרִים",
+    "ADJ;PL;FEM": "מְכֹעָרוֹת",
+    "ADJ;SG;MASC;DEF": "הַמְּכֹעָר",
+    "ADJ;SG;FEM;DEF": "הַמְּכֹעֶרֶת",
+    "ADJ;PL;MASC;DEF": "הַמְּכֹעָרִים",
+    "ADJ;PL;FEM;DEF": "הַמְּכֹעָרוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "מכוער",
+    "ADJ;SG;FEM": "מכוערת",
+    "ADJ;PL;MASC": "מכוערים",
+    "ADJ;PL;FEM": "מכוערות",
+    "ADJ;SG;MASC;DEF": "המכוער",
+    "ADJ;SG;FEM;DEF": "המכוערת",
+    "ADJ;PL;MASC;DEF": "המכוערים",
+    "ADJ;PL;FEM;DEF": "המכוערות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "An ugly building, an ugly fight — and the Ugly Duckling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ugly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.ugly"
+     },
+     {
+      "id": "s2",
+      "def": "ugly, nasty (of behaviour, a situation)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבִּנְיָן הַזֶּה מְכֹעָר.",
+      "tr": "This building is ugly.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים אֶת הַסִּפּוּר עַל הַבַּרְוָזוֹן הַמְּכֹעָר.",
+      "tr": "The children love the story of the ugly duckling.",
+      "register": "neutral",
+      "context": "fairy tales",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה הָיָה וִכּוּחַ מְכֹעָר.",
+      "tr": "It was an ugly argument.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּנְיָן מְכֹעָר",
+      "tr": "an ugly building"
+     },
+     {
+      "text": "הַבַּרְוָזוֹן הַמְּכֹעָר",
+      "tr": "the ugly duckling"
+     },
+     {
+      "text": "מַצָּב מְכֹעָר",
+      "tr": "an ugly situation"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לֹא יָפֶה",
+      "register": "euphemistic",
+      "nuance": "“not pretty” — softer"
+     },
+     {
+      "word": "מַגְעִיל",
+      "register": "colloquial",
+      "nuance": "“disgusting” — stronger"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יָפֶה",
+      "note": "beautiful"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. The form is the pu‘al participle of the root כ־ע־ר (“ugly”): “made ugly”; the noun is כִּעוּר “ugliness”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German hässlich comes from Hass “hate”; Hebrew has a root of its own for “ugly”, כ־ע־ר."
+    ],
+    "pitfalls": [
+     "ע cannot be doubled, so the first vowel lengthens to o: mechoár — pointed מְכֹעָר, written מכוער.",
+     "The feminine ends in -et: מְכֹעֶרֶת."
+    ],
+    "subtleties": [
+     "About people it is harsh; Israelis soften it to לֹא כָּל כָּךְ יָפֶה “not so pretty”."
+    ]
+   }
+  },
+  {
+   "id": "he:kal",
+   "lemma": "קַל",
+   "pos": "ADJ",
+   "senses": [
+    "adj.easy"
+   ],
+   "translit": "kal",
+   "forms": {
+    "ADJ;SG;MASC": "קַל",
+    "ADJ;SG;FEM": "קַלָּה",
+    "ADJ;PL;MASC": "קַלִּים",
+    "ADJ;PL;FEM": "קַלּוֹת",
+    "ADJ;SG;MASC;DEF": "הַקַּל",
+    "ADJ;SG;FEM;DEF": "הַקַּלָּה",
+    "ADJ;PL;MASC;DEF": "הַקַּלִּים",
+    "ADJ;PL;FEM;DEF": "הַקַּלּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An easy question, a light bag, a light dinner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "easy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.easy"
+     },
+     {
+      "id": "s2",
+      "def": "light (of little weight)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "light, minor (a meal, an illness)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשְּׁאֵלָה הַזֹּאת קַלָּה.",
+      "tr": "This question is easy.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "עִבְרִית לֹא קַלָּה, אֲבָל הִיא יָפָה.",
+      "tr": "Hebrew isn’t easy, but it’s beautiful.",
+      "register": "neutral",
+      "context": "language",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּיק קַל מְאוֹד.",
+      "tr": "The bag is very light.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "אֲנִי אוֹכֵל אֲרוּחַת עֶרֶב קַלָּה.",
+      "tr": "I eat a light dinner.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שְׁאֵלָה קַלָּה",
+      "tr": "an easy question"
+     },
+     {
+      "text": "אֲרוּחָה קַלָּה",
+      "tr": "a light meal"
+     },
+     {
+      "text": "לֹא קַל",
+      "tr": "not easy"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קַל וָחֹמֶר",
+      "tr": "light and heavy",
+      "kind": "fixed expression",
+      "meaning": "all the more so (a fortiori — a rule of Talmudic reasoning)",
+      "register": "formal"
+     },
+     {
+      "text": "קַל לְהַגִּיד",
+      "tr": "easy to say",
+      "kind": "colloquial",
+      "meaning": "easier said than done",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "פָּשׁוּט",
+      "register": "neutral",
+      "nuance": "“simple”"
+     },
+     {
+      "word": "קַלִּיל",
+      "register": "neutral",
+      "nuance": "“light, breezy” — of a mood, clothes, music"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קָשֶׁה",
+      "note": "difficult"
+     },
+     {
+      "word": "כָּבֵד",
+      "note": "heavy"
+     }
+    ],
+    "etymology": {
+     "text": "Root ק־ל־ל, pattern קֶטֶל; related to Arabic قَلِيل (qalīl, “few”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German leicht, קַל means both “easy” and “light (not heavy)”."
+    ],
+    "pitfalls": [
+     "A light COLOUR is not קַל but בָּהִיר (lesson 17).",
+     "The other forms double the ל: קַלָּה, קַלִּים, קַלּוֹת."
+    ],
+    "subtleties": [
+     "קַל לִי “it’s easy for me”, לֹא קַל לוֹ “it isn’t easy for him” — impersonal, like חַם לִי."
+    ]
+   }
+  },
+  {
+   "id": "he:kashe",
+   "lemma": "קָשֶׁה",
+   "pos": "ADJ",
+   "senses": [
+    "adj.difficult"
+   ],
+   "translit": "kashe",
+   "forms": {
+    "ADJ;SG;MASC": "קָשֶׁה",
+    "ADJ;SG;FEM": "קָשָׁה",
+    "ADJ;PL;MASC": "קָשִׁים",
+    "ADJ;PL;FEM": "קָשׁוֹת",
+    "ADJ;SG;MASC;DEF": "הַקָּשֶׁה",
+    "ADJ;SG;FEM;DEF": "הַקָּשָׁה",
+    "ADJ;PL;MASC;DEF": "הַקָּשִׁים",
+    "ADJ;PL;FEM;DEF": "הַקָּשׁוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "A hard test, a hard day — and a hard-boiled egg.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "difficult, hard",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.difficult"
+     },
+     {
+      "id": "s2",
+      "def": "hard (not soft)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "hard, severe, serious",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמִּבְחָן הָיָה קָשֶׁה.",
+      "tr": "The test was hard.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "קָשֶׁה לִי לָקוּם בַּבֹּקֶר.",
+      "tr": "It’s hard for me to get up in the morning.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "הַלֶּחֶם קָשֶׁה.",
+      "tr": "The bread is hard.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "אֲנִי אוֹכֵל בֵּיצָה קָשָׁה.",
+      "tr": "I eat a hard-boiled egg.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲבוֹדָה קָשָׁה",
+      "tr": "hard work"
+     },
+     {
+      "text": "שְׁאֵלָה קָשָׁה",
+      "tr": "a hard question"
+     },
+     {
+      "text": "בֵּיצָה קָשָׁה",
+      "tr": "a hard-boiled egg"
+     },
+     {
+      "text": "יוֹם קָשֶׁה",
+      "tr": "a hard day"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עַם קְשֵׁה עֹרֶף",
+      "tr": "a stiff-necked people",
+      "kind": "quote",
+      "meaning": "a stubborn people",
+      "register": "literary",
+      "source": "Exodus 32:9"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מְסֻבָּךְ",
+      "register": "neutral",
+      "nuance": "“complicated”"
+     },
+     {
+      "word": "מְאַתְגֵּר",
+      "register": "neutral",
+      "nuance": "“challenging” — modern, positive"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קַל",
+      "note": "easy"
+     },
+     {
+      "word": "רַךְ",
+      "note": "soft"
+     }
+    ],
+    "etymology": {
+     "text": "Root ק־שׁ־ה (Wiktionary, which gives no further etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like English hard, קָשֶׁה is both “difficult” and “not soft”."
+    ],
+    "pitfalls": [
+     "Masculine קָשֶׁה (kashé) and feminine קָשָׁה (kashá) are both written קשה.",
+     "“It is hard for me to …” = קָשֶׁה לִי + infinitive (the adjective stays masculine singular)."
+    ],
+    "subtleties": [
+     "In set phrases it takes the construct form קְשֵׁה: קְשֵׁה עֹרֶף “stubborn”."
+    ]
+   }
+  },
+  {
+   "id": "he:zol",
+   "lemma": "זוֹל",
+   "pos": "ADJ",
+   "senses": [
+    "adj.cheap"
+   ],
+   "translit": "zol",
+   "forms": {
+    "ADJ;SG;MASC": "זוֹל",
+    "ADJ;SG;FEM": "זוֹלָה",
+    "ADJ;PL;MASC": "זוֹלִים",
+    "ADJ;PL;FEM": "זוֹלוֹת",
+    "ADJ;SG;MASC;DEF": "הַזּוֹל",
+    "ADJ;SG;FEM;DEF": "הַזּוֹלָה",
+    "ADJ;PL;MASC;DEF": "הַזּוֹלִים",
+    "ADJ;PL;FEM;DEF": "הַזּוֹלוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cheap fruit at the market, a cheap ticket — or a cheap trick.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheap, inexpensive",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.cheap"
+     },
+     {
+      "id": "s2",
+      "def": "cheap, tacky",
+      "register": [
+       "pejorative"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַפֵּרוֹת בַּשּׁוּק זוֹלִים.",
+      "tr": "The fruit at the market is cheap.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה מִסְעָדָה טוֹבָה וְזוֹלָה.",
+      "tr": "There is a good, cheap restaurant here.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה טְרִיק זוֹל.",
+      "tr": "That’s a cheap trick.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כַּרְטִיס זוֹל",
+      "tr": "a cheap ticket"
+     },
+     {
+      "text": "דִּירָה זוֹלָה",
+      "tr": "a cheap flat"
+     },
+     {
+      "text": "בְּזוֹל",
+      "tr": "cheaply"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מוּזָל",
+      "register": "neutral",
+      "nuance": "“reduced, discounted”"
+     },
+     {
+      "word": "מִשְׁתַּלֵּם",
+      "register": "neutral",
+      "nuance": "“good value, worth it” — positive"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יָקָר",
+      "note": "expensive"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. The verb הוֹזִיל “to make cheaper” and the noun הוֹזָלָה “price cut” are built on it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A common sign in Israeli shops: הַמְּחִירִים הוּזְלוּ “prices have been reduced” — the verb of זוֹל."
+    ],
+    "pitfalls": [
+     "Of a price itself Hebrew prefers “low”: מְחִיר נָמוּךְ (as German niedriger Preis); זוֹל describes the thing: הַכַּרְטִיס זוֹל."
+    ],
+    "subtleties": [
+     "זוֹל can sound pejorative (“cheap, tacky”); a positive “good value” is מִשְׁתַּלֵּם."
+    ]
+   }
+  },
+  {
+   "id": "he:yakar",
+   "lemma": "יָקָר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.expensive"
+   ],
+   "translit": "yakar",
+   "forms": {
+    "ADJ;SG;MASC": "יָקָר",
+    "ADJ;SG;FEM": "יְקָרָה",
+    "ADJ;PL;MASC": "יְקָרִים",
+    "ADJ;PL;FEM": "יְקָרוֹת",
+    "ADJ;SG;MASC;DEF": "הַיָּקָר",
+    "ADJ;SG;FEM;DEF": "הַיְּקָרָה",
+    "ADJ;PL;MASC;DEF": "הַיְּקָרִים",
+    "ADJ;PL;FEM;DEF": "הַיְּקָרוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Expensive taxis and dear friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "expensive",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.expensive"
+     },
+     {
+      "id": "s2",
+      "def": "dear, precious",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַחַיִּים בְּתֵל אָבִיב יְקָרִים.",
+      "tr": "Life in Tel Aviv is expensive.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹנִית יְקָרָה, אֲנִי נוֹסֵעַ בְּאוֹטוֹבּוּס.",
+      "tr": "The taxi is expensive, I’m going by bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא יְקָרָה לִי מְאוֹד.",
+      "tr": "Mum is very dear to me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "חֲבֵרִים יְקָרִים, תּוֹדָה שֶׁבָּאתֶם.",
+      "tr": "Dear friends, thank you for coming.",
+      "register": "formal",
+      "context": "speech",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יָקָר מְאוֹד",
+      "tr": "very expensive"
+     },
+     {
+      "text": "חָבֵר יָקָר",
+      "tr": "a dear friend"
+     },
+     {
+      "text": "יָקָר לִי",
+      "tr": "dear to me"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יָקָר מִפָּז",
+      "tr": "dearer than fine gold",
+      "kind": "idiom",
+      "meaning": "priceless, very precious",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יְקַר עֵרֶךְ",
+      "register": "formal",
+      "nuance": "“valuable, precious”"
+     },
+     {
+      "word": "אָהוּב",
+      "register": "neutral",
+      "nuance": "“beloved” — for “dear”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "זוֹל",
+      "note": "cheap"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *waqar- (“to be heavy or weighty; to hold weight in value”), from Proto-Afroasiatic; compare Egyptian jqr (“excellent, worthy”) and Arabic وَقَار (waqār, “dignity”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German teuer, Greek ακριβός and Russian дорогой, יָקָר means both “expensive” and “dear”."
+    ],
+    "pitfalls": [
+     "The first vowel shortens: יְקָרָה (yekará), יְקָרִים.",
+     "Not to be confused with קַר “cold”: יָקָר has a י at the start."
+    ],
+    "subtleties": [
+     "In letters: יְקָרִי / יְקָרָתִי “my dear (m. / f.)”."
+    ]
+   }
+  },
+  {
+   "id": "he:sameach",
+   "lemma": "שָׂמֵחַ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.happy"
+   ],
+   "translit": "sameach",
+   "forms": {
+    "ADJ;SG;MASC": "שָׂמֵחַ",
+    "ADJ;SG;FEM": "שְׂמֵחָה",
+    "ADJ;PL;MASC": "שְׂמֵחִים",
+    "ADJ;PL;FEM": "שְׂמֵחוֹת",
+    "ADJ;SG;MASC;DEF": "הַשָּׂמֵחַ",
+    "ADJ;SG;FEM;DEF": "הַשְּׂמֵחָה",
+    "ADJ;PL;MASC;DEF": "הַשְּׂמֵחִים",
+    "ADJ;PL;FEM;DEF": "הַשְּׂמֵחוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Glad to see you; happy children on the first day of the holidays; חַג שָׂמֵחַ!",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "happy, glad, pleased",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.happy"
+     },
+     {
+      "id": "s2",
+      "def": "merry, joyful (of an occasion)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שָׂמֵחַ לִרְאוֹת אוֹתְךָ!",
+      "tr": "I’m happy to see you!",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים שְׂמֵחִים, יֵשׁ חֻפְשָׁה!",
+      "tr": "The children are happy, it’s the holidays!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "חַג שָׂמֵחַ!",
+      "tr": "Happy holiday!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חַג שָׂמֵחַ",
+      "tr": "happy holiday"
+     },
+     {
+      "text": "שָׂמֵחַ לְהַכִּיר",
+      "tr": "glad to meet you"
+     },
+     {
+      "text": "שָׂמֵחַ בִּשְׁבִילְךָ",
+      "tr": "happy for you"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵיזֶהוּ עָשִׁיר? הַשָּׂמֵחַ בְּחֶלְקוֹ",
+      "tr": "who is rich? the one who is happy with his share",
+      "kind": "quote",
+      "meaning": "contentment is true wealth",
+      "register": "literary",
+      "source": "Pirkei Avot 4:1"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מְאֻשָּׁר",
+      "register": "neutral",
+      "nuance": "“happy” in a deeper, lasting sense"
+     },
+     {
+      "word": "עַלִּיז",
+      "register": "neutral",
+      "nuance": "“cheerful, merry”"
+     },
+     {
+      "word": "מְרֻצֶּה",
+      "register": "neutral",
+      "nuance": "“satisfied, pleased”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "עָצוּב",
+      "note": "sad"
+     }
+    ],
+    "etymology": {
+     "text": "Root שׂ־מ־ח; inherited from Proto-Semitic; cognate with Ugaritic šmḫ (“to be glad, rejoice”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "שִׂמְחָה “joy” is also a name (Simcha), and שִׂמְחַת תּוֹרָה is the festival of “Rejoicing in the Torah”."
+    ],
+    "pitfalls": [
+     "The final ח takes a “stolen” a: sa-mé-ach, pointed שָׂמֵחַ; in the other forms it is gone: שְׂמֵחָה.",
+     "“Glad to …” = שָׂמֵחַ לְ + infinitive; “glad that …” = שָׂמֵחַ שֶׁ… (lesson 18)."
+    ],
+    "subtleties": [
+     "שָׂמֵחַ is glad in the moment; מְאֻשָּׁר is happy with life."
+    ]
+   }
+  },
+  {
+   "id": "he:atsuv",
+   "lemma": "עָצוּב",
+   "pos": "ADJ",
+   "senses": [
+    "adj.sad"
+   ],
+   "translit": "atsuv",
+   "forms": {
+    "ADJ;SG;MASC": "עָצוּב",
+    "ADJ;SG;FEM": "עֲצוּבָה",
+    "ADJ;PL;MASC": "עֲצוּבִים",
+    "ADJ;PL;FEM": "עֲצוּבוֹת",
+    "ADJ;SG;MASC;DEF": "הֶעָצוּב",
+    "ADJ;SG;FEM;DEF": "הָעֲצוּבָה",
+    "ADJ;PL;MASC;DEF": "הָעֲצוּבִים",
+    "ADJ;PL;FEM;DEF": "הָעֲצוּבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "A sad face, a sad film, a sad song.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sad, unhappy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.sad"
+     },
+     {
+      "id": "s2",
+      "def": "sad (causing sadness: a sad film)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "לָמָּה אַתָּה עָצוּב?",
+      "tr": "Why are you sad?",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא עֲצוּבָה כִּי הַחֲבֵרָה שֶׁלָּהּ נָסְעָה.",
+      "tr": "She is sad because her friend has left.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה סֶרֶט עָצוּב מְאוֹד.",
+      "tr": "It’s a very sad film.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סֶרֶט עָצוּב",
+      "tr": "a sad film"
+     },
+     {
+      "text": "שִׁיר עָצוּב",
+      "tr": "a sad song"
+     },
+     {
+      "text": "עָצוּב לִי",
+      "tr": "I feel sad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְדֻכָּא",
+      "register": "neutral",
+      "nuance": "“depressed”"
+     },
+     {
+      "word": "עָגוּם",
+      "register": "formal",
+      "nuance": "“gloomy, glum”"
+     },
+     {
+      "word": "עָצֵב",
+      "register": "literary",
+      "nuance": "“sad, sorrowful”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׂמֵחַ",
+      "note": "happy"
+     }
+    ],
+    "etymology": {
+     "text": "Root ע־צ־ב (Wiktionary); the noun is עֶצֶב “sadness” (Wiktionary compares Arabic غَضَب, “anger”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "עַצְבָּנִי “irritable, nervous” comes from עֲצַבִּים “nerves” — the same letters ע־צ־ב, but a different word from עֶצֶב “sadness”."
+    ],
+    "pitfalls": [
+     "With the article: הֶעָצוּב, but הָעֲצוּבָה, הָעֲצוּבִים.",
+     "Feminine עֲצוּבָה (atsuvá) — the first a shortens."
+    ],
+    "subtleties": [
+     "It describes what causes sadness as well: סִפּוּר עָצוּב “a sad story”."
+    ]
+   }
+  },
+  {
+   "id": "he:ayef",
+   "lemma": "עָיֵף",
+   "pos": "ADJ",
+   "senses": [
+    "adj.tired"
+   ],
+   "translit": "ayef",
+   "forms": {
+    "ADJ;SG;MASC": "עָיֵף",
+    "ADJ;SG;FEM": "עֲיֵפָה",
+    "ADJ;PL;MASC": "עֲיֵפִים",
+    "ADJ;PL;FEM": "עֲיֵפוֹת",
+    "ADJ;SG;MASC;DEF": "הֶעָיֵף",
+    "ADJ;SG;FEM;DEF": "הָעֲיֵפָה",
+    "ADJ;PL;MASC;DEF": "הָעֲיֵפִים",
+    "ADJ;PL;FEM;DEF": "הָעֲיֵפוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "עייף",
+    "ADJ;SG;FEM": "עייפה",
+    "ADJ;PL;MASC": "עייפים",
+    "ADJ;PL;FEM": "עייפות",
+    "ADJ;SG;MASC;DEF": "העייף",
+    "ADJ;SG;FEM;DEF": "העייפה",
+    "ADJ;PL;MASC;DEF": "העייפים",
+    "ADJ;PL;FEM;DEF": "העייפות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Tired after work, after a trip, after a long day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tired",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.tired"
+     },
+     {
+      "id": "s2",
+      "def": "tired of, fed up with (עָיֵף מִ…)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי עָיֵף, אֲנִי הוֹלֵךְ לִישֹׁן.",
+      "tr": "I’m tired, I’m going to sleep.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא חוֹזֶרֶת עֲיֵפָה מֵהָעֲבוֹדָה.",
+      "tr": "She comes home tired from work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים עֲיֵפִים אַחֲרֵי הַטִּיּוּל.",
+      "tr": "The children are tired after the trip.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי עָיֵף מִכָּל הַוִּכּוּחִים.",
+      "tr": "I’m tired of all the arguments.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עָיֵף מְאוֹד",
+      "tr": "very tired"
+     },
+     {
+      "text": "עָיֵף מִ…",
+      "tr": "tired of …"
+     },
+     {
+      "text": "פָּנִים עֲיֵפוֹת",
+      "tr": "a tired face"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עָיֵף מֵת",
+      "tr": "tired dead",
+      "kind": "slang",
+      "meaning": "dead tired",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מוּתָשׁ",
+      "register": "neutral",
+      "nuance": "“exhausted”"
+     },
+     {
+      "word": "גָּמוּר",
+      "register": "slang",
+      "nuance": "“wiped out, finished”"
+     },
+     {
+      "word": "מְנֻמְנָם",
+      "register": "neutral",
+      "nuance": "“sleepy, drowsy”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "רַעֲנָן",
+      "note": "fresh, refreshed"
+     }
+    ],
+    "etymology": {
+     "text": "Participle of the verb עִיֵּף; pattern קָטֵל (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Biblical word is the same: Esau comes in from the field “וְהוּא עָיֵף” — “and he was tired” (Genesis 25:29)."
+    ],
+    "pitfalls": [
+     "Pointed עָיֵף, but in full spelling it has two yods: עייף, עייפה.",
+     "With the article: הֶעָיֵף, but הָעֲיֵפָה."
+    ],
+    "subtleties": [
+     "The noun is עֲיֵפוּת “tiredness”."
+    ]
+   }
+  },
+  {
+   "id": "he:raev",
+   "lemma": "רָעֵב",
+   "pos": "ADJ",
+   "senses": [
+    "adj.hungry"
+   ],
+   "translit": "raev",
+   "forms": {
+    "ADJ;SG;MASC": "רָעֵב",
+    "ADJ;SG;FEM": "רְעֵבָה",
+    "ADJ;PL;MASC": "רְעֵבִים",
+    "ADJ;PL;FEM": "רְעֵבוֹת",
+    "ADJ;SG;MASC;DEF": "הָרָעֵב",
+    "ADJ;SG;FEM;DEF": "הָרְעֵבָה",
+    "ADJ;PL;MASC;DEF": "הָרְעֵבִים",
+    "ADJ;PL;FEM;DEF": "הָרְעֵבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Hungry after school: “what is there to eat?”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hungry",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.hungry"
+     },
+     {
+      "id": "s2",
+      "def": "hungry for, eager (רָעֵב לְ…)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי רָעֵב, מָה יֵשׁ לֶאֱכֹל?",
+      "tr": "I’m hungry, what is there to eat?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינוֹק רָעֵב.",
+      "tr": "The baby is hungry.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקְּבוּצָה רְעֵבָה לְנִצָּחוֹן.",
+      "tr": "The team is hungry for a win.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רָעֵב מְאוֹד",
+      "tr": "very hungry"
+     },
+     {
+      "text": "רָעֵב לְ…",
+      "tr": "hungry for …"
+     },
+     {
+      "text": "רָעֵב כְּמוֹ זְאֵב",
+      "tr": "hungry as a wolf"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "רָעֵב כְּמוֹ זְאֵב",
+      "tr": "hungry like a wolf",
+      "kind": "colloquial",
+      "meaning": "very hungry",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מֵת מֵרָעָב",
+      "register": "colloquial",
+      "nuance": "“starving” (dying of hunger)"
+     },
+     {
+      "word": "רְעַבְתָּן",
+      "register": "colloquial",
+      "nuance": "“a glutton, always hungry” (noun)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׂבֵעַ",
+      "note": "full, sated"
+     }
+    ],
+    "etymology": {
+     "text": "Root ר־ע־ב, pattern קָטֵל; related to Arabic رَغِبَ (raḡiba, “to desire”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The noun רָעָב “famine” is the famine that brought Jacob’s sons to Egypt (Genesis 41–42)."
+    ],
+    "pitfalls": [
+     "רָעֵב “hungry” and רָעָב “hunger, famine” differ only in the last vowel.",
+     "With the article: הָרָעֵב (ר takes הָ)."
+    ],
+    "subtleties": [
+     "The opposite is שָׂבֵעַ “full”: אֲנִי שָׂבֵעַ, תּוֹדָה “I’m full, thanks” is the polite way to refuse more food."
+    ]
+   }
+  },
+  {
+   "id": "he:tsame",
+   "lemma": "צָמֵא",
+   "pos": "ADJ",
+   "senses": [
+    "adj.thirsty"
+   ],
+   "translit": "tsame",
+   "forms": {
+    "ADJ;SG;MASC": "צָמֵא",
+    "ADJ;SG;FEM": "צְמֵאָה",
+    "ADJ;PL;MASC": "צְמֵאִים",
+    "ADJ;PL;FEM": "צְמֵאוֹת",
+    "ADJ;SG;MASC;DEF": "הַצָּמֵא",
+    "ADJ;SG;FEM;DEF": "הַצְּמֵאָה",
+    "ADJ;PL;MASC;DEF": "הַצְּמֵאִים",
+    "ADJ;PL;FEM;DEF": "הַצְּמֵאוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Thirsty in an Israeli summer — always carry water.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirsty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.thirsty"
+     },
+     {
+      "id": "s2",
+      "def": "thirsty for, longing for",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי צָמֵא, יֵשׁ מַיִם?",
+      "tr": "I’m thirsty, is there any water?",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּקַּיִץ כֻּלָּם צְמֵאִים.",
+      "tr": "In summer everyone is thirsty.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא צָמֵא לְיֶדַע.",
+      "tr": "He is thirsty for knowledge.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "צָמֵא מְאוֹד",
+      "tr": "very thirsty"
+     },
+     {
+      "text": "צָמֵא לְדַעַת",
+      "tr": "eager to know"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "צָמֵא לְדַעַת",
+      "tr": "thirsty to know",
+      "kind": "fixed expression",
+      "meaning": "eager to learn",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מְיֻבָּשׁ",
+      "register": "neutral",
+      "nuance": "“dehydrated”"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ṯ̣amiʔ- (“to thirst”); compare Arabic ظَمِئَ (ẓamiʔa, “to thirst; to long”) (Wiktionary). Pattern קָטֵל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic ظَمْآن “thirsty” comes from the same Semitic root."
+    ],
+    "pitfalls": [
+     "The final א is silent: tsamé; the feminine is tsme’á, צְמֵאָה."
+    ],
+    "subtleties": [
+     "The noun is צָמָא “thirst” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:mahir",
+   "lemma": "מָהִיר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.fast"
+   ],
+   "translit": "mahir",
+   "forms": {
+    "ADJ;SG;MASC": "מָהִיר",
+    "ADJ;SG;FEM": "מְהִירָה",
+    "ADJ;PL;MASC": "מְהִירִים",
+    "ADJ;PL;FEM": "מְהִירוֹת",
+    "ADJ;SG;MASC;DEF": "הַמָּהִיר",
+    "ADJ;SG;FEM;DEF": "הַמְּהִירָה",
+    "ADJ;PL;MASC;DEF": "הַמְּהִירִים",
+    "ADJ;PL;FEM;DEF": "הַמְּהִירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A fast train, fast food, a quick answer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fast, quick",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.fast"
+     },
+     {
+      "id": "s2",
+      "def": "skilled, expert (literary)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָרַכֶּבֶת לְחֵיפָה מְהִירָה.",
+      "tr": "The train to Haifa is fast.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אוֹכֵל אֹכֶל מָהִיר כָּל יוֹם.",
+      "tr": "He eats fast food every day.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "וְהוּא סֹפֵר מָהִיר בְּתוֹרַת מֹשֶׁה",
+      "tr": "and he was a skilled scribe in the Law of Moses",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֹכֶל מָהִיר",
+      "tr": "fast food"
+     },
+     {
+      "text": "כְּבִישׁ מָהִיר",
+      "tr": "a motorway"
+     },
+     {
+      "text": "רַכֶּבֶת מְהִירָה",
+      "tr": "a fast train"
+     },
+     {
+      "text": "תְּשׁוּבָה מְהִירָה",
+      "tr": "a quick answer"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְהוּא סֹפֵר מָהִיר בְּתוֹרַת מֹשֶׁה",
+      "tr": "and he was a skilled scribe in the Law of Moses",
+      "kind": "quote",
+      "meaning": "Ezra the scribe — מָהִיר in its old sense “skilled”",
+      "register": "literary",
+      "source": "Ezra 7:6"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "זָרִיז",
+      "register": "neutral",
+      "nuance": "“quick, nimble, agile”"
+     },
+     {
+      "word": "מַהֵר",
+      "register": "neutral",
+      "nuance": "“quickly” — the adverb"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "אִטִּי",
+      "note": "slow"
+     }
+    ],
+    "etymology": {
+     "text": "An adjective in the קָטִיל pattern from the root מ־ה־ר, as the verb מִהֵר (“to hurry”); cognate with Arabic مَاهِر (māhir, “skilled, expert”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic مَاهِر “skilled” — and Turkish mahir “skilful”, from it — share this root; Hebrew kept both senses."
+    ],
+    "pitfalls": [
+     "“Quickly” is the adverb מַהֵר, not מָהִיר: הוּא רָץ מַהֵר “he runs fast”."
+    ],
+    "subtleties": [
+     "מָהִיר is about speed; “early” is a different word, מֻקְדָּם (lesson 14)."
+    ]
+   }
+  },
+  {
+   "id": "he:iti",
+   "lemma": "אִטִּי",
+   "pos": "ADJ",
+   "senses": [
+    "adj.slow"
+   ],
+   "translit": "iti",
+   "forms": {
+    "ADJ;SG;MASC": "אִטִּי",
+    "ADJ;SG;FEM": "אִטִּית",
+    "ADJ;PL;MASC": "אִטִּיִּים",
+    "ADJ;PL;FEM": "אִטִּיּוֹת",
+    "ADJ;SG;MASC;DEF": "הָאִטִּי",
+    "ADJ;SG;FEM;DEF": "הָאִטִּית",
+    "ADJ;PL;MASC;DEF": "הָאִטִּיִּים",
+    "ADJ;PL;FEM;DEF": "הָאִטִּיּוֹת"
+   },
+   "formsAlt": {
+    "ADJ;PL;MASC": [
+     "אִטִּים"
+    ]
+   },
+   "plene": {
+    "ADJ;SG;MASC": "איטי",
+    "ADJ;SG;FEM": "איטית",
+    "ADJ;PL;MASC": "איטיים",
+    "ADJ;PL;FEM": "איטיות",
+    "ADJ;SG;MASC;DEF": "האיטי",
+    "ADJ;SG;FEM;DEF": "האיטית",
+    "ADJ;PL;MASC;DEF": "האיטיים",
+    "ADJ;PL;FEM;DEF": "האיטיות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "A slow bus, slow internet — and the Israeli “לְאַט לְאַט”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "slow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.slow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאוֹטוֹבּוּס אִטִּי מְאוֹד.",
+      "tr": "The bus is very slow.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאִינְטֶרְנֶט פֹּה אִטִּי.",
+      "tr": "The internet here is slow.",
+      "register": "neutral",
+      "context": "technology",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה תַּהֲלִיךְ אִטִּי.",
+      "tr": "It’s a slow process.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תְּנוּעָה אִטִּית",
+      "tr": "slow traffic"
+     },
+     {
+      "text": "בִּשּׁוּל אִטִּי",
+      "tr": "slow cooking"
+     },
+     {
+      "text": "אִטִּי מְאוֹד",
+      "tr": "very slow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לְאַט לְאַט",
+      "tr": "slowly slowly",
+      "kind": "colloquial",
+      "meaning": "little by little, gradually",
+      "register": "colloquial"
+     },
+     {
+      "text": "לְאַט לְךָ!",
+      "tr": "slowly to you",
+      "kind": "colloquial",
+      "meaning": "easy! take it easy, slow down",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: Hebrew says אִטִּי for slow and the adverb לְאַט for slowly.",
+    "antonyms": [
+     {
+      "word": "מָהִיר",
+      "note": "fast"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. It is built on the adverb אַט “slowly, gently” (Wiktionary: אַט, לְאַט) with the adjective ending ־ִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Biblical אַט means “gently”: David asks his men “לְאַט לִי לַנַּעַר לְאַבְשָׁלוֹם” — “deal gently, for my sake, with the young man Absalom” (2 Samuel 18:5)."
+    ],
+    "pitfalls": [
+     "The masculine plural has two yods: אִטִּיִּים (also written and said אִטִּים); the feminine ends in ־ִית: אִטִּית.",
+     "“Slowly” is the adverb לְאַט, not *אִטִּי."
+    ],
+    "subtleties": [
+     "Adjectives in ־ִי take ־ִית in the feminine, like יִשְׂרְאֵלִי / יִשְׂרְאֵלִית."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

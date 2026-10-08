@@ -1,0 +1,332 @@
+{
+ "function": "fn.question.wh",
+ "status": "realized",
+ "summary": "A Hebrew question with a question word is the statement with the question word put first: הַנֶּהָג פֹּה “the driver is here” → אֵיפֹה הַנֶּהָג? “where is the driver?”. There is no helper verb like English “do” and, in the present, no “is / are” at all: מָה אַתָּה רוֹצֶה? “what (do) you want?”, מִי הִיא? “who (is) she?”. The question words: מָה what, מִי who, אֵיפֹה where (לְאָן where to, מֵאֵיפֹה where from), מָתַי when, אֵיךְ how, לָמָּה why (everyday) and מַדּוּעַ why (formal), כַּמָּה how many / how much (with a plural noun), אֵיזֶה / אֵיזוֹ / אֵילוּ which (agreeing with the noun, which follows it), and the two-word שֶׁל מִי whose. A preposition always goes in front of the question word, never to the end of the sentence: עִם מִי? “who with?”, מֵאֵיפֹה? “where from?”, לְמִי? “to whom?”. In speech the question word may also stay at the end as an echo (הַתִּיק שֶׁל מִי?), but the normal place is first.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question word",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "מָה",
+     "what",
+     "מָה אַתָּה רוֹצֶה? — What do you (m.) want?"
+    ],
+    [
+     "מִי",
+     "who",
+     "מִי הָרוֹפֵא? — Who is the doctor?"
+    ],
+    [
+     "אֵיפֹה",
+     "where",
+     "אֵיפֹה הַנֶּהָג? — Where is the driver?"
+    ],
+    [
+     "מָתַי",
+     "when",
+     "מָתַי אֲרוּחַת הָעֶרֶב? — When is dinner?"
+    ],
+    [
+     "אֵיךְ",
+     "how",
+     "אֵיךְ הַמָּרָק? — How is the soup?"
+    ],
+    [
+     "לָמָּה · מַדּוּעַ",
+     "why (everyday · formal)",
+     "לָמָּה אַתָּה לֹא אוֹכֵל? — Why aren’t you eating?"
+    ],
+    [
+     "כַּמָּה",
+     "how many, how much (+ plural noun)",
+     "כַּמָּה יְלָדִים יֵשׁ לָהּ? — How many children does she have?"
+    ],
+    [
+     "אֵיזֶה · אֵיזוֹ · אֵילוּ",
+     "which (m. · f. · plural)",
+     "אֵיזוֹ כּוֹס שֶׁלְּךָ? — Which glass is yours?"
+    ],
+    [
+     "שֶׁל מִי",
+     "whose",
+     "שֶׁל מִי הַתִּיק הַזֶּה? — Whose bag is this?"
+    ]
+   ],
+   "caption": "The question words of lesson 10 — each goes first in its question."
+  },
+  {
+   "t": "table",
+   "head": [
+    "with a preposition",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "עִם מִי?",
+     "with whom? (who … with?)"
+    ],
+    [
+     "לְמִי?",
+     "to whom? for whom?"
+    ],
+    [
+     "שֶׁל מִי?",
+     "whose? (of whom?)"
+    ],
+    [
+     "מֵאֵיפֹה?",
+     "where from?"
+    ],
+    [
+     "לְאָן?",
+     "where to?"
+    ],
+    [
+     "בִּשְׁבִיל מָה?",
+     "what for?"
+    ],
+    [
+     "עַל מָה?",
+     "about what?"
+    ],
+    [
+     "בְּאֵיזֶה רְחוֹב?",
+     "in which street?"
+    ]
+   ],
+   "caption": "The preposition comes first — Hebrew never leaves it at the end, as English does (“Who is it for?”)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Question word first — then the statement",
+   "text": "Take the statement, put the question word in front, and change nothing else: הִיא רוֹצָה קָפֶה → מָה הִיא רוֹצָה? No “do”, no inversion, and no “is” in the present."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "“Which” agrees with the noun",
+   "text": "אֵיזֶה סֵפֶר (m.), אֵיזוֹ כּוֹס (f.), אֵילוּ סְפָרִים (plural). In everyday speech you will hear אֵיזֶה for everything — but write אֵיזוֹ before a feminine noun."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "כַּמָּה takes a plural",
+   "text": "כַּמָּה יְלָדִים? — never *כַּמָּה יֶלֶד. (Arabic كَمْ takes a singular — the opposite.) Without a question mark, כַּמָּה סְפָרִים means “a few books”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Two words for “why”",
+   "text": "לָמָּה is what everyone says; מַדּוּעַ is formal — the news, a teacher, an official letter. Both mean exactly “why”."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "Where, where to, where from",
+   "text": "אֵיפֹה asks where something is. With movement: לְאָן? “where to?” and מֵאֵיפֹה? “where from?” — just like German Wo? Wohin? Woher? (lessons 11 and 13)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "אֵיפֹה הַנֶּהָג?",
+      "question word first; no verb “is”"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "Wo ist der Fahrer?",
+      "question word first, then the verb (V2)"
+     ]
+    },
+    {
+     "title": "Chinese · Turkish",
+     "points": [
+      "司机在哪儿？ · Şoför nerede?",
+      "the question word stays where the answer would be"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "Greek, Russian and German also put the question word first (Πού είναι ο οδηγός; Где водитель? Wo ist der Fahrer?) — Hebrew is like Russian here: no verb “is” at all. Turkish keeps the question word in place (Şoför nerede?); Hebrew does not."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you ask",
+   "questions": [
+    "What do I want to know: a thing, a person, a place, a time, a manner, a reason, a number, a choice, an owner?",
+    "Is there a preposition? Put it before the question word.",
+    "“Which” — is the noun masculine, feminine or plural?",
+    "Is it everyday speech (לָמָּה) or formal (מַדּוּעַ)?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What am I asking about? a thing → מָה; a person → מִי; a place → אֵיפֹה (where to → לְאָן, where from → מֵאֵיפֹה); a time → מָתַי; a manner → אֵיךְ; a reason → לָמָּה (formal מַדּוּעַ); a number or amount → כַּמָּה; a choice → אֵיזֶה / אֵיזוֹ / אֵילוּ; an owner → שֶׁל מִי.",
+   "Does a preposition belong to the question word (with, to, from, for, about)? → put it in front: עִם מִי, לְמִי, מֵאֵיפֹה.",
+   "Is it “which + noun”? → אֵיזֶה before a masculine noun, אֵיזוֹ before a feminine one, אֵילוּ before a plural.",
+   "Is it “how many”? → כַּמָּה + plural noun.",
+   "Did I add “is / are” or “do”? → take it out: Hebrew has neither in a present question.",
+   "Is the rest in statement order? → it should be: מָה אַתָּה רוֹצֶה?"
+  ],
+  "steps": [
+   "Start from the statement.",
+   "Choose the question word (with its preposition).",
+   "Put it first; keep the rest; end with “?”."
+  ]
+ },
+ "traps": [
+  "No “do” and no “is”: “Where is the driver?” = אֵיפֹה הַנֶּהָג?",
+  "אֵיפֹה is “where (at)”; “where to” is לְאָן and “where from” is מֵאֵיפֹה.",
+  "אֵיזֶה / אֵיזוֹ / אֵילוּ agree with the noun after them.",
+  "כַּמָּה + plural noun: כַּמָּה סְפָרִים?",
+  "“What is your name?” is asked with “how”: אֵיךְ קוֹרְאִים לְךָ?",
+  "A preposition cannot be left at the end: “Who are you with?” = עִם מִי אַתָּה?",
+  "מַדּוּעַ is correct but formal; in conversation say לָמָּה."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:ma",
+   "he:mi",
+   "he:eifo",
+   "he:matay",
+   "he:eich",
+   "he:lama",
+   "he:madua",
+   "he:kama",
+   "he:eize",
+   "he:shel-mi",
+   "he:lean"
+  ]
+ },
+ "paradigmCells": [
+  "DET;SG;MASC",
+  "DET;SG;FEM",
+  "DET;PL"
+ ],
+ "needs": {
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "class": "int",
+   "cells": [
+    "DET;SG;MASC",
+    "DET;SG;FEM",
+    "DET;PL"
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“Where is the doctor?” in Hebrew:",
+   "options": [
+    "אֵיפֹה הָרוֹפֵא?",
+    "אֵיפֹה הוּא הָרוֹפֵא הוּא?",
+    "הָרוֹפֵא אֵיפֹה הוּא עוֹשֶׂה?"
+   ],
+   "answer": "אֵיפֹה הָרוֹפֵא?",
+   "why": "The question word goes first and there is no verb “is” in the present."
+  },
+  {
+   "q": "Which word asks about a reason in a formal letter?",
+   "options": [
+    "מַדּוּעַ",
+    "מָתַי",
+    "אֵיךְ"
+   ],
+   "answer": "מַדּוּעַ",
+   "why": "מַדּוּעַ is the formal “why”; לָמָּה is the everyday one. מָתַי is “when”, אֵיךְ “how”."
+  },
+  {
+   "q": "Complete: ___ כּוֹס שֶׁלְּךָ? (“Which glass is yours?”)",
+   "options": [
+    "אֵיזוֹ",
+    "אֵיזֶה",
+    "אֵילוּ"
+   ],
+   "answer": "אֵיזוֹ",
+   "why": "כּוֹס is feminine, so “which” is אֵיזוֹ; אֵיזֶה is masculine and אֵילוּ plural."
+  },
+  {
+   "q": "“Who are you going with?” — where does עִם go?",
+   "options": [
+    "first: עִם מִי …?",
+    "last: מִי … עִם?",
+    "it is left out"
+   ],
+   "answer": "first: עִם מִי …?",
+   "why": "A Hebrew preposition always stands before its word — also before a question word."
+  },
+  {
+   "q": "כַּמָּה ___ יֵשׁ לָהּ? (“How many children does she have?”)",
+   "options": [
+    "יְלָדִים",
+    "יֶלֶד",
+    "הַיֶּלֶד"
+   ],
+   "answer": "יְלָדִים",
+   "why": "After כַּמָּה the noun is plural and has no article."
+  },
+  {
+   "q": "How do you ask “What is your name?” (to a man)?",
+   "options": [
+    "אֵיךְ קוֹרְאִים לְךָ?",
+    "מָה קוֹרְאִים לְךָ?",
+    "מִי אַתָּה שֵׁם?"
+   ],
+   "answer": "אֵיךְ קוֹרְאִים לְךָ?",
+   "why": "Literally “how do they call you?” — with אֵיךְ, as in Greek Πώς σε λένε; and German Wie heißt du?"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.question.wh",
+   "note": "Arabic also puts the question word first, and several are the same words: מָתַי = مَتَى, כַּמָּה ≈ كَمْ, מָה = مَا. But Arabic كَمْ takes a singular noun (كَمْ وَلَدًا) where Hebrew takes a plural."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.wh",
+   "note": "German W-questions also start with the question word, but the verb must come second (Wo ist …?); Hebrew has no verb at all in a present question."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.wh",
+   "note": "Chinese leaves the question word where the answer goes (你去哪儿？); Hebrew moves it to the front."
+  }
+ ]
+}

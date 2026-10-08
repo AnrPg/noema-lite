@@ -1,0 +1,429 @@
+{
+ "function": "fn.prep.time",
+ "status": "realized",
+ "summary": "One small prefix does the work of English at / on / in for time: בְּ. At an hour: בְּשָׁעָה חָמֵשׁ “at five o’clock” (also just בְּחָמֵשׁ); on a day: בְּיוֹם שֵׁנִי; in a month: בְּמַאי (no article); in a season: בַּקַּיִץ, בַּחֹרֶף (with the article). The other prepositions of time are separate words: לִפְנֵי “before” (and “ago”: לִפְנֵי שָׁבוּעַ), אַחֲרֵי “after”, עַד “until” (מִ… עַד … “from … to …”), מֵאָז “since” (or מִ with a time word: מֵהַבֹּקֶר) and בְּמֶשֶׁךְ “during, for”. As always in Hebrew the noun after them does not change. “Since” goes with the present when the state still lasts — הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”, exactly like German seit. A length of time often needs no preposition at all (אֲנִי מְחַכֶּה שָׁעָה), and two days, weeks, months, years or hours have a dual: יוֹמַיִם, שְׁבוּעַיִם, חׇדְשַׁיִם, שְׁנָתַיִם, שְׁעָתַיִם. The clock: הַשָּׁעָה + a feminine number (because שָׁעָה is feminine) — הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, וָחֵצִי “half past”, וָרֶבַע “quarter past”, רֶבַע לְ… “quarter to”. The date: the day (masculine number, for יוֹם) + בְּ + the month — עֶשְׂרִים בְּמַאי “the 20th of May”. The months are the German ones (יָנוּאָר … דֵּצֶמְבֶּר); next to them lives the Hebrew lunar calendar (תִּשְׁרֵי … אֱלוּל), which fixes the holidays.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "Hebrew",
+    "example"
+   ],
+   "rows": [
+    [
+     "at (an hour)",
+     "בְּשָׁעָה + f. number",
+     "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ."
+    ],
+    [
+     "on (a day)",
+     "בְּ + day",
+     "בְּיוֹם שֵׁנִי · בְּשַׁבָּת"
+    ],
+    [
+     "in (a month)",
+     "בְּ + month (no article)",
+     "בְּמַאי · בְּיָנוּאָר"
+    ],
+    [
+     "in (a season)",
+     "בְּ + article",
+     "בָּאָבִיב · בַּקַּיִץ · בַּסְּתָו · בַּחֹרֶף"
+    ],
+    [
+     "before · ago",
+     "לִפְנֵי",
+     "לִפְנֵי אֲרוּחַת הָעֶרֶב · לִפְנֵי שָׁבוּעַ"
+    ],
+    [
+     "after",
+     "אַחֲרֵי",
+     "אַחֲרֵי הָעֲבוֹדָה"
+    ],
+    [
+     "until · from … to …",
+     "עַד · מִ… עַד …",
+     "עַד דֵּצֶמְבֶּר · מִשְּׁמוֹנֶה עַד חָמֵשׁ"
+    ],
+    [
+     "since",
+     "מֵאָז · מִ…",
+     "מֵאָז יָנוּאָר · מֵהַבֹּקֶר"
+    ],
+    [
+     "during, for",
+     "בְּמֶשֶׁךְ (or nothing)",
+     "בְּמֶשֶׁךְ הַקַּיִץ · מְחַכֶּה שָׁעָה"
+    ]
+   ],
+   "caption": "Greek στις πέντε, τη Δευτέρα, τον Μάιο — Hebrew: always בְּ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "the clock",
+    "Hebrew"
+   ],
+   "rows": [
+    [
+     "It is three o’clock.",
+     "הַשָּׁעָה שָׁלוֹשׁ."
+    ],
+    [
+     "at one / two / five",
+     "בְּשָׁעָה אַחַת / שְׁתַּיִם / חָמֵשׁ"
+    ],
+    [
+     "half past three",
+     "שָׁלוֹשׁ וָחֵצִי"
+    ],
+    [
+     "quarter past three",
+     "שָׁלוֹשׁ וָרֶבַע"
+    ],
+    [
+     "quarter to four",
+     "רֶבַע לְאַרְבַּע"
+    ],
+    [
+     "twelve noon",
+     "שְׁתֵּים עֶשְׂרֵה בַּצָּהֳרַיִם"
+    ],
+    [
+     "What time is it?",
+     "מָה הַשָּׁעָה?"
+    ]
+   ],
+   "caption": "Feminine numbers, because שָׁעָה is feminine: שָׁלוֹשׁ, not שְׁלוֹשָׁה."
+  },
+  {
+   "t": "table",
+   "head": [
+    "one",
+    "two (dual)",
+    "three and more"
+   ],
+   "rows": [
+    [
+     "יוֹם",
+     "יוֹמַיִם",
+     "שְׁלוֹשָׁה יָמִים"
+    ],
+    [
+     "שָׁבוּעַ",
+     "שְׁבוּעַיִם",
+     "שְׁלוֹשָׁה שָׁבוּעוֹת"
+    ],
+    [
+     "חֹדֶשׁ",
+     "חׇדְשַׁיִם",
+     "שְׁלוֹשָׁה חֳדָשִׁים"
+    ],
+    [
+     "שָׁנָה",
+     "שְׁנָתַיִם",
+     "שָׁלוֹשׁ שָׁנִים"
+    ],
+    [
+     "שָׁעָה",
+     "שְׁעָתַיִם",
+     "שָׁלוֹשׁ שָׁעוֹת"
+    ]
+   ],
+   "caption": "Two units of time = one word, the dual (-ַיִם)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Gregorian",
+    "Hebrew calendar (about)",
+    "holiday"
+   ],
+   "rows": [
+    [
+     "September – October",
+     "תִּשְׁרֵי",
+     "רֹאשׁ הַשָּׁנָה, יוֹם כִּפּוּר, סֻכּוֹת"
+    ],
+    [
+     "October – November",
+     "חֶשְׁוָן",
+     ""
+    ],
+    [
+     "November – December",
+     "כִּסְלֵו",
+     "חֲנֻכָּה (begins 25 Kislev)"
+    ],
+    [
+     "December – January",
+     "טֵבֵת",
+     ""
+    ],
+    [
+     "January – February",
+     "שְׁבָט",
+     "טוּ בִּשְׁבָט"
+    ],
+    [
+     "February – March",
+     "אֲדָר",
+     "פּוּרִים"
+    ],
+    [
+     "March – April",
+     "נִיסָן",
+     "פֶּסַח"
+    ],
+    [
+     "April – May",
+     "אִיָּר",
+     "יוֹם הָעַצְמָאוּת"
+    ],
+    [
+     "May – June",
+     "סִיוָן",
+     "שָׁבוּעוֹת"
+    ],
+    [
+     "June – July",
+     "תַּמּוּז",
+     ""
+    ],
+    [
+     "July – August",
+     "אָב",
+     "תִּשְׁעָה בְּאָב"
+    ],
+    [
+     "August – September",
+     "אֱלוּל",
+     ""
+    ]
+   ],
+   "caption": "The Hebrew months follow the moon, so they move against the Gregorian ones; a leap year adds a second Adar (אֲדָר א׳, אֲדָר ב׳). Several are the Levantine Arabic and Turkish month names: Nisan, Temmuz, Eylül, Şubat."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Months without, seasons with the article",
+   "text": "בְּמַאי, בְּיָנוּאָר (a month is like a name) — but בַּקַּיִץ, בַּחֹרֶף, בָּאָבִיב, בַּסְּתָו (בְּ + הַ fused)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "“Since” + present",
+   "text": "הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”; מֵהַבֹּקֶר אֲנִי מְחַכֶּה “I have been waiting since the morning”. Hebrew uses the present, like German seit — not a perfect like English."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "לִפְנֵי: before and ago",
+   "text": "לִפְנֵי הָאֲרוּחָה “before the meal”, but לִפְנֵי שָׁבוּעַ “a week ago” — the same word (and in lesson 12, “in front of”). German vor does all three too."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "Dates",
+   "text": "Day + בְּ + month, with masculine numbers (the day is a יוֹם): עֶשְׂרִים בְּמַאי, אֶחָד בְּיָנוּאָר. Hebrew-calendar dates are written with letters: ט״ו בִּשְׁבָט (15 Shevat), כ״ט בְּנוֹבֶמְבֶּר."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "German: um fünf, am Montag, im Mai, im Sommer, vor / nach, bis, seit (+ present!), während. Hebrew: בְּ for the first four, then לִפְנֵי, אַחֲרֵי, עַד, מֵאָז (+ present!), בְּמֶשֶׁךְ — and no cases after any of them. The month names are the German ones (Wiktionary: “from German Januar …”). Turkish -de / -den / -e kadar = בְּ / מִ / עַד."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "A point (hour, day, month, season) → בְּ; season with the article.",
+    "Before / after / until / since / during → the separate word.",
+    "Telling the time → הַשָּׁעָה + feminine number.",
+    "Two of a unit → the dual (שְׁבוּעַיִם)."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a point in time? → בְּ: an hour בְּשָׁעָה חָמֵשׁ, a day בְּיוֹם שֵׁנִי, a month בְּמַאי (no article), a season בַּקַּיִץ (with the article).",
+   "Is it before or after something? → לִפְנֵי / אַחֲרֵי + noun; “ago” → לִפְנֵי + length (לִפְנֵי שָׁבוּעַ).",
+   "Until? → עַד; from … to … → מִ… עַד ….",
+   "Since? → מֵאָז (or מִ + time word); is the state still going on? → the present.",
+   "A whole stretch? → בְּמֶשֶׁךְ, or the length alone (מְחַכֶּה שָׁעָה); two units → the dual.",
+   "The clock? → הַשָּׁעָה + feminine number (שָׁלוֹשׁ, שְׁתַּיִם, אַחַת).",
+   "A date? → masculine number + בְּ + month: עֶשְׂרִים בְּמַאי."
+  ],
+  "steps": [
+   "Decide: a point, a limit (before / after / until / since) or a stretch.",
+   "Choose בְּ or the separate word.",
+   "For the clock and the date pick the right gender of the number."
+  ]
+ },
+ "traps": [
+  "*בַּמַּאי → בְּמַאי (no article with months).",
+  "*בְּקַיִץ → בַּקַּיִץ (seasons take the article).",
+  "*הַשָּׁעָה שְׁלוֹשָׁה → הַשָּׁעָה שָׁלוֹשׁ (feminine numbers for the clock).",
+  "*שְׁנֵי שָׁבוּעוֹת → שְׁבוּעַיִם (two weeks = the dual).",
+  "מֵאָז + present for what still lasts: הוּא פֹּה מֵאָז יָנוּאָר.",
+  "לִפְנֵי שָׁבוּעַ = “a week ago”, not “before a week”.",
+  "After בְּ a בגדכפ״ת letter loses its dot: בְּדֵצֶמְבֶּר (bedetsember)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:lifnei",
+   "he:acharei",
+   "he:ad",
+   "he:meaz",
+   "he:bemeshech",
+   "he:be",
+   "he:min",
+   "he:shaa",
+   "he:taarich",
+   "he:daka",
+   "he:shavua",
+   "he:chodesh",
+   "he:shana"
+  ]
+ },
+ "paradigmCells": [
+  "N;DU;INDF"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "lemmas": [
+    "he:yom",
+    "he:shavua",
+    "he:chodesh",
+    "he:shana",
+    "he:shaa"
+   ],
+   "cells": [
+    "N;DU;INDF",
+    "N;PL;INDF"
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“In May”:",
+   "options": [
+    "בְּמַאי",
+    "בַּמַּאי",
+    "בְּיוֹם מַאי"
+   ],
+   "answer": "בְּמַאי",
+   "why": "Months take בְּ without the article."
+  },
+  {
+   "q": "“In winter”:",
+   "options": [
+    "בַּחֹרֶף",
+    "בְּחֹרֶף",
+    "לַחֹרֶף"
+   ],
+   "answer": "בַּחֹרֶף",
+   "why": "Seasons take בְּ + the article: בַּחֹרֶף, בַּקַּיִץ."
+  },
+  {
+   "q": "“It is three o’clock”:",
+   "options": [
+    "הַשָּׁעָה שָׁלוֹשׁ.",
+    "הַשָּׁעָה שְׁלוֹשָׁה.",
+    "זֶה שָׁלוֹשׁ שָׁעוֹת."
+   ],
+   "answer": "הַשָּׁעָה שָׁלוֹשׁ.",
+   "why": "שָׁעָה is feminine, so the clock uses feminine numbers: שָׁלוֹשׁ."
+  },
+  {
+   "q": "“Two weeks”:",
+   "options": [
+    "שְׁבוּעַיִם",
+    "שְׁנֵי שָׁבוּעוֹת",
+    "שְׁתֵּי שָׁבוּעַ"
+   ],
+   "answer": "שְׁבוּעַיִם",
+   "why": "Two units of time form a dual: שְׁבוּעַיִם, יוֹמַיִם, שְׁנָתַיִם."
+  },
+  {
+   "q": "“He has been here since January”:",
+   "options": [
+    "הוּא פֹּה מֵאָז יָנוּאָר.",
+    "הוּא הָיָה פֹּה מֵאָז יָנוּאָר.",
+    "הוּא פֹּה עַד יָנוּאָר."
+   ],
+   "answer": "הוּא פֹּה מֵאָז יָנוּאָר.",
+   "why": "A state that still lasts takes the present after מֵאָז — like German seit."
+  },
+  {
+   "q": "לִפְנֵי שָׁבוּעַ means:",
+   "options": [
+    "a week ago",
+    "in a week",
+    "for a week"
+   ],
+   "answer": "a week ago",
+   "why": "לִפְנֵי + a length of time is “ago”."
+  },
+  {
+   "q": "“The 20th of May”:",
+   "options": [
+    "עֶשְׂרִים בְּמַאי",
+    "מַאי עֶשְׂרִים",
+    "עֶשְׂרִים שֶׁל מַאי"
+   ],
+   "answer": "עֶשְׂרִים בְּמַאי",
+   "why": "A date is the day + בְּ + the month."
+  },
+  {
+   "q": "In which Hebrew-calendar month is Passover?",
+   "options": [
+    "נִיסָן",
+    "תִּשְׁרֵי",
+    "כִּסְלֵו"
+   ],
+   "answer": "נִיסָן",
+   "why": "פֶּסַח is on 15 Nisan (March – April); Tishrei has the New Year, Kislev Hanukkah."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.time",
+   "note": "Arabic says قَبْلَ “before”, بَعْدَ “after”, حَتَّى / إِلَى “until”, مُنْذُ “since” and في for months and seasons, with the noun in the genitive; Hebrew nouns never change after a preposition."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.time",
+   "note": "German um / am / im (+ dative) = Hebrew בְּ; vor = לִפְנֵי (also “ago”), nach = אַחֲרֵי, bis = עַד, seit + present = מֵאָז + present, während = בְּמֶשֶׁךְ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.time",
+   "note": "Chinese puts time words before the verb and uses words after the noun: 吃饭以前 “before eating”, 下班以后 “after work”, 从八点到五点 “from eight to five”."
+  }
+ ]
+}

@@ -1,0 +1,6358 @@
+{
+ "sentences": [
+  {
+   "id": "de.f3.001",
+   "frame": "fr.eat",
+   "text": "Ich esse Brot.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I eat bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.002",
+   "frame": "fr.eat",
+   "text": "Wir essen Brot.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.001",
+   "gloss": "We eat bread.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.003",
+   "frame": "fr.eat",
+   "text": "Du isst Fisch.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You eat fish.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.004",
+   "frame": "fr.eat",
+   "text": "Ihr esst Fisch.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esst",
+     "l": "de:essen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.003",
+   "gloss": "You (all) eat fish.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.005",
+   "frame": "fr.eat",
+   "text": "Das Kind isst einen Apfel.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Apfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The child is eating an apple.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.006",
+   "frame": "fr.eat",
+   "text": "Die Kinder essen Äpfel.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Äpfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.005",
+   "gloss": "The children are eating apples.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.007",
+   "frame": "fr.eat",
+   "text": "Die Frau trinkt Wasser.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The woman drinks water.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.008",
+   "frame": "fr.eat",
+   "text": "Die Frauen trinken Wasser.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Frauen",
+     "l": "de:Frau",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.007",
+   "gloss": "The women drink water.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.009",
+   "frame": "fr.eat",
+   "text": "Ich trinke Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I drink coffee.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.010",
+   "frame": "fr.eat",
+   "text": "Wir trinken Kaffee.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.009",
+   "gloss": "We drink coffee.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.011",
+   "frame": "fr.eat",
+   "text": "Mein Vater kocht das Abendessen.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Abendessen",
+     "l": "de:Abendessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My father cooks dinner.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.012",
+   "frame": "fr.eat",
+   "text": "Meine Eltern kochen das Abendessen.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Abendessen",
+     "l": "de:Abendessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.011",
+   "gloss": "My parents cook dinner.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.013",
+   "frame": "fr.eat",
+   "text": "Meine Mutter kocht eine Suppe.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My mother is cooking a soup.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.014",
+   "frame": "fr.eat",
+   "text": "Meine Mutter kocht die Suppe.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.013",
+   "gloss": "My mother is cooking the soup.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f3.015",
+   "frame": "fr.eat",
+   "text": "Wir kaufen einen Fisch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We are buying a fish.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.016",
+   "frame": "fr.eat",
+   "text": "Wir kaufen den Fisch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.015",
+   "gloss": "We are buying the fish.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f3.017",
+   "frame": "fr.eat",
+   "text": "Du kaufst ein Brot.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You are buying a loaf of bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.018",
+   "frame": "fr.eat",
+   "text": "Du kaufst das Brot.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.017",
+   "gloss": "You are buying the bread.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f3.019",
+   "frame": "fr.eat",
+   "text": "Ich trinke einen Saft.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I’m having a juice.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.020",
+   "frame": "fr.eat",
+   "text": "Ich trinke den Saft.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.019",
+   "gloss": "I’m drinking the juice.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f3.021",
+   "frame": "fr.eat",
+   "text": "Er kocht ein Ei.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Ei",
+     "l": "de:Ei",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He is boiling an egg.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.022",
+   "frame": "fr.eat",
+   "text": "Er kocht das Ei.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Ei",
+     "l": "de:Ei",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.021",
+   "gloss": "He is boiling the egg.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f3.023",
+   "frame": "fr.want",
+   "text": "Ich will Wasser.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I want water.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.024",
+   "frame": "fr.want",
+   "text": "Ich will Wasser trinken.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I want to drink water.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.025",
+   "frame": "fr.want",
+   "text": "Du willst Reis.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You want rice.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.026",
+   "frame": "fr.want",
+   "text": "Die Kinder wollen Saft.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The children want juice.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.027",
+   "frame": "fr.want",
+   "text": "Er will ein bisschen Salat.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein bisschen",
+     "l": "de:ein_bisschen"
+    },
+    {
+     "t": "Salat",
+     "l": "de:Salat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He wants a little salad.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.028",
+   "frame": "fr.want",
+   "text": "Ich mag Käse.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I like cheese.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.029",
+   "frame": "fr.want",
+   "text": "Wir mögen Obst.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We like fruit.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.030",
+   "frame": "fr.want",
+   "text": "Magst du Fisch?",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like fish?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.031",
+   "frame": "fr.want",
+   "text": "Ich möchte einen Tee, bitte.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "möchte",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I would like a tea, please.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.032",
+   "frame": "fr.want",
+   "text": "Möchten Sie einen Kaffee?",
+   "tokens": [
+    {
+     "t": "Möchten",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Would you like a coffee? (polite)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.033",
+   "frame": "fr.eat",
+   "text": "Mein Bruder trinkt Bier.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My brother drinks beer.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.034",
+   "frame": "fr.eat",
+   "text": "Meine Brüder trinken Bier.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Brüder",
+     "l": "de:Bruder",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.033",
+   "gloss": "My brothers drink beer.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.035",
+   "frame": "fr.eat",
+   "text": "Meine Oma trinkt Wein.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma drinks wine.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.036",
+   "frame": "fr.eat",
+   "text": "Das Kind trinkt viel Milch.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "viel",
+     "l": "de:viel",
+     "f": "DET;SG"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The child drinks a lot of milk.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.037",
+   "frame": "fr.eat",
+   "text": "Wir kaufen Zucker und Salz.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Zucker",
+     "l": "de:Zucker",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Salz",
+     "l": "de:Salz",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We are buying sugar and salt.",
+   "alts": [
+    "Wir kaufen Salz und Zucker."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.038",
+   "frame": "fr.eat",
+   "text": "Ich koche Reis und Hähnchen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "koche",
+     "l": "de:kochen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Hähnchen",
+     "l": "de:Hähnchen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I’m cooking rice and chicken.",
+   "alts": [
+    "Ich koche Hähnchen und Reis."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.039",
+   "frame": "fr.adj.pred",
+   "text": "Das Frühstück ist gut.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Frühstück",
+     "l": "de:Frühstück",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The breakfast is good.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.040",
+   "frame": "fr.eat",
+   "text": "Mein Opa kocht das Mittagessen.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Mittagessen",
+     "l": "de:Mittagessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa cooks lunch.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.041",
+   "frame": "fr.eat",
+   "text": "Du trinkst Tee.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You drink tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.042",
+   "frame": "fr.eat",
+   "text": "Sie trinken Tee.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.041",
+   "gloss": "You drink tea. (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f3.043",
+   "frame": "fr.eat",
+   "text": "Er isst Fleisch.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He eats meat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.044",
+   "frame": "fr.have",
+   "text": "Wir haben Brot, Käse und Eier.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Eier",
+     "l": "de:Ei",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We have bread, cheese and eggs.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.045",
+   "frame": "fr.eat",
+   "text": "Ich kaufe Obst und Milch.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I’m buying fruit and milk.",
+   "alts": [
+    "Ich kaufe Milch und Obst."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.046",
+   "frame": "fr.want",
+   "text": "Er mag den Salat.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Salat",
+     "l": "de:Salat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He likes the salad.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.047",
+   "frame": "fr.want",
+   "text": "Ich mag dich.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "dich",
+     "l": "de:du",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I like you.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.048",
+   "frame": "fr.want",
+   "text": "Magst du ihn?",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ihn",
+     "l": "de:er",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like him?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.049",
+   "frame": "fr.eat",
+   "text": "Die Frau kauft Wein und Bier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The woman is buying wine and beer.",
+   "alts": [
+    "Die Frau kauft Bier und Wein."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.050",
+   "frame": "fr.eat",
+   "text": "Der Junge isst Suppe.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The boy is eating soup.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.051",
+   "frame": "fr.want",
+   "text": "Wir wollen Fisch essen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We want to eat fish.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.052",
+   "frame": "fr.want",
+   "text": "Möchtest du Wasser?",
+   "tokens": [
+    {
+     "t": "Möchtest",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Would you like some water?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.053",
+   "frame": "fr.this.is",
+   "text": "Das ist Salz.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Salz",
+     "l": "de:Salz",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "That is salt.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.054",
+   "frame": "fr.eat",
+   "text": "Wir trinken Tee und essen Brot.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We drink tea and eat bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.055",
+   "frame": "fr.want",
+   "text": "Ich mag den Käse.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I like the cheese.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.056",
+   "frame": "fr.have",
+   "text": "Wir haben Brot.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We have bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.057",
+   "frame": "fr.eat",
+   "text": "Die Kinder trinken Milch.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The children drink milk.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.058",
+   "frame": "fr.want",
+   "text": "Die Kinder mögen Obst.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "The children like fruit.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.059",
+   "frame": "fr.have",
+   "text": "Ihr habt Brot.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habt",
+     "l": "de:haben",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) have bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.060",
+   "frame": "fr.adj.pred",
+   "text": "Der Tee ist gut.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The tea is good.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.061",
+   "frame": "fr.thing.here",
+   "text": "Der Kaffee ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The coffee is here.",
+   "alts": [
+    "Hier ist der Kaffee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.062",
+   "frame": "fr.thing.here",
+   "text": "Hier ist Wasser.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Here is water.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.063",
+   "frame": "fr.eat",
+   "text": "Sie kauft Reis.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "She is buying rice.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.064",
+   "frame": "fr.want",
+   "text": "Ich will einen Apfel.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Apfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I want an apple.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.065",
+   "frame": "fr.want",
+   "text": "Er will einen Apfel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Apfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He wants an apple.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.066",
+   "frame": "fr.want",
+   "text": "Sie wollen Äpfel.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Äpfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": "de.f3.065",
+   "gloss": "They want apples.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f3.067",
+   "frame": "fr.eat",
+   "text": "Mein Bruder kocht.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "My brother is cooking.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.068",
+   "frame": "fr.want",
+   "text": "Meine Tochter mag Eier.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Eier",
+     "l": "de:Ei",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My daughter likes eggs.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.069",
+   "frame": "fr.eat",
+   "text": "Ich trinke keinen Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.009",
+   "gloss": "I don’t drink coffee.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.070",
+   "frame": "fr.eat",
+   "text": "Er isst kein Fleisch.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.043",
+   "gloss": "He doesn’t eat meat.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.071",
+   "frame": "fr.want",
+   "text": "Ich mag den Käse nicht.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.055",
+   "gloss": "I don’t like the cheese.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.072",
+   "frame": "fr.eat",
+   "text": "Wir kaufen den Fisch nicht.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.016",
+   "gloss": "We aren’t buying the fish.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.073",
+   "frame": "fr.this.is",
+   "text": "Das ist kein Salz.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Salz",
+     "l": "de:Salz",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.053",
+   "gloss": "That isn’t salt.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.074",
+   "frame": "fr.adj.pred",
+   "text": "Das Frühstück ist nicht gut.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Frühstück",
+     "l": "de:Frühstück",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.039",
+   "gloss": "The breakfast isn’t good.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.075",
+   "frame": "fr.have",
+   "text": "Wir haben kein Brot.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.056",
+   "gloss": "We have no bread.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.076",
+   "frame": "fr.eat",
+   "text": "Die Kinder trinken keine Milch.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.057",
+   "gloss": "The children don’t drink milk.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.077",
+   "frame": "fr.be.person",
+   "text": "Der Mann ist kein Lehrer.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f1.030",
+   "gloss": "The man isn’t a teacher.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.078",
+   "frame": "fr.poss",
+   "text": "Das ist nicht mein Bruder.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f2.096",
+   "gloss": "That isn’t my brother.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.079",
+   "frame": "fr.eat",
+   "text": "Meine Oma trinkt keinen Wein.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.035",
+   "gloss": "My grandma doesn’t drink wine.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.080",
+   "frame": "fr.eat",
+   "text": "Meine Oma trinkt nie Wein.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nie",
+     "l": "de:nie"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma never drinks wine.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.081",
+   "frame": "fr.eat",
+   "text": "Ich esse nichts.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nichts",
+     "l": "de:nichts",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I’m not eating anything.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.082",
+   "frame": "fr.eat",
+   "text": "Er kauft nichts.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nichts",
+     "l": "de:nichts",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "He isn’t buying anything.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.083",
+   "frame": "fr.eat",
+   "text": "Niemand trinkt Bier.",
+   "tokens": [
+    {
+     "t": "Niemand",
+     "l": "de:niemand",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "Nobody drinks beer.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.084",
+   "frame": "fr.be.where",
+   "text": "Niemand ist hier.",
+   "tokens": [
+    {
+     "t": "Niemand",
+     "l": "de:niemand",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "Nobody is here.",
+   "alts": [
+    "Hier ist niemand."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.085",
+   "frame": "fr.want",
+   "text": "Er mag niemanden.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "niemanden",
+     "l": "de:niemand",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "He doesn’t like anybody.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.086",
+   "frame": "fr.eat",
+   "text": "Ich trinke weder Tee noch Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "weder",
+     "l": "de:weder"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "noch",
+     "l": "de:noch"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I drink neither tea nor coffee.",
+   "alts": [
+    "Ich trinke weder Kaffee noch Tee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.087",
+   "frame": "fr.eat",
+   "text": "Er isst weder Fleisch noch Fisch.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "weder",
+     "l": "de:weder"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "noch",
+     "l": "de:noch"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "He eats neither meat nor fish.",
+   "alts": [
+    "Er isst weder Fisch noch Fleisch."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.088",
+   "frame": "fr.have",
+   "text": "Wir haben weder Zucker noch Milch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "weder",
+     "l": "de:weder"
+    },
+    {
+     "t": "Zucker",
+     "l": "de:Zucker",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "noch",
+     "l": "de:noch"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "We have neither sugar nor milk.",
+   "alts": [
+    "Wir haben weder Milch noch Zucker."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.089",
+   "frame": "fr.eat",
+   "text": "Ich esse niemals Fisch.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "niemals",
+     "l": "de:niemals"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I never eat fish.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.090",
+   "frame": "fr.eat",
+   "text": "Mein Bruder kocht nie.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nie",
+     "l": "de:nie"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "My brother never cooks.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.091",
+   "frame": "fr.eat",
+   "text": "Mein Bruder kocht nicht.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.067",
+   "gloss": "My brother isn’t cooking.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.092",
+   "frame": "fr.thing.here",
+   "text": "Der Kaffee ist nicht hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.061",
+   "gloss": "The coffee isn’t here.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.093",
+   "frame": "fr.thing.here",
+   "text": "Hier ist kein Wasser.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.062",
+   "gloss": "There’s no water here.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.094",
+   "frame": "fr.want",
+   "text": "Ich will nicht kochen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I don’t want to cook.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.095",
+   "frame": "fr.want",
+   "text": "Nein, danke. Ich will keinen Tee.",
+   "tokens": [
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "No, thank you. I don’t want any tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.096",
+   "frame": "fr.want",
+   "text": "Die Kinder mögen keinen Salat.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Salat",
+     "l": "de:Salat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "The children don’t like salad.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.097",
+   "frame": "fr.want",
+   "text": "Meine Tochter mag keine Eier.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Eier",
+     "l": "de:Ei",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.068",
+   "gloss": "My daughter doesn’t like eggs.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.098",
+   "frame": "fr.eat",
+   "text": "Sie kauft keinen Reis.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.063",
+   "gloss": "She isn’t buying any rice.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.099",
+   "frame": "fr.adj.pred",
+   "text": "Der Tee ist nicht gut.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.060",
+   "gloss": "The tea isn’t good.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.100",
+   "frame": "fr.want",
+   "text": "Ich will keinen Apfel.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "will",
+     "l": "de:wollen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Apfel",
+     "l": "de:Apfel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f3.064",
+   "gloss": "I don’t want an apple.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f3.101",
+   "frame": "fr.want",
+   "text": "Ich mag Käse nicht.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I don’t like cheese.",
+   "alts": [
+    "Ich mag keinen Käse."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.102",
+   "frame": "fr.eat",
+   "text": "Niemand kocht das Abendessen.",
+   "tokens": [
+    {
+     "t": "Niemand",
+     "l": "de:niemand",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Abendessen",
+     "l": "de:Abendessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "Nobody is cooking dinner.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.103",
+   "frame": "fr.eat",
+   "text": "Trinkst du Tee?",
+   "tokens": [
+    {
+     "t": "Trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.041",
+   "gloss": "Do you drink tea?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.104",
+   "frame": "fr.eat",
+   "text": "Isst er Fleisch?",
+   "tokens": [
+    {
+     "t": "Isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.043",
+   "gloss": "Does he eat meat?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.105",
+   "frame": "fr.want",
+   "text": "Willst du Reis?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.025",
+   "gloss": "Do you want rice?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.106",
+   "frame": "fr.eat",
+   "text": "Trinken Sie Tee?",
+   "tokens": [
+    {
+     "t": "Trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.042",
+   "gloss": "Do you drink tea? (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.107",
+   "frame": "fr.this.is",
+   "text": "Ist das Salz?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Salz",
+     "l": "de:Salz",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.053",
+   "gloss": "Is that salt?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.108",
+   "frame": "fr.want",
+   "text": "Mögen die Kinder Obst?",
+   "tokens": [
+    {
+     "t": "Mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.058",
+   "gloss": "Do the children like fruit?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.109",
+   "frame": "fr.have",
+   "text": "Habt ihr Brot?",
+   "tokens": [
+    {
+     "t": "Habt",
+     "l": "de:haben",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.059",
+   "gloss": "Do you (all) have bread?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.110",
+   "frame": "fr.want",
+   "text": "Wollen die Kinder Saft?",
+   "tokens": [
+    {
+     "t": "Wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.026",
+   "gloss": "Do the children want juice?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.111",
+   "frame": "fr.adj.pred",
+   "text": "Ist der Tee gut?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.060",
+   "gloss": "Is the tea good?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.112",
+   "frame": "fr.alt.q",
+   "text": "Willst du Tee oder Kaffee?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want tea or coffee?",
+   "alts": [
+    "Willst du Kaffee oder Tee?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.113",
+   "frame": "fr.alt.q",
+   "text": "Trinkst du Wein oder Bier?",
+   "tokens": [
+    {
+     "t": "Trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you drink wine or beer?",
+   "alts": [
+    "Trinkst du Bier oder Wein?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.114",
+   "frame": "fr.alt.q",
+   "text": "Isst du Fisch oder Fleisch?",
+   "tokens": [
+    {
+     "t": "Isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you eat fish or meat?",
+   "alts": [
+    "Isst du Fleisch oder Fisch?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.115",
+   "frame": "fr.alt.q",
+   "text": "Möchten Sie Reis oder Brot?",
+   "tokens": [
+    {
+     "t": "Möchten",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Would you like rice or bread? (polite)",
+   "alts": [
+    "Möchten Sie Brot oder Reis?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.116",
+   "frame": "fr.alt.q",
+   "text": "Ist das Salz oder Zucker?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Salz",
+     "l": "de:Salz",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Zucker",
+     "l": "de:Zucker",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is that salt or sugar?",
+   "alts": [
+    "Ist das Zucker oder Salz?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.117",
+   "frame": "fr.eat",
+   "text": "Vielleicht trinke ich Tee.",
+   "tokens": [
+    {
+     "t": "Vielleicht",
+     "l": "de:vielleicht"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Maybe I’ll drink tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.118",
+   "frame": "fr.eat",
+   "text": "Kocht dein Bruder? Vielleicht.",
+   "tokens": [
+    {
+     "t": "Kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dein",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Vielleicht",
+     "l": "de:vielleicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is your brother cooking? – Maybe.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.119",
+   "frame": "fr.adj.pred",
+   "text": "Das Brot ist wirklich gut.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "wirklich",
+     "l": "de:wirklich"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The bread is really good.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.120",
+   "frame": "fr.adj.pred",
+   "text": "Ist das Brot wirklich gut?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wirklich",
+     "l": "de:wirklich"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.119",
+   "gloss": "Is the bread really good?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.121",
+   "frame": "fr.want",
+   "text": "Magst du Obst? Ja, natürlich!",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Ja",
+     "l": "de:ja"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "natürlich",
+     "l": "de:natürlich"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like fruit? – Yes, of course!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.122",
+   "frame": "fr.eat",
+   "text": "Natürlich trinke ich Kaffee!",
+   "tokens": [
+    {
+     "t": "Natürlich",
+     "l": "de:natürlich"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Of course I drink coffee!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.123",
+   "frame": "fr.eat",
+   "text": "Ich trinke auch Tee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I drink tea too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.124",
+   "frame": "fr.eat",
+   "text": "Du trinkst auch Tee.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You drink tea too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.125",
+   "frame": "fr.eat",
+   "text": "Trinkst du auch Tee?",
+   "tokens": [
+    {
+     "t": "Trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.124",
+   "gloss": "Do you drink tea too?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.126",
+   "frame": "fr.eat",
+   "text": "Er isst nur Obst.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "He only eats fruit.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.127",
+   "frame": "fr.eat",
+   "text": "Isst er nur Obst?",
+   "tokens": [
+    {
+     "t": "Isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.126",
+   "gloss": "Does he only eat fruit?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.128",
+   "frame": "fr.eat",
+   "text": "Du isst wirklich kein Fleisch.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "wirklich",
+     "l": "de:wirklich"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "You really don’t eat meat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.129",
+   "frame": "fr.eat",
+   "text": "Isst du wirklich kein Fleisch?",
+   "tokens": [
+    {
+     "t": "Isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wirklich",
+     "l": "de:wirklich"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.128",
+   "gloss": "Do you really not eat meat?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.130",
+   "frame": "fr.be.person",
+   "text": "Er ist auch Lehrer.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He is a teacher too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.131",
+   "frame": "fr.want",
+   "text": "Ich mag Käse. Ich auch!",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I like cheese. – Me too!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.132",
+   "frame": "fr.eat",
+   "text": "Ich trinke nur Wasser.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I only drink water.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.133",
+   "frame": "fr.have",
+   "text": "Wir haben nur zwei Eier.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Eier",
+     "l": "de:Ei",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We only have two eggs.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.134",
+   "frame": "fr.want",
+   "text": "Nur ein bisschen, bitte.",
+   "tokens": [
+    {
+     "t": "Nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "ein bisschen",
+     "l": "de:ein_bisschen"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Just a little, please.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.135",
+   "frame": "fr.eat",
+   "text": "Isst du kein Fleisch? Doch!",
+   "tokens": [
+    {
+     "t": "Isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Doch",
+     "l": "de:doch"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t you eat meat? – Yes, I do!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.136",
+   "frame": "fr.want",
+   "text": "Magst du keinen Käse? Doch, ich mag Käse.",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Doch",
+     "l": "de:doch"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t you like cheese? – Oh yes, I do like cheese.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.137",
+   "frame": "fr.eat",
+   "text": "Trinkst du keinen Kaffee? Nein, ich trinke nur Tee.",
+   "tokens": [
+    {
+     "t": "Trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t you drink coffee? – No, I only drink tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.138",
+   "frame": "fr.poss",
+   "text": "Ist das dein Kaffee? Ja.",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "dein",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Ja",
+     "l": "de:ja"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is that your coffee? – Yes.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.139",
+   "frame": "fr.eat",
+   "text": "Du kaufst auch Milch.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You are buying milk too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.140",
+   "frame": "fr.eat",
+   "text": "Kaufst du auch Milch?",
+   "tokens": [
+    {
+     "t": "Kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f3.139",
+   "gloss": "Are you buying milk too?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f3.141",
+   "frame": "fr.want",
+   "text": "Möchtest du auch einen Saft?",
+   "tokens": [
+    {
+     "t": "Möchtest",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "auch",
+     "l": "de:auch"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Would you like a juice too?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.142",
+   "frame": "fr.eat",
+   "text": "Vielleicht kauft sie Obst.",
+   "tokens": [
+    {
+     "t": "Vielleicht",
+     "l": "de:vielleicht"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Maybe she’ll buy fruit.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.143",
+   "frame": "fr.eat",
+   "text": "Mein Bruder isst nur Fleisch.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nur",
+     "l": "de:nur"
+    },
+    {
+     "t": "Fleisch",
+     "l": "de:Fleisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "My brother only eats meat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.144",
+   "frame": "fr.eat",
+   "text": "Kocht er wirklich Suppe?",
+   "tokens": [
+    {
+     "t": "Kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wirklich",
+     "l": "de:wirklich"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is he really cooking soup?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.145",
+   "frame": "fr.eat",
+   "text": "Kocht ihr das Mittagessen?",
+   "tokens": [
+    {
+     "t": "Kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Mittagessen",
+     "l": "de:Mittagessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Are you (all) cooking lunch?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f3.146",
+   "frame": "fr.eat",
+   "text": "Natürlich kochen wir das Abendessen.",
+   "tokens": [
+    {
+     "t": "Natürlich",
+     "l": "de:natürlich"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Abendessen",
+     "l": "de:Abendessen",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Of course we’re cooking dinner.",
+   "alts": [],
+   "level": "A1"
+  }
+ ]
+}

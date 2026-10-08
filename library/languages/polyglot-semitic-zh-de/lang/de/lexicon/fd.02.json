@@ -1367,11 +1367,67 @@
     "greet.fine",
     "adj.good"
    ],
+   "forms": {
+    "ADJ": "gut",
+    "ADJ;NOM;SG;MASC;STRG": "guter",
+    "ADJ;NOM;SG;FEM;STRG": "gute",
+    "ADJ;NOM;SG;NEUT;STRG": "gutes",
+    "ADJ;NOM;PL;STRG": "gute",
+    "ADJ;ACC;SG;MASC;STRG": "guten",
+    "ADJ;ACC;SG;FEM;STRG": "gute",
+    "ADJ;ACC;SG;NEUT;STRG": "gutes",
+    "ADJ;ACC;PL;STRG": "gute",
+    "ADJ;DAT;SG;MASC;STRG": "gutem",
+    "ADJ;DAT;SG;FEM;STRG": "guter",
+    "ADJ;DAT;SG;NEUT;STRG": "gutem",
+    "ADJ;DAT;PL;STRG": "guten",
+    "ADJ;NOM;SG;MASC;WEAK": "gute",
+    "ADJ;NOM;SG;FEM;WEAK": "gute",
+    "ADJ;NOM;SG;NEUT;WEAK": "gute",
+    "ADJ;NOM;PL;WEAK": "guten",
+    "ADJ;ACC;SG;MASC;WEAK": "guten",
+    "ADJ;ACC;SG;FEM;WEAK": "gute",
+    "ADJ;ACC;SG;NEUT;WEAK": "gute",
+    "ADJ;ACC;PL;WEAK": "guten",
+    "ADJ;DAT;SG;MASC;WEAK": "guten",
+    "ADJ;DAT;SG;FEM;WEAK": "guten",
+    "ADJ;DAT;SG;NEUT;WEAK": "guten",
+    "ADJ;DAT;PL;WEAK": "guten",
+    "ADJ;NOM;SG;MASC;MIX": "guter",
+    "ADJ;NOM;SG;FEM;MIX": "gute",
+    "ADJ;NOM;SG;NEUT;MIX": "gutes",
+    "ADJ;NOM;PL;MIX": "guten",
+    "ADJ;ACC;SG;MASC;MIX": "guten",
+    "ADJ;ACC;SG;FEM;MIX": "gute",
+    "ADJ;ACC;SG;NEUT;MIX": "gutes",
+    "ADJ;ACC;PL;MIX": "guten",
+    "ADJ;DAT;SG;MASC;MIX": "guten",
+    "ADJ;DAT;SG;FEM;MIX": "guten",
+    "ADJ;DAT;SG;NEUT;MIX": "guten",
+    "ADJ;DAT;PL;MIX": "guten",
+    "ADJ;CMPR": "besser",
+    "ADJ;SPRL": "am besten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "beste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "beste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "beste",
+    "ADJ;NOM;PL;WEAK;SPRL": "besten"
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
     "override": {
-     "meaning": "The concept is the answer “fine, well” (Gut, danke. / Mir geht es gut.); Wiktionary’s adjective gives “good; all right, satisfactory” and its adverb gut “well” – one word in German."
+     "meaning": "The concept is the answer “fine, well” (Gut, danke. / Mir geht es gut.); Wiktionary’s adjective gives “good; all right, satisfactory” and its adverb gut “well” – one word in German.",
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
     }
    },
    "profile": {
@@ -1442,6 +1498,13 @@
       "register": "colloquial",
       "context": "agreement",
       "sense": "s3"
+     },
+     {
+      "text": "Das ist der beste Kaffee in der Stadt.",
+      "tr": "This is the best coffee in town.",
+      "register": "neutral",
+      "context": "cafés",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1511,7 +1574,7 @@
     ],
     "pitfalls": [
      "How you are is Mir geht es gut (dative mir!), not *Ich bin gut – that means “I am good (at something / a good person)”.",
-     "Irregular comparison: gut – besser – am besten."
+     "Irregular comparison: gut – besser – am besten (der beste …); never *guter, *am gutesten."
     ],
     "subtleties": [
      "German uses one word for good and well: Er singt gut (he sings well).",

@@ -1,0 +1,8820 @@
+{
+ "sentences": [
+  {
+   "id": "de.f6.001",
+   "frame": "fr.adj.pred",
+   "text": "Das Haus ist groß.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "groß",
+     "l": "de:groß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The house is big.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.002",
+   "frame": "fr.adj.pred",
+   "text": "Die Wohnung ist klein.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "klein",
+     "l": "de:klein",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The flat is small.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.003",
+   "frame": "fr.adj.attr",
+   "text": "Das ist ein großes Haus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "großes",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is a big house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.004",
+   "frame": "fr.adj.attr",
+   "text": "Das ist das große Haus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "große",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.003",
+   "gloss": "That is the big house.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f6.005",
+   "frame": "fr.adj.attr",
+   "text": "Wir haben eine kleine Wohnung.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "kleine",
+     "l": "de:klein",
+     "f": "ADJ;ACC;SG;FEM;MIX"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We have a small flat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.006",
+   "frame": "fr.adj.pred",
+   "text": "Mein Bruder ist groß.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "groß",
+     "l": "de:groß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My brother is tall.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.007",
+   "frame": "fr.adj.attr",
+   "text": "Mein großer Bruder ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "großer",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My big brother is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.008",
+   "frame": "fr.adj.attr",
+   "text": "Meine kleine Schwester ist müde.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "kleine",
+     "l": "de:klein",
+     "f": "ADJ;NOM;SG;FEM;MIX"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My little sister is tired.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.009",
+   "frame": "fr.adj.pred",
+   "text": "Im Sommer sind die Tage lang.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "lang",
+     "l": "de:lang",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In summer the days are long.",
+   "alts": [
+    "Die Tage sind im Sommer lang."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.010",
+   "frame": "fr.adj.pred",
+   "text": "Im Winter sind die Tage kurz.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Winter",
+     "l": "de:Winter",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "kurz",
+     "l": "de:kurz",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In winter the days are short.",
+   "alts": [
+    "Die Tage sind im Winter kurz."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.011",
+   "frame": "fr.adj.pred",
+   "text": "Die Straße ist lang.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Straße",
+     "l": "de:Straße",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "lang",
+     "l": "de:lang",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The street is long.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.012",
+   "frame": "fr.adj.pred",
+   "text": "Der Schrank ist hoch.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Schrank",
+     "l": "de:Schrank",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hoch",
+     "l": "de:hoch",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The cupboard is tall.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.013",
+   "frame": "fr.adj.attr",
+   "text": "Das ist ein hohes Haus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "hohes",
+     "l": "de:hoch",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is a tall building.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.014",
+   "frame": "fr.adj.attr",
+   "text": "Unsere neue Lehrerin ist jung.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "neue",
+     "l": "de:neu",
+     "f": "ADJ;NOM;SG;FEM;MIX"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "jung",
+     "l": "de:jung",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "Our new teacher is young.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.015",
+   "frame": "fr.adj.attr",
+   "text": "Ein junger Mann ist hier.",
+   "tokens": [
+    {
+     "t": "Ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "junger",
+     "l": "de:jung",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "A young man is here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.016",
+   "frame": "fr.adj.attr",
+   "text": "Der junge Mann ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "junge",
+     "l": "de:jung",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.015",
+   "gloss": "The young man is here.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f6.017",
+   "frame": "fr.adj.pred",
+   "text": "Meine Oma ist alt.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "alt",
+     "l": "de:alt",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma is old.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.018",
+   "frame": "fr.adj.attr",
+   "text": "Wir haben ein altes Auto.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "altes",
+     "l": "de:alt",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We have an old car.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.019",
+   "frame": "fr.adj.attr",
+   "text": "Das alte Auto ist langsam.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "alte",
+     "l": "de:alt",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "langsam",
+     "l": "de:langsam",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The old car is slow.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.020",
+   "frame": "fr.adj.attr",
+   "text": "Die alten Autos sind langsam.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "alten",
+     "l": "de:alt",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Autos",
+     "l": "de:Auto",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "langsam",
+     "l": "de:langsam",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.019",
+   "gloss": "The old cars are slow.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.021",
+   "frame": "fr.adj.pred",
+   "text": "Der Zug ist schnell.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schnell",
+     "l": "de:schnell",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The train is fast.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.022",
+   "frame": "fr.adj.attr",
+   "text": "Er fährt mit dem neuen Auto zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "neuen",
+     "l": "de:neu",
+     "f": "ADJ;DAT;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "He drives to work in the new car.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.023",
+   "frame": "fr.adj.pred",
+   "text": "Die Suppe ist heiß.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "heiß",
+     "l": "de:heiß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The soup is hot.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.024",
+   "frame": "fr.adj.attr",
+   "text": "Im Winter trinke ich heißen Tee.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Winter",
+     "l": "de:Winter",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heißen",
+     "l": "de:heiß",
+     "f": "ADJ;ACC;SG;MASC;STRG"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In winter I drink hot tea.",
+   "alts": [
+    "Ich trinke im Winter heißen Tee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.025",
+   "frame": "fr.adj.attr",
+   "text": "Im Sommer trinken wir kaltes Wasser.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaltes",
+     "l": "de:kalt",
+     "f": "ADJ;ACC;SG;NEUT;STRG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In summer we drink cold water.",
+   "alts": [
+    "Wir trinken im Sommer kaltes Wasser."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.026",
+   "frame": "fr.adj.pred",
+   "text": "Der Kaffee ist kalt.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The coffee is cold.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.027",
+   "frame": "fr.adj.pred",
+   "text": "Heute ist es warm.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warm",
+     "l": "de:warm",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.time.day",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "It is warm today.",
+   "alts": [
+    "Es ist heute warm."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.028",
+   "frame": "fr.adj.attr",
+   "text": "Ich trinke Tee mit warmer Milch.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "warmer",
+     "l": "de:warm",
+     "f": "ADJ;DAT;SG;FEM;STRG"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I drink tea with warm milk.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.029",
+   "frame": "fr.adj.pred",
+   "text": "Der Park ist schön.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schön",
+     "l": "de:schön",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The park is beautiful.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.030",
+   "frame": "fr.adj.attr",
+   "text": "Berlin ist eine schöne Stadt.",
+   "tokens": [
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "schöne",
+     "l": "de:schön",
+     "f": "ADJ;NOM;SG;FEM;MIX"
+    },
+    {
+     "t": "Stadt",
+     "l": "de:Stadt",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "Berlin is a beautiful city.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.031",
+   "frame": "fr.adj.pred",
+   "text": "Die Lampe ist hässlich.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Lampe",
+     "l": "de:Lampe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hässlich",
+     "l": "de:hässlich",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The lamp is ugly.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.032",
+   "frame": "fr.adj.pred",
+   "text": "Das ist leicht.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "leicht",
+     "l": "de:leicht",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is easy.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.033",
+   "frame": "fr.adj.pred",
+   "text": "Das ist nicht schwierig.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "schwierig",
+     "l": "de:schwierig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.negation",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That isn’t difficult.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.034",
+   "frame": "fr.adj.pred",
+   "text": "Die Arbeit ist schwer.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schwer",
+     "l": "de:schwer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The work is hard.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.035",
+   "frame": "fr.adj.pred",
+   "text": "Das ist einfach.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einfach",
+     "l": "de:einfach",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is simple.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.036",
+   "frame": "fr.adj.pred",
+   "text": "Ist das einfach?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "einfach",
+     "l": "de:einfach",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.035",
+   "gloss": "Is that simple?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.037",
+   "frame": "fr.adj.pred",
+   "text": "Das Restaurant ist teuer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Restaurant",
+     "l": "de:Restaurant",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The restaurant is expensive.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.038",
+   "frame": "fr.adj.attr",
+   "text": "Das ist ein teures Auto.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "teures",
+     "l": "de:teuer",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is an expensive car.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.039",
+   "frame": "fr.adj.attr",
+   "text": "Das ist kein teures Auto.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "teures",
+     "l": "de:teuer",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.present",
+    "fn.negation",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.038",
+   "gloss": "That isn’t an expensive car.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f6.040",
+   "frame": "fr.adj.pred",
+   "text": "Auf dem Markt ist das Obst billig.",
+   "tokens": [
+    {
+     "t": "Auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "billig",
+     "l": "de:billig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.prep.place",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "At the market the fruit is cheap.",
+   "alts": [
+    "Das Obst ist auf dem Markt billig."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.041",
+   "frame": "fr.adj.pred",
+   "text": "Die Wohnung ist günstig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "günstig",
+     "l": "de:günstig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The flat is good value.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.042",
+   "frame": "fr.adj.pred",
+   "text": "Wir sind glücklich.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "glücklich",
+     "l": "de:glücklich",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We are happy.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.043",
+   "frame": "fr.adj.pred",
+   "text": "Die Eltern sind froh.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "froh",
+     "l": "de:froh",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The parents are glad.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.044",
+   "frame": "fr.wh",
+   "text": "Warum bist du traurig?",
+   "tokens": [
+    {
+     "t": "Warum",
+     "l": "de:warum"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "traurig",
+     "l": "de:traurig",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "Why are you sad?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.045",
+   "frame": "fr.adj.pred",
+   "text": "Die Kinder sind hungrig und durstig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hungrig",
+     "l": "de:hungrig",
+     "f": "ADJ"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "durstig",
+     "l": "de:durstig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The children are hungry and thirsty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.046",
+   "frame": "fr.adj.attr",
+   "text": "Der kleine Junge ist müde.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "kleine",
+     "l": "de:klein",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The little boy is tired.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.047",
+   "frame": "fr.adj.attr",
+   "text": "Die kleinen Jungen sind müde.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "kleinen",
+     "l": "de:klein",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Jungen",
+     "l": "de:Junge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.046",
+   "gloss": "The little boys are tired.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.048",
+   "frame": "fr.have",
+   "text": "Ich habe Hunger.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I’m hungry.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.049",
+   "frame": "fr.have",
+   "text": "Ich habe keinen Hunger.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "variantOf": "de.f6.048",
+   "gloss": "I’m not hungry.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f6.050",
+   "frame": "fr.have",
+   "text": "Du hast Durst.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Durst",
+     "l": "de:Durst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "You’re thirsty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.051",
+   "frame": "fr.have",
+   "text": "Hast du Durst?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Durst",
+     "l": "de:Durst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.f6.050",
+   "gloss": "Are you thirsty?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.052",
+   "frame": "fr.adj.pred",
+   "text": "Mir ist kalt.",
+   "tokens": [
+    {
+     "t": "Mir",
+     "l": "de:ich",
+     "f": "PRON;DAT"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’m cold.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.053",
+   "frame": "fr.adj.pred",
+   "text": "Mir ist heiß.",
+   "tokens": [
+    {
+     "t": "Mir",
+     "l": "de:ich",
+     "f": "PRON;DAT"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "heiß",
+     "l": "de:heiß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’m hot.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.054",
+   "frame": "fr.wh",
+   "text": "Wie alt bist du?",
+   "tokens": [
+    {
+     "t": "Wie",
+     "l": "de:wie"
+    },
+    {
+     "t": "alt",
+     "l": "de:alt",
+     "f": "ADJ"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "How old are you?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.055",
+   "frame": "fr.adj.pred",
+   "text": "Der Bus ist langsam.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "langsam",
+     "l": "de:langsam",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is slow.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.056",
+   "frame": "fr.adj.pred",
+   "text": "Der Kaffee hier ist schlecht.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schlecht",
+     "l": "de:schlecht",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The coffee here is bad.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.057",
+   "frame": "fr.adj.attr",
+   "text": "Wir essen in einem guten Restaurant.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "einem",
+     "l": "de:ein",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "guten",
+     "l": "de:gut",
+     "f": "ADJ;DAT;SG;NEUT;MIX"
+    },
+    {
+     "t": "Restaurant",
+     "l": "de:Restaurant",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We’re eating in a good restaurant.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.058",
+   "frame": "fr.adj.attr",
+   "text": "Das ist ein gutes Buch.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "gutes",
+     "l": "de:gut",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Buch",
+     "l": "de:Buch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "That is a good book.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.059",
+   "frame": "fr.adj.attr",
+   "text": "Ich kaufe ein neues Handy.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "neues",
+     "l": "de:neu",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’m buying a new phone.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.060",
+   "frame": "fr.adj.attr",
+   "text": "Ich kaufe das neue Handy.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "neue",
+     "l": "de:neu",
+     "f": "ADJ;ACC;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.059",
+   "gloss": "I’m buying the new phone.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f6.061",
+   "frame": "fr.adj.attr",
+   "text": "Wir gehen mit den kleinen Kindern in den Park.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "kleinen",
+     "l": "de:klein",
+     "f": "ADJ;DAT;PL;WEAK"
+    },
+    {
+     "t": "Kindern",
+     "l": "de:Kind",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going to the park with the little children.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.062",
+   "frame": "fr.adj.attr",
+   "text": "Zwei kleine Kinder sind im Garten.",
+   "tokens": [
+    {
+     "t": "Zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "kleine",
+     "l": "de:klein",
+     "f": "ADJ;NOM;PL;STRG"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "Two little children are in the garden.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.063",
+   "frame": "fr.adj.attr",
+   "text": "Viele junge Leute sind im Park.",
+   "tokens": [
+    {
+     "t": "Viele",
+     "l": "de:viel",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "junge",
+     "l": "de:jung",
+     "f": "ADJ;NOM;PL;STRG"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "Many young people are in the park.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.064",
+   "frame": "fr.adj.attr",
+   "text": "Die schöne Lampe ist teuer.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "schöne",
+     "l": "de:schön",
+     "f": "ADJ;NOM;SG;FEM;WEAK"
+    },
+    {
+     "t": "Lampe",
+     "l": "de:Lampe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The beautiful lamp is expensive.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.065",
+   "frame": "fr.adj.attr",
+   "text": "Ich mag den kleinen Tisch.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "kleinen",
+     "l": "de:klein",
+     "f": "ADJ;ACC;SG;MASC;WEAK"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I like the small table.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.066",
+   "frame": "fr.adj.attr",
+   "text": "Wir haben einen großen Garten.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "großen",
+     "l": "de:groß",
+     "f": "ADJ;ACC;SG;MASC;MIX"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We have a big garden.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.067",
+   "frame": "fr.adj.attr",
+   "text": "Das schnelle Auto ist teuer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "schnelle",
+     "l": "de:schnell",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The fast car is expensive.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.068",
+   "frame": "fr.adj.attr",
+   "text": "Ist das schnelle Auto teuer?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "schnelle",
+     "l": "de:schnell",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.067",
+   "gloss": "Is the fast car expensive?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.069",
+   "frame": "fr.adj.attr",
+   "text": "Das alte Haus ist schön.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "alte",
+     "l": "de:alt",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schön",
+     "l": "de:schön",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The old house is beautiful.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.070",
+   "frame": "fr.adj.attr",
+   "text": "Die alten Häuser sind schön.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "alten",
+     "l": "de:alt",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Häuser",
+     "l": "de:Haus",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "schön",
+     "l": "de:schön",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.069",
+   "gloss": "The old houses are beautiful.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.071",
+   "frame": "fr.adj.attr",
+   "text": "Mein Opa ist ein alter Mann.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "alter",
+     "l": "de:alt",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa is an old man.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.072",
+   "frame": "fr.adj.pred",
+   "text": "Die Fahrkarte ist billig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Fahrkarte",
+     "l": "de:Fahrkarte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "billig",
+     "l": "de:billig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The ticket is cheap.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.073",
+   "frame": "fr.want",
+   "text": "Ich möchte einen heißen Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "möchte",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "heißen",
+     "l": "de:heiß",
+     "f": "ADJ;ACC;SG;MASC;MIX"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’d like a hot coffee.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.074",
+   "frame": "fr.colour",
+   "text": "Das Auto ist rot.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The car is red.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.075",
+   "frame": "fr.colour",
+   "text": "Das Auto ist nicht rot.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.negation",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.074",
+   "gloss": "The car isn’t red.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f6.076",
+   "frame": "fr.colour",
+   "text": "Ich habe ein rotes Auto.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "rotes",
+     "l": "de:rot",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I have a red car.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.077",
+   "frame": "fr.colour",
+   "text": "Die Wände sind weiß.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Wände",
+     "l": "de:Wand",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "weiß",
+     "l": "de:weiß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The walls are white.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.078",
+   "frame": "fr.colour",
+   "text": "Das Haus ist weiß.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "weiß",
+     "l": "de:weiß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The house is white.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.079",
+   "frame": "fr.colour",
+   "text": "Die Häuser sind weiß.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Häuser",
+     "l": "de:Haus",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "weiß",
+     "l": "de:weiß",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.078",
+   "gloss": "The houses are white.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.080",
+   "frame": "fr.colour",
+   "text": "Mein Handy ist schwarz.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schwarz",
+     "l": "de:schwarz",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My phone is black.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.081",
+   "frame": "fr.colour",
+   "text": "Ich trinke schwarzen Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "schwarzen",
+     "l": "de:schwarz",
+     "f": "ADJ;ACC;SG;MASC;STRG"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I drink black coffee.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.082",
+   "frame": "fr.colour",
+   "text": "Ich mag grünen Tee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "grünen",
+     "l": "de:grün",
+     "f": "ADJ;ACC;SG;MASC;STRG"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I like green tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.083",
+   "frame": "fr.colour",
+   "text": "Der Stift ist blau.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Stift",
+     "l": "de:Stift",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "blau",
+     "l": "de:blau",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The pen is blue.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.084",
+   "frame": "fr.colour",
+   "text": "Ich kaufe einen blauen Stift.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "blauen",
+     "l": "de:blau",
+     "f": "ADJ;ACC;SG;MASC;MIX"
+    },
+    {
+     "t": "Stift",
+     "l": "de:Stift",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’m buying a blue pen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.085",
+   "frame": "fr.colour",
+   "text": "Der Käse ist gelb.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Käse",
+     "l": "de:Käse",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gelb",
+     "l": "de:gelb",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The cheese is yellow.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.086",
+   "frame": "fr.colour",
+   "text": "Der Bus ist gelb.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gelb",
+     "l": "de:gelb",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is yellow.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.087",
+   "frame": "fr.colour",
+   "text": "Ist der Bus gelb?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "gelb",
+     "l": "de:gelb",
+     "f": "ADJ"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.adjective"
+   ],
+   "variantOf": "de.f6.086",
+   "gloss": "Is the bus yellow?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.088",
+   "frame": "fr.colour",
+   "text": "Der Tisch ist braun.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "braun",
+     "l": "de:braun",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The table is brown.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.089",
+   "frame": "fr.colour",
+   "text": "Wir haben ein graues Sofa.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "graues",
+     "l": "de:grau",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Sofa",
+     "l": "de:Sofa",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "We have a grey sofa.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.090",
+   "frame": "fr.colour",
+   "text": "Der Saft ist orange.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Saft",
+     "l": "de:Saft",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "orange",
+     "l": "de:orange",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The juice is orange.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.091",
+   "frame": "fr.colour",
+   "text": "Die Tasche ist rosa.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tasche",
+     "l": "de:Tasche",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "rosa",
+     "l": "de:rosa",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The bag is pink.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.092",
+   "frame": "fr.colour",
+   "text": "Meine Tochter hat eine rosa Tasche.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "rosa",
+     "l": "de:rosa",
+     "f": "ADJ"
+    },
+    {
+     "t": "Tasche",
+     "l": "de:Tasche",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "My daughter has a pink bag.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.093",
+   "frame": "fr.colour",
+   "text": "Die Lampe ist lila.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Lampe",
+     "l": "de:Lampe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "lila",
+     "l": "de:lila",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The lamp is purple.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.094",
+   "frame": "fr.colour",
+   "text": "Ich trinke ein helles Bier.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "helles",
+     "l": "de:hell",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I’m drinking a pale beer.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.095",
+   "frame": "fr.colour",
+   "text": "Er trinkt ein dunkles Bier.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "dunkles",
+     "l": "de:dunkel",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Bier",
+     "l": "de:Bier",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "He’s drinking a dark beer.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.096",
+   "frame": "fr.colour",
+   "text": "Im Winter ist es früh dunkel.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Winter",
+     "l": "de:Winter",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "dunkel",
+     "l": "de:dunkel",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In winter it gets dark early.",
+   "alts": [
+    "Es ist im Winter früh dunkel."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.097",
+   "frame": "fr.colour",
+   "text": "Das Wohnzimmer ist hell.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Wohnzimmer",
+     "l": "de:Wohnzimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hell",
+     "l": "de:hell",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The living room is bright.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.098",
+   "frame": "fr.colour",
+   "text": "Die Äpfel sind grün und rot.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Äpfel",
+     "l": "de:Apfel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "grün",
+     "l": "de:grün",
+     "f": "ADJ"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "The apples are green and red.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.099",
+   "frame": "fr.colour",
+   "text": "Ich mag dunkles Brot.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "dunkles",
+     "l": "de:dunkel",
+     "f": "ADJ;ACC;SG;NEUT;STRG"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "I like dark bread.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.100",
+   "frame": "fr.compare",
+   "text": "Der Zug ist schneller als der Bus.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schneller",
+     "l": "de:schnell",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The train is faster than the bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.101",
+   "frame": "fr.compare",
+   "text": "Ist der Zug schneller als der Bus?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "schneller",
+     "l": "de:schnell",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": "de.f6.100",
+   "gloss": "Is the train faster than the bus?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.102",
+   "frame": "fr.compare",
+   "text": "Mein Bruder ist älter als ich.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "älter",
+     "l": "de:alt",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "My brother is older than me.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.103",
+   "frame": "fr.compare",
+   "text": "Meine Brüder sind älter als ich.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Brüder",
+     "l": "de:Bruder",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "älter",
+     "l": "de:alt",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": "de.f6.102",
+   "gloss": "My brothers are older than me.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.104",
+   "frame": "fr.compare",
+   "text": "Meine Schwester ist jünger als mein Bruder.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "jünger",
+     "l": "de:jung",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "My sister is younger than my brother.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.105",
+   "frame": "fr.compare",
+   "text": "Das Auto ist teurer als das Fahrrad.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teurer",
+     "l": "de:teuer",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The car is more expensive than the bicycle.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.106",
+   "frame": "fr.compare",
+   "text": "Im Sommer sind die Tage länger als im Winter.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "länger",
+     "l": "de:lang",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Winter",
+     "l": "de:Winter",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "In summer the days are longer than in winter.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.107",
+   "frame": "fr.compare",
+   "text": "Im Januar ist es kälter als im März.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Januar",
+     "l": "de:Januar",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kälter",
+     "l": "de:kalt",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "März",
+     "l": "de:März",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "In January it is colder than in March.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.108",
+   "frame": "fr.compare",
+   "text": "Heute ist es wärmer als gestern.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wärmer",
+     "l": "de:warm",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.time.day",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "Today it is warmer than yesterday.",
+   "alts": [
+    "Es ist heute wärmer als gestern."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.109",
+   "frame": "fr.compare",
+   "text": "Unsere Wohnung ist kleiner als euer Haus.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kleiner",
+     "l": "de:klein",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "euer",
+     "l": "de:euer",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "Our flat is smaller than your house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.110",
+   "frame": "fr.compare",
+   "text": "Dieser Kaffee ist besser als der Tee.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "besser",
+     "l": "de:gut",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "This coffee is better than the tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.111",
+   "frame": "fr.compare",
+   "text": "Der Zug ist am schnellsten.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am schnellsten",
+     "l": "de:schnell",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The train is the fastest.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.112",
+   "frame": "fr.compare",
+   "text": "Im Juli ist es am heißesten.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Juli",
+     "l": "de:Juli",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am heißesten",
+     "l": "de:heiß",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "It is hottest in July.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.113",
+   "frame": "fr.compare",
+   "text": "Welches Zimmer ist am größten?",
+   "tokens": [
+    {
+     "t": "Welches",
+     "l": "de:welcher",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am größten",
+     "l": "de:groß",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "Which room is the biggest?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.114",
+   "frame": "fr.compare",
+   "text": "Das ist das größte Zimmer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "größte",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;NEUT;WEAK;SPRL"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "That is the biggest room.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.115",
+   "frame": "fr.compare",
+   "text": "Das sind die größten Zimmer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "größten",
+     "l": "de:groß",
+     "f": "ADJ;NOM;PL;WEAK;SPRL"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": "de.f6.114",
+   "gloss": "Those are the biggest rooms.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.116",
+   "frame": "fr.compare",
+   "text": "Mein Opa ist der älteste Mann im Dorf.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "älteste",
+     "l": "de:alt",
+     "f": "ADJ;NOM;SG;MASC;WEAK;SPRL"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Dorf",
+     "l": "de:Dorf",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa is the oldest man in the village.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.117",
+   "frame": "fr.compare",
+   "text": "Das ist der beste Kaffee.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "beste",
+     "l": "de:gut",
+     "f": "ADJ;NOM;SG;MASC;WEAK;SPRL"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "That is the best coffee.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.118",
+   "frame": "fr.compare",
+   "text": "Wer ist am ältesten?",
+   "tokens": [
+    {
+     "t": "Wer",
+     "l": "de:wer",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am ältesten",
+     "l": "de:alt",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "Who is the oldest?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.119",
+   "frame": "fr.compare",
+   "text": "Im Sommer trinken wir mehr Wasser.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mehr",
+     "l": "de:mehr"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "In summer we drink more water.",
+   "alts": [
+    "Wir trinken im Sommer mehr Wasser."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.120",
+   "frame": "fr.compare",
+   "text": "Ich trinke mehr Tee als Kaffee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "mehr",
+     "l": "de:mehr"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "I drink more tea than coffee.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.121",
+   "frame": "fr.compare",
+   "text": "Was magst du am meisten?",
+   "tokens": [
+    {
+     "t": "Was",
+     "l": "de:was",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am meisten",
+     "l": "de:am_meisten"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.question.wh",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "What do you like most?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.122",
+   "frame": "fr.compare",
+   "text": "Wer trinkt am meisten Kaffee?",
+   "tokens": [
+    {
+     "t": "Wer",
+     "l": "de:wer",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am meisten",
+     "l": "de:am_meisten"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.question.wh",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "Who drinks the most coffee?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.123",
+   "frame": "fr.compare",
+   "text": "Mein großer Bruder ist größer als mein Vater.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "großer",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "größer",
+     "l": "de:groß",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "My big brother is taller than my father.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.124",
+   "frame": "fr.compare",
+   "text": "Das Fahrrad ist langsamer als das Auto.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "langsamer",
+     "l": "de:langsam",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The bicycle is slower than the car.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.125",
+   "frame": "fr.compare",
+   "text": "Der Markt ist billiger als der Supermarkt.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "billiger",
+     "l": "de:billig",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Supermarkt",
+     "l": "de:Supermarkt",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The market is cheaper than the supermarket.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.126",
+   "frame": "fr.compare",
+   "text": "Das rote Auto ist schneller als das blaue.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "rote",
+     "l": "de:rot",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schneller",
+     "l": "de:schnell",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "blaue",
+     "l": "de:blau",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The red car is faster than the blue one.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.127",
+   "frame": "fr.compare",
+   "text": "Die rosa Tasche ist am schönsten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "rosa",
+     "l": "de:rosa",
+     "f": "ADJ"
+    },
+    {
+     "t": "Tasche",
+     "l": "de:Tasche",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am schönsten",
+     "l": "de:schön",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "variantOf": null,
+   "gloss": "The pink bag is the prettiest.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.128",
+   "frame": "fr.link",
+   "text": "Das Auto ist schön, aber es ist teuer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schön",
+     "l": "de:schön",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The car is nice, but it’s expensive.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.129",
+   "frame": "fr.link",
+   "text": "Ich bin müde, aber ich gehe zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m tired, but I’m going to work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.130",
+   "frame": "fr.link",
+   "text": "Der Kaffee ist gut, aber der Tee ist besser.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "besser",
+     "l": "de:gut",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The coffee is good, but the tea is better.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.131",
+   "frame": "fr.link",
+   "text": "Ich trinke Wasser, weil ich Durst habe.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Durst",
+     "l": "de:Durst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m drinking water because I’m thirsty.",
+   "alts": [
+    "Weil ich Durst habe, trinke ich Wasser."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.132",
+   "frame": "fr.link",
+   "text": "Er bleibt zu Hause, weil er müde ist.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleibt",
+     "l": "de:bleiben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "He’s staying at home because he’s tired.",
+   "alts": [
+    "Weil er müde ist, bleibt er zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.133",
+   "frame": "fr.link",
+   "text": "Weil es kalt ist, trinken wir Tee.",
+   "tokens": [
+    {
+     "t": "Weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "trinken",
+     "l": "de:trinken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.object",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "Because it’s cold, we’re drinking tea.",
+   "alts": [
+    "Wir trinken Tee, weil es kalt ist."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.134",
+   "frame": "fr.link",
+   "text": "Ich trinke Wasser, denn ich habe Durst.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "denn",
+     "l": "de:denn"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Durst",
+     "l": "de:Durst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m drinking water, for I’m thirsty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.135",
+   "frame": "fr.link",
+   "text": "Wir bleiben zu Hause, denn es ist kalt.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "denn",
+     "l": "de:denn"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "We’re staying at home because it’s cold.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.136",
+   "frame": "fr.link",
+   "text": "Ich habe Hunger, deshalb esse ich jetzt.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "deshalb",
+     "l": "de:deshalb"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "jetzt",
+     "l": "de:jetzt"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.time.day",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m hungry, so I’m eating now.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.137",
+   "frame": "fr.link",
+   "text": "Es ist kalt, deswegen bleiben wir zu Hause.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "deswegen",
+     "l": "de:deswegen"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "It’s cold, so we’re staying at home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.138",
+   "frame": "fr.link",
+   "text": "Der Bus ist langsam, also fahre ich mit dem Fahrrad.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "langsam",
+     "l": "de:langsam",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "also",
+     "l": "de:also"
+    },
+    {
+     "t": "fahre",
+     "l": "de:fahren",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is slow, so I’m going by bike.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.139",
+   "frame": "fr.link",
+   "text": "Wir essen, dann gehen wir in den Park.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dann",
+     "l": "de:dann"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "We eat, then we go to the park.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.140",
+   "frame": "fr.link",
+   "text": "Ich trinke einen Kaffee und dann gehe ich zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "dann",
+     "l": "de:dann"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I drink a coffee and then I go to work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.141",
+   "frame": "fr.link",
+   "text": "Wenn ich Hunger habe, esse ich Brot.",
+   "tokens": [
+    {
+     "t": "Wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "When I’m hungry, I eat bread.",
+   "alts": [
+    "Ich esse Brot, wenn ich Hunger habe."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.142",
+   "frame": "fr.link",
+   "text": "Wenn es warm ist, gehen wir in den Park.",
+   "tokens": [
+    {
+     "t": "Wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warm",
+     "l": "de:warm",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "When it’s warm, we go to the park.",
+   "alts": [
+    "Wir gehen in den Park, wenn es warm ist."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.143",
+   "frame": "fr.link",
+   "text": "Komm nach Hause, wenn du müde bist!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:kommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.imperative",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "Come home when you’re tired!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.144",
+   "frame": "fr.link",
+   "text": "Als mein Opa jung war, war er Bauer.",
+   "tokens": [
+    {
+     "t": "Als",
+     "l": "de:als"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "jung",
+     "l": "de:jung",
+     "f": "ADJ"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Bauer",
+     "l": "de:Bauer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.possessive",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "When my grandpa was young, he was a farmer.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.145",
+   "frame": "fr.link",
+   "text": "Ich bin froh, dass ihr hier seid.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "froh",
+     "l": "de:froh",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dass",
+     "l": "de:dass"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m glad that you’re here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.146",
+   "frame": "fr.link",
+   "text": "Es ist schön, dass ihr kommt.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schön",
+     "l": "de:schön",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dass",
+     "l": "de:dass"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "It’s nice that you’re coming.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.147",
+   "frame": "fr.link",
+   "text": "Wir gehen in den Park, obwohl es kalt ist.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "obwohl",
+     "l": "de:obwohl"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going to the park although it’s cold.",
+   "alts": [
+    "Obwohl es kalt ist, gehen wir in den Park."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.148",
+   "frame": "fr.link",
+   "text": "Obwohl sie müde ist, geht sie zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Obwohl",
+     "l": "de:obwohl"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "geht",
+     "l": "de:gehen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "Although she’s tired, she goes to work.",
+   "alts": [
+    "Sie geht zur Arbeit, obwohl sie müde ist."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.149",
+   "frame": "fr.link",
+   "text": "Ich trinke Kaffee, obwohl es spät ist.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "obwohl",
+     "l": "de:obwohl"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.object",
+    "fn.time.day",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m drinking coffee although it’s late.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.150",
+   "frame": "fr.link",
+   "text": "Du bleibst zu Hause, weil du müde bist.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleibst",
+     "l": "de:bleiben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "You’re staying at home because you’re tired.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.151",
+   "frame": "fr.link",
+   "text": "Bleibst du zu Hause, weil du müde bist?",
+   "tokens": [
+    {
+     "t": "Bleibst",
+     "l": "de:bleiben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": "de.f6.150",
+   "gloss": "Are you staying at home because you’re tired?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.152",
+   "frame": "fr.link",
+   "text": "Ihr kommt morgen, wenn es warm ist.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warm",
+     "l": "de:warm",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.time.day",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "You’re coming tomorrow if it’s warm.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.153",
+   "frame": "fr.link",
+   "text": "Kommt ihr morgen, wenn es warm ist?",
+   "tokens": [
+    {
+     "t": "Kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warm",
+     "l": "de:warm",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.time.day",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": "de.f6.152",
+   "gloss": "Are you coming tomorrow if it’s warm?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f6.154",
+   "frame": "fr.link",
+   "text": "Das Kind ist müde, deshalb bleibt es zu Hause.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "deshalb",
+     "l": "de:deshalb"
+    },
+    {
+     "t": "bleibt",
+     "l": "de:bleiben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The child is tired, so it’s staying at home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.155",
+   "frame": "fr.link",
+   "text": "Die Kinder sind müde, deshalb bleiben sie zu Hause.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "deshalb",
+     "l": "de:deshalb"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": "de.f6.154",
+   "gloss": "The children are tired, so they’re staying at home.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f6.156",
+   "frame": "fr.link",
+   "text": "Es ist gut, dass du hier bist.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dass",
+     "l": "de:dass"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "It’s good that you’re here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.157",
+   "frame": "fr.link",
+   "text": "Es ist nicht gut, dass du hier bist.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dass",
+     "l": "de:dass"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.negation",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": "de.f6.156",
+   "gloss": "It isn’t good that you’re here.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f6.158",
+   "frame": "fr.link",
+   "text": "Warum trinkst du Wasser? Weil ich Durst habe.",
+   "tokens": [
+    {
+     "t": "Warum",
+     "l": "de:warum"
+    },
+    {
+     "t": "trinkst",
+     "l": "de:trinken",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Durst",
+     "l": "de:Durst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.question.wh",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "Why are you drinking water? – Because I’m thirsty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.159",
+   "frame": "fr.link",
+   "text": "Ich gehe zu Fuß, weil der Bus langsam ist.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "langsam",
+     "l": "de:langsam",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m walking because the bus is slow.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.160",
+   "frame": "fr.link",
+   "text": "Der Zug ist teuer, also fahren wir mit dem Bus.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "also",
+     "l": "de:also"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The train is expensive, so we’re going by bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.161",
+   "frame": "fr.link",
+   "text": "Wenn ich müde bin, trinke ich Kaffee.",
+   "tokens": [
+    {
+     "t": "Wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.object",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "When I’m tired, I drink coffee.",
+   "alts": [
+    "Ich trinke Kaffee, wenn ich müde bin."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.162",
+   "frame": "fr.link",
+   "text": "Ich bin glücklich, wenn die Kinder glücklich sind.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "glücklich",
+     "l": "de:glücklich",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "glücklich",
+     "l": "de:glücklich",
+     "f": "ADJ"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m happy when the children are happy.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.163",
+   "frame": "fr.link",
+   "text": "Es ist warm, aber das Wasser ist kalt.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "warm",
+     "l": "de:warm",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kalt",
+     "l": "de:kalt",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "It’s warm, but the water is cold.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.164",
+   "frame": "fr.link",
+   "text": "Ich habe Hunger, aber ich esse nichts.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nichts",
+     "l": "de:nichts",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I’m hungry, but I’m not eating anything.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.165",
+   "frame": "fr.link",
+   "text": "Wir kaufen kein neues Auto, weil es teuer ist.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "neues",
+     "l": "de:neu",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "We’re not buying a new car because it’s expensive.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.166",
+   "frame": "fr.link",
+   "text": "Ich esse und dann trinke ich einen Tee.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "dann",
+     "l": "de:dann"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I eat and then I drink a tea.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f6.167",
+   "frame": "fr.link",
+   "text": "Meine Oma ist alt, aber sie ist nicht müde.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "alt",
+     "l": "de:alt",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "müde",
+     "l": "de:müde",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.negation",
+    "fn.adjective",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma is old, but she isn’t tired.",
+   "alts": [],
+   "level": "A1"
+  }
+ ]
+}

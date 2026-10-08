@@ -153,7 +153,5967 @@
      "有 + a noun can make an adjective: 有名 (famous), 有用 (useful), 有意思 (interesting)."
     ]
    }
+  },
+  {
+   "id": "zh:jia",
+   "lemma": "家",
+   "trad": "家",
+   "pinyin": "jiā",
+   "pos": "NOUN",
+   "senses": [
+    "family.family",
+    "place.home"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Home and family in one syllable — warmth, belonging, the Spring Festival trip home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family, household",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     },
+     {
+      "id": "s2",
+      "def": "home (在家 ‘at home’, 回家 ‘go home’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
+     },
+     {
+      "id": "s3",
+      "def": "(measure word, S11) for businesses and households: 一家饭馆, 三家人 ‘three families’",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(suffix) -ist, specialist: 科学家 ‘scientist’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我家有四口人。",
+      "py": "Wǒ jiā yǒu sì kǒu rén.",
+      "tr": "There are four people in my family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他们是一家人。",
+      "py": "Tāmen shì yì jiā rén.",
+      "tr": "They are one family.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "我回家了。",
+      "py": "Wǒ huí jiā le.",
+      "tr": "I’m going home. / I’m home.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s2"
+     },
+     {
+      "text": "你在家吗？",
+      "py": "Nǐ zài jiā ma?",
+      "tr": "Are you at home?",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s2"
+     },
+     {
+      "text": "我们在家吃晚饭。",
+      "py": "Wǒmen zài jiā chī wǎnfàn.",
+      "tr": "We have dinner at home.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "这家饭馆很好。",
+      "py": "Zhè jiā fànguǎn hěn hǎo.",
+      "tr": "This restaurant is very good.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我家",
+      "tr": "my family, my home"
+     },
+     {
+      "text": "回家",
+      "tr": "to go home"
+     },
+     {
+      "text": "家人",
+      "tr": "family members"
+     },
+     {
+      "text": "国家",
+      "tr": "country"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "家和万事兴",
+      "tr": "a harmonious family makes all things prosper",
+      "kind": "proverb",
+      "meaning": "peace at home is the basis of success",
+      "register": "neutral"
+     },
+     {
+      "text": "家常便饭",
+      "tr": "plain home-cooked food",
+      "kind": "idiom",
+      "meaning": "something quite ordinary, an everyday occurrence",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "家庭",
+      "register": "neutral",
+      "nuance": "the family as a unit, a household — more formal"
+     },
+     {
+      "word": "家人",
+      "register": "neutral",
+      "nuance": "the people of one’s family, ‘my folks’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: 宀 ‘roof’ + phonetic 𢑓 ‘boar’ (later written 豕 ‘pig’). The popular reading ‘a pig under a roof’ is a folk etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "国家 ‘country’ is literally ‘state-family’, and 大家 ‘big family’ means ‘everybody’."
+    ],
+    "pitfalls": [
+     "我家 is both ‘my family’ and ‘my home’: 我家在北京 ‘my home is in Beijing’.",
+     "As a measure word 家 counts shops and companies (一家公司) and households (这栋楼住着三家人 ‘three families live in this building’); a family as a unit is 一个家庭.",
+     "‘At home’ is 在家 — no 里 needed (在家里 is also fine). ‘To go home’ is 回家 (not *去家); ‘to go to someone’s home’ is 去 + owner + 家: 去我家."
+    ],
+    "subtleties": [
+     "With 家 the 的 is normally dropped: 我家, 你们家; 我的家 sounds emotional, as in songs."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiating",
+   "lemma": "家庭",
+   "trad": "家庭",
+   "pinyin": "jiā tíng",
+   "pos": "NOUN",
+   "senses": [
+    "family.family"
+   ],
+   "measure": [
+    "个",
+    "户"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral",
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "The family as a unit — in society, statistics and sociology.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family, household (as a unit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个家庭有三个孩子。",
+      "py": "Zhège jiātíng yǒu sān ge háizi.",
+      "tr": "This family has three children.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     },
+     {
+      "text": "她来自一个普通家庭。",
+      "py": "Tā láizì yí ge pǔtōng jiātíng.",
+      "tr": "She comes from an ordinary family.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "他很爱他的家庭。",
+      "py": "Tā hěn ài tā de jiātíng.",
+      "tr": "He loves his family very much.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "家庭主妇",
+      "tr": "housewife"
+     },
+     {
+      "text": "家庭作业",
+      "tr": "homework"
+     },
+     {
+      "text": "家庭医生",
+      "tr": "family doctor"
+     },
+     {
+      "text": "幸福的家庭",
+      "tr": "a happy family"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "幸福的家庭都是相似的",
+      "tr": "happy families are all alike",
+      "kind": "quote",
+      "meaning": "the opening of Anna Karenina in Chinese",
+      "register": "literary",
+      "source": "Leo Tolstoy, Anna Karenina (Chinese translation)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "家",
+      "register": "neutral",
+      "nuance": "the everyday word — also ‘home’"
+     },
+     {
+      "word": "家人",
+      "register": "neutral",
+      "nuance": "the members, not the unit"
+     }
+    ],
+    "etymology": {
+     "text": "家 ‘family, home’ + 庭 ‘courtyard, hall’ (广 ‘building’ + phonetic 廷).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tolstoy’s ‘All happy families are alike’ is known in Chinese as 幸福的家庭都是相似的 — a sentence every Chinese reader recognises."
+    ],
+    "pitfalls": [
+     "家庭 is the family as a unit; for ‘my family’ in daily talk say 我家 or 我的家人."
+    ],
+    "subtleties": [
+     "家庭 is often the first part of a compound: 家庭作业 ‘homework’, 家庭医生 ‘family doctor’, 家庭主妇 ‘housewife’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiaren",
+   "lemma": "家人",
+   "trad": "家人",
+   "pinyin": "jiā rén",
+   "pos": "NOUN",
+   "senses": [
+    "family.family"
+   ],
+   "measure": [
+    "位",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The people you belong to — ‘my folks’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family members, one’s family (the people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我的家人。",
+      "py": "Zhè shì wǒ de jiārén.",
+      "tr": "This is my family.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "我很想我的家人。",
+      "py": "Wǒ hěn xiǎng wǒ de jiārén.",
+      "tr": "I miss my family a lot.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "我们是家人。",
+      "py": "Wǒmen shì jiārén.",
+      "tr": "We are family.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我的家人",
+      "tr": "my family"
+     },
+     {
+      "text": "想家人",
+      "tr": "to miss one’s family"
+     },
+     {
+      "text": "家人和朋友",
+      "tr": "family and friends"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "家",
+      "register": "neutral",
+      "nuance": "family and home"
+     },
+     {
+      "word": "亲人",
+      "register": "neutral",
+      "nuance": "one’s dear ones, next of kin — warmer"
+     }
+    ],
+    "etymology": {
+     "text": "家 ‘family’ + 人 ‘person’: ‘family people’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "家人们 ‘family members!’ has become the typical greeting of Chinese livestreamers to their viewers — like ‘folks!’."
+    ],
+    "pitfalls": [
+     "家人 means the people: 我的家人 ‘my family (members)’; a family as a unit is 一个家庭."
+    ],
+    "subtleties": [
+     "我们是家人 ‘we are family’ is also said to close friends — the same image as English."
+    ]
+   }
+  },
+  {
+   "id": "zh:fumu",
+   "lemma": "父母",
+   "trad": "父母",
+   "pinyin": "fù mǔ",
+   "pos": "NOUN",
+   "senses": [
+    "family.parents"
+   ],
+   "measureNone": "a pair word that is not counted with a measure word: 我的父母, 他父母",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Father and mother together — respect, care, filial duty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parents, father and mother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.parents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的父母都是老师。",
+      "py": "Wǒ de fùmǔ dōu shì lǎoshī.",
+      "tr": "My parents are both teachers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他父母住在上海。",
+      "py": "Tā fùmǔ zhù zài Shànghǎi.",
+      "tr": "His parents live in Shanghai.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "父母都希望孩子幸福。",
+      "py": "Fùmǔ dōu xīwàng háizi xìngfú.",
+      "tr": "All parents want their children to be happy.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "父母亲",
+      "tr": "parents (formal)"
+     },
+     {
+      "text": "孝敬父母",
+      "tr": "to honour and care for one’s parents"
+     },
+     {
+      "text": "父母家",
+      "tr": "one’s parents’ home"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "可怜天下父母心",
+      "tr": "pity the hearts of all the parents under heaven",
+      "kind": "saying",
+      "meaning": "parents everywhere give everything for their children",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "爸妈",
+      "register": "colloquial",
+      "nuance": "bàmā: ‘mum and dad’"
+     },
+     {
+      "word": "双亲",
+      "register": "literary",
+      "nuance": "shuāngqīn: ‘both parents’"
+     }
+    ],
+    "etymology": {
+     "text": "A pairing (dvandva) of 父 ‘father’ + 母 ‘mother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German Eltern and Greek γονείς, Chinese has one word for ‘parents’ — but it is simply ‘father-mother’."
+    ],
+    "pitfalls": [
+     "The order is fixed: 父母 ‘father-mother’, never *母父.",
+     "You talk ABOUT your parents with 父母; you call them 爸 and 妈."
+    ],
+    "subtleties": [
+     "父母 is neutral to formal; in casual speech people say 我爸妈."
+    ]
+   }
+  },
+  {
+   "id": "zh:mama",
+   "lemma": "妈妈",
+   "trad": "媽媽",
+   "pinyin": "mā ma",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Mum — the first word of many children.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mum, mother (the everyday word and form of address)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.mother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我妈妈。",
+      "py": "Zhè shì wǒ māma.",
+      "tr": "This is my mum.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈，我回来了！",
+      "py": "Māma, wǒ huílai le!",
+      "tr": "Mum, I’m home!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我妈妈是医生。",
+      "py": "Wǒ māma shì yīshēng.",
+      "tr": "My mother is a doctor.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "爸爸妈妈",
+      "tr": "mum and dad"
+     },
+     {
+      "text": "我妈妈",
+      "tr": "my mum"
+     },
+     {
+      "text": "当妈妈",
+      "tr": "to become a mother"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "世上只有妈妈好",
+      "tr": "only mum is good in all the world",
+      "kind": "saying",
+      "meaning": "nothing equals a mother’s love (the first line of a famous children’s song)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "母亲",
+      "register": "formal",
+      "nuance": "the written and formal ‘mother’ — never a form of address"
+     },
+     {
+      "word": "妈",
+      "register": "colloquial",
+      "nuance": "the short form: 我妈, 妈！"
+     },
+     {
+      "word": "娘",
+      "register": "regional",
+      "nuance": "niáng: ‘mother’ in northern dialects and old novels"
+     }
+    ],
+    "etymology": {
+     "text": "媽: semantic 女 ‘woman’ + phonetic 馬; a colloquial form of 母 ‘mother’, from Proto-Sino-Tibetan *mow.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "妈 mā, 麻 má ‘hemp’, 马 mǎ ‘horse’, 骂 mà ‘to scold’ — the classic drill of the four tones starts with ‘mother’.",
+     "Like Greek μαμά, Russian мама and German Mama, 妈妈 is a nursery word built on ‘ma’."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: māma, not *māmā.",
+     "妈 alone (mā) is the informal short form: 我妈 ‘my mum’, 妈！ ‘Mum!’"
+    ],
+    "subtleties": [
+     "With family words 的 is usually dropped: 我妈妈 ‘my mother’; 我的妈妈 sounds more emphatic or written."
+    ]
+   }
+  },
+  {
+   "id": "zh:muqin",
+   "lemma": "母亲",
+   "trad": "母親",
+   "pinyin": "mǔ qīn",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "Mother in writing and in solemn speech — and the ‘mother’ of rivers and countries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mother (formal, written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.mother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我母亲是老师。",
+      "py": "Wǒ mǔqīn shì lǎoshī.",
+      "tr": "My mother is a teacher.",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "母亲节快乐！",
+      "py": "Mǔqīn Jié kuàilè!",
+      "tr": "Happy Mother’s Day!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "黄河是中国的母亲河。",
+      "py": "Huáng Hé shì Zhōngguó de mǔqīn hé.",
+      "tr": "The Yellow River is China’s mother river.",
+      "register": "formal",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "母亲节",
+      "tr": "Mother’s Day"
+     },
+     {
+      "text": "母亲河",
+      "tr": "mother river"
+     },
+     {
+      "text": "年轻的母亲",
+      "tr": "a young mother"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "妈妈",
+      "register": "neutral",
+      "nuance": "the everyday word and form of address"
+     },
+     {
+      "word": "母",
+      "register": "literary",
+      "nuance": "in compounds: 母女 ‘mother and daughter’, 母语 ‘mother tongue’"
+     }
+    ],
+    "etymology": {
+     "text": "母 ‘mother’ (in the oracle bones 女 ‘woman’ with two added dots; from Proto-Sino-Tibetan *məʔ) + 亲 ‘parent, close relative’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Mother’s Day (母亲节) is on the second Sunday of May in China, as in Germany and Greece."
+    ],
+    "pitfalls": [
+     "母亲 is formal or written: you use it in a speech or an essay, but you call your mother 妈 / 妈妈 — never *母亲 to her face."
+    ],
+    "subtleties": [
+     "母亲 is the word for figurative mothers: 母亲河 ‘mother river’, 祖国母亲 ‘the motherland’."
+    ]
+   }
+  },
+  {
+   "id": "zh:baba",
+   "lemma": "爸爸",
+   "trad": "爸爸",
+   "pinyin": "bà ba",
+   "pos": "NOUN",
+   "senses": [
+    "family.father"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Dad — the everyday father.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dad, father (the everyday word and form of address)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.father"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我爸爸。",
+      "py": "Zhè shì wǒ bàba.",
+      "tr": "This is my dad.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "爸爸，你在哪里？",
+      "py": "Bàba, nǐ zài nǎli?",
+      "tr": "Dad, where are you?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我爸爸五十岁。",
+      "py": "Wǒ bàba wǔshí suì.",
+      "tr": "My father is fifty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "爸爸妈妈",
+      "tr": "mum and dad"
+     },
+     {
+      "text": "我爸",
+      "tr": "my dad"
+     },
+     {
+      "text": "当爸爸",
+      "tr": "to become a dad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "父亲",
+      "register": "formal",
+      "nuance": "the written and formal ‘father’"
+     },
+     {
+      "word": "爸",
+      "register": "colloquial",
+      "nuance": "the short form: 我爸, 爸！"
+     },
+     {
+      "word": "爹",
+      "register": "regional",
+      "nuance": "diē: ‘dad’ in northern dialects and old novels"
+     }
+    ],
+    "etymology": {
+     "text": "爸: semantic 父 ‘father’ + phonetic 巴. A colloquial form of 父 that kept the old b- sound, from Proto-Sino-Tibetan *p/ba ‘male; father’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "bàba sounds like Turkish baba ‘father’ and Arabic bābā ‘dad’ — b/p nursery words for ‘father’ are found worldwide (Greek μπαμπάς, Russian папа, Hebrew אַבָּא)."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: bàba."
+    ],
+    "subtleties": [
+     "爸爸 and 妈妈 are both how you talk about your parents and how you call them; 父亲 / 母亲 are never used to call them."
+    ]
+   }
+  },
+  {
+   "id": "zh:fuqin",
+   "lemma": "父亲",
+   "trad": "父親",
+   "pinyin": "fù qīn",
+   "pos": "NOUN",
+   "senses": [
+    "family.father"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "Father in writing and in solemn speech.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "father (formal, written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.father"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我父亲是工程师。",
+      "py": "Wǒ fùqīn shì gōngchéngshī.",
+      "tr": "My father is an engineer.",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "父亲节快乐！",
+      "py": "Fùqīn Jié kuàilè!",
+      "tr": "Happy Father’s Day!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "他是两个孩子的父亲。",
+      "py": "Tā shì liǎng ge háizi de fùqīn.",
+      "tr": "He is the father of two children.",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "父亲节",
+      "tr": "Father’s Day"
+     },
+     {
+      "text": "当父亲",
+      "tr": "to become a father"
+     },
+     {
+      "text": "父亲和母亲",
+      "tr": "father and mother"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "爸爸",
+      "register": "neutral",
+      "nuance": "the everyday word and form of address"
+     },
+     {
+      "word": "父",
+      "register": "literary",
+      "nuance": "in compounds: 父子 ‘father and son’"
+     }
+    ],
+    "etymology": {
+     "text": "父: pictogram of a hand holding a stone axe; from Proto-Sino-Tibetan *paʔ ‘male; father’. + 亲 ‘parent, close relative’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Taiwan Father’s Day is 8 August: 八八 bābā sounds like 爸爸.",
+     "Zhu Ziqing’s essay 背影 ‘The View of My Father’s Back’ (1925) is a school classic about a father’s love."
+    ],
+    "pitfalls": [
+     "父亲 is formal: you would never call your father *父亲 — call him 爸 or 爸爸."
+    ],
+    "subtleties": [
+     "In father-son words the literary 父 is used: 父子 ‘father and son’, 父女 ‘father and daughter’."
+    ]
+   }
+  },
+  {
+   "id": "zh:erzi",
+   "lemma": "儿子",
+   "trad": "兒子",
+   "pinyin": "ér zi",
+   "pos": "NOUN",
+   "senses": [
+    "family.son"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A son — in old China the heir who carried on the family line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "son",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.son"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个儿子。",
+      "py": "Wǒ yǒu yí ge érzi.",
+      "tr": "I have a son.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他儿子今年十岁。",
+      "py": "Tā érzi jīnnián shí suì.",
+      "tr": "His son is ten this year.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "儿子，吃饭了！",
+      "py": "Érzi, chīfàn le!",
+      "tr": "Son, dinner’s ready!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大儿子",
+      "tr": "eldest son"
+     },
+     {
+      "text": "小儿子",
+      "tr": "youngest son"
+     },
+     {
+      "text": "儿子和女儿",
+      "tr": "son and daughter"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "养儿防老",
+      "tr": "raise sons to guard against old age",
+      "kind": "saying",
+      "meaning": "children (traditionally sons) look after their parents in old age",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "孩子",
+      "register": "neutral",
+      "nuance": "child — son or daughter"
+     },
+     {
+      "word": "犬子",
+      "register": "formal",
+      "nuance": "quǎnzǐ: ‘my humble son’ (literally ‘dog-son’), a very modest way to speak of one’s own son"
+     },
+     {
+      "word": "令郎",
+      "register": "honorific",
+      "nuance": "lìngláng: ‘your son’, very polite"
+     }
+    ],
+    "etymology": {
+     "text": "儿 (traditional 兒): pictogram of an infant with an open fontanelle; from Proto-Sino-Tibetan *m/s-ŋa-j ‘small; offspring’. + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Polite Chinese is modest about one’s own family and flattering about others’: my son 犬子 ‘dog-son’, your son 令郎 ‘fine young man’."
+    ],
+    "pitfalls": [
+     "érzi has a toneless zi; the 儿 at the end of words like 一点儿 is the -r ending (erhua) and does not mean ‘son’."
+    ],
+    "subtleties": [
+     "Parents often call their son simply 儿子 — ‘son!’ — as a form of address."
+    ]
+   }
+  },
+  {
+   "id": "zh:nver",
+   "lemma": "女儿",
+   "trad": "女兒",
+   "pinyin": "nǚ ér",
+   "pos": "NOUN",
+   "senses": [
+    "family.daughter"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A daughter — ‘dad’s little padded jacket’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "daughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.daughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他们有一个女儿。",
+      "py": "Tāmen yǒu yí ge nǚ'ér.",
+      "tr": "They have a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我女儿两岁。",
+      "py": "Wǒ nǚ'ér liǎng suì.",
+      "tr": "My daughter is two.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "女儿是爸爸的小棉袄。",
+      "py": "Nǚ'ér shì bàba de xiǎo mián'ǎo.",
+      "tr": "A daughter is her dad’s little padded jacket.",
+      "register": "colloquial",
+      "context": "saying",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大女儿",
+      "tr": "eldest daughter"
+     },
+     {
+      "text": "小女儿",
+      "tr": "youngest daughter"
+     },
+     {
+      "text": "女儿和儿子",
+      "tr": "daughter and son"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "女儿是爸爸的小棉袄",
+      "tr": "a daughter is her dad’s little padded jacket",
+      "kind": "saying",
+      "meaning": "a daughter warms and cares for her parents",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "闺女",
+      "register": "regional",
+      "nuance": "guīnü: ‘daughter, girl’ in northern speech"
+     },
+     {
+      "word": "千金",
+      "register": "honorific",
+      "nuance": "qiānjīn: ‘your daughter’ (literally ‘a thousand gold’)"
+     }
+    ],
+    "etymology": {
+     "text": "女 ‘woman’ (pictogram of a kneeling woman) + 儿 ‘child’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "女儿红 ‘daughter red’ is a Shaoxing rice wine that by tradition was buried when a daughter was born and opened at her wedding."
+    ],
+    "pitfalls": [
+     "女儿 is a daughter (a relation), 女孩 a girl (any girl): 我有一个女儿 vs 那个女孩是学生."
+    ],
+    "subtleties": [
+     "Politely, someone else’s daughter is 您的千金 ‘your thousand gold’."
+    ]
+   }
+  },
+  {
+   "id": "zh:gege",
+   "lemma": "哥哥",
+   "trad": "哥哥",
+   "pinyin": "gē ge",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Big brother — protector, rival, role model.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "elder brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个哥哥。",
+      "py": "Wǒ yǒu yí ge gēge.",
+      "tr": "I have an elder brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我哥哥是老师。",
+      "py": "Wǒ gēge shì lǎoshī.",
+      "tr": "My elder brother is a teacher.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "哥哥，等等我！",
+      "py": "Gēge, děngdeng wǒ!",
+      "tr": "Big brother, wait for me!",
+      "register": "neutral",
+      "context": "play",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大哥",
+      "tr": "eldest brother; ‘big brother’ (address)"
+     },
+     {
+      "text": "我哥",
+      "tr": "my brother (informal)"
+     },
+     {
+      "text": "亲哥哥",
+      "tr": "one’s own (blood) brother"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "兄",
+      "register": "literary",
+      "nuance": "xiōng: ‘elder brother’ in written style and compounds"
+     },
+     {
+      "word": "大哥",
+      "register": "colloquial",
+      "nuance": "the eldest brother; also a friendly address to an older man"
+     },
+     {
+      "word": "兄长",
+      "register": "formal",
+      "nuance": "xiōngzhǎng: ‘elder brother’, respectful"
+     }
+    ],
+    "etymology": {
+     "text": "哥 first meant ‘to sing’ (可 doubled). The sense ‘elder brother’ comes from 阿哥, borrowed from Xianbei *aqa ‘elder brother’ (compare Mongolian aq-a).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "哥 came into Chinese from the Xianbei word aqa ‘elder brother’ — compare Turkish ağabey (abi) ‘big brother’, from Turkic aka."
+    ],
+    "pitfalls": [
+     "There is no everyday word for just ‘brother’: say 哥哥 (older) or 弟弟 (younger). ‘Brothers and sisters’ is 兄弟姐妹.",
+     "The second syllable is toneless: gēge."
+    ],
+    "subtleties": [
+     "哥 is also a friendly address for a young man a little older than you: 张哥 ‘brother Zhang’."
+    ]
+   }
+  },
+  {
+   "id": "zh:didi",
+   "lemma": "弟弟",
+   "trad": "弟弟",
+   "pinyin": "dì di",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Little brother — the one you look after.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "younger brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     },
+     {
+      "id": "s2",
+      "def": "a friendly address for a boy or young man younger than you",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有两个弟弟。",
+      "py": "Wǒ yǒu liǎng ge dìdi.",
+      "tr": "I have two younger brothers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我弟弟是学生。",
+      "py": "Wǒ dìdi shì xuésheng.",
+      "tr": "My younger brother is a student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "小弟弟，你几岁？",
+      "py": "Xiǎo dìdi, nǐ jǐ suì?",
+      "tr": "Little boy, how old are you?",
+      "register": "neutral",
+      "context": "meeting a child",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小弟弟",
+      "tr": "little boy (address)"
+     },
+     {
+      "text": "亲弟弟",
+      "tr": "one’s own younger brother"
+     },
+     {
+      "text": "表弟",
+      "tr": "younger male cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "弟",
+      "register": "literary",
+      "nuance": "dì: ‘younger brother’ in written style and compounds (兄弟)"
+     },
+     {
+      "word": "兄弟",
+      "register": "regional",
+      "nuance": "xiōngdi (toneless di): ‘younger brother’ in some regions"
+     }
+    ],
+    "etymology": {
+     "text": "弟: pictogram of a spear handle wrapped in a leather strap; the orderly winding suggested ‘sequence’, hence ‘the one who comes after’ — the younger brother.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "第 ‘order, -th’ (第一 ‘first’) is 弟 under bamboo 竹 — the same idea of sequence."
+    ],
+    "pitfalls": [
+     "弟弟 is only the younger brother; an older one is 哥哥. The second syllable is toneless: dìdi."
+    ],
+    "subtleties": [
+     "小弟 xiǎodì is also a man’s modest ‘I’ among friends, and ‘underling’ in gang talk."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiongdi",
+   "lemma": "兄弟",
+   "trad": "兄弟",
+   "pinyin": "xiōng dì",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "measure": "Wiktionary lists only 位, for the figurative sense ‘brothers, good friends’; brothers in a family are counted with 个 (我有两个兄弟), as every Mandarin dictionary and textbook shows."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Brothers — and brotherhood between friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brothers (elder and younger)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) bro, mate — a close male friend",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他们是兄弟。",
+      "py": "Tāmen shì xiōngdì.",
+      "tr": "They are brothers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你有兄弟姐妹吗？",
+      "py": "Nǐ yǒu xiōngdì jiěmèi ma?",
+      "tr": "Do you have brothers or sisters?",
+      "register": "neutral",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "兄弟，谢谢你！",
+      "py": "Xiōngdì, xièxie nǐ!",
+      "tr": "Thanks, bro!",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "兄弟姐妹",
+      "tr": "brothers and sisters, siblings"
+     },
+     {
+      "text": "亲兄弟",
+      "tr": "blood brothers"
+     },
+     {
+      "text": "好兄弟",
+      "tr": "a good buddy"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "亲兄弟，明算账",
+      "tr": "even blood brothers keep clear accounts",
+      "kind": "proverb",
+      "meaning": "money matters should be settled clearly, even among family",
+      "register": "neutral"
+     },
+     {
+      "text": "四海之内皆兄弟",
+      "tr": "within the four seas all are brothers",
+      "kind": "quote",
+      "meaning": "all people are brothers",
+      "register": "literary",
+      "source": "Analects 12.5"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "弟兄",
+      "register": "colloquial",
+      "nuance": "dìxiong: ‘brothers; comrades, the lads’"
+     },
+     {
+      "word": "哥们儿",
+      "register": "slang",
+      "nuance": "gēmenr: ‘buddies, mates’"
+     }
+    ],
+    "etymology": {
+     "text": "A pairing (dvandva) of 兄 ‘elder brother’ + 弟 ‘younger brother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Pearl S. Buck called her translation of the novel 水浒传 ‘All Men Are Brothers’, after the line 四海之内皆兄弟."
+    ],
+    "pitfalls": [
+     "兄弟 is ‘brothers’ (a set) or ‘bro’; for ‘my brother’ choose 我哥哥 or 我弟弟.",
+     "Said xiōngdì it is ‘brothers’; with a toneless di (xiōngdi) it can mean ‘younger brother’ in some regions."
+    ],
+    "subtleties": [
+     "兄弟姐妹 ‘brothers and sisters’ is the Chinese for ‘siblings’ — there is no single everyday word."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiejie",
+   "lemma": "姐姐",
+   "trad": "姐姐",
+   "pinyin": "jiě jie",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Big sister — and a friendly address for a young woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "elder sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "a friendly address for a young woman a little older than you",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个姐姐。",
+      "py": "Wǒ yǒu yí ge jiějie.",
+      "tr": "I have an elder sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我姐姐是医生。",
+      "py": "Wǒ jiějie shì yīshēng.",
+      "tr": "My elder sister is a doctor.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "姐姐，这个多少钱？",
+      "py": "Jiějie, zhège duōshao qián?",
+      "tr": "Excuse me (miss), how much is this?",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大姐",
+      "tr": "eldest sister; ‘ma’am’ (address)"
+     },
+     {
+      "text": "我姐",
+      "tr": "my sister (informal)"
+     },
+     {
+      "text": "亲姐姐",
+      "tr": "one’s own elder sister"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姐",
+      "register": "colloquial",
+      "nuance": "the short form: 我姐, 姐！"
+     },
+     {
+      "word": "姊",
+      "register": "literary",
+      "nuance": "zǐ: ‘elder sister’ in old and written style"
+     }
+    ],
+    "etymology": {
+     "text": "姐: semantic 女 ‘woman’ + phonetic 且.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "小姐 ‘Miss’ (literally ‘little elder sister’) is a polite address, but on the mainland it is often avoided now because it can suggest a bar hostess — 姐 or 美女 are heard instead."
+    ],
+    "pitfalls": [
+     "Only the OLDER sister is 姐姐; the younger is 妹妹. The second syllable is toneless: jiějie."
+    ],
+    "subtleties": [
+     "Shop assistants and waitresses are often addressed as 姐 / 姐姐 or 美女 ‘beautiful lady’ — informal but friendly."
+    ]
+   }
+  },
+  {
+   "id": "zh:meimei",
+   "lemma": "妹妹",
+   "trad": "妹妹",
+   "pinyin": "mèi mei",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Little sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "younger sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "a friendly address for a girl younger than you (小妹妹)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个妹妹。",
+      "py": "Wǒ yǒu yí ge mèimei.",
+      "tr": "I have a younger sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我妹妹八岁。",
+      "py": "Wǒ mèimei bā suì.",
+      "tr": "My younger sister is eight.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "小妹妹，别哭了。",
+      "py": "Xiǎo mèimei, bié kū le.",
+      "tr": "Don’t cry, little girl.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小妹妹",
+      "tr": "little girl (address)"
+     },
+     {
+      "text": "亲妹妹",
+      "tr": "one’s own younger sister"
+     },
+     {
+      "text": "表妹",
+      "tr": "younger female cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "妹",
+      "register": "colloquial",
+      "nuance": "the short form: 我妹"
+     },
+     {
+      "word": "小妹",
+      "register": "colloquial",
+      "nuance": "the youngest sister; ‘little sis’"
+     }
+    ],
+    "etymology": {
+     "text": "妹: semantic 女 ‘woman’ + phonetic 未.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish also splits sisters by age — abla ‘elder sister’ vs kız kardeş — but Chinese does it for brothers too: 哥哥, 弟弟, 姐姐, 妹妹."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: mèimei."
+    ],
+    "subtleties": [
+     "妹子 mèizi is slang for ‘girl, young woman’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiemei",
+   "lemma": "姐妹",
+   "trad": "姐妹",
+   "pinyin": "jiě mèi",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sisters — and sisterhood among friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sisters (elder and younger)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) girls, girlfriends — women addressing each other",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "她们是姐妹。",
+      "py": "Tāmen shì jiěmèi.",
+      "tr": "They are sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我有两个姐妹。",
+      "py": "Wǒ yǒu liǎng ge jiěmèi.",
+      "tr": "I have two sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "姐妹们，加油！",
+      "py": "Jiěmèimen, jiāyóu!",
+      "tr": "Come on, girls!",
+      "register": "colloquial",
+      "context": "sport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "兄弟姐妹",
+      "tr": "brothers and sisters, siblings"
+     },
+     {
+      "text": "亲姐妹",
+      "tr": "real sisters"
+     },
+     {
+      "text": "好姐妹",
+      "tr": "best girlfriend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姊妹",
+      "register": "literary",
+      "nuance": "zǐmèi: ‘sisters’ in written and some regional speech"
+     },
+     {
+      "word": "闺蜜",
+      "register": "colloquial",
+      "nuance": "guīmì: a girl’s best friend — not a relative"
+     }
+    ],
+    "etymology": {
+     "text": "姐 ‘elder sister’ + 妹 ‘younger sister’: both together.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese, like English, has ‘sister cities’: 姐妹城市."
+    ],
+    "pitfalls": [
+     "姐妹 says nothing about age: 我有两个姐妹 ‘I have two sisters’ — older or younger."
+    ],
+    "subtleties": [
+     "Women call close friends 姐妹, as English speakers say ‘sis’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhangfu",
+   "lemma": "丈夫",
+   "trad": "丈夫",
+   "pinyin": "zhàng fu",
+   "pos": "NOUN",
+   "senses": [
+    "family.husband"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Husband — the neutral word of forms and introductions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "husband",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.husband"
+     },
+     {
+      "id": "s2",
+      "def": "(zhàngfū, literary) man, a real man",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我丈夫。",
+      "py": "Zhè shì wǒ zhàngfu.",
+      "tr": "This is my husband.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "她丈夫是老师。",
+      "py": "Tā zhàngfu shì lǎoshī.",
+      "tr": "Her husband is a teacher.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "男子汉大丈夫，说话要算数。",
+      "py": "Nánzǐhàn dà zhàngfū, shuōhuà yào suànshù.",
+      "tr": "A real man keeps his word.",
+      "register": "literary",
+      "context": "saying",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "她丈夫",
+      "tr": "her husband"
+     },
+     {
+      "text": "丈夫和妻子",
+      "tr": "husband and wife"
+     },
+     {
+      "text": "好丈夫",
+      "tr": "a good husband"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "大丈夫能屈能伸",
+      "tr": "a true man can bend and stretch",
+      "kind": "proverb",
+      "meaning": "a strong person adapts to circumstances",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "老公",
+      "register": "colloquial",
+      "nuance": "affectionate, among friends and family"
+     },
+     {
+      "word": "先生",
+      "register": "neutral",
+      "nuance": "polite: 我先生 ‘my husband’"
+     },
+     {
+      "word": "爱人",
+      "register": "dated",
+      "nuance": "àiren: ‘spouse’ in the mainland of the 1950s–80s"
+     }
+    ],
+    "etymology": {
+     "text": "丈 (a unit of length, about 3 m) + 夫 ‘man’: first ‘grown man’ — still in 大丈夫 ‘a real man’ — then ‘husband’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Japanese 大丈夫 daijōbu ‘it’s all right’ comes from the same Chinese 大丈夫 ‘a real man’."
+    ],
+    "pitfalls": [
+     "zhàngfu with a toneless fu is ‘husband’; zhàngfū with a full tone is the literary ‘man’ in 大丈夫."
+    ],
+    "subtleties": [
+     "丈夫 is neutral and fine everywhere; with friends people say 老公, in polite company 我先生."
+    ]
+   }
+  },
+  {
+   "id": "zh:laogong",
+   "lemma": "老公",
+   "trad": "老公",
+   "pinyin": "lǎo gōng",
+   "pos": "NOUN",
+   "senses": [
+    "family.husband"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "Hubby — warm, familiar, also a term of endearment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "husband (colloquial, affectionate)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "family.husband"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我老公是厨师。",
+      "py": "Wǒ lǎogōng shì chúshī.",
+      "tr": "My husband is a cook.",
+      "register": "colloquial",
+      "context": "chat",
+      "sense": "s1"
+     },
+     {
+      "text": "老公，你在哪儿？",
+      "py": "Lǎogōng, nǐ zài nǎr?",
+      "tr": "Honey, where are you?",
+      "register": "colloquial",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "她和她老公都在北京工作。",
+      "py": "Tā hé tā lǎogōng dōu zài Běijīng gōngzuò.",
+      "tr": "She and her husband both work in Beijing.",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我老公",
+      "tr": "my hubby"
+     },
+     {
+      "text": "老公和老婆",
+      "tr": "husband and wife"
+     },
+     {
+      "text": "她老公",
+      "tr": "her husband"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "丈夫",
+      "register": "neutral",
+      "nuance": "the neutral word"
+     },
+     {
+      "word": "先生",
+      "register": "neutral",
+      "nuance": "polite: 我先生 ‘my husband’"
+     },
+     {
+      "word": "爱人",
+      "register": "dated",
+      "nuance": "‘spouse’, old mainland usage"
+     }
+    ],
+    "etymology": {
+     "text": "老 (a familiar prefix, as in 老师) + 公 ‘male; lord’. In imperial times the toneless lǎogong was slang for a eunuch.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In imperial times 老公 (said lǎogong) was slang for ‘eunuch’ — today it is every wife’s ‘hubby’."
+    ],
+    "pitfalls": [
+     "Colloquial: fine with friends and family, not in a formal letter or speech — there use 丈夫 or 先生."
+    ],
+    "subtleties": [
+     "Couples call each other 老公 / 老婆 as terms of endearment, like ‘honey’."
+    ]
+   }
+  },
+  {
+   "id": "zh:qizi",
+   "lemma": "妻子",
+   "trad": "妻子",
+   "pinyin": "qī zi",
+   "pos": "NOUN",
+   "senses": [
+    "family.wife"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wife — the neutral word of forms and introductions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wife",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.wife"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我妻子。",
+      "py": "Zhè shì wǒ qīzi.",
+      "tr": "This is my wife.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "他妻子是医生。",
+      "py": "Tā qīzi shì yīshēng.",
+      "tr": "His wife is a doctor.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "他和妻子有两个孩子。",
+      "py": "Tā hé qīzi yǒu liǎng ge háizi.",
+      "tr": "He and his wife have two children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "他的妻子",
+      "tr": "his wife"
+     },
+     {
+      "text": "妻子和孩子",
+      "tr": "wife and children"
+     },
+     {
+      "text": "丈夫和妻子",
+      "tr": "husband and wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "老婆",
+      "register": "colloquial",
+      "nuance": "affectionate, among friends and family"
+     },
+     {
+      "word": "太太",
+      "register": "neutral",
+      "nuance": "tàitai: ‘wife; Mrs.’ — polite"
+     },
+     {
+      "word": "夫人",
+      "register": "honorific",
+      "nuance": "fūrén: someone else’s wife, ‘Madame’ (总统夫人)"
+     },
+     {
+      "word": "爱人",
+      "register": "dated",
+      "nuance": "‘spouse’, old mainland usage"
+     }
+    ],
+    "etymology": {
+     "text": "妻: 肀 ‘a hand holding hair’ + 女 ‘woman’ — usually read as ‘marriage by capture’. + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Classical Chinese 妻子 (qīzǐ) meant ‘wife and children’ — the modern ‘wife’ has a toneless zi."
+    ],
+    "pitfalls": [
+     "Say qīzi with a toneless zi.",
+     "夫人 is only for someone else’s wife, politely — never for your own."
+    ],
+    "subtleties": [
+     "妻子 is neutral: in forms, news and introductions; 老婆 with friends; 太太 politely."
+    ]
+   }
+  },
+  {
+   "id": "zh:laopo",
+   "lemma": "老婆",
+   "trad": "老婆",
+   "pinyin": "lǎo po",
+   "pos": "NOUN",
+   "senses": [
+    "family.wife"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "Wifey — warm, familiar, also a term of endearment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wife (colloquial, affectionate)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "family.wife"
+     },
+     {
+      "id": "s2",
+      "def": "(internet slang) ‘waifu’, a fan’s favourite female character",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我老婆是老师。",
+      "py": "Wǒ lǎopo shì lǎoshī.",
+      "tr": "My wife is a teacher.",
+      "register": "colloquial",
+      "context": "chat",
+      "sense": "s1"
+     },
+     {
+      "text": "老婆，我回来了！",
+      "py": "Lǎopo, wǒ huílai le!",
+      "tr": "Honey, I’m home!",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他很怕老婆。",
+      "py": "Tā hěn pà lǎopo.",
+      "tr": "He is very henpecked.",
+      "register": "humorous",
+      "context": "joke",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我老婆",
+      "tr": "my wife"
+     },
+     {
+      "text": "怕老婆",
+      "tr": "to be henpecked"
+     },
+     {
+      "text": "老婆孩子",
+      "tr": "wife and kids"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "妻子",
+      "register": "neutral",
+      "nuance": "the neutral word"
+     },
+     {
+      "word": "太太",
+      "register": "neutral",
+      "nuance": "polite ‘wife; Mrs.’"
+     },
+     {
+      "word": "媳妇",
+      "register": "regional",
+      "nuance": "xífu: ‘wife’ in northern speech"
+     }
+    ],
+    "etymology": {
+     "text": "老 ‘old; familiar prefix’ + 婆 ‘(old) woman’ (女 + phonetic 波). With full tones, lǎopó still means ‘old woman’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "老婆饼 ‘wife cake’ is a flaky Cantonese pastry with a sweet winter-melon filling."
+    ],
+    "pitfalls": [
+     "Colloquial: fine with friends, not in a formal letter — there use 妻子 or 太太.",
+     "lǎopo is ‘wife’; 老婆婆 lǎopópo is ‘old lady, granny’."
+    ],
+    "subtleties": [
+     "Husbands use 老婆 as ‘honey’ when speaking to their wife."
+    ]
+   }
+  },
+  {
+   "id": "zh:baobao",
+   "lemma": "宝宝",
+   "trad": "寶寶",
+   "pinyin": "bǎo bao",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral",
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "A little treasure — babies, toddlers, and sweethearts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby, little child (affectionate)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     },
+     {
+      "id": "s2",
+      "def": "darling, sweetheart (to a child or a lover)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们有一个宝宝。",
+      "py": "Wǒmen yǒu yí ge bǎobao.",
+      "tr": "We have a baby.",
+      "register": "neutral",
+      "context": "family news",
+      "sense": "s1"
+     },
+     {
+      "text": "宝宝两岁了。",
+      "py": "Bǎobao liǎng suì le.",
+      "tr": "The baby is two now.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "宝宝，我想你了。",
+      "py": "Bǎobao, wǒ xiǎng nǐ le.",
+      "tr": "Babe, I miss you.",
+      "register": "colloquial",
+      "context": "love",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小宝宝",
+      "tr": "little baby"
+     },
+     {
+      "text": "生宝宝",
+      "tr": "to have a baby"
+     },
+     {
+      "text": "宝宝的",
+      "tr": "the baby’s"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "婴儿",
+      "register": "neutral",
+      "nuance": "yīng’ér: ‘infant’ — the neutral word of doctors and shops"
+     },
+     {
+      "word": "宝贝",
+      "register": "colloquial",
+      "nuance": "bǎobèi: ‘treasure, darling’"
+     },
+     {
+      "word": "小孩",
+      "register": "colloquial",
+      "nuance": "xiǎohái: ‘kid’"
+     }
+    ],
+    "etymology": {
+     "text": "A diminutive of 宝 ‘treasure, precious’ formed by reduplication; 寶 shows jade and cowries under a roof — treasures in a house.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The simplified 宝 is jade (玉) under a roof (宀) — a treasure kept at home."
+    ],
+    "pitfalls": [
+     "宝宝 is affectionate; on forms and in medicine the word is 婴儿."
+    ],
+    "subtleties": [
+     "宝宝 is also a sweet ‘babe’ between lovers, and online a cute ‘I, me’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yinger",
+   "lemma": "婴儿",
+   "trad": "嬰兒",
+   "pinyin": "yīng ér",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral",
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "An infant — the neutral word of hospitals and baby shops.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby, infant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个婴儿三个月大。",
+      "py": "Zhège yīng'ér sān ge yuè dà.",
+      "tr": "This baby is three months old.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "医院里有很多婴儿。",
+      "py": "Yīyuàn li yǒu hěn duō yīng'ér.",
+      "tr": "There are many babies in the hospital.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "婴儿需要很多睡眠。",
+      "py": "Yīng'ér xūyào hěn duō shuìmián.",
+      "tr": "Babies need a lot of sleep.",
+      "register": "neutral",
+      "context": "science",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "婴儿车",
+      "tr": "pram, baby carriage"
+     },
+     {
+      "text": "婴儿床",
+      "tr": "cot, crib"
+     },
+     {
+      "text": "新生婴儿",
+      "tr": "newborn baby"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "宝宝",
+      "register": "colloquial",
+      "nuance": "affectionate ‘baby’"
+     },
+     {
+      "word": "新生儿",
+      "register": "technical",
+      "nuance": "xīnshēng’ér: ‘newborn’ (medical)"
+     },
+     {
+      "word": "婴孩",
+      "register": "literary",
+      "nuance": "yīnghái: ‘infant’"
+     }
+    ],
+    "etymology": {
+     "text": "嬰: semantic 貝 ‘cowrie’ + phonetic 癭 + 儿 ‘child’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Daoist alchemy 婴儿 ‘the infant’ was a code name for lead."
+    ],
+    "pitfalls": [
+     "婴儿 is for babies up to about one year; an older little child is a 宝宝 or 小孩."
+    ],
+    "subtleties": [
+     "婴儿 is the word of shops and doctors: 婴儿用品 ‘baby products’, 婴儿食品 ‘baby food’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zufumu",
+   "lemma": "祖父母",
+   "trad": "祖父母",
+   "pinyin": "zǔ fù mǔ",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandparents"
+   ],
+   "measureNone": "a pair word that is not counted with a measure word: 我的祖父母",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandparents in writing — strictly the father’s parents.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandparents (strictly: the father’s parents)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.grandparents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的祖父母住在乡下。",
+      "py": "Wǒ de zǔfùmǔ zhù zài xiāngxià.",
+      "tr": "My grandparents live in the countryside.",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "很多孩子由祖父母照顾。",
+      "py": "Hěn duō háizi yóu zǔfùmǔ zhàogù.",
+      "tr": "Many children are looked after by their grandparents.",
+      "register": "formal",
+      "context": "society",
+      "sense": "s1"
+     },
+     {
+      "text": "他的祖父母和外祖父母都还健在。",
+      "py": "Tā de zǔfùmǔ hé wàizǔfùmǔ dōu hái jiànzài.",
+      "tr": "Both sets of his grandparents are still alive.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外祖父母",
+      "tr": "maternal grandparents (formal)"
+     },
+     {
+      "text": "祖父母和父母",
+      "tr": "grandparents and parents"
+     },
+     {
+      "text": "我的祖父母",
+      "tr": "my grandparents"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "爷爷奶奶",
+      "register": "colloquial",
+      "nuance": "‘grandpa and grandma’ on the father’s side — what people say"
+     },
+     {
+      "word": "外公外婆",
+      "register": "colloquial",
+      "nuance": "the mother’s parents"
+     },
+     {
+      "word": "老人",
+      "register": "neutral",
+      "nuance": "‘the old folks’ (at home)"
+     }
+    ],
+    "etymology": {
+     "text": "祖 ‘ancestor; grandfather’ (示 ‘altar’ + phonetic 且) + 父 ‘father’ + 母 ‘mother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "祖 means ‘ancestor’: 祖国 ‘motherland’ is literally ‘the ancestors’ country’ — like German Vaterland."
+    ],
+    "pitfalls": [
+     "Strictly 祖父母 are the father’s parents; the mother’s are 外祖父母. In daily talk say 爷爷奶奶 / 外公外婆."
+    ],
+    "subtleties": [
+     "祖父母 belongs to writing — forms, essays, the news; nobody calls their grandparents that."
+    ]
+   }
+  },
+  {
+   "id": "zh:yeye",
+   "lemma": "爷爷",
+   "trad": "爺爺",
+   "pinyin": "yé ye",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandpa on the father’s side — and any old man you greet kindly.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather (father’s father)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandfather"
+     },
+     {
+      "id": "s2",
+      "def": "grandpa — a friendly address for an old man",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爷爷八十岁。",
+      "py": "Wǒ yéye bāshí suì.",
+      "tr": "My grandfather is eighty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "爷爷和奶奶住在一起。",
+      "py": "Yéye hé nǎinai zhù zài yìqǐ.",
+      "tr": "Grandpa and grandma live together.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "老爷爷，您坐这里吧。",
+      "py": "Lǎo yéye, nín zuò zhèli ba.",
+      "tr": "Grandpa, please sit here.",
+      "register": "neutral",
+      "context": "on the bus",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "爷爷奶奶",
+      "tr": "grandpa and grandma (father’s side)"
+     },
+     {
+      "text": "老爷爷",
+      "tr": "old man (friendly address)"
+     },
+     {
+      "text": "爷爷家",
+      "tr": "grandpa’s home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "祖父",
+      "register": "formal",
+      "nuance": "zǔfù: ‘grandfather’ in writing"
+     },
+     {
+      "word": "爷",
+      "register": "colloquial",
+      "nuance": "yé: short form, also ‘old man, master’"
+     }
+    ],
+    "etymology": {
+     "text": "爺: semantic 父 ‘father’ + phonetic 耶. Vovin and McCraw compare Old Turkic uya ‘relative’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "大爷 dàye is a polite way to address an older man in the north — and in some places it means ‘father’s elder brother’."
+    ],
+    "pitfalls": [
+     "爷爷 is the father’s father; the mother’s father is 外公 (in the north 姥爷).",
+     "The second syllable is toneless: yéye."
+    ],
+    "subtleties": [
+     "Children call any old man 爷爷 or 老爷爷 out of respect."
+    ]
+   }
+  },
+  {
+   "id": "zh:waigong",
+   "lemma": "外公",
+   "trad": "外公",
+   "pinyin": "wài gōng",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandpa on the mother’s side.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather (mother’s father)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandfather"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我外公是医生。",
+      "py": "Wǒ wàigōng shì yīshēng.",
+      "tr": "My grandfather (mother’s father) is a doctor.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "我们去外公家。",
+      "py": "Wǒmen qù wàigōng jiā.",
+      "tr": "We’re going to grandpa’s.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "外公和外婆住在南京。",
+      "py": "Wàigōng hé wàipó zhù zài Nánjīng.",
+      "tr": "My mother’s parents live in Nanjing.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外公外婆",
+      "tr": "grandpa and grandma (mother’s side)"
+     },
+     {
+      "text": "外公家",
+      "tr": "grandpa’s home"
+     },
+     {
+      "text": "我外公",
+      "tr": "my grandpa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姥爷",
+      "register": "regional",
+      "nuance": "lǎoye: the northern word for the mother’s father"
+     },
+     {
+      "word": "外祖父",
+      "register": "formal",
+      "nuance": "wàizǔfù: ‘maternal grandfather’ in writing"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ (the mother’s side, outside the father’s line) + 公 ‘grandfather, old man’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "外 ‘outside’ reflects the old patrilineal view: the mother’s family was ‘outside’ the clan."
+    ],
+    "pitfalls": [
+     "外 marks the mother’s side: 外公, 外婆, 外孙. Don’t call your father’s father 外公 — he is 爷爷."
+    ],
+    "subtleties": [
+     "外公 / 外婆 are standard and southern; in the north many say 姥爷 / 姥姥."
+    ]
+   }
+  },
+  {
+   "id": "zh:nainai",
+   "lemma": "奶奶",
+   "trad": "奶奶",
+   "pinyin": "nǎi nai",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Granny on the father’s side — dumplings, stories, spoiling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother (father’s mother)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandmother"
+     },
+     {
+      "id": "s2",
+      "def": "granny — a friendly address for an old woman",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我奶奶七十五岁。",
+      "py": "Wǒ nǎinai qīshíwǔ suì.",
+      "tr": "My grandmother is seventy-five.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "奶奶做的饺子最好吃。",
+      "py": "Nǎinai zuò de jiǎozi zuì hǎochī.",
+      "tr": "Grandma’s dumplings are the best.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "老奶奶，您慢走。",
+      "py": "Lǎo nǎinai, nín màn zǒu.",
+      "tr": "Take care, granny.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "爷爷奶奶",
+      "tr": "grandpa and grandma (father’s side)"
+     },
+     {
+      "text": "老奶奶",
+      "tr": "old lady (friendly address)"
+     },
+     {
+      "text": "奶奶家",
+      "tr": "grandma’s home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "祖母",
+      "register": "formal",
+      "nuance": "zǔmǔ: ‘grandmother’ in writing"
+     },
+     {
+      "word": "阿嬷",
+      "register": "regional",
+      "nuance": "āmā: ‘grandma’ in Taiwan and Fujian (from Min)"
+     }
+    ],
+    "etymology": {
+     "text": "奶: semantic 女 ‘woman’ + phonetic 乃; the character also means ‘milk, breast’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "奶 alone means ‘milk’ (牛奶 ‘cow’s milk’) — doubled, 奶奶 is ‘granny’."
+    ],
+    "pitfalls": [
+     "奶奶 is the father’s mother; the mother’s mother is 外婆 (in the north 姥姥).",
+     "The second syllable is toneless: nǎinai."
+    ],
+    "subtleties": [
+     "Children greet any old woman as 奶奶 or 老奶奶."
+    ]
+   }
+  },
+  {
+   "id": "zh:waipo",
+   "lemma": "外婆",
+   "trad": "外婆",
+   "pinyin": "wài pó",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Granny on the mother’s side — the bridge of the old lullaby.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother (mother’s mother)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandmother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我外婆六十八岁。",
+      "py": "Wǒ wàipó liùshíbā suì.",
+      "tr": "My grandmother (mother’s mother) is sixty-eight.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "外婆家在乡下。",
+      "py": "Wàipó jiā zài xiāngxià.",
+      "tr": "Grandma’s home is in the countryside.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "摇啊摇，摇到外婆桥。",
+      "py": "Yáo a yáo, yáo dào wàipó qiáo.",
+      "tr": "Rock-a-bye, rock-a-bye, to Grandma’s bridge.",
+      "register": "neutral",
+      "context": "lullaby",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外公外婆",
+      "tr": "grandpa and grandma (mother’s side)"
+     },
+     {
+      "text": "外婆家",
+      "tr": "grandma’s home"
+     },
+     {
+      "text": "外婆桥",
+      "tr": "grandma’s bridge (the lullaby)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "摇啊摇，摇到外婆桥",
+      "tr": "rock, rock, rock to grandma’s bridge",
+      "kind": "saying",
+      "meaning": "the opening of a famous nursery rhyme from the lower Yangtze region",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "姥姥",
+      "register": "regional",
+      "nuance": "lǎolao: the northern word for the mother’s mother"
+     },
+     {
+      "word": "外祖母",
+      "register": "formal",
+      "nuance": "wàizǔmǔ: ‘maternal grandmother’ in writing"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ (the mother’s side) + 婆 ‘old woman, grandmother’ (女 + phonetic 波; from Proto-Sino-Tibetan *pʷa-n ‘grandmother’, cognate with Burmese bhwa:).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "婆 ‘grandmother’ is an old Sino-Tibetan word: Burmese still says bhwa: for ‘grandmother’."
+    ],
+    "pitfalls": [
+     "外婆 is the mother’s mother; the father’s mother is 奶奶. 婆婆 alone means ‘mother-in-law (the husband’s mother)’ in standard Chinese."
+    ],
+    "subtleties": [
+     "Southern and standard: 外婆; northern: 姥姥."
+    ]
+   }
+  },
+  {
+   "id": "zh:sunzi",
+   "lemma": "孙子",
+   "trad": "孫子",
+   "pinyin": "sūn zi",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandson"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A grandson — the pride of grandparents.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandson (son’s son)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandson"
+     },
+     {
+      "id": "s2",
+      "def": "grandchild",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(northern, vulgar) bastard, coward (an insult)",
+      "register": [
+       "vulgar",
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "爷爷有三个孙子。",
+      "py": "Yéye yǒu sān ge sūnzi.",
+      "tr": "Grandpa has three grandsons.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这是我的孙子。",
+      "py": "Zhè shì wǒ de sūnzi.",
+      "tr": "This is my grandson.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "奶奶每天送孙子上学。",
+      "py": "Nǎinai měitiān sòng sūnzi shàngxué.",
+      "tr": "Grandma takes her grandson to school every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "孙子孙女",
+      "tr": "grandsons and granddaughters"
+     },
+     {
+      "text": "抱孙子",
+      "tr": "to hold a grandson — to become a grandparent"
+     },
+     {
+      "text": "大孙子",
+      "tr": "eldest grandson"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "孙儿",
+      "register": "literary",
+      "nuance": "sūn’ér: ‘grandson’ in written or old style"
+     },
+     {
+      "word": "孙辈",
+      "register": "formal",
+      "nuance": "sūnbèi: ‘the grandchildren’s generation’"
+     }
+    ],
+    "etymology": {
+     "text": "孫: 子 ‘son’ + 系 ‘to continue’ — the line continued; from Proto-Sino-Tibetan *sju(w)-n ‘grandchild’. + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "With a full tone, 孙子 Sūnzǐ is Sun Tzu, author of The Art of War (孙子兵法)."
+    ],
+    "pitfalls": [
+     "In northern slang 孙子 is an insult (‘bastard, coward’): 装孙子 ‘to play the meek grandson, grovel’ — context makes it clear."
+    ],
+    "subtleties": [
+     "孙子 is the son’s son; the daughter’s son is 外孙."
+    ]
+   }
+  },
+  {
+   "id": "zh:waisun",
+   "lemma": "外孙",
+   "trad": "外孫",
+   "pinyin": "wài sūn",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandson"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A grandson through one’s daughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandson (daughter’s son)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandson"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她有一个外孙。",
+      "py": "Tā yǒu yí ge wàisūn.",
+      "tr": "She has a grandson (her daughter’s son).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "外孙放假来外婆家。",
+      "py": "Wàisūn fàngjià lái wàipó jiā.",
+      "tr": "In the holidays her grandson comes to her house.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "这是我外孙，今年五岁。",
+      "py": "Zhè shì wǒ wàisūn, jīnnián wǔ suì.",
+      "tr": "This is my grandson, he’s five.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外孙女",
+      "tr": "granddaughter (daughter’s daughter)"
+     },
+     {
+      "text": "外孙和孙子",
+      "tr": "grandsons on both sides"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "外孙子",
+      "register": "colloquial",
+      "nuance": "the same with the suffix 子"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ (through a daughter, who married into another family) + 孙 ‘grandchild’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A daughter’s children traditionally belonged to her husband’s family — hence ‘outside’ grandchildren."
+    ],
+    "pitfalls": [
+     "外孙 is the DAUGHTER’s son; the son’s son is 孙子."
+    ],
+    "subtleties": [
+     "In everyday talk grandparents often just say 孙子 for both; 外孙 makes the side clear."
+    ]
+   }
+  },
+  {
+   "id": "zh:sunnv",
+   "lemma": "孙女",
+   "trad": "孫女",
+   "pinyin": "sūn nǚ",
+   "pos": "NOUN",
+   "senses": [
+    "family.granddaughter"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A granddaughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "granddaughter (son’s daughter)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.granddaughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他有两个孙女。",
+      "py": "Tā yǒu liǎng ge sūnnǚ.",
+      "tr": "He has two granddaughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "孙女今年上大学了。",
+      "py": "Sūnnǚ jīnnián shàng dàxué le.",
+      "tr": "My granddaughter started university this year.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "奶奶很疼孙女。",
+      "py": "Nǎinai hěn téng sūnnǚ.",
+      "tr": "Grandma dotes on her granddaughter.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "孙子孙女",
+      "tr": "grandchildren"
+     },
+     {
+      "text": "小孙女",
+      "tr": "little granddaughter"
+     },
+     {
+      "text": "孙女儿",
+      "tr": "granddaughter (with -r)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "孙女儿",
+      "register": "regional",
+      "nuance": "the same with the northern -r ending"
+     }
+    ],
+    "etymology": {
+     "text": "孙 ‘grandchild’ + 女 ‘female’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese makes the grandchild words like a grid: 孙 + 子 / 女, with 外 for the daughter’s side."
+    ],
+    "pitfalls": [
+     "孙女 is the son’s daughter; the daughter’s daughter is 外孙女."
+    ],
+    "subtleties": [
+     "孙女 has no toneless syllable: sūnnǚ."
+    ]
+   }
+  },
+  {
+   "id": "zh:waisunnv",
+   "lemma": "外孙女",
+   "trad": "外孫女",
+   "pinyin": "wài sūn nǚ",
+   "pos": "NOUN",
+   "senses": [
+    "family.granddaughter"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A granddaughter through one’s daughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "granddaughter (daughter’s daughter)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.granddaughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我的外孙女。",
+      "py": "Zhè shì wǒ de wàisūnnǚ.",
+      "tr": "This is my granddaughter (my daughter’s daughter).",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "外婆给外孙女买了一本书。",
+      "py": "Wàipó gěi wàisūnnǚ mǎi le yì běn shū.",
+      "tr": "Grandma bought her granddaughter a book.",
+      "register": "neutral",
+      "context": "gifts",
+      "sense": "s1"
+     },
+     {
+      "text": "我外孙女三岁了。",
+      "py": "Wǒ wàisūnnǚ sān suì le.",
+      "tr": "My granddaughter is three now.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外孙和外孙女",
+      "tr": "grandchildren through a daughter"
+     },
+     {
+      "text": "小外孙女",
+      "tr": "little granddaughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "外孙女儿",
+      "register": "regional",
+      "nuance": "the same with the northern -r ending"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ + 孙 ‘grandchild’ + 女 ‘female’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Three syllables for one relation — and every syllable tells you something: outside line, grandchild, female."
+    ],
+    "pitfalls": [
+     "外孙女 is the DAUGHTER’s daughter; the son’s daughter is 孙女."
+    ],
+    "subtleties": [
+     "外 always marks a link through a woman of the family: 外公, 外婆, 外孙, 外甥."
+    ]
+   }
+  },
+  {
+   "id": "zh:shushu",
+   "lemma": "叔叔",
+   "trad": "叔叔",
+   "pinyin": "shū shu",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Uncle — the father’s younger brother, and every friendly grown-up man.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle: the father’s younger brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "‘uncle’ — how children address a man of their parents’ age",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我叔叔是警察。",
+      "py": "Wǒ shūshu shì jǐngchá.",
+      "tr": "My uncle (father’s younger brother) is a policeman.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "叔叔有一个女儿。",
+      "py": "Shūshu yǒu yí ge nǚ'ér.",
+      "tr": "My uncle has a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "谢谢警察叔叔！",
+      "py": "Xièxie jǐngchá shūshu!",
+      "tr": "Thank you, Mr. Policeman!",
+      "register": "children",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "警察叔叔",
+      "tr": "Mr. Policeman (children’s word)"
+     },
+     {
+      "text": "叔叔阿姨",
+      "tr": "uncles and aunties — grown-ups"
+     },
+     {
+      "text": "二叔",
+      "tr": "second uncle"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "叔父",
+      "register": "formal",
+      "nuance": "shūfù: ‘father’s younger brother’ in writing"
+     },
+     {
+      "word": "叔",
+      "register": "colloquial",
+      "nuance": "the short form: 王叔 ‘uncle Wang’"
+     }
+    ],
+    "etymology": {
+     "text": "叔: a hand (又) planting a wooden stake (尗) — later borrowed for ‘father’s younger brother’; 叔叔 is a reduplicated, affectionate form.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old birth-order words 伯, 仲, 叔, 季 (first, second, third, fourth brother) survive in 伯伯 and 叔叔."
+    ],
+    "pitfalls": [
+     "叔叔 is strictly the father’s YOUNGER brother; the elder one is 伯伯, the mother’s brother 舅舅."
+    ],
+    "subtleties": [
+     "Children call any man of their parents’ age 叔叔 — like ‘uncle’ in many cultures."
+    ]
+   }
+  },
+  {
+   "id": "zh:bobo",
+   "lemma": "伯伯",
+   "trad": "伯伯",
+   "pinyin": "bó bo",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Uncle — the father’s elder brother; a respectful ‘sir’ for older men.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle: the father’s elder brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "a respectful address for a man older than one’s father",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我伯伯是医生。",
+      "py": "Wǒ bóbo shì yīshēng.",
+      "tr": "My uncle (father’s elder brother) is a doctor.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "伯伯比爸爸大五岁。",
+      "py": "Bóbo bǐ bàba dà wǔ suì.",
+      "tr": "My uncle is five years older than my father.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "王伯伯，您好！",
+      "py": "Wáng bóbo, nín hǎo!",
+      "tr": "Hello, uncle Wang!",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "伯伯和伯母",
+      "tr": "uncle and aunt (father’s elder brother and his wife)"
+     },
+     {
+      "text": "大伯",
+      "tr": "eldest uncle"
+     },
+     {
+      "text": "王伯伯",
+      "tr": "uncle Wang"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "伯父",
+      "register": "formal",
+      "nuance": "bófù: ‘father’s elder brother’ in writing; also a polite address"
+     },
+     {
+      "word": "大伯",
+      "register": "colloquial",
+      "nuance": "dàbó: the eldest uncle"
+     }
+    ],
+    "etymology": {
+     "text": "伯: semantic 人 ‘person’ + phonetic 白; 伯 is the old word for the eldest brother.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "伯 was the eldest of four brothers (伯, 仲, 叔, 季): Confucius’ courtesy name 仲尼 says he was a second son."
+    ],
+    "pitfalls": [
+     "伯伯 is OLDER than your father, 叔叔 younger."
+    ],
+    "subtleties": [
+     "伯伯 is also a respectful address for neighbours or older men you know."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiujiu",
+   "lemma": "舅舅",
+   "trad": "舅舅",
+   "pinyin": "jiù jiu",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The mother’s brother — traditionally an uncle with special authority.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle: the mother’s brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我舅舅在上海工作。",
+      "py": "Wǒ jiùjiu zài Shànghǎi gōngzuò.",
+      "tr": "My uncle (mother’s brother) works in Shanghai.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "舅舅是妈妈的哥哥。",
+      "py": "Jiùjiu shì māma de gēge.",
+      "tr": "My uncle is my mother’s elder brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "舅舅给了我一个红包。",
+      "py": "Jiùjiu gěi le wǒ yí ge hóngbāo.",
+      "tr": "My uncle gave me a red envelope.",
+      "register": "neutral",
+      "context": "New Year",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "舅舅和舅妈",
+      "tr": "uncle and aunt (mother’s brother and his wife)"
+     },
+     {
+      "text": "大舅",
+      "tr": "eldest maternal uncle"
+     },
+     {
+      "text": "舅舅家",
+      "tr": "uncle’s home"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "外甥打灯笼——照舅",
+      "tr": "the nephew carries a lantern — lighting up his uncle",
+      "kind": "saying",
+      "meaning": "a pun: 照舅 zhào jiù sounds like 照旧 ‘as before, as usual’",
+      "register": "colloquial"
+     },
+     {
+      "text": "娘亲舅大",
+      "tr": "mother is dearest, mother’s brother is greatest",
+      "kind": "saying",
+      "meaning": "the maternal uncle is the most important relative after one’s mother",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "舅",
+      "register": "colloquial",
+      "nuance": "the short form: 大舅, 二舅"
+     },
+     {
+      "word": "舅父",
+      "register": "formal",
+      "nuance": "jiùfù: ‘mother’s brother’ in writing"
+     }
+    ],
+    "etymology": {
+     "text": "舅: phonetic 臼 + semantic 男 ‘man’; possibly from Proto-Sino-Tibetan *kuʔ ‘elder brother; senior male relative’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "小舅子 is a man’s brother-in-law (his wife’s younger brother) — 舅 is used for the wife’s brothers too."
+    ],
+    "pitfalls": [
+     "舅舅 is the mother’s brother, older or younger — not the father’s brother (叔叔 / 伯伯)."
+    ],
+    "subtleties": [
+     "At weddings and family decisions the 舅舅 traditionally has a place of honour."
+    ]
+   }
+  },
+  {
+   "id": "zh:gufu",
+   "lemma": "姑父",
+   "trad": "姑父",
+   "pinyin": "gū fu",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An uncle by marriage — the husband of the father’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle: the husband of the father’s sister (姑姑)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我姑父是老师。",
+      "py": "Wǒ gūfu shì lǎoshī.",
+      "tr": "My uncle (my aunt’s husband) is a teacher.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "姑父和姑姑住在北京。",
+      "py": "Gūfu hé gūgu zhù zài Běijīng.",
+      "tr": "My uncle and aunt live in Beijing.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "姑父做的菜很好吃。",
+      "py": "Gūfu zuò de cài hěn hǎochī.",
+      "tr": "My uncle’s cooking is delicious.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "姑父和姑姑",
+      "tr": "uncle and aunt (father’s sister and her husband)"
+     },
+     {
+      "text": "大姑父",
+      "tr": "the eldest aunt’s husband"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姑夫",
+      "register": "neutral",
+      "nuance": "another spelling of the same word, also gūfu"
+     },
+     {
+      "word": "姑丈",
+      "register": "regional",
+      "nuance": "gūzhàng: the same, more formal or southern"
+     }
+    ],
+    "etymology": {
+     "text": "姑 ‘father’s sister’ + 父 ‘father, elder man’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Every uncle by marriage is named after his wife: 姑父 is ‘aunt-father’, 姨父 ‘(maternal) aunt-father’."
+    ],
+    "pitfalls": [
+     "姑父 is related by marriage: the husband of 姑姑 (your father’s sister)."
+    ],
+    "subtleties": [
+     "Written 姑父 or 姑夫; both are pronounced gūfu."
+    ]
+   }
+  },
+  {
+   "id": "zh:yifu",
+   "lemma": "姨父",
+   "trad": "姨父",
+   "pinyin": "yí fu",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An uncle by marriage — the husband of the mother’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle: the husband of the mother’s sister (阿姨, 姨妈)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我姨父是工程师。",
+      "py": "Wǒ yífu shì gōngchéngshī.",
+      "tr": "My uncle (my aunt’s husband) is an engineer.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "姨父和阿姨有两个孩子。",
+      "py": "Yífu hé āyí yǒu liǎng ge háizi.",
+      "tr": "My uncle and aunt have two children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "姨父开车送我们回家。",
+      "py": "Yífu kāichē sòng wǒmen huí jiā.",
+      "tr": "My uncle drove us home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "姨父和阿姨",
+      "tr": "uncle and aunt (mother’s sister and her husband)"
+     },
+     {
+      "text": "大姨父",
+      "tr": "the eldest maternal aunt’s husband"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姨夫",
+      "register": "neutral",
+      "nuance": "another spelling of the same word"
+     },
+     {
+      "word": "姨丈",
+      "register": "regional",
+      "nuance": "yízhàng: the same, more formal or southern"
+     }
+    ],
+    "etymology": {
+     "text": "姨 ‘mother’s sister’ (女 + phonetic 夷) + 父 ‘father, elder man’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary marks 姨父 as chiefly northern; 姨丈 is heard in the south and in Taiwan."
+    ],
+    "pitfalls": [
+     "姨父 is the husband of 阿姨 / 姨妈 (your mother’s sister) — related by marriage."
+    ],
+    "subtleties": [
+     "Written 姨父 or 姨夫; both are pronounced yífu."
+    ]
+   }
+  },
+  {
+   "id": "zh:gugu",
+   "lemma": "姑姑",
+   "trad": "姑姑",
+   "pinyin": "gū gu",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Auntie on the father’s side.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt: the father’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我姑姑是爸爸的妹妹。",
+      "py": "Wǒ gūgu shì bàba de mèimei.",
+      "tr": "My aunt is my father’s younger sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "姑姑给我买了一本书。",
+      "py": "Gūgu gěi wǒ mǎi le yì běn shū.",
+      "tr": "My aunt bought me a book.",
+      "register": "neutral",
+      "context": "gifts",
+      "sense": "s1"
+     },
+     {
+      "text": "杨过叫小龙女“姑姑”。",
+      "py": "Yáng Guò jiào Xiǎolóngnǚ “gūgu”.",
+      "tr": "Yang Guo calls Xiaolongnü ‘aunt’.",
+      "register": "literary",
+      "context": "novels",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "姑姑和姑父",
+      "tr": "aunt and uncle (father’s sister and her husband)"
+     },
+     {
+      "text": "大姑",
+      "tr": "the eldest aunt"
+     },
+     {
+      "text": "姑姑家",
+      "tr": "auntie’s home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姑妈",
+      "register": "colloquial",
+      "nuance": "gūmā: the father’s sister, especially a married one"
+     },
+     {
+      "word": "姑",
+      "register": "colloquial",
+      "nuance": "the short form: 大姑, 小姑"
+     }
+    ],
+    "etymology": {
+     "text": "姑: semantic 女 ‘woman’ + phonetic 古 — a kind of woman of the family (aunt, mother-in-law).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Jin Yong’s novel The Return of the Condor Heroes, Yang Guo calls his teacher — and later wife — 小龙女 ‘姑姑’, which makes their love a scandal in the story."
+    ],
+    "pitfalls": [
+     "姑姑 is only the father’s sister; the mother’s sister is 阿姨 / 姨妈."
+    ],
+    "subtleties": [
+     "小姑 (小姑子) is also a woman’s sister-in-law: her husband’s younger sister."
+    ]
+   }
+  },
+  {
+   "id": "zh:ayi",
+   "lemma": "阿姨",
+   "trad": "阿姨",
+   "pinyin": "ā yí",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Auntie — the mother’s sister, every friendly woman of mum’s age, and the nanny.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt: the mother’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     },
+     {
+      "id": "s2",
+      "def": "‘auntie’ — how children address a woman of their parents’ age",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "nanny, cleaning lady, household help",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我阿姨是妈妈的妹妹。",
+      "py": "Wǒ āyí shì māma de mèimei.",
+      "tr": "My aunt is my mother’s younger sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我阿姨有一个女儿。",
+      "py": "Wǒ āyí yǒu yí ge nǚ'ér.",
+      "tr": "My aunt has a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "阿姨好！",
+      "py": "Āyí hǎo!",
+      "tr": "Hello, auntie!",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s2"
+     },
+     {
+      "text": "我们家的阿姨每周来两次。",
+      "py": "Wǒmen jiā de āyí měi zhōu lái liǎng cì.",
+      "tr": "Our cleaning lady comes twice a week.",
+      "register": "neutral",
+      "context": "household",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "叔叔阿姨",
+      "tr": "uncles and aunties — grown-ups"
+     },
+     {
+      "text": "阿姨好",
+      "tr": "hello, auntie"
+     },
+     {
+      "text": "保洁阿姨",
+      "tr": "cleaning lady"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "姨妈",
+      "register": "colloquial",
+      "nuance": "yímā: the mother’s sister, usually married"
+     },
+     {
+      "word": "姨",
+      "register": "colloquial",
+      "nuance": "the short form: 大姨, 小姨"
+     }
+    ],
+    "etymology": {
+     "text": "阿 (a familiar prefix, as in 阿哥) + 姨 ‘mother’s sister’ (女 + phonetic 夷).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "大姨妈 ‘big auntie’ is a common slang euphemism for a woman’s period."
+    ],
+    "pitfalls": [
+     "阿姨 is both a relative (the mother’s sister) and an address for any woman of your mother’s age — and for a nanny or cleaner."
+    ],
+    "subtleties": [
+     "Children are taught to greet adults with 叔叔好 and 阿姨好."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiuma",
+   "lemma": "舅妈",
+   "trad": "舅媽",
+   "pinyin": "jiù mā",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An aunt by marriage — the wife of the mother’s brother.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt: the wife of the mother’s brother (舅舅)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "舅妈是舅舅的妻子。",
+      "py": "Jiùmā shì jiùjiu de qīzi.",
+      "tr": "My aunt is my (maternal) uncle’s wife.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我舅妈是护士。",
+      "py": "Wǒ jiùmā shì hùshi.",
+      "tr": "My aunt is a nurse.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "舅妈做的饭很好吃。",
+      "py": "Jiùmā zuò de fàn hěn hǎochī.",
+      "tr": "My aunt’s cooking is delicious.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "舅舅和舅妈",
+      "tr": "uncle and aunt (mother’s brother and his wife)"
+     },
+     {
+      "text": "大舅妈",
+      "tr": "the eldest uncle’s wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "舅母",
+      "register": "formal",
+      "nuance": "jiùmǔ: the same in writing"
+     }
+    ],
+    "etymology": {
+     "text": "舅 ‘mother’s brother’ + 妈 ‘mother, (married) woman’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The wives of uncles are named after their husbands: 舅妈 (舅舅’s wife), 婶婶 (叔叔’s wife), 伯母 (伯伯’s wife)."
+    ],
+    "pitfalls": [
+     "舅妈 is the wife of 舅舅 — related by marriage, not by blood."
+    ],
+    "subtleties": [
+     "Spoken jiùmā with a full first tone on 妈 — unlike 妈妈 māma."
+    ]
+   }
+  },
+  {
+   "id": "zh:shenshen",
+   "lemma": "婶婶",
+   "trad": "嬸嬸",
+   "pinyin": "shěn shen",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An aunt by marriage — the wife of the father’s younger brother.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt: the wife of the father’s younger brother (叔叔)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     },
+     {
+      "id": "s2",
+      "def": "a friendly address for a married woman a little younger than one’s mother",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "婶婶是叔叔的妻子。",
+      "py": "Shěnshen shì shūshu de qīzi.",
+      "tr": "My aunt is my uncle’s wife.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我婶婶在银行工作。",
+      "py": "Wǒ shěnshen zài yínháng gōngzuò.",
+      "tr": "My aunt works at a bank.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "隔壁的婶婶很热情。",
+      "py": "Gébì de shěnshen hěn rèqíng.",
+      "tr": "The lady next door is very warm-hearted.",
+      "register": "colloquial",
+      "context": "neighbours",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "叔叔和婶婶",
+      "tr": "uncle and aunt (father’s younger brother and his wife)"
+     },
+     {
+      "text": "二婶",
+      "tr": "the second uncle’s wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "婶子",
+      "register": "colloquial",
+      "nuance": "shěnzi: the same, northern and rural"
+     },
+     {
+      "word": "婶母",
+      "register": "formal",
+      "nuance": "shěnmǔ: the same in writing"
+     }
+    ],
+    "etymology": {
+     "text": "嬸: semantic 女 ‘woman’ + phonetic 審; a one-syllable fusion of 叔母 ‘father’s younger brother’s wife’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "婶 squeezes two syllables, 叔 + 母, into one — the way English ‘ma’am’ comes from ‘madam’."
+    ],
+    "pitfalls": [
+     "婶婶 is the wife of 叔叔; the wife of 伯伯 is 伯母, of 舅舅 舅妈."
+    ],
+    "subtleties": [
+     "In the countryside 婶 / 婶子 is a friendly address for a married woman of the village."
+    ]
+   }
+  },
+  {
+   "id": "zh:bomu",
+   "lemma": "伯母",
+   "trad": "伯母",
+   "pinyin": "bó mǔ",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral",
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "An aunt by marriage — and the polite way to greet a friend’s mother.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt: the wife of the father’s elder brother (伯伯)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     },
+     {
+      "id": "s2",
+      "def": "a polite address for a friend’s or colleague’s mother",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "伯母是伯伯的妻子。",
+      "py": "Bómǔ shì bóbo de qīzi.",
+      "tr": "My aunt is my (paternal) uncle’s wife.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我伯母是大学老师。",
+      "py": "Wǒ bómǔ shì dàxué lǎoshī.",
+      "tr": "My aunt is a university teacher.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "伯母，您好！",
+      "py": "Bómǔ, nín hǎo!",
+      "tr": "Hello, auntie! (to a friend’s mother)",
+      "register": "formal",
+      "context": "visiting",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "伯伯和伯母",
+      "tr": "uncle and aunt (father’s elder brother and his wife)"
+     },
+     {
+      "text": "伯父伯母",
+      "tr": "uncle and aunt (formal; also a friend’s parents)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "大妈",
+      "register": "colloquial",
+      "nuance": "dàmā: the eldest uncle’s wife; also ‘auntie’ for any older woman"
+     },
+     {
+      "word": "伯娘",
+      "register": "regional",
+      "nuance": "bóniáng: the same in some dialects"
+     }
+    ],
+    "etymology": {
+     "text": "伯 ‘father’s elder brother’ + 母 ‘mother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "When you visit a Chinese friend, greeting the parents as 伯父、伯母 (or 叔叔、阿姨) is polite — never by their names."
+    ],
+    "pitfalls": [
+     "伯母 is the wife of 伯伯, not of 叔叔 (that is 婶婶)."
+    ],
+    "subtleties": [
+     "伯母 is the polite, slightly formal address for a friend’s mother."
+    ]
+   }
+  },
+  {
+   "id": "zh:tangge",
+   "lemma": "堂哥",
+   "trad": "堂哥",
+   "pinyin": "táng gē",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — male, older than you; the child of your father’s brother — same surname line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (male, older than you): the child of your father’s brother — same surname line",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个堂哥。",
+      "py": "Wǒ yǒu yí ge tánggē.",
+      "tr": "I have an older cousin (my father’s brother’s son).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我堂哥是叔叔的儿子。",
+      "py": "Wǒ tánggē shì shūshu de érzi.",
+      "tr": "My cousin is my uncle’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "春节的时候，堂哥带我们去放鞭炮。",
+      "py": "Chūnjié de shíhou, tánggē dài wǒmen qù fàng biānpào.",
+      "tr": "At Spring Festival my cousin took us to set off firecrackers.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "堂兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我堂哥",
+      "tr": "my cousin"
+     },
+     {
+      "text": "大堂哥",
+      "tr": "the eldest of these cousins"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "堂兄",
+      "register": "formal",
+      "nuance": "tángxiōng: the same in writing"
+     }
+    ],
+    "etymology": {
+     "text": "堂 ‘hall’ (phonetic 尚 + 土 ‘earth’): cousins of the same ancestral hall, i.e. the same surname line + 哥 ‘elder brother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "堂哥 is the child of your father’s brother — same surname line; the corresponding cousin on the other side is 表哥."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:tangjie",
+   "lemma": "堂姐",
+   "trad": "堂姐",
+   "pinyin": "táng jiě",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — female, older than you; the child of your father’s brother — same surname line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (female, older than you): the child of your father’s brother — same surname line",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我堂姐在北京上大学。",
+      "py": "Wǒ tángjiě zài Běijīng shàng dàxué.",
+      "tr": "My older cousin goes to university in Beijing.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "那是我堂姐。",
+      "py": "Nà shì wǒ tángjiě.",
+      "tr": "That is my cousin (my father’s brother’s daughter).",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "堂姐比我大三岁。",
+      "py": "Tángjiě bǐ wǒ dà sān suì.",
+      "tr": "My cousin is three years older than me.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "堂兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我堂姐",
+      "tr": "my cousin"
+     },
+     {
+      "text": "大堂姐",
+      "tr": "the eldest of these cousins"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "堂姊",
+      "register": "literary",
+      "nuance": "tángzǐ: the same in written style"
+     }
+    ],
+    "etymology": {
+     "text": "堂 ‘hall’ (phonetic 尚 + 土 ‘earth’): cousins of the same ancestral hall, i.e. the same surname line + 姐 ‘elder sister’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "堂姐 is the child of your father’s brother — same surname line; the corresponding cousin on the other side is 表姐."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:tangdi",
+   "lemma": "堂弟",
+   "trad": "堂弟",
+   "pinyin": "táng dì",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — male, younger than you; the child of your father’s brother — same surname line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (male, younger than you): the child of your father’s brother — same surname line",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我堂弟十八岁。",
+      "py": "Wǒ tángdì shíbā suì.",
+      "tr": "My younger cousin is eighteen.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "堂弟是伯伯的儿子。",
+      "py": "Tángdì shì bóbo de érzi.",
+      "tr": "My cousin is my uncle’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "我和堂弟一起长大。",
+      "py": "Wǒ hé tángdì yìqǐ zhǎngdà.",
+      "tr": "My cousin and I grew up together.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "堂兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我堂弟",
+      "tr": "my cousin"
+     },
+     {
+      "text": "小堂弟",
+      "tr": "little cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "堂兄弟",
+      "register": "neutral",
+      "nuance": "tángxiōngdì: paternal male cousins as a group"
+     }
+    ],
+    "etymology": {
+     "text": "堂 ‘hall’ (phonetic 尚 + 土 ‘earth’): cousins of the same ancestral hall, i.e. the same surname line + 弟 ‘younger brother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "堂弟 is the child of your father’s brother — same surname line; the corresponding cousin on the other side is 表弟."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:tangmei",
+   "lemma": "堂妹",
+   "trad": "堂妹",
+   "pinyin": "táng mèi",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — female, younger than you; the child of your father’s brother — same surname line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (female, younger than you): the child of your father’s brother — same surname line",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她是我堂妹。",
+      "py": "Tā shì wǒ tángmèi.",
+      "tr": "She is my younger cousin (my father’s brother’s daughter).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我堂妹今年上小学。",
+      "py": "Wǒ tángmèi jīnnián shàng xiǎoxué.",
+      "tr": "My little cousin starts primary school this year.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "堂妹给我打电话。",
+      "py": "Tángmèi gěi wǒ dǎ diànhuà.",
+      "tr": "My cousin phones me.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "堂兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我堂妹",
+      "tr": "my cousin"
+     },
+     {
+      "text": "小堂妹",
+      "tr": "little cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "堂姐妹",
+      "register": "neutral",
+      "nuance": "tángjiěmèi: paternal female cousins as a group"
+     }
+    ],
+    "etymology": {
+     "text": "堂 ‘hall’ (phonetic 尚 + 土 ‘earth’): cousins of the same ancestral hall, i.e. the same surname line + 妹 ‘younger sister’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "堂妹 is the child of your father’s brother — same surname line; the corresponding cousin on the other side is 表妹."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:biaoge",
+   "lemma": "表哥",
+   "trad": "表哥",
+   "pinyin": "biǎo gē",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — male, older than you; the child of your mother’s brother or sister, or of your father’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (male, older than you): the child of your mother’s brother or sister, or of your father’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是我表哥，不是我哥哥。",
+      "py": "Tā shì wǒ biǎogē, bú shì wǒ gēge.",
+      "tr": "He is my cousin, not my brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我表哥是舅舅的儿子。",
+      "py": "Wǒ biǎogē shì jiùjiu de érzi.",
+      "tr": "My cousin is my (maternal) uncle’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "表哥开车来接我。",
+      "py": "Biǎogē kāichē lái jiē wǒ.",
+      "tr": "My cousin came to pick me up by car.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "表兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我表哥",
+      "tr": "my cousin"
+     },
+     {
+      "text": "大表哥",
+      "tr": "the eldest of these cousins"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "表兄",
+      "register": "formal",
+      "nuance": "biǎoxiōng: the same in writing"
+     }
+    ],
+    "etymology": {
+     "text": "表 ‘outside, outer’ (first an outer garment: 衣 ‘clothes’ + 毛 ‘fur’): the ‘outer’ cousins, through a woman of the family + 哥 ‘elder brother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In 红楼梦 (Dream of the Red Chamber) Jia Baoyu loves his cousin Lin Daiyu, the daughter of his father’s sister — a 表 cousin; such matches were once common."
+    ],
+    "pitfalls": [
+     "表哥 is the child of your mother’s brother or sister, or of your father’s sister; the corresponding cousin on the other side is 堂哥."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:biaojie",
+   "lemma": "表姐",
+   "trad": "表姐",
+   "pinyin": "biǎo jiě",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — female, older than you; the child of your mother’s brother or sister, or of your father’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (female, older than you): the child of your mother’s brother or sister, or of your father’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个表姐和两个表弟。",
+      "py": "Wǒ yǒu yí ge biǎojiě hé liǎng ge biǎodì.",
+      "tr": "I have an older female cousin and two younger male cousins.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "表姐是阿姨的女儿。",
+      "py": "Biǎojiě shì āyí de nǚ'ér.",
+      "tr": "My cousin is my (maternal) aunt’s daughter.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "表姐结婚了。",
+      "py": "Biǎojiě jiéhūn le.",
+      "tr": "My cousin got married.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "表兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我表姐",
+      "tr": "my cousin"
+     },
+     {
+      "text": "大表姐",
+      "tr": "the eldest of these cousins"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "表姊",
+      "register": "literary",
+      "nuance": "biǎozǐ: the same in written style"
+     }
+    ],
+    "etymology": {
+     "text": "表 ‘outside, outer’ (first an outer garment: 衣 ‘clothes’ + 毛 ‘fur’): the ‘outer’ cousins, through a woman of the family + 姐 ‘elder sister’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "表姐 is the child of your mother’s brother or sister, or of your father’s sister; the corresponding cousin on the other side is 堂姐."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:biaodi",
+   "lemma": "表弟",
+   "trad": "表弟",
+   "pinyin": "biǎo dì",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — male, younger than you; the child of your mother’s brother or sister, or of your father’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (male, younger than you): the child of your mother’s brother or sister, or of your father’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我表弟是学生。",
+      "py": "Wǒ biǎodì shì xuésheng.",
+      "tr": "My younger cousin is a student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "表弟是姑姑的儿子。",
+      "py": "Biǎodì shì gūgu de érzi.",
+      "tr": "My cousin is my (paternal) aunt’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "暑假表弟来我家玩。",
+      "py": "Shǔjià biǎodì lái wǒ jiā wán.",
+      "tr": "In the summer holidays my cousin comes to stay with us.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "表兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我表弟",
+      "tr": "my cousin"
+     },
+     {
+      "text": "小表弟",
+      "tr": "little cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "表兄弟",
+      "register": "neutral",
+      "nuance": "biǎoxiōngdì: maternal (表) male cousins as a group"
+     }
+    ],
+    "etymology": {
+     "text": "表 ‘outside, outer’ (first an outer garment: 衣 ‘clothes’ + 毛 ‘fur’): the ‘outer’ cousins, through a woman of the family + 弟 ‘younger brother’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Marriage between 表 cousins was once common in China; the 1980 Marriage Law forbids marriage between blood relatives up to the third generation, which includes all cousins."
+    ],
+    "pitfalls": [
+     "表弟 is the child of your mother’s brother or sister, or of your father’s sister; the corresponding cousin on the other side is 堂弟."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:biaomei",
+   "lemma": "表妹",
+   "trad": "表妹",
+   "pinyin": "biǎo mèi",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — female, younger than you; the child of your mother’s brother or sister, or of your father’s sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (female, younger than you): the child of your mother’s brother or sister, or of your father’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "那是我表妹。",
+      "py": "Nà shì wǒ biǎomèi.",
+      "tr": "That is my younger cousin.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     },
+     {
+      "text": "表妹是舅舅的女儿。",
+      "py": "Biǎomèi shì jiùjiu de nǚ'ér.",
+      "tr": "My cousin is my (maternal) uncle’s daughter.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "我表妹会弹钢琴。",
+      "py": "Wǒ biǎomèi huì tán gāngqín.",
+      "tr": "My little cousin can play the piano.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "表兄弟姐妹",
+      "tr": "cousins on this side (as a group)"
+     },
+     {
+      "text": "我表妹",
+      "tr": "my cousin"
+     },
+     {
+      "text": "小表妹",
+      "tr": "little cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "表姐妹",
+      "register": "neutral",
+      "nuance": "biǎojiěmèi: 表 female cousins as a group"
+     }
+    ],
+    "etymology": {
+     "text": "表 ‘outside, outer’ (first an outer garment: 衣 ‘clothes’ + 毛 ‘fur’): the ‘outer’ cousins, through a woman of the family + 妹 ‘younger sister’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In 红楼梦 Lin Daiyu is Jia Baoyu’s 表妹 — the daughter of his father’s sister: father’s sisters’ children are 表, not 堂."
+    ],
+    "pitfalls": [
+     "表妹 is the child of your mother’s brother or sister, or of your father’s sister; the corresponding cousin on the other side is 堂妹."
+    ],
+    "subtleties": [
+     "Chinese cousin words tell you four things at once: the side (堂 / 表), the sex and whether the cousin is older or younger than you."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhizi",
+   "lemma": "侄子",
+   "trad": "姪子",
+   "pinyin": "zhí zi",
+   "pos": "NOUN",
+   "senses": [
+    "family.nephew"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A nephew — your brother’s son, the same surname line.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nephew: the son of one’s brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.nephew"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个侄子。",
+      "py": "Wǒ yǒu yí ge zhízi.",
+      "tr": "I have a nephew (my brother’s son).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "侄子是我哥哥的儿子。",
+      "py": "Zhízi shì wǒ gēge de érzi.",
+      "tr": "My nephew is my elder brother’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "我侄子今年上小学。",
+      "py": "Wǒ zhízi jīnnián shàng xiǎoxué.",
+      "tr": "My nephew starts primary school this year.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "侄子侄女",
+      "tr": "nephews and nieces (brother’s children)"
+     },
+     {
+      "text": "大侄子",
+      "tr": "eldest nephew"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "侄儿",
+      "register": "regional",
+      "nuance": "zhí’ér: the same, colloquial and regional"
+     },
+     {
+      "word": "侄",
+      "register": "literary",
+      "nuance": "zhí: in written style and compounds"
+     }
+    ],
+    "etymology": {
+     "text": "姪: semantic 女 ‘woman’ + phonetic 至; from Proto-Sino-Tibetan *b/m-ləj ‘grandchild; nephew’. The simplified 侄 has 亻 ‘person’ instead of 女.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The traditional character 姪 has 女 ‘woman’; the simplified 侄 has 亻 ‘person’ — the same word."
+    ],
+    "pitfalls": [
+     "侄子 is your BROTHER’s son; your sister’s son is 外甥."
+    ],
+    "subtleties": [
+     "侄子 belongs to the same surname line as you — traditionally a possible heir for a man without sons."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhinv",
+   "lemma": "侄女",
+   "trad": "姪女",
+   "pinyin": "zhí nǚ",
+   "pos": "NOUN",
+   "senses": [
+    "family.niece"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A niece — your brother’s daughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "niece: the daughter of one’s brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.niece"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有两个侄女。",
+      "py": "Wǒ yǒu liǎng ge zhínǚ.",
+      "tr": "I have two nieces (my brother’s daughters).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "侄女是我弟弟的女儿。",
+      "py": "Zhínǚ shì wǒ dìdi de nǚ'ér.",
+      "tr": "My niece is my younger brother’s daughter.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "我的侄女五岁。",
+      "py": "Wǒ de zhínǚ wǔ suì.",
+      "tr": "My niece is five.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "侄子侄女",
+      "tr": "nephews and nieces (brother’s children)"
+     },
+     {
+      "text": "小侄女",
+      "tr": "little niece"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "侄女儿",
+      "register": "regional",
+      "nuance": "the same with the northern -r ending"
+     }
+    ],
+    "etymology": {
+     "text": "侄 ‘brother’s child’ (traditional 姪) + 女 ‘female’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Sichuan 侄女 is used for any niece, Wiktionary notes — in the standard it is only the brother’s daughter."
+    ],
+    "pitfalls": [
+     "侄女 is your BROTHER’s daughter; your sister’s daughter is 外甥女."
+    ],
+    "subtleties": [
+     "Like all these words, 侄女 works from your side: you are her 叔叔 / 伯伯 / 姑姑."
+    ]
+   }
+  },
+  {
+   "id": "zh:waisheng",
+   "lemma": "外甥",
+   "trad": "外甥",
+   "pinyin": "wài sheng",
+   "pos": "NOUN",
+   "senses": [
+    "family.nephew"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A nephew — your sister’s son.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nephew: the son of one’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.nephew"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我外甥是我姐姐的儿子。",
+      "py": "Wǒ wàisheng shì wǒ jiějie de érzi.",
+      "tr": "My nephew is my elder sister’s son.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "外甥来舅舅家玩。",
+      "py": "Wàisheng lái jiùjiu jiā wán.",
+      "tr": "The nephew comes to visit his uncle.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "我外甥十二岁。",
+      "py": "Wǒ wàisheng shí'èr suì.",
+      "tr": "My nephew is twelve.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外甥女",
+      "tr": "niece (sister’s daughter)"
+     },
+     {
+      "text": "外甥和舅舅",
+      "tr": "nephew and uncle"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "外甥打灯笼——照舅",
+      "tr": "the nephew carries a lantern — lighting up his uncle",
+      "kind": "saying",
+      "meaning": "a pun: 照舅 sounds like 照旧 ‘as usual, as before’",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "外甥儿",
+      "register": "regional",
+      "nuance": "the same with the northern -r ending"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ + 甥 ‘sister’s son’ (生 ‘to give birth’ + 男; from Proto-Sino-Tibetan *sriŋ ‘sister’, cognate with Tibetan sring mo).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pun 外甥打灯笼——照舅 (照旧) ‘as usual’ is one of the best-known 歇后语 — two-part riddle sayings."
+    ],
+    "pitfalls": [
+     "外甥 is your SISTER’s son; your brother’s son is 侄子. In some dialects 外甥 can also mean a daughter’s son."
+    ],
+    "subtleties": [
+     "From the nephew’s side you are his 舅舅 (if you are a man) or 姨 / 阿姨 (if a woman)."
+    ]
+   }
+  },
+  {
+   "id": "zh:waishengnv",
+   "lemma": "外甥女",
+   "trad": "外甥女",
+   "pinyin": "wài sheng nǚ",
+   "pos": "NOUN",
+   "senses": [
+    "family.niece"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A niece — your sister’s daughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "niece: the daughter of one’s sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.niece"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的外甥女三岁。",
+      "py": "Wǒ de wàishengnǚ sān suì.",
+      "tr": "My niece is three.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "外甥女是我妹妹的女儿。",
+      "py": "Wàishengnǚ shì wǒ mèimei de nǚ'ér.",
+      "tr": "My niece is my younger sister’s daughter.",
+      "register": "neutral",
+      "context": "family tree",
+      "sense": "s1"
+     },
+     {
+      "text": "我给外甥女买了一个包。",
+      "py": "Wǒ gěi wàishengnǚ mǎi le yí ge bāo.",
+      "tr": "I bought my niece a bag.",
+      "register": "neutral",
+      "context": "gifts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外甥和外甥女",
+      "tr": "nephews and nieces (sister’s children)"
+     },
+     {
+      "text": "小外甥女",
+      "tr": "little niece"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "外甥女儿",
+      "register": "regional",
+      "nuance": "the same with the northern -r ending"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ + 甥 ‘sister’s child’ + 女 ‘female’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English has one ‘niece’, Chinese four: 侄女 (brother’s), 外甥女 (sister’s) — and for a wife’s side further words exist."
+    ],
+    "pitfalls": [
+     "外甥女 is your SISTER’s daughter; your brother’s daughter is 侄女."
+    ],
+    "subtleties": [
+     "外 again marks the link through a woman of the family — here your sister."
+    ]
+   }
+  },
+  {
+   "id": "zh:qinqi",
+   "lemma": "亲戚",
+   "trad": "親戚",
+   "pinyin": "qīn qi",
+   "pos": "NOUN",
+   "senses": [
+    "family.relative"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Relatives — the round of New Year visits, help, obligations.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "relative, relation",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.relative"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有很多亲戚。",
+      "py": "Wǒ yǒu hěn duō qīnqi.",
+      "tr": "I have lots of relatives.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "春节我们去看亲戚。",
+      "py": "Chūnjié wǒmen qù kàn qīnqi.",
+      "tr": "At Spring Festival we visit our relatives.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "他是我的远房亲戚。",
+      "py": "Tā shì wǒ de yuǎnfáng qīnqi.",
+      "tr": "He is a distant relative of mine.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "走亲戚",
+      "tr": "to visit relatives"
+     },
+     {
+      "text": "远房亲戚",
+      "tr": "distant relative"
+     },
+     {
+      "text": "亲戚朋友",
+      "tr": "relatives and friends"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "远亲不如近邻",
+      "tr": "a distant relative is not as good as a near neighbour",
+      "kind": "proverb",
+      "meaning": "in need, people close by help more than family far away",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "亲属",
+      "register": "formal",
+      "nuance": "qīnshǔ: ‘relatives, kin’ (legal and official)"
+     },
+     {
+      "word": "亲人",
+      "register": "neutral",
+      "nuance": "qīnrén: one’s closest family, dear ones"
+     }
+    ],
+    "etymology": {
+     "text": "亲 ‘close; parent; kin’ (traditional 親: phonetic + 見 ‘to see’) + 戚, first a battle-axe, later borrowed for ‘relative’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "So many terms exist that phone apps called 亲戚计算器 ‘relatives calculator’ tell you what to call, say, your father’s sister’s husband."
+    ],
+    "pitfalls": [
+     "亲戚 are relatives outside your own household (aunts, cousins, in-laws); your parents and siblings are 家人.",
+     "Spoken qīnqi with a toneless second syllable."
+    ],
+    "subtleties": [
+     "走亲戚 ‘walking the relatives’ is the round of visits during the New Year holidays."
+    ]
+   }
+  },
+  {
+   "id": "zh:de",
+   "lemma": "的",
+   "trad": "的",
+   "pinyin": "de",
+   "pos": "PART",
+   "senses": [],
+   "role": "links a modifier to a noun; after a pronoun or a noun it marks the owner: 我的书 ‘my book’, 老师的钥匙 ‘the teacher’s key’ — with close family and one’s home it is usually left out: 我妈妈, 我家",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most frequent character of Chinese — the glue between an owner or a description and a noun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "possessive: ’s, of (我的 ‘my’, 老师的 ‘the teacher’s’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "links a description to a noun (红色的车 ‘a red car’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the one(s) that … (我要大的 ‘I want the big one’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我的书。",
+      "py": "Zhè shì wǒ de shū.",
+      "tr": "This is my book.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "那是老师的钥匙。",
+      "py": "Nà shì lǎoshī de yàoshi.",
+      "tr": "That is the teacher’s key.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢红色的车。",
+      "py": "Wǒ xǐhuan hóngsè de chē.",
+      "tr": "I like red cars.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s2"
+     },
+     {
+      "text": "我要大的。",
+      "py": "Wǒ yào dà de.",
+      "tr": "I want the big one.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我的",
+      "tr": "my, mine"
+     },
+     {
+      "text": "你的",
+      "tr": "your, yours"
+     },
+     {
+      "text": "他们的",
+      "tr": "their, theirs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "之",
+      "register": "literary",
+      "nuance": "zhī: the classical ‘of’, still in set phrases: 母亲之河"
+     }
+    ],
+    "etymology": {
+     "text": "Written 的 since it was borrowed for the Northern Chinese particle de; earlier the particle was written 底. Probably a weakened form of classical 之 or of 者.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "的 is the most frequent character in Chinese texts."
+    ],
+    "pitfalls": [
+     "的 comes AFTER the owner: 我的书 ‘my book’, never *的我书 or *书的我.",
+     "的 is toneless: de."
+    ],
+    "subtleties": [
+     "我的 alone means ‘mine’: 这本书是我的 ‘this book is mine’."
+    ]
+   }
+  },
+  {
+   "id": "zh:kou",
+   "lemma": "口",
+   "trad": "口",
+   "pinyin": "kǒu",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for the members of a family (literally ‘mouths’ to feed): 我家有四口人 ‘there are four people in my family’; elsewhere people are counted with 个 or 位",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
   }
  ],
- "absent": []
+ "absent": [
+  {
+   "concept": "poss.my",
+   "reason": "Chinese has no possessive word for “my”: the personal pronoun + the particle 的 does it (我的书 ‘my book’). With close family and one’s home the 的 is usually dropped (我妈妈 ‘my mother’).",
+   "use": "我的 + noun (我的书 ‘my book’); with family: 我妈妈 ‘my mother’"
+  },
+  {
+   "concept": "poss.your.sg",
+   "reason": "Chinese has no possessive word for “your (of one person)”: the personal pronoun + the particle 的 does it (你的钥匙 ‘your key’; politely 您的). With close family and one’s home the 的 is usually dropped (你爸爸 ‘your dad’).",
+   "use": "你的 + noun (你的钥匙 ‘your key’; politely 您的); with family: 你爸爸 ‘your dad’"
+  },
+  {
+   "concept": "poss.his",
+   "reason": "Chinese has no possessive word for “his”: the personal pronoun + the particle 的 does it (他的手机 ‘his phone’). With close family and one’s home the 的 is usually dropped (他哥哥 ‘his elder brother’).",
+   "use": "他的 + noun (他的手机 ‘his phone’); with family: 他哥哥 ‘his elder brother’"
+  },
+  {
+   "concept": "poss.her",
+   "reason": "Chinese has no possessive word for “her”: the personal pronoun + the particle 的 does it (她的包 ‘her bag’ — it sounds exactly like 他的 tā de). With close family and one’s home the 的 is usually dropped (她妹妹 ‘her younger sister’).",
+   "use": "她的 + noun (她的包 ‘her bag’ — it sounds exactly like 他的 tā de); with family: 她妹妹 ‘her younger sister’"
+  },
+  {
+   "concept": "poss.our",
+   "reason": "Chinese has no possessive word for “our”: the personal pronoun + the particle 的 does it (我们的老师 ‘our teacher’). With close family and one’s home the 的 is usually dropped (我们家 ‘our family, our home’).",
+   "use": "我们的 + noun (我们的老师 ‘our teacher’); with family: 我们家 ‘our family, our home’"
+  },
+  {
+   "concept": "poss.your.pl",
+   "reason": "Chinese has no possessive word for “your (of several people)”: the personal pronoun + the particle 的 does it (你们的房子 ‘your house’). With close family and one’s home the 的 is usually dropped (你们家 ‘your family’).",
+   "use": "你们的 + noun (你们的房子 ‘your house’); with family: 你们家 ‘your family’"
+  },
+  {
+   "concept": "poss.their",
+   "reason": "Chinese has no possessive word for “their”: the personal pronoun + the particle 的 does it (他们的书 ‘their books’ (她们的 for women only, 它们的 for things)). With close family and one’s home the 的 is usually dropped (他们家 ‘their family’).",
+   "use": "他们的 + noun (他们的书 ‘their books’ (她们的 for women only, 它们的 for things)); with family: 他们家 ‘their family’"
+  }
+ ]
 }

@@ -398,6 +398,7 @@
     await loadScript(base + 'langui.js');
     document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
     NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data: window.NOEMA_LANGPACKS[meta.courseId] });
+    if (meta.profiles) loadScript(meta.profiles).then(() => NoemaLangUI.addProfiles((window.NOEMA_LANGPROFILES || {})[meta.courseId])).catch(e => console.warn('[noema] word profiles', e));   // the depth of every word, loaded after the course is open
     AutoBackup.start(acc.id).catch(() => { });
   }
   /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */

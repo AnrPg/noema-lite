@@ -1,0 +1,5623 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f3.001",
+   "frame": "fr.eat",
+   "text": "我吃面包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I eat bread.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.002",
+   "frame": "fr.eat",
+   "text": "我们吃米饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We eat rice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.003",
+   "frame": "fr.eat",
+   "text": "他吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats meat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.004",
+   "frame": "fr.eat",
+   "text": "他不吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He doesn’t eat meat.",
+   "variantOf": "zh.f3.003",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.005",
+   "frame": "fr.eat",
+   "text": "她吃鸡肉。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鸡肉",
+     "l": "zh:jirou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She eats chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.006",
+   "frame": "fr.eat",
+   "text": "孩子们吃苹果。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "The children eat apples.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.007",
+   "frame": "fr.eat",
+   "text": "我喝水。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I drink water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.008",
+   "frame": "fr.eat",
+   "text": "你喝茶。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You drink tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.009",
+   "frame": "fr.eat",
+   "text": "爸爸喝咖啡，妈妈喝茶。",
+   "tokens": [
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Dad drinks coffee and Mum drinks tea.",
+   "alts": [
+    "妈妈喝茶，爸爸喝咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.010",
+   "frame": "fr.eat",
+   "text": "她喝牛奶。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She drinks milk.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.011",
+   "frame": "fr.eat",
+   "text": "我们喝果汁。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "果汁",
+     "l": "zh:guozhi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We drink juice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.012",
+   "frame": "fr.eat",
+   "text": "他们喝啤酒。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They drink beer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.013",
+   "frame": "fr.eat",
+   "text": "我妈妈喝葡萄酒。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.possessive"
+   ],
+   "gloss": "My mother drinks wine.",
+   "alts": [
+    "我的妈妈喝葡萄酒。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.014",
+   "frame": "fr.eat",
+   "text": "我买面包和牛奶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m buying bread and milk.",
+   "alts": [
+    "我买牛奶和面包。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.015",
+   "frame": "fr.eat",
+   "text": "妈妈买鱼和肉。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Mum buys fish and meat.",
+   "alts": [
+    "妈妈买肉和鱼。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.016",
+   "frame": "fr.eat",
+   "text": "他买一瓶葡萄酒。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "瓶",
+     "l": "zh:ping"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He buys a bottle of wine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.017",
+   "frame": "fr.eat",
+   "text": "我们买两瓶水。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "瓶",
+     "l": "zh:ping"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We buy two bottles of water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.018",
+   "frame": "fr.eat",
+   "text": "我买一个苹果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m buying an apple.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.019",
+   "frame": "fr.eat",
+   "text": "我买三个苹果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m buying three apples.",
+   "variantOf": "zh.f3.018",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.020",
+   "frame": "fr.want",
+   "text": "我要一杯咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like a cup of coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.021",
+   "frame": "fr.want",
+   "text": "我要两杯咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like two cups of coffee.",
+   "variantOf": "zh.f3.020",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.022",
+   "frame": "fr.want",
+   "text": "我要一碗米饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "碗",
+     "l": "zh:wan"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like a bowl of rice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.023",
+   "frame": "fr.want",
+   "text": "我要两碗米饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "碗",
+     "l": "zh:wan"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like two bowls of rice.",
+   "variantOf": "zh.f3.022",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.024",
+   "frame": "fr.eat",
+   "text": "他吃一块面包。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "块",
+     "l": "zh:kuai"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats a piece of bread.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.025",
+   "frame": "fr.eat",
+   "text": "他吃两块面包。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "块",
+     "l": "zh:kuai"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats two pieces of bread.",
+   "variantOf": "zh.f3.024",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.026",
+   "frame": "fr.want",
+   "text": "她要一份沙拉。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "份",
+     "l": "zh:fen"
+    },
+    {
+     "t": "沙拉",
+     "l": "zh:shala"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She’d like a salad.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.027",
+   "frame": "fr.eat",
+   "text": "我喝一碗汤。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "碗",
+     "l": "zh:wan"
+    },
+    {
+     "t": "汤",
+     "l": "zh:tang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ll have a bowl of soup.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.028",
+   "frame": "fr.want",
+   "text": "我要一块奶酪。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "块",
+     "l": "zh:kuai"
+    },
+    {
+     "t": "奶酪",
+     "l": "zh:nailao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like a piece of cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.029",
+   "frame": "fr.eat",
+   "text": "我吃两个鸡蛋。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "鸡蛋",
+     "l": "zh:jidan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I eat two eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.030",
+   "frame": "fr.eat",
+   "text": "爸爸做饭。",
+   "tokens": [
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.word.order"
+   ],
+   "gloss": "Dad cooks.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.031",
+   "frame": "fr.eat",
+   "text": "我妈妈在家做饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.word.order",
+    "fn.possessive"
+   ],
+   "gloss": "My mother cooks at home.",
+   "alts": [
+    "我的妈妈在家做饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.032",
+   "frame": "fr.eat",
+   "text": "我们在家吃饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We eat at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.033",
+   "frame": "fr.eat",
+   "text": "他们在那里吃午饭。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They have lunch over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.034",
+   "frame": "fr.eat",
+   "text": "我在这里吃早饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have breakfast here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.035",
+   "frame": "fr.eat",
+   "text": "我们在家吃晚饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "晚饭",
+     "l": "zh:wanfan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have dinner at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.036",
+   "frame": "fr.eat",
+   "text": "我早饭吃面包和鸡蛋。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "鸡蛋",
+     "l": "zh:jidan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "For breakfast I have bread and eggs.",
+   "alts": [
+    "早饭我吃面包和鸡蛋。",
+    "我早饭吃鸡蛋和面包。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.037",
+   "frame": "fr.eat",
+   "text": "他午饭吃米饭和鸡肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "鸡肉",
+     "l": "zh:jirou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "For lunch he has rice and chicken.",
+   "alts": [
+    "午饭他吃米饭和鸡肉。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.038",
+   "frame": "fr.eat",
+   "text": "晚饭我们吃鱼。",
+   "tokens": [
+    {
+     "t": "晚饭",
+     "l": "zh:wanfan"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "For dinner we’re having fish.",
+   "alts": [
+    "我们晚饭吃鱼。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.039",
+   "frame": "fr.want",
+   "text": "我喜欢茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.040",
+   "frame": "fr.want",
+   "text": "你喜欢咖啡。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You like coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.041",
+   "frame": "fr.want",
+   "text": "我喜欢吃鱼。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like eating fish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.042",
+   "frame": "fr.want",
+   "text": "孩子们喜欢水果。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Children like fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.043",
+   "frame": "fr.want",
+   "text": "他不喜欢奶酪。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "奶酪",
+     "l": "zh:nailao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He doesn’t like cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.044",
+   "frame": "fr.want",
+   "text": "我想喝水。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like to drink some water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.045",
+   "frame": "fr.want",
+   "text": "他想吃米饭。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He’d like to eat rice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.046",
+   "frame": "fr.want",
+   "text": "我想买一点水果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一点",
+     "l": "zh:yidian"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like to buy some fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.047",
+   "frame": "fr.want",
+   "text": "我喝咖啡不要糖。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "糖",
+     "l": "zh:tang.sugar"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I take my coffee without sugar.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.048",
+   "frame": "fr.this.is",
+   "text": "这是糖，那是盐。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "糖",
+     "l": "zh:tang.sugar"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "盐",
+     "l": "zh:yan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is sugar, that is salt.",
+   "alts": [
+    "那是盐，这是糖。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.049",
+   "frame": "fr.thing.here",
+   "text": "盐在这里。",
+   "tokens": [
+    {
+     "t": "盐",
+     "l": "zh:yan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The salt is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.050",
+   "frame": "fr.have",
+   "text": "我们家有很多水果。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.have",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "We have lots of fruit at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.051",
+   "frame": "fr.have",
+   "text": "我有一瓶牛奶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "瓶",
+     "l": "zh:ping"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a bottle of milk.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.052",
+   "frame": "fr.want",
+   "text": "我们都喜欢喝茶。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We all like drinking tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.053",
+   "frame": "fr.eat",
+   "text": "他们都不喝啤酒。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "None of them drinks beer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.054",
+   "frame": "fr.eat",
+   "text": "我的孩子不喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.possessive"
+   ],
+   "gloss": "My child doesn’t drink coffee.",
+   "alts": [
+    "我孩子不喝咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.055",
+   "frame": "fr.poss",
+   "text": "这是我的咖啡。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.056",
+   "frame": "fr.poss",
+   "text": "这杯茶是你的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This cup of tea is yours.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.057",
+   "frame": "fr.want",
+   "text": "我奶奶喜欢吃鱼。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.possessive"
+   ],
+   "gloss": "My grandma likes eating fish.",
+   "alts": [
+    "我的奶奶喜欢吃鱼。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.058",
+   "frame": "fr.want",
+   "text": "我要两个鸡蛋和一杯果汁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "鸡蛋",
+     "l": "zh:jidan"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "果汁",
+     "l": "zh:guozhi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like two eggs and a glass of juice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.059",
+   "frame": "fr.eat",
+   "text": "他吃很多肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats a lot of meat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.060",
+   "frame": "fr.want",
+   "text": "我们想吃鸡肉。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鸡肉",
+     "l": "zh:jirou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’d like to eat chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.061",
+   "frame": "fr.want",
+   "text": "我喜欢喝汤。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "汤",
+     "l": "zh:tang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like soup.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.062",
+   "frame": "fr.want",
+   "text": "他喜欢沙拉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "沙拉",
+     "l": "zh:shala"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He likes salad.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.063",
+   "frame": "fr.have",
+   "text": "我有咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.064",
+   "frame": "fr.have",
+   "text": "这里有盐。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "盐",
+     "l": "zh:yan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative"
+   ],
+   "gloss": "There is salt here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.065",
+   "frame": "fr.have",
+   "text": "我们家有啤酒。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "gloss": "We have beer at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.066",
+   "frame": "fr.have",
+   "text": "我有面包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have bread.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.067",
+   "frame": "fr.eat",
+   "text": "他喝咖啡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He drinks coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.068",
+   "frame": "fr.eat",
+   "text": "他不喝咖啡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He doesn’t drink coffee.",
+   "variantOf": "zh.f3.067",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.069",
+   "frame": "fr.want",
+   "text": "你们要米饭。",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You (all) want rice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.070",
+   "frame": "fr.eat",
+   "text": "我们在这里喝咖啡。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We drink coffee here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.071",
+   "frame": "fr.eat",
+   "text": "他们都在家吃早饭。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They all have breakfast at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.072",
+   "frame": "fr.eat",
+   "text": "孩子们吃鱼。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "The children eat fish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.073",
+   "frame": "fr.eat",
+   "text": "孩子们不吃鱼。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order"
+   ],
+   "gloss": "The children don’t eat fish.",
+   "variantOf": "zh.f3.072",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.074",
+   "frame": "fr.have",
+   "text": "我没有咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have no coffee.",
+   "variantOf": "zh.f3.063",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.075",
+   "frame": "fr.have",
+   "text": "这里没有盐。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "盐",
+     "l": "zh:yan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.demonstrative"
+   ],
+   "gloss": "There is no salt here.",
+   "variantOf": "zh.f3.064",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.076",
+   "frame": "fr.have",
+   "text": "我们家没有啤酒。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "gloss": "We have no beer at home.",
+   "variantOf": "zh.f3.065",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.077",
+   "frame": "fr.have",
+   "text": "我没有牛奶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have no milk.",
+   "variantOf": "zh.f3.051",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.078",
+   "frame": "fr.have",
+   "text": "我没有面包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have no bread.",
+   "variantOf": "zh.f3.066",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.079",
+   "frame": "fr.eat",
+   "text": "我没吃早饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I didn’t have breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.080",
+   "frame": "fr.eat",
+   "text": "他没喝咖啡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He didn’t drink the coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.081",
+   "frame": "fr.eat",
+   "text": "妈妈没买鱼。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation"
+   ],
+   "gloss": "Mum didn’t buy fish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.082",
+   "frame": "fr.eat",
+   "text": "我们没吃午饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We didn’t have lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.083",
+   "frame": "fr.eat",
+   "text": "孩子没喝牛奶。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation"
+   ],
+   "gloss": "The child didn’t drink the milk.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.084",
+   "frame": "fr.eat",
+   "text": "我从来不喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "从来",
+     "l": "zh:conglai"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I never drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.085",
+   "frame": "fr.eat",
+   "text": "他从来不吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "从来",
+     "l": "zh:conglai"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He never eats meat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.086",
+   "frame": "fr.eat",
+   "text": "我爸爸从来不做饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "从来",
+     "l": "zh:conglai"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.word.order",
+    "fn.possessive"
+   ],
+   "gloss": "My dad never cooks.",
+   "alts": [
+    "我的爸爸从来不做饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.087",
+   "frame": "fr.eat",
+   "text": "他什么都不吃。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He doesn’t eat anything.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.088",
+   "frame": "fr.want",
+   "text": "我什么都不想喝。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I don’t want to drink anything.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.089",
+   "frame": "fr.eat",
+   "text": "她什么都没买。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She didn’t buy anything.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.090",
+   "frame": "fr.have",
+   "text": "我什么都没有。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have nothing.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.091",
+   "frame": "fr.be.where",
+   "text": "没有人在家。",
+   "tokens": [
+    {
+     "t": "没有人",
+     "l": "zh:meiyouren"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.copula"
+   ],
+   "gloss": "Nobody is at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.092",
+   "frame": "fr.be.where",
+   "text": "这里没有人。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "没有人",
+     "l": "zh:meiyouren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.demonstrative"
+   ],
+   "gloss": "There is nobody here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.093",
+   "frame": "fr.want",
+   "text": "没有人要咖啡。",
+   "tokens": [
+    {
+     "t": "没有人",
+     "l": "zh:meiyouren"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation"
+   ],
+   "gloss": "Nobody wants coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.094",
+   "frame": "fr.eat",
+   "text": "没有人做饭。",
+   "tokens": [
+    {
+     "t": "没有人",
+     "l": "zh:meiyouren"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.word.order"
+   ],
+   "gloss": "Nobody cooks.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.095",
+   "frame": "fr.eat",
+   "text": "我不喝茶，也不喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "也不",
+     "l": "zh:yebu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I drink neither tea nor coffee.",
+   "alts": [
+    "我不喝咖啡，也不喝茶。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.096",
+   "frame": "fr.eat",
+   "text": "他不吃鱼，也不吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "也不",
+     "l": "zh:yebu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He eats neither fish nor meat.",
+   "alts": [
+    "他不吃肉，也不吃鱼。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.097",
+   "frame": "fr.eat",
+   "text": "她不喝啤酒，也不喝葡萄酒。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "也不",
+     "l": "zh:yebu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She drinks neither beer nor wine.",
+   "alts": [
+    "她不喝葡萄酒，也不喝啤酒。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.098",
+   "frame": "fr.want",
+   "text": "我不要糖，也不要牛奶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "糖",
+     "l": "zh:tang.sugar"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "也不",
+     "l": "zh:yebu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I want neither sugar nor milk.",
+   "alts": [
+    "我不要牛奶，也不要糖。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.099",
+   "frame": "fr.eat",
+   "text": "我们都没吃早饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "None of us had breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.100",
+   "frame": "fr.eat",
+   "text": "我不吃肉，你也不吃肉。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "也不",
+     "l": "zh:yebu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I don’t eat meat, and you don’t either.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.101",
+   "frame": "fr.eat",
+   "text": "孩子们什么都吃。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.word.order"
+   ],
+   "gloss": "The children eat everything.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.102",
+   "frame": "fr.eat",
+   "text": "我没买苹果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I didn’t buy apples.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.103",
+   "frame": "fr.eat",
+   "text": "我们从来不喝啤酒。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "从来",
+     "l": "zh:conglai"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We never drink beer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.104",
+   "frame": "fr.eat",
+   "text": "你喝茶吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you drink tea?",
+   "variantOf": "zh.f3.008",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "你喝不喝茶？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.105",
+   "frame": "fr.want",
+   "text": "你喜欢咖啡吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you like coffee?",
+   "variantOf": "zh.f3.040",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "你喜欢不喜欢咖啡？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.106",
+   "frame": "fr.eat",
+   "text": "他吃肉吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Does he eat meat?",
+   "variantOf": "zh.f3.003",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "他吃不吃肉？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.107",
+   "frame": "fr.want",
+   "text": "你们要米饭吗？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you (all) like rice?",
+   "variantOf": "zh.f3.069",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "你们要不要米饭？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.108",
+   "frame": "fr.eat",
+   "text": "她喝牛奶吗？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Does she drink milk?",
+   "variantOf": "zh.f3.010",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "她喝不喝牛奶？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.109",
+   "frame": "fr.want",
+   "text": "你要不要茶？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you want tea?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.110",
+   "frame": "fr.want",
+   "text": "你喜欢不喜欢吃鱼？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you like eating fish?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.111",
+   "frame": "fr.poss",
+   "text": "这是不是你的咖啡？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Is this your coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.112",
+   "frame": "fr.have",
+   "text": "你有没有牛奶？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you have any milk?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.113",
+   "frame": "fr.want",
+   "text": "你想不想喝果汁？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "果汁",
+     "l": "zh:guozhi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like some juice?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.114",
+   "frame": "fr.alt.q",
+   "text": "你喝茶还是喝咖啡？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you drink tea or coffee?",
+   "alts": [
+    "你喝茶还是咖啡？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.115",
+   "frame": "fr.alt.q",
+   "text": "你要米饭还是面包？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like rice or bread?",
+   "alts": [
+    "你要面包还是米饭？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.116",
+   "frame": "fr.alt.q",
+   "text": "你想吃鱼还是鸡肉？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "鸡肉",
+     "l": "zh:jirou"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like fish or chicken?",
+   "alts": [
+    "你想吃鱼还是吃鸡肉？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.117",
+   "frame": "fr.alt.q",
+   "text": "这是糖还是盐？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "糖",
+     "l": "zh:tang.sugar"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "盐",
+     "l": "zh:yan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Is this sugar or salt?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.118",
+   "frame": "fr.alt.q",
+   "text": "你要啤酒还是葡萄酒？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like beer or wine?",
+   "alts": [
+    "你要葡萄酒还是啤酒？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.119",
+   "frame": "fr.eat",
+   "text": "我早饭喝茶或者咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "或者",
+     "l": "zh:huozhe"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "For breakfast I drink tea or coffee.",
+   "alts": [
+    "早饭我喝茶或者咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.120",
+   "frame": "fr.eat",
+   "text": "我们买鱼或者鸡肉。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "或者",
+     "l": "zh:huozhe"
+    },
+    {
+     "t": "鸡肉",
+     "l": "zh:jirou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’ll buy fish or chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.121",
+   "frame": "fr.eat",
+   "text": "他也许不吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "也许",
+     "l": "zh:yexu"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Maybe he doesn’t eat meat.",
+   "alts": [
+    "也许他不吃肉。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.122",
+   "frame": "fr.eat",
+   "text": "也许她不喝咖啡。",
+   "tokens": [
+    {
+     "t": "也许",
+     "l": "zh:yexu"
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Perhaps she doesn’t drink coffee.",
+   "alts": [
+    "她也许不喝咖啡。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.123",
+   "frame": "fr.be.where",
+   "text": "他可能在家。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "可能",
+     "l": "zh:keneng"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He’s probably at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.124",
+   "frame": "fr.eat",
+   "text": "我们可能吃鱼。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "可能",
+     "l": "zh:keneng"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We might have fish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.125",
+   "frame": "fr.eat",
+   "text": "我从来不吃肉。真的吗？",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "从来",
+     "l": "zh:conglai"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    },
+    {
+     "t": "真的",
+     "l": "zh:zhende"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I never eat meat. — Really?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.126",
+   "frame": "fr.eat",
+   "text": "你真的不喝咖啡吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "真的",
+     "l": "zh:zhende"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you really not drink coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.127",
+   "frame": "fr.want",
+   "text": "他真的喜欢做饭。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "真的",
+     "l": "zh:zhende"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He really likes cooking.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.128",
+   "frame": "fr.eat",
+   "text": "你喝茶吗？当然喝！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "当然",
+     "l": "zh:dangran"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like some tea? — Of course!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.129",
+   "frame": "fr.want",
+   "text": "我当然喜欢水果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "当然",
+     "l": "zh:dangran"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Of course I like fruit.",
+   "alts": [
+    "当然，我喜欢水果。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.130",
+   "frame": "fr.want",
+   "text": "你要不要咖啡？当然要！",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "当然",
+     "l": "zh:dangran"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you want coffee? — Of course!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.131",
+   "frame": "fr.want",
+   "text": "我也喜欢茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like tea too.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.132",
+   "frame": "fr.eat",
+   "text": "他喝咖啡，我也喝咖啡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He drinks coffee, and so do I.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.133",
+   "frame": "fr.want",
+   "text": "我们也要两碗米饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "碗",
+     "l": "zh:wan"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’d also like two bowls of rice.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.134",
+   "frame": "fr.eat",
+   "text": "你也喝啤酒吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "啤酒",
+     "l": "zh:pijiu"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you drink beer too?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.135",
+   "frame": "fr.eat",
+   "text": "我只喝水。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "只",
+     "l": "zh:zhi.only"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I only drink water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.136",
+   "frame": "fr.eat",
+   "text": "他只吃鱼，不吃肉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "只",
+     "l": "zh:zhi.only"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He only eats fish, not meat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.137",
+   "frame": "fr.want",
+   "text": "我只要一杯茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "只",
+     "l": "zh:zhi.only"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I just want a cup of tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.138",
+   "frame": "fr.eat",
+   "text": "你只吃苹果吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "只",
+     "l": "zh:zhi.only"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you only eat apples?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.139",
+   "frame": "fr.eat",
+   "text": "你不喝咖啡吗？对，我不喝。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "对",
+     "l": "zh:dui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Don’t you drink coffee? — Right, I don’t.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.140",
+   "frame": "fr.eat",
+   "text": "你不吃肉吗？不，我吃肉。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Don’t you eat meat? — No, I do.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.141",
+   "frame": "fr.have",
+   "text": "我没有哥哥，也没有姐姐。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "姐姐",
+     "l": "zh:jiejie"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have neither an older brother nor an older sister.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.142",
+   "frame": "fr.want",
+   "text": "你要茶或者咖啡吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "或者",
+     "l": "zh:huozhe"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like some tea or coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.143",
+   "frame": "fr.eat",
+   "text": "他们也在家吃午饭。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They have lunch at home too.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.144",
+   "frame": "fr.want",
+   "text": "你们也要果汁吗？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "也",
+     "l": "zh:ye"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "果汁",
+     "l": "zh:guozhi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Would you like juice too?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f3.145",
+   "frame": "fr.eat",
+   "text": "我只喝茶，不喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "只",
+     "l": "zh:zhi.only"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.negation",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I only drink tea, not coffee.",
+   "level": "A1"
+  }
+ ]
+}

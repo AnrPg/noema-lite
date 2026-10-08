@@ -1,0 +1,265 @@
+{
+ "function": "fn.have",
+ "status": "periphrastic",
+ "summary": "Hebrew has no verb “to have”. It says that the thing exists “to” the owner: יֵשׁ “there is” + לְ “to” + the owner — יֵשׁ לִי אָח “I have a brother”, literally “there is to me a brother”. With a pronoun, לְ takes the personal endings: לִי, לְךָ (to a man), לָךְ (to a woman), לוֹ, לָהּ, לָנוּ, לָכֶם, לָכֶן, לָהֶם, לָהֶן. יֵשׁ itself never changes. Because the thing owned is the grammatical subject, the past and the future use הָיָה agreeing with that thing — not with the owner: הָיָה לִי מַפְתֵּחַ, הָיְתָה לִי דִּירָה, הָיוּ לִי סְפָרִים; יִהְיֶה לָנוּ תִּינוֹק, תִּהְיֶה לָהֶם תִּינֹקֶת. The negative replaces יֵשׁ with אֵין (אֵין לִי …, lesson 8). Russian and Turkish, which you know, work the same way: у меня есть брат, kardeşim var.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "owner",
+    "has",
+    "example"
+   ],
+   "rows": [
+    [
+     "I",
+     "יֵשׁ לִי",
+     "יֵשׁ לִי אָח."
+    ],
+    [
+     "you (to a man)",
+     "יֵשׁ לְךָ",
+     "יֵשׁ לְךָ אַחִים?"
+    ],
+    [
+     "you (to a woman)",
+     "יֵשׁ לָךְ",
+     "יֵשׁ לָךְ אַחִים?"
+    ],
+    [
+     "he",
+     "יֵשׁ לוֹ",
+     "יֵשׁ לוֹ דִּירָה."
+    ],
+    [
+     "she",
+     "יֵשׁ לָהּ",
+     "יֵשׁ לָהּ שָׁלוֹשׁ אֲחָיוֹת."
+    ],
+    [
+     "we",
+     "יֵשׁ לָנוּ",
+     "יֵשׁ לָנוּ תִּינוֹק."
+    ],
+    [
+     "you (pl.)",
+     "יֵשׁ לָכֶם / לָכֶן",
+     "יֵשׁ לָכֶם הַרְבֵּה קְרוֹבֵי מִשְׁפָּחָה?"
+    ],
+    [
+     "they",
+     "יֵשׁ לָהֶם / לָהֶן",
+     "יֵשׁ לָהֶם שְׁתֵּי בָּנוֹת."
+    ]
+   ],
+   "caption": "לְ with the owner’s ending; יֵשׁ never changes."
+  },
+  {
+   "t": "table",
+   "head": [
+    "the thing owned",
+    "now",
+    "had",
+    "will have"
+   ],
+   "rows": [
+    [
+     "אָח (m.)",
+     "יֵשׁ לִי אָח",
+     "הָיָה לִי אָח",
+     "יִהְיֶה לִי אָח"
+    ],
+    [
+     "דִּירָה (f.)",
+     "יֵשׁ לִי דִּירָה",
+     "הָיְתָה לִי דִּירָה",
+     "תִּהְיֶה לִי דִּירָה"
+    ],
+    [
+     "סְפָרִים (pl.)",
+     "יֵשׁ לִי סְפָרִים",
+     "הָיוּ לִי סְפָרִים",
+     "יִהְיוּ לִי סְפָרִים"
+    ]
+   ],
+   "caption": "In the past and future הָיָה agrees with the thing owned, never with the owner."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Having = existing for someone",
+   "text": "The thing owned is the subject of the sentence. That is why הָיָה agrees with it, and why standard Hebrew puts no אֶת before it even when it is definite: יֵשׁ לִי הַסֵּפֶר (in speech יֵשׁ לִי אֶת הַסֵּפֶר is very common)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No “I have” verb",
+   "text": "*אֲנִי יֵשׁ אָח is wrong: the owner is never the subject. Say יֵשׁ לִי אָח — or, to stress the owner, לִי יֵשׁ אָח."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Have ≠ my",
+   "text": "יֵשׁ לִי סֵפֶר “I have a book” — הַסֵּפֶר שֶׁלִּי “my book”. לְ is for having, שֶׁל for belonging."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "The negative is a different word",
+   "text": "Not *לֹא יֵשׁ, but אֵין: אֵין לִי אַחִים “I have no brothers” (lesson 8)."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "who owns? → לְ + ending",
+    "now → יֵשׁ",
+    "past / future → הָיָה / יִהְיֶה, agreeing with the thing",
+    "the thing owned"
+   ],
+   "caption": "Building a “have” sentence"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "יֵשׁ לִי אָח — “there is to me a brother”",
+      "negative: אֵין לִי אָח"
+     ]
+    },
+    {
+     "title": "Russian · Turkish",
+     "points": [
+      "у меня есть брат — “at me there is a brother”",
+      "bir kardeşim var — “a brother of mine exists”",
+      "the same idea: no verb “have”"
+     ]
+    },
+    {
+     "title": "German · Greek · Chinese",
+     "points": [
+      "ich habe einen Bruder",
+      "έχω έναν αδερφό",
+      "我有一个哥哥 — a real verb “to have”"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Who is the owner? (→ לִי, לוֹ, לָהּ …)",
+    "Now, before or later?",
+    "In the past or future: what gender and number has the thing owned?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the owner? → the form of לְ: לִי, לְךָ / לָךְ, לוֹ, לָהּ, לָנוּ, לָכֶם / לָכֶן, לָהֶם / לָהֶן.",
+   "Am I speaking to a man or to a woman? → לְךָ or לָךְ.",
+   "Is it now? → יֵשׁ, which never changes.",
+   "Is it past or future? → הָיָה / הָיְתָה / הָיוּ or יִהְיֶה / תִּהְיֶה / יִהְיוּ, agreeing with the THING owned (its gender and number).",
+   "Is the thing definite? → standard Hebrew adds no אֶת.",
+   "Is it negative? → אֵין instead of יֵשׁ (lesson 8)."
+  ],
+  "steps": [
+   "Put the owner into לְ.",
+   "Put יֵשׁ (or the agreeing form of הָיָה) in front.",
+   "Add the thing owned."
+  ]
+ },
+ "traps": [
+  "*אֲנִי יֵשׁ אָח — the owner goes into לְ: יֵשׁ לִי אָח.",
+  "*הָיִיתִי לִי אָחוֹת — the past agrees with the thing, not the owner: הָיְתָה לִי אָחוֹת.",
+  "*הָיָה לִי שְׁנֵי טֶלֶפוֹנִים — two phones are plural: הָיוּ לִי שְׁנֵי טֶלֶפוֹנִים.",
+  "לְךָ is to a man, לָךְ to a woman: יֵשׁ לְךָ? / יֵשׁ לָךְ?",
+  "*לֹא יֵשׁ — the negative is אֵין לִי.",
+  "יֵשׁ לִי ≠ שֶׁלִּי: יֵשׁ לִי סֵפֶר “I have a book”, הַסֵּפֶר שֶׁלִּי “my book”."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:yesh",
+   "he:le"
+  ]
+ },
+ "paradigmCells": [
+  "ADP;1;SG",
+  "ADP;2;SG;MASC",
+  "ADP;2;SG;FEM",
+  "ADP;3;SG;MASC",
+  "ADP;3;SG;FEM",
+  "ADP;1;PL",
+  "ADP;2;PL;MASC",
+  "ADP;2;PL;FEM",
+  "ADP;3;PL;MASC",
+  "ADP;3;PL;FEM"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADP",
+   "lemmas": [
+    "he:le"
+   ],
+   "cells": [
+    "ADP;1;SG",
+    "ADP;2;SG;MASC",
+    "ADP;2;SG;FEM",
+    "ADP;3;SG;MASC",
+    "ADP;3;SG;FEM",
+    "ADP;1;PL",
+    "ADP;2;PL;MASC",
+    "ADP;2;PL;FEM",
+    "ADP;3;PL;MASC",
+    "ADP;3;PL;FEM"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.have"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.have"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.have",
+   "note": "Arabic has no verb “have” either: عِنْدِي أَخ / لِي أَخ — a preposition with the owner’s suffix, like לִי, but without a word for “there is”."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.have",
+   "note": "German uses the verb haben with an accusative object (ich habe einen Bruder); in Hebrew the thing owned is the subject."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.have",
+   "note": "Chinese uses the verb 有 (我有一个哥哥) — the same word as “there is”, just as Hebrew יֵשׁ means both."
+  }
+ ]
+}

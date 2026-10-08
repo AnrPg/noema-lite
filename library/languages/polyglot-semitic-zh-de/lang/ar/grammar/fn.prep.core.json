@@ -1,0 +1,448 @@
+{
+ "function": "fn.prep.core",
+ "status": "realized",
+ "summary": "Arabic prepositions stand before the noun, and the noun after them is always genitive (-i / -in, see fn.case). The core set: فِي (in, at — where?), إِلَى (to — where to?), مِنْ (from — where from?), عِنْدَ (at someone’s place), مَعَ (with — together with), بِـ (with — a tool or an ingredient; by; for a price), بِدُونِ (without), لِـ (for; belonging to) and عَنْ (about; away from). بِـ and لِـ are single letters written together with the next word (بِالْحَلِيبِ, لِأَخِي). Every preposition takes the pronoun endings: مَعِي (with me), لَكَ (for you), مِنْهُ (from him), فِيهَا (in it), إِلَيْكَ (to you). Where Greek has one σε for in, at and to, Arabic chooses: فِي for “where?”, إِلَى for “where to?”, عِنْدَ for “at someone’s”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Greek",
+    "meaning",
+    "Arabic",
+    "example"
+   ],
+   "rows": [
+    [
+     "σε — στο σπίτι, στο σχολείο",
+     "in, at (where?)",
+     "فِي",
+     "فِي الْبَيْتِ (at home), فِي الْمَدْرَسَةِ (at school)"
+    ],
+    [
+     "σε — πάω στο σχολείο",
+     "to (where to?)",
+     "إِلَى",
+     "إِلَى الْمَدْرَسَةِ (to school)"
+    ],
+    [
+     "σε — στον γιατρό",
+     "at someone’s place",
+     "عِنْدَ",
+     "عِنْدَ الطَّبِيبِ (at the doctor’s)"
+    ],
+    [
+     "από — από την πόλη",
+     "from",
+     "مِنْ",
+     "مِنَ الْمَدِينَةِ (from the city)"
+    ],
+    [
+     "με — με τον φίλο μου",
+     "with (together)",
+     "مَعَ",
+     "مَعَ صَدِيقِي (with my friend)"
+    ],
+    [
+     "με — καφές με γάλα, με το στυλό",
+     "with (ingredient, tool)",
+     "بِـ",
+     "قَهْوَةٌ بِالْحَلِيبِ, بِالْقَلَمِ"
+    ],
+    [
+     "για — για σένα",
+     "for",
+     "لِـ",
+     "لَكَ (for you), لِأَخِي (for my brother)"
+    ],
+    [
+     "χωρίς",
+     "without",
+     "بِدُونِ",
+     "بِدُونِ سُكَّرٍ (without sugar)"
+    ],
+    [
+     "για / σχετικά με — ένα βιβλίο για την πόλη",
+     "about",
+     "عَنْ",
+     "كِتَابٌ عَنِ الْمَدِينَةِ (a book about the city)"
+    ]
+   ],
+   "caption": "Greek σε alone covers in, at and to; Arabic decides between فِي, إِلَى and عِنْدَ. Greek με is مَعَ for company but بِـ for a tool or an ingredient."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Where? — فِي",
+     "points": [
+      "أَيْنَ أَبُوكَ؟",
+      "أَبِي فِي الْعَمَلِ.",
+      "نَحْنُ فِي الْمَطْعَمِ."
+     ]
+    },
+    {
+     "title": "Where to? — إِلَى",
+     "points": [
+      "إِلَى أَيْنَ؟",
+      "إِلَى الْمَطَارِ.",
+      "إِلَى الْبَيْتِ."
+     ]
+    },
+    {
+     "title": "Where from? — مِنْ",
+     "points": [
+      "مِنْ أَيْنَ أَنْتَ؟",
+      "أَنَا مِنْ هٰذِهِ الْقَرْيَةِ.",
+      "هٰذَا الْخُبْزُ مِنَ السُّوقِ."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "me",
+    "you (m.)",
+    "you (f.)",
+    "him / it",
+    "her / it",
+    "us",
+    "you (pl.)",
+    "them"
+   ],
+   "rows": [
+    [
+     "فِي",
+     "فِيَّ",
+     "فِيكَ",
+     "فِيكِ",
+     "فِيهِ",
+     "فِيهَا",
+     "فِينَا",
+     "فِيكُمْ",
+     "فِيهِمْ"
+    ],
+    [
+     "إِلَى",
+     "إِلَيَّ",
+     "إِلَيْكَ",
+     "إِلَيْكِ",
+     "إِلَيْهِ",
+     "إِلَيْهَا",
+     "إِلَيْنَا",
+     "إِلَيْكُمْ",
+     "إِلَيْهِمْ"
+    ],
+    [
+     "مِنْ",
+     "مِنِّي",
+     "مِنْكَ",
+     "مِنْكِ",
+     "مِنْهُ",
+     "مِنْهَا",
+     "مِنَّا",
+     "مِنْكُمْ",
+     "مِنْهُمْ"
+    ],
+    [
+     "مَعَ",
+     "مَعِي",
+     "مَعَكَ",
+     "مَعَكِ",
+     "مَعَهُ",
+     "مَعَهَا",
+     "مَعَنَا",
+     "مَعَكُمْ",
+     "مَعَهُمْ"
+    ],
+    [
+     "بِـ",
+     "بِي",
+     "بِكَ",
+     "بِكِ",
+     "بِهِ",
+     "بِهَا",
+     "بِنَا",
+     "بِكُمْ",
+     "بِهِمْ"
+    ],
+    [
+     "لِـ",
+     "لِي",
+     "لَكَ",
+     "لَكِ",
+     "لَهُ",
+     "لَهَا",
+     "لَنَا",
+     "لَكُمْ",
+     "لَهُمْ"
+    ],
+    [
+     "عَنْ",
+     "عَنِّي",
+     "عَنْكَ",
+     "عَنْكِ",
+     "عَنْهُ",
+     "عَنْهَا",
+     "عَنَّا",
+     "عَنْكُمْ",
+     "عَنْهُمْ"
+    ],
+    [
+     "بِدُونِ",
+     "بِدُونِي",
+     "بِدُونِكَ",
+     "بِدُونِكِ",
+     "بِدُونِهِ",
+     "بِدُونِهَا",
+     "بِدُونِنَا",
+     "بِدُونِكُمْ",
+     "بِدُونِهِمْ"
+    ]
+   ],
+   "caption": "The endings are those of كِتَابِي, كِتَابُكَ … (lesson 6). After i or ī the -hu, -hum become -hi, -him (فِيهِ, بِهِمْ); the ى of إِلَى becomes يْ (إِلَيْكَ); the n of مِنْ and عَنْ doubles before -ī and -nā (مِنِّي, عَنَّا); لِـ has a before every ending except -ī (لَكَ, but لِي)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Two “with”s.",
+   "text": "مَعَ is company: أَنَا مَعَ صَدِيقِي (I am with my friend). بِـ is a tool, an ingredient or a means: أَكْتُبُ بِالْقَلَمِ (I write with a pen), قَهْوَةٌ بِالْحَلِيبِ (coffee with milk). Greek and German use one word (με, mit) for both."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Helping vowels before al-.",
+   "text": "مِنْ + الْ → مِنَ الْ (مِنَ السُّوقِ); عَنْ + الْ → عَنِ الْ (عَنِ الْمَدِينَةِ). لِـ + الْ drops the alif: لِلْبَيْتِ (li-l-bayti). فِي, إِلَى, مَعَ, بِدُونِ do not change in writing."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "عِنْدِي — I have (own, keep)",
+     "points": [
+      "عِنْدِي كِتَابٌ.",
+      "also “at”: أَنَا عِنْدَ الطَّبِيبِ."
+     ]
+    },
+    {
+     "title": "مَعِي — I have on me",
+     "points": [
+      "هَلْ مَعَكَ قَلَمٌ؟",
+      "what you carry now"
+     ]
+    },
+    {
+     "title": "لِي — mine, for me",
+     "points": [
+      "هٰذَا الْكِتَابُ لِي.",
+      "لِمَنْ هٰذَا؟ — لِأَخِي."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "“There is” = a place first.",
+   "text": "فِي الْقَرْيَةِ مَدْرَسَةٌ — there is a school in the village. The indefinite noun (مَدْرَسَةٌ) comes after the place and is nominative; no verb is needed. Question: هَلْ فِي الْقَرْيَةِ مَدْرَسَةٌ؟"
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "حَرْفُ جَرٍّ",
+     "def": "a preposition (lit. “a particle of dragging”): it “drags” the noun into the genitive (الْجَرّ)"
+    },
+    {
+     "term": "اِسْمٌ مَجْرُورٌ",
+     "def": "the noun after a preposition, in the genitive"
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a place where something is (in, at)? → فِي. At a person’s place? → عِنْدَ.",
+   "Is there movement towards it? → إِلَى. Away from it, or the origin? → مِنْ.",
+   "With a person (company)? → مَعَ. With a tool, an ingredient, a means, or for a price? → بِـ.",
+   "For someone, or whose is it? → لِـ (written together). Without? → بِدُونِ. About a topic? → عَنْ.",
+   "Does the next word start with al-? → مِنَ الْ…, عَنِ الْ…, لِلْ….",
+   "Is the noun after it in the genitive (-i, -in)? Is a pronoun after it? → the ending: مَعِي, لَكَ, فِيهِ, إِلَيْهِ."
+  ]
+ },
+ "traps": [
+  "“To school” is إِلَى الْمَدْرَسَةِ, “at school” فِي الْمَدْرَسَةِ — do not use فِي for “to” as Greek σε would.",
+  "A tool takes بِـ, not مَعَ: *أَكْتُبُ مَعَ الْقَلَمِ → أَكْتُبُ بِالْقَلَمِ.",
+  "*مِنْ الْبَيْتِ → مِنَ الْبَيْتِ; *عَنْ الْمَدِينَةِ → عَنِ الْمَدِينَةِ.",
+  "بِـ and لِـ never stand alone: بِالْحَلِيبِ, لِأَخِي, لَكَ.",
+  "“Mine” is لِي, not *لِأَنَا; “for you” لَكَ, not *لِأَنْتَ.",
+  "The noun after a preposition is never nominative: *فِي الْبَيْتُ → فِي الْبَيْتِ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:fi",
+   "ar:ila",
+   "ar:min",
+   "ar:maa_with",
+   "ar:bi",
+   "ar:biduni",
+   "ar:li",
+   "ar:an",
+   "ar:inda"
+  ]
+ },
+ "paradigmCells": [
+  "ADP;1;SG",
+  "ADP;2;SG;MASC",
+  "ADP;2;SG;FEM",
+  "ADP;3;SG;MASC",
+  "ADP;3;SG;FEM",
+  "ADP;1;PL",
+  "ADP;2;PL;MASC",
+  "ADP;3;PL;MASC"
+ ],
+ "needs": {
+  "ADP": 3,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADP",
+   "lemmas": [
+    "ar:fi",
+    "ar:ila",
+    "ar:min",
+    "ar:maa_with",
+    "ar:bi",
+    "ar:biduni",
+    "ar:li",
+    "ar:an",
+    "ar:inda"
+   ],
+   "cells": [
+    "ADP;1;SG",
+    "ADP;2;SG;MASC",
+    "ADP;2;SG;FEM",
+    "ADP;3;SG;MASC",
+    "ADP;3;SG;FEM",
+    "ADP;1;PL",
+    "ADP;2;PL;MASC",
+    "ADP;3;PL;MASC"
+   ],
+   "count": 12
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“My father is at work.”",
+   "options": [
+    "أَبِي فِي الْعَمَلِ.",
+    "أَبِي إِلَى الْعَمَلِ.",
+    "أَبِي مِنَ الْعَمَلِ."
+   ],
+   "answer": "أَبِي فِي الْعَمَلِ.",
+   "why": "“At” a place, where something is: فِي."
+  },
+  {
+   "q": "“Where to? — To the airport.”",
+   "options": [
+    "إِلَى أَيْنَ؟ إِلَى الْمَطَارِ.",
+    "فِي أَيْنَ؟ فِي الْمَطَارِ.",
+    "أَيْنَ؟ الْمَطَارُ."
+   ],
+   "answer": "إِلَى أَيْنَ؟ إِلَى الْمَطَارِ.",
+   "why": "Movement towards a place: إِلَى — in the question too."
+  },
+  {
+   "q": "“I drink coffee with milk.”",
+   "options": [
+    "أَشْرَبُ الْقَهْوَةَ بِالْحَلِيبِ.",
+    "أَشْرَبُ الْقَهْوَةَ مَعَ الْحَلِيبُ.",
+    "أَشْرَبُ الْقَهْوَةَ لِلْحَلِيبِ."
+   ],
+   "answer": "أَشْرَبُ الْقَهْوَةَ بِالْحَلِيبِ.",
+   "why": "An ingredient takes بِـ (مَعَ الْحَلِيبِ is also heard, but never with a nominative الْحَلِيبُ)."
+  },
+  {
+   "q": "“This book is for my brother.”",
+   "options": [
+    "هٰذَا الْكِتَابُ لِأَخِي.",
+    "هٰذَا الْكِتَابُ لِ أَخِي.",
+    "هٰذَا الْكِتَابُ مَعَ أَخِي."
+   ],
+   "answer": "هٰذَا الْكِتَابُ لِأَخِي.",
+   "why": "لِـ (for) is written together with the next word."
+  },
+  {
+   "q": "“from the market”",
+   "options": [
+    "مِنَ السُّوقِ",
+    "مِنْ السُّوقِ",
+    "مِنَ السُّوقُ"
+   ],
+   "answer": "مِنَ السُّوقِ",
+   "why": "Before al- مِنْ becomes مِنَ, and the noun is genitive (-i)."
+  },
+  {
+   "q": "“with me”",
+   "options": [
+    "مَعِي",
+    "مَعَ أَنَا",
+    "مَعَنِي"
+   ],
+   "answer": "مَعِي",
+   "why": "After a preposition a pronoun is an ending: مَعِي, مَعَكَ, مَعَهُ …"
+  },
+  {
+   "q": "Greek σε covers “in / at” and “to”. Which Arabic preposition is “to” (where to?)?",
+   "options": [
+    "إِلَى",
+    "فِي",
+    "عِنْدَ"
+   ],
+   "answer": "إِلَى",
+   "why": "فِي answers “where?”, إِلَى “where to?”, عِنْدَ “at someone’s place”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.prep.core",
+   "note": "Hebrew writes its three commonest prepositions together with the noun — בְּ (in), לְ (to, for), מִ (from) — where Arabic attaches only بِـ and لِـ; Hebrew בְּ is the everyday “in”, Arabic says فِي. Hebrew עִם (with) is Arabic مَعَ with the letters swapped."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.core",
+   "note": "German keeps one preposition and changes the case: in der Schule (where?) / in die Schule (where to?). Arabic keeps one case (the genitive) and changes the preposition: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "Chinese uses coverbs before the verb: 在 (at, in), 从 (from), 跟 (with), 给 (for); the noun after them never changes. Arabic prepositions are followed by the genitive."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.case",
+   "note": "Why the noun ends in -i after every preposition: the genitive."
+  }
+ ]
+}

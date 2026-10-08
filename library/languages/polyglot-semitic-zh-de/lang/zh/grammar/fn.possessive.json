@@ -1,0 +1,364 @@
+{
+ "function": "fn.possessive",
+ "status": "periphrastic",
+ "summary": "Chinese has no words for ‘my, your, his’: the personal pronoun + the particle 的 does it — 我的书 ‘my book’, 你的钥匙 ‘your key’, 他们的房子 ‘their house’. 的 works like English ’s and links any owner to a thing (老师的书 ‘the teacher’s book’). With close family, one’s home and one’s own group the 的 is usually dropped: 我妈妈 ‘my mother’, 我家 ‘my family, my home’, 我们老师 ‘our teacher’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Pronoun",
+    "+ 的",
+    "English"
+   ],
+   "rows": [
+    [
+     "我",
+     "我的 wǒ de",
+     "my, mine"
+    ],
+    [
+     "你 / 您",
+     "你的 / 您的",
+     "your (one person; 您 polite)"
+    ],
+    [
+     "他",
+     "他的 tā de",
+     "his"
+    ],
+    [
+     "她",
+     "她的 tā de",
+     "her"
+    ],
+    [
+     "它",
+     "它的 tā de",
+     "its"
+    ],
+    [
+     "我们",
+     "我们的",
+     "our"
+    ],
+    [
+     "你们",
+     "你们的",
+     "your (several)"
+    ],
+    [
+     "他们 / 她们",
+     "他们的 / 她们的",
+     "their"
+    ]
+   ],
+   "caption": "his and her sound the same: tā de"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "owner",
+    "的",
+    "thing"
+   ],
+   "caption": "我 + 的 + 书 = my book; 老师 + 的 + 钥匙 = the teacher’s key"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "with 的 — things, most nouns",
+     "points": [
+      "我的书 my book",
+      "你的手机 your phone",
+      "老师的钥匙 the teacher’s key"
+     ]
+    },
+    {
+     "title": "without 的 — family, home, own group",
+     "points": [
+      "我妈妈 my mother",
+      "我哥哥 my elder brother",
+      "我家 my family / home",
+      "我们老师 our teacher"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "father’s side",
+    "mother’s side"
+   ],
+   "rows": [
+    [
+     "grandfather",
+     "爷爷",
+     "外公 (north: 姥爷)"
+    ],
+    [
+     "grandmother",
+     "奶奶",
+     "外婆 (north: 姥姥)"
+    ],
+    [
+     "uncle (blood)",
+     "伯伯 (older than father), 叔叔 (younger)",
+     "舅舅"
+    ],
+    [
+     "his wife",
+     "伯母, 婶婶",
+     "舅妈"
+    ],
+    [
+     "aunt (blood)",
+     "姑姑",
+     "阿姨 / 姨妈"
+    ],
+    [
+     "her husband",
+     "姑父",
+     "姨父"
+    ],
+    [
+     "cousins",
+     "堂哥 堂姐 堂弟 堂妹 (children of 伯伯 / 叔叔)",
+     "表哥 表姐 表弟 表妹 (also the children of 姑姑)"
+    ]
+   ],
+   "caption": "The family system: every relative is named by side, sex and age"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "male",
+    "female"
+   ],
+   "rows": [
+    [
+     "older sibling",
+     "哥哥",
+     "姐姐"
+    ],
+    [
+     "younger sibling",
+     "弟弟",
+     "妹妹"
+    ],
+    [
+     "siblings as a group",
+     "兄弟",
+     "姐妹"
+    ],
+    [
+     "son’s children",
+     "孙子",
+     "孙女"
+    ],
+    [
+     "daughter’s children",
+     "外孙",
+     "外孙女"
+    ],
+    [
+     "brother’s children",
+     "侄子",
+     "侄女"
+    ],
+    [
+     "sister’s children",
+     "外甥",
+     "外甥女"
+    ]
+   ],
+   "caption": "Siblings, grandchildren, nephews and nieces"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "外 ‘outside’ = through a woman of the family",
+   "text": "The mother’s parents (外公, 外婆), a daughter’s children (外孙, 外孙女) and a sister’s children (外甥, 外甥女) all carry 外: in the old patrilineal family they belonged to another family line."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "One particle for everything",
+   "text": "Unlike German mein / meine / meinen or Greek ο … μου, 的 never changes: 我的哥哥, 我的姐姐, 我的书 — one form for every noun, one or many."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Owner first",
+   "text": "The owner always comes first, the reverse of English ‘of’: 老师的书 ‘the book of the teacher’, never *书的老师 (that would mean ‘the book’s teacher’)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the owner? → owner (pronoun or noun) + 的 + thing: 我的书, 老师的书.",
+   "Is the ‘thing’ a family member, my home or my own group (class, school, country)? → 的 is usually dropped: 我妈妈, 我家, 我们学校.",
+   "Is it ‘his’ or ‘her’? → 他的 / 她的 — the same sound, only the character differs.",
+   "Is it ‘mine, yours’ standing alone? → 我的, 你的: 这本书是我的.",
+   "Which relative exactly? → father’s side or mother’s side, older or younger than you (or than the parent), male or female."
+  ],
+  "steps": [
+   "Owner",
+   "(的)",
+   "thing or relative"
+  ]
+ },
+ "traps": [
+  "*我书 → 我的书: things keep 的.",
+  "*的我书, *书的我 → 我的书: 的 comes right after the owner.",
+  "他的 and 她的 both sound tā de — only writing shows ‘his’ or ‘her’.",
+  "叔叔, 伯伯 and 舅舅 are not interchangeable: father’s younger brother, father’s elder brother, mother’s brother.",
+  "堂 cousins are only the children of the father’s brothers; all other cousins are 表."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:de",
+   "zh:wo",
+   "zh:ni",
+   "zh:nin",
+   "zh:ta.he",
+   "zh:ta.she",
+   "zh:ta.it",
+   "zh:women",
+   "zh:zanmen",
+   "zh:nimen",
+   "zh:tamen.m",
+   "zh:tamen.f",
+   "zh:tamen.it",
+   "zh:sheide"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘my book’",
+   "options": [
+    "我的书",
+    "我书",
+    "书的我"
+   ],
+   "answer": "我的书",
+   "why": "Owner + 的 + thing; with things 的 stays."
+  },
+  {
+   "q": "‘my mother’ (everyday)",
+   "options": [
+    "我妈妈",
+    "妈妈我",
+    "的我妈妈"
+   ],
+   "answer": "我妈妈",
+   "why": "With close family 的 is usually dropped (我的妈妈 is also correct)."
+  },
+  {
+   "q": "Your father’s younger brother is your …",
+   "options": [
+    "叔叔",
+    "伯伯",
+    "舅舅",
+    "姑父"
+   ],
+   "answer": "叔叔",
+   "why": "伯伯 is older than your father; 舅舅 is your mother’s brother; 姑父 the husband of your father’s sister."
+  },
+  {
+   "q": "Your mother’s brother is your …",
+   "options": [
+    "舅舅",
+    "叔叔",
+    "伯伯",
+    "姨父"
+   ],
+   "answer": "舅舅",
+   "why": "All the mother’s brothers are 舅舅."
+  },
+  {
+   "q": "Your mother’s father is your …",
+   "options": [
+    "外公",
+    "爷爷",
+    "伯伯",
+    "舅舅"
+   ],
+   "answer": "外公",
+   "why": "外 marks the mother’s side; 爷爷 is the father’s father."
+  },
+  {
+   "q": "The son of your father’s sister, older than you, is your …",
+   "options": [
+    "表哥",
+    "堂哥",
+    "哥哥",
+    "外甥"
+   ],
+   "answer": "表哥",
+   "why": "堂 is only for the children of the father’s brothers."
+  },
+  {
+   "q": "Your sister’s son is your …",
+   "options": [
+    "外甥",
+    "侄子",
+    "孙子",
+    "外孙"
+   ],
+   "answer": "外甥",
+   "why": "侄子 is your brother’s son; 外孙 your daughter’s son."
+  },
+  {
+   "q": "In speech, how do 他的书 and 她的书 differ?",
+   "options": [
+    "They sound the same",
+    "她的 has another tone",
+    "她的 has no 的"
+   ],
+   "answer": "They sound the same",
+   "why": "Both are tā de shū."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.possessive",
+   "note": "German possessives agree with the noun (mein Bruder, meine Schwester, meinen Bruder); Chinese has one unchanging 的 after the owner."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.possessive",
+   "note": "Arabic attaches a suffix to the noun (كِتَابِي ‘my book’, أُمِّي ‘my mother’); Chinese puts the owner first: 我的书, 我妈妈."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.possessive",
+   "note": "Hebrew puts שֶׁלִּי after the noun (הַסֵּפֶר שֶׁלִּי) or a suffix on it (אִמִּי); Chinese 我的 comes before the noun."
+  }
+ ]
+}

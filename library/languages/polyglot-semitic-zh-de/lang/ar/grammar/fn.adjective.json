@@ -1,0 +1,482 @@
+{
+ "function": "fn.adjective",
+ "status": "realized",
+ "summary": "The Arabic adjective comes AFTER its noun and copies four things from it: gender, number, case and definiteness — بَيْتٌ كَبِيرٌ (a big house), الْبَيْتُ الْكَبِيرُ (the big house), غُرْفَةٌ صَغِيرَةٌ (a small room), فِي الْبَيْتِ الْكَبِيرِ (in the big house), أُرِيدُ كِتَابًا جَدِيدًا (I want a new book). The feminine adds ـَة; the dual ends in -āni / -ayni (سَيَّارَتَانِ جَدِيدَتَانِ). The article decides between a phrase and a sentence: with al- on both words it is “the big house”; with al- only on the noun it is the verbless sentence “the house is big”, الْبَيْتُ كَبِيرٌ (lesson 1). A noun with an owner ending is definite, so its adjective takes al-: بَيْتِي الْكَبِيرُ (my big house). Plurals of things take the feminine singular (الْبُيُوتُ كَبِيرَةٌ, الْكُتُبُ الْجَدِيدَةُ); plurals of people take a plural adjective, often a broken one (أَطْفَالٌ صِغَارٌ, طُلَّابٌ جُدُدٌ) or the sound -ūna (مُتْعَبُونَ). After لَيْسَ and كَانَ the predicate adjective is accusative: الْبَيْتُ لَيْسَ كَبِيرًا. A few adjectives have shapes of their own: عَطْشَانُ / عَطْشَى (no tanwīn), the defective غَالٍ / غَالِيًا / الْغَالِي, and the colours of lesson 17.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "the noun is …",
+    "the adjective",
+    "example"
+   ],
+   "rows": [
+    [
+     "masculine, indefinite",
+     "كَبِيرٌ",
+     "بَيْتٌ كَبِيرٌ — a big house"
+    ],
+    [
+     "masculine, definite",
+     "الْكَبِيرُ",
+     "الْبَيْتُ الْكَبِيرُ — the big house"
+    ],
+    [
+     "feminine",
+     "صَغِيرَةٌ / الصَّغِيرَةُ",
+     "غُرْفَةٌ صَغِيرَةٌ — الْغُرْفَةُ الصَّغِيرَةُ"
+    ],
+    [
+     "two (dual)",
+     "جَدِيدَتَانِ",
+     "سَيَّارَتَانِ جَدِيدَتَانِ — two new cars"
+    ],
+    [
+     "people, plural",
+     "جُدُدٌ / مُتْعَبُونَ",
+     "طُلَّابٌ جُدُدٌ — new students"
+    ],
+    [
+     "things, plural",
+     "feminine singular",
+     "بُيُوتٌ كَبِيرَةٌ — الْكُتُبُ الْجَدِيدَةُ"
+    ],
+    [
+     "accusative (object)",
+     "-an / -a",
+     "أُرِيدُ كِتَابًا جَدِيدًا — أُرِيدُ الْكِتَابَ الْجَدِيدَ"
+    ],
+    [
+     "genitive (after a preposition)",
+     "-in / -i",
+     "فِي بَيْتٍ كَبِيرٍ — فِي الْبَيْتِ الْكَبِيرِ"
+    ]
+   ],
+   "caption": "The adjective copies gender, number, case and definiteness."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "phrase: al- on both",
+     "points": [
+      "الْبَيْتُ الْكَبِيرُ — the big house",
+      "هٰذَا الْبَيْتُ الْكَبِيرُ — this big house",
+      "بَيْتِي الْكَبِيرُ — my big house"
+     ]
+    },
+    {
+     "title": "sentence: al- on the noun only",
+     "points": [
+      "الْبَيْتُ كَبِيرٌ — the house is big",
+      "هٰذَا الْبَيْتُ كَبِيرٌ — this house is big",
+      "بَيْتِي كَبِيرٌ — my house is big"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "adjective",
+    "feminine",
+    "plural (people)",
+    "with al-"
+   ],
+   "rows": [
+    [
+     "كَبِير (big)",
+     "كَبِيرَةٌ",
+     "كِبَارٌ",
+     "الْكَبِيرُ"
+    ],
+    [
+     "صَغِير (small)",
+     "صَغِيرَةٌ",
+     "صِغَارٌ",
+     "الصَّغِيرُ"
+    ],
+    [
+     "طَوِيل (long, tall)",
+     "طَوِيلَةٌ",
+     "طِوَالٌ",
+     "الطَّوِيلُ"
+    ],
+    [
+     "قَصِير (short)",
+     "قَصِيرَةٌ",
+     "قِصَارٌ",
+     "الْقَصِيرُ"
+    ],
+    [
+     "جَدِيد (new)",
+     "جَدِيدَةٌ",
+     "جُدُدٌ",
+     "الْجَدِيدُ"
+    ],
+    [
+     "قَدِيم (old)",
+     "قَدِيمَةٌ",
+     "قُدَامَى",
+     "الْقَدِيمُ"
+    ],
+    [
+     "شَابّ (young)",
+     "شَابَّةٌ",
+     "شُبَّانٌ",
+     "الشَّابُّ"
+    ],
+    [
+     "سَعِيد (happy)",
+     "سَعِيدَةٌ",
+     "سُعَدَاءُ",
+     "السَّعِيدُ"
+    ],
+    [
+     "جَائِع (hungry)",
+     "جَائِعَةٌ",
+     "جِيَاعٌ",
+     "الْجَائِعُ"
+    ],
+    [
+     "سَرِيع (fast)",
+     "سَرِيعَةٌ",
+     "سِرَاعٌ",
+     "السَّرِيعُ"
+    ],
+    [
+     "بَطِيء (slow)",
+     "بَطِيئَةٌ",
+     "بِطَاءٌ",
+     "الْبَطِيءُ"
+    ],
+    [
+     "جَمِيل (beautiful)",
+     "جَمِيلَةٌ",
+     "جَمِيلُونَ",
+     "الْجَمِيلُ"
+    ],
+    [
+     "مُتْعَب (tired)",
+     "مُتْعَبَةٌ",
+     "مُتْعَبُونَ",
+     "الْمُتْعَبُ"
+    ],
+    [
+     "حَارّ (hot)",
+     "حَارَّةٌ",
+     "حَارُّونَ",
+     "الْحَارُّ"
+    ]
+   ],
+   "caption": "Broken plurals (كِبَار, صِغَار, جُدُد …) must be learnt with the word; many adjectives take the sound -ūna."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Things in the plural are “she” — also for adjectives.",
+   "text": "الْبُيُوتُ كَبِيرَةٌ (the houses are big), السَّيَّارَاتُ الْجَدِيدَةُ (the new cars), الْكُتُبُ الْقَدِيمَةُ (the old books). Plural adjectives are for people only: الْأَطْفَالُ صِغَارٌ, نَحْنُ سُعَدَاءُ."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The article: on both words, or the sentence changes.",
+   "text": "الْبَيْتُ الْكَبِيرُ = the big house; الْبَيْتُ كَبِيرٌ = the house is big. Never *بَيْتٌ الْكَبِيرُ or *الْبَيْتُ كَبِيرُ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "adjective",
+    "what is special",
+    "forms"
+   ],
+   "rows": [
+    [
+     "عَطْشَان (thirsty)",
+     "pattern فَعْلَان: no tanwīn, feminine فَعْلَى",
+     "أَنَا عَطْشَانُ — هِيَ عَطْشَى (speech: عَطْشَانَة) — هُمْ عِطَاشٌ"
+    ],
+    [
+     "غَالٍ (expensive)",
+     "defective: the y shows only in some forms",
+     "غَالٍ (nom./gen.), غَالِيًا (acc.), الْغَالِي (with al-), غَالِيَةٌ (f.)"
+    ],
+    [
+     "حَارّ / سَاخِن (hot)",
+     "two words",
+     "الْجَوُّ حَارٌّ (weather, spicy food) — الْقَهْوَةُ سَاخِنَةٌ (to the touch)"
+    ],
+    [
+     "شَابّ / مُسِنّ (young / old)",
+     "for people",
+     "مُعَلِّمٌ شَابٌّ — رَجُلٌ مُسِنٌّ (polite; قَدِيم is for things)"
+    ],
+    [
+     "طَوِيل (long, tall)",
+     "one word for both",
+     "شَارِعٌ طَوِيلٌ — رَجُلٌ طَوِيلٌ"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "After لَيْسَ and كَانَ: accusative.",
+   "text": "الْبَيْتُ كَبِيرٌ → الْبَيْتُ لَيْسَ كَبِيرًا (is not big) — كَانَ الْبَيْتُ كَبِيرًا (was big). The same with feelings: لَسْتُ مُتْعَبًا (I’m not tired)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Two adjectives.",
+   "text": "They follow one another, each agreeing: بَيْتٌ كَبِيرٌ جَمِيلٌ (a big, beautiful house), or with وَ: الْبَيْتُ كَبِيرٌ وَجَمِيلٌ."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "find the noun",
+    "definite? → al-",
+    "masculine or feminine?",
+    "one, two, several — people or things?",
+    "which case?",
+    "choose the form"
+   ],
+   "caption": "Choosing the form of an adjective."
+  },
+  {
+   "t": "p",
+   "text": "Feelings are adjectives too, and they agree with the speaker: a man says أَنَا جَائِعٌ / مُتْعَبٌ / سَعِيدٌ, a woman أَنَا جَائِعَةٌ / مُتْعَبَةٌ / سَعِيدَةٌ. Two exceptions to remember: “I’m cold” is أَشْعُرُ بِالْبَرْدِ (not أَنَا بَارِدٌ), and “I’m fine” is أَنَا بِخَيْرٍ (not أَنَا جَيِّدٌ)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Does it describe the noun (a big house) or say something about it (the house is big)?",
+   "Is the noun definite — al-, an owner ending, a name? → the adjective takes al- too (for a description).",
+   "Masculine or feminine? → feminine: ـَة (or a special shape: عَطْشَى).",
+   "People or things? Things in the plural → feminine singular.",
+   "People in the plural → which plural does this adjective have (كِبَار, جُدُد … or -ūna)?",
+   "Exactly two? → the dual -āni / -ayni.",
+   "Which case is the noun in — subject, object, after a preposition? The adjective copies it.",
+   "Is it the predicate after لَيْسَ or كَانَ? → accusative (كَبِيرًا)."
+  ]
+ },
+ "traps": [
+  "“The house is big” is الْبَيْتُ كَبِيرٌ, not *الْبَيْتُ الْكَبِيرُ (that is “the big house”).",
+  "Things in the plural: الْكُتُبُ جَدِيدَةٌ, not *الْكُتُبُ جُدُدٌ.",
+  "After a preposition the adjective is genitive too: فِي الْبَيْتِ الْكَبِيرِ, not *الْكَبِيرُ.",
+  "“My big house” is بَيْتِي الْكَبِيرُ; بَيْتِي كَبِيرٌ means “my house is big”.",
+  "A woman is عَطْشَى (or عَطْشَانَة), not *عَطْشَانُ; the masculine has no tanwīn: عَطْشَانُ.",
+  "Old people are مُسِنّ / كَبِيرٌ فِي السِّنِّ — قَدِيم is for things.",
+  "The predicate after لَيْسَ is accusative: الْبَيْتُ لَيْسَ كَبِيرًا."
+ ],
+ "evidence": {
+  "tags": [
+   "ADJ"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;NOM;SG;MASC;INDF",
+  "ADJ;NOM;SG;FEM;INDF",
+  "ADJ;NOM;SG;MASC;DEF",
+  "ADJ;NOM;DU;MASC;INDF",
+  "ADJ;NOM;PL;MASC;INDF",
+  "ADJ;ACC;SG;MASC;INDF",
+  "ADJ;GEN;SG;MASC;DEF"
+ ],
+ "needs": {
+  "ADJ": 6,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;FEM;INDF",
+    "ADJ;NOM;SG;MASC;DEF",
+    "ADJ;NOM;SG;FEM;DEF",
+    "ADJ;NOM;PL;MASC;INDF",
+    "ADJ;NOM;DU;MASC;INDF",
+    "ADJ;ACC;SG;MASC;INDF",
+    "ADJ;GEN;SG;FEM;DEF"
+   ],
+   "count": 14
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“the big house” (a phrase)",
+   "options": [
+    "الْبَيْتُ الْكَبِيرُ",
+    "الْبَيْتُ كَبِيرٌ",
+    "بَيْتٌ الْكَبِيرُ"
+   ],
+   "answer": "الْبَيْتُ الْكَبِيرُ",
+   "why": "A description takes al- like its noun; الْبَيْتُ كَبِيرٌ is the sentence “the house is big”."
+  },
+  {
+   "q": "“The books are new.”",
+   "options": [
+    "الْكُتُبُ جَدِيدَةٌ.",
+    "الْكُتُبُ جُدُدٌ.",
+    "الْكُتُبُ جَدِيدٌ."
+   ],
+   "answer": "الْكُتُبُ جَدِيدَةٌ.",
+   "why": "Things in the plural take the feminine singular."
+  },
+  {
+   "q": "“a small room”",
+   "options": [
+    "غُرْفَةٌ صَغِيرَةٌ",
+    "غُرْفَةٌ صَغِيرٌ",
+    "صَغِيرَةٌ غُرْفَةٌ"
+   ],
+   "answer": "غُرْفَةٌ صَغِيرَةٌ",
+   "why": "After the noun, feminine like غُرْفَة."
+  },
+  {
+   "q": "“The children are hungry.”",
+   "options": [
+    "الْأَطْفَالُ جِيَاعٌ.",
+    "الْأَطْفَالُ جَائِعَةٌ.",
+    "الْأَطْفَالُ جَائِعٌ."
+   ],
+   "answer": "الْأَطْفَالُ جِيَاعٌ.",
+   "why": "People in the plural take a plural adjective — here the broken plural جِيَاع."
+  },
+  {
+   "q": "“in the big house”",
+   "options": [
+    "فِي الْبَيْتِ الْكَبِيرِ",
+    "فِي الْبَيْتِ الْكَبِيرُ",
+    "فِي بَيْتٍ الْكَبِيرِ"
+   ],
+   "answer": "فِي الْبَيْتِ الْكَبِيرِ",
+   "why": "The adjective copies the genitive and the article."
+  },
+  {
+   "q": "“The phone is expensive.”",
+   "options": [
+    "الْهَاتِفُ غَالٍ.",
+    "الْهَاتِفُ غَالِيًا.",
+    "الْهَاتِفُ الْغَالِي."
+   ],
+   "answer": "الْهَاتِفُ غَالٍ.",
+   "why": "Indefinite nominative of the defective adjective: غَالٍ; الْهَاتِفُ الْغَالِي is “the expensive phone”."
+  },
+  {
+   "q": "“She is thirsty.”",
+   "options": [
+    "هِيَ عَطْشَى.",
+    "هِيَ عَطْشَانُ.",
+    "هِيَ عَطْشَانٌ."
+   ],
+   "answer": "هِيَ عَطْشَى.",
+   "why": "The feminine of عَطْشَان is عَطْشَى (in speech عَطْشَانَة)."
+  },
+  {
+   "q": "“The coffee isn’t hot.”",
+   "options": [
+    "الْقَهْوَةُ لَيْسَتْ سَاخِنَةً.",
+    "الْقَهْوَةُ لَيْسَتْ سَاخِنَةٌ.",
+    "الْقَهْوَةُ لَا سَاخِنَةٌ."
+   ],
+   "answer": "الْقَهْوَةُ لَيْسَتْ سَاخِنَةً.",
+   "why": "لَيْسَ (feminine لَيْسَتْ) + accusative."
+  },
+  {
+   "q": "“My grandfather is old.”",
+   "options": [
+    "جَدِّي مُسِنٌّ.",
+    "جَدِّي قَدِيمٌ.",
+    "جَدِّي شَابٌّ."
+   ],
+   "answer": "جَدِّي مُسِنٌّ.",
+   "why": "For people: مُسِنّ (or كَبِيرٌ فِي السِّنِّ); قَدِيم is for things."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.adjective",
+   "note": "Hebrew is the closest: the adjective follows the noun and repeats the article (הַבַּיִת הַגָּדוֹל, the big house; הַבַּיִת גָּדוֹל, the house is big), with four forms (גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת) — but no cases, no dual, and things in the plural stay plural (בָּתִּים גְּדוֹלִים)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.adjective",
+   "note": "German puts the adjective BEFORE the noun with strong / weak / mixed endings (ein großes Haus, das große Haus); a predicate never changes (das Haus ist groß) — in Arabic the predicate agrees too (الْغُرْفَةُ كَبِيرَةٌ)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.adjective",
+   "note": "Chinese adjectives are stative verbs: 房子很大 (the house is big — with 很), 大房子 or 很大的房子 before the noun with 的; no agreement at all."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.agreement",
+   "note": "The agreement rule of lesson 4 — things in the plural are feminine singular — now applies to adjectives."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "الْبَيْتُ كَبِيرٌ is a verbless sentence; كَانَ and لَيْسَ make the adjective accusative."
+  }
+ ]
+}

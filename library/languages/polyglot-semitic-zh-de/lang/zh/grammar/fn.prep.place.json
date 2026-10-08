@@ -1,0 +1,342 @@
+{
+ "function": "fn.prep.place",
+ "status": "realized",
+ "summary": "Where things are is said with a place word AFTER the noun — like a postposition: 桌子上 ‘on the table’ (table-top), 椅子下面 ‘under the chair’, 冰箱里 ‘in the fridge’, 沙发旁边 ‘next to the sofa’, 房子后面 ‘behind the house’, 床和衣柜中间 ‘between the bed and the wardrobe’. The whole frame is 在 + noun + place word: 书在桌子上. Short forms 上 / 下 / 里 attach to a noun; the long forms 上面, 下面, 里面, 外面, 前面, 后面, 旁边, 中间, 左边, 右边 can also stand alone (他在外面, 车站在前面). ‘There is X on Y’ turns round and starts with the place: 桌子上有一本书. Near and far are adjectives with 离 ‘from’: 超市离我家很近.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "在",
+    "noun",
+    "place word"
+   ],
+   "caption": "书 在 桌子 上 — ‘the book is at table-top’"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Short (after a noun)",
+    "Long (also alone)",
+    "Example"
+   ],
+   "rows": [
+    [
+     "on",
+     "上 shàng",
+     "上面 shàngmian",
+     "书在桌子上。 钥匙在上面。"
+    ],
+    [
+     "under",
+     "下 xià (床下, 树下)",
+     "下面 xiàmian",
+     "包在椅子下面。"
+    ],
+    [
+     "in, inside",
+     "里 lǐ",
+     "里面 lǐmian",
+     "牛奶在冰箱里。 他在里面。"
+    ],
+    [
+     "outside",
+     "— (外 only in set words)",
+     "外面 wàimian",
+     "孩子们在外面。"
+    ],
+    [
+     "in front of",
+     "—",
+     "前面 qiánmian",
+     "我家前面有一个公园。"
+    ],
+    [
+     "behind",
+     "—",
+     "后面 hòumian",
+     "花园在房子后面。"
+    ],
+    [
+     "next to",
+     "—",
+     "旁边 pángbiān",
+     "灯在沙发旁边。"
+    ],
+    [
+     "between",
+     "—",
+     "A 和 B 中间 / 之间",
+     "桌子在床和衣柜中间。"
+    ],
+    [
+     "left / right",
+     "—",
+     "左边 zuǒbian / 右边 yòubian",
+     "银行在超市左边。"
+    ],
+    [
+     "near / far",
+     "近 jìn / 远 yuǎn (adjectives)",
+     "附近 fùjìn ‘nearby’",
+     "超市离我家很近。 附近有药店吗？"
+    ]
+   ],
+   "caption": "The place words of S12"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Pattern",
+    "Example",
+    "Use"
+   ],
+   "rows": [
+    [
+     "known thing + 在 + noun + place word",
+     "书在桌子上。",
+     "where a known thing is (‘the book is on the table’)"
+    ],
+    [
+     "noun + place word + 有 + new thing",
+     "桌子上有一本书。",
+     "what there is somewhere (‘there is a book on the table’)"
+    ],
+    [
+     "A + 离 + B + 很近 / 很远",
+     "学校离这里很远。",
+     "distance (‘far from here’)"
+    ]
+   ],
+   "caption": "在 for known things, 有 for new things"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Things become places with a place word",
+   "text": "A place noun stands alone after 在: 在学校, 在北京, 在家. A thing needs a place word: 在冰箱里, 在桌子上 — *在冰箱 is incomplete. Rooms can go either way: 在厨房 / 在厨房里."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "After the noun, not before",
+   "text": "Greek πάνω στο τραπέζι, German auf dem Tisch put ‘on’ first. Chinese: 在桌子上 — *在上桌子 is wrong. Turkish works like Chinese: masanın üstünde ‘table-of top-at’."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Short: 上, 下, 里",
+     "points": [
+      "only right after a noun",
+      "桌子上, 床下, 冰箱里",
+      "*书在上 ✗"
+     ]
+    },
+    {
+     "title": "Long: 上面, 里面, 外面, 前面, 旁边 …",
+     "points": [
+      "after a noun or alone",
+      "桌子上面, 冰箱里面",
+      "书在上面 ✓, 他在外面 ✓"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Near and far are adjectives",
+   "text": "近 and 远 work like adjectives, with 很: 很近, 很远. The point you measure from comes with 离: 超市离我家很近 ‘the supermarket is close to my home’; question: 远不远？ / 远吗？; ‘nearby’ is the noun 附近: 我家附近有一个公园."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "On the floor, in the street, in the square",
+   "text": "Surfaces take 上 even when they are not ‘on top’: 在地板上 ‘on the floor’, 在街上 ‘in the street’, 在广场上 ‘in the square’, 墙上 ‘on the wall’."
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "上 / 下",
+     "def": "also time: 上个月 ‘last month’, 下个月 ‘next month’."
+    },
+    {
+     "term": "里面请！",
+     "def": "‘please come in’ — what a host says."
+    },
+    {
+     "term": "中间 / 之间",
+     "def": "both ‘between’; 之间 is more formal and also for people and times (朋友之间)."
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the noun a place by itself (school, home, Beijing) or a thing (table, fridge, sofa)? → a thing needs a place word after it.",
+   "Which relation? on → 上, under → 下面, in → 里, outside → 外面, in front → 前面, behind → 后面, next to → 旁边, between → A 和 B 中间, left / right → 左边 / 右边.",
+   "Does the place word stand alone, without a noun? → use the long form: 在上面, 在里面, 在外面.",
+   "Is the thing known (the book) → thing + 在 + place; or new (a book) → place + 有 + thing?",
+   "Near or far? → A 离 B 很近 / 很远.",
+   "Is it a surface (floor, street, wall)? → 上.",
+   "Did I put the place word before the noun, like a preposition? → move it after the noun."
+  ],
+  "steps": [
+   "Name the thing.",
+   "在 + the reference noun + the place word.",
+   "Or start with the place and use 有 for something new."
+  ]
+ },
+ "traps": [
+  "*书在上桌子 → 书在桌子上.",
+  "*牛奶在冰箱 → 牛奶在冰箱里.",
+  "*书在上 → 书在上面 (a short form cannot stand alone).",
+  "*有一本书在桌子上 (copying English) → 桌子上有一本书.",
+  "*超市近我家 → 超市离我家很近.",
+  "*中间床和衣柜 → 床和衣柜中间.",
+  "‘Floor’ as a storey is not 地板: 三楼 ‘the third floor’."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:shang",
+   "zh:shangmian",
+   "zh:xia",
+   "zh:xiamian",
+   "zh:li",
+   "zh:limian",
+   "zh:waimian",
+   "zh:pangbian",
+   "zh:qianmian",
+   "zh:houmian",
+   "zh:zhongjian",
+   "zh:zhijian",
+   "zh:zuobian",
+   "zh:youbian",
+   "zh:jin",
+   "zh:yuan",
+   "zh:fujin",
+   "zh:li.from"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘The book is on the table.’",
+   "options": [
+    "书在桌子上。",
+    "书在上桌子。",
+    "书上在桌子。"
+   ],
+   "answer": "书在桌子上。",
+   "why": "在 + noun + place word: the place word follows the noun."
+  },
+  {
+   "q": "‘The milk is in the fridge.’",
+   "options": [
+    "牛奶在冰箱里。",
+    "牛奶在冰箱。",
+    "牛奶在里冰箱。"
+   ],
+   "answer": "牛奶在冰箱里。",
+   "why": "A thing needs 里 to become a place."
+  },
+  {
+   "q": "‘There is a sofa in the living room.’",
+   "options": [
+    "客厅里有一张沙发。",
+    "一张沙发有在客厅里。",
+    "有一张沙发在客厅。"
+   ],
+   "answer": "客厅里有一张沙发。",
+   "why": "Something new: place + 有 + thing."
+  },
+  {
+   "q": "‘He is outside.’",
+   "options": [
+    "他在外面。",
+    "他在外。",
+    "他外面在。"
+   ],
+   "answer": "他在外面。",
+   "why": "Alone, the long form 外面 is used."
+  },
+  {
+   "q": "‘The supermarket is very close to my home.’",
+   "options": [
+    "超市离我家很近。",
+    "超市近我家。",
+    "超市从我家很近。"
+   ],
+   "answer": "超市离我家很近。",
+   "why": "Distance: A 离 B 很近."
+  },
+  {
+   "q": "‘The table is between the bed and the wardrobe.’",
+   "options": [
+    "桌子在床和衣柜中间。",
+    "桌子在中间床和衣柜。",
+    "桌子中间在床和衣柜。"
+   ],
+   "answer": "桌子在床和衣柜中间。",
+   "why": "Both sides first, then 中间."
+  },
+  {
+   "q": "Which language puts the place word after the noun, like Chinese?",
+   "options": [
+    "Turkish (masanın üstünde)",
+    "German (auf dem Tisch)",
+    "Greek (πάνω στο τραπέζι)"
+   ],
+   "answer": "Turkish (masanın üstünde)",
+   "why": "Turkish, like Chinese, says ‘table top-at’; German and Greek put the preposition first."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.prep.place",
+   "note": "German puts the preposition first and uses the dative for ‘where’ (auf dem Tisch, unter dem Stuhl, neben dem Sofa, zwischen dem Bett und dem Schrank); Chinese puts the place word after the noun and changes no ending."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "German two-way prepositions switch case (Wo? auf dem Tisch / Wohin? auf den Tisch); Chinese keeps 在 … 上 for ‘where’ and uses a verb for ‘where to’."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.place",
+   "note": "Arabic places the word before the noun, which goes into the genitive: ʿalā, taḥta, bi-jānibi, amāma, khalfa / warāʾa, bayna."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.place",
+   "note": "Hebrew, too, puts it first: עַל, מִתַּחַת לְ־, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין — Chinese turns the order round: 桌子上, 沙发旁边."
+  }
+ ]
+}

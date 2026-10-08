@@ -1,0 +1,456 @@
+{
+ "function": "fn.imperative",
+ "status": "realized",
+ "summary": "The imperative is built from the “you” form of the present: drop the prefix تَـ (تَذْهَبُ → ذْهَبْ) and, if the word now starts with two consonants, put a helping alif in front — اِ when the present vowel is a or i (اِذْهَبْ, اِنْتَظِرْ, اِمْشِ), اُ when it is u (اُدْخُلْ, اُخْرُجْ, اُرْكُضْ). The ending says who is spoken to: nothing (sukūn) to a man, -ī to a woman, -ū to several men or a mixed group, -na to several women: اِذْهَبْ / اِذْهَبِي / اِذْهَبُوا / اِذْهَبْنَ. Verbs whose present has a vowel after the prefix need no helping alif: form III سَافِرْ, غَادِرْ (from تُسَافِرُ, تُغَادِرُ), hollow قُدْ, عُدْ (with a short vowel before a consonant ending, long before a vowel: قُودِي, عُودُوا). A weak last letter falls away to a man: اِمْشِ, اِبْقَ, اِشْتَرِ. Two common irregulars: كُلْ (eat!) from أَكَلَ, and “come!” is تَعَالَ (تَعَالَيْ, تَعَالَوْا), not the rare جِئْ. The helping alif is hamzat al-waṣl: it is said at the start, silent after a vowel. Arabic has no polite form like German Sie: politeness comes from words — مِنْ فَضْلِكَ / مِنْ فَضْلِكِ, لَوْ سَمَحْتَ. “Don’t …!” is لَا + the jussive (لَا تَذْهَبْ), a form of a later lesson.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "تَذْهَبُ (you go)",
+    "drop تَـ → ذْهَبْ",
+    "two consonants? add اِ",
+    "اِذْهَبْ!"
+   ],
+   "caption": "From the present to the command."
+  },
+  {
+   "t": "table",
+   "head": [
+    "verb",
+    "to a man",
+    "to a woman",
+    "to men / mixed",
+    "to women"
+   ],
+   "rows": [
+    [
+     "ذَهَبَ (go)",
+     "اِذْهَبْ",
+     "اِذْهَبِي",
+     "اِذْهَبُوا",
+     "اِذْهَبْنَ"
+    ],
+    [
+     "تَعَالَ (come)",
+     "تَعَالَ",
+     "تَعَالَيْ",
+     "تَعَالَوْا",
+     "تَعَالَيْنَ"
+    ],
+    [
+     "مَشَى (walk)",
+     "اِمْشِ",
+     "اِمْشِي",
+     "اِمْشُوا",
+     "اِمْشِينَ"
+    ],
+    [
+     "رَكَضَ (run)",
+     "اُرْكُضْ",
+     "اُرْكُضِي",
+     "اُرْكُضُوا",
+     "اُرْكُضْنَ"
+    ],
+    [
+     "قَادَ (drive)",
+     "قُدْ",
+     "قُودِي",
+     "قُودُوا",
+     "قُدْنَ"
+    ],
+    [
+     "سَافَرَ (travel)",
+     "سَافِرْ",
+     "سَافِرِي",
+     "سَافِرُوا",
+     "سَافِرْنَ"
+    ],
+    [
+     "عَادَ (come back)",
+     "عُدْ",
+     "عُودِي",
+     "عُودُوا",
+     "عُدْنَ"
+    ],
+    [
+     "دَخَلَ (come in)",
+     "اُدْخُلْ",
+     "اُدْخُلِي",
+     "اُدْخُلُوا",
+     "اُدْخُلْنَ"
+    ],
+    [
+     "خَرَجَ (go out)",
+     "اُخْرُجْ",
+     "اُخْرُجِي",
+     "اُخْرُجُوا",
+     "اُخْرُجْنَ"
+    ],
+    [
+     "غَادَرَ (leave)",
+     "غَادِرْ",
+     "غَادِرِي",
+     "غَادِرُوا",
+     "غَادِرْنَ"
+    ],
+    [
+     "بَقِيَ (stay)",
+     "اِبْقَ",
+     "اِبْقَيْ",
+     "اِبْقَوْا",
+     "اِبْقَيْنَ"
+    ],
+    [
+     "اِنْتَظَرَ (wait)",
+     "اِنْتَظِرْ",
+     "اِنْتَظِرِي",
+     "اِنْتَظِرُوا",
+     "اِنْتَظِرْنَ"
+    ],
+    [
+     "أَكَلَ (eat)",
+     "كُلْ",
+     "كُلِي",
+     "كُلُوا",
+     "كُلْنَ"
+    ],
+    [
+     "شَرِبَ (drink)",
+     "اِشْرَبْ",
+     "اِشْرَبِي",
+     "اِشْرَبُوا",
+     "اِشْرَبْنَ"
+    ],
+    [
+     "طَبَخَ (cook)",
+     "اُطْبُخْ",
+     "اُطْبُخِي",
+     "اُطْبُخُوا",
+     "اُطْبُخْنَ"
+    ],
+    [
+     "اِشْتَرَى (buy)",
+     "اِشْتَرِ",
+     "اِشْتَرِي",
+     "اِشْتَرُوا",
+     "اِشْتَرِينَ"
+    ]
+   ],
+   "caption": "The commands of the verbs taught so far (from the Wiktionary tables)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "present (you)",
+    "type",
+    "command (to a man)",
+    "how"
+   ],
+   "rows": [
+    [
+     "تَذْهَبُ, تَشْرَبُ",
+     "present vowel a",
+     "اِذْهَبْ, اِشْرَبْ",
+     "add اِ"
+    ],
+    [
+     "تَدْخُلُ, تَخْرُجُ, تَرْكُضُ, تَطْبُخُ",
+     "present vowel u",
+     "اُدْخُلْ, اُخْرُجْ, اُرْكُضْ, اُطْبُخْ",
+     "add اُ"
+    ],
+    [
+     "تَنْتَظِرُ",
+     "form VIII",
+     "اِنْتَظِرْ",
+     "add اِ"
+    ],
+    [
+     "تُسَافِرُ, تُغَادِرُ",
+     "form III (vowel after the prefix)",
+     "سَافِرْ, غَادِرْ",
+     "no alif"
+    ],
+    [
+     "تَقُودُ, تَعُودُ",
+     "hollow",
+     "قُدْ, عُدْ (but قُودِي, عُودُوا)",
+     "no alif; short vowel before sukūn"
+    ],
+    [
+     "تَمْشِي, تَبْقَى, تَشْتَرِي",
+     "weak last letter",
+     "اِمْشِ, اِبْقَ, اِشْتَرِ",
+     "the last letter falls"
+    ],
+    [
+     "تَأْكُلُ",
+     "irregular",
+     "كُلْ",
+     "learn it"
+    ],
+    [
+     "تَجِيءُ",
+     "suppletive",
+     "تَعَالَ",
+     "another verb"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Please.",
+   "text": "Add مِنْ فَضْلِكَ (to a man), مِنْ فَضْلِكِ (to a woman), مِنْ فَضْلِكُمْ (to several) or لَوْ سَمَحْتَ: اِنْتَظِرْ قَلِيلًا، مِنْ فَضْلِكَ. To invite someone in, تَفَضَّلْ is the polite word."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The helping alif is silent after a vowel.",
+   "text": "At the start of a sentence it is said: اِذْهَبْ (iḏhab). After a vowel it disappears in speech and loses its vowel sign in writing: وَاذْهَبْ (wa-ḏhab). Form III and hollow verbs have no such alif: سَافِرْ, قُدْ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No pronoun, four forms.",
+   "text": "The ending already says who is meant, so there is no “you”: اِجْلِسْ / اِجْلِسِي — German setz dich / setzen Sie sich has a polite form; Arabic has gender and number instead."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "geh! (du)",
+      "geht! (ihr)",
+      "gehen Sie! (polite)"
+     ]
+    },
+    {
+     "title": "Arabic",
+     "points": [
+      "اِذْهَبْ! (to a man)",
+      "اِذْهَبِي! (to a woman)",
+      "اِذْهَبُوا! (to several) — اِذْهَبْنَ! (to women)"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "The plural -ū is written with a silent alif, as in the past: اِذْهَبُوا, اُدْخُلُوا, قُودُوا; the women form ends in -na: اِذْهَبْنَ, قُدْنَ."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who am I talking to: a man, a woman, several men or a mixed group, several women?",
+   "What is the present “you” form? تَذْهَبُ, تَدْخُلُ, تُسَافِرُ, تَقُودُ, تَمْشِي …",
+   "Drop تَـ / تُـ. Two consonants at the start now? → add اِ (present vowel a or i) or اُ (present vowel u).",
+   "Hollow verb? Short vowel when the ending is sukūn or -na (قُدْ, قُدْنَ), long before -ī / -ū (قُودِي, قُودُوا).",
+   "Weak last letter? It falls away to a man: اِمْشِ, اِبْقَ, اِشْتَرِ.",
+   "Is it “come” (تَعَالَ) or “eat” (كُلْ)?",
+   "Polite? Add مِنْ فَضْلِكَ / مِنْ فَضْلِكِ."
+  ]
+ },
+ "traps": [
+  "*تَذْهَبْ! → اِذْهَبْ! (the prefix goes).",
+  "*اِدْخُلْ → اُدْخُلْ: the present vowel u gives the helping vowel u.",
+  "*اِسَافِرْ → سَافِرْ: form III needs no helping alif.",
+  "*قُودْ → قُدْ: a hollow verb shortens its vowel before sukūn.",
+  "اِمْشِي is to a woman; to a man it is اِمْشِ.",
+  "*جِئْ for “come!” → تَعَالَ.",
+  "“Don’t go!” is not *لَا اِذْهَبْ but لَا تَذْهَبْ (the jussive, a later lesson)."
+ ],
+ "evidence": {
+  "tags": [
+   "IMP"
+  ]
+ },
+ "paradigmCells": [
+  "V;IMP;2;SG;MASC",
+  "V;IMP;2;SG;FEM",
+  "V;IMP;2;PL;MASC",
+  "V;IMP;2;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:dhahaba",
+    "ar:taala",
+    "ar:masha",
+    "ar:rakada",
+    "ar:qada",
+    "ar:safara",
+    "ar:ada",
+    "ar:dakhala",
+    "ar:kharaja",
+    "ar:ghadara",
+    "ar:baqiya",
+    "ar:intazara",
+    "ar:akala",
+    "ar:shariba",
+    "ar:tabakha",
+    "ar:ishtara"
+   ],
+   "cells": [
+    "V;IMP;2;SG;MASC",
+    "V;IMP;2;SG;FEM",
+    "V;IMP;2;PL;MASC",
+    "V;IMP;2;PL;FEM"
+   ],
+   "count": 14
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“Go!” (to a woman)",
+   "options": [
+    "اِذْهَبِي",
+    "اِذْهَبْ",
+    "تَذْهَبِينَ",
+    "اِذْهَبُوا"
+   ],
+   "answer": "اِذْهَبِي",
+   "why": "To one woman the command ends in -ī."
+  },
+  {
+   "q": "“Come in!” (to a man)",
+   "options": [
+    "اُدْخُلْ",
+    "اِدْخُلْ",
+    "تَدْخُلُ",
+    "دَخَلَ"
+   ],
+   "answer": "اُدْخُلْ",
+   "why": "The present is تَدْخُلُ (u), so the helping vowel is u."
+  },
+  {
+   "q": "“Come here!” (to several people)",
+   "options": [
+    "تَعَالَوْا إِلَى هُنَا!",
+    "جِيئُوا هُنَا!",
+    "تَجِيئُونَ هُنَا!"
+   ],
+   "answer": "تَعَالَوْا إِلَى هُنَا!",
+   "why": "“Come!” is تَعَالَ — to several تَعَالَوْا."
+  },
+  {
+   "q": "“Travel with us!” (to a man)",
+   "options": [
+    "سَافِرْ مَعَنَا!",
+    "اِسَافِرْ مَعَنَا!",
+    "تُسَافِرُ مَعَنَا!"
+   ],
+   "answer": "سَافِرْ مَعَنَا!",
+   "why": "Form III: no helping alif."
+  },
+  {
+   "q": "“Drive slowly!” (to a man)",
+   "options": [
+    "قُدْ بِبُطْءٍ!",
+    "قُودْ بِبُطْءٍ!",
+    "اُقُدْ بِبُطْءٍ!"
+   ],
+   "answer": "قُدْ بِبُطْءٍ!",
+   "why": "Hollow verb: short u before the sukūn."
+  },
+  {
+   "q": "“Stay here!” (to a man)",
+   "options": [
+    "اِبْقَ هُنَا!",
+    "اِبْقَى هُنَا!",
+    "اِبْقِي هُنَا!"
+   ],
+   "answer": "اِبْقَ هُنَا!",
+   "why": "The weak last letter falls away to a man; اِبْقَيْ is to a woman."
+  },
+  {
+   "q": "“Eat!” (to a man)",
+   "options": [
+    "كُلْ!",
+    "اُؤْكُلْ!",
+    "تَأْكُلُ!"
+   ],
+   "answer": "كُلْ!",
+   "why": "أَكَلَ has the short irregular command كُلْ."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.imperative",
+   "note": "Hebrew builds the command from the future stem too: לֵךְ / לְכִי / לְכוּ (go!) — in speech the future often serves as a command (תֵּלֵךְ). Like Arabic it has masculine and feminine forms."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.imperative",
+   "note": "German: geh! / geht! / gehen Sie! — a polite Sie-form but no gender. Arabic: four forms by gender and number, politeness by words (مِنْ فَضْلِكَ)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.imperative",
+   "note": "Chinese has no command form: the bare verb (走！), 请 for “please”, 吧 to soften, 别 / 不要 for “don’t”."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "The command comes from the present “you” form (lesson 7)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.greetings",
+   "note": "مِنْ فَضْلِكَ / مِنْ فَضْلِكِ and لَوْ سَمَحْتَ change with the listener (lesson 2)."
+  }
+ ]
+}

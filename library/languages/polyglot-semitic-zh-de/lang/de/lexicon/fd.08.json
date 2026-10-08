@@ -45,6 +45,13 @@
       "sense": "s1"
      },
      {
+      "text": "Ich mag den Käse nicht.",
+      "tr": "I don’t like the cheese.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
       "text": "Der Salat ist nicht frisch.",
       "tr": "The lettuce isn't fresh.",
       "register": "neutral",
@@ -113,14 +120,17 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English not has the same history: from Old English nāwiht “no thing” (also the source of naught)."
+     "English not has the same history: from Old English nāwiht “no thing” (also the source of naught).",
+     "Greek δεν, Russian не and Turkish -me/-ma stand before the verb or inside it; German nicht usually comes late in the clause: Ich trinke den Kaffee nicht.",
+     "nicht never combines with another negative word in standard German: Ich esse nichts (not *Ich esse nicht nichts) – unlike Greek δεν τρώω τίποτα or Russian я ничего не ем."
     ],
     "pitfalls": [
      "nicht vs kein: kein replaces “not a / not any” before a noun without the definite article (Ich habe keine Gurke), nicht negates verbs, adjectives and nouns with der/die/das (Ich esse die Gurke nicht).",
      "Position: nicht usually comes after the object and at the end of a main clause (Ich mag ihn nicht), but before adjectives, places and second verbs (nicht frisch, nicht hier, nicht essen)."
     ],
     "subtleties": [
-     "The position of nicht can change what is negated: Ich esse nicht die Gurke (but something else) vs Ich esse die Gurke nicht (not at all)."
+     "The position of nicht can change what is negated: Ich esse nicht die Gurke (but something else) vs Ich esse die Gurke nicht (not at all).",
+     "nicht before a word negates just that word: nicht hier (but there), nicht gut, nicht mein Bruder."
     ]
    }
   },
@@ -130,7 +140,7 @@
    "pos": "DET",
    "class": "neg",
    "senses": [
-    "part.not"
+    "det.none"
    ],
    "forms": {
     "DET;NOM;SG;MASC": "kein",
@@ -169,7 +179,7 @@
       "register": [
        "neutral"
       ],
-      "concept": "part.not"
+      "concept": "det.none"
      },
      {
       "id": "s2",
@@ -185,6 +195,20 @@
       "tr": "I don't like onions.",
       "register": "neutral",
       "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe heute keine Zeit.",
+      "tr": "I have no time today.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Er trinkt keinen Kaffee.",
+      "tr": "He doesn’t drink coffee.",
+      "register": "neutral",
+      "context": "habits",
       "sense": "s1"
      },
      {
@@ -255,14 +279,713 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "kein is declined exactly like ein in the singular – but unlike ein it has a plural: keine Tomaten."
+     "kein is declined exactly like ein in the singular – but unlike ein it has a plural: keine Tomaten.",
+     "Greek says δεν έχω αυτοκίνητο (“I don’t have car”), Russian у меня нет машины, Turkish arabam yok – German puts the negation into the article: Ich habe kein Auto."
     ],
     "pitfalls": [
      "*Ich habe nicht eine Tomate is not the normal negation – say Ich habe keine Tomate.",
-     "kein takes the case endings of ein: keinen Kürbis (masc. accusative), keiner Gurke (fem. dative)."
+     "kein takes the case endings of ein: keinen Kürbis (masc. accusative), keiner Gurke (fem. dative).",
+     "Masculine accusative keinen: Ich trinke keinen Tee, keinen Kaffee, keinen Saft, keinen Wein (der Tee → keinen Tee)."
     ],
     "subtleties": [
      "Used alone as a pronoun it takes adjective-like endings: Hast du einen Apfel? – Nein, ich habe keinen."
+    ]
+   }
+  },
+  {
+   "id": "de:nichts",
+   "lemma": "nichts",
+   "pos": "PRON",
+   "senses": [
+    "pron.nothing"
+   ],
+   "forms": {
+    "PRON;NOM": "nichts",
+    "PRON;ACC": "nichts",
+    "PRON;DAT": "nichts"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Emptiness – an empty fridge, a shrug, “nothing at all”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nothing, not anything",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nothing"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse heute nichts.",
+      "tr": "I’m not eating anything today.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Er sagt nichts.",
+      "tr": "He says nothing.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Danke! – Nichts zu danken.",
+      "tr": "Thanks! – Don’t mention it.",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gar nichts",
+      "tr": "nothing at all"
+     },
+     {
+      "text": "sonst nichts",
+      "tr": "nothing else"
+     },
+     {
+      "text": "nichts mehr",
+      "tr": "nothing more, nothing left"
+     },
+     {
+      "text": "nichts Neues",
+      "tr": "nothing new"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Von nichts kommt nichts.",
+      "tr": "From nothing comes nothing.",
+      "kind": "saying",
+      "meaning": "you have to work for success",
+      "register": "neutral"
+     },
+     {
+      "text": "Nichts zu danken.",
+      "tr": "Nothing to thank for.",
+      "kind": "fixed expression",
+      "meaning": "you’re welcome, don’t mention it",
+      "register": "neutral"
+     },
+     {
+      "text": "viel Lärm um nichts",
+      "tr": "much noise about nothing",
+      "kind": "fixed expression",
+      "meaning": "much ado about nothing (the German title of Shakespeare’s play)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nix",
+      "register": "colloquial",
+      "nuance": "the spoken form everywhere – Ich weiß nix."
+     },
+     {
+      "word": "nischt",
+      "register": "regional",
+      "nuance": "Berlin, Saxony and the east"
+     },
+     {
+      "word": "überhaupt nichts",
+      "register": "neutral",
+      "nuance": "nothing whatsoever – emphatic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "alles",
+      "note": "everything"
+     },
+     {
+      "word": "etwas",
+      "note": "something"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German nihtes niht (“nothing of nothing”), a reinforcing construction with niht. Compare French rien de rien. See nicht. Cognate with Dutch niets, Low German nix.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nichts is an old genitive: Middle High German nihtes niht, “nothing of nothing” – like French rien de rien."
+    ],
+    "pitfalls": [
+     "One negation is enough: Ich esse nichts – never *Ich esse nicht nichts (Greek δεν τρώω τίποτα and Russian я ничего не ем need two).",
+     "nichts never changes its form: nichts (subject), nichts (object), mit nichts."
+    ],
+    "subtleties": [
+     "An adjective after nichts becomes a capitalised noun: nichts Neues, nichts Gutes.",
+     "das Nichts (capital N) is a noun: nothingness, the void."
+    ]
+   }
+  },
+  {
+   "id": "de:niemand",
+   "lemma": "niemand",
+   "pos": "PRON",
+   "senses": [
+    "pron.nobody"
+   ],
+   "forms": {
+    "PRON;NOM": "niemand",
+    "PRON;ACC": "niemanden",
+    "PRON;DAT": "niemandem"
+   },
+   "formsAlt": {
+    "PRON;ACC": [
+     "niemand"
+    ],
+    "PRON;DAT": [
+     "niemand"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An empty room; a slightly lonely, emphatic word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nobody, no one",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nobody"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Niemand ist zu Hause.",
+      "tr": "Nobody is at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kenne hier niemanden.",
+      "tr": "I don’t know anyone here.",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     },
+     {
+      "text": "Das gehört niemandem.",
+      "tr": "That belongs to nobody.",
+      "register": "neutral",
+      "context": "lost property",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sonst niemand",
+      "tr": "nobody else"
+     },
+     {
+      "text": "fast niemand",
+      "tr": "almost nobody"
+     },
+     {
+      "text": "niemand anders",
+      "tr": "nobody else"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Niemand ist perfekt.",
+      "tr": "Nobody is perfect.",
+      "kind": "saying",
+      "meaning": "everyone makes mistakes",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "keiner",
+      "register": "colloquial",
+      "nuance": "nobody – the more common word in speech: Keiner ist da."
+     },
+     {
+      "word": "kein Mensch",
+      "register": "colloquial",
+      "nuance": "not a soul – emphatic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "jemand",
+      "note": "somebody"
+     },
+     {
+      "word": "alle",
+      "note": "everybody"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German nieman, from Old High German nioman; equivalent to nie (“never”) + Mann (“man”). Cognate with Dutch niemand, Afrikaans niemand.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "niemand is “never a man”: nie + Mann – Dutch niemand is the same word."
+    ],
+    "pitfalls": [
+     "Accusative niemanden, dative niemandem – in speech often simply niemand.",
+     "One negation only: Niemand trinkt Wein = nobody drinks wine (Greek needs two: Κανείς δεν πίνει κρασί)."
+    ],
+    "subtleties": [
+     "The verb is singular: Niemand isst, niemand ist da."
+    ]
+   }
+  },
+  {
+   "id": "de:nie",
+   "lemma": "nie",
+   "pos": "ADV",
+   "senses": [
+    "adv.never"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Firm and final – “not once, not ever”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "never, not ever",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.never"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke nie Kaffee.",
+      "tr": "I never drink coffee.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "Er isst nie Fleisch.",
+      "tr": "He never eats meat.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Das vergesse ich nie.",
+      "tr": "I’ll never forget that.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "fast nie",
+      "tr": "almost never"
+     },
+     {
+      "text": "noch nie",
+      "tr": "never (up to now), never before"
+     },
+     {
+      "text": "nie wieder",
+      "tr": "never again"
+     },
+     {
+      "text": "jetzt oder nie",
+      "tr": "now or never"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Besser spät als nie.",
+      "tr": "Better late than never.",
+      "kind": "proverb",
+      "meaning": "it is better to do something late than not at all",
+      "register": "neutral"
+     },
+     {
+      "text": "Jetzt oder nie!",
+      "tr": "Now or never!",
+      "kind": "fixed expression",
+      "meaning": "this is the only chance",
+      "register": "neutral"
+     },
+     {
+      "text": "Sag niemals nie.",
+      "tr": "Never say never.",
+      "kind": "saying",
+      "meaning": "do not rule anything out",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "niemals",
+      "register": "neutral",
+      "nuance": "never – a little more emphatic or formal"
+     },
+     {
+      "word": "nimmer",
+      "register": "regional",
+      "nuance": "never / no longer – south and Austria"
+     },
+     {
+      "word": "zu keiner Zeit",
+      "register": "formal",
+      "nuance": "at no time – official language"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "immer",
+      "note": "always"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German nie, from Old High German nio.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nie, nichts, niemand and nirgends (nowhere) all start with the old negative n- – as English never, nothing, nobody and nowhere do."
+    ],
+    "pitfalls": [
+     "nie stands where nicht would stand: Ich trinke nie Kaffee. Ich esse das nie.",
+     "No second negation: Ich trinke nie Kaffee (not *nie keinen Kaffee)."
+    ],
+    "subtleties": [
+     "noch nie = never so far: Ich war noch nie in Berlin. – je = ever: Warst du je in Berlin?"
+    ]
+   }
+  },
+  {
+   "id": "de:niemals",
+   "lemma": "niemals",
+   "pos": "ADV",
+   "senses": [
+    "adv.never"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A strong, emphatic “never!” – promises and refusals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "never (emphatic), at no time",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.never"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gebe niemals auf.",
+      "tr": "I’ll never give up.",
+      "register": "neutral",
+      "context": "sport, motivation",
+      "sense": "s1"
+     },
+     {
+      "text": "Das mache ich niemals!",
+      "tr": "I’ll never do that!",
+      "register": "informal",
+      "context": "refusal",
+      "sense": "s1"
+     },
+     {
+      "text": "Er lügt niemals.",
+      "tr": "He never lies.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "niemals aufgeben",
+      "tr": "never to give up"
+     },
+     {
+      "text": "niemals vergessen",
+      "tr": "never to forget"
+     },
+     {
+      "text": "Niemals!",
+      "tr": "Never! (as an answer)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Sag niemals nie.",
+      "tr": "Never say never.",
+      "kind": "saying",
+      "meaning": "do not rule anything out",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nie",
+      "register": "neutral",
+      "nuance": "never – the everyday word"
+     },
+     {
+      "word": "nie und nimmer",
+      "register": "colloquial",
+      "nuance": "never ever – very emphatic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "immer",
+      "note": "always"
+     }
+    ],
+    "etymology": {
+     "text": "From nie + -mals. Similar to Dutch niemaals.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "-mals is the “times” of damals (back then), mehrmals (several times) and keinmal (not once)."
+    ],
+    "pitfalls": [
+     "In everyday speech nie is more common; niemals adds weight.",
+     "Like nie, it takes no second negation: Ich esse niemals Fisch."
+    ],
+    "subtleties": [
+     "Niemals! can stand alone as a strong answer."
+    ]
+   }
+  },
+  {
+   "id": "de:weder",
+   "lemma": "weder",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.neithernor"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A double “no” that rejects both choices.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "neither (in weder … noch: neither … nor)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.neithernor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke weder Kaffee noch Tee.",
+      "tr": "I drink neither coffee nor tea.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Er hat weder Zeit noch Geld.",
+      "tr": "He has neither time nor money.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist weder gut noch schlecht.",
+      "tr": "That is neither good nor bad.",
+      "register": "neutral",
+      "context": "opinion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "weder … noch",
+      "tr": "neither … nor"
+     },
+     {
+      "text": "weder heute noch morgen",
+      "tr": "neither today nor tomorrow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "weder Fisch noch Fleisch",
+      "tr": "neither fish nor meat",
+      "kind": "idiom",
+      "meaning": "neither one thing nor the other",
+      "register": "neutral"
+     },
+     {
+      "text": "weder ein noch aus wissen",
+      "tr": "to know neither in nor out",
+      "kind": "idiom",
+      "meaning": "to be at one’s wits’ end",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nicht … und auch nicht",
+      "register": "neutral",
+      "nuance": "not … and not … either – plainer, two separate negations"
+     }
+    ],
+    "etymology": {
+     "text": "From Old High German wedar, from Proto-West Germanic *hwaþar, from Proto-Germanic *hwaþeraz; cognate with English whether and either.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "weder is a cousin of English whether and either; the pair weder … noch matches Greek ούτε … ούτε, Russian ни … ни and Turkish ne … ne."
+    ],
+    "pitfalls": [
+     "weder … noch is already negative: Ich habe weder Brot noch Käse – no kein, no nicht in the same clause.",
+     "weder always pairs with noch, never with oder."
+    ],
+    "subtleties": [
+     "It can join objects (weder Tee noch Kaffee), subjects (Weder Anna noch Max …) and adjectives (weder gut noch schlecht)."
+    ]
+   }
+  },
+  {
+   "id": "de:noch",
+   "lemma": "noch",
+   "pos": "CCONJ",
+   "senses": [],
+   "role": "nor – the second half of weder … noch (the adverb noch, “still, yet”, comes later)",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Here only the “nor” of weder … noch; on its own a very frequent little word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nor (after weder)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "still, yet; more, another (the adverb: noch ein Kaffee, noch nicht)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke weder Bier noch Wein.",
+      "tr": "I drink neither beer nor wine.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben weder Zucker noch Milch.",
+      "tr": "We have neither sugar nor milk.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Möchten Sie noch einen Kaffee?",
+      "tr": "Would you like another coffee?",
+      "register": "formal",
+      "context": "café",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "weder … noch",
+      "tr": "neither … nor"
+     },
+     {
+      "text": "noch nicht",
+      "tr": "not yet"
+     },
+     {
+      "text": "noch einmal",
+      "tr": "once more"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The conjunction “nor” has no other form in German; outside weder … noch, use und auch nicht.",
+    "etymology": {
+     "text": "From Middle High German noch, from Old High German noh, from Proto-West Germanic *noh, from Proto-Germanic *nuh, from Proto-Indo-European *nu (“now”) + *-kʷe (“and, also”). Cognate to Dutch nog and noch.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "noch alone usually means “still” or “more”: Ich habe noch Brot (I still have bread). Only after weder does it mean “nor”."
+    ],
+    "subtleties": [
+     "Noch einen Kaffee, bitte! = Another coffee, please!"
     ]
    }
   }

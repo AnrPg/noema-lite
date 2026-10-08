@@ -17,7 +17,15 @@
   "DET.indef": "DET;NOM;SG;MASC",
   "DET.dem": "DET;NOM;SG;MASC",
   "DET.neg": "DET;NOM;SG;MASC",
-  "NOUN.plt": "N;NOM;PL"
+  "NOUN.plt": "N;NOM;PL",
+  "DET.poss": "DET;NOM;SG;MASC",
+  "DET.quant": "DET;SG",
+  "DET.quantpl": "DET;NOM;PL",
+  "NOUN.adj": "N;NOM;SG;INDF",
+  "DET.int": "DET;NOM;SG;MASC",
+  "PRON.intp": "PRON;NOM",
+  "ADJ": "ADJ",
+  "ADJ.inv": "ADJ"
  },
  "paradigmCells": {
   "NOUN": [
@@ -128,6 +136,128 @@
    "N;ACC;PL",
    "N;DAT;PL",
    "N;GEN;PL"
+  ],
+  "DET.poss": [
+   "DET;NOM;SG;MASC",
+   "DET;NOM;SG;FEM",
+   "DET;NOM;SG;NEUT",
+   "DET;ACC;SG;MASC",
+   "DET;ACC;SG;FEM",
+   "DET;ACC;SG;NEUT",
+   "DET;DAT;SG;MASC",
+   "DET;DAT;SG;FEM",
+   "DET;DAT;SG;NEUT",
+   "DET;GEN;SG;MASC",
+   "DET;GEN;SG;FEM",
+   "DET;GEN;SG;NEUT",
+   "DET;NOM;PL",
+   "DET;ACC;PL",
+   "DET;DAT;PL",
+   "DET;GEN;PL"
+  ],
+  "DET.quant": [
+   "DET;SG",
+   "DET;NOM;PL",
+   "DET;ACC;PL",
+   "DET;DAT;PL",
+   "DET;GEN;PL"
+  ],
+  "DET.quantpl": [
+   "DET;NOM;PL",
+   "DET;ACC;PL",
+   "DET;DAT;PL",
+   "DET;GEN;PL"
+  ],
+  "NOUN.adj": [
+   "N;NOM;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG",
+   "N;DAT;SG",
+   "N;GEN;SG",
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;INDF",
+   "N;ACC;PL;DEF",
+   "N;DAT;PL",
+   "N;GEN;PL;DEF"
+  ],
+  "PRON.intp": [
+   "PRON;NOM",
+   "PRON;ACC",
+   "PRON;DAT",
+   "PRON;GEN"
+  ],
+  "DET.int": [
+   "DET;NOM;SG;MASC",
+   "DET;NOM;SG;FEM",
+   "DET;NOM;SG;NEUT",
+   "DET;ACC;SG;MASC",
+   "DET;ACC;SG;FEM",
+   "DET;ACC;SG;NEUT",
+   "DET;DAT;SG;MASC",
+   "DET;DAT;SG;FEM",
+   "DET;DAT;SG;NEUT",
+   "DET;GEN;SG;MASC",
+   "DET;GEN;SG;FEM",
+   "DET;GEN;SG;NEUT",
+   "DET;NOM;PL",
+   "DET;ACC;PL",
+   "DET;DAT;PL",
+   "DET;GEN;PL"
+  ],
+  "ADJ": [
+   "ADJ",
+   "ADJ;NOM;SG;MASC;STRG",
+   "ADJ;NOM;SG;FEM;STRG",
+   "ADJ;NOM;SG;NEUT;STRG",
+   "ADJ;NOM;PL;STRG",
+   "ADJ;ACC;SG;MASC;STRG",
+   "ADJ;ACC;SG;FEM;STRG",
+   "ADJ;ACC;SG;NEUT;STRG",
+   "ADJ;ACC;PL;STRG",
+   "ADJ;DAT;SG;MASC;STRG",
+   "ADJ;DAT;SG;FEM;STRG",
+   "ADJ;DAT;SG;NEUT;STRG",
+   "ADJ;DAT;PL;STRG",
+   "ADJ;NOM;SG;MASC;WEAK",
+   "ADJ;NOM;SG;FEM;WEAK",
+   "ADJ;NOM;SG;NEUT;WEAK",
+   "ADJ;NOM;PL;WEAK",
+   "ADJ;ACC;SG;MASC;WEAK",
+   "ADJ;ACC;SG;FEM;WEAK",
+   "ADJ;ACC;SG;NEUT;WEAK",
+   "ADJ;ACC;PL;WEAK",
+   "ADJ;DAT;SG;MASC;WEAK",
+   "ADJ;DAT;SG;FEM;WEAK",
+   "ADJ;DAT;SG;NEUT;WEAK",
+   "ADJ;DAT;PL;WEAK",
+   "ADJ;NOM;SG;MASC;MIX",
+   "ADJ;NOM;SG;FEM;MIX",
+   "ADJ;NOM;SG;NEUT;MIX",
+   "ADJ;NOM;PL;MIX",
+   "ADJ;ACC;SG;MASC;MIX",
+   "ADJ;ACC;SG;FEM;MIX",
+   "ADJ;ACC;SG;NEUT;MIX",
+   "ADJ;ACC;PL;MIX",
+   "ADJ;DAT;SG;MASC;MIX",
+   "ADJ;DAT;SG;FEM;MIX",
+   "ADJ;DAT;SG;NEUT;MIX",
+   "ADJ;DAT;PL;MIX",
+   "ADJ;CMPR",
+   "ADJ;SPRL",
+   "ADJ;NOM;SG;MASC;WEAK;SPRL",
+   "ADJ;NOM;SG;FEM;WEAK;SPRL",
+   "ADJ;NOM;SG;NEUT;WEAK;SPRL",
+   "ADJ;NOM;PL;WEAK;SPRL"
+  ],
+  "ADJ.inv": [
+   "ADJ"
   ]
- }
+ },
+ "extraTags": [
+  "SEP",
+  "STRG",
+  "WEAK",
+  "MIX"
+ ]
 }

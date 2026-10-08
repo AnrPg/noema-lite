@@ -1,0 +1,408 @@
+{
+ "function": "fn.direction",
+ "status": "realized",
+ "summary": "Hebrew shows the direction of a movement with the same small prepositions it uses for place, put before the noun, which never changes: where to = לְ (לַשּׁוּק “to the market”, לְחֵיפָה “to Haifa”; formal אֶל), where from = מִ / מֵ (מֵהָעֲבוֹדָה “from work”), by what = בְּ (בְּאוֹטוֹבּוּס “by bus”, בָּרַכֶּבֶת “by train”) and on foot = בָּרֶגֶל. Home(wards) is the single word הַבַּיְתָה (no לְ), and the questions are לְאָן? “where to?” and מֵאֵיפֹה? “where from?”. The verb carries the rest — and Hebrew, like German, splits “go”: הָלַךְ is going on foot (or going somewhere in town in general), נָסַע is going by any vehicle, as driver or passenger (gehen / fahren); the driver himself נוֹהֵג. Each verb has its preposition: נִכְנַס לְ… “go into”, יָצָא מִ… “go out of”, הִגִּיעַ לְ… “arrive at”, חִכָּה לְ… “wait for”, נִשְׁאַר בְּ… “stay at”, but עָזַב אֶת … “leave (behind)” takes a direct object. The verbs come from roots in different patterns (binyanim): pa‘al הָלַךְ / הוֹלֵךְ, nif‘al נִכְנַס / נִכְנָס, hif‘il הִגִּיעַ / מַגִּיעַ, pi‘el חִכָּה / מְחַכֶּה — the present tense still has just four forms, by gender and number.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "Hebrew",
+    "example"
+   ],
+   "rows": [
+    [
+     "where to?  לְאָן?",
+     "לְ + place (formal אֶל); הַבַּיְתָה “home”",
+     "אֲנִי הוֹלֵךְ לַשּׁוּק. · הוּא חוֹזֵר הַבַּיְתָה."
+    ],
+    [
+     "where from?  מֵאֵיפֹה?",
+     "מִ / מֵ + place",
+     "אִמָּא בָּאָה מֵהָעֲבוֹדָה. · הַמָּטוֹס מַגִּיעַ מֵאַתּוּנָה."
+    ],
+    [
+     "by what?",
+     "בְּ + vehicle; בָּרֶגֶל “on foot”",
+     "נוֹסְעִים בְּאוֹטוֹבּוּס / בָּרַכֶּבֶת / בְּמוֹנִית · הוֹלֵךְ בָּרֶגֶל"
+    ],
+    [
+     "where (staying)?  אֵיפֹה?",
+     "בְּ + place",
+     "אֲנִי נִשְׁאָר בַּבַּיִת."
+    ]
+   ],
+   "caption": "Where to, where from, by what — Greek σε / από / με, German wohin / woher / womit."
+  },
+  {
+   "t": "table",
+   "head": [
+    "verb",
+    "meaning",
+    "present (m. · f. · pl. m. · pl. f.)",
+    "with"
+   ],
+   "rows": [
+    [
+     "הָלַךְ",
+     "go (on foot), walk",
+     "הוֹלֵךְ · הוֹלֶכֶת · הוֹלְכִים · הוֹלְכוֹת",
+     "לְ… · הַבַּיְתָה · בָּרֶגֶל"
+    ],
+    [
+     "בָּא",
+     "come",
+     "בָּא · בָּאָה · בָּאִים · בָּאוֹת",
+     "לְ… · מִ…"
+    ],
+    [
+     "רָץ",
+     "run",
+     "רָץ · רָצָה · רָצִים · רָצוֹת",
+     "לְ…"
+    ],
+    [
+     "נָהַג",
+     "drive (be the driver)",
+     "נוֹהֵג · נוֹהֶגֶת · נוֹהֲגִים · נוֹהֲגוֹת",
+     "בְּ + vehicle"
+    ],
+    [
+     "נָסַע",
+     "go by vehicle, travel",
+     "נוֹסֵעַ · נוֹסַעַת · נוֹסְעִים · נוֹסְעוֹת",
+     "לְ… · בְּ + vehicle"
+    ],
+    [
+     "חָזַר",
+     "come back, return",
+     "חוֹזֵר · חוֹזֶרֶת · חוֹזְרִים · חוֹזְרוֹת",
+     "לְ… · מִ… · הַבַּיְתָה"
+    ],
+    [
+     "נִכְנַס",
+     "enter, go in",
+     "נִכְנָס · נִכְנֶסֶת · נִכְנָסִים · נִכְנָסוֹת",
+     "לְ…"
+    ],
+    [
+     "יָצָא",
+     "go out (of), leave",
+     "יוֹצֵא · יוֹצֵאת · יוֹצְאִים · יוֹצְאוֹת",
+     "מִ…"
+    ],
+    [
+     "עָזַב",
+     "leave (behind)",
+     "עוֹזֵב · עוֹזֶבֶת · עוֹזְבִים · עוֹזְבוֹת",
+     "אֶת …"
+    ],
+    [
+     "הִגִּיעַ",
+     "arrive",
+     "מַגִּיעַ · מַגִּיעָה · מַגִּיעִים · מַגִּיעוֹת",
+     "לְ… · מִ…"
+    ],
+    [
+     "נִשְׁאַר",
+     "stay",
+     "נִשְׁאָר · נִשְׁאֶרֶת · נִשְׁאָרִים · נִשְׁאָרוֹת",
+     "בְּ…"
+    ],
+    [
+     "חִכָּה",
+     "wait (for)",
+     "מְחַכֶּה · מְחַכָּה · מְחַכִּים · מְחַכּוֹת",
+     "לְ…"
+    ]
+   ],
+   "caption": "The twelve verbs of the lesson: the present and the preposition each one takes."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "on foot — הָלַךְ",
+     "points": [
+      "אֲנִי הוֹלֵךְ לָעֲבוֹדָה בָּרֶגֶל.",
+      "German: ich gehe zu Fuß",
+      "also “going” to a place in town in general"
+     ]
+    },
+    {
+     "title": "by vehicle — נָסַע",
+     "points": [
+      "אֲנִי נוֹסֵעַ לְחֵיפָה בְּאוֹטוֹבּוּס.",
+      "German: ich fahre mit dem Bus",
+      "driver or passenger — the driver alone is נוֹהֵג"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "without the article",
+    "with the article"
+   ],
+   "rows": [
+    [
+     "לְ to",
+     "לְחֵיפָה · לְמוֹנִית · לִשְׂדֵה הַתְּעוּפָה (לִ before a shva)",
+     "לַשּׁוּק · לַתַּחֲנָה · לָעֲבוֹדָה · לָאוֹטוֹבּוּס (לָ before הָ)"
+    ],
+    [
+     "מִ from",
+     "מִתֵּל אָבִיב · מֵחֵיפָה · מֵאַתּוּנָה",
+     "מֵהַבַּיִת · מֵהָעֲבוֹדָה (the ה stays)"
+    ],
+    [
+     "בְּ by, in",
+     "בְּאוֹטוֹבּוּס · בִּמְכוֹנִית · בְּמוֹנִית",
+     "בָּרַכֶּבֶת · בַּמְּכוֹנִית · בַּבַּיִת"
+    ]
+   ],
+   "caption": "The prefixes of lesson 11 again: בְּ and לְ swallow the article, מִ keeps it."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "הַבַּיְתָה — home(wards), one word",
+   "text": "Going home is הוֹלֵךְ הַבַּיְתָה, חוֹזֵר הַבַּיְתָה — no לְ in front. Being at home is בַּבַּיִת. The final ־ָה is an old ending meaning “towards” (also in שְׂמֹאלָה “to the left”)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "נָסַע, not הָלַךְ, for a bus, a car, a train",
+   "text": "אֲנִי נוֹסֵעַ לְחֵיפָה “I am going to Haifa (by bus / car / train)”. *אֲנִי הוֹלֵךְ לְחֵיפָה would mean you walk there. For a plane there is a verb of its own: טָס “fly”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Into, out of, for",
+   "text": "Entering takes לְ: נִכְנָס לַבַּיִת (German: in das Haus). Going out takes מִ: יוֹצֵא מֵהַבַּיִת. Waiting takes לְ: מְחַכֶּה לָאוֹטוֹבּוּס “waiting for the bus” — not בִּשְׁבִיל."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "יָצָא or עָזַב?",
+   "text": "יָצָא מִ… is going out of a place, often just for now: יוֹצֵא מֵהַבַּיִת בַּבֹּקֶר. עָזַב אֶת … is leaving behind — a city, a job, a person: עוֹזֵב אֶת הָעִיר."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "German needs a case for every direction (in die Stadt, in der Stadt, aus der Stadt); Turkish adds a suffix (şehre, şehirde, şehirden). Hebrew uses three prefixes and leaves the noun alone: לָעִיר, בָּעִיר, מֵהָעִיר. Greek σε covers both “to” and “in” — Hebrew separates them (לְ / בְּ), like German wohin / wo."
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "pa‘al, nif‘al, pi‘el, hif‘il",
+     "def": "verb patterns (binyanim): the same root takes a different shape in each. הָלַךְ (pa‘al) · נִכְנַס, נִשְׁאַר (nif‘al, present without מ־: נִכְנָס) · חִכָּה (pi‘el, present מְחַכֶּה) · הִגִּיעַ (hif‘il, present מַגִּיעַ)."
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it on foot (הָלַךְ) or by vehicle (נָסַע)?",
+    "Towards (לְ, הַבַּיְתָה), out of (מִ), or staying (בְּ)?",
+    "Does the verb need its own preposition (נִכְנַס לְ, חִכָּה לְ, יָצָא מִ) or a direct object (עָזַב אֶת)?",
+    "Is there an article to fuse (לַ, בַּ) — or to keep (מֵהַ)?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "How does the person move? On foot → הָלַךְ (or רָץ); by bus, car, train → נָסַע; at the wheel → נָהַג; by plane → טָס.",
+   "Where to? → לְ + place (לַשּׁוּק, לְחֵיפָה); home → הַבַּיְתָה without לְ; formal → אֶל.",
+   "Where from? → מִ / מֵ + place (מֵהָעֲבוֹדָה, מֵחֵיפָה).",
+   "By what? → בְּ + vehicle (בְּאוֹטוֹבּוּס, בָּרַכֶּבֶת); on foot → בָּרֶגֶל.",
+   "Which preposition does the verb itself take? נִכְנַס לְ, יָצָא מִ, הִגִּיעַ לְ, חִכָּה לְ, נִשְׁאַר בְּ — and עָזַב אֶת + object.",
+   "Who moves? → the present form by gender and number: הוֹלֵךְ / הוֹלֶכֶת / הוֹלְכִים / הוֹלְכוֹת.",
+   "Asking? → לְאָן? “where to?”, מֵאֵיפֹה? “where from?”."
+  ],
+  "steps": [
+   "Choose the verb (on foot or by vehicle; in, out, back, arrive, stay, wait).",
+   "Put it in the present by the subject’s gender and number.",
+   "Add the direction with לְ / מִ / בְּ (or הַבַּיְתָה, בָּרֶגֶל), fusing the article with לְ and בְּ."
+  ]
+ },
+ "traps": [
+  "*הוֹלֵךְ לְחֵיפָה for a trip by bus → נוֹסֵעַ לְחֵיפָה.",
+  "*לְהַבַּיְתָה → הַבַּיְתָה (it already means “to home”).",
+  "*נִכְנַס בַּבַּיִת → נִכְנַס לַבַּיִת (with בְּ it means “bumped into”).",
+  "*מְחַכֶּה בִּשְׁבִיל הָאוֹטוֹבּוּס → מְחַכֶּה לָאוֹטוֹבּוּס.",
+  "*עוֹזֵב מֵהָעִיר → עוֹזֵב אֶת הָעִיר (or יוֹצֵא מֵהָעִיר).",
+  "*מַגִּיעַ בַּתַּחֲנָה → מַגִּיעַ לַתַּחֲנָה: arriving is “to”.",
+  "The passenger does not נוֹהֵג: the driver נוֹהֵג, everybody נוֹסֵעַ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:le",
+   "he:el",
+   "he:min",
+   "he:be",
+   "he:habayta",
+   "he:baregel",
+   "he:lean",
+   "he:halach",
+   "he:ba",
+   "he:rats",
+   "he:nahag",
+   "he:nasa",
+   "he:chazar",
+   "he:nichnas",
+   "he:yatsa",
+   "he:azav",
+   "he:higia",
+   "he:nishar",
+   "he:chika"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;SG;MASC",
+  "V;PRS;SG;FEM",
+  "V;PRS;PL;MASC",
+  "V;PRS;PL;FEM",
+  "V;NFIN"
+ ],
+ "needs": {
+  "VERB": 4,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "he:halach",
+    "he:ba",
+    "he:rats",
+    "he:nahag",
+    "he:nasa",
+    "he:chazar",
+    "he:nichnas",
+    "he:yatsa",
+    "he:azav",
+    "he:higia",
+    "he:nishar",
+    "he:chika"
+   ],
+   "cells": [
+    "V;PRS;SG;MASC",
+    "V;PRS;SG;FEM",
+    "V;PRS;PL;MASC",
+    "V;PRS;PL;FEM",
+    "V;NFIN"
+   ],
+   "count": 12
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "concepts": [
+    "tr."
+   ]
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“I am going to Haifa by bus” (a man speaking):",
+   "options": [
+    "אֲנִי נוֹסֵעַ לְחֵיפָה בְּאוֹטוֹבּוּס.",
+    "אֲנִי הוֹלֵךְ לְחֵיפָה בְּאוֹטוֹבּוּס.",
+    "אֲנִי נוֹהֵג לְחֵיפָה בְּאוֹטוֹבּוּס."
+   ],
+   "answer": "אֲנִי נוֹסֵעַ לְחֵיפָה בְּאוֹטוֹבּוּס.",
+   "why": "By vehicle the verb is נָסַע; הָלַךְ is on foot, and only the bus driver נוֹהֵג."
+  },
+  {
+   "q": "“He is going home”:",
+   "options": [
+    "הוּא הוֹלֵךְ הַבַּיְתָה.",
+    "הוּא הוֹלֵךְ לְהַבַּיְתָה.",
+    "הוּא הוֹלֵךְ בַּבַּיִת."
+   ],
+   "answer": "הוּא הוֹלֵךְ הַבַּיְתָה.",
+   "why": "הַבַּיְתָה already means “to home”: no לְ. בַּבַּיִת is “at home”."
+  },
+  {
+   "q": "“We are waiting for the bus”:",
+   "options": [
+    "אֲנַחְנוּ מְחַכִּים לָאוֹטוֹבּוּס.",
+    "אֲנַחְנוּ מְחַכִּים בִּשְׁבִיל הָאוֹטוֹבּוּס.",
+    "אֲנַחְנוּ מְחַכִּים אֶת הָאוֹטוֹבּוּס."
+   ],
+   "answer": "אֲנַחְנוּ מְחַכִּים לָאוֹטוֹבּוּס.",
+   "why": "חִכָּה takes לְ: מְחַכֶּה לְ… “waits for …”."
+  },
+  {
+   "q": "“She leaves the city (she is moving away)”:",
+   "options": [
+    "הִיא עוֹזֶבֶת אֶת הָעִיר.",
+    "הִיא עוֹזֶבֶת מֵהָעִיר.",
+    "הִיא יוֹצֵאת אֶת הָעִיר."
+   ],
+   "answer": "הִיא עוֹזֶבֶת אֶת הָעִיר.",
+   "why": "עָזַב takes a direct object with אֶת; יָצָא takes מִ (יוֹצֵאת מֵהָעִיר “goes out of the city”)."
+  },
+  {
+   "q": "Which question asks “where to?”",
+   "options": [
+    "לְאָן?",
+    "אֵיפֹה?",
+    "מֵאֵיפֹה?"
+   ],
+   "answer": "לְאָן?",
+   "why": "אֵיפֹה is “where (at)?”, מֵאֵיפֹה “where from?” — like wo / wohin / woher."
+  },
+  {
+   "q": "“The teacher (f.) comes into the room”:",
+   "options": [
+    "הַמּוֹרָה נִכְנֶסֶת לַחֶדֶר.",
+    "הַמּוֹרָה נִכְנֶסֶת בַּחֶדֶר.",
+    "הַמּוֹרָה נִכְנָס לַחֶדֶר."
+   ],
+   "answer": "הַמּוֹרָה נִכְנֶסֶת לַחֶדֶר.",
+   "why": "Entering takes לְ, and the present agrees with a woman: נִכְנֶסֶת."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.direction",
+   "note": "Arabic uses إِلَى “to” (the same word as Hebrew אֶל), مِنْ “from” (= מִן / מִ) and بِـ “by” (بِالسَّيَّارَةِ “by car”), with the noun in the genitive; Hebrew nouns stay unchanged."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.direction",
+   "note": "German splits “go” the same way: gehen (on foot) = הָלַךְ, fahren (by vehicle) = נָסַע; but German marks the direction with cases (in die Stadt / in der Stadt), Hebrew with לְ / בְּ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.direction",
+   "note": "Chinese uses 去 “go” / 来 “come”, 从 … 到 … “from … to …” and 坐 + vehicle (坐公共汽车 “take the bus”) before the verb."
+  }
+ ]
+}

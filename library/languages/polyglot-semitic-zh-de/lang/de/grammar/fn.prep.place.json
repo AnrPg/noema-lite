@@ -1,0 +1,385 @@
+{
+ "function": "fn.prep.place",
+ "status": "realized",
+ "summary": "To say where something is, German uses the two-way prepositions with the DATIVE: auf (on, touching a surface), unter (under), neben (next to), vor (in front of), hinter (behind), zwischen (between), über (above, not touching), in (in), an (at, on a side). Das Buch ist auf dem Tisch. Der Schlüssel ist unter dem Sofa. Die Lampe ist neben dem Bett. The question is Wo? – and the answer is dative: dem (masculine, neuter), der (feminine), den + -n (plural). When something moves to a place (Wohin?), the same prepositions take the accusative: Ich lege das Buch auf den Tisch (S13). in dem and an dem merge to im and am (im Kühlschrank, am Fenster); speech also says aufm, unterm, hinterm, vorm. auf vs an vs über: auf = on top, touching (auf dem Tisch); an = at the side or on a wall (an der Wand, am Fenster); über = above, not touching (über dem Tisch). Open places take auf: auf dem Markt, auf dem Platz, auf der Straße. Without a noun, German uses adverbs: links / rechts (on the left / right), drinnen / draußen (inside / outside), nah or in der Nähe (near), weit (far). The rooms of this step: die Küche, das Bad / Badezimmer, das Schlafzimmer, das Wohnzimmer, der Garten, der (Fuß)Boden, die Treppe, das Regal, das Sofa, der Kühlschrank.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "preposition",
+    "meaning",
+    "Wo? + dative",
+    "Greek"
+   ],
+   "rows": [
+    [
+     "auf",
+     "on (top, touching)",
+     "auf dem Tisch",
+     "πάνω σε (στο τραπέζι)"
+    ],
+    [
+     "unter",
+     "under",
+     "unter dem Sofa",
+     "κάτω από"
+    ],
+    [
+     "neben",
+     "next to",
+     "neben dem Bett",
+     "δίπλα σε"
+    ],
+    [
+     "vor",
+     "in front of",
+     "vor dem Haus",
+     "μπροστά σε / από"
+    ],
+    [
+     "hinter",
+     "behind",
+     "hinter dem Haus",
+     "πίσω από"
+    ],
+    [
+     "zwischen",
+     "between",
+     "zwischen dem Sofa und dem Regal",
+     "ανάμεσα σε"
+    ],
+    [
+     "über",
+     "above (not touching)",
+     "über dem Tisch",
+     "πάνω από"
+    ],
+    [
+     "in",
+     "in",
+     "im Kühlschrank, in der Küche",
+     "μέσα σε"
+    ],
+    [
+     "an",
+     "at, on (a side, a wall)",
+     "am Fenster, an der Wand",
+     "σε, δίπλα σε"
+    ]
+   ],
+   "caption": "Where is it? – the two-way prepositions with the dative"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "Wo? (dative)",
+     "auf dem Tisch",
+     "auf der Treppe",
+     "auf dem Sofa",
+     "auf den Stühlen"
+    ],
+    [
+     "Wohin? (accusative)",
+     "auf den Tisch",
+     "auf die Treppe",
+     "auf das Sofa",
+     "auf die Stühle"
+    ]
+   ],
+   "caption": "Dative for where, accusative for where to"
+  },
+  {
+   "t": "table",
+   "head": [
+    "adverb",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "links / rechts",
+     "on the left / right",
+     "Die Küche ist links, das Bad ist rechts."
+    ],
+    [
+     "drinnen / draußen",
+     "inside / outside",
+     "Wir sind drinnen, die Kinder sind draußen."
+    ],
+    [
+     "nah / in der Nähe",
+     "near / nearby",
+     "Die Apotheke ist nah. · Ist hier in der Nähe eine Bank?"
+    ],
+    [
+     "weit",
+     "far",
+     "Der Flughafen ist weit."
+    ]
+   ],
+   "caption": "Without a noun: adverbs"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "auf – an – über",
+   "text": "auf dem Tisch (on it, touching) · an der Wand (on the wall, at the side) · über dem Tisch (above it, in the air)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Wo? is always dative",
+   "text": "Das Buch ist auf dem Tisch – not *auf den Tisch. The accusative only comes with movement: Ich lege das Buch auf den Tisch."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Near and far with a noun",
+   "text": "in der Nähe vom Bahnhof (near the station) · weit von der Stadt (far from the town) – von + dative."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek",
+     "points": [
+      "Greek builds compound prepositions with an adverb: πάνω στο τραπέζι, κάτω από το κρεβάτι, δίπλα στην πόρτα",
+      "German uses one word + dative: auf dem Tisch, unter dem Bett, neben der Tür"
+     ]
+    },
+    {
+     "title": "Turkish and Chinese",
+     "points": [
+      "Turkish and Chinese put a place noun after the thing: masanın üstünde, 桌子上",
+      "German puts the preposition before it: auf dem Tisch"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the thing staying somewhere (Wo?) → dative, or moving somewhere (Wohin?) → accusative?",
+   "On top and touching → auf; at a side or on a wall → an; above without touching → über; under → unter; next to → neben; in front of → vor; behind → hinter; between two → zwischen.",
+   "What gender is the place noun? → dem (m./n.), der (f.), den + -n (pl.).",
+   "Can the article merge (im, am)?",
+   "Is it an open place (market, square, street)? → auf.",
+   "No noun after it? → an adverb: links, rechts, drinnen, draußen, nah, in der Nähe, weit."
+  ],
+  "steps": [
+   "Ask Wo?",
+   "Choose the preposition for the position.",
+   "Put the article in the dative (merge if possible)."
+  ]
+ },
+ "traps": [
+  "Location is dative: Die Tasche ist auf dem Boden (not *auf den Boden).",
+  "zwischen needs both nouns in the dative: zwischen dem Sofa und dem Regal.",
+  "auf = on top, an = at the side: Das Bild ist an der Wand (not *auf der Wand).",
+  "über (above, not touching) is not auf (on, touching).",
+  "Things in a shelf unit are im Regal, not *auf dem Regal (unless on top of it).",
+  "links and rechts need no preposition: Die Küche ist links.",
+  "weit means far: Der Flughafen ist weit. – “far from” is weit von + dative."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:auf",
+   "de:unter",
+   "de:neben",
+   "de:vor",
+   "de:hinter",
+   "de:zwischen",
+   "de:über",
+   "de:in",
+   "de:im",
+   "de:an",
+   "de:am",
+   "de:nah",
+   "de:in_der_Nähe",
+   "de:weit",
+   "de:drinnen",
+   "de:draußen",
+   "de:links",
+   "de:rechts"
+  ]
+ },
+ "paradigmCells": [
+  "DET;DAT;SG;MASC",
+  "DET;DAT;SG;FEM",
+  "DET;DAT;SG;NEUT",
+  "DET;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 8,
+  "ADP": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:der",
+    "de:ein"
+   ],
+   "cells": [
+    "DET;DAT;SG;MASC",
+    "DET;DAT;SG;FEM",
+    "DET;DAT;SG;NEUT",
+    "DET;DAT;PL"
+   ]
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Das Buch ist auf ___ Tisch.",
+   "options": [
+    "dem",
+    "den",
+    "der"
+   ],
+   "answer": "dem",
+   "why": "Wo? → dative; der Tisch → auf dem Tisch."
+  },
+  {
+   "q": "Der Schlüssel ist unter ___ Sofa.",
+   "options": [
+    "dem",
+    "das",
+    "der"
+   ],
+   "answer": "dem",
+   "why": "das Sofa → dative dem."
+  },
+  {
+   "q": "Die Lampe ist neben ___ Tür.",
+   "options": [
+    "der",
+    "die",
+    "dem"
+   ],
+   "answer": "der",
+   "why": "die Tür → dative der."
+  },
+  {
+   "q": "The picture is on the wall.",
+   "options": [
+    "Das Bild ist an der Wand.",
+    "Das Bild ist auf der Wand.",
+    "Das Bild ist über der Wand."
+   ],
+   "answer": "Das Bild ist an der Wand.",
+   "why": "A side or a wall → an."
+  },
+  {
+   "q": "The lamp hangs above the table (not touching).",
+   "options": [
+    "über dem Tisch",
+    "auf dem Tisch",
+    "an dem Tisch"
+   ],
+   "answer": "über dem Tisch",
+   "why": "above, not touching → über."
+  },
+  {
+   "q": "Die Milch ist ___ Kühlschrank.",
+   "options": [
+    "im",
+    "in",
+    "ins"
+   ],
+   "answer": "im",
+   "why": "Where → in dem → im."
+  },
+  {
+   "q": "Der Tisch ist zwischen ___ Sofa und ___ Regal.",
+   "options": [
+    "dem … dem",
+    "das … das",
+    "den … den"
+   ],
+   "answer": "dem … dem",
+   "why": "zwischen + dative for both nouns."
+  },
+  {
+   "q": "The kitchen is on the left.",
+   "options": [
+    "Die Küche ist links.",
+    "Die Küche ist auf links.",
+    "Die Küche ist in links."
+   ],
+   "answer": "Die Küche ist links.",
+   "why": "links is an adverb – no preposition."
+  },
+  {
+   "q": "The children are outside.",
+   "options": [
+    "Die Kinder sind draußen.",
+    "Die Kinder sind drinnen.",
+    "Die Kinder sind weit."
+   ],
+   "answer": "Die Kinder sind draußen.",
+   "why": "draußen = outside; drinnen = inside."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.place",
+   "note": "Arabic fī, ʿalā, taḥta, amāma, khalfa / warāʾa, bayna, bi-jānibi – the noun after them is always genitive."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.place",
+   "note": "Hebrew al (on), mitaḥat le- (under), le-yad (next to), lifnei (in front of), me-aḥorei (behind), bein (between) – no case change."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.place",
+   "note": "Chinese: 在 + the thing + a place word after it: 在桌子上 (on the table), 在床下 (under the bed), 在门旁边 (next to the door)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "Where → dative, where to → accusative: the two-way prepositions."
+  }
+ ]
+}

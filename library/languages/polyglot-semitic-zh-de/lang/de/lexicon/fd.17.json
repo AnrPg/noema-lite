@@ -1,0 +1,2633 @@
+{
+ "lexemes": [
+  {
+   "id": "de:weiß",
+   "lemma": "weiß",
+   "pos": "ADJ",
+   "senses": [
+    "colour.white"
+   ],
+   "forms": {
+    "ADJ": "weiß",
+    "ADJ;NOM;SG;MASC;STRG": "weißer",
+    "ADJ;NOM;SG;FEM;STRG": "weiße",
+    "ADJ;NOM;SG;NEUT;STRG": "weißes",
+    "ADJ;NOM;PL;STRG": "weiße",
+    "ADJ;ACC;SG;MASC;STRG": "weißen",
+    "ADJ;ACC;SG;FEM;STRG": "weiße",
+    "ADJ;ACC;SG;NEUT;STRG": "weißes",
+    "ADJ;ACC;PL;STRG": "weiße",
+    "ADJ;DAT;SG;MASC;STRG": "weißem",
+    "ADJ;DAT;SG;FEM;STRG": "weißer",
+    "ADJ;DAT;SG;NEUT;STRG": "weißem",
+    "ADJ;DAT;PL;STRG": "weißen",
+    "ADJ;NOM;SG;MASC;WEAK": "weiße",
+    "ADJ;NOM;SG;FEM;WEAK": "weiße",
+    "ADJ;NOM;SG;NEUT;WEAK": "weiße",
+    "ADJ;NOM;PL;WEAK": "weißen",
+    "ADJ;ACC;SG;MASC;WEAK": "weißen",
+    "ADJ;ACC;SG;FEM;WEAK": "weiße",
+    "ADJ;ACC;SG;NEUT;WEAK": "weiße",
+    "ADJ;ACC;PL;WEAK": "weißen",
+    "ADJ;DAT;SG;MASC;WEAK": "weißen",
+    "ADJ;DAT;SG;FEM;WEAK": "weißen",
+    "ADJ;DAT;SG;NEUT;WEAK": "weißen",
+    "ADJ;DAT;PL;WEAK": "weißen",
+    "ADJ;NOM;SG;MASC;MIX": "weißer",
+    "ADJ;NOM;SG;FEM;MIX": "weiße",
+    "ADJ;NOM;SG;NEUT;MIX": "weißes",
+    "ADJ;NOM;PL;MIX": "weißen",
+    "ADJ;ACC;SG;MASC;MIX": "weißen",
+    "ADJ;ACC;SG;FEM;MIX": "weiße",
+    "ADJ;ACC;SG;NEUT;MIX": "weißes",
+    "ADJ;ACC;PL;MIX": "weißen",
+    "ADJ;DAT;SG;MASC;MIX": "weißen",
+    "ADJ;DAT;SG;FEM;MIX": "weißen",
+    "ADJ;DAT;SG;NEUT;MIX": "weißen",
+    "ADJ;DAT;PL;MIX": "weißen",
+    "ADJ;CMPR": "weißer",
+    "ADJ;SPRL": "am weißesten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "weißeste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "weißeste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "weißeste",
+    "ADJ;NOM;PL;WEAK;SPRL": "weißesten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "White – walls, snow, milk, white wine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "white",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.white"
+     },
+     {
+      "id": "s2",
+      "def": "white (wine, bread: Weißwein, Weißbrot)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Wände sind weiß.",
+      "tr": "The walls are white.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Winter ist alles weiß.",
+      "tr": "In winter everything is white.",
+      "register": "neutral",
+      "context": "snow",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich trinke ein Glas Weißwein.",
+      "tr": "I’m having a glass of white wine.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "weiße Wände",
+      "tr": "white walls"
+     },
+     {
+      "text": "der Weißwein",
+      "tr": "white wine"
+     },
+     {
+      "text": "das Weißbrot",
+      "tr": "white bread"
+     },
+     {
+      "text": "schwarz auf weiß",
+      "tr": "in black and white"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "schwarz auf weiß",
+      "tr": "black on white",
+      "kind": "idiom",
+      "meaning": "in writing, in black and white",
+      "register": "neutral"
+     },
+     {
+      "text": "eine weiße Weste haben",
+      "tr": "to have a white waistcoat",
+      "kind": "idiom",
+      "meaning": "to have a clean record",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "schneeweiß",
+      "register": "neutral",
+      "nuance": "snow-white"
+     },
+     {
+      "word": "hell",
+      "register": "neutral",
+      "nuance": "light, pale – not exactly white"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "schwarz",
+      "note": "black"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wīȥ, from Old High German wīȥ, from Proto-West Germanic *hwīt, from Proto-Germanic *hwītaz, from Proto-Indo-European *ḱweytos (“bright; shine”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From the Indo-European root for “bright, shine” – the same root as Russian свет (light).",
+     "English white and German weiß are one Germanic word."
+    ],
+    "pitfalls": [
+     "weiß is also a form of wissen: ich weiß / er weiß = I know / he knows. Die Wand ist weiß – Ich weiß es."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Weiß (ein helles Weiß).",
+     "Comparison exists but is rare for colours: weißer, am weißesten."
+    ]
+   }
+  },
+  {
+   "id": "de:schwarz",
+   "lemma": "schwarz",
+   "pos": "ADJ",
+   "senses": [
+    "colour.black"
+   ],
+   "forms": {
+    "ADJ": "schwarz",
+    "ADJ;NOM;SG;MASC;STRG": "schwarzer",
+    "ADJ;NOM;SG;FEM;STRG": "schwarze",
+    "ADJ;NOM;SG;NEUT;STRG": "schwarzes",
+    "ADJ;NOM;PL;STRG": "schwarze",
+    "ADJ;ACC;SG;MASC;STRG": "schwarzen",
+    "ADJ;ACC;SG;FEM;STRG": "schwarze",
+    "ADJ;ACC;SG;NEUT;STRG": "schwarzes",
+    "ADJ;ACC;PL;STRG": "schwarze",
+    "ADJ;DAT;SG;MASC;STRG": "schwarzem",
+    "ADJ;DAT;SG;FEM;STRG": "schwarzer",
+    "ADJ;DAT;SG;NEUT;STRG": "schwarzem",
+    "ADJ;DAT;PL;STRG": "schwarzen",
+    "ADJ;NOM;SG;MASC;WEAK": "schwarze",
+    "ADJ;NOM;SG;FEM;WEAK": "schwarze",
+    "ADJ;NOM;SG;NEUT;WEAK": "schwarze",
+    "ADJ;NOM;PL;WEAK": "schwarzen",
+    "ADJ;ACC;SG;MASC;WEAK": "schwarzen",
+    "ADJ;ACC;SG;FEM;WEAK": "schwarze",
+    "ADJ;ACC;SG;NEUT;WEAK": "schwarze",
+    "ADJ;ACC;PL;WEAK": "schwarzen",
+    "ADJ;DAT;SG;MASC;WEAK": "schwarzen",
+    "ADJ;DAT;SG;FEM;WEAK": "schwarzen",
+    "ADJ;DAT;SG;NEUT;WEAK": "schwarzen",
+    "ADJ;DAT;PL;WEAK": "schwarzen",
+    "ADJ;NOM;SG;MASC;MIX": "schwarzer",
+    "ADJ;NOM;SG;FEM;MIX": "schwarze",
+    "ADJ;NOM;SG;NEUT;MIX": "schwarzes",
+    "ADJ;NOM;PL;MIX": "schwarzen",
+    "ADJ;ACC;SG;MASC;MIX": "schwarzen",
+    "ADJ;ACC;SG;FEM;MIX": "schwarze",
+    "ADJ;ACC;SG;NEUT;MIX": "schwarzes",
+    "ADJ;ACC;PL;MIX": "schwarzen",
+    "ADJ;DAT;SG;MASC;MIX": "schwarzen",
+    "ADJ;DAT;SG;FEM;MIX": "schwarzen",
+    "ADJ;DAT;SG;NEUT;MIX": "schwarzen",
+    "ADJ;DAT;PL;MIX": "schwarzen",
+    "ADJ;CMPR": "schwärzer",
+    "ADJ;SPRL": "am schwärzesten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "schwärzeste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "schwärzeste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "schwärzeste",
+    "ADJ;NOM;PL;WEAK;SPRL": "schwärzesten"
+   },
+   "formsAlt": {
+    "ADJ;CMPR": [
+     "schwarzer"
+    ],
+    "ADJ;SPRL": [
+     "am schwarzesten"
+    ],
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": [
+     "schwarzeste"
+    ],
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": [
+     "schwarzeste"
+    ],
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": [
+     "schwarzeste"
+    ],
+    "ADJ;NOM;PL;WEAK;SPRL": [
+     "schwarzesten"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Black – black coffee, a black phone; and “illegal” in schwarzfahren.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "black",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.black"
+     },
+     {
+      "id": "s2",
+      "def": "black (coffee without milk, tea)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "illegal, unofficial (schwarzfahren, schwarzarbeiten)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Handy ist schwarz.",
+      "tr": "My phone is black.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie trägt ein schwarzes Kleid.",
+      "tr": "She’s wearing a black dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich trinke den Kaffee schwarz.",
+      "tr": "I take my coffee black.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s2"
+     },
+     {
+      "text": "Er fährt immer schwarz.",
+      "tr": "He always rides without a ticket.",
+      "register": "colloquial",
+      "context": "public transport",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "schwarzer Kaffee",
+      "tr": "black coffee"
+     },
+     {
+      "text": "schwarzer Tee",
+      "tr": "black tea"
+     },
+     {
+      "text": "schwarzfahren",
+      "tr": "to ride without a ticket"
+     },
+     {
+      "text": "der Schwarzwald",
+      "tr": "the Black Forest"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "schwarz auf weiß",
+      "tr": "black on white",
+      "kind": "idiom",
+      "meaning": "in writing",
+      "register": "neutral"
+     },
+     {
+      "text": "schwarzsehen",
+      "tr": "to see black",
+      "kind": "idiom",
+      "meaning": "to be pessimistic",
+      "register": "neutral"
+     },
+     {
+      "text": "ins Schwarze treffen",
+      "tr": "to hit into the black",
+      "kind": "idiom",
+      "meaning": "to hit the bull’s eye",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "dunkel",
+      "register": "neutral",
+      "nuance": "dark – not necessarily black"
+     },
+     {
+      "word": "pechschwarz",
+      "register": "colloquial",
+      "nuance": "pitch-black"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "weiß",
+      "note": "white"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German swarz, from Old High German swarz, from Proto-West Germanic *swart, from Proto-Germanic *swartaz, from Proto-Indo-European *swerd- (“dirty, dark, black”). Compare Dutch zwart, English swart and swarthy, Yiddish שוואַרץ (shvarts).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English swarthy (dark-skinned) is a cousin of schwarz."
+    ],
+    "pitfalls": [
+     "schwarz- in verbs means “illegal”: schwarzfahren (ride without a ticket), schwarzarbeiten (work off the books)."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Schwarz (ein helles Schwarz).",
+     "Comparison with umlaut: schwärzer, am schwärzesten (schwarzer also exists)."
+    ]
+   }
+  },
+  {
+   "id": "de:rot",
+   "lemma": "rot",
+   "pos": "ADJ",
+   "senses": [
+    "colour.red"
+   ],
+   "forms": {
+    "ADJ": "rot",
+    "ADJ;NOM;SG;MASC;STRG": "roter",
+    "ADJ;NOM;SG;FEM;STRG": "rote",
+    "ADJ;NOM;SG;NEUT;STRG": "rotes",
+    "ADJ;NOM;PL;STRG": "rote",
+    "ADJ;ACC;SG;MASC;STRG": "roten",
+    "ADJ;ACC;SG;FEM;STRG": "rote",
+    "ADJ;ACC;SG;NEUT;STRG": "rotes",
+    "ADJ;ACC;PL;STRG": "rote",
+    "ADJ;DAT;SG;MASC;STRG": "rotem",
+    "ADJ;DAT;SG;FEM;STRG": "roter",
+    "ADJ;DAT;SG;NEUT;STRG": "rotem",
+    "ADJ;DAT;PL;STRG": "roten",
+    "ADJ;NOM;SG;MASC;WEAK": "rote",
+    "ADJ;NOM;SG;FEM;WEAK": "rote",
+    "ADJ;NOM;SG;NEUT;WEAK": "rote",
+    "ADJ;NOM;PL;WEAK": "roten",
+    "ADJ;ACC;SG;MASC;WEAK": "roten",
+    "ADJ;ACC;SG;FEM;WEAK": "rote",
+    "ADJ;ACC;SG;NEUT;WEAK": "rote",
+    "ADJ;ACC;PL;WEAK": "roten",
+    "ADJ;DAT;SG;MASC;WEAK": "roten",
+    "ADJ;DAT;SG;FEM;WEAK": "roten",
+    "ADJ;DAT;SG;NEUT;WEAK": "roten",
+    "ADJ;DAT;PL;WEAK": "roten",
+    "ADJ;NOM;SG;MASC;MIX": "roter",
+    "ADJ;NOM;SG;FEM;MIX": "rote",
+    "ADJ;NOM;SG;NEUT;MIX": "rotes",
+    "ADJ;NOM;PL;MIX": "roten",
+    "ADJ;ACC;SG;MASC;MIX": "roten",
+    "ADJ;ACC;SG;FEM;MIX": "rote",
+    "ADJ;ACC;SG;NEUT;MIX": "rotes",
+    "ADJ;ACC;PL;MIX": "roten",
+    "ADJ;DAT;SG;MASC;MIX": "roten",
+    "ADJ;DAT;SG;FEM;MIX": "roten",
+    "ADJ;DAT;SG;NEUT;MIX": "roten",
+    "ADJ;DAT;PL;MIX": "roten",
+    "ADJ;CMPR": "röter",
+    "ADJ;SPRL": "am rötesten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "röteste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "röteste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "röteste",
+    "ADJ;NOM;PL;WEAK;SPRL": "rötesten"
+   },
+   "formsAlt": {
+    "ADJ;CMPR": [
+     "roter"
+    ],
+    "ADJ;SPRL": [
+     "am rotesten"
+    ],
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": [
+     "roteste"
+    ],
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": [
+     "roteste"
+    ],
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": [
+     "roteste"
+    ],
+    "ADJ;NOM;PL;WEAK;SPRL": [
+     "rotesten"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Red – red wine, a red light, red hair, blushing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.red"
+     },
+     {
+      "id": "s2",
+      "def": "red-haired (rote Haare)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "red, left-wing (politics)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Ampel ist rot.",
+      "tr": "The traffic light is red.",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe ein rotes Auto.",
+      "tr": "I have a red car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat rote Haare.",
+      "tr": "She has red hair.",
+      "register": "neutral",
+      "context": "looks",
+      "sense": "s2"
+     },
+     {
+      "text": "Er wird rot.",
+      "tr": "He’s blushing.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Rotwein",
+      "tr": "red wine"
+     },
+     {
+      "text": "rote Haare",
+      "tr": "red hair"
+     },
+     {
+      "text": "rot werden",
+      "tr": "to blush"
+     },
+     {
+      "text": "die rote Ampel",
+      "tr": "the red light"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "rot sehen",
+      "tr": "to see red",
+      "kind": "idiom",
+      "meaning": "to get very angry",
+      "register": "neutral"
+     },
+     {
+      "text": "der rote Faden",
+      "tr": "the red thread",
+      "kind": "idiom",
+      "meaning": "the common thread, the main line of something",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "knallrot",
+      "register": "colloquial",
+      "nuance": "bright red"
+     },
+     {
+      "word": "rötlich",
+      "register": "neutral",
+      "nuance": "reddish"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German rōt (“red, red-haired”), from Old High German rōt, from Proto-West Germanic *raud, from Proto-Germanic *raudaz, from Proto-Indo-European *h₁rowdʰós, from *h₁rewdʰ-. Compare Dutch rood, English red, Danish rød.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same Indo-European root gave Greek ερυθρός (red – the Ερυθρά Θάλασσα, Red Sea) and Latin ruber."
+    ],
+    "pitfalls": [
+     "rot werden = to blush (not “to become red” in general)."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Rot (ein helles Rot).",
+     "Comparison: röter / roter, am rötesten / am rotesten – both exist, rarely needed.",
+     "Light and dark shades are one word: hellrot, dunkelrot (ein dunkelrotes Auto)."
+    ]
+   }
+  },
+  {
+   "id": "de:blau",
+   "lemma": "blau",
+   "pos": "ADJ",
+   "senses": [
+    "colour.blue"
+   ],
+   "forms": {
+    "ADJ": "blau",
+    "ADJ;NOM;SG;MASC;STRG": "blauer",
+    "ADJ;NOM;SG;FEM;STRG": "blaue",
+    "ADJ;NOM;SG;NEUT;STRG": "blaues",
+    "ADJ;NOM;PL;STRG": "blaue",
+    "ADJ;ACC;SG;MASC;STRG": "blauen",
+    "ADJ;ACC;SG;FEM;STRG": "blaue",
+    "ADJ;ACC;SG;NEUT;STRG": "blaues",
+    "ADJ;ACC;PL;STRG": "blaue",
+    "ADJ;DAT;SG;MASC;STRG": "blauem",
+    "ADJ;DAT;SG;FEM;STRG": "blauer",
+    "ADJ;DAT;SG;NEUT;STRG": "blauem",
+    "ADJ;DAT;PL;STRG": "blauen",
+    "ADJ;NOM;SG;MASC;WEAK": "blaue",
+    "ADJ;NOM;SG;FEM;WEAK": "blaue",
+    "ADJ;NOM;SG;NEUT;WEAK": "blaue",
+    "ADJ;NOM;PL;WEAK": "blauen",
+    "ADJ;ACC;SG;MASC;WEAK": "blauen",
+    "ADJ;ACC;SG;FEM;WEAK": "blaue",
+    "ADJ;ACC;SG;NEUT;WEAK": "blaue",
+    "ADJ;ACC;PL;WEAK": "blauen",
+    "ADJ;DAT;SG;MASC;WEAK": "blauen",
+    "ADJ;DAT;SG;FEM;WEAK": "blauen",
+    "ADJ;DAT;SG;NEUT;WEAK": "blauen",
+    "ADJ;DAT;PL;WEAK": "blauen",
+    "ADJ;NOM;SG;MASC;MIX": "blauer",
+    "ADJ;NOM;SG;FEM;MIX": "blaue",
+    "ADJ;NOM;SG;NEUT;MIX": "blaues",
+    "ADJ;NOM;PL;MIX": "blauen",
+    "ADJ;ACC;SG;MASC;MIX": "blauen",
+    "ADJ;ACC;SG;FEM;MIX": "blaue",
+    "ADJ;ACC;SG;NEUT;MIX": "blaues",
+    "ADJ;ACC;PL;MIX": "blauen",
+    "ADJ;DAT;SG;MASC;MIX": "blauen",
+    "ADJ;DAT;SG;FEM;MIX": "blauen",
+    "ADJ;DAT;SG;NEUT;MIX": "blauen",
+    "ADJ;DAT;PL;MIX": "blauen",
+    "ADJ;CMPR": "blauer",
+    "ADJ;SPRL": "am blauesten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "blaueste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "blaueste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "blaueste",
+    "ADJ;NOM;PL;WEAK;SPRL": "blauesten"
+   },
+   "formsAlt": {
+    "ADJ;SPRL": [
+     "am blausten"
+    ],
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": [
+     "blauste"
+    ],
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": [
+     "blauste"
+    ],
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": [
+     "blauste"
+    ],
+    "ADJ;NOM;PL;WEAK;SPRL": [
+     "blausten"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Blue – the sky, blue eyes; and, in slang, drunk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "blue",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.blue"
+     },
+     {
+      "id": "s2",
+      "def": "drunk",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Himmel ist blau.",
+      "tr": "The sky is blue.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat blaue Augen.",
+      "tr": "She has blue eyes.",
+      "register": "neutral",
+      "context": "looks",
+      "sense": "s1"
+     },
+     {
+      "text": "Gestern war er total blau.",
+      "tr": "Yesterday he was totally drunk.",
+      "register": "colloquial",
+      "context": "parties",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "blaue Augen",
+      "tr": "blue eyes"
+     },
+     {
+      "text": "der blaue Himmel",
+      "tr": "the blue sky"
+     },
+     {
+      "text": "ein blauer Fleck",
+      "tr": "a bruise"
+     },
+     {
+      "text": "blaumachen",
+      "tr": "to skip work"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "blaumachen",
+      "tr": "to make blue",
+      "kind": "colloquial",
+      "meaning": "to skip work or school",
+      "register": "colloquial"
+     },
+     {
+      "text": "das Blaue vom Himmel versprechen",
+      "tr": "to promise the blue from the sky",
+      "kind": "idiom",
+      "meaning": "to promise the moon",
+      "register": "neutral"
+     },
+     {
+      "text": "eine Fahrt ins Blaue",
+      "tr": "a trip into the blue",
+      "kind": "idiom",
+      "meaning": "a trip with no fixed destination",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "himmelblau",
+      "register": "neutral",
+      "nuance": "sky blue"
+     },
+     {
+      "word": "hellblau",
+      "register": "neutral",
+      "nuance": "light blue"
+     },
+     {
+      "word": "dunkelblau",
+      "register": "neutral",
+      "nuance": "dark blue, navy"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German blā (genitive blāwes), from Old High German blāo, from Proto-West Germanic *blāu, from Proto-Germanic *blēwaz.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian splits blue into two basic colours, синий (dark) and голубой (light); German, like English, has one: blau, with hellblau and dunkelblau."
+    ],
+    "pitfalls": [
+     "blau sein = to be drunk (colloquial) – it never means “sad” like English “feeling blue”."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Blau (ein helles Blau).",
+     "Comparison exists but is rare for colours: blauer, am blauesten. (am blausten also).",
+     "Light and dark shades are one word: hellblau, dunkelblau (ein dunkelblaues Auto)."
+    ]
+   }
+  },
+  {
+   "id": "de:grün",
+   "lemma": "grün",
+   "pos": "ADJ",
+   "senses": [
+    "colour.green"
+   ],
+   "forms": {
+    "ADJ": "grün",
+    "ADJ;NOM;SG;MASC;STRG": "grüner",
+    "ADJ;NOM;SG;FEM;STRG": "grüne",
+    "ADJ;NOM;SG;NEUT;STRG": "grünes",
+    "ADJ;NOM;PL;STRG": "grüne",
+    "ADJ;ACC;SG;MASC;STRG": "grünen",
+    "ADJ;ACC;SG;FEM;STRG": "grüne",
+    "ADJ;ACC;SG;NEUT;STRG": "grünes",
+    "ADJ;ACC;PL;STRG": "grüne",
+    "ADJ;DAT;SG;MASC;STRG": "grünem",
+    "ADJ;DAT;SG;FEM;STRG": "grüner",
+    "ADJ;DAT;SG;NEUT;STRG": "grünem",
+    "ADJ;DAT;PL;STRG": "grünen",
+    "ADJ;NOM;SG;MASC;WEAK": "grüne",
+    "ADJ;NOM;SG;FEM;WEAK": "grüne",
+    "ADJ;NOM;SG;NEUT;WEAK": "grüne",
+    "ADJ;NOM;PL;WEAK": "grünen",
+    "ADJ;ACC;SG;MASC;WEAK": "grünen",
+    "ADJ;ACC;SG;FEM;WEAK": "grüne",
+    "ADJ;ACC;SG;NEUT;WEAK": "grüne",
+    "ADJ;ACC;PL;WEAK": "grünen",
+    "ADJ;DAT;SG;MASC;WEAK": "grünen",
+    "ADJ;DAT;SG;FEM;WEAK": "grünen",
+    "ADJ;DAT;SG;NEUT;WEAK": "grünen",
+    "ADJ;DAT;PL;WEAK": "grünen",
+    "ADJ;NOM;SG;MASC;MIX": "grüner",
+    "ADJ;NOM;SG;FEM;MIX": "grüne",
+    "ADJ;NOM;SG;NEUT;MIX": "grünes",
+    "ADJ;NOM;PL;MIX": "grünen",
+    "ADJ;ACC;SG;MASC;MIX": "grünen",
+    "ADJ;ACC;SG;FEM;MIX": "grüne",
+    "ADJ;ACC;SG;NEUT;MIX": "grünes",
+    "ADJ;ACC;PL;MIX": "grünen",
+    "ADJ;DAT;SG;MASC;MIX": "grünen",
+    "ADJ;DAT;SG;FEM;MIX": "grünen",
+    "ADJ;DAT;SG;NEUT;MIX": "grünen",
+    "ADJ;DAT;PL;MIX": "grünen",
+    "ADJ;CMPR": "grüner",
+    "ADJ;SPRL": "am grünsten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "grünste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "grünste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "grünste",
+    "ADJ;NOM;PL;WEAK;SPRL": "grünsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Green – parks in spring, green tea; unripe; ecological.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.green"
+     },
+     {
+      "id": "s2",
+      "def": "unripe (fruit, vegetables)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "green, ecological; of the Green party",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Frühling ist der Park grün.",
+      "tr": "In spring the park is green.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich trinke gern grünen Tee.",
+      "tr": "I like drinking green tea.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tomaten sind noch grün.",
+      "tr": "The tomatoes are still unripe.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s2"
+     },
+     {
+      "text": "Sie wählt grün.",
+      "tr": "She votes Green.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "grüner Tee",
+      "tr": "green tea"
+     },
+     {
+      "text": "grünes Licht",
+      "tr": "green light"
+     },
+     {
+      "text": "die Grünen",
+      "tr": "the Greens (party)"
+     },
+     {
+      "text": "im grünen Bereich",
+      "tr": "all fine (in the green zone)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "grünes Licht geben",
+      "tr": "to give green light",
+      "kind": "idiom",
+      "meaning": "to give the go-ahead",
+      "register": "neutral"
+     },
+     {
+      "text": "auf keinen grünen Zweig kommen",
+      "tr": "to come onto no green branch",
+      "kind": "idiom",
+      "meaning": "to get nowhere",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem nicht grün sein",
+      "tr": "not to be green to someone",
+      "kind": "idiom",
+      "meaning": "to dislike someone",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "grünlich",
+      "register": "neutral",
+      "nuance": "greenish"
+     },
+     {
+      "word": "hellgrün",
+      "register": "neutral",
+      "nuance": "light green"
+     },
+     {
+      "word": "dunkelgrün",
+      "register": "neutral",
+      "nuance": "dark green"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German grüene, from Old High German gruoni, gruoen, from Proto-West Germanic *grōnī, from Proto-Germanic *grōniz. Compare Dutch groen, English green, Danish grøn.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "im grünen Bereich (“in the green zone”) – everything is fine, like a gauge in the green."
+    ],
+    "pitfalls": [
+     "grün can mean unripe: grüne Tomaten are not ready yet."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Grün (ein helles Grün).",
+     "Comparison exists but is rare for colours: grüner, am grünsten."
+    ]
+   }
+  },
+  {
+   "id": "de:gelb",
+   "lemma": "gelb",
+   "pos": "ADJ",
+   "senses": [
+    "colour.yellow"
+   ],
+   "forms": {
+    "ADJ": "gelb",
+    "ADJ;NOM;SG;MASC;STRG": "gelber",
+    "ADJ;NOM;SG;FEM;STRG": "gelbe",
+    "ADJ;NOM;SG;NEUT;STRG": "gelbes",
+    "ADJ;NOM;PL;STRG": "gelbe",
+    "ADJ;ACC;SG;MASC;STRG": "gelben",
+    "ADJ;ACC;SG;FEM;STRG": "gelbe",
+    "ADJ;ACC;SG;NEUT;STRG": "gelbes",
+    "ADJ;ACC;PL;STRG": "gelbe",
+    "ADJ;DAT;SG;MASC;STRG": "gelbem",
+    "ADJ;DAT;SG;FEM;STRG": "gelber",
+    "ADJ;DAT;SG;NEUT;STRG": "gelbem",
+    "ADJ;DAT;PL;STRG": "gelben",
+    "ADJ;NOM;SG;MASC;WEAK": "gelbe",
+    "ADJ;NOM;SG;FEM;WEAK": "gelbe",
+    "ADJ;NOM;SG;NEUT;WEAK": "gelbe",
+    "ADJ;NOM;PL;WEAK": "gelben",
+    "ADJ;ACC;SG;MASC;WEAK": "gelben",
+    "ADJ;ACC;SG;FEM;WEAK": "gelbe",
+    "ADJ;ACC;SG;NEUT;WEAK": "gelbe",
+    "ADJ;ACC;PL;WEAK": "gelben",
+    "ADJ;DAT;SG;MASC;WEAK": "gelben",
+    "ADJ;DAT;SG;FEM;WEAK": "gelben",
+    "ADJ;DAT;SG;NEUT;WEAK": "gelben",
+    "ADJ;DAT;PL;WEAK": "gelben",
+    "ADJ;NOM;SG;MASC;MIX": "gelber",
+    "ADJ;NOM;SG;FEM;MIX": "gelbe",
+    "ADJ;NOM;SG;NEUT;MIX": "gelbes",
+    "ADJ;NOM;PL;MIX": "gelben",
+    "ADJ;ACC;SG;MASC;MIX": "gelben",
+    "ADJ;ACC;SG;FEM;MIX": "gelbe",
+    "ADJ;ACC;SG;NEUT;MIX": "gelbes",
+    "ADJ;ACC;PL;MIX": "gelben",
+    "ADJ;DAT;SG;MASC;MIX": "gelben",
+    "ADJ;DAT;SG;FEM;MIX": "gelben",
+    "ADJ;DAT;SG;NEUT;MIX": "gelben",
+    "ADJ;DAT;PL;MIX": "gelben",
+    "ADJ;CMPR": "gelber",
+    "ADJ;SPRL": "am gelbsten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "gelbste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "gelbste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "gelbste",
+    "ADJ;NOM;PL;WEAK;SPRL": "gelbsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Yellow – bananas, cheese, German post boxes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yellow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.yellow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Bananen sind gelb.",
+      "tr": "The bananas are yellow.",
+      "register": "neutral",
+      "context": "fruit",
+      "sense": "s1"
+     },
+     {
+      "text": "In Deutschland sind die Briefkästen gelb.",
+      "tr": "In Germany the post boxes are yellow.",
+      "register": "neutral",
+      "context": "post",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Schiedsrichter zeigt die gelbe Karte.",
+      "tr": "The referee shows the yellow card.",
+      "register": "neutral",
+      "context": "football",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die gelbe Karte",
+      "tr": "the yellow card"
+     },
+     {
+      "text": "die Gelben Seiten",
+      "tr": "the Yellow Pages"
+     },
+     {
+      "text": "gelb werden",
+      "tr": "to turn yellow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das ist nicht das Gelbe vom Ei.",
+      "tr": "That is not the yellow of the egg.",
+      "kind": "idiom",
+      "meaning": "that’s not ideal, not the best",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zitronengelb",
+      "register": "neutral",
+      "nuance": "lemon yellow"
+     },
+     {
+      "word": "goldgelb",
+      "register": "neutral",
+      "nuance": "golden yellow"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German gel (inflected gelwe), from Old High German gelo, from Proto-West Germanic *gelu, from Proto-Germanic *gelwaz. The form gelb comes from the inflected stem. Cognate with Dutch geel, English yellow.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From the Indo-European colour root that also gave Russian жёлтый (yellow), зелёный (green) and Greek χλωρός (pale green)."
+    ],
+    "pitfalls": [
+     "das Gelbe vom Ei is the yolk (literally “the yellow of the egg”); the egg white is das Eiweiß."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Gelb (ein helles Gelb).",
+     "Comparison exists but is rare for colours: gelber, am gelbsten."
+    ]
+   }
+  },
+  {
+   "id": "de:braun",
+   "lemma": "braun",
+   "pos": "ADJ",
+   "senses": [
+    "colour.brown"
+   ],
+   "forms": {
+    "ADJ": "braun",
+    "ADJ;NOM;SG;MASC;STRG": "brauner",
+    "ADJ;NOM;SG;FEM;STRG": "braune",
+    "ADJ;NOM;SG;NEUT;STRG": "braunes",
+    "ADJ;NOM;PL;STRG": "braune",
+    "ADJ;ACC;SG;MASC;STRG": "braunen",
+    "ADJ;ACC;SG;FEM;STRG": "braune",
+    "ADJ;ACC;SG;NEUT;STRG": "braunes",
+    "ADJ;ACC;PL;STRG": "braune",
+    "ADJ;DAT;SG;MASC;STRG": "braunem",
+    "ADJ;DAT;SG;FEM;STRG": "brauner",
+    "ADJ;DAT;SG;NEUT;STRG": "braunem",
+    "ADJ;DAT;PL;STRG": "braunen",
+    "ADJ;NOM;SG;MASC;WEAK": "braune",
+    "ADJ;NOM;SG;FEM;WEAK": "braune",
+    "ADJ;NOM;SG;NEUT;WEAK": "braune",
+    "ADJ;NOM;PL;WEAK": "braunen",
+    "ADJ;ACC;SG;MASC;WEAK": "braunen",
+    "ADJ;ACC;SG;FEM;WEAK": "braune",
+    "ADJ;ACC;SG;NEUT;WEAK": "braune",
+    "ADJ;ACC;PL;WEAK": "braunen",
+    "ADJ;DAT;SG;MASC;WEAK": "braunen",
+    "ADJ;DAT;SG;FEM;WEAK": "braunen",
+    "ADJ;DAT;SG;NEUT;WEAK": "braunen",
+    "ADJ;DAT;PL;WEAK": "braunen",
+    "ADJ;NOM;SG;MASC;MIX": "brauner",
+    "ADJ;NOM;SG;FEM;MIX": "braune",
+    "ADJ;NOM;SG;NEUT;MIX": "braunes",
+    "ADJ;NOM;PL;MIX": "braunen",
+    "ADJ;ACC;SG;MASC;MIX": "braunen",
+    "ADJ;ACC;SG;FEM;MIX": "braune",
+    "ADJ;ACC;SG;NEUT;MIX": "braunes",
+    "ADJ;ACC;PL;MIX": "braunen",
+    "ADJ;DAT;SG;MASC;MIX": "braunen",
+    "ADJ;DAT;SG;FEM;MIX": "braunen",
+    "ADJ;DAT;SG;NEUT;MIX": "braunen",
+    "ADJ;DAT;PL;MIX": "braunen",
+    "ADJ;CMPR": "brauner",
+    "ADJ;SPRL": "am braunsten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "braunste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "braunste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "braunste",
+    "ADJ;NOM;PL;WEAK;SPRL": "braunsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Brown – wood, eyes, a summer tan.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brown",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.brown"
+     },
+     {
+      "id": "s2",
+      "def": "tanned (braun werden)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "Nazi, far-right (politics, from the brown SA uniforms)",
+      "register": [
+       "pejorative"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Tisch ist braun.",
+      "tr": "The table is brown.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat braune Augen.",
+      "tr": "She has brown eyes.",
+      "register": "neutral",
+      "context": "looks",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach dem Urlaub bin ich ganz braun.",
+      "tr": "After the holiday I’m really tanned.",
+      "register": "neutral",
+      "context": "summer",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "braune Augen",
+      "tr": "brown eyes"
+     },
+     {
+      "text": "braune Haare",
+      "tr": "brown hair"
+     },
+     {
+      "text": "braun werden",
+      "tr": "to get a tan"
+     },
+     {
+      "text": "braungebrannt",
+      "tr": "suntanned"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "bräunlich",
+      "register": "neutral",
+      "nuance": "brownish"
+     },
+     {
+      "word": "gebräunt",
+      "register": "neutral",
+      "nuance": "tanned"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German and Old High German brūn, from Proto-West Germanic *brūn.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English brown and German braun are one Germanic word."
+    ],
+    "pitfalls": [
+     "In political talk braun refers to the Nazis and the far right – mind the context."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Braun (ein helles Braun).",
+     "Comparison: brauner, am braunsten (colloquial bräuner)."
+    ]
+   }
+  },
+  {
+   "id": "de:grau",
+   "lemma": "grau",
+   "pos": "ADJ",
+   "senses": [
+    "colour.grey"
+   ],
+   "forms": {
+    "ADJ": "grau",
+    "ADJ;NOM;SG;MASC;STRG": "grauer",
+    "ADJ;NOM;SG;FEM;STRG": "graue",
+    "ADJ;NOM;SG;NEUT;STRG": "graues",
+    "ADJ;NOM;PL;STRG": "graue",
+    "ADJ;ACC;SG;MASC;STRG": "grauen",
+    "ADJ;ACC;SG;FEM;STRG": "graue",
+    "ADJ;ACC;SG;NEUT;STRG": "graues",
+    "ADJ;ACC;PL;STRG": "graue",
+    "ADJ;DAT;SG;MASC;STRG": "grauem",
+    "ADJ;DAT;SG;FEM;STRG": "grauer",
+    "ADJ;DAT;SG;NEUT;STRG": "grauem",
+    "ADJ;DAT;PL;STRG": "grauen",
+    "ADJ;NOM;SG;MASC;WEAK": "graue",
+    "ADJ;NOM;SG;FEM;WEAK": "graue",
+    "ADJ;NOM;SG;NEUT;WEAK": "graue",
+    "ADJ;NOM;PL;WEAK": "grauen",
+    "ADJ;ACC;SG;MASC;WEAK": "grauen",
+    "ADJ;ACC;SG;FEM;WEAK": "graue",
+    "ADJ;ACC;SG;NEUT;WEAK": "graue",
+    "ADJ;ACC;PL;WEAK": "grauen",
+    "ADJ;DAT;SG;MASC;WEAK": "grauen",
+    "ADJ;DAT;SG;FEM;WEAK": "grauen",
+    "ADJ;DAT;SG;NEUT;WEAK": "grauen",
+    "ADJ;DAT;PL;WEAK": "grauen",
+    "ADJ;NOM;SG;MASC;MIX": "grauer",
+    "ADJ;NOM;SG;FEM;MIX": "graue",
+    "ADJ;NOM;SG;NEUT;MIX": "graues",
+    "ADJ;NOM;PL;MIX": "grauen",
+    "ADJ;ACC;SG;MASC;MIX": "grauen",
+    "ADJ;ACC;SG;FEM;MIX": "graue",
+    "ADJ;ACC;SG;NEUT;MIX": "graues",
+    "ADJ;ACC;PL;MIX": "grauen",
+    "ADJ;DAT;SG;MASC;MIX": "grauen",
+    "ADJ;DAT;SG;FEM;MIX": "grauen",
+    "ADJ;DAT;SG;NEUT;MIX": "grauen",
+    "ADJ;DAT;PL;MIX": "grauen",
+    "ADJ;CMPR": "grauer",
+    "ADJ;SPRL": "am grauesten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "graueste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "graueste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "graueste",
+    "ADJ;NOM;PL;WEAK;SPRL": "grauesten"
+   },
+   "formsAlt": {
+    "ADJ;SPRL": [
+     "am grausten"
+    ],
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": [
+     "grauste"
+    ],
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": [
+     "grauste"
+    ],
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": [
+     "grauste"
+    ],
+    "ADJ;NOM;PL;WEAK;SPRL": [
+     "grausten"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grey – a grey sky, grey hair, the grey everyday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grey",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.grey"
+     },
+     {
+      "id": "s2",
+      "def": "dull, dreary (der graue Alltag)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Himmel ist heute grau.",
+      "tr": "The sky is grey today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Opa hat graue Haare.",
+      "tr": "My grandpa has grey hair.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach dem Urlaub kommt der graue Alltag.",
+      "tr": "After the holiday comes the dreary daily routine.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "graue Haare",
+      "tr": "grey hair"
+     },
+     {
+      "text": "ein grauer Tag",
+      "tr": "a grey day"
+     },
+     {
+      "text": "der graue Alltag",
+      "tr": "humdrum everyday life"
+     },
+     {
+      "text": "eine graue Maus",
+      "tr": "a plain, unremarkable person"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich keine grauen Haare wachsen lassen",
+      "tr": "not to let oneself grow grey hairs",
+      "kind": "idiom",
+      "meaning": "not to lose sleep over something",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "grau meliert",
+      "register": "neutral",
+      "nuance": "greying, flecked with grey – of hair"
+     },
+     {
+      "word": "gräulich",
+      "register": "neutral",
+      "nuance": "greyish"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German grā, from Old High German grāo, from Proto-West Germanic *grāu. Compare English gray, grey.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "eine graue Maus (“a grey mouse”) is a plain, unremarkable person."
+    ],
+    "pitfalls": [
+     "English writes grey or gray; German has only grau."
+    ],
+    "subtleties": [
+     "As a noun a colour is neuter and capitalised: das Grau (ein helles Grau).",
+     "Comparison exists but is rare for colours: grauer, am grauesten. (am grausten also)."
+    ]
+   }
+  },
+  {
+   "id": "de:orange",
+   "lemma": "orange",
+   "pos": "ADJ",
+   "class": "inv",
+   "senses": [
+    "colour.orange"
+   ],
+   "forms": {
+    "ADJ": "orange"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Orange – the colour of the fruit; it takes no endings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orange (colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.orange"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Saft ist orange.",
+      "tr": "The juice is orange.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tasche ist orange.",
+      "tr": "The bag is orange.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie trägt ein orangefarbenes Kleid.",
+      "tr": "She’s wearing an orange dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "orangefarben",
+      "tr": "orange-coloured"
+     },
+     {
+      "text": "knallorange",
+      "tr": "bright orange"
+     },
+     {
+      "text": "orange Streifen",
+      "tr": "orange stripes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "orangefarben",
+      "register": "neutral",
+      "nuance": "orange-coloured – takes normal endings, the safe choice before a noun"
+     }
+    ],
+    "etymology": {
+     "text": "From the noun Orange (“orange fruit”), from French orange.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The fruit is also die Apfelsine (“apple from China”) in the north – like Russian апельсин; Greek πορτοκάλι, Turkish portakal and Arabic بُرْتُقَال name it after Portugal."
+    ],
+    "pitfalls": [
+     "Before a noun it traditionally stays unchanged: ein orange Kleid, eine orange Tasche, mit dem orange Auto. Everyday speech often adds endings with an extra -n- (ein orangenes Auto) – that is colloquial and many teachers mark it wrong; in writing use it unchanged or the compound orange-farben (ein orangefarbenes Kleid)."
+    ],
+    "subtleties": [
+     "Pronounced the French way: o-RAHNG-zhe, with the zh of Journal.",
+     "Capitalised, die Orange is the fruit."
+    ]
+   }
+  },
+  {
+   "id": "de:rosa",
+   "lemma": "rosa",
+   "pos": "ADJ",
+   "class": "inv",
+   "senses": [
+    "colour.pink"
+   ],
+   "forms": {
+    "ADJ": "rosa"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pink – pale pink, the colour of roses; it takes no endings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pink (pale)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.pink"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Tasche ist rosa.",
+      "tr": "The bag is pink.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie trägt ein rosa Kleid.",
+      "tr": "She’s wearing a pink dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Er sieht alles durch die rosarote Brille.",
+      "tr": "He sees everything through rose-tinted glasses.",
+      "register": "neutral",
+      "context": "attitudes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein rosa Kleid",
+      "tr": "a pink dress"
+     },
+     {
+      "text": "rosarot",
+      "tr": "rosy red"
+     },
+     {
+      "text": "hellrosa",
+      "tr": "light pink"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "etwas durch die rosarote Brille sehen",
+      "tr": "to see something through the rosy-red glasses",
+      "kind": "idiom",
+      "meaning": "to see something through rose-tinted glasses",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "pink",
+      "register": "colloquial",
+      "nuance": "bright, hot pink – borrowed from English, often declined in speech (ein pinkes T-Shirt)"
+     },
+     {
+      "word": "rosé",
+      "register": "neutral",
+      "nuance": "very pale pink – also the wine"
+     },
+     {
+      "word": "rosarot",
+      "register": "neutral",
+      "nuance": "rosy red"
+     }
+    ],
+    "etymology": {
+     "text": "From Latin rosa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "rosa is simply Latin rosa, “rose” – Greek ροζ and Russian розовый also name the colour after the rose."
+    ],
+    "pitfalls": [
+     "Before a noun it traditionally stays unchanged: ein rosa Kleid, eine rosa Tasche, mit dem rosa Auto. Everyday speech often adds endings with an extra -n- (ein rosanes Kleid) – that is colloquial and many teachers mark it wrong; in writing use it unchanged or the compound rosa-farben (ein rosafarbenes Kleid)."
+    ],
+    "subtleties": [
+     "rosa is pale pink; strong pink is pink."
+    ]
+   }
+  },
+  {
+   "id": "de:lila",
+   "lemma": "lila",
+   "pos": "ADJ",
+   "class": "inv",
+   "senses": [
+    "colour.purple"
+   ],
+   "forms": {
+    "ADJ": "lila"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Purple, lilac – the colour of lilac flowers; it takes no endings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purple, lilac, violet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.purple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Blumen sind lila.",
+      "tr": "The flowers are purple.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat eine lila Tasche.",
+      "tr": "She has a purple bag.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kuh in der Werbung ist lila.",
+      "tr": "The cow in the advert is purple.",
+      "register": "colloquial",
+      "context": "advertising",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine lila Tasche",
+      "tr": "a purple bag"
+     },
+     {
+      "text": "dunkellila",
+      "tr": "dark purple"
+     },
+     {
+      "text": "lila Blumen",
+      "tr": "purple flowers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "violett",
+      "register": "neutral",
+      "nuance": "violet – a bit more formal and technical"
+     },
+     {
+      "word": "fliederfarben",
+      "register": "neutral",
+      "nuance": "lilac-coloured"
+     },
+     {
+      "word": "purpur",
+      "register": "literary",
+      "nuance": "deep purple, crimson"
+     }
+    ],
+    "etymology": {
+     "text": "From French lilas.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The cow in the Milka chocolate adverts has been lila since the 1970s – “die lila Kuh”."
+    ],
+    "pitfalls": [
+     "Before a noun it traditionally stays unchanged: ein lila Kleid, eine lila Tasche, mit dem lila Auto. Everyday speech often adds endings with an extra -n- (eine lilane Tasche) – that is colloquial and many teachers mark it wrong; in writing use it unchanged or the compound lila-farben (ein lilafarbenes Kleid)."
+    ],
+    "subtleties": [
+     "lila covers lilac to purple; very dark purple is dunkellila.",
+     "lila is not compared."
+    ]
+   }
+  },
+  {
+   "id": "de:hell",
+   "lemma": "hell",
+   "pos": "ADJ",
+   "senses": [
+    "adj.light"
+   ],
+   "forms": {
+    "ADJ": "hell",
+    "ADJ;NOM;SG;MASC;STRG": "heller",
+    "ADJ;NOM;SG;FEM;STRG": "helle",
+    "ADJ;NOM;SG;NEUT;STRG": "helles",
+    "ADJ;NOM;PL;STRG": "helle",
+    "ADJ;ACC;SG;MASC;STRG": "hellen",
+    "ADJ;ACC;SG;FEM;STRG": "helle",
+    "ADJ;ACC;SG;NEUT;STRG": "helles",
+    "ADJ;ACC;PL;STRG": "helle",
+    "ADJ;DAT;SG;MASC;STRG": "hellem",
+    "ADJ;DAT;SG;FEM;STRG": "heller",
+    "ADJ;DAT;SG;NEUT;STRG": "hellem",
+    "ADJ;DAT;PL;STRG": "hellen",
+    "ADJ;NOM;SG;MASC;WEAK": "helle",
+    "ADJ;NOM;SG;FEM;WEAK": "helle",
+    "ADJ;NOM;SG;NEUT;WEAK": "helle",
+    "ADJ;NOM;PL;WEAK": "hellen",
+    "ADJ;ACC;SG;MASC;WEAK": "hellen",
+    "ADJ;ACC;SG;FEM;WEAK": "helle",
+    "ADJ;ACC;SG;NEUT;WEAK": "helle",
+    "ADJ;ACC;PL;WEAK": "hellen",
+    "ADJ;DAT;SG;MASC;WEAK": "hellen",
+    "ADJ;DAT;SG;FEM;WEAK": "hellen",
+    "ADJ;DAT;SG;NEUT;WEAK": "hellen",
+    "ADJ;DAT;PL;WEAK": "hellen",
+    "ADJ;NOM;SG;MASC;MIX": "heller",
+    "ADJ;NOM;SG;FEM;MIX": "helle",
+    "ADJ;NOM;SG;NEUT;MIX": "helles",
+    "ADJ;NOM;PL;MIX": "hellen",
+    "ADJ;ACC;SG;MASC;MIX": "hellen",
+    "ADJ;ACC;SG;FEM;MIX": "helle",
+    "ADJ;ACC;SG;NEUT;MIX": "helles",
+    "ADJ;ACC;PL;MIX": "hellen",
+    "ADJ;DAT;SG;MASC;MIX": "hellen",
+    "ADJ;DAT;SG;FEM;MIX": "hellen",
+    "ADJ;DAT;SG;NEUT;MIX": "hellen",
+    "ADJ;DAT;PL;MIX": "hellen",
+    "ADJ;CMPR": "heller",
+    "ADJ;SPRL": "am hellsten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "hellste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "hellste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "hellste",
+    "ADJ;NOM;PL;WEAK;SPRL": "hellsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light, bright – light colours, bright rooms, long summer evenings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "light, pale (of a colour: hellblau)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.light"
+     },
+     {
+      "id": "s2",
+      "def": "bright, light (a room, the day: Es ist hell)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "light-coloured (beer, bread: ein Helles)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "bright, clever (ein heller Kopf)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich mag helle Farben.",
+      "tr": "I like light colours.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat ein hellblaues Kleid.",
+      "tr": "She has a light-blue dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Sommer ist es lange hell.",
+      "tr": "In summer it stays light for a long time.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s2"
+     },
+     {
+      "text": "Ein Helles, bitte!",
+      "tr": "A pale lager, please!",
+      "register": "colloquial",
+      "context": "Bavarian beer garden",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "helle Farben",
+      "tr": "light colours"
+     },
+     {
+      "text": "hellblau",
+      "tr": "light blue"
+     },
+     {
+      "text": "ein helles Zimmer",
+      "tr": "a bright room"
+     },
+     {
+      "text": "ein Helles",
+      "tr": "a pale lager"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "am helllichten Tag",
+      "tr": "on the bright-light day",
+      "kind": "idiom",
+      "meaning": "in broad daylight",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "licht",
+      "register": "literary",
+      "nuance": "light, bright"
+     },
+     {
+      "word": "blass",
+      "register": "neutral",
+      "nuance": "pale – a faint colour; also of faces"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "dunkel",
+      "note": "dark"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German hel (“resounding, loud, shining, bright”), from Old High German hel (“resounding”), from Proto-Germanic *halliz (“resounding”), from Proto-Indo-European *kelh₁- (“to call, make noise”). Cognate with Dutch hel.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "hell first described sound – “ringing, clear” – and only later light; eine helle Stimme is still a clear, high voice.",
+     "am helllichten Tag (in broad daylight) has three l’s in a row since the 1996 spelling reform."
+    ],
+    "pitfalls": [
+     "hell is not English “hell” (die Hölle), and not “light” in weight (leicht)."
+    ],
+    "subtleties": [
+     "Shades are one word: hellblau, hellgrün, hellrot.",
+     "Comparison: heller, am hellsten."
+    ]
+   }
+  },
+  {
+   "id": "de:dunkel",
+   "lemma": "dunkel",
+   "pos": "ADJ",
+   "senses": [
+    "adj.dark"
+   ],
+   "forms": {
+    "ADJ": "dunkel",
+    "ADJ;NOM;SG;MASC;STRG": "dunkler",
+    "ADJ;NOM;SG;FEM;STRG": "dunkle",
+    "ADJ;NOM;SG;NEUT;STRG": "dunkles",
+    "ADJ;NOM;PL;STRG": "dunkle",
+    "ADJ;ACC;SG;MASC;STRG": "dunklen",
+    "ADJ;ACC;SG;FEM;STRG": "dunkle",
+    "ADJ;ACC;SG;NEUT;STRG": "dunkles",
+    "ADJ;ACC;PL;STRG": "dunkle",
+    "ADJ;DAT;SG;MASC;STRG": "dunklem",
+    "ADJ;DAT;SG;FEM;STRG": "dunkler",
+    "ADJ;DAT;SG;NEUT;STRG": "dunklem",
+    "ADJ;DAT;PL;STRG": "dunklen",
+    "ADJ;NOM;SG;MASC;WEAK": "dunkle",
+    "ADJ;NOM;SG;FEM;WEAK": "dunkle",
+    "ADJ;NOM;SG;NEUT;WEAK": "dunkle",
+    "ADJ;NOM;PL;WEAK": "dunklen",
+    "ADJ;ACC;SG;MASC;WEAK": "dunklen",
+    "ADJ;ACC;SG;FEM;WEAK": "dunkle",
+    "ADJ;ACC;SG;NEUT;WEAK": "dunkle",
+    "ADJ;ACC;PL;WEAK": "dunklen",
+    "ADJ;DAT;SG;MASC;WEAK": "dunklen",
+    "ADJ;DAT;SG;FEM;WEAK": "dunklen",
+    "ADJ;DAT;SG;NEUT;WEAK": "dunklen",
+    "ADJ;DAT;PL;WEAK": "dunklen",
+    "ADJ;NOM;SG;MASC;MIX": "dunkler",
+    "ADJ;NOM;SG;FEM;MIX": "dunkle",
+    "ADJ;NOM;SG;NEUT;MIX": "dunkles",
+    "ADJ;NOM;PL;MIX": "dunklen",
+    "ADJ;ACC;SG;MASC;MIX": "dunklen",
+    "ADJ;ACC;SG;FEM;MIX": "dunkle",
+    "ADJ;ACC;SG;NEUT;MIX": "dunkles",
+    "ADJ;ACC;PL;MIX": "dunklen",
+    "ADJ;DAT;SG;MASC;MIX": "dunklen",
+    "ADJ;DAT;SG;FEM;MIX": "dunklen",
+    "ADJ;DAT;SG;NEUT;MIX": "dunklen",
+    "ADJ;DAT;PL;MIX": "dunklen",
+    "ADJ;CMPR": "dunkler",
+    "ADJ;SPRL": "am dunkelsten",
+    "ADJ;NOM;SG;MASC;WEAK;SPRL": "dunkelste",
+    "ADJ;NOM;SG;FEM;WEAK;SPRL": "dunkelste",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL": "dunkelste",
+    "ADJ;NOM;PL;WEAK;SPRL": "dunkelsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "ADJ;NOM;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;ACC;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;WEAK": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;MASC;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;FEM;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;DAT;SG;NEUT;MIX": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;MASC;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed.",
+     "ADJ;NOM;SG;NEUT;WEAK;SPRL": "Wiktionary lists the weak and mixed adjective forms (and the superlative after the article) only together with the article (der große, einem großen, das größte); the course stores the adjective alone, as it stands in the sentence. Checked against Wiktionary’s declension table with the article removed."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dark – dark colours, dark winter evenings, dark beer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dark (of a colour: dunkelblau)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dark"
+     },
+     {
+      "id": "s2",
+      "def": "dark (without light: Es ist dunkel)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "dark (beer, bread: ein Dunkles)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "vague, faint (eine dunkle Erinnerung)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er trägt einen dunklen Anzug.",
+      "tr": "He’s wearing a dark suit.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat dunkle Haare.",
+      "tr": "She has dark hair.",
+      "register": "neutral",
+      "context": "looks",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Winter wird es früh dunkel.",
+      "tr": "In winter it gets dark early.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich trinke ein dunkles Bier.",
+      "tr": "I’m having a dark beer.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "dunkle Haare",
+      "tr": "dark hair"
+     },
+     {
+      "text": "dunkelblau",
+      "tr": "dark blue"
+     },
+     {
+      "text": "Es wird dunkel.",
+      "tr": "It’s getting dark."
+     },
+     {
+      "text": "dunkles Brot",
+      "tr": "dark bread"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "im Dunkeln tappen",
+      "tr": "to grope in the dark",
+      "kind": "idiom",
+      "meaning": "to be in the dark, to have no idea",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "finster",
+      "register": "literary",
+      "nuance": "dark, gloomy – also sinister"
+     },
+     {
+      "word": "düster",
+      "register": "neutral",
+      "nuance": "gloomy, dim"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "hell",
+      "note": "light, bright"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German tunkel, from Old High German tunkal, tuncal (“dark”), from Proto-Germanic *dunkalaz (“dark”), from Proto-Indo-European *dʰengʷ- (“to smoke, fume”). Cognate to Dutch donker (“dark”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Bavaria beer is ordered by its colour: ein Helles or ein Dunkles."
+    ],
+    "pitfalls": [
+     "The e before l drops when an ending follows: ein dunkler Anzug, dunkle Haare, das dunkle Bier (not *dunkeles); comparative dunkler."
+    ],
+    "subtleties": [
+     "dunkler is both the comparative (darker) and the strong masculine form (ein dunkler Anzug).",
+     "Shades are one word: dunkelblau, dunkelrot."
+    ]
+   }
+  },
+  {
+   "id": "de:mehr",
+   "lemma": "mehr",
+   "pos": "ADV",
+   "senses": [
+    "adv.more"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "More – the comparative of viel; with nicht: no longer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "more (comparative of viel: mehr Zeit, mehr als …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.more"
+     },
+     {
+      "id": "s2",
+      "def": "no longer, any more (with negation: nicht mehr, kein … mehr)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Sommer trinken wir mehr Wasser.",
+      "tr": "In summer we drink more water.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe mehr Bücher als du.",
+      "tr": "I have more books than you.",
+      "register": "neutral",
+      "context": "comparing",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe keinen Hunger mehr.",
+      "tr": "I’m not hungry any more.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "Er wohnt nicht mehr hier.",
+      "tr": "He doesn’t live here any more.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mehr als",
+      "tr": "more than"
+     },
+     {
+      "text": "immer mehr",
+      "tr": "more and more"
+     },
+     {
+      "text": "nicht mehr",
+      "tr": "no longer"
+     },
+     {
+      "text": "mehr oder weniger",
+      "tr": "more or less"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Mehr Licht!",
+      "tr": "more light!",
+      "kind": "quote",
+      "meaning": "Goethe’s reputed last words",
+      "register": "neutral",
+      "source": "attributed to Johann Wolfgang von Goethe, 1832"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "weitere",
+      "register": "neutral",
+      "nuance": "further, additional – an adjective with endings (weitere Fragen)"
+     },
+     {
+      "word": "zusätzlich",
+      "register": "formal",
+      "nuance": "additional, extra"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "weniger",
+      "note": "less, fewer"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German mēre, from Old High German mēro, from Proto-West Germanic *maiʀō, from Proto-Germanic *maizô, from Proto-Indo-European *mē- (“many”). See English more.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mehr and English more are one word, from Proto-Germanic *maizô."
+    ],
+    "pitfalls": [
+     "mehr never takes an ending: mehr Bücher, mehr Milch (not *mehre).",
+     "nicht mehr = no longer – not “not more”: Ich rauche nicht mehr = I don’t smoke any more."
+    ],
+    "subtleties": [
+     "mehrere is a different word: mehrere Bücher = several books.",
+     "viel – mehr – am meisten: the comparison of viel."
+    ]
+   }
+  },
+  {
+   "id": "de:am_meisten",
+   "lemma": "am meisten",
+   "pos": "ADV",
+   "senses": [
+    "adv.most"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most – the superlative of viel, with a verb: Was magst du am meisten?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "most, the most (superlative of viel, with a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.most"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was magst du am meisten?",
+      "tr": "What do you like most?",
+      "register": "neutral",
+      "context": "likes",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer arbeitet hier am meisten?",
+      "tr": "Who works the most here?",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Am meisten freue ich mich auf den Urlaub.",
+      "tr": "Most of all I’m looking forward to the holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am meisten mögen",
+      "tr": "to like most"
+     },
+     {
+      "text": "was mich am meisten stört",
+      "tr": "what bothers me most"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die meisten",
+      "register": "neutral",
+      "nuance": "most (+ plural noun): die meisten Leute = most people – a determiner with endings"
+     },
+     {
+      "word": "das meiste",
+      "register": "neutral",
+      "nuance": "most of it (das meiste Geld = most of the money)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "am wenigsten",
+      "note": "least"
+     }
+    ],
+    "etymology": {
+     "text": "The superlative of viel (comparative mehr, superlative am meisten). meist- is from Old High German meist, from Proto-Germanic *maist, *maistaz. Compare Dutch meest, English most, Danish mest.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "meist- and English most are one word."
+    ],
+    "pitfalls": [
+     "“Most people / most children” is die meisten Leute / die meisten Kinder, not *am meisten Leute."
+    ],
+    "subtleties": [
+     "am meisten is built like am größten, am schnellsten: am + -sten."
+    ]
+   }
+  },
+  {
+   "id": "de:als",
+   "lemma": "als",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.than",
+    "conj.when"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Than – after a comparative; and “when” for one event in the past.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "than (after a comparative: größer als)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.than"
+     },
+     {
+      "id": "s2",
+      "def": "when (one event or period in the past: Als ich jung war, …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     },
+     {
+      "id": "s3",
+      "def": "as (in the role of: als Lehrer arbeiten)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "as if (als ob)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Zug ist schneller als der Bus.",
+      "tr": "The train is faster than the bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Bruder ist älter als ich.",
+      "tr": "My brother is older than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Als ich ein Kind war, wohnten wir in Athen.",
+      "tr": "When I was a child, we lived in Athens.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s2"
+     },
+     {
+      "text": "Als wir ankamen, war es schon dunkel.",
+      "tr": "When we arrived, it was already dark.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "Sie arbeitet als Lehrerin.",
+      "tr": "She works as a teacher.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "größer als",
+      "tr": "bigger than"
+     },
+     {
+      "text": "mehr als",
+      "tr": "more than"
+     },
+     {
+      "text": "als Kind",
+      "tr": "as a child"
+     },
+     {
+      "text": "als ob",
+      "tr": "as if"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Lieber ein Ende mit Schrecken als ein Schrecken ohne Ende.",
+      "tr": "Better an end with horror than horror without end.",
+      "kind": "saying",
+      "meaning": "better to end a bad situation now than suffer it forever",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym for “than”: als is the only word after a comparative in standard German.",
+    "etymology": {
+     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so. Compare English as.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "als comes from all + so – the same pair that gave English also and, worn down, as."
+    ],
+    "pitfalls": [
+     "than = als, not wie: größer als ich. *größer wie ich is colloquial/regional and counts as an error in writing; “as … as” is so … wie (so groß wie ich).",
+     "After als the pronoun stays nominative: älter als ich (not *als mich).",
+     "als (when) is for ONE event or period in the past; for repeated or future events use wenn (S18)."
+    ],
+    "subtleties": [
+     "A clause with als (when) has the verb at the end: Als ich jung war, …"
+    ]
+   }
+  }
+ ]
+}

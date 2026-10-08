@@ -12,7 +12,927 @@
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
    }
+  },
+  {
+   "id": "zh:haishi",
+   "lemma": "还是",
+   "trad": "還是",
+   "pinyin": "hái shi",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.or"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Offering a choice: tea or coffee? this one or that one?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "or (in questions that offer a choice)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.or"
+     },
+     {
+      "id": "s2",
+      "def": "(adverb) still; nevertheless",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(adverb) had better",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你喝茶还是咖啡？",
+      "py": "Nǐ hē chá háishi kāfēi?",
+      "tr": "Tea or coffee?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "你是学生还是老师？",
+      "py": "Nǐ shì xuésheng háishi lǎoshī?",
+      "tr": "Are you a student or a teacher?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "他还是不明白。",
+      "py": "Tā háishi bù míngbai.",
+      "tr": "He still doesn’t understand.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "我们还是走吧。",
+      "py": "Wǒmen háishi zǒu ba.",
+      "tr": "We’d better go.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "A 还是 B？",
+      "tr": "A or B?"
+     },
+     {
+      "text": "是 A 还是 B？",
+      "tr": "is it A or B?"
+     },
+     {
+      "text": "还是 … 吧",
+      "tr": "had better …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "或者",
+      "register": "neutral",
+      "nuance": "huòzhě: ‘or’ in statements — not for asking someone to choose"
+     },
+     {
+      "word": "要么",
+      "register": "colloquial",
+      "nuance": "yàome: ‘either … or …’ (要么 A，要么 B) — two options, pick one"
+     }
+    ],
+    "etymology": {
+     "text": "还 ‘still; also’ + 是 ‘to be’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German oder, Greek ή and Russian или cover every ‘or’; Chinese has two: 还是 asks (‘tea or coffee?’), 或者 states (‘tea or coffee, either is fine’)."
+    ],
+    "pitfalls": [
+     "A 还是 question needs no 吗: 你喝茶还是咖啡？ (not *…咖啡吗？).",
+     "In a statement ‘or’ is 或者: 我喝茶或者咖啡."
+    ],
+    "subtleties": [
+     "还 is read hái here; the same character is huán in 还 ‘to give back’."
+    ]
+   }
+  },
+  {
+   "id": "zh:huozhe",
+   "lemma": "或者",
+   "trad": "或者",
+   "pinyin": "huò zhě",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.or"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Options laid out calmly: this or that, either will do.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "or (in statements); either … or …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.or"
+     },
+     {
+      "id": "s2",
+      "def": "(adverb, written) perhaps, maybe",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我早饭喝茶或者咖啡。",
+      "py": "Wǒ zǎofàn hē chá huòzhě kāfēi.",
+      "tr": "For breakfast I drink tea or coffee.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "你可以坐地铁或者打车。",
+      "py": "Nǐ kěyǐ zuò dìtiě huòzhě dǎchē.",
+      "tr": "You can take the underground or a taxi.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "或者明天，或者后天，我一定来。",
+      "py": "Huòzhě míngtiān, huòzhě hòutiān, wǒ yídìng lái.",
+      "tr": "Either tomorrow or the day after — I’ll definitely come.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "或者他已经走了。",
+      "py": "Huòzhě tā yǐjīng zǒu le.",
+      "tr": "Perhaps he has already left.",
+      "register": "formal",
+      "context": "guesses",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "A 或者 B",
+      "tr": "A or B"
+     },
+     {
+      "text": "或者 A，或者 B",
+      "tr": "either A or B"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "还是",
+      "register": "neutral",
+      "nuance": "háishi: ‘or’ when you ask someone to choose"
+     },
+     {
+      "word": "或",
+      "register": "formal",
+      "nuance": "huò: the written one-character ‘or’"
+     }
+    ],
+    "etymology": {
+     "text": "或 ‘some, someone; perhaps’ (Schuessler: from 有 ‘there is’ with a distributive suffix) + the suffix 者.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Two Chinese ‘or’s for one German oder: 或者 for statements, 还是 for questions of choice."
+    ],
+    "pitfalls": [
+     "Don’t ask someone to choose with 或者: ‘tea or coffee?’ is 你喝茶还是咖啡？ — 你要茶或者咖啡吗？ only asks whether they want something at all (tea, coffee …)."
+    ],
+    "subtleties": [
+     "In a list, the last ‘or’ is 或者: 茶、咖啡或者果汁."
+    ]
+   }
+  },
+  {
+   "id": "zh:yexu",
+   "lemma": "也许",
+   "trad": "也許",
+   "pinyin": "yě xǔ",
+   "pos": "ADV",
+   "senses": [
+    "adv.maybe"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A soft guess, without commitment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maybe, perhaps",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.maybe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "也许他不来了。",
+      "py": "Yěxǔ tā bù lái le.",
+      "tr": "Maybe he isn’t coming.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "他也许在家。",
+      "py": "Tā yěxǔ zài jiā.",
+      "tr": "He may be at home.",
+      "register": "neutral",
+      "context": "guesses",
+      "sense": "s1"
+     },
+     {
+      "text": "也许吧。",
+      "py": "Yěxǔ ba.",
+      "tr": "Maybe.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "也许吧",
+      "tr": "maybe (as an answer)"
+     },
+     {
+      "text": "也许不",
+      "tr": "maybe not"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "可能",
+      "register": "neutral",
+      "nuance": "kěnéng: ‘probably, may’ — sounds more like an estimate; also ‘possible’"
+     },
+     {
+      "word": "或许",
+      "register": "formal",
+      "nuance": "huòxǔ: ‘perhaps’, mostly written"
+     },
+     {
+      "word": "说不定",
+      "register": "colloquial",
+      "nuance": "shuōbudìng: ‘who knows — maybe’"
+     }
+    ],
+    "etymology": {
+     "text": "也 ‘also’ + 许 ‘perhaps’ (许 originally ‘to allow, to promise’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "也许吧 ‘maybe’ is a polite way to avoid a clear no."
+    ],
+    "pitfalls": [
+     "也许 stands before the verb or at the start, never at the end: 他也许在家 / 也许他在家 — not *他在家也许."
+    ],
+    "subtleties": [
+     "也许 is a pure adverb; 可能 can also be an adjective (不可能 ‘impossible’) and a noun (可能 ‘possibility’)."
+    ]
+   }
+  },
+  {
+   "id": "zh:keneng",
+   "lemma": "可能",
+   "trad": "可能",
+   "pinyin": "kě néng",
+   "pos": "ADV",
+   "senses": [
+    "adv.maybe"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Weighing the chances: probably, possibly — or ‘impossible!’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maybe, probably; may, might",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.maybe"
+     },
+     {
+      "id": "s2",
+      "def": "(adjective) possible",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(noun) possibility",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他可能在家。",
+      "py": "Tā kěnéng zài jiā.",
+      "tr": "He’s probably at home.",
+      "register": "neutral",
+      "context": "guesses",
+      "sense": "s1"
+     },
+     {
+      "text": "明天可能下雨。",
+      "py": "Míngtiān kěnéng xià yǔ.",
+      "tr": "It may rain tomorrow.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "这不可能！",
+      "py": "Zhè bù kěnéng!",
+      "tr": "That’s impossible!",
+      "register": "colloquial",
+      "context": "surprise",
+      "sense": "s2"
+     },
+     {
+      "text": "还有一个可能。",
+      "py": "Hái yǒu yí ge kěnéng.",
+      "tr": "There is one more possibility.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "可能会",
+      "tr": "might (will)"
+     },
+     {
+      "text": "不可能",
+      "tr": "impossible"
+     },
+     {
+      "text": "有可能",
+      "tr": "it’s possible"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "也许",
+      "register": "neutral",
+      "nuance": "yěxǔ: ‘perhaps’ — a pure adverb, a softer guess"
+     },
+     {
+      "word": "大概",
+      "register": "neutral",
+      "nuance": "dàgài: ‘probably; roughly’"
+     }
+    ],
+    "etymology": {
+     "text": "可 ‘can, may’ + 能 ‘to be able’: ‘can be’ — possible.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "不可能！ ‘impossible!’ is one of the commonest ways to say ‘No way!’."
+    ],
+    "pitfalls": [
+     "The negation follows 可能: 他可能不来 ‘he may not come’; 他不可能来 means ‘he can’t possibly come’.",
+     "可能 is also an adjective and a noun (不可能, 有可能); 也许 is only an adverb."
+    ],
+    "subtleties": [
+     "可能 often goes with 会: 他可能会来 ‘he might come’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhende",
+   "lemma": "真的",
+   "trad": "真的",
+   "pinyin": "zhēn de",
+   "pos": "ADV",
+   "senses": [
+    "adv.really"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Surprise and sincerity: ‘Really?’ — ‘Really!’",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "really, truly; really? (surprise)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.really"
+     },
+     {
+      "id": "s2",
+      "def": "(adjective) true, real, genuine",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "真的吗？",
+      "py": "Zhēn de ma?",
+      "tr": "Really?",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "我真的不喝酒。",
+      "py": "Wǒ zhēn de bù hē jiǔ.",
+      "tr": "I really don’t drink.",
+      "register": "neutral",
+      "context": "parties",
+      "sense": "s1"
+     },
+     {
+      "text": "这是真的。",
+      "py": "Zhè shì zhēn de.",
+      "tr": "It’s true.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "真的吗？",
+      "tr": "really?"
+     },
+     {
+      "text": "真的假的？",
+      "tr": "seriously? (real or fake?)"
+     },
+     {
+      "text": "真的很",
+      "tr": "really very"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "真",
+      "register": "neutral",
+      "nuance": "zhēn: ‘really’ before an adjective — 真好吃 ‘really tasty’"
+     },
+     {
+      "word": "确实",
+      "register": "formal",
+      "nuance": "quèshí: ‘indeed, truly’"
+     },
+     {
+      "word": "是吗",
+      "register": "neutral",
+      "nuance": "shì ma: ‘is that so?’ — milder surprise"
+     }
+    ],
+    "etymology": {
+     "text": "真 ‘true, real’ + the particle 的.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "真的假的？ ‘real or fake?’ is the colloquial ‘Seriously?!’."
+    ],
+    "pitfalls": [
+     "真的 goes before the verb: 我真的喜欢 — not *我喜欢真的.",
+     "Before an adjective people usually say 真: 真好吃; 真的好吃 is more emphatic."
+    ],
+    "subtleties": [
+     "真的！ as an answer insists ‘Really! (I’m not joking)’; 真的吗？ asks."
+    ]
+   }
+  },
+  {
+   "id": "zh:dangran",
+   "lemma": "当然",
+   "trad": "當然",
+   "pinyin": "dāng rán",
+   "pos": "ADV",
+   "senses": [
+    "adv.ofcourse"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A confident yes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "of course, naturally",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.ofcourse"
+     },
+     {
+      "id": "s2",
+      "def": "(adjective) natural, to be expected",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "当然！",
+      "py": "Dāngrán!",
+      "tr": "Of course!",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "你来吗？当然来！",
+      "py": "Nǐ lái ma? Dāngrán lái!",
+      "tr": "Are you coming? Of course!",
+      "register": "informal",
+      "context": "invitations",
+      "sense": "s1"
+     },
+     {
+      "text": "父母当然爱孩子。",
+      "py": "Fùmǔ dāngrán ài háizi.",
+      "tr": "Parents naturally love their children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这是当然的。",
+      "py": "Zhè shì dāngrán de.",
+      "tr": "That goes without saying.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "当然了",
+      "tr": "of course! (emphatic)"
+     },
+     {
+      "text": "当然可以",
+      "tr": "of course you may"
+     },
+     {
+      "text": "当然不",
+      "tr": "of course not"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "理所当然",
+      "tr": "as reason dictates it should be",
+      "kind": "idiom",
+      "meaning": "as a matter of course; naturally",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "当然了",
+      "register": "colloquial",
+      "nuance": "dāngrán le: a more emphatic ‘of course!’"
+     },
+     {
+      "word": "那还用说",
+      "register": "colloquial",
+      "nuance": "nà hái yòng shuō: ‘need you ask?’"
+     },
+     {
+      "word": "自然",
+      "register": "formal",
+      "nuance": "zìrán: ‘naturally’"
+     }
+    ],
+    "etymology": {
+     "text": "当 ‘to match, to be fitting’ + 然 ‘so, thus’: ‘as it should be’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "当然可以 ‘of course you may’ is the usual friendly answer to a request."
+    ],
+    "pitfalls": [
+     "当然 can sound blunt (‘obviously!’) when the other person was not sure; a softer yes is 可以 or 好啊.",
+     "In an answer you may repeat the verb after it: 你喝茶吗？— 当然喝！"
+    ],
+    "subtleties": [
+     "当然 also answers a negative idea: 当然不 ‘of course not’."
+    ]
+   }
+  },
+  {
+   "id": "zh:ye",
+   "lemma": "也",
+   "trad": "也",
+   "pinyin": "yě",
+   "pos": "ADV",
+   "senses": [
+    "adv.also"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Joining in: me too.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "also, too, as well",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.also"
+     },
+     {
+      "id": "s2",
+      "def": "(with a negation) not … either",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "even (连 … 也 …)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我也喜欢茶。",
+      "py": "Wǒ yě xǐhuan chá.",
+      "tr": "I like tea too.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "他是老师，我也是老师。",
+      "py": "Tā shì lǎoshī, wǒ yě shì lǎoshī.",
+      "tr": "He’s a teacher, and I’m a teacher too.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "我也不知道。",
+      "py": "Wǒ yě bù zhīdào.",
+      "tr": "I don’t know either.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "他连饭也不吃。",
+      "py": "Tā lián fàn yě bù chī.",
+      "tr": "He won’t even eat.",
+      "register": "neutral",
+      "context": "worries",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我也是",
+      "tr": "me too"
+     },
+     {
+      "text": "也不",
+      "tr": "not … either"
+     },
+     {
+      "text": "也很",
+      "tr": "also very"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "还",
+      "register": "neutral",
+      "nuance": "hái: ‘also, in addition’ — adds one more thing: 我还要一杯茶"
+     },
+     {
+      "word": "都",
+      "register": "neutral",
+      "nuance": "dōu: ‘all, both’ — not ‘too’"
+     }
+    ],
+    "etymology": {
+     "text": "In Classical Chinese 也 is a sentence-final particle (‘it is …’); the modern adverb means ‘also’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Classical texts 也 ends the sentence (是也 ‘so it is’) — today it stands right before the verb."
+    ],
+    "pitfalls": [
+     "也 comes after the subject and before the verb: 我也喝 — never at the start (*也我喝) or at the end (*我喝也).",
+     "‘Me too’ is 我也是 or 我也 + the verb (我也喜欢), not *也我."
+    ],
+    "subtleties": [
+     "也 + 不 = ‘not either’: 我也不喝; in ‘neither … nor’ the second part is 也不."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhi.only",
+   "lemma": "只",
+   "trad": "只",
+   "pinyin": "zhǐ",
+   "pos": "ADV",
+   "senses": [
+    "adv.only"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Limits: only this much, just this.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "only, just",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.only"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我只喝水。",
+      "py": "Wǒ zhǐ hē shuǐ.",
+      "tr": "I only drink water.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "我只有一个妹妹。",
+      "py": "Wǒ zhǐ yǒu yí ge mèimei.",
+      "tr": "I have only one younger sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "只要一点儿。",
+      "py": "Zhǐ yào yìdiǎnr.",
+      "tr": "Just a little.",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "只有",
+      "tr": "to have only; there is only"
+     },
+     {
+      "text": "只是",
+      "tr": "merely, just"
+     },
+     {
+      "text": "只要",
+      "tr": "as long as"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "只是",
+      "register": "neutral",
+      "nuance": "zhǐshì: ‘just, merely’ — often softening: 我只是问问 ‘I’m just asking’"
+     },
+     {
+      "word": "就",
+      "register": "colloquial",
+      "nuance": "jiù: ‘just, only’ — 就一个 ‘just one’"
+     },
+     {
+      "word": "仅",
+      "register": "formal",
+      "nuance": "jǐn: ‘only’, in writing"
+     }
+    ],
+    "etymology": {
+     "text": "Originally a pictogram of breath coming out of a mouth (口), a modal particle; ‘only’ is a later use.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In simplified script 只 zhǐ ‘only’ also stands for 隻 zhī, the measure word for animals (一只猫 ‘a cat’) — two words, two tones, one character."
+    ],
+    "pitfalls": [
+     "只 goes before the verb, not before the noun: 我只喝水 ‘I only drink water’ (not *我喝只水).",
+     "只 zhǐ (3rd tone) ‘only’ vs 只 zhī (1st tone), the measure word in 一只鸡."
+    ],
+    "subtleties": [
+     "只 + 有 = ‘to have only’ or ‘there is only’: 我只有一个妹妹."
+    ]
+   }
   }
- ],
- "absent": []
+ ]
 }

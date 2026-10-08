@@ -1,0 +1,1841 @@
+{
+ "lexemes": [
+  {
+   "id": "he:lavan",
+   "lemma": "לָבָן",
+   "pos": "ADJ",
+   "senses": [
+    "colour.white"
+   ],
+   "translit": "lavan",
+   "forms": {
+    "ADJ;SG;MASC": "לָבָן",
+    "ADJ;SG;FEM": "לְבָנָה",
+    "ADJ;PL;MASC": "לְבָנִים",
+    "ADJ;PL;FEM": "לְבָנוֹת",
+    "ADJ;SG;MASC;DEF": "הַלָּבָן",
+    "ADJ;SG;FEM;DEF": "הַלְּבָנָה",
+    "ADJ;PL;MASC;DEF": "הַלְּבָנִים",
+    "ADJ;PL;FEM;DEF": "הַלְּבָנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "White houses in the sun — Tel Aviv, “the White City”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "white",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.white"
+     },
+     {
+      "id": "s2",
+      "def": "white (of people: a white person)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבַּיִת שֶׁלָּנוּ לָבָן.",
+      "tr": "Our house is white.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי שׁוֹתֶה יַיִן לָבָן.",
+      "tr": "I drink white wine.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "תֵּל אָבִיב נִקְרֵאת הָעִיר הַלְּבָנָה.",
+      "tr": "Tel Aviv is called the White City.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יַיִן לָבָן",
+      "tr": "white wine"
+     },
+     {
+      "text": "לֶחֶם לָבָן",
+      "tr": "white bread"
+     },
+     {
+      "text": "שֵׂעָר לָבָן",
+      "tr": "white hair"
+     },
+     {
+      "text": "הַבַּיִת הַלָּבָן",
+      "tr": "the White House"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כָּחֹל לָבָן",
+      "tr": "blue and white",
+      "kind": "colloquial",
+      "meaning": "Israeli, made in Israel (the colours of the flag)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "צַח",
+      "register": "literary",
+      "nuance": "“pure white, clear”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׁחֹר",
+      "note": "black"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-West Semitic *laban-; cognate with Arabic لَبَن (laban, “milk”), Ugaritic lbn and Phoenician lbn (Wiktionary). Root ל־ב־ן, pattern קָטָל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic لَبَن is “milk” — the white drink; and לְבָנוֹן, Lebanon, is named for its white, snowy mountains."
+    ],
+    "pitfalls": [
+     "The first vowel shortens: לְבָנָה, לְבָנִים.",
+     "The feminine לְבָנָה is also a poetic word for the moon, and לְבֵנָה (with e) is a brick."
+    ],
+    "subtleties": [
+     "Blue and white are the colours of the flag: תּוֹצֶרֶת כָּחֹל לָבָן “blue-and-white made” means “made in Israel”."
+    ]
+   }
+  },
+  {
+   "id": "he:shachor",
+   "lemma": "שָׁחֹר",
+   "pos": "ADJ",
+   "senses": [
+    "colour.black"
+   ],
+   "translit": "shachor",
+   "forms": {
+    "ADJ;SG;MASC": "שָׁחֹר",
+    "ADJ;SG;FEM": "שְׁחֹרָה",
+    "ADJ;PL;MASC": "שְׁחֹרִים",
+    "ADJ;PL;FEM": "שְׁחֹרוֹת",
+    "ADJ;SG;MASC;DEF": "הַשָּׁחֹר",
+    "ADJ;SG;FEM;DEF": "הַשְּׁחֹרָה",
+    "ADJ;PL;MASC;DEF": "הַשְּׁחֹרִים",
+    "ADJ;PL;FEM;DEF": "הַשְּׁחֹרוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "שחור",
+    "ADJ;SG;FEM": "שחורה",
+    "ADJ;PL;MASC": "שחורים",
+    "ADJ;PL;FEM": "שחורות",
+    "ADJ;SG;MASC;DEF": "השחור",
+    "ADJ;SG;FEM;DEF": "השחורה",
+    "ADJ;PL;MASC;DEF": "השחורים",
+    "ADJ;PL;FEM;DEF": "השחורות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Strong black coffee, black hair, a black cat on the sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "black",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.black"
+     },
+     {
+      "id": "s2",
+      "def": "black, illegal, menial (in set phrases: שׁוּק שָׁחֹר, עֲבוֹדָה שְׁחֹרָה)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה קָפֶה שָׁחֹר.",
+      "tr": "I drink black coffee.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ שֵׂעָר שָׁחֹר.",
+      "tr": "She has black hair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "הֶחָתוּל הַשָּׁחֹר יָשֵׁן עַל הַסַּפָּה.",
+      "tr": "The black cat is sleeping on the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם קוֹנִים דּוֹלָרִים בַּשּׁוּק הַשָּׁחֹר.",
+      "tr": "They buy dollars on the black market.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קָפֶה שָׁחֹר",
+      "tr": "black (Turkish-style) coffee"
+     },
+     {
+      "text": "שׁוּק שָׁחֹר",
+      "tr": "black market"
+     },
+     {
+      "text": "הַיָּם הַשָּׁחֹר",
+      "tr": "the Black Sea"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שָׁחֹר עַל גַּבֵּי לָבָן",
+      "tr": "black on white",
+      "kind": "idiom",
+      "meaning": "in writing, in black and white",
+      "register": "neutral"
+     },
+     {
+      "text": "שְׁחוֹרָה אֲנִי וְנָאוָה",
+      "tr": "I am black and comely",
+      "kind": "quote",
+      "meaning": "the bride of the Song of Songs",
+      "register": "literary",
+      "source": "Song of Songs 1:5"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "שְׁחַרְחֹר",
+      "register": "literary",
+      "nuance": "“blackish, swarthy” (Song of Songs 1:6)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "לָבָן",
+      "note": "white"
+     }
+    ],
+    "etymology": {
+     "text": "Root שׁ־ח־ר, pattern קָטֹל (Wiktionary). The same letters spell שַׁחַר “dawn”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Israel קָפֶה שָׁחֹר “black coffee” is the strong coffee boiled with its grounds, Turkish-style."
+    ],
+    "pitfalls": [
+     "Pointed with a short o (שָׁחֹר), written with ו: שחור, שחורה.",
+     "Feminine שְׁחֹרָה — no doubled letter (ר cannot be doubled)."
+    ],
+    "subtleties": [
+     "In set phrases it means illegal or menial: עֲבוֹדָה שְׁחֹרָה “menial work”, שׁוּק שָׁחֹר “black market”."
+    ]
+   }
+  },
+  {
+   "id": "he:adom",
+   "lemma": "אָדֹם",
+   "pos": "ADJ",
+   "senses": [
+    "colour.red"
+   ],
+   "translit": "adom",
+   "forms": {
+    "ADJ;SG;MASC": "אָדֹם",
+    "ADJ;SG;FEM": "אֲדֻמָּה",
+    "ADJ;PL;MASC": "אֲדֻמִּים",
+    "ADJ;PL;FEM": "אֲדֻמּוֹת",
+    "ADJ;SG;MASC;DEF": "הָאָדֹם",
+    "ADJ;SG;FEM;DEF": "הָאֲדֻמָּה",
+    "ADJ;PL;MASC;DEF": "הָאֲדֻמִּים",
+    "ADJ;PL;FEM;DEF": "הָאֲדֻמּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "אדום",
+    "ADJ;SG;FEM": "אדומה",
+    "ADJ;PL;MASC": "אדומים",
+    "ADJ;PL;FEM": "אדומות",
+    "ADJ;SG;MASC;DEF": "האדום",
+    "ADJ;SG;FEM;DEF": "האדומה",
+    "ADJ;PL;MASC;DEF": "האדומים",
+    "ADJ;PL;FEM;DEF": "האדומות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Red wine, a red dress, the red traffic light.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.red"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא קוֹנָה שִׂמְלָה אֲדֻמָּה.",
+      "tr": "She buys a red dress.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוֹר אָדֹם, עוֹצְרִים!",
+      "tr": "The light is red — we stop!",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹהֵב יַיִן אָדֹם.",
+      "tr": "I like red wine.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יַיִן אָדֹם",
+      "tr": "red wine"
+     },
+     {
+      "text": "אוֹר אָדֹם",
+      "tr": "a red light"
+     },
+     {
+      "text": "קַו אָדֹם",
+      "tr": "a red line"
+     },
+     {
+      "text": "מָגֵן דָּוִד אָדֹם",
+      "tr": "Magen David Adom (the Israeli ambulance service)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קַו אָדֹם",
+      "tr": "a red line",
+      "kind": "fixed expression",
+      "meaning": "a limit that must not be crossed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַדְמוֹנִי",
+      "register": "neutral",
+      "nuance": "“red-haired, ruddy” (Esau in Genesis 25:25)"
+     }
+    ],
+    "etymology": {
+     "text": "Root א־ד־ם, pattern קָטֹל; compare Akkadian, Classical Syriac ܐܕܘܡ, Arabic ادوم and Edomite ʾdm (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives אָדָם “man” and אֲדָמָה “earth” — and אֱדוֹם, Edom, Esau’s land, “the red one” (Genesis 25:30)."
+    ],
+    "pitfalls": [
+     "The other forms double the מ and take u: אֲדֻמָּה, אֲדֻמִּים, אֲדֻמּוֹת (adumá).",
+     "With the article: הָאָדֹם, הָאֲדֻמָּה (א takes הָ)."
+    ],
+    "subtleties": [
+     "The Red Sea is not *הַיָּם הָאָדֹם in the Bible but יַם סוּף, “the Sea of Reeds”."
+    ]
+   }
+  },
+  {
+   "id": "he:kachol",
+   "lemma": "כָּחֹל",
+   "pos": "ADJ",
+   "senses": [
+    "colour.blue"
+   ],
+   "translit": "kachol",
+   "forms": {
+    "ADJ;SG;MASC": "כָּחֹל",
+    "ADJ;SG;FEM": "כְּחֻלָּה",
+    "ADJ;PL;MASC": "כְּחֻלִּים",
+    "ADJ;PL;FEM": "כְּחֻלּוֹת",
+    "ADJ;SG;MASC;DEF": "הַכָּחֹל",
+    "ADJ;SG;FEM;DEF": "הַכְּחֻלָּה",
+    "ADJ;PL;MASC;DEF": "הַכְּחֻלִּים",
+    "ADJ;PL;FEM;DEF": "הַכְּחֻלּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "כחול",
+    "ADJ;SG;FEM": "כחולה",
+    "ADJ;PL;MASC": "כחולים",
+    "ADJ;PL;FEM": "כחולות",
+    "ADJ;SG;MASC;DEF": "הכחול",
+    "ADJ;SG;FEM;DEF": "הכחולה",
+    "ADJ;PL;MASC;DEF": "הכחולים",
+    "ADJ;PL;FEM;DEF": "הכחולות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The blue sky, the blue sea, the blue and white flag.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "blue (a darker shade than תְּכֵלֶת)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.blue"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשָּׁמַיִם כְּחֻלִּים הַיּוֹם.",
+      "tr": "The sky is blue today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לוֹ עֵינַיִם כְּחֻלּוֹת.",
+      "tr": "He has blue eyes.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדֶּגֶל כָּחֹל וְלָבָן.",
+      "tr": "The flag is blue and white.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׁמַיִם כְּחֻלִּים",
+      "tr": "a blue sky"
+     },
+     {
+      "text": "עֵינַיִם כְּחֻלּוֹת",
+      "tr": "blue eyes"
+     },
+     {
+      "text": "כָּחֹל כֵּהֶה",
+      "tr": "dark blue"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כָּחֹל לָבָן",
+      "tr": "blue and white",
+      "kind": "colloquial",
+      "meaning": "Israeli, made in Israel",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תְּכֵלֶת",
+      "register": "neutral",
+      "nuance": "“light blue, sky blue” — a basic colour word of its own"
+     },
+     {
+      "word": "כְּחַלְחַל",
+      "register": "neutral",
+      "nuance": "“bluish”"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic كُحْلِيّ (kuḥliyy, “navy blue”), from كُحْل (kuḥl, “kohl”) (Wiktionary). Pattern קָטֹל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives כָּחָל “kohl”, the dark eye paint — and English alcohol comes from Arabic الْكُحْل “the kohl”."
+    ],
+    "pitfalls": [
+     "Hebrew splits blue like Russian синий / голубой: כָּחֹל is (darker) blue, תְּכֵלֶת light or sky blue.",
+     "The other forms double the ל: כְּחֻלָּה, כְּחֻלִּים, כְּחֻלּוֹת."
+    ],
+    "subtleties": [
+     "תְּכֵלֶת is a noun used as a colour and does not change: חֻלְצָה תְּכֵלֶת “a light-blue shirt”."
+    ]
+   }
+  },
+  {
+   "id": "he:yarok",
+   "lemma": "יָרֹק",
+   "pos": "ADJ",
+   "senses": [
+    "colour.green"
+   ],
+   "translit": "yarok",
+   "forms": {
+    "ADJ;SG;MASC": "יָרֹק",
+    "ADJ;SG;FEM": "יְרֻקָּה",
+    "ADJ;PL;MASC": "יְרֻקִּים",
+    "ADJ;PL;FEM": "יְרֻקּוֹת",
+    "ADJ;SG;MASC;DEF": "הַיָּרֹק",
+    "ADJ;SG;FEM;DEF": "הַיְּרֻקָּה",
+    "ADJ;PL;MASC;DEF": "הַיְּרֻקִּים",
+    "ADJ;PL;FEM;DEF": "הַיְּרֻקּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "ירוק",
+    "ADJ;SG;FEM": "ירוקה",
+    "ADJ;PL;MASC": "ירוקים",
+    "ADJ;PL;FEM": "ירוקות",
+    "ADJ;SG;MASC;DEF": "הירוק",
+    "ADJ;SG;FEM;DEF": "הירוקה",
+    "ADJ;PL;MASC;DEF": "הירוקים",
+    "ADJ;PL;FEM;DEF": "הירוקות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Green grass, a green apple, the green light for a plan.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.green"
+     },
+     {
+      "id": "s2",
+      "def": "green, ecological",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַדֶּשֶׁא יָרֹק.",
+      "tr": "The grass is green.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹכֵל תַּפּוּחַ יָרֹק.",
+      "tr": "I eat a green apple.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "קִבַּלְנוּ אוֹר יָרֹק.",
+      "tr": "We got the green light.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה בִּנְיָן יָרֹק.",
+      "tr": "It is a green (eco-friendly) building.",
+      "register": "neutral",
+      "context": "environment",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אוֹר יָרֹק",
+      "tr": "a green light (permission)"
+     },
+     {
+      "text": "יָרֹק כֵּהֶה",
+      "tr": "dark green"
+     },
+     {
+      "text": "הַקַּו הַיָּרֹק",
+      "tr": "the Green Line"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אוֹר יָרֹק",
+      "tr": "a green light",
+      "kind": "fixed expression",
+      "meaning": "permission to go ahead",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יְרַקְרַק",
+      "register": "neutral",
+      "nuance": "“greenish”"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *waruḳ-; compare יֶרֶק (“vegetation”) and Arabic وَرَق (waraq, “leaf”) (Wiktionary). Pattern קָטֹל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives יָרָק “vegetable” and יְרָקוֹת “vegetables” — the vegetables field of this course is, in Hebrew, “the greens”."
+    ],
+    "pitfalls": [
+     "The other forms double the ק: יְרֻקָּה, יְרֻקִּים, יְרֻקּוֹת.",
+     "The verb יָרַק “to spit” is written with the same letters ירק (Wiktionary)."
+    ],
+    "subtleties": [
+     "הַקַּו הַיָּרֹק, “the Green Line”, is the 1949 armistice line of Israel."
+    ]
+   }
+  },
+  {
+   "id": "he:tsahov",
+   "lemma": "צָהֹב",
+   "pos": "ADJ",
+   "senses": [
+    "colour.yellow"
+   ],
+   "translit": "tsahov",
+   "forms": {
+    "ADJ;SG;MASC": "צָהֹב",
+    "ADJ;SG;FEM": "צְהֻבָּה",
+    "ADJ;PL;MASC": "צְהֻבִּים",
+    "ADJ;PL;FEM": "צְהֻבּוֹת",
+    "ADJ;SG;MASC;DEF": "הַצָּהֹב",
+    "ADJ;SG;FEM;DEF": "הַצְּהֻבָּה",
+    "ADJ;PL;MASC;DEF": "הַצְּהֻבִּים",
+    "ADJ;PL;FEM;DEF": "הַצְּהֻבּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "צהוב",
+    "ADJ;SG;FEM": "צהובה",
+    "ADJ;PL;MASC": "צהובים",
+    "ADJ;PL;FEM": "צהובות",
+    "ADJ;SG;MASC;DEF": "הצהוב",
+    "ADJ;SG;FEM;DEF": "הצהובה",
+    "ADJ;PL;MASC;DEF": "הצהובים",
+    "ADJ;PL;FEM;DEF": "הצהובות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Yellow cheese in a sandwich, a yellow card, the yellow press.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yellow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.yellow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹנֶה גְּבִינָה צְהֻבָּה.",
+      "tr": "I buy yellow (hard) cheese.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכִּסֵּא הַצָּהֹב בַּמִּטְבָּח.",
+      "tr": "The yellow chair is in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשּׁוֹפֵט נוֹתֵן כַּרְטִיס צָהֹב.",
+      "tr": "The referee gives a yellow card.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גְּבִינָה צְהֻבָּה",
+      "tr": "yellow (hard) cheese"
+     },
+     {
+      "text": "כַּרְטִיס צָהֹב",
+      "tr": "a yellow card"
+     },
+     {
+      "text": "עִתּוֹנוּת צְהֻבָּה",
+      "tr": "the yellow press"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צְהַבְהַב",
+      "register": "neutral",
+      "nuance": "“yellowish”"
+     },
+     {
+      "word": "זָהֹב",
+      "register": "neutral",
+      "nuance": "“golden”"
+     }
+    ],
+    "etymology": {
+     "text": "Pattern קָטֹל; compare Arabic صهب (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Israel גְּבִינָה צְהֻבָּה “yellow cheese” is any hard sliced cheese (Gouda, Emmental), as opposed to גְּבִינָה לְבָנָה, “white cheese”, a soft quark."
+    ],
+    "pitfalls": [
+     "The other forms double the ב: צְהֻבָּה, צְהֻבִּים, צְהֻבּוֹת."
+    ],
+    "subtleties": [
+     "צַהֶבֶת, “the yellow (illness)”, is jaundice."
+    ]
+   }
+  },
+  {
+   "id": "he:chum",
+   "lemma": "חוּם",
+   "pos": "ADJ",
+   "senses": [
+    "colour.brown"
+   ],
+   "translit": "chum",
+   "forms": {
+    "ADJ;SG;MASC": "חוּם",
+    "ADJ;SG;FEM": "חוּמָה",
+    "ADJ;PL;MASC": "חוּמִים",
+    "ADJ;PL;FEM": "חוּמוֹת",
+    "ADJ;SG;MASC;DEF": "הַחוּם",
+    "ADJ;SG;FEM;DEF": "הַחוּמָה",
+    "ADJ;PL;MASC;DEF": "הַחוּמִים",
+    "ADJ;PL;FEM;DEF": "הַחוּמוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Brown eyes, a brown table, brown sugar.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brown",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.brown"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהּ עֵינַיִם חוּמוֹת.",
+      "tr": "She has brown eyes.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשֻּׁלְחָן הַחוּם בַּסָּלוֹן.",
+      "tr": "The brown table is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לוֹבֵשׁ נַעֲלַיִם חוּמוֹת.",
+      "tr": "I’m wearing brown shoes.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֵינַיִם חוּמוֹת",
+      "tr": "brown eyes"
+     },
+     {
+      "text": "שֵׂעָר חוּם",
+      "tr": "brown hair"
+     },
+     {
+      "text": "סֻכָּר חוּם",
+      "tr": "brown sugar"
+     },
+     {
+      "text": "חוּם בָּהִיר",
+      "tr": "light brown"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שָׁחוּם",
+      "register": "neutral",
+      "nuance": "“dark, swarthy” — of skin"
+     }
+    ],
+    "etymology": {
+     "text": "Root ח־מ־ם, pattern קֹטֶל (Wiktionary) — the root of חֹם “heat”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Brown” and “heat” come from one root, ח־מ־ם — the root of חַם “hot” and חָמִים “warm” (lesson 16)."
+    ],
+    "pitfalls": [
+     "חוּם “brown” and חֹם “heat, fever” are both written חום unpointed: יֵשׁ לוֹ חֹם “he has a fever”."
+    ],
+    "subtleties": [
+     "Unlike most colours it is not in the קָטֹל pattern: חוּם, חוּמָה keep their u."
+    ]
+   }
+  },
+  {
+   "id": "he:afor",
+   "lemma": "אָפֹר",
+   "pos": "ADJ",
+   "senses": [
+    "colour.grey"
+   ],
+   "translit": "afor",
+   "forms": {
+    "ADJ;SG;MASC": "אָפֹר",
+    "ADJ;SG;FEM": "אֲפֹרָה",
+    "ADJ;PL;MASC": "אֲפֹרִים",
+    "ADJ;PL;FEM": "אֲפֹרוֹת",
+    "ADJ;SG;MASC;DEF": "הָאָפֹר",
+    "ADJ;SG;FEM;DEF": "הָאֲפֹרָה",
+    "ADJ;PL;MASC;DEF": "הָאֲפֹרִים",
+    "ADJ;PL;FEM;DEF": "הָאֲפֹרוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "אפור",
+    "ADJ;SG;FEM": "אפורה",
+    "ADJ;PL;MASC": "אפורים",
+    "ADJ;PL;FEM": "אפורות",
+    "ADJ;SG;MASC;DEF": "האפור",
+    "ADJ;SG;FEM;DEF": "האפורה",
+    "ADJ;PL;MASC;DEF": "האפורים",
+    "ADJ;PL;FEM;DEF": "האפורות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A grey sky, grey hair, a grey routine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grey",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.grey"
+     },
+     {
+      "id": "s2",
+      "def": "grey, dull, drab; ambiguous (figurative)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשָּׁמַיִם אֲפֹרִים הַיּוֹם.",
+      "tr": "The sky is grey today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לוֹ שֵׂעָר אָפֹר.",
+      "tr": "He has grey hair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה אֵזוֹר אָפֹר.",
+      "tr": "That’s a grey area.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֵׂעָר אָפֹר",
+      "tr": "grey hair"
+     },
+     {
+      "text": "שָׁמַיִם אֲפֹרִים",
+      "tr": "a grey sky"
+     },
+     {
+      "text": "אֵזוֹר אָפֹר",
+      "tr": "a grey area"
+     },
+     {
+      "text": "שִׁגְרָה אֲפֹרָה",
+      "tr": "a grey routine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַפְרוּרִי",
+      "register": "neutral",
+      "nuance": "“greyish; dull, drab”"
+     }
+    ],
+    "etymology": {
+     "text": "Root א־פ־ר, pattern קָטֹל (Wiktionary); the same letters as אֵפֶר “ash”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Grey is “ash-coloured”: אָפֹר shares its letters א־פ־ר with אֵפֶר “ash”."
+    ],
+    "pitfalls": [
+     "Feminine אֲפֹרָה — no doubled letter (unlike אֲדֻמָּה).",
+     "Pointed אָפֹר, written with ו: אפור."
+    ],
+    "subtleties": [
+     "It also means dull, drab: יוֹם אָפֹר “a grey, dreary day”."
+    ]
+   }
+  },
+  {
+   "id": "he:katom",
+   "lemma": "כָּתֹם",
+   "pos": "ADJ",
+   "senses": [
+    "colour.orange"
+   ],
+   "translit": "katom",
+   "forms": {
+    "ADJ;SG;MASC": "כָּתֹם",
+    "ADJ;SG;FEM": "כְּתֻמָּה",
+    "ADJ;PL;MASC": "כְּתֻמִּים",
+    "ADJ;PL;FEM": "כְּתֻמּוֹת",
+    "ADJ;SG;MASC;DEF": "הַכָּתֹם",
+    "ADJ;SG;FEM;DEF": "הַכְּתֻמָּה",
+    "ADJ;PL;MASC;DEF": "הַכְּתֻמִּים",
+    "ADJ;PL;FEM;DEF": "הַכְּתֻמּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "כתום",
+    "ADJ;SG;FEM": "כתומה",
+    "ADJ;PL;MASC": "כתומים",
+    "ADJ;PL;FEM": "כתומות",
+    "ADJ;SG;MASC;DEF": "הכתום",
+    "ADJ;SG;FEM;DEF": "הכתומה",
+    "ADJ;PL;MASC;DEF": "הכתומים",
+    "ADJ;PL;FEM;DEF": "הכתומות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An orange sofa, an orange shirt, the orange evening sun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orange (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.orange"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסַּפָּה הַחֲדָשָׁה כְּתֻמָּה.",
+      "tr": "The new sofa is orange.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשֶּׁמֶשׁ כְּתֻמָּה בָּעֶרֶב.",
+      "tr": "The sun is orange in the evening.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לוֹבֵשׁ חֻלְצָה כְּתֻמָּה.",
+      "tr": "He is wearing an orange shirt.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֻלְצָה כְּתֻמָּה",
+      "tr": "an orange shirt"
+     },
+     {
+      "text": "כָּתֹם בָּהִיר",
+      "tr": "light orange"
+     },
+     {
+      "text": "אוֹר כָּתֹם",
+      "tr": "an orange light"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: כָּתֹם is the only word for the colour; the fruit is תַּפּוּז.",
+    "etymology": {
+     "text": "Root כ־ת־ם, pattern קָטֹל (Wiktionary, which gives no further etymology); the letters of כֶּתֶם “stain”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew names the colour and the fruit differently: כָּתֹם is the colour, תַּפּוּז the fruit — short for תַּפּוּחַ זָהָב, “golden apple”."
+    ],
+    "pitfalls": [
+     "The fruit “orange” is a different word, תַּפּוּז — do not use it for the colour.",
+     "The other forms double the מ: כְּתֻמָּה, כְּתֻמִּים."
+    ],
+    "subtleties": [
+     "The colours share one pattern, קָטֹל: אָדֹם, כָּחֹל, יָרֹק, צָהֹב, כָּתֹם, וָרֹד, סָגֹל, אָפֹר, שָׁחֹר."
+    ]
+   }
+  },
+  {
+   "id": "he:varod",
+   "lemma": "וָרֹד",
+   "pos": "ADJ",
+   "senses": [
+    "colour.pink"
+   ],
+   "translit": "varod",
+   "forms": {
+    "ADJ;SG;MASC": "וָרֹד",
+    "ADJ;SG;FEM": "וְרֻדָּה",
+    "ADJ;PL;MASC": "וְרֻדִּים",
+    "ADJ;PL;FEM": "וְרֻדּוֹת",
+    "ADJ;SG;MASC;DEF": "הַוָּרֹד",
+    "ADJ;SG;FEM;DEF": "הַוְּרֻדָּה",
+    "ADJ;PL;MASC;DEF": "הַוְּרֻדִּים",
+    "ADJ;PL;FEM;DEF": "הַוְּרֻדּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "ורוד",
+    "ADJ;SG;FEM": "ורודה",
+    "ADJ;PL;MASC": "ורודים",
+    "ADJ;PL;FEM": "ורודות",
+    "ADJ;SG;MASC;DEF": "הוורוד",
+    "ADJ;SG;FEM;DEF": "הוורודה",
+    "ADJ;PL;MASC;DEF": "הוורודים",
+    "ADJ;PL;FEM;DEF": "הוורודות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A pink baby dress, a pink sunset, rose-coloured glasses.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pink",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.pink"
+     },
+     {
+      "id": "s2",
+      "def": "rosy, optimistic (figurative)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַתִּינֹקֶת לוֹבֶשֶׁת שִׂמְלָה וְרֻדָּה.",
+      "tr": "The baby girl is wearing a pink dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשָּׁמַיִם וְרֻדִּים בַּשְּׁקִיעָה.",
+      "tr": "The sky is pink at sunset.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא רוֹאֶה אֶת הָעוֹלָם דֶּרֶךְ מִשְׁקָפַיִם וְרֻדִּים.",
+      "tr": "He sees the world through rose-coloured glasses.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שִׂמְלָה וְרֻדָּה",
+      "tr": "a pink dress"
+     },
+     {
+      "text": "מִשְׁקָפַיִם וְרֻדִּים",
+      "tr": "rose-coloured glasses"
+     },
+     {
+      "text": "וָרֹד בָּהִיר",
+      "tr": "light pink"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מִשְׁקָפַיִם וְרֻדִּים",
+      "tr": "pink glasses",
+      "kind": "idiom",
+      "meaning": "rose-coloured glasses: too optimistic a view",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; the flower is וֶרֶד “rose”.",
+    "etymology": {
+     "text": "From וֶרֶד “rose”; see Arabic وَرْد (ward, “rose”) (Wiktionary). Pattern קָטֹל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Pink is “rose-coloured” in Hebrew and in Arabic (وَرْدِيّ) — as in French rose and Greek ροζ."
+    ],
+    "pitfalls": [
+     "One of the few Hebrew words that begin with ו. With the article: הַוָּרֹד.",
+     "The other forms double the ד: וְרֻדָּה, וְרֻדִּים."
+    ],
+    "subtleties": [
+     "In full spelling the article brings two ו’s together: הוורוד, as in Wiktionary’s הוורד “the rose”."
+    ]
+   }
+  },
+  {
+   "id": "he:sagol",
+   "lemma": "סָגֹל",
+   "pos": "ADJ",
+   "senses": [
+    "colour.purple"
+   ],
+   "translit": "sagol",
+   "forms": {
+    "ADJ;SG;MASC": "סָגֹל",
+    "ADJ;SG;FEM": "סְגֻלָּה",
+    "ADJ;PL;MASC": "סְגֻלִּים",
+    "ADJ;PL;FEM": "סְגֻלּוֹת",
+    "ADJ;SG;MASC;DEF": "הַסָּגֹל",
+    "ADJ;SG;FEM;DEF": "הַסְּגֻלָּה",
+    "ADJ;PL;MASC;DEF": "הַסְּגֻלִּים",
+    "ADJ;PL;FEM;DEF": "הַסְּגֻלּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "סגול",
+    "ADJ;SG;FEM": "סגולה",
+    "ADJ;PL;MASC": "סגולים",
+    "ADJ;PL;FEM": "סגולות",
+    "ADJ;SG;MASC;DEF": "הסגול",
+    "ADJ;SG;FEM;DEF": "הסגולה",
+    "ADJ;PL;MASC;DEF": "הסגולים",
+    "ADJ;PL;FEM;DEF": "הסגולות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Purple flowers in the garden, a purple bag.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purple, violet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.purple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהּ תִּיק סָגֹל.",
+      "tr": "She has a purple bag.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפְּרָחִים בַּגִּנָּה סְגֻלִּים.",
+      "tr": "The flowers in the garden are purple.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "סָגֹל הוּא הַצֶּבַע הָאָהוּב עָלַי.",
+      "tr": "Purple is my favourite colour.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תִּיק סָגֹל",
+      "tr": "a purple bag"
+     },
+     {
+      "text": "פְּרָחִים סְגֻלִּים",
+      "tr": "purple flowers"
+     },
+     {
+      "text": "סָגֹל כֵּהֶה",
+      "tr": "dark purple"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַרְגָּמָן",
+      "register": "literary",
+      "nuance": "“royal purple, crimson” — the dye of the Bible"
+     },
+     {
+      "word": "לִילָךְ",
+      "register": "neutral",
+      "nuance": "“lilac” — a light purple"
+     }
+    ],
+    "etymology": {
+     "text": "From סֶגֶל (“violet (flower)”) (Wiktionary). Pattern קָטֹל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "סָגֹל comes from the flower סֶגֶל “violet” — exactly as English violet went from a flower to a colour."
+    ],
+    "pitfalls": [
+     "סָגֹל (purple) and סֶגּוֹל, the vowel sign “segol” (three dots, ◌ֶ), are both written סגול unpointed.",
+     "The other forms double the ל: סְגֻלָּה, סְגֻלִּים."
+    ],
+    "subtleties": [
+     "סֶגֶל also means “staff, faculty” (Wiktionary) — another word."
+    ]
+   }
+  },
+  {
+   "id": "he:bahir",
+   "lemma": "בָּהִיר",
+   "pos": "ADJ",
+   "senses": [
+    "adj.light"
+   ],
+   "translit": "bahir",
+   "forms": {
+    "ADJ;SG;MASC": "בָּהִיר",
+    "ADJ;SG;FEM": "בְּהִירָה",
+    "ADJ;PL;MASC": "בְּהִירִים",
+    "ADJ;PL;FEM": "בְּהִירוֹת",
+    "ADJ;SG;MASC;DEF": "הַבָּהִיר",
+    "ADJ;SG;FEM;DEF": "הַבְּהִירָה",
+    "ADJ;PL;MASC;DEF": "הַבְּהִירִים",
+    "ADJ;PL;FEM;DEF": "הַבְּהִירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Light blue, fair hair, a clear day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "light, pale (of a colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.light"
+     },
+     {
+      "id": "s2",
+      "def": "bright, clear (a day, the sky)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "clear, lucid (an explanation)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי רוֹצֶה חֻלְצָה כְּחֻלָּה בְּהִירָה.",
+      "tr": "I want a light blue shirt.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לוֹ שֵׂעָר בָּהִיר.",
+      "tr": "He has fair hair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיּוֹם יוֹם בָּהִיר.",
+      "tr": "Today is a clear day.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא נוֹתֵן הֶסְבֵּר בָּהִיר.",
+      "tr": "He gives a clear explanation.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּחֹל בָּהִיר",
+      "tr": "light blue"
+     },
+     {
+      "text": "שֵׂעָר בָּהִיר",
+      "tr": "fair hair"
+     },
+     {
+      "text": "יוֹם בָּהִיר",
+      "tr": "a clear day"
+     },
+     {
+      "text": "עוֹר בָּהִיר",
+      "tr": "fair skin"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כְּרַעַם בְּיוֹם בָּהִיר",
+      "tr": "like thunder on a clear day",
+      "kind": "idiom",
+      "meaning": "out of the blue, completely unexpected",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "צָלוּל",
+      "register": "neutral",
+      "nuance": "“clear, limpid” — of water, the sky"
+     },
+     {
+      "word": "בָּרוּר",
+      "register": "neutral",
+      "nuance": "“clear” — of an explanation"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "כֵּהֶה",
+      "note": "dark"
+     }
+    ],
+    "etymology": {
+     "text": "Root ב־ה־ר, pattern קָטִיל (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German hell / dunkel = Hebrew בָּהִיר / כֵּהֶה: hellblau = כָּחֹל בָּהִיר, dunkelrot = אָדֹם כֵּהֶה."
+    ],
+    "pitfalls": [
+     "“Light” in weight is קַל, not בָּהִיר.",
+     "It agrees like any adjective: חֻלְצָה כְּחֻלָּה בְּהִירָה — both words feminine."
+    ],
+    "subtleties": [
+     "It stands after the colour, like German hell- before it: כָּחֹל בָּהִיר = hellblau."
+    ]
+   }
+  },
+  {
+   "id": "he:kehe",
+   "lemma": "כֵּהֶה",
+   "pos": "ADJ",
+   "senses": [
+    "adj.dark"
+   ],
+   "translit": "kehe",
+   "forms": {
+    "ADJ;SG;MASC": "כֵּהֶה",
+    "ADJ;SG;FEM": "כֵּהָה",
+    "ADJ;PL;MASC": "כֵּהִים",
+    "ADJ;PL;FEM": "כֵּהוֹת",
+    "ADJ;SG;MASC;DEF": "הַכֵּהֶה",
+    "ADJ;SG;FEM;DEF": "הַכֵּהָה",
+    "ADJ;PL;MASC;DEF": "הַכֵּהִים",
+    "ADJ;PL;FEM;DEF": "הַכֵּהוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dark blue, dark hair, a dark grey suit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dark (of a colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dark"
+     },
+     {
+      "id": "s2",
+      "def": "dim, faded (literary)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמְּכוֹנִית שֶׁלּוֹ כְּחֻלָּה כֵּהָה.",
+      "tr": "His car is dark blue.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ שֵׂעָר כֵּהֶה.",
+      "tr": "She has dark hair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לוֹבֵשׁ חֲלִיפָה אֲפֹרָה כֵּהָה.",
+      "tr": "I’m wearing a dark grey suit.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּחֹל כֵּהֶה",
+      "tr": "dark blue"
+     },
+     {
+      "text": "שֵׂעָר כֵּהֶה",
+      "tr": "dark hair"
+     },
+     {
+      "text": "עוֹר כֵּהֶה",
+      "tr": "dark skin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קוֹדֵר",
+      "register": "neutral",
+      "nuance": "“gloomy, sombre”"
+     },
+     {
+      "word": "חָשׁוּךְ",
+      "register": "neutral",
+      "nuance": "“dark” = without light — of a room or a street, not of a colour"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "בָּהִיר",
+      "note": "light"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Aramaic kəhā and Arabic قَهِيَ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Bible says of Moses at 120: “לֹא כָהֲתָה עֵינוֹ” — “his eye had not dimmed” (Deuteronomy 34:7), the verb of the same root."
+    ],
+    "pitfalls": [
+     "A dark ROOM is חָשׁוּךְ, not כֵּהֶה: כֵּהֶה is for colours and shades.",
+     "Masculine כֵּהֶה (-e), feminine כֵּהָה (-a): the same letters."
+    ],
+    "subtleties": [
+     "It follows the colour and agrees with the noun: עֵינַיִם חוּמוֹת כֵּהוֹת “dark brown eyes”."
+    ]
+   }
+  },
+  {
+   "id": "he:yoter",
+   "lemma": "יוֹתֵר",
+   "pos": "ADV",
+   "senses": [
+    "adv.more"
+   ],
+   "translit": "yoter",
+   "note": "“More”: before or after an adjective (יוֹתֵר גָּדוֹל = גָּדוֹל יוֹתֵר “bigger”), before a noun (יוֹתֵר סְפָרִים “more books”) or after a verb (אוֹכֵל יוֹתֵר “eats more”); “than” = מִ / מֵ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bigger, cheaper, more books — Hebrew makes every comparison with this one word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "more",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.more"
+     },
+     {
+      "id": "s2",
+      "def": "any more, no longer (with a negation)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "most, extremely (בְּיוֹתֵר, formal)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבַּיִת גָּדוֹל יוֹתֵר מֵהַדִּירָה.",
+      "tr": "The house is bigger than the flat.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי צָרִיךְ יוֹתֵר זְמַן.",
+      "tr": "I need more time.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לֹא גָּר פֹּה יוֹתֵר.",
+      "tr": "He doesn’t live here any more.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s2"
+     },
+     {
+      "text": "זֶה חָשׁוּב בְּיוֹתֵר.",
+      "tr": "This is extremely important.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹתֵר טוֹב",
+      "tr": "better"
+     },
+     {
+      "text": "יוֹתֵר מִדַּי",
+      "tr": "too much"
+     },
+     {
+      "text": "לְכָל הַיּוֹתֵר",
+      "tr": "at the most"
+     },
+     {
+      "text": "בְּיוֹתֵר",
+      "tr": "most, extremely"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יוֹתֵר מִדַּי",
+      "tr": "more than enough",
+      "kind": "fixed expression",
+      "meaning": "too much",
+      "register": "neutral"
+     },
+     {
+      "text": "לְכָל הַיּוֹתֵר",
+      "tr": "to all the most",
+      "kind": "fixed expression",
+      "meaning": "at the most",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עוֹד",
+      "register": "neutral",
+      "nuance": "“more” = another, additional: עוֹד קָפֶה “more (another) coffee” — יוֹתֵר compares amounts"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "פָּחוֹת",
+      "note": "less"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it files the word under the root י־ת־ר (“remain, exceed”), the root of יֶתֶר “the rest, surplus” and מְיֻתָּר “superfluous”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew has no -er endings: every comparative is יוֹתֵר + adjective — like Greek πιο (πιο μεγάλος) and Turkish daha (daha büyük)."
+    ],
+    "pitfalls": [
+     "It can stand before or after the adjective: יוֹתֵר גָּדוֹל = גָּדוֹל יוֹתֵר (after is a little more formal).",
+     "“Not … any more” = לֹא … יוֹתֵר: הוּא לֹא פֹּה יוֹתֵר."
+    ],
+    "subtleties": [
+     "For “more” = another, additional, say עוֹד: עוֹד כּוֹס מַיִם “another glass of water”.",
+     "The opposite is פָּחוֹת “less”: פָּחוֹת יָקָר “less expensive”."
+    ]
+   }
+  },
+  {
+   "id": "he:hachi",
+   "lemma": "הֲכִי",
+   "pos": "ADV",
+   "senses": [
+    "adv.most"
+   ],
+   "alts": [
+    "הַכִּי"
+   ],
+   "translit": "hachi",
+   "note": "“Most, the most”: before the adjective (הֲכִי גָּדוֹל “the biggest”), which then takes no article: הַבַּיִת הֲכִי גָּדוֹל. Formal: הַגָּדוֹל בְּיוֹתֵר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The best book, the tallest in the class — the everyday superlative.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "most, the most (before an adjective or adverb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.most"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה הַסֵּפֶר הֲכִי טוֹב.",
+      "tr": "This is the best book.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי הֲכִי גָּבֹהַּ בַּכִּתָּה?",
+      "tr": "Who is the tallest in the class?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הֲכִי חָשׁוּב שֶׁאַתָּה בָּרִיא.",
+      "tr": "The most important thing is that you are healthy.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הֲכִי טוֹב",
+      "tr": "best"
+     },
+     {
+      "text": "הֲכִי הַרְבֵּה",
+      "tr": "the most (amount)"
+     },
+     {
+      "text": "הֲכִי פָּחוֹת",
+      "tr": "the least"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּיוֹתֵר",
+      "register": "formal",
+      "nuance": "after the adjective, with the article: הַטּוֹב בְּיוֹתֵר “the best”"
+     }
+    ],
+    "etymology": {
+     "text": "From הֲ־ (ha-, interrogative particle) + כִּי (kí, “thus”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek ο πιο, Turkish en, Hebrew הֲכִי: one small word before the adjective, no -est ending."
+    ],
+    "pitfalls": [
+     "With a definite noun the adjective after הֲכִי takes no article: הַסֵּפֶר הֲכִי טוֹב (formal: הַסֵּפֶר הַטּוֹב בְּיוֹתֵר).",
+     "Say it hakhí, with a soft כ."
+    ],
+    "subtleties": [
+     "Its spelling has been debated: dictionaries and Wiktionary point it הֲכִי (hakhí), the pointing הַכִּי is also seen; unpointed both are just הכי.",
+     "In careful writing many prefer the formal ה… בְּיוֹתֵר: הָעִיר הַגְּדוֹלָה בְּיוֹתֵר."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

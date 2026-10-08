@@ -1,0 +1,273 @@
+{
+ "function": "fn.aspect",
+ "status": "realized",
+ "summary": "Chinese has no tenses; instead three small markers show how an action is seen. 了 le after the verb: the action is complete (我买了两张票 ‘I bought two tickets’); 了 at the end of the sentence: something new is the case (他来了 ‘he’s here (now)’, 下雨了 ‘it has started to rain’). 过 guo after the verb: experience, ‘have ever done’ (我去过北京 ‘I have been to Beijing’). 在 / 正在 zài / zhèngzài before the verb: in progress (他在吃饭 ‘he is eating’) — the same 在 as ‘to be at’, so 他在吃饭 is literally ‘he is at eating’. Negation: completed actions are denied with 没 and the 了 disappears (他没来 ‘he didn’t come’); experience keeps 过 (我没去过北京 ‘I have never been to Beijing’). 了 is not a past tense: when you only say WHEN something happened or describe a habit, there is no 了 (昨天我在家, 以前我常常去); a future action can be complete too (明天吃了饭我们走).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Marker",
+    "Where",
+    "Meaning",
+    "Example",
+    "Negation"
+   ],
+   "rows": [
+    [
+     "了 le",
+     "after the verb",
+     "completed action",
+     "我买了两张票。 I bought two tickets.",
+     "我没买票。 (no 了)"
+    ],
+    [
+     "了 le",
+     "end of the sentence",
+     "change, new situation",
+     "他来了！ He’s here! · 下雨了。 It’s raining now.",
+     "他没来。 / 还没来。"
+    ],
+    [
+     "过 guo",
+     "after the verb",
+     "experience: ever, once",
+     "我去过北京。 I’ve been to Beijing.",
+     "我没去过北京。 (过 stays)"
+    ],
+    [
+     "在 / 正在 zài / zhèngzài",
+     "before the verb",
+     "in progress",
+     "他在吃饭。 He is eating.",
+     "他没在吃饭。"
+    ]
+   ],
+   "caption": "Aspect: how the action is seen"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "去了 — went",
+     "points": [
+      "他去北京了。 He has gone to Beijing (and is there now)."
+     ]
+    },
+    {
+     "title": "去过 — has been",
+     "points": [
+      "他去过北京。 He has been to Beijing (some time, and came back)."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "了 is not a past tense",
+   "text": "昨天我在家 ‘yesterday I was at home’ — no 了: the time word already says ‘past’, and nothing was completed. 以前我常常去公园 ‘I used to go to the park often’ — a habit, no 了. But 明天吃了饭我们走 ‘tomorrow, after we have eaten, we’ll leave’ — a future 了. Think ‘done’, not ‘past’."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "没 swallows 了",
+   "text": "他来了 → 他没来 (never *他没来了). But 过 stays: 我去过 → 我没去过."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Verb-了 likes a number",
+   "text": "我买了两张票 sounds finished. With a bare object, put 了 at the end instead: 我买票了 ‘I’ve bought the tickets’ — 我买了票 alone sounds as if something should follow (…就走了)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "在 + place (S11)",
+     "points": [
+      "他在家。 He is at home.",
+      "他在家吃饭。 He eats at home."
+     ]
+    },
+    {
+     "title": "在 + verb (S14)",
+     "points": [
+      "他在吃饭。 He is eating.",
+      "他正在吃饭呢。 He’s eating right now."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Greek, German and Russian",
+   "text": "Greek and Russian mark aspect inside the verb (έφαγα / έτρωγα, съел / ел); German has no aspect at all and uses gerade for ‘in progress’. Chinese marks it with separate particles, and the verb itself never changes: 吃了, 吃过, 在吃."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Questions",
+   "text": "你吃了吗？ ‘have you eaten?’ (also a greeting) · 你去过中国吗？ ‘have you ever been to China?’ · 他来了没有？ ‘has he come or not?’"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the action done and counted (two tickets, three days)? → verb + 了 + number + noun.",
+   "Is something new the case now (he’s here, it’s raining, I’m off)? → 了 at the end.",
+   "Am I talking about an experience, ‘ever / once’? → verb + 过.",
+   "Is it going on right now? → 在 / 正在 + verb (+ 呢).",
+   "Is it negative? → 没 + verb, and drop 了; keep 过 (没去过).",
+   "Am I only saying WHEN, or describing a habit? → no 了 needed.",
+   "Did I put 了 because English uses a past tense? → check: is it complete or new? If not, remove it."
+  ],
+  "steps": [
+   "Find the verb.",
+   "Done → 了 after it (or at the end); ever → 过 after it; going on → 在 before it.",
+   "Negate with 没 (drop 了, keep 过)."
+  ]
+ },
+ "traps": [
+  "*他没来了 → 他没来.",
+  "*我没去北京过 → 我没去过北京 (过 right after the verb).",
+  "*昨天我在家了 — no 了 for a plain past state: 昨天我在家.",
+  "*以前我常常去了公园 → 以前我常常去公园 (a habit takes no 了).",
+  "*他正在到 → 他快到了 (到 cannot be ‘in progress’).",
+  "他去过北京 (has been and come back) ≠ 他去北京了 (has gone there).",
+  "了 le after a verb ≠ 了 liǎo ‘to finish’ (了解 ‘to understand’)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:le",
+   "zh:guo",
+   "zh:zhengzai",
+   "zh:zai"
+  ]
+ },
+ "needs": {
+  "VERB": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.aspect"
+    ],
+    "variant": "Aspect"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.aspect"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘He didn’t come.’",
+   "options": [
+    "他没来。",
+    "他没来了。",
+    "他不来了。"
+   ],
+   "answer": "他没来。",
+   "why": "没 negates the completed action and 了 disappears; 他不来了 means ‘he isn’t coming any more’."
+  },
+  {
+   "q": "‘I have been to Beijing.’",
+   "options": [
+    "我去过北京。",
+    "我去北京过。",
+    "我过去北京。"
+   ],
+   "answer": "我去过北京。",
+   "why": "过 follows the verb directly."
+  },
+  {
+   "q": "‘He is eating.’",
+   "options": [
+    "他在吃饭。",
+    "他吃饭在。",
+    "他吃了饭。"
+   ],
+   "answer": "他在吃饭。",
+   "why": "在 before the verb = in progress."
+  },
+  {
+   "q": "‘I bought two tickets.’",
+   "options": [
+    "我买了两张票。",
+    "我了买两张票。",
+    "我买两张票过。"
+   ],
+   "answer": "我买了两张票。",
+   "why": "Completed action with a number: verb + 了 + number + measure word + noun."
+  },
+  {
+   "q": "‘I have never flown.’",
+   "options": [
+    "我没坐过飞机。",
+    "我没坐飞机了。",
+    "我不坐过飞机。"
+   ],
+   "answer": "我没坐过飞机。",
+   "why": "Experience negated: 没 + verb + 过."
+  },
+  {
+   "q": "Yesterday I was at home.",
+   "options": [
+    "昨天我在家。",
+    "昨天我在家了。",
+    "昨天我了在家。"
+   ],
+   "answer": "昨天我在家。",
+   "why": "A plain past state needs no 了 — 昨天 already says when."
+  },
+  {
+   "q": "他去北京了 vs 他去过北京:",
+   "options": [
+    "he has gone (is there) vs he has been (some time)",
+    "both mean the same",
+    "he will go vs he went"
+   ],
+   "answer": "he has gone (is there) vs he has been (some time)",
+   "why": "了 = the going is done and he is away; 过 = an experience in his past."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.aspect",
+   "note": "German has tenses but no aspect: ich habe gegessen / ich aß for the past, gerade or am Essen sein for ‘in progress’; Chinese has no tense but three aspect markers (了, 过, 在) on an unchanging verb."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.aspect",
+   "note": "Arabic’s perfect (فَعَلَ) and imperfect (يَفْعَلُ) are close to a completed / ongoing split, but they are built into the verb and also carry tense; Chinese adds 了 or 在 to the bare verb."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.aspect",
+   "note": "Modern Hebrew has past, present and future but no aspect marking: אָכַלְתִּי ‘I ate / I have eaten’; Chinese distinguishes 吃了 (done) and 吃过 (ever eaten) where Hebrew and English do not."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "没 (S08) is the negation of completed and experienced actions: 没来, 没去过."
+  }
+ ]
+}

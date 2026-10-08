@@ -1,23 +1,141 @@
 {
  "function": "fn.plural.noun",
  "status": "realized",
- "summary": "Most masculine nouns take -ִים (-im) in the plural and most feminine nouns take -וֹת (-ot), replacing a feminine ending -ָה / -ִית / -ִיָּה (עַגְבָנִיָּה → עַגְבָנִיּוֹת, כְּרוּבִית → כְּרוּבִיּוֹת). The stem vowels often shorten (בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים, חָצִיל → חֲצִילִים). Some feminine nouns take -ִים (דְּלַעַת → דְּלוּעִים, כְּרֵשָׁה → כְּרֵשִׁים, אֲפוּנָה → אֲפוּנִים), so the plural has to be learnt with the word. Many food words are mass nouns used in the singular (שׁוּם, בְּרוֹקוֹלִי, תִּירָס). Adjectives agree in number (פִּלְפְּלִים חֲרִיפִים); in a construct phrase only the first noun changes (תַּפּוּחֵי אֲדָמָה).",
+ "summary": "Most masculine nouns form the plural with -ִים and most feminine nouns with -וֹת, which replaces the feminine ending -ָה / -ֶת / -ִית: סֵפֶר → סְפָרִים, מִטָּה → מִטּוֹת, תַּלְמִידָה → תַּלְמִידוֹת, סְטוּדֶנְטִית → סְטוּדֶנְטִיּוֹת. The ending does not prove the gender: many masculine nouns take -וֹת (חַלּוֹן → חַלּוֹנוֹת, שֻׁלְחָן → שֻׁלְחָנוֹת, אָב → אָבוֹת, תִּינוֹק → תִּינוֹקוֹת) and some feminine ones -ִים (אִשָּׁה → נָשִׁים, דְּלַעַת → דְּלוּעִים) — agreement always follows the gender of the singular. The stem often changes: the first vowel shortens (סֵפֶר → סְפָרִים, יֶלֶד → יְלָדִים, נֶכֶד → נְכָדִים, חֶדֶר → חֲדָרִים) and a few common nouns are irregular (בַּיִת → בָּתִּים, אִשָּׁה → נָשִׁים, אָח → אַחִים, אָחוֹת → אֲחָיוֹת, בַּת → בָּנוֹת), so the plural is learnt with the word. Some nouns live only in the plural (אֲנָשִׁים “people”, הוֹרִים “parents”), and many food words are mass nouns used in the singular (שׁוּם, תִּירָס). A few words keep a dual in -ַיִם for exactly two (יוֹמַיִם “two days”). Everything that agrees becomes plural too (הַסְּפָרִים הָאֵלֶּה, הֵם, הָיוּ), a mixed group is masculine (אַחִים “brothers and sisters”), after a number the noun is plural from 2 on (שְׁנֵי סְפָרִים), and in a construct phrase only the first noun changes (תַּפּוּחֵי אֲדָמָה, בְּנֵי דּוֹדִים).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "type",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "masculine → -ִים",
+     "תַּלְמִיד, טֶלֶפוֹן, תִּיק",
+     "תַּלְמִידִים, טֶלֶפוֹנִים, תִּיקִים"
+    ],
+    [
+     "feminine -ָה → -וֹת",
+     "מִטָּה, דִּירָה, דּוֹדָה",
+     "מִטּוֹת, דִּירוֹת, דּוֹדוֹת"
+    ],
+    [
+     "feminine -ִית → -ִיּוֹת",
+     "סְטוּדֶנְטִית, אַחְיָנִית",
+     "סְטוּדֶנְטִיּוֹת, אַחְיָנִיּוֹת"
+    ],
+    [
+     "feminine -ֶת / -ַת → -וֹת",
+     "דֶּלֶת, צַלַּחַת",
+     "דְּלָתוֹת, צַלָּחוֹת"
+    ],
+    [
+     "masculine with -וֹת",
+     "חַלּוֹן, כִּסֵּא, אָב, תִּינוֹק",
+     "חַלּוֹנוֹת, כִּסְּאוֹת, אָבוֹת, תִּינוֹקוֹת"
+    ],
+    [
+     "the first vowel shortens",
+     "סֵפֶר, יֶלֶד, נֶכֶד, חֶדֶר",
+     "סְפָרִים, יְלָדִים, נְכָדִים, חֲדָרִים"
+    ],
+    [
+     "irregular",
+     "בַּיִת, אִשָּׁה, אָח, אָחוֹת, בַּת",
+     "בָּתִּים, נָשִׁים, אַחִים, אֲחָיוֹת, בָּנוֹת"
+    ],
+    [
+     "plural only",
+     "—",
+     "אֲנָשִׁים, הוֹרִים"
+    ]
+   ],
+   "caption": "The plural is part of the word: learn it with the singular."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "-וֹת is not a gender sign",
+   "text": "חַלּוֹנוֹת, שֻׁלְחָנוֹת, אָבוֹת and תִּינוֹקוֹת are masculine: הַחַלּוֹנוֹת הָאֵלֶּה, שְׁלוֹשָׁה חַלּוֹנוֹת. נָשִׁים is feminine: הַנָּשִׁים הָהֵן, שָׁלוֹשׁ נָשִׁים."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "A mixed group is masculine",
+   "text": "Men and women together take the masculine plural: אַחִים “brothers, or brothers and sisters”, יְלָדִים “children”, נְכָדִים “grandchildren”, בְּנֵי דּוֹדִים “cousins”, הַסָּבִים “the grandparents”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The dual",
+   "text": "For exactly two of some time and measure words Hebrew keeps the ending -ַיִם: יוֹמַיִם “two days”, שְׁבוּעַיִם “two weeks”, שְׁנָתַיִם “two years”, מָאתַיִם “200”. Paired body parts use it as their only plural: עֵינַיִם “eyes”, יָדַיִם “hands”, רַגְלַיִם “legs”."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Plural everywhere",
+   "text": "When the noun becomes plural, so does everything that agrees with it: הַסֵּפֶר הַזֶּה הָיָה פֹּה → הַסְּפָרִים הָאֵלֶּה הָיוּ פֹּה."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "-ִים / -וֹת, with stem changes",
+      "a few duals (יוֹמַיִם)",
+      "plural after every number from 2"
+     ]
+    },
+    {
+     "title": "Arabic",
+     "points": [
+      "sound plurals -ūna / -āt like -ִים / -וֹת",
+      "“broken” plurals that change the inside of the word",
+      "a full dual for every noun"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "five plural types (-e, -er, -(e)n, -s, umlaut)",
+      "learnt with each noun, like Hebrew",
+      "the article die for every plural"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Masculine or feminine (look at the singular)?",
+    "Does the feminine ending -ָה / -ֶת / -ִית go away?",
+    "Does the first vowel shorten — or is it an irregular plural?",
+    "What else in the sentence must become plural?"
+   ]
+  }
+ ],
  "procedure": {
   "askYourself": [
-   "Is the noun masculine or feminine? (Masculine → usually -ִים; feminine → usually -וֹת.)",
-   "Does it end in -ָה, -ִית or -ִיָּה? → replace the ending with -וֹת / -ִיּוֹת.",
-   "Is it one of the feminine nouns with -ִים (דְּלַעַת, כְּרֵשָׁה, אֲפוּנָה)? → check the word card.",
-   "Do the stem vowels shorten (qamats or segol in the first syllable → shva or hataf)?",
-   "Is it a mass noun (garlic, broccoli, corn)? → keep the singular.",
-   "Is there an adjective or a second noun? → the adjective also becomes plural; in a construct phrase only the first noun changes."
+   "Is the noun masculine or feminine — from its singular? (Masculine → usually -ִים; feminine → usually -וֹת.)",
+   "Does it end in -ָה, -ֶת / -ַת, -ִית or -ִיָּה? → replace the ending with -וֹת / -ִיּוֹת.",
+   "Is it one of the nouns that cross over (חַלּוֹן → חַלּוֹנוֹת, אִשָּׁה → נָשִׁים, דְּלַעַת → דְּלוּעִים)? → check the word card.",
+   "Do the stem vowels shorten (סֵפֶר → סְפָרִים; under a guttural a hataf: חֶדֶר → חֲדָרִים)?",
+   "Is it irregular (בַּיִת → בָּתִּים, אָחוֹת → אֲחָיוֹת) or plural only (אֲנָשִׁים, הוֹרִים)?",
+   "Is it a mass noun (garlic, corn)? → keep the singular.",
+   "What agrees with it — a demonstrative, a pronoun, הָיָה, a number? → make it plural too; in a construct phrase change only the first noun."
   ]
  },
  "traps": [
-  "The ending does not always follow the gender: דְּלַעַת (f) → דְּלוּעִים, כְּרֵשָׁה (f) → כְּרֵשִׁים.",
-  "The first vowel shortens: בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים, סֶלֶק → סְלָקִים; under a guttural it becomes a hataf: חָצִיל → חֲצִילִים.",
-  "-ִיָּה and -ִית become -ִיּוֹת: עַגְבָנִיָּה → עַגְבָנִיּוֹת, כְּרוּבִית → כְּרוּבִיּוֹת.",
+  "The ending does not always follow the gender: חַלּוֹן (m) → חַלּוֹנוֹת, תִּינוֹק (m) → תִּינוֹקוֹת, אִשָּׁה (f) → נָשִׁים, דְּלַעַת (f) → דְּלוּעִים, כְּרֵשָׁה (f) → כְּרֵשִׁים.",
+  "The first vowel shortens: סֵפֶר → סְפָרִים, בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים; under a guttural it becomes a hataf: חֶדֶר → חֲדָרִים, חָצִיל → חֲצִילִים.",
+  "-ִיָּה and -ִית become -ִיּוֹת: עַגְבָנִיָּה → עַגְבָנִיּוֹת, סְטוּדֶנְטִית → סְטוּדֶנְטִיּוֹת.",
+  "Irregular plurals must be learnt: בַּיִת → בָּתִּים, אָח → אַחִים, אָחוֹת → אֲחָיוֹת, בַּת → בָּנוֹת.",
   "Food is often a mass noun: קָנִיתִי גֶּזֶר “I bought carrots”; שׁוּם, בְּרוֹקוֹלִי and תִּירָס have no plural in everyday use.",
-  "Construct phrase: תַּפּוּחַ אֲדָמָה → תַּפּוּחֵי אֲדָמָה (only the first noun)."
+  "Construct phrase: only the first noun changes — תַּפּוּחַ אֲדָמָה → תַּפּוּחֵי אֲדָמָה, בֶּן דּוֹד → בְּנֵי דּוֹדִים."
  ],
  "evidence": {
   "tags": [
@@ -55,8 +173,15 @@
    "bank": {
     "functions": [
      "fn.plural.noun"
-    ]
+    ],
+    "variant": "Number"
    }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
   },
   {
    "type": "agree",
@@ -71,12 +196,12 @@
   {
    "lang": "ar",
    "fn": "fn.plural.noun",
-   "note": "Arabic has sound plurals like Hebrew -ִים / -וֹת (-ūna / -āt) and also “broken” plurals that change the inside of the word — and a dual."
+   "note": "Arabic has sound plurals like Hebrew -ִים / -וֹת (-ūna / -āt) and also “broken” plurals that change the inside of the word — and a dual for every noun."
   },
   {
    "lang": "de",
    "fn": "fn.plural.noun",
-   "note": "German has five plural types (-e, -er, -(e)n, -s, umlaut) learned with each noun, as Hebrew plurals are."
+   "note": "German has five plural types (-e, -er, -(e)n, -s, umlaut) learnt with each noun, as Hebrew plurals are."
   },
   {
    "lang": "zh",

@@ -1,0 +1,4276 @@
+{
+ "sentences": [
+  {
+   "id": "ar.f3.001",
+   "frame": "fr.eat",
+   "text": "أَشْرَبُ الْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.002",
+   "frame": "fr.eat",
+   "text": "نَشْرَبُ الْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "نَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We drink coffee.",
+   "level": "A1",
+   "variantOf": "ar.f3.001",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f3.003",
+   "frame": "fr.eat",
+   "text": "أُمِّي تَطْبُخُ الْأَرُزَّ.",
+   "tokens": [
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْأَرُزَّ",
+     "l": "ar:aruzz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My mother cooks rice.",
+   "level": "A1",
+   "alts": [
+    "تَطْبُخُ أُمِّي الْأَرُزَّ."
+   ]
+  },
+  {
+   "id": "ar.f3.004",
+   "frame": "fr.eat",
+   "text": "أَبِي يَطْبُخُ الْأَرُزَّ.",
+   "tokens": [
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْأَرُزَّ",
+     "l": "ar:aruzz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My father cooks rice.",
+   "level": "A1",
+   "variantOf": "ar.f3.003",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "alts": [
+    "يَطْبُخُ أَبِي الْأَرُزَّ."
+   ]
+  },
+  {
+   "id": "ar.f3.005",
+   "frame": "fr.eat",
+   "text": "الْوَلَدُ يَأْكُلُ تُفَّاحَةً.",
+   "tokens": [
+    {
+     "t": "الْوَلَدُ",
+     "l": "ar:walad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "تُفَّاحَةً",
+     "l": "ar:tuffah",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The boy is eating an apple.",
+   "level": "A1",
+   "alts": [
+    "يَأْكُلُ الْوَلَدُ تُفَّاحَةً."
+   ]
+  },
+  {
+   "id": "ar.f3.006",
+   "frame": "fr.eat",
+   "text": "الْبِنْتُ تَأْكُلُ تُفَّاحَةً.",
+   "tokens": [
+    {
+     "t": "الْبِنْتُ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "تُفَّاحَةً",
+     "l": "ar:tuffah",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The girl is eating an apple.",
+   "level": "A1",
+   "variantOf": "ar.f3.005",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "alts": [
+    "تَأْكُلُ الْبِنْتُ تُفَّاحَةً."
+   ]
+  },
+  {
+   "id": "ar.f3.007",
+   "frame": "fr.eat",
+   "text": "الْأَوْلَادُ يَأْكُلُونَ التُّفَّاحَ.",
+   "tokens": [
+    {
+     "t": "الْأَوْلَادُ",
+     "l": "ar:walad",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "يَأْكُلُونَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "التُّفَّاحَ",
+     "l": "ar:tuffah",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The boys eat apples.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.008",
+   "frame": "fr.eat",
+   "text": "أَشْتَرِي خُبْزًا وَجُبْنًا.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "خُبْزًا",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "وَجُبْنًا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "جُبْنًا",
+       "l": "ar:jubn",
+       "f": "N;ACC;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m buying bread and cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.009",
+   "frame": "fr.eat",
+   "text": "أَشْتَرِي الْخُبْزَ وَالْجُبْنَ.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْخُبْزَ",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْجُبْنَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْجُبْنَ",
+       "l": "ar:jubn",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m buying the bread and the cheese.",
+   "level": "A1",
+   "variantOf": "ar.f3.008",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "ar.f3.010",
+   "frame": "fr.want",
+   "text": "أُرِيدُ مَاءً، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "مَاءً",
+     "l": "ar:maa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’d like some water, please.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.011",
+   "frame": "fr.want",
+   "text": "أُحِبُّ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I like tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.012",
+   "frame": "fr.want",
+   "text": "أُخْتِي تُحِبُّ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My sister likes tea.",
+   "level": "A1",
+   "alts": [
+    "تُحِبُّ أُخْتِي الشَّايَ."
+   ]
+  },
+  {
+   "id": "ar.f3.013",
+   "frame": "fr.want",
+   "text": "نُحِبُّ السَّمَكَ.",
+   "tokens": [
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We like fish.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.014",
+   "frame": "fr.want",
+   "text": "أَنْتِ تُحِبِّينَ السَّلَطَةَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "السَّلَطَةَ",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a woman) like salad.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.015",
+   "frame": "fr.want",
+   "text": "أَنْتَ تُحِبُّ السَّلَطَةَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "السَّلَطَةَ",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a man) like salad.",
+   "level": "A1",
+   "variantOf": "ar.f3.014",
+   "variant": {
+    "Addressee": "MASC"
+   }
+  },
+  {
+   "id": "ar.f3.016",
+   "frame": "fr.eat",
+   "text": "هُمْ يَشْرَبُونَ الْحَلِيبَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "They drink milk.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.017",
+   "frame": "fr.eat",
+   "text": "هُنَّ يَشْرَبْنَ الْعَصِيرَ.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْرَبْنَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "الْعَصِيرَ",
+     "l": "ar:asir",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "They (women) drink juice.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.018",
+   "frame": "fr.eat",
+   "text": "أَنْتُمْ تَشْتَرُونَ لَحْمًا.",
+   "tokens": [
+    {
+     "t": "أَنْتُمْ",
+     "l": "ar:antum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرُونَ",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "لَحْمًا",
+     "l": "ar:lahm",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (several) are buying meat.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.019",
+   "frame": "fr.eat",
+   "text": "أَنْتُنَّ تَطْبُخْنَ الْحَسَاءَ.",
+   "tokens": [
+    {
+     "t": "أَنْتُنَّ",
+     "l": "ar:antunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَطْبُخْنَ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;2;PL;FEM"
+    },
+    {
+     "t": "الْحَسَاءَ",
+     "l": "ar:hasa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (women) are cooking the soup.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.020",
+   "frame": "fr.eat",
+   "text": "الطِّفْلُ يَشْرَبُ الْحَلِيبَ.",
+   "tokens": [
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The child drinks milk.",
+   "level": "A1",
+   "alts": [
+    "يَشْرَبُ الطِّفْلُ الْحَلِيبَ."
+   ]
+  },
+  {
+   "id": "ar.f3.021",
+   "frame": "fr.eat",
+   "text": "جَدِّي يَشْرَبُ الشَّايَ وَالْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "جَدِّي",
+     "l": "ar:jadd",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْقَهْوَةَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْقَهْوَةَ",
+       "l": "ar:qahwa",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My grandfather drinks tea and coffee.",
+   "level": "A1",
+   "alts": [
+    "يَشْرَبُ جَدِّي الشَّايَ وَالْقَهْوَةَ."
+   ]
+  },
+  {
+   "id": "ar.f3.022",
+   "frame": "fr.eat",
+   "text": "الرَّجُلُ يَشْرَبُ بِيرَةً.",
+   "tokens": [
+    {
+     "t": "الرَّجُلُ",
+     "l": "ar:rajul",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "بِيرَةً",
+     "l": "ar:bira",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The man is drinking a beer.",
+   "level": "A1",
+   "alts": [
+    "يَشْرَبُ الرَّجُلُ بِيرَةً."
+   ]
+  },
+  {
+   "id": "ar.f3.023",
+   "frame": "fr.eat",
+   "text": "الْمَرْأَةُ تَشْرَبُ نَبِيذًا.",
+   "tokens": [
+    {
+     "t": "الْمَرْأَةُ",
+     "l": "ar:imraa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "تَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "نَبِيذًا",
+     "l": "ar:nabidh",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The woman is drinking wine.",
+   "level": "A1",
+   "alts": [
+    "تَشْرَبُ الْمَرْأَةُ نَبِيذًا."
+   ]
+  },
+  {
+   "id": "ar.f3.024",
+   "frame": "fr.eat",
+   "text": "آكُلُ بَيْضَتَيْنِ.",
+   "tokens": [
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "بَيْضَتَيْنِ",
+     "l": "ar:bayd",
+     "f": "N;ACC;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I eat two eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.025",
+   "frame": "fr.eat",
+   "text": "أَطْبُخُ الْغَدَاءَ.",
+   "tokens": [
+    {
+     "t": "أَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْغَدَاءَ",
+     "l": "ar:ghada",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m cooking lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.026",
+   "frame": "fr.eat",
+   "text": "أُمِّي تَطْبُخُ الْعَشَاءَ.",
+   "tokens": [
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْعَشَاءَ",
+     "l": "ar:asha",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My mother is cooking dinner.",
+   "level": "A1",
+   "alts": [
+    "تَطْبُخُ أُمِّي الْعَشَاءَ."
+   ]
+  },
+  {
+   "id": "ar.f3.027",
+   "frame": "fr.eat",
+   "text": "أَبِي يَشْتَرِي الْفَطُورَ.",
+   "tokens": [
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْفَطُورَ",
+     "l": "ar:fatur",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My father buys the breakfast.",
+   "level": "A1",
+   "alts": [
+    "يَشْتَرِي أَبِي الْفَطُورَ."
+   ]
+  },
+  {
+   "id": "ar.f3.028",
+   "frame": "fr.want",
+   "text": "الْأَطْفَالُ يُرِيدُونَ الْفَطُورَ.",
+   "tokens": [
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "يُرِيدُونَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْفَطُورَ",
+     "l": "ar:fatur",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The children want breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.029",
+   "frame": "fr.eat",
+   "text": "أَشْتَرِي سُكَّرًا وَمِلْحًا.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "سُكَّرًا",
+     "l": "ar:sukkar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "وَمِلْحًا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "مِلْحًا",
+       "l": "ar:milh",
+       "f": "N;ACC;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m buying sugar and salt.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.030",
+   "frame": "fr.want",
+   "text": "أَخِي يُحِبُّ الدَّجَاجَ.",
+   "tokens": [
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الدَّجَاجَ",
+     "l": "ar:dajaj",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My brother likes chicken.",
+   "level": "A1",
+   "alts": [
+    "يُحِبُّ أَخِي الدَّجَاجَ."
+   ]
+  },
+  {
+   "id": "ar.f3.031",
+   "frame": "fr.want",
+   "text": "نُرِيدُ دَجَاجًا وَأَرُزًّا.",
+   "tokens": [
+    {
+     "t": "نُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "دَجَاجًا",
+     "l": "ar:dajaj",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": "وَأَرُزًّا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "أَرُزًّا",
+       "l": "ar:aruzz",
+       "f": "N;ACC;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We’d like chicken and rice.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.032",
+   "frame": "fr.eat",
+   "text": "هِيَ تَشْتَرِي فَاكِهَةً.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "فَاكِهَةً",
+     "l": "ar:fakiha",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "She is buying fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.033",
+   "frame": "fr.eat",
+   "text": "هِيَ تَشْتَرِي فَوَاكِهَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "فَوَاكِهَ",
+     "l": "ar:fakiha",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "She is buying all kinds of fruit.",
+   "level": "A1",
+   "variantOf": "ar.f3.032",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f3.034",
+   "frame": "fr.eat",
+   "text": "أَشْتَرِي ثَلَاثَ تُفَّاحَاتٍ.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "ثَلَاثَ",
+     "l": "ar:thalatha",
+     "f": "NUM;ACC;FEM;CONST"
+    },
+    {
+     "t": "تُفَّاحَاتٍ",
+     "l": "ar:tuffah",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.numerals"
+   ],
+   "gloss": "I’m buying three apples.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.035",
+   "frame": "fr.eat",
+   "text": "الْمُعَلِّمُ يَشْرَبُ الْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The teacher drinks coffee.",
+   "level": "A1",
+   "alts": [
+    "يَشْرَبُ الْمُعَلِّمُ الْقَهْوَةَ."
+   ]
+  },
+  {
+   "id": "ar.f3.036",
+   "frame": "fr.eat",
+   "text": "الطُّلَّابُ يَشْرَبُونَ الْعَصِيرَ.",
+   "tokens": [
+    {
+     "t": "الطُّلَّابُ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "يَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْعَصِيرَ",
+     "l": "ar:asir",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The students drink juice.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.037",
+   "frame": "fr.want",
+   "text": "صَدِيقِي يُرِيدُ قَهْوَةً.",
+   "tokens": [
+    {
+     "t": "صَدِيقِي",
+     "l": "ar:sadiq",
+     "f": "N;NOM;SG;MASC;POSS;PSS1S"
+    },
+    {
+     "t": "يُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My friend wants a coffee.",
+   "level": "A1",
+   "alts": [
+    "يُرِيدُ صَدِيقِي قَهْوَةً."
+   ]
+  },
+  {
+   "id": "ar.f3.038",
+   "frame": "fr.want",
+   "text": "أُرِيدُ شَايًا، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’d like tea, please.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.039",
+   "frame": "fr.want",
+   "text": "أَنْتِ تُرِيدِينَ عَصِيرًا.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "عَصِيرًا",
+     "l": "ar:asir",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a woman) want juice.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.040",
+   "frame": "fr.want",
+   "text": "أَنْتَ تُرِيدُ عَصِيرًا.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "عَصِيرًا",
+     "l": "ar:asir",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a man) want juice.",
+   "level": "A1",
+   "variantOf": "ar.f3.039",
+   "variant": {
+    "Addressee": "MASC"
+   }
+  },
+  {
+   "id": "ar.f3.041",
+   "frame": "fr.this.is",
+   "text": "هٰذَا شَايٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "شَايٌ",
+     "l": "ar:shay",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.042",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ قَهْوَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قَهْوَةٌ",
+     "l": "ar:qahwa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.043",
+   "frame": "fr.thing.here",
+   "text": "الْقَهْوَةُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقَهْوَةُ",
+     "l": "ar:qahwa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The coffee is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.044",
+   "frame": "fr.thing.here",
+   "text": "الْعَشَاءُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْعَشَاءُ",
+     "l": "ar:asha",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Dinner is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.045",
+   "frame": "fr.have",
+   "text": "عِنْدَنَا خُبْزٌ وَجُبْنٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "خُبْزٌ",
+     "l": "ar:khubz",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَجُبْنٌ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "جُبْنٌ",
+       "l": "ar:jubn",
+       "f": "N;NOM;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have bread and cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.046",
+   "frame": "fr.count",
+   "text": "عِنْدِي ثَلَاثُ بَيْضَاتٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "ثَلَاثُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "بَيْضَاتٍ",
+     "l": "ar:bayd",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "I have three eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.047",
+   "frame": "fr.eat",
+   "text": "نَحْنُ نَطْبُخُ سَمَكًا.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "سَمَكًا",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We are cooking fish.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.048",
+   "frame": "fr.eat",
+   "text": "هُوَ يَأْكُلُ سَلَطَةً.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "سَلَطَةً",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "He is eating a salad.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.049",
+   "frame": "fr.eat",
+   "text": "هِيَ تَأْكُلُ سَلَطَةً.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "سَلَطَةً",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "She is eating a salad.",
+   "level": "A1",
+   "variantOf": "ar.f3.048",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.f3.050",
+   "frame": "fr.eat",
+   "text": "أَنْتَ تَأْكُلُ الْخُبْزَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْخُبْزَ",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a man) eat bread.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.051",
+   "frame": "fr.eat",
+   "text": "أَنْتُمْ تَأْكُلُونَ الدَّجَاجَ.",
+   "tokens": [
+    {
+     "t": "أَنْتُمْ",
+     "l": "ar:antum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُونَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "الدَّجَاجَ",
+     "l": "ar:dajaj",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (several) eat chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.052",
+   "frame": "fr.eat",
+   "text": "هُنَّ يَطْبُخْنَ بَيْضًا.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَطْبُخْنَ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "بَيْضًا",
+     "l": "ar:bayd",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "They (women) are cooking eggs.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.053",
+   "frame": "fr.want",
+   "text": "أَنْتُنَّ تُرِدْنَ شَايًا.",
+   "tokens": [
+    {
+     "t": "أَنْتُنَّ",
+     "l": "ar:antunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُرِدْنَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;PL;FEM"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (women) want tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.054",
+   "frame": "fr.eat",
+   "text": "أَشْتَرِي السُّكَّرَ وَالْمِلْحَ.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "السُّكَّرَ",
+     "l": "ar:sukkar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْمِلْحَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْمِلْحَ",
+       "l": "ar:milh",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m buying the sugar and the salt.",
+   "level": "A1",
+   "variantOf": "ar.f3.029",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "ar.f3.055",
+   "frame": "fr.eat",
+   "text": "الرَّجُلُ يَشْرَبُ الْبِيرَةَ.",
+   "tokens": [
+    {
+     "t": "الرَّجُلُ",
+     "l": "ar:rajul",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْبِيرَةَ",
+     "l": "ar:bira",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The man is drinking the beer.",
+   "level": "A1",
+   "variantOf": "ar.f3.022",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "alts": [
+    "يَشْرَبُ الرَّجُلُ الْبِيرَةَ."
+   ]
+  },
+  {
+   "id": "ar.f3.056",
+   "frame": "fr.eat",
+   "text": "هُوَ يَأْكُلُ السَّلَطَةَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "السَّلَطَةَ",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "He is eating the salad.",
+   "level": "A1",
+   "variantOf": "ar.f3.048",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "ar.f3.057",
+   "frame": "fr.want",
+   "text": "نُرِيدُ شَايًا، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "نُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We’d like tea, please.",
+   "level": "A1",
+   "variantOf": "ar.f3.038",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f3.058",
+   "frame": "fr.eat",
+   "text": "هُمْ يَأْكُلُونَ سَلَطَةً.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُونَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "سَلَطَةً",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "They are eating a salad.",
+   "level": "A1",
+   "variantOf": "ar.f3.048",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f3.059",
+   "frame": "fr.eat",
+   "text": "لَا أَشْرَبُ الْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I don’t drink coffee.",
+   "level": "A1",
+   "variantOf": "ar.f3.001",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.060",
+   "frame": "fr.eat",
+   "text": "أُمِّي لَا تَطْبُخُ الْأَرُزَّ.",
+   "tokens": [
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْأَرُزَّ",
+     "l": "ar:aruzz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My mother doesn’t cook rice.",
+   "level": "A1",
+   "variantOf": "ar.f3.003",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "لَا تَطْبُخُ أُمِّي الْأَرُزَّ."
+   ]
+  },
+  {
+   "id": "ar.f3.061",
+   "frame": "fr.want",
+   "text": "لَا أُحِبُّ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I don’t like tea.",
+   "level": "A1",
+   "variantOf": "ar.f3.011",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.062",
+   "frame": "fr.want",
+   "text": "لَا نُحِبُّ السَّمَكَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We don’t like fish.",
+   "level": "A1",
+   "variantOf": "ar.f3.013",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.063",
+   "frame": "fr.eat",
+   "text": "هُمْ لَا يَشْرَبُونَ الْحَلِيبَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "They don’t drink milk.",
+   "level": "A1",
+   "variantOf": "ar.f3.016",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.064",
+   "frame": "fr.eat",
+   "text": "أَبِي لَا يَشْرَبُ النَّبِيذَ.",
+   "tokens": [
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "النَّبِيذَ",
+     "l": "ar:nabidh",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My father doesn’t drink wine.",
+   "level": "A1",
+   "alts": [
+    "لَا يَشْرَبُ أَبِي النَّبِيذَ."
+   ]
+  },
+  {
+   "id": "ar.f3.065",
+   "frame": "fr.eat",
+   "text": "لَا آكُلُ اللَّحْمَ أَبَدًا.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "اللَّحْمَ",
+     "l": "ar:lahm",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "أَبَدًا",
+     "l": "ar:abadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I never eat meat.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.066",
+   "frame": "fr.eat",
+   "text": "هِيَ لَا تَشْرَبُ الْبِيرَةَ أَبَدًا.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْبِيرَةَ",
+     "l": "ar:bira",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "أَبَدًا",
+     "l": "ar:abadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "She never drinks beer.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.067",
+   "frame": "fr.eat",
+   "text": "لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَلَا",
+     "l": "ar:wala"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I drink neither tea nor coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.068",
+   "frame": "fr.have",
+   "text": "لَيْسَ عِنْدِي خُبْزٌ وَلَا جُبْنٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "خُبْزٌ",
+     "l": "ar:khubz",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَلَا",
+     "l": "ar:wala"
+    },
+    {
+     "t": "جُبْنٌ",
+     "l": "ar:jubn",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "I have neither bread nor cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.069",
+   "frame": "fr.thing.here",
+   "text": "لَا شَيْءَ هُنَا.",
+   "tokens": [
+    {
+     "t": "لَا شَيْءَ",
+     "l": "ar:la_shay"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "There is nothing here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.070",
+   "frame": "fr.be.where",
+   "text": "لَا أَحَدَ هُنَا.",
+   "tokens": [
+    {
+     "t": "لَا أَحَدَ",
+     "l": "ar:la_ahad"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "Nobody is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.071",
+   "frame": "fr.eat",
+   "text": "لَا أَحَدَ يَأْكُلُ السَّلَطَةَ.",
+   "tokens": [
+    {
+     "t": "لَا أَحَدَ",
+     "l": "ar:la_ahad"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "السَّلَطَةَ",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Nobody eats the salad.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.072",
+   "frame": "fr.want",
+   "text": "لَا أُرِيدُ شَيْئًا.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "شَيْئًا",
+     "l": "ar:shay_thing",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I don’t want anything.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.073",
+   "frame": "fr.have",
+   "text": "عِنْدَنَا مَاءٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "مَاءٌ",
+     "l": "ar:maa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have water.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.074",
+   "frame": "fr.have",
+   "text": "لَيْسَ عِنْدَنَا مَاءٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "مَاءٌ",
+     "l": "ar:maa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "We have no water.",
+   "level": "A1",
+   "variantOf": "ar.f3.073",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.075",
+   "frame": "fr.this.is",
+   "text": "هٰذَا لَيْسَ شَايًا.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This is not tea.",
+   "level": "A1",
+   "variantOf": "ar.f3.041",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.076",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ لَيْسَتْ قَهْوَةً.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "لَيْسَتْ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;FEM"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This is not coffee.",
+   "level": "A1",
+   "variantOf": "ar.f3.042",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.077",
+   "frame": "fr.be.person",
+   "text": "لَسْتُ مُعَلِّمًا.",
+   "tokens": [
+    {
+     "t": "لَسْتُ",
+     "l": "ar:laysa",
+     "f": "V;PFV;1;SG"
+    },
+    {
+     "t": "مُعَلِّمًا",
+     "l": "ar:muallim",
+     "f": "N;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I am not a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.078",
+   "frame": "fr.thing.here",
+   "text": "الْقَهْوَةُ لَيْسَتْ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقَهْوَةُ",
+     "l": "ar:qahwa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَيْسَتْ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;FEM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "The coffee isn’t here.",
+   "level": "A1",
+   "variantOf": "ar.f3.043",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f3.079",
+   "frame": "fr.have",
+   "text": "لَيْسَ عِنْدِي شَيْءٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "شَيْءٌ",
+     "l": "ar:shay_thing",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "I have nothing.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.080",
+   "frame": "fr.want",
+   "text": "لَا، لَا أُرِيدُ قَهْوَةً.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la_no"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "No, I don’t want coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.081",
+   "frame": "fr.want",
+   "text": "أَنْتِ لَا تُحِبِّينَ الْجُبْنَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْجُبْنَ",
+     "l": "ar:jubn",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a woman) don’t like cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.082",
+   "frame": "fr.eat",
+   "text": "الطِّفْلُ لَا يَأْكُلُ وَلَا يَشْرَبُ.",
+   "tokens": [
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "وَلَا",
+     "l": "ar:wala"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "The child neither eats nor drinks.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.083",
+   "frame": "fr.eat",
+   "text": "لَا آكُلُ شَيْئًا.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "شَيْئًا",
+     "l": "ar:shay_thing",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m not eating anything.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.084",
+   "frame": "fr.eat",
+   "text": "أَخِي لَا يَطْبُخُ أَبَدًا.",
+   "tokens": [
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَبَدًا",
+     "l": "ar:abadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "My brother never cooks.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.085",
+   "frame": "fr.want",
+   "text": "لَا أَحَدَ يُرِيدُ الْحَسَاءَ.",
+   "tokens": [
+    {
+     "t": "لَا أَحَدَ",
+     "l": "ar:la_ahad"
+    },
+    {
+     "t": "يُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْحَسَاءَ",
+     "l": "ar:hasa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Nobody wants the soup.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.086",
+   "frame": "fr.have",
+   "text": "لَيْسَ عِنْدَهَا سُكَّرٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "سُكَّرٌ",
+     "l": "ar:sukkar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "She has no sugar.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.087",
+   "frame": "fr.eat",
+   "text": "هَلِ الْوَلَدُ يَأْكُلُ تُفَّاحَةً؟",
+   "tokens": [
+    {
+     "t": "هَلِ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "الْوَلَدُ",
+     "l": "ar:walad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "تُفَّاحَةً",
+     "l": "ar:tuffah",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Is the boy eating an apple?",
+   "level": "A1",
+   "variantOf": "ar.f3.005",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "هَلْ يَأْكُلُ الْوَلَدُ تُفَّاحَةً؟"
+   ]
+  },
+  {
+   "id": "ar.f3.088",
+   "frame": "fr.eat",
+   "text": "هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟",
+   "tokens": [
+    {
+     "t": "هَلِ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Does the child drink milk?",
+   "level": "A1",
+   "variantOf": "ar.f3.020",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "هَلْ يَشْرَبُ الطِّفْلُ الْحَلِيبَ؟"
+   ]
+  },
+  {
+   "id": "ar.f3.089",
+   "frame": "fr.eat",
+   "text": "هَلِ الْمُعَلِّمُ يَشْرَبُ الْقَهْوَةَ؟",
+   "tokens": [
+    {
+     "t": "هَلِ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Does the teacher drink coffee?",
+   "level": "A1",
+   "variantOf": "ar.f3.035",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "هَلْ يَشْرَبُ الْمُعَلِّمُ الْقَهْوَةَ؟"
+   ]
+  },
+  {
+   "id": "ar.f3.090",
+   "frame": "fr.this.is",
+   "text": "هَلْ هٰذَا شَايٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "شَايٌ",
+     "l": "ar:shay",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this tea?",
+   "level": "A1",
+   "variantOf": "ar.f3.041",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f3.091",
+   "frame": "fr.have",
+   "text": "عِنْدَكَ سُكَّرٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "سُكَّرٌ",
+     "l": "ar:sukkar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "You (to a man) have sugar.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.092",
+   "frame": "fr.have",
+   "text": "هَلْ عِنْدَكَ سُكَّرٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "سُكَّرٌ",
+     "l": "ar:sukkar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.have"
+   ],
+   "gloss": "Do you (to a man) have sugar?",
+   "level": "A1",
+   "variantOf": "ar.f3.091",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f3.093",
+   "frame": "fr.want",
+   "text": "لَا تُحِبُّ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You (to a man) don’t like tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.094",
+   "frame": "fr.want",
+   "text": "أَلَا تُحِبُّ الشَّايَ؟",
+   "tokens": [
+    {
+     "t": "أَلَا",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "لَا",
+       "l": "ar:la"
+      }
+     ]
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Don’t you like tea?",
+   "level": "A1",
+   "variantOf": "ar.f3.093",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f3.095",
+   "frame": "fr.want",
+   "text": "أَلَا تُحِبُّ الشَّايَ؟ بَلَى، أُحِبُّ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "أَلَا",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "لَا",
+       "l": "ar:la"
+      }
+     ]
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "بَلَى",
+     "l": "ar:bala"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Don’t you like tea? — Oh yes, I do like tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.096",
+   "frame": "fr.this.is",
+   "text": "أَلَيْسَ هٰذَا شَايًا؟",
+   "tokens": [
+    {
+     "t": "أَلَيْسَ",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "لَيْسَ",
+       "l": "ar:laysa",
+       "f": "V;PFV;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation"
+   ],
+   "gloss": "Isn’t this tea?",
+   "level": "A1",
+   "variantOf": "ar.f3.075",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f3.097",
+   "frame": "fr.alt.q",
+   "text": "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+   "tokens": [
+    {
+     "t": "أَتُرِيدُ",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "تُرِيدُ",
+       "l": "ar:arada",
+       "f": "V;PRS;IND;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "أَمْ",
+     "l": "ar:am"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you want tea or coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.098",
+   "frame": "fr.alt.q",
+   "text": "أَتُرِيدِينَ مَاءً أَمْ عَصِيرًا؟",
+   "tokens": [
+    {
+     "t": "أَتُرِيدِينَ",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "تُرِيدِينَ",
+       "l": "ar:arada",
+       "f": "V;PRS;IND;2;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "مَاءً",
+     "l": "ar:maa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "أَمْ",
+     "l": "ar:am"
+    },
+    {
+     "t": "عَصِيرًا",
+     "l": "ar:asir",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you (to a woman) want water or juice?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.099",
+   "frame": "fr.alt.q",
+   "text": "أَتُحِبُّ السَّمَكَ أَمِ اللَّحْمَ؟",
+   "tokens": [
+    {
+     "t": "أَتُحِبُّ",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "تُحِبُّ",
+       "l": "ar:ahabba",
+       "f": "V;PRS;IND;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "أَمِ",
+     "l": "ar:am"
+    },
+    {
+     "t": "اللَّحْمَ",
+     "l": "ar:lahm",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Which do you like: fish or meat?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.100",
+   "frame": "fr.alt.q",
+   "text": "هَلْ تَشْرَبُونَ الشَّايَ أَمِ الْقَهْوَةَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "أَمِ",
+     "l": "ar:am"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you (several) drink tea or coffee?",
+   "level": "A1",
+   "alts": [
+    "أَتَشْرَبُونَ الشَّايَ أَمِ الْقَهْوَةَ؟"
+   ]
+  },
+  {
+   "id": "ar.f3.101",
+   "frame": "fr.want",
+   "text": "هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "سُكَّرًا",
+     "l": "ar:sukkar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "أَوْ",
+     "l": "ar:aw"
+    },
+    {
+     "t": "حَلِيبًا",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Would you like any sugar or milk?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.102",
+   "frame": "fr.eat",
+   "text": "آكُلُ السَّمَكَ أَوِ الدَّجَاجَ.",
+   "tokens": [
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "أَوِ",
+     "l": "ar:aw"
+    },
+    {
+     "t": "الدَّجَاجَ",
+     "l": "ar:dajaj",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I eat fish or chicken.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.103",
+   "frame": "fr.eat",
+   "text": "رُبَّمَا يَشْرَبُ أَبِي الشَّايَ.",
+   "tokens": [
+    {
+     "t": "رُبَّمَا",
+     "l": "ar:rubbama"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Maybe my father will have tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.104",
+   "frame": "fr.eat",
+   "text": "هَلْ يَطْبُخُ أَخُوكَ؟ رُبَّمَا.",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "يَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَخُوكَ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS2SM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "رُبَّمَا",
+     "l": "ar:rubbama"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "gloss": "Does your brother cook? — Maybe.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.105",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَحَدَ عَشَرَ أَخًا. حَقًّا؟",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَحَدَ عَشَرَ",
+     "l": "ar:ahada_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "أَخًا",
+     "l": "ar:akh",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "حَقًّا",
+     "l": "ar:haqqan"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "I have eleven brothers. — Really?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.106",
+   "frame": "fr.want",
+   "text": "أُحِبُّ الْبِيرَةَ. حَقًّا؟",
+   "tokens": [
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْبِيرَةَ",
+     "l": "ar:bira",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "حَقًّا",
+     "l": "ar:haqqan"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "gloss": "I like beer. — Really?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.107",
+   "frame": "fr.want",
+   "text": "هَلْ تُحِبِّينَ الْفَاكِهَةَ؟ طَبْعًا!",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْفَاكِهَةَ",
+     "l": "ar:fakiha",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "طَبْعًا",
+     "l": "ar:taban"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you (to a woman) like fruit? — Of course!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.108",
+   "frame": "fr.want",
+   "text": "طَبْعًا أُرِيدُ قَهْوَةً.",
+   "tokens": [
+    {
+     "t": "طَبْعًا",
+     "l": "ar:taban"
+    },
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Of course I want a coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.109",
+   "frame": "fr.want",
+   "text": "أَنَا أَيْضًا أُحِبُّ السَّمَكَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَيْضًا",
+     "l": "ar:aydan"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I like fish too.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.110",
+   "frame": "fr.eat",
+   "text": "نَشْتَرِي الْخُبْزَ وَالْحَلِيبَ أَيْضًا.",
+   "tokens": [
+    {
+     "t": "نَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْخُبْزَ",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْحَلِيبَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْحَلِيبَ",
+       "l": "ar:halib",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "أَيْضًا",
+     "l": "ar:aydan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We’re buying bread and milk as well.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.111",
+   "frame": "fr.eat",
+   "text": "أَشْرَبُ الْمَاءَ فَقَطْ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْمَاءَ",
+     "l": "ar:maa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "فَقَطْ",
+     "l": "ar:faqat"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I only drink water.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.112",
+   "frame": "fr.have",
+   "text": "عِنْدِي أَخٌ وَاحِدٌ فَقَطْ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "أَخٌ",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَاحِدٌ",
+     "l": "ar:wahid",
+     "f": "NUM;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": "فَقَطْ",
+     "l": "ar:faqat"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have only one brother.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.113",
+   "frame": "fr.eat",
+   "text": "هَلْ تَشْرَبُونَ الشَّايَ أَيْضًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "أَيْضًا",
+     "l": "ar:aydan"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you (several) drink tea too?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.114",
+   "frame": "fr.eat",
+   "text": "أَتَشْرَبُ الْقَهْوَةَ؟",
+   "tokens": [
+    {
+     "t": "أَتَشْرَبُ",
+     "parts": [
+      {
+       "t": "أَ",
+       "l": "ar:a"
+      },
+      {
+       "t": "تَشْرَبُ",
+       "l": "ar:shariba",
+       "f": "V;PRS;IND;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you drink coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.115",
+   "frame": "fr.this.is",
+   "text": "هَلْ هٰذِهِ قَهْوَةٌ؟ نَعَمْ.",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قَهْوَةٌ",
+     "l": "ar:qahwa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this coffee? — Yes.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.116",
+   "frame": "fr.want",
+   "text": "هَلْ تُرِيدُ شَايًا؟ نَعَمْ، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "شَايًا",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Would you like tea? — Yes, please.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.117",
+   "frame": "fr.want",
+   "text": "هَلْ تُرِيدِينَ قَهْوَةً؟ لَا، شُكْرًا.",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la_no"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Would you (to a woman) like coffee? — No, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.118",
+   "frame": "fr.want",
+   "text": "هَلْ تُرِيدُ شَيْئًا؟ لَا شَيْءَ، شُكْرًا.",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "شَيْئًا",
+     "l": "ar:shay_thing",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "لَا شَيْءَ",
+     "l": "ar:la_shay"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you want anything? — Nothing, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f3.119",
+   "frame": "fr.eat",
+   "text": "هَلْ تَطْبُخْنَ السَّمَكَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَطْبُخْنَ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;2;PL;FEM"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Do you (women) cook the fish?",
+   "level": "A1"
+  }
+ ]
+}

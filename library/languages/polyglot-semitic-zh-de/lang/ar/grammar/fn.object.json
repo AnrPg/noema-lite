@@ -1,0 +1,344 @@
+{
+ "function": "fn.object",
+ "status": "realized",
+ "summary": "The direct object — the thing you eat, drink, cook, buy, want or like — is in the accusative (النَّصْب). With the article it ends in -a: أَشْرَبُ الشَّايَ; without the article in -an, written with an extra alif: أَشْرَبُ شَايًا (except after ة and after ـاء: قَهْوَةً، مَاءً). The verb takes its object directly, with no preposition, and the object normally follows the verb. Feminine plurals in -āt take -i / -in instead (أَشْتَرِي تُفَّاحَاتٍ), diptotes take -a without tanwīn (أَشْتَرِي فَوَاكِهَ), duals end in -ayni (آكُلُ بَيْضَتَيْنِ). For things in general Arabic uses the article: أُحِبُّ الشَّايَ = I like tea; the indefinite means “a / some”: أُرِيدُ شَايًا = I’d like (some) tea. A pronoun object is a suffix on the verb (أُحِبُّكَ, “I love you”) — a preview here. Objects with prepositions and the indirect object (“to whom”) come later (lessons 11–13 and the core lesson on two objects).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "noun",
+    "subject (nominative)",
+    "object, definite",
+    "object, indefinite"
+   ],
+   "rows": [
+    [
+     "bread",
+     "الْخُبْزُ",
+     "الْخُبْزَ",
+     "خُبْزًا"
+    ],
+    [
+     "coffee (ة)",
+     "الْقَهْوَةُ",
+     "الْقَهْوَةَ",
+     "قَهْوَةً"
+    ],
+    [
+     "water (ـاء)",
+     "الْمَاءُ",
+     "الْمَاءَ",
+     "مَاءً"
+    ],
+    [
+     "eggs (collective)",
+     "الْبَيْضُ",
+     "الْبَيْضَ",
+     "بَيْضًا"
+    ],
+    [
+     "apples (-āt)",
+     "التُّفَّاحَاتُ",
+     "التُّفَّاحَاتِ",
+     "تُفَّاحَاتٍ"
+    ],
+    [
+     "fruits (diptote)",
+     "الْفَوَاكِهُ",
+     "الْفَوَاكِهَ",
+     "فَوَاكِهَ"
+    ],
+    [
+     "two eggs (dual)",
+     "الْبَيْضَتَانِ",
+     "الْبَيْضَتَيْنِ",
+     "بَيْضَتَيْنِ"
+    ]
+   ],
+   "caption": "Subject → object: -u becomes -a, -un becomes -an. The -āt plural uses -i / -in, a diptote has no tanwīn, the dual has -ayni."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Who does it: -u. What is affected: -a.",
+   "text": "الْوَلَدُ يَأْكُلُ الْخُبْزَ — the boy (-u) eats the bread (-a). The endings, not the order, tell you who does what: يَأْكُلُ الْخُبْزَ الْوَلَدُ is still “the boy eats the bread”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The extra alif of -an.",
+   "text": "خُبْزًا، شَايًا، لَحْمًا — with alif. No alif after ة (قَهْوَةً، سَلَطَةً) and after ـاء (مَاءً، عَشَاءً، غَدَاءً). شَيْء puts its hamza on a seat: شَيْئًا."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "the + noun = in general / the one we know",
+     "points": [
+      "أُحِبُّ الشَّايَ — I like tea",
+      "أَشْتَرِي الْخُبْزَ — I’m buying the bread"
+     ]
+    },
+    {
+     "title": "no article = a / some",
+     "points": [
+      "أُرِيدُ شَايًا — I’d like (some) tea",
+      "أَشْتَرِي خُبْزًا — I’m buying (some) bread"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "object pronoun (preview)",
+    "suffix",
+    "example"
+   ],
+   "rows": [
+    [
+     "me",
+     "-nī ـنِي",
+     "يُحِبُّنِي — he loves me"
+    ],
+    [
+     "you (to a man)",
+     "-ka ـكَ",
+     "أُحِبُّكَ — I love you"
+    ],
+    [
+     "you (to a woman)",
+     "-ki ـكِ",
+     "أُحِبُّكِ — I love you"
+    ],
+    [
+     "him, it (m)",
+     "-hu ـهُ",
+     "آكُلُهُ — I eat it"
+    ],
+    [
+     "her, it (f)",
+     "-hā ـهَا",
+     "أَشْرَبُهَا — I drink it (the coffee)"
+    ],
+    [
+     "us",
+     "-nā ـنَا",
+     "يُحِبُّنَا — he loves us"
+    ],
+    [
+     "you (several)",
+     "-kum ـكُمْ",
+     "نُحِبُّكُمْ — we love you"
+    ],
+    [
+     "them (people)",
+     "-hum ـهُمْ",
+     "أُحِبُّهُمْ — I love them"
+    ]
+   ],
+   "caption": "A preview: the same endings as the possessives (كِتَابُكَ), except “me”: -nī on verbs, -ī on nouns."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "“Them” for things is -hā.",
+   "text": "Non-human plurals are feminine singular for agreement, so “I buy them (the apples)” is أَشْتَرِيهَا, not *أَشْتَرِيهِمْ. ـهُمْ is for people: أُحِبُّهُمْ (I love them)."
+  },
+  {
+   "t": "p",
+   "text": "Later: verbs that take their object with a preposition (to wait for, to look at), the indirect object (to give someone something) and the genitive after prepositions come in lessons 11–13 and in the core lesson on two objects."
+  },
+  {
+   "t": "p",
+   "text": "For you: German marks the accusative only on the article and only in the masculine (den Tee, einen Apfel); Greek on the article and the ending (τον καφέ); Turkish adds -(y)ı only to a definite object (çayı içiyorum) — Arabic marks every object, definite or not: الشَّايَ / شَايًا. Russian is the closest: the ending changes (воду, кашу)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the noun the thing that is eaten, drunk, cooked, bought, wanted or liked? → it is the object → accusative.",
+   "Does it have the article? → -a (الشَّايَ); no article → -an (شَايًا).",
+   "Does it end in ة or ـاء? → -an without the extra alif (قَهْوَةً، مَاءً).",
+   "Is it a feminine plural in -āt? → -i / -in (تُفَّاحَاتٍ). A diptote (فَوَاكِه)? → -a, never tanwīn. A dual? → -ayni.",
+   "Is the subject a noun too? → the subject keeps -u: الْبِنْتُ تَأْكُلُ تُفَّاحَةً.",
+   "Is the object a pronoun (me, you, it)? → a suffix on the verb: أُحِبُّكَ."
+  ]
+ },
+ "traps": [
+  "*أَشْرَبُ الشَّايُ is wrong: the object never keeps -u.",
+  "The article and tanwīn never go together: الشَّايَ or شَايًا, never *الشَّايًا.",
+  "No extra alif after ة: قَهْوَةً, not *قَهْوَةًا.",
+  "Sound feminine plurals have no -a: أَشْتَرِي تُفَّاحَاتٍ (-in), not *تُفَّاحَاتًا.",
+  "In عِنْدِي خُبْزٌ the bread is the subject (“at me is bread”), so it stays nominative — not an object (lesson 6).",
+  "After a number the counted noun is not the object: ثَلَاثَ تُفَّاحَاتٍ — the number takes the object case, the noun is genitive."
+ ],
+ "evidence": {
+  "tags": [
+   "ACC"
+  ]
+ },
+ "paradigmCells": [
+  "N;ACC;SG;INDF",
+  "N;ACC;SG;DEF",
+  "N;ACC;PL;INDF",
+  "N;ACC;PL;DEF",
+  "N;ACC;COLL;INDF",
+  "N;ACC;COLL;DEF",
+  "N;ACC;DU;INDF"
+ ],
+ "needs": {
+  "NOUN": 6,
+  "VERB": 2
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "lemmas": [
+    "ar:khubz",
+    "ar:jubn",
+    "ar:lahm",
+    "ar:aruzz",
+    "ar:hasa",
+    "ar:salata",
+    "ar:fakiha",
+    "ar:sukkar",
+    "ar:milh",
+    "ar:maa",
+    "ar:shay",
+    "ar:qahwa",
+    "ar:halib",
+    "ar:asir",
+    "ar:nabidh",
+    "ar:bira",
+    "ar:fatur",
+    "ar:ghada",
+    "ar:asha",
+    "ar:bayd",
+    "ar:samak",
+    "ar:dajaj",
+    "ar:tuffah"
+   ],
+   "cells": [
+    "N;ACC;SG;INDF",
+    "N;ACC;SG;DEF",
+    "N;ACC;COLL;INDF",
+    "N;ACC;COLL;DEF",
+    "N;ACC;PL;INDF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“I drink the tea.”",
+   "options": [
+    "أَشْرَبُ الشَّايَ",
+    "أَشْرَبُ الشَّايُ",
+    "أَشْرَبُ الشَّايِ"
+   ],
+   "answer": "أَشْرَبُ الشَّايَ",
+   "why": "The object is accusative: -a with the article."
+  },
+  {
+   "q": "“I’d like (some) water.”",
+   "options": [
+    "أُرِيدُ مَاءً",
+    "أُرِيدُ مَاءًا",
+    "أُرِيدُ مَاءٌ"
+   ],
+   "answer": "أُرِيدُ مَاءً",
+   "why": "Indefinite object: -an; after ـاء no extra alif."
+  },
+  {
+   "q": "“She is buying a coffee.”",
+   "options": [
+    "تَشْتَرِي قَهْوَةً",
+    "تَشْتَرِي قَهْوَةٌ",
+    "تَشْتَرِي الْقَهْوَةً"
+   ],
+   "answer": "تَشْتَرِي قَهْوَةً",
+   "why": "-an on ة, without alif; the article and tanwīn never go together."
+  },
+  {
+   "q": "“I’m buying three apples” — the form of تُفَّاحَات after ثَلَاثَ?",
+   "options": [
+    "تُفَّاحَاتٍ",
+    "تُفَّاحَاتًا",
+    "تُفَّاحَاتٌ"
+   ],
+   "answer": "تُفَّاحَاتٍ",
+   "why": "After 3–10 the counted noun is genitive plural; and -āt plurals never take -an."
+  },
+  {
+   "q": "“I like fish” (in general) is …",
+   "options": [
+    "أُحِبُّ السَّمَكَ",
+    "أُحِبُّ سَمَكًا",
+    "أُحِبُّ سَمَكٌ"
+   ],
+   "answer": "أُحِبُّ السَّمَكَ",
+   "why": "Things in general take the article in Arabic."
+  },
+  {
+   "q": "“He loves me.”",
+   "options": [
+    "يُحِبُّنِي",
+    "يُحِبُّي",
+    "يُحِبُّ أَنَا"
+   ],
+   "answer": "يُحِبُّنِي",
+   "why": "The object “me” is the suffix -nī on a verb (-ī is for nouns: كِتَابِي)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "German shows the accusative on the article, and only in the masculine (den Tee, einen Apfel; die Milch stays die); Arabic changes the ending of every noun (-a / -an)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.object",
+   "note": "Hebrew has no case endings: before a definite object it puts אֶת (אֲנִי שׁוֹתֶה אֶת הַקָּפֶה), an indefinite object gets nothing — Arabic marks both with the ending."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.word.order",
+   "note": "Chinese shows the object only by its place after the verb (我喝茶); nothing on the noun changes."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.case.basic",
+   "note": "The three cases: the nominative (subject) was lesson 4; the genitive after prepositions comes in lesson 11."
+  }
+ ]
+}

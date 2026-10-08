@@ -1,0 +1,513 @@
+{
+ "function": "fn.connectors",
+ "status": "realized",
+ "summary": "Arabic joins clauses without changing their word order — there is nothing like the German verb at the end. What changes is the case of what follows. Most linking words are followed by an ordinary clause: وَ (and), أَوْ (or), لٰكِنْ (but), ثُمَّ (then), the prefix فَـ (and so, and then), لِذٰلِكَ (so, therefore), عِنْدَمَا (when), إِذَا (if). A small family, the “sisters of إِنَّ”, must be followed by a noun in the ACCUSATIVE or by a pronoun ending: لٰكِنَّ (but), لِأَنَّ (because), أَنَّ (that) and مَعَ أَنَّ (although) — لِأَنَّ الْجَوَّ بَارِدٌ (because the weather is cold), لِأَنَّهُ مُتْعَبٌ (because he is tired), لِأَنَّنِي جَائِعٌ (because I am hungry). أَنْ (that, to) is followed by a verb in the subjunctive, which ends in -a: أُرِيدُ أَنْ أَذْهَبَ (I want to go — “I want that I go”, like Greek θέλω να πάω). After إِذَا the verb usually stands in the past form with a present or future meaning (إِذَا جَاءَ الصَّيْفُ نُسَافِرُ), and a command after it needs فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ. In clauses with عِنْدَمَا and إِذَا, “to be” comes back as كَانَ (أَكُونُ, كُنْتَ) with the predicate in the accusative. “When?” in a question is مَتَى, never عِنْدَمَا, and “although …” never takes a “but” in the main clause.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "word",
+    "meaning",
+    "followed by",
+    "example"
+   ],
+   "rows": [
+    [
+     "وَ",
+     "and",
+     "anything (joined to the next word)",
+     "أَنَا جَائِعٌ وَعَطْشَانُ."
+    ],
+    [
+     "أَوْ",
+     "or",
+     "anything",
+     "شَايٌ أَوْ قَهْوَةٌ؟"
+    ],
+    [
+     "لٰكِنْ",
+     "but",
+     "a verb, a phrase",
+     "أَنَا مُتْعَبٌ، لٰكِنْ أَذْهَبُ إِلَى الْعَمَلِ."
+    ],
+    [
+     "لٰكِنَّ",
+     "but",
+     "noun in the accusative / ending",
+     "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلٌ."
+    ],
+    [
+     "لِأَنَّ",
+     "because",
+     "noun in the accusative / ending",
+     "آكُلُ لِأَنَّنِي جَائِعٌ."
+    ],
+    [
+     "لِذٰلِكَ",
+     "so, therefore",
+     "a clause",
+     "أَنَا جَائِعٌ، لِذٰلِكَ آكُلُ."
+    ],
+    [
+     "فَـ",
+     "and so, and then",
+     "joined to the next word",
+     "جُعْتُ فَأَكَلْتُ."
+    ],
+    [
+     "ثُمَّ",
+     "then (later)",
+     "a clause",
+     "نَأْكُلُ ثُمَّ نَشْرَبُ الشَّايَ."
+    ],
+    [
+     "عِنْدَمَا",
+     "when",
+     "a clause",
+     "عِنْدَمَا أَصِلُ إِلَى الْبَيْتِ، آكُلُ."
+    ],
+    [
+     "إِذَا",
+     "if, when",
+     "a verb in the past form",
+     "إِذَا جَاءَ الصَّيْفُ نُسَافِرُ."
+    ],
+    [
+     "أَنَّ",
+     "that",
+     "noun in the accusative / ending",
+     "أَعْرِفُ أَنَّكَ مُتْعَبٌ."
+    ],
+    [
+     "أَنْ",
+     "that, to",
+     "a verb in the subjunctive",
+     "أُرِيدُ أَنْ أَشْرَبَ الشَّايَ."
+    ],
+    [
+     "مَعَ أَنَّ",
+     "although",
+     "noun in the accusative / ending",
+     "مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ."
+    ]
+   ],
+   "caption": "The linking words and what must follow them."
+  },
+  {
+   "t": "table",
+   "head": [
+    "person",
+    "لِأَنَّ (because)",
+    "أَنَّ (that)",
+    "لٰكِنَّ (but)"
+   ],
+   "rows": [
+    [
+     "I",
+     "لِأَنَّنِي",
+     "أَنَّنِي",
+     "لٰكِنَّنِي"
+    ],
+    [
+     "you (m.)",
+     "لِأَنَّكَ",
+     "أَنَّكَ",
+     "لٰكِنَّكَ"
+    ],
+    [
+     "you (f.)",
+     "لِأَنَّكِ",
+     "أَنَّكِ",
+     "لٰكِنَّكِ"
+    ],
+    [
+     "he, it",
+     "لِأَنَّهُ",
+     "أَنَّهُ",
+     "لٰكِنَّهُ"
+    ],
+    [
+     "she, it",
+     "لِأَنَّهَا",
+     "أَنَّهَا",
+     "لٰكِنَّهَا"
+    ],
+    [
+     "we",
+     "لِأَنَّنَا",
+     "أَنَّنَا",
+     "لٰكِنَّنَا"
+    ],
+    [
+     "you (pl.)",
+     "لِأَنَّكُمْ",
+     "أَنَّكُمْ",
+     "لٰكِنَّكُمْ"
+    ],
+    [
+     "they",
+     "لِأَنَّهُمْ",
+     "أَنَّهُمْ",
+     "لٰكِنَّهُمْ"
+    ]
+   ],
+   "caption": "The pronoun endings are those of the possessives (lesson 6); “I” also لِأَنِّي, أَنِّي, لٰكِنِّي."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The sisters of إِنَّ: subject in the accusative.",
+   "text": "لِأَنَّ، أَنَّ، لٰكِنَّ، مَعَ أَنَّ: the next noun is accusative and its predicate nominative — لِأَنَّ الشَّايَ رَخِيصٌ, مَعَ أَنَّ الْمَدْرَسَةَ بَعِيدَةٌ. A pronoun cannot stand alone after them: it becomes an ending — لِأَنَّهُ, never *لِأَنَّ هُوَ."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "لٰكِنْ or لٰكِنَّ?",
+   "text": "Before a verb or anything else: لٰكِنْ (لٰكِنْ أَذْهَبُ). Before a noun or pronoun as subject: لٰكِنَّ (لٰكِنَّ الشَّايَ رَخِيصٌ, لٰكِنَّهُ جَمِيلٌ). Both mean “but”."
+  },
+  {
+   "t": "table",
+   "head": [
+    "person",
+    "present (indicative)",
+    "after أَنْ (subjunctive)"
+   ],
+   "rows": [
+    [
+     "I",
+     "أَذْهَبُ",
+     "أَنْ أَذْهَبَ"
+    ],
+    [
+     "you (m.)",
+     "تَذْهَبُ",
+     "أَنْ تَذْهَبَ"
+    ],
+    [
+     "you (f.)",
+     "تَذْهَبِينَ",
+     "أَنْ تَذْهَبِي"
+    ],
+    [
+     "he",
+     "يَذْهَبُ",
+     "أَنْ يَذْهَبَ"
+    ],
+    [
+     "we",
+     "نَذْهَبُ",
+     "أَنْ نَذْهَبَ"
+    ],
+    [
+     "they (m.)",
+     "يَذْهَبُونَ",
+     "أَنْ يَذْهَبُوا"
+    ]
+   ],
+   "caption": "أَنْ + subjunctive: -u becomes -a, and the -na of -īna / -ūna falls (the plural keeps a silent alif)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "إِذَا + past, and فَـ.",
+   "text": "إِذَا ذَهَبْتَ إِلَى السُّوقِ = if you go to the market (past form, future meaning). If the result is a command, a nominal sentence or a negation with لَيْسَ, it begins with فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ! — a present verb needs no فَـ: إِذَا جَاءَ الصَّيْفُ نُسَافِرُ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "“To be” in a time or if clause.",
+   "text": "The verbless present cannot follow عِنْدَمَا or إِذَا; use كَانَ with the predicate in the accusative: عِنْدَمَا أَكُونُ مُتْعَبًا (when I am tired), إِذَا كَانَ الْمَطْعَمُ غَالِيًا (if the restaurant is expensive)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "…, weil ich müde bin (verb last)",
+      "…, dass du müde bist (verb last)",
+      "deshalb esse ich (inversion)",
+      "obwohl …, … — no aber"
+     ]
+    },
+    {
+     "title": "Arabic",
+     "points": [
+      "… لِأَنَّنِي مُتْعَبٌ (order unchanged, ending on لِأَنَّ)",
+      "… أَنَّكَ مُتْعَبٌ",
+      "لِذٰلِكَ آكُلُ (no inversion)",
+      "مَعَ أَنَّ …، … — no لٰكِنْ"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "وَ adds, فَـ follows at once, ثُمَّ follows later: أَكَلَ وَشَرِبَ (he ate and drank) — جُعْتُ فَأَكَلْتُ (I got hungry, so I ate) — أَشْرَبُ الْقَهْوَةَ ثُمَّ أَذْهَبُ إِلَى الْعَمَلِ (I drink coffee, then I go to work). The questions “why?” and “when?” are لِمَاذَا and مَتَى; the answers start with لِأَنَّ and عِنْدَمَا."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Adding, choosing or contrasting? → وَ, أَوْ, لٰكِنْ / لٰكِنَّ.",
+   "Does a noun or pronoun come right after “but / because / that / although”? → لٰكِنَّ / لِأَنَّ / أَنَّ / مَعَ أَنَّ + accusative, or a pronoun ending (لِأَنَّهُ).",
+   "Does a verb come right after “but”? → لٰكِنْ.",
+   "“That / to” + a verb (want to, must)? → أَنْ + the subjunctive in -a.",
+   "A consequence? → لِذٰلِكَ (therefore) or فَـ (and so); one thing after another → ثُمَّ (later) / فَـ (at once).",
+   "A time clause → عِنْدَمَا; a question “when?” → مَتَى.",
+   "A condition → إِذَا + past form; a command after it → فَـ.",
+   "Is there an “is” in the when / if clause? → كَانَ (أَكُونُ, كُنْتَ) + accusative."
+  ]
+ },
+ "traps": [
+  "*لِأَنَّ أَنَا جَائِعٌ → لِأَنَّنِي جَائِعٌ.",
+  "*لِأَنَّ الْجَوُّ بَارِدٌ → لِأَنَّ الْجَوَّ بَارِدٌ (accusative).",
+  "*أُرِيدُ أَنْ أَذْهَبُ → أُرِيدُ أَنْ أَذْهَبَ (subjunctive).",
+  "*إِذَا كُنْتَ جَائِعًا، كُلْ! → إِذَا كُنْتَ جَائِعًا فَكُلْ!",
+  "*عِنْدَمَا يَصِلُ الْقِطَارُ؟ (question) → مَتَى يَصِلُ الْقِطَارُ؟",
+  "*مَعَ أَنَّنِي مُتْعَبٌ لٰكِنْ أَذْهَبُ → مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ.",
+  "*عِنْدَمَا أَنَا مُتْعَبٌ → عِنْدَمَا أَكُونُ مُتْعَبًا."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:wa",
+   "ar:aw",
+   "ar:lakin",
+   "ar:lakinna",
+   "ar:lianna",
+   "ar:lidhalika",
+   "ar:fa",
+   "ar:thumma",
+   "ar:indama",
+   "ar:idha",
+   "ar:anna",
+   "ar:an_that",
+   "ar:maa_anna"
+  ]
+ },
+ "paradigmCells": [
+  "PART;1;SG",
+  "PART;3;SG;MASC",
+  "PART;3;SG;FEM",
+  "V;SBJV;1;SG"
+ ],
+ "needs": {
+  "SCONJ": 3,
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "SCONJ",
+   "lemmas": [
+    "ar:lianna",
+    "ar:anna",
+    "ar:maa_anna"
+   ],
+   "cells": [
+    "PART;1;SG",
+    "PART;2;SG;MASC",
+    "PART;2;SG;FEM",
+    "PART;3;SG;MASC",
+    "PART;3;SG;FEM",
+    "PART;1;PL",
+    "PART;3;PL;MASC"
+   ],
+   "count": 8
+  },
+  {
+   "type": "inflect",
+   "pos": "CCONJ",
+   "lemmas": [
+    "ar:lakinna"
+   ],
+   "cells": [
+    "PART;1;SG",
+    "PART;3;SG;MASC",
+    "PART;3;SG;FEM"
+   ],
+   "count": 3
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:dhahaba",
+    "ar:akala",
+    "ar:shariba",
+    "ar:ishtara",
+    "ar:safara"
+   ],
+   "cells": [
+    "V;SBJV;1;SG",
+    "V;SBJV;2;SG;MASC",
+    "V;SBJV;3;SG;MASC",
+    "V;SBJV;1;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.connectors"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“because I am hungry” (a man speaking)",
+   "options": [
+    "لِأَنَّنِي جَائِعٌ",
+    "لِأَنَّ أَنَا جَائِعٌ",
+    "لِأَنَّنِي جَائِعًا"
+   ],
+   "answer": "لِأَنَّنِي جَائِعٌ",
+   "why": "The pronoun becomes an ending on لِأَنَّ; the predicate stays nominative."
+  },
+  {
+   "q": "“because the room is cold”",
+   "options": [
+    "لِأَنَّ الْغُرْفَةَ بَارِدَةٌ",
+    "لِأَنَّ الْغُرْفَةُ بَارِدَةٌ",
+    "لِأَنَّ الْغُرْفَةَ بَارِدَةً"
+   ],
+   "answer": "لِأَنَّ الْغُرْفَةَ بَارِدَةٌ",
+   "why": "Subject accusative after لِأَنَّ, predicate nominative."
+  },
+  {
+   "q": "“I want to drink tea.”",
+   "options": [
+    "أُرِيدُ أَنْ أَشْرَبَ الشَّايَ.",
+    "أُرِيدُ أَنْ أَشْرَبُ الشَّايَ.",
+    "أُرِيدُ أَنَّ أَشْرَبَ الشَّايَ."
+   ],
+   "answer": "أُرِيدُ أَنْ أَشْرَبَ الشَّايَ.",
+   "why": "أَنْ + subjunctive (-a); أَنَّ is followed by a noun, not a verb."
+  },
+  {
+   "q": "“If you’re hungry, eat!”",
+   "options": [
+    "إِذَا كُنْتَ جَائِعًا فَكُلْ!",
+    "إِذَا أَنْتَ جَائِعٌ كُلْ!",
+    "عِنْدَمَا كُنْتَ جَائِعًا كُلْ!"
+   ],
+   "answer": "إِذَا كُنْتَ جَائِعًا فَكُلْ!",
+   "why": "إِذَا + past of كَانَ + accusative; a command after it takes فَـ."
+  },
+  {
+   "q": "“When does the train arrive?” (a question)",
+   "options": [
+    "مَتَى يَصِلُ الْقِطَارُ؟",
+    "عِنْدَمَا يَصِلُ الْقِطَارُ؟",
+    "إِذَا يَصِلُ الْقِطَارُ؟"
+   ],
+   "answer": "مَتَى يَصِلُ الْقِطَارُ؟",
+   "why": "The question word is مَتَى; عِنْدَمَا only links clauses."
+  },
+  {
+   "q": "“The house is small, but it is beautiful.”",
+   "options": [
+    "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلٌ.",
+    "الْبَيْتُ صَغِيرٌ لٰكِنَّ هُوَ جَمِيلٌ.",
+    "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلًا."
+   ],
+   "answer": "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلٌ.",
+   "why": "لٰكِنَّ + pronoun ending; the predicate stays nominative."
+  },
+  {
+   "q": "“Although I am tired, I go to work.”",
+   "options": [
+    "مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ.",
+    "مَعَ أَنَّنِي مُتْعَبٌ، لٰكِنْ أَذْهَبُ إِلَى الْعَمَلِ.",
+    "مَعَ أَنَّ أَنَا مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ."
+   ],
+   "answer": "مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ.",
+   "why": "No “but” in the main clause; the pronoun is an ending."
+  },
+  {
+   "q": "“I drink coffee, then I go to work.”",
+   "options": [
+    "أَشْرَبُ الْقَهْوَةَ ثُمَّ أَذْهَبُ إِلَى الْعَمَلِ.",
+    "أَشْرَبُ الْقَهْوَةَ لِأَنَّ أَذْهَبُ إِلَى الْعَمَلِ.",
+    "أَشْرَبُ الْقَهْوَةَ عِنْدَمَا أَذْهَبَ إِلَى الْعَمَلِ."
+   ],
+   "answer": "أَشْرَبُ الْقَهْوَةَ ثُمَّ أَذْهَبُ إِلَى الْعَمَلِ.",
+   "why": "ثُمَّ = then; لِأَنَّ cannot stand before a verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.connectors",
+   "note": "Hebrew: אֲבָל (but), כִּי / מִפְּנֵי שֶׁ (because), לָכֵן (so), אַחַר כָּךְ (then), כְּשֶׁ (when), אִם (if), שֶׁ (that), לַמְרוֹת שֶׁ (although) — many end in the prefix שֶׁ, and nothing changes after them: no case, no word order."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.connectors",
+   "note": "German: weil, dass, wenn, obwohl send the verb to the end; deshalb and dann invert (deshalb esse ich). Arabic keeps the order and changes the case after لِأَنَّ / أَنَّ / لٰكِنَّ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.connectors",
+   "note": "Chinese pairs its linking words: 因为 … 所以 … (because … so), 虽然 … 但是 … (although … but — the pair Arabic does not allow), 如果 …（的话）(if), … 的时候 (when)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.possessive",
+   "note": "The endings on لِأَنَّ / أَنَّ / لٰكِنَّ are the possessive endings of lesson 6 (-ī → -nī for “I”)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "After عِنْدَمَا and إِذَا, “to be” returns as كَانَ (أَكُونُ, كُنْتَ) with an accusative predicate."
+  }
+ ]
+}

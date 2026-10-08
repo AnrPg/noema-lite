@@ -1,0 +1,264 @@
+{
+ "function": "fn.have",
+ "status": "realized",
+ "summary": "German has a real verb “to have”: haben. It is irregular in two forms – du hast, er/sie/es hat (the b disappears) – and otherwise regular: ich habe, wir haben, ihr habt, sie/Sie haben. What you have is the object of the sentence, in the accusative case (fully taught at S07): you can see it only with a masculine noun – der Bruder → Ich habe einen Bruder, mein Sohn → Ich habe einen Sohn; feminine, neuter and plural look the same as in the nominative (eine Schwester, ein Baby, zwei Brüder). haben is used for possession and family (Ich habe zwei Kinder) and for many states where English uses “be” (Hunger haben = to be hungry, Zeit haben = to have time). It is not used for age (Ich bin zwanzig) or for “there is” (es gibt).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "1st",
+     "ich habe",
+     "wir haben"
+    ],
+    [
+     "2nd",
+     "du hast (!)",
+     "ihr habt"
+    ],
+    [
+     "3rd",
+     "er / sie / es hat (!)",
+     "sie haben"
+    ],
+    [
+     "polite",
+     "Sie haben",
+     "Sie haben"
+    ]
+   ],
+   "caption": "haben in the present"
+  },
+  {
+   "t": "table",
+   "head": [
+    "gender of the thing",
+    "nominative (Das ist …)",
+    "after haben (Ich habe …)"
+   ],
+   "rows": [
+    [
+     "masculine",
+     "ein Bruder · mein Sohn",
+     "einen Bruder · meinen Sohn (!)"
+    ],
+    [
+     "feminine",
+     "eine Schwester",
+     "eine Schwester"
+    ],
+    [
+     "neuter",
+     "ein Baby",
+     "ein Baby"
+    ],
+    [
+     "plural",
+     "zwei Brüder · meine Eltern",
+     "zwei Brüder · meine Eltern"
+    ]
+   ],
+   "caption": "haben takes the accusative – only the masculine changes (more at S07)"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Age is sein",
+   "text": "Ich bin zwanzig (Jahre alt). – not *Ich habe zwanzig Jahre. German uses sein for age, like Greek (είμαι είκοσι χρονών) and English."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "haben where English says “be”",
+   "text": "Hunger haben (to be hungry), Durst haben (to be thirsty), Angst haben (to be afraid), Recht haben (to be right), Glück haben (to be lucky), Zeit haben (to have time)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "“There is” is es gibt",
+   "text": "Es gibt hier ein Café (there is a café here) – not *Hier hat ein Café. haben needs a person or a thing that owns something."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek and English",
+     "points": [
+      "a verb “to have”, like German: έχω, have",
+      "both mark the object on a masculine article: Greek έχω έναν αδελφό, German Ich habe einen Bruder"
+     ]
+    },
+    {
+     "title": "Russian and Turkish",
+     "points": [
+      "no everyday “have” verb: у меня есть брат (“at me there is a brother”), bir kardeşim var (“my sibling exists”)",
+      "Arabic and Hebrew work the same way (“at me”, “there is to me”) – German is the odd one out"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who has it? → ich habe, du hast, er/sie/es hat, wir haben, ihr habt, sie haben, Sie haben.",
+   "Am I saying it politely? → Sie haben (with a capital S).",
+   "Is the thing I have masculine and singular? → einen / meinen (Ich habe einen Bruder); otherwise the form does not change.",
+   "Am I saying someone’s age? → sein, not haben.",
+   "Do I mean “there is / there are”? → es gibt, not haben."
+  ],
+  "steps": [
+   "Choose the form of haben for the subject.",
+   "Put what is owned after the verb.",
+   "Masculine singular: einen / meinen."
+  ]
+ },
+ "traps": [
+  "du hast, er hat – no b in these two forms.",
+  "Ich habe einen Bruder, not *ein Bruder: haben takes the accusative.",
+  "Age: Ich bin zwanzig, not *Ich habe zwanzig.",
+  "“There is” = es gibt.",
+  "Sie haben = you have (polite) and they have – only the context and the capital S (inside a sentence) tell them apart."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:haben"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;1;SG",
+  "V;PRS;2;SG",
+  "V;PRS;3;SG",
+  "V;PRS;1;PL",
+  "V;PRS;2;PL",
+  "V;PRS;3;PL"
+ ],
+ "needs": {
+  "VERB": 1,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:haben"
+   ],
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;1;PL",
+    "V;PRS;2;PL",
+    "V;PRS;3;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.have"
+    ],
+    "variant": "Formality"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "er ___ (haben)",
+   "options": [
+    "hat",
+    "habt",
+    "hast"
+   ],
+   "answer": "hat",
+   "why": "er/sie/es hat – the b disappears."
+  },
+  {
+   "q": "ihr ___ (haben)",
+   "options": [
+    "habt",
+    "haben",
+    "hat"
+   ],
+   "answer": "habt",
+   "why": "ihr habt."
+  },
+  {
+   "q": "Ich habe ___ Bruder.",
+   "options": [
+    "einen",
+    "ein",
+    "eine"
+   ],
+   "answer": "einen",
+   "why": "der Bruder is masculine; after haben it is accusative: einen Bruder."
+  },
+  {
+   "q": "Ich habe ___ Schwester.",
+   "options": [
+    "eine",
+    "einen",
+    "ein"
+   ],
+   "answer": "eine",
+   "why": "Feminine: eine stays eine in the accusative."
+  },
+  {
+   "q": "“I am twenty.”",
+   "options": [
+    "Ich bin zwanzig.",
+    "Ich habe zwanzig.",
+    "Ich habe zwanzig Jahre."
+   ],
+   "answer": "Ich bin zwanzig.",
+   "why": "Age is said with sein."
+  },
+  {
+   "q": "“Do you have children?” – said politely",
+   "options": [
+    "Haben Sie Kinder?",
+    "Hast du Kinder?",
+    "Habt ihr Kinder?"
+   ],
+   "answer": "Haben Sie Kinder?",
+   "why": "Polite Sie takes the plural form haben."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.have",
+   "note": "Arabic has no verb “to have”: it says “at me” – عِنْدِي (ʿindī), from the preposition عِنْدَ with a pronoun suffix."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.have",
+   "note": "Hebrew says “there is to me”: יֵשׁ לִי (yesh li); the negative is אֵין לִי (ein li)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.have",
+   "note": "Chinese uses the verb 有 (yǒu), as German uses haben; its negative is 没有 (méiyǒu), never 不有."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "The accusative after haben (einen Bruder) is the direct object, taught fully at S07."
+  }
+ ]
+}

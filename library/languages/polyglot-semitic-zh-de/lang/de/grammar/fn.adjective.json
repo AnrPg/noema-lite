@@ -1,0 +1,519 @@
+{
+ "function": "fn.adjective",
+ "status": "realized",
+ "summary": "A German adjective has two lives. After sein (and werden, bleiben) and as an adverb it never changes: Das Haus ist groß. Der Zug fährt schnell. Before a noun it always takes an ending, and the ending depends on the word in front of it. The rule of thumb: the article and the adjective share the job of showing gender and case – if the article already shows it clearly (der, die, das, dem, den, dieser …), the adjective only adds the weak ending -e or -en; if there is no article, or the article has no ending (ein, kein, mein in the masculine nominative and the neuter nominative/accusative), the adjective takes the strong ending that der/das would have had (-er, -es). The WEAK endings are learned in one sentence: -e in the five “light” places (nominative singular of all three genders, accusative singular feminine and neuter), -en everywhere else – all datives and all plurals included. German puts the adjective before the noun, as Greek and English do (unlike Arabic and Hebrew). Feelings of the body use the dative or haben, not sein + adjective: Mir ist kalt (I’m cold), Ich habe Hunger / Durst (I’m hungry / thirsty).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "der große Tisch",
+     "die große Lampe",
+     "das große Haus",
+     "die großen Häuser"
+    ],
+    [
+     "accusative",
+     "den großen Tisch",
+     "die große Lampe",
+     "das große Haus",
+     "die großen Häuser"
+    ],
+    [
+     "dative",
+     "dem großen Tisch",
+     "der großen Lampe",
+     "dem großen Haus",
+     "den großen Häusern"
+    ]
+   ],
+   "caption": "Step 1 – WEAK endings after der, die, das (also dieser, jener, welcher, alle): -e in the five light places, -en everywhere else"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "ein großer Tisch",
+     "eine große Lampe",
+     "ein großes Haus",
+     "keine großen Häuser"
+    ],
+    [
+     "accusative",
+     "einen großen Tisch",
+     "eine große Lampe",
+     "ein großes Haus",
+     "keine großen Häuser"
+    ],
+    [
+     "dative",
+     "einem großen Tisch",
+     "einer großen Lampe",
+     "einem großen Haus",
+     "keinen großen Häusern"
+    ]
+   ],
+   "caption": "Step 2 – MIXED endings after ein, kein, mein, dein … : the weak pattern, except the three places where ein has no ending – there the adjective shows the gender (-er, -es)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "heißer Tee",
+     "warme Milch",
+     "kaltes Wasser",
+     "kleine Kinder"
+    ],
+    [
+     "accusative",
+     "heißen Tee",
+     "warme Milch",
+     "kaltes Wasser",
+     "kleine Kinder"
+    ],
+    [
+     "dative",
+     "mit heißem Tee",
+     "mit warmer Milch",
+     "mit kaltem Wasser",
+     "mit kleinen Kindern"
+    ]
+   ],
+   "caption": "Step 3 – STRONG endings with no article (also after numbers, viele, einige, wenige): the adjective takes the ending of der / die / das (-er, -e, -es, -en, -em)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One question decides",
+   "text": "Does the word in front already show the gender and case with its own ending? Yes (der, dem, den, dieser, meinem …) → the adjective is weak: -e or -en. No (ein, kein, mein with no ending; no article at all) → the adjective shows it: -er (der), -es (das), -e (die), -em (dem), -en (den)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "position",
+    "form",
+    "example"
+   ],
+   "rows": [
+    [
+     "after sein, werden, bleiben",
+     "no ending",
+     "Das Haus ist groß. Die Kinder sind müde."
+    ],
+    [
+     "describing a verb (adverb)",
+     "no ending, no -ly",
+     "Er fährt schnell. Sie spricht langsam."
+    ],
+    [
+     "before a noun",
+     "always an ending",
+     "ein großes Haus, die kleine Wohnung, mit dem neuen Auto"
+    ]
+   ],
+   "caption": "Predicate, adverb, attribute"
+  },
+  {
+   "t": "table",
+   "head": [
+    "adjective",
+    "before a noun",
+    "why"
+   ],
+   "rows": [
+    [
+     "hoch",
+     "ein hohes Haus, die hohe Wand",
+     "the c drops: hoh-"
+    ],
+    [
+     "teuer",
+     "ein teures Auto, die teure Wohnung",
+     "the e before r drops: teur-"
+    ],
+    [
+     "dunkel",
+     "ein dunkles Bier, dunkle Haare",
+     "the e before l drops: dunkl-"
+    ],
+    [
+     "müde",
+     "ein müder Mann, die müden Kinder",
+     "it already ends in -e: add only r, s, m, n"
+    ],
+    [
+     "rosa, lila, orange",
+     "ein rosa Kleid, eine lila Tasche",
+     "no endings at all (S17)"
+    ]
+   ],
+   "caption": "Adjectives that change their stem"
+  },
+  {
+   "t": "table",
+   "head": [
+    "meaning",
+    "German",
+    "note"
+   ],
+   "rows": [
+    [
+     "big / tall",
+     "groß",
+     "tall of people: Er ist groß"
+    ],
+    [
+     "tall, high",
+     "hoch",
+     "buildings, mountains, trees – never people"
+    ],
+    [
+     "old",
+     "alt",
+     "things AND people: ein altes Auto, ein alter Mann; age: Wie alt bist du?"
+    ],
+    [
+     "easy",
+     "leicht / einfach",
+     "leicht = not hard (and light in weight); einfach = not complicated"
+    ],
+    [
+     "difficult",
+     "schwer / schwierig",
+     "schwer = hard (and heavy); schwierig = only difficult"
+    ],
+    [
+     "cheap",
+     "billig / günstig",
+     "billig can sound shoddy; günstig = good value"
+    ],
+    [
+     "happy",
+     "glücklich / froh",
+     "glücklich = deeply happy; froh = glad about something (froh, dass …)"
+    ],
+    [
+     "hungry / thirsty",
+     "Ich habe Hunger / Durst",
+     "more usual than Ich bin hungrig / durstig"
+    ],
+    [
+     "I’m cold / hot / warm",
+     "Mir ist kalt / heiß / warm",
+     "dative! Ich bin kalt = I’m cold-hearted; Ich bin heiß = I’m “hot” (sexy)"
+    ]
+   ],
+   "caption": "Choosing the word"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Plural without an article is strong",
+   "text": "die kleinen Kinder, keine kleinen Kinder, meine kleinen Kinder – but zwei kleine Kinder, viele junge Leute (numbers and viele are not articles)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The dative is always -en after an article",
+   "text": "mit dem neuen Auto, in der kleinen Wohnung, mit einem guten Freund – whatever the gender."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "mein großer Bruder",
+   "text": "groß and klein before family words mean older and younger: mein großer Bruder (my older brother), meine kleine Schwester (my little sister)."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before an adjective",
+   "questions": [
+    "Is it after sein / werden / bleiben, or does it describe a verb? → no ending.",
+    "Is there a word in front of it? Which one?",
+    "Does that word show gender and case with its own ending (der, dem, den, dieser, meinem …)? → weak: -e or -en.",
+    "Is it ein / kein / mein without an ending (masculine nominative, neuter nominative/accusative)? → -er (masc.) or -es (neuter).",
+    "No article at all (or a number, viele)? → strong: the ending of der / die / das: -er, -e, -es, -en, -em.",
+    "Dative or plural after an article? → -en.",
+    "Does the stem change? hoch → hoh-, teuer → teur-, dunkel → dunkl-; rosa, lila, orange never change."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the adjective after sein / werden / bleiben, or used as an adverb? → no ending.",
+   "Which word stands in front of it: der-word, ein-word, or nothing?",
+   "Does the determiner show the case and gender itself (der, die, das, dem, den, dieser, meinem …)? → weak: -e / -en.",
+   "ein, kein, mein … with no ending (masc. nominative, neuter nominative/accusative)? → -er / -es on the adjective.",
+   "No determiner (or a number, viele, einige)? → strong: -er, -e, -es, -en, -em like the article.",
+   "Is the noun dative, or plural after an article? → -en.",
+   "Does the stem change (hoh-, teur-, dunkl-, müd-), or is it an invariant colour (rosa, lila, orange)?",
+   "Is it a feeling of the body? → Mir ist kalt / heiß; Ich habe Hunger / Durst."
+  ],
+  "steps": [
+   "Find the noun and its gender, number and case.",
+   "Look at the determiner in front of the adjective.",
+   "Pick weak, mixed or strong and add the ending."
+  ]
+ },
+ "traps": [
+  "Before a noun there is always an ending: *ein groß Haus is wrong – ein großes Haus.",
+  "After sein no ending: Das Haus ist groß (not *ist großes).",
+  "ein + masculine nominative → -er: ein großer Tisch (not *ein große Tisch).",
+  "Dative after an article is always -en: mit dem neuen Auto, in einer kleinen Wohnung.",
+  "Plural after die / keine / meine → -en; after numbers and viele → -e: zwei kleine Kinder.",
+  "hoch → ein hohes Haus (not *hoches); teuer → ein teures Auto; dunkel → ein dunkles Bier.",
+  "Tall of people is groß, not hoch.",
+  "Mir ist kalt (I’m cold), not *Ich bin kalt; Ich habe Hunger is the usual “I’m hungry”.",
+  "No -ly: Er fährt schnell (fast / quickly)."
+ ],
+ "paradigmCells": [
+  "ADJ",
+  "ADJ;NOM;SG;MASC;WEAK",
+  "ADJ;NOM;SG;MASC;MIX",
+  "ADJ;NOM;SG;NEUT;MIX",
+  "ADJ;ACC;SG;MASC;STRG",
+  "ADJ;DAT;SG;NEUT;WEAK"
+ ],
+ "evidence": {
+  "tags": [
+   "ADJ"
+  ]
+ },
+ "needs": {
+  "ADJ": 8,
+  "NOUN": 10
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;WEAK",
+    "ADJ;NOM;SG;FEM;WEAK",
+    "ADJ;NOM;PL;WEAK",
+    "ADJ;DAT;SG;NEUT;WEAK"
+   ],
+   "count": 8
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;MIX",
+    "ADJ;NOM;SG;NEUT;MIX",
+    "ADJ;ACC;SG;MASC;MIX",
+    "ADJ;ACC;SG;NEUT;MIX"
+   ],
+   "count": 8
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;STRG",
+    "ADJ;ACC;SG;MASC;STRG",
+    "ADJ;NOM;SG;NEUT;STRG",
+    "ADJ;DAT;SG;FEM;STRG"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Das ist ein ___ Haus. (groß)",
+   "options": [
+    "großes",
+    "große",
+    "großer"
+   ],
+   "answer": "großes",
+   "why": "ein has no ending in the neuter → the adjective shows it: -es."
+  },
+  {
+   "q": "Der ___ Tisch ist neu. (klein)",
+   "options": [
+    "kleine",
+    "kleiner",
+    "kleinen"
+   ],
+   "answer": "kleine",
+   "why": "der already shows masculine nominative → weak -e."
+  },
+  {
+   "q": "Im Winter trinke ich ___ Tee. (heiß)",
+   "options": [
+    "heißen",
+    "heißer",
+    "heiße"
+   ],
+   "answer": "heißen",
+   "why": "No article, masculine accusative → strong -en (like den)."
+  },
+  {
+   "q": "Er fährt mit dem ___ Auto. (neu)",
+   "options": [
+    "neuen",
+    "neue",
+    "neues"
+   ],
+   "answer": "neuen",
+   "why": "Dative after an article → always -en."
+  },
+  {
+   "q": "Das ist ein ___ Haus. (hoch)",
+   "options": [
+    "hohes",
+    "hoches",
+    "hoch"
+   ],
+   "answer": "hohes",
+   "why": "hoch loses its c before an ending: hoh-."
+  },
+  {
+   "q": "zwei ___ Kinder (klein)",
+   "options": [
+    "kleine",
+    "kleinen",
+    "kleiner"
+   ],
+   "answer": "kleine",
+   "why": "A number is not an article → strong plural -e."
+  },
+  {
+   "q": "He is tall.",
+   "options": [
+    "Er ist groß.",
+    "Er ist hoch.",
+    "Er ist lang."
+   ],
+   "answer": "Er ist groß.",
+   "why": "People are groß; hoch is for buildings and mountains."
+  },
+  {
+   "q": "I’m cold.",
+   "options": [
+    "Mir ist kalt.",
+    "Ich bin kalt.",
+    "Ich habe kalt."
+   ],
+   "answer": "Mir ist kalt.",
+   "why": "Bodily feelings take the dative: mir ist kalt. Ich bin kalt = I’m cold-hearted."
+  },
+  {
+   "q": "I’m hungry. (the most usual way)",
+   "options": [
+    "Ich habe Hunger.",
+    "Ich bin Hunger.",
+    "Ich habe hungrig."
+   ],
+   "answer": "Ich habe Hunger.",
+   "why": "German “has” hunger; Ich bin hungrig is correct but less common."
+  },
+  {
+   "q": "Wir haben ein ___ Auto. (teuer)",
+   "options": [
+    "teures",
+    "teueres",
+    "teuer"
+   ],
+   "answer": "teures",
+   "why": "teuer drops the e before r: teur-."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.adjective",
+   "note": "Arabic puts the adjective AFTER the noun and makes it agree in gender, number, case and definiteness: بَيْتٌ كَبِيرٌ (a big house), الْبَيْتُ الْكَبِيرُ (the big house) – the article is repeated."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.adjective",
+   "note": "Hebrew also puts it after the noun, agreeing in gender and number, with הַ repeated when the noun is definite: בַּיִת גָּדוֹל, הַבַּיִת הַגָּדוֹל."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.adjective",
+   "note": "Chinese adjectives are stative verbs: no 是, usually 很 in a statement (房子很大); before a noun with 的 (很大的房子) or directly for short ones (大房子). No endings at all."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.agreement",
+   "note": "The endings of der / ein from S04 are the model of the strong and mixed endings here."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "The case after a preposition decides the adjective ending too: mit dem neuen Auto (dative), für den kleinen Jungen (accusative)."
+  }
+ ]
+}

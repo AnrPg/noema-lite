@@ -1,0 +1,481 @@
+{
+ "function": "fn.direction",
+ "status": "realized",
+ "summary": "Movement is told by the verb and a preposition with the genitive: إِلَى answers “where to?” (أَذْهَبُ إِلَى الْمَدْرَسَةِ), مِنْ answers “where from?” (أَعُودُ مِنَ الْعَمَلِ), and بِـ gives the means of transport (أُسَافِرُ بِالْقِطَارِ, by train) — but “on foot” is the adverb مَشْيًا, with no preposition. The questions are إِلَى أَيْنَ؟ (where to?), مِنْ أَيْنَ؟ (where from?) and كَيْفَ؟ (how?). A few verbs take the place directly as an object: دَخَلَ الْبَيْتَ (enter the house), غَادَرَ الْمَدِينَةَ (leave the town), وَصَلَ الْمَدِينَةَ or وَصَلَ إِلَى الْمَدِينَةِ (reach the town). Arabic has one verb for going, however you go (ذَهَبَ = German gehen and fahren), and the case never depends on “where” or “where to”: after any preposition the noun is genitive. The movement verbs include the most irregular verbs of the language — hollow (قَادَ / يَقُودُ, عَادَ / يَعُودُ, جَاءَ / يَجِيءُ), with a weak last letter (مَشَى / يَمْشِي, بَقِيَ / يَبْقَى) and assimilated (وَصَلَ / يَصِلُ): learn them with their present.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "answer with",
+    "example"
+   ],
+   "rows": [
+    [
+     "إِلَى أَيْنَ؟ (where to?)",
+     "إِلَى + genitive",
+     "أَذْهَبُ إِلَى الْمَدْرَسَةِ."
+    ],
+    [
+     "مِنْ أَيْنَ؟ (where from?)",
+     "مِنْ + genitive (مِنَ before al-)",
+     "أَعُودُ مِنَ الْعَمَلِ."
+    ],
+    [
+     "كَيْفَ؟ (how? by what?)",
+     "بِـ + al- + genitive",
+     "أُسَافِرُ بِالْقِطَارِ. — نَذْهَبُ بِالسَّيَّارَةِ."
+    ],
+    [
+     "كَيْفَ؟ — on foot",
+     "مَشْيًا (no preposition)",
+     "أَذْهَبُ إِلَى الْعَمَلِ مَشْيًا."
+    ],
+    [
+     "أَيْنَ؟ (where? — no movement)",
+     "فِي + genitive",
+     "أَنَا فِي الْمَحَطَّةِ."
+    ]
+   ],
+   "caption": "Every noun after a preposition is genitive (-i / -in)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "verb",
+    "meaning",
+    "present (he)",
+    "type",
+    "with a place"
+   ],
+   "rows": [
+    [
+     "ذَهَبَ",
+     "go",
+     "يَذْهَبُ",
+     "sound, a",
+     "إِلَى"
+    ],
+    [
+     "جَاءَ",
+     "come",
+     "يَجِيءُ",
+     "hollow + hamza",
+     "إِلَى / مِنْ"
+    ],
+    [
+     "مَشَى",
+     "walk",
+     "يَمْشِي",
+     "weak last letter",
+     "إِلَى / فِي"
+    ],
+    [
+     "رَكَضَ",
+     "run",
+     "يَرْكُضُ",
+     "sound, u",
+     "إِلَى"
+    ],
+    [
+     "قَادَ",
+     "drive",
+     "يَقُودُ",
+     "hollow (w)",
+     "the vehicle as object"
+    ],
+    [
+     "سَافَرَ",
+     "travel",
+     "يُسَافِرُ",
+     "form III",
+     "إِلَى"
+    ],
+    [
+     "عَادَ",
+     "return",
+     "يَعُودُ",
+     "hollow (w)",
+     "إِلَى / مِنْ"
+    ],
+    [
+     "دَخَلَ",
+     "enter",
+     "يَدْخُلُ",
+     "sound, u",
+     "object (or إِلَى)"
+    ],
+    [
+     "خَرَجَ",
+     "go out, leave",
+     "يَخْرُجُ",
+     "sound, u",
+     "مِنْ"
+    ],
+    [
+     "غَادَرَ",
+     "leave, depart",
+     "يُغَادِرُ",
+     "form III",
+     "object"
+    ],
+    [
+     "وَصَلَ",
+     "arrive",
+     "يَصِلُ",
+     "assimilated (w drops)",
+     "إِلَى (or object)"
+    ],
+    [
+     "بَقِيَ",
+     "stay",
+     "يَبْقَى",
+     "weak last letter",
+     "فِي"
+    ],
+    [
+     "اِنْتَظَرَ",
+     "wait for",
+     "يَنْتَظِرُ",
+     "form VIII",
+     "object"
+    ]
+   ],
+   "caption": "The dictionary form is the past “he” form; the present shows the vowel and the type."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "جَاءَ (come)",
+    "قَادَ (drive)",
+    "عَادَ (return)",
+    "مَشَى (walk)",
+    "بَقِيَ (stay)",
+    "وَصَلَ (arrive)"
+   ],
+   "rows": [
+    [
+     "I",
+     "أَجِيءُ",
+     "أَقُودُ",
+     "أَعُودُ",
+     "أَمْشِي",
+     "أَبْقَى",
+     "أَصِلُ"
+    ],
+    [
+     "you (m.)",
+     "تَجِيءُ",
+     "تَقُودُ",
+     "تَعُودُ",
+     "تَمْشِي",
+     "تَبْقَى",
+     "تَصِلُ"
+    ],
+    [
+     "you (f.)",
+     "تَجِيئِينَ",
+     "تَقُودِينَ",
+     "تَعُودِينَ",
+     "تَمْشِينَ",
+     "تَبْقَيْنَ",
+     "تَصِلِينَ"
+    ],
+    [
+     "he",
+     "يَجِيءُ",
+     "يَقُودُ",
+     "يَعُودُ",
+     "يَمْشِي",
+     "يَبْقَى",
+     "يَصِلُ"
+    ],
+    [
+     "she",
+     "تَجِيءُ",
+     "تَقُودُ",
+     "تَعُودُ",
+     "تَمْشِي",
+     "تَبْقَى",
+     "تَصِلُ"
+    ],
+    [
+     "we",
+     "نَجِيءُ",
+     "نَقُودُ",
+     "نَعُودُ",
+     "نَمْشِي",
+     "نَبْقَى",
+     "نَصِلُ"
+    ],
+    [
+     "you (m. pl.)",
+     "تَجِيئُونَ",
+     "تَقُودُونَ",
+     "تَعُودُونَ",
+     "تَمْشُونَ",
+     "تَبْقَوْنَ",
+     "تَصِلُونَ"
+    ],
+    [
+     "you (f. pl.)",
+     "تَجِئْنَ",
+     "تَقُدْنَ",
+     "تَعُدْنَ",
+     "تَمْشِينَ",
+     "تَبْقَيْنَ",
+     "تَصِلْنَ"
+    ],
+    [
+     "they (m.)",
+     "يَجِيئُونَ",
+     "يَقُودُونَ",
+     "يَعُودُونَ",
+     "يَمْشُونَ",
+     "يَبْقَوْنَ",
+     "يَصِلُونَ"
+    ],
+    [
+     "they (f.)",
+     "يَجِئْنَ",
+     "يَقُدْنَ",
+     "يَعُدْنَ",
+     "يَمْشِينَ",
+     "يَبْقَيْنَ",
+     "يَصِلْنَ"
+    ]
+   ],
+   "caption": "The present of the irregular movement verbs (from the Wiktionary tables). Hollow verbs shorten their long vowel before -na: يَقُدْنَ, تَعُدْنَ, يَجِئْنَ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "go in / go out",
+     "points": [
+      "دَخَلْتُ الْبَيْتَ. (object)",
+      "خَرَجْتُ مِنَ الْبَيْتِ. (مِنْ)",
+      "غَادَرْتُ الْبَيْتَ. (object, formal)"
+     ]
+    },
+    {
+     "title": "arrive / leave",
+     "points": [
+      "وَصَلَ الْقِطَارُ إِلَى الْمَحَطَّةِ.",
+      "غَادَرَ الْقِطَارُ الْمَحَطَّةَ.",
+      "خَرَجَ الْقِطَارُ مِنَ الْمَحَطَّةِ."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Not فِي for “to”.",
+   "text": "Greek σε and German in / zu cover both “at” and “to”; Arabic separates them: فِي الْمَدْرَسَةِ (at school) but إِلَى الْمَدْرَسَةِ (to school)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "By bus, by car: بِـ with the article.",
+   "text": "بِالْحَافِلَةِ, بِالْقِطَارِ, بِالطَّائِرَةِ, بِالسَّيَّارَةِ, بِالدَّرَّاجَةِ — and for a taxi بِسَيَّارَةِ أُجْرَةٍ. مَعَ is company (مَعَ أَخِي), never the vehicle."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One “go” for all.",
+   "text": "German says gehen on foot and fahren by vehicle, Hebrew הָלַךְ and נָסַע; Arabic uses ذَهَبَ for both and adds the vehicle: ذَهَبْتُ بِالْقِطَارِ, ذَهَبْتُ مَشْيًا. “Drive (a car)” is قَادَ السَّيَّارَةَ."
+  },
+  {
+   "t": "p",
+   "text": "German changes the case with the direction (in der Schule — where? dative; in die Schule — where to? accusative). Arabic changes the preposition instead and keeps the genitive: فِي الْمَدْرَسَةِ, إِلَى الْمَدْرَسَةِ, مِنَ الْمَدْرَسَةِ."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there movement? Towards a place → إِلَى; away from a place, or the origin → مِنْ (مِنَ before al-); no movement → فِي.",
+   "How? By a vehicle → بِـ + al- (بِالْقِطَارِ); on foot → مَشْيًا.",
+   "Does the verb take the place directly? دَخَلَ, غَادَرَ (and وَصَلَ, اِنْتَظَرَ) — then no preposition.",
+   "Is the noun after the preposition genitive (-i, -in)?",
+   "Which present has this verb? Hollow يَقُودُ / يَعُودُ / يَجِيءُ, weak يَمْشِي / يَبْقَى, assimilated يَصِلُ, form III يُسَافِرُ / يُغَادِرُ.",
+   "Asking? إِلَى أَيْنَ؟ (where to?), مِنْ أَيْنَ؟ (where from?), كَيْفَ؟ (how?)."
+  ]
+ },
+ "traps": [
+  "*أَذْهَبُ فِي الْمَدْرَسَةِ → أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+  "*أُسَافِرُ مَعَ الْقِطَارِ → أُسَافِرُ بِالْقِطَارِ (مَعَ is “together with” a person).",
+  "“On foot” has no بِـ: أَذْهَبُ مَشْيًا.",
+  "*دَخَلْتُ فِي الْبَيْتِ → دَخَلْتُ الْبَيْتَ (or دَخَلْتُ إِلَى الْبَيْتِ).",
+  "*غَادَرْتُ مِنَ الْبَيْتِ → غَادَرْتُ الْبَيْتَ (غَادَرَ takes an object); but خَرَجْتُ مِنَ الْبَيْتِ.",
+  "The w of وَصَلَ disappears in the present: يَصِلُ, not *يَوْصِلُ.",
+  "بَقِيَ has i in the past and a in the present: يَبْقَى; “they stay” is يَبْقَوْنَ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:ila",
+   "ar:min",
+   "ar:bi",
+   "ar:mashyan",
+   "ar:dakhala",
+   "ar:ghadara",
+   "ar:wasala"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;IND;1;SG",
+  "V;PRS;IND;2;SG;MASC",
+  "V;PRS;IND;2;SG;FEM",
+  "V;PRS;IND;3;SG;MASC",
+  "V;PRS;IND;3;SG;FEM",
+  "V;PRS;IND;1;PL",
+  "V;PRS;IND;2;PL;MASC",
+  "V;PRS;IND;2;PL;FEM",
+  "V;PRS;IND;3;PL;MASC",
+  "V;PRS;IND;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 4,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:dhahaba",
+    "ar:jaa",
+    "ar:masha",
+    "ar:rakada",
+    "ar:qada",
+    "ar:safara",
+    "ar:ada",
+    "ar:dakhala",
+    "ar:kharaja",
+    "ar:ghadara",
+    "ar:wasala",
+    "ar:baqiya",
+    "ar:intazara"
+   ],
+   "cells": [
+    "V;PRS;IND;1;SG",
+    "V;PRS;IND;2;SG;MASC",
+    "V;PRS;IND;2;SG;FEM",
+    "V;PRS;IND;3;SG;MASC",
+    "V;PRS;IND;3;SG;FEM",
+    "V;PRS;IND;1;PL",
+    "V;PRS;IND;2;PL;MASC",
+    "V;PRS;IND;2;PL;FEM",
+    "V;PRS;IND;3;PL;MASC",
+    "V;PRS;IND;3;PL;FEM"
+   ],
+   "count": 14
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“I go to school.”",
+   "options": [
+    "أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+    "أَذْهَبُ فِي الْمَدْرَسَةِ.",
+    "أَذْهَبُ الْمَدْرَسَةُ."
+   ],
+   "answer": "أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+   "why": "Movement towards a place: إِلَى + genitive."
+  },
+  {
+   "q": "“We travel by train.”",
+   "options": [
+    "نُسَافِرُ بِالْقِطَارِ.",
+    "نُسَافِرُ مَعَ الْقِطَارِ.",
+    "نُسَافِرُ فِي الْقِطَارُ."
+   ],
+   "answer": "نُسَافِرُ بِالْقِطَارِ.",
+   "why": "The means of transport takes بِـ with the article."
+  },
+  {
+   "q": "“He walks to work” (on foot) — which is right?",
+   "options": [
+    "يَذْهَبُ إِلَى الْعَمَلِ مَشْيًا.",
+    "يَذْهَبُ إِلَى الْعَمَلِ بِمَشْيٍ.",
+    "يَذْهَبُ مَشْيًا فِي الْعَمَلِ."
+   ],
+   "answer": "يَذْهَبُ إِلَى الْعَمَلِ مَشْيًا.",
+   "why": "مَشْيًا is an adverb: no preposition."
+  },
+  {
+   "q": "“She comes back from the market.”",
+   "options": [
+    "تَعُودُ مِنَ السُّوقِ.",
+    "تَعُودُ مِنْ السُّوقُ.",
+    "تَعُودُ إِلَى السُّوقِ."
+   ],
+   "answer": "تَعُودُ مِنَ السُّوقِ.",
+   "why": "مِنْ becomes مِنَ before al-, and the noun is genitive."
+  },
+  {
+   "q": "“The train arrives” — which form?",
+   "options": [
+    "يَصِلُ الْقِطَارُ.",
+    "يَوْصِلُ الْقِطَارُ.",
+    "يَوْصُلُ الْقِطَارُ."
+   ],
+   "answer": "يَصِلُ الْقِطَارُ.",
+   "why": "وَصَلَ is assimilated: the w drops in the present."
+  },
+  {
+   "q": "“I enter the room.”",
+   "options": [
+    "أَدْخُلُ الْغُرْفَةَ.",
+    "أَدْخُلُ فِي الْغُرْفَةُ.",
+    "أَدْخِلُ الْغُرْفَةَ."
+   ],
+   "answer": "أَدْخُلُ الْغُرْفَةَ.",
+   "why": "دَخَلَ takes the place as a direct object; its present vowel is u."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.direction",
+   "note": "Hebrew has the same three helpers — לְ / אֶל (to), מִ / מִן (from), בְּ (by: בָּאוֹטוֹבּוּס) — but, like German, it separates הָלַךְ (go on foot) and נָסַע (go by vehicle); Arabic says ذَهَبَ for both."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.direction",
+   "note": "German: gehen on foot, fahren by vehicle; nach / zu / in + accusative for “where to”, aus / von + dative for “where from”, mit dem Bus. Arabic: one ذَهَبَ, إِلَى / مِنْ / بِـ, always the genitive."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.direction",
+   "note": "Chinese puts the direction in the verb (去 go, 来 come) and the vehicle before it: 我坐公共汽车去学校; “from … to …” is 从 … 到 …. Arabic: أَذْهَبُ إِلَى الْمَدْرَسَةِ بِالْحَافِلَةِ."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.core",
+   "note": "إِلَى, مِنْ and بِـ were met in lesson 11; here they move."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.imperative",
+   "note": "Commands with the same verbs: اِذْهَبْ!, تَعَالَ!, اُدْخُلْ!"
+  }
+ ]
+}

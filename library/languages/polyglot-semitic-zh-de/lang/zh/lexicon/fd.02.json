@@ -49,9 +49,9 @@
       "sense": "s1"
      },
      {
-      "text": "小明，你好！",
-      "py": "Xiǎomíng, nǐ hǎo!",
-      "tr": "Hi, Xiaoming!",
+      "text": "王明，你好！",
+      "py": "Wáng Míng, nǐ hǎo!",
+      "tr": "Hi, Wang Ming!",
       "register": "neutral",
       "context": "friends",
       "sense": "s1"
@@ -1329,9 +1329,9 @@
       "sense": "s1"
      },
      {
-      "text": "小明，认识你很高兴。",
-      "py": "Xiǎomíng, rènshi nǐ hěn gāoxìng.",
-      "tr": "Xiaoming, nice to meet you.",
+      "text": "王明，认识你很高兴。",
+      "py": "Wáng Míng, rènshi nǐ hěn gāoxìng.",
+      "tr": "Wang Ming, nice to meet you.",
       "register": "neutral",
       "context": "meeting friends of friends",
       "sense": "s1"
@@ -1427,9 +1427,9 @@
       "sense": "s1"
      },
      {
-      "text": "安娜，很高兴认识你，我叫小明。",
-      "py": "Ānnà, hěn gāoxìng rènshi nǐ, wǒ jiào Xiǎomíng.",
-      "tr": "Anna, nice to meet you — I’m Xiaoming.",
+      "text": "安娜，很高兴认识你，我叫王明。",
+      "py": "Ānnà, hěn gāoxìng rènshi nǐ, wǒ jiào Wáng Míng.",
+      "tr": "Anna, nice to meet you — I’m Wang Ming.",
       "register": "neutral",
       "context": "introductions",
       "sense": "s1"

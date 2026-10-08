@@ -1,29 +1,162 @@
 {
  "function": "fn.plural.noun",
  "status": "realized",
- "summary": "German nouns form the plural in five ways: -(e)n (most feminine nouns: Tomate → Tomaten, Zwiebel → Zwiebeln), -e (often masculine: Kohl → Kohle, Lauch → Lauche; sometimes with umlaut), -er (with umlaut where possible), -s (many loanwords: Chili → Chilis) and no ending (nouns in -chen, many in -el/-er/-en: Radieschen → Radieschen). Learn the plural together with the noun. The plural article is always die; in the dative plural the noun adds -n unless it already ends in -n or -s.",
+ "summary": "German has no single plural ending: there are five patterns, and the vowel often takes an umlaut (a → ä, o → ö, u → ü). -e: der Tisch – die Tische, der Stuhl – die Stühle. -er (with umlaut where possible): das Kind – die Kinder, das Buch – die Bücher. -(e)n: die Frau – die Frauen, die Lampe – die Lampen, die Lehrerin – die Lehrerinnen. -s (mostly loanwords and words ending in a vowel): das Handy – die Handys, das Baby – die Babys. No ending (often nouns in -er, -el, -chen): das Zimmer – die Zimmer, der Lehrer – die Lehrer, and with umlaut only: die Mutter – die Mütter, der Bruder – die Brüder. Learn every noun with its article and plural, as a dictionary gives it (der Stuhl, -e). The plural article is always die (dieser → diese, mein → meine), the indefinite article has no plural (ein Buch → Bücher), and in the dative plural the noun adds -n unless it already ends in -n or -s: den Kindern, but den Frauen, den Handys.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "nouns taught so far",
+    "typical for"
+   ],
+   "rows": [
+    [
+     "-e",
+     "der Tisch – die Tische · der Stift – die Stifte · der Freund – die Freunde · das Telefon – die Telefone",
+     "masculine and neuter"
+    ],
+    [
+     "¨-e",
+     "der Stuhl – die Stühle · der Schrank – die Schränke · die Wand – die Wände · der Sohn – die Söhne",
+     "masculine (and some feminine) one-syllable nouns"
+    ],
+    [
+     "-er / ¨-er",
+     "das Kind – die Kinder · das Buch – die Bücher · das Haus – die Häuser · das Glas – die Gläser · der Mann – die Männer",
+     "neuter one-syllable nouns"
+    ],
+    [
+     "-n / -en",
+     "die Frau – die Frauen · die Tür – die Türen · die Lampe – die Lampen · die Tasse – die Tassen · die Wohnung – die Wohnungen · das Bett – die Betten · die Schwester – die Schwestern · die Tante – die Tanten",
+     "most feminine nouns"
+    ],
+    [
+     "-nen (after -in)",
+     "die Lehrerin – die Lehrerinnen · die Freundin – die Freundinnen · die Enkelin – die Enkelinnen",
+     "female nouns in -in"
+    ],
+    [
+     "-n (weak masculines)",
+     "der Junge – die Jungen · der Student – die Studenten · der Neffe – die Neffen",
+     "masculine nouns that end in -n in every case but one"
+    ],
+    [
+     "-s",
+     "das Handy – die Handys · das Baby – die Babys · der Opa – die Opas · die Oma – die Omas · der Cousin – die Cousins",
+     "loanwords, nouns ending in a vowel"
+    ],
+    [
+     "– (no ending)",
+     "das Zimmer – die Zimmer · das Fenster – die Fenster · der Lehrer – die Lehrer · der Schlüssel – die Schlüssel · der Teller – die Teller · das Mädchen – die Mädchen · der Onkel – die Onkel · der Enkel – die Enkel",
+     "masculine and neuter nouns in -er, -el, -en, -chen"
+    ],
+    [
+     "¨ only",
+     "die Mutter – die Mütter · der Vater – die Väter · der Bruder – die Brüder · die Tochter – die Töchter",
+     "a few nouns in -er"
+    ]
+   ],
+   "caption": "The plural patterns with the nouns of S01, S04 and S06 (¨ = umlaut)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "the",
+     "der / die / das Stuhl, Lampe, Buch",
+     "die Stühle, Lampen, Bücher"
+    ],
+    [
+     "a / –",
+     "ein Stuhl, eine Lampe, ein Buch",
+     "Stühle, Lampen, Bücher (no article)"
+    ],
+    [
+     "this",
+     "dieser / diese / dieses",
+     "diese"
+    ],
+    [
+     "my",
+     "mein / meine / mein",
+     "meine"
+    ],
+    [
+     "dative plural",
+     "",
+     "den Stühlen, den Lampen, den Büchern"
+    ]
+   ],
+   "caption": "One plural article for all genders: die"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The dative plural adds -n",
+   "text": "die Kinder → mit den Kindern, die Männer → den Männern, die Brüder → den Brüdern. No extra -n when the plural already ends in -n or -s: den Frauen, den Lampen, den Handys, den Omas."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Rules of thumb (not laws)",
+   "text": "Feminine → usually -(e)n (and -in → -innen). Nouns in -chen, -lein, and masculine/neuter nouns in -er, -el, -en → no ending. Words from English or French, and nouns ending in a vowel other than -e → -s. One-syllable masculines → often -e, often with umlaut. One-syllable neuters → often -er with umlaut."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Plural only",
+   "text": "die Leute (people), die Eltern (parents), die Großeltern (grandparents) have no singular: one person = eine Person, one parent = ein Elternteil."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Turkish and English",
+     "points": [
+      "one main ending: -ler / -lar, -s",
+      "German has five patterns – learn the plural with each noun"
+     ]
+    },
+    {
+     "title": "Greek and Russian",
+     "points": [
+      "several endings by gender and stem, as in German",
+      "but neither uses umlaut: German Buch → Bücher changes the vowel inside the word"
+     ]
+    }
+   ]
+  }
+ ],
  "procedure": {
   "askYourself": [
-   "Which plural did I learn with this noun (die Tomaten, die Kürbisse, die Radieschen)?",
-   "Is it feminine? Then -(e)n is very likely.",
-   "Does it end in -chen or -lein? Then the plural has no ending.",
-   "Is it a loanword ending in a vowel (Chili)? Then often -s.",
-   "Is it dative plural? Add -n if the plural does not already end in -n or -s.",
-   "Is the noun countable at all (Knoblauch, Mais, Spinat are normally used in the singular)?"
+   "Which plural did I learn with this noun (der Stuhl, -e → die Stühle)?",
+   "Is it feminine? Then -(e)n is very likely; a female noun in -in takes -innen.",
+   "Does it end in -er, -el, -en or -chen (masculine or neuter)? Then no ending – maybe an umlaut (Mütter, Väter, Brüder).",
+   "Is it a loanword or does it end in a vowel (Handy, Baby, Opa)? Then often -s.",
+   "Is it a one-syllable neuter (Kind, Buch, Haus)? Then often -er with umlaut.",
+   "Is it plural-only (Leute, Eltern, Großeltern)?",
+   "Is it dative plural? Add -n unless the plural already ends in -n or -s."
   ],
   "steps": [
    "Recall the plural form.",
-   "Use die (nominative/accusative), den (dative) or der (genitive).",
+   "Use die (nominative/accusative), den (dative) or der (genitive); no article for “some”.",
    "Check the dative -n."
   ]
  },
  "traps": [
-  "Dative plural adds -n: den Kürbissen, den Salaten – but not after -n or -s: den Tomaten, den Chilis.",
-  "-is → -isse: der Kürbis, die Kürbisse.",
-  "Same form in singular and plural: das Radieschen – die Radieschen, die Zucchini – die Zucchini, der Brokkoli – die Brokkoli.",
-  "Some food nouns are normally uncountable: Knoblauch, Mais (count with eine Knoblauchzehe, ein Maiskolben).",
-  "der Kohl has the rare plural Kohle – the same spelling as die Kohle (coal).",
-  "Paprika: zwei Paprika (with a number or article), but standing alone often Paprikas."
+  "Umlaut only: die Mutter – die Mütter, der Vater – die Väter, der Bruder – die Brüder, die Tochter – die Töchter (die Muttern are nuts for bolts!).",
+  "Same form in the singular and plural: das Zimmer – die Zimmer, der Lehrer – die Lehrer, das Mädchen – die Mädchen, der Enkel – die Enkel.",
+  "Dative plural adds -n: den Kindern, den Männern – but not after -n or -s: den Frauen, den Handys.",
+  "Loanwords: das Baby – die Babys (not *Babies), der Cousin – die Cousins.",
+  "Weak masculines take -n everywhere: der Junge – die Jungen, der Neffe – die Neffen.",
+  "ein has no plural: ein Buch – Bücher (no article).",
+  "Leute, Eltern and Großeltern have no singular."
  ],
  "evidence": {
   "tags": [
@@ -48,6 +181,14 @@
    "count": 12
   },
   {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;DAT;PL"
+   ],
+   "count": 6
+  },
+  {
    "type": "principal_parts",
    "pos": "NOUN",
    "count": 10
@@ -60,23 +201,93 @@
     ],
     "variant": "Number"
    }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "das Buch → die ___",
+   "options": [
+    "Bücher",
+    "Buchs",
+    "Buchen"
+   ],
+   "answer": "Bücher",
+   "why": "One-syllable neuter: -er with umlaut."
+  },
+  {
+   "q": "die Lampe → die ___",
+   "options": [
+    "Lampen",
+    "Lampe",
+    "Lämpe"
+   ],
+   "answer": "Lampen",
+   "why": "Feminine in -e: add -n."
+  },
+  {
+   "q": "das Handy → die ___",
+   "options": [
+    "Handys",
+    "Handies",
+    "Handyen"
+   ],
+   "answer": "Handys",
+   "why": "Loanword ending in a vowel: -s."
+  },
+  {
+   "q": "der Lehrer → die ___",
+   "options": [
+    "Lehrer",
+    "Lehrern",
+    "Lehrers"
+   ],
+   "answer": "Lehrer",
+   "why": "Masculine in -er: no ending (Lehrern is the dative plural)."
+  },
+  {
+   "q": "die Mutter → die ___",
+   "options": [
+    "Mütter",
+    "Muttern",
+    "Mutters"
+   ],
+   "answer": "Mütter",
+   "why": "Umlaut only; Muttern are nuts for bolts."
+  },
+  {
+   "q": "Which article goes with every plural noun?",
+   "options": [
+    "die",
+    "der",
+    "das"
+   ],
+   "answer": "die",
+   "why": "die Stühle, die Lampen, die Bücher – one plural article for all three genders."
   }
  ],
  "seeAlso": [
   {
    "lang": "ar",
    "fn": "fn.plural.noun",
-   "note": "Arabic has a dual and “broken” plurals made inside the word (kitāb → kutub)."
+   "note": "Arabic has a dual (two) and “broken” plurals made inside the word (kitāb → kutub) – a bigger version of German Buch → Bücher."
   },
   {
    "lang": "he",
    "fn": "fn.plural.noun",
-   "note": "Hebrew plurals in -im (masculine) and -ot (feminine), with exceptions."
+   "note": "Hebrew plurals end mostly in -im (masculine) and -ot (feminine), with exceptions; the vowels inside the word often change too."
   },
   {
    "lang": "zh",
    "fn": "fn.plural.noun",
-   "note": "Chinese nouns do not change; numbers and measure words show the amount, 们 only for people."
+   "note": "Chinese nouns do not change; numbers and measure words show the amount, 们 is added only for people."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.numerals",
+   "note": "After zwei and above the noun is plural: zwei Stühle, zehn Kinder."
   }
  ]
 }

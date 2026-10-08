@@ -1,0 +1,2732 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:ahad",
+   "lemma": "الْأَحَد",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.sunday"
+   ],
+   "gender": "MASC",
+   "translit": "al-ʾaḥad",
+   "forms": {
+    "N;NOM;SG;DEF": "الْأَحَدُ",
+    "N;ACC;SG;DEF": "الْأَحَدَ",
+    "N;GEN;SG;DEF": "الْأَحَدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Sunday — the first day of the Arab week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.sunday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الْأَحَدِ أَوَّلُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Sunday is the first day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "نَزُورُ جَدَّتِي يَوْمَ الْأَحَدِ.",
+      "tr": "We visit my grandmother on Sunday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَحَدُ يَوْمُ عَمَلٍ فِي مِصْرَ.",
+      "tr": "Sunday is a working day in Egypt.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الْأَحَدِ",
+      "tr": "on Sunday"
+     },
+     {
+      "text": "صَبَاحَ الْأَحَدِ",
+      "tr": "on Sunday morning"
+     },
+     {
+      "text": "الْأَحَدَ الْقَادِمَ",
+      "tr": "next Sunday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الْأَحَدِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: الْـ + أَحَد, literally “the one”, a phono-semantic matching of Classical Syriac ḥaḏ bəšabbā (“the one of the week”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the one”: by the Arabic count the week starts on Sunday — Greek Κυριακή (the Lord’s day) is a name, not a number.",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الْأَحَد — and in “on …” the genitive after يَوْمَ: يَوْمَ الْأَحَدِ."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْأَحَدِ), or فِي يَوْمِ الْأَحَدِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:ithnayn",
+   "lemma": "الِاثْنَيْن",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.monday"
+   ],
+   "gender": "MASC",
+   "translit": "al-iṯnayn",
+   "forms": {
+    "N;NOM;SG;DEF": "الِاثْنَانِ",
+    "N;ACC;SG;DEF": "الِاثْنَيْنِ",
+    "N;GEN;SG;DEF": "الِاثْنَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Monday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.monday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الِاثْنَيْنِ ثَانِي أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Monday is the second day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي دَرْسٌ يَوْمَ الِاثْنَيْنِ.",
+      "tr": "I have a lesson on Monday.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "أَرَاكَ يَوْمَ الِاثْنَيْنِ.",
+      "tr": "See you on Monday.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الِاثْنَيْنِ",
+      "tr": "on Monday"
+     },
+     {
+      "text": "مَسَاءَ الِاثْنَيْنِ",
+      "tr": "on Monday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الِاثْنَيْنِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: a phono-semantic matching of Classical Syriac trēn bəšabbā (“two of the week”) — the dual of “one”: “the two”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the two (days)”: it is the dual of اِثْنَان (two, lesson 5), like Greek Δευτέρα (the second).",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الِاثْنَيْن — and in “on …” the genitive after يَوْمَ: يَوْمَ الِاثْنَيْنِ.",
+     "It is a frozen dual: الِاثْنَيْنِ in the genitive and accusative (the form you hear everywhere), الِاثْنَانِ in the nominative (Wiktionary); written الاثنين, without a hamza."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الِاثْنَيْنِ), or فِي يَوْمِ الِاثْنَيْنِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:thulathaa",
+   "lemma": "الثُّلَاثَاء",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.tuesday"
+   ],
+   "gender": "MASC",
+   "translit": "aṯ-ṯulāṯāʾ",
+   "forms": {
+    "N;NOM;SG;DEF": "الثُّلَاثَاءُ",
+    "N;ACC;SG;DEF": "الثُّلَاثَاءَ",
+    "N;GEN;SG;DEF": "الثُّلَاثَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Tuesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tuesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الثُّلَاثَاءِ ثَالِثُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Tuesday is the third day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "السُّوقُ مَفْتُوحٌ يَوْمَ الثُّلَاثَاءِ.",
+      "tr": "The market is open on Tuesday.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبْدَأُ الْعَمَلُ يَوْمَ الثُّلَاثَاءِ.",
+      "tr": "Work starts on Tuesday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الثُّلَاثَاءِ",
+      "tr": "on Tuesday"
+     },
+     {
+      "text": "صَبَاحَ الثُّلَاثَاءِ",
+      "tr": "on Tuesday morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الثُّلَاثَاءِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: a phono-semantic matching of Classical Syriac təlāṯā bəšabbā (“three of the week”); from the root of ثَلَاثَة (three).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From ثَلَاثَة (three) — Greek Τρίτη, “the third”. Wiktionary also accepts the spelling الثَّلَاثَاء (aṯ-ṯalāṯāʾ).",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الثُّلَاثَاء — and in “on …” the genitive after يَوْمَ: يَوْمَ الثُّلَاثَاءِ."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الثُّلَاثَاءِ), or فِي يَوْمِ الثُّلَاثَاءِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:arbiaa",
+   "lemma": "الْأَرْبِعَاء",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.wednesday"
+   ],
+   "gender": "MASC",
+   "translit": "al-ʾarbiʿāʾ",
+   "forms": {
+    "N;NOM;SG;DEF": "الْأَرْبِعَاءُ",
+    "N;ACC;SG;DEF": "الْأَرْبِعَاءَ",
+    "N;GEN;SG;DEF": "الْأَرْبِعَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Wednesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.wednesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الْأَرْبِعَاءِ رَابِعُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Wednesday is the fourth day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "نَلْتَقِي يَوْمَ الْأَرْبِعَاءِ.",
+      "tr": "We’re meeting on Wednesday.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي امْتِحَانٌ يَوْمَ الْأَرْبِعَاءِ.",
+      "tr": "I have an exam on Wednesday.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الْأَرْبِعَاءِ",
+      "tr": "on Wednesday"
+     },
+     {
+      "text": "مَسَاءَ الْأَرْبِعَاءِ",
+      "tr": "on Wednesday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الْأَرْبِعَاءِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: a phono-semantic matching of Classical Syriac ʔarbəʕā bəšabbā (“four of the week”); from the root of أَرْبَعَة (four).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From أَرْبَعَة (four) — Greek Τετάρτη, “the fourth”. The same letters are also a plural of رَبِيع, spring (Wiktionary).",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الْأَرْبِعَاء — and in “on …” the genitive after يَوْمَ: يَوْمَ الْأَرْبِعَاءِ.",
+     "Pronounced al-ʾarbiʿāʾ, with i: not like أَرْبَعَة (ʾarbaʿa)."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْأَرْبِعَاءِ), or فِي يَوْمِ الْأَرْبِعَاءِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:khamis",
+   "lemma": "الْخَمِيس",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.thursday"
+   ],
+   "gender": "MASC",
+   "translit": "al-ḫamīs",
+   "forms": {
+    "N;NOM;SG;DEF": "الْخَمِيسُ",
+    "N;ACC;SG;DEF": "الْخَمِيسَ",
+    "N;GEN;SG;DEF": "الْخَمِيسِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Thursday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.thursday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الْخَمِيسِ خَامِسُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Thursday is the fifth day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "الْخَمِيسُ آخِرُ يَوْمِ عَمَلٍ فِي بُلْدَانٍ عَرَبِيَّةٍ كَثِيرَةٍ.",
+      "tr": "Thursday is the last working day in many Arab countries.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "نَخْرُجُ مَعَ الْأَصْدِقَاءِ مَسَاءَ الْخَمِيسِ.",
+      "tr": "We go out with friends on Thursday evening.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الْخَمِيسِ",
+      "tr": "on Thursday"
+     },
+     {
+      "text": "مَسَاءَ الْخَمِيسِ",
+      "tr": "on Thursday evening (the start of the weekend in many countries)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الْخَمِيسِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: from the root of خَمْس (five) in the pattern فَعِيل, a phono-semantic matching of Classical Syriac ḥammeš bəšabbā (“five of the week”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From خَمْسَة (five) — Greek Πέμπτη, “the fifth”.",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الْخَمِيس — and in “on …” the genitive after يَوْمَ: يَوْمَ الْخَمِيسِ."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْخَمِيسِ), or فِي يَوْمِ الْخَمِيسِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:jumua",
+   "lemma": "الْجُمُعَة",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.friday"
+   ],
+   "gender": "FEM",
+   "translit": "al-jumuʿa",
+   "forms": {
+    "N;NOM;SG;DEF": "الْجُمُعَةُ",
+    "N;ACC;SG;DEF": "الْجُمُعَةَ",
+    "N;GEN;SG;DEF": "الْجُمُعَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the days and months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Friday — the day of the congregational prayer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.friday"
+     },
+     {
+      "id": "s2",
+      "def": "week (Wiktionary: جُمُعَة)",
+      "register": [
+       "dated"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ الْجُمُعَةِ سَادِسُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Friday is the sixth day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا نَعْمَلُ يَوْمَ الْجُمُعَةِ.",
+      "tr": "We don’t work on Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "صَلَاةُ الْجُمُعَةِ عِنْدَ الظُّهْرِ.",
+      "tr": "The Friday prayer is at noon.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ الْجُمُعَةِ",
+      "tr": "on Friday"
+     },
+     {
+      "text": "صَلَاةُ الْجُمُعَةِ",
+      "tr": "the Friday prayer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ الْجُمُعَةِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: the definite form of جُمُعَة, from جَمَعَ (“to gather, to assemble”) — the day of the congregational prayer; it displaced the old name عَرُوبَة.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From جَمَعَ, “to gather”: Friday is the day of gathering for the noon prayer; جُمُعَة can also mean “week” (Wiktionary).",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: الْجُمُعَة — and in “on …” the genitive after يَوْمَ: يَوْمَ الْجُمُعَةِ.",
+     "Feminine (it ends in ة): الْجُمُعَةُ الْقَادِمَةُ (next Friday). Also spelled الْجُمْعَة."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْجُمُعَةِ), or فِي يَوْمِ الْجُمُعَةِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:sabt",
+   "lemma": "السَّبْت",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.saturday"
+   ],
+   "gender": "MASC",
+   "translit": "as-sabt",
+   "forms": {
+    "N;NOM;SG;DEF": "السَّبْتُ",
+    "N;ACC;SG;DEF": "السَّبْتَ",
+    "N;GEN;SG;DEF": "السَّبْتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A day of the week and its rhythm: work, market, prayer, rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Saturday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.saturday"
+     },
+     {
+      "id": "s2",
+      "def": "the Sabbath",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَوْمُ السَّبْتِ سَابِعُ أَيَّامِ الْأُسْبُوعِ.",
+      "tr": "Saturday is the seventh day of the week in the Arabic count of the days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "نَذْهَبُ إِلَى السُّوقِ يَوْمَ السَّبْتِ.",
+      "tr": "We go to the market on Saturday.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّبْتُ يَوْمُ رَاحَةٍ عِنْدَ الْيَهُودِ.",
+      "tr": "The Sabbath is a day of rest for Jews.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "يَوْمَ السَّبْتِ",
+      "tr": "on Saturday"
+     },
+     {
+      "text": "صَبَاحَ السَّبْتِ",
+      "tr": "on Saturday morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name is in use; يَوْمُ السَّبْتِ is the same word with “day” in front.",
+    "etymology": {
+     "text": "Wiktionary: the definite verbal noun of سَبَتَ (“to rest, to cease”), matching Classical Syriac šabbəṯā; the religious sense is likely from Hebrew שַׁבָּת; ultimately Proto-Semitic *ṯabat- (“to be still”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שַׁבָּת, Greek Σάββατο and Russian суббота are the same word.",
+     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+    ],
+    "pitfalls": [
+     "Always with the article: السَّبْت — and in “on …” the genitive after يَوْمَ: يَوْمَ السَّبْتِ."
+    ],
+    "subtleties": [
+     "On a day = يَوْمَ + the day in the genitive (يَوْمَ السَّبْتِ), or فِي يَوْمِ السَّبْتِ; the day name never stands without the article."
+    ]
+   }
+  },
+  {
+   "id": "ar:nihayat_usbu",
+   "lemma": "نِهَايَة الْأُسْبُوع",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.weekend"
+   ],
+   "gender": "FEM",
+   "translit": "nihāyat al-ʾusbūʿ",
+   "forms": {
+    "N;NOM;SG;DEF": "نِهَايَةُ الْأُسْبُوعِ",
+    "N;ACC;SG;DEF": "نِهَايَةَ الْأُسْبُوعِ",
+    "N;GEN;SG;DEF": "نِهَايَةِ الْأُسْبُوعِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Free days: family visits, trips, sleeping late.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the weekend (lit. “the end of the week”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.weekend"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَفْعَلُ فِي نِهَايَةِ الْأُسْبُوعِ؟",
+      "tr": "What do you do at the weekend?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "نُسَافِرُ إِلَى الْقَرْيَةِ فِي نِهَايَةِ الْأُسْبُوعِ.",
+      "tr": "We go to the village at the weekend.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تَبْدَأُ نِهَايَةُ الْأُسْبُوعِ يَوْمَ الْجُمُعَةِ.",
+      "tr": "The weekend starts on Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي نِهَايَةِ الْأُسْبُوعِ",
+      "tr": "at the weekend"
+     },
+     {
+      "text": "عُطْلَةُ نِهَايَةِ الْأُسْبُوعِ",
+      "tr": "the weekend (as days off)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عُطْلَةُ نِهَايَةِ الْأُسْبُوعِ",
+      "register": "neutral",
+      "nuance": "the weekend as days off — unambiguous"
+     },
+     {
+      "word": "وِيكِنْد",
+      "register": "colloquial",
+      "nuance": "from English weekend — heard in the Levant and the Gulf"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from نِهَايَة (end) + أُسْبُوع (week).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Built like English week-end and German Wochenende — but in Arabic order: “end (of) the week”."
+    ],
+    "pitfalls": [
+     "A construct: the case is on نِهَايَة (نِهَايَةُ / نِهَايَةَ / نِهَايَةِ), الْأُسْبُوعِ stays genitive.",
+     "Literally “the end of the week”: it can also mean the last days of a week; for the days off عُطْلَةُ نِهَايَةِ الْأُسْبُوعِ is unambiguous."
+    ],
+    "subtleties": [
+     "Which days? In most Arab countries Friday and Saturday; in Morocco, Tunisia and Lebanon Saturday and Sunday."
+    ]
+   }
+  },
+  {
+   "id": "ar:yawm",
+   "lemma": "يَوْم",
+   "pos": "NOUN",
+   "senses": [
+    "time.day"
+   ],
+   "gender": "MASC",
+   "root": "ي و م",
+   "translit": "yawm",
+   "forms": {
+    "N;NOM;SG;INDF": "يَوْمٌ",
+    "N;NOM;PL;INDF": "أَيَّامٌ",
+    "N;NOM;DU;INDF": "يَوْمَانِ",
+    "N;NOM;SG;DEF": "الْيَوْمُ",
+    "N;NOM;PL;DEF": "الْأَيَّامُ",
+    "N;NOM;DU;DEF": "الْيَوْمَانِ",
+    "N;ACC;SG;INDF": "يَوْمًا",
+    "N;ACC;PL;INDF": "أَيَّامًا",
+    "N;ACC;DU;INDF": "يَوْمَيْنِ",
+    "N;ACC;SG;DEF": "الْيَوْمَ",
+    "N;ACC;PL;DEF": "الْأَيَّامَ",
+    "N;ACC;DU;DEF": "الْيَوْمَيْنِ",
+    "N;GEN;SG;INDF": "يَوْمٍ",
+    "N;GEN;PL;INDF": "أَيَّامٍ",
+    "N;GEN;DU;INDF": "يَوْمَيْنِ",
+    "N;GEN;SG;DEF": "الْيَوْمِ",
+    "N;GEN;PL;DEF": "الْأَيَّامِ",
+    "N;GEN;DU;DEF": "الْيَوْمَيْنِ",
+    "N;NOM;SG;CONST": "يَوْمُ",
+    "N;ACC;SG;CONST": "يَوْمَ",
+    "N;GEN;SG;CONST": "يَوْمِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The basic unit of life: days of work, days of rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "day (24 hours; also daytime)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.day"
+     },
+     {
+      "id": "s2",
+      "def": "يَوْمَ + day name: on (that day)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "يَوْمُ الدِّينِ / يَوْمُ الْقِيَامَةِ — the Day of Judgement",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْأُسْبُوعِ سَبْعَةُ أَيَّامٍ.",
+      "tr": "There are seven days in a week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْمَلُ كُلَّ يَوْمٍ.",
+      "tr": "I work every day.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "يَوْمَ الْجُمُعَةِ لَا نَعْمَلُ.",
+      "tr": "On Friday we don’t work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "مَالِكِ يَوْمِ الدِّينِ",
+      "tr": "Master of the Day of Judgement (Qurʾān 1:4)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كُلَّ يَوْمٍ",
+      "tr": "every day"
+     },
+     {
+      "text": "يَوْمًا مَا",
+      "tr": "some day"
+     },
+     {
+      "text": "يَوْمَ الْأَحَدِ",
+      "tr": "on Sunday"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "يَوْمٌ لَكَ وَيَوْمٌ عَلَيْكَ",
+      "tr": "a day for you and a day against you",
+      "kind": "proverb",
+      "meaning": "luck changes; you win some, you lose some",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "نَهَار",
+      "register": "neutral",
+      "nuance": "daytime, the day as opposed to the night"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "لَيْلَة",
+      "note": "night"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: inherited from Proto-Semitic *yawm-. Plural أَيَّام.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew יוֹם (yom) is the same word.",
+     "الْيَوْمَ, “today”, is simply “the day” in the accusative."
+    ],
+    "pitfalls": [
+     "Plural أَيَّام; after 3–10 the genitive plural: ثَلَاثَةُ أَيَّامٍ (a masculine noun takes the number with ة).",
+     "الْيَوْمُ (-u: the day, today as subject: الْيَوْمُ الْأَحَدُ) vs الْيَوْمَ (-a: the adverb “today”)."
+    ],
+    "subtleties": [
+     "يَوْمَ + day name, with no preposition, means “on”: يَوْمَ السَّبْتِ = on Saturday."
+    ]
+   }
+  },
+  {
+   "id": "ar:layl",
+   "lemma": "لَيْل",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.night"
+   ],
+   "gender": "MASC",
+   "root": "ل ي ل",
+   "translit": "layl",
+   "forms": {
+    "N;NOM;SG;INDF": "لَيْلٌ",
+    "N;NOM;SG;DEF": "اللَّيْلُ",
+    "N;ACC;SG;INDF": "لَيْلًا",
+    "N;ACC;SG;DEF": "اللَّيْلَ",
+    "N;GEN;SG;INDF": "لَيْلٍ",
+    "N;GEN;SG;DEF": "اللَّيْلِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Darkness, sleep, stars — the night as a time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "night, night-time (uncountable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.night"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اللَّيْلُ طَوِيلٌ فِي الشِّتَاءِ.",
+      "tr": "The night is long in winter.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْمَلُ فِي اللَّيْلِ.",
+      "tr": "I work at night.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا أَشْرَبُ الْقَهْوَةَ لَيْلًا.",
+      "tr": "I don’t drink coffee at night.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي اللَّيْلِ",
+      "tr": "at night"
+     },
+     {
+      "text": "لَيْلًا وَنَهَارًا",
+      "tr": "night and day"
+     },
+     {
+      "text": "مُنْتَصَفُ اللَّيْلِ",
+      "tr": "midnight"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَيْلَة",
+      "register": "neutral",
+      "nuance": "a (single) night; tonight"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "نَهَار",
+      "note": "daytime"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: inherited from Proto-Semitic *laylay-.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לַיְלָה (láyla) is the same word; the girl’s name Layla (Leila) is “night”."
+    ],
+    "pitfalls": [
+     "لَيْل is night-time and has no plural; one night, a night = لَيْلَة."
+    ],
+    "subtleties": [
+     "لَيْلًا (accusative) = by night — like نَهَارًا (by day) and صَبَاحًا (in the morning)."
+    ]
+   }
+  },
+  {
+   "id": "ar:layla",
+   "lemma": "لَيْلَة",
+   "pos": "NOUN",
+   "senses": [
+    "time.night"
+   ],
+   "gender": "FEM",
+   "root": "ل ي ل",
+   "translit": "layla",
+   "forms": {
+    "N;NOM;SG;INDF": "لَيْلَةٌ",
+    "N;NOM;PL;INDF": "لَيَالٍ",
+    "N;NOM;DU;INDF": "لَيْلَتَانِ",
+    "N;NOM;SG;DEF": "اللَّيْلَةُ",
+    "N;NOM;PL;DEF": "اللَّيَالِي",
+    "N;NOM;DU;DEF": "اللَّيْلَتَانِ",
+    "N;ACC;SG;INDF": "لَيْلَةً",
+    "N;ACC;PL;INDF": "لَيَالِيَ",
+    "N;ACC;DU;INDF": "لَيْلَتَيْنِ",
+    "N;ACC;SG;DEF": "اللَّيْلَةَ",
+    "N;ACC;PL;DEF": "اللَّيَالِيَ",
+    "N;ACC;DU;DEF": "اللَّيْلَتَيْنِ",
+    "N;GEN;SG;INDF": "لَيْلَةٍ",
+    "N;GEN;PL;INDF": "لَيَالٍ",
+    "N;GEN;DU;INDF": "لَيْلَتَيْنِ",
+    "N;GEN;SG;DEF": "اللَّيْلَةِ",
+    "N;GEN;PL;DEF": "اللَّيَالِي",
+    "N;GEN;DU;DEF": "اللَّيْلَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One night: a night in a hotel, a festive evening, tonight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a night (one night)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.night"
+     },
+     {
+      "id": "s2",
+      "def": "اللَّيْلَةَ — tonight",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "an evening party, a soirée (Wiktionary)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَضَيْنَا لَيْلَةً فِي الْفُنْدُقِ.",
+      "tr": "We spent a night at the hotel.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "لَيْلَةٌ سَعِيدَةٌ!",
+      "tr": "Have a nice night!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ اللَّيْلَةَ.",
+      "tr": "I’m travelling tonight.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اللَّيْلَةَ",
+      "tr": "tonight"
+     },
+     {
+      "text": "لَيْلَةَ أَمْسِ",
+      "tr": "last night"
+     },
+     {
+      "text": "لَيْلَةٌ سَعِيدَةٌ",
+      "tr": "good night (a wish)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَيْل",
+      "register": "neutral",
+      "nuance": "night-time in general (uncountable)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Proto-Semitic *laylay-; it can be analysed as a singulative of لَيْل (night-time) + ـَة. Cognates: Classical Syriac lēlyā, Aramaic lēləyā, Hebrew לַיְלָה (láyla).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Thousand and One Nights is ألف ليلة وليلة in Arabic."
+    ],
+    "pitfalls": [
+     "Plural لَيَالٍ: -in in the nominative and genitive, لَيَالِيَ in the accusative, اللَّيَالِي with the article.",
+     "اللَّيْلَةَ (adverb) is “tonight”, not “the night” in general (that is اللَّيْلُ)."
+    ],
+    "subtleties": [
+     "One night = لَيْلَةٌ; at night (in general) = فِي اللَّيْلِ or لَيْلًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:sabah",
+   "lemma": "صَبَاح",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.morning"
+   ],
+   "gender": "MASC",
+   "root": "ص ب ح",
+   "translit": "ṣabāḥ",
+   "forms": {
+    "N;NOM;SG;INDF": "صَبَاحٌ",
+    "N;NOM;SG;DEF": "الصَّبَاحُ",
+    "N;ACC;SG;INDF": "صَبَاحًا",
+    "N;ACC;SG;DEF": "الصَّبَاحَ",
+    "N;GEN;SG;INDF": "صَبَاحٍ",
+    "N;GEN;SG;DEF": "الصَّبَاحِ",
+    "N;ACC;SG;CONST": "صَبَاحَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee, light, the start of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "morning (from sunrise to noon)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الشَّايَ فِي الصَّبَاحِ.",
+      "tr": "I drink tea in the morning.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ إِلَى الْعَمَلِ صَبَاحًا.",
+      "tr": "I go to work in the morning.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "صَبَاحُ الْخَيْرِ!",
+      "tr": "Good morning!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الصَّبَاحِ",
+      "tr": "in the morning"
+     },
+     {
+      "text": "صَبَاحًا",
+      "tr": "in the morning; a.m."
+     },
+     {
+      "text": "كُلَّ صَبَاحٍ",
+      "tr": "every morning"
+     },
+     {
+      "text": "صَبَاحَ الْيَوْمِ",
+      "tr": "this morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "صُبْح",
+      "register": "formal",
+      "nuance": "morning, daybreak — as in صَلَاةُ الصُّبْحِ (the dawn prayer)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مَسَاء",
+      "note": "evening"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ص ب ح; Wiktionary compares Geʿez ጽበሕ (ṣəbäḥ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "صَبَاحُ الْخَيْرِ (good morning, lesson 2) is answered with صَبَاحُ النُّورِ, “morning of light”."
+    ],
+    "pitfalls": [
+     "صَبَاحًا (in the morning) is the accusative used as an adverb; on clocks and timetables ص stands for it (a.m.)."
+    ],
+    "subtleties": [
+     "Wiktionary: the time from sunrise to noon."
+    ]
+   }
+  },
+  {
+   "id": "ar:zuhr",
+   "lemma": "ظُهْر",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.noon"
+   ],
+   "gender": "MASC",
+   "root": "ظ ه ر",
+   "translit": "ẓuhr",
+   "forms": {
+    "N;NOM;SG;INDF": "ظُهْرٌ",
+    "N;NOM;SG;DEF": "الظُّهْرُ",
+    "N;ACC;SG;INDF": "ظُهْرًا",
+    "N;ACC;SG;DEF": "الظُّهْرَ",
+    "N;GEN;SG;INDF": "ظُهْرٍ",
+    "N;GEN;SG;DEF": "الظُّهْرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The sun at its highest: lunch, heat, the noon prayer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "noon, midday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.noon"
+     },
+     {
+      "id": "s2",
+      "def": "the noon prayer (صَلَاةُ الظُّهْرِ)",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ الْغَدَاءَ عِنْدَ الظُّهْرِ.",
+      "tr": "We have lunch at noon.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعُودُ أَبِي إِلَى الْبَيْتِ ظُهْرًا.",
+      "tr": "My father comes home at noon.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "صَلَاةُ الظُّهْرِ",
+      "tr": "the noon prayer",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِنْدَ الظُّهْرِ",
+      "tr": "at noon"
+     },
+     {
+      "text": "بَعْدَ الظُّهْرِ",
+      "tr": "in the afternoon"
+     },
+     {
+      "text": "قَبْلَ الظُّهْرِ",
+      "tr": "in the morning, a.m."
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ظَهِيرَة",
+      "register": "formal",
+      "nuance": "midday, the hot middle of the day"
+     },
+     {
+      "word": "مُنْتَصَفُ النَّهَارِ",
+      "register": "formal",
+      "nuance": "midday (lit. the middle of the day)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: cognate to Hebrew צָהֳרַיִם (tsohoráyim, noon) and Aramaic ṭahrā. Plural أَظْهَار.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew צָהֳרַיִם (noon) is its cousin.",
+     "Times of day are named after the prayers: الْفَجْرُ (dawn), الظُّهْرُ (noon), الْعَصْرُ (afternoon), الْمَغْرِبُ (sunset), الْعِشَاءُ (night)."
+    ],
+    "pitfalls": [
+     "ظُهْر (ẓuhr, noon) and ظَهْر (ẓahr, back) differ in one vowel (Wiktionary)."
+    ],
+    "subtleties": [
+     "“At noon” is عِنْدَ الظُّهْرِ or ظُهْرًا; Wiktionary also lists “afternoon, p.m.” as a sense."
+    ]
+   }
+  },
+  {
+   "id": "ar:bada_zuhr",
+   "lemma": "بَعْدَ الظُّهْرِ",
+   "pos": "ADV",
+   "senses": [
+    "time.afternoon"
+   ],
+   "translit": "baʿda ẓ-ẓuhr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The quiet hours after lunch: tea, homework, a nap.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the afternoon; the afternoon (lit. “after noon”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.afternoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَدْرُسُ بَعْدَ الظُّهْرِ.",
+      "tr": "I study in the afternoon.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "نَشْرَبُ الشَّايَ بَعْدَ الظُّهْرِ.",
+      "tr": "We drink tea in the afternoon.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَحَلُّ مُغْلَقٌ بَعْدَ الظُّهْرِ.",
+      "tr": "The shop is closed in the afternoon.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "السَّاعَةُ الثَّالِثَةُ بَعْدَ الظُّهْرِ",
+      "tr": "three o’clock in the afternoon (3 p.m.)"
+     },
+     {
+      "text": "فَتْرَةُ مَا بَعْدَ الظُّهْرِ",
+      "tr": "the afternoon (as a period)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الْعَصْر",
+      "register": "neutral",
+      "nuance": "late afternoon — the time of the afternoon prayer"
+     },
+     {
+      "word": "بَعْدَ الظَّهِيرَةِ",
+      "register": "formal",
+      "nuance": "in the afternoon"
+     }
+    ],
+    "etymology": {
+     "text": "بَعْدَ (after) + الظُّهْرِ (noon): literally “after noon”; Wiktionary gives ظُهْر also the sense “afternoon, p.m.”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Built like English after-noon and German Nachmittag; Greek απόγευμα is “after the meal”."
+    ],
+    "pitfalls": [
+     "A fixed phrase: بَعْدَ never changes and الظُّهْرِ stays genitive; do not put فِي in front of it."
+    ],
+    "subtleties": [
+     "In timetables it is p.m.; the morning hours are قَبْلَ الظُّهْرِ (a.m.)."
+    ]
+   }
+  },
+  {
+   "id": "ar:masa",
+   "lemma": "مَسَاء",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.evening"
+   ],
+   "gender": "MASC",
+   "root": "م س ي",
+   "translit": "masāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "مَسَاءٌ",
+    "N;NOM;SG;DEF": "الْمَسَاءُ",
+    "N;ACC;SG;INDF": "مَسَاءً",
+    "N;ACC;SG;DEF": "الْمَسَاءَ",
+    "N;GEN;SG;INDF": "مَسَاءٍ",
+    "N;GEN;SG;DEF": "الْمَسَاءِ",
+    "N;ACC;SG;CONST": "مَسَاءَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dinner, family, the day winding down.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.evening"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَعُودُ إِلَى الْبَيْتِ فِي الْمَسَاءِ.",
+      "tr": "I come home in the evening.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ الْعَشَاءَ مَسَاءً.",
+      "tr": "We have dinner in the evening.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "مَسَاءُ الْخَيْرِ!",
+      "tr": "Good evening!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْمَسَاءِ",
+      "tr": "in the evening"
+     },
+     {
+      "text": "مَسَاءً",
+      "tr": "in the evening; p.m."
+     },
+     {
+      "text": "مَسَاءَ أَمْسِ",
+      "tr": "yesterday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَشِيَّة",
+      "register": "literary",
+      "nuance": "evening, eve"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَبَاح",
+      "note": "morning"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Proto-Semitic *mušy-; synchronically from the root م س ي. Plural أَمْسِيَة.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "On clocks and timetables م stands for مَسَاءً (p.m.) and ص for صَبَاحًا (a.m.)."
+    ],
+    "pitfalls": [
+     "The adverb مَسَاءً (in the evening) has no extra alif after the hamza."
+    ],
+    "subtleties": [
+     "مَسَاءُ الْخَيْرِ (good evening) is said from the afternoon on."
+    ]
+   }
+  },
+  {
+   "id": "ar:alyawma",
+   "lemma": "الْيَوْمَ",
+   "pos": "ADV",
+   "senses": [
+    "time.today"
+   ],
+   "root": "ي و م",
+   "translit": "al-yawma",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Here and now: today’s plans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "today",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.today"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْيَوْمَ أَبْقَى فِي الْبَيْتِ.",
+      "tr": "Today I’m staying at home.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَطْبُخُ الْيَوْمَ؟",
+      "tr": "What are you cooking today?",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "الْيَوْمَ عِيدُ مِيلَادِي.",
+      "tr": "Today is my birthday.",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْيَوْمَ صَبَاحًا",
+      "tr": "this morning (today in the morning)"
+     },
+     {
+      "text": "مُنْذُ الْيَوْمِ",
+      "tr": "from today on"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: فِي هٰذَا الْيَوْمِ means “on this day”.",
+    "etymology": {
+     "text": "Wiktionary: from اَلـ (al-) + يَوْم (day) — “the day”, in the accusative used as an adverb.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew הַיּוֹם (hayom), “the day”, is built the same way; Greek σήμερα and German heute also come from “this day”."
+    ],
+    "pitfalls": [
+     "الْيَوْمَ (-a) is the adverb; الْيَوْمُ (-u) is “the day” as a subject: الْيَوْمُ الْأَحَدُ (today is Sunday)."
+    ],
+    "subtleties": [
+     "It can stand at the start or at the end: الْيَوْمَ أَعْمَلُ = أَعْمَلُ الْيَوْمَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghadan",
+   "lemma": "غَدًا",
+   "pos": "ADV",
+   "senses": [
+    "time.tomorrow"
+   ],
+   "root": "غ د و",
+   "translit": "ġadan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plans and promises.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomorrow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tomorrow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُسَافِرُ غَدًا.",
+      "tr": "I’m travelling tomorrow.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "نَلْتَقِي غَدًا فِي الْمَقْهَى.",
+      "tr": "We’ll meet tomorrow at the café.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "غَدًا يَوْمُ السَّبْتِ.",
+      "tr": "Tomorrow is Saturday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غَدًا صَبَاحًا",
+      "tr": "tomorrow morning"
+     },
+     {
+      "text": "بَعْدَ غَدٍ",
+      "tr": "the day after tomorrow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "إِنَّ غَدًا لِنَاظِرِهِ قَرِيبُ",
+      "tr": "tomorrow is near for the one who watches for it",
+      "kind": "proverb",
+      "meaning": "what you wait for will come soon; time will tell",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "بُكْرَة",
+      "register": "colloquial",
+      "nuance": "tomorrow — the spoken word in the Levant and Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of غَد (ġad, “morrow; tomorrow”, a noun).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "بَعْدَ غَدٍ is “the day after tomorrow”."
+    ],
+    "pitfalls": [
+     "غَدًا is the adverb; the noun is غَد: بَعْدَ غَدٍ, الْغَدُ (the morrow)."
+    ],
+    "subtleties": [
+     "The present tense with غَدًا already means the future: أُسَافِرُ غَدًا = I’m travelling tomorrow."
+    ]
+   }
+  },
+  {
+   "id": "ar:amsi",
+   "lemma": "أَمْسِ",
+   "pos": "ADV",
+   "senses": [
+    "time.yesterday"
+   ],
+   "translit": "ʾamsi",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What just happened.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yesterday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.yesterday"
+     },
+     {
+      "id": "s2",
+      "def": "lately, recently (Wiktionary)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "كُنْتُ فِي الْبَيْتِ أَمْسِ.",
+      "tr": "I was at home yesterday.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلَ أَخِي أَمْسِ.",
+      "tr": "My brother arrived yesterday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَمْسِ كَانَ الْجَوُّ بَارِدًا.",
+      "tr": "Yesterday the weather was cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَسَاءَ أَمْسِ",
+      "tr": "yesterday evening"
+     },
+     {
+      "text": "أَوَّلُ أَمْسِ",
+      "tr": "the day before yesterday"
+     },
+     {
+      "text": "بِالْأَمْسِ",
+      "tr": "yesterday (with the noun)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الْبَارِحَة",
+      "register": "neutral",
+      "nuance": "yesterday, last night — and the source of the spoken مبارح (Levant)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Proto-Semitic *ʔamšay- (“yesterday”); cognate with Akkadian amšālim. Compare Hebrew אֶמֶשׁ (last night).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אֶמֶשׁ (emesh, last night) is a cousin."
+    ],
+    "pitfalls": [
+     "أَمْسِ ends in -i and never changes; with the article it is a noun: الْأَمْسُ, بِالْأَمْسِ."
+    ],
+    "subtleties": [
+     "With yesterday the verb is in the past (lesson C01); “was” is كَانَ: كُنْتُ, كَانَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:alana",
+   "lemma": "الْآنَ",
+   "pos": "ADV",
+   "senses": [
+    "adv.now"
+   ],
+   "translit": "al-ʾāna",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right now, this moment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "now",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.now"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا فِي الْعَمَلِ الْآنَ.",
+      "tr": "I’m at work now.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ أَنْتَ الْآنَ؟",
+      "tr": "Where are you now?",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "الْآنَ نَأْكُلُ.",
+      "tr": "Now we eat.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَتَّى الْآنَ",
+      "tr": "until now, so far"
+     },
+     {
+      "text": "مِنَ الْآنَ",
+      "tr": "from now on"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَالًا",
+      "register": "neutral",
+      "nuance": "immediately, right away"
+     },
+     {
+      "word": "دِلْوَقْتِي",
+      "register": "colloquial",
+      "nuance": "now — Egyptian Arabic",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the definite accusative of آن (ʾān, “time”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the time” — like Greek τώρα, a word for a moment of time."
+    ],
+    "pitfalls": [
+     "Always with al- and -a: الْآنَ (al-ʾāna), never *آنَ alone."
+    ],
+    "subtleties": [
+     "Often at the end: أَنَا مَشْغُولٌ الْآنَ (I’m busy now)."
+    ]
+   }
+  },
+  {
+   "id": "ar:lahiqan",
+   "lemma": "لَاحِقًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.later"
+   ],
+   "root": "ل ح ق",
+   "translit": "lāḥiqan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not now — afterwards.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later, afterwards",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَتَكَلَّمُ لَاحِقًا.",
+      "tr": "We’ll talk later.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعُودُ لَاحِقًا.",
+      "tr": "I’ll come back later.",
+      "register": "neutral",
+      "context": "visit",
+      "sense": "s1"
+     },
+     {
+      "text": "أَرَاكَ لَاحِقًا!",
+      "tr": "See you later!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَرَاكَ لَاحِقًا",
+      "tr": "see you later"
+     },
+     {
+      "text": "لَاحِقًا الْيَوْمَ",
+      "tr": "later today"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِيمَا بَعْدُ",
+      "register": "formal",
+      "nuance": "later on, subsequently"
+     },
+     {
+      "word": "بَعْدَيْن",
+      "register": "colloquial",
+      "nuance": "later — spoken (Levant, Egypt)"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of لَاحِق (“following, subsequent”), the active participle of لَحِقَ (“to catch up with”) (Wiktionary: لَاحِق).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its root means “to follow, to catch up”: later is what follows."
+    ],
+    "pitfalls": [
+     "Not “late”: لَاحِقًا = afterwards; late = مُتَأَخِّرًا."
+    ],
+    "subtleties": [
+     "أَرَاكَ لَاحِقًا (lesson 2) is a fixed goodbye."
+    ]
+   }
+  },
+  {
+   "id": "ar:qariban",
+   "lemma": "قَرِيبًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.soon"
+   ],
+   "root": "ق ر ب",
+   "translit": "qarīban",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Anticipation: it will happen soon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soon, shortly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.soon"
+     },
+     {
+      "id": "s2",
+      "def": "near, nearby (Wiktionary)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَصِلُ الْقِطَارُ قَرِيبًا.",
+      "tr": "The train arrives soon.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى اللِّقَاءِ قَرِيبًا!",
+      "tr": "See you soon!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "يَسْكُنُ قَرِيبًا مِنَ الْمَدْرَسَةِ.",
+      "tr": "He lives near the school.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَرِيبًا جِدًّا",
+      "tr": "very soon"
+     },
+     {
+      "text": "عَمَّا قَرِيبٍ",
+      "tr": "before long"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَمَّا قَرِيبٍ",
+      "register": "formal",
+      "nuance": "before long, shortly"
+     },
+     {
+      "word": "بَعْدَ قَلِيلٍ",
+      "register": "neutral",
+      "nuance": "in a little while"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: an adverb; compare قَرُبَ (“to be near”) — the accusative of قَرِيب (near, lesson 12).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Near in space and soon in time are one root: قَرِيب."
+    ],
+    "pitfalls": [
+     "قَرِيبٌ (adjective: near) agrees with its noun; قَرِيبًا (adverb: soon) never changes."
+    ],
+    "subtleties": [
+     "Greek has two words (σύντομα / κοντά); Arabic uses one form for “soon” and “nearby”."
+    ]
+   }
+  },
+  {
+   "id": "ar:mubakkiran",
+   "lemma": "مُبَكِّرًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.early"
+   ],
+   "root": "ب ك ر",
+   "translit": "mubakkiran",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Alarm clocks and empty streets.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "early",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.early"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَسْتَيْقِظُ مُبَكِّرًا.",
+      "tr": "I get up early.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلْنَا مُبَكِّرًا.",
+      "tr": "We arrived early.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يَخْرُجُ أَبِي مِنَ الْبَيْتِ مُبَكِّرًا.",
+      "tr": "My father leaves the house early.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُبَكِّرًا جِدًّا",
+      "tr": "very early"
+     },
+     {
+      "text": "فِي وَقْتٍ مُبَكِّرٍ",
+      "tr": "at an early hour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَاكِرًا",
+      "register": "neutral",
+      "nuance": "early"
+     },
+     {
+      "word": "بَدْرِي",
+      "register": "colloquial",
+      "nuance": "early — spoken (Egypt, Levant)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مُتَأَخِّرًا",
+      "note": "late"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of مُبَكِّر (“early”), the active participle of بَكَّرَ; root ب ك ر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives بِكْر (first-born) and بُكْرَة (early morning — and the spoken word for “tomorrow”)."
+    ],
+    "pitfalls": [
+     "The k is doubled: mubakkiran."
+    ],
+    "subtleties": [
+     "As an adjective it agrees: الْقِطَارُ مُبَكِّرٌ (the train is early)."
+    ]
+   }
+  },
+  {
+   "id": "ar:mutaakhkhiran",
+   "lemma": "مُتَأَخِّرًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.late"
+   ],
+   "root": "ء خ ر",
+   "translit": "mutaʾaḫḫiran",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary lists مُتَأَخِّرًا only as the accusative of مُتَأَخِّر, which it glosses “late; delayed”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Apologies and missed buses.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "late",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.late"
+     }
+    ],
+    "examples": [
+     {
+      "text": "وَصَلَ الْقِطَارُ مُتَأَخِّرًا.",
+      "tr": "The train arrived late.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَامُ مُتَأَخِّرًا.",
+      "tr": "I go to bed late.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا آسِفٌ، جِئْتُ مُتَأَخِّرًا.",
+      "tr": "I’m sorry, I came late.",
+      "register": "neutral",
+      "context": "apology",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُتَأَخِّرًا جِدًّا",
+      "tr": "very late, too late"
+     },
+     {
+      "text": "وَصَلَ مُتَأَخِّرًا",
+      "tr": "to arrive late"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِي وَقْتٍ مُتَأَخِّرٍ",
+      "register": "formal",
+      "nuance": "at a late hour"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مُبَكِّرًا",
+      "note": "early"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of مُتَأَخِّر (“late, delayed”), the active participle of تَأَخَّرَ (“to be late, to remain behind”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its root ء خ ر is in آخِر (last) and أَخِيرًا (finally)."
+    ],
+    "pitfalls": [
+     "Not مُؤَخَّرًا, which means “recently, lately”."
+    ],
+    "subtleties": [
+     "As an adjective it agrees: الْحَافِلَةُ مُتَأَخِّرَةٌ (the bus is late); as an adverb it stays مُتَأَخِّرًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:daiman",
+   "lemma": "دَائِمًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.always"
+   ],
+   "root": "د و م",
+   "translit": "dāʾiman",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Habits that never change.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "always",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.always"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ دَائِمًا فِي الصَّبَاحِ.",
+      "tr": "I always drink coffee in the morning.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ دَائِمًا مُتَأَخِّرٌ.",
+      "tr": "He is always late.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّكِ دَائِمًا.",
+      "tr": "I will always love you.",
+      "register": "neutral",
+      "context": "love",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "دَائِمًا وَأَبَدًا",
+      "tr": "always and forever"
+     },
+     {
+      "text": "كَمَا هُوَ دَائِمًا",
+      "tr": "as always"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دَوْمًا",
+      "register": "literary",
+      "nuance": "always"
+     },
+     {
+      "word": "عَلَى طُول",
+      "register": "colloquial",
+      "nuance": "always (also “straight on”) — spoken"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "أَبَدًا",
+      "note": "never (with a negation)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of دَائِم (“lasting, enduring”); root د و م.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives دَوَام, working hours: دَوَامٌ كَامِلٌ = full-time."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ seat: دَائِمًا (dāʾiman)."
+    ],
+    "subtleties": [
+     "It can stand before the verb or at the end of the sentence."
+    ]
+   }
+  },
+  {
+   "id": "ar:kathiran",
+   "lemma": "كَثِيرًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "root": "ك ث ر",
+   "translit": "kaṯīran",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Many times — and a lot.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "often",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     },
+     {
+      "id": "s2",
+      "def": "a lot, much",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَزُورُ جَدَّتِي كَثِيرًا.",
+      "tr": "I often visit my grandmother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "كَثِيرًا مَا نُسَافِرُ فِي الصَّيْفِ.",
+      "tr": "We often travel in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ كَثِيرًا.",
+      "tr": "He eats a lot.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَثِيرًا مَا …",
+      "tr": "it often happens that …"
+     },
+     {
+      "text": "شُكْرًا كَثِيرًا",
+      "tr": "thanks a lot (spoken)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "غَالِبًا",
+      "register": "neutral",
+      "nuance": "usually, mostly"
+     },
+     {
+      "word": "مِرَارًا",
+      "register": "formal",
+      "nuance": "repeatedly, time and again"
+     },
+     {
+      "word": "عَادَةً",
+      "register": "neutral",
+      "nuance": "usually, as a rule"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "نَادِرًا",
+      "note": "rarely"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from the root ك ث ر — the adverbial accusative of كَثِير (“many”, lesson 5).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same form كَثِيرًا is also the accusative of the adjective كَثِير (lesson 5)."
+    ],
+    "pitfalls": [
+     "كَثِيرًا مَا + verb = “often”: here مَا is not a negation."
+    ],
+    "subtleties": [
+     "After a verb it can mean “a lot” or “often”: أَقْرَأُ كَثِيرًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghaliban",
+   "lemma": "غَالِبًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "root": "غ ل ب",
+   "translit": "ġāliban",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What happens most of the time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "usually, mostly; often",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     },
+     {
+      "id": "s2",
+      "def": "most likely, probably",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "غَالِبًا أَذْهَبُ إِلَى الْعَمَلِ بِالْحَافِلَةِ.",
+      "tr": "I usually go to work by bus.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "غَالِبًا مَا نَأْكُلُ فِي الْبَيْتِ.",
+      "tr": "We mostly eat at home.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ غَالِبًا فِي الْمَكْتَبِ.",
+      "tr": "He’s probably in the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غَالِبًا مَا …",
+      "tr": "it is usually the case that …"
+     },
+     {
+      "text": "فِي الْغَالِبِ",
+      "tr": "mostly, in most cases"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَادَةً",
+      "register": "neutral",
+      "nuance": "usually, as a rule"
+     },
+     {
+      "word": "فِي الْغَالِبِ",
+      "register": "formal",
+      "nuance": "mostly, in most cases"
+     },
+     {
+      "word": "كَثِيرًا",
+      "register": "neutral",
+      "nuance": "often, a lot"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of غَالِب (“predominant, preponderant”), the active participle of غَلَبَ (“to overcome”) (Wiktionary: غَالِب).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From “to prevail”: what prevails is what usually happens; أَغْلَبِيَّة is a majority."
+    ],
+    "pitfalls": [
+     "It also means “probably”: هُوَ غَالِبًا فِي الْبَيْتِ = he’s probably at home."
+    ],
+    "subtleties": [
+     "A scale: دَائِمًا (always) – غَالِبًا (usually) – كَثِيرًا (often) – أَحْيَانًا (sometimes) – لَا … أَبَدًا (never)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahyanan",
+   "lemma": "أَحْيَانًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.sometimes"
+   ],
+   "root": "ح ي ن",
+   "translit": "ʾaḥyānan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Now and then.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sometimes",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.sometimes"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَحْيَانًا أَشْرَبُ الشَّايَ.",
+      "tr": "Sometimes I drink tea.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "نَذْهَبُ إِلَى الْمَطْعَمِ أَحْيَانًا.",
+      "tr": "We sometimes go to the restaurant.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "أَحْيَانًا يَصِلُ الْقِطَارُ مُتَأَخِّرًا.",
+      "tr": "Sometimes the train arrives late.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي بَعْضِ الْأَحْيَانِ",
+      "tr": "sometimes, at times"
+     },
+     {
+      "text": "مِنْ حِينٍ لِآخَرَ",
+      "tr": "from time to time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِي بَعْضِ الْأَحْيَانِ",
+      "register": "neutral",
+      "nuance": "sometimes (lit. in some of the times)"
+     },
+     {
+      "word": "مِنْ حِينٍ لِآخَرَ",
+      "register": "neutral",
+      "nuance": "from time to time"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of أَحْيَان (“times”), the plural of حِين (time).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “at times” — exactly the English expression."
+    ],
+    "pitfalls": [
+     "A plural noun used as an adverb: أَحْيَانًا (not *حِينًا) for “sometimes”."
+    ],
+    "subtleties": [
+     "It can open the sentence (أَحْيَانًا أَعْمَلُ لَيْلًا) or close it."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

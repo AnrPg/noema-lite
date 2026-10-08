@@ -1,24 +1,162 @@
 {
  "function": "fn.question.yesno",
  "status": "realized",
- "summary": "A German yes/no question puts the finite verb first, before the subject: Du willst eine Tomate. → Willst du eine Tomate? There is no helper verb like English “do”: the main verb itself moves to the front (Magst du Spinat? – Do you like spinach?). In speech the voice usually rises at the end. Answers: ja, nein – or doch to contradict a negative question.",
+ "summary": "A German yes/no question puts the conjugated verb first, before the subject: Du trinkst Tee. → Trinkst du Tee? There is no helper like English “do”: the main verb itself moves to the front (Isst er Fleisch? – Does he eat meat?). Everything else keeps its place; a second verb stays at the end (Willst du Tee trinken?). A choice question with oder works the same way (Willst du Tee oder Kaffee?) but is answered with the choice, not with ja or nein. Answers: ja (yes), nein (no) – and doch, the “yes” that contradicts a negative question or statement: Isst du kein Fleisch? – Doch! (Yes, I do.) Small words make questions natural: auch (too: Trinkst du auch Tee?), nur (only), wirklich (really: Isst du wirklich kein Fleisch?) and the replies vielleicht (maybe) and natürlich (of course). In speech the voice usually rises at the end.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "Du trinkst Tee.",
+    "→ verb to the front",
+    "Trinkst du Tee?"
+   ],
+   "caption": "From statement to yes/no question"
+  },
+  {
+   "t": "table",
+   "head": [
+    "statement",
+    "question"
+   ],
+   "rows": [
+    [
+     "Er isst Fleisch.",
+     "Isst er Fleisch?"
+    ],
+    [
+     "Sie trinken Tee. (polite)",
+     "Trinken Sie Tee?"
+    ],
+    [
+     "Das ist Salz.",
+     "Ist das Salz?"
+    ],
+    [
+     "Ihr habt Brot.",
+     "Habt ihr Brot?"
+    ],
+    [
+     "Du willst Reis.",
+     "Willst du Reis?"
+    ],
+    [
+     "Du willst Tee trinken.",
+     "Willst du Tee trinken? (second verb stays at the end)"
+    ]
+   ],
+   "caption": "Only the conjugated verb moves"
+  },
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "yes",
+    "no"
+   ],
+   "rows": [
+    [
+     "Trinkst du Kaffee? (positive)",
+     "Ja (, ich trinke Kaffee).",
+     "Nein (, ich trinke keinen Kaffee)."
+    ],
+    [
+     "Trinkst du keinen Kaffee? (negative)",
+     "Doch (, ich trinke Kaffee)!",
+     "Nein (, ich trinke keinen Kaffee)."
+    ]
+   ],
+   "caption": "ja, nein, doch"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "doch",
+   "text": "doch says “yes” against a negative: Magst du keinen Käse? – Doch! (Yes, I do like it.) Answering ja here would be unclear. French si and Arabic بَلَى (balā) work the same way; Greek, Russian and Turkish need a whole sentence."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Choice questions with oder",
+   "text": "Willst du Tee oder Kaffee? – Kaffee, bitte. The verb is first as in any yes/no question, but the answer is one of the choices. …, oder? at the end of a statement asks for agreement: Das ist gut, oder? (right?)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "word",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "auch",
+     "also, too",
+     "Trinkst du auch Tee? – Ich auch!"
+    ],
+    [
+     "nur",
+     "only",
+     "Ich trinke nur Wasser."
+    ],
+    [
+     "wirklich",
+     "really",
+     "Wirklich? · Isst du wirklich kein Fleisch?"
+    ],
+    [
+     "vielleicht",
+     "maybe",
+     "Vielleicht. · Vielleicht trinke ich Tee."
+    ],
+    [
+     "natürlich",
+     "of course",
+     "Ja, natürlich! · Natürlich trinke ich Kaffee."
+    ]
+   ],
+   "caption": "The little words of this step – vielleicht and natürlich take the first place, so the verb comes right after them"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek and Russian",
+     "points": [
+      "keep the statement order and change only the intonation: Πίνεις τσάι; / Ты пьёшь чай?",
+      "German must move the verb: Trinkst du Tee?"
+     ]
+    },
+    {
+     "title": "Turkish and English",
+     "points": [
+      "Turkish adds the particle mi: Çay içiyor musun?",
+      "English adds do: Do you drink tea? – German has no do: Trinkst du Tee?"
+     ]
+    }
+   ]
+  }
+ ],
  "procedure": {
   "askYourself": [
    "Which verb carries the person ending? Put exactly that verb in first position.",
-   "Is the subject a pronoun? It comes straight after the verb (Willst du …?, Wollen Sie …?).",
+   "Is the subject a pronoun? It comes straight after the verb (Willst du …?, Trinken Sie …?).",
+   "Is there a second verb (an infinitive)? It stays at the end.",
    "Did I add a “do”? German has none: Isst du …?, not *Tust du essen …?",
-   "Is the question negative? Then “yes” is doch."
+   "Is it a choice? → … oder …? – the answer is the choice.",
+   "Is the question negative and I want to say yes? → doch."
   ],
   "steps": [
    "Take the statement.",
-   "Move the finite verb to the front.",
+   "Move the conjugated verb to the front.",
    "Keep everything else in place; end with a question mark."
   ]
  },
  "traps": [
   "No do-support: Do you eat meat? = Isst du Fleisch?",
-  "The verb form follows the subject that comes after it: Wollen Sie …? (3rd person plural for polite Sie), Willst du …?",
-  "Statement word order with rising intonation (Du willst eine Tomate?) exists in speech but expresses surprise or a check, not a neutral question."
+  "The verb form agrees with the subject after it: Willst du …?, Wollen Sie …?, Isst er …?",
+  "The second verb does not move: Willst du Tee trinken? (not *Willst trinken du Tee?)",
+  "After a negative question, “yes” is doch: Trinkst du keinen Kaffee? – Doch!",
+  "A question with oder is not answered with ja / nein.",
+  "Statement order with rising intonation (Du trinkst keinen Kaffee?) exists in speech, but it expresses surprise or a check, not a neutral question."
  ],
  "evidence": {
   "punct": [
@@ -26,17 +164,36 @@
   ],
   "exclude": [
    "de:was",
-   "de:wo"
+   "de:wo",
+   "de:wer",
+   "de:wann",
+   "de:wie",
+   "de:warum",
+   "de:wie_viel",
+   "de:wie_viele",
+   "de:welcher",
+   "de:wohin",
+   "de:woher"
   ]
  },
  "paradigmCells": [
   "V;PRS;2;SG",
+  "V;PRS;3;SG",
   "V;PRS;3;PL"
  ],
  "needs": {
   "VERB": 3
  },
  "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ],
+    "variant": "Mood"
+   }
+  },
   {
    "type": "word_order",
    "bank": {
@@ -46,30 +203,99 @@
    }
   },
   {
-   "type": "transform",
-   "bank": {
-    "functions": [
-     "fn.question.yesno"
-    ],
-    "variant": "Mood"
-   }
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“Do you drink tea?”",
+   "options": [
+    "Trinkst du Tee?",
+    "Du trinkst Tee?",
+    "Tust du Tee trinken?"
+   ],
+   "answer": "Trinkst du Tee?",
+   "why": "The verb moves to the front; no “do”."
+  },
+  {
+   "q": "Isst du kein Fleisch? – ___! (Yes, I do.)",
+   "options": [
+    "Doch",
+    "Ja",
+    "Nein"
+   ],
+   "answer": "Doch",
+   "why": "doch contradicts a negative question."
+  },
+  {
+   "q": "Willst du Tee oder Kaffee? – best answer:",
+   "options": [
+    "Kaffee, bitte.",
+    "Ja.",
+    "Doch."
+   ],
+   "answer": "Kaffee, bitte.",
+   "why": "A choice question is answered with the choice."
+  },
+  {
+   "q": "“Do you want to drink water?”",
+   "options": [
+    "Willst du Wasser trinken?",
+    "Willst du trinken Wasser?",
+    "Trinken du willst Wasser?"
+   ],
+   "answer": "Willst du Wasser trinken?",
+   "why": "The modal goes first; the infinitive stays at the end."
+  },
+  {
+   "q": "“Me too!”",
+   "options": [
+    "Ich auch!",
+    "Auch ich nicht!",
+    "Ich nur!"
+   ],
+   "answer": "Ich auch!",
+   "why": "auch = too; ich auch nicht = me neither."
+  },
+  {
+   "q": "“Maybe.” – as a whole answer",
+   "options": [
+    "Vielleicht.",
+    "Natürlich.",
+    "Wirklich."
+   ],
+   "answer": "Vielleicht.",
+   "why": "vielleicht = maybe; natürlich = of course; wirklich = really."
   }
  ],
  "seeAlso": [
   {
    "lang": "ar",
    "fn": "fn.question.yesno",
-   "note": "Arabic puts hal (or ʾa-) before a statement."
+   "note": "Arabic puts هَلْ hal (or أَ ʾa-) before the statement; بَلَى balā is its “doch”."
   },
   {
    "lang": "he",
    "fn": "fn.question.yesno",
-   "note": "Hebrew keeps the statement order; intonation or ha-im makes the question."
+   "note": "Hebrew keeps the statement order: intonation (or הַאִם haʾim in writing) makes the question."
   },
   {
    "lang": "zh",
    "fn": "fn.question.yesno",
-   "note": "Chinese adds 吗 at the end or uses verb-not-verb (是不是)."
+   "note": "Chinese adds 吗 at the end, or uses verb-not-verb (喝不喝), and 还是 for “or” in a choice question."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.negation",
+   "note": "Negative questions (Isst du kein Fleisch?) are answered with doch or nein."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.wh",
+   "note": "With a question word (wer, was, wo …) the verb comes second, not first: Was trinkst du?"
   }
  ]
 }

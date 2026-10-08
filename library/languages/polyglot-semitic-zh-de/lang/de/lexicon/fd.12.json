@@ -1,0 +1,2732 @@
+{
+ "lexemes": [
+  {
+   "id": "de:auf",
+   "lemma": "auf",
+   "pos": "ADP",
+   "senses": [
+    "prep.on"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On top of a surface: the book on the table, the cat on the sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on, on top of (touching a surface; Wo? + dative: auf dem Tisch)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.on"
+     },
+     {
+      "id": "s2",
+      "def": "onto (Wohin? + accusative: auf den Tisch)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "at, in (with certain places: auf dem Markt, auf der Post, auf dem Land)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "in (a language: auf Deutsch)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Buch ist auf dem Tisch.",
+      "tr": "The book is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Leg das Buch auf den Tisch!",
+      "tr": "Put the book on the table!",
+      "register": "informal",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir kaufen Obst auf dem Markt.",
+      "tr": "We buy fruit at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     },
+     {
+      "text": "Wie heißt das auf Deutsch?",
+      "tr": "What’s that called in German?",
+      "register": "neutral",
+      "context": "language",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Tisch",
+      "tr": "on the table"
+     },
+     {
+      "text": "auf dem Boden",
+      "tr": "on the floor"
+     },
+     {
+      "text": "auf Deutsch",
+      "tr": "in German"
+     },
+     {
+      "text": "auf dem Land",
+      "tr": "in the countryside"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German ūf, from Old High German ūf, from Proto-Germanic *upp. Compare Dutch op, English up.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "auf is English up: aufstehen = to get up, auf! (colloquial) = open."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – Das Buch ist auf dem Tisch; Wohin? (where to) + accusative – Ich lege das Buch auf den Tisch.",
+     "auf = on a horizontal surface, touching (auf dem Tisch); an = at a side or vertical surface (an der Wand); über = above, not touching (über dem Tisch)."
+    ],
+    "subtleties": [
+     "Open places take auf, not in: auf dem Markt, auf dem Platz, auf der Straße."
+    ]
+   }
+  },
+  {
+   "id": "de:unter",
+   "lemma": "unter",
+   "pos": "ADP",
+   "senses": [
+    "prep.under"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hidden below: under the bed, under the sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "under, below (Wo? + dative: unter dem Bett)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.under"
+     },
+     {
+      "id": "s2",
+      "def": "under (Wohin? + accusative: unter das Bett)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "among (unter Freunden)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Schlüssel ist unter dem Sofa.",
+      "tr": "The key is under the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Katze schläft unter dem Tisch.",
+      "tr": "The cat is sleeping under the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das bleibt unter uns!",
+      "tr": "That stays between us!",
+      "register": "informal",
+      "context": "secrets",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "unter dem Bett",
+      "tr": "under the bed"
+     },
+     {
+      "text": "unter uns",
+      "tr": "between you and me, among us"
+     },
+     {
+      "text": "unter Freunden",
+      "tr": "among friends"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German under, unter, from Old High German untar, from Proto-West Germanic *undar. Compare Old Saxon undar, Dutch onder, English under.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "unter, Dutch onder and English under are one Germanic word."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – Die Tasche ist unter dem Tisch; Wohin? (where to) + accusative – Ich stelle die Tasche unter den Tisch.",
+     "Spoken German merges unter dem → unterm (unterm Bett); in writing use unter dem."
+    ],
+    "subtleties": [
+     "unter uns gesagt = between you and me."
+    ]
+   }
+  },
+  {
+   "id": "de:neben",
+   "lemma": "neben",
+   "pos": "ADP",
+   "senses": [
+    "prep.nextto"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Side by side: the lamp next to the bed, the post office next to the bank.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next to, beside (Wo? + dative: neben der Tür)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.nextto"
+     },
+     {
+      "id": "s2",
+      "def": "next to (Wohin? + accusative: neben die Tür)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "besides, in addition to",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Lampe steht neben dem Bett.",
+      "tr": "The lamp is next to the bed.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Post ist neben der Bank.",
+      "tr": "The post office is next to the bank.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Neben der Arbeit studiert sie noch.",
+      "tr": "Besides work, she is also studying.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "neben der Tür",
+      "tr": "next to the door"
+     },
+     {
+      "text": "direkt neben",
+      "tr": "right next to"
+     },
+     {
+      "text": "nebenan",
+      "tr": "next door"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "Inherited from Middle High German nëben, enëben, from Old High German in ebanī (“in a line, level with”). Cognate with Dutch neven, compare English anent.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "neben hides eben (even, level): “in an even line with”."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – Der Stuhl steht neben dem Tisch; Wohin? (where to) + accusative – Ich stelle den Stuhl neben den Tisch."
+    ],
+    "subtleties": [
+     "nebenan (next door) and der Nachbar (neighbour) are handy companions: Mein Nachbar wohnt nebenan."
+    ]
+   }
+  },
+  {
+   "id": "de:vor",
+   "lemma": "vor",
+   "pos": "ADP",
+   "senses": [
+    "prep.infront",
+    "prep.before"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In front: the car in front of the house – and, in time, “before” and “ago”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in front of (Wo? + dative: vor dem Haus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.infront"
+     },
+     {
+      "id": "s2",
+      "def": "in front of (Wohin? + accusative: vor das Haus)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "before (time, + dative: vor dem Essen, vor acht Uhr); ago (vor zwei Jahren)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.before"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Auto steht vor dem Haus.",
+      "tr": "The car is in front of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir warten vor dem Kino.",
+      "tr": "We’re waiting in front of the cinema.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Vor dem Essen waschen wir uns die Hände.",
+      "tr": "Before eating we wash our hands.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     },
+     {
+      "text": "Vor dem Frühstück trinke ich ein Glas Wasser.",
+      "tr": "Before breakfast I drink a glass of water.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s3"
+     },
+     {
+      "text": "Vor zwei Wochen war ich in Athen.",
+      "tr": "Two weeks ago I was in Athens.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "vor dem Haus",
+      "tr": "in front of the house"
+     },
+     {
+      "text": "vor der Tür",
+      "tr": "at the door, outside"
+     },
+     {
+      "text": "vor zwei Jahren",
+      "tr": "two years ago"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German vore, vor, from Old High German fora. Cognate with Dutch voor; compare English fore.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "vor is English fore (before, forehead) and a cousin of Greek πρό (pró)."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – Das Auto steht vor dem Haus; Wohin? (where to) + accusative – Ich fahre das Auto vor das Haus.",
+     "vor (in front of, before) ≠ für (for): Ich warte vor dem Haus. – Das ist für dich.",
+     "In time, vor takes the dative only: vor dem Essen (before the meal), vor acht Uhr (before eight), vor einer Woche (a week ago) – there is no accusative of time."
+    ],
+    "subtleties": [
+     "vor + a time = “ago”: vor einer Woche (a week ago) – always dative.",
+     "before + a verb is the conjunction bevor (Bevor ich esse, …), not vor."
+    ]
+   }
+  },
+  {
+   "id": "de:hinter",
+   "lemma": "hinter",
+   "pos": "ADP",
+   "senses": [
+    "prep.behind"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "At the back: the garden behind the house.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "behind (Wo? + dative: hinter dem Haus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.behind"
+     },
+     {
+      "id": "s2",
+      "def": "behind (Wohin? + accusative: hinter das Haus)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "after, beyond",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Garten ist hinter dem Haus.",
+      "tr": "The garden is behind the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Treppe ist hinter der Tür.",
+      "tr": "The stairs are behind the door.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Schlimmste haben wir hinter uns.",
+      "tr": "We’ve got the worst behind us.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "hinter dem Haus",
+      "tr": "behind the house"
+     },
+     {
+      "text": "hinter mir",
+      "tr": "behind me"
+     },
+     {
+      "text": "etwas hinter sich haben",
+      "tr": "to have something behind one"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German hinder, from Old High German hintar, from Proto-Germanic *hinder.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "hinter and English behind / hind (as in hindsight) share the same Germanic root *hind-."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – Der Garten ist hinter dem Haus; Wohin? (where to) + accusative – Wir gehen hinter das Haus.",
+     "Spoken German says hinterm (= hinter dem): hinterm Haus."
+    ],
+    "subtleties": [
+     "hinter is the opposite of vor; the adverbs are hinten (at the back) and vorne (at the front)."
+    ]
+   }
+  },
+  {
+   "id": "de:zwischen",
+   "lemma": "zwischen",
+   "pos": "ADP",
+   "senses": [
+    "prep.between"
+   ],
+   "governs": "DAT|ACC",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In the middle of two things – the table between the sofa and the shelf.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "between (Wo? + dative: zwischen dem Sofa und dem Regal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.between"
+     },
+     {
+      "id": "s2",
+      "def": "between (Wohin? + accusative)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "among, amongst",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Tisch steht zwischen dem Sofa und dem Regal.",
+      "tr": "The table is between the sofa and the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Café ist zwischen der Bank und der Post.",
+      "tr": "The café is between the bank and the post office.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Zwischen uns ist alles gut.",
+      "tr": "Everything is fine between us.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zwischen … und …",
+      "tr": "between … and …"
+     },
+     {
+      "text": "zwischendurch",
+      "tr": "in between, now and then"
+     },
+     {
+      "text": "der Zwischenraum",
+      "tr": "gap, space in between"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Old High German in zuiskēn, from zuiski, from Proto-West Germanic *twisk(ī), from Proto-Germanic *twiskaz (“twofold”), from Proto-Indo-European *dwís (“twice”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zwischen contains the old word for “two” (zwei) – like English between (“by two”) and twin."
+    ],
+    "pitfalls": [
+     "Two-way preposition: Wo? (where) + dative – zwischen dem Sofa und dem Regal; Wohin? (where to) + accusative – zwischen das Sofa und das Regal. Both nouns take the case."
+    ],
+    "subtleties": [
+     "zwischen also works for time: zwischen acht und neun Uhr."
+    ]
+   }
+  },
+  {
+   "id": "de:nah",
+   "lemma": "nah",
+   "pos": "ADV",
+   "senses": [
+    "adv.near"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Close by – just a few steps away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "near, close (in space)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     },
+     {
+      "id": "s2",
+      "def": "near, close (in time or in a relationship: ein naher Freund)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ist die Apotheke weit? – Nein, sie ist ganz nah.",
+      "tr": "Is the pharmacy far? – No, it’s very close.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bahnhof ist nah am Zentrum.",
+      "tr": "The station is close to the centre.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Weihnachten ist schon nah.",
+      "tr": "Christmas is already near.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ganz nah",
+      "tr": "very close"
+     },
+     {
+      "text": "nah an / bei …",
+      "tr": "close to …"
+     },
+     {
+      "text": "aus der Nähe",
+      "tr": "from close up"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "in der Nähe",
+      "register": "neutral",
+      "nuance": "nearby, in the area – the most common way to say it"
+     },
+     {
+      "word": "nahe",
+      "register": "formal",
+      "nuance": "the longer, slightly old-fashioned form"
+     },
+     {
+      "word": "nicht weit",
+      "register": "neutral",
+      "nuance": "not far"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "weit",
+      "note": "far"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German nāh, from Old High German nāh. Compare English nigh. Doublet of nach.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nah is English nigh (as in “the end is nigh”) – and neighbour is the “nigh-dweller”, German Nachbar."
+    ],
+    "pitfalls": [
+     "nah alone or with an/bei: Das Hotel ist nah am Strand. – “Near the station” is more often in der Nähe vom Bahnhof / des Bahnhofs.",
+     "Comparison: nah – näher – am nächsten (nächst- also means “next”)."
+    ],
+    "subtleties": [
+     "nah also means emotionally close: Wir stehen uns sehr nah."
+    ]
+   }
+  },
+  {
+   "id": "de:in_der_Nähe",
+   "lemma": "in der Nähe",
+   "pos": "ADV",
+   "senses": [
+    "adv.near"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Somewhere around here – nearby.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nearby, in the area; near (in der Nähe von + dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ist hier in der Nähe eine Apotheke?",
+      "tr": "Is there a pharmacy near here?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Supermarkt ist in der Nähe.",
+      "tr": "The supermarket is nearby.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen in der Nähe vom Bahnhof.",
+      "tr": "We live near the station.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "hier in der Nähe",
+      "tr": "near here, around here"
+     },
+     {
+      "text": "in der Nähe von …",
+      "tr": "near …"
+     },
+     {
+      "text": "ganz in der Nähe",
+      "tr": "very near"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "nah",
+      "register": "neutral",
+      "nuance": "close – describes the distance (Es ist nah.)"
+     },
+     {
+      "word": "in der Umgebung",
+      "register": "formal",
+      "nuance": "in the surrounding area"
+     }
+    ],
+    "etymology": {
+     "text": "From in (“in”) + der (dative of die) + Nähe (“nearness, vicinity”), from Middle High German næhe, from Old High German nāhī.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nähe and nah are one family – like Greek κοντά and κοντινός."
+    ],
+    "pitfalls": [
+     "in der Nähe von + dative: in der Nähe vom Park (von dem → vom).",
+     "die Nähe is feminine, so in der Nähe (dative after in)."
+    ],
+    "subtleties": [
+     "Ist hier in der Nähe …? is the standard question when you look for something."
+    ]
+   }
+  },
+  {
+   "id": "de:weit",
+   "lemma": "weit",
+   "pos": "ADV",
+   "senses": [
+    "adv.far"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long way – far from home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "far (distance)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.far"
+     },
+     {
+      "id": "s2",
+      "def": "wide, broad (an adjective: ein weiter Rock)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "far, much (with comparatives: weit besser)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Flughafen ist weit.",
+      "tr": "The airport is far.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist es weit bis zum Bahnhof?",
+      "tr": "Is it far to the station?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Dorf ist nicht weit von hier.",
+      "tr": "The village isn’t far from here.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Hose ist zu weit.",
+      "tr": "The trousers are too wide.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "weit weg",
+      "tr": "far away"
+     },
+     {
+      "text": "weit von …",
+      "tr": "far from …"
+     },
+     {
+      "text": "nicht weit",
+      "tr": "not far"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "So weit, so gut.",
+      "tr": "So far, so good.",
+      "kind": "saying",
+      "meaning": "everything is fine up to now",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "weit weg",
+      "register": "neutral",
+      "nuance": "far away – a little stronger"
+     },
+     {
+      "word": "entfernt",
+      "register": "formal",
+      "nuance": "distant, away (zehn Kilometer entfernt)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "nah",
+      "note": "near"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wīt, from Old High German wīt, from Proto-Germanic *wīdaz. Compare Dutch wijd, English wide.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "weit is English wide; English “far” is German fern (as in Fernseher, “far-seer” = TV)."
+    ],
+    "pitfalls": [
+     "weit means “far” – and “wide”: ein weites Land (a vast country), eine weite Hose (wide trousers).",
+     "Far from X: weit von + dative, or weit weg von: weit weg von der Stadt."
+    ],
+    "subtleties": [
+     "Wie weit ist es? asks the distance; So weit, so gut = so far, so good."
+    ]
+   }
+  },
+  {
+   "id": "de:drinnen",
+   "lemma": "drinnen",
+   "pos": "ADV",
+   "senses": [
+    "adv.inside"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Indoors, warm and dry, while it rains outside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "inside, indoors",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inside"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir essen heute drinnen.",
+      "tr": "We’re eating inside today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder spielen drinnen.",
+      "tr": "The children are playing indoors.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist noch jemand drinnen?",
+      "tr": "Is anybody still inside?",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "drinnen bleiben",
+      "tr": "to stay inside"
+     },
+     {
+      "text": "drinnen und draußen",
+      "tr": "indoors and outdoors"
+     },
+     {
+      "text": "da drinnen",
+      "tr": "in there"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "innen",
+      "register": "neutral",
+      "nuance": "inside, on the inside (of a thing: innen rot = red inside)"
+     },
+     {
+      "word": "im Haus",
+      "register": "neutral",
+      "nuance": "in the house"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "draußen",
+      "note": "outside"
+     }
+    ],
+    "etymology": {
+     "text": "From dr- (a short form of dar-) + innen (“inside”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The dr- of drinnen and draußen is a short form of da(r)-: “there-in”, “there-out”."
+    ],
+    "pitfalls": [
+     "drinnen is where (Ich bin drinnen); going in is rein / herein (Komm rein!)."
+    ],
+    "subtleties": [
+     "drinnen is colloquial-neutral and very common; innen is used for the inner side of things (innen und außen)."
+    ]
+   }
+  },
+  {
+   "id": "de:draußen",
+   "lemma": "draußen",
+   "pos": "ADV",
+   "senses": [
+    "adv.outside"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh air, the garden, the street – outdoors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "outside, outdoors",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.outside"
+     },
+     {
+      "id": "s2",
+      "def": "out there (far away: draußen auf dem Meer)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder sind draußen im Garten.",
+      "tr": "The children are outside in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Draußen ist es kalt.",
+      "tr": "It’s cold outside.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sitzen draußen vor dem Café.",
+      "tr": "We’re sitting outside the café.",
+      "register": "neutral",
+      "context": "going out",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "draußen spielen",
+      "tr": "to play outside"
+     },
+     {
+      "text": "nach draußen",
+      "tr": "outside (where to)"
+     },
+     {
+      "text": "von draußen",
+      "tr": "from outside"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "außen",
+      "register": "neutral",
+      "nuance": "on the outside (of a thing)"
+     },
+     {
+      "word": "im Freien",
+      "register": "formal",
+      "nuance": "in the open air"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "drinnen",
+      "note": "inside"
+     }
+    ],
+    "etymology": {
+     "text": "From dr- (a short form of dar-) + außen (“outside”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Draußen nur Kännchen (“outside only pots of coffee”) is a famous sign of old German cafés – a running joke about German rules."
+    ],
+    "pitfalls": [
+     "draußen is where you are; going out is nach draußen or raus: Geh raus! / Geh nach draußen!"
+    ],
+    "subtleties": [
+     "außen is the outer side of something (außen grün); draußen is outdoors."
+    ]
+   }
+  },
+  {
+   "id": "de:links",
+   "lemma": "links",
+   "pos": "ADV",
+   "senses": [
+    "adv.left"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Turning left at the corner – and the political left.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on the left; to the left",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.left"
+     },
+     {
+      "id": "s2",
+      "def": "left-wing (politics)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "inside out (clothes)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Küche ist links.",
+      "tr": "The kitchen is on the left.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Gehen Sie hier links!",
+      "tr": "Turn left here!",
+      "register": "formal",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie wählt links.",
+      "tr": "She votes for the left.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nach links",
+      "tr": "to the left"
+     },
+     {
+      "text": "links abbiegen",
+      "tr": "to turn left"
+     },
+     {
+      "text": "auf der linken Seite",
+      "tr": "on the left-hand side"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "etwas mit links machen",
+      "tr": "to do something with the left",
+      "kind": "idiom",
+      "meaning": "to do something very easily",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "auf der linken Seite",
+      "register": "neutral",
+      "nuance": "on the left-hand side – the longer form"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "rechts",
+      "note": "right"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German linkes, originally the genitive of linc (whence modern link); by surface analysis link + -s. Cognate with Dutch links.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Etwas mit links machen = to do something with ease (literally “with the left”)."
+    ],
+    "pitfalls": [
+     "links / rechts are adverbs (Die Küche ist links); before a noun use the adjective: die linke Tür, die rechte Hand."
+    ],
+    "subtleties": [
+     "Something done “mit links” is done easily – with the left hand, without effort."
+    ]
+   }
+  },
+  {
+   "id": "de:rechts",
+   "lemma": "rechts",
+   "pos": "ADV",
+   "senses": [
+    "adv.right"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On the right – where Germans walk and drive.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on the right; to the right",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.right"
+     },
+     {
+      "id": "s2",
+      "def": "right-wing (politics)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Bad ist rechts.",
+      "tr": "The bathroom is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Apotheke ist rechts neben der Bank.",
+      "tr": "The pharmacy is on the right, next to the bank.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf der Rolltreppe steht man rechts.",
+      "tr": "On the escalator you stand on the right.",
+      "register": "neutral",
+      "context": "manners",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nach rechts",
+      "tr": "to the right"
+     },
+     {
+      "text": "rechts abbiegen",
+      "tr": "to turn right"
+     },
+     {
+      "text": "rechts vor links",
+      "tr": "right before left (the German priority rule)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "auf der rechten Seite",
+      "register": "neutral",
+      "nuance": "on the right-hand side – the longer form"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "links",
+      "note": "left"
+     }
+    ],
+    "etymology": {
+     "text": "From recht (“right”) + -s (“adverbial suffix”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "rechts and recht (right, law) are one word – like English right and Greek δεξιά / δεξιός (right, skilful)."
+    ],
+    "pitfalls": [
+     "rechts (on the right) is different from recht (right, correct; quite): Du hast recht. – Das ist recht gut."
+    ],
+    "subtleties": [
+     "rechts vor links: at crossings without signs, the car coming from the right goes first."
+    ]
+   }
+  },
+  {
+   "id": "de:Küche",
+   "lemma": "Küche",
+   "pos": "NOUN",
+   "senses": [
+    "home.kitchen"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Küche",
+    "N;ACC;SG": "Küche",
+    "N;DAT;SG": "Küche",
+    "N;GEN;SG": "Küche",
+    "N;NOM;PL": "Küchen",
+    "N;ACC;PL": "Küchen",
+    "N;DAT;PL": "Küchen",
+    "N;GEN;PL": "Küchen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The heart of the flat – coffee in the morning, cooking in the evening.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kitchen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.kitchen"
+     },
+     {
+      "id": "s2",
+      "def": "cuisine, cooking (die griechische Küche)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Mutter ist in der Küche.",
+      "tr": "My mother is in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Milch ist im Kühlschrank in der Küche.",
+      "tr": "The milk is in the fridge in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich mag die griechische Küche.",
+      "tr": "I like Greek cuisine.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in der Küche",
+      "tr": "in the kitchen"
+     },
+     {
+      "text": "die Einbauküche",
+      "tr": "fitted kitchen"
+     },
+     {
+      "text": "die griechische Küche",
+      "tr": "Greek cuisine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kochnische",
+      "register": "neutral",
+      "nuance": "kitchenette, a small cooking corner"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German küche, from Old High German chuhhina, from late Proto-West Germanic *kukinā, from Late Latin cocīna, from earlier coquīna.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Küche, kochen and Koch all come from Latin coquere (to cook), like English kitchen and cook."
+    ],
+    "pitfalls": [
+     "die Küche (kitchen) vs der Kuchen (cake): Der Kuchen ist in der Küche.",
+     "Küche also means cuisine: die deutsche Küche."
+    ],
+    "subtleties": [
+     "In German flat adverts, EBK = Einbauküche (fitted kitchen) – many flats are rented without one!"
+    ]
+   }
+  },
+  {
+   "id": "de:Badezimmer",
+   "lemma": "Badezimmer",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Badezimmer",
+    "N;ACC;SG": "Badezimmer",
+    "N;DAT;SG": "Badezimmer",
+    "N;GEN;SG": "Badezimmers",
+    "N;NOM;PL": "Badezimmer",
+    "N;ACC;PL": "Badezimmer",
+    "N;DAT;PL": "Badezimmern",
+    "N;GEN;PL": "Badezimmer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tiles, a shower, a mirror – the bathroom.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bathroom (with shower or bath)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Badezimmer ist rechts.",
+      "tr": "The bathroom is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wohnung hat zwei Badezimmer.",
+      "tr": "The flat has two bathrooms.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Badezimmer ist kein Fenster.",
+      "tr": "There’s no window in the bathroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Badezimmer",
+      "tr": "in the bathroom"
+     },
+     {
+      "text": "ins Badezimmer gehen",
+      "tr": "to go into the bathroom"
+     },
+     {
+      "text": "das Badezimmerfenster",
+      "tr": "bathroom window"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Bad",
+      "register": "neutral",
+      "nuance": "the short, everyday word"
+     },
+     {
+      "word": "Toilette",
+      "register": "neutral",
+      "nuance": "toilet – the room with the WC only"
+     },
+     {
+      "word": "WC",
+      "register": "neutral",
+      "nuance": "toilet (on signs)"
+     }
+    ],
+    "etymology": {
+     "text": "From baden (“to bathe”) + Zimmer (“room”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Zimmer once meant timber (English timber is the same word): a room was what was built of wood."
+    ],
+    "pitfalls": [
+     "Asking for the toilet: Wo ist die Toilette? – not *Wo ist das Badezimmer? (that sounds as if you want a shower).",
+     "Plural = singular: die Badezimmer; dative plural den Badezimmern."
+    ],
+    "subtleties": [
+     "Many German flats have the toilet in the bathroom; a separate WC is called Gäste-WC."
+    ]
+   }
+  },
+  {
+   "id": "de:Bad",
+   "lemma": "Bad",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Bad",
+    "N;ACC;SG": "Bad",
+    "N;DAT;SG": "Bad",
+    "N;GEN;SG": "Bades",
+    "N;NOM;PL": "Bäder",
+    "N;ACC;PL": "Bäder",
+    "N;DAT;PL": "Bädern",
+    "N;GEN;PL": "Bäder"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Bads"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bathroom – and a hot bath, a spa town.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bathroom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     },
+     {
+      "id": "s2",
+      "def": "bath (Ich nehme ein Bad)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "swimming pool, baths (Hallenbad, Freibad)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "spa (in town names: Baden-Baden, Bad Ems)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Bad ist links.",
+      "tr": "The bathroom is on the left.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wohnung hat ein großes Bad.",
+      "tr": "The flat has a big bathroom.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach der Arbeit nehme ich ein heißes Bad.",
+      "tr": "After work I take a hot bath.",
+      "register": "neutral",
+      "context": "relaxing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Bad gehen",
+      "tr": "to go into the bathroom"
+     },
+     {
+      "text": "ein Bad nehmen",
+      "tr": "to take a bath"
+     },
+     {
+      "text": "das Freibad",
+      "tr": "open-air pool"
+     },
+     {
+      "text": "das Hallenbad",
+      "tr": "indoor pool"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Badezimmer",
+      "register": "neutral",
+      "nuance": "the full word for the room"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German bat, from Old High German bad, from Proto-West Germanic *baþ, from Proto-Germanic *baþą. Related to bähen.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bad is English bath; the city of Bath in England and Baden-Baden in Germany are both named after their hot springs."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Bäder.",
+     "Bad in a town name (Bad Ems, Bad Homburg) means a spa town."
+    ],
+    "subtleties": [
+     "In flat adverts Bad is the bathroom; Wanne (tub) or Dusche (shower) says what is in it."
+    ]
+   }
+  },
+  {
+   "id": "de:Schlafzimmer",
+   "lemma": "Schlafzimmer",
+   "pos": "NOUN",
+   "senses": [
+    "home.bedroom"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Schlafzimmer",
+    "N;ACC;SG": "Schlafzimmer",
+    "N;DAT;SG": "Schlafzimmer",
+    "N;GEN;SG": "Schlafzimmers",
+    "N;NOM;PL": "Schlafzimmer",
+    "N;ACC;PL": "Schlafzimmer",
+    "N;DAT;PL": "Schlafzimmern",
+    "N;GEN;PL": "Schlafzimmer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Quiet and dark – the room with the bed.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bedroom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bedroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Bett ist im Schlafzimmer.",
+      "tr": "The bed is in the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wohnung hat zwei Schlafzimmer.",
+      "tr": "The flat has two bedrooms.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Schlafzimmer ist oben, neben dem Bad.",
+      "tr": "The bedroom is upstairs, next to the bathroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Schlafzimmer",
+      "tr": "in the bedroom"
+     },
+     {
+      "text": "das Kinderzimmer",
+      "tr": "children’s room"
+     },
+     {
+      "text": "der Schlafzimmerschrank",
+      "tr": "bedroom wardrobe"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kinderzimmer",
+      "register": "neutral",
+      "nuance": "children’s room – often also where the children sleep"
+     }
+    ],
+    "etymology": {
+     "text": "From Schlaf (“sleep”) + Zimmer (“room”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "schlafen (to sleep) is English sleep – Schlafzimmer is literally “sleep room”."
+    ],
+    "pitfalls": [
+     "Plural = singular: die Schlafzimmer; dative plural den Schlafzimmern.",
+     "German flats are counted in rooms (Zimmer), not bedrooms: eine 3-Zimmer-Wohnung has e.g. two bedrooms and a living room."
+    ],
+    "subtleties": [
+     "Schlafzimmerblick (“bedroom look”) is a dreamy, sleepy look."
+    ]
+   }
+  },
+  {
+   "id": "de:Wohnzimmer",
+   "lemma": "Wohnzimmer",
+   "pos": "NOUN",
+   "senses": [
+    "home.livingroom"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Wohnzimmer",
+    "N;ACC;SG": "Wohnzimmer",
+    "N;DAT;SG": "Wohnzimmer",
+    "N;GEN;SG": "Wohnzimmers",
+    "N;NOM;PL": "Wohnzimmer",
+    "N;ACC;PL": "Wohnzimmer",
+    "N;DAT;PL": "Wohnzimmern",
+    "N;GEN;PL": "Wohnzimmer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sofa, television, family evenings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "living room, sitting room",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.livingroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Sofa ist im Wohnzimmer.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen im Wohnzimmer.",
+      "tr": "We eat in the living room.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Wohnzimmer hat ein großes Fenster.",
+      "tr": "The living room has a big window.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Wohnzimmer",
+      "tr": "in the living room"
+     },
+     {
+      "text": "ins Wohnzimmer gehen",
+      "tr": "to go into the living room"
+     },
+     {
+      "text": "der Wohnzimmertisch",
+      "tr": "coffee table"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Stube",
+      "register": "regional",
+      "nuance": "living room – old-fashioned or regional (gute Stube = the best room)"
+     },
+     {
+      "word": "Salon",
+      "register": "dated",
+      "nuance": "drawing room"
+     }
+    ],
+    "etymology": {
+     "text": "From wohnen (“to live, reside”) + Zimmer (“room”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wohnzimmer, Wohnung and wohnen are one family: German “lives” (wohnt) in a Wohnung and sits in the Wohnzimmer."
+    ],
+    "pitfalls": [
+     "wohnen = to live (somewhere): Wohnzimmer, Wohnung (flat) – leben = to be alive.",
+     "Plural = singular: die Wohnzimmer."
+    ],
+    "subtleties": [
+     "die gute Stube was the best room kept for guests in old German homes."
+    ]
+   }
+  },
+  {
+   "id": "de:Garten",
+   "lemma": "Garten",
+   "pos": "NOUN",
+   "senses": [
+    "home.garden"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Garten",
+    "N;ACC;SG": "Garten",
+    "N;DAT;SG": "Garten",
+    "N;GEN;SG": "Gartens",
+    "N;NOM;PL": "Gärten",
+    "N;ACC;PL": "Gärten",
+    "N;DAT;PL": "Gärten",
+    "N;GEN;PL": "Gärten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flowers, vegetables, a barbecue on summer evenings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garden, yard",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.garden"
+     },
+     {
+      "id": "s2",
+      "def": "orchard; park (in names: der Englische Garten)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder spielen im Garten.",
+      "tr": "The children are playing in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Garten ist hinter dem Haus.",
+      "tr": "The garden is behind the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Opa hat einen Garten mit Tomaten.",
+      "tr": "My grandpa has a garden with tomatoes.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Garten",
+      "tr": "in the garden"
+     },
+     {
+      "text": "der Schrebergarten",
+      "tr": "allotment garden"
+     },
+     {
+      "text": "der Kindergarten",
+      "tr": "kindergarten"
+     },
+     {
+      "text": "der Biergarten",
+      "tr": "beer garden"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Schrebergarten",
+      "register": "neutral",
+      "nuance": "allotment garden in a colony of small gardens"
+     },
+     {
+      "word": "Hof",
+      "register": "neutral",
+      "nuance": "yard, courtyard (paved)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German garte, from Old High German garto, from Proto-West Germanic *gardō. Cognate with English yard, and through French with English garden.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gave Russian город (town – once a fenced place) and Turkish has bahçe (from Persian)."
+    ],
+    "pitfalls": [
+     "der Garten (masculine), plural die Gärten.",
+     "im Garten (where) – in den Garten (where to)."
+    ],
+    "subtleties": [
+     "Kindergarten went into English from German (Friedrich Fröbel, 1840)."
+    ]
+   }
+  },
+  {
+   "id": "de:Boden",
+   "lemma": "Boden",
+   "pos": "NOUN",
+   "senses": [
+    "home.floor"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Boden",
+    "N;ACC;SG": "Boden",
+    "N;DAT;SG": "Boden",
+    "N;GEN;SG": "Bodens",
+    "N;NOM;PL": "Böden",
+    "N;ACC;PL": "Böden",
+    "N;DAT;PL": "Böden",
+    "N;GEN;PL": "Böden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What you walk on – the floor, the ground, the soil.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "floor (of a room)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.floor"
+     },
+     {
+      "id": "s2",
+      "def": "ground, soil",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "bottom (of a container, the sea)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "attic, loft (Dachboden)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Tasche ist auf dem Boden.",
+      "tr": "The bag is on the floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder sitzen auf dem Boden.",
+      "tr": "The children are sitting on the floor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Boden hier ist sehr gut für Kartoffeln.",
+      "tr": "The soil here is very good for potatoes.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Boden",
+      "tr": "on the floor, on the ground"
+     },
+     {
+      "text": "der Dachboden",
+      "tr": "attic"
+     },
+     {
+      "text": "der Fußboden",
+      "tr": "floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Fußboden",
+      "register": "neutral",
+      "nuance": "floor – only the floor of a room"
+     },
+     {
+      "word": "Erde",
+      "register": "neutral",
+      "nuance": "earth, soil, ground"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German boden, bodem, from Old High German bodam, from Proto-West Germanic *bodm. Cognate with English bottom, Dutch bodem.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Boden is English bottom; the Bodensee (Lake Constance) is named after the old palace of Bodman."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Böden.",
+     "auf dem Boden = on the floor; “floor” as a storey is der Stock / die Etage: im ersten Stock."
+    ],
+    "subtleties": [
+     "Boden has many senses: floor, ground, soil, bottom, attic – the context decides."
+    ]
+   }
+  },
+  {
+   "id": "de:Fußboden",
+   "lemma": "Fußboden",
+   "pos": "NOUN",
+   "senses": [
+    "home.floor"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Fußboden",
+    "N;ACC;SG": "Fußboden",
+    "N;DAT;SG": "Fußboden",
+    "N;GEN;SG": "Fußbodens",
+    "N;NOM;PL": "Fußböden",
+    "N;ACC;PL": "Fußböden",
+    "N;DAT;PL": "Fußböden",
+    "N;GEN;PL": "Fußböden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The surface of a room you walk on – wood, tiles, carpet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "floor (of a room); flooring",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.floor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Handy liegt auf dem Fußboden.",
+      "tr": "The phone is lying on the floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Fußboden ist aus Holz.",
+      "tr": "The floor is made of wood.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Küche sind die Fußböden aus Stein.",
+      "tr": "In the kitchen the floors are made of stone.",
+      "register": "neutral",
+      "context": "house",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Fußboden",
+      "tr": "on the floor"
+     },
+     {
+      "text": "die Fußbodenheizung",
+      "tr": "underfloor heating"
+     },
+     {
+      "text": "den Fußboden wischen",
+      "tr": "to mop the floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Boden",
+      "register": "neutral",
+      "nuance": "the shorter everyday word"
+     }
+    ],
+    "etymology": {
+     "text": "From Fuß (“foot”) + Boden (“bottom, ground, floor”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fußbodenheizung (underfloor heating) – a very long and very German word for a very comfortable thing."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Fußböden.",
+     "In Switzerland it is written Fussboden."
+    ],
+    "subtleties": [
+     "Fußboden is more precise than Boden: only the floor of a room, never soil or attic."
+    ]
+   }
+  },
+  {
+   "id": "de:Treppe",
+   "lemma": "Treppe",
+   "pos": "NOUN",
+   "senses": [
+    "home.stairs"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Treppe",
+    "N;ACC;SG": "Treppe",
+    "N;DAT;SG": "Treppe",
+    "N;GEN;SG": "Treppe",
+    "N;NOM;PL": "Treppen",
+    "N;ACC;PL": "Treppen",
+    "N;DAT;PL": "Treppen",
+    "N;GEN;PL": "Treppen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Up and down – the stairs in the hallway.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stairs, staircase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.stairs"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Treppe ist hinter der Tür.",
+      "tr": "The stairs are behind the door.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Kind sitzt auf der Treppe.",
+      "tr": "The child is sitting on the stairs.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir nehmen die Treppe, nicht den Aufzug.",
+      "tr": "We take the stairs, not the lift.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Treppe hinaufgehen",
+      "tr": "to go up the stairs"
+     },
+     {
+      "text": "auf der Treppe",
+      "tr": "on the stairs"
+     },
+     {
+      "text": "das Treppenhaus",
+      "tr": "stairwell"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Stiege",
+      "register": "regional",
+      "nuance": "stairs – the Austrian and Bavarian word"
+     },
+     {
+      "word": "Stufe",
+      "register": "neutral",
+      "nuance": "a single step"
+     }
+    ],
+    "etymology": {
+     "text": "Attested since the 12th century, from Middle High German treppe, trappe, from Old High German trappa, from Proto-West Germanic *trappā.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Treppenwitz is a calque of French l’esprit de l’escalier, “staircase wit”."
+    ],
+    "pitfalls": [
+     "German says die Treppe (singular) for “the stairs”: Die Treppe ist steil.",
+     "One step is die Stufe."
+    ],
+    "subtleties": [
+     "Treppenwitz: the clever reply you think of too late, on the stairs going out (French l’esprit de l’escalier)."
+    ]
+   }
+  },
+  {
+   "id": "de:Regal",
+   "lemma": "Regal",
+   "pos": "NOUN",
+   "senses": [
+    "home.shelf"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Regal",
+    "N;ACC;SG": "Regal",
+    "N;DAT;SG": "Regal",
+    "N;GEN;SG": "Regals",
+    "N;NOM;PL": "Regale",
+    "N;ACC;PL": "Regale",
+    "N;DAT;PL": "Regalen",
+    "N;GEN;PL": "Regale"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Books, plants, photos – the shelf unit on the wall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shelf, shelving unit, bookcase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.shelf"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Bücher sind im Regal.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Regal steht neben dem Fenster.",
+      "tr": "The shelf unit is next to the window.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Supermarkt sind die Regale voll.",
+      "tr": "In the supermarket the shelves are full.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Regal",
+      "tr": "on the shelf (inside the unit)"
+     },
+     {
+      "text": "das Bücherregal",
+      "tr": "bookcase"
+     },
+     {
+      "text": "das Regal aufbauen",
+      "tr": "to put the shelf together"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Brett",
+      "register": "neutral",
+      "nuance": "a single board – one shelf (Regalbrett)"
+     },
+     {
+      "word": "Bücherschrank",
+      "register": "neutral",
+      "nuance": "bookcase with doors"
+     }
+    ],
+    "etymology": {
+     "text": "Early 17th century, of unclear origin; perhaps related to Reihe (“row”) or to Latin rēgula (“bar, rule”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "IKEA’s Billy is the classic German student bookcase – Billy-Regal."
+    ],
+    "pitfalls": [
+     "Things are IM Regal (inside the unit), not *auf dem Regal – unless they lie on top of it.",
+     "Plural die Regale."
+    ],
+    "subtleties": [
+     "Regal is the whole unit; a single shelf board is das Regalbrett."
+    ]
+   }
+  },
+  {
+   "id": "de:Sofa",
+   "lemma": "Sofa",
+   "pos": "NOUN",
+   "senses": [
+    "home.sofa"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Sofa",
+    "N;ACC;SG": "Sofa",
+    "N;DAT;SG": "Sofa",
+    "N;GEN;SG": "Sofas",
+    "N;NOM;PL": "Sofas",
+    "N;ACC;PL": "Sofas",
+    "N;DAT;PL": "Sofas",
+    "N;GEN;PL": "Sofas"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A lazy evening on the sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sofa, couch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.sofa"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Schlüssel ist unter dem Sofa.",
+      "tr": "The key is under the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sitzen auf dem Sofa.",
+      "tr": "We’re sitting on the sofa.",
+      "register": "neutral",
+      "context": "evening",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Sofa steht im Wohnzimmer.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Sofa",
+      "tr": "on the sofa"
+     },
+     {
+      "text": "das Schlafsofa",
+      "tr": "sofa bed"
+     },
+     {
+      "text": "die Sofaecke",
+      "tr": "corner of the sofa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Couch",
+      "register": "neutral",
+      "nuance": "couch – very common, also die Couch"
+     },
+     {
+      "word": "Kanapee",
+      "register": "dated",
+      "nuance": "settee"
+     }
+    ],
+    "etymology": {
+     "text": "17th century, from French sofa, from Italian sofà, from Ottoman Turkish صفه (sofa), from Arabic صُفَّة (ṣuffa).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sofa travelled from Arabic صُفَّة (a raised bench) via Turkish sofa to Europe – Turkish sofa today is a hall or an entrance room."
+    ],
+    "pitfalls": [
+     "das Sofa (neuter), plural die Sofas.",
+     "auf dem Sofa sitzen (on), but unter dem Sofa (under)."
+    ],
+    "subtleties": [
+     "Couch and Sofa mean the same; die Couch is feminine (in Switzerland also der Couch)."
+    ]
+   }
+  },
+  {
+   "id": "de:Kühlschrank",
+   "lemma": "Kühlschrank",
+   "pos": "NOUN",
+   "senses": [
+    "home.fridge"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Kühlschrank",
+    "N;ACC;SG": "Kühlschrank",
+    "N;DAT;SG": "Kühlschrank",
+    "N;GEN;SG": "Kühlschranks",
+    "N;NOM;PL": "Kühlschränke",
+    "N;ACC;PL": "Kühlschränke",
+    "N;DAT;PL": "Kühlschränken",
+    "N;GEN;PL": "Kühlschränke"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Kühlschrankes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Kühlschrank as “refrigerator” – the fridge."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold milk, butter, leftovers – open the door and look.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fridge, refrigerator",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.fridge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Milch ist im Kühlschrank.",
+      "tr": "The milk is in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Kühlschrank ist leer!",
+      "tr": "The fridge is empty!",
+      "register": "informal",
+      "context": "shopping list",
+      "sense": "s1"
+     },
+     {
+      "text": "Stell die Butter in den Kühlschrank.",
+      "tr": "Put the butter in the fridge.",
+      "register": "informal",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Kühlschrank",
+      "tr": "in the fridge"
+     },
+     {
+      "text": "in den Kühlschrank stellen",
+      "tr": "to put in the fridge"
+     },
+     {
+      "text": "den Kühlschrank aufmachen",
+      "tr": "to open the fridge"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Eisschrank",
+      "register": "dated",
+      "nuance": "icebox – the old word, still heard from older people"
+     }
+    ],
+    "etymology": {
+     "text": "From kühl (“cool”) + Schrank (“cupboard, cabinet”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kühlschrank is built like Greek ψυγείο (from ψύχω, to cool): named after the cold, not after the food."
+    ],
+    "pitfalls": [
+     "im Kühlschrank (where: dative) – in den Kühlschrank (where to: accusative).",
+     "Plural with umlaut: die Kühlschränke."
+    ],
+    "subtleties": [
+     "Kühlschrank is literally “cool cupboard”; a freezer is der Gefrierschrank or das Gefrierfach."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

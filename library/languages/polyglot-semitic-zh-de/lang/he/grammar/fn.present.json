@@ -1,0 +1,399 @@
+{
+ "function": "fn.present",
+ "status": "realized",
+ "summary": "Hebrew has one present tense, and it works differently from Greek, German or Russian: the verb does not change for the person (I / you / he) but for **gender and number** — four forms. אָכַל “to eat”: אוֹכֵל for a man or a masculine subject, אוֹכֶלֶת for a woman, אוֹכְלִים for men or a mixed group, אוֹכְלוֹת for women only. The person is shown only by the subject, so the pronoun is never left out: אֲנִי אוֹכֵל, אַתָּה אוֹכֵל and הוּא אוֹכֵל share one form. The present is historically a participle (בֵּינוֹנִי, “the middle form”), which is why it inflects like an adjective. One form covers “I eat” and “I am eating” — there is no progressive and no helper verb “do”. The vowels depend on the verb’s pattern (binyan, see roots and patterns): paʿal אוֹכֵל, שׁוֹתֶה; piʿel מְבַשֵּׁל. After רוֹצֶה “want” or אוֹהֵב “like”, a second verb is an infinitive with לְ־: אֲנִי רוֹצֶה לֶאֱכֹל, הִיא אוֹהֶבֶת לְבַשֵּׁל. The past and the future do have person endings; they come after the foundations (C01, C02).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "eats",
+    "said"
+   ],
+   "rows": [
+    [
+     "אֲנִי (a man) · אַתָּה · הוּא",
+     "אוֹכֵל",
+     "okhel"
+    ],
+    [
+     "אֲנִי (a woman) · אַתְּ · הִיא",
+     "אוֹכֶלֶת",
+     "okhelet"
+    ],
+    [
+     "אֲנַחְנוּ (men or mixed) · אַתֶּם · הֵם",
+     "אוֹכְלִים",
+     "okhlim"
+    ],
+    [
+     "אֲנַחְנוּ (women) · אַתֶּן · הֵן",
+     "אוֹכְלוֹת",
+     "okhlot"
+    ]
+   ],
+   "caption": "Three persons, singular and plural — but only four forms: the pronoun shows the person."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Gender and number, not person",
+   "text": "The present form tells you whether the subject is masculine or feminine, one or more — never whether it is “I”, “you” or “he”. That is why the pronoun (or a noun) must always be there: אֲנִי שׁוֹתֶה, אַתָּה שׁוֹתֶה, הוּא שׁוֹתֶה."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "אוֹכֵל",
+     "אוֹכֶלֶת"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "אוֹכְלִים",
+     "אוֹכְלוֹת"
+    ]
+   ],
+   "caption": "אָכַל “eat” — paʿal; to eat: לֶאֱכֹל"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "אוֹהֵב",
+     "אוֹהֶבֶת"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "אוֹהֲבִים",
+     "אוֹהֲבוֹת"
+    ]
+   ],
+   "caption": "אָהַב “like, love” — paʿal; to like, love: לֶאֱהֹב"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "שׁוֹתֶה",
+     "שׁוֹתָה"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "שׁוֹתִים",
+     "שׁוֹתוֹת"
+    ]
+   ],
+   "caption": "שָׁתָה “drink” — paʿal, root ending in ה; to drink: לִשְׁתּוֹת"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "רוֹצֶה",
+     "רוֹצָה"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "רוֹצִים",
+     "רוֹצוֹת"
+    ]
+   ],
+   "caption": "רָצָה “want” — paʿal, root ending in ה; to want: לִרְצוֹת"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "קוֹנֶה",
+     "קוֹנָה"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "קוֹנִים",
+     "קוֹנוֹת"
+    ]
+   ],
+   "caption": "קָנָה “buy” — paʿal, root ending in ה; to buy: לִקְנוֹת"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine"
+   ],
+   "rows": [
+    [
+     "singular — אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא",
+     "מְבַשֵּׁל",
+     "מְבַשֶּׁלֶת"
+    ],
+    [
+     "plural — אֲנַחְנוּ, אַתֶּם / אַתֶּן, הֵם / הֵן",
+     "מְבַשְּׁלִים",
+     "מְבַשְּׁלוֹת"
+    ]
+   ],
+   "caption": "בִּשֵּׁל “cook” — piʿel; to cook: לְבַשֵּׁל"
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "m. sg",
+    "f. sg",
+    "m. pl",
+    "f. pl",
+    "verbs"
+   ],
+   "rows": [
+    [
+     "paʿal",
+     "אוֹכֵל",
+     "אוֹכֶלֶת",
+     "אוֹכְלִים",
+     "אוֹכְלוֹת",
+     "אָכַל, אָהַב"
+    ],
+    [
+     "paʿal, root ending in ה",
+     "שׁוֹתֶה",
+     "שׁוֹתָה",
+     "שׁוֹתִים",
+     "שׁוֹתוֹת",
+     "שָׁתָה, רָצָה, קָנָה"
+    ],
+    [
+     "piʿel (מְ־ in front)",
+     "מְבַשֵּׁל",
+     "מְבַשֶּׁלֶת",
+     "מְבַשְּׁלִים",
+     "מְבַשְּׁלוֹת",
+     "בִּשֵּׁל"
+    ]
+   ],
+   "caption": "The endings are the same in every pattern — ∅, -ֶת or -ָה, -ִים, -וֹת — like the endings of adjectives."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Who is “I”?",
+   "text": "A woman says אֲנִי אוֹכֶלֶת, אֲנִי רוֹצָה; a man אֲנִי אוֹכֵל, אֲנִי רוֹצֶה. Speaking to a woman: אַתְּ שׁוֹתָה. A group with even one man takes the masculine plural: הֵם אוֹכְלִים."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "One form, two meanings — and no “do”",
+   "text": "הִיא שׁוֹתָה קָפֶה is “she drinks coffee” and “she is drinking coffee”. A question is the same sentence with a question mark: אַתָּה שׁוֹתֶה קָפֶה? “Do you drink coffee?”"
+  },
+  {
+   "t": "table",
+   "head": [
+    "want / like + to …",
+    "example"
+   ],
+   "rows": [
+    [
+     "לֶאֱכֹל “to eat”",
+     "הַיְּלָדִים רוֹצִים לֶאֱכֹל."
+    ],
+    [
+     "לִשְׁתּוֹת “to drink”",
+     "אֲנִי רוֹצֶה לִשְׁתּוֹת קָפֶה."
+    ],
+    [
+     "לִקְנוֹת “to buy”",
+     "הִיא רוֹצָה לִקְנוֹת לֶחֶם."
+    ],
+    [
+     "לְבַשֵּׁל “to cook”",
+     "הִיא אוֹהֶבֶת לְבַשֵּׁל."
+    ]
+   ],
+   "caption": "The second verb does not agree: it is the infinitive, with לְ־ in front."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "אֲנִי / אַתָּה / הוּא אוֹכֵל — one form",
+      "gender: אוֹכֵל / אוֹכֶלֶת",
+      "number: אוֹכְלִים / אוֹכְלוֹת"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "ich esse, du isst, er isst, wir essen, ihr esst, sie essen",
+      "person and number — never gender"
+     ]
+    },
+    {
+     "title": "Greek · Russian · Turkish",
+     "points": [
+      "τρώω, τρως, τρώει … · ем, ешь, ест … · yerim, yersin, yer …",
+      "person endings; Russian shows gender only in the past (ел / ела) — Hebrew does it in the present"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Who is the subject?",
+    "Masculine or feminine? One or more?",
+    "Choose: ∅ · -ֶת / -ָה · -ִים · -וֹת",
+    "Add the object (אֶת if definite)"
+   ],
+   "caption": "Building a present-tense sentence"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Who is speaking, and to whom (man or woman)?",
+    "One person or more? Is there a man in the group?",
+    "Is there a second verb after רוֹצֶה / אוֹהֵב? → the infinitive."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who does it? → put the pronoun or the noun first; in the present the pronoun is never left out.",
+   "Is the subject masculine or feminine? (For אֲנִי and אַתָּה / אַתְּ it depends on who speaks and to whom.)",
+   "One or more? A mixed group → masculine plural (-ִים).",
+   "Which pattern? A root ending in ה → -ֶה / -ָה (שׁוֹתֶה, שׁוֹתָה); piʿel → מְ־ in front (מְבַשֵּׁל); otherwise like אוֹכֵל.",
+   "Is there a second verb after רוֹצֶה / אוֹהֵב? → the infinitive with לְ־: לֶאֱכֹל, לִשְׁתּוֹת, לְבַשֵּׁל.",
+   "Is it a question? → the same form, no “do”: אַתָּה אוֹכֵל?"
+  ],
+  "steps": [
+   "Find the subject’s gender and number.",
+   "Take the matching present form.",
+   "Put the object after the verb (with אֶת when it is definite)."
+  ]
+ },
+ "traps": [
+  "*אֲנִי אוֹכֵל said by a woman — she says אֲנִי אוֹכֶלֶת.",
+  "*הִיא שׁוֹתֶלֶת — when the root ends in ה the feminine ends in -ָה: שׁוֹתָה, רוֹצָה, קוֹנָה.",
+  "*אוֹכֵל לֶחֶם for “I eat bread” — in the present the pronoun is required: אֲנִי אוֹכֵל לֶחֶם.",
+  "A group of women with one man is masculine: הֵם אוֹכְלִים, אֲנַחְנוּ שׁוֹתִים.",
+  "רוֹצָה “she wants” ≠ רָצְתָה “she wanted”; קוֹנָה “she buys” ≠ קָנְתָה “she bought”.",
+  "No progressive: “I am eating” is just אֲנִי אוֹכֵל — no form of הָיָה.",
+  "*רוֹצֶה אוֹכֵל — after רוֹצֶה the second verb is the infinitive: רוֹצֶה לֶאֱכֹל."
+ ],
+ "evidence": {
+  "tags": [
+   "V",
+   "PRS"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;SG;MASC",
+  "V;PRS;SG;FEM",
+  "V;PRS;PL;MASC",
+  "V;PRS;PL;FEM",
+  "V;NFIN"
+ ],
+ "needs": {
+  "VERB": 3,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;PRS;SG;MASC",
+    "V;PRS;SG;FEM",
+    "V;PRS;PL;MASC",
+    "V;PRS;PL;FEM"
+   ],
+   "exclude": [
+    "he:haya"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "Arabic’s present (the imperfect) marks the person with prefixes and also gender and number — يَأْكُلُ, تَأْكُلُ, آكُلُ …; the Hebrew present has no person at all, only four gender-number forms."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "German conjugates by person and number (ich esse, du isst, er isst …) and never by gender — the reverse of the Hebrew present."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.present",
+   "note": "Chinese verbs never change: 我吃, 她吃, 他们吃 — time and aspect come from other words."
+  }
+ ]
+}

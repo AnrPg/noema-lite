@@ -1,0 +1,155 @@
+{
+ "function": "fn.case",
+ "status": "absent",
+ "summary": "Hebrew has no cases, so a preposition never changes the form of the noun after it: הַבַּיִת is the same in הַבַּיִת גָּדוֹל, בַּבַּיִת, לַבַּיִת and מֵהַבַּיִת. The meaning a case would carry is carried by the preposition alone — and “where?”, “where to?” and “where from?”, which German shows with the dative and the accusative (in der Stadt / in die Stadt), Hebrew shows with three different prepositions: בָּעִיר “in the city”, לָעִיר “to the city”, מֵהָעִיר “from the city” (the question words are אֵיפֹה? לְאָן? מֵאֵיפֹה?). What does change is only spelling at the start of the word: the article fuses with בְּ and לְ (בַּבַּיִת), מִ doubles the first letter (מִשְּׂמֹאל), and a בגדכפ״ת letter loses its dot after a prefix (בְּבֵית). Pronouns are not declined either: “me, to me, with me” are prepositions with personal endings (אוֹתִי, לִי, אִתִּי). A few old words still carry a fossil of the Biblical directional ending ־ָה “towards”: הַבַּיְתָה “home(wards)”, הַחוּצָה “outwards”, צָפוֹנָה “northwards”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "Hebrew (a preposition)",
+    "German (a case)",
+    "Arabic (a case)"
+   ],
+   "rows": [
+    [
+     "Where? — אֵיפֹה?",
+     "בָּעִיר",
+     "in der Stadt (dative)",
+     "فِي الْمَدِينَةِ (genitive)"
+    ],
+    [
+     "Where to? — לְאָן?",
+     "לָעִיר",
+     "in die Stadt (accusative)",
+     "إِلَى الْمَدِينَةِ (genitive)"
+    ],
+    [
+     "Where from? — מֵאֵיפֹה?",
+     "מֵהָעִיר",
+     "aus der Stadt (dative)",
+     "مِنَ الْمَدِينَةِ (genitive)"
+    ]
+   ],
+   "caption": "Hebrew עִיר stays עִיר; only the preposition changes."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "What does the work of the cases",
+   "text": "The preposition (בְּ, לְ, מִ, עִם …), the word order (subject first), אֶת before a definite object (lesson 7), and personal endings on prepositions (לִי, אִתִּי)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Spelling changes are not cases",
+   "text": "בַּבַּיִת (the article swallowed), מִשְּׂמֹאל (a doubled letter), בְּבֵית (a soft ב) are changes of spelling and sound at the junction — the noun is still the same form in every role."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Wo? Wohin? Woher?",
+   "text": "Hebrew has the same three questions as German — אֵיפֹה? לְאָן? מֵאֵיפֹה? — but answers them with בְּ, לְ and מִ instead of dative and accusative."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "Greek (στο σπίτι / από το σπίτι — the accusative after every preposition), Russian (в доме / в дом / из дома) and Turkish (evde / eve / evden) all change the noun; Hebrew, like English, does not."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Where / where to / where from? → בְּ / לְ / מִ — not a case ending.",
+    "Did I change the noun for the preposition? → don’t."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it “where” (location)? → בְּ + the unchanged noun.",
+   "Is it “where to”? → לְ (or אֶל) + the unchanged noun; a few words take the ending ־ָה (הַבַּיְתָה).",
+   "Is it “where from”? → מִ / מֵ + the unchanged noun.",
+   "Is it a pronoun? → the preposition with a personal ending (לִי, אִתִּי, מִמֶּנִּי)."
+  ]
+ },
+ "traps": [
+  "Do not look for a dative or a genitive ending: לַבַּיִת “to the house” is לְ + הַבַּיִת.",
+  "German two-way prepositions (in + dative / accusative) have no Hebrew counterpart: Hebrew changes the preposition (בְּ / לְ), not the noun.",
+  "הַבַּיְתָה “home(wards)” is a fossil of an old ending, used with a few words only — not a living case."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Does הָעִיר change after a preposition?",
+   "options": [
+    "no — בָּעִיר, לָעִיר, מֵהָעִיר",
+    "yes — it takes a case ending"
+   ],
+   "answer": "no — בָּעִיר, לָעִיר, מֵהָעִיר",
+   "why": "Hebrew has no cases; only the preposition changes."
+  },
+  {
+   "q": "German “Wohin?” is Hebrew …",
+   "options": [
+    "לְאָן?",
+    "אֵיפֹה?",
+    "מֵאֵיפֹה?"
+   ],
+   "answer": "לְאָן?",
+   "why": "Wo? = אֵיפֹה?, Wohin? = לְאָן?, Woher? = מֵאֵיפֹה?"
+  },
+  {
+   "q": "“in die Stadt” (towards the city) in Hebrew:",
+   "options": [
+    "לָעִיר",
+    "בָּעִיר",
+    "מֵהָעִיר"
+   ],
+   "answer": "לָעִיר",
+   "why": "Direction takes לְ (fused with the article: לָ); location takes בְּ."
+  },
+  {
+   "q": "Which course language puts every noun after a preposition into the genitive?",
+   "options": [
+    "Arabic",
+    "Hebrew",
+    "Chinese"
+   ],
+   "answer": "Arabic",
+   "why": "Arabic: فِي الْبَيْتِ (-i). Hebrew and Chinese have no cases."
+  },
+  {
+   "q": "Why is it בַּבַּיִת and not בְּהַבַּיִת?",
+   "options": [
+    "the article fuses with בְּ",
+    "בַּיִת is in the dative",
+    "בַּבַּיִת is plural"
+   ],
+   "answer": "the article fuses with בְּ",
+   "why": "A spelling rule, not a case: בְּ + הַ → בַּ."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.case",
+   "note": "Arabic, Hebrew’s sister, kept the cases: after every preposition the noun is genitive (فِي الْبَيْتِ, مِنَ الْبَيْتِ)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "German shows where (dative) and where to (accusative) with the case after in, an, auf …; Hebrew uses two prepositions, בְּ and לְ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "Chinese has no cases either: 在, 从 and 往 / 到 do the work, as בְּ, מִ and לְ do in Hebrew."
+  }
+ ]
+}

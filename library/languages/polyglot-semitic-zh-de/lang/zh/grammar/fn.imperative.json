@@ -1,0 +1,254 @@
+{
+ "function": "fn.imperative",
+ "status": "realized",
+ "summary": "A Chinese command is the plain verb — it never changes its form: 来！ ‘come!’, 等我！ ‘wait for me!’, 进来！ ‘come in!’. The subject 你 / 你们 may stay (你来！ is a firm ‘YOU come’). Small words set the tone: 请 before the verb makes it polite (请进 ‘please come in’, 请坐 ‘please sit down’), 吧 at the end makes it a suggestion or a friendly push (我们走吧 ‘let’s go’, 你来吧 ‘do come’), and ‘don’t’ is 别 or 不要 before the verb (别走！ ‘don’t go!’, 不要开车 ‘don’t drive’). There is no singular / plural or formal / informal form of the verb: politeness comes from 请, 您 and 吧, number from 你 / 你们.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Tone",
+    "Chinese",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "bare command",
+     "来！ 等我！ 进来！",
+     "Come! Wait for me! Come in!"
+    ],
+    [
+     "with the subject (firm, contrastive)",
+     "你来！ 你们等我！",
+     "YOU come! You (all) wait for me!"
+    ],
+    [
+     "polite: 请 + verb",
+     "请进！ 请坐！ 请等我。",
+     "Please come in! Please sit down! Please wait for me."
+    ],
+    [
+     "very polite: 请 + 您 …",
+     "请您等一下。",
+     "Would you please wait a moment."
+    ],
+    [
+     "suggestion / soft push: … 吧",
+     "我们走吧！ 你来吧！ 坐出租车吧！",
+     "Let’s go! Do come! Take a taxi!"
+    ],
+    [
+     "negative: 别 + verb",
+     "别走！ 别等我。",
+     "Don’t go! Don’t wait for me."
+    ],
+    [
+     "negative: 不要 + verb",
+     "不要开车！ 请不要在这里等。",
+     "Don’t drive! Please don’t wait here."
+    ]
+   ],
+   "caption": "Commands: the verb stays the same, the small words change"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "(你 / 你们)",
+    "(请)",
+    "(别 / 不要)",
+    "verb",
+    "(object / place)",
+    "(吧)"
+   ],
+   "caption": "The slots of a command"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No imperative form — compare Greek and German",
+   "text": "Greek έλα / ελάτε, German komm / kommt / kommen Sie change the verb for one person, several, or politeness. Chinese keeps 来 for all of them: 来！ 你们来！ 请您来！"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "请 goes first",
+   "text": "请 stands before the verb, never at the end like English ‘…, please’: 请等我, not *等我请."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "别 / 不要 — don’t (a command)",
+     "points": [
+      "别走！ Don’t go!",
+      "不要开车！ Don’t drive!"
+     ]
+    },
+    {
+     "title": "不 — not (a statement)",
+     "points": [
+      "他不走。 He isn’t going.",
+      "我不开车。 I don’t drive."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "吧 makes it friendly",
+   "text": "A bare 走！ can sound brusque; 走吧！ is ‘come on, let’s go’. With 我们 it is ‘let’s’: 我们坐出租车吧. With 你 it is a gentle push: 你先吃吧 ‘go ahead and eat’."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Signs and notices",
+   "text": "Written commands use 请 and 请勿 ‘please do not’: 请勿吸烟 ‘no smoking’, 请排队 ‘please queue’."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a command or a request? → the plain verb, unchanged.",
+   "Do I want to be polite? → put 请 before the verb (请您 … for very polite).",
+   "Is it a suggestion, ‘let’s …’, or a friendly push? → add 吧 at the end (我们 … 吧 for ‘let’s’).",
+   "Is it ‘don’t …’? → 别 + verb (spoken) or 不要 + verb; not 不 alone.",
+   "Am I singling out the person? → keep 你 / 你们 before the verb.",
+   "Did I put 请 at the end, like ‘please’ in English? → move it before the verb."
+  ],
+  "steps": [
+   "(你) + (请) + (别 / 不要) + verb + (object) + (吧)"
+  ]
+ },
+ "traps": [
+  "*等我请 → 请等我.",
+  "*不走！ for ‘don’t go!’ → 别走！ / 不要走！",
+  "Greek/German habit: there is no plural or polite form of the verb — 你们来, 请您来, the verb is still 来.",
+  "吗 turns it into a question, not a command: 你来吗？ ‘are you coming?’ vs 你来吧！ ‘do come!’"
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:ba.part",
+   "zh:bie",
+   "zh:qing"
+  ],
+  "punct": [
+   "！",
+   "!"
+  ]
+ },
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘Please come in!’",
+   "options": [
+    "请进！",
+    "进请！",
+    "你进吗？"
+   ],
+   "answer": "请进！",
+   "why": "请 comes before the verb."
+  },
+  {
+   "q": "‘Don’t go!’",
+   "options": [
+    "别走！",
+    "不走！",
+    "走别！"
+   ],
+   "answer": "别走！",
+   "why": "A negative command uses 别 (or 不要) before the verb; 不走 is ‘(I’m) not going’."
+  },
+  {
+   "q": "‘Let’s take a taxi!’",
+   "options": [
+    "我们坐出租车吧！",
+    "我们坐出租车吗？",
+    "坐出租车我们！"
+   ],
+   "answer": "我们坐出租车吧！",
+   "why": "我们 … 吧 = ‘let’s’; 吗 would make it a question."
+  },
+  {
+   "q": "German ‘Kommt!’ (to several people) in Chinese:",
+   "options": [
+    "你们来！",
+    "来们！",
+    "你们来了！"
+   ],
+   "answer": "你们来！",
+   "why": "The verb does not change; 你们 shows that several people are meant."
+  },
+  {
+   "q": "你来吧！ means …",
+   "options": [
+    "Do come! / Come on!",
+    "Are you coming?",
+    "You came."
+   ],
+   "answer": "Do come! / Come on!",
+   "why": "吧 makes a friendly suggestion; 你来吗？ would be the question."
+  },
+  {
+   "q": "‘Please don’t wait for me.’",
+   "options": [
+    "请不要等我。",
+    "请不等我。",
+    "不要请等我。"
+   ],
+   "answer": "请不要等我。",
+   "why": "请 first, then 不要 + verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.imperative",
+   "note": "German has three imperatives (komm! / kommt! / kommen Sie!) and puts the verb first; Chinese keeps the bare verb for everyone and adds 请 for politeness, 吧 for a suggestion, 别 / 不要 for ‘don’t’ (Geh nicht! = 别走！)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.imperative",
+   "note": "Arabic builds the imperative from the jussive and marks gender and number (اِذْهَبْ، اِذْهَبِي، اِذْهَبُوا); ‘don’t’ is لَا + jussive (لَا تَذْهَبْ). Chinese marks none of this: 去！ 别去！"
+  },
+  {
+   "lang": "he",
+   "fn": "fn.imperative",
+   "note": "Hebrew has imperative forms for him, her and them (לֵךְ, לְכִי, לְכוּ), and speech often uses the future instead (תֵּלֵךְ); ‘don’t’ is אַל + future (אַל תֵּלֵךְ). Chinese: 走！ 别走！"
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "不 and 没 (S08) negate statements; commands take 别 / 不要."
+  }
+ ]
+}

@@ -1002,7 +1002,7 @@
   {
    "id": "he.f1.036",
    "frame": "fr.greet",
-   "text": "בֹּקֶר טוֹב, דָּוִד! בֹּקֶר אוֹר, שָׂרָה!",
+   "text": "בֹּקֶר טוֹב, יוֹסִי! בֹּקֶר אוֹר, שָׂרָה!",
    "tokens": [
     {
      "t": "בֹּקֶר טוֹב",
@@ -1013,7 +1013,7 @@
      "p": true
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1040,7 +1040,7 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "Good morning, David! — Good morning, Sarah!",
+   "gloss": "Good morning, Yossi! — Good morning, Sarah!",
    "level": "A1"
   },
   {
@@ -1086,7 +1086,7 @@
   {
    "id": "he.f1.039",
    "frame": "fr.greet",
-   "text": "שָׁלוֹם, דָּוִד! מַה שְּׁלוֹמְךָ?",
+   "text": "שָׁלוֹם, יוֹסִי! מַה שְּׁלוֹמְךָ?",
    "tokens": [
     {
      "t": "שָׁלוֹם",
@@ -1097,7 +1097,7 @@
      "p": true
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1116,7 +1116,7 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "Hello, David! How are you?",
+   "gloss": "Hello, Yossi! How are you?",
    "level": "A1"
   },
   {
@@ -1270,7 +1270,7 @@
   {
    "id": "he.f1.044",
    "frame": "fr.greet",
-   "text": "נָעִים מְאוֹד, אֲנִי דָּוִד.",
+   "text": "נָעִים מְאוֹד, אֲנִי יוֹסִי.",
    "tokens": [
     {
      "t": "נָעִים מְאוֹד",
@@ -1285,7 +1285,7 @@
      "l": "he:ani"
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1297,7 +1297,7 @@
     "fn.greetings",
     "fn.pronoun.subject"
    ],
-   "gloss": "Nice to meet you, I’m David.",
+   "gloss": "Nice to meet you, I’m Yossi.",
    "level": "A1"
   },
   {
@@ -1327,14 +1327,14 @@
   {
    "id": "he.f1.046",
    "frame": "fr.greet",
-   "text": "שְׁמִי דָּוִד.",
+   "text": "שְׁמִי יוֹסִי.",
    "tokens": [
     {
      "t": "שְׁמִי",
      "l": "he:shmi"
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1345,13 +1345,13 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "My name is David. (formal)",
+   "gloss": "My name is Yossi. (formal)",
    "level": "A1"
   },
   {
    "id": "he.f1.047",
    "frame": "fr.greet",
-   "text": "שָׁלוֹם, קוֹרְאִים לִי דָּוִד. נָעִים מְאוֹד!",
+   "text": "שָׁלוֹם, קוֹרְאִים לִי יוֹסִי. נָעִים מְאוֹד!",
    "tokens": [
     {
      "t": "שָׁלוֹם",
@@ -1366,7 +1366,7 @@
      "l": "he:korim-li"
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1385,7 +1385,7 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "Hello, my name is David. Nice to meet you!",
+   "gloss": "Hello, my name is Yossi. Nice to meet you!",
    "level": "A1"
   },
   {
@@ -1419,7 +1419,7 @@
   {
    "id": "he.f1.049",
    "frame": "fr.greet",
-   "text": "תּוֹדָה, דָּוִד! עַל לֹא דָּבָר.",
+   "text": "תּוֹדָה, יוֹסִי! עַל לֹא דָּבָר.",
    "tokens": [
     {
      "t": "תּוֹדָה",
@@ -1430,7 +1430,7 @@
      "p": true
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -1449,7 +1449,7 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "Thanks, David! — Don’t mention it.",
+   "gloss": "Thanks, Yossi! — Don’t mention it.",
    "level": "A1"
   },
   {
@@ -1988,7 +1988,7 @@
   {
    "id": "he.f1.068",
    "frame": "fr.be.person",
-   "text": "זֶה דָּוִד וְזֹאת שָׂרָה.",
+   "text": "זֶה יוֹסִי וְזֹאת שָׂרָה.",
    "tokens": [
     {
      "t": "זֶה",
@@ -1996,7 +1996,7 @@
      "f": "PRON;SG;MASC"
     },
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -2025,7 +2025,7 @@
    "functions": [
     "fn.demonstrative"
    ],
-   "gloss": "This is David and this is Sarah.",
+   "gloss": "This is Yossi and this is Sarah.",
    "level": "A1"
   },
   {
@@ -2409,10 +2409,10 @@
   {
    "id": "he.f1.081",
    "frame": "fr.be.where",
-   "text": "דָּוִד פֹּה וְשָׂרָה שָׁם.",
+   "text": "יוֹסִי פֹּה וְשָׂרָה שָׁם.",
    "tokens": [
     {
-     "t": "דָּוִד",
+     "t": "יוֹסִי",
      "name": true
     },
     {
@@ -2444,7 +2444,7 @@
    "functions": [
     "fn.demonstrative"
    ],
-   "gloss": "David is here and Sarah is there.",
+   "gloss": "Yossi is here and Sarah is there.",
    "level": "A1"
   },
   {

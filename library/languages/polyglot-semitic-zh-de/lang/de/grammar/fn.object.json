@@ -1,0 +1,321 @@
+{
+ "function": "fn.object",
+ "status": "realized",
+ "summary": "The direct object – the thing or person a verb acts on (wen? or was? – whom? what?) – stands in the accusative. In German you see the accusative only in the masculine singular: der → den, ein → einen, kein → keinen, mein → meinen (also deinen, seinen, ihren, unseren, euren, Ihren): Der Kaffee ist hier. → Ich trinke den Kaffee / einen Kaffee. Feminine (die, eine, keine, meine Suppe), neuter (das, ein, kein, mein Brot) and plural (die, keine, meine Äpfel) look exactly like the nominative. The noun itself usually stays the same; a few masculine nouns add -n (der Junge → den Jungen, der Student → den Studenten, der Neffe → den Neffen). Pronouns have their own accusative: mich, dich, ihn, sie, es, uns, euch, sie, Sie (Ich mag dich. Magst du ihn?). Food and drink are often objects without any article: Ich trinke Wasser, Wir essen Brot. Verbs of this step that take an accusative: haben, essen, trinken, kochen, kaufen, mögen, wollen, möchte. sein never takes an object: after sein comes the nominative (Das ist ein Apfel). Because the case marks the object, it may even come first: Den Kaffee trinke ich (the coffee – that’s what I drink). The dative (the indirect object, “to whom”) and objects after prepositions come later (S11–S13 and C03).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative (subject)",
+     "der / ein / kein / mein Apfel",
+     "die / eine / keine / meine Suppe",
+     "das / ein / kein / mein Brot",
+     "die / keine / meine Äpfel"
+    ],
+    [
+     "accusative (object)",
+     "den / einen / keinen / meinen Apfel",
+     "die / eine / keine / meine Suppe",
+     "das / ein / kein / mein Brot",
+     "die / keine / meine Äpfel"
+    ]
+   ],
+   "caption": "Only the masculine singular changes: -en (den, einen, keinen, meinen)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "subject",
+    "object",
+    "example"
+   ],
+   "rows": [
+    [
+     "ich",
+     "mich",
+     "Er mag mich."
+    ],
+    [
+     "du",
+     "dich",
+     "Ich mag dich."
+    ],
+    [
+     "er",
+     "ihn (!)",
+     "Magst du ihn?"
+    ],
+    [
+     "sie",
+     "sie",
+     "Wir mögen sie."
+    ],
+    [
+     "es",
+     "es",
+     "Ich esse es."
+    ],
+    [
+     "wir",
+     "uns",
+     "Sie mögen uns."
+    ],
+    [
+     "ihr",
+     "euch",
+     "Ich mag euch."
+    ],
+    [
+     "sie / Sie",
+     "sie / Sie",
+     "Ich mag sie."
+    ]
+   ],
+   "caption": "Personal pronouns as objects"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Wer? – Ich (subject, nominative)",
+    "trinke (verb)",
+    "Was? – einen Kaffee (object, accusative)"
+   ],
+   "caption": "Ask the two questions: who does it? what / whom does it affect?"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The one change to learn now",
+   "text": "masculine: der → den, ein → einen, kein → keinen, mein → meinen. Everything else looks like the nominative. der Tee → Ich trinke den Tee. der Apfel → Er isst einen Apfel."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "sein has no object",
+   "text": "Das ist ein Apfel (nominative) – but Ich esse einen Apfel (accusative). After sein the noun stays in the nominative: Er ist ein Freund, not *einen Freund."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "No article with food and drink",
+   "text": "Speaking of food and drink in general, German uses no article: Ich trinke Wasser. Wir essen Brot. Er kocht Reis. The accusative is then invisible – but it is still there (keinen Reis, den Reis)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek and Russian",
+     "points": [
+      "also mark the object: ο καφές → πίνω τον καφέ – τον like German den",
+      "Russian changes feminine -а to -у: я пью воду (вода) – German changes only the masculine article"
+     ]
+    },
+    {
+     "title": "Turkish and English",
+     "points": [
+      "Turkish adds -(y)ı only to a definite object: suyu içiyorum (the water) / su içiyorum (water)",
+      "English shows the object only in pronouns (him, me) and by word order"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which verb is it? Does it act on something (essen, trinken, kochen, kaufen, haben, mögen, wollen, möchte)? Then that thing is the object.",
+   "Is the verb sein? Then there is no object: the noun after it stays nominative.",
+   "Is the object masculine singular? → den / einen / keinen / meinen.",
+   "Feminine, neuter or plural? → the same form as the nominative.",
+   "Is the object a pronoun? → mich, dich, ihn, sie, es, uns, euch, sie, Sie.",
+   "Is it a masculine noun like Junge, Student, Neffe? → it takes -n as well: den Jungen."
+  ],
+  "steps": [
+   "Find the verb and ask “wen? / was?”.",
+   "Find the gender of the object.",
+   "Masculine singular: change the article to -en; otherwise keep it."
+  ]
+ },
+ "traps": [
+  "Ich habe einen Bruder – not *ein Bruder (der Bruder is masculine).",
+  "Das ist ein Apfel – not *einen Apfel: sein takes no object.",
+  "Ich trinke keinen Kaffee – the negative article takes the same -en.",
+  "er → ihn: Magst du ihn? (not *er).",
+  "die and das do not change: Ich esse die Suppe, ich esse das Brot.",
+  "The dative (mir, dem, einem) is not used for direct objects: Ich mag dich, not *dir."
+ ],
+ "evidence": {
+  "tags": [
+   "ACC"
+  ]
+ },
+ "paradigmCells": [
+  "DET;ACC;SG;MASC",
+  "DET;ACC;SG;FEM",
+  "DET;ACC;SG;NEUT",
+  "DET;ACC;PL",
+  "PRON;ACC"
+ ],
+ "needs": {
+  "VERB": 3,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:der",
+    "de:ein",
+    "de:kein",
+    "de:mein",
+    "de:dein"
+   ],
+   "cells": [
+    "DET;ACC;SG;MASC",
+    "DET;ACC;SG;FEM",
+    "DET;ACC;SG;NEUT",
+    "DET;ACC;PL"
+   ],
+   "count": 10
+  },
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "lemmas": [
+    "de:ich",
+    "de:du",
+    "de:er",
+    "de:wir",
+    "de:ihr"
+   ],
+   "cells": [
+    "PRON;ACC"
+   ],
+   "count": 5
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich trinke ___ Kaffee. (a)",
+   "options": [
+    "einen",
+    "ein",
+    "eine"
+   ],
+   "answer": "einen",
+   "why": "der Kaffee is masculine; as an object: einen Kaffee."
+  },
+  {
+   "q": "Ich esse ___ Suppe. (the)",
+   "options": [
+    "die",
+    "den",
+    "der"
+   ],
+   "answer": "die",
+   "why": "Feminine does not change: die Suppe."
+  },
+  {
+   "q": "Wir kaufen ___ Brot. (a)",
+   "options": [
+    "ein",
+    "einen",
+    "eine"
+   ],
+   "answer": "ein",
+   "why": "das Brot is neuter: ein Brot, also as an object."
+  },
+  {
+   "q": "Das ist ___ Apfel.",
+   "options": [
+    "ein",
+    "einen"
+   ],
+   "answer": "ein",
+   "why": "After sein: nominative – no object."
+  },
+  {
+   "q": "Magst du ___? (him)",
+   "options": [
+    "ihn",
+    "er",
+    "ihm"
+   ],
+   "answer": "ihn",
+   "why": "er → ihn in the accusative."
+  },
+  {
+   "q": "Er trinkt ___ Wein. (no)",
+   "options": [
+    "keinen",
+    "kein",
+    "keine"
+   ],
+   "answer": "keinen",
+   "why": "der Wein is masculine: keinen Wein."
+  },
+  {
+   "q": "Ich kaufe ___ Apfel. (the)",
+   "options": [
+    "den",
+    "der",
+    "das"
+   ],
+   "answer": "den",
+   "why": "der Apfel is masculine: den Apfel as an object."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "Arabic marks the object with the ending -a (-an without the article): أَشْرَبُ ٱلْمَاءَ ʾašrabu l-māʾa (I drink the water) – as German changes der to den."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.object",
+   "note": "Hebrew puts אֶת before a definite object: אֲנִי שׁוֹתֶה אֶת הַקָּפֶה (I drink the coffee); an indefinite object has nothing."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.object",
+   "note": "Chinese has no case: the object simply follows the verb – 我喝茶 (I drink tea)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.have",
+   "note": "haben already showed the accusative: Ich habe einen Bruder."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case.basic",
+   "note": "The nominative (S04) is the subject form; the accusative is the second case you learn."
+  }
+ ]
+}

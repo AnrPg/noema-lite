@@ -1,0 +1,3350 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:shang",
+   "lemma": "上",
+   "trad": "上",
+   "pinyin": "shàng",
+   "pos": "ADP",
+   "senses": [
+    "prep.on"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On a surface — the table, the wall, the street.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on, on top of (after a noun: 桌子上)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.on"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to go up; to get on (a vehicle); to attend",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "last, previous (上个月 ‘last month’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "书在桌子上。",
+      "py": "Shū zài zhuōzi shang.",
+      "tr": "The book is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "墙上有一张画。",
+      "py": "Qiáng shang yǒu yì zhāng huà.",
+      "tr": "There is a picture on the wall.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在这里上车。",
+      "py": "Wǒmen zài zhèli shàng chē.",
+      "tr": "We get on (the bus) here.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     },
+     {
+      "text": "上个月我很忙。",
+      "py": "Shàng ge yuè wǒ hěn máng.",
+      "tr": "Last month I was very busy.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "桌子上",
+      "tr": "on the table"
+     },
+     {
+      "text": "墙上",
+      "tr": "on the wall"
+     },
+     {
+      "text": "街上",
+      "tr": "in the street"
+     },
+     {
+      "text": "上车",
+      "tr": "to get on (a vehicle)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "天上掉馅饼",
+      "tr": "a pie falls from the sky",
+      "kind": "idiom",
+      "meaning": "something for nothing — usually: it never happens (天上不会掉馅饼)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "上面",
+      "register": "neutral",
+      "nuance": "shàngmian: the longer form — it can also stand alone (在上面 ‘on top’)"
+     },
+     {
+      "word": "上边",
+      "register": "colloquial",
+      "nuance": "shàngbian: the same as 上面, more spoken"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogram: a short stroke above a long one (the mirror of 下). From Proto-Sino-Tibetan *tVŋ ‘top’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "上 and 下 are mirror images: a mark above or below a line."
+    ],
+    "pitfalls": [
+     "上 comes AFTER the noun: 桌子上 ‘on the table’ — never *在上桌子.",
+     "在 opens the phrase, 上 closes it: 在 + noun + 上. 上 alone cannot stand after 在 (*书在上) — then use 上面."
+    ],
+    "subtleties": [
+     "上 is also ‘on’ for surfaces that are not on top: 墙上 ‘on the wall’, 街上 ‘in the street’.",
+     "After a noun it is usually said lightly: 桌子上 zhuōzi shang."
+    ]
+   }
+  },
+  {
+   "id": "zh:shangmian",
+   "lemma": "上面",
+   "trad": "上面",
+   "pinyin": "shàng mian",
+   "pos": "NOUN",
+   "senses": [
+    "prep.on"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On top, above — a position you can point to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on top (of), above, on",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.on"
+     },
+     {
+      "id": "s2",
+      "def": "the top, the surface",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "above, aforementioned (in a text)",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "the higher-ups, the authorities",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "钥匙在桌子上面。",
+      "py": "Yàoshi zài zhuōzi shàngmian.",
+      "tr": "The keys are on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "书在上面。",
+      "py": "Shū zài shàngmian.",
+      "tr": "The book is on top.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "上面写着什么？",
+      "py": "Shàngmian xiězhe shénme?",
+      "tr": "What does it say on it?",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s2"
+     },
+     {
+      "text": "这是上面的意思。",
+      "py": "Zhè shì shàngmian de yìsi.",
+      "tr": "This is what the higher-ups want.",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "桌子上面",
+      "tr": "on (top of) the table"
+     },
+     {
+      "text": "在上面",
+      "tr": "on top, up there"
+     },
+     {
+      "text": "上面写着",
+      "tr": "it says on it"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "上",
+      "register": "neutral",
+      "nuance": "shàng: the short form after a noun (桌子上); it cannot stand alone"
+     },
+     {
+      "word": "上边",
+      "register": "colloquial",
+      "nuance": "shàngbian: the same, more spoken"
+     },
+     {
+      "word": "上方",
+      "register": "formal",
+      "nuance": "shàngfāng: above (signs, descriptions)"
+     }
+    ],
+    "etymology": {
+     "text": "上 ‘up, on’ + 面 ‘side, face’: ‘the upper side’.",
+     "src": "morphemes: 上 + 面"
+    },
+    "funFacts": [
+     "面 ‘face, side’ makes the long place words: 上面, 下面, 里面, 外面, 前面, 后面."
+    ],
+    "pitfalls": [
+     "上面 can stand alone (书在上面 ‘the book is on top’); short 上 cannot (*书在上)."
+    ],
+    "subtleties": [
+     "上面 also covers ‘above’ without touching (灯在桌子上面 can be a lamp hanging over the table); 上 is mostly ‘on the surface’."
+    ]
+   }
+  },
+  {
+   "id": "zh:xia",
+   "lemma": "下",
+   "trad": "下",
+   "pinyin": "xià",
+   "pos": "ADP",
+   "senses": [
+    "prep.under"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Below, underneath — and going down.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "under, below (after a noun: 床下)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.under"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to go down; to get off (a vehicle)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "next (下个月 ‘next month’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(verb, of rain or snow) to fall",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的包在床下。",
+      "py": "Wǒ de bāo zài chuáng xià.",
+      "tr": "My bag is under the bed.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "树下有一个人。",
+      "py": "Shù xià yǒu yí ge rén.",
+      "tr": "There is someone under the tree.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在这里下车。",
+      "py": "Wǒmen zài zhèli xià chē.",
+      "tr": "We get off here.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     },
+     {
+      "text": "下雨了。",
+      "py": "Xià yǔ le.",
+      "tr": "It’s raining.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "床下",
+      "tr": "under the bed"
+     },
+     {
+      "text": "树下",
+      "tr": "under the tree"
+     },
+     {
+      "text": "下车",
+      "tr": "to get off"
+     },
+     {
+      "text": "下雨",
+      "tr": "to rain"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "下面",
+      "register": "neutral",
+      "nuance": "xiàmian: the longer form — the safe everyday choice (桌子下面)"
+     },
+     {
+      "word": "底下",
+      "register": "colloquial",
+      "nuance": "dǐxia: underneath — 桌子底下"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogram: a short stroke below a long one (the mirror of 上). From Proto-Sino-Tibetan *(k/g)la ‘to fall’; cognate with 落 ‘to fall’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "下雨 ‘down-rain’ is ‘it is raining’, 下雪 ‘down-snow’ ‘it is snowing’."
+    ],
+    "pitfalls": [
+     "Short 下 after a noun is fine in set phrases (床下, 树下, 山下); for everyday things 下面 is safer: 桌子下面."
+    ],
+    "subtleties": [
+     "上 / 下 also order time: 上个月 ‘last month’, 下个月 ‘next month’ — the past is ‘up’, the future ‘down’."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiamian",
+   "lemma": "下面",
+   "trad": "下面",
+   "pinyin": "xià mian",
+   "pos": "NOUN",
+   "senses": [
+    "prep.under"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Underneath — under the table, under the bed.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "under, below, underneath",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.under"
+     },
+     {
+      "id": "s2",
+      "def": "next, following (in a talk, a text)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the lower levels, subordinates",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "包在椅子下面。",
+      "py": "Bāo zài yǐzi xiàmian.",
+      "tr": "The bag is under the chair.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "桌子下面有一只猫。",
+      "py": "Zhuōzi xiàmian yǒu yì zhī māo.",
+      "tr": "There is a cat under the table.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     },
+     {
+      "text": "下面我们吃饭。",
+      "py": "Xiàmian wǒmen chīfàn.",
+      "tr": "Next, let’s eat.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "桌子下面",
+      "tr": "under the table"
+     },
+     {
+      "text": "在下面",
+      "tr": "underneath"
+     },
+     {
+      "text": "下面的",
+      "tr": "the following"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "下",
+      "register": "neutral",
+      "nuance": "xià: short form after a noun in set phrases (床下)"
+     },
+     {
+      "word": "底下",
+      "register": "colloquial",
+      "nuance": "dǐxia: underneath"
+     },
+     {
+      "word": "下边",
+      "register": "colloquial",
+      "nuance": "xiàbian: the same as 下面"
+     }
+    ],
+    "etymology": {
+     "text": "下 ‘down, under’ + 面 ‘side’.",
+     "src": "morphemes: 下 + 面"
+    },
+    "funFacts": [
+     "下面 is also how a speaker moves on: 下面请老师讲话 ‘next, the teacher will speak’."
+    ],
+    "pitfalls": [
+     "Like 上面, 下面 can stand alone: 包在下面 ‘the bag is underneath’."
+    ],
+    "subtleties": [
+     "下面 is ‘under’ for position; 以下 means ‘below (a number), the following’."
+    ]
+   }
+  },
+  {
+   "id": "zh:li",
+   "lemma": "里",
+   "trad": "裡",
+   "pinyin": "lǐ",
+   "pos": "ADP",
+   "senses": [
+    "adv.inside"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Inside something — a room, a fridge, a bag, a heart.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in, inside (after a noun: 冰箱里)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inside"
+     },
+     {
+      "id": "s2",
+      "def": "within, during (a time)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "li, a Chinese mile (500 m)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "牛奶在冰箱里。",
+      "py": "Niúnǎi zài bīngxiāng li.",
+      "tr": "The milk is in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "房间里没有人。",
+      "py": "Fángjiān li méiyǒu rén.",
+      "tr": "There is nobody in the room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我在家里。",
+      "py": "Wǒ zài jiā li.",
+      "tr": "I’m at home.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "万里长城",
+      "py": "Wànlǐ Chángchéng",
+      "tr": "the Great Wall (‘ten-thousand-li long wall’)",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "冰箱里",
+      "tr": "in the fridge"
+     },
+     {
+      "text": "家里",
+      "tr": "at home"
+     },
+     {
+      "text": "房间里",
+      "tr": "in the room"
+     },
+     {
+      "text": "心里",
+      "tr": "in one’s heart"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "里面",
+      "register": "neutral",
+      "nuance": "lǐmian: the longer form — it can also stand alone (在里面 ‘inside’)"
+     },
+     {
+      "word": "内",
+      "register": "formal",
+      "nuance": "nèi: inside, within — 室内 ‘indoors’"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 裡 / 裏: semantic 衣 ‘clothes’ + phonetic 里 — the lining of a garment. Simplified Chinese writes it with 里 ‘village; li (mile)’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The traditional 裡 / 裏 contains 衣 ‘clothes’: the first ‘inside’ was the lining of a garment."
+    ],
+    "pitfalls": [
+     "An ordinary noun needs 里 to become a place: 在冰箱里 — *在冰箱 is incomplete. Place names and institutions do not: 在北京, 在学校.",
+     "里 alone cannot follow 在: *他在里 — use 里面."
+    ],
+    "subtleties": [
+     "After a noun 里 is usually toneless: 家里 jiāli.",
+     "With rooms and buildings 里 is optional: 在厨房 / 在厨房里."
+    ]
+   }
+  },
+  {
+   "id": "zh:limian",
+   "lemma": "里面",
+   "trad": "裡面",
+   "pinyin": "lǐ mian",
+   "pos": "NOUN",
+   "senses": [
+    "adv.inside"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Inside — come in, it’s warm in here.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "inside, in",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inside"
+     },
+     {
+      "id": "s2",
+      "def": "the inside, the interior",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他在里面。",
+      "py": "Tā zài lǐmian.",
+      "tr": "He’s inside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "冰箱里面什么都没有。",
+      "py": "Bīngxiāng lǐmian shénme dōu méiyǒu.",
+      "tr": "There’s nothing in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "里面请！",
+      "py": "Lǐmian qǐng!",
+      "tr": "Please come in!",
+      "register": "formal",
+      "context": "hospitality",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在里面",
+      "tr": "inside"
+     },
+     {
+      "text": "房间里面",
+      "tr": "inside the room"
+     },
+     {
+      "text": "里面请",
+      "tr": "do come in"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "里",
+      "register": "neutral",
+      "nuance": "lǐ: the short form after a noun (冰箱里)"
+     },
+     {
+      "word": "里边",
+      "register": "colloquial",
+      "nuance": "lǐbian: the same, more spoken"
+     },
+     {
+      "word": "内部",
+      "register": "formal",
+      "nuance": "nèibù: the interior; internal"
+     }
+    ],
+    "etymology": {
+     "text": "里 ‘inside’ + 面 ‘side’.",
+     "src": "morphemes: 里 + 面"
+    },
+    "funFacts": [
+     "里面请！ ‘inside, please!’ is what a host or a waiter says to welcome you in."
+    ],
+    "pitfalls": [
+     "里面 can stand alone (他在里面 ‘he’s inside’); 里 cannot (*他在里)."
+    ],
+    "subtleties": [
+     "After a noun both work: 冰箱里 / 冰箱里面 — the short form is more common."
+    ]
+   }
+  },
+  {
+   "id": "zh:waimian",
+   "lemma": "外面",
+   "trad": "外面",
+   "pinyin": "wài mian",
+   "pos": "NOUN",
+   "senses": [
+    "adv.outside"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Outside — the street, the fresh air, the wide world.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "outside, out",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.outside"
+     },
+     {
+      "id": "s2",
+      "def": "away from home; the outside world",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the outside, the surface",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在外面。",
+      "py": "Háizimen zài wàimian.",
+      "tr": "The children are outside.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "外面很冷。",
+      "py": "Wàimian hěn lěng.",
+      "tr": "It’s cold outside.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在外面吃饭吧。",
+      "py": "Wǒmen zài wàimian chīfàn ba.",
+      "tr": "Let’s eat out.",
+      "register": "neutral",
+      "context": "eating out",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在外面",
+      "tr": "outside"
+     },
+     {
+      "text": "门外面",
+      "tr": "outside the door"
+     },
+     {
+      "text": "外面的世界",
+      "tr": "the outside world"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "外边",
+      "register": "colloquial",
+      "nuance": "wàibian: the same, more spoken"
+     },
+     {
+      "word": "外头",
+      "register": "colloquial",
+      "nuance": "wàitou: northern ‘outside’",
+      "region": "northern China"
+     },
+     {
+      "word": "室外",
+      "register": "formal",
+      "nuance": "shìwài: outdoors"
+     }
+    ],
+    "etymology": {
+     "text": "外 ‘outside’ (semantic 卜 ‘divination’ + phonetic 月) + 面 ‘side’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "在外面吃饭 ‘to eat outside’ means ‘to eat out’ (at a restaurant)."
+    ],
+    "pitfalls": [
+     "外 alone lives in set words (国外 ‘abroad’, 门外, 窗外); in everyday speech say 外面."
+    ],
+    "subtleties": [
+     "外面 can mean ‘away from home’: 他在外面工作 ‘he works away from home’."
+    ]
+   }
+  },
+  {
+   "id": "zh:pangbian",
+   "lemma": "旁边",
+   "trad": "旁邊",
+   "pinyin": "páng biān",
+   "pos": "NOUN",
+   "senses": [
+    "prep.nextto"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right beside — the next seat, the shop next door.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beside, next to; the side",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.nextto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "灯在沙发旁边。",
+      "py": "Dēng zài shāfā pángbiān.",
+      "tr": "The lamp is next to the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我家旁边有一个超市。",
+      "py": "Wǒ jiā pángbiān yǒu yí ge chāoshì.",
+      "tr": "There is a supermarket next to my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "坐我旁边吧。",
+      "py": "Zuò wǒ pángbiān ba.",
+      "tr": "Sit next to me.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在…旁边",
+      "tr": "next to …"
+     },
+     {
+      "text": "旁边的人",
+      "tr": "the person next to you"
+     },
+     {
+      "text": "就在旁边",
+      "tr": "right next to it"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "边上",
+      "register": "colloquial",
+      "nuance": "biānshang: beside, at the edge"
+     },
+     {
+      "word": "隔壁",
+      "register": "neutral",
+      "nuance": "gébì: next door (houses, rooms)"
+     },
+     {
+      "word": "身边",
+      "register": "neutral",
+      "nuance": "shēnbiān: at one’s side (people)"
+     }
+    ],
+    "etymology": {
+     "text": "旁 ‘side’ + 边 ‘side, edge’.",
+     "src": "morphemes: 旁 + 边"
+    },
+    "funFacts": [
+     "旁边 is ‘side-side’: two words for ‘side’ joined, a typical Chinese two-syllable word."
+    ],
+    "pitfalls": [
+     "旁边 follows the noun: 沙发旁边 ‘next to the sofa’ — not *旁边沙发."
+    ],
+    "subtleties": [
+     "旁边 can open a sentence: 旁边有一家银行 ‘there is a bank next to it’."
+    ]
+   }
+  },
+  {
+   "id": "zh:qianmian",
+   "lemma": "前面",
+   "trad": "前面",
+   "pinyin": "qián mian",
+   "pos": "NOUN",
+   "senses": [
+    "prep.infront"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ahead, in front — where you are going.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in front (of), ahead",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.infront"
+     },
+     {
+      "id": "s2",
+      "def": "the earlier part, above (in a text)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我家前面有一个公园。",
+      "py": "Wǒ jiā qiánmian yǒu yí ge gōngyuán.",
+      "tr": "There is a park in front of my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "车站就在前面。",
+      "py": "Chēzhàn jiù zài qiánmian.",
+      "tr": "The station is just ahead.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "前面说的你还记得吗？",
+      "py": "Qiánmian shuō de nǐ hái jìde ma?",
+      "tr": "Do you still remember what was said before?",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在…前面",
+      "tr": "in front of …"
+     },
+     {
+      "text": "就在前面",
+      "tr": "just ahead"
+     },
+     {
+      "text": "前面的车",
+      "tr": "the car in front"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "前边",
+      "register": "colloquial",
+      "nuance": "qiánbian: the same, more spoken"
+     },
+     {
+      "word": "前方",
+      "register": "formal",
+      "nuance": "qiánfāng: ahead (signs: 前方施工 ‘roadworks ahead’)"
+     },
+     {
+      "word": "对面",
+      "register": "neutral",
+      "nuance": "duìmiàn: opposite, across the street — not the same as ‘in front of’"
+     }
+    ],
+    "etymology": {
+     "text": "前 ‘front’ (originally 歬: 止 ‘foot’ on 舟 ‘boat’ — moving forward) + 面 ‘side’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old form of 前 shows a foot on a boat: moving forward."
+    ],
+    "pitfalls": [
+     "‘In front of the house’ is 房子前面 — the place word after the noun. ‘Before’ in time is 以前 (S15), not 前面."
+    ],
+    "subtleties": [
+     "When giving directions 前面 means ‘ahead’: 就在前面 ‘it’s just up ahead’."
+    ]
+   }
+  },
+  {
+   "id": "zh:houmian",
+   "lemma": "后面",
+   "trad": "後面",
+   "pinyin": "hòu mian",
+   "pos": "NOUN",
+   "senses": [
+    "prep.behind"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Behind — the back garden, the back of the queue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "behind, at the back",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.behind"
+     },
+     {
+      "id": "s2",
+      "def": "later; the later part",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "花园在房子后面。",
+      "py": "Huāyuán zài fángzi hòumian.",
+      "tr": "The garden is behind the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他在我后面。",
+      "py": "Tā zài wǒ hòumian.",
+      "tr": "He is behind me.",
+      "register": "neutral",
+      "context": "queue",
+      "sense": "s1"
+     },
+     {
+      "text": "后面还有很多。",
+      "py": "Hòumian hái yǒu hěn duō.",
+      "tr": "There is a lot more later on.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在…后面",
+      "tr": "behind …"
+     },
+     {
+      "text": "后面的人",
+      "tr": "the people behind"
+     },
+     {
+      "text": "房子后面",
+      "tr": "behind the house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "后边",
+      "register": "colloquial",
+      "nuance": "hòubian: the same, more spoken"
+     },
+     {
+      "word": "背后",
+      "register": "neutral",
+      "nuance": "bèihòu: behind — also ‘behind someone’s back’"
+     }
+    ],
+    "etymology": {
+     "text": "后 (traditional 後: a foot bound by a rope, lagging behind) + 面 ‘side’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The simplified 后 ‘behind’ was a different character before: 后 ‘queen, empress’ (皇后)."
+    ],
+    "pitfalls": [
+     "‘After’ in time is 以后 (S15); 后面 is a place."
+    ],
+    "subtleties": [
+     "背后 also means ‘secretly, behind someone’s back’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhongjian",
+   "lemma": "中间",
+   "trad": "中間",
+   "pinyin": "zhōng jiān",
+   "pos": "NOUN",
+   "senses": [
+    "prep.between"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 中間 ‘middle; midway; midst; among’; ‘between’ is its standard use after two nouns joined by 和 (床和衣柜中间 ‘between the bed and the wardrobe’), as Mandarin dictionaries give it."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In the middle — between two people, two things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "between (A 和 B 中间); in the middle",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.between"
+     },
+     {
+      "id": "s2",
+      "def": "among, in the midst of",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "桌子在床和衣柜中间。",
+      "py": "Zhuōzi zài chuáng hé yīguì zhōngjiān.",
+      "tr": "The table is between the bed and the wardrobe.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我坐在爸爸和妈妈中间。",
+      "py": "Wǒ zuò zài bàba hé māma zhōngjiān.",
+      "tr": "I sit between Dad and Mum.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "中间那个人是我哥哥。",
+      "py": "Zhōngjiān nàge rén shì wǒ gēge.",
+      "tr": "The person in the middle is my brother.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "A 和 B 中间",
+      "tr": "between A and B"
+     },
+     {
+      "text": "在中间",
+      "tr": "in the middle"
+     },
+     {
+      "text": "中间的",
+      "tr": "the middle one"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "之间",
+      "register": "formal",
+      "nuance": "zhījiān: between, among — also for relations and time (朋友之间, 两点之间)"
+     },
+     {
+      "word": "当中",
+      "register": "neutral",
+      "nuance": "dāngzhōng: among, in the middle of"
+     }
+    ],
+    "etymology": {
+     "text": "中 ‘middle’ (a flagpole with a drum in the middle, Wiktionary) + 间 ‘space between, gap’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "中 pictures a flagpole with a drum at its centre — and 中国 is the ‘Middle Kingdom’."
+    ],
+    "pitfalls": [
+     "Name both sides first, joined with 和: 床和衣柜中间 — *中间床和衣柜 is wrong."
+    ],
+    "subtleties": [
+     "中间 alone is ‘in the middle’: 他在中间 ‘he is in the middle’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhijian",
+   "lemma": "之间",
+   "trad": "之間",
+   "pinyin": "zhī jiān",
+   "pos": "ADP",
+   "senses": [
+    "prep.between"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Between — places, people, times; a little more formal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "between, among (after the nouns)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.between"
+     },
+     {
+      "id": "s2",
+      "def": "within, in the space of (time)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "北京和上海之间有很多城市。",
+      "py": "Běijīng hé Shànghǎi zhījiān yǒu hěn duō chéngshì.",
+      "tr": "There are many cities between Beijing and Shanghai.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "朋友之间不用客气。",
+      "py": "Péngyou zhījiān búyòng kèqi.",
+      "tr": "Between friends there’s no need to stand on ceremony.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "三点和四点之间来吧。",
+      "py": "Sān diǎn hé sì diǎn zhījiān lái ba.",
+      "tr": "Come between three and four.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "A 和 B 之间",
+      "tr": "between A and B"
+     },
+     {
+      "text": "朋友之间",
+      "tr": "between friends"
+     },
+     {
+      "text": "两国之间",
+      "tr": "between the two countries"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "中间",
+      "register": "neutral",
+      "nuance": "zhōngjiān: the everyday word for where things are"
+     }
+    ],
+    "etymology": {
+     "text": "之 (the classical ‘of’) + 间 ‘space between’.",
+     "src": "morphemes: 之 + 间"
+    },
+    "funFacts": [
+     "之间 keeps the classical 之 ‘of’: literally ‘the space-between of A and B’."
+    ],
+    "pitfalls": [
+     "之间 also covers relations and time (朋友之间, 两点之间); for things on a table 中间 is more natural."
+    ],
+    "subtleties": [
+     "之间 is a little more formal than 中间."
+    ]
+   }
+  },
+  {
+   "id": "zh:zuobian",
+   "lemma": "左边",
+   "trad": "左邊",
+   "pinyin": "zuǒ bian",
+   "pos": "NOUN",
+   "senses": [
+    "adv.left"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The left-hand side.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the left side; on the left",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.left"
+     }
+    ],
+    "examples": [
+     {
+      "text": "卫生间在左边。",
+      "py": "Wèishēngjiān zài zuǒbian.",
+      "tr": "The bathroom is on the left.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "银行在超市左边。",
+      "py": "Yínháng zài chāoshì zuǒbian.",
+      "tr": "The bank is to the left of the supermarket.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "左边那个人是谁？",
+      "py": "Zuǒbian nàge rén shì shéi?",
+      "tr": "Who is the person on the left?",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在左边",
+      "tr": "on the left"
+     },
+     {
+      "text": "左边的",
+      "tr": "the one on the left"
+     },
+     {
+      "text": "往左",
+      "tr": "to the left"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "左",
+      "register": "neutral",
+      "nuance": "zuǒ: the short form — 往左走 ‘go left’, 左手 ‘left hand’"
+     },
+     {
+      "word": "左侧",
+      "register": "formal",
+      "nuance": "zuǒcè: left side (signs)"
+     }
+    ],
+    "etymology": {
+     "text": "左 (originally a pictogram of a left hand, later with 工; cognate with 佐 ‘to assist’) + 边 ‘side’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "左 was a drawing of the left hand; the related 佐 ‘to assist’ comes from ‘being at someone’s left side’ (Wiktionary)."
+    ],
+    "pitfalls": [
+     "左边 follows the noun: 超市左边 ‘to the left of the supermarket’."
+    ],
+    "subtleties": [
+     "In politics 左 is the left: 左派 ‘the left wing’."
+    ]
+   }
+  },
+  {
+   "id": "zh:youbian",
+   "lemma": "右边",
+   "trad": "右邊",
+   "pinyin": "yòu bian",
+   "pos": "NOUN",
+   "senses": [
+    "adv.right"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The right-hand side.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the right side; on the right",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.right"
+     }
+    ],
+    "examples": [
+     {
+      "text": "厨房在右边。",
+      "py": "Chúfáng zài yòubian.",
+      "tr": "The kitchen is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "邮局在银行右边。",
+      "py": "Yóujú zài yínháng yòubian.",
+      "tr": "The post office is to the right of the bank.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "右边的那本书是我的。",
+      "py": "Yòubian de nà běn shū shì wǒ de.",
+      "tr": "The book on the right is mine.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在右边",
+      "tr": "on the right"
+     },
+     {
+      "text": "右边的",
+      "tr": "the one on the right"
+     },
+     {
+      "text": "往右",
+      "tr": "to the right"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "右",
+      "register": "neutral",
+      "nuance": "yòu: the short form — 往右走 ‘go right’, 右手 ‘right hand’"
+     },
+     {
+      "word": "右侧",
+      "register": "formal",
+      "nuance": "yòucè: right side (signs)"
+     }
+    ],
+    "etymology": {
+     "text": "右 (phonetic 又 ‘right hand’ + 口). From Proto-Sino-Tibetan *g-ya ‘right (hand)’; 友 ‘friend’ is derived from the same word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "右 ‘right (hand)’ and 友 ‘friend’ belong to one word family (Wiktionary)."
+    ],
+    "pitfalls": [
+     "右 yòu, 又 yòu ‘again’ and 有 yǒu ‘to have’ sound alike — watch the character and the tone."
+    ],
+    "subtleties": [
+     "Traffic in mainland China and Taiwan drives on the right: 靠右 ‘keep right’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jin",
+   "lemma": "近",
+   "trad": "近",
+   "pinyin": "jìn",
+   "pos": "ADJ",
+   "senses": [
+    "adv.near"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Close by — a short walk, convenient.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "near, close (in space)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     },
+     {
+      "id": "s2",
+      "def": "near, recent (in time: 最近)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "close, intimate",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "超市离我家很近。",
+      "py": "Chāoshì lí wǒ jiā hěn jìn.",
+      "tr": "The supermarket is very close to my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "学校近吗？",
+      "py": "Xuéxiào jìn ma?",
+      "tr": "Is the school near?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "最近好吗？",
+      "py": "Zuìjìn hǎo ma?",
+      "tr": "How have you been lately?",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s2"
+     },
+     {
+      "text": "远亲不如近邻。",
+      "py": "Yuǎnqīn bùrú jìnlín.",
+      "tr": "A relative far away is not as good as a neighbour nearby.",
+      "register": "neutral",
+      "context": "proverbs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很近",
+      "tr": "very close"
+     },
+     {
+      "text": "离…很近",
+      "tr": "close to …"
+     },
+     {
+      "text": "最近",
+      "tr": "recently, lately"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "远亲不如近邻",
+      "tr": "a distant relative is not as good as a near neighbour",
+      "kind": "proverb",
+      "meaning": "in need, the people close by help more than family far away",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "附近",
+      "register": "neutral",
+      "nuance": "fùjìn: ‘nearby, the area around’ — a noun: 在附近"
+     },
+     {
+      "word": "不远",
+      "register": "neutral",
+      "nuance": "bù yuǎn: ‘not far’ — softer"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "远",
+      "note": "far"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 辶 ‘walk’ + phonetic 斤.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The proverb 远亲不如近邻 has a twin in the Hebrew Bible: טוֹב שָׁכֵן קָרוֹב מֵאָח רָחוֹק ‘better a neighbour near than a brother far off’ (Proverbs 27:10)."
+    ],
+    "pitfalls": [
+     "Chinese says ‘X is near FROM Y’: 超市离我家很近 — with 离, and the adjective last, with 很.",
+     "近 is an adjective (很近 ‘is near’), not a preposition: *超市近我家 is wrong."
+    ],
+    "subtleties": [
+     "近 is the adjective; 附近 is the noun ‘vicinity’: 我家附近 ‘near my home’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yuan",
+   "lemma": "远",
+   "trad": "遠",
+   "pinyin": "yuǎn",
+   "pos": "ADJ",
+   "senses": [
+    "adv.far"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Far away — a long trip, a distance.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "far, distant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.far"
+     },
+     {
+      "id": "s2",
+      "def": "distant (relationship)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(远远) by far",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "学校离这里很远。",
+      "py": "Xuéxiào lí zhèli hěn yuǎn.",
+      "tr": "The school is far from here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "机场远不远？",
+      "py": "Jīchǎng yuǎn bu yuǎn?",
+      "tr": "Is the airport far?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他是我的一个远亲。",
+      "py": "Tā shì wǒ de yí ge yuǎnqīn.",
+      "tr": "He is a distant relative of mine.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很远",
+      "tr": "very far"
+     },
+     {
+      "text": "离…很远",
+      "tr": "far from …"
+     },
+     {
+      "text": "有多远？",
+      "tr": "how far is it?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "遥远",
+      "register": "literary",
+      "nuance": "yáoyuǎn: far away, remote"
+     },
+     {
+      "word": "不近",
+      "register": "neutral",
+      "nuance": "bú jìn: ‘not near’ — a softer ‘far’"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "近",
+      "note": "near"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 辵 ‘walk’ + phonetic 袁. From Proto-Sino-Tibetan *g-wəj-n ‘far’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "近 and 远 both contain 辶 ‘walk’ — a handy way to remember that they are about distance."
+    ],
+    "pitfalls": [
+     "‘How far is it?’ is 有多远？ — not *多少远.",
+     "Use 离 for the point you measure from: 机场离城市很远."
+    ],
+    "subtleties": [
+     "远 is also used for time: 不远的将来 ‘the not-too-distant future’."
+    ]
+   }
+  },
+  {
+   "id": "zh:fujin",
+   "lemma": "附近",
+   "trad": "附近",
+   "pinyin": "fù jìn",
+   "pos": "NOUN",
+   "senses": [
+    "adv.near"
+   ],
+   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 附近 ‘nearby; vicinity; proximity’ — the meaning ‘near’; the tool matches whole words and does not see ‘near’ inside ‘nearby’."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The neighbourhood around you — what is within a few minutes’ walk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nearby; the vicinity, the area around",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     }
+    ],
+    "examples": [
+     {
+      "text": "附近有药店吗？",
+      "py": "Fùjìn yǒu yàodiàn ma?",
+      "tr": "Is there a pharmacy nearby?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我家附近有一个公园。",
+      "py": "Wǒ jiā fùjìn yǒu yí ge gōngyuán.",
+      "tr": "There is a park near my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "银行就在附近。",
+      "py": "Yínháng jiù zài fùjìn.",
+      "tr": "The bank is right nearby.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在附近",
+      "tr": "nearby"
+     },
+     {
+      "text": "…附近",
+      "tr": "near …"
+     },
+     {
+      "text": "附近的",
+      "tr": "nearby (before a noun)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周围",
+      "register": "neutral",
+      "nuance": "zhōuwéi: around, the surroundings"
+     },
+     {
+      "word": "一带",
+      "register": "neutral",
+      "nuance": "yídài: the area (of): 这一带 ‘around here’"
+     }
+    ],
+    "etymology": {
+     "text": "附 ‘attached, close to’ + 近 ‘near’.",
+     "src": "morphemes: 附 + 近"
+    },
+    "funFacts": [
+     "On map apps the button 附近 means ‘nearby’ — restaurants, banks, pharmacies around you."
+    ],
+    "pitfalls": [
+     "附近 follows the place: 我家附近 ‘near my home’ — not *附近我家."
+    ],
+    "subtleties": [
+     "附近 is a noun: it can be the subject (附近有… ‘there is … nearby’); 近 is an adjective (很近)."
+    ]
+   }
+  },
+  {
+   "id": "zh:li.from",
+   "lemma": "离",
+   "trad": "離",
+   "pinyin": "lí",
+   "pos": "ADP",
+   "senses": [],
+   "role": "‘from’ for distance: A 离 B 很近 / 很远 ‘A is close to / far from B’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Measuring a distance — how far one place is from another.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (for distance): A 离 B 很近 / 很远",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to leave, to part from",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "超市离我家很近。",
+      "py": "Chāoshì lí wǒ jiā hěn jìn.",
+      "tr": "The supermarket is close to my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "学校离这里远吗？",
+      "py": "Xuéxiào lí zhèli yuǎn ma?",
+      "tr": "Is the school far from here?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "他离开了北京。",
+      "py": "Tā líkāi le Běijīng.",
+      "tr": "He left Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "离…很近",
+      "tr": "close to …"
+     },
+     {
+      "text": "离…很远",
+      "tr": "far from …"
+     },
+     {
+      "text": "离开",
+      "tr": "to leave"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "从",
+      "register": "neutral",
+      "nuance": "cóng: ‘from’ for movement and starting points (S11), not for distance"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 離: phonetic 离 + semantic 隹 ‘bird’ — first the name of a bird (the oriole), borrowed for ‘to leave, to part’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "離 first named a bird, the black-naped oriole; the meaning ‘to part’ is a sound loan."
+    ],
+    "pitfalls": [
+     "Distance takes 离, not 从: 我家离学校很近 — *我家从学校很近 is wrong."
+    ],
+    "subtleties": [
+     "离 also counts time: 离春节还有三天 ‘three days to go until the Spring Festival’."
+    ]
+   }
+  },
+  {
+   "id": "zh:chufang",
+   "lemma": "厨房",
+   "trad": "廚房",
+   "pinyin": "chú fáng",
+   "pos": "NOUN",
+   "senses": [
+    "home.kitchen"
+   ],
+   "measure": [
+    "间",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The wok, steam, the smell of garlic and ginger.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kitchen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.kitchen"
+     }
+    ],
+    "examples": [
+     {
+      "text": "妈妈在厨房做饭。",
+      "py": "Māma zài chúfáng zuòfàn.",
+      "tr": "Mum is cooking in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家的厨房很小。",
+      "py": "Wǒmen jiā de chúfáng hěn xiǎo.",
+      "tr": "Our kitchen is very small.",
+      "register": "neutral",
+      "context": "flat",
+      "sense": "s1"
+     },
+     {
+      "text": "这家饭馆的厨房很干净。",
+      "py": "Zhè jiā fànguǎn de chúfáng hěn gānjìng.",
+      "tr": "This restaurant’s kitchen is very clean.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在厨房",
+      "tr": "in the kitchen"
+     },
+     {
+      "text": "厨房里",
+      "tr": "in the kitchen"
+     },
+     {
+      "text": "开放式厨房",
+      "tr": "open-plan kitchen"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "灶间",
+      "register": "dated",
+      "nuance": "zàojiān: kitchen (old or regional)"
+     },
+     {
+      "word": "伙房",
+      "register": "dated",
+      "nuance": "huǒfáng: kitchen of a canteen or army unit"
+     }
+    ],
+    "etymology": {
+     "text": "厨 ‘kitchen’ (traditional 廚: semantic 广 + phonetic 尌) + 房 ‘room, house’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same 厨 is in 厨师 ‘cook’ (S10)."
+    ],
+    "pitfalls": [
+     "厨房 is the room; the cook is 厨师, cooking is 做饭."
+    ],
+    "subtleties": [
+     "With rooms 里 is optional: 在厨房 / 在厨房里."
+    ]
+   }
+  },
+  {
+   "id": "zh:weishengjian",
+   "lemma": "卫生间",
+   "trad": "衛生間",
+   "pinyin": "wèi shēng jiān",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom"
+   ],
+   "measure": [
+    "间",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bathroom of a flat: toilet, washbasin, shower.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bathroom, toilet (in a home)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "卫生间在哪里？",
+      "py": "Wèishēngjiān zài nǎli?",
+      "tr": "Where is the bathroom?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "卫生间在卧室旁边。",
+      "py": "Wèishēngjiān zài wòshì pángbiān.",
+      "tr": "The bathroom is next to the bedroom.",
+      "register": "neutral",
+      "context": "flat",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家有两个卫生间。",
+      "py": "Wǒmen jiā yǒu liǎng ge wèishēngjiān.",
+      "tr": "Our home has two bathrooms.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去卫生间",
+      "tr": "to go to the toilet"
+     },
+     {
+      "text": "公共卫生间",
+      "tr": "public toilet"
+     },
+     {
+      "text": "卫生间里",
+      "tr": "in the bathroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "洗手间",
+      "register": "neutral",
+      "nuance": "xǐshǒujiān: ‘washroom’ — the polite word, usual in public places"
+     },
+     {
+      "word": "厕所",
+      "register": "neutral",
+      "nuance": "cèsuǒ: toilet, lavatory — plain, a little blunt"
+     },
+     {
+      "word": "浴室",
+      "register": "neutral",
+      "nuance": "yùshì: a room with a bath or shower (also a bathhouse)"
+     }
+    ],
+    "etymology": {
+     "text": "卫生 ‘hygiene’ (卫 ‘to guard’ + 生 ‘life’) + 间 ‘room’.",
+     "src": "morphemes: 卫生 + 间"
+    },
+    "funFacts": [
+     "卫生 ‘hygiene’ is literally ‘guarding life’."
+    ],
+    "pitfalls": [
+     "卫生间 is the room with the toilet (and usually the shower) in a flat; a room with a bath is 浴室."
+    ],
+    "subtleties": [
+     "To ask for the toilet politely: 请问，洗手间在哪里？"
+    ]
+   }
+  },
+  {
+   "id": "zh:xishoujian",
+   "lemma": "洗手间",
+   "trad": "洗手間",
+   "pinyin": "xǐ shǒu jiān",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom"
+   ],
+   "measure": [
+    "个",
+    "间"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The polite word for the toilet — on signs in restaurants and stations.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "toilet, washroom, restroom (polite)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请问，洗手间在哪里？",
+      "py": "Qǐngwèn, xǐshǒujiān zài nǎli?",
+      "tr": "Excuse me, where is the toilet?",
+      "register": "formal",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "我去一下洗手间。",
+      "py": "Wǒ qù yíxià xǐshǒujiān.",
+      "tr": "I’ll just go to the bathroom.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "洗手间在楼梯旁边。",
+      "py": "Xǐshǒujiān zài lóutī pángbiān.",
+      "tr": "The toilet is next to the stairs.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去洗手间",
+      "tr": "to go to the toilet"
+     },
+     {
+      "text": "男洗手间",
+      "tr": "men’s room"
+     },
+     {
+      "text": "女洗手间",
+      "tr": "ladies’ room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "卫生间",
+      "register": "neutral",
+      "nuance": "wèishēngjiān: the bathroom of a home"
+     },
+     {
+      "word": "厕所",
+      "register": "neutral",
+      "nuance": "cèsuǒ: toilet — plain, a little blunt"
+     }
+    ],
+    "etymology": {
+     "text": "洗 ‘to wash’ + 手 ‘hand’ + 间 ‘room’: ‘hand-washing room’.",
+     "src": "morphemes: 洗手 + 间"
+    },
+    "funFacts": [
+     "洗手间 is a euphemism built exactly like English ‘washroom’."
+    ],
+    "pitfalls": [
+     "洗手间 means the toilet, not a room only for washing hands."
+    ],
+    "subtleties": [
+     "我去一下洗手间 is the polite way to excuse yourself."
+    ]
+   }
+  },
+  {
+   "id": "zh:woshi",
+   "lemma": "卧室",
+   "trad": "臥室",
+   "pinyin": "wò shì",
+   "pos": "NOUN",
+   "senses": [
+    "home.bedroom"
+   ],
+   "measure": [
+    "间"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Rest and privacy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bedroom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bedroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我在卧室。",
+      "py": "Wǒ zài wòshì.",
+      "tr": "I’m in the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家有三间卧室。",
+      "py": "Wǒmen jiā yǒu sān jiān wòshì.",
+      "tr": "Our home has three bedrooms.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "卧室里有一张床和一个衣柜。",
+      "py": "Wòshì li yǒu yì zhāng chuáng hé yí ge yīguì.",
+      "tr": "In the bedroom there is a bed and a wardrobe.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "主卧",
+      "tr": "master bedroom"
+     },
+     {
+      "text": "卧室里",
+      "tr": "in the bedroom"
+     },
+     {
+      "text": "两室一厅",
+      "tr": "two bedrooms and a living room (flat adverts)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "睡房",
+      "register": "regional",
+      "nuance": "shuìfáng: bedroom (southern)",
+      "region": "southern China"
+     },
+     {
+      "word": "房间",
+      "register": "neutral",
+      "nuance": "fángjiān: room — often one’s own bedroom: 我的房间"
+     }
+    ],
+    "etymology": {
+     "text": "卧 ‘to lie down’ + 室 ‘room’.",
+     "src": "morphemes: 卧 + 室"
+    },
+    "funFacts": [
+     "Flat adverts count rooms like this: 三室两厅 ‘three bedrooms, two living rooms’."
+    ],
+    "pitfalls": [
+     "卧 is wò (4th tone) — not wǒ ‘I’."
+    ],
+    "subtleties": [
+     "People often just say 我的房间 ‘my room’ for their bedroom."
+    ]
+   }
+  },
+  {
+   "id": "zh:keting",
+   "lemma": "客厅",
+   "trad": "客廳",
+   "pinyin": "kè tīng",
+   "pos": "NOUN",
+   "senses": [
+    "home.livingroom"
+   ],
+   "measure": [
+    "个",
+    "间"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The sofa, the TV, tea with guests.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "living room, sitting room",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.livingroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "沙发在客厅里。",
+      "py": "Shāfā zài kètīng li.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在客厅喝茶。",
+      "py": "Wǒmen zài kètīng hē chá.",
+      "tr": "We have tea in the living room.",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "客厅很大。",
+      "py": "Kètīng hěn dà.",
+      "tr": "The living room is very big.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在客厅",
+      "tr": "in the living room"
+     },
+     {
+      "text": "客厅里",
+      "tr": "in the living room"
+     },
+     {
+      "text": "大客厅",
+      "tr": "a big living room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "起居室",
+      "register": "formal",
+      "nuance": "qǐjūshì: sitting room"
+     },
+     {
+      "word": "厅",
+      "register": "neutral",
+      "nuance": "tīng: hall; living room in flat adverts (两室一厅)"
+     }
+    ],
+    "etymology": {
+     "text": "客 ‘guest’ + 厅 ‘hall’: ‘guest hall’.",
+     "src": "morphemes: 客 + 厅"
+    },
+    "funFacts": [
+     "客厅 is the ‘guest hall’ — the room where visitors are received."
+    ],
+    "pitfalls": [
+     "客 is ‘guest’, as in 客人; the room is called 客厅 even when no guests are there."
+    ],
+    "subtleties": [
+     "In flats the living room is often also the dining room: 客厅 and 餐厅 in one."
+    ]
+   }
+  },
+  {
+   "id": "zh:huayuan",
+   "lemma": "花园",
+   "trad": "花園",
+   "pinyin": "huā yuán",
+   "pos": "NOUN",
+   "senses": [
+    "home.garden"
+   ],
+   "measure": [
+    "个",
+    "座"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Flowers, green, a quiet corner outside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garden, flower garden",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.garden"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们家后面有一个花园。",
+      "py": "Wǒmen jiā hòumian yǒu yí ge huāyuán.",
+      "tr": "There is a garden behind our house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们在花园里。",
+      "py": "Háizimen zài huāyuán li.",
+      "tr": "The children are in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这个小区叫“阳光花园”。",
+      "py": "Zhège xiǎoqū jiào “Yángguāng Huāyuán”.",
+      "tr": "This housing estate is called “Sunshine Garden”.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小花园",
+      "tr": "a small garden"
+     },
+     {
+      "text": "在花园里",
+      "tr": "in the garden"
+     },
+     {
+      "text": "屋顶花园",
+      "tr": "roof garden"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "院子",
+      "register": "colloquial",
+      "nuance": "yuànzi: the yard of a house, where a family may grow flowers and vegetables"
+     },
+     {
+      "word": "公园",
+      "register": "neutral",
+      "nuance": "gōngyuán: a public park"
+     },
+     {
+      "word": "菜园",
+      "register": "neutral",
+      "nuance": "càiyuán: vegetable garden"
+     }
+    ],
+    "etymology": {
+     "text": "花 ‘flower’ + 园 ‘garden’.",
+     "src": "morphemes: 花 + 园"
+    },
+    "funFacts": [
+     "Housing estates are often called …花园 ‘… Garden(s)’."
+    ],
+    "pitfalls": [
+     "花园 is a planted garden; a vegetable plot is 菜园."
+    ],
+    "subtleties": [
+     "‘In the garden’ is 在花园里, with 里."
+    ]
+   }
+  },
+  {
+   "id": "zh:yuanzi",
+   "lemma": "院子",
+   "trad": "院子",
+   "pinyin": "yuàn zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.garden"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 院子 ‘(colloquial) courtyard’ — the yard of a house, which is the home’s garden in everyday Mandarin; 花园 is the planted flower garden."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The yard of a house — chickens, a tree, children playing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yard, courtyard (the garden of a house)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "home.garden"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在院子里。",
+      "py": "Háizimen zài yuànzi li.",
+      "tr": "The children are in the yard.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我爷爷家有一个大院子。",
+      "py": "Wǒ yéye jiā yǒu yí ge dà yuànzi.",
+      "tr": "My grandfather’s house has a big yard.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     },
+     {
+      "text": "院子里有很多花。",
+      "py": "Yuànzi li yǒu hěn duō huā.",
+      "tr": "There are lots of flowers in the yard.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大院子",
+      "tr": "a big yard"
+     },
+     {
+      "text": "在院子里",
+      "tr": "in the yard"
+     },
+     {
+      "text": "四合院",
+      "tr": "courtyard house (Beijing)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "花园",
+      "register": "neutral",
+      "nuance": "huāyuán: a planted (flower) garden"
+     },
+     {
+      "word": "庭院",
+      "register": "literary",
+      "nuance": "tíngyuàn: courtyard"
+     }
+    ],
+    "etymology": {
+     "text": "院 ‘courtyard’ (semantic 阝 + phonetic 完) + the noun suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Beijing 四合院 is a house with four wings around one courtyard."
+    ],
+    "pitfalls": [
+     "In 医院 ‘hospital’ and 学院 ‘college’ 院 means ‘institution’, not ‘yard’."
+    ],
+    "subtleties": [
+     "In the countryside the family garden is the 院子; 花园 sounds more like a planted, decorative garden."
+    ]
+   }
+  },
+  {
+   "id": "zh:diban",
+   "lemma": "地板",
+   "trad": "地板",
+   "pinyin": "dì bǎn",
+   "pos": "NOUN",
+   "senses": [
+    "home.floor"
+   ],
+   "measure": [
+    "块"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wooden boards or tiles under your feet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "floor (of a room); flooring",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.floor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "杯子在地板上。",
+      "py": "Bēizi zài dìbǎn shang.",
+      "tr": "The cup is on the floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "地板很干净。",
+      "py": "Dìbǎn hěn gānjìng.",
+      "tr": "The floor is very clean.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家的地板是木头的。",
+      "py": "Wǒmen jiā de dìbǎn shì mùtou de.",
+      "tr": "Our floors are wooden.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "地板上",
+      "tr": "on the floor"
+     },
+     {
+      "text": "木地板",
+      "tr": "wooden floor"
+     },
+     {
+      "text": "擦地板",
+      "tr": "to mop the floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "地",
+      "register": "neutral",
+      "nuance": "dì: the ground, the floor — 在地上 ‘on the floor / on the ground’"
+     },
+     {
+      "word": "地面",
+      "register": "neutral",
+      "nuance": "dìmiàn: the ground surface"
+     }
+    ],
+    "etymology": {
+     "text": "地 ‘ground, earth’ + 板 ‘board’.",
+     "src": "morphemes: 地 + 板"
+    },
+    "funFacts": [
+     "Everyday speech often just says 地上 ‘on the ground’: 别坐在地上 ‘don’t sit on the floor’."
+    ],
+    "pitfalls": [
+     "‘On the floor’ needs 上: 在地板上 / 在地上.",
+     "‘Floor’ as a storey is not 地板: ‘the third floor’ is 三楼 or 三层."
+    ],
+    "subtleties": [
+     "A single board or tile is counted 一块地板."
+    ]
+   }
+  },
+  {
+   "id": "zh:louti",
+   "lemma": "楼梯",
+   "trad": "樓梯",
+   "pinyin": "lóu tī",
+   "pos": "NOUN",
+   "senses": [
+    "home.stairs"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "measure": "Wiktionary lists 部 for 楼梯 (and Cantonese 条); in everyday Mandarin 这个楼梯 / 一个楼梯 is the usual form, and 个 is never drilled as wrong."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Up and down between the floors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stairs, staircase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.stairs"
+     }
+    ],
+    "examples": [
+     {
+      "text": "楼梯在厨房旁边。",
+      "py": "Lóutī zài chúfáng pángbiān.",
+      "tr": "The stairs are next to the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们走楼梯吧。",
+      "py": "Wǒmen zǒu lóutī ba.",
+      "tr": "Let’s take the stairs.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     },
+     {
+      "text": "这个楼梯很窄。",
+      "py": "Zhège lóutī hěn zhǎi.",
+      "tr": "This staircase is very narrow.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "上楼梯",
+      "tr": "to go up the stairs"
+     },
+     {
+      "text": "下楼梯",
+      "tr": "to go down the stairs"
+     },
+     {
+      "text": "走楼梯",
+      "tr": "to take the stairs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "台阶",
+      "register": "neutral",
+      "nuance": "táijiē: steps (outside a building)"
+     },
+     {
+      "word": "电梯",
+      "register": "neutral",
+      "nuance": "diàntī: lift, elevator — not stairs: ‘electric ladder’"
+     }
+    ],
+    "etymology": {
+     "text": "楼 ‘storey, building’ + 梯 ‘ladder’.",
+     "src": "morphemes: 楼 + 梯"
+    },
+    "funFacts": [
+     "楼梯 is a ‘building ladder’, 电梯 an ‘electric ladder’ — the lift."
+    ],
+    "pitfalls": [
+     "楼 means a building or a storey: 楼上 ‘upstairs’, 楼下 ‘downstairs’."
+    ],
+    "subtleties": [
+     "In some dialects 楼梯 also means a ladder."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiazi",
+   "lemma": "架子",
+   "trad": "架子",
+   "pinyin": "jià zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.shelf"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shelves and racks — books, cups, everything in its place.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shelf, rack, frame",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.shelf"
+     },
+     {
+      "id": "s2",
+      "def": "(figurative) airs, arrogance",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "书在架子上。",
+      "py": "Shū zài jiàzi shang.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "架子上有很多杯子。",
+      "py": "Jiàzi shang yǒu hěn duō bēizi.",
+      "tr": "There are lots of cups on the shelf.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "他一点架子也没有。",
+      "py": "Tā yìdiǎn jiàzi yě méiyǒu.",
+      "tr": "He doesn’t put on any airs.",
+      "register": "colloquial",
+      "context": "character",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "书架",
+      "tr": "bookshelf"
+     },
+     {
+      "text": "衣架",
+      "tr": "coat hanger"
+     },
+     {
+      "text": "摆架子",
+      "tr": "to put on airs"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "摆架子",
+      "tr": "to set up one’s frame",
+      "kind": "idiom",
+      "meaning": "to put on airs, to act important",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "书架",
+      "register": "neutral",
+      "nuance": "shūjià: bookshelf, bookcase"
+     },
+     {
+      "word": "搁板",
+      "register": "technical",
+      "nuance": "gēbǎn: a shelf board"
+     }
+    ],
+    "etymology": {
+     "text": "架 ‘frame, rack’ + the noun suffix 子.",
+     "src": "morphemes: 架 + 子"
+    },
+    "funFacts": [
+     "A person with 架子 ‘a frame’ holds himself stiffly — he puts on airs."
+    ],
+    "pitfalls": [
+     "架子 is any rack or frame; a bookshelf is 书架."
+    ],
+    "subtleties": [
+     "‘On the shelf’ is 架子上, with 上."
+    ]
+   }
+  },
+  {
+   "id": "zh:shafa",
+   "lemma": "沙发",
+   "trad": "沙發",
+   "pinyin": "shā fā",
+   "pos": "NOUN",
+   "senses": [
+    "home.sofa"
+   ],
+   "measure": [
+    "张",
+    "套",
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "measure": "Wiktionary lists only 组 for 沙发; 张 (one sofa), 套 (a suite) and 个 are standard Mandarin measure words for it, and 张 must not be drilled as wrong."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Comfort after work — tea, TV, family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sofa, couch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.sofa"
+     },
+     {
+      "id": "s2",
+      "def": "(internet slang) the first reply in a forum thread",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "沙发在客厅里。",
+      "py": "Shāfā zài kètīng li.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "他在沙发上睡觉。",
+      "py": "Tā zài shāfā shang shuìjiào.",
+      "tr": "He is sleeping on the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "沙发！",
+      "py": "Shāfā!",
+      "tr": "First reply!",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐沙发",
+      "tr": "to sit on the sofa"
+     },
+     {
+      "text": "沙发上",
+      "tr": "on the sofa"
+     },
+     {
+      "text": "沙发床",
+      "tr": "sofa bed"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "长沙发",
+      "register": "neutral",
+      "nuance": "cháng shāfā: couch, settee (a long sofa)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from English sofa, probably via Shanghainese.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word travelled far: Arabic صُفَّة ṣuffa ‘bench’ → Turkish sofa → English sofa (Greek σοφάς, German Sofa) → Chinese 沙发."
+    ],
+    "pitfalls": [
+     "沙发 is a sound loan: 沙 ‘sand’ and 发 ‘to send’ carry no meaning here."
+    ],
+    "subtleties": [
+     "‘On the sofa’ is 沙发上: 坐在沙发上."
+    ]
+   }
+  },
+  {
+   "id": "zh:bingxiang",
+   "lemma": "冰箱",
+   "trad": "冰箱",
+   "pinyin": "bīng xiāng",
+   "pos": "NOUN",
+   "senses": [
+    "home.fridge"
+   ],
+   "measure": [
+    "台"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 冰箱 ‘refrigerator’ — the same as ‘fridge’; the tool compares whole words."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The humming box of cold drinks and leftovers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fridge, refrigerator",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.fridge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "牛奶在冰箱里。",
+      "py": "Niúnǎi zài bīngxiāng li.",
+      "tr": "The milk is in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "冰箱里什么都没有。",
+      "py": "Bīngxiāng li shénme dōu méiyǒu.",
+      "tr": "There’s nothing in the fridge.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们买了一台新冰箱。",
+      "py": "Wǒmen mǎi le yì tái xīn bīngxiāng.",
+      "tr": "We bought a new fridge.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "冰箱里",
+      "tr": "in the fridge"
+     },
+     {
+      "text": "打开冰箱",
+      "tr": "to open the fridge"
+     },
+     {
+      "text": "冰箱贴",
+      "tr": "fridge magnet"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "电冰箱",
+      "register": "formal",
+      "nuance": "diànbīngxiāng: ‘electric icebox’ — the full form"
+     },
+     {
+      "word": "雪柜",
+      "register": "regional",
+      "nuance": "xuěguì: ‘snow cabinet’ (Cantonese)",
+      "region": "Guangdong, Hong Kong"
+     }
+    ],
+    "etymology": {
+     "text": "冰 ‘ice’ + 箱 ‘box, chest’.",
+     "src": "morphemes: 冰 + 箱"
+    },
+    "funFacts": [
+     "冰箱 is an ‘ice box’, like the old English icebox; Cantonese says 雪柜 ‘snow cabinet’."
+    ],
+    "pitfalls": [
+     "‘In the fridge’ is 冰箱里 — the 里 is required."
+    ],
+    "subtleties": [
+     "台 is the measure word for machines: 一台冰箱, 一台电脑."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

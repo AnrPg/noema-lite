@@ -1,0 +1,3091 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:dhahaba",
+   "lemma": "ذَهَبَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.go"
+   ],
+   "root": "ذ ه ب",
+   "verbForm": "I",
+   "masdar": "ذَهَاب",
+   "translit": "ḏahaba",
+   "forms": {
+    "V;PST;1;SG": "ذَهَبْتُ",
+    "V;PST;2;SG;MASC": "ذَهَبْتَ",
+    "V;PST;2;SG;FEM": "ذَهَبْتِ",
+    "V;PST;3;SG;MASC": "ذَهَبَ",
+    "V;PST;3;SG;FEM": "ذَهَبَتْ",
+    "V;PST;1;PL": "ذَهَبْنَا",
+    "V;PST;2;PL;MASC": "ذَهَبْتُمْ",
+    "V;PST;2;PL;FEM": "ذَهَبْتُنَّ",
+    "V;PST;3;PL;MASC": "ذَهَبُوا",
+    "V;PST;3;PL;FEM": "ذَهَبْنَ",
+    "V;PRS;IND;1;SG": "أَذْهَبُ",
+    "V;PRS;IND;2;SG;MASC": "تَذْهَبُ",
+    "V;PRS;IND;2;SG;FEM": "تَذْهَبِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَذْهَبُ",
+    "V;PRS;IND;3;SG;FEM": "تَذْهَبُ",
+    "V;PRS;IND;1;PL": "نَذْهَبُ",
+    "V;PRS;IND;2;PL;MASC": "تَذْهَبُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَذْهَبْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَذْهَبُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَذْهَبْنَ",
+    "V;IMP;2;SG;MASC": "اِذْهَبْ",
+    "V;IMP;2;SG;FEM": "اِذْهَبِي",
+    "V;IMP;2;PL;MASC": "اِذْهَبُوا",
+    "V;IMP;2;PL;FEM": "اِذْهَبْنَ",
+    "V;SBJV;1;SG": "أَذْهَبَ",
+    "V;SBJV;2;SG;MASC": "تَذْهَبَ",
+    "V;SBJV;3;SG;MASC": "يَذْهَبَ",
+    "V;SBJV;1;PL": "نَذْهَبَ",
+    "V;SBJV;2;PL;MASC": "تَذْهَبُوا",
+    "V;SBJV;3;PL;MASC": "يَذْهَبُوا",
+    "V;SBJV;2;SG;FEM": "تَذْهَبِي",
+    "V;SBJV;3;SG;FEM": "تَذْهَبَ",
+    "V;SBJV;2;PL;FEM": "تَذْهَبْنَ",
+    "V;SBJV;3;PL;FEM": "يَذْهَبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Setting off — to school, to work, to the market.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go (somewhere): ذَهَبَ إِلَى … (to go to …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.go"
+     },
+     {
+      "id": "s2",
+      "def": "to go away, to leave, to be gone",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "ذَهَبَ إِلَى أَنَّ … — to hold the view that … (formal)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَذْهَبُ إِلَى الْمَدْرَسَةِ مَشْيًا.",
+      "tr": "I go to school on foot.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى أَيْنَ تَذْهَبِينَ؟",
+      "tr": "Where are you going? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "اِذْهَبْ إِلَى غُرْفَتِكَ!",
+      "tr": "Go to your room!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "ذَهَبَ الْقِطَارُ.",
+      "tr": "The train has gone.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ذَهَبَ إِلَى الْعَمَلِ",
+      "tr": "to go to work"
+     },
+     {
+      "text": "ذَهَبَ بِالسَّيَّارَةِ",
+      "tr": "to go by car"
+     },
+     {
+      "text": "ذَهَبَ بِـ …",
+      "tr": "to take … away, to take … along (Wiktionary)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَضَى",
+      "register": "literary",
+      "nuance": "to go on, to pass (also of time)"
+     },
+     {
+      "word": "رَاحَ",
+      "register": "colloquial",
+      "nuance": "the everyday “go” of Levantine and Egyptian Arabic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "جَاءَ",
+      "note": "to come"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root ذ ه ب (non-past يَذْهَبُ, verbal noun ذَهَاب) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same three letters spell ذَهَب, “gold”: an unvocalized ذهب can be “he went” or “gold”.",
+     "The Arabic title of Gone with the Wind is ذهب مع الريح."
+    ],
+    "pitfalls": [
+     "The present has a: يَذْهَبُ (not *يَذْهُبُ), so the imperative starts with i: اِذْهَبْ!",
+     "The goal takes إِلَى: أَذْهَبُ إِلَى السُّوقِ — never فِي (Greek σε, German in/zu are both إِلَى here)."
+    ],
+    "subtleties": [
+     "ذَهَبَ is “go” however you go — on foot or by car; German gehen / fahren are both ذَهَبَ (the vehicle comes with بِـ: ذَهَبْتُ بِالْقِطَارِ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:jaa",
+   "lemma": "جَاءَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.come"
+   ],
+   "root": "ج ي ء",
+   "verbForm": "I",
+   "masdar": "مَجِيء",
+   "translit": "jāʾa",
+   "forms": {
+    "V;PST;1;SG": "جِئْتُ",
+    "V;PST;2;SG;MASC": "جِئْتَ",
+    "V;PST;2;SG;FEM": "جِئْتِ",
+    "V;PST;3;SG;MASC": "جَاءَ",
+    "V;PST;3;SG;FEM": "جَاءَتْ",
+    "V;PST;1;PL": "جِئْنَا",
+    "V;PST;2;PL;MASC": "جِئْتُمْ",
+    "V;PST;2;PL;FEM": "جِئْتُنَّ",
+    "V;PST;3;PL;MASC": "جَاؤُوا",
+    "V;PST;3;PL;FEM": "جِئْنَ",
+    "V;PRS;IND;1;SG": "أَجِيءُ",
+    "V;PRS;IND;2;SG;MASC": "تَجِيءُ",
+    "V;PRS;IND;2;SG;FEM": "تَجِيئِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَجِيءُ",
+    "V;PRS;IND;3;SG;FEM": "تَجِيءُ",
+    "V;PRS;IND;1;PL": "نَجِيءُ",
+    "V;PRS;IND;2;PL;MASC": "تَجِيئُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَجِئْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَجِيئُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَجِئْنَ"
+   },
+   "formsAlt": {
+    "V;PST;3;PL;MASC": [
+     "جَاءُوا"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Someone arriving where you are — guests, the bus, the winter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.come"
+     },
+     {
+      "id": "s2",
+      "def": "جَاءَ بِـ … — to bring …",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to occur, to be (in a text): جَاءَ فِي الْكِتَابِ … (it says in the book …)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَجِيءُ أَبِي مِنَ الْعَمَلِ مَسَاءً.",
+      "tr": "My father comes home from work in the evening.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى تَجِيئِينَ؟",
+      "tr": "When are you coming? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "جَاءَ الشِّتَاءُ.",
+      "tr": "Winter has come.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "جَاءَ بِالْكِتَابِ.",
+      "tr": "He brought the book.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَاءَ مِنْ …",
+      "tr": "to come from …"
+     },
+     {
+      "text": "جَاءَ إِلَى …",
+      "tr": "to come to …"
+     },
+     {
+      "text": "جَاءَ بِـ …",
+      "tr": "to bring …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَتَى",
+      "register": "formal",
+      "nuance": "to come — frequent in writing and in the Qurʾān (present يَأْتِي)"
+     },
+     {
+      "word": "حَضَرَ",
+      "register": "formal",
+      "nuance": "to come, to attend, to be present (at a meeting, a lesson)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "ذَهَبَ",
+      "note": "to go"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root ج ي ء, hollow and with a final hamza (non-past يَجِيءُ, verbal noun مَجِيء) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its imperative جِئْ is hardly used: “come!” is تَعَالَ, which Wiktionary describes as the form replacing the awkward imperatives of جَاءَ."
+    ],
+    "pitfalls": [
+     "Hollow verb: long ā in جَاءَ (he came), long ī in the present يَجِيءُ, short i in جِئْتُ (I came).",
+     "The hamza changes its seat: جَاءَ, جِئْتُ, يَجِيئُونَ, جَاؤُوا."
+    ],
+    "subtleties": [
+     "Like English, Arabic separates ذَهَبَ (go, away from here) and جَاءَ (come, towards the speaker); Greek έρχομαι = جَاءَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:taala",
+   "lemma": "تَعَالَ",
+   "pos": "VERB",
+   "class": "imp",
+   "senses": [
+    "verb.come"
+   ],
+   "root": "ع ل و",
+   "verbForm": "VI",
+   "translit": "taʿāla",
+   "forms": {
+    "V;IMP;2;SG;MASC": "تَعَالَ",
+    "V;IMP;2;SG;FEM": "تَعَالَيْ",
+    "V;IMP;2;PL;MASC": "تَعَالَوْا",
+    "V;IMP;2;PL;FEM": "تَعَالَيْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A wave of the hand: “come here!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "come (here)! — the imperative that serves جَاءَ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.come"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَعَالَ هُنَا!",
+      "tr": "Come here! (to a man)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "تَعَالَيْ مَعِي!",
+      "tr": "Come with me! (to a woman)",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تَعَالَوْا إِلَى الْمَطْبَخِ!",
+      "tr": "Come to the kitchen! (to several people)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَعَالَ هُنَا",
+      "tr": "come here"
+     },
+     {
+      "text": "تَعَالَ مَعِي",
+      "tr": "come with me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هَلُمَّ",
+      "register": "literary",
+      "nuance": "come on!, come here! — classical"
+     }
+    ],
+    "etymology": {
+     "text": "The imperative of تَعَالَى (form VI of the root ع ل و); Wiktionary: it supplies the imperative of جَاءَ, whose own imperative forms are phonetically impractical.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its root ع ل و is the root of عَلَى (on) and عَالٍ (high).",
+     "The colloquial forms of “come!” all go back to it."
+    ],
+    "pitfalls": [
+     "Only a command: there is no past or present “he comes” from تَعَالَ — use جَاءَ / يَجِيءُ.",
+     "Endings of a weak verb: تَعَالَ (to a man), تَعَالَيْ (to a woman), تَعَالَوْا (to several); in speech one also hears taʿāli to a woman."
+    ],
+    "subtleties": [
+     "It is used everywhere, from classical texts to the street, and is never rude — unlike اُخْرُجْ! (get out!)."
+    ]
+   }
+  },
+  {
+   "id": "ar:masha",
+   "lemma": "مَشَى",
+   "pos": "VERB",
+   "senses": [
+    "verb.walk"
+   ],
+   "root": "م ش ي",
+   "verbForm": "I",
+   "masdar": "مَشْي",
+   "translit": "mašā",
+   "forms": {
+    "V;PST;1;SG": "مَشَيْتُ",
+    "V;PST;2;SG;MASC": "مَشَيْتَ",
+    "V;PST;2;SG;FEM": "مَشَيْتِ",
+    "V;PST;3;SG;MASC": "مَشَى",
+    "V;PST;3;SG;FEM": "مَشَتْ",
+    "V;PST;1;PL": "مَشَيْنَا",
+    "V;PST;2;PL;MASC": "مَشَيْتُمْ",
+    "V;PST;2;PL;FEM": "مَشَيْتُنَّ",
+    "V;PST;3;PL;MASC": "مَشَوْا",
+    "V;PST;3;PL;FEM": "مَشَيْنَ",
+    "V;PRS;IND;1;SG": "أَمْشِي",
+    "V;PRS;IND;2;SG;MASC": "تَمْشِي",
+    "V;PRS;IND;2;SG;FEM": "تَمْشِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَمْشِي",
+    "V;PRS;IND;3;SG;FEM": "تَمْشِي",
+    "V;PRS;IND;1;PL": "نَمْشِي",
+    "V;PRS;IND;2;PL;MASC": "تَمْشُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَمْشِينَ",
+    "V;PRS;IND;3;PL;MASC": "يَمْشُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَمْشِينَ",
+    "V;IMP;2;SG;MASC": "اِمْشِ",
+    "V;IMP;2;SG;FEM": "اِمْشِي",
+    "V;IMP;2;PL;MASC": "اِمْشُوا",
+    "V;IMP;2;PL;FEM": "اِمْشِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Footsteps: a walk in the park, walking to work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to walk, to go on foot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.walk"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَمْشِي إِلَى الْعَمَلِ.",
+      "tr": "I walk to work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَمْشِي فِي الْحَدِيقَةِ مَسَاءً.",
+      "tr": "We walk in the park in the evening.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "اِمْشِ بِبُطْءٍ!",
+      "tr": "Walk slowly!",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَشَى إِلَى …",
+      "tr": "to walk to …"
+     },
+     {
+      "text": "مَشَى فِي الشَّارِعِ",
+      "tr": "to walk along the street"
+     },
+     {
+      "text": "مَشَى عَلَى الْأَقْدَامِ",
+      "tr": "to walk, to go on foot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَشْيًا عَلَى الْأَقْدَامِ",
+      "tr": "walking on the feet",
+      "kind": "fixed expression",
+      "meaning": "on foot",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "سَارَ",
+      "register": "formal",
+      "nuance": "to go, to move along, to walk — written style"
+     },
+     {
+      "word": "تَمَشَّى",
+      "register": "neutral",
+      "nuance": "to stroll, to take a walk for pleasure"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root م ش ي (non-past يَمْشِي, verbal noun مَشْي) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its verbal noun in the accusative, مَشْيًا, is the Arabic “on foot”."
+    ],
+    "pitfalls": [
+     "Final weak y: يَمْشِي (he walks), but the imperative to a man loses it: اِمْشِ!",
+     "تَمْشِينَ is both “you (one woman) walk” and “you (women) walk”."
+    ],
+    "subtleties": [
+     "مَشَى is walking as a way of moving; “go somewhere” is ذَهَبَ: أَذْهَبُ إِلَى الْعَمَلِ مَشْيًا = I go to work on foot."
+    ]
+   }
+  },
+  {
+   "id": "ar:rakada",
+   "lemma": "رَكَضَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.run"
+   ],
+   "root": "ر ك ض",
+   "verbForm": "I",
+   "masdar": "رَكْض",
+   "translit": "rakaḍa",
+   "forms": {
+    "V;PST;1;SG": "رَكَضْتُ",
+    "V;PST;2;SG;MASC": "رَكَضْتَ",
+    "V;PST;2;SG;FEM": "رَكَضْتِ",
+    "V;PST;3;SG;MASC": "رَكَضَ",
+    "V;PST;3;SG;FEM": "رَكَضَتْ",
+    "V;PST;1;PL": "رَكَضْنَا",
+    "V;PST;2;PL;MASC": "رَكَضْتُمْ",
+    "V;PST;2;PL;FEM": "رَكَضْتُنَّ",
+    "V;PST;3;PL;MASC": "رَكَضُوا",
+    "V;PST;3;PL;FEM": "رَكَضْنَ",
+    "V;PRS;IND;1;SG": "أَرْكُضُ",
+    "V;PRS;IND;2;SG;MASC": "تَرْكُضُ",
+    "V;PRS;IND;2;SG;FEM": "تَرْكُضِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَرْكُضُ",
+    "V;PRS;IND;3;SG;FEM": "تَرْكُضُ",
+    "V;PRS;IND;1;PL": "نَرْكُضُ",
+    "V;PRS;IND;2;PL;MASC": "تَرْكُضُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَرْكُضْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَرْكُضُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَرْكُضْنَ",
+    "V;IMP;2;SG;MASC": "اُرْكُضْ",
+    "V;IMP;2;SG;FEM": "اُرْكُضِي",
+    "V;IMP;2;PL;MASC": "اُرْكُضُوا",
+    "V;IMP;2;PL;FEM": "اُرْكُضْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hurry and breath: children running, running for the bus.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to run, to race",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَرْكُضُ الطِّفْلُ فِي الْحَدِيقَةِ.",
+      "tr": "The child is running in the garden.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s1"
+     },
+     {
+      "text": "أَرْكُضُ كُلَّ صَبَاحٍ.",
+      "tr": "I run every morning.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "اُرْكُضُوا! الْقِطَارُ هُنَا.",
+      "tr": "Run! The train is here.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَكَضَ إِلَى …",
+      "tr": "to run to …"
+     },
+     {
+      "text": "رَكَضَ وَرَاءَ …",
+      "tr": "to run after …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جَرَى",
+      "register": "neutral",
+      "nuance": "to run — also “to flow, to happen”; the everyday word in Egypt (يَجْرِي)"
+     },
+     {
+      "word": "عَدَا",
+      "register": "literary",
+      "nuance": "to run, to race (عَدَّاء = runner)"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root ر ك ض (non-past يَرْكُضُ); Wiktionary compares Classical Syriac ܪܗܛ, Hebrew רָץ (rats) and Geʿez ሮጸ (roṣä).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary compares it with Hebrew רָץ (rats, “runs”)."
+    ],
+    "pitfalls": [
+     "The present has u: يَرْكُضُ, so the imperative starts with u: اُرْكُضْ!"
+    ],
+    "subtleties": [
+     "رَكَضَ is the standard written word; in Egyptian speech people say جَرَى / يَجْرِي."
+    ]
+   }
+  },
+  {
+   "id": "ar:qada",
+   "lemma": "قَادَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.drive"
+   ],
+   "root": "ق و د",
+   "verbForm": "I",
+   "masdar": "قِيَادَة",
+   "translit": "qāda",
+   "forms": {
+    "V;PST;1;SG": "قُدْتُ",
+    "V;PST;2;SG;MASC": "قُدْتَ",
+    "V;PST;2;SG;FEM": "قُدْتِ",
+    "V;PST;3;SG;MASC": "قَادَ",
+    "V;PST;3;SG;FEM": "قَادَتْ",
+    "V;PST;1;PL": "قُدْنَا",
+    "V;PST;2;PL;MASC": "قُدْتُمْ",
+    "V;PST;2;PL;FEM": "قُدْتُنَّ",
+    "V;PST;3;PL;MASC": "قَادُوا",
+    "V;PST;3;PL;FEM": "قُدْنَ",
+    "V;PRS;IND;1;SG": "أَقُودُ",
+    "V;PRS;IND;2;SG;MASC": "تَقُودُ",
+    "V;PRS;IND;2;SG;FEM": "تَقُودِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَقُودُ",
+    "V;PRS;IND;3;SG;FEM": "تَقُودُ",
+    "V;PRS;IND;1;PL": "نَقُودُ",
+    "V;PRS;IND;2;PL;MASC": "تَقُودُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَقُدْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَقُودُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَقُدْنَ",
+    "V;IMP;2;SG;MASC": "قُدْ",
+    "V;IMP;2;SG;FEM": "قُودِي",
+    "V;IMP;2;PL;MASC": "قُودُوا",
+    "V;IMP;2;PL;FEM": "قُدْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hands on the wheel — and, in a bigger sense, leading people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drive (a vehicle)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drive"
+     },
+     {
+      "id": "s2",
+      "def": "to lead, to guide, to command",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَقُودُ أَبِي السَّيَّارَةَ.",
+      "tr": "My father is driving the car.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تَقُودِينَ السَّيَّارَةَ؟",
+      "tr": "Do you drive (a car)? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "قُدْ بِبُطْءٍ!",
+      "tr": "Drive slowly!",
+      "register": "neutral",
+      "context": "road",
+      "sense": "s1"
+     },
+     {
+      "text": "قَادَ الْجَيْشَ.",
+      "tr": "He led the army.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَادَ السَّيَّارَةَ",
+      "tr": "to drive the car"
+     },
+     {
+      "text": "قَادَ الْحَافِلَةَ",
+      "tr": "to drive the bus"
+     },
+     {
+      "text": "رُخْصَةُ الْقِيَادَةِ",
+      "tr": "the driving licence"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَاقَ",
+      "register": "neutral",
+      "nuance": "to drive (a car) — common in Egypt and in speech; also “to drive (animals)”",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the hollow root ق و د (non-past يَقُودُ, verbal noun قِيَادَة or قَوْد); Wiktionary: to lead, to steer, to drive, to guide, to rule.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "قَائِد (leader, commander) and قِيَادَة (leadership; driving) share the root: رُخْصَةُ قِيَادَةٍ is a driving licence."
+    ],
+    "pitfalls": [
+     "Hollow verb: ā in قَادَ, ū in يَقُودُ, short u in قُدْتُ (I drove) and in the command قُدْ!",
+     "The women forms keep the short u: تَقُدْنَ, يَقُدْنَ."
+    ],
+    "subtleties": [
+     "قَادَ takes the vehicle as object (قَادَ السَّيَّارَةَ); “go by car” is ذَهَبَ بِالسَّيَّارَةِ — German fahren covers both."
+    ]
+   }
+  },
+  {
+   "id": "ar:safara",
+   "lemma": "سَافَرَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.travel"
+   ],
+   "root": "س ف ر",
+   "verbForm": "III",
+   "masdar": "سَفَر",
+   "translit": "sāfara",
+   "forms": {
+    "V;PST;1;SG": "سَافَرْتُ",
+    "V;PST;2;SG;MASC": "سَافَرْتَ",
+    "V;PST;2;SG;FEM": "سَافَرْتِ",
+    "V;PST;3;SG;MASC": "سَافَرَ",
+    "V;PST;3;SG;FEM": "سَافَرَتْ",
+    "V;PST;1;PL": "سَافَرْنَا",
+    "V;PST;2;PL;MASC": "سَافَرْتُمْ",
+    "V;PST;2;PL;FEM": "سَافَرْتُنَّ",
+    "V;PST;3;PL;MASC": "سَافَرُوا",
+    "V;PST;3;PL;FEM": "سَافَرْنَ",
+    "V;PRS;IND;1;SG": "أُسَافِرُ",
+    "V;PRS;IND;2;SG;MASC": "تُسَافِرُ",
+    "V;PRS;IND;2;SG;FEM": "تُسَافِرِينَ",
+    "V;PRS;IND;3;SG;MASC": "يُسَافِرُ",
+    "V;PRS;IND;3;SG;FEM": "تُسَافِرُ",
+    "V;PRS;IND;1;PL": "نُسَافِرُ",
+    "V;PRS;IND;2;PL;MASC": "تُسَافِرُونَ",
+    "V;PRS;IND;2;PL;FEM": "تُسَافِرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يُسَافِرُونَ",
+    "V;PRS;IND;3;PL;FEM": "يُسَافِرْنَ",
+    "V;IMP;2;SG;MASC": "سَافِرْ",
+    "V;IMP;2;SG;FEM": "سَافِرِي",
+    "V;IMP;2;PL;MASC": "سَافِرُوا",
+    "V;IMP;2;PL;FEM": "سَافِرْنَ",
+    "V;SBJV;1;SG": "أُسَافِرَ",
+    "V;SBJV;2;SG;MASC": "تُسَافِرَ",
+    "V;SBJV;3;SG;MASC": "يُسَافِرَ",
+    "V;SBJV;1;PL": "نُسَافِرَ",
+    "V;SBJV;2;PL;MASC": "تُسَافِرُوا",
+    "V;SBJV;3;PL;MASC": "يُسَافِرُوا",
+    "V;SBJV;2;SG;FEM": "تُسَافِرِي",
+    "V;SBJV;3;SG;FEM": "تُسَافِرَ",
+    "V;SBJV;2;PL;FEM": "تُسَافِرْنَ",
+    "V;SBJV;3;PL;FEM": "يُسَافِرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Suitcases, tickets and distant cities.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to travel, to go on a journey",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.travel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُسَافِرُ إِلَى مِصْرَ فِي الصَّيْفِ.",
+      "tr": "I travel to Egypt in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "يُسَافِرُ أَخِي بِالطَّائِرَةِ.",
+      "tr": "My brother travels by plane.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "سَافِرِي مَعَنَا!",
+      "tr": "Travel with us! (to a woman)",
+      "register": "neutral",
+      "context": "invitation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَافَرَ إِلَى …",
+      "tr": "to travel to …"
+     },
+     {
+      "text": "سَافَرَ بِالْقِطَارِ",
+      "tr": "to travel by train"
+     },
+     {
+      "text": "سَافَرَ إِلَى الْخَارِجِ",
+      "tr": "to travel abroad"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "السَّفَرُ قِطْعَةٌ مِنَ الْعَذَابِ",
+      "tr": "travel is a piece of torment",
+      "kind": "saying",
+      "meaning": "travelling is hard work",
+      "register": "neutral",
+      "source": "ḥadīth (al-Buḫārī, Muslim)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "رَحَلَ",
+      "register": "literary",
+      "nuance": "to depart, to set out on a journey (رِحْلَة = trip)"
+     }
+    ],
+    "etymology": {
+     "text": "Form III verb of the root س ف ر (non-past يُسَافِرُ, verbal noun مُسَافَرَة or سَفَر); Wiktionary compares سَفَر (journey, travel).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Swahili safari (journey) comes from Arabic سَفَر — and English took safari from Swahili.",
+     "مُسَافِر is a traveller or a passenger."
+    ],
+    "pitfalls": [
+     "Form III: u in the present prefix (أُسَافِرُ, يُسَافِرُ) and i before the last root letter.",
+     "The past has a long ā: سَافَرْتُ (I travelled), not *سَفَرْتُ."
+    ],
+    "subtleties": [
+     "سَافَرَ is a journey to another town or country; for the daily way to work use ذَهَبَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ada",
+   "lemma": "عَادَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.return"
+   ],
+   "root": "ع و د",
+   "verbForm": "I",
+   "masdar": "عَوْدَة",
+   "translit": "ʿāda",
+   "forms": {
+    "V;PST;1;SG": "عُدْتُ",
+    "V;PST;2;SG;MASC": "عُدْتَ",
+    "V;PST;2;SG;FEM": "عُدْتِ",
+    "V;PST;3;SG;MASC": "عَادَ",
+    "V;PST;3;SG;FEM": "عَادَتْ",
+    "V;PST;1;PL": "عُدْنَا",
+    "V;PST;2;PL;MASC": "عُدْتُمْ",
+    "V;PST;2;PL;FEM": "عُدْتُنَّ",
+    "V;PST;3;PL;MASC": "عَادُوا",
+    "V;PST;3;PL;FEM": "عُدْنَ",
+    "V;PRS;IND;1;SG": "أَعُودُ",
+    "V;PRS;IND;2;SG;MASC": "تَعُودُ",
+    "V;PRS;IND;2;SG;FEM": "تَعُودِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَعُودُ",
+    "V;PRS;IND;3;SG;FEM": "تَعُودُ",
+    "V;PRS;IND;1;PL": "نَعُودُ",
+    "V;PRS;IND;2;PL;MASC": "تَعُودُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَعُدْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَعُودُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَعُدْنَ",
+    "V;IMP;2;SG;MASC": "عُدْ",
+    "V;IMP;2;SG;FEM": "عُودِي",
+    "V;IMP;2;PL;MASC": "عُودُوا",
+    "V;IMP;2;PL;FEM": "عُدْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming home: the way back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to return, to go back, to come back",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.return"
+     },
+     {
+      "id": "s2",
+      "def": "to do again; لَمْ يَعُدْ … = no longer …",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to visit (a sick person) — a separate word with the same letters",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَعُودُ إِلَى الْبَيْتِ مَسَاءً.",
+      "tr": "I go back home in the evening.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى تَعُودُ مِنَ الْعَمَلِ؟",
+      "tr": "When do you come back from work?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عُدْ بِسُرْعَةٍ!",
+      "tr": "Come back quickly!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عَادَ الطَّبِيبُ الْمَرِيضَ.",
+      "tr": "The doctor visited the sick man.",
+      "register": "formal",
+      "context": "health",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَادَ إِلَى …",
+      "tr": "to return to …"
+     },
+     {
+      "text": "عَادَ مِنْ …",
+      "tr": "to come back from …"
+     },
+     {
+      "text": "عَادَ إِلَى الْبَيْتِ",
+      "tr": "to go / come back home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَجَعَ",
+      "register": "neutral",
+      "nuance": "to return — the more common word in speech (رِجِع)"
+     },
+     {
+      "word": "آبَ",
+      "register": "literary",
+      "nuance": "to return, to come back (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the hollow root ع و د (non-past يَعُودُ, verbal noun عَوْدَة or عَوْد); Wiktionary: to return, to go back, to come back; to do again.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arab lexicographers derive عِيد (feast) from this root: the day that comes back every year."
+    ],
+    "pitfalls": [
+     "Hollow verb like قَادَ: يَعُودُ, عُدْتُ (I came back), عُدْ! (come back!)."
+    ],
+    "subtleties": [
+     "One verb for both directions: عَادَ إِلَى الْبَيْتِ is “go back home” or “come back home” — Greek γυρίζω also covers both."
+    ]
+   }
+  },
+  {
+   "id": "ar:dakhala",
+   "lemma": "دَخَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.enter"
+   ],
+   "root": "د خ ل",
+   "verbForm": "I",
+   "masdar": "دُخُول",
+   "translit": "daḫala",
+   "forms": {
+    "V;PST;1;SG": "دَخَلْتُ",
+    "V;PST;2;SG;MASC": "دَخَلْتَ",
+    "V;PST;2;SG;FEM": "دَخَلْتِ",
+    "V;PST;3;SG;MASC": "دَخَلَ",
+    "V;PST;3;SG;FEM": "دَخَلَتْ",
+    "V;PST;1;PL": "دَخَلْنَا",
+    "V;PST;2;PL;MASC": "دَخَلْتُمْ",
+    "V;PST;2;PL;FEM": "دَخَلْتُنَّ",
+    "V;PST;3;PL;MASC": "دَخَلُوا",
+    "V;PST;3;PL;FEM": "دَخَلْنَ",
+    "V;PRS;IND;1;SG": "أَدْخُلُ",
+    "V;PRS;IND;2;SG;MASC": "تَدْخُلُ",
+    "V;PRS;IND;2;SG;FEM": "تَدْخُلِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَدْخُلُ",
+    "V;PRS;IND;3;SG;FEM": "تَدْخُلُ",
+    "V;PRS;IND;1;PL": "نَدْخُلُ",
+    "V;PRS;IND;2;PL;MASC": "تَدْخُلُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَدْخُلْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَدْخُلُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَدْخُلْنَ",
+    "V;IMP;2;SG;MASC": "اُدْخُلْ",
+    "V;IMP;2;SG;FEM": "اُدْخُلِي",
+    "V;IMP;2;PL;MASC": "اُدْخُلُوا",
+    "V;IMP;2;PL;FEM": "اُدْخُلْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A door opening: going in, coming in.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to enter, to go in, to come in",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.enter"
+     },
+     {
+      "id": "s2",
+      "def": "to take up, to start (a school, a profession)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَدْخُلُ الْبَيْتَ.",
+      "tr": "We go into the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "دَخَلَ الْمُعَلِّمُ الصَّفَّ.",
+      "tr": "The teacher came into the classroom.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "اُدْخُلْ، مِنْ فَضْلِكَ!",
+      "tr": "Come in, please!",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s1"
+     },
+     {
+      "text": "دَخَلَتْ أُخْتِي الْجَامِعَةَ.",
+      "tr": "My sister started university.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "دَخَلَ الْبَيْتَ",
+      "tr": "to enter the house"
+     },
+     {
+      "text": "دَخَلَ إِلَى …",
+      "tr": "to go into …"
+     },
+     {
+      "text": "دَخَلَ الْجَامِعَةَ",
+      "tr": "to start university"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَلَجَ",
+      "register": "literary",
+      "nuance": "to enter, to penetrate — classical style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "خَرَجَ",
+      "note": "to go out"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root د خ ل (non-past يَدْخُلُ, verbal noun دُخُول) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَدْخَل is an entrance and دَخْل an income — what comes in."
+    ],
+    "pitfalls": [
+     "Usually with a direct object, no preposition: دَخَلْتُ الْغُرْفَةَ (I entered the room); دَخَلَ إِلَى … is also correct.",
+     "The present has u, so the imperative starts with u: اُدْخُلْ!"
+    ],
+    "subtleties": [
+     "To invite someone in, تَفَضَّلْ (please, come in) is more polite than the bare imperative اُدْخُلْ."
+    ]
+   }
+  },
+  {
+   "id": "ar:kharaja",
+   "lemma": "خَرَجَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave"
+   ],
+   "root": "خ ر ج",
+   "verbForm": "I",
+   "masdar": "خُرُوج",
+   "translit": "ḫaraja",
+   "forms": {
+    "V;PST;1;SG": "خَرَجْتُ",
+    "V;PST;2;SG;MASC": "خَرَجْتَ",
+    "V;PST;2;SG;FEM": "خَرَجْتِ",
+    "V;PST;3;SG;MASC": "خَرَجَ",
+    "V;PST;3;SG;FEM": "خَرَجَتْ",
+    "V;PST;1;PL": "خَرَجْنَا",
+    "V;PST;2;PL;MASC": "خَرَجْتُمْ",
+    "V;PST;2;PL;FEM": "خَرَجْتُنَّ",
+    "V;PST;3;PL;MASC": "خَرَجُوا",
+    "V;PST;3;PL;FEM": "خَرَجْنَ",
+    "V;PRS;IND;1;SG": "أَخْرُجُ",
+    "V;PRS;IND;2;SG;MASC": "تَخْرُجُ",
+    "V;PRS;IND;2;SG;FEM": "تَخْرُجِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَخْرُجُ",
+    "V;PRS;IND;3;SG;FEM": "تَخْرُجُ",
+    "V;PRS;IND;1;PL": "نَخْرُجُ",
+    "V;PRS;IND;2;PL;MASC": "تَخْرُجُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَخْرُجْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَخْرُجُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَخْرُجْنَ",
+    "V;IMP;2;SG;MASC": "اُخْرُجْ",
+    "V;IMP;2;SG;FEM": "اُخْرُجِي",
+    "V;IMP;2;PL;MASC": "اُخْرُجُوا",
+    "V;IMP;2;PL;FEM": "اُخْرُجْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Stepping outside: out of the house, out with friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go out, to leave (a place): خَرَجَ مِنْ …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to come out, to emerge",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَخْرُجُ مِنَ الْبَيْتِ فِي الصَّبَاحِ.",
+      "tr": "I leave the house in the morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "تَخْرُجُ الْبِنْتُ مِنَ الْمَدْرَسَةِ ظُهْرًا.",
+      "tr": "The girl comes out of school at noon.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "نَخْرُجُ مَعَ الْأَصْدِقَاءِ.",
+      "tr": "We go out with friends.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "اُخْرُجْ مِنْ هُنَا!",
+      "tr": "Get out of here!",
+      "register": "informal",
+      "context": "argument",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "خَرَجَ مِنْ …",
+      "tr": "to go out of …, to leave …"
+     },
+     {
+      "text": "خَرَجَ إِلَى …",
+      "tr": "to go out to …"
+     },
+     {
+      "text": "خَرَجَ مَعَ الْأَصْدِقَاءِ",
+      "tr": "to go out with friends"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "غَادَرَ",
+      "register": "formal",
+      "nuance": "to leave, to depart from (a place) — with a direct object"
+     },
+     {
+      "word": "طَلَعَ",
+      "register": "colloquial",
+      "nuance": "to go out (Levant, Egypt); in standard Arabic “to rise, to go up”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "دَخَلَ",
+      "note": "to enter"
+     }
+    ],
+    "etymology": {
+     "text": "From the root خ ر ج; Wiktionary: ultimately from Iranian — see خَرَاج (ḫarāj, “poll-tax”). Form I (non-past يَخْرُجُ, verbal noun خُرُوج).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَخْرَج is an exit (on signs), and مُخْرِج (from form IV) a film director — the one who “brings out” the film."
+    ],
+    "pitfalls": [
+     "“Leave a place” needs مِنْ: خَرَجْتُ مِنَ الْبَيْتِ — or use غَادَرَ with a direct object: غَادَرْتُ الْبَيْتَ.",
+     "The imperative اُخْرُجْ! sounds rude (“get out!”)."
+    ],
+    "subtleties": [
+     "خَرَجَ is movement from inside to outside (go out); غَادَرَ is leaving a place behind (depart)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghadara",
+   "lemma": "غَادَرَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave"
+   ],
+   "root": "غ د ر",
+   "verbForm": "III",
+   "masdar": "مُغَادَرَة",
+   "translit": "ġādara",
+   "forms": {
+    "V;PST;1;SG": "غَادَرْتُ",
+    "V;PST;2;SG;MASC": "غَادَرْتَ",
+    "V;PST;2;SG;FEM": "غَادَرْتِ",
+    "V;PST;3;SG;MASC": "غَادَرَ",
+    "V;PST;3;SG;FEM": "غَادَرَتْ",
+    "V;PST;1;PL": "غَادَرْنَا",
+    "V;PST;2;PL;MASC": "غَادَرْتُمْ",
+    "V;PST;2;PL;FEM": "غَادَرْتُنَّ",
+    "V;PST;3;PL;MASC": "غَادَرُوا",
+    "V;PST;3;PL;FEM": "غَادَرْنَ",
+    "V;PRS;IND;1;SG": "أُغَادِرُ",
+    "V;PRS;IND;2;SG;MASC": "تُغَادِرُ",
+    "V;PRS;IND;2;SG;FEM": "تُغَادِرِينَ",
+    "V;PRS;IND;3;SG;MASC": "يُغَادِرُ",
+    "V;PRS;IND;3;SG;FEM": "تُغَادِرُ",
+    "V;PRS;IND;1;PL": "نُغَادِرُ",
+    "V;PRS;IND;2;PL;MASC": "تُغَادِرُونَ",
+    "V;PRS;IND;2;PL;FEM": "تُغَادِرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يُغَادِرُونَ",
+    "V;PRS;IND;3;PL;FEM": "يُغَادِرْنَ",
+    "V;IMP;2;SG;MASC": "غَادِرْ",
+    "V;IMP;2;SG;FEM": "غَادِرِي",
+    "V;IMP;2;PL;MASC": "غَادِرُوا",
+    "V;IMP;2;PL;FEM": "غَادِرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departure boards and announcements.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to leave, to depart from (a place) — with a direct object",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.leave"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُغَادِرُ الْقِطَارُ الْمَحَطَّةَ فِي السَّاعَةِ السَّابِعَةِ.",
+      "tr": "The train leaves the station at seven o’clock.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "غَادَرْنَا الْفُنْدُقَ صَبَاحًا.",
+      "tr": "We left the hotel in the morning.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "غَادِرُوا الْمَبْنَى، مِنْ فَضْلِكُمْ!",
+      "tr": "Leave the building, please!",
+      "register": "neutral",
+      "context": "announcement",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غَادَرَ الْبَلَدَ",
+      "tr": "to leave the country"
+     },
+     {
+      "text": "غَادَرَ الْمَطَارَ",
+      "tr": "to leave the airport"
+     },
+     {
+      "text": "قَاعَةُ الْمُغَادَرَةِ",
+      "tr": "the departure hall"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خَرَجَ مِنْ",
+      "register": "neutral",
+      "nuance": "to go out of — the everyday way to say “leave”"
+     },
+     {
+      "word": "رَحَلَ",
+      "register": "literary",
+      "nuance": "to depart, to set out"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "وَصَلَ",
+      "note": "to arrive"
+     }
+    ],
+    "etymology": {
+     "text": "Form III verb of the root غ د ر (non-past يُغَادِرُ, verbal noun مُغَادَرَة); Wiktionary: to leave.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "At airports: الْمُغَادَرَةُ (departures) and الْوُصُولُ (arrivals) — the verbal nouns of غَادَرَ and وَصَلَ."
+    ],
+    "pitfalls": [
+     "Transitive: غَادَرَ الْبَيْتَ — no مِنْ (unlike خَرَجَ مِنَ الْبَيْتِ).",
+     "Form III: u in the present prefix: يُغَادِرُ, أُغَادِرُ."
+    ],
+    "subtleties": [
+     "More formal than خَرَجَ: news, timetables, announcements. Form I of the same root, غَدَرَ, means “to betray”."
+    ]
+   }
+  },
+  {
+   "id": "ar:wasala",
+   "lemma": "وَصَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.arrive"
+   ],
+   "root": "و ص ل",
+   "verbForm": "I",
+   "masdar": "وُصُول",
+   "translit": "waṣala",
+   "forms": {
+    "V;PST;1;SG": "وَصَلْتُ",
+    "V;PST;2;SG;MASC": "وَصَلْتَ",
+    "V;PST;2;SG;FEM": "وَصَلْتِ",
+    "V;PST;3;SG;MASC": "وَصَلَ",
+    "V;PST;3;SG;FEM": "وَصَلَتْ",
+    "V;PST;1;PL": "وَصَلْنَا",
+    "V;PST;2;PL;MASC": "وَصَلْتُمْ",
+    "V;PST;2;PL;FEM": "وَصَلْتُنَّ",
+    "V;PST;3;PL;MASC": "وَصَلُوا",
+    "V;PST;3;PL;FEM": "وَصَلْنَ",
+    "V;PRS;IND;1;SG": "أَصِلُ",
+    "V;PRS;IND;2;SG;MASC": "تَصِلُ",
+    "V;PRS;IND;2;SG;FEM": "تَصِلِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَصِلُ",
+    "V;PRS;IND;3;SG;FEM": "تَصِلُ",
+    "V;PRS;IND;1;PL": "نَصِلُ",
+    "V;PRS;IND;2;PL;MASC": "تَصِلُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَصِلْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَصِلُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَصِلْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the journey: “we’re here!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to arrive (at), to reach: وَصَلَ إِلَى …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.arrive"
+     },
+     {
+      "id": "s2",
+      "def": "to join, to connect (a separate entry in Wiktionary)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَصِلُ الْقِطَارُ فِي الْمَسَاءِ.",
+      "tr": "The train arrives in the evening.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى تَصِلِينَ إِلَى الْمَطَارِ؟",
+      "tr": "When do you arrive at the airport? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلْنَا!",
+      "tr": "We’ve arrived!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَصَلَ إِلَى …",
+      "tr": "to arrive at …, to reach …"
+     },
+     {
+      "text": "وَصَلَ مُتَأَخِّرًا",
+      "tr": "to arrive late"
+     },
+     {
+      "text": "وَصَلَ فِي الْوَقْتِ",
+      "tr": "to arrive on time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَلَغَ",
+      "register": "formal",
+      "nuance": "to reach, to attain (a place, an age, a goal)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "غَادَرَ",
+      "note": "to leave"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root و ص ل (non-past يَصِلُ); Wiktionary has two entries: “to unite, to join” and “to arrive at, to reach”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "وُصُول is arrival; إِيصَال a receipt; صِلَة a link — all from this root."
+    ],
+    "pitfalls": [
+     "Assimilated verb: the w drops in the present — يَصِلُ, أَصِلُ, تَصِلِينَ (not *يَوْصِلُ).",
+     "With a place: وَصَلَ إِلَى الْمَدِينَةِ, or directly وَصَلَ الْمَدِينَةَ."
+    ],
+    "subtleties": [
+     "Greek φτάνω, German ankommen: Arabic says وَصَلَ + إِلَى. Its command form صِلْ! is rarely needed."
+    ]
+   }
+  },
+  {
+   "id": "ar:baqiya",
+   "lemma": "بَقِيَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.stay"
+   ],
+   "root": "ب ق ي",
+   "verbForm": "I",
+   "masdar": "بَقَاء",
+   "translit": "baqiya",
+   "forms": {
+    "V;PST;1;SG": "بَقِيتُ",
+    "V;PST;2;SG;MASC": "بَقِيتَ",
+    "V;PST;2;SG;FEM": "بَقِيتِ",
+    "V;PST;3;SG;MASC": "بَقِيَ",
+    "V;PST;3;SG;FEM": "بَقِيَتْ",
+    "V;PST;1;PL": "بَقِينَا",
+    "V;PST;2;PL;MASC": "بَقِيتُمْ",
+    "V;PST;2;PL;FEM": "بَقِيتُنَّ",
+    "V;PST;3;PL;MASC": "بَقُوا",
+    "V;PST;3;PL;FEM": "بَقِينَ",
+    "V;PRS;IND;1;SG": "أَبْقَى",
+    "V;PRS;IND;2;SG;MASC": "تَبْقَى",
+    "V;PRS;IND;2;SG;FEM": "تَبْقَيْنَ",
+    "V;PRS;IND;3;SG;MASC": "يَبْقَى",
+    "V;PRS;IND;3;SG;FEM": "تَبْقَى",
+    "V;PRS;IND;1;PL": "نَبْقَى",
+    "V;PRS;IND;2;PL;MASC": "تَبْقَوْنَ",
+    "V;PRS;IND;2;PL;FEM": "تَبْقَيْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَبْقَوْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَبْقَيْنَ",
+    "V;IMP;2;SG;MASC": "اِبْقَ",
+    "V;IMP;2;SG;FEM": "اِبْقَيْ",
+    "V;IMP;2;PL;MASC": "اِبْقَوْا",
+    "V;IMP;2;PL;FEM": "اِبْقَيْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not moving: staying at home, staying with someone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to stay, to remain",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.stay"
+     },
+     {
+      "id": "s2",
+      "def": "to last, to endure",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to be left (over)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبْقَى فِي الْبَيْتِ الْيَوْمَ.",
+      "tr": "I’m staying at home today.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "بَقِيَتْ أُمِّي مَعَ الْأَطْفَالِ.",
+      "tr": "My mother stayed with the children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "اِبْقَ هُنَا!",
+      "tr": "Stay here!",
+      "register": "neutral",
+      "context": "command",
+      "sense": "s1"
+     },
+     {
+      "text": "بَقِيَ قَلِيلٌ مِنَ الْخُبْزِ.",
+      "tr": "A little bread is left.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَقِيَ فِي الْبَيْتِ",
+      "tr": "to stay at home"
+     },
+     {
+      "text": "بَقِيَ مَعَ …",
+      "tr": "to stay with …"
+     },
+     {
+      "text": "بَقِيَ صَامِتًا",
+      "tr": "to remain silent"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْبَقَاءُ لِلّٰهِ",
+      "tr": "lasting belongs to God",
+      "kind": "fixed expression",
+      "meaning": "said to offer condolences after a death",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ظَلَّ",
+      "register": "formal",
+      "nuance": "to remain, to keep (doing)"
+     },
+     {
+      "word": "مَكَثَ",
+      "register": "literary",
+      "nuance": "to stay, to linger"
+     },
+     {
+      "word": "قَعَدَ",
+      "register": "colloquial",
+      "nuance": "to stay (Egypt, the Gulf); in standard Arabic “to sit”"
+     }
+    ],
+    "etymology": {
+     "text": "Form I verb of the root ب ق ي (non-past يَبْقَى, verbal noun بَقَاء); Wiktionary: to last, to endure; to stay, to remain.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "بَقَاء is survival: الْبَقَاءُ لِلْأَصْلَحِ = the survival of the fittest."
+    ],
+    "pitfalls": [
+     "Past with i, present with a: بَقِيَ → يَبْقَى (written with ى).",
+     "The imperative loses the last letter: اِبْقَ! (to a woman اِبْقَيْ!); “they stay” is يَبْقَوْنَ (-awna), not *يَبْقُونَ."
+    ],
+    "subtleties": [
+     "Also “to be left”: بَقِيَ لِي يَوْمَانِ = I have two days left."
+    ]
+   }
+  },
+  {
+   "id": "ar:intazara",
+   "lemma": "اِنْتَظَرَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.wait"
+   ],
+   "root": "ن ظ ر",
+   "verbForm": "VIII",
+   "masdar": "اِنْتِظَار",
+   "translit": "intaẓara",
+   "forms": {
+    "V;PST;1;SG": "اِنْتَظَرْتُ",
+    "V;PST;2;SG;MASC": "اِنْتَظَرْتَ",
+    "V;PST;2;SG;FEM": "اِنْتَظَرْتِ",
+    "V;PST;3;SG;MASC": "اِنْتَظَرَ",
+    "V;PST;3;SG;FEM": "اِنْتَظَرَتْ",
+    "V;PST;1;PL": "اِنْتَظَرْنَا",
+    "V;PST;2;PL;MASC": "اِنْتَظَرْتُمْ",
+    "V;PST;2;PL;FEM": "اِنْتَظَرْتُنَّ",
+    "V;PST;3;PL;MASC": "اِنْتَظَرُوا",
+    "V;PST;3;PL;FEM": "اِنْتَظَرْنَ",
+    "V;PRS;IND;1;SG": "أَنْتَظِرُ",
+    "V;PRS;IND;2;SG;MASC": "تَنْتَظِرُ",
+    "V;PRS;IND;2;SG;FEM": "تَنْتَظِرِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَنْتَظِرُ",
+    "V;PRS;IND;3;SG;FEM": "تَنْتَظِرُ",
+    "V;PRS;IND;1;PL": "نَنْتَظِرُ",
+    "V;PRS;IND;2;PL;MASC": "تَنْتَظِرُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَنْتَظِرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَنْتَظِرُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَنْتَظِرْنَ",
+    "V;IMP;2;SG;MASC": "اِنْتَظِرْ",
+    "V;IMP;2;SG;FEM": "اِنْتَظِرِي",
+    "V;IMP;2;PL;MASC": "اِنْتَظِرُوا",
+    "V;IMP;2;PL;FEM": "اِنْتَظِرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bus stops and waiting rooms.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wait (for), to await — with a direct object",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wait"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتَظِرُ الْحَافِلَةَ.",
+      "tr": "I’m waiting for the bus.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "نَنْتَظِرُكَ فِي الْمَقْهَى.",
+      "tr": "We’re waiting for you at the café.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظِرْ قَلِيلًا!",
+      "tr": "Wait a moment!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِنْتَظَرَ الْحَافِلَةَ",
+      "tr": "to wait for the bus"
+     },
+     {
+      "text": "اِنْتَظِرْ لَحْظَةً",
+      "tr": "wait a moment"
+     },
+     {
+      "text": "قَاعَةُ الِانْتِظَارِ",
+      "tr": "the waiting room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَرَقَّبَ",
+      "register": "formal",
+      "nuance": "to await, to look forward to (anxiously)"
+     }
+    ],
+    "etymology": {
+     "text": "Form VIII (اِفْتَعَلَ) verb of the root ن ظ ر, “to look” (non-past يَنْتَظِرُ, verbal noun اِنْتِظَار); Wiktionary: to wait for, to await.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root of “looking”: نَظَّارَة (glasses) and مَنْظَر (view) belong to it too."
+    ],
+    "pitfalls": [
+     "Transitive, no preposition: أَنْتَظِرُ أَخِي (I’m waiting for my brother), not *أَنْتَظِرُ لِأَخِي.",
+     "The first alif is hamzat al-waṣl: at the start اِنْتَظِرْ!, after a vowel silent: وَانْتَظَرَ."
+    ],
+    "subtleties": [
+     "Like Greek περιμένω and unlike German warten auf, it takes a direct object."
+    ]
+   }
+  },
+  {
+   "id": "ar:hafila",
+   "lemma": "حَافِلَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bus"
+   ],
+   "gender": "FEM",
+   "root": "ح ف ل",
+   "translit": "ḥāfila",
+   "forms": {
+    "N;NOM;SG;INDF": "حَافِلَةٌ",
+    "N;NOM;PL;INDF": "حَافِلَاتٌ",
+    "N;NOM;DU;INDF": "حَافِلَتَانِ",
+    "N;NOM;SG;DEF": "الْحَافِلَةُ",
+    "N;NOM;PL;DEF": "الْحَافِلَاتُ",
+    "N;NOM;DU;DEF": "الْحَافِلَتَانِ",
+    "N;ACC;SG;INDF": "حَافِلَةً",
+    "N;ACC;PL;INDF": "حَافِلَاتٍ",
+    "N;ACC;DU;INDF": "حَافِلَتَيْنِ",
+    "N;ACC;SG;DEF": "الْحَافِلَةَ",
+    "N;ACC;PL;DEF": "الْحَافِلَاتِ",
+    "N;ACC;DU;DEF": "الْحَافِلَتَيْنِ",
+    "N;GEN;SG;INDF": "حَافِلَةٍ",
+    "N;GEN;PL;INDF": "حَافِلَاتٍ",
+    "N;GEN;DU;INDF": "حَافِلَتَيْنِ",
+    "N;GEN;SG;DEF": "الْحَافِلَةِ",
+    "N;GEN;PL;DEF": "الْحَافِلَاتِ",
+    "N;GEN;DU;DEF": "الْحَافِلَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bus stops, crowds and timetables.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bus",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     },
+     {
+      "id": "s2",
+      "def": "tram, streetcar (Wiktionary)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَذْهَبُ إِلَى الْعَمَلِ بِالْحَافِلَةِ.",
+      "tr": "I go to work by bus.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَافِلَةُ مُتَأَخِّرَةٌ الْيَوْمَ.",
+      "tr": "The bus is late today.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ مَوْقِفُ الْحَافِلَةِ؟",
+      "tr": "Where is the bus stop?",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَوْقِفُ الْحَافِلَةِ",
+      "tr": "the bus stop"
+     },
+     {
+      "text": "سَائِقُ الْحَافِلَةِ",
+      "tr": "the bus driver"
+     },
+     {
+      "text": "رَكِبَ الْحَافِلَةَ",
+      "tr": "to take the bus"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَاص",
+      "register": "colloquial",
+      "nuance": "bus — from English, the everyday word in the Levant and the Gulf"
+     },
+     {
+      "word": "أُوتُوبِيس",
+      "register": "colloquial",
+      "nuance": "bus — Egypt, from French autobus",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a tool noun from the active participle of حَفَلَ (ḥafala, “to gather”) — حَافِل (“gatherer”) + ـَة.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the gatherer”: حَفْلَة (party) and اِحْتِفَال (celebration) come from the same root of gathering."
+    ],
+    "pitfalls": [
+     "“By bus” is بِالْحَافِلَةِ, with the article.",
+     "Plural حَافِلَات (Wiktionary also gives حَوَافِل)."
+    ],
+    "subtleties": [
+     "حَافِلَة is the word of signs, news and textbooks; most people say بَاص (Levant, Gulf) or أُوتُوبِيس (Egypt)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qitar",
+   "lemma": "قِطَار",
+   "pos": "NOUN",
+   "senses": [
+    "tr.train"
+   ],
+   "gender": "MASC",
+   "root": "ق ط ر",
+   "translit": "qiṭār",
+   "forms": {
+    "N;NOM;SG;INDF": "قِطَارٌ",
+    "N;NOM;PL;INDF": "قِطَارَاتٌ",
+    "N;NOM;DU;INDF": "قِطَارَانِ",
+    "N;NOM;SG;DEF": "الْقِطَارُ",
+    "N;NOM;PL;DEF": "الْقِطَارَاتُ",
+    "N;NOM;DU;DEF": "الْقِطَارَانِ",
+    "N;ACC;SG;INDF": "قِطَارًا",
+    "N;ACC;PL;INDF": "قِطَارَاتٍ",
+    "N;ACC;DU;INDF": "قِطَارَيْنِ",
+    "N;ACC;SG;DEF": "الْقِطَارَ",
+    "N;ACC;PL;DEF": "الْقِطَارَاتِ",
+    "N;ACC;DU;DEF": "الْقِطَارَيْنِ",
+    "N;GEN;SG;INDF": "قِطَارٍ",
+    "N;GEN;PL;INDF": "قِطَارَاتٍ",
+    "N;GEN;DU;INDF": "قِطَارَيْنِ",
+    "N;GEN;SG;DEF": "الْقِطَارِ",
+    "N;GEN;PL;DEF": "الْقِطَارَاتِ",
+    "N;GEN;DU;DEF": "الْقِطَارَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Platforms, rails and long journeys.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "train",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.train"
+     },
+     {
+      "id": "s2",
+      "def": "row; a line of camels (the old meaning)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "نُسَافِرُ بِالْقِطَارِ.",
+      "tr": "We travel by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يَصِلُ الْقِطَارُ فِي السَّاعَةِ الثَّامِنَةِ.",
+      "tr": "The train arrives at eight o’clock.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأَيْنَا قِطَارًا مِنَ الْجِمَالِ.",
+      "tr": "We saw a line of camels.",
+      "register": "literary",
+      "context": "desert",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَحَطَّةُ الْقِطَارِ",
+      "tr": "the train station"
+     },
+     {
+      "text": "تَذْكِرَةُ قِطَارٍ",
+      "tr": "a train ticket"
+     },
+     {
+      "text": "رَكِبَ الْقِطَارَ",
+      "tr": "to take the train"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "There is no other common word: قِطَار is the train everywhere.",
+    "etymology": {
+     "text": "From the root ق ط ر; Wiktionary gives the meanings “row”, “row of camels” and “train” — the train is named after a caravan in a line.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The train borrowed the name of the camel caravan walking in single file."
+    ],
+    "pitfalls": [
+     "Masculine, but with a feminine-looking plural: قِطَارَات (Wiktionary also gives قُطُر)."
+    ],
+    "subtleties": [
+     "“By train” is بِالْقِطَارِ; “the train station” مَحَطَّةُ الْقِطَارِ (lesson 11)."
+    ]
+   }
+  },
+  {
+   "id": "ar:taira",
+   "lemma": "طَائِرَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.plane"
+   ],
+   "gender": "FEM",
+   "root": "ط ي ر",
+   "translit": "ṭāʾira",
+   "forms": {
+    "N;NOM;SG;INDF": "طَائِرَةٌ",
+    "N;NOM;PL;INDF": "طَائِرَاتٌ",
+    "N;NOM;DU;INDF": "طَائِرَتَانِ",
+    "N;NOM;SG;DEF": "الطَّائِرَةُ",
+    "N;NOM;PL;DEF": "الطَّائِرَاتُ",
+    "N;NOM;DU;DEF": "الطَّائِرَتَانِ",
+    "N;ACC;SG;INDF": "طَائِرَةً",
+    "N;ACC;PL;INDF": "طَائِرَاتٍ",
+    "N;ACC;DU;INDF": "طَائِرَتَيْنِ",
+    "N;ACC;SG;DEF": "الطَّائِرَةَ",
+    "N;ACC;PL;DEF": "الطَّائِرَاتِ",
+    "N;ACC;DU;DEF": "الطَّائِرَتَيْنِ",
+    "N;GEN;SG;INDF": "طَائِرَةٍ",
+    "N;GEN;PL;INDF": "طَائِرَاتٍ",
+    "N;GEN;DU;INDF": "طَائِرَتَيْنِ",
+    "N;GEN;SG;DEF": "الطَّائِرَةِ",
+    "N;GEN;PL;DEF": "الطَّائِرَاتِ",
+    "N;GEN;DU;DEF": "الطَّائِرَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses طَائِرَة as “airplane” — the course concept “plane”; the check does not find the word “plane” inside “airplane”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Airports, holidays, far-away places.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aeroplane, airplane",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.plane"
+     },
+     {
+      "id": "s2",
+      "def": "طَائِرَةٌ وَرَقِيَّةٌ — a kite (a paper “plane”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُسَافِرُ بِالطَّائِرَةِ.",
+      "tr": "I travel by plane.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "تَصِلُ الطَّائِرَةُ فِي الْمَسَاءِ.",
+      "tr": "The plane arrives in the evening.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     },
+     {
+      "text": "يَلْعَبُ الْأَطْفَالُ بِطَائِرَةٍ وَرَقِيَّةٍ.",
+      "tr": "The children are playing with a kite.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَذْكِرَةُ طَائِرَةٍ",
+      "tr": "a plane ticket"
+     },
+     {
+      "text": "رَكِبَ الطَّائِرَةَ",
+      "tr": "to board the plane"
+     },
+     {
+      "text": "طَائِرَةٌ وَرَقِيَّةٌ",
+      "tr": "a kite"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طَيَّارَة",
+      "register": "colloquial",
+      "nuance": "plane — the spoken word in many countries"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from the root ط ي ر (ṭ y r), related to flying — the feminine of طَائِر (flying; a bird).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the flying one”: طَائِر is a bird and طَيَّار a pilot."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ seat after ā: طَائِرَة (ṭāʾira)."
+    ],
+    "subtleties": [
+     "A plane is feminine like most vehicles in -a: سَيَّارَة, حَافِلَة, دَرَّاجَة, سَفِينَة."
+    ]
+   }
+  },
+  {
+   "id": "ar:sayyarat_ujra",
+   "lemma": "سَيَّارَةُ أُجْرَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.taxi"
+   ],
+   "gender": "FEM",
+   "translit": "sayyārat ʾujra",
+   "forms": {
+    "N;NOM;SG;INDF": "سَيَّارَةُ أُجْرَةٍ",
+    "N;NOM;PL;INDF": "سَيَّارَاتُ أُجْرَةٍ",
+    "N;NOM;SG;DEF": "سَيَّارَةُ الْأُجْرَةِ",
+    "N;NOM;PL;DEF": "سَيَّارَاتُ الْأُجْرَةِ",
+    "N;ACC;SG;INDF": "سَيَّارَةَ أُجْرَةٍ",
+    "N;ACC;PL;INDF": "سَيَّارَاتِ أُجْرَةٍ",
+    "N;ACC;SG;DEF": "سَيَّارَةَ الْأُجْرَةِ",
+    "N;ACC;PL;DEF": "سَيَّارَاتِ الْأُجْرَةِ",
+    "N;GEN;SG;INDF": "سَيَّارَةِ أُجْرَةٍ",
+    "N;GEN;PL;INDF": "سَيَّارَاتِ أُجْرَةٍ",
+    "N;GEN;SG;DEF": "سَيَّارَةِ الْأُجْرَةِ",
+    "N;GEN;PL;DEF": "سَيَّارَاتِ الْأُجْرَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A raised hand at the kerb, a fare to agree on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taxi, cab (lit. “car of hire”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.taxi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَذْهَبُ إِلَى الْمَطَارِ بِسَيَّارَةِ أُجْرَةٍ.",
+      "tr": "I go to the airport by taxi.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ أَجِدُ سَيَّارَةَ أُجْرَةٍ؟",
+      "tr": "Where can I find a taxi?",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "سَائِقُ سَيَّارَةِ الْأُجْرَةِ لَطِيفٌ.",
+      "tr": "The taxi driver is nice.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَائِقُ سَيَّارَةِ أُجْرَةٍ",
+      "tr": "a taxi driver"
+     },
+     {
+      "text": "أَخَذَ سَيَّارَةَ أُجْرَةٍ",
+      "tr": "to take a taxi"
+     },
+     {
+      "text": "كَمِ الْأُجْرَةُ؟",
+      "tr": "how much is the fare?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَاكْسِي",
+      "register": "colloquial",
+      "nuance": "taxi — from French; what almost everyone says"
+     },
+     {
+      "word": "سِرْفِيس",
+      "register": "regional",
+      "nuance": "a shared taxi on a fixed route (Levant)",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from سَيَّارَة (car) + أُجْرَة (rent, fare, wages) — “a car for hire”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أُجْرَة alone is the fare or the wage: كَمِ الْأُجْرَةُ؟ — how much is the fare?"
+    ],
+    "pitfalls": [
+     "Two words in a construct: only the first one takes the case ending and it never takes the article: سَيَّارَةُ أُجْرَةٍ, سَيَّارَةُ الْأُجْرَةِ (the taxi); plural سَيَّارَاتُ أُجْرَةٍ."
+    ],
+    "subtleties": [
+     "In speech almost everyone says تَاكْسِي; سَيَّارَةُ أُجْرَةٍ is the written and formal word."
+    ]
+   }
+  },
+  {
+   "id": "ar:sayyara",
+   "lemma": "سَيَّارَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.car"
+   ],
+   "gender": "FEM",
+   "root": "س ي ر",
+   "translit": "sayyāra",
+   "forms": {
+    "N;NOM;SG;INDF": "سَيَّارَةٌ",
+    "N;NOM;PL;INDF": "سَيَّارَاتٌ",
+    "N;NOM;DU;INDF": "سَيَّارَتَانِ",
+    "N;NOM;SG;DEF": "السَّيَّارَةُ",
+    "N;NOM;PL;DEF": "السَّيَّارَاتُ",
+    "N;NOM;DU;DEF": "السَّيَّارَتَانِ",
+    "N;ACC;SG;INDF": "سَيَّارَةً",
+    "N;ACC;PL;INDF": "سَيَّارَاتٍ",
+    "N;ACC;DU;INDF": "سَيَّارَتَيْنِ",
+    "N;ACC;SG;DEF": "السَّيَّارَةَ",
+    "N;ACC;PL;DEF": "السَّيَّارَاتِ",
+    "N;ACC;DU;DEF": "السَّيَّارَتَيْنِ",
+    "N;GEN;SG;INDF": "سَيَّارَةٍ",
+    "N;GEN;PL;INDF": "سَيَّارَاتٍ",
+    "N;GEN;DU;INDF": "سَيَّارَتَيْنِ",
+    "N;GEN;SG;DEF": "السَّيَّارَةِ",
+    "N;GEN;PL;DEF": "السَّيَّارَاتِ",
+    "N;GEN;DU;DEF": "السَّيَّارَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Traffic, roads, family trips.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "car",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.car"
+     },
+     {
+      "id": "s2",
+      "def": "caravan, travellers (the old meaning)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدَنَا سَيَّارَةٌ جَدِيدَةٌ.",
+      "tr": "We have a new car.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ إِلَى الْعَمَلِ بِالسَّيَّارَةِ.",
+      "tr": "I go to work by car.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "وَجَاءَتْ سَيَّارَةٌ",
+      "tr": "And there came a caravan (Qurʾān 12:19)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَادَ السَّيَّارَةَ",
+      "tr": "to drive the car"
+     },
+     {
+      "text": "مَوْقِفُ السَّيَّارَاتِ",
+      "tr": "the car park"
+     },
+     {
+      "text": "سَيَّارَةُ أُجْرَةٍ",
+      "tr": "a taxi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَرَبِيَّة",
+      "register": "colloquial",
+      "nuance": "car — the everyday word in Egypt",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a tool noun from the characteristic adjective of سَارَ (sāra, “to move, to travel”) — سَيَّار (“moving frequently”) + ـَة.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In old Arabic سَيَّارَة was a caravan (Qurʾān 12:19); the old word was given the new meaning “car” in modern times.",
+     "كَوْكَبٌ سَيَّارٌ, a “wandering star”, is a planet (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The y is doubled: sayyāra, سَيَّارَة."
+    ],
+    "subtleties": [
+     "Feminine: سَيَّارَةٌ جَدِيدَةٌ, سَيَّارَتِي (my car)."
+    ]
+   }
+  },
+  {
+   "id": "ar:darraja",
+   "lemma": "دَرَّاجَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bicycle"
+   ],
+   "gender": "FEM",
+   "root": "د ر ج",
+   "translit": "darrāja",
+   "forms": {
+    "N;NOM;SG;INDF": "دَرَّاجَةٌ",
+    "N;NOM;PL;INDF": "دَرَّاجَاتٌ",
+    "N;NOM;DU;INDF": "دَرَّاجَتَانِ",
+    "N;NOM;SG;DEF": "الدَّرَّاجَةُ",
+    "N;NOM;PL;DEF": "الدَّرَّاجَاتُ",
+    "N;NOM;DU;DEF": "الدَّرَّاجَتَانِ",
+    "N;ACC;SG;INDF": "دَرَّاجَةً",
+    "N;ACC;PL;INDF": "دَرَّاجَاتٍ",
+    "N;ACC;DU;INDF": "دَرَّاجَتَيْنِ",
+    "N;ACC;SG;DEF": "الدَّرَّاجَةَ",
+    "N;ACC;PL;DEF": "الدَّرَّاجَاتِ",
+    "N;ACC;DU;DEF": "الدَّرَّاجَتَيْنِ",
+    "N;GEN;SG;INDF": "دَرَّاجَةٍ",
+    "N;GEN;PL;INDF": "دَرَّاجَاتٍ",
+    "N;GEN;DU;INDF": "دَرَّاجَتَيْنِ",
+    "N;GEN;SG;DEF": "الدَّرَّاجَةِ",
+    "N;GEN;PL;DEF": "الدَّرَّاجَاتِ",
+    "N;GEN;DU;DEF": "الدَّرَّاجَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pedals, bells and a ride in the park.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bicycle",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bicycle"
+     },
+     {
+      "id": "s2",
+      "def": "دَرَّاجَةٌ نَارِيَّةٌ — motorcycle (lit. a fire bike)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَذْهَبُ أَخِي إِلَى الْمَدْرَسَةِ بِالدَّرَّاجَةِ.",
+      "tr": "My brother goes to school by bike.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي دَرَّاجَةٌ قَدِيمَةٌ.",
+      "tr": "I have an old bike.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s1"
+     },
+     {
+      "text": "رَكِبَ دَرَّاجَةً نَارِيَّةً.",
+      "tr": "He rode a motorbike.",
+      "register": "neutral",
+      "context": "road",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَكِبَ الدَّرَّاجَةَ",
+      "tr": "to ride the bike"
+     },
+     {
+      "text": "دَرَّاجَةٌ هَوَائِيَّةٌ",
+      "tr": "a bicycle (formal)"
+     },
+     {
+      "text": "دَرَّاجَةٌ نَارِيَّةٌ",
+      "tr": "a motorcycle"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِسِكْلِيت",
+      "register": "colloquial",
+      "nuance": "bicycle — from French bicyclette (Levant)",
+      "region": "Levant"
+     },
+     {
+      "word": "عَجَلَة",
+      "register": "colloquial",
+      "nuance": "bicycle in Egypt; in standard Arabic “wheel”",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from the root د ر ج (d r j) — a tool noun from دَرَجَ (daraja, “to proceed gradually”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as دَرَج (stairs, lesson 12) and دَرَجَة (step, degree): moving step by step."
+    ],
+    "pitfalls": [
+     "The r is doubled: darrāja."
+    ],
+    "subtleties": [
+     "دَرَّاجَة alone is usually the bicycle; to be clear: دَرَّاجَةٌ هَوَائِيَّةٌ (bicycle) vs دَرَّاجَةٌ نَارِيَّةٌ (motorbike)."
+    ]
+   }
+  },
+  {
+   "id": "ar:safina",
+   "lemma": "سَفِينَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "gender": "FEM",
+   "root": "س ف ن",
+   "translit": "safīna",
+   "forms": {
+    "N;NOM;SG;INDF": "سَفِينَةٌ",
+    "N;NOM;PL;INDF": "سُفُنٌ",
+    "N;NOM;DU;INDF": "سَفِينَتَانِ",
+    "N;NOM;SG;DEF": "السَّفِينَةُ",
+    "N;NOM;PL;DEF": "السُّفُنُ",
+    "N;NOM;DU;DEF": "السَّفِينَتَانِ",
+    "N;ACC;SG;INDF": "سَفِينَةً",
+    "N;ACC;PL;INDF": "سُفُنًا",
+    "N;ACC;DU;INDF": "سَفِينَتَيْنِ",
+    "N;ACC;SG;DEF": "السَّفِينَةَ",
+    "N;ACC;PL;DEF": "السُّفُنَ",
+    "N;ACC;DU;DEF": "السَّفِينَتَيْنِ",
+    "N;GEN;SG;INDF": "سَفِينَةٍ",
+    "N;GEN;PL;INDF": "سُفُنٍ",
+    "N;GEN;DU;INDF": "سَفِينَتَيْنِ",
+    "N;GEN;SG;DEF": "السَّفِينَةِ",
+    "N;GEN;PL;DEF": "السُّفُنِ",
+    "N;GEN;DU;DEF": "السَّفِينَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The sea, ports, long crossings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ship, vessel",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "سَافَرْنَا بِالسَّفِينَةِ إِلَى الْجَزِيرَةِ.",
+      "tr": "We went to the island by ship.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّفِينَةُ فِي الْمِينَاءِ.",
+      "tr": "The ship is in the port.",
+      "register": "neutral",
+      "context": "sea",
+      "sense": "s1"
+     },
+     {
+      "text": "سَفِينَةُ نُوحٍ",
+      "tr": "Noah’s ark",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَكِبَ السَّفِينَةَ",
+      "tr": "to board the ship"
+     },
+     {
+      "text": "سَفِينَةُ نُوحٍ",
+      "tr": "Noah’s ark"
+     },
+     {
+      "text": "سَفِينَةٌ تِجَارِيَّةٌ",
+      "tr": "a merchant ship"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "سَفِينَةُ الصَّحْرَاءِ",
+      "tr": "the ship of the desert",
+      "kind": "fixed expression",
+      "meaning": "the camel",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "بَاخِرَة",
+      "register": "formal",
+      "nuance": "a steamship, a large ship"
+     },
+     {
+      "word": "مَرْكَب",
+      "register": "neutral",
+      "nuance": "a boat or vessel of any size"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Aramaic סְפינִתָּא (sǝp̄īntā), forming the root س ف ن; cognate with Hebrew סְפִינָה (sᵊfīnāh).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew סְפִינָה (sfina) is the same word.",
+     "سَفِينَةُ الصَّحْرَاءِ, “the ship of the desert”, is the camel."
+    ],
+    "pitfalls": [
+     "Broken plural سُفُن (sufun)."
+    ],
+    "subtleties": [
+     "سَفِينَة is a ship; a small boat is قَارِب — together they cover the course word “boat, ship”."
+    ]
+   }
+  },
+  {
+   "id": "ar:qarib_boat",
+   "lemma": "قَارِب",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "gender": "MASC",
+   "root": "ق ر ب",
+   "translit": "qārib",
+   "forms": {
+    "N;NOM;SG;INDF": "قَارِبٌ",
+    "N;NOM;PL;INDF": "قَوَارِبُ",
+    "N;NOM;DU;INDF": "قَارِبَانِ",
+    "N;NOM;SG;DEF": "الْقَارِبُ",
+    "N;NOM;PL;DEF": "الْقَوَارِبُ",
+    "N;NOM;DU;DEF": "الْقَارِبَانِ",
+    "N;ACC;SG;INDF": "قَارِبًا",
+    "N;ACC;PL;INDF": "قَوَارِبَ",
+    "N;ACC;DU;INDF": "قَارِبَيْنِ",
+    "N;ACC;SG;DEF": "الْقَارِبَ",
+    "N;ACC;PL;DEF": "الْقَوَارِبَ",
+    "N;ACC;DU;DEF": "الْقَارِبَيْنِ",
+    "N;GEN;SG;INDF": "قَارِبٍ",
+    "N;GEN;PL;INDF": "قَوَارِبَ",
+    "N;GEN;DU;INDF": "قَارِبَيْنِ",
+    "N;GEN;SG;DEF": "الْقَارِبِ",
+    "N;GEN;PL;DEF": "الْقَوَارِبِ",
+    "N;GEN;DU;DEF": "الْقَارِبَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fishermen, rivers and small harbours.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "small boat, skiff, dinghy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَارِبُ الصَّيَّادِ صَغِيرٌ.",
+      "tr": "The fisherman’s boat is small.",
+      "register": "neutral",
+      "context": "fishing",
+      "sense": "s1"
+     },
+     {
+      "text": "عَبَرْنَا النَّهْرَ بِقَارِبٍ.",
+      "tr": "We crossed the river in a boat.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْبُحَيْرَةِ قَوَارِبُ كَثِيرَةٌ.",
+      "tr": "There are many boats on the lake.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَارِبُ صَيْدٍ",
+      "tr": "a fishing boat"
+     },
+     {
+      "text": "قَارِبٌ شِرَاعِيٌّ",
+      "tr": "a sailing boat"
+     },
+     {
+      "text": "قَارِبُ نَجَاةٍ",
+      "tr": "a lifeboat"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَوْرَق",
+      "register": "formal",
+      "nuance": "a small boat, a skiff"
+     },
+     {
+      "word": "مَرْكَب",
+      "register": "neutral",
+      "nuance": "a boat or vessel of any size"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: perhaps from the active participle of قَرِبَ (“to come near”) — a small boat used to approach the shore; alternatively a loan from Latin carabus or Ancient Greek κάραβος (kárabos).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "If it comes from Greek κάραβος, it is a cousin of Modern Greek καράβι (ship)."
+    ],
+    "pitfalls": [
+     "The plural قَوَارِبُ is diptote (no tanwīn): قَوَارِبُ كَثِيرَةٌ.",
+     "Do not confuse قَارِب (boat) with قَرِيب (near, lesson 12) and أَقَارِب (relatives)."
+    ],
+    "subtleties": [
+     "قَارِب is small (rowing, fishing); a big ship is سَفِينَة or بَاخِرَة."
+    ]
+   }
+  },
+  {
+   "id": "ar:mashyan",
+   "lemma": "مَشْيًا",
+   "pos": "ADV",
+   "senses": [
+    "tr.onfoot"
+   ],
+   "root": "م ش ي",
+   "translit": "mašyan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Walking instead of riding.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on foot (lit. “walking”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.onfoot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَذْهَبُ إِلَى الْمَدْرَسَةِ مَشْيًا.",
+      "tr": "I go to school on foot.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَحَطَّةُ قَرِيبَةٌ، نَذْهَبُ مَشْيًا.",
+      "tr": "The station is near, we’ll go on foot.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلُوا مَشْيًا عَلَى الْأَقْدَامِ.",
+      "tr": "They arrived on foot.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَشْيًا عَلَى الْأَقْدَامِ",
+      "tr": "on foot (lit. walking on the feet)"
+     },
+     {
+      "text": "ذَهَبَ مَشْيًا",
+      "tr": "to go on foot"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَيْرًا عَلَى الْأَقْدَامِ",
+      "register": "formal",
+      "nuance": "on foot — the style of the news"
+     },
+     {
+      "word": "عَلَى الْأَقْدَامِ",
+      "register": "neutral",
+      "nuance": "on foot (lit. on the feet)"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of مَشْي, the verbal noun of مَشَى (“to walk”) (Wiktionary: مَشْي), used as an adverb.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German zu Fuß and Greek με τα πόδια name the foot; Arabic says “walking” — or in full مَشْيًا عَلَى الْأَقْدَامِ, walking on the feet."
+    ],
+    "pitfalls": [
+     "Unlike the vehicles (بِالْحَافِلَةِ, بِالسَّيَّارَةِ), “on foot” takes no بِـ: أَذْهَبُ مَشْيًا."
+    ],
+    "subtleties": [
+     "-an is the accusative used as an adverb, as in مَسَاءً (in the evening) and شُكْرًا (thanks)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tadhkira",
+   "lemma": "تَذْكِرَة",
+   "pos": "NOUN",
+   "senses": [
+    "tr.ticket"
+   ],
+   "gender": "FEM",
+   "root": "ذ ك ر",
+   "translit": "taḏkira",
+   "forms": {
+    "N;NOM;SG;INDF": "تَذْكِرَةٌ",
+    "N;NOM;PL;INDF": "تَذَاكِرُ",
+    "N;NOM;DU;INDF": "تَذْكِرَتَانِ",
+    "N;NOM;SG;DEF": "التَّذْكِرَةُ",
+    "N;NOM;PL;DEF": "التَّذَاكِرُ",
+    "N;NOM;DU;DEF": "التَّذْكِرَتَانِ",
+    "N;ACC;SG;INDF": "تَذْكِرَةً",
+    "N;ACC;PL;INDF": "تَذَاكِرَ",
+    "N;ACC;DU;INDF": "تَذْكِرَتَيْنِ",
+    "N;ACC;SG;DEF": "التَّذْكِرَةَ",
+    "N;ACC;PL;DEF": "التَّذَاكِرَ",
+    "N;ACC;DU;DEF": "التَّذْكِرَتَيْنِ",
+    "N;GEN;SG;INDF": "تَذْكِرَةٍ",
+    "N;GEN;PL;INDF": "تَذَاكِرَ",
+    "N;GEN;DU;INDF": "تَذْكِرَتَيْنِ",
+    "N;GEN;SG;DEF": "التَّذْكِرَةِ",
+    "N;GEN;PL;DEF": "التَّذَاكِرِ",
+    "N;GEN;DU;DEF": "التَّذْكِرَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Queues at the counter, a paper in the pocket.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ticket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.ticket"
+     },
+     {
+      "id": "s2",
+      "def": "memorandum, reminder (older meaning)",
+      "register": [
+       "dated"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ تَذْكِرَةً إِلَى الْإِسْكَنْدَرِيَّةِ.",
+      "tr": "I’d like a ticket to Alexandria.",
+      "register": "neutral",
+      "context": "station",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ تَذْكِرَتَيْنِ لِلْقِطَارِ.",
+      "tr": "I bought two train tickets.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "كَمْ ثَمَنُ التَّذْكِرَةِ؟",
+      "tr": "How much is the ticket?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَذْكِرَةُ قِطَارٍ",
+      "tr": "a train ticket"
+     },
+     {
+      "text": "تَذْكِرَةُ ذَهَابٍ وَإِيَابٍ",
+      "tr": "a return ticket"
+     },
+     {
+      "text": "شُبَّاكُ التَّذَاكِرِ",
+      "tr": "the ticket office"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِطَاقَة",
+      "register": "neutral",
+      "nuance": "card; also a ticket for an event or a boarding pass"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the verbal noun of ذَكَّرَ (form II, “to remind”) — “memorandum”, later “ticket”; root ذ ك ر (to remember).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “a reminder”: the same root gives ذِكْرَى (memory) and ذَكَرَ (to mention)."
+    ],
+    "pitfalls": [
+     "The plural تَذَاكِرُ is diptote (no tanwīn): تَذَاكِرُ كَثِيرَةٌ (Wiktionary also gives تَذْكِرَات).",
+     "Written with ذ; Egyptians say tazkara."
+    ],
+    "subtleties": [
+     "تَذْكِرَتَانِ, two tickets: the dual — no number needed."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

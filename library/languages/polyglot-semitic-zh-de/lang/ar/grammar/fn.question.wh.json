@@ -1,0 +1,378 @@
+{
+ "function": "fn.question.wh",
+ "status": "realized",
+ "summary": "An Arabic question with a question word puts that word first and leaves the rest of the sentence as it is: no helper verb, no inversion, no هَلْ, and ؟ at the end — تَشْرَبُ الْقَهْوَةَ → مَاذَا تَشْرَبُ؟ (What do you drink?). The words: مَا (what, before a noun or pronoun) and مَاذَا (what, before a verb), مَنْ (who), أَيْنَ (where), مَتَى (when), كَيْفَ (how), لِمَاذَا (why, “for what”), كَمْ (how many, how much — followed by a singular noun in the accusative: كَمْ أَخًا؟), أَيّ (which — followed by a genitive noun, and it declines itself: أَيُّ / أَيَّ / أَيِّ) and لِمَنْ (whose, “to whom”). A preposition goes in front of the question word: مِنْ أَيْنَ؟ إِلَى أَيْنَ؟ مَعَ مَنْ؟ بِكَمْ؟ With a noun no “is” is needed: أَيْنَ الطَّبِيبُ؟ مَتَى الْعَشَاءُ؟ — and the answer about a job is verbless too: مَنْ هُوَ؟ هُوَ طَبِيبٌ (he is a doctor), هِيَ طَبِيبَةٌ (she is a doctor).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question word",
+    "asks for",
+    "example",
+    "note"
+   ],
+   "rows": [
+    [
+     "مَا",
+     "what? (a thing)",
+     "مَا هٰذَا؟",
+     "before a noun or pronoun"
+    ],
+    [
+     "مَاذَا",
+     "what? (a thing)",
+     "مَاذَا تَشْرَبُ؟",
+     "before a verb"
+    ],
+    [
+     "مَنْ",
+     "who? (a person)",
+     "مَنْ هٰذِهِ الْمَرْأَةُ؟",
+     "before al-: مَنِ الطَّبِيبُ؟"
+    ],
+    [
+     "أَيْنَ",
+     "where?",
+     "أَيْنَ الطَّبِيبُ؟",
+     "مِنْ أَيْنَ؟ (from where) — إِلَى أَيْنَ؟ (where to)"
+    ],
+    [
+     "مَتَى",
+     "when?",
+     "مَتَى الْعَشَاءُ؟",
+     "Hebrew מָתַי is the same word"
+    ],
+    [
+     "كَيْفَ",
+     "how?",
+     "كَيْفَ تَشْرَبُ الْقَهْوَةَ؟",
+     "كَيْفَ حَالُكَ؟ (lesson 2)"
+    ],
+    [
+     "لِمَاذَا",
+     "why?",
+     "لِمَاذَا لَا تَأْكُلُ اللَّحْمَ؟",
+     "لِ + مَاذَا, “for what”"
+    ],
+    [
+     "كَمْ",
+     "how many? how much?",
+     "كَمْ أَخًا عِنْدَكَ؟",
+     "+ singular accusative indefinite; price: بِكَمْ؟"
+    ],
+    [
+     "أَيّ",
+     "which?",
+     "أَيَّ كِتَابٍ تُرِيدُ؟",
+     "+ genitive noun; أَيّ itself declines"
+    ],
+    [
+     "لِمَنْ",
+     "whose?",
+     "لِمَنْ هٰذَا الْكِتَابُ؟",
+     "لِ + مَنْ, “to whom”; answer: هٰذَا لِي"
+    ]
+   ],
+   "caption": "The question word comes first; the rest keeps the order of the statement."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Statement",
+     "points": [
+      "تَشْرَبُ الْقَهْوَةَ.",
+      "تَأْكُلُ الْغَدَاءَ فِي الْمَطْعَمِ.",
+      "هُوَ طَبِيبٌ."
+     ]
+    },
+    {
+     "title": "Question",
+     "points": [
+      "مَاذَا تَشْرَبُ؟ — the object becomes مَاذَا",
+      "مَتَى تَأْكُلُ الْغَدَاءَ؟ — the verb does not move",
+      "مَنْ هُوَ؟ — no “is”, no “do”"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "كَمْ + a singular noun in the accusative.",
+   "text": "كَمْ أَخًا عِنْدَكَ؟ (how many brothers?) — not *كَمْ إِخْوَةً؟. The noun is singular, indefinite and accusative (-an): كَمْ كِتَابًا؟ كَمْ أُخْتًا؟. For a price add بِ: بِكَمْ هٰذَا؟ (how much is this?)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "place of أَيّ",
+    "form",
+    "example"
+   ],
+   "rows": [
+    [
+     "subject or predicate",
+     "أَيُّ",
+     "أَيُّ بَيْتٍ بَيْتُكَ؟ (which house is yours?)"
+    ],
+    [
+     "object",
+     "أَيَّ",
+     "أَيَّ كِتَابٍ تُرِيدُ؟ (which book do you want?)"
+    ],
+    [
+     "after a preposition",
+     "أَيِّ",
+     "مِنْ أَيِّ بَلَدٍ أَنْتَ؟ (which country are you from?)"
+    ]
+   ],
+   "caption": "أَيّ is the only question word with case endings; the noun after it is always genitive and indefinite."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Never هَلْ with a question word.",
+   "text": "هَلْ is only for yes/no questions (lesson 9). *هَلْ أَيْنَ الْمَحَطَّةُ؟ is wrong — say أَيْنَ الْمَحَطَّةُ؟."
+  },
+  {
+   "t": "table",
+   "head": [
+    "job (he)",
+    "job (she)",
+    "plural (men / mixed)",
+    "plural (women)"
+   ],
+   "rows": [
+    [
+     "طَبِيب",
+     "طَبِيبَة",
+     "أَطِبَّاء",
+     "طَبِيبَات"
+    ],
+    [
+     "مُمَرِّض",
+     "مُمَرِّضَة",
+     "مُمَرِّضُونَ",
+     "مُمَرِّضَات"
+    ],
+    [
+     "مُهَنْدِس",
+     "مُهَنْدِسَة",
+     "مُهَنْدِسُونَ",
+     "مُهَنْدِسَات"
+    ],
+    [
+     "سَائِق",
+     "سَائِقَة",
+     "سَائِقُونَ",
+     "سَائِقَات"
+    ],
+    [
+     "طَبَّاخ",
+     "طَبَّاخَة",
+     "طَبَّاخُونَ",
+     "طَبَّاخَات"
+    ],
+    [
+     "بَائِع",
+     "بَائِعَة",
+     "بَاعَة / بَائِعُونَ",
+     "بَائِعَات"
+    ],
+    [
+     "عَامِل",
+     "عَامِلَة",
+     "عُمَّال",
+     "عَامِلَات"
+    ],
+    [
+     "مُزَارِع / فَلَّاح",
+     "مُزَارِعَة / فَلَّاحَة",
+     "مُزَارِعُونَ / فَلَّاحُونَ",
+     "مُزَارِعَات / فَلَّاحَات"
+    ],
+    [
+     "شُرْطِيّ",
+     "شُرْطِيَّة",
+     "شُرْطِيُّونَ",
+     "شُرْطِيَّات"
+    ],
+    [
+     "مُحَامٍ (الْمُحَامِي)",
+     "مُحَامِيَة",
+     "مُحَامُونَ",
+     "مُحَامِيَات"
+    ],
+    [
+     "فَنَّان",
+     "فَنَّانَة",
+     "فَنَّانُونَ",
+     "فَنَّانَات"
+    ]
+   ],
+   "caption": "Jobs have a feminine in ة. Sound plurals in -ūna / -āt; three broken ones to learn: أَطِبَّاء, بَاعَة, عُمَّال."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Who is she? — She is a doctor.",
+   "text": "مَنْ هِيَ؟ هِيَ طَبِيبَةٌ. No word for “is”, no word for “a”: the indefinite noun with -un says “a doctor”. Change the job to the feminine when you speak about a woman: أُمِّي مُمَرِّضَةٌ, أُخْتِي فَنَّانَةٌ."
+  },
+  {
+   "t": "p",
+   "text": "In speech the question words differ by region — Levant شُو (what), وَيْن (where), لَيْش (why), قَدَّيْش (how much), مِين (who); Egypt إِيه, فِين, لِيه, كَام, مِين. Standard Arabic, used in writing and understood everywhere, has the forms of this page."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What am I asking about: a thing (مَا / مَاذَا), a person (مَنْ), a place (أَيْنَ), a time (مَتَى), a way (كَيْفَ), a reason (لِمَاذَا), a number (كَمْ), a choice (أَيّ) or an owner (لِمَنْ)?",
+   "“What”: does a verb follow? → مَاذَا تَشْرَبُ؟ A noun or pronoun? → مَا هٰذَا؟",
+   "Does the question need a preposition? → put it before the question word: مِنْ أَيْنَ؟ مَعَ مَنْ؟ بِكَمْ؟",
+   "After كَمْ: is my noun singular, indefinite and accusative (كَمْ أَخًا)?",
+   "After أَيّ: is my noun indefinite and genitive — and does أَيّ take the case of its own place (أَيُّ / أَيَّ / أَيِّ)?",
+   "Did I leave out هَلْ, keep the order of the statement and end with ؟?"
+  ]
+ },
+ "traps": [
+  "No inversion and no “do”: مَتَى تَأْكُلُ؟ (lit. when you-eat?).",
+  "مَاذَا before a verb, مَا before a noun: *مَاذَا هٰذَا؟ → مَا هٰذَا؟.",
+  "*هَلْ مَاذَا …؟ — a question word never takes هَلْ.",
+  "كَمْ + singular: كَمْ أَخًا؟, not *كَمْ إِخْوَةً؟ — and accusative: not *كَمْ أَخٌ؟.",
+  "أَيّ + indefinite genitive: أَيَّ كِتَابٍ, not *أَيَّ الْكِتَابَ.",
+  "مَنْ (man, who) and مِنْ (min, from) are both written من without vowels.",
+  "Feminine jobs: هِيَ طَبِيبَةٌ, not *هِيَ طَبِيبٌ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:ma",
+   "ar:madha",
+   "ar:man",
+   "ar:ayna",
+   "ar:mata",
+   "ar:kayfa",
+   "ar:limadha",
+   "ar:kam",
+   "ar:ayy",
+   "ar:liman"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "ADV": 2,
+  "PRON": 1
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "class": "person",
+   "cells": [
+    "N;NOM;SG;FEM;INDF",
+    "N;NOM;PL;MASC;INDF",
+    "N;NOM;SG;MASC;DEF"
+   ],
+   "count": 10
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“What are you drinking?”",
+   "options": [
+    "مَاذَا تَشْرَبُ؟",
+    "مَا تَشْرَبُ هَلْ؟",
+    "هَلْ مَاذَا تَشْرَبُ؟"
+   ],
+   "answer": "مَاذَا تَشْرَبُ؟",
+   "why": "The question word first, then the statement unchanged; مَاذَا before a verb; never هَلْ with a question word."
+  },
+  {
+   "q": "“How many brothers do you have?”",
+   "options": [
+    "كَمْ أَخًا عِنْدَكَ؟",
+    "كَمْ إِخْوَةٌ عِنْدَكَ؟",
+    "كَمْ أَخٌ عِنْدَكَ؟"
+   ],
+   "answer": "كَمْ أَخًا عِنْدَكَ؟",
+   "why": "After كَمْ the noun is singular, indefinite and accusative: أَخًا."
+  },
+  {
+   "q": "“Which book do you want?”",
+   "options": [
+    "أَيَّ كِتَابٍ تُرِيدُ؟",
+    "أَيَّ الْكِتَابَ تُرِيدُ؟",
+    "أَيُّ كِتَابًا تُرِيدُ؟"
+   ],
+   "answer": "أَيَّ كِتَابٍ تُرِيدُ؟",
+   "why": "أَيّ is the object (accusative أَيَّ); the noun after it is indefinite genitive: كِتَابٍ."
+  },
+  {
+   "q": "“Whose bag is this?”",
+   "options": [
+    "لِمَنْ هٰذِهِ الْحَقِيبَةُ؟",
+    "مَنْ هٰذِهِ الْحَقِيبَةُ؟",
+    "مِنْ هٰذِهِ الْحَقِيبَةُ؟"
+   ],
+   "answer": "لِمَنْ هٰذِهِ الْحَقِيبَةُ؟",
+   "why": "“Whose” is “to whom”: لِ + مَنْ. مَنْ alone asks “who”, مِنْ means “from”."
+  },
+  {
+   "q": "“Who is she? — She is a nurse.”",
+   "options": [
+    "مَنْ هِيَ؟ هِيَ مُمَرِّضَةٌ.",
+    "مَنْ هِيَ؟ هِيَ مُمَرِّضٌ.",
+    "مَا هِيَ؟ هِيَ مُمَرِّضَةٌ."
+   ],
+   "answer": "مَنْ هِيَ؟ هِيَ مُمَرِّضَةٌ.",
+   "why": "مَنْ for a person; the job takes the feminine ة for a woman; no word for “is”."
+  },
+  {
+   "q": "Where does the preposition go in “Where are you from?”",
+   "options": [
+    "before the question word: مِنْ أَيْنَ أَنْتَ؟",
+    "at the end: أَيْنَ أَنْتَ مِنْ؟",
+    "it is left out: أَيْنَ أَنْتَ؟"
+   ],
+   "answer": "before the question word: مِنْ أَيْنَ أَنْتَ؟",
+   "why": "Arabic never strands a preposition: مِنْ أَيْنَ؟ إِلَى أَيْنَ؟ مَعَ مَنْ؟"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.question.wh",
+   "note": "Hebrew question words also come first and are often the same Semitic words: מָה = مَا, מָתַי = مَتَى, כַּמָּה = كَمْ. But Hebrew כַּמָּה takes a plural noun (כַּמָּה אַחִים), Arabic كَمْ a singular accusative (كَمْ أَخًا)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.wh",
+   "note": "German puts the W-word first and the verb second (Was trinkst du?); Arabic also fronts the question word but never moves the verb. German welcher declines like Arabic أَيّ (welchen Kaffee / أَيَّ قَهْوَةٍ)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.wh",
+   "note": "Chinese leaves the question word where the answer will stand (你喝什么？ “you drink what?”); Arabic moves it to the front (مَاذَا تَشْرَبُ؟). Chinese 多少 / 几 ask like Arabic كَمْ."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Yes/no questions take هَلْ (lesson 9) — never together with a question word."
+  }
+ ]
+}

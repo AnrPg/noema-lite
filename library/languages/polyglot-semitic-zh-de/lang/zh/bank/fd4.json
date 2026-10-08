@@ -1,0 +1,5549 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f4.001",
+   "frame": "fr.who",
+   "text": "他是谁？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Who is he?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.002",
+   "frame": "fr.who",
+   "text": "他是我哥哥。他是医生。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "。",
+     "p": true
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is my older brother. He is a doctor.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.003",
+   "frame": "fr.who",
+   "text": "安娜是医生。",
+   "tokens": [
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "Anna is a doctor.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.004",
+   "frame": "fr.who",
+   "text": "谁是医生？",
+   "tokens": [
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula"
+   ],
+   "gloss": "Who is a doctor?",
+   "variantOf": "zh.f4.003",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.005",
+   "frame": "fr.be.person",
+   "text": "我妈妈是护士。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "护士",
+     "l": "zh:hushi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My mother is a nurse.",
+   "alts": [
+    "我的妈妈是护士。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.006",
+   "frame": "fr.be.person",
+   "text": "我爸爸是工程师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "工程师",
+     "l": "zh:gongchengshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My father is an engineer.",
+   "alts": [
+    "我的爸爸是工程师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.007",
+   "frame": "fr.be.person",
+   "text": "他是司机吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "司机",
+     "l": "zh:siji"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Is he a driver?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.008",
+   "frame": "fr.be.person",
+   "text": "我哥哥是厨师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "厨师",
+     "l": "zh:chushi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother is a cook.",
+   "alts": [
+    "我的哥哥是厨师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.009",
+   "frame": "fr.be.person",
+   "text": "她是售货员。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "售货员",
+     "l": "zh:shouhuoyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is a shop assistant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.010",
+   "frame": "fr.be.person",
+   "text": "他们都是工人。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "工人",
+     "l": "zh:gongren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.pronoun.subject",
+    "fn.numerals"
+   ],
+   "gloss": "They are all workers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.011",
+   "frame": "fr.be.person",
+   "text": "我爷爷和奶奶都是农民。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "农民",
+     "l": "zh:nongmin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My grandfather and grandmother are both farmers.",
+   "alts": [
+    "我奶奶和爷爷都是农民。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.012",
+   "frame": "fr.who",
+   "text": "那位是警察。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "警察",
+     "l": "zh:jingcha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "That person is a police officer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.013",
+   "frame": "fr.who",
+   "text": "哪位是警察？",
+   "tokens": [
+    {
+     "t": "哪",
+     "l": "zh:na.which"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "警察",
+     "l": "zh:jingcha"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.measure.word"
+   ],
+   "gloss": "Which one is the police officer?",
+   "variantOf": "zh.f4.012",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.014",
+   "frame": "fr.be.person",
+   "text": "我姐姐是律师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "姐姐",
+     "l": "zh:jiejie"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "律师",
+     "l": "zh:lvshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My older sister is a lawyer.",
+   "alts": [
+    "我的姐姐是律师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.015",
+   "frame": "fr.be.person",
+   "text": "她是一位艺术家。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "艺术家",
+     "l": "zh:yishujia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is an artist.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.016",
+   "frame": "fr.be.person",
+   "text": "我不是医生，我是护士。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "护士",
+     "l": "zh:hushi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m not a doctor, I’m a nurse.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.017",
+   "frame": "fr.be.person",
+   "text": "你爸爸是警察吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "警察",
+     "l": "zh:jingcha"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.possessive"
+   ],
+   "gloss": "Is your father a police officer?",
+   "alts": [
+    "你的爸爸是警察吗？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.018",
+   "frame": "fr.be.person",
+   "text": "我哥哥是一名警察。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "名",
+     "l": "zh:ming"
+    },
+    {
+     "t": "警察",
+     "l": "zh:jingcha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother is a police officer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.019",
+   "frame": "fr.eat",
+   "text": "爷爷喝茶。",
+   "tokens": [
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Grandpa drinks tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.020",
+   "frame": "fr.eat",
+   "text": "爷爷喝什么？",
+   "tokens": [
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "What does Grandpa drink?",
+   "variantOf": "zh.f4.019",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.021",
+   "frame": "fr.have",
+   "text": "她有两个孩子。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She has two children.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.022",
+   "frame": "fr.have",
+   "text": "她有几个孩子？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.have",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How many children does she have?",
+   "variantOf": "zh.f4.021",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.023",
+   "frame": "fr.poss",
+   "text": "这是老师的书。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is the teacher’s book.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.024",
+   "frame": "fr.poss",
+   "text": "这是谁的书？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁的",
+     "l": "zh:sheide"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Whose book is this?",
+   "variantOf": "zh.f4.023",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.025",
+   "frame": "fr.want",
+   "text": "他要这本书。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He wants this book.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.026",
+   "frame": "fr.want",
+   "text": "他要哪本书？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "哪",
+     "l": "zh:na.which"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Which book does he want?",
+   "variantOf": "zh.f4.025",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.027",
+   "frame": "fr.count",
+   "text": "这里有二十个人。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.demonstrative"
+   ],
+   "gloss": "There are twenty people here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.028",
+   "frame": "fr.count",
+   "text": "这里有多少人？",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "多少",
+     "l": "zh:duoshao"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.have",
+    "fn.demonstrative"
+   ],
+   "gloss": "How many people are here?",
+   "variantOf": "zh.f4.027",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.029",
+   "frame": "fr.count",
+   "text": "她女儿三岁。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "Her daughter is three.",
+   "alts": [
+    "她的女儿三岁。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.030",
+   "frame": "fr.count",
+   "text": "她女儿几岁？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "How old is her daughter?",
+   "variantOf": "zh.f4.029",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "她的女儿几岁？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.031",
+   "frame": "fr.wh",
+   "text": "你什么时候吃早饭？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "什么时候",
+     "l": "zh:shenmeshihou"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When do you have breakfast?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.032",
+   "frame": "fr.wh",
+   "text": "你们什么时候吃晚饭？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "什么时候",
+     "l": "zh:shenmeshihou"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "晚饭",
+     "l": "zh:wanfan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When do you (all) have dinner?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.033",
+   "frame": "fr.wh",
+   "text": "这个怎么吃？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "怎么",
+     "l": "zh:zenme"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "How do you eat this?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.034",
+   "frame": "fr.wh",
+   "text": "你怎么不喝茶？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "怎么",
+     "l": "zh:zenme"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How come you’re not drinking tea?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.035",
+   "frame": "fr.wh",
+   "text": "你妈妈怎么样？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "怎么样",
+     "l": "zh:zenmeyang"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.possessive"
+   ],
+   "gloss": "How is your mother?",
+   "alts": [
+    "你的妈妈怎么样？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.036",
+   "frame": "fr.wh",
+   "text": "我们喝茶，怎么样？",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "怎么样",
+     "l": "zh:zenmeyang"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Let’s have tea — how about it?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.037",
+   "frame": "fr.wh",
+   "text": "你为什么不吃肉？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "为什么",
+     "l": "zh:weishenme"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "肉",
+     "l": "zh:rou"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Why don’t you eat meat?",
+   "alts": [
+    "为什么你不吃肉？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.038",
+   "frame": "fr.wh",
+   "text": "他为什么不喝咖啡？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "为什么",
+     "l": "zh:weishenme"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Why doesn’t he drink coffee?",
+   "alts": [
+    "为什么他不喝咖啡？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.039",
+   "frame": "fr.wh",
+   "text": "你家有几口人？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "口",
+     "l": "zh:kou"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.have",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "How many people are there in your family?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.040",
+   "frame": "fr.wh",
+   "text": "你有多少本书？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "多少",
+     "l": "zh:duoshao"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.have",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How many books do you have?",
+   "alts": [
+    "你有多少书？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.041",
+   "frame": "fr.wh",
+   "text": "你要哪个？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "哪",
+     "l": "zh:na.which"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Which one do you want?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.042",
+   "frame": "fr.wh",
+   "text": "谁要咖啡？",
+   "tokens": [
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object"
+   ],
+   "gloss": "Who wants coffee?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.043",
+   "frame": "fr.wh",
+   "text": "谁做饭？",
+   "tokens": [
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.word.order"
+   ],
+   "gloss": "Who is cooking?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.044",
+   "frame": "fr.wh",
+   "text": "这些是谁的？",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁的",
+     "l": "zh:sheide"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Whose are these?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.045",
+   "frame": "fr.who",
+   "text": "那个人是谁？",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "Who is that person?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.046",
+   "frame": "fr.who",
+   "text": "您是哪位？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "哪",
+     "l": "zh:na.which"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Who is speaking, please?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.047",
+   "frame": "fr.alt.q",
+   "text": "你哥哥是医生还是护士？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "护士",
+     "l": "zh:hushi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.possessive"
+   ],
+   "gloss": "Is your brother a doctor or a nurse?",
+   "alts": [
+    "你的哥哥是医生还是护士？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.048",
+   "frame": "fr.wh",
+   "text": "你喜欢什么水果？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "What fruit do you like?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.049",
+   "frame": "fr.wh",
+   "text": "这个苹果怎么样？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "怎么样",
+     "l": "zh:zenmeyang"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "How is this apple?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.050",
+   "frame": "fr.who",
+   "text": "谁是你的老师？",
+   "tokens": [
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Who is your teacher?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.051",
+   "frame": "fr.at.place",
+   "text": "我在学校。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m at school.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.052",
+   "frame": "fr.at.place",
+   "text": "我不在学校。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m not at school.",
+   "variantOf": "zh.f4.051",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.053",
+   "frame": "fr.at.place",
+   "text": "我哥哥在大学。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "大学",
+     "l": "zh:daxue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother is at university.",
+   "alts": [
+    "我的哥哥在大学。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.054",
+   "frame": "fr.at.place",
+   "text": "我妈妈在医院工作。她是护士。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "医院",
+     "l": "zh:yiyuan"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "护士",
+     "l": "zh:hushi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My mother works at the hospital. She is a nurse.",
+   "alts": [
+    "我的妈妈在医院工作。她是护士。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.055",
+   "frame": "fr.at.place",
+   "text": "我爸爸在银行工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.possessive"
+   ],
+   "gloss": "My father works at a bank.",
+   "alts": [
+    "我的爸爸在银行工作。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.056",
+   "frame": "fr.at.place",
+   "text": "我爸爸不在银行工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.negation",
+    "fn.possessive"
+   ],
+   "gloss": "My father doesn’t work at a bank.",
+   "variantOf": "zh.f4.055",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "我的爸爸不在银行工作。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.057",
+   "frame": "fr.wh",
+   "text": "你在哪里工作？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where do you work?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.058",
+   "frame": "fr.at.place",
+   "text": "我在办公室工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "办公室",
+     "l": "zh:bangongshi"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I work in an office.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.059",
+   "frame": "fr.at.place",
+   "text": "我们在饭馆吃晚饭。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "晚饭",
+     "l": "zh:wanfan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have dinner at a restaurant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.060",
+   "frame": "fr.at.place",
+   "text": "我在咖啡馆喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "咖啡馆",
+     "l": "zh:kafeiguan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m having coffee at the café.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.061",
+   "frame": "fr.at.place",
+   "text": "我们到超市买牛奶。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We go to the supermarket to buy milk.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.062",
+   "frame": "fr.at.place",
+   "text": "妈妈到市场买鱼。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "鱼",
+     "l": "zh:yu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Mum goes to the market to buy fish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.063",
+   "frame": "fr.at.place",
+   "text": "我跟朋友一起吃饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I eat with friends.",
+   "alts": [
+    "我和朋友一起吃饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.064",
+   "frame": "fr.wh",
+   "text": "你跟谁一起喝咖啡？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Who are you having coffee with?",
+   "alts": [
+    "你和谁一起喝咖啡？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.065",
+   "frame": "fr.at.place",
+   "text": "我和妈妈一起做饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I cook with my mother.",
+   "alts": [
+    "我跟妈妈一起做饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.066",
+   "frame": "fr.at.place",
+   "text": "这是给你的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "This is for you.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.067",
+   "frame": "fr.at.place",
+   "text": "这是给谁的？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "谁的",
+     "l": "zh:sheide"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "Who is this for?",
+   "variantOf": "zh.f4.066",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.068",
+   "frame": "fr.at.place",
+   "text": "我给妈妈买水果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m buying fruit for Mum.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.069",
+   "frame": "fr.at.place",
+   "text": "他给孩子们做饭。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He cooks for the children.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.070",
+   "frame": "fr.at.place",
+   "text": "妈妈为我们做饭。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "为",
+     "l": "zh:wei.for"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Mum cooks for us.",
+   "alts": [
+    "妈妈给我们做饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.071",
+   "frame": "fr.at.place",
+   "text": "这是一本关于家庭的书。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "关于",
+     "l": "zh:guanyu"
+    },
+    {
+     "t": "家庭",
+     "l": "zh:jiating"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This is a book about the family.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.072",
+   "frame": "fr.from",
+   "text": "这些苹果是从市场买的。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "These apples are from the market.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.073",
+   "frame": "fr.from",
+   "text": "这些苹果是从哪里买的？",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "Where are these apples from?",
+   "variantOf": "zh.f4.072",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.074",
+   "frame": "fr.from",
+   "text": "这瓶葡萄酒是从超市买的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "瓶",
+     "l": "zh:ping"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This bottle of wine is from the supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.075",
+   "frame": "fr.be.where",
+   "text": "这家饭馆在哪里？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "Where is this restaurant?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.076",
+   "frame": "fr.be.where",
+   "text": "劳驾，药店在哪里？",
+   "tokens": [
+    {
+     "t": "劳驾",
+     "l": "zh:laojia"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "药店",
+     "l": "zh:yaodian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula"
+   ],
+   "gloss": "Excuse me, where is the pharmacy?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.077",
+   "frame": "fr.be.where",
+   "text": "车站在哪里？",
+   "tokens": [
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula"
+   ],
+   "gloss": "Where is the station?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.078",
+   "frame": "fr.be.where",
+   "text": "邮局在这里。",
+   "tokens": [
+    {
+     "t": "邮局",
+     "l": "zh:youju"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "The post office is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.079",
+   "frame": "fr.be.where",
+   "text": "广场在那里。",
+   "tokens": [
+    {
+     "t": "广场",
+     "l": "zh:guangchang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "The square is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.080",
+   "frame": "fr.have",
+   "text": "这家超市有很多水果。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This supermarket has lots of fruit.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.081",
+   "frame": "fr.have",
+   "text": "这条街有很多商店。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "条",
+     "l": "zh:tiao"
+    },
+    {
+     "t": "街",
+     "l": "zh:jie"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "商店",
+     "l": "zh:shangdian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This street has lots of shops.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.082",
+   "frame": "fr.have",
+   "text": "我们的城市有两个机场。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "城市",
+     "l": "zh:chengshi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "Our city has two airports.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.083",
+   "frame": "fr.have",
+   "text": "这个村子没有超市。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "村子",
+     "l": "zh:cunzi"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.negation",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This village has no supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.084",
+   "frame": "fr.have",
+   "text": "这所大学有很多学生。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "所",
+     "l": "zh:suo"
+    },
+    {
+     "t": "大学",
+     "l": "zh:daxue"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This university has a lot of students.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.085",
+   "frame": "fr.have",
+   "text": "这所学校有一千个学生。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "所",
+     "l": "zh:suo"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一千",
+     "l": "zh:yiqian"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This school has a thousand pupils.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.086",
+   "frame": "fr.at.place",
+   "text": "孩子们在公园。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula"
+   ],
+   "gloss": "The children are in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.087",
+   "frame": "fr.at.place",
+   "text": "孩子们不在公园。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.negation"
+   ],
+   "gloss": "The children aren’t in the park.",
+   "variantOf": "zh.f4.086",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.088",
+   "frame": "fr.at.place",
+   "text": "他在机场。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is at the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.089",
+   "frame": "fr.wh",
+   "text": "你们国家有多少人？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "国家",
+     "l": "zh:guojia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "多少",
+     "l": "zh:duoshao"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "gloss": "How many people does your country have?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.090",
+   "frame": "fr.at.place",
+   "text": "我不在家，我在工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m not at home, I’m at work.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.091",
+   "frame": "fr.at.place",
+   "text": "我在药店。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "药店",
+     "l": "zh:yaodian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m at the pharmacy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.092",
+   "frame": "fr.at.place",
+   "text": "我们在车站。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We’re at the station.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.093",
+   "frame": "fr.at.place",
+   "text": "你在学校吃午饭吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Do you have lunch at school?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.094",
+   "frame": "fr.wh",
+   "text": "我们在哪里吃饭？",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where shall we eat?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.095",
+   "frame": "fr.at.place",
+   "text": "我在家吃早饭，在学校吃午饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have breakfast at home and lunch at school.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.096",
+   "frame": "fr.at.place",
+   "text": "他在家。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.097",
+   "frame": "fr.at.place",
+   "text": "他在家吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Is he at home?",
+   "variantOf": "zh.f4.096",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.098",
+   "frame": "fr.place.on",
+   "text": "书在桌子上。",
+   "tokens": [
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The book is on the table.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.099",
+   "frame": "fr.place.on",
+   "text": "书不在桌子上。",
+   "tokens": [
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.negation"
+   ],
+   "gloss": "The book isn’t on the table.",
+   "variantOf": "zh.f4.098",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.100",
+   "frame": "fr.place.on",
+   "text": "钥匙在桌子上面。",
+   "tokens": [
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上面",
+     "l": "zh:shangmian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The keys are on the table.",
+   "alts": [
+    "钥匙在桌子上。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.101",
+   "frame": "fr.place.on",
+   "text": "钥匙在桌子上面吗？",
+   "tokens": [
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上面",
+     "l": "zh:shangmian"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are the keys on the table?",
+   "variantOf": "zh.f4.100",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "钥匙在桌子上吗？"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.102",
+   "frame": "fr.place.on",
+   "text": "我的包在床下。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "床",
+     "l": "zh:chuang"
+    },
+    {
+     "t": "下",
+     "l": "zh:xia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My bag is under the bed.",
+   "alts": [
+    "我的包在床下面。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.103",
+   "frame": "fr.place.on",
+   "text": "手机在沙发下面。",
+   "tokens": [
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "下面",
+     "l": "zh:xiamian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The phone is under the sofa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.104",
+   "frame": "fr.place.on",
+   "text": "牛奶在冰箱里。",
+   "tokens": [
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The milk is in the fridge.",
+   "alts": [
+    "牛奶在冰箱里面。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.105",
+   "frame": "fr.place.on",
+   "text": "冰箱里有很多水果。",
+   "tokens": [
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "水果",
+     "l": "zh:shuiguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "There is a lot of fruit in the fridge.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.106",
+   "frame": "fr.place.on",
+   "text": "冰箱里面什么都没有。",
+   "tokens": [
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "里面",
+     "l": "zh:limian"
+    },
+    {
+     "t": "什么都",
+     "l": "zh:shenmedou"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.negation",
+    "fn.have"
+   ],
+   "gloss": "There’s nothing in the fridge.",
+   "alts": [
+    "冰箱里什么都没有。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.107",
+   "frame": "fr.place.on",
+   "text": "孩子们在外面。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "外面",
+     "l": "zh:waimian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The children are outside.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.108",
+   "frame": "fr.place.on",
+   "text": "他们在院子里。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "院子",
+     "l": "zh:yuanzi"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are in the yard.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.109",
+   "frame": "fr.at.place",
+   "text": "妈妈在厨房做饭。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "厨房",
+     "l": "zh:chufang"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.word.order"
+   ],
+   "gloss": "Mum is cooking in the kitchen.",
+   "alts": [
+    "妈妈在厨房里做饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.110",
+   "frame": "fr.place.on",
+   "text": "客厅里有一张沙发。",
+   "tokens": [
+    {
+     "t": "客厅",
+     "l": "zh:keting"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "There is a sofa in the living room.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.111",
+   "frame": "fr.place.on",
+   "text": "灯在沙发旁边。",
+   "tokens": [
+    {
+     "t": "灯",
+     "l": "zh:deng"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "旁边",
+     "l": "zh:pangbian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The lamp is next to the sofa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.112",
+   "frame": "fr.place.on",
+   "text": "卫生间在卧室旁边。",
+   "tokens": [
+    {
+     "t": "卫生间",
+     "l": "zh:weishengjian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "卧室",
+     "l": "zh:woshi"
+    },
+    {
+     "t": "旁边",
+     "l": "zh:pangbian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The bathroom is next to the bedroom.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.113",
+   "frame": "fr.place.on",
+   "text": "我家前面有一个公园。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "前面",
+     "l": "zh:qianmian"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "There is a park in front of my home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.114",
+   "frame": "fr.place.on",
+   "text": "花园在房子后面。",
+   "tokens": [
+    {
+     "t": "花园",
+     "l": "zh:huayuan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "后面",
+     "l": "zh:houmian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The garden is behind the house.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.115",
+   "frame": "fr.place.on",
+   "text": "桌子在床和衣柜中间。",
+   "tokens": [
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "床",
+     "l": "zh:chuang"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "衣柜",
+     "l": "zh:yigui"
+    },
+    {
+     "t": "中间",
+     "l": "zh:zhongjian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The table is between the bed and the wardrobe.",
+   "alts": [
+    "桌子在衣柜和床中间。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.116",
+   "frame": "fr.place.on",
+   "text": "卫生间在左边，厨房在右边。",
+   "tokens": [
+    {
+     "t": "卫生间",
+     "l": "zh:weishengjian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "左边",
+     "l": "zh:zuobian"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "厨房",
+     "l": "zh:chufang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "右边",
+     "l": "zh:youbian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The bathroom is on the left, the kitchen on the right.",
+   "alts": [
+    "厨房在右边，卫生间在左边。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.117",
+   "frame": "fr.place.on",
+   "text": "超市离我家很近。",
+   "tokens": [
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "离",
+     "l": "zh:li.from"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "近",
+     "l": "zh:jin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.possessive"
+   ],
+   "gloss": "The supermarket is very close to my home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.118",
+   "frame": "fr.place.on",
+   "text": "学校离这里很远。",
+   "tokens": [
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "离",
+     "l": "zh:li.from"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.demonstrative"
+   ],
+   "gloss": "The school is far from here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.119",
+   "frame": "fr.place.on",
+   "text": "学校离这里很远吗？",
+   "tokens": [
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "离",
+     "l": "zh:li.from"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the school far from here?",
+   "variantOf": "zh.f4.118",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.120",
+   "frame": "fr.place.on",
+   "text": "附近有药店吗？",
+   "tokens": [
+    {
+     "t": "附近",
+     "l": "zh:fujin"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "药店",
+     "l": "zh:yaodian"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is there a pharmacy nearby?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.121",
+   "frame": "fr.place.on",
+   "text": "书在架子上。",
+   "tokens": [
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "架子",
+     "l": "zh:jiazi"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The books are on the shelf.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.122",
+   "frame": "fr.be.where",
+   "text": "洗手间在哪里？",
+   "tokens": [
+    {
+     "t": "洗手间",
+     "l": "zh:xishoujian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.copula"
+   ],
+   "gloss": "Where is the toilet?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.123",
+   "frame": "fr.place.on",
+   "text": "杯子在地板上。",
+   "tokens": [
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "地板",
+     "l": "zh:diban"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The cup is on the floor.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.124",
+   "frame": "fr.place.on",
+   "text": "楼梯在厨房旁边。",
+   "tokens": [
+    {
+     "t": "楼梯",
+     "l": "zh:louti"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "厨房",
+     "l": "zh:chufang"
+    },
+    {
+     "t": "旁边",
+     "l": "zh:pangbian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The stairs are next to the kitchen.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.125",
+   "frame": "fr.place.on",
+   "text": "我在卧室里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "卧室",
+     "l": "zh:woshi"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m in the bedroom.",
+   "alts": [
+    "我在卧室。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.126",
+   "frame": "fr.place.on",
+   "text": "他在里面。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "里面",
+     "l": "zh:limian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is inside.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.127",
+   "frame": "fr.place.on",
+   "text": "你在外面吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "外面",
+     "l": "zh:waimian"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Are you outside?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.128",
+   "frame": "fr.place.on",
+   "text": "从我家到超市很近。",
+   "tokens": [
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "近",
+     "l": "zh:jin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.prep.core",
+    "fn.possessive"
+   ],
+   "gloss": "It’s very close from my home to the supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.129",
+   "frame": "fr.place.on",
+   "text": "广场上有很多人。",
+   "tokens": [
+    {
+     "t": "广场",
+     "l": "zh:guangchang"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "There are lots of people in the square.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.130",
+   "frame": "fr.place.on",
+   "text": "银行在超市左边。",
+   "tokens": [
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "左边",
+     "l": "zh:zuobian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The bank is to the left of the supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.131",
+   "frame": "fr.place.on",
+   "text": "邮局在银行右边。",
+   "tokens": [
+    {
+     "t": "邮局",
+     "l": "zh:youju"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "右边",
+     "l": "zh:youbian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The post office is to the right of the bank.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.132",
+   "frame": "fr.place.on",
+   "text": "机场离城市不远。",
+   "tokens": [
+    {
+     "t": "机场",
+     "l": "zh:jichang"
+    },
+    {
+     "t": "离",
+     "l": "zh:li.from"
+    },
+    {
+     "t": "城市",
+     "l": "zh:chengshi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.negation"
+   ],
+   "gloss": "The airport isn’t far from the city.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.133",
+   "frame": "fr.place.on",
+   "text": "冰箱在厨房里。",
+   "tokens": [
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "厨房",
+     "l": "zh:chufang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The fridge is in the kitchen.",
+   "alts": [
+    "冰箱在厨房。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.134",
+   "frame": "fr.place.on",
+   "text": "沙发在客厅里。",
+   "tokens": [
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "客厅",
+     "l": "zh:keting"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The sofa is in the living room.",
+   "alts": [
+    "沙发在客厅。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.135",
+   "frame": "fr.place.on",
+   "text": "银行在附近。",
+   "tokens": [
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "附近",
+     "l": "zh:fujin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The bank is nearby.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.136",
+   "frame": "fr.place.on",
+   "text": "我的手机在哪里？在沙发上。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.question.wh",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Where is my phone? On the sofa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.137",
+   "frame": "fr.place.on",
+   "text": "孩子们在花园里。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "花园",
+     "l": "zh:huayuan"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The children are in the garden.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.138",
+   "frame": "fr.place.on",
+   "text": "孩子们不在花园里。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "花园",
+     "l": "zh:huayuan"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.negation"
+   ],
+   "gloss": "The children aren’t in the garden.",
+   "variantOf": "zh.f4.137",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.139",
+   "frame": "fr.place.on",
+   "text": "楼梯下面有一个柜子。",
+   "tokens": [
+    {
+     "t": "楼梯",
+     "l": "zh:louti"
+    },
+    {
+     "t": "下面",
+     "l": "zh:xiamian"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "柜子",
+     "l": "zh:guizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "There is a cupboard under the stairs.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.140",
+   "frame": "fr.place.on",
+   "text": "我家和学校之间有一个公园。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "之间",
+     "l": "zh:zhijian"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "There is a park between my home and the school.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.141",
+   "frame": "fr.place.on",
+   "text": "车站在前面。",
+   "tokens": [
+    {
+     "t": "车站",
+     "l": "zh:chezhan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "前面",
+     "l": "zh:qianmian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula"
+   ],
+   "gloss": "The station is up ahead.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.142",
+   "frame": "fr.place.on",
+   "text": "我在你后面。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "后面",
+     "l": "zh:houmian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m behind you.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.143",
+   "frame": "fr.place.on",
+   "text": "桌子上有什么？",
+   "tokens": [
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.question.wh",
+    "fn.have"
+   ],
+   "gloss": "What is on the table?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f4.144",
+   "frame": "fr.place.on",
+   "text": "你家离这里远不远？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "离",
+     "l": "zh:li.from"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "远",
+     "l": "zh:yuan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.demonstrative",
+    "fn.question.yesno",
+    "fn.possessive"
+   ],
+   "gloss": "Is your home far from here?",
+   "level": "A1"
+  }
+ ]
+}

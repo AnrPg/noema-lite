@@ -1,0 +1,404 @@
+{
+ "function": "fn.prep.time",
+ "status": "realized",
+ "summary": "Each kind of time has its own preposition in German. A clock time takes um: um acht Uhr. A day, a date, a part of the day takes am (an + dem): am Montag, am Abend, am 3. Mai. A month or a season takes im (in + dem): im Mai, im Sommer; a year takes no preposition (2026 fahre ich nach Athen) or im Jahr 2026 – *in 2026 is an anglicism. in + dative also says “in” a span or “from now”: in der Nacht, in der Woche, in fünf Minuten. vor + dative = before (vor dem Frühstück, vor acht Uhr) and, with a length of time, “ago” (vor zwei Wochen). nach + dative = after (nach der Arbeit, nach zehn Uhr). bis = until or by (bis Montag, bis morgen); with an article it joins zu: bis zum Abend, bis zur Pause. seit + dative = since / for something that started in the past and is STILL going on – with the PRESENT tense: Ich bin seit einer Woche hier. Wir warten seit zwanzig Minuten. während + genitive = during: während der Woche, während des Urlaubs (speech often uses the dative). A length of time needs no preposition at all: Wir bleiben eine Woche (accusative). Telling the time: Es ist acht Uhr. Wie spät ist es? / Wie viel Uhr ist es? – Uhr is the time on the clock (never plural here), Stunde is an hour of duration. halb neun is 8:30 – half TO nine, not half past. The date: Welches Datum ist heute? (the ordinal numbers for “the 8th” come later).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "preposition",
+    "for",
+    "case",
+    "examples"
+   ],
+   "rows": [
+    [
+     "um",
+     "a clock time",
+     "accusative",
+     "um acht Uhr, um Mitternacht"
+    ],
+    [
+     "am (an dem)",
+     "a day, a date, a part of the day, the weekend",
+     "dative",
+     "am Montag, am 3. Mai, am Abend, am Wochenende"
+    ],
+    [
+     "im (in dem)",
+     "a month, a season (a year: im Jahr 2026)",
+     "dative",
+     "im Mai, im Sommer"
+    ],
+    [
+     "in",
+     "the night, the week; in … from now",
+     "dative",
+     "in der Nacht, in der Woche, in fünf Minuten"
+    ],
+    [
+     "vor",
+     "before; ago",
+     "dative",
+     "vor dem Frühstück, vor acht Uhr; vor zwei Wochen"
+    ],
+    [
+     "nach",
+     "after",
+     "dative",
+     "nach der Arbeit, nach zehn Uhr"
+    ],
+    [
+     "bis",
+     "until, by",
+     "accusative (bis zum / zur + dative)",
+     "bis Montag, bis morgen, bis zum Abend"
+    ],
+    [
+     "seit",
+     "since, for (still going on)",
+     "dative",
+     "seit Montag, seit zwei Jahren"
+    ],
+    [
+     "während",
+     "during",
+     "genitive",
+     "während der Woche, während des Urlaubs, während der Ferien"
+    ]
+   ],
+   "caption": "The prepositions of time"
+  },
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "answer"
+   ],
+   "rows": [
+    [
+     "Wann?",
+     "am Montag · im Mai · um acht Uhr · morgen"
+    ],
+    [
+     "Um wie viel Uhr?",
+     "um acht Uhr"
+    ],
+    [
+     "Seit wann?",
+     "seit Montag · seit einer Woche"
+    ],
+    [
+     "Bis wann?",
+     "bis Sonntag · bis acht Uhr"
+    ],
+    [
+     "Wie lange?",
+     "eine Woche · zwei Stunden (no preposition)"
+    ],
+    [
+     "Wie spät ist es? / Wie viel Uhr ist es?",
+     "Es ist acht Uhr."
+    ]
+   ],
+   "caption": "Asking about time"
+  },
+  {
+   "t": "table",
+   "head": [
+    "time",
+    "everyday",
+    "official (24 h)"
+   ],
+   "rows": [
+    [
+     "8:00",
+     "acht (Uhr)",
+     "acht Uhr"
+    ],
+    [
+     "8:15",
+     "Viertel nach acht",
+     "acht Uhr fünfzehn"
+    ],
+    [
+     "8:30",
+     "halb neun (!)",
+     "acht Uhr dreißig"
+    ],
+    [
+     "8:45",
+     "Viertel vor neun",
+     "acht Uhr fünfundvierzig"
+    ],
+    [
+     "20:00",
+     "acht (Uhr abends)",
+     "zwanzig Uhr"
+    ]
+   ],
+   "caption": "The clock"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "halb neun = 8:30",
+   "text": "German counts towards the next hour: halb neun is “half (on the way) to nine” – Russian половина девятого works the same way; Greek οχτώμισι and English “half past eight” count from the hour before."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "seit + present",
+   "text": "Ich wohne seit drei Jahren hier – not *Ich habe seit drei Jahren hier gewohnt. Greek (μένω εδώ από …) and Russian (живу здесь три года) use the present too."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Uhr or Stunde?",
+   "text": "Es ist zwei Uhr (clock time) – Ich warte zwei Stunden (duration)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "ago = vor",
+   "text": "vor zwei Wochen = two weeks ago (vor + dative, before the time word – English puts “ago” after it)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek",
+     "points": [
+      "στις οκτώ, τη Δευτέρα, τον Μάιο – σε or the plain accusative",
+      "πριν, μετά, μέχρι, από, κατά τη διάρκεια = vor, nach, bis, seit, während"
+     ]
+    },
+    {
+     "title": "Turkish",
+     "points": [
+      "suffixes: saat sekizde, mayısta, iki yıldan beri (seit), pazartesiye kadar (bis), yemekten önce / sonra (vor / nach)"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a clock time? → um (um acht Uhr).",
+   "A day, a date, a part of the day, the weekend? → am (the night: in der Nacht).",
+   "A month or a season? → im. A year? → no preposition, or im Jahr …",
+   "Before or after something? → vor / nach + dative (vor dem Essen, nach der Arbeit); a length of time ago? → vor + dative.",
+   "Up to a point? → bis (with an article: bis zum / bis zur).",
+   "Started in the past and still going on? → seit + dative, and the verb in the PRESENT.",
+   "Inside a span? → während + genitive (des / der).",
+   "How long? → no preposition: eine Woche, zwei Stunden.",
+   "Clock time or duration? → Uhr (acht Uhr) or Stunde (acht Stunden)."
+  ],
+  "steps": [
+   "Decide what kind of time it is.",
+   "Choose the preposition.",
+   "Put the article in its case (am, im, dem, der, des)."
+  ]
+ },
+ "traps": [
+  "um acht Uhr, but am Montag and im Mai – three different prepositions.",
+  "No *in 2026: say 2026 or im Jahr 2026.",
+  "seit + present: Ich warte seit zehn Minuten (not *habe gewartet).",
+  "seit (still going on) ≠ vor (ago): seit zwei Jahren (for two years now) / vor zwei Jahren (two years ago).",
+  "während takes the genitive: während der Woche, während des Urlaubs.",
+  "halb neun is 8:30, not 9:30.",
+  "Uhr never takes a plural in times: zehn Uhr (not *zehn Uhren).",
+  "bis + article → bis zum / bis zur: bis zum Abend."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:um",
+   "de:am",
+   "de:an",
+   "de:im",
+   "de:in",
+   "de:vor",
+   "de:nach",
+   "de:bis",
+   "de:seit",
+   "de:während",
+   "de:Uhr",
+   "de:Datum"
+  ]
+ },
+ "needs": {
+  "NOUN": 8,
+  "ADP": 5
+ },
+ "generators": [
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "lemmas": [
+    "de:Tag",
+    "de:Woche",
+    "de:Monat",
+    "de:Jahr",
+    "de:Stunde",
+    "de:Minute"
+   ],
+   "cells": [
+    "N;DAT;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "concepts": [
+    "time."
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "___ acht Uhr",
+   "options": [
+    "um",
+    "am",
+    "im"
+   ],
+   "answer": "um",
+   "why": "A clock time → um."
+  },
+  {
+   "q": "___ Montag",
+   "options": [
+    "am",
+    "um",
+    "im"
+   ],
+   "answer": "am",
+   "why": "A day → am."
+  },
+  {
+   "q": "___ Mai",
+   "options": [
+    "im",
+    "am",
+    "um"
+   ],
+   "answer": "im",
+   "why": "A month → im."
+  },
+  {
+   "q": "I’ve been waiting for twenty minutes.",
+   "options": [
+    "Ich warte seit zwanzig Minuten.",
+    "Ich habe seit zwanzig Minuten gewartet.",
+    "Ich warte für zwanzig Minuten."
+   ],
+   "answer": "Ich warte seit zwanzig Minuten.",
+   "why": "seit + dative + present tense for something still going on."
+  },
+  {
+   "q": "during the week",
+   "options": [
+    "während der Woche",
+    "während die Woche",
+    "während dem Woche"
+   ],
+   "answer": "während der Woche",
+   "why": "während + genitive: die Woche → der Woche."
+  },
+  {
+   "q": "halb neun is …",
+   "options": [
+    "8:30",
+    "9:30",
+    "8:50"
+   ],
+   "answer": "8:30",
+   "why": "halb neun = half (on the way) to nine."
+  },
+  {
+   "q": "two weeks ago",
+   "options": [
+    "vor zwei Wochen",
+    "seit zwei Wochen",
+    "zwei Wochen vor"
+   ],
+   "answer": "vor zwei Wochen",
+   "why": "ago = vor + dative, before the time word."
+  },
+  {
+   "q": "I’m staying until Sunday.",
+   "options": [
+    "Ich bleibe bis Sonntag.",
+    "Ich bleibe bis zu Sonntag.",
+    "Ich bleibe seit Sonntag."
+   ],
+   "answer": "Ich bleibe bis Sonntag.",
+   "why": "No article → bis alone."
+  },
+  {
+   "q": "It’s eight o’clock.",
+   "options": [
+    "Es ist acht Uhr.",
+    "Es ist acht Stunden.",
+    "Es ist acht Uhren."
+   ],
+   "answer": "Es ist acht Uhr.",
+   "why": "Clock time = Uhr, never plural."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.time",
+   "note": "Arabic قَبْلَ (before), بَعْدَ (after), حَتَّى (until), مُنْذُ (since), أَثْنَاءَ / خِلَالَ (during), فِي + month; the hour is said with the ordinal: السَّاعَةَ الثَّامِنَةَ (at eight o’clock)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.time",
+   "note": "Hebrew לִפְנֵי (before; also “ago”), אַחֲרֵי (after), עַד (until), מֵאָז / מִ־ (since), בְּמֶשֶׁךְ (during), בְּ + month or hour (בְּשָׁעָה שְׁמוֹנֶה)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.time",
+   "note": "Chinese puts the time phrase before the verb and the “before / after” word after the time: 八点以前 (before eight), 八点以后 (after eight); 从 … 到 … (from … to …); o’clock is 点."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.time.day",
+   "note": "am Montag, am Abend, in der Nacht – the days and parts of the day of the previous step."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "vor, nach, seit take the dative, bis and um the accusative, während the genitive."
+  }
+ ]
+}

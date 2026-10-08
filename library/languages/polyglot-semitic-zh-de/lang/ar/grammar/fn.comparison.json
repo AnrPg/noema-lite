@@ -1,0 +1,578 @@
+{
+ "function": "fn.comparison",
+ "status": "realized",
+ "summary": "Arabic compares with one special form of the adjective, the elative أَفْعَلُ (ʾafʿal, “more / most”): كَبِير → أَكْبَرُ, صَغِير → أَصْغَرُ, جَمِيل → أَجْمَلُ, سَرِيع → أَسْرَعُ. With مِنْ it is the comparative: الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ (the house is bigger than the flat) — “than” is the same مِنْ as “from”, as in Greek μεγαλύτερος από. With the article, or before a noun in the genitive, it is the superlative: الْبَيْتُ الْأَكْبَرُ (the biggest house), أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ (the biggest house in the village). The comparative does not change for gender or number — أَخِي أَكْبَرُ مِنِّي, أُخْتِي أَكْبَرُ مِنِّي — and it is a diptote: أَكْبَرُ, accusative and genitive أَكْبَرَ, never with tanwīn. Roots with a doubled or weak letter keep their shape: حَارّ → أَحَرُّ, قَرِيب → أَقْرَبُ, بَطِيء → أَبْطَأُ, سَيِّئ → أَسْوَأُ (worse), غَالٍ → أَغْلَى (never changes). “Better” is أَفْضَلُ (or أَحْسَنُ), not a form of جَيِّد. Adjectives that cannot take the pattern — the colours, participles like مُتْعَب — use أَكْثَرُ (more) or أَشَدُّ + a noun in the accusative: أَكْثَرُ تَعَبًا (more tired), أَكْثَرُ حُمْرَةً (redder). أَكْثَرُ is itself the elative of كَثِير: “more” (أُحِبُّ الشَّايَ أَكْثَرَ مِنَ الْقَهْوَةِ) and, before a definite plural, “most of” (أَكْثَرُ النَّاسِ). The colours have a pattern of their own that looks like the elative: أَحْمَرُ (m.), حَمْرَاءُ (f.), حُمْرٌ (pl.) — with no tanwīn in the singular; the newer colour words in -iyy (بُنِّيّ, رَمَادِيّ, بُرْتُقَالِيّ, وَرْدِيّ, بَنَفْسَجِيّ) are regular. Light and dark shades follow the colour: أَزْرَقُ فَاتِحٌ, أَخْضَرُ غَامِقٌ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "adjective",
+    "elative",
+    "bigger than …",
+    "the biggest"
+   ],
+   "rows": [
+    [
+     "كَبِير (big; old)",
+     "أَكْبَرُ",
+     "أَكْبَرُ مِنْ …",
+     "الْأَكْبَرُ"
+    ],
+    [
+     "صَغِير (small; young)",
+     "أَصْغَرُ",
+     "أَصْغَرُ مِنْ …",
+     "الْأَصْغَرُ"
+    ],
+    [
+     "طَوِيل (long, tall)",
+     "أَطْوَلُ",
+     "أَطْوَلُ مِنْ …",
+     "الْأَطْوَلُ"
+    ],
+    [
+     "قَصِير (short)",
+     "أَقْصَرُ",
+     "أَقْصَرُ مِنْ …",
+     "الْأَقْصَرُ"
+    ],
+    [
+     "جَمِيل (beautiful)",
+     "أَجْمَلُ",
+     "أَجْمَلُ مِنْ …",
+     "الْأَجْمَلُ"
+    ],
+    [
+     "سَهْل (easy)",
+     "أَسْهَلُ",
+     "أَسْهَلُ مِنْ …",
+     "الْأَسْهَلُ"
+    ],
+    [
+     "صَعْب (difficult)",
+     "أَصْعَبُ",
+     "أَصْعَبُ مِنْ …",
+     "الْأَصْعَبُ"
+    ],
+    [
+     "رَخِيص (cheap)",
+     "أَرْخَصُ",
+     "أَرْخَصُ مِنْ …",
+     "الْأَرْخَصُ"
+    ],
+    [
+     "غَالٍ (expensive)",
+     "أَغْلَى",
+     "أَغْلَى مِنْ …",
+     "الْأَغْلَى"
+    ],
+    [
+     "حَارّ (hot)",
+     "أَحَرُّ",
+     "أَحَرُّ مِنْ …",
+     "الْأَحَرُّ"
+    ],
+    [
+     "بَارِد (cold)",
+     "أَبْرَدُ",
+     "أَبْرَدُ مِنْ …",
+     "الْأَبْرَدُ"
+    ],
+    [
+     "سَرِيع (fast)",
+     "أَسْرَعُ",
+     "أَسْرَعُ مِنْ …",
+     "الْأَسْرَعُ"
+    ],
+    [
+     "بَطِيء (slow)",
+     "أَبْطَأُ",
+     "أَبْطَأُ مِنْ …",
+     "الْأَبْطَأُ"
+    ],
+    [
+     "سَيِّئ (bad)",
+     "أَسْوَأُ",
+     "أَسْوَأُ مِنْ …",
+     "الْأَسْوَأُ"
+    ],
+    [
+     "قَرِيب (near)",
+     "أَقْرَبُ",
+     "أَقْرَبُ مِنْ …",
+     "الْأَقْرَبُ"
+    ],
+    [
+     "بَعِيد (far)",
+     "أَبْعَدُ",
+     "أَبْعَدُ مِنْ …",
+     "الْأَبْعَدُ"
+    ],
+    [
+     "قَدِيم (old (things))",
+     "أَقْدَمُ",
+     "أَقْدَمُ مِنْ …",
+     "الْأَقْدَمُ"
+    ]
+   ],
+   "caption": "The elative أَفْعَل: one form for “-er” and “-est”."
+  },
+  {
+   "t": "table",
+   "head": [
+    "use",
+    "pattern",
+    "example"
+   ],
+   "rows": [
+    [
+     "comparative",
+     "X أَفْعَلُ مِنْ Y",
+     "الْقِطَارُ أَسْرَعُ مِنَ الْحَافِلَةِ. — أَخِي أَطْوَلُ مِنِّي."
+    ],
+    [
+     "superlative, after the noun",
+     "الْـ + أَفْعَل",
+     "أَخِي الْأَكْبَرُ (my eldest brother) — هٰذَا الْبَيْتُ هُوَ الْأَكْبَرُ."
+    ],
+    [
+     "superlative + one noun",
+     "أَفْعَلُ + indefinite genitive",
+     "أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ — the biggest house in the village"
+    ],
+    [
+     "superlative + a group",
+     "أَفْعَلُ + definite plural",
+     "أَكْبَرُ الْبُيُوتِ — the biggest of the houses"
+    ],
+    [
+     "no elative possible",
+     "أَكْثَرُ / أَشَدُّ + accusative noun",
+     "أَكْثَرُ تَعَبًا (more tired), أَكْثَرُ حُمْرَةً (redder)"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The comparative does not agree.",
+   "text": "الطَّائِرَةُ أَسْرَعُ مِنَ الْقِطَارِ (the plane, f., is faster than the train) — أُخْتِي أَكْبَرُ مِنِّي. Only the superlative with al- may take a feminine form: الْكُبْرَى, الصُّغْرَى (أُخْتِي الصُّغْرَى, my youngest sister)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No tanwīn on the elative.",
+   "text": "أَكْبَرُ, not *أَكْبَرٌ; after لَيْسَ or a verb it is أَكْبَرَ: أَخِي لَيْسَ أَطْوَلَ مِنِّي, أُحِبُّ الشَّايَ أَكْثَرَ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "meaning",
+    "say",
+    "not"
+   ],
+   "rows": [
+    [
+     "better",
+     "أَفْضَلُ / أَحْسَنُ",
+     "a form of جَيِّد"
+    ],
+    [
+     "worse",
+     "أَسْوَأُ",
+     "*أَسْيَأُ"
+    ],
+    [
+     "more expensive",
+     "أَغْلَى — the same form in every case",
+     "a case ending on أَغْلَى"
+    ],
+    [
+     "newer, latest",
+     "أَحْدَثُ",
+     "the rare أَجَدُّ"
+    ],
+    [
+     "more tired",
+     "أَكْثَرُ تَعَبًا",
+     "*أَتْعَبُ"
+    ],
+    [
+     "redder",
+     "أَكْثَرُ حُمْرَةً / أَشَدُّ حُمْرَةً",
+     "*أَحْمَرُ مِنْ"
+    ],
+    [
+     "more (much)",
+     "أَكْثَرُ",
+     "*أَكْثَرُ كَبِيرٌ for “bigger”"
+    ]
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "colour",
+    "masculine",
+    "feminine",
+    "plural"
+   ],
+   "rows": [
+    [
+     "white",
+     "أَبْيَض",
+     "بَيْضَاء",
+     "بِيضٌ"
+    ],
+    [
+     "black",
+     "أَسْوَد",
+     "سَوْدَاء",
+     "سُودٌ"
+    ],
+    [
+     "red",
+     "أَحْمَر",
+     "حَمْرَاء",
+     "حُمْرٌ"
+    ],
+    [
+     "blue",
+     "أَزْرَق",
+     "زَرْقَاء",
+     "زُرْقٌ"
+    ],
+    [
+     "green",
+     "أَخْضَر",
+     "خَضْرَاء",
+     "خُضْرٌ"
+    ],
+    [
+     "yellow",
+     "أَصْفَر",
+     "صَفْرَاء",
+     "صُفْرٌ"
+    ],
+    [
+     "brown",
+     "بُنِّيّ",
+     "بُنِّيَّة",
+     "بُنِّيُّونَ"
+    ],
+    [
+     "grey",
+     "رَمَادِيّ",
+     "رَمَادِيَّة",
+     "رَمَادِيُّونَ"
+    ],
+    [
+     "orange",
+     "بُرْتُقَالِيّ",
+     "بُرْتُقَالِيَّة",
+     "بُرْتُقَالِيُّونَ"
+    ],
+    [
+     "pink",
+     "وَرْدِيّ",
+     "وَرْدِيَّة",
+     "وَرْدِيُّونَ"
+    ],
+    [
+     "purple",
+     "بَنَفْسَجِيّ",
+     "بَنَفْسَجِيَّة",
+     "بَنَفْسَجِيُّونَ"
+    ]
+   ],
+   "caption": "The six old colours: أَفْعَل / فَعْلَاء / فُعْل (no tanwīn in the singular); the -iyy colours are regular."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Light and dark.",
+   "text": "فَاتِح (light) and غَامِق (dark) follow the colour: أَزْرَقُ فَاتِحٌ, أَخْضَرُ غَامِقٌ. With a feminine noun the safe way is to name the colour (لَوْن, m.): لَوْنُ السَّيَّارَةِ أَزْرَقُ غَامِقٌ. A dark room is مُظْلِمَة, not غَامِقَة."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "A red car, red cars.",
+   "text": "سَيَّارَةٌ حَمْرَاءُ — and things in the plural are feminine singular: سَيَّارَاتٌ حَمْرَاءُ, هٰذِهِ أَقْلَامٌ حَمْرَاءُ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "größer als …",
+      "am größten / der größte",
+      "one ending (-er), one ending (-st)"
+     ]
+    },
+    {
+     "title": "Arabic",
+     "points": [
+      "أَكْبَرُ مِنْ …",
+      "الْأَكْبَرُ / أَكْبَرُ بَيْتٍ",
+      "one pattern (أَفْعَل) for both"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "“Than me, than you”: مِنْ takes its pronoun endings (lesson 11): أَخِي أَكْبَرُ مِنِّي, أَنْتَ أَطْوَلُ مِنْهُ. “More than” with a verb: يَأْكُلُ أَخِي أَكْثَرَ مِنِّي."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I comparing two things? → elative + مِنْ (genitive after مِنْ; a pronoun: مِنِّي, مِنْكَ).",
+   "Is it the highest degree? → الْـ + elative after the noun, or the elative + an indefinite noun in the genitive (أَكْبَرُ بَيْتٍ).",
+   "Does this adjective have an elative? Colours, participles, -ān adjectives don’t → أَكْثَرُ / أَشَدُّ + a noun in the accusative.",
+   "“Good” or “new”? → better = أَفْضَلُ, newer = أَحْدَثُ.",
+   "Is the noun feminine or plural? → the comparative stays the same (أَكْبَرُ).",
+   "Does it stand after a verb or after لَيْسَ / كَانَ? → accusative أَكْبَرَ (no tanwīn).",
+   "A colour: masculine or feminine noun? → أَحْمَرُ / حَمْرَاءُ; things in the plural → حَمْرَاءُ."
+  ]
+ },
+ "traps": [
+  "*أَكْبَرٌ → أَكْبَرُ: the elative is a diptote.",
+  "*الطَّائِرَةُ سُرْعَى مِنَ الْقِطَارِ → الطَّائِرَةُ أَسْرَعُ مِنَ الْقِطَارِ: the comparative does not agree.",
+  "*أَكْثَرُ كَبِيرٌ → أَكْبَرُ.",
+  "*الْقَمِيصُ أَحْمَرُ مِنْ … (redder) → أَكْثَرُ حُمْرَةً مِنْ ….",
+  "*سَيَّارَةٌ أَحْمَرُ → سَيَّارَةٌ حَمْرَاءُ.",
+  "“Than” is مِنْ — not *مِثْلَ (like) and not *كَـ.",
+  "“Better” is أَفْضَلُ / أَحْسَنُ, not a form of جَيِّد."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:akthar",
+   "ar:baid",
+   "ar:barid",
+   "ar:bati",
+   "ar:dafi",
+   "ar:ghali",
+   "ar:harr",
+   "ar:hazin",
+   "ar:jamil",
+   "ar:kabir",
+   "ar:qabih",
+   "ar:qadim",
+   "ar:qalil",
+   "ar:qarib",
+   "ar:qasir",
+   "ar:rakhis",
+   "ar:sab",
+   "ar:saghir",
+   "ar:sahl",
+   "ar:said",
+   "ar:sakhin",
+   "ar:sari",
+   "ar:sayyi",
+   "ar:tawil"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;CMPR;NOM",
+  "ADJ;CMPR;ACC",
+  "ADJ;SPRL;NOM;DEF",
+  "ADJ;SPRL;NOM;CONST"
+ ],
+ "needs": {
+  "ADJ": 6,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "cells": [
+    "ADJ;CMPR;NOM",
+    "ADJ;CMPR;ACC",
+    "ADJ;SPRL;NOM;DEF"
+   ],
+   "exclude": [
+    "ar:akthar"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "colour."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;FEM;INDF",
+    "ADJ;NOM;SG;MASC;DEF",
+    "ADJ;NOM;PL;MASC;INDF"
+   ],
+   "count": 10
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“bigger than the flat”",
+   "options": [
+    "أَكْبَرُ مِنَ الشَّقَّةِ",
+    "أَكْبَرٌ مِنَ الشَّقَّةِ",
+    "كَبِيرٌ مِنَ الشَّقَّةِ"
+   ],
+   "answer": "أَكْبَرُ مِنَ الشَّقَّةِ",
+   "why": "Elative (no tanwīn) + مِنْ."
+  },
+  {
+   "q": "“My sister is older than me.”",
+   "options": [
+    "أُخْتِي أَكْبَرُ مِنِّي.",
+    "أُخْتِي كُبْرَى مِنِّي.",
+    "أُخْتِي أَكْبَرَةٌ مِنِّي."
+   ],
+   "answer": "أُخْتِي أَكْبَرُ مِنِّي.",
+   "why": "The comparative does not change for a woman."
+  },
+  {
+   "q": "“the biggest house in the village”",
+   "options": [
+    "أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ",
+    "أَكْبَرُ الْبَيْتُ فِي الْقَرْيَةِ",
+    "بَيْتٌ أَكْبَرُ فِي الْقَرْيَةِ"
+   ],
+   "answer": "أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ",
+   "why": "Elative + an indefinite noun in the genitive = the -est."
+  },
+  {
+   "q": "“a red car”",
+   "options": [
+    "سَيَّارَةٌ حَمْرَاءُ",
+    "سَيَّارَةٌ أَحْمَرُ",
+    "سَيَّارَةٌ أَحْمَرَةٌ"
+   ],
+   "answer": "سَيَّارَةٌ حَمْرَاءُ",
+   "why": "The feminine of أَحْمَر is حَمْرَاء."
+  },
+  {
+   "q": "“Coffee is more expensive than tea.”",
+   "options": [
+    "الْقَهْوَةُ أَغْلَى مِنَ الشَّايِ.",
+    "الْقَهْوَةُ أَغْلَى مِنَ الشَّايُ.",
+    "الْقَهْوَةُ غَالِيَةٌ مِنَ الشَّايِ."
+   ],
+   "answer": "الْقَهْوَةُ أَغْلَى مِنَ الشَّايِ.",
+   "why": "أَغْلَى never changes; after مِنْ the genitive."
+  },
+  {
+   "q": "“better”",
+   "options": [
+    "أَفْضَلُ",
+    "أَجْيَدُ",
+    "أَكْثَرُ جَيِّدًا"
+   ],
+   "answer": "أَفْضَلُ",
+   "why": "Better is أَفْضَلُ (or أَحْسَنُ)."
+  },
+  {
+   "q": "“light blue”",
+   "options": [
+    "أَزْرَقُ فَاتِحٌ",
+    "فَاتِحٌ أَزْرَقُ",
+    "أَزْرَقُ غَامِقٌ"
+   ],
+   "answer": "أَزْرَقُ فَاتِحٌ",
+   "why": "فَاتِح follows the colour; غَامِق is dark."
+  },
+  {
+   "q": "“most people”",
+   "options": [
+    "أَكْثَرُ النَّاسِ",
+    "أَكْثَرُ مِنَ النَّاسِ",
+    "النَّاسُ الْأَكْثَرُ"
+   ],
+   "answer": "أَكْثَرُ النَّاسِ",
+   "why": "أَكْثَرُ + a definite plural = most of; أَكْثَرُ مِنَ النَّاسِ is “more than the people”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.comparison",
+   "note": "Hebrew has no special form: יוֹתֵר גָּדוֹל מִ… (more big than), הֲכִי גָּדוֹל (the biggest); its “than” is מִ / מֵאֲשֶׁר — the same מִן as Arabic مِنْ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.comparison",
+   "note": "German: größer als, am größten / der größte — endings; Arabic changes the whole pattern of the word (كَبِير → أَكْبَر), and its “than” is “from” (مِنْ) where German has als."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.comparison",
+   "note": "Chinese leaves the adjective alone: A 比 B 大 (A is bigger than B), 最大 (the biggest), 更 (even more)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.adjective",
+   "note": "The positive forms and their agreement (lesson 16); the comparative is the one adjective form that does not agree."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.core",
+   "note": "مِنْ with pronoun endings — مِنِّي, مِنْكَ, مِنْهُ — is “than me, than you, than him”."
+  }
+ ]
+}

@@ -1,0 +1,434 @@
+{
+ "function": "fn.direction",
+ "status": "realized",
+ "summary": "German asks three different “where” questions and answers each with its own prepositions and cases: Wo? (where – a place, no movement) takes the dative: Ich bin im Park, beim Arzt, zu Hause. Wohin? (where to – a goal) takes nach for cities and countries without an article (nach Berlin, nach Griechenland, nach Hause), zu + dative for people, shops, buildings and events (zum Arzt, zur Arbeit, zum Bahnhof), and in / an / auf + ACCUSATIVE for going into or onto a place (in den Park, in die Stadt, ins Kino). Woher? (where from) takes aus + dative for coming out of a country, a city or a building (aus Griechenland, aus der Schule) and von + dative for a person, a point or work (vom Bahnhof, von der Arbeit). The verb shows HOW you move: gehen is on foot, fahren is by any vehicle (Ich fahre mit dem Bus), fliegen is by plane; laufen is everyday “walk” (and “run” in sport), rennen is “run fast”. kommen is movement towards the speaker, gehen away from the speaker. The means of transport takes mit + dative: mit dem Bus, mit dem Zug, mit dem Auto, mit dem Fahrrad, mit dem Schiff; on foot is zu Fuß. Many verbs of movement are separable: the particle goes to the end of the clause – Der Zug kommt um acht Uhr an. Ich komme morgen zurück. Kommen Sie herein! – and her- (towards me) / hin- (away from me) mark the direction: herein (in here), hinein (in there); speech shortens both to rein. To leave a place is verlassen + accusative (Ich verlasse das Haus) or, without an object, weggehen (Ich gehe weg).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "question",
+    "answer with",
+    "case",
+    "examples"
+   ],
+   "rows": [
+    [
+     "Wo? (where)",
+     "in / an / auf, bei, zu Hause",
+     "dative",
+     "Ich bin im Park. · Er ist beim Arzt. · Wir sind zu Hause."
+    ],
+    [
+     "Wohin? (where to)",
+     "nach (cities, countries, home)",
+     "dative",
+     "Ich fahre nach Berlin. · Wir gehen nach Hause."
+    ],
+    [
+     "",
+     "zu (people, shops, buildings, events)",
+     "dative",
+     "Ich gehe zum Arzt / zur Arbeit / zum Bahnhof."
+    ],
+    [
+     "",
+     "in / an / auf (into, onto)",
+     "ACCUSATIVE",
+     "Er geht in den Park. · Wir fahren in die Stadt. · Ich gehe ins Kino."
+    ],
+    [
+     "Woher? (where from)",
+     "aus (out of a country, city, building)",
+     "dative",
+     "Ich komme aus Griechenland. · Er kommt aus der Schule."
+    ],
+    [
+     "",
+     "von (a person, a point, work)",
+     "dative",
+     "Ich komme vom Bahnhof / von der Arbeit / von meiner Mutter."
+    ]
+   ],
+   "caption": "Three questions – three answers"
+  },
+  {
+   "t": "table",
+   "head": [
+    "how?",
+    "German",
+    "verb"
+   ],
+   "rows": [
+    [
+     "on foot",
+     "zu Fuß",
+     "gehen (laufen)"
+    ],
+    [
+     "by bus",
+     "mit dem Bus",
+     "fahren"
+    ],
+    [
+     "by train",
+     "mit dem Zug",
+     "fahren"
+    ],
+    [
+     "by car / taxi",
+     "mit dem Auto / mit dem Taxi",
+     "fahren"
+    ],
+    [
+     "by bike",
+     "mit dem Fahrrad",
+     "fahren"
+    ],
+    [
+     "by ship / boat",
+     "mit dem Schiff / mit dem Boot",
+     "fahren"
+    ],
+    [
+     "by plane",
+     "mit dem Flugzeug",
+     "fliegen"
+    ]
+   ],
+   "caption": "By what: mit + dative (der Bus → mit dem Bus, die Bahn → mit der Bahn)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "verb",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "gehen",
+     "to go on foot; to go (in general, without a vehicle)",
+     "Ich gehe zur Arbeit."
+    ],
+    [
+     "fahren",
+     "to go by vehicle; to drive",
+     "Ich fahre mit dem Zug nach Berlin."
+    ],
+    [
+     "laufen",
+     "to walk (everyday speech); to run (sport)",
+     "Wir laufen zum Bahnhof."
+    ],
+    [
+     "rennen",
+     "to run fast",
+     "Der Junge rennt zum Bus."
+    ],
+    [
+     "kommen",
+     "to come (towards the speaker)",
+     "Kommst du heute?"
+    ],
+    [
+     "reisen",
+     "to travel (a journey)",
+     "Wir reisen nach Italien."
+    ],
+    [
+     "ankommen · zurückkommen",
+     "to arrive · to come back (separable)",
+     "Der Zug kommt in München an. · Wann kommst du zurück?"
+    ],
+    [
+     "hereinkommen · hineingehen",
+     "to come in (towards me) · to go in (away from me)",
+     "Kommen Sie herein! · Ich gehe in den Laden hinein."
+    ],
+    [
+     "weggehen · verlassen",
+     "to go away (no object) · to leave a place (+ accusative)",
+     "Ich gehe weg. · Er verlässt das Haus."
+    ],
+    [
+     "bleiben · warten",
+     "to stay · to wait (for: auf + accusative)",
+     "Ich bleibe zu Hause. · Ich warte auf den Bus."
+    ]
+   ],
+   "caption": "The verbs of this step"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Der Zug",
+    "kommt (verb, 2nd)",
+    "um acht Uhr",
+    "in München",
+    "an (particle, last)"
+   ],
+   "caption": "A separable verb: the particle closes the clause"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "gehen is not fahren",
+   "text": "Ich gehe nach Berlin sounds like walking there. By train, bus or car: Ich fahre nach Berlin. By plane: Ich fliege nach Athen."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Wo? dative – Wohin? accusative",
+   "text": "Ich bin im Park (where: dative) – Ich gehe in den Park (where to: accusative). nach, zu, aus, von always take the dative."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Spoken German splits the question word",
+   "text": "Wohin gehst du? = Wo gehst du hin? · Woher kommst du? = Wo kommst du her? – hin and her go to the end like a separable particle."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "nach Hause – zu Hause",
+   "text": "nach Hause = (going) home; zu Hause = at home: Ich gehe nach Hause. – Ich bin zu Hause."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek",
+     "points": [
+      "σε covers “where” and “where to”: Είμαι στο πάρκο / Πάω στο πάρκο",
+      "German splits them: im Park (dative) / in den Park (accusative); one verb πηγαίνω, two in German: gehen / fahren"
+     ]
+    },
+    {
+     "title": "Russian",
+     "points": [
+      "the same logic as German: в парке (prepositional, where) / в парк (accusative, where to); идти (on foot) / ехать (by vehicle) = gehen / fahren"
+     ]
+    },
+    {
+     "title": "Turkish",
+     "points": [
+      "suffixes instead of prepositions: parkta (where), parka (where to), parktan (where from) – one ending for each German question"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is anything moving? No → Wo? + dative (im Park, zu Hause). Yes → Wohin? or Woher?",
+   "Where to – a city or a country without article? → nach (nach Berlin); home? → nach Hause.",
+   "Where to – a person, a shop, a building, an event as a goal? → zu + dative (zum Arzt, zur Arbeit).",
+   "Where to – into or onto a place? → in / an / auf + accusative (in den Park, ins Kino).",
+   "Where from – out of a country, city or building? → aus; from a person, a point, work? → von (vom Bahnhof).",
+   "On foot or by vehicle? → gehen / zu Fuß – fahren mit + dative – fliegen (plane).",
+   "Towards me or away from me? → kommen, her-, herein – gehen, hin-, hinein.",
+   "Separable verb (ankommen, zurückkommen, weggehen, hereinkommen)? → the particle goes to the end.",
+   "Does the verb need an object? → verlassen + accusative (das Haus); weggehen has none."
+  ],
+  "steps": [
+   "Ask Wo?, Wohin? or Woher?",
+   "Choose the preposition and its case.",
+   "Choose the verb of movement (gehen / fahren / kommen …).",
+   "Put a separable particle at the end."
+  ]
+ },
+ "traps": [
+  "Ich gehe nach Athen means walking; with a vehicle say fahren, with a plane fliegen.",
+  "nach only for cities, countries without article and Hause; with an article: in die Türkei, in die Schweiz.",
+  "zu + people and buildings: Ich gehe zum Arzt – not *nach dem Arzt (nach dem Arzt = after the doctor).",
+  "Where from a country is aus: Ich komme aus Griechenland – not *von Griechenland.",
+  "Where to into a place is accusative: in den Park – not *in dem Park (that is “in the park”, no movement).",
+  "By bus = mit dem Bus (dative), not *mit Bus; im Bus means inside the bus.",
+  "The separable particle goes last: Der Zug kommt um acht an – not *Der Zug ankommt um acht.",
+  "verlassen needs an object (Ich verlasse das Haus); alone say Ich gehe (weg).",
+  "warten auf + accusative: Ich warte auf den Bus – not *für den Bus."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:gehen",
+   "de:kommen",
+   "de:laufen",
+   "de:rennen",
+   "de:fahren",
+   "de:reisen",
+   "de:zurückkommen",
+   "de:hereinkommen",
+   "de:hineingehen",
+   "de:weggehen",
+   "de:verlassen",
+   "de:ankommen",
+   "de:wohin",
+   "de:woher",
+   "de:zu_Fuß",
+   "de:nach_Hause"
+  ]
+ },
+ "needs": {
+  "VERB": 4,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "concepts": [
+    "tr."
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:fahren",
+    "de:laufen",
+    "de:verlassen"
+   ],
+   "cells": [
+    "V;PRS;2;SG",
+    "V;PRS;3;SG"
+   ],
+   "count": 6
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "We’re going to Berlin by train.",
+   "options": [
+    "Wir fahren mit dem Zug nach Berlin.",
+    "Wir gehen mit dem Zug nach Berlin.",
+    "Wir fahren mit Zug zu Berlin."
+   ],
+   "answer": "Wir fahren mit dem Zug nach Berlin.",
+   "why": "A vehicle → fahren; by train → mit dem Zug; a city → nach."
+  },
+  {
+   "q": "Ich gehe ___ Arzt.",
+   "options": [
+    "zum",
+    "nach",
+    "in"
+   ],
+   "answer": "zum",
+   "why": "A person as a goal → zu + dative: zu dem → zum Arzt."
+  },
+  {
+   "q": "Ich komme ___ Griechenland.",
+   "options": [
+    "aus",
+    "von",
+    "nach"
+   ],
+   "answer": "aus",
+   "why": "Origin from a country → aus."
+  },
+  {
+   "q": "Er geht in ___ Park. (where to)",
+   "options": [
+    "den",
+    "dem",
+    "der"
+   ],
+   "answer": "den",
+   "why": "Wohin? → accusative: der Park → in den Park."
+  },
+  {
+   "q": "The train arrives at eight.",
+   "options": [
+    "Der Zug kommt um acht an.",
+    "Der Zug ankommt um acht.",
+    "Der Zug kommt an um acht."
+   ],
+   "answer": "Der Zug kommt um acht an.",
+   "why": "ankommen is separable: the particle an closes the clause."
+  },
+  {
+   "q": "Where are you going? (colloquial)",
+   "options": [
+    "Wo gehst du hin?",
+    "Wo gehst du her?",
+    "Woher gehst du?"
+   ],
+   "answer": "Wo gehst du hin?",
+   "why": "hin = away, to a goal; the split form puts hin at the end."
+  },
+  {
+   "q": "I’m walking (on foot).",
+   "options": [
+    "Ich gehe zu Fuß.",
+    "Ich gehe mit dem Fuß.",
+    "Ich fahre zu Fuß."
+   ],
+   "answer": "Ich gehe zu Fuß.",
+   "why": "On foot = zu Fuß, with gehen."
+  },
+  {
+   "q": "He leaves the house.",
+   "options": [
+    "Er verlässt das Haus.",
+    "Er geht das Haus weg.",
+    "Er verlässt von dem Haus."
+   ],
+   "answer": "Er verlässt das Haus.",
+   "why": "verlassen + accusative object; weggehen takes no object."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.direction",
+   "note": "Arabic إِلَى (to) and مِنْ (from) with the genitive, بِـ for the means (بِالسَّيَّارَةِ, by car), مَشْيًا (on foot); the questions are إِلَى أَيْنَ؟ and مِنْ أَيْنَ؟ – “to where”, “from where”, like German wohin / woher."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.direction",
+   "note": "Hebrew has the same three questions as German: אֵיפֹה (where), לְאָן (where to), מֵאֵיפֹה (where from); לְ / אֶל (to), מִ / מִן (from), בְּ for the vehicle (בְּאוֹטוֹבּוּס), בָּרֶגֶל (on foot)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.direction",
+   "note": "Chinese puts the direction into the verb: 去 (go, away from here) / 来 (come, towards here) + the place; 从 … 到 … (from … to …); the vehicle comes before: 坐公共汽车去 (go by bus), 走路去 (go on foot)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.place",
+   "note": "The same two-way prepositions: dative for Wo? (im Park), accusative for Wohin? (in den Park)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "nach, zu, aus, von, mit always take the dative."
+  }
+ ]
+}

@@ -1,0 +1,1953 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:abyad",
+   "lemma": "أَبْيَض",
+   "pos": "ADJ",
+   "senses": [
+    "colour.white"
+   ],
+   "root": "ب ي ض",
+   "brokenPlural": "بِيض",
+   "diptote": true,
+   "translit": "ʾabyaḍ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَبْيَضُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَبْيَضَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَبْيَضَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَبْيَضُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَبْيَضَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَبْيَضِ",
+    "ADJ;NOM;SG;FEM;INDF": "بَيْضَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "بَيْضَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "بَيْضَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبَيْضَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبَيْضَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبَيْضَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَبْيَضَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَبْيَضَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَبْيَضَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَبْيَضَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَبْيَضَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَبْيَضَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بَيْضَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بَيْضَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بَيْضَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبَيْضَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبَيْضَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبَيْضَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بِيضٌ",
+    "ADJ;ACC;PL;MASC;INDF": "بِيضًا",
+    "ADJ;GEN;PL;MASC;INDF": "بِيضٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبِيضُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبِيضَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبِيضِ",
+    "ADJ;NOM;PL;FEM;INDF": "بِيضٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بِيضًا",
+    "ADJ;GEN;PL;FEM;INDF": "بِيضٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبِيضُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبِيضَ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبِيضِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Snow, milk, a white house in the sun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "white",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.white"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَابُ أَبْيَضُ.",
+      "tr": "The door is white.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي سَيَّارَةٌ بَيْضَاءُ.",
+      "tr": "I have a white car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَيْتُ الْأَبْيَضُ فِي وَاشِنْطُن.",
+      "tr": "The White House is in Washington.",
+      "register": "neutral",
+      "context": "places",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْبَحْرُ الْأَبْيَضُ الْمُتَوَسِّطُ",
+      "tr": "the Mediterranean Sea (“the white middle sea”)"
+     },
+     {
+      "text": "الْبَيْتُ الْأَبْيَضُ",
+      "tr": "the White House"
+     },
+     {
+      "text": "الدَّارُ الْبَيْضَاءُ",
+      "tr": "Casablanca (“the white house”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نَاصِع",
+      "register": "literary",
+      "nuance": "bright, snow-white — intensifies whiteness: أَبْيَضُ نَاصِعٌ"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "أَسْوَد",
+      "note": "black"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ب ي ض (b y ḍ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Mediterranean is الْبَحْرُ الْأَبْيَضُ الْمُتَوَسِّطُ, “the white middle sea” — Turkish Akdeniz is also “the white sea”.",
+     "بَيْض (eggs, lesson 7) has the same root ب ي ض: the egg is “the white one”."
+    ],
+    "pitfalls": [
+     "A colour of the pattern أَفْعَل is a diptote (no tanwīn): قَمِيصٌ أَبْيَضُ (a white shirt), not *أَبْيَضٌ; feminine بَيْضَاء, plural بِيض.",
+     "The feminine has another shape: سَيَّارَةٌ بَيْضَاءُ, not *أَبْيَضَة."
+    ],
+    "subtleties": [
+     "“Whiter” is not *أَبْيَضُ مِنْ: Wiktionary gives أَشَدُّ بَيَاضًا or أَنْصَعُ بَيَاضًا (“stronger in whiteness”)."
+    ]
+   }
+  },
+  {
+   "id": "ar:aswad",
+   "lemma": "أَسْوَد",
+   "pos": "ADJ",
+   "senses": [
+    "colour.black"
+   ],
+   "root": "س و د",
+   "brokenPlural": "سُود",
+   "diptote": true,
+   "translit": "ʾaswad",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَسْوَدُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَسْوَدَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَسْوَدَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَسْوَدُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَسْوَدَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَسْوَدِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَوْدَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "سَوْدَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "سَوْدَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّوْدَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّوْدَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّوْدَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَسْوَدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَسْوَدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَسْوَدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَسْوَدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَسْوَدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَسْوَدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَوْدَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَوْدَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَوْدَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّوْدَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّوْدَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّوْدَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سُودٌ",
+    "ADJ;ACC;PL;MASC;INDF": "سُودًا",
+    "ADJ;GEN;PL;MASC;INDF": "سُودٍ",
+    "ADJ;NOM;PL;MASC;DEF": "السُّودُ",
+    "ADJ;ACC;PL;MASC;DEF": "السُّودَ",
+    "ADJ;GEN;PL;MASC;DEF": "السُّودِ",
+    "ADJ;NOM;PL;FEM;INDF": "سُودٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سُودًا",
+    "ADJ;GEN;PL;FEM;INDF": "سُودٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السُّودُ",
+    "ADJ;ACC;PL;FEM;DEF": "السُّودَ",
+    "ADJ;GEN;PL;FEM;DEF": "السُّودِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Night, coffee, black hair.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "black",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.black"
+     },
+     {
+      "id": "s2",
+      "def": "dark, gloomy (figurative): يَوْمٌ أَسْوَدُ, a black day",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَقِيبَةُ سَوْدَاءُ.",
+      "tr": "The bag is black.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي قِطَّةٌ سَوْدَاءُ.",
+      "tr": "I have a black cat.",
+      "register": "neutral",
+      "context": "animals",
+      "sense": "s1"
+     },
+     {
+      "text": "شَعْرُهَا أَسْوَدُ.",
+      "tr": "Her hair is black.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْبَحْرُ الْأَسْوَدُ",
+      "tr": "the Black Sea"
+     },
+     {
+      "text": "السُّوقُ السَّوْدَاءُ",
+      "tr": "the black market"
+     },
+     {
+      "text": "الْقَائِمَةُ السَّوْدَاءُ",
+      "tr": "the blacklist"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فَاحِم",
+      "register": "literary",
+      "nuance": "jet-black, coal-black — of hair"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "أَبْيَض",
+      "note": "white"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root س و د (s w d).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "السُّودَان (Sudan) is one of its plurals: “the black (people)” — Wiktionary lists سُود and سُودَان.",
+     "The Black Sea is الْبَحْرُ الْأَسْوَدُ, like Turkish Karadeniz."
+    ],
+    "pitfalls": [
+     "Diptote, feminine سَوْدَاءُ, plural سُود: حَقِيبَةٌ سَوْدَاءُ, a black bag.",
+     "Unvocalized اسود can also be أُسُود, “lions” (plural of أَسَد)."
+    ],
+    "subtleties": [
+     "سُوق (market) is feminine here: السُّوقُ السَّوْدَاءُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahmar",
+   "lemma": "أَحْمَر",
+   "pos": "ADJ",
+   "senses": [
+    "colour.red"
+   ],
+   "root": "ح م ر",
+   "brokenPlural": "حُمْر",
+   "diptote": true,
+   "translit": "ʾaḥmar",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَحْمَرُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَحْمَرَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَحْمَرَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَحْمَرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَحْمَرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَحْمَرِ",
+    "ADJ;NOM;SG;FEM;INDF": "حَمْرَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "حَمْرَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "حَمْرَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "الْحَمْرَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْحَمْرَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْحَمْرَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَحْمَرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَحْمَرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَحْمَرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَحْمَرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَحْمَرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَحْمَرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "حَمْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "حَمْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "حَمْرَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْحَمْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْحَمْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْحَمْرَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "حُمْرٌ",
+    "ADJ;ACC;PL;MASC;INDF": "حُمْرًا",
+    "ADJ;GEN;PL;MASC;INDF": "حُمْرٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْحُمْرُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْحُمْرَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْحُمْرِ",
+    "ADJ;NOM;PL;FEM;INDF": "حُمْرٌ",
+    "ADJ;ACC;PL;FEM;INDF": "حُمْرًا",
+    "ADJ;GEN;PL;FEM;INDF": "حُمْرٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْحُمْرُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْحُمْرَ",
+    "ADJ;GEN;PL;FEM;DEF": "الْحُمْرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tomatoes, roses, a red car — and anger.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.red"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّيَّارَةُ حَمْرَاءُ.",
+      "tr": "The car is red.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا قَلَمٌ أَحْمَرُ.",
+      "tr": "This is a red pen.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَحْرُ الْأَحْمَرُ بَيْنَ مِصْرَ وَالسُّعُودِيَّةِ.",
+      "tr": "The Red Sea is between Egypt and Saudi Arabia.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْبَحْرُ الْأَحْمَرُ",
+      "tr": "the Red Sea"
+     },
+     {
+      "text": "الْهِلَالُ الْأَحْمَرُ",
+      "tr": "the Red Crescent"
+     },
+     {
+      "text": "الصَّلِيبُ الْأَحْمَرُ",
+      "tr": "the Red Cross"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَانٍ",
+      "register": "literary",
+      "nuance": "deep red, crimson"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ح م ر (ḥ m r).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Alhambra in Granada is الْحَمْرَاءُ, “the red (one)”."
+    ],
+    "pitfalls": [
+     "Diptote, feminine حَمْرَاءُ, plural حُمْر: سَيَّارَةٌ حَمْرَاءُ (a red car), هٰذِهِ أَقْلَامٌ حَمْرَاءُ (these are red pens)."
+    ],
+    "subtleties": [
+     "“Redder” is أَكْثَرُ حُمْرَةً or أَشَدُّ حُمْرَةً (Wiktionary): colours of the pattern أَفْعَل have no elative of their own."
+    ]
+   }
+  },
+  {
+   "id": "ar:azraq",
+   "lemma": "أَزْرَق",
+   "pos": "ADJ",
+   "senses": [
+    "colour.blue"
+   ],
+   "root": "ز ر ق",
+   "brokenPlural": "زُرْق",
+   "diptote": true,
+   "translit": "ʾazraq",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَزْرَقُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَزْرَقَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَزْرَقَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَزْرَقُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَزْرَقَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَزْرَقِ",
+    "ADJ;NOM;SG;FEM;INDF": "زَرْقَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "زَرْقَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "زَرْقَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "الزَّرْقَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "الزَّرْقَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "الزَّرْقَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَزْرَقَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَزْرَقَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَزْرَقَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَزْرَقَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَزْرَقَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَزْرَقَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "زَرْقَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "زَرْقَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "زَرْقَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الزَّرْقَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الزَّرْقَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الزَّرْقَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "زُرْقٌ",
+    "ADJ;ACC;PL;MASC;INDF": "زُرْقًا",
+    "ADJ;GEN;PL;MASC;INDF": "زُرْقٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الزُّرْقُ",
+    "ADJ;ACC;PL;MASC;DEF": "الزُّرْقَ",
+    "ADJ;GEN;PL;MASC;DEF": "الزُّرْقِ",
+    "ADJ;NOM;PL;FEM;INDF": "زُرْقٌ",
+    "ADJ;ACC;PL;FEM;INDF": "زُرْقًا",
+    "ADJ;GEN;PL;FEM;INDF": "زُرْقٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الزُّرْقُ",
+    "ADJ;ACC;PL;FEM;DEF": "الزُّرْقَ",
+    "ADJ;GEN;PL;FEM;DEF": "الزُّرْقِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sky and sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "blue",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.blue"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّمَاءُ زَرْقَاءُ.",
+      "tr": "The sky is blue.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَحْرُ أَزْرَقُ.",
+      "tr": "The sea is blue.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي سَيَّارَةٌ زَرْقَاءُ.",
+      "tr": "I have a blue car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "السَّمَاءُ الزَّرْقَاءُ",
+      "tr": "the blue sky"
+     },
+     {
+      "text": "أَزْرَقُ فَاتِحٌ",
+      "tr": "light blue"
+     },
+     {
+      "text": "أَزْرَقُ غَامِقٌ",
+      "tr": "dark blue"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَمَاوِيّ",
+      "register": "neutral",
+      "nuance": "sky-blue (from سَمَاء, sky)"
+     },
+     {
+      "word": "كُحْلِيّ",
+      "register": "neutral",
+      "nuance": "navy blue (from كُحْل, kohl)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ز ر ق (z r q); its first sense is “flickering, glinting” — compare Ancient Greek γλαυκός (glaukós) for the same development.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek γλαυκός also went from “gleaming” to “blue-grey” (Wiktionary compares them).",
+     "Zarqāʾ al-Yamāma, “the blue(-eyed) woman of al-Yamāma”, is a legendary Arabian woman who could see riders three days away."
+    ],
+    "pitfalls": [
+     "Diptote, feminine زَرْقَاءُ, plural زُرْق: سَيَّارَةٌ زَرْقَاءُ."
+    ],
+    "subtleties": [
+     "Light and dark shades follow the colour: أَزْرَقُ فَاتِحٌ, أَزْرَقُ غَامِقٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:akhdar",
+   "lemma": "أَخْضَر",
+   "pos": "ADJ",
+   "senses": [
+    "colour.green"
+   ],
+   "root": "خ ض ر",
+   "brokenPlural": "خُضْر",
+   "diptote": true,
+   "translit": "ʾaḫḍar",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَخْضَرُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَخْضَرَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَخْضَرَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَخْضَرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَخْضَرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَخْضَرِ",
+    "ADJ;NOM;SG;FEM;INDF": "خَضْرَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "خَضْرَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "خَضْرَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "الْخَضْرَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْخَضْرَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْخَضْرَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَخْضَرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَخْضَرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَخْضَرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَخْضَرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَخْضَرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَخْضَرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "خَضْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "خَضْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "خَضْرَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْخَضْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْخَضْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْخَضْرَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "خُضْرٌ",
+    "ADJ;ACC;PL;MASC;INDF": "خُضْرًا",
+    "ADJ;GEN;PL;MASC;INDF": "خُضْرٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْخُضْرُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْخُضْرَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْخُضْرِ",
+    "ADJ;NOM;PL;FEM;INDF": "خُضْرٌ",
+    "ADJ;ACC;PL;FEM;INDF": "خُضْرًا",
+    "ADJ;GEN;PL;FEM;INDF": "خُضْرٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْخُضْرُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْخُضْرَ",
+    "ADJ;GEN;PL;FEM;DEF": "الْخُضْرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Gardens, fields, green tea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.green"
+     },
+     {
+      "id": "s2",
+      "def": "dark; black; grey (older senses, Wiktionary)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَدِيقَةُ خَضْرَاءُ فِي الرَّبِيعِ.",
+      "tr": "The park is green in spring.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الشَّايَ الْأَخْضَرَ.",
+      "tr": "I drink green tea.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَابُ أَخْضَرُ.",
+      "tr": "The door is green.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الشَّايُ الْأَخْضَرُ",
+      "tr": "green tea"
+     },
+     {
+      "text": "الضَّوْءُ الْأَخْضَرُ",
+      "tr": "the green light (approval)"
+     },
+     {
+      "text": "الْمِنْطَقَةُ الْخَضْرَاءُ",
+      "tr": "the green zone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَيْتِيّ",
+      "register": "neutral",
+      "nuance": "olive green (from زَيْت, oil)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root خ ض ر (ḫ ḍ r).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "خُضَار (vegetables, “the greens”) has the same root خ ض ر."
+    ],
+    "pitfalls": [
+     "Diptote, feminine خَضْرَاءُ, plural خُضْر: الْحَدِيقَةُ خَضْرَاءُ."
+    ],
+    "subtleties": [
+     "To give the green light = أَعْطَى الضَّوْءَ الْأَخْضَرَ, as in English."
+    ]
+   }
+  },
+  {
+   "id": "ar:asfar",
+   "lemma": "أَصْفَر",
+   "pos": "ADJ",
+   "senses": [
+    "colour.yellow"
+   ],
+   "root": "ص ف ر",
+   "brokenPlural": "صُفْر",
+   "diptote": true,
+   "translit": "ʾaṣfar",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "أَصْفَرُ",
+    "ADJ;ACC;SG;MASC;INDF": "أَصْفَرَ",
+    "ADJ;GEN;SG;MASC;INDF": "أَصْفَرَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْأَصْفَرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْأَصْفَرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْأَصْفَرِ",
+    "ADJ;NOM;SG;FEM;INDF": "صَفْرَاءُ",
+    "ADJ;ACC;SG;FEM;INDF": "صَفْرَاءَ",
+    "ADJ;GEN;SG;FEM;INDF": "صَفْرَاءَ",
+    "ADJ;NOM;SG;FEM;DEF": "الصَّفْرَاءُ",
+    "ADJ;ACC;SG;FEM;DEF": "الصَّفْرَاءَ",
+    "ADJ;GEN;SG;FEM;DEF": "الصَّفْرَاءِ",
+    "ADJ;NOM;DU;MASC;INDF": "أَصْفَرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "أَصْفَرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "أَصْفَرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْأَصْفَرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْأَصْفَرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْأَصْفَرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "صَفْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "صَفْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "صَفْرَاوَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الصَّفْرَاوَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الصَّفْرَاوَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الصَّفْرَاوَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "صُفْرٌ",
+    "ADJ;ACC;PL;MASC;INDF": "صُفْرًا",
+    "ADJ;GEN;PL;MASC;INDF": "صُفْرٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الصُّفْرُ",
+    "ADJ;ACC;PL;MASC;DEF": "الصُّفْرَ",
+    "ADJ;GEN;PL;MASC;DEF": "الصُّفْرِ",
+    "ADJ;NOM;PL;FEM;INDF": "صُفْرٌ",
+    "ADJ;ACC;PL;FEM;INDF": "صُفْرًا",
+    "ADJ;GEN;PL;FEM;INDF": "صُفْرٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الصُّفْرُ",
+    "ADJ;ACC;PL;FEM;DEF": "الصُّفْرَ",
+    "ADJ;GEN;PL;FEM;DEF": "الصُّفْرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sun, lemons, cheese.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yellow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.yellow"
+     },
+     {
+      "id": "s2",
+      "def": "pale (a face)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْجُبْنُ أَصْفَرُ.",
+      "tr": "The cheese is yellow.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي قَمِيصٌ أَصْفَرُ.",
+      "tr": "I have a yellow shirt.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "وَجْهُهُ أَصْفَرُ الْيَوْمَ.",
+      "tr": "His face is pale today.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْبِطَاقَةُ الصَّفْرَاءُ",
+      "tr": "the yellow card"
+     },
+     {
+      "text": "لَوْنٌ أَصْفَرُ",
+      "tr": "a yellow colour"
+     },
+     {
+      "text": "أَصْفَرُ فَاتِحٌ",
+      "tr": "light yellow"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَيْمُونِيّ",
+      "register": "neutral",
+      "nuance": "lemon-yellow"
+     },
+     {
+      "word": "ذَهَبِيّ",
+      "register": "neutral",
+      "nuance": "golden"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ص ف ر (ṣ f r).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "صِفْر (zero, lesson 5) is written with the same root letters ص ف ر; Arabic صِفْر, “empty”, gave European cipher and zero."
+    ],
+    "pitfalls": [
+     "Diptote, feminine صَفْرَاءُ, plural صُفْر: الْبِطَاقَةُ الصَّفْرَاءُ."
+    ],
+    "subtleties": [
+     "A pale, sick face is “yellow” in Arabic: وَجْهُهُ أَصْفَرُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:bunni",
+   "lemma": "بُنِّيّ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.brown"
+   ],
+   "translit": "bunnī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بُنِّيٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "بُنِّيًّا",
+    "ADJ;GEN;SG;MASC;INDF": "بُنِّيٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبُنِّيُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبُنِّيَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبُنِّيِّ",
+    "ADJ;NOM;SG;FEM;INDF": "بُنِّيَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بُنِّيَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "بُنِّيَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبُنِّيَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبُنِّيَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبُنِّيَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بُنِّيَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بُنِّيَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بُنِّيَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبُنِّيَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبُنِّيَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبُنِّيَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بُنِّيَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بُنِّيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بُنِّيَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبُنِّيَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبُنِّيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبُنِّيَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بُنِّيُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "بُنِّيِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "بُنِّيِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبُنِّيُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبُنِّيِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبُنِّيِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "بُنِّيَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بُنِّيَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بُنِّيَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبُنِّيَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبُنِّيَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبُنِّيَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee beans, wood, brown eyes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brown",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.brown"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الطَّاوِلَةُ بُنِّيَّةٌ.",
+      "tr": "The table is brown.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عُيُونُهُ بُنِّيَّةٌ.",
+      "tr": "His eyes are brown.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي حِذَاءٌ بُنِّيٌّ.",
+      "tr": "I have brown shoes.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عُيُونٌ بُنِّيَّةٌ",
+      "tr": "brown eyes"
+     },
+     {
+      "text": "شَعْرٌ بُنِّيٌّ",
+      "tr": "brown hair"
+     },
+     {
+      "text": "بُنِّيٌّ غَامِقٌ",
+      "tr": "dark brown"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَسْمَر",
+      "register": "neutral",
+      "nuance": "brown, dark — of skin and hair (tanned, brunette); feminine سَمْرَاء"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from بُنّ (bunn, “coffee beans”) + the adjective ending ـِيّ (-iyy) — “coffee-coloured”; بُنّ is borrowed from Classical Syriac.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “coffee-bean coloured”: بُنّ is the coffee bean."
+    ],
+    "pitfalls": [
+     "A nisba adjective in -iyy: fully regular, with tanwīn — بُنِّيٌّ, بُنِّيَّةٌ (unlike أَحْمَرُ, حَمْرَاءُ).",
+     "For skin and hair Arabic says أَسْمَر, not بُنِّيّ."
+    ],
+    "subtleties": [
+     "Things in the plural agree in the feminine singular: عُيُونُهُ بُنِّيَّةٌ (his eyes are brown)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ramadi",
+   "lemma": "رَمَادِيّ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.grey"
+   ],
+   "root": "ر م د",
+   "translit": "ramādī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "رَمَادِيٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "رَمَادِيًّا",
+    "ADJ;GEN;SG;MASC;INDF": "رَمَادِيٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الرَّمَادِيُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الرَّمَادِيَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الرَّمَادِيِّ",
+    "ADJ;NOM;SG;FEM;INDF": "رَمَادِيَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "رَمَادِيَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "رَمَادِيَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الرَّمَادِيَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الرَّمَادِيَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الرَّمَادِيَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "رَمَادِيَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "رَمَادِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "رَمَادِيَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الرَّمَادِيَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الرَّمَادِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الرَّمَادِيَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "رَمَادِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "رَمَادِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "رَمَادِيَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الرَّمَادِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الرَّمَادِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الرَّمَادِيَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "رَمَادِيُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "رَمَادِيِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "رَمَادِيِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الرَّمَادِيُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الرَّمَادِيِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الرَّمَادِيِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "رَمَادِيَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "رَمَادِيَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "رَمَادِيَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الرَّمَادِيَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الرَّمَادِيَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الرَّمَادِيَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it “gray (color)” — American spelling of the course concept “grey”.",
+     "ADJ;NOM;SG;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;SG;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;SG;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;SG;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;PL;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;PL;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;PL;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;NOM;PL;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;SG;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;SG;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;SG;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;SG;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;PL;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;PL;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;PL;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;ACC;PL;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;SG;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;SG;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;SG;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;SG;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;PL;MASC;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;PL;MASC;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;PL;FEM;INDF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs",
+     "ADJ;GEN;PL;FEM;DEF": "Wiktionary writes this word رَمادِيّ, without the fatha on the mīm, in every form; the word is رَمَادِيّ (ramādiyy, from رَمَاد, ash), so only that mark differs"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ash, clouds, a grey sky.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grey",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.grey"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّمَاءُ رَمَادِيَّةٌ الْيَوْمَ.",
+      "tr": "The sky is grey today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكُرْسِيُّ رَمَادِيٌّ.",
+      "tr": "The chair is grey.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهُ شَعْرٌ رَمَادِيٌّ.",
+      "tr": "He has grey hair.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْمِنْطَقَةُ الرَّمَادِيَّةُ",
+      "tr": "the grey area"
+     },
+     {
+      "text": "سَمَاءٌ رَمَادِيَّةٌ",
+      "tr": "a grey sky"
+     },
+     {
+      "text": "لَوْنٌ رَمَادِيٌّ",
+      "tr": "a grey colour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَصَاصِيّ",
+      "register": "neutral",
+      "nuance": "lead-grey (from رَصَاص, lead) — common in speech"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from رَمَاد (ramād, “ash”) + ـِيّ (-iyy) — “ash-coloured”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Ash-coloured”, like Greek σταχτής / σταχτί (from στάχτη, ash) and Russian пепельный."
+    ],
+    "pitfalls": [
+     "A nisba adjective: regular, with tanwīn — رَمَادِيٌّ, رَمَادِيَّةٌ."
+    ],
+    "subtleties": [
+     "Grey hair from age is also شَعْرٌ أَشْيَبُ (from شَيْب, grey hair)."
+    ]
+   }
+  },
+  {
+   "id": "ar:burtuqali",
+   "lemma": "بُرْتُقَالِيّ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.orange"
+   ],
+   "translit": "burtuqālī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بُرْتُقَالِيٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "بُرْتُقَالِيًّا",
+    "ADJ;GEN;SG;MASC;INDF": "بُرْتُقَالِيٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبُرْتُقَالِيُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبُرْتُقَالِيَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبُرْتُقَالِيِّ",
+    "ADJ;NOM;SG;FEM;INDF": "بُرْتُقَالِيَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بُرْتُقَالِيَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "بُرْتُقَالِيَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبُرْتُقَالِيَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبُرْتُقَالِيَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبُرْتُقَالِيَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بُرْتُقَالِيَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بُرْتُقَالِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بُرْتُقَالِيَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبُرْتُقَالِيَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبُرْتُقَالِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبُرْتُقَالِيَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بُرْتُقَالِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بُرْتُقَالِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بُرْتُقَالِيَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبُرْتُقَالِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبُرْتُقَالِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبُرْتُقَالِيَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بُرْتُقَالِيُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "بُرْتُقَالِيِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "بُرْتُقَالِيِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبُرْتُقَالِيُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبُرْتُقَالِيِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبُرْتُقَالِيِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "بُرْتُقَالِيَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بُرْتُقَالِيَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بُرْتُقَالِيَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبُرْتُقَالِيَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبُرْتُقَالِيَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبُرْتُقَالِيَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Oranges and sunsets.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orange (colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.orange"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَافِلَةُ بُرْتُقَالِيَّةٌ.",
+      "tr": "The bus is orange.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ اللَّوْنَ الْبُرْتُقَالِيَّ.",
+      "tr": "I like the colour orange.",
+      "register": "neutral",
+      "context": "colours",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي فِنْجَانٌ بُرْتُقَالِيٌّ.",
+      "tr": "I have an orange cup.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اللَّوْنُ الْبُرْتُقَالِيُّ",
+      "tr": "the colour orange"
+     },
+     {
+      "text": "قَمِيصٌ بُرْتُقَالِيٌّ",
+      "tr": "an orange shirt"
+     },
+     {
+      "text": "بُرْتُقَالِيٌّ فَاتِحٌ",
+      "tr": "light orange"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word in standard Arabic; some dialects say بُرْتُقَانِي.",
+    "etymology": {
+     "text": "Wiktionary: بُرْتُقَال (burtuqāl, “orange (fruit)”) + ـِيّ (-iyy); بُرْتُقَال is borrowed from Ottoman Turkish portokal, or more likely from Greek πορτοκάλι, and is a doublet of الْبُرْتُغَال, Portugal.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek πορτοκάλι, Turkish portakal, Arabic بُرْتُقَال: the sweet orange is “the Portugal fruit”."
+    ],
+    "pitfalls": [
+     "A nisba adjective: regular, with tanwīn — بُرْتُقَالِيٌّ, بُرْتُقَالِيَّةٌ."
+    ],
+    "subtleties": [
+     "The fruit is بُرْتُقَال (a collective noun), the colour بُرْتُقَالِيّ."
+    ]
+   }
+  },
+  {
+   "id": "ar:wardi",
+   "lemma": "وَرْدِيّ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.pink"
+   ],
+   "root": "و ر د",
+   "translit": "wardī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "وَرْدِيٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "وَرْدِيًّا",
+    "ADJ;GEN;SG;MASC;INDF": "وَرْدِيٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْوَرْدِيُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْوَرْدِيَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْوَرْدِيِّ",
+    "ADJ;NOM;SG;FEM;INDF": "وَرْدِيَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "وَرْدِيَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "وَرْدِيَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْوَرْدِيَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْوَرْدِيَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْوَرْدِيَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "وَرْدِيَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "وَرْدِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "وَرْدِيَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْوَرْدِيَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْوَرْدِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْوَرْدِيَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "وَرْدِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "وَرْدِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "وَرْدِيَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْوَرْدِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْوَرْدِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْوَرْدِيَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "وَرْدِيُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "وَرْدِيِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "وَرْدِيِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْوَرْدِيُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْوَرْدِيِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْوَرْدِيِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "وَرْدِيَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "وَرْدِيَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "وَرْدِيَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْوَرْدِيَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْوَرْدِيَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْوَرْدِيَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses وَرْدِيّ “rose, roseate; of a reddish or purplish tint that resembles the color of roses” — the colour pink, the course concept."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Roses, candy, a girl’s room.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pink, rose-coloured",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.pink"
+     },
+     {
+      "id": "s2",
+      "def": "rosy, hopeful: أَحْلَامٌ وَرْدِيَّةٌ (rosy dreams)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "of roses, floral",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "غُرْفَةُ النَّوْمِ وَرْدِيَّةٌ.",
+      "tr": "The bedroom is pink.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "تُحِبُّ ابْنَتِي اللَّوْنَ الْوَرْدِيَّ.",
+      "tr": "My daughter loves the colour pink.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهَا فُسْتَانٌ وَرْدِيٌّ.",
+      "tr": "She has a pink dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَوْنٌ وَرْدِيٌّ",
+      "tr": "a pink colour"
+     },
+     {
+      "text": "فُسْتَانٌ وَرْدِيٌّ",
+      "tr": "a pink dress"
+     },
+     {
+      "text": "أَحْلَامٌ وَرْدِيَّةٌ",
+      "tr": "rosy dreams"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَهْرِيّ",
+      "register": "regional",
+      "nuance": "pink (“flower-coloured”) — the everyday word in the Levant"
+     },
+     {
+      "word": "بَمْبِيّ",
+      "register": "regional",
+      "nuance": "pink — Egyptian"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from وَرْد (ward, “roses, blossoms”) + ـِيّ (-iyy); وَرْد, like Hebrew וֶרֶד and Ancient Greek ῥόδον, is borrowed from a reflex of Proto-Iranian *wardah.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Rose = وَرْد, Hebrew וֶרֶד (vered), Greek ρόδο: one Iranian word behind all three (Wiktionary)."
+    ],
+    "pitfalls": [
+     "A nisba adjective: regular, with tanwīn — وَرْدِيٌّ, وَرْدِيَّةٌ."
+    ],
+    "subtleties": [
+     "As in English, “rosy” can mean hopeful: أَحْلَامٌ وَرْدِيَّةٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:banafsaji",
+   "lemma": "بَنَفْسَجِيّ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.purple"
+   ],
+   "translit": "banafsajī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بَنَفْسَجِيٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "بَنَفْسَجِيًّا",
+    "ADJ;GEN;SG;MASC;INDF": "بَنَفْسَجِيٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبَنَفْسَجِيُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبَنَفْسَجِيَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبَنَفْسَجِيِّ",
+    "ADJ;NOM;SG;FEM;INDF": "بَنَفْسَجِيَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بَنَفْسَجِيَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "بَنَفْسَجِيَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبَنَفْسَجِيَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبَنَفْسَجِيَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبَنَفْسَجِيَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بَنَفْسَجِيَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بَنَفْسَجِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بَنَفْسَجِيَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبَنَفْسَجِيَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبَنَفْسَجِيَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبَنَفْسَجِيَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بَنَفْسَجِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بَنَفْسَجِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بَنَفْسَجِيَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبَنَفْسَجِيَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبَنَفْسَجِيَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبَنَفْسَجِيَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بَنَفْسَجِيُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "بَنَفْسَجِيِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "بَنَفْسَجِيِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبَنَفْسَجِيُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبَنَفْسَجِيِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبَنَفْسَجِيِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "بَنَفْسَجِيَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بَنَفْسَجِيَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بَنَفْسَجِيَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبَنَفْسَجِيَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبَنَفْسَجِيَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبَنَفْسَجِيَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Violets, lavender, a purple bag.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purple, violet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.purple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي حَقِيبَةٌ بَنَفْسَجِيَّةٌ.",
+      "tr": "I have a purple bag.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "اللَّوْنُ الْبَنَفْسَجِيُّ جَمِيلٌ.",
+      "tr": "Purple is a beautiful colour.",
+      "register": "neutral",
+      "context": "colours",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَشِعَّةُ فَوْقَ الْبَنَفْسَجِيَّةِ خَطِيرَةٌ.",
+      "tr": "Ultraviolet rays are dangerous.",
+      "register": "neutral",
+      "context": "science",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَوْنٌ بَنَفْسَجِيٌّ",
+      "tr": "a purple colour"
+     },
+     {
+      "text": "الْأَشِعَّةُ فَوْقَ الْبَنَفْسَجِيَّةِ",
+      "tr": "ultraviolet rays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أُرْجُوَانِيّ",
+      "register": "formal",
+      "nuance": "purple, crimson-purple (the classic imperial purple)"
+     },
+     {
+      "word": "لَيْلَكِيّ",
+      "register": "neutral",
+      "nuance": "lilac"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: بَنَفْسَج (banafsaj, “violet” — the flower) + ـِيّ (-iyy); بَنَفْسَج comes from Middle Iranian (compare Persian بنفشه, banafše).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same Persian flower name is Turkish menekşe and Greek μενεξές (violet)."
+    ],
+    "pitfalls": [
+     "A nisba adjective: regular, with tanwīn — بَنَفْسَجِيٌّ, بَنَفْسَجِيَّةٌ."
+    ],
+    "subtleties": [
+     "“Ultraviolet” is literally “above the violet”: فَوْقَ الْبَنَفْسَجِيِّ."
+    ]
+   }
+  },
+  {
+   "id": "ar:fatih",
+   "lemma": "فَاتِح",
+   "pos": "ADJ",
+   "senses": [
+    "adj.light"
+   ],
+   "root": "ف ت ح",
+   "translit": "fātiḥ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "فَاتِحٌ",
+    "ADJ;ACC;SG;MASC;INDF": "فَاتِحًا",
+    "ADJ;GEN;SG;MASC;INDF": "فَاتِحٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْفَاتِحُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْفَاتِحَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْفَاتِحِ",
+    "ADJ;NOM;SG;FEM;INDF": "فَاتِحَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "فَاتِحَةً",
+    "ADJ;GEN;SG;FEM;INDF": "فَاتِحَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْفَاتِحَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْفَاتِحَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْفَاتِحَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "فَاتِحَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "فَاتِحَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "فَاتِحَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْفَاتِحَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْفَاتِحَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْفَاتِحَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "فَاتِحَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "فَاتِحَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "فَاتِحَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْفَاتِحَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْفَاتِحَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْفَاتِحَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "فَاتِحُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "فَاتِحِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "فَاتِحِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْفَاتِحُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْفَاتِحِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْفَاتِحِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "فَاتِحَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "فَاتِحَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "فَاتِحَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْفَاتِحَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْفَاتِحَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْفَاتِحَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pale, light shades.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "light (of a colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.light"
+     },
+     {
+      "id": "s2",
+      "def": "opener; conqueror (as a noun)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَمِيصِي أَزْرَقُ فَاتِحٌ.",
+      "tr": "My shirt is light blue.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الْأَلْوَانَ الْفَاتِحَةَ.",
+      "tr": "I like light colours.",
+      "register": "neutral",
+      "context": "colours",
+      "sense": "s1"
+     },
+     {
+      "text": "فَتَحَ السُّلْطَانُ مُحَمَّدٌ الْفَاتِحُ الْقُسْطَنْطِينِيَّةَ.",
+      "tr": "Sultan Mehmed the Conqueror took Constantinople.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَزْرَقُ فَاتِحٌ",
+      "tr": "light blue"
+     },
+     {
+      "text": "أَخْضَرُ فَاتِحٌ",
+      "tr": "light green"
+     },
+     {
+      "text": "لَوْنٌ فَاتِحٌ",
+      "tr": "a light colour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَاهٍ",
+      "register": "neutral",
+      "nuance": "bright, vivid — brightness, not lightness"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "غَامِق",
+      "note": "dark (colour)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of فَتَحَ (fataḥa, “to open, to conquer”) — an “opening” colour.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Istanbul’s Fatih district and Fatih Sultan Mehmet carry its other sense: الْفَاتِح, “the Conqueror”."
+    ],
+    "pitfalls": [
+     "It goes after the colour word: أَزْرَقُ فَاتِحٌ (light blue). With a feminine noun, the safe way is to speak about the colour (لَوْن, masculine): لَوْنُ السَّيَّارَةِ أَزْرَقُ فَاتِحٌ."
+    ],
+    "subtleties": [
+     "Not “light” in weight (خَفِيف) and not “light” as in bright (مُضِيء)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghamiq",
+   "lemma": "غَامِق",
+   "pos": "ADJ",
+   "senses": [
+    "adj.dark"
+   ],
+   "root": "غ م ق",
+   "translit": "ġāmiq",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "غَامِقٌ",
+    "ADJ;ACC;SG;MASC;INDF": "غَامِقًا",
+    "ADJ;GEN;SG;MASC;INDF": "غَامِقٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْغَامِقُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْغَامِقَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْغَامِقِ",
+    "ADJ;NOM;SG;FEM;INDF": "غَامِقَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "غَامِقَةً",
+    "ADJ;GEN;SG;FEM;INDF": "غَامِقَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْغَامِقَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْغَامِقَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْغَامِقَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "غَامِقَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "غَامِقَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "غَامِقَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْغَامِقَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْغَامِقَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْغَامِقَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "غَامِقَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "غَامِقَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "غَامِقَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْغَامِقَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْغَامِقَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْغَامِقَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "غَامِقُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "غَامِقِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "غَامِقِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْغَامِقُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْغَامِقِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْغَامِقِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "غَامِقَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "غَامِقَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "غَامِقَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْغَامِقَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْغَامِقَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْغَامِقَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Deep, dark shades.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dark (of a colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dark"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَابُ أَخْضَرُ غَامِقٌ.",
+      "tr": "The door is dark green.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الْأَلْوَانَ الْغَامِقَةَ فِي الشِّتَاءِ.",
+      "tr": "I like dark colours in winter.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "لَوْنُ السَّيَّارَةِ أَزْرَقُ غَامِقٌ.",
+      "tr": "The car’s colour is dark blue.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَزْرَقُ غَامِقٌ",
+      "tr": "dark blue"
+     },
+     {
+      "text": "لَوْنٌ غَامِقٌ",
+      "tr": "a dark colour"
+     },
+     {
+      "text": "بُنِّيٌّ غَامِقٌ",
+      "tr": "dark brown"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دَاكِن",
+      "register": "formal",
+      "nuance": "dark — the written word, also of skin and clouds"
+     },
+     {
+      "word": "قَاتِم",
+      "register": "neutral",
+      "nuance": "dark, sombre, gloomy"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "فَاتِح",
+      "note": "light (colour)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of غَمُقَ (ġamuqa); elative أَغْمَق.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Standard writing often prefers دَاكِن; in speech غَامِق is the usual word."
+    ],
+    "pitfalls": [
+     "Only for colours: a dark room is غُرْفَةٌ مُظْلِمَةٌ, not *غَامِقَةٌ."
+    ],
+    "subtleties": [
+     "It follows the colour word, like فَاتِح: أَخْضَرُ غَامِقٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:akthar",
+   "lemma": "أَكْثَر",
+   "pos": "ADJ",
+   "class": "elative",
+   "senses": [
+    "adv.more",
+    "adv.most"
+   ],
+   "root": "ك ث ر",
+   "translit": "ʾakṯar",
+   "forms": {
+    "ADJ;CMPR;NOM": "أَكْثَرُ",
+    "ADJ;CMPR;ACC": "أَكْثَرَ",
+    "ADJ;CMPR;GEN": "أَكْثَرَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَكْثَرُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَكْثَرَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَكْثَرِ",
+    "ADJ;SPRL;NOM;CONST": "أَكْثَرُ",
+    "ADJ;SPRL;ACC;CONST": "أَكْثَرَ",
+    "ADJ;SPRL;GEN;CONST": "أَكْثَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Quantity and preference: more than, most of, the most.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "more (than): أَكْثَرَ مِنْ …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.more"
+     },
+     {
+      "id": "s2",
+      "def": "most, the most; most of: أَكْثَرُ النَّاسِ, الْأَكْثَرُ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.most"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ الشَّايَ أَكْثَرَ مِنَ الْقَهْوَةِ.",
+      "tr": "I like tea more than coffee.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ أَخِي أَكْثَرَ مِنِّي.",
+      "tr": "My brother eats more than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَكْثَرُ النَّاسِ يَشْرَبُونَ الشَّايَ هُنَا.",
+      "tr": "Most people here drink tea.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s2"
+     },
+     {
+      "text": "هٰذِهِ هِيَ الْمَدِينَةُ الْأَكْثَرُ زِيَارَةً.",
+      "tr": "This is the most visited city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَكْثَرَ مِنْ …",
+      "tr": "more than …"
+     },
+     {
+      "text": "أَكْثَرُ النَّاسِ",
+      "tr": "most people"
+     },
+     {
+      "text": "الْأَكْثَرُ جَمَالًا",
+      "tr": "the most beautiful"
+     },
+     {
+      "text": "أَكْثَرَ فَأَكْثَرَ",
+      "tr": "more and more"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "عَلَى الْأَكْثَرِ",
+      "tr": "at the most",
+      "kind": "fixed expression",
+      "meaning": "at most, at the maximum",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مُعْظَمُ",
+      "register": "neutral",
+      "nuance": "most of, the greater part — before a definite noun: مُعْظَمُ النَّاسِ"
+     },
+     {
+      "word": "الْمَزِيدُ مِنْ",
+      "register": "neutral",
+      "nuance": "more (of something): الْمَزِيدُ مِنَ الْمَاءِ, more water"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "أَقَلّ",
+      "note": "less, fewer"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the elative of كَثِير (kaṯīr, “much, many”), of the root ك ث ر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Where Greek and Turkish add a word (πιο, daha), Arabic usually makes a new word: كَبِير → أَكْبَر. أَكْثَر is the elative of كَثِير — “more” is literally “much-er”."
+    ],
+    "pitfalls": [
+     "Not for adjectives that have an elative: bigger is أَكْبَرُ, not *أَكْثَرُ كَبِيرًا.",
+     "For colours and many participles it is the only way: أَكْثَرُ + a noun in the accusative — أَكْثَرُ تَعَبًا (more tired)."
+    ],
+    "subtleties": [
+     "After a verb, “more” is accusative: أُحِبُّ الشَّايَ أَكْثَرَ.",
+     "أَكْثَرُ + a definite plural = most of: أَكْثَرُ الطُّلَّابِ."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

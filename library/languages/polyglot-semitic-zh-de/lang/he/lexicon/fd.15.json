@@ -1,0 +1,2911 @@
+{
+ "lexemes": [
+  {
+   "id": "he:yanuar",
+   "lemma": "יָנוּאָר",
+   "pos": "NOUN",
+   "senses": [
+    "time.january"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "yanuar",
+   "note": "The first month of the civil (Gregorian) year. “In January” = בְּיָנוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּיָנוּאָר).",
+   "forms": {
+    "N;SG;INDF": "יָנוּאָר",
+    "N;SG;INDF;PFX": "יָּנוּאָר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rain in Tel Aviv, snow on the Hermon, the civil New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "January",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.january"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשָּׁנָה הָאֶזְרָחִית מַתְחִילָה בְּאֶחָד בְּיָנוּאָר.",
+      "tr": "The civil year begins on the first of January.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיָנוּאָר יֵשׁ שֶׁלֶג בַּחֶרְמוֹן.",
+      "tr": "In January there is snow on Mount Hermon.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי בְּיָנוּאָר.",
+      "tr": "My birthday is in January.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיָנוּאָר",
+      "tr": "in January"
+     },
+     {
+      "text": "אֶחָד בְּיָנוּאָר",
+      "tr": "the first of January"
+     },
+     {
+      "text": "סוֹף יָנוּאָר",
+      "tr": "the end of January"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ינו׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German Januar, from Latin Iānuārius “(month) of Janus” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like the other month names, Hebrew took יָנוּאָר from German (Wiktionary) — so German Januar, Russian январь and Greek Ιανουάριος are its brothers."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּיָנוּאָר “in January” (a month is like a name).",
+     "The Jewish New Year (רֹאשׁ הַשָּׁנָה) is in the autumn; 1 January is the civil New Year, often called סִילְבֶסְטֶר for its eve."
+    ],
+    "subtleties": [
+     "January falls in the Hebrew months טֵבֵת and שְׁבָט; Hebrew dates and Gregorian dates are both used in Israel."
+    ]
+   }
+  },
+  {
+   "id": "he:februar",
+   "lemma": "פֶבְּרוּאָר",
+   "pos": "NOUN",
+   "senses": [
+    "time.february"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "februar",
+   "note": "The second month of the civil (Gregorian) year. “In February” = בְּפֶבְּרוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּפֶבְּרוּאָר).",
+   "forms": {
+    "N;SG;INDF": "פֶבְּרוּאָר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The short month; almond trees in bloom.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "February",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.february"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּפֶבְּרוּאָר יֵשׁ עֶשְׂרִים וּשְׁמוֹנָה יָמִים.",
+      "tr": "February has twenty-eight days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "טוּ בִּשְׁבָט חָל בְּיָנוּאָר אוֹ בְּפֶבְּרוּאָר.",
+      "tr": "Tu BiShvat falls in January or February.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשְּׁקֵדִיּוֹת פּוֹרְחוֹת בְּפֶבְּרוּאָר.",
+      "tr": "The almond trees bloom in February.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּפֶבְּרוּאָר",
+      "tr": "in February"
+     },
+     {
+      "text": "סוֹף פֶבְּרוּאָר",
+      "tr": "the end of February"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פבר׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German Februar, from Latin Februarius (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish Şubat and Levantine Arabic شُبَاط “February” carry the old Semitic month name that Hebrew calls שְׁבָט."
+    ],
+    "pitfalls": [
+     "The first letter is פ without a dot: f (februar) — a sign of a loanword.",
+     "No article and no change after בְּ: בְּפֶבְּרוּאָר “in February” (a month is like a name)."
+    ],
+    "subtleties": [
+     "February overlaps the Hebrew month שְׁבָט; the tree festival טוּ בִּשְׁבָט (15 Shevat) falls in January or February."
+    ]
+   }
+  },
+  {
+   "id": "he:merts",
+   "lemma": "מֶרְץ",
+   "pos": "NOUN",
+   "senses": [
+    "time.march"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "merts",
+   "note": "The third month of the civil (Gregorian) year. “In March” = בְּמֶרְץ (no article); a date: day + בְּ + month (אֶחָד בְּמֶרְץ).",
+   "forms": {
+    "N;SG;INDF": "מֶרְץ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The only noun Wiktionary files under the letters מרץ is מֶרֶץ “energy, vigour”, another word; the month מֶרְץ “March” is filed there as a proper noun (name), with exactly this vowelling.",
+     "N;SG;INDF": "Wiktionary’s vowelling מֶרֶץ belongs to the other word under these letters (“energy”); its entry for the month “March” is vowelled מֶרְץ, as here."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Spring arrives; Purim costumes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "March",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.march"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּמֶרְץ מַתְחִיל הָאָבִיב.",
+      "tr": "Spring begins in March.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "פּוּרִים חָל בְּדֶרֶךְ כְּלָל בְּמֶרְץ.",
+      "tr": "Purim usually falls in March.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקּוּרְס מַתְחִיל בְּעֶשְׂרִים בְּמֶרְץ.",
+      "tr": "The course starts on the twentieth of March.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּמֶרְץ",
+      "tr": "in March"
+     },
+     {
+      "text": "תְּחִלַּת מֶרְץ",
+      "tr": "the beginning of March"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מֶרְס",
+      "register": "neutral",
+      "nuance": "another spelling and pronunciation (מרס / מארס), less common (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from German März, from Latin Martius (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Levantine Arabic آذَار “March” is the old month name that Hebrew calls אֲדָר."
+    ],
+    "pitfalls": [
+     "Unvowelled מרץ is also מֶרֶץ “energy, vigour” (Wiktionary) — read it by the context.",
+     "No article and no change after בְּ: בְּמֶרְץ “in March” (a month is like a name)."
+    ],
+    "subtleties": [
+     "March overlaps the Hebrew month אֲדָר (Purim, 14 Adar) or נִיסָן. In a Hebrew leap year there are two Adars: אֲדָר א׳ and אֲדָר ב׳."
+    ]
+   }
+  },
+  {
+   "id": "he:april",
+   "lemma": "אַפְּרִיל",
+   "pos": "NOUN",
+   "senses": [
+    "time.april"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "april",
+   "note": "The fourth month of the civil (Gregorian) year. “In April” = בְּאַפְּרִיל (no article); a date: day + בְּ + month (אֶחָד בְּאַפְּרִיל).",
+   "forms": {
+    "N;SG;INDF": "אַפְּרִיל"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Passover, spring flowers, April fools.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "April",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.april"
+     }
+    ],
+    "examples": [
+     {
+      "text": "פֶּסַח חָל בְּדֶרֶךְ כְּלָל בְּאַפְּרִיל.",
+      "tr": "Passover usually falls in April.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּאַפְּרִיל אֲנַחְנוּ נוֹסְעִים לַצָּפוֹן.",
+      "tr": "In April we travel up north.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶחָד בְּאַפְּרִיל!",
+      "tr": "April fool! (the first of April)",
+      "register": "colloquial",
+      "context": "customs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּאַפְּרִיל",
+      "tr": "in April"
+     },
+     {
+      "text": "אֶחָד בְּאַפְּרִיל",
+      "tr": "April Fools’ Day (Wiktionary)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אפר׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German April, from Latin Aprilis (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish Nisan “April” and Levantine Arabic نَيْسَان are the same name as the Hebrew month נִיסָן."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּאַפְּרִיל “in April” (a month is like a name).",
+     "אֶחָד בְּאַפְּרִיל is April Fools’ Day — and the shout “April fool!” (Wiktionary)."
+    ],
+    "subtleties": [
+     "April overlaps the Hebrew month נִיסָן, the month of Passover (פֶּסַח, 15 Nisan)."
+    ]
+   }
+  },
+  {
+   "id": "he:mai",
+   "lemma": "מַאי",
+   "pos": "NOUN",
+   "senses": [
+    "time.may"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "mai",
+   "note": "The fifth month of the civil (Gregorian) year. “In May” = בְּמַאי (no article); a date: day + בְּ + month (אֶחָד בְּמַאי).",
+   "forms": {
+    "N;SG;INDF": "מַאי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm days, Independence Day barbecues.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "May",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּמַאי כְּבָר חַם.",
+      "tr": "In May it is already hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "יוֹם הָעַצְמָאוּת חָל בְּאַפְּרִיל אוֹ בְּמַאי.",
+      "tr": "Independence Day falls in April or May.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶחָד בְּמַאי הוּא חַג הַפּוֹעֲלִים.",
+      "tr": "The first of May is Labour Day.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּמַאי",
+      "tr": "in May"
+     },
+     {
+      "text": "אֶחָד בְּמַאי",
+      "tr": "May Day, Labour Day (Wiktionary)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; Wiktionary gives no abbreviation for this short name.",
+    "etymology": {
+     "text": "From German Mai, from Latin Māius “Maia’s month” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Levantine Arabic أَيَّار “May” is the old month name that Hebrew calls אִיָּר."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּמַאי “in May” (a month is like a name).",
+     "Unvowelled מאי is also a girl’s name, and in the Talmud the Aramaic מַאי “what?” (Wiktionary)."
+    ],
+    "subtleties": [
+     "May overlaps the Hebrew month אִיָּר, when Israel’s Independence Day (5 Iyar) is celebrated."
+    ]
+   }
+  },
+  {
+   "id": "he:yuni",
+   "lemma": "יוּנִי",
+   "pos": "NOUN",
+   "senses": [
+    "time.june"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "yuni",
+   "note": "The sixth month of the civil (Gregorian) year. “In June” = בְּיוּנִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּנִי).",
+   "forms": {
+    "N;SG;INDF": "יוּנִי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The nouns Wiktionary files under the letters יוני are other words (יוֹנֵי־ “doves of”, יְוָנִי “Greek”); the month יוּנִי “June” is filed there as a proper noun (name)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the school year, long hot days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "June",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.june"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּיוּנִי נִגְמָרִים הַלִּמּוּדִים.",
+      "tr": "In June the school year ends.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁבוּעוֹת חָל בְּמַאי אוֹ בְּיוּנִי.",
+      "tr": "Shavuot falls in May or June.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֻפְשָׁה מַתְחִילָה בְּסוֹף יוּנִי.",
+      "tr": "The holiday starts at the end of June.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוּנִי",
+      "tr": "in June"
+     },
+     {
+      "text": "סוֹף יוּנִי",
+      "tr": "the end of June"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; Wiktionary gives no abbreviation for this short name.",
+    "etymology": {
+     "text": "From German Juni, from Latin Iunius (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Unvowelled, “June” and “Greek” (יוני / יווני) are almost the same word — a pun for a Greek speaker."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּיוּנִי “in June” (a month is like a name).",
+     "Unvowelled יוני is also the boy’s name Yoni, and יְוָנִי “Greek” in short spelling (Wiktionary) — vowels or context decide."
+    ],
+    "subtleties": [
+     "June overlaps the Hebrew month סִיוָן, the month of Shavuot (6 Sivan)."
+    ]
+   }
+  },
+  {
+   "id": "he:yuli",
+   "lemma": "יוּלִי",
+   "pos": "NOUN",
+   "senses": [
+    "time.july"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "yuli",
+   "note": "The seventh month of the civil (Gregorian) year. “In July” = בְּיוּלִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּלִי).",
+   "forms": {
+    "N;SG;INDF": "יוּלִי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The heat of the summer holiday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "July",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.july"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּיוּלִי אֲנַחְנוּ נוֹסְעִים לַיָּם.",
+      "tr": "In July we go to the sea.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "יוּלִי וְאוֹגוּסְט הֵם הַחֳדָשִׁים הַחַמִּים בְּיוֹתֵר.",
+      "tr": "July and August are the hottest months.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקַּיְטָנָה מַתְחִילָה בְּאֶחָד בְּיוּלִי.",
+      "tr": "The summer camp starts on the first of July.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוּלִי",
+      "tr": "in July"
+     },
+     {
+      "text": "אֶמְצַע יוּלִי",
+      "tr": "mid-July"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; Wiktionary gives no abbreviation for this short name.",
+    "etymology": {
+     "text": "From German Juli, from Latin Iulius (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish Temmuz “July” and Levantine Arabic تَمُّوز are the same name as the Hebrew month תַּמּוּז."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּיוּלִי “in July” (a month is like a name).",
+     "Unvowelled יולי is also a given name (Wiktionary)."
+    ],
+    "subtleties": [
+     "July overlaps the Hebrew month תַּמּוּז."
+    ]
+   }
+  },
+  {
+   "id": "he:ogust",
+   "lemma": "אוֹגוּסְט",
+   "pos": "NOUN",
+   "senses": [
+    "time.august"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "ogust",
+   "note": "The eighth month of the civil (Gregorian) year. “In August” = בְּאוֹגוּסְט (no article); a date: day + בְּ + month (אֶחָד בְּאוֹגוּסְט).",
+   "forms": {
+    "N;SG;INDF": "אוֹגוּסְט"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Beaches, family trips, the hottest weeks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "August",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.august"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּאוֹגוּסְט חַם מְאֹד.",
+      "tr": "In August it is very hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֻפְשָׁה שֶׁלָּנוּ בְּאוֹגוּסְט.",
+      "tr": "Our holiday is in August.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "תִּשְׁעָה בְּאָב חָל בְּיוּלִי אוֹ בְּאוֹגוּסְט.",
+      "tr": "Tisha B’Av falls in July or August.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּאוֹגוּסְט",
+      "tr": "in August"
+     },
+     {
+      "text": "סוֹף אוֹגוּסְט",
+      "tr": "the end of August"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אוג׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German August, from Latin Augustus; the pronunciation was likely influenced by English August (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Levantine Arabic آب “August” is the same name as the Hebrew month אָב."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּאוֹגוּסְט “in August” (a month is like a name).",
+     "Stress on the first syllable: ógust."
+    ],
+    "subtleties": [
+     "August overlaps the Hebrew month אָב (Tisha B’Av, 9 Av, the fast for the Temple)."
+    ]
+   }
+  },
+  {
+   "id": "he:september",
+   "lemma": "סֶפְּטֶמְבֶּר",
+   "pos": "NOUN",
+   "senses": [
+    "time.september"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "september",
+   "note": "The ninth month of the civil (Gregorian) year. “In September” = בְּסֶפְּטֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּסֶפְּטֶמְבֶּר).",
+   "forms": {
+    "N;SG;INDF": "סֶפְּטֶמְבֶּר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Back to school and the Jewish New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "September",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.september"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּאֶחָד בְּסֶפְּטֶמְבֶּר הַיְּלָדִים חוֹזְרִים לְבֵית הַסֵּפֶר.",
+      "tr": "On the first of September the children go back to school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "רֹאשׁ הַשָּׁנָה חָל בְּסֶפְּטֶמְבֶּר אוֹ בְּאוֹקְטוֹבֶּר.",
+      "tr": "Rosh Hashana falls in September or October.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חוֹזֵר מֵחוּ״ל בְּסֶפְּטֶמְבֶּר.",
+      "tr": "He is coming back from abroad in September.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּסֶפְּטֶמְבֶּר",
+      "tr": "in September"
+     },
+     {
+      "text": "אֶחָד בְּסֶפְּטֶמְבֶּר",
+      "tr": "the first of September (the first school day)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ספט׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from German September, from Latin September (Wiktionary) — from septem “seven”: the seventh month of the old Roman year.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish Eylül “September” and Levantine Arabic أَيْلُول are the same name as the Hebrew month אֱלוּל."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּסֶפְּטֶמְבֶּר “in September” (a month is like a name).",
+     "The school year in Israel starts on 1 September."
+    ],
+    "subtleties": [
+     "September overlaps the Hebrew months אֱלוּל and תִּשְׁרֵי — the time of the High Holidays."
+    ]
+   }
+  },
+  {
+   "id": "he:oktober",
+   "lemma": "אוֹקְטוֹבֶּר",
+   "pos": "NOUN",
+   "senses": [
+    "time.october"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "oktober",
+   "note": "The tenth month of the civil (Gregorian) year. “In October” = בְּאוֹקְטוֹבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּאוֹקְטוֹבֶּר).",
+   "forms": {
+    "N;SG;INDF": "אוֹקְטוֹבֶּר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sukkot booths, the first rain.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "October",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.october"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּאוֹקְטוֹבֶּר הַסְּטוּדֶנְטִים חוֹזְרִים לָאוּנִיבֶרְסִיטָה.",
+      "tr": "In October the students go back to university.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     },
+     {
+      "text": "סֻכּוֹת חָל בְּסֶפְּטֶמְבֶּר אוֹ בְּאוֹקְטוֹבֶּר.",
+      "tr": "Sukkot falls in September or October.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הַגֶּשֶׁם הָרִאשׁוֹן יוֹרֵד בְּאוֹקְטוֹבֶּר.",
+      "tr": "The first rain falls in October.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּאוֹקְטוֹבֶּר",
+      "tr": "in October"
+     },
+     {
+      "text": "אֶמְצַע אוֹקְטוֹבֶּר",
+      "tr": "mid-October"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אוק׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from German Oktober, from Latin October (Wiktionary) — from octo “eight”: the eighth month of the old Roman year.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Levantine Arabic تِشْرِين الْأَوَّل “October” carries the old name that Hebrew calls תִּשְׁרֵי."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּאוֹקְטוֹבֶּר “in October” (a month is like a name).",
+     "Israeli universities start the year in October, after the autumn holidays."
+    ],
+    "subtleties": [
+     "October overlaps the Hebrew months תִּשְׁרֵי and חֶשְׁוָן."
+    ]
+   }
+  },
+  {
+   "id": "he:november",
+   "lemma": "נוֹבֶמְבֶּר",
+   "pos": "NOUN",
+   "senses": [
+    "time.november"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "november",
+   "note": "The eleventh month of the civil (Gregorian) year. “In November” = בְּנוֹבֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּנוֹבֶמְבֶּר).",
+   "forms": {
+    "N;SG;INDF": "נוֹבֶמְבֶּר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rain and the first cool evenings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "November",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.november"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יוֹם הַהֻלֶּדֶת שֶׁלָּהּ בְּנוֹבֶמְבֶּר.",
+      "tr": "Her birthday is in November.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּנוֹבֶמְבֶּר יוֹרֵד הַרְבֵּה גֶּשֶׁם.",
+      "tr": "In November it rains a lot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם גָּרִים בִּרְחוֹב כ״ט בְּנוֹבֶמְבֶּר.",
+      "tr": "They live on 29 November Street.",
+      "register": "neutral",
+      "context": "addresses",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּנוֹבֶמְבֶּר",
+      "tr": "in November"
+     },
+     {
+      "text": "כ״ט בְּנוֹבֶמְבֶּר",
+      "tr": "29 November (the UN vote of 1947; a street name)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נוב׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German November, from Latin November (Wiktionary) — from novem “nine”: the ninth month of the old Roman year.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many Israeli towns have a street called כ״ט בְּנוֹבֶמְבֶּר, after the UN vote of 29 November 1947 on the partition of Palestine."
+    ],
+    "pitfalls": [
+     "No article and no change after בְּ: בְּנוֹבֶמְבֶּר “in November” (a month is like a name).",
+     "In כ״ט בְּנוֹבֶמְבֶּר the day is written with Hebrew letters (כ״ט = 29) — read it “kaf-tet be-november”."
+    ],
+    "subtleties": [
+     "November overlaps the Hebrew months חֶשְׁוָן and כִּסְלֵו."
+    ]
+   }
+  },
+  {
+   "id": "he:detsember",
+   "lemma": "דֵּצֶמְבֶּר",
+   "pos": "NOUN",
+   "senses": [
+    "time.december"
+   ],
+   "class": "cal",
+   "gender": "MASC",
+   "translit": "detsember",
+   "note": "The twelfth month of the civil (Gregorian) year. “In December” = בְּדֵצֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּדֵצֶמְבֶּר).",
+   "forms": {
+    "N;SG;INDF": "דֵּצֶמְבֶּר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the Gregorian month names as proper nouns (“name”); the course treats them as nouns, like the month names of its other languages."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hanukkah candles, short days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "December",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.december"
+     }
+    ],
+    "examples": [
+     {
+      "text": "חֲנֻכָּה חָל בְּדֶרֶךְ כְּלָל בְּחֹדֶשׁ דֵּצֶמְבֶּר.",
+      "tr": "Hanukkah usually falls in December.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "דֵּצֶמְבֶּר הוּא הַחֹדֶשׁ הָאַחֲרוֹן בַּשָּׁנָה.",
+      "tr": "December is the last month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּשְׂרָד סָגוּר עַד סוֹף דֵּצֶמְבֶּר.",
+      "tr": "The office is closed until the end of December.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּדֵצֶמְבֶּר",
+      "tr": "in December (the ד loses its dot: bedetsember)"
+     },
+     {
+      "text": "סוֹף דֵּצֶמְבֶּר",
+      "tr": "the end of December"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "דצמ׳",
+      "register": "neutral",
+      "nuance": "the written abbreviation (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From German Dezember, from Latin december “tenth month”, from decem “ten”: December was the tenth month of the Roman calendar (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin decem “ten” is the same word as Greek δέκα and Russian десять — December was the tenth month (Wiktionary)."
+    ],
+    "pitfalls": [
+     "After בְּ the dot of the ד disappears: בְּדֵצֶמְבֶּר (bedetsember).",
+     "No article: בְּדֵצֶמְבֶּר “in December”."
+    ],
+    "subtleties": [
+     "December overlaps the Hebrew months כִּסְלֵו and טֵבֵת; Hanukkah begins on 25 Kislev."
+    ]
+   }
+  },
+  {
+   "id": "he:aviv",
+   "lemma": "אָבִיב",
+   "pos": "NOUN",
+   "senses": [
+    "time.spring"
+   ],
+   "gender": "MASC",
+   "translit": "aviv",
+   "note": "“In spring” = בָּאָבִיב (with the article).",
+   "forms": {
+    "N;SG;INDF": "אָבִיב",
+    "N;SG;DEF": "הָאָבִיב",
+    "N;PL;INDF": "אֲבִיבִים",
+    "N;PL;DEF": "הָאֲבִיבִים",
+    "N;SG;DEF;PFX": "אָבִיב"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הָאָבִיב → (בַּ / לַ)אָבִיב; Wiktionary lists only the full definite form הָאָבִיב."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Green fields and wild flowers — short and lovely.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring (the season)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.spring"
+     },
+     {
+      "id": "s2",
+      "def": "fresh ears of barley; the early ripening of grain",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "בָּאָבִיב הַשָּׂדוֹת יְרֻקִּים.",
+      "tr": "In spring the fields are green.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "פֶּסַח הוּא חַג הָאָבִיב.",
+      "tr": "Passover is the festival of spring.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאָבִיב בְּיִשְׂרָאֵל קָצָר.",
+      "tr": "Spring in Israel is short.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּאָבִיב",
+      "tr": "in spring"
+     },
+     {
+      "text": "חַג הָאָבִיב",
+      "tr": "the spring festival (Passover)"
+     },
+     {
+      "text": "אֲבִיבִי",
+      "tr": "spring-like"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "From a root meaning “to be thick, swell, ripen”; possibly cognate with Arabic أَبّ (ʔabb, “pasture, herbage”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tel Aviv, תֵּל אָבִיב, is “the hill of spring” — the Hebrew title of Herzl’s novel Altneuland, from a place name in Ezekiel 3:15."
+    ],
+    "pitfalls": [
+     "“In spring” takes the article: בָּאָבִיב (not *בְּאָבִיב).",
+     "Masculine: אָבִיב חַם “a warm spring”."
+    ],
+    "subtleties": [
+     "In the Bible אָבִיב is fresh barley, and חֹדֶשׁ הָאָבִיב the month of Nisan (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:kayits",
+   "lemma": "קַיִץ",
+   "pos": "NOUN",
+   "senses": [
+    "time.summer"
+   ],
+   "gender": "MASC",
+   "translit": "kayits",
+   "note": "“In summer” = בַּקַּיִץ. Plural קֵיצִים.",
+   "forms": {
+    "N;SG;INDF": "קַיִץ",
+    "N;SG;DEF": "הַקַּיִץ",
+    "N;PL;INDF": "קֵיצִים",
+    "N;PL;DEF": "הַקֵּיצִים",
+    "N;SG;DEF;PFX": "קַּיִץ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Long, hot and humid; the beach and the big holiday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "summer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.summer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּקַּיִץ חַם מְאֹד.",
+      "tr": "In summer it is very hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּקַּיִץ אֲנַחְנוּ נוֹסְעִים לַיָּם.",
+      "tr": "In summer we go to the sea.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "חֻפְשַׁת הַקַּיִץ מַתְחִילָה בְּיוּלִי.",
+      "tr": "The summer holiday starts in July.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּקַּיִץ",
+      "tr": "in summer"
+     },
+     {
+      "text": "חֻפְשַׁת קַיִץ",
+      "tr": "summer holiday"
+     },
+     {
+      "text": "שְׁעוֹן קַיִץ",
+      "tr": "summer time (daylight saving)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "From Proto-Semitic *qayθ̣- “summer”; compare Aramaic qēṭā and Arabic قَيْظ (qayẓ, “oppressive heat, midsummer”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Arabic cousin قَيْظ means the fierce midsummer heat; the ordinary Arabic “summer” is another word, صَيْف."
+    ],
+    "pitfalls": [
+     "“In summer” takes the article: בַּקַּיִץ.",
+     "A segolate noun: קַיִץ, but the plural is קֵיצִים."
+    ],
+    "subtleties": [
+     "קֵיצִי “summery” (Wiktionary) — בְּגָדִים קֵיצִיִּים “summer clothes”."
+    ]
+   }
+  },
+  {
+   "id": "he:stav",
+   "lemma": "סְתָו",
+   "pos": "NOUN",
+   "senses": [
+    "time.autumn"
+   ],
+   "gender": "MASC",
+   "translit": "stav",
+   "note": "“In autumn” = בַּסְּתָו. Written without vowels סתיו (with a silent י).",
+   "forms": {
+    "N;SG;INDF": "סְתָו",
+    "N;SG;DEF": "הַסְּתָו",
+    "N;PL;INDF": "סְתָוִים",
+    "N;PL;DEF": "הַסְּתָוִים",
+    "N;SG;DEF;PFX": "סְּתָו"
+   },
+   "plene": {
+    "N;SG;INDF": "סתיו",
+    "N;SG;DEF": "הסתיו",
+    "N;PL;INDF": "סתווים",
+    "N;PL;DEF": "הסתווים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first rain, the autumn holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "autumn, fall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.autumn"
+     },
+     {
+      "id": "s2",
+      "def": "winter, the rainy season (Biblical)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּסְּתָו מַתְחִיל הַגֶּשֶׁם.",
+      "tr": "In autumn the rain begins.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "חַגֵּי תִּשְׁרֵי בַּסְּתָו.",
+      "tr": "The holidays of Tishrei are in the autumn.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "כִּי הִנֵּה הַסְּתָו עָבָר.",
+      "tr": "For lo, the winter is past.",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּסְּתָו",
+      "tr": "in autumn"
+     },
+     {
+      "text": "עֲלֵי סְתָו",
+      "tr": "autumn leaves"
+     },
+     {
+      "text": "סְתָו גָּשׁוּם",
+      "tr": "a rainy autumn"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כִּי הִנֵּה הַסְּתָו עָבָר",
+      "tr": "for lo, the winter is past",
+      "kind": "quote",
+      "meaning": "the bad season is over; spring has come",
+      "register": "literary",
+      "source": "Song of Songs 2:11"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Compare Arabic شِتَاء (šitāʔ, “winter”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A false friend between the course’s two Semitic languages: Hebrew סְתָו is autumn, its Arabic cousin شِتَاء is winter — and Hebrew חֹרֶף “winter” matches Arabic خَرِيف “autumn” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Written without vowels סתיו (with י), as in the name Stav (Wiktionary).",
+     "“In autumn” takes the article: בַּסְּתָו."
+    ],
+    "subtleties": [
+     "In the Bible סְתָו is the rainy winter (Wiktionary): כִּי הִנֵּה הַסְּתָו עָבָר “for lo, the winter is past” (Song of Songs 2:11)."
+    ]
+   }
+  },
+  {
+   "id": "he:choref",
+   "lemma": "חֹרֶף",
+   "pos": "NOUN",
+   "senses": [
+    "time.winter"
+   ],
+   "gender": "MASC",
+   "translit": "choref",
+   "note": "“In winter” = בַּחֹרֶף. Full spelling חורף.",
+   "forms": {
+    "N;SG;INDF": "חֹרֶף",
+    "N;SG;DEF": "הַחֹרֶף",
+    "N;PL;INDF": "חֳרָפִים",
+    "N;PL;DEF": "הַחֳרָפִים",
+    "N;SG;DEF;PFX": "חֹרֶף"
+   },
+   "plene": {
+    "N;SG;INDF": "חורף",
+    "N;SG;DEF": "החורף",
+    "N;PL;INDF": "חורפים",
+    "N;PL;DEF": "החורפים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַחֹרֶף → (בַּ / לַ)חֹרֶף; Wiktionary lists only the full definite form הַחֹרֶף."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rain, a heater, soup — and snow in Jerusalem now and then.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.winter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּחֹרֶף יוֹרֵד גֶּשֶׁם.",
+      "tr": "In winter it rains.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף קַר בִּירוּשָׁלַיִם.",
+      "tr": "In winter it is cold in Jerusalem.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי צָרִיךְ מְעִיל חֹרֶף.",
+      "tr": "I (m.) need a winter coat.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּחֹרֶף",
+      "tr": "in winter"
+     },
+     {
+      "text": "מְעִיל חֹרֶף",
+      "tr": "winter coat"
+     },
+     {
+      "text": "חֻפְשַׁת חֹרֶף",
+      "tr": "winter holiday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Cognate with Arabic خَرِيف (ḵarīf, “autumn, fall”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic خَرِيف is the same word but means autumn: the seasons “moved” between the two languages (Wiktionary)."
+    ],
+    "pitfalls": [
+     "“In winter” takes the article: בַּחֹרֶף.",
+     "Plural חֳרָפִים; full spelling חורף."
+    ],
+    "subtleties": [
+     "חָרְפִּי “wintry” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:shavua",
+   "lemma": "שָׁבוּעַ",
+   "pos": "NOUN",
+   "senses": [
+    "time.week"
+   ],
+   "gender": "MASC",
+   "translit": "shavua",
+   "note": "“This week” = הַשָּׁבוּעַ. Two weeks = שְׁבוּעַיִם (dual). Plural שָׁבוּעוֹת (masculine, with -וֹת).",
+   "forms": {
+    "N;SG;INDF": "שָׁבוּעַ",
+    "N;SG;DEF": "הַשָּׁבוּעַ",
+    "N;PL;INDF": "שָׁבוּעוֹת",
+    "N;PL;DEF": "הַשָּׁבוּעוֹת",
+    "N;DU;INDF": "שְׁבוּעַיִם"
+   },
+   "plene": {
+    "N;DU;INDF": "שבועיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seven days, from Sunday to Shabbat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.week"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ שִׁבְעָה יָמִים בְּשָׁבוּעַ.",
+      "tr": "There are seven days in a week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשָּׁבוּעַ אֲנִי עוֹבֵד מֵהַבַּיִת.",
+      "tr": "This week I (m.) am working from home.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁבוּעַ טוֹב!",
+      "tr": "Have a good week! (said on Saturday night)",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּל שָׁבוּעַ",
+      "tr": "every week"
+     },
+     {
+      "text": "בַּשָּׁבוּעַ הַבָּא",
+      "tr": "next week"
+     },
+     {
+      "text": "שְׁבוּעַיִם",
+      "tr": "two weeks, a fortnight"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שָׁבוּעַ טוֹב",
+      "tr": "a good week",
+      "kind": "fixed expression",
+      "meaning": "have a good week (greeting on Saturday night)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Related to שֶׁבַע “seven” (Wiktionary): a period of seven days.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The festival of Shavuot, שָׁבוּעוֹת, is literally “Weeks”: it comes seven weeks after Passover."
+    ],
+    "pitfalls": [
+     "Masculine, but the plural is שָׁבוּעוֹת.",
+     "Two weeks is the dual שְׁבוּעַיִם, not *שְׁנֵי שָׁבוּעוֹת.",
+     "“This week” is הַשָּׁבוּעַ — the article alone."
+    ],
+    "subtleties": [
+     "שָׁבוּעַ טוֹב “a good week” is the greeting when Shabbat ends on Saturday evening."
+    ]
+   }
+  },
+  {
+   "id": "he:chodesh",
+   "lemma": "חֹדֶשׁ",
+   "pos": "NOUN",
+   "senses": [
+    "time.month"
+   ],
+   "gender": "MASC",
+   "translit": "chodesh",
+   "note": "“This month” = הַחֹדֶשׁ. Two months = חׇדְשַׁיִם (dual). Full spelling חודש.",
+   "forms": {
+    "N;SG;INDF": "חֹדֶשׁ",
+    "N;SG;DEF": "הַחֹדֶשׁ",
+    "N;PL;INDF": "חֳדָשִׁים",
+    "N;PL;DEF": "הַחֳדָשִׁים",
+    "N;DU;INDF": "חׇדְשַׁיִם"
+   },
+   "plene": {
+    "N;SG;INDF": "חודש",
+    "N;SG;DEF": "החודש",
+    "N;PL;INDF": "חודשים",
+    "N;PL;DEF": "החודשים",
+    "N;DU;INDF": "חודשיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rent, salary, the new moon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "month",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.month"
+     },
+     {
+      "id": "s2",
+      "def": "new moon, the first day of a Hebrew month",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ שְׁנֵים עָשָׂר חֳדָשִׁים בְּשָׁנָה.",
+      "tr": "There are twelve months in a year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֹדֶשׁ אֲנַחְנוּ בְּחֻפְשָׁה.",
+      "tr": "This month we are on holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "רֹאשׁ חֹדֶשׁ אֱלוּל",
+      "tr": "the new moon of Elul",
+      "register": "religious",
+      "context": "calendar",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּל חֹדֶשׁ",
+      "tr": "every month"
+     },
+     {
+      "text": "בְּעוֹד חֹדֶשׁ",
+      "tr": "in a month"
+     },
+     {
+      "text": "חׇדְשַׁיִם",
+      "tr": "two months"
+     },
+     {
+      "text": "רֹאשׁ חֹדֶשׁ",
+      "tr": "the new moon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Originally “new moon”; related to חָדָשׁ “new”; compare Phoenician ḥdš “new moon, month” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A month is a “new (moon)”: חֹדֶשׁ and חָדָשׁ “new” are one root (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Plural חֳדָשִׁים (khodashim); two months = חׇדְשַׁיִם.",
+     "Do not confuse with חָדָשׁ “new” — same letters, other vowels."
+    ],
+    "subtleties": [
+     "The Hebrew calendar is lunar: every month begins with the new moon, רֹאשׁ חֹדֶשׁ “head of the month”."
+    ]
+   }
+  },
+  {
+   "id": "he:shana",
+   "lemma": "שָׁנָה",
+   "pos": "NOUN",
+   "senses": [
+    "time.year"
+   ],
+   "gender": "FEM",
+   "translit": "shana",
+   "note": "Feminine, but the plural is שָׁנִים. “This year” = הַשָּׁנָה. Two years = שְׁנָתַיִם.",
+   "forms": {
+    "N;SG;INDF": "שָׁנָה",
+    "N;SG;DEF": "הַשָּׁנָה",
+    "N;PL;INDF": "שָׁנִים",
+    "N;PL;DEF": "הַשָּׁנִים",
+    "N;DU;INDF": "שְׁנָתַיִם"
+   },
+   "plene": {
+    "N;DU;INDF": "שנתיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Birthdays, anniversaries, “a good year!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.year"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׁנָה טוֹבָה!",
+      "tr": "Happy New Year! (“a good year”)",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשָּׁנָה אֲנַחְנוּ נוֹסְעִים לְיָוָן.",
+      "tr": "This year we are travelling to Greece.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא גָּר פֹּה עֶשְׂרִים שָׁנָה.",
+      "tr": "He has lived here for twenty years.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׁנָה טוֹבָה",
+      "tr": "Happy New Year"
+     },
+     {
+      "text": "רֹאשׁ הַשָּׁנָה",
+      "tr": "the Jewish New Year"
+     },
+     {
+      "text": "כָּל שָׁנָה",
+      "tr": "every year"
+     },
+     {
+      "text": "שְׁנָתַיִם",
+      "tr": "two years"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שָׁנָה טוֹבָה",
+      "tr": "a good year",
+      "kind": "fixed expression",
+      "meaning": "Happy New Year (at Rosh Hashana)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šanat-; cognate with Arabic سَنَة (sana) and Ugaritic šnt (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سَنَة (sana) is the same word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Feminine (שָׁנָה טוֹבָה) but the plural ends in -ִים: שָׁנִים.",
+     "Unvowelled שנה is also שֵׁנָה “sleep” and the verb שָׁנָה “repeated” (Wiktionary)."
+    ],
+    "subtleties": [
+     "After numbers from eleven on, time words often stay singular: עֶשְׂרִים שָׁנָה “twenty years”.",
+     "רֹאשׁ הַשָּׁנָה “the head of the year” is the Jewish New Year, in September or October."
+    ]
+   }
+  },
+  {
+   "id": "he:shaa",
+   "lemma": "שָׁעָה",
+   "pos": "NOUN",
+   "senses": [
+    "time.hour",
+    "time.oclock"
+   ],
+   "gender": "FEM",
+   "translit": "sha‘a",
+   "note": "Hour, and the word for telling the time: הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, בְּשָׁעָה שָׁלוֹשׁ “at three o’clock” — with the feminine numbers. Two hours = שְׁעָתַיִם.",
+   "forms": {
+    "N;SG;INDF": "שָׁעָה",
+    "N;SG;DEF": "הַשָּׁעָה",
+    "N;PL;INDF": "שָׁעוֹת",
+    "N;PL;DEF": "הַשָּׁעוֹת",
+    "N;DU;INDF": "שְׁעָתַיִם"
+   },
+   "plene": {
+    "N;DU;INDF": "שעתיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clocks, timetables, “what time is it?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.hour"
+     },
+     {
+      "id": "s2",
+      "def": "o’clock, the time on the clock (הַשָּׁעָה + number)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.oclock"
+     },
+     {
+      "id": "s3",
+      "def": "a time, a moment (בְּשָׁעָה טוֹבָה “at a good time”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַנְּסִיעָה לְחֵיפָה לוֹקַחַת שָׁעָה.",
+      "tr": "The trip to Haifa takes an hour.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְחַכֶּה כְּבָר שְׁעָתַיִם.",
+      "tr": "I (m.) have been waiting for two hours.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה הַשָּׁעָה?",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "הַשָּׁעָה שָׁלוֹשׁ.",
+      "tr": "It is three o’clock.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s2"
+     },
+     {
+      "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ.",
+      "tr": "The train leaves at five o’clock.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲצִי שָׁעָה",
+      "tr": "half an hour"
+     },
+     {
+      "text": "שְׁעָתַיִם",
+      "tr": "two hours"
+     },
+     {
+      "text": "בְּשָׁעָה …",
+      "tr": "at … o’clock"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בְּשָׁעָה טוֹבָה",
+      "tr": "at a good hour",
+      "kind": "fixed expression",
+      "meaning": "congratulations (on a birth, a new step); may it be at a lucky time",
+      "register": "neutral"
+     },
+     {
+      "text": "הַשָּׁעוֹת הַקְּטַנּוֹת שֶׁל הַלַּיְלָה",
+      "tr": "the small hours of the night",
+      "kind": "idiom",
+      "meaning": "the hours after midnight",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "זְמַן",
+      "register": "neutral",
+      "nuance": "“time” in general: אֵין לִי זְמַן “I have no time” — not the time on the clock"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic šāʿəṯā; cognate with Arabic سَاعَة (sāʕa) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سَاعَة and Turkish saat (from Arabic) mean both “hour” and “clock” — Hebrew uses שָׁעָה for the hour and שָׁעוֹן for the clock."
+    ],
+    "pitfalls": [
+     "Telling the time uses the feminine numbers, because שָׁעָה is feminine: הַשָּׁעָה שָׁלוֹשׁ (not שְׁלוֹשָׁה), בְּשָׁעָה שְׁתַּיִם.",
+     "There is no separate word for “o’clock”: “at five o’clock” is בְּשָׁעָה חָמֵשׁ (or just בְּחָמֵשׁ).",
+     "Two hours = שְׁעָתַיִם (dual), not *שְׁתֵּי שָׁעוֹת."
+    ],
+    "subtleties": [
+     "Half past = וָחֵצִי: הַשָּׁעָה שָׁלוֹשׁ וָחֵצִי; quarter past = וָרֶבַע; quarter to = רֶבַע לְ…: רֶבַע לְאַרְבַּע.",
+     "A watch or a clock is a שָׁעוֹן — from שָׁעָה (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:daka",
+   "lemma": "דַּקָּה",
+   "pos": "NOUN",
+   "senses": [
+    "time.minute"
+   ],
+   "gender": "FEM",
+   "translit": "daka",
+   "forms": {
+    "N;SG;INDF": "דַּקָּה",
+    "N;SG;DEF": "הַדַּקָּה",
+    "N;PL;INDF": "דַּקּוֹת",
+    "N;PL;DEF": "הַדַּקּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“Just a minute!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "minute",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.minute"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה עֶשֶׂר דַּקּוֹת בָּרֶגֶל.",
+      "tr": "It’s ten minutes on foot.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ שִׁשִּׁים דַּקּוֹת בְּשָׁעָה.",
+      "tr": "There are sixty minutes in an hour.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "חַכֵּה דַּקָּה!",
+      "tr": "Wait a minute! (to a man)",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עוֹד דַּקָּה",
+      "tr": "in a minute"
+     },
+     {
+      "text": "רַק דַּקָּה",
+      "tr": "just a minute"
+     },
+     {
+      "text": "חָמֵשׁ דַּקּוֹת",
+      "tr": "five minutes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "רֶגַע",
+      "register": "neutral",
+      "nuance": "“a moment”: רֶגַע! “just a moment!” — not a measured minute"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic دَقِيقَة (daqīqa) (Wiktionary) — the root of דַּק “thin, fine”: a small part (of the hour).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic دَقِيقَة and Turkish dakika are the same word — the “fine, small” part of an hour (Wiktionary gives the Arabic)."
+    ],
+    "pitfalls": [
+     "Feminine: דַּקָּה אַחַת, חָמֵשׁ דַּקּוֹת (feminine numbers).",
+     "Unvowelled דקה is also דַּקָּה “thin (f.)” — the adjective דַּק (Wiktionary)."
+    ],
+    "subtleties": [
+     "עוֹד דַּקָּה is “in a minute”; רֶגַע is shorter and vaguer."
+    ]
+   }
+  },
+  {
+   "id": "he:taarich",
+   "lemma": "תַּאֲרִיךְ",
+   "pos": "NOUN",
+   "senses": [
+    "time.date"
+   ],
+   "gender": "MASC",
+   "translit": "ta’arich",
+   "forms": {
+    "N;SG;INDF": "תַּאֲרִיךְ",
+    "N;SG;DEF": "הַתַּאֲרִיךְ",
+    "N;PL;INDF": "תַּאֲרִיכִים",
+    "N;PL;DEF": "הַתַּאֲרִיכִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Forms, deadlines, the top of a letter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "date (calendar date)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.date"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה הַתַּאֲרִיךְ הַיּוֹם?",
+      "tr": "What’s the date today?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "כִּתְבוּ אֶת הַתַּאֲרִיךְ בְּרֹאשׁ הַדַּף.",
+      "tr": "Write the date at the top of the page.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה תַּאֲרִיךְ הַתְּפוּגָה שֶׁל הֶחָלָב?",
+      "tr": "What is the milk’s expiry date?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּאֲרִיךְ לֵידָה",
+      "tr": "date of birth"
+     },
+     {
+      "text": "תַּאֲרִיךְ עִבְרִי",
+      "tr": "Hebrew (calendar) date"
+     },
+     {
+      "text": "תַּאֲרִיךְ תְּפוּגָה",
+      "tr": "expiry date"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use.",
+    "etymology": {
+     "text": "Borrowed from Arabic تَأْرِيخ (taʔrīḵ, “date”); ultimately from Proto-Semitic *warḫ- “moon, month” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic تَارِيخ and Turkish tarih mean both “date” and “history”; Hebrew borrowed only “date”."
+    ],
+    "pitfalls": [
+     "A date is a day of the calendar — not a meeting with someone (that is פְּגִישָׁה) and not the fruit (תָּמָר).",
+     "Masculine: תַּאֲרִיךְ חָשׁוּב."
+    ],
+    "subtleties": [
+     "A date is said “day + בְּ + month”: עֶשְׂרִים בְּמַאי “the 20th of May” (masculine numbers, for יוֹם)."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-huledet",
+   "lemma": "יוֹם הֻלֶּדֶת",
+   "pos": "NOUN",
+   "senses": [
+    "time.birthday"
+   ],
+   "gender": "MASC",
+   "translit": "yom huledet",
+   "note": "The article goes on the second word: יוֹם הַהֻלֶּדֶת שֶׁלִּי “my birthday”. Plural יְמֵי הֻלֶּדֶת.",
+   "forms": {
+    "N;SG;INDF": "יוֹם הֻלֶּדֶת",
+    "N;SG;DEF": "יוֹם הַהֻלֶּדֶת",
+    "N;PL;INDF": "יְמֵי הֻלֶּדֶת",
+    "N;PL;DEF": "יְמֵי הַהֻלֶּדֶת"
+   },
+   "plene": {
+    "N;SG;INDF": "יום הולדת",
+    "N;SG;DEF": "יום ההולדת",
+    "N;PL;INDF": "ימי הולדת",
+    "N;PL;DEF": "ימי ההולדת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Cake, candles, the whole family singing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "birthday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.birthday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יוֹם הֻלֶּדֶת שָׂמֵחַ!",
+      "tr": "Happy birthday!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי יוֹם הַהֻלֶּדֶת שֶׁלְּךָ?",
+      "tr": "When is your (m.) birthday?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי בְּמַאי.",
+      "tr": "My birthday is in May.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹם הֻלֶּדֶת שָׂמֵחַ",
+      "tr": "happy birthday"
+     },
+     {
+      "text": "מְסִבַּת יוֹם הֻלֶּדֶת",
+      "tr": "birthday party"
+     },
+     {
+      "text": "עוּגַת יוֹם הֻלֶּדֶת",
+      "tr": "birthday cake"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עַד מֵאָה וְעֶשְׂרִים",
+      "tr": "until a hundred and twenty",
+      "kind": "saying",
+      "meaning": "a birthday wish: a long life, like Moses’ 120 years",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יוֹמוּלֶדֶת",
+      "register": "colloquial",
+      "nuance": "the everyday pronunciation run together, “yomuledet” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + הֻלֶּדֶת “birth” (Wiktionary has both words); “day of birth”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Israelis also sing יוֹם הֻלֶּדֶת שָׂמֵחַ to the English tune of “Happy Birthday”."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: יוֹם הַהֻלֶּדֶת (not *הַיּוֹם הֻלֶּדֶת).",
+     "Plural יְמֵי הֻלֶּדֶת."
+    ],
+    "subtleties": [
+     "The traditional wish is עַד מֵאָה וְעֶשְׂרִים “(may you live) to a hundred and twenty”, like Moses."
+    ]
+   }
+  },
+  {
+   "id": "he:chufsha",
+   "lemma": "חֻפְשָׁה",
+   "pos": "NOUN",
+   "senses": [
+    "time.holiday"
+   ],
+   "gender": "FEM",
+   "translit": "chufsha",
+   "note": "A holiday, time off (from work or school). A religious or national holiday is חַג. Full spelling חופשה.",
+   "forms": {
+    "N;SG;INDF": "חֻפְשָׁה",
+    "N;SG;DEF": "הַחֻפְשָׁה",
+    "N;PL;INDF": "חֻפְשׁוֹת",
+    "N;PL;DEF": "הַחֻפְשׁוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "חופשה",
+    "N;SG;DEF": "החופשה",
+    "N;PL;INDF": "חופשות",
+    "N;PL;DEF": "החופשות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Days off: a trip abroad, a week by the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "holiday, vacation, leave",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     },
+     {
+      "id": "s2",
+      "def": "emancipation, release",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ בְּחֻפְשָׁה!",
+      "tr": "We are on holiday!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "חֻפְשָׁה נְעִימָה!",
+      "tr": "Have a nice holiday!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לוֹקֵחַ שָׁבוּעַ חֻפְשָׁה.",
+      "tr": "He is taking a week off.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹצֵא לְחֻפְשָׁה",
+      "tr": "goes on holiday"
+     },
+     {
+      "text": "חֻפְשַׁת מַחֲלָה",
+      "tr": "sick leave"
+     },
+     {
+      "text": "חֻפְשָׁה נְעִימָה",
+      "tr": "have a nice holiday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֹפֶשׁ",
+      "register": "colloquial",
+      "nuance": "“holiday, time off”, especially from school: הַחֹפֶשׁ הַגָּדוֹל “the long summer holiday” (Wiktionary)"
+     },
+     {
+      "word": "חַג",
+      "register": "neutral",
+      "nuance": "“a festival, a public holiday” (Passover, Independence Day) — not your own time off"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ח־פ־שׁ “free” (חֹפֶשׁ “freedom”, חָפְשִׁי “free”); Wiktionary gives no etymology of its own.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A holiday is “freedom”: חֻפְשָׁה, חֹפֶשׁ and חָפְשִׁי “free” share one root."
+    ],
+    "pitfalls": [
+     "Your own days off are חֻפְשָׁה; a festival is חַג: חַג שָׂמֵחַ!",
+     "Full spelling חופשה (qubuts → ו)."
+    ],
+    "subtleties": [
+     "In the summer children have the חֹפֶשׁ הַגָּדוֹל, “the big holiday”, July and August."
+    ]
+   }
+  },
+  {
+   "id": "he:acharei",
+   "lemma": "אַחֲרֵי",
+   "pos": "ADP",
+   "senses": [
+    "prep.after"
+   ],
+   "translit": "acharei",
+   "note": "“After” (in time): אַחֲרֵי הָעֲבוֹדָה. Before a clause אַחֲרֵי שֶׁ…; with pronouns אַחֲרַי “after me”, אַחֲרֶיךָ …",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What comes next: after work, after dinner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "after (in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.after"
+     },
+     {
+      "id": "s2",
+      "def": "after, behind (following someone): רָץ אַחֲרֵי",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַחֲרֵי הָעֲבוֹדָה אֲנִי הוֹלֵךְ לַפַּארְק.",
+      "tr": "After work I (m.) go to the park.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "אַחֲרֵי אֲרוּחַת הָעֶרֶב אֲנַחְנוּ שׁוֹתִים תֵּה.",
+      "tr": "After dinner we drink tea.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא רָץ אַחֲרֵי הָאוֹטוֹבּוּס.",
+      "tr": "He is running after the bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַחֲרֵי הָעֲבוֹדָה",
+      "tr": "after work"
+     },
+     {
+      "text": "אַחֲרֵי הַחַגִּים",
+      "tr": "after the holidays (Wiktionary)"
+     },
+     {
+      "text": "אַחֲרַי!",
+      "tr": "follow me!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לְאַחַר",
+      "register": "formal",
+      "nuance": "“after” in writing and the news (Wiktionary lists it as related)"
+     },
+     {
+      "word": "אַחַר",
+      "register": "literary",
+      "nuance": "the short, old form"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "לִפְנֵי",
+      "note": "before"
+     }
+    ],
+    "etymology": {
+     "text": "Related to אַחַר and לְאַחַר (Wiktionary, which gives no etymology of its own); from the root א־ח־ר “behind, after”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives אַחֲרוֹן “last”, מְאֻחָר “late” and אַחֲרָיוּת “responsibility” — what comes “after” you."
+    ],
+    "pitfalls": [
+     "“After” + a noun is אַחֲרֵי; “afterwards” alone is אַחַר כָּךְ (lesson 14).",
+     "Before a verb clause: אַחֲרֵי שֶׁ…"
+    ],
+    "subtleties": [
+     "אַחֲרֵי הַחַגִּים “after the holidays” is the Israeli way of postponing anything until the autumn holidays are over."
+    ]
+   }
+  },
+  {
+   "id": "he:ad",
+   "lemma": "עַד",
+   "pos": "ADP",
+   "senses": [
+    "prep.until"
+   ],
+   "translit": "ad",
+   "note": "“Until, till”; with מִ: from … to … (מִשְּׁמוֹנֶה עַד חָמֵשׁ). Before a clause עַד שֶׁ…",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Opening hours, deadlines, “see you tomorrow”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "until, till (a time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     },
+     {
+      "id": "s2",
+      "def": "by (a time: not later than)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to, up to, as far as (a place, a number)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי בָּעֲבוֹדָה עַד חָמֵשׁ.",
+      "tr": "I am at work until five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "עַד מָחָר!",
+      "tr": "Until tomorrow! (see you tomorrow)",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדּוּחַ צָרִיךְ לִהְיוֹת מוּכָן עַד יוֹם שֵׁנִי.",
+      "tr": "The report has to be ready by Monday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "מִתֵּל אָבִיב עַד חֵיפָה זֶה שָׁעָה.",
+      "tr": "From Tel Aviv to Haifa it’s an hour.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַד מָתַי?",
+      "tr": "until when?"
+     },
+     {
+      "text": "מִ… עַד …",
+      "tr": "from … to …"
+     },
+     {
+      "text": "עַד כָּאן",
+      "tr": "that’s all, up to here (Wiktionary)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עַד מֵאָה וְעֶשְׂרִים",
+      "tr": "until a hundred and twenty",
+      "kind": "saying",
+      "meaning": "a wish for a long life (birthdays)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עַד לְ…",
+      "register": "formal",
+      "nuance": "“up to, until” — written style"
+     },
+     {
+      "word": "לֹא יְאֻחַר מִ…",
+      "register": "formal",
+      "nuance": "“no later than” — deadlines in forms"
+     }
+    ],
+    "etymology": {
+     "text": "Biblical Hebrew; Wiktionary gives no etymology. The Aramaic word is the same: עַד.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Unvowelled עד is also עֵד “witness” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "“From … to …” is מִ… עַד …: מִיּוֹם רִאשׁוֹן עַד יוֹם חֲמִישִׁי.",
+     "Before a verb clause use עַד שֶׁ…: עַד שֶׁהוּא בָּא."
+    ],
+    "subtleties": [
+     "עַד can mean “until” or “by”: עַד מָחָר is “until tomorrow” or “by tomorrow” — the context decides (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:meaz",
+   "lemma": "מֵאָז",
+   "pos": "ADP",
+   "senses": [
+    "prep.since"
+   ],
+   "translit": "me’az",
+   "note": "“Since (a point in time)”, with the present for what is still going on: הוּא פֹּה מֵאָז יָנוּאָר. Alone it means “since then”. With a time word מִ alone also works: מֵהַבֹּקֶר “since the morning”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Since January, since then, ever since.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "since (a point in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     },
+     {
+      "id": "s2",
+      "def": "since then (adverb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא פֹּה מֵאָז יָנוּאָר.",
+      "tr": "He has been here since January.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s1"
+     },
+     {
+      "text": "מֵאָז הַבֹּקֶר אֲנִי מְחַכֶּה.",
+      "tr": "I have been waiting since the morning.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "מֵאָז הוּא לֹא חָזַר.",
+      "tr": "He hasn’t come back since then.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֵאָז וּמִתָּמִיד",
+      "tr": "since forever, always (Wiktionary)"
+     },
+     {
+      "text": "מֵאָז שֶׁ…",
+      "tr": "since (+ clause)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִ…",
+      "register": "neutral",
+      "nuance": "“from, since” with a time word: מֵהַבֹּקֶר, מִיּוֹם רִאשׁוֹן"
+     },
+     {
+      "word": "מִן",
+      "register": "formal",
+      "nuance": "“from, since” in careful style: מִן הַבֹּקֶר"
+     }
+    ],
+    "etymology": {
+     "text": "מִ “from” + אָז “then” (Wiktionary): “from then”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German seit + present (ich warte seit einer Stunde) works exactly like Hebrew מֵאָז + present."
+    ],
+    "pitfalls": [
+     "A state that is still going on takes the present: הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January” — like German Er ist seit Januar hier, not like English “has been”."
+    ],
+    "subtleties": [
+     "Before a clause: מֵאָז שֶׁ… “ever since …” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:bemeshech",
+   "lemma": "בְּמֶשֶׁךְ",
+   "pos": "ADP",
+   "senses": [
+    "prep.during"
+   ],
+   "translit": "bemeshech",
+   "note": "“During, for (a period)”: בְּמֶשֶׁךְ הַקַּיִץ “during the summer”, בְּמֶשֶׁךְ שָׁעָה “for an hour”. A length of time can also stand alone: מְחַכֶּה שָׁעָה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The whole stretch of a time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "during, throughout",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.during"
+     },
+     {
+      "id": "s2",
+      "def": "for (a length of time)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּמֶשֶׁךְ הַקַּיִץ הַיְּלָדִים אֵצֶל סָבְתָא.",
+      "tr": "During the summer the children are at Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּמֶשֶׁךְ הַשָּׁבוּעַ אֲנִי עוֹבֵד.",
+      "tr": "During the week I (m.) work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חִכָּה בְּמֶשֶׁךְ שָׁעָה.",
+      "tr": "He waited for an hour.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּמֶשֶׁךְ הַיּוֹם",
+      "tr": "during the day"
+     },
+     {
+      "text": "בְּמֶשֶׁךְ שָׁנִים",
+      "tr": "for years"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בִּזְמַן",
+      "register": "neutral",
+      "nuance": "“during, at the time of” — a point inside the period: בִּזְמַן הָאֲרוּחָה"
+     },
+     {
+      "word": "בְּמַהֲלַךְ",
+      "register": "formal",
+      "nuance": "“in the course of”"
+     },
+     {
+      "word": "לְאֹרֶךְ",
+      "register": "neutral",
+      "nuance": "“throughout, all along”"
+     }
+    ],
+    "etymology": {
+     "text": "בְּ “in” + מֶשֶׁךְ “extent, duration” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מֶשֶׁךְ comes from מָשַׁךְ “to pull, draw out” — a duration is time “drawn out”."
+    ],
+    "pitfalls": [
+     "A length of time often needs no preposition at all: אֲנִי מְחַכֶּה שָׁעָה “I’ve been waiting an hour”.",
+     "It is one word: בְּמֶשֶׁךְ (be + meshekh), with a soft כ at the end."
+    ],
+    "subtleties": [
+     "בְּמֶשֶׁךְ stresses the whole period; בִּזְמַן a moment inside it."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

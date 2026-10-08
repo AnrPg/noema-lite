@@ -143,11 +143,15 @@
    "lemma": "לְ",
    "pos": "ADP",
    "class": "suffixed",
-   "senses": [],
+   "senses": [
+    "prep.to"
+   ],
    "prefix": true,
    "translit": "le",
-   "role": "to, for; with יֵשׁ / אֵין it marks the possessor (יֵשׁ לִי “I have”). With a pronoun it takes suffixes and is written as a word of its own.",
+   "role": "“to, for”: the prefix written onto the next word (לְאִמָּא “to / for Mum”), fused with the article as לַ (לַשּׁוּק “to the market”) or לָ before הָ (לָעֲבוֹדָה, לָאוֹטוֹבּוּס); before a shva it is לִ (לִשְׂדֵה הַתְּעוּפָה). With יֵשׁ / אֵין it marks the possessor (יֵשׁ לִי “I have”). With a pronoun it takes endings and is written as a word of its own (לִי, לְךָ, לוֹ …).",
    "forms": {
+    "ADP": "לְ",
+    "ADP;DEF": "לַ",
     "ADP;1;SG": "לִי",
     "ADP;2;SG;MASC": "לְךָ",
     "ADP;2;SG;FEM": "לָךְ",
@@ -157,8 +161,3420 @@
     "ADP;2;PL;MASC": "לָכֶם",
     "ADP;2;PL;FEM": "לָכֶן",
     "ADP;3;PL;MASC": "לָהֶם",
-    "ADP;3;PL;FEM": "לָהֶן"
+    "ADP;3;PL;FEM": "לָהֶן",
+    "ADP;ALT": "לִ",
+    "ADP;DEF;ALT": "לָ"
    },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s glosses of the prefix ל־ (“to; for; …”) do not contain the words of the course gloss “to (towards a place)”; לְ is the standard “to” of Modern Hebrew (לַשּׁוּק “to the market”)."
+    }
+   }
+  },
+  {
+   "id": "he:mishpacha",
+   "lemma": "מִשְׁפָּחָה",
+   "pos": "NOUN",
+   "senses": [
+    "family.family"
+   ],
+   "gender": "FEM",
+   "translit": "mishpacha",
+   "forms": {
+    "N;SG;INDF": "מִשְׁפָּחָה",
+    "N;SG;DEF": "הַמִּשְׁפָּחָה",
+    "N;PL;INDF": "מִשְׁפָּחוֹת",
+    "N;PL;DEF": "הַמִּשְׁפָּחוֹת",
+    "N;POSS;1;SG": "מִשְׁפַּחְתִּי",
+    "N;POSS;2;SG;MASC": "מִשְׁפַּחְתְּךָ",
+    "N;POSS;2;SG;FEM": "מִשְׁפַּחְתֵּךְ",
+    "N;POSS;3;SG;MASC": "מִשְׁפַּחְתּוֹ",
+    "N;POSS;3;SG;FEM": "מִשְׁפַּחְתָּהּ",
+    "N;POSS;1;PL": "מִשְׁפַּחְתֵּנוּ",
+    "N;POSS;2;PL;MASC": "מִשְׁפַּחְתְּכֶם",
+    "N;POSS;2;PL;FEM": "מִשְׁפַּחְתְּכֶן",
+    "N;POSS;3;PL;MASC": "מִשְׁפַּחְתָּם",
+    "N;POSS;3;PL;FEM": "מִשְׁפַּחְתָּן",
+    "N;SG;DEF;PFX": "מִּשְׁפָּחָה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַמִּשְׁפָּחָה → (בַּ / לַ)מִּשְׁפָּחָה; Wiktionary lists only the full definite form הַמִּשְׁפָּחָה."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Home, warmth and duties — the family is the centre of Israeli life (Friday-night dinners, holidays together).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family (relatives; parents and their children)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     },
+     {
+      "id": "s2",
+      "def": "family (in biology: a rank of classification)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֹאת הַמִּשְׁפָּחָה שֶׁלִּי.",
+      "tr": "This is my family.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ מִשְׁפָּחָה גְּדוֹלָה.",
+      "tr": "We have a big family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה שֵּׁם הַמִּשְׁפָּחָה שֶׁלְּךָ?",
+      "tr": "What is your surname?",
+      "register": "neutral",
+      "context": "forms and offices",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחָתוּל וְהָאַרְיֵה מֵאוֹתָהּ מִשְׁפָּחָה.",
+      "tr": "The cat and the lion are from the same family.",
+      "register": "technical",
+      "context": "biology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֵׁם מִשְׁפָּחָה",
+      "tr": "surname, family name"
+     },
+     {
+      "text": "בֶּן מִשְׁפָּחָה",
+      "tr": "a family member"
+     },
+     {
+      "text": "קְרוֹב מִשְׁפָּחָה",
+      "tr": "a relative"
+     },
+     {
+      "text": "מִשְׁפָּחָה גְּדוֹלָה",
+      "tr": "a big family"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בַּיִת",
+      "register": "neutral",
+      "nuance": "“home, household” — הַבַּיִת שֶׁלִּי can mean the people at home, my family"
+     },
+     {
+      "word": "שֵׁבֶט",
+      "register": "humorous",
+      "nuance": "“tribe” — said jokingly of a very large family"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: perhaps related to שִׁפְחָה (shifkhá) “female slave, maidservant” — the people of one household.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The suffixed forms show the old -at- ending that the plain word hides: מִשְׁפָּחָה → מִשְׁפַּחַת־ → מִשְׁפַּחְתִּי “my family”.",
+     "In biology it is exactly English family: the rank just above the genus (סוּג)."
+    ],
+    "pitfalls": [
+     "“My family” in everyday speech is הַמִּשְׁפָּחָה שֶׁלִּי; מִשְׁפַּחְתִּי is formal or written.",
+     "The article is needed before שֶׁלִּי: הַמִּשְׁפָּחָה שֶׁלָּנוּ “our family”; מִשְׁפָּחָה שֶׁלָּנוּ would be “a family of ours”."
+    ],
+    "subtleties": [
+     "כָּל הַמִּשְׁפָּחָה is “the whole family”: with a definite singular noun כָּל means “whole”, not “every”."
+    ]
+   }
+  },
+  {
+   "id": "he:horim",
+   "lemma": "הוֹרִים",
+   "pos": "NOUN",
+   "senses": [
+    "family.parents"
+   ],
+   "gender": "MASC",
+   "class": "plt",
+   "translit": "horim",
+   "note": "Used in the plural; the singular הוֹרֶה “a parent” is formal.",
+   "forms": {
+    "N;PL;INDF": "הוֹרִים",
+    "N;PL;DEF": "הַהוֹרִים",
+    "N;POSS;1;SG": "הוֹרַי",
+    "N;POSS;2;SG;MASC": "הוֹרֶיךָ",
+    "N;POSS;2;SG;FEM": "הוֹרַיִךְ",
+    "N;POSS;3;SG;MASC": "הוֹרָיו",
+    "N;POSS;3;SG;FEM": "הוֹרֶיהָ",
+    "N;POSS;1;PL": "הוֹרֵינוּ",
+    "N;POSS;2;PL;MASC": "הוֹרֵיכֶם",
+    "N;POSS;2;PL;FEM": "הוֹרֵיכֶן",
+    "N;POSS;3;PL;MASC": "הוֹרֵיהֶם",
+    "N;POSS;3;PL;FEM": "הוֹרֵיהֶן"
+   },
+   "plene": {
+    "N;POSS;1;SG": "הוריי",
+    "N;POSS;2;SG;FEM": "הורייך"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mum and Dad together — the word of school forms and of daily talk alike.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parents (mother and father)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.parents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵלֶּה הַהוֹרִים שֶׁלִּי.",
+      "tr": "These are my parents.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הוֹרַי גָּרִים בְּחֵיפָה.",
+      "tr": "My parents live in Haifa.",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מָחָר יֵשׁ אֲסֵפַת הוֹרִים בְּבֵית הַסֵּפֶר.",
+      "tr": "Tomorrow there is a parents’ meeting at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲסֵפַת הוֹרִים",
+      "tr": "a parent–teacher meeting"
+     },
+     {
+      "text": "בֵּית הַהוֹרִים",
+      "tr": "the parents’ home (where one grew up)"
+     },
+     {
+      "text": "הוֹרִים צְעִירִים",
+      "tr": "young parents"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כַּבֵּד אֶת אָבִיךָ וְאֶת אִמֶּךָ",
+      "tr": "honour your father and your mother",
+      "kind": "quote",
+      "meaning": "the commandment to respect one’s parents",
+      "register": "literary",
+      "source": "Exodus 20:12"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַבָּא וְאִמָּא",
+      "register": "colloquial",
+      "nuance": "“Mum and Dad” — how people speak of their own parents at home"
+     }
+    ],
+    "etymology": {
+     "text": "The plural of הוֹרֶה “parent” (Wiktionary); Wiktionary also lists a rare feminine הוֹרָה “mother”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Do not confuse it with הוֹרָה, the Israeli circle dance: that word came through Yiddish from Greek χορός “dance” (English chorus)."
+    ],
+    "pitfalls": [
+     "There is no everyday singular: the formal הוֹרֶה “a parent” appears in official language; “one of my parents” is אֶחָד הַהוֹרִים שֶׁלִּי.",
+     "It is masculine plural: הַהוֹרִים הָאֵלֶּה, הֵם."
+    ],
+    "subtleties": [
+     "The suffixed הוֹרַי “my parents” sounds a little formal; in conversation הַהוֹרִים שֶׁלִּי is usual."
+    ]
+   }
+  },
+  {
+   "id": "he:ima",
+   "lemma": "אִמָּא",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "gender": "FEM",
+   "translit": "ima",
+   "note": "Used like a name: אִמָּא שֶׁלִּי “my mum” (no article); calling her: אִמָּא!",
+   "forms": {
+    "N;SG;INDF": "אִמָּא",
+    "N;SG;DEF": "הָאִמָּא",
+    "N;PL;INDF": "אִמָּהוֹת",
+    "N;PL;DEF": "הָאִמָּהוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "אימא",
+    "N;SG;DEF": "האימא",
+    "N;PL;INDF": "אימהות",
+    "N;PL;DEF": "האימהות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Mum — warm and everyday; adults say it too.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mother, mum (the everyday word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.mother"
+     },
+     {
+      "id": "s2",
+      "def": "Mum! (calling one’s mother; used like a name, without the article)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֹאת אִמָּא שֶׁלִּי.",
+      "tr": "This is my mum.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא שֶׁלּוֹ מוֹרָה.",
+      "tr": "His mother is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא, אֵיפֹה הַמַּפְתֵּחַ?",
+      "tr": "Mum, where is the key?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אִמָּא שֶׁלִּי",
+      "tr": "my mother"
+     },
+     {
+      "text": "אַבָּא וְאִמָּא",
+      "tr": "Mum and Dad"
+     },
+     {
+      "text": "אִמָּא טוֹבָה",
+      "tr": "a good mother"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אִמָּא׳לֶה",
+      "tr": "little mummy",
+      "kind": "colloquial",
+      "meaning": "oh no! oh my God! — a cry of fright or surprise",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אֵם",
+      "register": "formal",
+      "nuance": "the formal and written word (forms, the news, literature), also figurative: “mother of …”"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic אִמָּא (ʾimmā); the inherited Hebrew word is אֵם (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The final -ָא of אִמָּא, אַבָּא and סָבְתָא is the Aramaic “emphatic” (definite) ending — and Hebrew indeed uses these words like names, without הַ."
+    ],
+    "pitfalls": [
+     "With שֶׁלִּי it usually goes without the article, like a name: אִמָּא שֶׁלִּי (הָאִמָּא שֶׁלִּי is also heard in speech).",
+     "No suffix on this word: “my mum” is אִמָּא שֶׁלִּי, or the formal אִמִּי (from אֵם)."
+    ],
+    "subtleties": [
+     "Children and adults alike say אִמָּא; a sentence with אִמִּי sounds like a speech or a book."
+    ]
+   }
+  },
+  {
+   "id": "he:em",
+   "lemma": "אֵם",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "gender": "FEM",
+   "mishkal": "קֵטֶל",
+   "translit": "em",
+   "forms": {
+    "N;SG;INDF": "אֵם",
+    "N;SG;DEF": "הָאֵם",
+    "N;PL;INDF": "אִמָּהוֹת",
+    "N;PL;DEF": "הָאִמָּהוֹת",
+    "N;POSS;1;SG": "אִמִּי",
+    "N;POSS;2;SG;MASC": "אִמְּךָ",
+    "N;POSS;2;SG;FEM": "אִמֵּךְ",
+    "N;POSS;3;SG;MASC": "אִמּוֹ",
+    "N;POSS;3;SG;FEM": "אִמָּהּ",
+    "N;POSS;1;PL": "אִמֵּנוּ",
+    "N;POSS;2;PL;MASC": "אִמְּכֶם",
+    "N;POSS;2;PL;FEM": "אִמְּכֶן",
+    "N;POSS;3;PL;MASC": "אִמָּם",
+    "N;POSS;3;PL;FEM": "אִמָּן"
+   },
+   "plene": {
+    "N;PL;INDF": "אימהות",
+    "N;PL;DEF": "האימהות",
+    "N;POSS;1;SG": "אימי",
+    "N;POSS;2;SG;MASC": "אימך",
+    "N;POSS;2;SG;FEM": "אימך",
+    "N;POSS;3;SG;MASC": "אימו",
+    "N;POSS;3;SG;FEM": "אימה",
+    "N;POSS;1;PL": "אימנו",
+    "N;POSS;2;PL;MASC": "אימכם",
+    "N;POSS;2;PL;FEM": "אימכן",
+    "N;POSS;3;PL;MASC": "אימם",
+    "N;POSS;3;PL;FEM": "אימן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "Mother in the formal sense — documents, the news, literature and figures of speech.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mother (formal and written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.mother"
+     },
+     {
+      "id": "s2",
+      "def": "mother, origin (figurative: “the mother of …”, שְׂפַת אֵם “mother tongue”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמִּי מוֹרָה.",
+      "tr": "My mother is a teacher.",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאֵם וְהַתִּינוֹק בְּסֵדֶר.",
+      "tr": "Mother and baby are fine.",
+      "register": "formal",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "עִבְרִית הִיא שְׂפַת הָאֵם שֶׁלִּי.",
+      "tr": "Hebrew is my mother tongue.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שְׂפַת אֵם",
+      "tr": "mother tongue"
+     },
+     {
+      "text": "אֵם חַד־הוֹרִית",
+      "tr": "a single mother"
+     },
+     {
+      "text": "יוֹם הָאֵם",
+      "tr": "Mother’s Day"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שְׁמַע בְּנִי מוּסַר אָבִיךָ וְאַל תִּטֹּשׁ תּוֹרַת אִמֶּךָ",
+      "tr": "hear, my son, your father’s instruction, and do not forsake your mother’s teaching",
+      "kind": "quote",
+      "meaning": "listen to what your parents teach you",
+      "register": "literary",
+      "source": "Proverbs 1:8"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אִמָּא",
+      "register": "neutral",
+      "nuance": "the everyday word, used like a name: אִמָּא שֶׁלִּי"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔimm- (Wiktionary). Cognate with Arabic أُمّ (ʔumm).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic أُمّ (umm) is the same word — as in names like أُمّ كُلْثُوم (Umm Kulthum), “mother of Kulthum”."
+    ],
+    "pitfalls": [
+     "With a suffix the vowel changes and the מ doubles: אִמִּי, אִמּוֹ, אִמָּהּ.",
+     "Do not confuse it with אִם “if”: the same letters, other vowels."
+    ],
+    "subtleties": [
+     "In speech אִמִּי sounds formal or solemn (a speech at a wedding, a memorial); everyday “my mother” is אִמָּא שֶׁלִּי."
+    ]
+   }
+  },
+  {
+   "id": "he:aba",
+   "lemma": "אַבָּא",
+   "pos": "NOUN",
+   "senses": [
+    "family.father"
+   ],
+   "gender": "MASC",
+   "translit": "aba",
+   "note": "Used like a name: אַבָּא שֶׁלִּי “my dad” (no article); calling him: אַבָּא!",
+   "forms": {
+    "N;SG;INDF": "אַבָּא",
+    "N;SG;DEF": "הָאַבָּא",
+    "N;PL;INDF": "אָבוֹת",
+    "N;PL;DEF": "הָאָבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Dad — warm and everyday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "father, dad (the everyday word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.father"
+     },
+     {
+      "id": "s2",
+      "def": "Dad! (calling one’s father; used like a name, without the article)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה אַבָּא שֶׁלִּי.",
+      "tr": "This is my dad.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא שֶׁלָּהּ מוֹרֶה.",
+      "tr": "Her father is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא, אַתָּה בַּבַּיִת?",
+      "tr": "Dad, are you at home?",
+      "register": "informal",
+      "context": "phone call",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַבָּא שֶׁלִּי",
+      "tr": "my father"
+     },
+     {
+      "text": "אַבָּא וְאִמָּא",
+      "tr": "Mum and Dad"
+     },
+     {
+      "text": "אַבָּא טוֹב",
+      "tr": "a good father"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אָב",
+      "register": "formal",
+      "nuance": "the formal and written word (forms, the news, literature), also “founder, forefather”"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic אַבָּא (ʾabbā), ultimately from Proto-Semitic *ʾab-; a doublet of the inherited אָב (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Through the Aramaic of the Gospels (“Abba, Father”) the word reached Greek ἀββᾶς and Latin abbas — the source of English abbot and German Abt."
+    ],
+    "pitfalls": [
+     "Like אִמָּא it goes without the article before שֶׁלִּי: אַבָּא שֶׁלִּי.",
+     "The standard plural is אָבוֹת, the plural of אָב."
+    ],
+    "subtleties": [
+     "Stress the first syllable: ÁBA."
+    ]
+   }
+  },
+  {
+   "id": "he:av",
+   "lemma": "אָב",
+   "pos": "NOUN",
+   "senses": [
+    "family.father"
+   ],
+   "gender": "MASC",
+   "translit": "av",
+   "forms": {
+    "N;SG;INDF": "אָב",
+    "N;SG;DEF": "הָאָב",
+    "N;PL;INDF": "אָבוֹת",
+    "N;PL;DEF": "הָאָבוֹת",
+    "N;POSS;1;SG": "אָבִי",
+    "N;POSS;2;SG;MASC": "אָבִיךָ",
+    "N;POSS;2;SG;FEM": "אָבִיךְ",
+    "N;POSS;3;SG;MASC": "אָבִיו",
+    "N;POSS;3;SG;FEM": "אָבִיהָ",
+    "N;POSS;1;PL": "אָבִינוּ",
+    "N;POSS;2;PL;MASC": "אֲבִיכֶם",
+    "N;POSS;2;PL;FEM": "אֲבִיכֶן",
+    "N;POSS;3;PL;MASC": "אֲבִיהֶם",
+    "N;POSS;3;PL;FEM": "אֲבִיהֶן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Father as a role and an origin — formal and solemn; also founder and forefather.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "father (formal and written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.father"
+     },
+     {
+      "id": "s2",
+      "def": "forefather, ancestor (הָאָבוֹת “the Patriarchs”)",
+      "register": [
+       "literary"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "founder, originator (אֲבִי הַ… “the father of …”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָבִי מוֹרֶה.",
+      "tr": "My father is a teacher.",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאָב וְהַבֵּן הָיוּ שָׁם.",
+      "tr": "The father and the son were there.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבְרָהָם, יִצְחָק וְיַעֲקֹב הֵם הָאָבוֹת.",
+      "tr": "Abraham, Isaac and Jacob are the Patriarchs.",
+      "register": "literary",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אָב וָאֵם",
+      "tr": "father and mother"
+     },
+     {
+      "text": "אַב בַּיִת",
+      "tr": "a caretaker (of a building)"
+     },
+     {
+      "text": "אַב טִיפּוּס",
+      "tr": "a prototype"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָבִינוּ מַלְכֵּנוּ",
+      "tr": "our Father, our King",
+      "kind": "quote",
+      "meaning": "the opening words of a prayer of the High Holidays",
+      "register": "religious",
+      "source": "Jewish liturgy (Avinu Malkeinu)"
+     },
+     {
+      "text": "אָבוֹת אָכְלוּ בֹסֶר וְשִׁנֵּי בָנִים תִּקְהֶינָה",
+      "tr": "the fathers have eaten sour grapes, and the children’s teeth are set on edge",
+      "kind": "quote",
+      "meaning": "children suffer for what their parents did",
+      "register": "literary",
+      "source": "Ezekiel 18:2"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַבָּא",
+      "register": "neutral",
+      "nuance": "the everyday word, used like a name: אַבָּא שֶׁלִּי"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔabw-; cognate with Arabic أَب (ʔab). A doublet of אַבָּא, which was borrowed from Aramaic (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many names begin with it: אַבְרָהָם, אַבְנֵר, אֲבִישָׁלוֹם (Absalom, “my father is peace”).",
+     "Arabic أَبُو (abū) “father of” in names (Abu Bakr) is the same word."
+    ],
+    "pitfalls": [
+     "With suffixes it adds -ִי-: אָבִי “my father”, אָבִיו “his father”, אָבִיהָ “her father” — like אָח.",
+     "The plural אָבוֹת ends in -וֹת although the word is masculine."
+    ],
+    "subtleties": [
+     "Before another noun it is אֲבִי־ “father of”: אֲבִי הַכַּלָּה “the bride’s father”."
+    ]
+   }
+  },
+  {
+   "id": "he:ben",
+   "lemma": "בֵּן",
+   "pos": "NOUN",
+   "senses": [
+    "family.son"
+   ],
+   "gender": "MASC",
+   "translit": "ben",
+   "note": "Construct form בֶּן “son of; aged” (בֶּן דּוֹד, בֶּן שֵׁשׁ).",
+   "forms": {
+    "N;SG;INDF": "בֵּן",
+    "N;SG;DEF": "הַבֵּן",
+    "N;PL;INDF": "בָּנִים",
+    "N;PL;DEF": "הַבָּנִים",
+    "N;SG;CONST": "בֶּן",
+    "N;POSS;1;SG": "בְּנִי",
+    "N;POSS;2;SG;MASC": "בִּנְךָ",
+    "N;POSS;2;SG;FEM": "בְּנֵךְ",
+    "N;POSS;3;SG;MASC": "בְּנוֹ",
+    "N;POSS;3;SG;FEM": "בְּנָהּ",
+    "N;POSS;1;PL": "בְּנֵנוּ",
+    "N;POSS;2;PL;MASC": "בִּנְכֶם",
+    "N;POSS;2;PL;FEM": "בִּנְכֶן",
+    "N;POSS;3;PL;MASC": "בְּנָם",
+    "N;POSS;3;PL;FEM": "בְּנָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A son — and a whole family of expressions: “son of” means belonging, age and membership.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "son",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.son"
+     },
+     {
+      "id": "s2",
+      "def": "(בֶּן + number) aged: הוּא בֶּן שֵׁשׁ “he is six”",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(בֶּן + noun) one who belongs to: בֶּן אָדָם “person”, בֶּן זוּג “partner”",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(plural בָּנִים) boys",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָנוּ בֵּן וּבַת.",
+      "tr": "We have a son and a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבֵּן שֶׁלָּהֶם סְטוּדֶנְט.",
+      "tr": "Their son is a student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא בֶּן חָמֵשׁ.",
+      "tr": "He is five years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s2"
+     },
+     {
+      "text": "בָּנִים וּבָנוֹת",
+      "tr": "boys and girls",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּן יָחִיד",
+      "tr": "an only son"
+     },
+     {
+      "text": "בֶּן זוּג",
+      "tr": "partner, spouse"
+     },
+     {
+      "text": "בֶּן אָדָם",
+      "tr": "a person"
+     },
+     {
+      "text": "בֶּן דּוֹד",
+      "tr": "a cousin"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בֵּן חָכָם יְשַׂמַּח אָב",
+      "tr": "a wise son makes a father glad",
+      "kind": "quote",
+      "meaning": "good children are their parents’ joy",
+      "register": "literary",
+      "source": "Proverbs 10:1"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יֶלֶד",
+      "register": "neutral",
+      "nuance": "“child, boy” — הַיֶּלֶד שֶׁלִּי “my kid” is the everyday way to speak of a young son"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *bin-; the old vowel survives in names such as בִּנְיָמִין (Benjamin) and יְהוֹשֻׁעַ בִּן־נוּן “Joshua son of Nun” (Wiktionary). Cognate with Arabic اِبْن (ibn).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic اِبْن (ibn) / bin is the same word: Hebrew בֶּן־ and Arabic bin both mean “son of” in names."
+    ],
+    "pitfalls": [
+     "Before another noun it becomes בֶּן: בֶּן דּוֹד, בֶּן שֵׁשׁ — and the plural בָּנִים becomes בְּנֵי: בְּנֵי דּוֹדִים.",
+     "בָּנִים also means simply “boys” (בָּנִים וּבָנוֹת “boys and girls”); “children” in general is יְלָדִים."
+    ],
+    "subtleties": [
+     "Age in years is said with בֶּן / בַּת and a feminine number, because שָׁנִים “years” is feminine: הוּא בֶּן שָׁלוֹשׁ “he is three” (but בֶּן שְׁלוֹשָׁה חֳדָשִׁים “three months old”)."
+    ]
+   }
+  },
+  {
+   "id": "he:bat",
+   "lemma": "בַּת",
+   "pos": "NOUN",
+   "senses": [
+    "family.daughter"
+   ],
+   "gender": "FEM",
+   "translit": "bat",
+   "forms": {
+    "N;SG;INDF": "בַּת",
+    "N;SG;DEF": "הַבַּת",
+    "N;PL;INDF": "בָּנוֹת",
+    "N;PL;DEF": "הַבָּנוֹת",
+    "N;POSS;1;SG": "בִּתִּי",
+    "N;POSS;2;SG;MASC": "בִּתְּךָ",
+    "N;POSS;2;SG;FEM": "בִּתֵּךְ",
+    "N;POSS;3;SG;MASC": "בִּתּוֹ",
+    "N;POSS;3;SG;FEM": "בִּתָּהּ",
+    "N;POSS;1;PL": "בִּתֵּנוּ",
+    "N;POSS;2;PL;MASC": "בִּתְּכֶם",
+    "N;POSS;2;PL;FEM": "בִּתְּכֶן",
+    "N;POSS;3;PL;MASC": "בִּתָּם",
+    "N;POSS;3;PL;FEM": "בִּתָּן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A daughter — and, as with בֵּן, “daughter of” for age and belonging.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "daughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.daughter"
+     },
+     {
+      "id": "s2",
+      "def": "(בַּת + number) aged (of a woman or a girl): הִיא בַּת שֵׁשׁ",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(plural בָּנוֹת) girls",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהֶם שְׁתֵּי בָּנוֹת.",
+      "tr": "They have two daughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בִּתִּי סְטוּדֶנְטִית.",
+      "tr": "My daughter is a student.",
+      "register": "formal",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא בַּת שֵׁשׁ.",
+      "tr": "She is six years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s2"
+     },
+     {
+      "text": "הַבָּנוֹת מְשַׂחֲקוֹת בַּחוּץ.",
+      "tr": "The girls are playing outside.",
+      "register": "neutral",
+      "context": "playground",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּת יְחִידָה",
+      "tr": "an only daughter"
+     },
+     {
+      "text": "בַּת זוּג",
+      "tr": "a (female) partner"
+     },
+     {
+      "text": "בַּת דּוֹד",
+      "tr": "a (female) cousin"
+     },
+     {
+      "text": "בָּנִים וּבָנוֹת",
+      "tr": "boys and girls"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בַּת קוֹל",
+      "tr": "daughter of a voice",
+      "kind": "idiom",
+      "meaning": "a voice from heaven; a faint echo",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יַלְדָּה",
+      "register": "neutral",
+      "nuance": "“girl, child” — הַיַּלְדָּה שֶׁלִּי “my little girl” is the everyday way to speak of a young daughter"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *bint-: the i became a (Philippi’s law) and the n assimilated to the t. Cognate with Arabic بِنْت (bint) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "בַּת יָם, a city south of Tel Aviv, is literally “daughter of the sea”.",
+     "Arabic بِنْت (bint) keeps the n that Hebrew בַּת lost — but Hebrew shows it again in the plural בָּנוֹת."
+    ],
+    "pitfalls": [
+     "The plural is בָּנוֹת — the n of *bint- comes back — not *בַּתּוֹת.",
+     "With suffixes the vowel becomes i and the ת doubles: בִּתִּי “my daughter”, בִּתּוֹ “his daughter”."
+    ],
+    "subtleties": [
+     "הַבָּנוֹת often means just “the girls (of the group)”."
+    ]
+   }
+  },
+  {
+   "id": "he:ach",
+   "lemma": "אָח",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother",
+    "job.nurse"
+   ],
+   "gender": "MASC",
+   "translit": "ach",
+   "forms": {
+    "N;SG;INDF": "אָח",
+    "N;SG;DEF": "הָאָח",
+    "N;PL;INDF": "אַחִים",
+    "N;PL;DEF": "הָאַחִים",
+    "N;POSS;1;SG": "אָחִי",
+    "N;POSS;2;SG;MASC": "אָחִיךָ",
+    "N;POSS;2;SG;FEM": "אָחִיךְ",
+    "N;POSS;3;SG;MASC": "אָחִיו",
+    "N;POSS;3;SG;FEM": "אָחִיהָ",
+    "N;POSS;1;PL": "אָחִינוּ",
+    "N;POSS;2;PL;MASC": "אֲחִיכֶם",
+    "N;POSS;2;PL;FEM": "אֲחִיכֶן",
+    "N;POSS;3;PL;MASC": "אֲחִיהֶם",
+    "N;POSS;3;PL;FEM": "אֲחִיהֶן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A brother — and, as אָחִי, the Israeli “bro”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brother; (plural אַחִים) brothers, or brothers and sisters",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     },
+     {
+      "id": "s2",
+      "def": "(male) nurse",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     },
+     {
+      "id": "s3",
+      "def": "brother, fellow; אָחִי “bro, mate” as a friendly address",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לִי אָח וְאָחוֹת.",
+      "tr": "I have a brother and a sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אָחִי סְטוּדֶנְט.",
+      "tr": "My brother is a student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אָח בְּבֵית חוֹלִים.",
+      "tr": "He is a nurse in a hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "הָאָח בָּא לִבְדֹּק אוֹתְךָ.",
+      "tr": "The nurse is coming to check on you.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s2"
+     },
+     {
+      "text": "מַה נִּשְׁמַע, אָחִי?",
+      "tr": "What’s up, bro?",
+      "register": "slang",
+      "context": "street",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אָח גָּדוֹל",
+      "tr": "an older brother"
+     },
+     {
+      "text": "אָח קָטָן",
+      "tr": "a younger brother"
+     },
+     {
+      "text": "אַחִים וַאֲחָיוֹת",
+      "tr": "brothers and sisters"
+     },
+     {
+      "text": "אָח מֻסְמָךְ",
+      "tr": "a registered nurse (male)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הִנֵּה מַה טּוֹב וּמַה נָּעִים שֶׁבֶת אַחִים גַּם יָחַד",
+      "tr": "how good and how pleasant it is for brothers to sit together",
+      "kind": "quote",
+      "meaning": "the joy of unity and friendship (a well-known song)",
+      "register": "literary",
+      "source": "Psalms 133:1"
+     },
+     {
+      "text": "הֲשֹׁמֵר אָחִי אָנֹכִי",
+      "tr": "am I my brother’s keeper?",
+      "kind": "quote",
+      "meaning": "refusing responsibility for another person",
+      "register": "literary",
+      "source": "Genesis 4:9"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אָחוֹת",
+      "register": "neutral",
+      "nuance": "for the second sense: a female nurse, and the usual name of the profession"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔaḫw- (Wiktionary). Cognate with Arabic أَخ (ʔax).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic أَخ (akh) is the same word, and أَخِي (akhī) “my brother” is a friendly address there too — like Israeli אָחִי."
+    ],
+    "pitfalls": [
+     "The plural has a patah: אָח → אַחִים, הָאַחִים.",
+     "With suffixes it adds -ִי-: אָחִיו “his brother”, אָחִיהָ “her brother” (like אָב).",
+     "אַחִים also means “siblings” for a mixed group: כַּמָּה אַחִים יֵשׁ לְךָ? “how many brothers and sisters do you have?”"
+    ],
+    "subtleties": [
+     "אָחִי is both “my brother” and the slang “bro” between friends; only the context tells."
+    ]
+   }
+  },
+  {
+   "id": "he:achot",
+   "lemma": "אָחוֹת",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister",
+    "job.nurse"
+   ],
+   "gender": "FEM",
+   "translit": "achot",
+   "forms": {
+    "N;SG;INDF": "אָחוֹת",
+    "N;SG;DEF": "הָאָחוֹת",
+    "N;PL;INDF": "אֲחָיוֹת",
+    "N;PL;DEF": "הָאֲחָיוֹת",
+    "N;POSS;1;SG": "אֲחוֹתִי",
+    "N;POSS;2;SG;MASC": "אֲחוֹתְךָ",
+    "N;POSS;2;SG;FEM": "אֲחוֹתֵךְ",
+    "N;POSS;3;SG;MASC": "אֲחוֹתוֹ",
+    "N;POSS;3;SG;FEM": "אֲחוֹתָהּ",
+    "N;POSS;1;PL": "אֲחוֹתֵנוּ",
+    "N;POSS;2;PL;MASC": "אֲחוֹתְכֶם",
+    "N;POSS;2;PL;FEM": "אֲחוֹתְכֶן",
+    "N;POSS;3;PL;MASC": "אֲחוֹתָם",
+    "N;POSS;3;PL;FEM": "אֲחוֹתָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A sister — and the nurse at the hospital.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "nurse (a woman; also the profession in general)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהּ שָׁלוֹשׁ אֲחָיוֹת.",
+      "tr": "She has three sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲחוֹתִי מוֹרָה.",
+      "tr": "My sister is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אָחוֹת בְּבֵית חוֹלִים.",
+      "tr": "She is a nurse in a hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "הָאֲחָיוֹת עוֹבְדוֹת גַּם בַּלַּיְלָה.",
+      "tr": "The nurses work at night too.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אָחוֹת גְּדוֹלָה",
+      "tr": "an older sister"
+     },
+     {
+      "text": "אָחוֹת קְטַנָּה",
+      "tr": "a younger sister"
+     },
+     {
+      "text": "אָחוֹת מֻסְמֶכֶת",
+      "tr": "a registered nurse"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לִבַּבְתִּנִי אֲחֹתִי כַלָּה",
+      "tr": "you have captured my heart, my sister, my bride",
+      "kind": "quote",
+      "meaning": "a line of love poetry",
+      "register": "literary",
+      "source": "Song of Songs 4:9"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אָח",
+      "register": "neutral",
+      "nuance": "for the second sense: a male nurse"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔaḫwat- (Wiktionary). Cognate with Arabic أُخْت (ʔuxt).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A nurse is a “sister” in Hebrew as in British English (Sister), in German (Krankenschwester) and in Russian (медсестра, from медицинская сестра “medical sister”)."
+    ],
+    "pitfalls": [
+     "The plural is irregular: אֲחָיוֹת, הָאֲחָיוֹת (not *אָחוֹתוֹת).",
+     "With suffixes the first vowel shortens: אֲחוֹתִי “my sister”, אֲחוֹתוֹ “his sister”."
+    ],
+    "subtleties": [
+     "A male nurse is אָח, a female nurse אָחוֹת — the same pair as brother and sister."
+    ]
+   }
+  },
+  {
+   "id": "he:baal",
+   "lemma": "בַּעַל",
+   "pos": "NOUN",
+   "senses": [
+    "family.husband"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֶטֶל",
+   "translit": "ba'al",
+   "forms": {
+    "N;SG;INDF": "בַּעַל",
+    "N;SG;DEF": "הַבַּעַל",
+    "N;PL;INDF": "בְּעָלִים",
+    "N;PL;DEF": "הַבְּעָלִים",
+    "N;POSS;1;SG": "בַּעֲלִי",
+    "N;POSS;2;SG;MASC": "בַּעַלְךָ",
+    "N;POSS;2;SG;FEM": "בַּעֲלֵךְ",
+    "N;POSS;3;SG;MASC": "בַּעֲלוֹ",
+    "N;POSS;3;SG;FEM": "בַּעֲלָהּ",
+    "N;POSS;1;PL": "בַּעֲלֵנוּ",
+    "N;POSS;2;PL;MASC": "בַּעַלְכֶם",
+    "N;POSS;2;PL;FEM": "בַּעַלְכֶן",
+    "N;POSS;3;PL;MASC": "בַּעֲלָם",
+    "N;POSS;3;PL;FEM": "בַּעֲלָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The usual word for “husband” — though at heart it means “owner”, which makes some couples avoid it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "husband",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.husband"
+     },
+     {
+      "id": "s2",
+      "def": "owner, master (בַּעַל הַבַּיִת “the landlord”)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(בַּעַל + noun) having, endowed with: בַּעַל נִסָּיוֹן “experienced”",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה בַּעֲלִי.",
+      "tr": "This is my husband.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּעַל שֶׁלָּהּ מוֹרֶה.",
+      "tr": "Her husband is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּעַל הַדִּירָה גָּר לְמַעְלָה.",
+      "tr": "The owner of the flat lives upstairs.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּעַל וְאִשָּׁה",
+      "tr": "husband and wife"
+     },
+     {
+      "text": "בַּעַל הַבַּיִת",
+      "tr": "the landlord; the master of the house"
+     },
+     {
+      "text": "בַּעַל חַיִּים",
+      "tr": "an animal (literally “owner of life”)"
+     },
+     {
+      "text": "בַּעַל מִקְצוֹעַ",
+      "tr": "a professional, a tradesman"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "תִּקְרְאִי אִישִׁי וְלֹא תִקְרְאִי לִי עוֹד בַּעְלִי",
+      "tr": "you will call me “my man”, and no longer call me “my master”",
+      "kind": "quote",
+      "meaning": "a relationship of love, not of ownership — quoted in the modern debate about the word",
+      "register": "literary",
+      "source": "Hosea 2:18"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בֶּן זוּג",
+      "register": "neutral",
+      "nuance": "“partner, spouse” — neutral and equal; preferred by many couples and in official language"
+     },
+     {
+      "word": "אִישׁ",
+      "register": "literary",
+      "nuance": "“man” — אִישִׁי “my husband” is the Biblical alternative (Hosea 2:18), chosen today by some who reject בַּעַל"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *baʕl- “owner, lord”; the same word is the name of the Canaanite god Baal (Wiktionary). Cognate with Arabic بَعْل (baʿl) “husband”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Canaanite storm god Baal is simply “the Lord, the Owner” — the same word.",
+     "Arabic بَعْل (baʿl) also means “husband” (Qur’an 11:72), though everyday Arabic says زَوْج (zawj)."
+    ],
+    "pitfalls": [
+     "בַּעַל literally means “owner, master”; many couples avoid it for that reason and say בֶּן הַזּוּג שֶׁלִּי “my partner”.",
+     "The plural בְּעָלִים is usually heard as “owners” (הַבְּעָלִים שֶׁל הַדִּירָה)."
+    ],
+    "subtleties": [
+     "In the suffixed forms the guttural ע takes a hataf: בַּעֲלִי, בַּעֲלָהּ."
+    ]
+   }
+  },
+  {
+   "id": "he:tinok",
+   "lemma": "תִּינוֹק",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "gender": "MASC",
+   "translit": "tinok",
+   "forms": {
+    "N;SG;INDF": "תִּינוֹק",
+    "N;SG;DEF": "הַתִּינוֹק",
+    "N;PL;INDF": "תִּינוֹקוֹת",
+    "N;PL;DEF": "הַתִּינוֹקוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A baby — small, soft and loud; the default word for any baby.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby, infant (a baby boy, or any baby)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָנוּ תִּינוֹק.",
+      "tr": "We have a baby.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינוֹק יָשֵׁן.",
+      "tr": "The baby is sleeping.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּגַּן יֵשׁ עֲשָׂרָה תִּינוֹקוֹת.",
+      "tr": "There are ten babies at the nursery.",
+      "register": "neutral",
+      "context": "day care",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲגָלַת תִּינוֹק",
+      "tr": "a pram, a baby carriage"
+     },
+     {
+      "text": "תִּינוֹק בֶּן חֹדֶשׁ",
+      "tr": "a one-month-old baby"
+     },
+     {
+      "text": "תִּינוֹק חָדָשׁ",
+      "tr": "a new baby"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "תִּינוֹק שֶׁנִּשְׁבָּה",
+      "tr": "a baby who was taken captive",
+      "kind": "idiom",
+      "meaning": "someone who never learned the tradition, through no fault of his own",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "פָּעוֹט",
+      "register": "formal",
+      "nuance": "a toddler, a small child (about one to three) — official and educational language"
+     },
+     {
+      "word": "עוֹלָל",
+      "register": "literary",
+      "nuance": "an infant, a babe — poetic and Biblical"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary links it to יָנַק “to suckle” and יַנְקוּת “infancy”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its relative יָנַק “to suckle” also gives יוֹנֵק “mammal” — literally “one that suckles”."
+    ],
+    "pitfalls": [
+     "The plural is תִּינוֹקוֹת although the word is masculine: עֲשָׂרָה תִּינוֹקוֹת (masculine number).",
+     "A baby girl is תִּינֹקֶת; for any baby, or when the sex does not matter, say תִּינוֹק."
+    ],
+    "subtleties": [
+     "Israelis give a baby’s age with בֶּן / בַּת: תִּינוֹק בֶּן חֹדֶשׁ “a month-old baby”."
+    ]
+   }
+  },
+  {
+   "id": "he:tinoket",
+   "lemma": "תִּינֹקֶת",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "gender": "FEM",
+   "translit": "tinoket",
+   "forms": {
+    "N;SG;INDF": "תִּינֹקֶת",
+    "N;SG;DEF": "הַתִּינֹקֶת",
+    "N;PL;INDF": "תִּינוֹקוֹת",
+    "N;PL;DEF": "הַתִּינוֹקוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "תינוקת",
+    "N;SG;DEF": "התינוקת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A baby girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a baby girl",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהֶם תִּינֹקֶת.",
+      "tr": "They have a baby girl.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינֹקֶת יְשֵׁנָה.",
+      "tr": "The baby (girl) is sleeping.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "נוֹלְדָה לָנוּ תִּינֹקֶת!",
+      "tr": "We’ve had a baby girl!",
+      "register": "neutral",
+      "context": "announcements",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תִּינֹקֶת חֲמוּדָה",
+      "tr": "a sweet baby girl"
+     },
+     {
+      "text": "תִּינֹקֶת בַּת חֹדֶשׁ",
+      "tr": "a one-month-old baby girl"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תִּינוֹק",
+      "register": "neutral",
+      "nuance": "any baby — also a girl, when her sex is not the point"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of תִּינוֹק “baby” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pair תִּינוֹק / תִּינֹקֶת works like יֶלֶד / יַלְדָּה: Hebrew names the sex even of a newborn."
+    ],
+    "pitfalls": [
+     "The plural תִּינוֹקוֹת is the same as that of תִּינוֹק; only agreement shows the gender: שָׁלוֹשׁ תִּינוֹקוֹת (girls), שְׁלוֹשָׁה תִּינוֹקוֹת (boys or a mix)."
+    ],
+    "subtleties": [
+     "In full spelling it is written תינוקת, with a ו, although the vowel sign is a short holam (תִּינֹקֶת)."
+    ]
+   }
+  },
+  {
+   "id": "he:sabim",
+   "lemma": "סָבִים",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandparents"
+   ],
+   "gender": "MASC",
+   "class": "plt",
+   "translit": "savim",
+   "note": "The plural of סָב “grandfather”, used for “grandparents”.",
+   "forms": {
+    "N;PL;INDF": "סָבִים",
+    "N;PL;DEF": "הַסָּבִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandparents as a group — the word of schools, speeches and adverts; at home people say סַבָּא וְסָבְתָא.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandparents (grandfathers and grandmothers together)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandparents"
+     },
+     {
+      "id": "s2",
+      "def": "grandfathers",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסָּבִים שֶׁלִּי גָּרִים בִּירוּשָׁלַיִם.",
+      "tr": "My grandparents live in Jerusalem.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּבִים בָּאִים בְּשַׁבָּת.",
+      "tr": "The grandparents are coming on Saturday.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבִים וְסָבְתוֹת הֵם עֶזְרָה גְּדוֹלָה.",
+      "tr": "Grandfathers and grandmothers are a big help.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סָבִים וְסָבְתוֹת",
+      "tr": "grandfathers and grandmothers"
+     },
+     {
+      "text": "סָבִים וּנְכָדִים",
+      "tr": "grandparents and grandchildren"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סַבָּא וְסָבְתָא",
+      "register": "colloquial",
+      "nuance": "“Grandpa and Grandma” — how people speak of their own grandparents"
+     }
+    ],
+    "etymology": {
+     "text": "The plural of סָב “grandfather, old man”, from Aramaic סָבָא “elder, grandfather” (Wiktionary, סָב).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek οι παππούδες, Hebrew uses the plural of “grandfather” for “grandparents”; German has a word of its own, Großeltern."
+    ],
+    "pitfalls": [
+     "It is a masculine plural used for a mixed group: הַסָּבִים = the grandparents (or only the grandfathers)."
+    ],
+    "subtleties": [
+     "At home: סַבָּא וְסָבְתָא שֶׁלִּי; in writing or in a speech: הַסָּבִים שֶׁלִּי."
+    ]
+   }
+  },
+  {
+   "id": "he:saba",
+   "lemma": "סַבָּא",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "translit": "saba",
+   "note": "Used like a name (סַבָּא שֶׁלִּי). Its plural is not used: “grandfathers, grandparents” is סָבִים.",
+   "forms": {
+    "N;SG;INDF": "סַבָּא",
+    "N;SG;DEF": "הַסַּבָּא"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandpa — affectionate, used like a name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather, grandpa (the everyday word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandfather"
+     },
+     {
+      "id": "s2",
+      "def": "Grandpa! (calling or naming one’s grandfather, without the article)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבָּא שֶׁלִּי מוֹרֶה.",
+      "tr": "My grandpa is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסַּבָּא שֶׁל דָּנָה גָּר פֹּה.",
+      "tr": "Dana’s grandfather lives here.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "סַבָּא וְסָבְתָא בָּאִים!",
+      "tr": "Grandpa and Grandma are coming!",
+      "register": "informal",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סַבָּא וְסָבְתָא",
+      "tr": "Grandpa and Grandma"
+     },
+     {
+      "text": "סַבָּא רַבָּא",
+      "tr": "great-grandfather"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סָב",
+      "register": "formal",
+      "nuance": "the formal and written word; סָבִי “my grandfather”"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic סָבָא (sāḇā) “elder, grandfather” (Wiktionary, under סָב).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "סַבָּא רַבָּא “great-grandfather” and סָבְתָא רַבְּתָא “great-grandmother” are pure Aramaic: “great grandfather”."
+    ],
+    "pitfalls": [
+     "Say SÁ-ba with b: the ב has a dagesh (סַבָּא) — but סָבְתָא is SÁV-ta, with v.",
+     "It is hardly ever made plural; “grandfathers, grandparents” is סָבִים."
+    ],
+    "subtleties": [
+     "Like אִמָּא it is used as a name, without the article: סַבָּא בַּבַּיִת “Grandpa is at home”."
+    ]
+   }
+  },
+  {
+   "id": "he:sav",
+   "lemma": "סָב",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "gender": "MASC",
+   "translit": "sav",
+   "forms": {
+    "N;SG;INDF": "סָב",
+    "N;SG;DEF": "הַסָּב",
+    "N;PL;INDF": "סָבִים",
+    "N;PL;DEF": "הַסָּבִים",
+    "N;POSS;1;SG": "סָבִי",
+    "N;POSS;2;SG;MASC": "סָבְךָ",
+    "N;POSS;2;SG;FEM": "סָבֵךְ",
+    "N;POSS;3;SG;MASC": "סָבוֹ",
+    "N;POSS;3;SG;FEM": "סָבָהּ",
+    "N;POSS;1;PL": "סָבֵנוּ",
+    "N;POSS;2;PL;MASC": "סַבְכֶם",
+    "N;POSS;2;PL;FEM": "סַבְכֶן",
+    "N;POSS;3;PL;MASC": "סָבָם",
+    "N;POSS;3;PL;FEM": "סָבָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandfather in formal language; also an old, wise man.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather (formal and written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.grandfather"
+     },
+     {
+      "id": "s2",
+      "def": "an old man, an elder",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סָבִי הָיָה מוֹרֶה.",
+      "tr": "My grandfather was a teacher.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּב וְהַנֶּכֶד הָיוּ שָׁם.",
+      "tr": "The grandfather and the grandson were there.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ סָב וְסָבָה.",
+      "tr": "She has a grandfather and a grandmother.",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סָב וְסָבָה",
+      "tr": "grandfather and grandmother"
+     },
+     {
+      "text": "סָבִים וּנְכָדִים",
+      "tr": "grandparents and grandchildren"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סַבָּא",
+      "register": "neutral",
+      "nuance": "the everyday word, used like a name: סַבָּא שֶׁלִּי"
+     },
+     {
+      "word": "זָקֵן",
+      "register": "neutral",
+      "nuance": "“an old man” — for the second sense"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic סָבָא (sāḇā) “ancestor; elder; grandfather”; related to native Hebrew שָׂב (sav) “grey-haired, old” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its native Hebrew cousin שֵׂיבָה means “grey hair, old age”."
+    ],
+    "pitfalls": [
+     "It is formal: הַסָּב שֶׁלִּי sounds stiff at home — say סַבָּא שֶׁלִּי."
+    ],
+    "subtleties": [
+     "סָבִי “my grandfather” is the usual form in writing (dedications, biographies)."
+    ]
+   }
+  },
+  {
+   "id": "he:savta",
+   "lemma": "סָבְתָא",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "gender": "FEM",
+   "translit": "savta",
+   "forms": {
+    "N;SG;INDF": "סָבְתָא",
+    "N;SG;DEF": "הַסָּבְתָא",
+    "N;PL;INDF": "סָבְתוֹת",
+    "N;PL;DEF": "הַסָּבְתוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandma — soup, stories and spoiling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother, grandma (the everyday word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandmother"
+     },
+     {
+      "id": "s2",
+      "def": "Grandma! (calling or naming one’s grandmother, without the article)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סָבְתָא שֶׁלִּי בַּבַּיִת.",
+      "tr": "My grandma is at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּבְתוֹת יוֹשְׁבוֹת בַּגִּנָּה.",
+      "tr": "The grandmothers are sitting in the garden.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא, אַתְּ פֹּה?",
+      "tr": "Grandma, are you here?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סַבָּא וְסָבְתָא",
+      "tr": "Grandpa and Grandma"
+     },
+     {
+      "text": "סָבְתָא רַבְּתָא",
+      "tr": "great-grandmother"
+     },
+     {
+      "text": "סִפּוּרֵי סָבְתָא",
+      "tr": "old wives’ tales"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מְעַנְיֵן אֶת הַסָּבְתָא שֶׁלִּי",
+      "tr": "it interests my grandmother",
+      "kind": "slang",
+      "meaning": "I couldn’t care less",
+      "register": "slang"
+     },
+     {
+      "text": "סִפּוּרֵי סָבְתָא",
+      "tr": "grandma’s stories",
+      "kind": "idiom",
+      "meaning": "nonsense, old wives’ tales",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "סָבָה",
+      "register": "formal",
+      "nuance": "the formal and written word; סָבָתִי “my grandmother”"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic סָבְתָא (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "שַׂעֲרוֹת סָבְתָא, “grandma’s hair”, is the Hebrew name of candy floss (cotton candy)."
+    ],
+    "pitfalls": [
+     "No dagesh in the ב: SÁV-ta (but סַבָּא is SÁ-ba).",
+     "The plural is סָבְתוֹת."
+    ],
+    "subtleties": [
+     "Like אִמָּא it is used as a name: סָבְתָא אוֹמֶרֶת … “Grandma says …”."
+    ]
+   }
+  },
+  {
+   "id": "he:sava",
+   "lemma": "סָבָה",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "gender": "FEM",
+   "translit": "sava",
+   "forms": {
+    "N;SG;INDF": "סָבָה",
+    "N;SG;DEF": "הַסָּבָה",
+    "N;PL;INDF": "סָבוֹת",
+    "N;PL;DEF": "הַסָּבוֹת",
+    "N;POSS;1;SG": "סָבָתִי",
+    "N;POSS;2;SG;MASC": "סָבָתְךָ",
+    "N;POSS;2;SG;FEM": "סָבָתֵךְ",
+    "N;POSS;3;SG;MASC": "סָבָתוֹ",
+    "N;POSS;3;SG;FEM": "סָבָתָהּ",
+    "N;POSS;1;PL": "סָבָתֵנוּ",
+    "N;POSS;2;PL;MASC": "סָבַתְכֶם",
+    "N;POSS;2;PL;FEM": "סָבַתְכֶן",
+    "N;POSS;3;PL;MASC": "סָבָתָם",
+    "N;POSS;3;PL;FEM": "סָבָתָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandmother in formal language.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother (formal and written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.grandmother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סָבָתִי הָיְתָה מוֹרָה.",
+      "tr": "My grandmother was a teacher.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ סָב וְסָבָה.",
+      "tr": "She has a grandfather and a grandmother.",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּבָה וְהַנֶּכְדָּה יָצְאוּ לְטַיֵּל.",
+      "tr": "The grandmother and the granddaughter went for a walk.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סָב וְסָבָה",
+      "tr": "grandfather and grandmother"
+     },
+     {
+      "text": "סָבָה וְנֶכְדָּה",
+      "tr": "grandmother and granddaughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סָבְתָא",
+      "register": "neutral",
+      "nuance": "the everyday word, used like a name: סָבְתָא שֶׁלִּי"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of סָב “grandfather” (Wiktionary lists the pair); Wiktionary marks סָבָה as formal.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Formal סָב / סָבָה and everyday סַבָּא / סָבְתָא mirror אָב / אֵם and אַבָּא / אִמָּא: Hebrew keeps two registers for the closest family."
+    ],
+    "pitfalls": [
+     "Do not confuse it with סִבָּה “reason, cause” (other vowels; in full spelling סיבה)."
+    ],
+    "subtleties": [
+     "With suffixes the old -at- appears: סָבָתִי “my grandmother”, סָבָתוֹ “his grandmother”."
+    ]
+   }
+  },
+  {
+   "id": "he:neched",
+   "lemma": "נֶכֶד",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandson"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֶטֶל",
+   "translit": "neched",
+   "forms": {
+    "N;SG;INDF": "נֶכֶד",
+    "N;SG;DEF": "הַנֶּכֶד",
+    "N;PL;INDF": "נְכָדִים",
+    "N;PL;DEF": "הַנְּכָדִים",
+    "N;POSS;1;SG": "נֶכְדִּי",
+    "N;POSS;2;SG;MASC": "נֶכְדְּךָ",
+    "N;POSS;2;SG;FEM": "נֶכְדֵּךְ",
+    "N;POSS;3;SG;MASC": "נֶכְדּוֹ",
+    "N;POSS;3;SG;FEM": "נֶכְדָּהּ",
+    "N;POSS;1;PL": "נֶכְדֵּנוּ",
+    "N;POSS;2;PL;MASC": "נֶכְדְּכֶם",
+    "N;POSS;2;PL;FEM": "נֶכְדְּכֶן",
+    "N;POSS;3;PL;MASC": "נֶכְדָּם",
+    "N;POSS;3;PL;FEM": "נֶכְדָּן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A grandson — the pride of every grandmother.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandson",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandson"
+     },
+     {
+      "id": "s2",
+      "def": "(plural נְכָדִים) grandchildren",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהֶם נֶכֶד וְנֶכְדָּה.",
+      "tr": "They have a grandson and a granddaughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנֶּכֶד שֶׁלָּהּ תִּינוֹק.",
+      "tr": "Her grandson is a baby.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהֶם עֲשָׂרָה נְכָדִים.",
+      "tr": "They have ten grandchildren.",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נֶכֶד רִאשׁוֹן",
+      "tr": "a first grandson"
+     },
+     {
+      "text": "נְכָדִים וְנִינִים",
+      "tr": "grandchildren and great-grandchildren"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for a grandson; a great-grandchild is נִין.",
+    "etymology": {
+     "text": "Wiktionary gives no etymology. The word is old: the Bible pairs it with נִין in נִין וָנֶכֶד “offspring and posterity” (Isaiah 14:22).",
+     "src": "Wiktionary (kaikki.org); Hebrew Bible"
+    },
+    "funFacts": [
+     "Grandparents and grandchildren come as a pair in Hebrew too: סָבִים וּנְכָדִים."
+    ],
+    "pitfalls": [
+     "The plural נְכָדִים covers grandchildren of both sexes.",
+     "The first vowel drops in the plural: נֶכֶד → נְכָדִים."
+    ],
+    "subtleties": [
+     "In the Bible נֶכֶד means “posterity, offspring” in general (נִין וָנֶכֶד); the exact meaning “grandson” is modern."
+    ]
+   }
+  },
+  {
+   "id": "he:nechda",
+   "lemma": "נֶכְדָּה",
+   "pos": "NOUN",
+   "senses": [
+    "family.granddaughter"
+   ],
+   "gender": "FEM",
+   "translit": "nechda",
+   "forms": {
+    "N;SG;INDF": "נֶכְדָּה",
+    "N;SG;DEF": "הַנֶּכְדָּה",
+    "N;PL;INDF": "נְכָדוֹת",
+    "N;PL;DEF": "הַנְּכָדוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A granddaughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "granddaughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.granddaughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָנוּ נֶכְדָּה חֲדָשָׁה!",
+      "tr": "We have a new granddaughter!",
+      "register": "neutral",
+      "context": "announcements",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנֶּכְדָּה שֶׁלּוֹ סְטוּדֶנְטִית.",
+      "tr": "His granddaughter is a student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ שָׁלוֹשׁ נְכָדוֹת.",
+      "tr": "She has three granddaughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נֶכְדָּה רִאשׁוֹנָה",
+      "tr": "a first granddaughter"
+     },
+     {
+      "text": "סָבְתָא וְנֶכְדָּה",
+      "tr": "grandmother and granddaughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for a granddaughter.",
+    "etymology": {
+     "text": "The feminine of נֶכֶד “grandson” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "נֶכֶד / נֶכְדָּה follow the most common pattern of Hebrew pairs: the feminine adds -ָה."
+    ],
+    "pitfalls": [
+     "נְכָדוֹת is only for granddaughters; a mixed group is נְכָדִים."
+    ],
+    "subtleties": [
+     "With suffixes (formal): נֶכְדָּתִי “my granddaughter”."
+    ]
+   }
+  },
+  {
+   "id": "he:dod",
+   "lemma": "דּוֹד",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "gender": "MASC",
+   "translit": "dod",
+   "forms": {
+    "N;SG;INDF": "דּוֹד",
+    "N;SG;DEF": "הַדּוֹד",
+    "N;PL;INDF": "דּוֹדִים",
+    "N;PL;DEF": "הַדּוֹדִים",
+    "N;POSS;1;SG": "דּוֹדִי",
+    "N;POSS;2;SG;MASC": "דּוֹדְךָ",
+    "N;POSS;2;SG;FEM": "דּוֹדֵךְ",
+    "N;POSS;3;SG;MASC": "דּוֹדוֹ",
+    "N;POSS;3;SG;FEM": "דּוֹדָהּ",
+    "N;POSS;1;PL": "דּוֹדֵנוּ",
+    "N;POSS;2;PL;MASC": "דּוֹדְכֶם",
+    "N;POSS;2;PL;FEM": "דּוֹדְכֶן",
+    "N;POSS;3;PL;MASC": "דּוֹדָם",
+    "N;POSS;3;PL;FEM": "דּוֹדָן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An uncle, on either side of the family — and, for children, any grown-up family friend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle (a brother of one’s father or mother, or an aunt’s husband)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "beloved (Biblical and poetic)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַדּוֹד שֶׁלִּי מוֹרֶה.",
+      "tr": "My uncle is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי שְׁלוֹשָׁה דּוֹדִים.",
+      "tr": "I have three uncles.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "דּוֹדִי לִי וַאֲנִי לוֹ.",
+      "tr": "My beloved is mine and I am his.",
+      "register": "literary",
+      "context": "poetry",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דּוֹד וְדוֹדָה",
+      "tr": "uncle and aunt"
+     },
+     {
+      "text": "בֶּן דּוֹד",
+      "tr": "a cousin"
+     },
+     {
+      "text": "הַדּוֹד מִצַּד אַבָּא",
+      "tr": "the uncle on Dad’s side"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הַדּוֹד מֵאֲמֶרִיקָה",
+      "tr": "the uncle from America",
+      "kind": "idiom",
+      "meaning": "a rich benefactor who will solve all your problems",
+      "register": "colloquial"
+     },
+     {
+      "text": "דּוֹדִי לִי וַאֲנִי לוֹ",
+      "tr": "my beloved is mine and I am his",
+      "kind": "quote",
+      "meaning": "mutual love",
+      "register": "literary",
+      "source": "Song of Songs 2:16"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "One word for both sides of the family; Hebrew has no separate word for the father’s or the mother’s brother.",
+    "etymology": {
+     "text": "From Proto-West Semitic *dād- “paternal uncle”; in Biblical Hebrew it also means “beloved” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic separates the father’s brother عَمّ (ʿamm) from the mother’s brother خَال (khāl), and Turkish too (amca / dayı); Hebrew דּוֹד covers both, like German Onkel, Greek θείος and Russian дядя.",
+     "The name דָּוִד (David) is traditionally explained as “beloved”, from the same root."
+    ],
+    "pitfalls": [
+     "Do not confuse it with דּוּד (dud) “water boiler” — one vowel apart, and Israelis talk about the דּוּד every winter.",
+     "The plural דּוֹדִים can mean uncles, or uncles and aunts together."
+    ],
+    "subtleties": [
+     "Children call a grown-up man close to the family דּוֹד, and a woman דּוֹדָה — like German Onkel and Tante."
+    ]
+   }
+  },
+  {
+   "id": "he:doda",
+   "lemma": "דּוֹדָה",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "gender": "FEM",
+   "translit": "doda",
+   "forms": {
+    "N;SG;INDF": "דּוֹדָה",
+    "N;SG;DEF": "הַדּוֹדָה",
+    "N;PL;INDF": "דּוֹדוֹת",
+    "N;PL;DEF": "הַדּוֹדוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An aunt, on either side of the family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt (a sister of one’s father or mother, or an uncle’s wife)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַדּוֹדָה שֶׁלָּהּ מוֹרָה.",
+      "tr": "Her aunt is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ שְׁתֵּי דּוֹדוֹת.",
+      "tr": "We have two aunts.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדּוֹדָה מְבַשֶּׁלֶת אֹכֶל טָעִים.",
+      "tr": "The aunt cooks tasty food.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דּוֹד וְדוֹדָה",
+      "tr": "uncle and aunt"
+     },
+     {
+      "text": "בַּת דּוֹדָה",
+      "tr": "a cousin (an aunt’s daughter)"
+     },
+     {
+      "text": "הַדּוֹדָה מִצַּד אִמָּא",
+      "tr": "the aunt on Mum’s side"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "One word for the father’s and the mother’s sister (Arabic عَمَّة / خَالَة, Turkish hala / teyze).",
+    "etymology": {
+     "text": "דּוֹד “uncle” + the feminine ending ־ָה (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish needs three words where Hebrew has דּוֹדָה: hala (father’s sister), teyze (mother’s sister) and yenge (an uncle’s wife)."
+    ],
+    "pitfalls": [
+     "The plural is דּוֹדוֹת; a mixed group of uncles and aunts is דּוֹדִים."
+    ],
+    "subtleties": [
+     "דּוֹדָה is also an uncle’s wife: Hebrew does not separate aunts by blood from aunts by marriage."
+    ]
+   }
+  },
+  {
+   "id": "he:ben-dod",
+   "lemma": "בֶּן דּוֹד",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "gender": "MASC",
+   "translit": "ben dod",
+   "forms": {
+    "N;SG;INDF": "בֶּן דּוֹד",
+    "N;SG;DEF": "בֶּן הַדּוֹד",
+    "N;PL;INDF": "בְּנֵי דּוֹדִים",
+    "N;PL;DEF": "בְּנֵי הַדּוֹדִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;INDF": "Wiktionary writes the plural with a maqaf (בְּנֵי־דוֹדִים / בְּנֵי־דוֹד); the course writes this multi-word noun with a space, like its lemma בֶּן דּוֹד, so the two spellings differ only in the hyphen (and the dagesh it removes)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A cousin — close family in Israel; in slang also an ironic name for Arabs (“cousins” through Abraham).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a (male) cousin; (plural בְּנֵי דּוֹדִים) cousins",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     },
+     {
+      "id": "s2",
+      "def": "an Arab (slang, from the shared descent from Abraham; can sound patronizing)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא בֶּן דּוֹד שֶׁלִּי.",
+      "tr": "He is my cousin.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי עֶשְׂרִים בְּנֵי דּוֹדִים.",
+      "tr": "I have twenty cousins.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּנֵי הַדּוֹדִים בָּאִים לַחֲתֻנָּה.",
+      "tr": "The cousins are coming to the wedding.",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֶּן דּוֹד רִאשׁוֹן",
+      "tr": "a first cousin"
+     },
+     {
+      "text": "בֶּן דּוֹד שֵׁנִי",
+      "tr": "a second cousin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בֶּן דּוֹדָה",
+      "register": "neutral",
+      "nuance": "a cousin through an aunt (the son of one’s aunt)"
+     }
+    ],
+    "etymology": {
+     "text": "A compound: בֶּן “son of” + דּוֹד “uncle” — “the uncle’s son” (Wiktionary, בֶּן־דּוֹד).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic paints the same picture: اِبْن عَمّ (ibn ʿamm) “son of the (paternal) uncle” is a cousin."
+    ],
+    "pitfalls": [
+     "The definite form puts הַ on the second word: בֶּן הַדּוֹד “the cousin” (in speech also הַבֶּן דּוֹד).",
+     "The plural changes the first word: בְּנֵי דּוֹדִים (or בְּנֵי דּוֹד).",
+     "In slang בְּנֵי דּוֹדִים can mean “Arabs” — it can sound patronizing."
+    ],
+    "subtleties": [
+     "Strictly it is the son of an uncle; for an aunt’s son one can say בֶּן דּוֹדָה, but בֶּן דּוֹד serves for every male cousin."
+    ]
+   }
+  },
+  {
+   "id": "he:bat-dod",
+   "lemma": "בַּת דּוֹד",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "gender": "FEM",
+   "translit": "bat dod",
+   "forms": {
+    "N;SG;INDF": "בַּת דּוֹד",
+    "N;SG;DEF": "בַּת הַדּוֹד",
+    "N;PL;INDF": "בְּנוֹת דּוֹדִים",
+    "N;PL;DEF": "בְּנוֹת הַדּוֹדִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;INDF": "Wiktionary writes the plural with a maqaf (בְּנוֹת־דּוֹדִים / בְּנוֹת־דּוֹד); the course writes this multi-word noun with a space, like its lemma בַּת דּוֹד."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A female cousin.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a (female) cousin",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא בַּת דּוֹד שֶׁלִּי.",
+      "tr": "She is my cousin.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי בַּת דּוֹד אַחַת.",
+      "tr": "I have one (female) cousin.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּנוֹת הַדּוֹדִים שֶׁלִּי גָּרוֹת בְּחֵיפָה.",
+      "tr": "My (female) cousins live in Haifa.",
+      "register": "neutral",
+      "context": "home towns",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּת דּוֹד רִאשׁוֹנָה",
+      "tr": "a first cousin (female)"
+     },
+     {
+      "text": "בְּנוֹת דּוֹדִים",
+      "tr": "(female) cousins"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בַּת דּוֹדָה",
+      "register": "neutral",
+      "nuance": "a cousin through an aunt (the daughter of one’s aunt) — very common in speech"
+     }
+    ],
+    "etymology": {
+     "text": "A compound: בַּת “daughter of” + דּוֹד “uncle” (Wiktionary, בַּת־דּוֹד).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Esther was Mordecai’s cousin: the Bible calls her בַּת־דֹּדוֹ, “the daughter of his uncle” (Esther 2:7)."
+    ],
+    "pitfalls": [
+     "The plural is בְּנוֹת דּוֹדִים (or בְּנוֹת דּוֹד); a mixed group of cousins is בְּנֵי דּוֹדִים.",
+     "The definite form: בַּת הַדּוֹד “the cousin”."
+    ],
+    "subtleties": [
+     "Many speakers choose by the parent: בַּת דּוֹד (an uncle’s daughter), בַּת דּוֹדָה (an aunt’s daughter)."
+    ]
+   }
+  },
+  {
+   "id": "he:achyan",
+   "lemma": "אַחְיָן",
+   "pos": "NOUN",
+   "senses": [
+    "family.nephew"
+   ],
+   "gender": "MASC",
+   "translit": "achyan",
+   "forms": {
+    "N;SG;INDF": "אַחְיָן",
+    "N;SG;DEF": "הָאַחְיָן",
+    "N;PL;INDF": "אַחְיָנִים",
+    "N;PL;DEF": "הָאַחְיָנִים"
+   },
+   "plene": {
+    "N;SG;INDF": "אחיין",
+    "N;SG;DEF": "האחיין",
+    "N;PL;INDF": "אחיינים",
+    "N;PL;DEF": "האחיינים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A nephew.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nephew",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.nephew"
+     },
+     {
+      "id": "s2",
+      "def": "(plural אַחְיָנִים) nephews and nieces",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהּ שְׁנֵי אַחְיָנִים.",
+      "tr": "She has two nephews.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאַחְיָן שֶׁלִּי תַּלְמִיד.",
+      "tr": "My nephew is a pupil.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לוֹ שְׁלוֹשָׁה אַחִים וְשִׁבְעָה אַחְיָנִים.",
+      "tr": "He has three brothers and seven nephews and nieces.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַחְיָנִים וְאַחְיָנִיּוֹת",
+      "tr": "nephews and nieces"
+     },
+     {
+      "text": "דּוֹד וְאַחְיָן",
+      "tr": "uncle and nephew"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other everyday word; older Hebrew said בֶּן אָח “a brother’s son”.",
+    "etymology": {
+     "text": "Built on אָח “brother”: the child of one’s brother or sister. Wiktionary gives no further etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew builds “nephew” from “brother” (אָח → אַחְיָן), as Arabic says اِبْن أَخ (ibn akh) “son of a brother”."
+    ],
+    "pitfalls": [
+     "In full spelling it has two yods: אחיין.",
+     "A mixed group is אַחְיָנִים."
+    ],
+    "subtleties": [
+     "The word covers the son of a brother and of a sister alike."
+    ]
+   }
+  },
+  {
+   "id": "he:achyanit",
+   "lemma": "אַחְיָנִית",
+   "pos": "NOUN",
+   "senses": [
+    "family.niece"
+   ],
+   "gender": "FEM",
+   "translit": "achyanit",
+   "forms": {
+    "N;SG;INDF": "אַחְיָנִית",
+    "N;SG;DEF": "הָאַחְיָנִית",
+    "N;PL;INDF": "אַחְיָנִיּוֹת",
+    "N;PL;DEF": "הָאַחְיָנִיּוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "אחיינית",
+    "N;SG;DEF": "האחיינית",
+    "N;PL;INDF": "אחייניות",
+    "N;PL;DEF": "האחייניות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A niece.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "niece",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.niece"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֹאת הָאַחְיָנִית שֶׁלִּי.",
+      "tr": "This is my niece.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ שָׁלוֹשׁ אַחְיָנִיּוֹת.",
+      "tr": "We have three nieces.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאַחְיָנִית שֶׁלּוֹ עוֹבֶדֶת שָׁם.",
+      "tr": "His niece works there.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַחְיָנִית קְטַנָּה",
+      "tr": "a little niece"
+     },
+     {
+      "text": "דּוֹדָה וְאַחְיָנִית",
+      "tr": "aunt and niece"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other everyday word for a niece.",
+    "etymology": {
+     "text": "The feminine of אַחְיָן “nephew” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ending -ִית makes feminines of many nouns: סְטוּדֶנְט / סְטוּדֶנְטִית, אַחְיָן / אַחְיָנִית."
+    ],
+    "pitfalls": [
+     "The plural ends in -יּוֹת: אַחְיָנִיּוֹת (like סְטוּדֶנְטִית → סְטוּדֶנְטִיּוֹת)."
+    ],
+    "subtleties": [
+     "In speech one also hears אַחְיָנִית שֶׁלִּי without הַ: “a niece of mine”."
+    ]
+   }
+  },
+  {
+   "id": "he:krov-mishpacha",
+   "lemma": "קְרוֹב מִשְׁפָּחָה",
+   "pos": "NOUN",
+   "senses": [
+    "family.relative"
+   ],
+   "gender": "MASC",
+   "translit": "krov mishpacha",
+   "forms": {
+    "N;SG;INDF": "קְרוֹב מִשְׁפָּחָה",
+    "N;SG;DEF": "קְרוֹב הַמִּשְׁפָּחָה",
+    "N;PL;INDF": "קְרוֹבֵי מִשְׁפָּחָה",
+    "N;PL;DEF": "קְרוֹבֵי הַמִּשְׁפָּחָה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Any relative — the wide circle of a family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a relative, a family member (a man, or anyone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.relative"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא קְרוֹב מִשְׁפָּחָה שֶׁלִּי.",
+      "tr": "He is a relative of mine.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָיוּ שָׁם הַרְבֵּה קְרוֹבֵי מִשְׁפָּחָה.",
+      "tr": "There were many relatives there.",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחַג בָּאִים אֵלֵינוּ קְרוֹבֵי מִשְׁפָּחָה מִכָּל הָאָרֶץ.",
+      "tr": "On the holiday relatives come to us from all over the country.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְרוֹב מִשְׁפָּחָה רָחוֹק",
+      "tr": "a distant relative"
+     },
+     {
+      "text": "קְרוֹבֵי מִשְׁפָּחָה מִדַּרְגָּה רִאשׁוֹנָה",
+      "tr": "first-degree relatives"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קָרוֹב",
+      "register": "neutral",
+      "nuance": "the short form: הוּא קָרוֹב שֶׁלִּי; plural קְרוֹבִים “relatives”"
+     },
+     {
+      "word": "בֶּן מִשְׁפָּחָה",
+      "register": "neutral",
+      "nuance": "“a family member” — someone who belongs to the family, or is treated as if he did"
+     }
+    ],
+    "etymology": {
+     "text": "קָרוֹב “near, close” (in its construct form קְרוֹב־) + מִשְׁפָּחָה “family”: “one near in the family”. Wiktionary gives קָרוֹב “a relative” and notes the same root as Arabic قَرِيب (qarīb) “near”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic قَرِيب (qarīb) also means both “near” and “relative”; Turkish took the Arabic plural as akraba “relatives”."
+    ],
+    "pitfalls": [
+     "Only the first word changes: קְרוֹבֵי מִשְׁפָּחָה; the article goes on the second word: קְרוֹב הַמִּשְׁפָּחָה."
+    ],
+    "subtleties": [
+     "With שֶׁלִּי and no article it means “a relative of mine”: הוּא קְרוֹב מִשְׁפָּחָה שֶׁלִּי."
+    ]
+   }
+  },
+  {
+   "id": "he:krovat-mishpacha",
+   "lemma": "קְרוֹבַת מִשְׁפָּחָה",
+   "pos": "NOUN",
+   "senses": [
+    "family.relative"
+   ],
+   "gender": "FEM",
+   "translit": "krovat mishpacha",
+   "forms": {
+    "N;SG;INDF": "קְרוֹבַת מִשְׁפָּחָה",
+    "N;SG;DEF": "קְרוֹבַת הַמִּשְׁפָּחָה",
+    "N;PL;INDF": "קְרוֹבוֹת מִשְׁפָּחָה",
+    "N;PL;DEF": "קְרוֹבוֹת הַמִּשְׁפָּחָה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A female relative.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a (female) relative",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.relative"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא קְרוֹבַת מִשְׁפָּחָה שֶׁלָּנוּ.",
+      "tr": "She is a relative of ours.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "קְרוֹבַת מִשְׁפָּחָה שֶׁלִּי עוֹבֶדֶת פֹּה.",
+      "tr": "A relative of mine works here.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא קְרוֹבַת מִשְׁפָּחָה רְחוֹקָה.",
+      "tr": "She is a distant relative.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְרוֹבַת מִשְׁפָּחָה רְחוֹקָה",
+      "tr": "a distant (female) relative"
+     },
+     {
+      "text": "קְרוֹבוֹת מִשְׁפָּחָה",
+      "tr": "(female) relatives"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קְרוֹבָה",
+      "register": "neutral",
+      "nuance": "the short form: הִיא קְרוֹבָה שֶׁלִּי"
+     }
+    ],
+    "etymology": {
+     "text": "קְרוֹבָה “a female relative” (Wiktionary) in its construct form קְרוֹבַת־ + מִשְׁפָּחָה “family”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The -ַת of קְרוֹבַת is the old feminine ending that every -ָה noun shows before another noun: מִשְׁפָּחָה → מִשְׁפַּחַת, קְרוֹבָה → קְרוֹבַת."
+    ],
+    "pitfalls": [
+     "The first word ends in -ַת: קְרוֹבַת מִשְׁפָּחָה, not *קְרוֹבָה מִשְׁפָּחָה."
+    ],
+    "subtleties": [
+     "A group of men and women together is קְרוֹבֵי מִשְׁפָּחָה."
+    ]
+   }
+  },
+  {
+   "id": "he:sheli",
+   "lemma": "שֶׁלִּי",
+   "pos": "ADP",
+   "senses": [
+    "poss.my"
+   ],
+   "translit": "sheli",
+   "note": "שֶׁל + “me”: after a definite noun, הַבַּיִת שֶׁלִּי “my house”. The same for a man and a woman speaking.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shelcha",
+   "lemma": "שֶׁלְּךָ",
+   "pos": "ADP",
+   "senses": [
+    "poss.your.sg"
+   ],
+   "translit": "shelcha",
+   "note": "שֶׁל + “you” (to a man): הַסֵּפֶר שֶׁלְּךָ “your book”. To a woman: שֶׁלָּךְ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it grammatically, as “form of שֶׁל including the second-person masculine singular personal pronoun” — which is exactly “your”; the check looks for the English word “your”, which that gloss does not contain."
+    }
+   }
+  },
+  {
+   "id": "he:shelach",
+   "lemma": "שֶׁלָּךְ",
+   "pos": "ADP",
+   "senses": [
+    "poss.your.sg"
+   ],
+   "translit": "shelach",
+   "note": "שֶׁל + “you” (to a woman): הַסֵּפֶר שֶׁלָּךְ “your book”. To a man: שֶׁלְּךָ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it grammatically, as “form of שֶׁל including the second-person feminine singular personal pronoun” — which is exactly “your”; the check looks for the English word “your”, which that gloss does not contain."
+    }
+   }
+  },
+  {
+   "id": "he:shelo",
+   "lemma": "שֶׁלּוֹ",
+   "pos": "ADP",
+   "senses": [
+    "poss.his"
+   ],
+   "translit": "shelo",
+   "note": "שֶׁל + “him”: הַבַּיִת שֶׁלּוֹ “his house”. It follows the owner, not the thing.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it grammatically, as “form of שֶׁל including the third-person masculine singular personal pronoun” — which is exactly “his”; the check looks for the English word “his”, which that gloss does not contain."
+    }
+   }
+  },
+  {
+   "id": "he:shela",
+   "lemma": "שֶׁלָּהּ",
+   "pos": "ADP",
+   "senses": [
+    "poss.her"
+   ],
+   "translit": "shela",
+   "note": "שֶׁל + “her”: הַבַּיִת שֶׁלָּהּ “her house”. The final ה is pronounced h in careful speech (shelah).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it grammatically, as “form of שֶׁל including the third-person feminine singular personal pronoun” — which is exactly “her”; the check looks for the English word “her”, which that gloss does not contain."
+    }
+   }
+  },
+  {
+   "id": "he:shelanu",
+   "lemma": "שֶׁלָּנוּ",
+   "pos": "ADP",
+   "senses": [
+    "poss.our"
+   ],
+   "translit": "shelanu",
+   "note": "שֶׁל + “us”: הַבַּיִת שֶׁלָּנוּ “our house”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it grammatically, as “form of שֶׁל including the first-person plural personal pronoun” — which is exactly “our”; the check looks for the English word “our”, which that gloss does not contain."
+    }
+   }
+  },
+  {
+   "id": "he:shelachem",
+   "lemma": "שֶׁלָּכֶם",
+   "pos": "ADP",
+   "senses": [
+    "poss.your.pl"
+   ],
+   "translit": "shelachem",
+   "note": "שֶׁל + “you” (several people, men or a mixed group): הַבַּיִת שֶׁלָּכֶם. To women only: שֶׁלָּכֶן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shelachen",
+   "lemma": "שֶׁלָּכֶן",
+   "pos": "ADP",
+   "senses": [
+    "poss.your.pl"
+   ],
+   "translit": "shelachen",
+   "note": "שֶׁל + “you” (several women): הַבַּיִת שֶׁלָּכֶן. In casual speech many use שֶׁלָּכֶם for women too.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shelahem",
+   "lemma": "שֶׁלָּהֶם",
+   "pos": "ADP",
+   "senses": [
+    "poss.their"
+   ],
+   "translit": "shelahem",
+   "note": "שֶׁל + “them” (men or a mixed group): הַבַּיִת שֶׁלָּהֶם. Women only: שֶׁלָּהֶן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shelahen",
+   "lemma": "שֶׁלָּהֶן",
+   "pos": "ADP",
+   "senses": [
+    "poss.their"
+   ],
+   "translit": "shelahen",
+   "note": "שֶׁל + “them” (women only): הַבַּיִת שֶׁלָּהֶן. In casual speech many use שֶׁלָּהֶם for women too.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shel",
+   "lemma": "שֶׁל",
+   "pos": "ADP",
+   "senses": [],
+   "translit": "shel",
+   "role": "“of” (belonging): הַתִּיק שֶׁל דָּנָה “Dana’s bag”. With a pronoun it fuses into one word: שֶׁלִּי, שֶׁלְּךָ, שֶׁלָּךְ, שֶׁלּוֹ … (my, your, his …).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

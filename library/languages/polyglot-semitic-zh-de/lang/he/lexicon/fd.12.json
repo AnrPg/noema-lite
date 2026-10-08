@@ -1,0 +1,2214 @@
+{
+ "lexemes": [
+  {
+   "id": "he:mitachat",
+   "lemma": "מִתַּחַת",
+   "pos": "ADP",
+   "senses": [
+    "prep.under"
+   ],
+   "translit": "mitachat",
+   "note": "Followed by לְ: מִתַּחַת לַשֻּׁלְחָן “under the table”. With pronouns: מִתַּחְתַּי, מִתַּחְתֶּיךָ …",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lost keys under the sofa, the cat under the bed.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "under, below (followed by לְ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.under"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמַּפְתֵּחַ מִתַּחַת לַסַּפָּה.",
+      "tr": "The key is under the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּיק מִתַּחַת לַשֻּׁלְחָן.",
+      "tr": "The bag is under the table.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכֶּלֶב יָשֵׁן מִתַּחַת לַמִּטָּה.",
+      "tr": "The dog sleeps under the bed.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִתַּחַת לַשֻּׁלְחָן",
+      "tr": "under the table (also: secretly, illegally)"
+     },
+     {
+      "text": "מִתַּחַת לָאַף",
+      "tr": "under one’s nose"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תַּחַת",
+      "register": "formal",
+      "nuance": "“under” without לְ, in formal and written style: תַּחַת הַשֻּׁלְחָן; it also means “instead of”"
+     }
+    ],
+    "etymology": {
+     "text": "מִן “from” + תַּחַת “under”; תַּחַת is related to Arabic تَحْتَ (taḥta), Ge’ez taḥtä and Ugaritic tḥt (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic تَحْتَ (taḥta) “under” is the same word as תַּחַת (Wiktionary).",
+     "As in English, מִתַּחַת לַשֻּׁלְחָן also means “under the table”: secretly, illegally."
+    ],
+    "pitfalls": [
+     "Say מִתַּחַת לְ… with לְ: מִתַּחַת לַשֻּׁלְחָן — not *מִתַּחַת הַשֻּׁלְחָן.",
+     "The לְ fuses with the article: לְ + הַשֻּׁלְחָן → לַשֻּׁלְחָן."
+    ],
+    "subtleties": [
+     "“Downstairs, below” without a noun is לְמַטָּה: הוּא לְמַטָּה “he is downstairs”."
+    ]
+   }
+  },
+  {
+   "id": "he:leyad",
+   "lemma": "לְיַד",
+   "pos": "ADP",
+   "senses": [
+    "prep.nextto"
+   ],
+   "translit": "leyad",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right beside: the lamp next to the bed, the bank next to the post office.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next to, beside, by",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.nextto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמְּנוֹרָה לְיַד הַמִּטָּה.",
+      "tr": "The lamp is next to the bed.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּנְק לְיַד הַדֹּאַר.",
+      "tr": "The bank is next to the post office.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא גָּר לְיַד הַיָּם.",
+      "tr": "He lives by the sea.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְיַד הַבַּיִת",
+      "tr": "next to the house"
+     },
+     {
+      "text": "לְיָדִי",
+      "tr": "next to me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עַל יַד",
+      "register": "formal",
+      "nuance": "“next to” — more formal or old-fashioned"
+     },
+     {
+      "word": "בְּסָמוּךְ לְ…",
+      "register": "formal",
+      "nuance": "“close to, adjacent to” — formal, in addresses and notices"
+     },
+     {
+      "word": "קָרוֹב לְ…",
+      "register": "neutral",
+      "nuance": "“near” — not necessarily right beside"
+     }
+    ],
+    "etymology": {
+     "text": "From לְ “to” + יַד “hand of”: roughly “at the hand of” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is literally “at the hand of” — as English says “close at hand”."
+    ],
+    "pitfalls": [
+     "No לְ after it: לְיַד הַבַּיִת, not *לְיַד לַבַּיִת.",
+     "With pronouns the vowel changes: לְיָדִי, לְיָדְךָ, לְיָדָהּ (Wiktionary)."
+    ],
+    "subtleties": [
+     "לְיַד is right beside; קָרוֹב לְ… is “near”, possibly farther away."
+    ]
+   }
+  },
+  {
+   "id": "he:lifnei",
+   "lemma": "לִפְנֵי",
+   "pos": "ADP",
+   "senses": [
+    "prep.infront",
+    "prep.before"
+   ],
+   "translit": "lifnei",
+   "note": "“in front of” (place); the same word is “before” in time (lesson 15) and “ago”: לִפְנֵי שָׁנָה “a year ago”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In front: the table before the sofa, the bus in front of the house.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in front of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.infront"
+     },
+     {
+      "id": "s2",
+      "def": "before (in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.before"
+     },
+     {
+      "id": "s3",
+      "def": "ago",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשֻּׁלְחָן לִפְנֵי הַסַּפָּה.",
+      "tr": "The table is in front of the sofa.",
+      "register": "neutral",
+      "context": "living room",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוֹטוֹבּוּס עוֹמֵד לִפְנֵי הַבַּיִת.",
+      "tr": "The bus is standing in front of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "לִפְנֵי אֲרוּחַת הָעֶרֶב",
+      "tr": "before dinner",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "לִפְנֵי הָעֲבוֹדָה אֲנִי שׁוֹתֶה קָפֶה.",
+      "tr": "Before work I (m.) drink coffee.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא חוֹזֵר הַבַּיְתָה לִפְנֵי אֲרוּחַת הָעֶרֶב.",
+      "tr": "He comes home before dinner.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא הָיָה פֹּה לִפְנֵי שָׁנָה.",
+      "tr": "He was here a year ago.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִפְנֵי הַבַּיִת",
+      "tr": "in front of the house"
+     },
+     {
+      "text": "לִפְנֵי שָׁנָה",
+      "tr": "a year ago"
+     },
+     {
+      "text": "לִפְנֵי הַכֹּל",
+      "tr": "first of all"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מוּל",
+      "register": "neutral",
+      "nuance": "“opposite, facing” — across from something"
+     },
+     {
+      "word": "בַּחֲזִית",
+      "register": "formal",
+      "nuance": "“at the front of” (a building)"
+     }
+    ],
+    "etymology": {
+     "text": "לְ “to, for” + פְּנֵי “face of”, the construct form of פָּנִים “face” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German vor works the same way: vor dem Haus “in front of the house”, vor einem Jahr “a year ago”."
+    ],
+    "pitfalls": [
+     "The same word is “before” in time (lesson 15) and “ago”: לִפְנֵי שָׁנָה “a year ago”.",
+     "“Opposite, facing” is מוּל, not לִפְנֵי."
+    ],
+    "subtleties": [
+     "With pronouns: לְפָנַי “in front of me”, לְפָנֶיךָ, לְפָנָיו (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:meachorei",
+   "lemma": "מֵאֲחוֹרֵי",
+   "pos": "ADP",
+   "senses": [
+    "prep.behind"
+   ],
+   "translit": "meachorei",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Out of sight: behind the door, behind the house.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "behind, at the back of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.behind"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַגִּנָּה מֵאֲחוֹרֵי הַבַּיִת.",
+      "tr": "The garden is behind the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּיק מֵאֲחוֹרֵי הַדֶּלֶת.",
+      "tr": "The bag is behind the door.",
+      "register": "neutral",
+      "context": "hall",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יֵשׁ מֵאֲחוֹרֵי הַקִּיר?",
+      "tr": "What is behind the wall?",
+      "register": "neutral",
+      "context": "curiosity",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֵאֲחוֹרֵי הַבַּיִת",
+      "tr": "behind the house"
+     },
+     {
+      "text": "מֵאֲחוֹרֵי הַקְּלָעִים",
+      "tr": "behind the scenes"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מֵאֲחוֹרֵי הַקְּלָעִים",
+      "tr": "behind the curtains",
+      "kind": "idiom",
+      "meaning": "behind the scenes, out of public view",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מֵאָחוֹר",
+      "register": "neutral",
+      "nuance": "“at the back, behind” without a noun: הוּא יוֹשֵׁב מֵאָחוֹר"
+     },
+     {
+      "word": "אַחֲרֵי",
+      "register": "colloquial",
+      "nuance": "“after” — in speech sometimes also “behind” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "מִן “from” + אֲחוֹרֵי, the construct form of אָחוֹר “back” (Wiktionary gives no etymology of its own).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew likes מִ “from” in place words: מִתַּחַת, מֵאֲחוֹרֵי, מִשְּׂמֹאל — as if seen “from” there."
+    ],
+    "pitfalls": [
+     "אַחֲרֵי is “after” (in time): אַחֲרֵי הָאֲרוּחָה. For a place say מֵאֲחוֹרֵי.",
+     "Without a noun use מֵאָחוֹר “at the back”."
+    ],
+    "subtleties": [
+     "With pronouns: מֵאֲחוֹרַי “behind me”, מֵאֲחוֹרֶיךָ (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:bein",
+   "lemma": "בֵּין",
+   "pos": "ADP",
+   "senses": [
+    "prep.between"
+   ],
+   "translit": "bein",
+   "note": "Between X and Y: בֵּין X לְY (standard) or בֵּין X וּבֵין Y; in speech also בֵּין X וְY.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In the middle: between the sofa and the window.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "between",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.between"
+     },
+     {
+      "id": "s2",
+      "def": "among",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשֻּׁלְחָן בֵּין הַסַּפָּה לַחַלּוֹן.",
+      "tr": "The table is between the sofa and the window.",
+      "register": "neutral",
+      "context": "living room",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּנְק בֵּין הַדֹּאַר לַסּוּפֶּר.",
+      "tr": "The bank is between the post office and the supermarket.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה נִשְׁאָר בֵּין חֲבֵרִים.",
+      "tr": "This stays between friends.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּין … לְ…",
+      "tr": "between … and …"
+     },
+     {
+      "text": "בֵּין הַשְּׁאָר",
+      "tr": "among other things"
+     },
+     {
+      "text": "בֵּינִי לְבֵינְךָ",
+      "tr": "between you and me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּקֶרֶב",
+      "register": "formal",
+      "nuance": "“among” — formal"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic بَيْنَ (bayna) and Aramaic byn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic بَيْنَ (bayna) is the same word; “international” is בֵּינְלְאֻמִּי, “between nations”."
+    ],
+    "pitfalls": [
+     "The second item takes לְ (standard: בֵּין הַבַּיִת לַגִּנָּה) or וּבֵין; plain וְ is heard in speech.",
+     "לְ fuses with the article: לַחַלּוֹן, לַסּוּפֶּר."
+    ],
+    "subtleties": [
+     "With pronouns: בֵּינִי לְבֵינְךָ “between you and me” (a fixed phrase)."
+    ]
+   }
+  },
+  {
+   "id": "he:karov",
+   "lemma": "קָרוֹב",
+   "pos": "ADJ",
+   "senses": [
+    "adv.near"
+   ],
+   "translit": "karov",
+   "note": "An adjective: it agrees with its noun (הַשּׁוּק קָרוֹב, הַתַּחֲנָה קְרוֹבָה). “Near to” takes לְ: קָרוֹב לַבַּיִת. As an adverb it stays קָרוֹב: הוּא גָּר קָרוֹב.",
+   "forms": {
+    "ADJ;SG;MASC": "קָרוֹב",
+    "ADJ;SG;FEM": "קְרוֹבָה",
+    "ADJ;PL;MASC": "קְרוֹבִים",
+    "ADJ;PL;FEM": "קְרוֹבוֹת",
+    "ADJ;SG;MASC;DEF": "הַקָּרוֹב",
+    "ADJ;SG;FEM;DEF": "הַקְּרוֹבָה",
+    "ADJ;PL;MASC;DEF": "הַקְּרוֹבִים",
+    "ADJ;PL;FEM;DEF": "הַקְּרוֹבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Just round the corner — five minutes on foot.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "near, close (to)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     },
+     {
+      "id": "s2",
+      "def": "close (a friend, a relationship)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסּוּפֶּר קָרוֹב.",
+      "tr": "The supermarket is close.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּחֲנָה קְרוֹבָה לַבַּיִת.",
+      "tr": "The stop is close to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חָבֵר קָרוֹב.",
+      "tr": "He is a close friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קָרוֹב לַבַּיִת",
+      "tr": "close to home"
+     },
+     {
+      "text": "חָבֵר קָרוֹב",
+      "tr": "a close friend"
+     },
+     {
+      "text": "בְּקָרוֹב",
+      "tr": "soon (“in near”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סָמוּךְ",
+      "register": "formal",
+      "nuance": "“adjacent, close by” — formal"
+     },
+     {
+      "word": "לְיַד",
+      "register": "neutral",
+      "nuance": "“right next to”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "רָחוֹק",
+      "note": "far"
+     }
+    ],
+    "etymology": {
+     "text": "From the same root as Arabic قَرِيب (qarīb) “close, near” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic قَرِيب (qarīb) is the same word; Turkish akraba “relatives” comes from its Arabic plural أَقْرِبَاء."
+    ],
+    "pitfalls": [
+     "It agrees: קָרוֹב, קְרוֹבָה, קְרוֹבִים, קְרוֹבוֹת — הַתַּחֲנָה קְרוֹבָה.",
+     "“Near to” takes לְ: קָרוֹב לַבַּיִת (but “far from” takes מִ)."
+    ],
+    "subtleties": [
+     "As an adverb it does not change: הִיא גָּרָה קָרוֹב “she lives nearby”.",
+     "בְּקָרוֹב “soon” is “in the near (time)”."
+    ]
+   }
+  },
+  {
+   "id": "he:rachok",
+   "lemma": "רָחוֹק",
+   "pos": "ADJ",
+   "senses": [
+    "adv.far"
+   ],
+   "translit": "rachok",
+   "note": "An adjective: it agrees with its noun (שְׂדֵה הַתְּעוּפָה רָחוֹק, הָאוּנִיבֶרְסִיטָה רְחוֹקָה). “Far from” takes מִ: רָחוֹק מִכָּאן.",
+   "forms": {
+    "ADJ;SG;MASC": "רָחוֹק",
+    "ADJ;SG;FEM": "רְחוֹקָה",
+    "ADJ;PL;MASC": "רְחוֹקִים",
+    "ADJ;PL;FEM": "רְחוֹקוֹת",
+    "ADJ;SG;MASC;DEF": "הָרָחוֹק",
+    "ADJ;SG;FEM;DEF": "הָרְחוֹקָה",
+    "ADJ;PL;MASC;DEF": "הָרְחוֹקִים",
+    "ADJ;PL;FEM;DEF": "הָרְחוֹקוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long way off — a long bus ride away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "far, distant (from)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.far"
+     },
+     {
+      "id": "s2",
+      "def": "distant (a relative)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "שְׂדֵה הַתְּעוּפָה רָחוֹק.",
+      "tr": "The airport is far.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוּנִיבֶרְסִיטָה רְחוֹקָה מִכָּאן.",
+      "tr": "The university is far from here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם גָּרִים רָחוֹק.",
+      "tr": "They live far away.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא קָרוֹב מִשְׁפָּחָה רָחוֹק.",
+      "tr": "He is a distant relative.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רָחוֹק מִכָּאן",
+      "tr": "far from here"
+     },
+     {
+      "text": "מֵרָחוֹק",
+      "tr": "from afar"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְרֻחָק",
+      "register": "formal",
+      "nuance": "“distant, remote” — formal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קָרוֹב",
+      "note": "near"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Tigre rəḥux̣ and Dahalik ruḥuq “far” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew pairs the prepositions like English: רָחוֹק מִ… “far from”, קָרוֹב לְ… “close to”."
+    ],
+    "pitfalls": [
+     "“Far from” takes מִ: רָחוֹק מִכָּאן, רָחוֹק מֵהָעִיר.",
+     "It agrees: רָחוֹק, רְחוֹקָה, רְחוֹקִים, רְחוֹקוֹת."
+    ],
+    "subtleties": [
+     "As an adverb it does not change: הֵם גָּרִים רָחוֹק “they live far away”."
+    ]
+   }
+  },
+  {
+   "id": "he:bifnim",
+   "lemma": "בִּפְנִים",
+   "pos": "ADV",
+   "senses": [
+    "adv.inside"
+   ],
+   "translit": "bifnim",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Indoors, in the warm.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "inside, indoors",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inside"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא בִּפְנִים.",
+      "tr": "Dad is inside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יֵשׁ בִּפְנִים?",
+      "tr": "What is inside?",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים בִּפְנִים, בַּבַּיִת.",
+      "tr": "The children are inside, in the house.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּפְנִים וּבַחוּץ",
+      "tr": "inside and outside"
+     },
+     {
+      "text": "מִבִּפְנִים",
+      "tr": "from the inside"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּתוֹךְ",
+      "register": "formal",
+      "nuance": "“inside (of)” with a noun: בְּתוֹךְ הַבַּיִת"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "בַּחוּץ",
+      "note": "outside"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ “in” + פְּנִים, from פָּנִים “face; interior” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Ministry of the Interior is מִשְׂרַד הַפְּנִים, “the ministry of the inside”."
+    ],
+    "pitfalls": [
+     "Where? בִּפְנִים. Where to? פְּנִימָה: בּוֹא פְּנִימָה “come in”.",
+     "With a noun say בְּ… or בְּתוֹךְ…: בַּבַּיִת / בְּתוֹךְ הַבַּיִת."
+    ],
+    "subtleties": [
+     "פָּנִים is both “face” and “inside”."
+    ]
+   }
+  },
+  {
+   "id": "he:bachuts",
+   "lemma": "בַּחוּץ",
+   "pos": "ADV",
+   "senses": [
+    "adv.outside"
+   ],
+   "translit": "bachuts",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Out in the open: the garden, the street, the weather.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "outside, outdoors",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.outside"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים בַּחוּץ.",
+      "tr": "The children are outside.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "קַר בַּחוּץ.",
+      "tr": "It is cold outside.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ אוֹכְלִים בַּחוּץ.",
+      "tr": "We are eating outside.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּחוּץ",
+      "tr": "outside"
+     },
+     {
+      "text": "הַחוּצָה",
+      "tr": "outwards, out (direction)"
+     },
+     {
+      "text": "חוּץ מִ…",
+      "tr": "except …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the direction “out” is הַחוּצָה.",
+    "antonyms": [
+     {
+      "word": "בִּפְנִים",
+      "note": "inside"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ “in” + הַ “the” + חוּץ “outside” (Wiktionary): “in the outside”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Abroad is חוּץ לָאָרֶץ, “outside the Land”, shortened to חוּ״ל."
+    ],
+    "pitfalls": [
+     "Where? בַּחוּץ. Where to? הַחוּצָה: צֵא הַחוּצָה “go out”.",
+     "חוּץ מִ… means “except”: כֻּלָּם חוּץ מִמֶּנִּי “everyone except me”."
+    ],
+    "subtleties": [
+     "It already contains the article: בַּ = בְּ + הַ (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:smol",
+   "lemma": "שְׂמֹאל",
+   "pos": "NOUN",
+   "senses": [
+    "adv.left"
+   ],
+   "class": "sgt",
+   "gender": "MASC",
+   "translit": "smol",
+   "note": "“On the left” = מִשְּׂמֹאל (מִ doubles the שׂ); “to the left” = שְׂמֹאלָה.",
+   "forms": {
+    "N;SG;INDF": "שְׂמֹאל",
+    "N;SG;DEF": "הַשְּׂמֹאל",
+    "N;SG;INDF;PFX": "שְּׂמֹאל"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;INDF;PFX": "the form after the prefix מִ, whose נ doubles the first letter (מִשְּׂמֹאל); Wiktionary lists only the plain form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Directions: the kitchen is on the left.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "left (the left side or direction)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.left"
+     },
+     {
+      "id": "s2",
+      "def": "the Left (in politics)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "north (Biblical)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמִּטְבָּח מִשְּׂמֹאל.",
+      "tr": "The kitchen is on the left.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּנְק מִשְּׂמֹאל לַדֹּאַר.",
+      "tr": "The bank is to the left of the post office.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "יַד שְׂמֹאל",
+      "tr": "the left hand",
+      "register": "neutral",
+      "context": "body",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אִישׁ שְׂמֹאל.",
+      "tr": "He is a left-winger (“a man of the Left”).",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִשְּׂמֹאל",
+      "tr": "on the left"
+     },
+     {
+      "text": "שְׂמֹאלָה",
+      "tr": "to the left"
+     },
+     {
+      "text": "יַד שְׂמֹאל",
+      "tr": "the left hand"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "antonyms": [
+     {
+      "word": "יָמִין",
+      "note": "right"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *śimaʔl-, cognate with Arabic شِمَال (šimāl), Akkadian šumēlum and Aramaic סְמָלָא; the sense “north” comes from facing the sunrise, with the north on the left (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic شِمَال (šimāl) means both “left” and “north” — Hebrew שְׂמֹאל once did too (Wiktionary)."
+    ],
+    "pitfalls": [
+     "“On the left” is מִשְּׂמֹאל (with a doubled שׂ); “to the left” is שְׂמֹאלָה.",
+     "The ש is a שׂ (s): smol."
+    ],
+    "subtleties": [
+     "Facing the sunrise, left is north: Biblical שְׂמֹאל can mean “north” (Wiktionary).",
+     "The adjective is שְׂמָאלִי “left, left-wing”."
+    ]
+   }
+  },
+  {
+   "id": "he:yamin",
+   "lemma": "יָמִין",
+   "pos": "NOUN",
+   "senses": [
+    "adv.right"
+   ],
+   "class": "sgt",
+   "gender": "FEM",
+   "translit": "yamin",
+   "note": "“On the right” = מִיָּמִין (מִ doubles the י); “to the right” = יָמִינָה.",
+   "forms": {
+    "N;SG;INDF": "יָמִין",
+    "N;SG;DEF": "הַיָּמִין",
+    "N;SG;INDF;PFX": "יָּמִין"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;INDF;PFX": "the form after the prefix מִ, whose נ doubles the first letter (מִיָּמִין); Wiktionary lists only the plain form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Directions: the bathroom is on the right.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "right (the right side or direction); the right hand",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.right"
+     },
+     {
+      "id": "s2",
+      "def": "the Right (in politics)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "south (Biblical)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "חֲדַר הָאַמְבַּטְיָה מִיָּמִין.",
+      "tr": "The bathroom is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסּוּפֶּר מִיָּמִין לַבַּנְק.",
+      "tr": "The supermarket is to the right of the bank.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא יַד יָמִין שֶׁל הַמְּנַהֵל.",
+      "tr": "He is the manager’s right hand.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "מִפְלֶגֶת יָמִין",
+      "tr": "a right-wing party",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיָּמִין",
+      "tr": "on the right"
+     },
+     {
+      "text": "יָמִינָה",
+      "tr": "to the right"
+     },
+     {
+      "text": "יַד יָמִין",
+      "tr": "the right hand; a right-hand man"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "antonyms": [
+     {
+      "word": "שְׂמֹאל",
+      "note": "left"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *yamīn-, from Proto-Afroasiatic *yamin- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Binyamin (בִּנְיָמִין, Benjamin) is “son of the right hand”."
+    ],
+    "pitfalls": [
+     "“On the right” is מִיָּמִין (with a doubled י); “to the right” is יָמִינָה.",
+     "Feminine (Wiktionary), unlike שְׂמֹאל."
+    ],
+    "subtleties": [
+     "Facing the sunrise, right is south: Biblical יָמִין can mean “south” (Wiktionary) — and תֵּימָן, Yemen, is “the south”.",
+     "The adjective is יְמָנִי “right, right-wing”."
+    ]
+   }
+  },
+  {
+   "id": "he:mitbach",
+   "lemma": "מִטְבָּח",
+   "pos": "NOUN",
+   "senses": [
+    "home.kitchen"
+   ],
+   "gender": "MASC",
+   "root": "ט־ב־ח",
+   "translit": "mitbach",
+   "forms": {
+    "N;SG;INDF": "מִטְבָּח",
+    "N;SG;DEF": "הַמִּטְבָּח",
+    "N;PL;INDF": "מִטְבָּחִים",
+    "N;PL;DEF": "הַמִּטְבָּחִים",
+    "N;SG;DEF;PFX": "מִּטְבָּח"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַמִּטְבָּח → (בַּ / לַ)מִּטְבָּח; Wiktionary lists only the full definite form הַמִּטְבָּח."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The smell of cooking, the heart of the family flat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kitchen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.kitchen"
+     },
+     {
+      "id": "s2",
+      "def": "cuisine",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא בַּמִּטְבָּח.",
+      "tr": "Mum is in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּטְבָּח קָטָן אֲבָל נוֹחַ.",
+      "tr": "The kitchen is small but comfortable.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹהֵב אֶת הַמִּטְבָּח הַיְּוָנִי.",
+      "tr": "I (m.) love Greek cuisine.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֻׁלְחַן מִטְבָּח",
+      "tr": "a kitchen table"
+     },
+     {
+      "text": "מִטְבָּח כָּשֵׁר",
+      "tr": "a kosher kitchen"
+     },
+     {
+      "text": "הַמִּטְבָּח הַיִּשְׂרְאֵלִי",
+      "tr": "Israeli cuisine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; a kitchenette is a מִטְבָּחוֹן.",
+    "etymology": {
+     "text": "From the root of טַבָּח “cook” and טָבַח “to slaughter”; cognate with Arabic مَطْبَخ (maṭbaḵ) “kitchen” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish mutfak “kitchen” comes from Arabic مَطْبَخ (maṭbaḵ) — the same word as מִטְבָּח."
+    ],
+    "pitfalls": [
+     "With the article the מ doubles: הַמִּטְבָּח; “in the kitchen” = בַּמִּטְבָּח.",
+     "Before another noun: מִטְבַּח־."
+    ],
+    "subtleties": [
+     "A kosher kitchen keeps two sets of dishes, for meat and for milk."
+    ]
+   }
+  },
+  {
+   "id": "he:chadar-ambatya",
+   "lemma": "חֲדַר אַמְבַּטְיָה",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom"
+   ],
+   "gender": "MASC",
+   "translit": "chadar ambatya",
+   "forms": {
+    "N;SG;INDF": "חֲדַר אַמְבַּטְיָה",
+    "N;SG;DEF": "חֲדַר הָאַמְבַּטְיָה",
+    "N;PL;INDF": "חַדְרֵי אַמְבַּטְיָה",
+    "N;PL;DEF": "חַדְרֵי הָאַמְבַּטְיָה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shower, bathtub, towels — and a queue in the morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bathroom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "חֲדַר הָאַמְבַּטְיָה מִיָּמִין.",
+      "tr": "The bathroom is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בַּדִּירָה שְׁנֵי חַדְרֵי אַמְבַּטְיָה.",
+      "tr": "The flat has two bathrooms.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "חֲדַר הָאַמְבַּטְיָה קָטָן.",
+      "tr": "The bathroom is small.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲדַר אַמְבַּטְיָה וְשֵׁרוּתִים",
+      "tr": "bathroom and toilet"
+     },
+     {
+      "text": "חֲדַר אַמְבַּטְיָה גָּדוֹל",
+      "tr": "a big bathroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַמְבַּטְיָה",
+      "register": "colloquial",
+      "nuance": "in speech often just “the bath”: הוּא בָּאַמְבַּטְיָה (Wiktionary lists “bathroom” as a sense)"
+     },
+     {
+      "word": "שֵׁרוּתִים",
+      "register": "neutral",
+      "nuance": "the toilet, the WC"
+     }
+    ],
+    "etymology": {
+     "text": "From חֲדַר־ “room (of)” + אַמְבַּטְיָה “bathtub” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "אַמְבַּטְיָה is the bathtub itself; the room is “the room of the bathtub”."
+    ],
+    "pitfalls": [
+     "Masculine, because of חֶדֶר: חֲדַר אַמְבַּטְיָה גָּדוֹל (אַמְבַּטְיָה alone is feminine).",
+     "The article goes on the second word: חֲדַר הָאַמְבַּטְיָה."
+    ],
+    "subtleties": [
+     "In Israeli flats the toilet is often a separate small room, the שֵׁרוּתִים."
+    ]
+   }
+  },
+  {
+   "id": "he:chadar-shena",
+   "lemma": "חֲדַר שֵׁנָה",
+   "pos": "NOUN",
+   "senses": [
+    "home.bedroom"
+   ],
+   "gender": "MASC",
+   "translit": "chadar shena",
+   "forms": {
+    "N;SG;INDF": "חֲדַר שֵׁנָה",
+    "N;SG;DEF": "חֲדַר הַשֵּׁנָה",
+    "N;PL;INDF": "חַדְרֵי שֵׁנָה",
+    "N;PL;DEF": "חַדְרֵי הַשֵּׁנָה"
+   },
+   "plene": {
+    "N;SG;INDF": "חדר שינה",
+    "N;SG;DEF": "חדר השינה",
+    "N;PL;INDF": "חדרי שינה",
+    "N;PL;DEF": "חדרי השינה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Quiet, a bed and a wardrobe — the room for sleep.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bedroom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bedroom"
+     },
+     {
+      "id": "s2",
+      "def": "dormitory",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים בַּחֲדַר הַשֵּׁנָה.",
+      "tr": "The children are in the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ שְׁלוֹשָׁה חַדְרֵי שֵׁנָה.",
+      "tr": "We have three bedrooms.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "חֲדַר הַשֵּׁנָה שֶׁלִּי קָטָן.",
+      "tr": "My bedroom is small.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲדַר שֵׁנָה גָּדוֹל",
+      "tr": "a big bedroom"
+     },
+     {
+      "text": "בַּחֲדַר הַשֵּׁנָה",
+      "tr": "in the bedroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֲדַר הוֹרִים",
+      "register": "neutral",
+      "nuance": "the parents’ bedroom, the master bedroom"
+     },
+     {
+      "word": "חֲדַר יְלָדִים",
+      "register": "neutral",
+      "nuance": "the children’s room"
+     }
+    ],
+    "etymology": {
+     "text": "From חֲדַר־ “room (of)” + שֵׁנָה “sleep” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Schlafzimmer is built the same way: “room of sleep”."
+    ],
+    "pitfalls": [
+     "“In the bedroom” is בַּחֲדַר הַשֵּׁנָה: בְּ before the hataf patah of חֲדַר becomes בַּ, and the article goes on שֵׁנָה."
+    ],
+    "subtleties": [
+     "Israeli flats are counted in rooms: a דִּירַת שָׁלוֹשׁ חֲדָרִים has a living room and two bedrooms."
+    ]
+   }
+  },
+  {
+   "id": "he:salon",
+   "lemma": "סָלוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "home.livingroom"
+   ],
+   "gender": "MASC",
+   "translit": "salon",
+   "forms": {
+    "N;SG;INDF": "סָלוֹן",
+    "N;SG;DEF": "הַסָּלוֹן",
+    "N;PL;INDF": "סָלוֹנִים",
+    "N;PL;DEF": "הַסָּלוֹנִים",
+    "N;SG;DEF;PFX": "סָּלוֹן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The sofa, the television, guests on a Friday evening.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "living room",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.livingroom"
+     },
+     {
+      "id": "s2",
+      "def": "a living-room set (sofa and armchairs)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַטֶּלֶפוֹן בַּסָּלוֹן.",
+      "tr": "The phone is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ יוֹשְׁבִים בַּסָּלוֹן.",
+      "tr": "We are sitting in the living room.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִינוּ סָלוֹן חָדָשׁ.",
+      "tr": "We bought a new living-room set.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֻׁלְחַן סָלוֹן",
+      "tr": "a coffee table"
+     },
+     {
+      "text": "בַּסָּלוֹן",
+      "tr": "in the living room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֲדַר מְגוּרִים",
+      "register": "formal",
+      "nuance": "“living room” in ads and on plans"
+     },
+     {
+      "word": "חֲדַר אוֹרְחִים",
+      "register": "dated",
+      "nuance": "a guest room, a parlour"
+     }
+    ],
+    "etymology": {
+     "text": "An internationalism, from French salon (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Salon, Greek σαλόνι, Russian салон, Turkish salon — all from French salon."
+    ],
+    "pitfalls": [
+     "With the article the ס doubles: הַסָּלוֹן; “in the living room” = בַּסָּלוֹן.",
+     "A hairdresser’s is a מִסְפָּרָה, not a סָלוֹן."
+    ],
+    "subtleties": [
+     "In Israel the סָלוֹן is the main room of the flat, where guests are received."
+    ]
+   }
+  },
+  {
+   "id": "he:gina",
+   "lemma": "גִּנָּה",
+   "pos": "NOUN",
+   "senses": [
+    "home.garden"
+   ],
+   "gender": "FEM",
+   "translit": "gina",
+   "forms": {
+    "N;SG;INDF": "גִּנָּה",
+    "N;SG;DEF": "הַגִּנָּה",
+    "N;PL;INDF": "גִּנּוֹת",
+    "N;PL;DEF": "הַגִּנּוֹת",
+    "N;SG;DEF;PFX": "גִּנָּה"
+   },
+   "plene": {
+    "N;SG;INDF": "גינה",
+    "N;SG;DEF": "הגינה",
+    "N;PL;INDF": "גינות",
+    "N;PL;DEF": "הגינות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Lemon trees, herbs and children on the grass.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garden",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.garden"
+     },
+     {
+      "id": "s2",
+      "def": "a small park, a public garden",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים בַּגִּנָּה.",
+      "tr": "The children are in the garden.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ גִּנָּה קְטַנָּה.",
+      "tr": "We have a small garden.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַגִּנָּה הַצִּבּוּרִית לְיַד הַבַּיִת.",
+      "tr": "The public garden is next to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גִּנַּת יְרָק",
+      "tr": "a vegetable garden"
+     },
+     {
+      "text": "גִּנָּה צִבּוּרִית",
+      "tr": "a public garden"
+     },
+     {
+      "text": "גִּנַּת שַׁעֲשׁוּעִים",
+      "tr": "a playground"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גַּן",
+      "register": "neutral",
+      "nuance": "a garden, a park (גַּן לְאֻמִּי); also a kindergarten"
+     },
+     {
+      "word": "חָצֵר",
+      "register": "neutral",
+      "nuance": "a yard, a courtyard"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine counterpart of גַּן “garden” (Song of Songs 6:11 אֶל גִּנַּת אֱגוֹז); גַּן comes from Proto-Semitic *g-n-n “to protect” and is cognate with Arabic جَنَّة (janna) (Wiktionary, under גַּן).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Garden of Eden is גַּן עֵדֶן; Arabic جَنَّة “paradise” is the same root (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Written גינה in full spelling; plural גִּנּוֹת.",
+     "“In the garden” = בַּגִּנָּה."
+    ],
+    "subtleties": [
+     "גַּן alone is often a kindergarten: הַיֶּלֶד בַּגַּן “the child is at kindergarten”."
+    ]
+   }
+  },
+  {
+   "id": "he:ritspa",
+   "lemma": "רִצְפָּה",
+   "pos": "NOUN",
+   "senses": [
+    "home.floor"
+   ],
+   "gender": "FEM",
+   "translit": "ritspa",
+   "forms": {
+    "N;SG;INDF": "רִצְפָּה",
+    "N;SG;DEF": "הָרִצְפָּה",
+    "N;PL;INDF": "רְצָפוֹת",
+    "N;PL;DEF": "הָרְצָפוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cool stone tiles under bare feet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "floor (of a room)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.floor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַתִּיק עַל הָרִצְפָּה.",
+      "tr": "The bag is on the floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הָרִצְפָּה נְקִיָּה.",
+      "tr": "The floor is clean.",
+      "register": "neutral",
+      "context": "cleaning",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים יוֹשְׁבִים עַל הָרִצְפָּה.",
+      "tr": "The children are sitting on the floor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַל הָרִצְפָּה",
+      "tr": "on the floor"
+     },
+     {
+      "text": "לִשְׁטֹף אֶת הָרִצְפָּה",
+      "tr": "to wash (mop) the floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; a storey is a קוֹמָה.",
+    "etymology": {
+     "text": "Wiktionary gives no etymology. A Biblical word for a paved floor (רִצְפַת בַּהַט וָשֵׁשׁ, Esther 1:6), from the root ר־צ־ף “to pave, to lay in a row”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives רֶצֶף “sequence” and רְצִיפוּת “continuity” — tiles laid in an unbroken row."
+    ],
+    "pitfalls": [
+     "A floor of a building (a storey) is קוֹמָה, not רִצְפָּה.",
+     "With the article: הָרִצְפָּה (qamats: ר never doubles)."
+    ],
+    "subtleties": [
+     "Israeli tiled floors are washed with lots of water and a squeegee — the סְפּוֹנְגָ׳ה."
+    ]
+   }
+  },
+  {
+   "id": "he:madregot",
+   "lemma": "מַדְרֵגוֹת",
+   "pos": "NOUN",
+   "senses": [
+    "home.stairs"
+   ],
+   "class": "plt",
+   "gender": "FEM",
+   "translit": "madregot",
+   "forms": {
+    "N;PL;INDF": "מַדְרֵגוֹת",
+    "N;PL;DEF": "הַמַּדְרֵגוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Four floors and no lift.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stairs, staircase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.stairs"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמַּדְרֵגוֹת מִשְּׂמֹאל.",
+      "tr": "The stairs are on the left.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים יוֹשְׁבִים עַל הַמַּדְרֵגוֹת.",
+      "tr": "The children are sitting on the stairs.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין מַעֲלִית, רַק מַדְרֵגוֹת.",
+      "tr": "There is no lift, only stairs.",
+      "register": "neutral",
+      "context": "flat hunting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲדַר מַדְרֵגוֹת",
+      "tr": "a stairwell"
+     },
+     {
+      "text": "לַעֲלוֹת בַּמַּדְרֵגוֹת",
+      "tr": "to go up the stairs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גֶּרֶם מַדְרֵגוֹת",
+      "register": "formal",
+      "nuance": "a flight of stairs"
+     }
+    ],
+    "etymology": {
+     "text": "The plural of מַדְרֵגָה “step” (Wiktionary), from the root ד־ר־ג (Biblical בְּסֵתֶר הַמַּדְרֵגָה, Song of Songs 2:14).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ד־ר־ג also gives דַּרְגָּה “rank, level” — going up step by step."
+    ],
+    "pitfalls": [
+     "One step is מַדְרֵגָה; “stairs” is the plural מַדְרֵגוֹת, and it is feminine.",
+     "With the article the מ doubles: הַמַּדְרֵגוֹת."
+    ],
+    "subtleties": [
+     "חֲדַר הַמַּדְרֵגוֹת is the shared stairwell of a block of flats."
+    ]
+   }
+  },
+  {
+   "id": "he:madaf",
+   "lemma": "מַדָּף",
+   "pos": "NOUN",
+   "senses": [
+    "home.shelf"
+   ],
+   "gender": "MASC",
+   "translit": "madaf",
+   "forms": {
+    "N;SG;INDF": "מַדָּף",
+    "N;SG;DEF": "הַמַּדָּף",
+    "N;PL;INDF": "מַדָּפִים",
+    "N;PL;DEF": "הַמַּדָּפִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Books, jars and plants on the shelf.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shelf",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.shelf"
+     },
+     {
+      "id": "s2",
+      "def": "a flap (of an aircraft wing)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסְּפָרִים עַל הַמַּדָּף.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "living room",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכּוֹס עַל הַמַּדָּף.",
+      "tr": "The glass is on the shelf.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ מַדָּפִים בַּמִּטְבָּח.",
+      "tr": "There are shelves in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַדַּף סְפָרִים",
+      "tr": "a bookshelf"
+     },
+     {
+      "text": "עַל הַמַּדָּף",
+      "tr": "on the shelf"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כּוֹנָנִית",
+      "register": "neutral",
+      "nuance": "a bookcase, a set of shelves"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it has the noun pattern מַקְטָל (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It also names the flap on an aircraft wing (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The ד is doubled: ma-DAF; with the article: הַמַּדָּף.",
+     "On the shelf = עַל הַמַּדָּף (on), not בַּמַּדָּף."
+    ],
+    "subtleties": [
+     "In shops, עַל הַמַּדָּפִים means “in the shops, on sale”."
+    ]
+   }
+  },
+  {
+   "id": "he:sapa",
+   "lemma": "סַפָּה",
+   "pos": "NOUN",
+   "senses": [
+    "home.sofa"
+   ],
+   "gender": "FEM",
+   "translit": "sapa",
+   "forms": {
+    "N;SG;INDF": "סַפָּה",
+    "N;SG;DEF": "הַסַּפָּה",
+    "N;PL;INDF": "סַפּוֹת",
+    "N;PL;DEF": "הַסַּפּוֹת",
+    "N;SG;DEF;PFX": "סַּפָּה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "An afternoon nap in front of the television.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sofa, couch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.sofa"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמַּפְתֵּחַ מִתַּחַת לַסַּפָּה.",
+      "tr": "The key is under the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא יָשֵׁן עַל הַסַּפָּה.",
+      "tr": "Dad is sleeping on the sofa.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ סַפָּה חֲדָשָׁה בַּסָּלוֹן.",
+      "tr": "We have a new sofa in the living room.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סַפָּה נִפְתַּחַת",
+      "tr": "a sofa bed"
+     },
+     {
+      "text": "עַל הַסַּפָּה",
+      "tr": "on the sofa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כֻּרְסָה",
+      "register": "neutral",
+      "nuance": "an armchair — for one person"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic صُفَّة (ṣuffa) “sofa, long seat of stone or brick”, from Aramaic צפא “mat”; the word may have entered European languages via Turkish or through Moorish Spain (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English and German Sofa came, via Turkish, from Arabic ṣuffa (Wiktionary) — a cousin of סַפָּה."
+    ],
+    "pitfalls": [
+     "Feminine: סַפָּה נוֹחָה.",
+     "With the article the ס doubles: הַסַּפָּה."
+    ],
+    "subtleties": [
+     "You sit “on” it: עַל הַסַּפָּה."
+    ]
+   }
+  },
+  {
+   "id": "he:mekarer",
+   "lemma": "מְקָרֵר",
+   "pos": "NOUN",
+   "senses": [
+    "home.fridge"
+   ],
+   "gender": "MASC",
+   "translit": "mekarer",
+   "forms": {
+    "N;SG;INDF": "מְקָרֵר",
+    "N;SG;DEF": "הַמְּקָרֵר",
+    "N;PL;INDF": "מְקָרְרִים",
+    "N;PL;DEF": "הַמְּקָרְרִים",
+    "N;SG;DEF;PFX": "מְּקָרֵר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַמְּקָרֵר → (בַּ / לַ)מְּקָרֵר; Wiktionary lists only the full definite form הַמְּקָרֵר.",
+     "meaning": "Wiktionary glosses מְקָרֵר as “refrigerator” — the course concept “fridge”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold drinks in the summer heat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fridge, refrigerator",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.fridge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֶחָלָב בַּמְּקָרֵר.",
+      "tr": "The milk is in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּקָרֵר לְיַד הַדֶּלֶת.",
+      "tr": "The fridge is next to the door.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין כְּלוּם בַּמְּקָרֵר.",
+      "tr": "There is nothing in the fridge.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְקָרֵר רֵיק",
+      "tr": "an empty fridge"
+     },
+     {
+      "text": "לְהַכְנִיס לַמְּקָרֵר",
+      "tr": "to put in the fridge"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַקְפִּיא",
+      "register": "neutral",
+      "nuance": "a freezer — for frozen food"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it is the piʿel present form “cooling”, from the root ק־ר־ר of קַר “cold”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as קַר “cold” and קָרִיר “cool”."
+    ],
+    "pitfalls": [
+     "With the article the מ doubles: הַמְּקָרֵר; “in the fridge” = בַּמְּקָרֵר.",
+     "Plural מְקָרְרִים."
+    ],
+    "subtleties": [
+     "Like German Kühlschrank (“cooling cupboard”), it names the machine by what it does."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

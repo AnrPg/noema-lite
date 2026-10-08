@@ -1,0 +1,9280 @@
+{
+ "sentences": [
+  {
+   "id": "de.f5.001",
+   "frame": "fr.go.to",
+   "text": "Ich gehe zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "I’m going to work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.002",
+   "frame": "fr.go.to",
+   "text": "Ich gehe zu Fuß zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "I walk to work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.003",
+   "frame": "fr.go.to",
+   "text": "Wir fahren mit dem Bus zur Schule.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We go to school by bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.004",
+   "frame": "fr.go.to",
+   "text": "Er fährt mit dem Auto zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "He drives to work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.005",
+   "frame": "fr.go.to",
+   "text": "Sie fährt mit dem Fahrrad zur Uni.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Uni",
+     "l": "de:Uni",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "She cycles to university.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.006",
+   "frame": "fr.go.to",
+   "text": "Wir fahren mit dem Zug nach Berlin.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going to Berlin by train.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.007",
+   "frame": "fr.go.to",
+   "text": "Wir reisen mit dem Flugzeug nach Athen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Flugzeug",
+     "l": "de:Flugzeug",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re travelling to Athens by plane.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.008",
+   "frame": "fr.go.to",
+   "text": "Wir fahren mit dem Taxi zum Flughafen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Taxi",
+     "l": "de:Taxi",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Flughafen",
+     "l": "de:Flughafen",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re taking a taxi to the airport.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.009",
+   "frame": "fr.go.to",
+   "text": "Mit dem Schiff fahren wir nach Kreta.",
+   "tokens": [
+    {
+     "t": "Mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Schiff",
+     "l": "de:Schiff",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Kreta",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going to Crete by ship.",
+   "alts": [
+    "Wir fahren mit dem Schiff nach Kreta."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.010",
+   "frame": "fr.go.to",
+   "text": "Mein Opa fährt mit dem Boot ins Dorf.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Boot",
+     "l": "de:Boot",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ins",
+     "l": "de:ins"
+    },
+    {
+     "t": "Dorf",
+     "l": "de:Dorf",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa goes to the village by boat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.011",
+   "frame": "fr.wh",
+   "text": "Wohin gehst du?",
+   "tokens": [
+    {
+     "t": "Wohin",
+     "l": "de:wohin"
+    },
+    {
+     "t": "gehst",
+     "l": "de:gehen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Where are you going?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.012",
+   "frame": "fr.wh",
+   "text": "Wohin fährt dieser Bus?",
+   "tokens": [
+    {
+     "t": "Wohin",
+     "l": "de:wohin"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Where does this bus go?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.013",
+   "frame": "fr.wh",
+   "text": "Woher kommst du? Ich komme aus Griechenland.",
+   "tokens": [
+    {
+     "t": "Woher",
+     "l": "de:woher"
+    },
+    {
+     "t": "kommst",
+     "l": "de:kommen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "komme",
+     "l": "de:kommen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "Griechenland",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.wh",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Where are you from? – I’m from Greece.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.014",
+   "frame": "fr.wh",
+   "text": "Woher kommt der Zug?",
+   "tokens": [
+    {
+     "t": "Woher",
+     "l": "de:woher"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the train coming from?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.015",
+   "frame": "fr.from",
+   "text": "Er kommt aus der Schule.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "He’s coming from school.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.016",
+   "frame": "fr.from",
+   "text": "Ich komme vom Bahnhof.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "komme",
+     "l": "de:kommen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "vom",
+     "l": "de:vom"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "I’m coming from the station.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.017",
+   "frame": "fr.from",
+   "text": "Meine Mutter kommt von der Arbeit.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "von",
+     "l": "de:von"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "My mother is coming from work.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.018",
+   "frame": "fr.go.to",
+   "text": "Wann kommst du zurück?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "kommst",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "When are you coming back?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.019",
+   "frame": "fr.go.to",
+   "text": "Mein Vater kommt aus Berlin zurück.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "My father is coming back from Berlin.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.020",
+   "frame": "fr.go.to",
+   "text": "Der Zug kommt in München an.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:ankommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "München",
+     "name": true
+    },
+    {
+     "t": "an",
+     "l": "de:ankommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The train arrives in Munich.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.021",
+   "frame": "fr.go.to",
+   "text": "Wann kommt der Bus an?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "kommt",
+     "l": "de:ankommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "an",
+     "l": "de:ankommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "When does the bus arrive?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.022",
+   "frame": "fr.go.to",
+   "text": "Wir kommen am Flughafen an.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommen",
+     "l": "de:ankommen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Flughafen",
+     "l": "de:Flughafen",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "an",
+     "l": "de:ankommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We arrive at the airport.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.023",
+   "frame": "fr.at.place",
+   "text": "Ich bleibe zu Hause.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleibe",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "variantOf": null,
+   "gloss": "I’m staying at home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.024",
+   "frame": "fr.at.place",
+   "text": "Die Kinder bleiben im Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "The children are staying in the garden.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.025",
+   "frame": "fr.at.place",
+   "text": "Wir warten am Bahnhof.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warten",
+     "l": "de:warten",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "We’re waiting at the station.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.026",
+   "frame": "fr.at.place",
+   "text": "Ich warte auf den Bus.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warte",
+     "l": "de:warten",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "I’m waiting for the bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.027",
+   "frame": "fr.go.to",
+   "text": "Er geht in den Park.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "geht",
+     "l": "de:gehen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "He’s going to the park.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.028",
+   "frame": "fr.go.to",
+   "text": "Die Kinder laufen in den Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "laufen",
+     "l": "de:laufen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The children run into the garden.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.029",
+   "frame": "fr.go.to",
+   "text": "Wir laufen zum Bahnhof.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "laufen",
+     "l": "de:laufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re walking to the station.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.030",
+   "frame": "fr.go.to",
+   "text": "Der Junge rennt zum Bus.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "rennt",
+     "l": "de:rennen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The boy is running for the bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.031",
+   "frame": "fr.go.to",
+   "text": "Ich gehe in den Laden hinein.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:hineingehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Laden",
+     "l": "de:Laden",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "hinein",
+     "l": "de:hineingehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "I’m going into the shop.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.032",
+   "frame": "fr.from",
+   "text": "Er verlässt das Haus.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "verlässt",
+     "l": "de:verlassen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "He leaves the house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.033",
+   "frame": "fr.from",
+   "text": "Wir verlassen die Stadt.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "verlassen",
+     "l": "de:verlassen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Stadt",
+     "l": "de:Stadt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re leaving the town.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.034",
+   "frame": "fr.from",
+   "text": "Du gehst weg.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehst",
+     "l": "de:weggehen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "weg",
+     "l": "de:weggehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You’re going away.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.035",
+   "frame": "fr.from",
+   "text": "Geh weg!",
+   "tokens": [
+    {
+     "t": "Geh",
+     "l": "de:weggehen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "weg",
+     "l": "de:weggehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.034",
+   "gloss": "Go away!",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.036",
+   "frame": "fr.go.to",
+   "text": "Du gehst nach Hause.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehst",
+     "l": "de:gehen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You’re going home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.037",
+   "frame": "fr.go.to",
+   "text": "Geh nach Hause!",
+   "tokens": [
+    {
+     "t": "Geh",
+     "l": "de:gehen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.036",
+   "gloss": "Go home!",
+   "alts": [
+    "Gehe nach Hause!"
+   ],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.038",
+   "frame": "fr.at.place",
+   "text": "Ihr wartet hier.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wartet",
+     "l": "de:warten",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) are waiting here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.039",
+   "frame": "fr.at.place",
+   "text": "Wartet hier!",
+   "tokens": [
+    {
+     "t": "Wartet",
+     "l": "de:warten",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "variantOf": "de.f5.038",
+   "gloss": "Wait here! (to several people)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.040",
+   "frame": "fr.at.place",
+   "text": "Sie bleiben hier.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "You stay here. (polite)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.041",
+   "frame": "fr.at.place",
+   "text": "Bleiben Sie hier!",
+   "tokens": [
+    {
+     "t": "Bleiben",
+     "l": "de:bleiben",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.imperative"
+   ],
+   "variantOf": "de.f5.040",
+   "gloss": "Stay here! (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.042",
+   "frame": "fr.go.to",
+   "text": "Du fährst mit dem Bus.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fährst",
+     "l": "de:fahren",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You’re going by bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.043",
+   "frame": "fr.go.to",
+   "text": "Fahr mit dem Bus!",
+   "tokens": [
+    {
+     "t": "Fahr",
+     "l": "de:fahren",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.prep.core",
+    "fn.case",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.042",
+   "gloss": "Go by bus!",
+   "alts": [
+    "Fahre mit dem Bus!"
+   ],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.044",
+   "frame": "fr.go.to",
+   "text": "Du kommst zurück.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommst",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You’re coming back.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.045",
+   "frame": "fr.go.to",
+   "text": "Komm zurück!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:zurückkommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.044",
+   "gloss": "Come back!",
+   "alts": [
+    "Komme zurück!"
+   ],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.046",
+   "frame": "fr.go.to",
+   "text": "Ihr kommt herein.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:hereinkommen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "herein",
+     "l": "de:hereinkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) are coming in.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.047",
+   "frame": "fr.go.to",
+   "text": "Kommt herein!",
+   "tokens": [
+    {
+     "t": "Kommt",
+     "l": "de:hereinkommen",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "herein",
+     "l": "de:hereinkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.046",
+   "gloss": "Come in! (to several people)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.048",
+   "frame": "fr.command",
+   "text": "Komm bitte herein!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:hereinkommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "herein",
+     "l": "de:hereinkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Please come in!",
+   "alts": [
+    "Bitte komm herein!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.049",
+   "frame": "fr.command",
+   "text": "Kommen Sie bitte herein!",
+   "tokens": [
+    {
+     "t": "Kommen",
+     "l": "de:hereinkommen",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "herein",
+     "l": "de:hereinkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.048",
+   "gloss": "Please come in! (polite)",
+   "alts": [
+    "Bitte kommen Sie herein!"
+   ],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f5.050",
+   "frame": "fr.go.to",
+   "text": "Du läufst nach Hause.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "läufst",
+     "l": "de:laufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "You’re walking home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.051",
+   "frame": "fr.go.to",
+   "text": "Lauf nach Hause!",
+   "tokens": [
+    {
+     "t": "Lauf",
+     "l": "de:laufen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.050",
+   "gloss": "Walk home! / Run home!",
+   "alts": [
+    "Laufe nach Hause!"
+   ],
+   "level": "A1",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "de.f5.052",
+   "frame": "fr.command",
+   "text": "Warte bitte!",
+   "tokens": [
+    {
+     "t": "Warte",
+     "l": "de:warten",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Wait, please!",
+   "alts": [
+    "Bitte warte!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.053",
+   "frame": "fr.command",
+   "text": "Warten Sie bitte hier!",
+   "tokens": [
+    {
+     "t": "Warten",
+     "l": "de:warten",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Please wait here! (polite)",
+   "alts": [
+    "Bitte warten Sie hier!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.054",
+   "frame": "fr.command",
+   "text": "Bleib hier!",
+   "tokens": [
+    {
+     "t": "Bleib",
+     "l": "de:bleiben",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Stay here!",
+   "alts": [
+    "Bleibe hier!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.055",
+   "frame": "fr.command",
+   "text": "Iss dein Brot!",
+   "tokens": [
+    {
+     "t": "Iss",
+     "l": "de:essen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "dein",
+     "l": "de:dein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.object",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Eat your bread!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.056",
+   "frame": "fr.command",
+   "text": "Trink Wasser!",
+   "tokens": [
+    {
+     "t": "Trink",
+     "l": "de:trinken",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Drink water!",
+   "alts": [
+    "Trinke Wasser!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.057",
+   "frame": "fr.command",
+   "text": "Kauft Brot und Milch!",
+   "tokens": [
+    {
+     "t": "Kauft",
+     "l": "de:kaufen",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "Brot",
+     "l": "de:Brot",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Milch",
+     "l": "de:Milch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Buy bread and milk! (to several people)",
+   "alts": [
+    "Kauft Milch und Brot!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.058",
+   "frame": "fr.command",
+   "text": "Geht nicht in den Garten!",
+   "tokens": [
+    {
+     "t": "Geht",
+     "l": "de:gehen",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t go into the garden! (to several people)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.059",
+   "frame": "fr.command",
+   "text": "Fahren Sie bitte zum Bahnhof!",
+   "tokens": [
+    {
+     "t": "Fahren",
+     "l": "de:fahren",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.prep.core",
+    "fn.case",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "To the station, please! (to a taxi driver)",
+   "alts": [
+    "Bitte fahren Sie zum Bahnhof!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.060",
+   "frame": "fr.command",
+   "text": "Gehen Sie hier nach links!",
+   "tokens": [
+    {
+     "t": "Gehen",
+     "l": "de:gehen",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "links",
+     "l": "de:links"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.prep.core",
+    "fn.prep.place",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Turn left here! (polite: go to the left here)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.061",
+   "frame": "fr.command",
+   "text": "Kommt mit dem Zug!",
+   "tokens": [
+    {
+     "t": "Kommt",
+     "l": "de:kommen",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.prep.core",
+    "fn.case",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Come by train! (to several people)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.062",
+   "frame": "fr.command",
+   "text": "Renn nicht!",
+   "tokens": [
+    {
+     "t": "Renn",
+     "l": "de:rennen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t run!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.063",
+   "frame": "fr.command",
+   "text": "Verlassen Sie bitte den Zug!",
+   "tokens": [
+    {
+     "t": "Verlassen",
+     "l": "de:verlassen",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Please leave the train! (polite)",
+   "alts": [
+    "Bitte verlassen Sie den Zug!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.064",
+   "frame": "fr.command",
+   "text": "Kauf eine Fahrkarte!",
+   "tokens": [
+    {
+     "t": "Kauf",
+     "l": "de:kaufen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Fahrkarte",
+     "l": "de:Fahrkarte",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.object",
+    "fn.imperative"
+   ],
+   "variantOf": null,
+   "gloss": "Buy a ticket!",
+   "alts": [
+    "Kaufe eine Fahrkarte!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.065",
+   "frame": "fr.wh",
+   "text": "Wo kaufe ich ein Ticket?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Ticket",
+     "l": "de:Ticket",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "Where do I buy a ticket?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.066",
+   "frame": "fr.have",
+   "text": "Hast du eine Fahrkarte?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Fahrkarte",
+     "l": "de:Fahrkarte",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you have a ticket?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.067",
+   "frame": "fr.have",
+   "text": "Ich habe zwei Tickets.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Tickets",
+     "l": "de:Ticket",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I have two tickets.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.068",
+   "frame": "fr.at.place",
+   "text": "Die Fahrkarte ist für dich.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Fahrkarte",
+     "l": "de:Fahrkarte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "für",
+     "l": "de:für"
+    },
+    {
+     "t": "dich",
+     "l": "de:du",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "The ticket is for you.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.069",
+   "frame": "fr.from",
+   "text": "Das Flugzeug kommt aus Berlin.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Flugzeug",
+     "l": "de:Flugzeug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The plane is coming from Berlin.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.070",
+   "frame": "fr.go.to",
+   "text": "Das Schiff fährt nach Kreta.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Schiff",
+     "l": "de:Schiff",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Kreta",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The ship goes to Crete.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.071",
+   "frame": "fr.go.to",
+   "text": "Der Bus fährt zum Bahnhof.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The bus goes to the station.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.072",
+   "frame": "fr.go.to",
+   "text": "Die Busse fahren zum Bahnhof.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Busse",
+     "l": "de:Bus",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.071",
+   "gloss": "The buses go to the station.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f5.073",
+   "frame": "fr.at.place",
+   "text": "Das Taxi wartet vor dem Haus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Taxi",
+     "l": "de:Taxi",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wartet",
+     "l": "de:warten",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "vor",
+     "l": "de:vor"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.prep.place"
+   ],
+   "variantOf": null,
+   "gloss": "The taxi is waiting in front of the house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.074",
+   "frame": "fr.go.to",
+   "text": "Meine Eltern reisen nach Spanien.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Spanien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "My parents are travelling to Spain.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.075",
+   "frame": "fr.at.place",
+   "text": "Du bleibst zu Hause.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleibst",
+     "l": "de:bleiben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "variantOf": null,
+   "gloss": "You’re staying at home.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.076",
+   "frame": "fr.at.place",
+   "text": "Bleibst du zu Hause?",
+   "tokens": [
+    {
+     "t": "Bleibst",
+     "l": "de:bleiben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.prep.core"
+   ],
+   "variantOf": "de.f5.075",
+   "gloss": "Are you staying at home?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f5.077",
+   "frame": "fr.go.to",
+   "text": "Fährst du mit dem Zug oder mit dem Auto?",
+   "tokens": [
+    {
+     "t": "Fährst",
+     "l": "de:fahren",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Are you going by train or by car?",
+   "alts": [
+    "Fährst du mit dem Auto oder mit dem Zug?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.078",
+   "frame": "fr.go.to",
+   "text": "Gehst du zu Fuß? Nein, ich fahre mit dem Fahrrad.",
+   "tokens": [
+    {
+     "t": "Gehst",
+     "l": "de:gehen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahre",
+     "l": "de:fahren",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Are you walking? – No, I’m cycling.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.079",
+   "frame": "fr.go.to",
+   "text": "Wir gehen nicht zu Fuß, wir fahren mit dem Bus.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We aren’t walking, we’re going by bus.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.080",
+   "frame": "fr.go.to",
+   "text": "Die Kinder kommen ins Haus herein.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "kommen",
+     "l": "de:hereinkommen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "ins",
+     "l": "de:ins"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "herein",
+     "l": "de:hereinkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "The children are coming into the house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.081",
+   "frame": "fr.go.to",
+   "text": "Wir gehen zu Fuß.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "We’re walking.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.082",
+   "frame": "fr.go.to",
+   "text": "Wir gehen nicht zu Fuß.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "zu Fuß",
+     "l": "de:zu_Fuß"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.negation",
+    "fn.direction"
+   ],
+   "variantOf": "de.f5.081",
+   "gloss": "We aren’t walking.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f5.083",
+   "frame": "fr.go.to",
+   "text": "Ich fahre nicht mit dem Auto, ich laufe.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahre",
+     "l": "de:fahren",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "laufe",
+     "l": "de:laufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "I’m not driving, I’m walking.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.084",
+   "frame": "fr.go.to",
+   "text": "Woher kommt das Schiff?",
+   "tokens": [
+    {
+     "t": "Woher",
+     "l": "de:woher"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Schiff",
+     "l": "de:Schiff",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.wh",
+    "fn.direction"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the ship coming from?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.085",
+   "frame": "fr.day",
+   "text": "Heute ist Montag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Today is Monday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.086",
+   "frame": "fr.day",
+   "text": "Morgen ist Dienstag.",
+   "tokens": [
+    {
+     "t": "Morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Dienstag",
+     "l": "de:Dienstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Tomorrow is Tuesday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.087",
+   "frame": "fr.day",
+   "text": "Gestern war Sonntag.",
+   "tokens": [
+    {
+     "t": "Gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "Sonntag",
+     "l": "de:Sonntag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Yesterday was Sunday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.088",
+   "frame": "fr.wh",
+   "text": "Welcher Tag ist heute?",
+   "tokens": [
+    {
+     "t": "Welcher",
+     "l": "de:welcher",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "What day is it today?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.089",
+   "frame": "fr.day",
+   "text": "Heute ist Mittwoch, morgen ist Donnerstag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Mittwoch",
+     "l": "de:Mittwoch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Donnerstag",
+     "l": "de:Donnerstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Today is Wednesday, tomorrow is Thursday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.090",
+   "frame": "fr.day",
+   "text": "Am Montag gehe ich zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "On Monday I go to work.",
+   "alts": [
+    "Ich gehe am Montag zur Arbeit."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.091",
+   "frame": "fr.day",
+   "text": "Am Montag gehe ich nicht zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": "de.f5.090",
+   "gloss": "On Monday I don’t go to work.",
+   "alts": [
+    "Ich gehe am Montag nicht zur Arbeit."
+   ],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f5.092",
+   "frame": "fr.day",
+   "text": "Am Dienstag kommt meine Oma.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Dienstag",
+     "l": "de:Dienstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma is coming on Tuesday.",
+   "alts": [
+    "Meine Oma kommt am Dienstag."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.093",
+   "frame": "fr.day",
+   "text": "Am Freitag fahren wir nach Hamburg.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Freitag",
+     "l": "de:Freitag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Hamburg",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "On Friday we’re going to Hamburg.",
+   "alts": [
+    "Wir fahren am Freitag nach Hamburg."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.094",
+   "frame": "fr.day",
+   "text": "Am Samstag kaufen wir Obst auf dem Markt.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Samstag",
+     "l": "de:Samstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Obst",
+     "l": "de:Obst",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.place",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "On Saturday we buy fruit at the market.",
+   "alts": [
+    "Wir kaufen am Samstag Obst auf dem Markt."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.095",
+   "frame": "fr.day",
+   "text": "Am Sonntag bleiben wir zu Hause.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Sonntag",
+     "l": "de:Sonntag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "On Sunday we stay at home.",
+   "alts": [
+    "Wir bleiben am Sonntag zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.096",
+   "frame": "fr.day",
+   "text": "Bleiben wir am Sonntag zu Hause?",
+   "tokens": [
+    {
+     "t": "Bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Sonntag",
+     "l": "de:Sonntag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": "de.f5.095",
+   "gloss": "Are we staying at home on Sunday?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f5.097",
+   "frame": "fr.day",
+   "text": "Am Wochenende fahren wir in die Stadt.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Wochenende",
+     "l": "de:Wochenende",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Stadt",
+     "l": "de:Stadt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At the weekend we go into town.",
+   "alts": [
+    "Wir fahren am Wochenende in die Stadt."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.098",
+   "frame": "fr.wh",
+   "text": "Was kochst du am Wochenende?",
+   "tokens": [
+    {
+     "t": "Was",
+     "l": "de:was",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "kochst",
+     "l": "de:kochen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Wochenende",
+     "l": "de:Wochenende",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.wh",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "What are you cooking at the weekend?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.099",
+   "frame": "fr.day",
+   "text": "Am Morgen trinke ich Kaffee.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Morgen",
+     "l": "de:Morgen",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In the morning I drink coffee.",
+   "alts": [
+    "Ich trinke am Morgen Kaffee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.100",
+   "frame": "fr.day",
+   "text": "Morgens trinke ich Tee.",
+   "tokens": [
+    {
+     "t": "Morgens",
+     "l": "de:morgens"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tee",
+     "l": "de:Tee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "In the mornings I drink tea.",
+   "alts": [
+    "Ich trinke morgens Tee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.101",
+   "frame": "fr.day",
+   "text": "Am Mittag essen wir Suppe.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Mittag",
+     "l": "de:Mittag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At midday we eat soup.",
+   "alts": [
+    "Wir essen am Mittag Suppe."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.102",
+   "frame": "fr.day",
+   "text": "Am Nachmittag gehen die Kinder in den Park.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Nachmittag",
+     "l": "de:Nachmittag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In the afternoon the children go to the park.",
+   "alts": [
+    "Die Kinder gehen am Nachmittag in den Park."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.103",
+   "frame": "fr.day",
+   "text": "Am Abend sind wir zu Hause.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Abend",
+     "l": "de:Abend",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In the evening we are at home.",
+   "alts": [
+    "Wir sind am Abend zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.104",
+   "frame": "fr.day",
+   "text": "Abends trinkt mein Vater Wein.",
+   "tokens": [
+    {
+     "t": "Abends",
+     "l": "de:abends"
+    },
+    {
+     "t": "trinkt",
+     "l": "de:trinken",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "Wein",
+     "l": "de:Wein",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "In the evenings my father drinks wine.",
+   "alts": [
+    "Mein Vater trinkt abends Wein."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.105",
+   "frame": "fr.day",
+   "text": "In der Nacht fahren keine Busse.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Nacht",
+     "l": "de:Nacht",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Busse",
+     "l": "de:Bus",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.present",
+    "fn.negation",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At night no buses run.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.106",
+   "frame": "fr.day",
+   "text": "Am Abend kochen wir Fisch.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Abend",
+     "l": "de:Abend",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In the evening we cook fish.",
+   "alts": [
+    "Wir kochen am Abend Fisch."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.107",
+   "frame": "fr.day",
+   "text": "Ich gehe jetzt nach Hause.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "jetzt",
+     "l": "de:jetzt"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "I’m going home now.",
+   "alts": [
+    "Jetzt gehe ich nach Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.108",
+   "frame": "fr.day",
+   "text": "Wir essen später.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "später",
+     "l": "de:später"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "We’ll eat later.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.109",
+   "frame": "fr.day",
+   "text": "Der Bus kommt bald.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "bald",
+     "l": "de:bald"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is coming soon.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.110",
+   "frame": "fr.day",
+   "text": "Ich komme morgen zurück.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "komme",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "I’m coming back tomorrow.",
+   "alts": [
+    "Morgen komme ich zurück."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.111",
+   "frame": "fr.day",
+   "text": "Kommst du morgen?",
+   "tokens": [
+    {
+     "t": "Kommst",
+     "l": "de:kommen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Are you coming tomorrow?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.112",
+   "frame": "fr.day",
+   "text": "Wir fahren morgen früh nach Berlin.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going to Berlin tomorrow morning.",
+   "alts": [
+    "Morgen früh fahren wir nach Berlin."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.113",
+   "frame": "fr.day",
+   "text": "Er kommt immer spät nach Hause.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "He always comes home late.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.114",
+   "frame": "fr.day",
+   "text": "Er kommt nie spät nach Hause.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nie",
+     "l": "de:nie"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": "de.f5.113",
+   "gloss": "He never comes home late.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f5.115",
+   "frame": "fr.day",
+   "text": "Wir essen oft Fisch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "Fisch",
+     "l": "de:Fisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "We often eat fish.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.116",
+   "frame": "fr.day",
+   "text": "Manchmal fahre ich mit dem Fahrrad zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Manchmal",
+     "l": "de:manchmal"
+    },
+    {
+     "t": "fahre",
+     "l": "de:fahren",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Sometimes I cycle to work.",
+   "alts": [
+    "Ich fahre manchmal mit dem Fahrrad zur Arbeit."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.117",
+   "frame": "fr.day",
+   "text": "Die Kinder gehen früh zur Schule.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "The children go to school early.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.118",
+   "frame": "fr.day",
+   "text": "Es ist spät.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "It’s late.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.119",
+   "frame": "fr.day",
+   "text": "Ist es spät?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.time.day"
+   ],
+   "variantOf": "de.f5.118",
+   "gloss": "Is it late?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f5.120",
+   "frame": "fr.day",
+   "text": "Wartest du oft auf den Bus?",
+   "tokens": [
+    {
+     "t": "Wartest",
+     "l": "de:warten",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.case",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Do you often wait for the bus?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.121",
+   "frame": "fr.day",
+   "text": "Ich trinke immer Kaffee am Morgen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "Kaffee",
+     "l": "de:Kaffee",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Morgen",
+     "l": "de:Morgen",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "I always drink coffee in the morning.",
+   "alts": [
+    "Am Morgen trinke ich immer Kaffee."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.122",
+   "frame": "fr.day",
+   "text": "Am Mittwoch und am Donnerstag bin ich in Berlin.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Mittwoch",
+     "l": "de:Mittwoch",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Donnerstag",
+     "l": "de:Donnerstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "On Wednesday and Thursday I’m in Berlin.",
+   "alts": [
+    "Ich bin am Mittwoch und am Donnerstag in Berlin."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.123",
+   "frame": "fr.day",
+   "text": "Wir bleiben einen Tag in Wien.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Wien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "We’re staying in Vienna for one day.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.124",
+   "frame": "fr.day",
+   "text": "Wir bleiben drei Tage in Wien.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Wien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.time.day"
+   ],
+   "variantOf": "de.f5.123",
+   "gloss": "We’re staying in Vienna for three days.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f5.125",
+   "frame": "fr.day",
+   "text": "Wann kommst du? Am Abend.",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "kommst",
+     "l": "de:kommen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Abend",
+     "l": "de:Abend",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.question.wh",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "When are you coming? – In the evening.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.126",
+   "frame": "fr.day",
+   "text": "Gestern war mein Bruder in Athen.",
+   "tokens": [
+    {
+     "t": "Gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Yesterday my brother was in Athens.",
+   "alts": [
+    "Mein Bruder war gestern in Athen."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.127",
+   "frame": "fr.day",
+   "text": "Heute ist Samstag. Gestern war Freitag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Samstag",
+     "l": "de:Samstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "Gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "Freitag",
+     "l": "de:Freitag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Today is Saturday. Yesterday was Friday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.128",
+   "frame": "fr.command",
+   "text": "Komm bald zurück!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:zurückkommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "bald",
+     "l": "de:bald"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Come back soon!",
+   "alts": [
+    "Komme bald zurück!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.129",
+   "frame": "fr.command",
+   "text": "Komm morgen!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:kommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Come tomorrow!",
+   "alts": [
+    "Komme morgen!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.130",
+   "frame": "fr.day",
+   "text": "Am Wochenende gehen wir weg.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Wochenende",
+     "l": "de:Wochenende",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehen",
+     "l": "de:weggehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "weg",
+     "l": "de:weggehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.case",
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At the weekend we go out.",
+   "alts": [
+    "Wir gehen am Wochenende weg."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.131",
+   "frame": "fr.day",
+   "text": "Ist heute Montag oder Dienstag?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Dienstag",
+     "l": "de:Dienstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Is today Monday or Tuesday?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.132",
+   "frame": "fr.day",
+   "text": "Der Bus kommt jetzt.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "jetzt",
+     "l": "de:jetzt"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is coming now.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.133",
+   "frame": "fr.day",
+   "text": "Kommt der Bus jetzt?",
+   "tokens": [
+    {
+     "t": "Kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "jetzt",
+     "l": "de:jetzt"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.time.day"
+   ],
+   "variantOf": "de.f5.132",
+   "gloss": "Is the bus coming now?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f5.134",
+   "frame": "fr.day",
+   "text": "In der Nacht ist meine Mutter im Krankenhaus.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Nacht",
+     "l": "de:Nacht",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Krankenhaus",
+     "l": "de:Krankenhaus",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At night my mother is at the hospital.",
+   "alts": [
+    "Meine Mutter ist in der Nacht im Krankenhaus."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.135",
+   "frame": "fr.day",
+   "text": "Manchmal essen wir am Abend im Restaurant.",
+   "tokens": [
+    {
+     "t": "Manchmal",
+     "l": "de:manchmal"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Abend",
+     "l": "de:Abend",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Restaurant",
+     "l": "de:Restaurant",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "Sometimes we eat at a restaurant in the evening.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.136",
+   "frame": "fr.time",
+   "text": "Es ist acht Uhr.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "It’s eight o’clock.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.137",
+   "frame": "fr.wh",
+   "text": "Wie viel Uhr ist es?",
+   "tokens": [
+    {
+     "t": "Wie viel",
+     "l": "de:wie_viel"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "What time is it?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.138",
+   "frame": "fr.time",
+   "text": "Der Zug kommt um acht Uhr an.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:ankommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "an",
+     "l": "de:ankommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.present",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "The train arrives at eight o’clock.",
+   "alts": [
+    "Um acht Uhr kommt der Zug an."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.139",
+   "frame": "fr.time",
+   "text": "Kommt der Zug um acht Uhr an?",
+   "tokens": [
+    {
+     "t": "Kommt",
+     "l": "de:ankommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "an",
+     "l": "de:ankommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.present",
+    "fn.question.yesno",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": "de.f5.138",
+   "gloss": "Does the train arrive at eight o’clock?",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.f5.140",
+   "frame": "fr.time",
+   "text": "Um wie viel Uhr fährt der Bus?",
+   "tokens": [
+    {
+     "t": "Um",
+     "l": "de:um"
+    },
+    {
+     "t": "wie viel",
+     "l": "de:wie_viel"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.present",
+    "fn.question.wh",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At what time does the bus leave?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.141",
+   "frame": "fr.time",
+   "text": "Ich gehe um sieben Uhr zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "I go to work at seven o’clock.",
+   "alts": [
+    "Um sieben Uhr gehe ich zur Arbeit."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.142",
+   "frame": "fr.time",
+   "text": "Im Januar bin ich in Berlin.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Januar",
+     "l": "de:Januar",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In January I’m in Berlin.",
+   "alts": [
+    "Ich bin im Januar in Berlin."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.143",
+   "frame": "fr.time",
+   "text": "Im Februar fahren wir nach Wien.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Februar",
+     "l": "de:Februar",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Wien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In February we’re going to Vienna.",
+   "alts": [
+    "Wir fahren im Februar nach Wien."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.144",
+   "frame": "fr.time",
+   "text": "Mein Geburtstag ist im März.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "März",
+     "l": "de:März",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "My birthday is in March.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.145",
+   "frame": "fr.time",
+   "text": "Im April kommt meine Tante.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "April",
+     "l": "de:April",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tante",
+     "l": "de:Tante",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In April my aunt is coming.",
+   "alts": [
+    "Meine Tante kommt im April."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.146",
+   "frame": "fr.time",
+   "text": "Im Mai reisen wir nach Italien.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Mai",
+     "l": "de:Mai",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Italien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In May we’re travelling to Italy.",
+   "alts": [
+    "Wir reisen im Mai nach Italien."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.147",
+   "frame": "fr.time",
+   "text": "Im Juni kommt mein Bruder aus Athen zurück.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Juni",
+     "l": "de:Juni",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In June my brother comes back from Athens.",
+   "alts": [
+    "Mein Bruder kommt im Juni aus Athen zurück."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.148",
+   "frame": "fr.time",
+   "text": "Im August fahren wir nach Griechenland.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "August",
+     "l": "de:August",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Griechenland",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In August we go to Greece.",
+   "alts": [
+    "Wir fahren im August nach Griechenland."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.149",
+   "frame": "fr.time",
+   "text": "Mein Urlaub ist im September.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Urlaub",
+     "l": "de:Urlaub",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "September",
+     "l": "de:September",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "My holiday is in September.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.150",
+   "frame": "fr.time",
+   "text": "Im Oktober kommt mein Cousin nach Berlin.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Oktober",
+     "l": "de:Oktober",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Cousin",
+     "l": "de:Cousin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In October my cousin is coming to Berlin.",
+   "alts": [
+    "Mein Cousin kommt im Oktober nach Berlin."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.151",
+   "frame": "fr.time",
+   "text": "Im November bleiben wir zu Hause.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "November",
+     "l": "de:November",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In November we stay at home.",
+   "alts": [
+    "Wir bleiben im November zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.152",
+   "frame": "fr.time",
+   "text": "Im Dezember fahren wir zu meinen Eltern.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Dezember",
+     "l": "de:Dezember",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu",
+     "l": "de:zu"
+    },
+    {
+     "t": "meinen",
+     "l": "de:mein",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In December we go to my parents’.",
+   "alts": [
+    "Wir fahren im Dezember zu meinen Eltern."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.153",
+   "frame": "fr.time",
+   "text": "Im Frühling fahren wir oft Fahrrad.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Frühling",
+     "l": "de:Frühling",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In spring we often go cycling.",
+   "alts": [
+    "Wir fahren im Frühling oft Fahrrad."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.154",
+   "frame": "fr.time",
+   "text": "Im Sommer haben die Kinder Ferien.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "Ferien",
+     "l": "de:Ferien",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In summer the children have their holidays.",
+   "alts": [
+    "Die Kinder haben im Sommer Ferien."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.155",
+   "frame": "fr.time",
+   "text": "Im Herbst reisen meine Eltern nach Spanien.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Herbst",
+     "l": "de:Herbst",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Spanien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In autumn my parents travel to Spain.",
+   "alts": [
+    "Meine Eltern reisen im Herbst nach Spanien."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.156",
+   "frame": "fr.time",
+   "text": "Im Winter bleibe ich zu Hause.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Winter",
+     "l": "de:Winter",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bleibe",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "In winter I stay at home.",
+   "alts": [
+    "Ich bleibe im Winter zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.157",
+   "frame": "fr.count",
+   "text": "Die Woche hat sieben Tage.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Woche",
+     "l": "de:Woche",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.have",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "The week has seven days.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.158",
+   "frame": "fr.count",
+   "text": "Das Jahr hat zwölf Monate.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Jahr",
+     "l": "de:Jahr",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zwölf",
+     "l": "de:zwölf"
+    },
+    {
+     "t": "Monate",
+     "l": "de:Monat",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.have",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The year has twelve months.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.159",
+   "frame": "fr.count",
+   "text": "Eine Stunde hat sechzig Minuten.",
+   "tokens": [
+    {
+     "t": "Eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Stunde",
+     "l": "de:Stunde",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sechzig",
+     "l": "de:sechzig"
+    },
+    {
+     "t": "Minuten",
+     "l": "de:Minute",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.have",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "An hour has sixty minutes.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.160",
+   "frame": "fr.time",
+   "text": "Wir warten seit zwanzig Minuten.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warten",
+     "l": "de:warten",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "zwanzig",
+     "l": "de:zwanzig"
+    },
+    {
+     "t": "Minuten",
+     "l": "de:Minute",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We’ve been waiting for twenty minutes.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.161",
+   "frame": "fr.time",
+   "text": "Ich bin seit einer Woche in Berlin.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "einer",
+     "l": "de:ein",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Woche",
+     "l": "de:Woche",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "I’ve been in Berlin for a week.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.162",
+   "frame": "fr.time",
+   "text": "Er ist seit Montag in Athen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "He’s been in Athens since Monday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.163",
+   "frame": "fr.time",
+   "text": "Wir bleiben bis Sonntag.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "bis",
+     "l": "de:bis"
+    },
+    {
+     "t": "Sonntag",
+     "l": "de:Sonntag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We’re staying until Sunday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.164",
+   "frame": "fr.time",
+   "text": "Ich bin bis acht Uhr im Büro.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "bis",
+     "l": "de:bis"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Büro",
+     "l": "de:Büro",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "I’m at the office until eight o’clock.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.165",
+   "frame": "fr.greet",
+   "text": "Bis morgen!",
+   "tokens": [
+    {
+     "t": "Bis",
+     "l": "de:bis"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "See you tomorrow!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.166",
+   "frame": "fr.time",
+   "text": "Vor dem Frühstück trinke ich Wasser.",
+   "tokens": [
+    {
+     "t": "Vor",
+     "l": "de:vor"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Frühstück",
+     "l": "de:Frühstück",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "trinke",
+     "l": "de:trinken",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Wasser",
+     "l": "de:Wasser",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "Before breakfast I drink water.",
+   "alts": [
+    "Ich trinke vor dem Frühstück Wasser."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.167",
+   "frame": "fr.time",
+   "text": "Nach dem Abendessen gehen wir in den Park.",
+   "tokens": [
+    {
+     "t": "Nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Abendessen",
+     "l": "de:Abendessen",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "After dinner we go to the park.",
+   "alts": [
+    "Wir gehen nach dem Abendessen in den Park."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.168",
+   "frame": "fr.time",
+   "text": "Nach der Arbeit gehe ich nach Hause.",
+   "tokens": [
+    {
+     "t": "Nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "After work I go home.",
+   "alts": [
+    "Ich gehe nach der Arbeit nach Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.169",
+   "frame": "fr.time",
+   "text": "Während der Woche gehe ich zur Arbeit.",
+   "tokens": [
+    {
+     "t": "Während",
+     "l": "de:während"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;GEN;SG;FEM"
+    },
+    {
+     "t": "Woche",
+     "l": "de:Woche",
+     "f": "N;GEN;SG"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "During the week I go to work.",
+   "alts": [
+    "Ich gehe während der Woche zur Arbeit."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.170",
+   "frame": "fr.time",
+   "text": "Während der Ferien fahren wir nach Kreta.",
+   "tokens": [
+    {
+     "t": "Während",
+     "l": "de:während"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;GEN;PL"
+    },
+    {
+     "t": "Ferien",
+     "l": "de:Ferien",
+     "f": "N;GEN;PL"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Kreta",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.direction",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "During the holidays we go to Crete.",
+   "alts": [
+    "Wir fahren während der Ferien nach Kreta."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.171",
+   "frame": "fr.time",
+   "text": "Während des Urlaubs bleiben wir in Athen.",
+   "tokens": [
+    {
+     "t": "Während",
+     "l": "de:während"
+    },
+    {
+     "t": "des",
+     "l": "de:der",
+     "f": "DET;GEN;SG;MASC"
+    },
+    {
+     "t": "Urlaubs",
+     "l": "de:Urlaub",
+     "f": "N;GEN;SG"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "During the holiday we stay in Athens.",
+   "alts": [
+    "Wir bleiben während des Urlaubs in Athen."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.172",
+   "frame": "fr.time",
+   "text": "Der Arzt kommt am Montag um neun Uhr.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Arzt",
+     "l": "de:Arzt",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Montag",
+     "l": "de:Montag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.present",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "The doctor is coming on Monday at nine o’clock.",
+   "alts": [
+    "Am Montag um neun Uhr kommt der Arzt."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.173",
+   "frame": "fr.wh",
+   "text": "Wann hast du Geburtstag? Im Mai.",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Mai",
+     "l": "de:Mai",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.question.wh",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "When is your birthday? – In May.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.174",
+   "frame": "fr.have",
+   "text": "Ich habe heute Geburtstag.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "It’s my birthday today.",
+   "alts": [
+    "Heute habe ich Geburtstag."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.175",
+   "frame": "fr.poss",
+   "text": "Heute ist mein Geburtstag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "Today is my birthday.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.176",
+   "frame": "fr.wh",
+   "text": "Welches Datum ist heute?",
+   "tokens": [
+    {
+     "t": "Welches",
+     "l": "de:welcher",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Datum",
+     "l": "de:Datum",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.present",
+    "fn.question.wh",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "What’s the date today?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.177",
+   "frame": "fr.time",
+   "text": "Wir haben im Juli Urlaub.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Juli",
+     "l": "de:Juli",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "Urlaub",
+     "l": "de:Urlaub",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We’re on holiday in July.",
+   "alts": [
+    "Im Juli haben wir Urlaub."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.178",
+   "frame": "fr.time",
+   "text": "Wir haben im Juli keinen Urlaub.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Juli",
+     "l": "de:Juli",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Urlaub",
+     "l": "de:Urlaub",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": "de.f5.177",
+   "gloss": "We aren’t on holiday in July.",
+   "alts": [
+    "Im Juli haben wir keinen Urlaub."
+   ],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f5.179",
+   "frame": "fr.time",
+   "text": "Wir fahren im August in Urlaub.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "August",
+     "l": "de:August",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Urlaub",
+     "l": "de:Urlaub",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We go on holiday in August.",
+   "alts": [
+    "Im August fahren wir in Urlaub."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.180",
+   "frame": "fr.time",
+   "text": "Meine Schwester ist seit einem Monat in Wien.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "einem",
+     "l": "de:ein",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Monat",
+     "l": "de:Monat",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Wien",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.possessive",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "My sister has been in Vienna for a month.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.181",
+   "frame": "fr.time",
+   "text": "Der Bus kommt in fünf Minuten.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "fünf",
+     "l": "de:fünf"
+    },
+    {
+     "t": "Minuten",
+     "l": "de:Minute",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "The bus is coming in five minutes.",
+   "alts": [
+    "In fünf Minuten kommt der Bus."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.182",
+   "frame": "fr.time",
+   "text": "Wir bleiben eine Woche in Athen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Woche",
+     "l": "de:Woche",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "variantOf": null,
+   "gloss": "We’re staying in Athens for a week.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.183",
+   "frame": "fr.time",
+   "text": "Wir bleiben zwei Wochen in Athen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Wochen",
+     "l": "de:Woche",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Athen",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "variantOf": "de.f5.182",
+   "gloss": "We’re staying in Athens for two weeks.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f5.184",
+   "frame": "fr.time",
+   "text": "Um zehn Uhr bin ich zu Hause.",
+   "tokens": [
+    {
+     "t": "Um",
+     "l": "de:um"
+    },
+    {
+     "t": "zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zu Hause",
+     "l": "de:zu_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "At ten o’clock I’m at home.",
+   "alts": [
+    "Ich bin um zehn Uhr zu Hause."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.185",
+   "frame": "fr.time",
+   "text": "Wir warten seit einer Stunde.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "warten",
+     "l": "de:warten",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "einer",
+     "l": "de:ein",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Stunde",
+     "l": "de:Stunde",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We’ve been waiting for an hour.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.186",
+   "frame": "fr.time",
+   "text": "Vor acht Uhr bin ich nicht im Büro.",
+   "tokens": [
+    {
+     "t": "Vor",
+     "l": "de:vor"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Büro",
+     "l": "de:Büro",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "I’m not at the office before eight o’clock.",
+   "alts": [
+    "Ich bin vor acht Uhr nicht im Büro."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.187",
+   "frame": "fr.time",
+   "text": "Nach zehn Uhr fahren keine Busse.",
+   "tokens": [
+    {
+     "t": "Nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Busse",
+     "l": "de:Bus",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.present",
+    "fn.negation",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "After ten o’clock no buses run.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.188",
+   "frame": "fr.count",
+   "text": "Der Juni hat dreißig Tage.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Juni",
+     "l": "de:Juni",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dreißig",
+     "l": "de:dreißig"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.have",
+    "fn.present",
+    "fn.time.day"
+   ],
+   "variantOf": null,
+   "gloss": "June has thirty days.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.189",
+   "frame": "fr.time",
+   "text": "Die Ferien sind im Juli und im August.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Ferien",
+     "l": "de:Ferien",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Juli",
+     "l": "de:Juli",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "August",
+     "l": "de:August",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "The holidays are in July and August.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.190",
+   "frame": "fr.command",
+   "text": "Komm um acht Uhr!",
+   "tokens": [
+    {
+     "t": "Komm",
+     "l": "de:kommen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.case",
+    "fn.imperative",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "Come at eight o’clock!",
+   "alts": [
+    "Komme um acht Uhr!"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.191",
+   "frame": "fr.command",
+   "text": "Warte bis morgen!",
+   "tokens": [
+    {
+     "t": "Warte",
+     "l": "de:warten",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "bis",
+     "l": "de:bis"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "Wait until tomorrow!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f5.192",
+   "frame": "fr.time",
+   "text": "Im Sommer haben die Kinder keine Ferien.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Ferien",
+     "l": "de:Ferien",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.have",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.case",
+    "fn.prep.time"
+   ],
+   "variantOf": "de.f5.154",
+   "gloss": "In summer the children have no holidays.",
+   "alts": [
+    "Die Kinder haben im Sommer keine Ferien."
+   ],
+   "level": "A1",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.f5.193",
+   "frame": "fr.time",
+   "text": "Wir bleiben bis Freitag in Hamburg.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bleiben",
+     "l": "de:bleiben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "bis",
+     "l": "de:bis"
+    },
+    {
+     "t": "Freitag",
+     "l": "de:Freitag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Hamburg",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "variantOf": null,
+   "gloss": "We’re staying in Hamburg until Friday.",
+   "alts": [
+    "Bis Freitag bleiben wir in Hamburg."
+   ],
+   "level": "A1"
+  }
+ ]
+}

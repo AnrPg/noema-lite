@@ -1,0 +1,340 @@
+{
+ "function": "fn.time.day",
+ "status": "realized",
+ "summary": "Hebrew numbers the days of the week from Sunday: יוֹם רִאשׁוֹן “first day” (Sunday), יוֹם שֵׁנִי “second day” (Monday) … יוֹם שִׁשִּׁי “sixth day” (Friday); only the seventh has a name, שַׁבָּת. In Israel the week starts on Sunday and the weekend (סוֹף שָׁבוּעַ) is Friday and Saturday. Telling the day needs no verb in the present: הַיּוֹם יוֹם שֵׁנִי “today (is) Monday”, מָחָר שַׁבָּת; in the past it takes הָיָה / הָיְתָה: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן. “On Monday” is בְּיוֹם שֵׁנִי (no article). The parts of the day take בְּ with the article — בַּבֹּקֶר “in the morning”, בַּצָּהֳרַיִם “at noon”, בָּעֶרֶב “in the evening”, בַּלַּיְלָה “at night” — except אַחַר הַצָּהֳרַיִם “in the afternoon”, which needs nothing. With the article alone they mean “this …”: הַבֹּקֶר “this morning”, הָעֶרֶב “this evening”, הַלַּיְלָה “tonight” — and הַיּוֹם, “the day”, is “today”. Words of time (הַיּוֹם, מָחָר, עַכְשָׁו, בַּבֹּקֶר …) usually open the sentence or close it; frequency words (תָּמִיד, לִפְעָמִים, לְעִתִּים קְרוֹבוֹת) stand before the verb or at the start, and “never” is אַף פַּעַם + לֹא. With מָחָר the present is enough for a plan: מָחָר אֲנִי נוֹסֵעַ. Hebrew verbs have no aspect: “I am going” and “I go” are the same form.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Hebrew",
+    "literally",
+    "day",
+    "written"
+   ],
+   "rows": [
+    [
+     "יוֹם רִאשׁוֹן",
+     "first day",
+     "Sunday",
+     "יוֹם א׳"
+    ],
+    [
+     "יוֹם שֵׁנִי",
+     "second day",
+     "Monday",
+     "יוֹם ב׳"
+    ],
+    [
+     "יוֹם שְׁלִישִׁי",
+     "third day",
+     "Tuesday",
+     "יוֹם ג׳"
+    ],
+    [
+     "יוֹם רְבִיעִי",
+     "fourth day",
+     "Wednesday",
+     "יוֹם ד׳"
+    ],
+    [
+     "יוֹם חֲמִישִׁי",
+     "fifth day",
+     "Thursday",
+     "יוֹם ה׳"
+    ],
+    [
+     "יוֹם שִׁשִּׁי",
+     "sixth day",
+     "Friday",
+     "יוֹם ו׳"
+    ],
+    [
+     "שַׁבָּת",
+     "rest",
+     "Saturday",
+     "שַׁבָּת"
+    ]
+   ],
+   "caption": "The week counts from Sunday — like Greek Δευτέρα “second” = Monday."
+  },
+  {
+   "t": "table",
+   "head": [
+    "part of the day",
+    "in the … (בְּ + article)",
+    "this … (article alone)"
+   ],
+   "rows": [
+    [
+     "בֹּקֶר morning",
+     "בַּבֹּקֶר",
+     "הַבֹּקֶר"
+    ],
+    [
+     "צָהֳרַיִם noon",
+     "בַּצָּהֳרַיִם",
+     "הַצָּהֳרַיִם"
+    ],
+    [
+     "אַחַר הַצָּהֳרַיִם afternoon",
+     "אַחַר הַצָּהֳרַיִם (no בְּ)",
+     "הַיּוֹם אַחַר הַצָּהֳרַיִם"
+    ],
+    [
+     "עֶרֶב evening",
+     "בָּעֶרֶב",
+     "הָעֶרֶב"
+    ],
+    [
+     "לַיְלָה night",
+     "בַּלַּיְלָה",
+     "הַלַּיְלָה"
+    ],
+    [
+     "יוֹם day",
+     "בַּיּוֹם (by day)",
+     "הַיּוֹם (today)"
+    ]
+   ],
+   "caption": "The article does two jobs: בְּ + article = “in the …”, the article alone = “this …”."
+  },
+  {
+   "t": "table",
+   "head": [
+    "how often?",
+    "Hebrew",
+    "example"
+   ],
+   "rows": [
+    [
+     "always",
+     "תָּמִיד",
+     "הוּא תָּמִיד בָּא בַּזְּמַן."
+    ],
+    [
+     "often",
+     "לְעִתִּים קְרוֹבוֹת (speech: הַרְבֵּה)",
+     "לְעִתִּים קְרוֹבוֹת אֲנַחְנוּ נוֹסְעִים לְחֵיפָה."
+    ],
+    [
+     "sometimes",
+     "לִפְעָמִים",
+     "לִפְעָמִים אֲנִי הוֹלֵךְ בָּרֶגֶל."
+    ],
+    [
+     "never",
+     "אַף פַּעַם + לֹא",
+     "הוּא אַף פַּעַם לֹא מַגִּיעַ מֻקְדָּם."
+    ],
+    [
+     "every day / morning",
+     "כָּל יוֹם · כָּל בֹּקֶר",
+     "כָּל יוֹם אֲנִי הוֹלֵךְ לָעֲבוֹדָה."
+    ]
+   ],
+   "caption": "Frequency words stand before the verb or open the sentence."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No verb, no article",
+   "text": "“Today is Monday” = הַיּוֹם יוֹם שֵׁנִי — no “is”. “On Monday” = בְּיוֹם שֵׁנִי — no article (בַּיּוֹם הַשֵּׁנִי would be “on the second day”)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Sunday is a working day",
+   "text": "In Israel the week starts on יוֹם רִאשׁוֹן; the weekend is Friday and Saturday. “See you after the weekend” means Sunday."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Yesterday needs the past",
+   "text": "אֶתְמוֹל goes with a past verb: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן “yesterday was Sunday”, אֶתְמוֹל הָיְתָה שַׁבָּת (שַׁבָּת is feminine). The past tense comes in lesson C01."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "German says am Montag, morgens, heute Abend — Hebrew בְּיוֹם שֵׁנִי, בַּבֹּקֶר, הָעֶרֶב. Greek numbers the weekdays like Hebrew (Δευτέρα, Τρίτη, Τετάρτη, Πέμπτη); Russian counts from Monday (вторник “second” is Tuesday) — Hebrew counts from Sunday. Turkish and German put the time word early, as Hebrew may: Yarın Hayfa’ya gidiyorum / Morgen fahre ich nach Haifa / מָחָר אֲנִי נוֹסֵעַ לְחֵיפָה."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it the name of a day? → (בְּ)יוֹם + ordinal; Saturday = שַׁבָּת.",
+    "A part of the day: “in the …” (בַּבֹּקֶר) or “this …” (הַבֹּקֶר)?",
+    "How often? → תָּמִיד / לְעִתִּים קְרוֹבוֹת / לִפְעָמִים / אַף פַּעַם לֹא.",
+    "Past (אֶתְמוֹל) → הָיָה / a past verb."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I naming the day? → הַיּוֹם / מָחָר + the day, no verb: הַיּוֹם יוֹם שֵׁנִי. Yesterday → אֶתְמוֹל הָיָה …",
+   "Is it “on (a day)”? → בְּיוֹם … (no article); Saturday → בְּשַׁבָּת.",
+   "Is it “in the morning / evening / at night”? → בְּ + article: בַּבֹּקֶר, בָּעֶרֶב, בַּלַּיְלָה; “in the afternoon” → אַחַר הַצָּהֳרַיִם.",
+   "Is it “this morning / this evening / tonight”? → the article alone: הַבֹּקֶר, הָעֶרֶב, הַלַּיְלָה.",
+   "How often? → תָּמִיד, לְעִתִּים קְרוֹבוֹת, לִפְעָמִים before the verb; never → אַף פַּעַם … לֹא.",
+   "Every …? → כָּל + noun without article: כָּל יוֹם, כָּל בֹּקֶר."
+  ],
+  "steps": [
+   "Choose the time word.",
+   "Add בְּ or the article as needed.",
+   "Put it at the start (or the end) of the sentence; frequency words before the verb."
+  ]
+ },
+ "traps": [
+  "Monday is יוֹם שֵׁנִי “the second day” — not the first.",
+  "*בְּבֹקֶר → בַּבֹּקֶר (the parts of the day take the article).",
+  "*בְּאַחַר הַצָּהֳרַיִם → אַחַר הַצָּהֳרַיִם.",
+  "הָעֶרֶב is “this evening”, בָּעֶרֶב “in the evening” — one vowel apart.",
+  "לַיְלָה is masculine: לַיְלָה טוֹב.",
+  "“Never” needs לֹא too: אַף פַּעַם לֹא.",
+  "מְאֻחָר is “late” (adverb); “he is late” is הוּא מְאַחֵר."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:yom-rishon",
+   "he:yom-sheni",
+   "he:yom-shlishi",
+   "he:yom-revii",
+   "he:yom-chamishi",
+   "he:yom-shishi",
+   "he:shabat",
+   "he:sof-shavua",
+   "he:yom",
+   "he:laila",
+   "he:boker",
+   "he:tsohorayim",
+   "he:achar-hatsohorayim",
+   "he:erev",
+   "he:hayom",
+   "he:machar",
+   "he:etmol",
+   "he:achshav",
+   "he:achar-kach",
+   "he:bekarov",
+   "he:mukdam",
+   "he:meuchar",
+   "he:tamid",
+   "he:leitim-krovot",
+   "he:lifamim",
+   "he:af-paam"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "concepts": [
+    "time."
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "יוֹם שֵׁנִי is:",
+   "options": [
+    "Monday",
+    "Tuesday",
+    "Sunday"
+   ],
+   "answer": "Monday",
+   "why": "The week counts from Sunday (יוֹם רִאשׁוֹן): the second day is Monday."
+  },
+  {
+   "q": "“In the morning I drink coffee” (a man):",
+   "options": [
+    "בַּבֹּקֶר אֲנִי שׁוֹתֶה קָפֶה.",
+    "בְּבֹקֶר אֲנִי שׁוֹתֶה קָפֶה.",
+    "הַבֹּקֶר בְּ אֲנִי שׁוֹתֶה קָפֶה."
+   ],
+   "answer": "בַּבֹּקֶר אֲנִי שׁוֹתֶה קָפֶה.",
+   "why": "The parts of the day take בְּ + the article: בַּבֹּקֶר."
+  },
+  {
+   "q": "הָעֶרֶב means:",
+   "options": [
+    "this evening",
+    "in the evenings",
+    "yesterday evening"
+   ],
+   "answer": "this evening",
+   "why": "The article alone means “this”: הָעֶרֶב, הַבֹּקֶר, הַלַּיְלָה."
+  },
+  {
+   "q": "“Today is Saturday”:",
+   "options": [
+    "הַיּוֹם שַׁבָּת.",
+    "הַיּוֹם הוּא בְּשַׁבָּת.",
+    "בַּיּוֹם שַׁבָּת."
+   ],
+   "answer": "הַיּוֹם שַׁבָּת.",
+   "why": "No verb in the present and no preposition."
+  },
+  {
+   "q": "Which days make the Israeli weekend?",
+   "options": [
+    "Friday and Saturday",
+    "Saturday and Sunday",
+    "Thursday and Friday"
+   ],
+   "answer": "Friday and Saturday",
+   "why": "The week starts on Sunday (יוֹם רִאשׁוֹן); סוֹף שָׁבוּעַ is Friday and Shabbat."
+  },
+  {
+   "q": "“He never comes early”:",
+   "options": [
+    "הוּא אַף פַּעַם לֹא בָּא מֻקְדָּם.",
+    "הוּא אַף פַּעַם בָּא מֻקְדָּם.",
+    "הוּא לֹא תָּמִיד בָּא מֻקְדָּם."
+   ],
+   "answer": "הוּא אַף פַּעַם לֹא בָּא מֻקְדָּם.",
+   "why": "אַף פַּעַם “ever” needs לֹא to mean “never”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.time.day",
+   "note": "Arabic also counts the days from Sunday — الْأَحَد “one”, الْإِثْنَيْن “two” … الْخَمِيس “five” — and calls Friday الْجُمُعَة and Saturday السَّبْت (= שַׁבָּת)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.time.day",
+   "note": "German am Montag, am Morgen / morgens, heute Abend: a preposition with a case where Hebrew uses בְּ or just the article (בְּיוֹם שֵׁנִי, בַּבֹּקֶר, הָעֶרֶב)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.time.day",
+   "note": "Chinese counts from Monday (星期一 = Monday) and puts the time word before the verb; Hebrew counts from Sunday and is free to put it first or last."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.aspect",
+   "note": "Chinese marks completed or experienced actions with 了 / 过 in this lesson; Hebrew verbs have tense, not aspect — the past comes later (C01)."
+  }
+ ]
+}

@@ -1,0 +1,1180 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:lakin",
+   "lemma": "لٰكِنْ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.but"
+   ],
+   "translit": "lākin",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A turn in the sentence: “but”, before anything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but (the light form: before a verb, a noun in the nominative, or any phrase)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     },
+     {
+      "id": "s2",
+      "def": "but rather (after a negation)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا مُتْعَبٌ، لٰكِنْ أَذْهَبُ إِلَى الْعَمَلِ.",
+      "tr": "I’m tired, but I’m going to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ الْقَهْوَةَ، لٰكِنْ بِدُونِ سُكَّرٍ.",
+      "tr": "I’d like coffee, but without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الشَّايَ وَلٰكِنْ لَا أُحِبُّ الْقَهْوَةَ.",
+      "tr": "I like tea, but I don’t like coffee.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَلٰكِنْ",
+      "tr": "but (with “and”: very common at the start of a clause)"
+     },
+     {
+      "text": "لٰكِنْ لَا …",
+      "tr": "but not …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لٰكِنَّ",
+      "register": "neutral",
+      "nuance": "but — the heavy form, before a noun in the accusative or a pronoun ending (لٰكِنَّهُ)"
+     },
+     {
+      "word": "غَيْرَ أَنَّ",
+      "register": "formal",
+      "nuance": "however, except that"
+     },
+     {
+      "word": "بَيْدَ أَنَّ",
+      "register": "literary",
+      "nuance": "however"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary records the light لٰكِنْ as a conjunction of its own (with the derived وَلٰكِن); for the origin of the pair see لٰكِنَّ (uncertain).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The long ā is written with a small (dagger) alif over the lām: لٰكِنْ — in everyday print simply لكن, but always pronounced lākin."
+    ],
+    "pitfalls": [
+     "Never spelt *لاكن: the ā is the dagger alif, as in هٰذَا and ذٰلِكَ.",
+     "Before a noun or pronoun ending you need the heavy لٰكِنَّ: لٰكِنَّهُ جَمِيلٌ."
+    ],
+    "subtleties": [
+     "وَلٰكِنْ (“and but”) is the most frequent form at the start of a clause; the وَ adds nothing in English."
+    ]
+   }
+  },
+  {
+   "id": "ar:lakinna",
+   "lemma": "لٰكِنَّ",
+   "pos": "CCONJ",
+   "class": "pron",
+   "senses": [
+    "conj.but"
+   ],
+   "translit": "lākinna",
+   "forms": {
+    "PART": "لٰكِنَّ",
+    "PART;1;SG": "لٰكِنَّنِي",
+    "PART;2;SG;MASC": "لٰكِنَّكَ",
+    "PART;2;SG;FEM": "لٰكِنَّكِ",
+    "PART;3;SG;MASC": "لٰكِنَّهُ",
+    "PART;3;SG;FEM": "لٰكِنَّهَا",
+    "PART;1;PL": "لٰكِنَّنَا",
+    "PART;2;PL;MASC": "لٰكِنَّكُمْ",
+    "PART;2;PL;FEM": "لٰكِنَّكُنَّ",
+    "PART;3;PL;MASC": "لٰكِنَّهُمْ",
+    "PART;3;PL;FEM": "لٰكِنَّهُنَّ"
+   },
+   "formsAlt": {
+    "PART;1;SG": [
+     "لٰكِنِّي"
+    ],
+    "PART;1;PL": [
+     "لٰكِنَّا"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“But” followed by a subject: but it…, but the tea….",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but (the heavy form: + a noun in the accusative or a pronoun ending)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلٌ.",
+      "tr": "The house is small, but it is beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَهْوَةُ غَالِيَةٌ لٰكِنَّ الشَّايَ رَخِيصٌ.",
+      "tr": "Coffee is expensive, but tea is cheap.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الْبَحْرَ لٰكِنَّنِي لَا أَسْبَحُ.",
+      "tr": "I love the sea, but I don’t swim.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لٰكِنَّهُ …",
+      "tr": "but he / it …"
+     },
+     {
+      "text": "لٰكِنَّ الْمُشْكِلَةَ …",
+      "tr": "but the problem …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لٰكِنْ",
+      "register": "neutral",
+      "nuance": "but — the light form, before a verb or anything else"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: origin uncertain — Bravmann proposes إِلَّا كَانَ (“except that [it] were”), without explaining the contraction.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is one of the “sisters of إِنَّ” (أَخَوَاتُ إِنَّ) of Arabic grammar: إِنَّ, أَنَّ, لٰكِنَّ … all put their subject in the accusative."
+    ],
+    "pitfalls": [
+     "The noun after it is ACCUSATIVE: لٰكِنَّ الشَّايَ رَخِيصٌ, not *لٰكِنَّ الشَّايُ.",
+     "A pronoun subject becomes an ending: لٰكِنَّهُ, لٰكِنَّهَا, لٰكِنَّنِي — never *لٰكِنَّ هُوَ."
+    ],
+    "subtleties": [
+     "Things in the plural are “she” here too: الْبُيُوتُ صَغِيرَةٌ لٰكِنَّهَا جَمِيلَةٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:lianna",
+   "lemma": "لِأَنَّ",
+   "pos": "SCONJ",
+   "class": "pron",
+   "senses": [
+    "conj.because"
+   ],
+   "translit": "liʾanna",
+   "forms": {
+    "PART": "لِأَنَّ",
+    "PART;1;SG": "لِأَنَّنِي",
+    "PART;2;SG;MASC": "لِأَنَّكَ",
+    "PART;2;SG;FEM": "لِأَنَّكِ",
+    "PART;3;SG;MASC": "لِأَنَّهُ",
+    "PART;3;SG;FEM": "لِأَنَّهَا",
+    "PART;1;PL": "لِأَنَّنَا",
+    "PART;2;PL;MASC": "لِأَنَّكُمْ",
+    "PART;2;PL;FEM": "لِأَنَّكُنَّ",
+    "PART;3;PL;MASC": "لِأَنَّهُمْ",
+    "PART;3;PL;FEM": "لِأَنَّهُنَّ"
+   },
+   "formsAlt": {
+    "PART;1;SG": [
+     "لِأَنِّي"
+    ],
+    "PART;1;PL": [
+     "لِأَنَّا"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Giving reasons.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "because (+ a noun in the accusative or a pronoun ending)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَشْرَبُ الْقَهْوَةَ لِأَنَّهَا غَالِيَةٌ.",
+      "tr": "I don’t drink coffee because it is expensive.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "آكُلُ الْآنَ لِأَنَّنِي جَائِعٌ.",
+      "tr": "I’m eating now because I’m hungry.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَاذَا تَبْقَى فِي الْبَيْتِ؟ لِأَنَّ الْجَوَّ بَارِدٌ.",
+      "tr": "Why are you staying at home? — Because it is cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِأَنَّهُ …",
+      "tr": "because he / it …"
+     },
+     {
+      "text": "لِأَنَّنِي …",
+      "tr": "because I …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِسَبَبِ",
+      "register": "neutral",
+      "nuance": "because of + a noun: بِسَبَبِ الْبَرْدِ, because of the cold"
+     },
+     {
+      "word": "إِذْ",
+      "register": "literary",
+      "nuance": "since, as"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: لِـ (li-, “for”) + أَنَّ (ʾanna, “that”) — “for (the fact) that”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German weil sends the verb to the end of the clause; Arabic لِأَنَّ leaves the order alone but puts the next noun in the accusative."
+    ],
+    "pitfalls": [
+     "لِأَنَّ + accusative or a pronoun ending: لِأَنَّ الْجَوَّ بَارِدٌ, لِأَنَّهُ مُتْعَبٌ — not *لِأَنَّ هُوَ مُتْعَبٌ.",
+     "“Because of” + noun is بِسَبَبِ, not لِأَنَّ."
+    ],
+    "subtleties": [
+     "“I” has two forms: لِأَنَّنِي and the shorter لِأَنِّي; “we”: لِأَنَّنَا or لِأَنَّا."
+    ]
+   }
+  },
+  {
+   "id": "ar:lidhalika",
+   "lemma": "لِذٰلِكَ",
+   "pos": "ADV",
+   "senses": [
+    "conj.so"
+   ],
+   "translit": "liḏālika",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A consequence: …, so ….",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "so, therefore, that is why",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا جَائِعٌ، لِذٰلِكَ آكُلُ.",
+      "tr": "I’m hungry, so I’m eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَوُّ بَارِدٌ، لِذٰلِكَ نَبْقَى فِي الْبَيْتِ.",
+      "tr": "It’s cold, so we’re staying at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ الطَّرِيقُ طَوِيلًا، لِذٰلِكَ وَصَلْنَا مُتَأَخِّرِينَ.",
+      "tr": "The road was long, so we arrived late.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَلِذٰلِكَ",
+      "tr": "and therefore"
+     },
+     {
+      "text": "لِذٰلِكَ السَّبَبِ",
+      "tr": "for that reason"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لِهٰذَا",
+      "register": "neutral",
+      "nuance": "so, that is why — the same with “this”"
+     },
+     {
+      "word": "لِذَا",
+      "register": "formal",
+      "nuance": "therefore — the short written form"
+     },
+     {
+      "word": "فَـ",
+      "register": "neutral",
+      "nuance": "so, and so — the light prefix: جُعْتُ فَأَكَلْتُ"
+     },
+     {
+      "word": "إِذَنْ",
+      "register": "neutral",
+      "nuance": "so then, in that case"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: لِـ (li-, “for”) + ذٰلِكَ (ḏālika, “that”) — “for that”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German deswegen is built the same way (“because of that”), and Greek γι’ αυτό, “for this”."
+    ],
+    "pitfalls": [
+     "Spelt with a dagger alif like ذٰلِكَ: لِذٰلِكَ (liḏālika); in print usually لذلك.",
+     "No inversion after it (unlike German deshalb + verb): لِذٰلِكَ نَبْقَى فِي الْبَيْتِ is normal order."
+    ],
+    "subtleties": [
+     "فَـ is the lighter, more frequent “so”; لِذٰلِكَ states the cause explicitly."
+    ]
+   }
+  },
+  {
+   "id": "ar:fa",
+   "lemma": "فَ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.so"
+   ],
+   "prefix": true,
+   "translit": "fa-",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The tiny link that drives a story on: and so, and then.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "so, and so, and then (attached to the next word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     },
+     {
+      "id": "s2",
+      "def": "then — opening the main clause after إِذَا when it is a command, a negation or a nominal sentence",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "جُعْتُ فَأَكَلْتُ.",
+      "tr": "I got hungry, so I ate.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "إِذَا كُنْتَ جَائِعًا فَكُلْ!",
+      "tr": "If you’re hungry, eat!",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "دَخَلَ فَجَلَسَ.",
+      "tr": "He came in and sat down.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فَـ + verb",
+      "tr": "and so / and then …"
+     },
+     {
+      "text": "إِذَا …، فَـ …",
+      "tr": "if …, then …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لِذٰلِكَ",
+      "register": "neutral",
+      "nuance": "therefore — a full word, the cause made explicit"
+     },
+     {
+      "word": "ثُمَّ",
+      "register": "neutral",
+      "nuance": "then, later — with a pause in time"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the conjunction فَـ, “then, and then; and so, thus, hence, therefore”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Grammarians describe it as order with no delay (ترتيب وتعقيب): فَـ = right after; ثُمَّ = after a while."
+    ],
+    "pitfalls": [
+     "It is written joined to the next word: فَأَكَلْتُ, فَكُلْ — never alone.",
+     "After إِذَا a command needs it: إِذَا كُنْتَ جَائِعًا فَكُلْ (not *… كُلْ)."
+    ],
+    "subtleties": [
+     "وَ adds, فَـ follows: أَكَلَ وَشَرِبَ (he ate and drank) / أَكَلَ فَشَبِعَ (he ate and so was full)."
+    ]
+   }
+  },
+  {
+   "id": "ar:thumma",
+   "lemma": "ثُمَّ",
+   "pos": "CCONJ",
+   "senses": [
+    "adv.then"
+   ],
+   "translit": "ṯumma",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One step after another.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "then, afterwards, and after that",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     },
+     {
+      "id": "s2",
+      "def": "moreover, and also (in argument)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ ثُمَّ أَذْهَبُ إِلَى الْعَمَلِ.",
+      "tr": "I drink coffee, then I go to work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ ثُمَّ نَشْرَبُ الشَّايَ.",
+      "tr": "We eat, then we drink tea.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "اُدْخُلْ ثُمَّ اجْلِسْ.",
+      "tr": "Come in, then sit down.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ثُمَّ بَعْدَ ذٰلِكَ",
+      "tr": "and then after that"
+     },
+     {
+      "text": "أَوَّلًا … ثُمَّ …",
+      "tr": "first … then …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَعْدَ ذٰلِكَ",
+      "register": "neutral",
+      "nuance": "after that — more explicit"
+     },
+     {
+      "word": "فَـ",
+      "register": "neutral",
+      "nuance": "and then — immediately, with no pause"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary lists it as a conjunction, “then, afterward, subsequently”, also used to mark the speaker’s order of points; no etymology is given.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Classical grammar contrasts it with فَـ: ثُمَّ is sequence with a gap in time (ترتيب مع تراخٍ)."
+    ],
+    "pitfalls": [
+     "ثُمَّ (ṯumma, then) ≠ ثَمَّ / ثَمَّةَ (ṯamma, there; there is) — one vowel."
+    ],
+    "subtleties": [
+     "It joins clauses with the same word order as before: أَشْرَبُ … ثُمَّ أَذْهَبُ …."
+    ]
+   }
+  },
+  {
+   "id": "ar:indama",
+   "lemma": "عِنْدَمَا",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.when"
+   ],
+   "translit": "ʿindamā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Time clauses: when I arrive, when I was a child.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when (conjunction), whenever",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     },
+     {
+      "id": "s2",
+      "def": "while, as",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدَمَا أَصِلُ إِلَى الْبَيْتِ، آكُلُ.",
+      "tr": "When I get home, I eat.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الشَّايَ عِنْدَمَا أَكُونُ مُتْعَبًا.",
+      "tr": "I drink tea when I’m tired.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَمَا كُنْتُ طِفْلًا، كُنْتُ أَعِيشُ فِي قَرْيَةٍ.",
+      "tr": "When I was a child, I lived in a village.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِنْدَمَا + verb",
+      "tr": "when …"
+     },
+     {
+      "text": "فَقَطْ عِنْدَمَا …",
+      "tr": "only when …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَمَّا",
+      "register": "neutral",
+      "nuance": "when — for past events (لَمَّا وَصَلْتُ, when I arrived); also the everyday “when” of many dialects"
+     },
+     {
+      "word": "حِينَ",
+      "register": "formal",
+      "nuance": "when, at the time when (also حِينَمَا)"
+     },
+     {
+      "word": "إِذَا",
+      "register": "neutral",
+      "nuance": "when, if — for the future and for general truths"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from عِنْدَ (ʿinda, “at”) + مَا (mā) — “at (the time) that”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is built from عِنْدَ, the “at” of عِنْدِي (I have, lesson 6): “at what (time)”."
+    ],
+    "pitfalls": [
+     "The question “when?” is مَتَى (lesson 10): مَتَى تَصِلُ؟ — عِنْدَمَا only joins two clauses.",
+     "To say “to be” in the present after it, use the present of كَانَ: عِنْدَمَا أَكُونُ مُتْعَبًا (and the predicate in the accusative)."
+    ],
+    "subtleties": [
+     "German distinguishes wenn / als; Arabic عِنْدَمَا covers both, while لَمَّا is only for the past."
+    ]
+   }
+  },
+  {
+   "id": "ar:idha",
+   "lemma": "إِذَا",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.if"
+   ],
+   "translit": "ʾiḏā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Real conditions and “whenever”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "if (a real, likely condition)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.if"
+     },
+     {
+      "id": "s2",
+      "def": "when, whenever",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "إِذَا جَاءَ الصَّيْفُ نُسَافِرُ.",
+      "tr": "When summer comes, we travel.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     },
+     {
+      "text": "إِذَا كُنْتَ جَائِعًا فَكُلْ!",
+      "tr": "If you’re hungry, eat!",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "إِذَا كَانَ الْمَطْعَمُ غَالِيًا نَأْكُلُ فِي الْبَيْتِ.",
+      "tr": "If the restaurant is expensive, we eat at home.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "إِذَا + past verb",
+      "tr": "if … (meaning present or future)"
+     },
+     {
+      "text": "إِذَا أَمْكَنَ",
+      "tr": "if possible"
+     },
+     {
+      "text": "إِذَا سَمَحْتَ",
+      "tr": "if you allow, please"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِنْ",
+      "register": "formal",
+      "nuance": "if — a more open or doubtful condition, with the past or the jussive"
+     },
+     {
+      "word": "لَوْ",
+      "register": "neutral",
+      "nuance": "if — an unreal condition: لَوْ كُنْتُ غَنِيًّا … (if I were rich …); also in لَوْ سَمَحْتَ (lesson 2)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: equivalent to إِن (ʾin, “if”) + ذَا (ḏā, “this”); compare Hebrew אָז (“then”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "لَوْ سَمَحْتَ (excuse me, lesson 2) is literally “if you allowed” — the polite unreal “if”."
+    ],
+    "pitfalls": [
+     "After إِذَا the verb is normally in the PAST form, but the meaning is present or future: إِذَا ذَهَبْتَ = if you go.",
+     "A command, a negation with لَنْ / لَيْسَ or a nominal sentence after it needs فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ.",
+     "For an unreal “if” use لَوْ, not إِذَا."
+    ],
+    "subtleties": [
+     "With كَانَ the adjective is accusative: إِذَا كَانَ الْمَطْعَمُ غَالِيًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:anna",
+   "lemma": "أَنَّ",
+   "pos": "SCONJ",
+   "class": "pron",
+   "senses": [
+    "conj.that"
+   ],
+   "translit": "ʾanna",
+   "forms": {
+    "PART": "أَنَّ",
+    "PART;1;SG": "أَنَّنِي",
+    "PART;2;SG;MASC": "أَنَّكَ",
+    "PART;2;SG;FEM": "أَنَّكِ",
+    "PART;3;SG;MASC": "أَنَّهُ",
+    "PART;3;SG;FEM": "أَنَّهَا",
+    "PART;1;PL": "أَنَّنَا",
+    "PART;2;PL;MASC": "أَنَّكُمْ",
+    "PART;2;PL;FEM": "أَنَّكُنَّ",
+    "PART;3;PL;MASC": "أَنَّهُمْ",
+    "PART;3;PL;FEM": "أَنَّهُنَّ"
+   },
+   "formsAlt": {
+    "PART;1;SG": [
+     "أَنِّي"
+    ],
+    "PART;1;PL": [
+     "أَنَّا"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Reported facts: I know that…, I think that….",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (+ a noun in the accusative or a pronoun ending)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.that"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَعْرِفُ أَنَّكَ مُتْعَبٌ.",
+      "tr": "I know that you are tired.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "أَظُنُّ أَنَّ الْقِطَارَ سَرِيعٌ.",
+      "tr": "I think that the train is fast.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْرِفُ أَنَّ الْعَرَبِيَّةَ صَعْبَةٌ.",
+      "tr": "I know that Arabic is difficult.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَعْرِفُ أَنَّ …",
+      "tr": "I know that …"
+     },
+     {
+      "text": "أَظُنُّ أَنَّ …",
+      "tr": "I think that …"
+     },
+     {
+      "text": "يَبْدُو أَنَّ …",
+      "tr": "it seems that …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَنْ",
+      "register": "neutral",
+      "nuance": "that + a verb (usually in the subjunctive) — often English “to”"
+     },
+     {
+      "word": "إِنَّ",
+      "register": "neutral",
+      "nuance": "that — after قَالَ (to say): قَالَ إِنَّهُ مُتْعَبٌ"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: “adverbial accusative of the noun underlying the former conjunction” (أَنْ); لِأَنَّ (because) is derived from it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew uses one prefix שֶׁ for this (אֲנִי יוֹדֵעַ שֶׁ…), German dass sends the verb to the end — Arabic أَنَّ changes the case of the subject."
+    ],
+    "pitfalls": [
+     "أَنَّ + accusative or a pronoun ending: أَعْرِفُ أَنَّ الْبَيْتَ كَبِيرٌ — after قَالَ it is إِنَّ, not أَنَّ.",
+     "أَنَّ (ʾanna, that) and أَنْ (ʾan, that / to) look the same without vowels: أن."
+    ],
+    "subtleties": [
+     "أَنِّي and أَنَّنِي (that I) are both correct; أَنَّنِي is more frequent today."
+    ]
+   }
+  },
+  {
+   "id": "ar:an_that",
+   "lemma": "أَنْ",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.that"
+   ],
+   "translit": "ʾan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wanting and needing to do things: I want to go.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that, to (+ a verb in the subjunctive: أُرِيدُ أَنْ أَذْهَبَ, I want to go)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.that"
+     },
+     {
+      "id": "s2",
+      "def": "that (+ a past verb), in reports",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ أَنْ أَشْرَبَ الشَّايَ.",
+      "tr": "I want to drink tea.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "نُرِيدُ أَنْ نُسَافِرَ فِي الصَّيْفِ.",
+      "tr": "We want to travel in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "يَجِبُ أَنْ أَذْهَبَ الْآنَ.",
+      "tr": "I must go now.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أُرِيدُ أَنْ …",
+      "tr": "I want to …"
+     },
+     {
+      "text": "يَجِبُ أَنْ …",
+      "tr": "one must …"
+     },
+     {
+      "text": "يُمْكِنُ أَنْ …",
+      "tr": "it is possible to …, can …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَنَّ",
+      "register": "neutral",
+      "nuance": "that + a noun or pronoun ending — facts: أَعْرِفُ أَنَّهُ هُنَا"
+     },
+     {
+      "word": "لِكَيْ",
+      "register": "neutral",
+      "nuance": "in order to, so that"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: perhaps from the same source as هَمّ (“concern”), with sound changes typical of Arabic (an uncertain proposal); لِأَنْ and أَلَّا (أَنْ + لَا) are derived from it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek says it the same way: θέλω να πάω, “I want that I go” = أُرِيدُ أَنْ أَذْهَبَ — no infinitive."
+    ],
+    "pitfalls": [
+     "The verb after it takes the subjunctive: -a instead of -u (أَنْ أَذْهَبَ, not أَذْهَبُ); the -na of تَأْكُلِينَ / يَأْكُلُونَ drops (أَنْ تَأْكُلِي, أَنْ يَأْكُلُوا).",
+     "أَنْ + لَا is written أَلَّا: أُرِيدُ أَلَّا أَذْهَبَ (I want not to go)."
+    ],
+    "subtleties": [
+     "Where English has “to” (I want to eat), Arabic has أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ, تُرِيدُ أَنْ تَأْكُلَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:maa_anna",
+   "lemma": "مَعَ أَنَّ",
+   "pos": "SCONJ",
+   "class": "pron",
+   "senses": [
+    "conj.although"
+   ],
+   "translit": "maʿa ʾanna",
+   "forms": {
+    "PART": "مَعَ أَنَّ",
+    "PART;1;SG": "مَعَ أَنَّنِي",
+    "PART;2;SG;MASC": "مَعَ أَنَّكَ",
+    "PART;2;SG;FEM": "مَعَ أَنَّكِ",
+    "PART;3;SG;MASC": "مَعَ أَنَّهُ",
+    "PART;3;SG;FEM": "مَعَ أَنَّهَا",
+    "PART;1;PL": "مَعَ أَنَّنَا",
+    "PART;2;PL;MASC": "مَعَ أَنَّكُمْ",
+    "PART;2;PL;FEM": "مَعَ أَنَّكُنَّ",
+    "PART;3;PL;MASC": "مَعَ أَنَّهُمْ",
+    "PART;3;PL;FEM": "مَعَ أَنَّهُنَّ"
+   },
+   "formsAlt": {
+    "PART;1;SG": [
+     "مَعَ أَنِّي"
+    ],
+    "PART;1;PL": [
+     "مَعَ أَنَّا"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A contrast inside one sentence: although….",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "although, even though (+ a noun in the accusative or a pronoun ending)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.although"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ.",
+      "tr": "Although I’m tired, I go to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ مَشْيًا مَعَ أَنَّ الْمَدْرَسَةَ بَعِيدَةٌ.",
+      "tr": "I walk although the school is far.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَى السَّيَّارَةَ مَعَ أَنَّهَا غَالِيَةٌ.",
+      "tr": "He bought the car although it is expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَعَ أَنَّهُ …",
+      "tr": "although he / it …"
+     },
+     {
+      "text": "مَعَ أَنَّنِي …",
+      "tr": "although I …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَغْمَ أَنَّ",
+      "register": "neutral",
+      "nuance": "although, despite the fact that — very common in writing"
+     },
+     {
+      "word": "بِالرَّغْمِ مِنْ أَنَّ",
+      "register": "formal",
+      "nuance": "in spite of the fact that"
+     },
+     {
+      "word": "عَلَى الرَّغْمِ مِنْ",
+      "register": "formal",
+      "nuance": "despite + a noun"
+     }
+    ],
+    "etymology": {
+     "text": "مَعَ (“with”) + أَنَّ (“that”): “with (the fact) that”; Wiktionary lists the pair as a conjunction, “although”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek παρόλο που and German obwohl are built from other pieces, but the idea is the same: “with all that, …”."
+    ],
+    "pitfalls": [
+     "No لٰكِنْ in the main clause: *مَعَ أَنَّنِي مُتْعَبٌ لٰكِنْ أَذْهَبُ is wrong, like English “although …, but …”.",
+     "Like أَنَّ, it takes the accusative or a pronoun ending: مَعَ أَنَّ الْمَدْرَسَةَ بَعِيدَةٌ."
+    ],
+    "subtleties": [
+     "The clause can come first or second: مَعَ أَنَّهَا غَالِيَةٌ، اِشْتَرَاهَا / اِشْتَرَاهَا مَعَ أَنَّهَا غَالِيَةٌ."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

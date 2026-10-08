@@ -232,7 +232,512 @@
      "לֹא + future is an absolute prohibition, as in the Ten Commandments: לֹא תִּרְצָח."
     ]
    }
+  },
+  {
+   "id": "he:shum-det",
+   "lemma": "שׁוּם",
+   "pos": "DET",
+   "senses": [
+    "det.none"
+   ],
+   "translit": "shum",
+   "note": "Before a noun, with לֹא or אֵין: “no … at all, not any”. Plain “no + noun” needs no word in Hebrew (אֵין לִי מְכוֹנִית “I have no car”); שׁוּם adds emphasis. Same spelling as שׁוּם “garlic”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An emphatic “no … at all”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "no, not any (before a noun, with לֹא / אֵין)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.none"
+     },
+     {
+      "id": "s2",
+      "def": "any (in questions and conditions)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵין לִי שׁוּם בְּעָיָה.",
+      "tr": "I have no problem at all.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לֹא אוֹכֵל שׁוּם בָּשָׂר.",
+      "tr": "He eats no meat at all.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּשׁוּם אֹפֶן לֹא!",
+      "tr": "By no means! / No way!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ שׁוּם סִכּוּי?",
+      "tr": "Is there any chance?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּשׁוּם אֹפֶן",
+      "tr": "by no means"
+     },
+     {
+      "text": "שׁוּם דָּבָר",
+      "tr": "nothing (“no thing”)"
+     },
+     {
+      "text": "בְּשׁוּם מָקוֹם",
+      "tr": "nowhere"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַף",
+      "register": "neutral",
+      "nuance": "“not a single …” — even stronger: לֹא קָנִיתִי אַף סֵפֶר “I didn’t buy a single book”; also in אַף אֶחָד, אַף פַּעַם"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic שֻׁם (šum), indefinite and construct form of שְׁמָא (“name”). The determiner is an extension of the noun (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is the Aramaic word for “name”: “not by any name” became “not any”.",
+     "Same spelling, another word: שׁוּם “garlic”."
+    ],
+    "pitfalls": [
+     "Hebrew needs no word for “no” before a noun: “I have no car” is simply אֵין לִי מְכוֹנִית. שׁוּם adds “at all”: אֵין לִי שׁוּם מְכוֹנִית.",
+     "It still needs לֹא or אֵין in the sentence: הוּא לֹא אוֹכֵל שׁוּם בָּשָׂר."
+    ],
+    "subtleties": [
+     "שׁוּם is emphatic, like German gar kein; אַף + noun (אַף סֵפֶר) is stronger still: “not a single”."
+    ]
+   }
+  },
+  {
+   "id": "he:klum",
+   "lemma": "כְּלוּם",
+   "pos": "PRON",
+   "senses": [
+    "pron.nothing"
+   ],
+   "translit": "klum",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses כְּלוּם as “anything” — its meaning under a negation (לֹא … כְּלוּם “not … anything”). In Modern Hebrew it is the everyday word for “nothing”, also alone as an answer (— מָה קָנִיתָ? — כְּלוּם.); the profile shows this."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “nothing” — short, frequent, a little dismissive.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nothing (with לֹא / אֵין, or alone as an answer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nothing"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי לֹא רוֹצֶה כְּלוּם.",
+      "tr": "I (m.) don’t want anything.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתָּה קוֹנֶה? כְּלוּם.",
+      "tr": "What are you buying? — Nothing.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין בַּמְּקָרֵר כְּלוּם.",
+      "tr": "There is nothing in the fridge.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֹא … כְּלוּם",
+      "tr": "nothing, not anything"
+     },
+     {
+      "text": "כִּמְעַט כְּלוּם",
+      "tr": "almost nothing"
+     },
+     {
+      "text": "זֶה כְּלוּם",
+      "tr": "it’s nothing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שׁוּם דָּבָר",
+      "register": "neutral",
+      "nuance": "“no thing” — the same meaning, a little more careful or emphatic"
+     },
+     {
+      "word": "אַיִן",
+      "register": "literary",
+      "nuance": "“nothingness” — a noun of philosophy and poetry (יֵשׁ מֵאַיִן “something from nothing”)"
+     }
+    ],
+    "etymology": {
+     "text": "Origin uncertain: the popular folk etymology כְּ (“like”) + *לוּם “olive pit” (“something as small as an olive pit”) is unsupported (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A popular story derives it from “like an olive pit”; Wiktionary calls this folk etymology unsupported."
+    ],
+    "pitfalls": [
+     "With a verb you still need לֹא: אֲנִי לֹא רוֹצֶה כְּלוּם (never *אֲנִי רוֹצֶה כְּלוּם)."
+    ],
+    "subtleties": [
+     "Alone, as an answer, it needs no לֹא: מָה יֵשׁ? כְּלוּם."
+    ]
+   }
+  },
+  {
+   "id": "he:shum-davar",
+   "lemma": "שׁוּם דָּבָר",
+   "pos": "PRON",
+   "senses": [
+    "pron.nothing"
+   ],
+   "translit": "shum davar",
+   "note": "A two-word lexeme: שׁוּם “any” + דָּבָר “thing”. Tokenized as one word.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses שׁוּם דָּבָר as “anything” — its meaning under a negation (לֹא … שׁוּם דָּבָר “not … anything”). Alone or with לֹא it is the standard “nothing”; the profile shows this."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A careful, complete “nothing — not a thing”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nothing, not a thing (with לֹא / אֵין, or alone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nothing"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא לֹא אוֹכֵל שׁוּם דָּבָר בַּבֹּקֶר.",
+      "tr": "He doesn’t eat anything in the morning.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה קָנִיתָ? שׁוּם דָּבָר.",
+      "tr": "What did you buy? — Nothing.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "שׁוּם דָּבָר לֹא קָרָה.",
+      "tr": "Nothing happened.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שׁוּם דָּבָר לֹא …",
+      "tr": "nothing … (as the subject)"
+     },
+     {
+      "text": "אֵין שׁוּם דָּבָר",
+      "tr": "there is nothing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כְּלוּם",
+      "register": "neutral",
+      "nuance": "“nothing” — shorter and more frequent in speech"
+     }
+    ],
+    "etymology": {
+     "text": "שׁוּם “any (with a negation)” + דָּבָר “thing” (Wiktionary lists the phrase as a pronoun).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The polite reply to thanks, עַל לֹא דָּבָר “for no thing”, uses the same word דָּבָר."
+    ],
+    "pitfalls": [
+     "A verb still needs לֹא: אֲנִי לֹא קוֹנֶה שׁוּם דָּבָר."
+    ],
+    "subtleties": [
+     "It can be the subject: שׁוּם דָּבָר לֹא קָרָה “nothing happened” — still with לֹא."
+    ]
+   }
+  },
+  {
+   "id": "he:af-echad",
+   "lemma": "אַף אֶחָד",
+   "pos": "PRON",
+   "senses": [
+    "pron.nobody"
+   ],
+   "translit": "af echad",
+   "note": "A two-word lexeme: אַף “even” + אֶחָד “one”. Feminine אַף אַחַת. Tokenized as one word.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“Not even one” — nobody.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nobody, no one (with לֹא / אֵין, or alone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nobody"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַף אֶחָד לֹא אוֹכֵל.",
+      "tr": "Nobody is eating.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי פֹּה? אַף אֶחָד.",
+      "tr": "Who is here? — Nobody.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין פֹּה אַף אֶחָד.",
+      "tr": "There is nobody here.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַף אֶחָד לֹא …",
+      "tr": "nobody … (as the subject)"
+     },
+     {
+      "text": "אֵין אַף אֶחָד",
+      "tr": "there is nobody"
+     },
+     {
+      "text": "אַף אַחַת",
+      "tr": "no one (of women, or of feminine things)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אִישׁ לֹא",
+      "register": "literary",
+      "nuance": "“no man” — literary: אִישׁ לֹא יָדַע “no one knew”"
+     }
+    ],
+    "etymology": {
+     "text": "אַף “even” + אֶחָד “one” — “not even one” (Wiktionary lists the phrase as a pronoun).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In fast speech it is run together — Wiktionary even lists the slang spelling אפ׳חד."
+    ],
+    "pitfalls": [
+     "A verb needs לֹא as well: אַף אֶחָד לֹא אוֹכֵל “nobody eats”.",
+     "For women or feminine nouns: אַף אַחַת (אַף אַחַת מֵהַבָּנוֹת “none of the girls”)."
+    ],
+    "subtleties": [
+     "As the subject it takes a masculine singular verb: אַף אֶחָד לֹא שׁוֹתֶה."
+    ]
+   }
+  },
+  {
+   "id": "he:af-paam",
+   "lemma": "אַף פַּעַם",
+   "pos": "ADV",
+   "senses": [
+    "adv.never"
+   ],
+   "translit": "af paam",
+   "note": "A two-word lexeme: אַף “even” + פַּעַם “time, once”. Tokenized as one word.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A firm “never” — and, in a question, “ever”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "never (with לֹא before the verb, or alone as an answer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.never"
+     },
+     {
+      "id": "s2",
+      "def": "ever (in a question)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה.",
+      "tr": "I (m.) never drink coffee.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה אוֹכֵל בָּשָׂר? אַף פַּעַם!",
+      "tr": "Do you eat meat? — Never!",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הָיִיתָ אַף פַּעַם בְּאֵילַת?",
+      "tr": "Have you (m.) ever been to Eilat?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַף פַּעַם לֹא",
+      "tr": "never (before a verb)"
+     },
+     {
+      "text": "כִּמְעַט אַף פַּעַם",
+      "tr": "almost never"
+     },
+     {
+      "text": "אַף פַּעַם לֹא מְאֻחָר",
+      "tr": "it is never too late"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אַף פַּעַם לֹא מְאֻחָר",
+      "tr": "it is never too late",
+      "kind": "saying",
+      "meaning": "one can always start or change",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מֵעוֹלָם לֹא",
+      "register": "formal",
+      "nuance": "“never (in all my life)” — about the past: מֵעוֹלָם לֹא רָאִיתִי"
+     },
+     {
+      "word": "לְעוֹלָם לֹא",
+      "register": "formal",
+      "nuance": "“never (ever)” — about the future, solemn: לְעוֹלָם לֹא אֶשְׁכַּח “I will never forget”"
+     }
+    ],
+    "etymology": {
+     "text": "אַף “even” + פַּעַם “time, occasion” — literally “(not) even once” (Wiktionary lists the phrase as an adverb, “never”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “even once”: the “never” comes from the לֹא beside it — which is why in a question it means “ever”."
+    ],
+    "pitfalls": [
+     "A verb needs לֹא as well: אֲנִי אַף פַּעַם לֹא אוֹכֵל … (not *אֲנִי אַף פַּעַם אוֹכֵל).",
+     "It may stand before לֹא or at the end: אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה = אֲנִי לֹא שׁוֹתֶה קָפֶה אַף פַּעַם."
+    ],
+    "subtleties": [
+     "Unlike German nie, which needs no other negation, Hebrew keeps the double negation (אַף פַּעַם לֹא), as Russian никогда не and Greek ποτέ δεν do."
+    ]
+   }
   }
  ],
- "absent": []
+ "absent": [
+  {
+   "concept": "conj.neithernor",
+   "reason": "Hebrew has no separate word for “neither … nor”: it simply repeats the negation before each part, with וְ “and”.",
+   "use": "לֹא X וְלֹא Y (אֲנִי לֹא רוֹצֶה תֵּה וְלֹא קָפֶה “I want neither tea nor coffee”); more emphatic גַּם לֹא X וְגַם לֹא Y; in the present with nouns also אֵין X וְאֵין Y."
+  }
+ ]
 }

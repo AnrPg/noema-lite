@@ -1,0 +1,2814 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:ling",
+   "lemma": "零",
+   "trad": "零",
+   "pinyin": "líng",
+   "pos": "NUM",
+   "senses": [
+    "num.0"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Zero — and the little word that fills an empty place inside a number (一百零一).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zero, nought",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.0"
+     },
+     {
+      "id": "s2",
+      "def": "(inside a number) the empty place: 一百零一 ‘a hundred and one’",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "odd, fragmentary, spare (零钱 ‘small change’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他一百零一岁！",
+      "py": "Tā yìbǎi líng yī suì!",
+      "tr": "He is a hundred and one!",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s2"
+     },
+     {
+      "text": "今天零下五度。",
+      "py": "Jīntiān líng xià wǔ dù.",
+      "tr": "It is five below zero today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "他考了零分。",
+      "py": "Tā kǎo le líng fēn.",
+      "tr": "He got zero points in the exam.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "你有零钱吗？",
+      "py": "Nǐ yǒu língqián ma?",
+      "tr": "Do you have small change?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "零下",
+      "tr": "below zero"
+     },
+     {
+      "text": "零钱",
+      "tr": "small change"
+     },
+     {
+      "text": "零食",
+      "tr": "snacks"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "〇",
+      "register": "neutral",
+      "nuance": "the round zero sign used when digits are read one by one: 二〇二六年 ‘2026’ (also read líng)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 雨 ‘rain’ + phonetic 令; the oracle-bone form shows raindrops falling. Its meanings include ‘light rain’, ‘fragmentary, remainder’ and ‘zero’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Years are read digit by digit and the zero is written 〇: 二〇二六年 èr líng èr liù nián ‘(the year) 2026’."
+    ],
+    "pitfalls": [
+     "Inside a number, 零 is said once for any run of empty places: 1005 = 一千零五 yìqiān líng wǔ, not *一千零零五."
+    ],
+    "subtleties": [
+     "101 is 一百零一, but 110 is 一百一十 — 零 only marks an empty place in the middle."
+    ]
+   }
+  },
+  {
+   "id": "zh:er",
+   "lemma": "二",
+   "trad": "二",
+   "pinyin": "èr",
+   "pos": "NUM",
+   "senses": [
+    "num.2"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The ‘two’ of counting and of bigger numbers — before a measure word it gives way to 两.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "two — when counting, inside numbers (十二, 二十), in ordinals (第二) and digits",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.2"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial, northern) daft, silly",
+      "register": [
+       "colloquial",
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "一、二、三、四、五！",
+      "py": "Yī, èr, sān, sì, wǔ!",
+      "tr": "One, two, three, four, five!",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s1"
+     },
+     {
+      "text": "他是第二个学生。",
+      "py": "Tā shì dì-èr ge xuésheng.",
+      "tr": "He is the second student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "二月很冷。",
+      "py": "Èryuè hěn lěng.",
+      "tr": "February is cold.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "他有点儿二。",
+      "py": "Tā yǒudiǎnr èr.",
+      "tr": "He’s a bit daft.",
+      "register": "colloquial",
+      "context": "chat",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "十二",
+      "tr": "twelve"
+     },
+     {
+      "text": "二十",
+      "tr": "twenty"
+     },
+     {
+      "text": "第二",
+      "tr": "second"
+     },
+     {
+      "text": "二月",
+      "tr": "February"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "三心二意",
+      "tr": "three hearts, two minds",
+      "kind": "idiom",
+      "meaning": "half-hearted, unable to make up one’s mind",
+      "register": "neutral"
+     },
+     {
+      "text": "说一不二",
+      "tr": "say one, not two",
+      "kind": "idiom",
+      "meaning": "to mean what one says; one’s word is final",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "两",
+      "register": "neutral",
+      "nuance": "the ‘two’ used before a measure word: 两个人, 两本书 — never *二个人"
+     },
+     {
+      "word": "贰",
+      "register": "formal",
+      "nuance": "the anti-fraud ‘financial’ form of 二 on cheques and receipts"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogram: two parallel strokes, as 一 is one stroke and 三 three. From Proto-Sino-Tibetan *kV-ni-s, cognate with Tibetan gnyis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "二百五 ‘two hundred and fifty’ is slang for ‘a fool, an idiot’ — avoid that number in jokes about people."
+    ],
+    "pitfalls": [
+     "Before a measure word say 两: 两个学生, not *二个学生. Inside numbers it is always 二: 十二个, 二十二个.",
+     "Ordinals and digits keep 二: 第二 ‘second’, 二号 ‘number two’."
+    ],
+    "subtleties": [
+     "For 200 and 2000 both 二百 / 两百 and 二千 / 两千 are heard; 两千 is the usual everyday form."
+    ]
+   }
+  },
+  {
+   "id": "zh:liang",
+   "lemma": "两",
+   "trad": "兩",
+   "pinyin": "liǎng",
+   "pos": "NUM",
+   "senses": [
+    "num.2"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday ‘two (of something)’ — two people, two books, two years old.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "two (before a measure word): 两个人, 两本书, 两岁",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.2"
+     },
+     {
+      "id": "s2",
+      "def": "both, either (two sides): 两边 ‘both sides’",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a few, a couple (说两句 ‘say a few words’)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "tael, a unit of weight (50 g in the mainland)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有两个弟弟。",
+      "py": "Wǒ yǒu liǎng ge dìdi.",
+      "tr": "I have two younger brothers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这个孩子两岁。",
+      "py": "Zhège háizi liǎng suì.",
+      "tr": "This child is two years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "马路两边都有树。",
+      "py": "Mǎlù liǎng biān dōu yǒu shù.",
+      "tr": "There are trees on both sides of the road.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     },
+     {
+      "text": "我说两句。",
+      "py": "Wǒ shuō liǎng jù.",
+      "tr": "Let me say a few words.",
+      "register": "colloquial",
+      "context": "meeting",
+      "sense": "s3"
+     },
+     {
+      "text": "我要二两饺子。",
+      "py": "Wǒ yào èr liǎng jiǎozi.",
+      "tr": "I’d like two taels (100 g) of dumplings.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "两个",
+      "tr": "two (of them)"
+     },
+     {
+      "text": "两岁",
+      "tr": "two years old"
+     },
+     {
+      "text": "两千",
+      "tr": "two thousand"
+     },
+     {
+      "text": "两边",
+      "tr": "both sides"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "两全其美",
+      "tr": "both complete, both good",
+      "kind": "idiom",
+      "meaning": "to satisfy both sides; to have it both ways",
+      "register": "neutral"
+     },
+     {
+      "text": "三三两两",
+      "tr": "threes and twos",
+      "kind": "idiom",
+      "meaning": "in twos and threes, in small groups",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "二",
+      "register": "neutral",
+      "nuance": "the counting ‘two’: in numbers (十二, 二十), ordinals (第二) and digits — not before a measure word"
+     }
+    ],
+    "etymology": {
+     "text": "Shuowen Jiezi explains 兩 as 一 + 㒳 (a pair); Baxter sees two 丙 side by side. The origin of the word is unknown (Schuessler proposes a Kra-Dai loan).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Restaurants in the north still sell dumplings by the 两 (tael, 50 g): 二两饺子 — here 二 comes before the unit 两."
+    ],
+    "pitfalls": [
+     "两 replaces 二 only directly before a measure word or a unit: 两个, 两本, 两岁 — but 十二个, 二十二个, 第二个.",
+     "Spoken liǎng: like every 3rd tone, it changes to 2nd before another 3rd tone (两本 liáng běn), though it is still written liǎng."
+    ],
+    "subtleties": [
+     "两 and 二 are the same number: 二 is the name of the digit, 两 the amount ‘two of something’ — like English ‘two’ vs ‘a pair / both’.",
+     "In a large number the first 2 may be 两: 两百 / 二百 ‘200’, 两千 ‘2000’, 两万 ‘20 000’ — both are correct, 两 is more colloquial."
+    ]
+   }
+  },
+  {
+   "id": "zh:san",
+   "lemma": "三",
+   "trad": "三",
+   "pinyin": "sān",
+   "pos": "NUM",
+   "senses": [
+    "num.3"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Three strokes for three — easy to write, easy to remember.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "three",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有三本书。",
+      "py": "Wǒ yǒu sān běn shū.",
+      "tr": "I have three books.",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1"
+     },
+     {
+      "text": "三月是春天。",
+      "py": "Sānyuè shì chūntiān.",
+      "tr": "March is spring.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "三个",
+      "tr": "three (of them)"
+     },
+     {
+      "text": "三月",
+      "tr": "March"
+     },
+     {
+      "text": "第三",
+      "tr": "third"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "三人行，必有我师焉",
+      "tr": "when three walk together, one of them is surely my teacher",
+      "kind": "quote",
+      "meaning": "you can learn from anyone",
+      "register": "literary",
+      "source": "Confucius, Analects, book 7 (述而)"
+     },
+     {
+      "text": "三心二意",
+      "tr": "three hearts, two minds",
+      "kind": "idiom",
+      "meaning": "half-hearted, undecided",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 叁 on cheques.",
+    "etymology": {
+     "text": "Ideogram: three parallel strokes, a triplication of 一. From Proto-Sino-Tibetan *kV-sum.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The numbers one, two and three are simply one, two and three strokes: 一, 二, 三."
+    ],
+    "pitfalls": [
+     "On cheques the forgery-proof form 叁 is written instead."
+    ],
+    "subtleties": [
+     "小三 ‘little three’ is modern slang for ‘the other woman’ — a mistress."
+    ]
+   }
+  },
+  {
+   "id": "zh:si",
+   "lemma": "四",
+   "trad": "四",
+   "pinyin": "sì",
+   "pos": "NUM",
+   "senses": [
+    "num.4"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The unlucky number — it sounds like 死 ‘death’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "four",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我家有四口人。",
+      "py": "Wǒ jiā yǒu sì kǒu rén.",
+      "tr": "There are four people in my family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "四月四日是儿童节。",
+      "py": "Sìyuè sì rì shì Értóng Jié.",
+      "tr": "The fourth of April is Children’s Day (in Taiwan).",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "四个",
+      "tr": "four (of them)"
+     },
+     {
+      "text": "四月",
+      "tr": "April"
+     },
+     {
+      "text": "四季",
+      "tr": "the four seasons"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "四海之内皆兄弟",
+      "tr": "within the four seas all are brothers",
+      "kind": "quote",
+      "meaning": "all people are brothers",
+      "register": "literary",
+      "source": "Analects 12.5"
+     },
+     {
+      "text": "四面八方",
+      "tr": "four sides, eight directions",
+      "kind": "idiom",
+      "meaning": "from all directions, everywhere",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 肆 on cheques.",
+    "etymology": {
+     "text": "Originally a pictogram of breath coming out of the nose, borrowed for the sound of ‘four’; earlier ‘four’ was written with four strokes (亖). From Proto-Sino-Tibetan *pV-lij.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Because 四 sì sounds like 死 sǐ ‘to die’, many buildings in China have no 4th floor, and phone numbers full of 4s are cheap."
+    ],
+    "pitfalls": [
+     "四 sì (4th tone) and 十 shí (2nd tone) are easy to confuse in fast speech, especially 四十 sìshí ‘40’ and 十四 shísì ‘14’ — listen for the order of the tones."
+    ],
+    "subtleties": [
+     "The tongue-twister 四是四，十是十，十四是十四，四十是四十 trains exactly this difference."
+    ]
+   }
+  },
+  {
+   "id": "zh:wu",
+   "lemma": "五",
+   "trad": "五",
+   "pinyin": "wǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.5"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Five — a hand’s worth.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "five",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这五把椅子在这里。",
+      "py": "Zhè wǔ bǎ yǐzi zài zhèli.",
+      "tr": "These five chairs are here.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "五月一日是劳动节。",
+      "py": "Wǔyuè yī rì shì Láodòng Jié.",
+      "tr": "The first of May is Labour Day.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "五个",
+      "tr": "five (of them)"
+     },
+     {
+      "text": "五月",
+      "tr": "May"
+     },
+     {
+      "text": "五星",
+      "tr": "five-star"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "五颜六色",
+      "tr": "five colours, six hues",
+      "kind": "idiom",
+      "meaning": "colourful, multicoloured",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 伍 on cheques.",
+    "etymology": {
+     "text": "Originally written with an X between two bars; its first meaning is disputed (a tally mark, ‘to cross’, …). From Proto-Sino-Tibetan *l-ŋaʔ ‘five’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Five ‘elements’ (五行: wood, fire, earth, metal, water) organise traditional Chinese medicine and cosmology."
+    ],
+    "pitfalls": [
+     "五 wǔ is a 3rd tone: in 五百 ‘500’ it is said wú bǎi (3rd-tone change), though written wǔ."
+    ],
+    "subtleties": [
+     "The China flag has five stars: 五星红旗 ‘the five-star red flag’."
+    ]
+   }
+  },
+  {
+   "id": "zh:liu",
+   "lemma": "六",
+   "trad": "六",
+   "pinyin": "liù",
+   "pos": "NUM",
+   "senses": [
+    "num.6"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A lucky number — ‘everything goes smoothly’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "six",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们有六个杯子。",
+      "py": "Wǒmen yǒu liù ge bēizi.",
+      "tr": "We have six cups.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "六六六！",
+      "py": "Liù liù liù!",
+      "tr": "Awesome! (internet slang: 666)",
+      "register": "slang",
+      "context": "online chat",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "六个",
+      "tr": "six (of them)"
+     },
+     {
+      "text": "六月",
+      "tr": "June"
+     },
+     {
+      "text": "六点",
+      "tr": "six o’clock"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "六六大顺",
+      "tr": "six-six, great smoothness",
+      "kind": "idiom",
+      "meaning": "may everything go smoothly (a toast and a wish)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 陆 on cheques.",
+    "etymology": {
+     "text": "Pictogram, perhaps of a shed; possibly first an old counting symbol. From Proto-Sino-Tibetan *d-k-ruk ‘six’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In online chat 666 means ‘awesome, well done’ — 六 is felt as ‘smooth, skilful’ (溜 liū)."
+    ],
+    "pitfalls": [
+     "六 liù must not be confused with 九 jiǔ in hand signs: Chinese show 6 with thumb and little finger, 9 with a hooked index finger."
+    ],
+    "subtleties": [
+     "Chinese count 6–10 on one hand with special signs: 六 is thumb + little finger, 八 thumb + index finger, 十 crossed index fingers or a fist."
+    ]
+   }
+  },
+  {
+   "id": "zh:qi",
+   "lemma": "七",
+   "trad": "七",
+   "pinyin": "qī",
+   "pos": "NUM",
+   "senses": [
+    "num.7"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seven — the days of a week, the Qixi lovers’ day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seven",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一个星期有七天。",
+      "py": "Yí ge xīngqī yǒu qī tiān.",
+      "tr": "A week has seven days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "那七个孩子在那里。",
+      "py": "Nà qī ge háizi zài nàli.",
+      "tr": "Those seven children are over there.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "七个",
+      "tr": "seven (of them)"
+     },
+     {
+      "text": "七月",
+      "tr": "July"
+     },
+     {
+      "text": "七夕",
+      "tr": "Qixi, the Chinese Valentine’s Day (7th day of the 7th month)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "乱七八糟",
+      "tr": "chaos seven, mess eight",
+      "kind": "idiom",
+      "meaning": "in a terrible mess",
+      "register": "colloquial"
+     },
+     {
+      "text": "七上八下",
+      "tr": "seven up, eight down",
+      "kind": "idiom",
+      "meaning": "nervous, on tenterhooks",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 柒 on cheques.",
+    "etymology": {
+     "text": "Pictogram: a vertical and a horizontal stroke crossing — originally the character for ‘to cut’ (now 切). From Proto-Sino-Tibetan *s-ni-s ‘seven’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Because 一 yī and 七 qī are easy to mishear, 1 is read yāo in phone and room numbers."
+    ],
+    "pitfalls": [
+     "七 qī and 一 yī rhyme: in phone numbers say yāo for 1 to keep them apart."
+    ],
+    "subtleties": [
+     "Ordinals and dates are regular: 第七 ‘seventh’, 七月七日 ‘the 7th of July’ (the Qixi date of the lunar calendar is the 7th day of the 7th month)."
+    ]
+   }
+  },
+  {
+   "id": "zh:ba.num",
+   "lemma": "八",
+   "trad": "八",
+   "pinyin": "bā",
+   "pos": "NUM",
+   "senses": [
+    "num.8"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The luckiest number — it rhymes with 发 ‘to get rich’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eight",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们班有八个女孩。",
+      "py": "Wǒmen bān yǒu bā ge nǚhái.",
+      "tr": "There are eight girls in our class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "北京奥运会二〇〇八年八月八日开幕。",
+      "py": "Běijīng Àoyùnhuì èr líng líng bā nián bāyuè bā rì kāimù.",
+      "tr": "The Beijing Olympics opened on 8 August 2008.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "八个",
+      "tr": "eight (of them)"
+     },
+     {
+      "text": "八月",
+      "tr": "August"
+     },
+     {
+      "text": "八点",
+      "tr": "eight o’clock"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "八九不离十",
+      "tr": "eight or nine, not far from ten",
+      "kind": "saying",
+      "meaning": "more or less right, pretty close",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 捌 on cheques.",
+    "etymology": {
+     "text": "Pictogram: two lines bending apart, first meaning ‘to divide’ (now 分, 别); borrowed for ‘eight’. From Proto-Sino-Tibetan *pV-rjat ‘eight’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Beijing Olympics opened on 08.08.2008 at 8 pm: 八 bā sounds like 发 fā ‘to prosper’."
+    ],
+    "pitfalls": [
+     "八 bā is easy to confuse with 把 bǎ (the measure word for chairs and keys) — the tone tells them apart."
+    ],
+    "subtleties": [
+     "八卦 ‘the eight trigrams’ is also everyday slang for ‘gossip’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiu",
+   "lemma": "九",
+   "trad": "九",
+   "pinyin": "jiǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.9"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Nine — ‘long-lasting’, the number of weddings and emperors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "九九八十一。",
+      "py": "Jiǔ jiǔ bāshíyī.",
+      "tr": "Nine nines are eighty-one.",
+      "register": "neutral",
+      "context": "maths",
+      "sense": "s1"
+     },
+     {
+      "text": "他九岁。",
+      "py": "Tā jiǔ suì.",
+      "tr": "He is nine.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "九个",
+      "tr": "nine (of them)"
+     },
+     {
+      "text": "九月",
+      "tr": "September"
+     },
+     {
+      "text": "九九乘法表",
+      "tr": "the multiplication table"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "九牛一毛",
+      "tr": "one hair of nine oxen",
+      "kind": "idiom",
+      "meaning": "a drop in the ocean",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 玖 on cheques.",
+    "etymology": {
+     "text": "Pictogram of a bent arm (the original meaning ‘elbow’ is now written 肘). From Proto-Sino-Tibetan *d/s-kəw, compare Tibetan dgu.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "九 jiǔ sounds like 久 jiǔ ‘long-lasting’ — couples like the 9th of September for weddings, and the Forbidden City’s doors have 9 × 9 golden studs."
+    ],
+    "pitfalls": [
+     "九 jiǔ (3rd tone) vs 酒 jiǔ ‘alcohol’ and 久 ‘long’ — same sound, different characters: the context decides."
+    ],
+    "subtleties": [
+     "The multiplication table in Chinese is called 九九 because it was recited from 九九八十一 downwards in ancient times."
+    ]
+   }
+  },
+  {
+   "id": "zh:shi.num",
+   "lemma": "十",
+   "trad": "十",
+   "pinyin": "shí",
+   "pos": "NUM",
+   "senses": [
+    "num.10"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ten — the building block of every number up to 99.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ten",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这十个杯子在这里。",
+      "py": "Zhè shí ge bēizi zài zhèli.",
+      "tr": "These ten cups are here.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "十月一日是国庆节。",
+      "py": "Shíyuè yī rì shì Guóqìng Jié.",
+      "tr": "The first of October is National Day.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "十个",
+      "tr": "ten (of them)"
+     },
+     {
+      "text": "十月",
+      "tr": "October"
+     },
+     {
+      "text": "十分",
+      "tr": "very, extremely (literally ‘ten parts’)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "十全十美",
+      "tr": "ten complete, ten beautiful",
+      "kind": "idiom",
+      "meaning": "perfect in every way",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; only the anti-fraud financial numeral 拾 on cheques.",
+    "etymology": {
+     "text": "In the oracle bones a single vertical stroke; the cross shape came later. Origin discussed (perhaps the original form of 针 ‘needle’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "十 looks like a cross, and the Chinese hand sign for 10 is two crossed index fingers."
+    ],
+    "pitfalls": [
+     "10 is just 十, never *一十 — but inside a bigger number the 一 comes back: 110 = 一百一十."
+    ],
+    "subtleties": [
+     "十 builds the numbers 11–99: 十 + digit for 11–19 (十五), digit + 十 for the tens (五十), digit + 十 + digit for the rest (五十五)."
+    ]
+   }
+  },
+  {
+   "id": "zh:shiyi",
+   "lemma": "十一",
+   "trad": "十一",
+   "pinyin": "shí yī",
+   "pos": "NUM",
+   "senses": [
+    "num.11"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shier",
+   "lemma": "十二",
+   "trad": "十二",
+   "pinyin": "shí èr",
+   "pos": "NUM",
+   "senses": [
+    "num.12"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shisan",
+   "lemma": "十三",
+   "trad": "十三",
+   "pinyin": "shí sān",
+   "pos": "NUM",
+   "senses": [
+    "num.13"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shisi",
+   "lemma": "十四",
+   "trad": "十四",
+   "pinyin": "shí sì",
+   "pos": "NUM",
+   "senses": [
+    "num.14"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shiwu",
+   "lemma": "十五",
+   "trad": "十五",
+   "pinyin": "shí wǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.15"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shiliu",
+   "lemma": "十六",
+   "trad": "十六",
+   "pinyin": "shí liù",
+   "pos": "NUM",
+   "senses": [
+    "num.16"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shiqi",
+   "lemma": "十七",
+   "trad": "十七",
+   "pinyin": "shí qī",
+   "pos": "NUM",
+   "senses": [
+    "num.17"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shiba",
+   "lemma": "十八",
+   "trad": "十八",
+   "pinyin": "shí bā",
+   "pos": "NUM",
+   "senses": [
+    "num.18"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:shijiu",
+   "lemma": "十九",
+   "trad": "十九",
+   "pinyin": "shí jiǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.19"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:ershi",
+   "lemma": "二十",
+   "trad": "二十",
+   "pinyin": "èr shí",
+   "pos": "NUM",
+   "senses": [
+    "num.20"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:sanshi",
+   "lemma": "三十",
+   "trad": "三十",
+   "pinyin": "sān shí",
+   "pos": "NUM",
+   "senses": [
+    "num.30"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:sishi",
+   "lemma": "四十",
+   "trad": "四十",
+   "pinyin": "sì shí",
+   "pos": "NUM",
+   "senses": [
+    "num.40"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:wushi",
+   "lemma": "五十",
+   "trad": "五十",
+   "pinyin": "wǔ shí",
+   "pos": "NUM",
+   "senses": [
+    "num.50"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:liushi",
+   "lemma": "六十",
+   "trad": "六十",
+   "pinyin": "liù shí",
+   "pos": "NUM",
+   "senses": [
+    "num.60"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:qishi",
+   "lemma": "七十",
+   "trad": "七十",
+   "pinyin": "qī shí",
+   "pos": "NUM",
+   "senses": [
+    "num.70"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:bashi",
+   "lemma": "八十",
+   "trad": "八十",
+   "pinyin": "bā shí",
+   "pos": "NUM",
+   "senses": [
+    "num.80"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:jiushi",
+   "lemma": "九十",
+   "trad": "九十",
+   "pinyin": "jiǔ shí",
+   "pos": "NUM",
+   "senses": [
+    "num.90"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:yibai",
+   "lemma": "一百",
+   "trad": "一百",
+   "pinyin": "yī bǎi",
+   "pos": "NUM",
+   "senses": [
+    "num.100"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A hundred — full marks, a full life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "one hundred, a hundred",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.100"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我考了一百分！",
+      "py": "Wǒ kǎo le yìbǎi fēn!",
+      "tr": "I got a hundred points (full marks)!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "他一百零一岁！",
+      "py": "Tā yìbǎi líng yī suì!",
+      "tr": "He is a hundred and one!",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一百个",
+      "tr": "a hundred (of them)"
+     },
+     {
+      "text": "一百块",
+      "tr": "a hundred yuan"
+     },
+     {
+      "text": "一百分",
+      "tr": "full marks"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "百闻不如一见",
+      "tr": "hearing a hundred times is not as good as seeing once",
+      "kind": "proverb",
+      "meaning": "seeing is believing",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No other word for 100 in everyday use (佰 only on cheques).",
+    "etymology": {
+     "text": "一 ‘one’ + 百 ‘hundred’ (phono-semantic: 一 + phonetic 白; from Proto-Sino-Tibetan *pV-rja(k)).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese exams are often marked out of 100, so 一百分 is the dream mark — and 百分之百 ‘a hundred out of a hundred’ means ‘one hundred per cent’."
+    ],
+    "pitfalls": [
+     "Say 一百, not just *百: the 一 is needed (unlike 十 for 10). Spoken yìbǎi — 一 changes to 4th tone before 3rd-tone 百."
+    ],
+    "subtleties": [
+     "百 alone also means ‘all, many’ in set words: 百货 ‘all kinds of goods’ (a department store is 百货商店)."
+    ]
+   }
+  },
+  {
+   "id": "zh:yiqian",
+   "lemma": "一千",
+   "trad": "一千",
+   "pinyin": "yī qiān",
+   "pos": "NUM",
+   "senses": [
+    "num.1000"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A thousand — and in Chinese the step before the big 万 (ten thousand).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "one thousand, a thousand",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1000"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这一千本书都在这里。",
+      "py": "Zhè yìqiān běn shū dōu zài zhèli.",
+      "tr": "All these thousand books are here.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "《一千零一夜》",
+      "py": "Yìqiān Líng Yī Yè",
+      "tr": "The Thousand and One Nights",
+      "register": "literary",
+      "context": "books",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一千个",
+      "tr": "a thousand (of them)"
+     },
+     {
+      "text": "一千块",
+      "tr": "a thousand yuan"
+     },
+     {
+      "text": "一千多",
+      "tr": "over a thousand"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "千里之行，始于足下",
+      "tr": "a journey of a thousand li begins beneath one’s feet",
+      "kind": "quote",
+      "meaning": "every great undertaking starts with a single step",
+      "register": "literary",
+      "source": "Laozi, Daodejing 64"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No other word for 1000 in everyday use (仟 only on cheques).",
+    "etymology": {
+     "text": "一 ‘one’ + 千 ‘thousand’ (一 + phonetic 人 — the two words sounded alike in Old Chinese).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Arabian Nights are 《一千零一夜》 ‘one thousand and one nights’ in Chinese — the same number as Arabic ألف ليلة وليلة."
+    ],
+    "pitfalls": [
+     "Chinese counts large numbers in groups of four digits: 10 000 is 一万, not *十千; 100 000 is 十万."
+    ],
+    "subtleties": [
+     "千 also means ‘very many’: 千万 ‘by all means’ (literally ‘thousands and tens of thousands’)."
+    ]
+   }
+  },
+  {
+   "id": "zh:henduo",
+   "lemma": "很多",
+   "trad": "很多",
+   "pinyin": "hěn duō",
+   "pos": "ADJ",
+   "senses": [
+    "quant.many"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lots — crowds, piles, plenty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "many, much, a lot of (before a noun, or as the predicate)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.many"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这里人很多。",
+      "py": "Zhèli rén hěn duō.",
+      "tr": "There are a lot of people here.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "我有很多朋友。",
+      "py": "Wǒ yǒu hěn duō péngyou.",
+      "tr": "I have lots of friends.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "很多人喜欢喝茶。",
+      "py": "Hěn duō rén xǐhuan hē chá.",
+      "tr": "Many people like drinking tea.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很多人",
+      "tr": "many people"
+     },
+     {
+      "text": "很多时候",
+      "tr": "often, much of the time"
+     },
+     {
+      "text": "很多次",
+      "tr": "many times"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "许多",
+      "register": "formal",
+      "nuance": "xǔduō: ‘many’, more written"
+     },
+     {
+      "word": "好多",
+      "register": "colloquial",
+      "nuance": "hǎoduō: ‘loads of’, warm and spoken"
+     },
+     {
+      "word": "不少",
+      "register": "neutral",
+      "nuance": "bùshǎo: ‘quite a few’ (literally ‘not few’)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "很少",
+      "note": "very few"
+     },
+     {
+      "word": "不多",
+      "note": "not many"
+     }
+    ],
+    "etymology": {
+     "text": "很 ‘very’ + 多 ‘many’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "好多 ‘good-many’ is the colloquial twin of 很多 — compare English ‘a good many’."
+    ],
+    "pitfalls": [
+     "多 alone hardly ever stands before a noun: say 很多书, not *多书.",
+     "As the predicate the amount comes last: 人很多 ‘there are many people’ — not *很多是人."
+    ],
+    "subtleties": [
+     "很 in 很多 is not felt as ‘very’: 很多 is the plain ‘many’; for ‘very many’ say 非常多.",
+     "很多 needs no measure word before the noun: 很多书, 很多人."
+    ]
+   }
+  },
+  {
+   "id": "zh:duo",
+   "lemma": "多",
+   "trad": "多",
+   "pinyin": "duō",
+   "pos": "ADJ",
+   "senses": [
+    "quant.many"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plenty — and the ‘over, and more’ after a round number.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "many, much (mostly as the predicate: 人多)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.many"
+     },
+     {
+      "id": "s2",
+      "def": "(after a round number) over, and more: 一千多 ‘over a thousand’",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(in questions and exclamations) how: 多大 ‘how old / how big’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这里人多，那里人少。",
+      "py": "Zhèli rén duō, nàli rén shǎo.",
+      "tr": "It’s crowded here and quiet over there.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "中国人口多。",
+      "py": "Zhōngguó rénkǒu duō.",
+      "tr": "China has a large population.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "他有三十多个学生。",
+      "py": "Tā yǒu sānshí duō ge xuésheng.",
+      "tr": "He has over thirty students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "你多大？",
+      "py": "Nǐ duō dà?",
+      "tr": "How old are you?",
+      "register": "neutral",
+      "context": "small talk",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "多少",
+      "tr": "how many, how much"
+     },
+     {
+      "text": "多大",
+      "tr": "how old, how big"
+     },
+     {
+      "text": "多一点",
+      "tr": "a bit more"
+     },
+     {
+      "text": "越来越多",
+      "tr": "more and more"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "多多益善",
+      "tr": "the more the better",
+      "kind": "idiom",
+      "meaning": "the more the better",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "很多",
+      "register": "neutral",
+      "nuance": "the usual ‘many’ before a noun (很多人)"
+     },
+     {
+      "word": "许多",
+      "register": "formal",
+      "nuance": "‘many’, written style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "少",
+      "note": "few, little"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: two pieces of meat (肉), later written as two 夕. One explanation: in ancient times two pieces of meat was a lot.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "多少 ‘many-few’ is the question ‘how many, how much?’ — Chinese often makes abstract words from opposites, like 大小 ‘size’ (big-small)."
+    ],
+    "pitfalls": [
+     "多 alone hardly ever stands before a noun in everyday speech: 很多人, not *多人.",
+     "After a number 多 means ‘over’: 二十多岁 ‘in one’s twenties’ — and it stands before the measure word: 三十多个, 一千多本."
+    ],
+    "subtleties": [
+     "Like all Chinese adjectives 多 is a predicate on its own, no 是: 人多 ‘there are many people’; a bare 多 sounds like a contrast (这里人多，那里人少)."
+    ]
+   }
+  },
+  {
+   "id": "zh:shao",
+   "lemma": "少",
+   "trad": "少",
+   "pinyin": "shǎo",
+   "pos": "ADJ",
+   "senses": [
+    "quant.few"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Scarcity — few people, a little less, one short.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "few, little (in number or amount)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.few"
+     },
+     {
+      "id": "s2",
+      "def": "to lack, to be short of (少一个人 ‘one person missing’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(read shào) young: 少年 ‘teenager’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这里人很少。",
+      "py": "Zhèli rén hěn shǎo.",
+      "tr": "There are very few people here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "我的朋友很少。",
+      "py": "Wǒ de péngyou hěn shǎo.",
+      "tr": "I have few friends.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "少一点，谢谢！",
+      "py": "Shǎo yìdiǎn, xièxie!",
+      "tr": "A bit less, thanks!",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "还少一个人。",
+      "py": "Hái shǎo yí ge rén.",
+      "tr": "We’re still one person short.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很少",
+      "tr": "very few; seldom"
+     },
+     {
+      "text": "多少",
+      "tr": "how many, how much"
+     },
+     {
+      "text": "少数",
+      "tr": "minority"
+     },
+     {
+      "text": "少一点",
+      "tr": "a bit less"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "少见多怪",
+      "tr": "seen little, finds much strange",
+      "kind": "idiom",
+      "meaning": "the less you have seen, the more you are surprised",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "不多",
+      "register": "neutral",
+      "nuance": "‘not many, not much’ — softer and more modest than 少"
+     },
+     {
+      "word": "很少",
+      "register": "neutral",
+      "nuance": "‘very few’ — also ‘seldom’ before a verb"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "多",
+      "note": "many, much"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram: small dots, perhaps grains of sand, for ‘a few, a little’; related to 小 ‘small’, which has three dots.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "多少 ‘many-few’ means ‘how many?’ — the opposites 多 and 少 together ask for the amount."
+    ],
+    "pitfalls": [
+     "少 does not stand before a noun on its own: not *少人, *少书. Use it as the predicate (人很少 ‘there are few people’) or say 很少有人 … ‘few people …’.",
+     "Read shào it is another word, ‘young’: 少年 ‘teenager’, 少女 ‘young girl’."
+    ],
+    "subtleties": [
+     "很少 before a verb means ‘seldom’: 我很少喝咖啡 ‘I seldom drink coffee’."
+    ]
+   }
+  },
+  {
+   "id": "zh:buduo",
+   "lemma": "不多",
+   "trad": "不多",
+   "pinyin": "bù duō",
+   "pos": "ADJ",
+   "senses": [
+    "quant.few"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not much, not many — the modest way to say ‘few’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not many, not much",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.few"
+     }
+    ],
+    "examples": [
+     {
+      "text": "学生很多，老师不多。",
+      "py": "Xuésheng hěn duō, lǎoshī bù duō.",
+      "tr": "There are many students but not many teachers.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "时间不多了。",
+      "py": "Shíjiān bù duō le.",
+      "tr": "There isn’t much time left.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "我的钱不多。",
+      "py": "Wǒ de qián bù duō.",
+      "tr": "I don’t have much money.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "差不多",
+      "tr": "almost; about the same"
+     },
+     {
+      "text": "不多不少",
+      "tr": "neither more nor less, just right"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "少",
+      "register": "neutral",
+      "nuance": "the plain ‘few’ — more direct"
+     },
+     {
+      "word": "不少",
+      "register": "neutral",
+      "nuance": "the opposite: ‘quite a lot’ (literally ‘not few’)"
+     }
+    ],
+    "etymology": {
+     "text": "不 ‘not’ + 多 ‘many’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The writer Hu Shi mocked the habit of ‘near enough’ in his satirical essay 差不多先生传 ‘Mr. Close-Enough’ — 差不多 ‘differs not much’."
+    ],
+    "pitfalls": [
+     "不多 normally stands after the thing it describes, as the predicate: 人不多 ‘there aren’t many people’, not *不多人.",
+     "Do not confuse it with 不少 ‘quite a lot’: 朋友不多 ‘not many friends’, 朋友不少 ‘quite a few friends’."
+    ],
+    "subtleties": [
+     "不多 is the softer, more modest way to say ‘few’: 我朋友不多 sounds less sad than 我朋友很少."
+    ]
+   }
+  },
+  {
+   "id": "zh:yidian",
+   "lemma": "一点",
+   "trad": "一點",
+   "pinyin": "yī diǎn",
+   "pos": "ADJ",
+   "senses": [
+    "quant.alittle"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little, a bit — the word that softens requests.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a little, a bit (of something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.alittle"
+     },
+     {
+      "id": "s2",
+      "def": "(after an adjective) a bit more …: 少一点 ‘a bit less’, 快一点 ‘a bit faster’",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(with 也 / 都 and a negation) not … at all: 一点也不 …",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "one o’clock",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我会说一点中文。",
+      "py": "Wǒ huì shuō yìdiǎn Zhōngwén.",
+      "tr": "I speak a little Chinese.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "喝一点水吧。",
+      "py": "Hē yìdiǎn shuǐ ba.",
+      "tr": "Have a little water.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "少一点，谢谢！",
+      "py": "Shǎo yìdiǎn, xièxie!",
+      "tr": "A bit less, thanks!",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s2"
+     },
+     {
+      "text": "我一点也不累。",
+      "py": "Wǒ yìdiǎn yě bú lèi.",
+      "tr": "I’m not tired at all.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一点儿",
+      "tr": "a little (northern, with -r)"
+     },
+     {
+      "text": "一点点",
+      "tr": "just a tiny bit"
+     },
+     {
+      "text": "快一点",
+      "tr": "a bit faster"
+     },
+     {
+      "text": "有一点",
+      "tr": "somewhat, a bit (too)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一点儿",
+      "register": "regional",
+      "nuance": "the same word with the northern -r ending (yìdiǎnr), the textbook form in the mainland"
+     },
+     {
+      "word": "一些",
+      "register": "neutral",
+      "nuance": "‘some’ — a larger amount, also of things that are counted"
+     },
+     {
+      "word": "有点",
+      "register": "neutral",
+      "nuance": "yǒudiǎn: ‘a bit (too)’ BEFORE an adjective, often negative: 有点贵 ‘a bit too expensive’"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 点 ‘dot, drop’ (traditional 點, 黑 ‘black’ + phonetic 占): ‘one dot’ of something.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the north people say yìdiǎnr and write 一点儿; Taiwan and the south say and write 一点 (一點)."
+    ],
+    "pitfalls": [
+     "一点 comes AFTER an adjective (贵一点 ‘a bit more expensive’), 有点 BEFORE it (有点贵 ‘a bit too expensive’).",
+     "Spoken yìdiǎn: 一 takes the 4th tone before the 3rd-tone 点."
+    ],
+    "subtleties": [
+     "一点 makes a request softer: 快一点 ‘a bit faster’, 多吃一点 ‘eat a bit more’."
+    ]
+   }
+  },
+  {
+   "id": "zh:suoyou",
+   "lemma": "所有",
+   "trad": "所有",
+   "pinyin": "suǒ yǒu",
+   "pos": "ADJ",
+   "senses": [
+    "quant.all"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Every single one — everyone, everything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all (every one of)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "possessions; to own (所有权 ‘ownership’)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "所有人都在这里。",
+      "py": "Suǒyǒu rén dōu zài zhèli.",
+      "tr": "Everyone is here.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "所有的学生都喜欢他。",
+      "py": "Suǒyǒu de xuésheng dōu xǐhuan tā.",
+      "tr": "All the students like him.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这是他所有的东西。",
+      "py": "Zhè shì tā suǒyǒu de dōngxi.",
+      "tr": "These are all his things.",
+      "register": "neutral",
+      "context": "moving house",
+      "sense": "s1"
+     },
+     {
+      "text": "这栋房子归他所有。",
+      "py": "Zhè dòng fángzi guī tā suǒyǒu.",
+      "tr": "This house belongs to him.",
+      "register": "formal",
+      "context": "law",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "所有人",
+      "tr": "everyone"
+     },
+     {
+      "text": "所有的东西",
+      "tr": "everything"
+     },
+     {
+      "text": "所有权",
+      "tr": "ownership"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "全部",
+      "register": "neutral",
+      "nuance": "‘the whole, all of it’ — also a noun and an adverb"
+     },
+     {
+      "word": "一切",
+      "register": "formal",
+      "nuance": "‘everything, all’ — literary in tone"
+     },
+     {
+      "word": "每",
+      "register": "neutral",
+      "nuance": "‘every, each’ — with a measure word: 每个人 ‘everyone (each person)’"
+     }
+    ],
+    "etymology": {
+     "text": "所 ‘that which’ + 有 ‘to have’: first ‘what one has’ (possessions), then ‘all of it’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same 有 ‘to have’ (S06) hides in 所有: ‘all’ grew out of ‘everything one has’."
+    ],
+    "pitfalls": [
+     "所有 is followed by 都 before the verb: 所有人都在这里 — without 都 the sentence sounds wrong to native ears."
+    ],
+    "subtleties": [
+     "所有 + noun may take 的 or not: 所有学生 / 所有的学生 — both are correct."
+    ]
+   }
+  },
+  {
+   "id": "zh:dou",
+   "lemma": "都",
+   "trad": "都",
+   "pinyin": "dōu",
+   "pos": "ADV",
+   "senses": [
+    "quant.all"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The little ‘all of them’ that stands before the verb.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all, both (sums up the people or things named before it)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "even (连 … 都 …)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "already (都十点了 ‘it’s already ten’)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(read dū) capital city: 首都",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们都是学生。",
+      "py": "Wǒmen dōu shì xuésheng.",
+      "tr": "We are all students.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     },
+     {
+      "text": "我爸爸妈妈都是老师。",
+      "py": "Wǒ bàba māma dōu shì lǎoshī.",
+      "tr": "My dad and mum are both teachers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这些书我都喜欢。",
+      "py": "Zhèxiē shū wǒ dōu xǐhuan.",
+      "tr": "I like all these books.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "连孩子都知道。",
+      "py": "Lián háizi dōu zhīdào.",
+      "tr": "Even the children know.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "都十点了！",
+      "py": "Dōu shí diǎn le!",
+      "tr": "It’s already ten o’clock!",
+      "register": "colloquial",
+      "context": "time",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "都是",
+      "tr": "all are; it’s all (because of)"
+     },
+     {
+      "text": "大家都",
+      "tr": "everybody"
+     },
+     {
+      "text": "也都",
+      "tr": "also all"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "都是你的错",
+      "tr": "it’s all your fault",
+      "kind": "fixed expression",
+      "meaning": "you are to blame",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "全",
+      "register": "neutral",
+      "nuance": "quán: ‘entirely, completely’"
+     },
+     {
+      "word": "全都",
+      "register": "colloquial",
+      "nuance": "quándōu: emphatic ‘every single one’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 者 + semantic 邑 ‘town’ (the reading dū ‘capital’). The adverb ‘all’ is a colloquial form of 諸 ‘all’ (Schuessler).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Read dū the same character means ‘capital’: 首都 ‘capital city’, and it is in the city name 成都 Chéngdū."
+    ],
+    "pitfalls": [
+     "都 stands before the verb, never before the subject: 我们都是学生, not *都我们是学生.",
+     "都 sums up what comes BEFORE it: in 他们都有书 it is ‘they all’, not ‘all the books’."
+    ],
+    "subtleties": [
+     "With two people 都 means ‘both’: 我和他都是老师 ‘He and I are both teachers.’",
+     "都不 is ‘none of …’, 不都 ‘not all’: 他们都不是老师 vs 他们不都是老师."
+    ]
+   }
+  },
+  {
+   "id": "zh:yixie",
+   "lemma": "一些",
+   "trad": "一些",
+   "pinyin": "yī xiē",
+   "pos": "DET",
+   "senses": [
+    "quant.some"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files 一些 as a noun and an adverb; it is the numeral 一 + the measure word 些 and stands before a noun like a determiner (一些书 ‘some books’), so it is filed here as DET."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Some, a few — an amount you do not count exactly.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some, a few, a little (an indefinite amount)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     },
+     {
+      "id": "s2",
+      "def": "(after an adjective) a bit, slightly: 好一些 ‘a bit better’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我买了一些苹果。",
+      "py": "Wǒ mǎi le yìxiē píngguǒ.",
+      "tr": "I bought some apples.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "一些书在这里，一些书在那里。",
+      "py": "Yìxiē shū zài zhèli, yìxiē shū zài nàli.",
+      "tr": "Some books are here, some are over there.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "今天好一些了。",
+      "py": "Jīntiān hǎo yìxiē le.",
+      "tr": "Today it’s a bit better.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一些人",
+      "tr": "some people"
+     },
+     {
+      "text": "一些东西",
+      "tr": "some things"
+     },
+     {
+      "text": "有一些",
+      "tr": "there are some"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "有些",
+      "register": "neutral",
+      "nuance": "‘some (of them)’, as opposed to others — usually at the start: 有些人…"
+     },
+     {
+      "word": "一点",
+      "register": "neutral",
+      "nuance": "‘a little’ — a small amount, mostly of things not counted"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 些, the measure word for an indefinite amount (as in 这些, 那些).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "些 is the measure word of ‘more than one, not counted’: 这些 ‘these’, 那些 ‘those’, 一些 ‘some’."
+    ],
+    "pitfalls": [
+     "一些 takes no other measure word: 一些书, not *一些本书.",
+     "Spoken yìxiē: 一 takes the 4th tone before 1st-tone 些."
+    ],
+    "subtleties": [
+     "一些 can be a few or quite a lot; 一点 is always small: 一些朋友, but 一点水."
+    ]
+   }
+  },
+  {
+   "id": "zh:youxie",
+   "lemma": "有些",
+   "trad": "有些",
+   "pinyin": "yǒu xiē",
+   "pos": "DET",
+   "senses": [
+    "quant.some"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Some — as opposed to others.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some (of them), as opposed to others",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     },
+     {
+      "id": "s2",
+      "def": "(adverb, before an adjective) somewhat, rather: 有些累",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "有些人在这里，有些人在那里。",
+      "py": "Yǒuxiē rén zài zhèli, yǒuxiē rén zài nàli.",
+      "tr": "Some people are here, some are over there.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "有些学生喜欢中文。",
+      "py": "Yǒuxiē xuésheng xǐhuan Zhōngwén.",
+      "tr": "Some students like Chinese.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我有些累。",
+      "py": "Wǒ yǒuxiē lèi.",
+      "tr": "I’m a bit tired.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "有些人",
+      "tr": "some people"
+     },
+     {
+      "text": "有些时候",
+      "tr": "sometimes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "有的",
+      "register": "neutral",
+      "nuance": "‘some (of them)’, very common in pairs: 有的人…有的人…"
+     },
+     {
+      "word": "一些",
+      "register": "neutral",
+      "nuance": "‘some’ — also after the verb (我买了一些书)"
+     }
+    ],
+    "etymology": {
+     "text": "有 ‘there are’ + 些 ‘some, a few’: ‘there are some (who) …’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "有些人 is literally ‘there are some people (who)’ — that is why it likes to stand at the start of a sentence."
+    ],
+    "pitfalls": [
+     "有些 + noun belongs at the start of the sentence; after a verb say 一些: 我买了一些书, not *我买了有些书."
+    ],
+    "subtleties": [
+     "有些 contrasts a part with the rest: 有些人喜欢，有些人不喜欢 ‘some like it, some don’t’."
+    ]
+   }
+  },
+  {
+   "id": "zh:hen",
+   "lemma": "很",
+   "trad": "很",
+   "pinyin": "hěn",
+   "pos": "ADV",
+   "senses": [],
+   "role": "very; and the plain link before an adjective used as the predicate: 人很多 ‘there are many people’, 这里人很少 ‘there are very few people here’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The default ‘very’ — often just the glue between a subject and an adjective.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "very, quite",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(before an adjective predicate, unstressed) the link: 我很好 ‘I am fine’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我很好。",
+      "py": "Wǒ hěn hǎo.",
+      "tr": "I’m fine.",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s2"
+     },
+     {
+      "text": "这里人很少。",
+      "py": "Zhèli rén hěn shǎo.",
+      "tr": "There are very few people here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     },
+     {
+      "text": "这本书很有意思。",
+      "py": "Zhè běn shū hěn yǒu yìsi.",
+      "tr": "This book is very interesting.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "我很喜欢她。",
+      "py": "Wǒ hěn xǐhuan tā.",
+      "tr": "I like her a lot.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很好",
+      "tr": "fine, very good"
+     },
+     {
+      "text": "很多",
+      "tr": "many"
+     },
+     {
+      "text": "很少",
+      "tr": "very few; seldom"
+     },
+     {
+      "text": "很喜欢",
+      "tr": "to like a lot"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "非常",
+      "register": "neutral",
+      "nuance": "fēicháng: ‘extremely’ — really strong"
+     },
+     {
+      "word": "挺",
+      "register": "colloquial",
+      "nuance": "tǐng: ‘pretty, quite’ (挺好的)"
+     },
+     {
+      "word": "太",
+      "register": "neutral",
+      "nuance": "tài: ‘too; so’ — 太好了 ‘great!’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 彳 + phonetic 艮. First meaning ‘to disobey; cruel’ (like 狠); used for ‘very’ since the Yuan dynasty.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "很 once meant ‘fierce, cruel’ — the same sound written 狠 hěn still does."
+    ],
+    "pitfalls": [
+     "A Chinese adjective needs a link, but not 是: 他很高 ‘he is tall’, not *他是高. A bare adjective sounds like a comparison: 这里人多，那里人少."
+    ],
+    "subtleties": [
+     "In 很好 and 很多 the 很 is usually not heard as ‘very’; stress it to mean ‘very’."
+    ]
+   }
+  },
+  {
+   "id": "zh:men.pl",
+   "lemma": "们",
+   "trad": "們",
+   "pinyin": "men",
+   "pos": "PART",
+   "senses": [],
+   "role": "plural suffix for pronouns and nouns for people when they are a group: 我们, 孩子们, 朋友们 — never after a number (三个学生, not *三个学生们) and never with things",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:sui",
+   "lemma": "岁",
+   "trad": "歲",
+   "pinyin": "suì",
+   "pos": "CLF",
+   "senses": [],
+   "role": "years of age, right after the number, with no 是: 我二十岁 ‘I am twenty’, 这个孩子两岁 ‘this child is two’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

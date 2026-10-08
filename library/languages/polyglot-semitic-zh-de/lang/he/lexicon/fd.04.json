@@ -5,7 +5,8 @@
    "lemma": "בַּיִת",
    "pos": "NOUN",
    "senses": [
-    "home.house"
+    "home.house",
+    "place.home"
    ],
    "gender": "MASC",
    "mishkal": "קֶטֶל",
@@ -14,11 +15,15 @@
     "N;SG;INDF": "בַּיִת",
     "N;SG;DEF": "הַבַּיִת",
     "N;PL;INDF": "בָּתִּים",
-    "N;PL;DEF": "הַבָּתִּים"
+    "N;PL;DEF": "הַבָּתִּים",
+    "N;SG;DEF;PFX": "בַּיִת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַבַּיִת → (בַּ / לַ)בַּיִת; Wiktionary lists only the full definite form הַבַּיִת."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -42,7 +47,8 @@
       "def": "home (בַּבַּיִת “at home”, הַבַּיְתָה “home(wards)”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.home"
      },
      {
       "id": "s3",
@@ -72,6 +78,13 @@
       "tr": "I’m at home.",
       "register": "neutral",
       "context": "phone call",
+      "sense": "s2"
+     },
+     {
+      "text": "הַיְּלָדִים בַּבַּיִת עִם סָבְתָא.",
+      "tr": "The children are at home with Grandma.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s2"
      },
      {
@@ -248,11 +261,15 @@
     "N;SG;INDF": "חֶדֶר",
     "N;SG;DEF": "הַחֶדֶר",
     "N;PL;INDF": "חֲדָרִים",
-    "N;PL;DEF": "הַחֲדָרִים"
+    "N;PL;DEF": "הַחֲדָרִים",
+    "N;SG;DEF;PFX": "חֶדֶר"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַחֶדֶר → (בַּ / לַ)חֶדֶר; Wiktionary lists only the full definite form הַחֶדֶר."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -462,7 +479,8 @@
     "N;SG;INDF": "חַלּוֹן",
     "N;SG;DEF": "הַחַלּוֹן",
     "N;PL;INDF": "חַלּוֹנוֹת",
-    "N;PL;DEF": "הַחַלּוֹנוֹת"
+    "N;PL;DEF": "הַחַלּוֹנוֹת",
+    "N;SG;DEF;PFX": "חַלּוֹן"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -676,7 +694,8 @@
     "N;SG;INDF": "שֻׁלְחָן",
     "N;SG;DEF": "הַשֻּׁלְחָן",
     "N;PL;INDF": "שֻׁלְחָנוֹת",
-    "N;PL;DEF": "הַשֻּׁלְחָנוֹת"
+    "N;PL;DEF": "הַשֻּׁלְחָנוֹת",
+    "N;SG;DEF;PFX": "שֻּׁלְחָן"
    },
    "plene": {
     "N;SG;INDF": "שולחן",
@@ -686,7 +705,10 @@
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַשֻּׁלְחָן → (בַּ / לַ)שֻּׁלְחָן; Wiktionary lists only the full definite form הַשֻּׁלְחָן."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -908,7 +930,8 @@
     "N;SG;INDF": "מִטָּה",
     "N;SG;DEF": "הַמִּטָּה",
     "N;PL;INDF": "מִטּוֹת",
-    "N;PL;DEF": "הַמִּטּוֹת"
+    "N;PL;DEF": "הַמִּטּוֹת",
+    "N;SG;DEF;PFX": "מִּטָּה"
    },
    "plene": {
     "N;SG;INDF": "מיטה",
@@ -1018,7 +1041,8 @@
     "N;SG;INDF": "אָרוֹן",
     "N;SG;DEF": "הָאָרוֹן",
     "N;PL;INDF": "אֲרוֹנוֹת",
-    "N;PL;DEF": "הָאֲרוֹנוֹת"
+    "N;PL;DEF": "הָאֲרוֹנוֹת",
+    "N;SG;DEF;PFX": "אָרוֹן"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1649,8 +1673,8 @@
       "sense": "s1"
      },
      {
-      "text": "דָּוִד, יֵשׁ לְךָ טֶלֶפוֹן!",
-      "tr": "David, there’s a phone call for you!",
+      "text": "יוֹסִי, יֵשׁ לְךָ טֶלֶפוֹן!",
+      "tr": "Yossi, there’s a phone call for you!",
       "register": "informal",
       "context": "calls",
       "sense": "s2"
@@ -1831,7 +1855,8 @@
     "N;SG;INDF": "תִּיק",
     "N;SG;DEF": "הַתִּיק",
     "N;PL;INDF": "תִּיקִים",
-    "N;PL;DEF": "הַתִּיקִים"
+    "N;PL;DEF": "הַתִּיקִים",
+    "N;SG;DEF;PFX": "תִּיק"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

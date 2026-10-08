@@ -348,30 +348,35 @@
   /* ---------- reading text: form index, clitics, segmentation ---------- */
   const PUNCT = /^[\p{P}\p{S}]+$/u;
   function lookup(C, code, w) {
-    const X = C.lang[code], lj = X.language, out = [];
-    // every reading of the written word: as written, without vowel marks, and — at the start of a sentence — with a small first letter (Sie / sie)
-    const tryWord = s => {
+    const X = C.lang[code], lj = X.language;
+    // readings of a written word: as written (and, at the start of a sentence, with a small first letter: Sie / sie);
+    // "loose" also without vowel marks. A vocalized word is first read exactly — so بِكَمْ is بِ + كَمْ, not بِكُمْ.
+    const tryWord = (s, loose) => {
       const all = [];
-      for (const k of new Set([s, stripMarks(code, s), ...(lj.capitalizeFirst ? [decapFirst(s)] : [])])) for (const m of X.forms.get(k) || []) if (!all.some(x => x.l === m.l && x.f === m.f)) all.push(m);
+      for (const k of new Set([s, ...(loose ? [stripMarks(code, s)] : []), ...(lj.capitalizeFirst ? [decapFirst(s)] : [])])) for (const m of X.forms.get(k) || []) if (!all.some(x => x.l === m.l && x.f === m.f)) all.push(m);
       return all.length ? all : null;
     };
-    const direct = tryWord(nfc(w));
-    if (direct) return { matches: direct };
     // prefix clitics (ar wa-/bi-…, he ve-/ha-/be-…): up to two, longest first
-    const strip = (s, depth) => {
+    const strip = (s, depth, loose) => {
       if (depth > 2) return null;
       for (const p of X.prefixes) for (const pre of [p.t, p.plain]) {
         if (pre && s.startsWith(pre) && s.length > pre.length) {
-          const rest = s.slice(pre.length).replace(/^\p{M}+/u, ''), m = tryWord(rest);   // the plain prefix letter may carry vowel marks of its own
+          const rest = s.slice(pre.length).replace(/^\p{M}+/u, ''), m = tryWord(rest, loose);   // the plain prefix letter may carry vowel marks of its own
           if (m) return [{ t: pre, matches: [{ l: p.l, f: null }] }, { t: rest, matches: m }];
-          const deeper = strip(rest, depth + 1);
+          const deeper = strip(rest, depth + 1, loose);
           if (deeper) return [{ t: pre, matches: [{ l: p.l, f: null }] }, ...deeper];
         }
       }
       return null;
     };
-    const parts = strip(nfc(w), 1);
-    return parts ? { matches: [], parts } : { matches: out };
+    const W = nfc(w);
+    for (const loose of [false, true]) {
+      const direct = tryWord(W, loose);
+      if (direct) return { matches: direct };
+      const parts = strip(W, 1, loose);
+      if (parts) return { matches: [], parts };
+    }
+    return { matches: [] };
   }
   /** Text → tokens [{t, p?, matches:[{l,f}], parts?, unknown?}]. Spaces split words; Chinese is segmented by longest match over the course words. */
   function tokenize(C, code, text) {
@@ -403,7 +408,7 @@
         const span = items.slice(i, i + n);
         if (span.slice(0, -1).some(x => x.trail) || span.slice(1).some(x => x.lead)) continue;   // punctuation inside: not one word
         const w = span.map(x => x.core).join(' '), r = lookup(C, code, w);
-        if (r.matches.length) { out.push({ t: w, matches: r.matches }); used = n; break; }
+        if (r.matches.length || (r.parts && r.parts[r.parts.length - 1].t.includes(' '))) { out.push({ t: w, matches: r.matches, ...(r.parts ? { parts: r.parts } : {}) }); used = n; break; }
       }
       if (used === 1 && items[i].core) pushWord(items[i].core);
       for (const ch of items[i + used - 1].trail) out.push({ t: ch, p: true, matches: [] });
@@ -486,8 +491,19 @@
     MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter', DEF: 'definite (“the”)', INDF: 'indefinite', PRS: 'present', PST: 'past', FUT: 'future',
     PFV: 'perfective', IPFV: 'imperfective', IND: 'indicative', SBJV: 'subjunctive', JUSS: 'jussive', IMP: 'imperative', NFIN: 'infinitive', CSTR: 'construct state',
     '1': '1st person', '2': '2nd person', '3': '3rd person' };
-  /** A feature cell in words: V;PRS;3;SG → “present · 3rd person · singular” */
-  const cellLabel = cell => cellParts(canon(cell)).slice(1).map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form';
+  Object.assign(TAG_LABEL, { STRG: 'strong ending (no article)', WEAK: 'weak ending (after der / die / das)', MIX: 'mixed ending (after ein / kein / mein)', SEP: 'the separated particle', PFX: 'after an attached preposition', ALT: 'before the article (another spelling)', CONST: 'construct state (“the … of”)', POSS: 'with an owner ending', INFM: 'informal', FORM: 'formal', CMPR: 'comparative', SPRL: 'superlative', NEG: 'negative', PTCP: 'participle', MSDR: 'verbal noun' });
+  const OWNER = { '1S': 'my', '2S': 'your', '2SM': 'your (m.)', '2SF': 'your (f.)', '3S': 'his/her', '3SM': 'his', '3SF': 'her', '1P': 'our', '2P': 'your (pl.)', '2PM': 'your (pl. m.)', '2PF': 'your (pl. f.)', '3P': 'their', '3PM': 'their (m.)', '3PF': 'their (f.)', '2D': 'your (two)', '3D': 'their (two)' };
+  /** A feature cell in words: V;PRS;3;SG → “present · 3rd person · singular”; possessed forms name the owner: N;NOM;SG;PSS1S → “nominative · singular · owner: my” */
+  function cellLabel(cell) {
+    const p = cellParts(canon(cell)).slice(1), pss = p.find(t => /^PSS\d/.test(t));
+    if (pss) return [...p.filter(t => t !== pss && t !== 'POSS').map(t => TAG_LABEL[t] || t), 'owner: ' + (OWNER[pss.slice(3)] || pss.slice(3))].join(' · ');
+    if (p.includes('POSS') && p[0] !== 'POSS') {   // N;POSS;3;PL;FEM — person, number and gender are the owner's
+      const own = p.filter(t => ['1', '2', '3', 'SG', 'PL', 'DU', 'MASC', 'FEM'].includes(t)), key = (own.find(t => /\d/.test(t)) || '') + ((own.includes('PL') ? 'P' : own.includes('DU') ? 'D' : 'S')) + (own.includes('MASC') ? 'M' : own.includes('FEM') ? 'F' : '');
+      const rest = p.filter(t => t !== 'POSS' && !own.includes(t)).map(t => TAG_LABEL[t] || t);
+      return [...rest, 'owner: ' + (OWNER[key] || OWNER[key.slice(0, 2)] || own.join(' '))].join(' · ');
+    }
+    return p.map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form';
+  }
   const VARIANT_LABEL = { Polarity: { NEG: 'Make it negative', POS: 'Make it positive' }, Mood: { INT: 'Make it a question', IMP: 'Make it a command' },
     Number: { PL: 'Make it plural', SG: 'Make it singular', DU: 'Make it dual (two)' }, Definiteness: { DEF: 'Make it definite (“the”)', INDF: 'Make it indefinite' },
     Gender: { FEM: 'Say it about / to a woman', MASC: 'Say it about / to a man' }, Addressee: { FEM: 'Say it to a woman', MASC: 'Say it to a man' },
@@ -509,7 +525,7 @@
     for (const k of s.tokens || []) {
       if (k.p || !k.l || !k.f) continue;
       const lx = X.lex[k.l]; if (!lx) continue;
-      for (const f of Object.values(lx.forms || {})) if (!used.has(nfc(f)) && stripMarks(code, f) !== stripMarks(code, k.t)) cands.push(f);
+      for (const f of Object.values(lx.forms || {})) if (!used.has(nfc(f)) && stripMarks(code, f).toLowerCase() !== stripMarks(code, k.t).toLowerCase()) cands.push(f);
     }
     const u = uniqStr(cands); return u.length ? u[Math.floor(rng() * u.length)] : null;
   }
@@ -528,11 +544,14 @@
       const items = [];
       if (['inflect', 'principal_parts', 'paradigm'].includes(gen.type)) {
         for (const lx of Object.values(X.lex)) {
-          if (!K.has(lx.id) || (gen.pos && lx.pos !== gen.pos) || (gen.class && lx.class !== gen.class) || (gen.lemmas && !gen.lemmas.includes(lx.id))) continue;
-          const forms = lx.forms || {}, cells = (gen.cells || Object.keys(forms)).filter(c => Object.keys(forms).some(x => canon(x) === canon(c)));
+          if (!K.has(lx.id) || (gen.pos && lx.pos !== gen.pos) || (gen.class && lx.class !== gen.class) || (gen.lemmas && !gen.lemmas.includes(lx.id)) || (gen.exclude || []).includes(lx.id)) continue;
+          if (gen.concepts && !(lx.senses || []).some(c => gen.concepts.some(p => c.startsWith(p)))) continue;
+          if (lx.separable && !gen.lemmas) continue;   // a separable verb's stem alone is not its whole form (komme … an)
+          const forms = lx.forms || {}, cells = (gen.cells || Object.keys(forms).filter(c => !/(^|;)(PFX|ALT|SEP)(;|$)/.test(c))).filter(c => Object.keys(forms).some(x => canon(x) === canon(c)));
           for (const c of cells) {
             const key = Object.keys(forms).find(x => canon(x) === canon(c)), ans = forms[key];
-            const wrong = uniqStr(Object.values(forms).filter(f => nfc(f) !== nfc(ans) && stripMarks(code, f) !== stripMarks(code, ans)));
+            const alsoRight = new Set([ans, ...((lx.formsAlt || {})[key] || [])].map(f => stripMarks(code, nfc(f)).toLowerCase()));   // e.g. Onkel / Onkels
+            const wrong = uniqStr(Object.entries(forms).filter(([c2, f]) => !/(^|;)(PFX|ALT|SEP)(;|$)/.test(c2) && !alsoRight.has(stripMarks(code, nfc(f)).toLowerCase())).map(([, f]) => f));   // a spelling variant is never offered as wrong
             if (!wrong.length || key === Object.keys(forms).find(x => forms[x] === lx.lemma) && cells.length > 1) continue;   // asking for the lemma itself teaches nothing
             items.push({ type: 'choose', kind: 'inflect', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: cellLabel(c), cell: canon(c),
               options: shuffled([ans, ...shuffled(wrong, rng).slice(0, 3)], rng), answer: ans, why: `${lx.lemma} — ${cellLabel(c)}: ${ans}` });
@@ -540,8 +559,8 @@
         }
       } else if (gen.type === 'gender_article') {
         for (const lx of Object.values(X.lex)) {
-          if (!K.has(lx.id) || lx.pos !== 'NOUN' || !GENDER_WORD[lx.gender] || lx.class === 'plt') continue;
-          if (code === 'de') { const a = { MASC: 'der', FEM: 'die', NEUT: 'das' }[lx.gender]; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its article?', options: ['der', 'die', 'das'], answer: a, why: `${a} ${lx.lemma} (${GENDER_WORD[lx.gender]})` }); }
+          if (!K.has(lx.id) || lx.pos !== 'NOUN' || !GENDER_WORD[lx.gender] || lx.class === 'plt' || (gen.concepts && !(lx.senses || []).some(c => gen.concepts.some(p => c.startsWith(p))))) continue;
+          if (code === 'de') { const a = { MASC: 'der', FEM: 'die', NEUT: 'das' }[lx.gender], f = lx.forms || {}, after = f[Object.keys(f).find(x => canon(x) === canon('N;NOM;SG;DEF'))] || lx.lemma; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its article?', options: ['der', 'die', 'das'], answer: a, why: `${a} ${after} (${GENDER_WORD[lx.gender]})` }); }
           else { const opts2 = code === 'ar' || code === 'he' ? ['masculine', 'feminine'] : ['masculine', 'feminine', 'neuter']; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its gender?', options: opts2, answer: GENDER_WORD[lx.gender], why: `${lx.lemma}: ${GENDER_WORD[lx.gender]}` }); }
         }
       } else if (gen.type === 'measure_word') {
@@ -574,9 +593,9 @@
       } else if (gen.type === 'transform') {
         const want = gen.bank?.variant;
         for (const s2 of selectSentences(C, code, { known: K, functions: gen.bank?.functions ? fnsOf(gen) : [] })) {
-          if (!s2.variantOf || (want && !(want in (s2.variant || {})))) continue;
+          if (!s2.variantOf || (want && !(want in (s2.variant || {}))) || (gen.bank?.frames && !gen.bank.frames.includes(s2.frame))) continue;
           const s1 = X.sentenceById[s2.variantOf]; if (!s1 || s1.req.some(l => !K.has(l))) continue;
-          if (!gen.bank?.functions && !(s2.functions || []).includes(fid) && !(s1.functions || []).includes(fid)) continue;
+          if (!gen.bank?.functions && !gen.bank?.frames && !(s2.functions || []).includes(fid) && !(s1.functions || []).includes(fid)) continue;
           const tiles = sentenceTiles(s2), extra = sentenceTiles(s1).filter(t => !tiles.includes(t));
           items.push({ type: 'build', kind: 'transform', fn: fid, lang: code, sentence: s2.id, source: s1.text, sourceGloss: s1.gloss, change: variantLabel(s2.variant), gloss: s2.gloss,
             tiles: shuffled([...tiles, ...extra.slice(0, 1)], rng), size: tiles.length, answers: [s2.text, ...(s2.alts || [])], punct: endPunct(s2), why: s2.text });
@@ -612,6 +631,13 @@
     const out = []; const pools = [words, ...fx].filter(p => p.length); let i = 0;
     while (out.length < size && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
     return out;
+  }
+
+  /** The word profiles, loaded separately (course.profiles.js: {lexeme id: profile}). */
+  function addProfiles(C, map) {
+    let n = 0;
+    for (const X of Object.values(C.lang)) for (const [id, lx] of Object.entries(X.lex)) if (map && map[id] && !lx.profile) { lx.profile = map[id]; n++; }
+    return n;
   }
 
   /* ---------- the daily session (§7.5) ---------- */
@@ -701,7 +727,7 @@
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
     readCourse, course, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
-    TYPES, applies, pathGroups, lessonFunctions, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+    TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

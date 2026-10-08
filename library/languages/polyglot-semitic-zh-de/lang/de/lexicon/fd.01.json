@@ -790,7 +790,10 @@
     "V;PRS;2;PL": "seid",
     "V;PRS;3;PL": "sind",
     "V;PST;3;SG": "war",
-    "V;PTCP;PST": "gewesen"
+    "V;PTCP;PST": "gewesen",
+    "V;IMP;2;SG": "sei",
+    "V;IMP;2;PL": "seid",
+    "V;IMP;FORM": "seien"
    },
    "ref": {
     "src": "kaikki",
@@ -943,7 +946,8 @@
     ],
     "pitfalls": [
      "Feelings of cold, heat or sickness use the dative: Mir ist kalt / Mir ist schlecht. Ich bin kalt means “I am cold-hearted”.",
-     "Perfect with sein, not haben, for motion and change of state: Ich bin gefahren / Er ist gewesen."
+     "Perfect with sein, not haben, for motion and change of state: Ich bin gefahren / Er ist gewesen.",
+     "Imperative: Sei ruhig! (du) – Seid leise! (ihr) – Seien Sie bitte pünktlich! (polite) – seien is the only Sie-imperative that is not the infinitive."
     ],
     "subtleties": [
      "sein is also the possessive “his”/“its” (sein Buch) – a different word with the same spelling."

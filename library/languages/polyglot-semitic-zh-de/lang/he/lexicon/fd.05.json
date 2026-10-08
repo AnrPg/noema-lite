@@ -1,0 +1,1339 @@
+{
+ "lexemes": [
+  {
+   "id": "he:efes",
+   "lemma": "אֶפֶס",
+   "pos": "NUM",
+   "senses": [
+    "num.0"
+   ],
+   "translit": "efes",
+   "note": "Zero, the digit and the score. Originally a noun meaning “end, nothing”; it never changes.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files אֶפֶס only as a noun (“end; zero (digit)”); in counting, phone numbers and scores it is the numeral zero, so the course files it with the numbers (NUM)."
+    }
+   }
+  },
+  {
+   "id": "he:echad",
+   "lemma": "אֶחָד",
+   "pos": "NUM",
+   "senses": [
+    "num.1"
+   ],
+   "class": "gender",
+   "translit": "echad",
+   "note": "The only number that comes after the noun and agrees like an adjective: סֵפֶר אֶחָד, מִטָּה אַחַת. The feminine אַחַת is the counting form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …).",
+   "forms": {
+    "NUM;MASC": "אֶחָד",
+    "NUM;FEM": "אַחַת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shnayim",
+   "lemma": "שְׁנַיִם",
+   "pos": "NUM",
+   "senses": [
+    "num.2"
+   ],
+   "class": "two",
+   "translit": "shnayim",
+   "note": "Before a noun always the construct form: שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת (also before a definite noun: שְׁנֵי הַסְּפָרִים). Alone: שְׁנַיִם / שְׁתַּיִם (counting: שְׁתַּיִם).",
+   "forms": {
+    "NUM;MASC": "שְׁנַיִם",
+    "NUM;FEM": "שְׁתַּיִם",
+    "NUM;MASC;CONST": "שְׁנֵי",
+    "NUM;FEM;CONST": "שְׁתֵּי"
+   },
+   "plene": {
+    "NUM;MASC": "שניים",
+    "NUM;FEM": "שתיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shlosha",
+   "lemma": "שְׁלוֹשָׁה",
+   "pos": "NUM",
+   "senses": [
+    "num.3"
+   ],
+   "class": "const",
+   "translit": "shlosha",
+   "note": "With a masculine noun use the form in -ָה (שְׁלוֹשָׁה סְפָרִים), with a feminine noun the short form (שָׁלוֹשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁלוֹשֶׁת הַ… (“the three …”). Counting form: שָׁלוֹשׁ.",
+   "forms": {
+    "NUM;MASC": "שְׁלוֹשָׁה",
+    "NUM;FEM": "שָׁלוֹשׁ",
+    "NUM;MASC;CONST": "שְׁלוֹשֶׁת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:arbaa",
+   "lemma": "אַרְבָּעָה",
+   "pos": "NUM",
+   "senses": [
+    "num.4"
+   ],
+   "class": "const",
+   "translit": "arba'a",
+   "note": "With a masculine noun use the form in -ָה (אַרְבָּעָה סְפָרִים), with a feminine noun the short form (אַרְבַּע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: אַרְבַּעַת הַ… (“the four …”). Counting form: אַרְבַּע.",
+   "forms": {
+    "NUM;MASC": "אַרְבָּעָה",
+    "NUM;FEM": "אַרְבַּע",
+    "NUM;MASC;CONST": "אַרְבַּעַת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:chamisha",
+   "lemma": "חֲמִשָּׁה",
+   "pos": "NUM",
+   "senses": [
+    "num.5"
+   ],
+   "class": "const",
+   "translit": "chamisha",
+   "note": "With a masculine noun use the form in -ָה (חֲמִשָּׁה סְפָרִים), with a feminine noun the short form (חָמֵשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: חֲמֵשֶׁת הַ… (“the five …”). Counting form: חָמֵשׁ.",
+   "forms": {
+    "NUM;MASC": "חֲמִשָּׁה",
+    "NUM;FEM": "חָמֵשׁ",
+    "NUM;MASC;CONST": "חֲמֵשֶׁת"
+   },
+   "plene": {
+    "NUM;MASC": "חמישה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shisha",
+   "lemma": "שִׁשָּׁה",
+   "pos": "NUM",
+   "senses": [
+    "num.6"
+   ],
+   "class": "const",
+   "translit": "shisha",
+   "note": "With a masculine noun use the form in -ָה (שִׁשָּׁה סְפָרִים), with a feminine noun the short form (שֵׁשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שֵׁשֶׁת הַ… (“the six …”). Counting form: שֵׁשׁ.",
+   "forms": {
+    "NUM;MASC": "שִׁשָּׁה",
+    "NUM;FEM": "שֵׁשׁ",
+    "NUM;MASC;CONST": "שֵׁשֶׁת"
+   },
+   "plene": {
+    "NUM;MASC": "שישה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shiva",
+   "lemma": "שִׁבְעָה",
+   "pos": "NUM",
+   "senses": [
+    "num.7"
+   ],
+   "class": "const",
+   "translit": "shiv'a",
+   "note": "With a masculine noun use the form in -ָה (שִׁבְעָה סְפָרִים), with a feminine noun the short form (שֶׁבַע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שִׁבְעַת הַ… (“the seven …”). Counting form: שֶׁבַע.",
+   "forms": {
+    "NUM;MASC": "שִׁבְעָה",
+    "NUM;FEM": "שֶׁבַע",
+    "NUM;MASC;CONST": "שִׁבְעַת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shmona",
+   "lemma": "שְׁמוֹנָה",
+   "pos": "NUM",
+   "senses": [
+    "num.8"
+   ],
+   "class": "const",
+   "translit": "shmona",
+   "note": "With a masculine noun use the form in -ָה (שְׁמוֹנָה סְפָרִים), with a feminine noun the short form (שְׁמוֹנֶה מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁמוֹנַת הַ… (“the eight …”). Counting form: שְׁמוֹנֶה.",
+   "forms": {
+    "NUM;MASC": "שְׁמוֹנָה",
+    "NUM;FEM": "שְׁמוֹנֶה",
+    "NUM;MASC;CONST": "שְׁמוֹנַת",
+    "NUM;FEM;PFX": "שְּׁמוֹנֶה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "NUM;FEM;PFX": "the form after the prefix מִ, whose נ doubles the first letter (מִשְּׁמוֹנֶה); Wiktionary lists only the plain form."
+    }
+   }
+  },
+  {
+   "id": "he:tisha",
+   "lemma": "תִּשְׁעָה",
+   "pos": "NUM",
+   "senses": [
+    "num.9"
+   ],
+   "class": "const",
+   "translit": "tish'a",
+   "note": "With a masculine noun use the form in -ָה (תִּשְׁעָה סְפָרִים), with a feminine noun the short form (תֵּשַׁע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: תִּשְׁעַת הַ… (“the nine …”). Counting form: תֵּשַׁע.",
+   "forms": {
+    "NUM;MASC": "תִּשְׁעָה",
+    "NUM;FEM": "תֵּשַׁע",
+    "NUM;MASC;CONST": "תִּשְׁעַת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:asara",
+   "lemma": "עֲשָׂרָה",
+   "pos": "NUM",
+   "senses": [
+    "num.10"
+   ],
+   "class": "const",
+   "translit": "asara",
+   "note": "With a masculine noun use the form in -ָה (עֲשָׂרָה סְפָרִים), with a feminine noun the short form (עֶשֶׂר מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: עֲשֶׂרֶת הַ… (“the ten …”). Counting form: עֶשֶׂר.",
+   "forms": {
+    "NUM;MASC": "עֲשָׂרָה",
+    "NUM;FEM": "עֶשֶׂר",
+    "NUM;MASC;CONST": "עֲשֶׂרֶת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:achad-asar",
+   "lemma": "אַחַד עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.11"
+   ],
+   "class": "gender",
+   "translit": "achad asar",
+   "note": "Masculine with masculine nouns (אַחַד עָשָׂר …), feminine with feminine nouns (אַחַת עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "אַחַד עָשָׂר",
+    "NUM;FEM": "אַחַת עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shneim-asar",
+   "lemma": "שְׁנֵים עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.12"
+   ],
+   "class": "gender",
+   "translit": "shneim asar",
+   "note": "Masculine with masculine nouns (שְׁנֵים עָשָׂר …), feminine with feminine nouns (שְׁתֵּים עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "שְׁנֵים עָשָׂר",
+    "NUM;FEM": "שְׁתֵּים עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shlosha-asar",
+   "lemma": "שְׁלוֹשָׁה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.13"
+   ],
+   "class": "gender",
+   "translit": "shlosha asar",
+   "note": "Masculine with masculine nouns (שְׁלוֹשָׁה עָשָׂר …), feminine with feminine nouns (שְׁלוֹשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "שְׁלוֹשָׁה עָשָׂר",
+    "NUM;FEM": "שְׁלוֹשׁ עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:arbaa-asar",
+   "lemma": "אַרְבָּעָה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.14"
+   ],
+   "class": "gender",
+   "translit": "arba'a asar",
+   "note": "Masculine with masculine nouns (אַרְבָּעָה עָשָׂר …), feminine with feminine nouns (אַרְבַּע עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "אַרְבָּעָה עָשָׂר",
+    "NUM;FEM": "אַרְבַּע עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:chamisha-asar",
+   "lemma": "חֲמִשָּׁה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.15"
+   ],
+   "class": "gender",
+   "translit": "chamisha asar",
+   "note": "Masculine with masculine nouns (חֲמִשָּׁה עָשָׂר …), feminine with feminine nouns (חֲמֵשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "חֲמִשָּׁה עָשָׂר",
+    "NUM;FEM": "חֲמֵשׁ עֶשְׂרֵה"
+   },
+   "plene": {
+    "NUM;MASC": "חמישה עשר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The short spelling חמשה עשר has a Wiktionary page that only says “defective spelling of חמישה עשר”, and the check follows just its first word (חמישה “five”); the full page חמישה עשר glosses the word “fifteen”."
+    }
+   }
+  },
+  {
+   "id": "he:shisha-asar",
+   "lemma": "שִׁשָּׁה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.16"
+   ],
+   "class": "gender",
+   "translit": "shisha asar",
+   "note": "Masculine with masculine nouns (שִׁשָּׁה עָשָׂר …), feminine with feminine nouns (שֵׁשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "שִׁשָּׁה עָשָׂר",
+    "NUM;FEM": "שֵׁשׁ עֶשְׂרֵה"
+   },
+   "plene": {
+    "NUM;MASC": "שישה עשר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The short spelling ששה עשר has a Wiktionary page that only says “defective spelling of שישה עשר”, and the check follows just its first word (שישה “six”); the full page שישה עשר glosses the word “sixteen”."
+    }
+   }
+  },
+  {
+   "id": "he:shiva-asar",
+   "lemma": "שִׁבְעָה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.17"
+   ],
+   "class": "gender",
+   "translit": "shiv'a asar",
+   "note": "Masculine with masculine nouns (שִׁבְעָה עָשָׂר …), feminine with feminine nouns (שְׁבַע עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "שִׁבְעָה עָשָׂר",
+    "NUM;FEM": "שְׁבַע עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shmona-asar",
+   "lemma": "שְׁמוֹנָה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.18"
+   ],
+   "class": "gender",
+   "translit": "shmona asar",
+   "note": "Masculine with masculine nouns (שְׁמוֹנָה עָשָׂר …), feminine with feminine nouns (שְׁמוֹנֶה עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "שְׁמוֹנָה עָשָׂר",
+    "NUM;FEM": "שְׁמוֹנֶה עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:tisha-asar",
+   "lemma": "תִּשְׁעָה עָשָׂר",
+   "pos": "NUM",
+   "senses": [
+    "num.19"
+   ],
+   "class": "gender",
+   "translit": "tish'a asar",
+   "note": "Masculine with masculine nouns (תִּשְׁעָה עָשָׂר …), feminine with feminine nouns (תְּשַׁע עֶשְׂרֵה …); the noun after it is plural.",
+   "forms": {
+    "NUM;MASC": "תִּשְׁעָה עָשָׂר",
+    "NUM;FEM": "תְּשַׁע עֶשְׂרֵה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:esrim",
+   "lemma": "עֶשְׂרִים",
+   "pos": "NUM",
+   "senses": [
+    "num.20"
+   ],
+   "translit": "esrim",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: עֶשְׂרִים וְאֶחָד / עֶשְׂרִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shloshim",
+   "lemma": "שְׁלוֹשִׁים",
+   "pos": "NUM",
+   "senses": [
+    "num.30"
+   ],
+   "translit": "shloshim",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁלוֹשִׁים וְאֶחָד / שְׁלוֹשִׁים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:arbaim",
+   "lemma": "אַרְבָּעִים",
+   "pos": "NUM",
+   "senses": [
+    "num.40"
+   ],
+   "translit": "arba'im",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: אַרְבָּעִים וְאֶחָד / אַרְבָּעִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:chamishim",
+   "lemma": "חֲמִשִּׁים",
+   "pos": "NUM",
+   "senses": [
+    "num.50"
+   ],
+   "translit": "chamishim",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: חֲמִשִּׁים וְאֶחָד / חֲמִשִּׁים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shishim",
+   "lemma": "שִׁשִּׁים",
+   "pos": "NUM",
+   "senses": [
+    "num.60"
+   ],
+   "translit": "shishim",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁשִּׁים וְאֶחָד / שִׁשִּׁים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shivim",
+   "lemma": "שִׁבְעִים",
+   "pos": "NUM",
+   "senses": [
+    "num.70"
+   ],
+   "translit": "shiv'im",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁבְעִים וְאֶחָד / שִׁבְעִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:shmonim",
+   "lemma": "שְׁמוֹנִים",
+   "pos": "NUM",
+   "senses": [
+    "num.80"
+   ],
+   "translit": "shmonim",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁמוֹנִים וְאֶחָד / שְׁמוֹנִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:tishim",
+   "lemma": "תִּשְׁעִים",
+   "pos": "NUM",
+   "senses": [
+    "num.90"
+   ],
+   "translit": "tish'im",
+   "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: תִּשְׁעִים וְאֶחָד / תִּשְׁעִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:mea",
+   "lemma": "מֵאָה",
+   "pos": "NUM",
+   "senses": [
+    "num.100"
+   ],
+   "class": "dual",
+   "translit": "me'a",
+   "note": "Feminine: 200 is the dual מָאתַיִם, 300–900 the feminine number + the plural מֵאוֹת (שְׁלוֹשׁ מֵאוֹת). Alone, מֵאוֹת = “hundreds”.",
+   "forms": {
+    "NUM;SG": "מֵאָה",
+    "NUM;DU": "מָאתַיִם",
+    "NUM;PL": "מֵאוֹת"
+   },
+   "plene": {
+    "NUM;DU": "מאתיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:elef",
+   "lemma": "אֶלֶף",
+   "pos": "NUM",
+   "senses": [
+    "num.1000"
+   ],
+   "class": "dual",
+   "translit": "elef",
+   "note": "Masculine: 2000 is the dual אַלְפַּיִם, 3000–9000 the masculine construct + the plural אֲלָפִים (שְׁלוֹשֶׁת אֲלָפִים). Alone, אֲלָפִים = “thousands”.",
+   "forms": {
+    "NUM;SG": "אֶלֶף",
+    "NUM;DU": "אַלְפַּיִם",
+    "NUM;PL": "אֲלָפִים"
+   },
+   "plene": {
+    "NUM;DU": "אלפיים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "he:harbe",
+   "lemma": "הַרְבֵּה",
+   "pos": "DET",
+   "senses": [
+    "quant.many"
+   ],
+   "translit": "harbe",
+   "note": "Invariable: הַרְבֵּה סְפָרִים, הַרְבֵּה מִטּוֹת, הַרְבֵּה נְיָר — before the noun, no article on the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plenty — the everyday “a lot”, for things you count and things you don’t.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "many, much, a lot of (before a noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.many"
+     },
+     {
+      "id": "s2",
+      "def": "a lot, much (after a verb or alone)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָיוּ שָׁם הַרְבֵּה אֲנָשִׁים.",
+      "tr": "There were a lot of people there.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי הַרְבֵּה חֲבֵרִים.",
+      "tr": "I have many friends.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא עוֹבֵד הַרְבֵּה.",
+      "tr": "He works a lot.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַרְבֵּה זְמַן",
+      "tr": "a long time, much time"
+     },
+     {
+      "text": "הַרְבֵּה אֲנָשִׁים",
+      "tr": "many people"
+     },
+     {
+      "text": "הַרְבֵּה יוֹתֵר",
+      "tr": "much more"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "רַבִּים / רַבּוֹת",
+      "register": "formal",
+      "nuance": "“many” as an adjective that agrees (אֲנָשִׁים רַבִּים, שָׁנִים רַבּוֹת) — written and formal style"
+     },
+     {
+      "word": "מָלֵא",
+      "register": "slang",
+      "nuance": "“loads of” in slang: מָלֵא אֲנָשִׁים “tons of people” (literally “full”)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "מְעַט",
+      "note": "few, little"
+     }
+    ],
+    "etymology": {
+     "text": "From the causative (hif‘il) of רָבָה “to be numerous, plentiful”: originally its infinitive absolute, which became an adverb and a determiner.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same Semitic “much, great” is in רַב “great; master” and in רַבִּי “rabbi”, literally “my master”; Arabic رَبّ (rabb) “lord” is its cousin."
+    ],
+    "pitfalls": [
+     "הַרְבֵּה never changes: no gender, no plural — הַרְבֵּה סְפָרִים, הַרְבֵּה מִטּוֹת.",
+     "It stands before the noun, and the noun has no article: הַרְבֵּה אֲנָשִׁים, not *הַרְבֵּה הָאֲנָשִׁים."
+    ],
+    "subtleties": [
+     "One word for English many and much: with a countable noun the noun is plural (הַרְבֵּה סְפָרִים), with a mass noun it stays singular (הַרְבֵּה נְיָר)."
+    ]
+   }
+  },
+  {
+   "id": "he:meat",
+   "lemma": "מְעַט",
+   "pos": "ADV",
+   "senses": [
+    "quant.few"
+   ],
+   "translit": "me'at",
+   "note": "Invariable, before the noun: מְעַט אֲנָשִׁים “few people”, מְעַט זְמַן “little time”. In casual speech “few” is more often לֹא הַרְבֵּה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not much, not many — a slightly bookish word; in chat people prefer קְצָת or לֹא הַרְבֵּה.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "few, little (not many, not much) — before a noun",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.few"
+     },
+     {
+      "id": "s2",
+      "def": "a little, slightly (before an adjective)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָיוּ שָׁם מְעַט אֲנָשִׁים.",
+      "tr": "There were few people there.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ מְעַט זְמַן.",
+      "tr": "We have little time.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֶדֶר מְעַט קָטָן.",
+      "tr": "The room is slightly small.",
+      "register": "formal",
+      "context": "housing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְעַט אֲנָשִׁים",
+      "tr": "few people"
+     },
+     {
+      "text": "מְעַט זְמַן",
+      "tr": "little time"
+     },
+     {
+      "text": "מְעַט מִדַּי",
+      "tr": "too little, too few"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עוֹד מְעַט",
+      "tr": "yet a little",
+      "kind": "fixed expression",
+      "meaning": "soon, in a moment",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "קְצָת",
+      "register": "neutral",
+      "nuance": "“a little” — the everyday word for an amount (קְצָת נְיָר); it is not used for “few people”"
+     },
+     {
+      "word": "לֹא הַרְבֵּה",
+      "register": "colloquial",
+      "nuance": "“not many, not much” — the most natural way to say “few” in conversation"
+     },
+     {
+      "word": "מְעַטִּים / מְעַטּוֹת",
+      "register": "formal",
+      "nuance": "“few” as an adjective that agrees: אֲנָשִׁים מְעַטִּים"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הַרְבֵּה",
+      "note": "many, a lot"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology for מְעַט itself; its root מ־ע־ט “to be few” also gives the verb מִעֵט “to diminish” and the noun מִעוּט “minority” (Wiktionary, מִעוּט).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "כִּמְעַט “almost” and עוֹד מְעַט “soon” are built on it: כְּ “like” + מְעַט “a little”, עוֹד “still” + מְעַט."
+    ],
+    "pitfalls": [
+     "מְעַט with a plural noun means “few” (מְעַט אֲנָשִׁים); “a few” (some) is כַּמָּה: כַּמָּה אֲנָשִׁים.",
+     "Like הַרְבֵּה it does not change and takes no article on the noun after it."
+    ],
+    "subtleties": [
+     "English separates few (count) and little (mass); מְעַט covers both: מְעַט אֲנָשִׁים, מְעַט זְמַן."
+    ]
+   }
+  },
+  {
+   "id": "he:ktsat",
+   "lemma": "קְצָת",
+   "pos": "DET",
+   "senses": [
+    "quant.alittle",
+    "quant.some"
+   ],
+   "translit": "ktsat",
+   "note": "Invariable. Before a mass noun: קְצָת נְיָר “a little / some paper”; before an adjective it softens: קְצָת קָשֶׁה “a bit hard”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bit — soft and friendly; Israelis use it all the time, also to soften what they say.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a little (of something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.alittle"
+     },
+     {
+      "id": "s2",
+      "def": "some (an amount of something you do not count)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     },
+     {
+      "id": "s3",
+      "def": "a bit, somewhat (with an adjective or a verb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לִי קְצָת נְיָר.",
+      "tr": "I have a little paper.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְדַבֵּר קְצָת עִבְרִית.",
+      "tr": "I speak a little Hebrew.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה רוֹצֶה קְצָת?",
+      "tr": "Do you want some?",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s2"
+     },
+     {
+      "text": "תֵּן לִי קְצָת מַיִם, בְּבַקָּשָׁה.",
+      "tr": "Give me some water, please.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     },
+     {
+      "text": "אֲנִי קְצָת עָיֵף.",
+      "tr": "I’m a bit tired.",
+      "register": "informal",
+      "context": "feelings",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְצָת זְמַן",
+      "tr": "a little time"
+     },
+     {
+      "text": "עוֹד קְצָת",
+      "tr": "a little more"
+     },
+     {
+      "text": "רַק קְצָת",
+      "tr": "just a little"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְעַט",
+      "register": "formal",
+      "nuance": "the written word for “a little; few”"
+     },
+     {
+      "word": "טִפָּה",
+      "register": "colloquial",
+      "nuance": "“a drop” — a tiny bit: טִפָּה חָלָב, טִפָּה עָיֵף"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הַרְבֵּה",
+      "note": "a lot"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. The word belongs with מִקְצָת “part of” (as in the rabbinic rule מִקְצָת הַיּוֹם כְּכֻלּוֹ “part of the day counts as the whole day”) and with קָצֶה “end, edge” (Wiktionary, קָצֶה).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Israelis soften requests and opinions with it: קְצָת קָשֶׁה לִי “it’s a bit hard for me” often means “it’s very hard”."
+    ],
+    "pitfalls": [
+     "For things you count use כַּמָּה “a few”: כַּמָּה סְפָרִים; קְצָת with a plural noun (קְצָת אֲנָשִׁים) is casual speech."
+    ],
+    "subtleties": [
+     "Before an adjective it is an adverb: קְצָת עָיֵף “a bit tired”; before a noun it is “a little / some”."
+    ]
+   }
+  },
+  {
+   "id": "he:kol",
+   "lemma": "כָּל",
+   "pos": "DET",
+   "senses": [
+    "quant.all"
+   ],
+   "translit": "kol",
+   "note": "Pronounced kol (the vowel is a qamats katan). כָּל + a definite noun = all / the whole (כָּל הַסְּפָרִים, כָּל הַמִּשְׁפָּחָה); כָּל + an indefinite singular = every (כָּל יוֹם). Alone: הַכֹּל “everything”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the word as the noun כֹּל “all, whole, entirety” and gives כָּל־ as its construct form; that construct is what stands before a noun (כָּל הַסְּפָרִים, כָּל יוֹם), working as a determiner, so the course files כָּל as DET."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everything and everyone — one short word for all, whole and every.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all, the whole (before a definite noun): כָּל הַסְּפָרִים “all the books”, כָּל הַמִּשְׁפָּחָה “the whole family”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "every, each (before an indefinite singular noun): כָּל יוֹם “every day”",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "any (in negative or open sentences): כָּל דָּבָר “anything”",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "כָּל הַתַּלְמִידִים פֹּה.",
+      "tr": "All the students are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "כָּל הַמִּשְׁפָּחָה בַּבַּיִת.",
+      "tr": "The whole family is at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי שׁוֹתֶה קָפֶה כָּל יוֹם.",
+      "tr": "I drink coffee every day.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּל יוֹם",
+      "tr": "every day"
+     },
+     {
+      "text": "כָּל הַזְּמַן",
+      "tr": "all the time"
+     },
+     {
+      "text": "כָּל אֶחָד",
+      "tr": "everyone, each one"
+     },
+     {
+      "text": "בְּכָל זֹאת",
+      "tr": "nevertheless, still"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כָּל הַכָּבוֹד",
+      "tr": "all the honour",
+      "kind": "fixed expression",
+      "meaning": "well done! bravo!",
+      "register": "neutral"
+     },
+     {
+      "text": "כָּל טוּב",
+      "tr": "all good",
+      "kind": "fixed expression",
+      "meaning": "all the best (when saying goodbye)",
+      "register": "neutral"
+     },
+     {
+      "text": "כָּל הַהַתְחָלוֹת קָשׁוֹת",
+      "tr": "all beginnings are hard",
+      "kind": "saying",
+      "meaning": "the start is always the hardest part",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "כֻּלָּם",
+      "register": "neutral",
+      "nuance": "“everyone, all of them” — stands alone, without a noun"
+     },
+     {
+      "word": "שָׁלֵם",
+      "register": "neutral",
+      "nuance": "“whole, complete” — an adjective after the noun: יוֹם שָׁלֵם “a whole day”"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *kʷall- or *kull-; compare Arabic كُلّ (kull), Ge‘ez ኵል (kʷəll), Akkadian kalûm, Classical Syriac ܟܠ (kul). The dictionary form is כֹּל; כָּל (kol) is its construct form, the one used before a noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic كُلّ (kull) is the same word: كُلّ يَوْم (kull yawm) “every day” = כָּל יוֹם."
+    ],
+    "pitfalls": [
+     "Say kol, not kal: the sign under כָּ is a qamats katan (a short o).",
+     "כָּל הַיּוֹם “all day” ≠ כָּל יוֹם “every day” — the article changes the meaning."
+    ],
+    "subtleties": [
+     "Alone, without a noun, “everything” is הַכֹּל (spelled with holam): הַכֹּל בְּסֵדֶר “everything is fine”."
+    ]
+   }
+  },
+  {
+   "id": "he:kulam",
+   "lemma": "כֻּלָּם",
+   "pos": "PRON",
+   "class": "all",
+   "senses": [
+    "quant.all"
+   ],
+   "translit": "kulam",
+   "note": "כֹּל “all” with a personal ending: כֻּלָּנוּ “all of us”, כֻּלְּכֶם / כֻּלְּכֶן “all of you”, כֻּלָּם / כֻּלָּן “all of them”; כֻּלָּם alone = “everyone”.",
+   "forms": {
+    "PRON;1;PL": "כֻּלָּנוּ",
+    "PRON;2;PL;MASC": "כֻּלְּכֶם",
+    "PRON;2;PL;FEM": "כֻּלְּכֶן",
+    "PRON;3;PL;MASC": "כֻּלָּם",
+    "PRON;3;PL;FEM": "כֻּלָּן"
+   },
+   "plene": {
+    "PRON;1;PL": "כולנו",
+    "PRON;2;PL;MASC": "כולכם",
+    "PRON;2;PL;FEM": "כולכן",
+    "PRON;3;PL;MASC": "כולם",
+    "PRON;3;PL;FEM": "כולן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everybody together — “all of us”, “all of them”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all of them; (כֻּלָּם alone) everyone, everybody",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "all of us / all of you (כֻּלָּנוּ, כֻּלְּכֶם, כֻּלְּכֶן)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "כֻּלָּם פֹּה.",
+      "tr": "Everyone is here.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "כֻּלָּם אוֹהֲבִים אֶת סָבְתָא.",
+      "tr": "Everybody loves Grandma.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "כֻּלָּנוּ תַּלְמִידִים.",
+      "tr": "We are all students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "כֻּלְּכֶם מוּזְמָנִים!",
+      "tr": "You are all invited!",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כֻּלָּם יַחַד",
+      "tr": "all together"
+     },
+     {
+      "text": "כֻּלָּנוּ בְּסֵדֶר",
+      "tr": "we are all fine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כָּל אֶחָד",
+      "register": "neutral",
+      "nuance": "“everyone, each one” — stresses each person separately (singular verb)"
+     },
+     {
+      "word": "הַכֹּל",
+      "register": "neutral",
+      "nuance": "“everything” — for things, not people"
+     }
+    ],
+    "etymology": {
+     "text": "A form of כֹּל “all” with the third-person masculine plural possessive ending -ָם: “all of them” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic does the same with كُلّ: كُلُّهُمْ (kulluhum) “all of them” — the same word with the same kind of ending."
+    ],
+    "pitfalls": [
+     "A group of only women: כֻּלָּן (הַבָּנוֹת? כֻּלָּן פֹּה). כֻּלָּם is for men or a mixed group.",
+     "Everyone is plural in Hebrew: כֻּלָּם פֹּה, כֻּלָּם אוֹהֲבִים — the verb is plural."
+    ],
+    "subtleties": [
+     "It can stand after the noun too: הַתַּלְמִידִים כֻּלָּם פֹּה “the students are all here”."
+    ]
+   }
+  },
+  {
+   "id": "he:kama",
+   "lemma": "כַּמָּה",
+   "pos": "DET",
+   "senses": [
+    "quant.some",
+    "q.howmany"
+   ],
+   "translit": "kama",
+   "note": "Invariable, before a plural noun: כַּמָּה סְפָרִים “a few books”. The same word asks “how many / how much?” (lesson 10): only the question shows the difference.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A handful — and the question everybody asks at the market: כַּמָּה?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some, a few, several (before a plural noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     },
+     {
+      "id": "s2",
+      "def": "how many? how much? (a question)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     },
+     {
+      "id": "s3",
+      "def": "how (very)! (in exclamations): כַּמָּה יָפֶה!",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָיוּ פֹּה כַּמָּה סְטוּדֶנְטִים.",
+      "tr": "There were a few students here.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי כַּמָּה שְׁאֵלוֹת.",
+      "tr": "I have a few questions.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     },
+     {
+      "text": "כַּמָּה אַחִים יֵשׁ לְךָ?",
+      "tr": "How many brothers and sisters do you have?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "כַּמָּה זֶה עוֹלֶה?",
+      "tr": "How much does it cost?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "כַּמָּה יָפֶה!",
+      "tr": "How beautiful!",
+      "register": "neutral",
+      "context": "exclamation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כַּמָּה זְמַן",
+      "tr": "how long (how much time); some time"
+     },
+     {
+      "text": "עוֹד כַּמָּה",
+      "tr": "a few more"
+     },
+     {
+      "text": "כַּמָּה פְּעָמִים",
+      "tr": "several times; how many times?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עַל אַחַת כַּמָּה וְכַמָּה",
+      "tr": "on one, how much and how much",
+      "kind": "fixed expression",
+      "meaning": "all the more so",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אֲחָדִים / אֲחָדוֹת",
+      "register": "formal",
+      "nuance": "“a few, several” in writing: סְפָרִים אֲחָדִים"
+     },
+     {
+      "word": "קְצָת",
+      "register": "neutral",
+      "nuance": "“some” of something you do not count (קְצָת מַיִם); כַּמָּה is for things you count"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary relates it to Arabic كَمْ (kam) “how many, how much”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic كَمْ (kam) asks “how many?” too — but Arabic keeps the noun singular after it (كَمْ كِتَابًا), while Hebrew makes it plural (כַּמָּה סְפָרִים)."
+    ],
+    "pitfalls": [
+     "The same word asks and states: כַּמָּה סְפָרִים? “how many books?” — כַּמָּה סְפָרִים. “a few books”. Intonation and the question mark decide.",
+     "The noun after it is plural: כַּמָּה יְלָדִים, never *כַּמָּה יֶלֶד."
+    ],
+    "subtleties": [
+     "In a question about something you do not count it means “how much”: כַּמָּה זְמַן? “how much time?”"
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

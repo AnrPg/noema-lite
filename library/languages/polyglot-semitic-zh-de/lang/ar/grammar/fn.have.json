@@ -1,0 +1,249 @@
+{
+ "function": "fn.have",
+ "status": "periphrastic",
+ "summary": "Arabic has no verb “to have”. It says “at me (is) …”: عِنْدِي كِتَابٌ = I have a book. The preposition عِنْدَ (“at, with”) takes the possessive suffixes — عِنْدِي, عِنْدَكَ, عِنْدَكِ, عِنْدَهُ, عِنْدَهَا, عِنْدَنَا, عِنْدَكُمْ, عِنْدَهُمْ — or a noun in the genitive: عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ (my father has three brothers). The thing you have is the grammatical subject: nominative, usually indefinite, after عِنْدَ…. Because عِنْدَ is not a verb, the past is made with كَانَ (كَانَ عِنْدِي, I had) and the negative with لَيْسَ (لَيْسَ عِنْدِي, lesson 8). Two more ways exist: لِي (“for me”, for relatives and lasting things: لِي أَخٌ) and مَعِي (“with me”, on you right now: مَعِي قَلَمٌ).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who has",
+    "عِنْدَ + suffix",
+    "example"
+   ],
+   "rows": [
+    [
+     "I",
+     "عِنْدِي",
+     "عِنْدِي أَخٌ. — I have a brother."
+    ],
+    [
+     "you (to a man)",
+     "عِنْدَكَ",
+     "عِنْدَكَ أُخْتٌ؟ — Do you have a sister?"
+    ],
+    [
+     "you (to a woman)",
+     "عِنْدَكِ",
+     "عِنْدَكِ أَطْفَالٌ؟ — Do you have children?"
+    ],
+    [
+     "he",
+     "عِنْدَهُ",
+     "عِنْدَهُ زَوْجَةٌ. — He has a wife."
+    ],
+    [
+     "she",
+     "عِنْدَهَا",
+     "عِنْدَهَا رَضِيعٌ. — She has a baby."
+    ],
+    [
+     "we",
+     "عِنْدَنَا",
+     "عِنْدَنَا بَيْتٌ. — We have a house."
+    ],
+    [
+     "you (several)",
+     "عِنْدَكُمْ (women only: عِنْدَكُنَّ)",
+     "عِنْدَكُمْ أَوْلَادٌ؟ — Do you have children?"
+    ],
+    [
+     "they",
+     "عِنْدَهُمْ (women only: عِنْدَهُنَّ)",
+     "عِنْدَهُمْ أَرْبَعَةُ أَحْفَادٍ. — They have four grandchildren."
+    ],
+    [
+     "a noun",
+     "عِنْدَ + genitive",
+     "عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ. — My father has three brothers."
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "What you have is the subject.",
+   "text": "In عِنْدِي أَخٌ the word أَخٌ is the subject of a sentence without a verb (“a brother is at me”): nominative -un, not accusative. Compare German Ich habe einen Bruder (accusative) — Arabic says عِنْدِي أَخٌ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The past: add كَانَ.",
+   "text": "كَانَ عِنْدِي بَيْتٌ (I had a house), كَانَ عِنْدَ جَدِّي بَيْتٌ (my grandfather had a house). Before a feminine thing both كَانَ and كَانَتْ are correct: كَانَ / كَانَتْ عِنْدِي سَيَّارَةٌ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "عِنْدِي",
+     "points": [
+      "the everyday “I have”",
+      "things you own or keep, family, time, a question"
+     ]
+    },
+    {
+     "title": "لِي",
+     "points": [
+      "“for me, mine”",
+      "relatives and lasting relations: لِي أَخٌ, لِي أَصْدِقَاءُ كَثِيرُونَ"
+     ]
+    },
+    {
+     "title": "مَعِي",
+     "points": [
+      "“with me”",
+      "what you carry right now: مَعِي قَلَمٌ"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Formal writing also uses لَدَى: لَدَيَّ (I have), لَدَيْكَ (you have) — the same idea, “at me”. Russian у меня есть and Turkish bende var build “to have” in exactly this way."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who has it? → choose the suffix on عِنْدَ: -ī, -ka / -ki, -hu / -hā, -nā, -kum, -hum.",
+   "Is the owner a noun? → عِنْدَ + the noun in the genitive (عِنْدَ أُخْتِي, عِنْدَ الْمُعَلِّمِ).",
+   "What is owned? → nominative, normally indefinite, after عِنْدَ…: عِنْدِي كِتَابٌ.",
+   "Was it in the past? → كَانَ before it: كَانَ عِنْدِي.",
+   "A relative or a lasting relation? → لِي also works; something on you right now? → مَعِي."
+  ]
+ },
+ "traps": [
+  "Not accusative: عِنْدِي أَخٌ, not *عِنْدِي أَخًا.",
+  "عِنْدِي already contains “I”: أَنَا is not needed.",
+  "To a man عِنْدَكَ, to a woman عِنْدَكِ — unvocalized both are عندك.",
+  "عِنْدَ is a preposition, not a verb: it never takes verb endings; the tense comes from كَانَ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:inda"
+  ]
+ },
+ "paradigmCells": [
+  "ADP;1;SG",
+  "ADP;2;SG;MASC",
+  "ADP;2;SG;FEM",
+  "ADP;3;SG;MASC",
+  "ADP;3;SG;FEM",
+  "ADP;1;PL",
+  "ADP;2;PL;MASC",
+  "ADP;3;PL;MASC"
+ ],
+ "needs": {
+  "ADP": 1,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADP",
+   "lemmas": [
+    "ar:inda"
+   ],
+   "cells": [
+    "ADP;1;SG",
+    "ADP;2;SG;MASC",
+    "ADP;2;SG;FEM",
+    "ADP;3;SG;MASC",
+    "ADP;3;SG;FEM",
+    "ADP;1;PL",
+    "ADP;2;PL;MASC",
+    "ADP;3;PL;MASC"
+   ],
+   "count": 8
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.have"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“I have a sister.”",
+   "options": [
+    "عِنْدِي أُخْتٌ",
+    "عِنْدِي أُخْتًا",
+    "أَنَا أُخْتٌ"
+   ],
+   "answer": "عِنْدِي أُخْتٌ",
+   "why": "عِنْدِي + the owned thing in the nominative."
+  },
+  {
+   "q": "“She has a baby.”",
+   "options": [
+    "عِنْدَهَا رَضِيعٌ",
+    "عِنْدَهُ رَضِيعٌ",
+    "عِنْدَكِ رَضِيعٌ"
+   ],
+   "answer": "عِنْدَهَا رَضِيعٌ",
+   "why": "-hā = her / she; -hu = him; -ki = you (a woman)."
+  },
+  {
+   "q": "“We had a house.”",
+   "options": [
+    "كَانَ عِنْدَنَا بَيْتٌ",
+    "عِنْدَنَا بَيْتٌ",
+    "كَانَ عِنْدَنَا بَيْتًا"
+   ],
+   "answer": "كَانَ عِنْدَنَا بَيْتٌ",
+   "why": "The past comes from كَانَ; the house stays the subject (nominative)."
+  },
+  {
+   "q": "“My father has three brothers.”",
+   "options": [
+    "عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ",
+    "عِنْدِي أَبِي ثَلَاثَةُ إِخْوَةٍ",
+    "عِنْدَ أَبِي ثَلَاثُ إِخْوَةٍ"
+   ],
+   "answer": "عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ",
+   "why": "عِنْدَ + the owner in the genitive; أَخ is masculine → ثَلَاثَةُ."
+  },
+  {
+   "q": "German haben, Greek έχω — what does Arabic use instead?",
+   "options": [
+    "the preposition عِنْدَ + a suffix",
+    "the verb كَانَ",
+    "the word هُنَاكَ"
+   ],
+   "answer": "the preposition عِنْدَ + a suffix",
+   "why": "Arabic has no verb “to have”; it says “at me (is)”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.have",
+   "note": "Hebrew has no “to have” either: יֵשׁ לִי (yesh li, “there is to me”) — with the preposition “to”, the twin of Arabic لِي."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.have",
+   "note": "German has a real verb, haben, with an accusative object (Ich habe einen Bruder); in Arabic the owned thing is a nominative subject."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.have",
+   "note": "Chinese has a verb, 有 (yǒu), negated with 没 (没有); it also means “there is”."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.possessive",
+   "note": "The endings of عِنْدِي, عِنْدَكَ … are the possessive endings of كِتَابِي, كِتَابُكَ …"
+  }
+ ]
+}

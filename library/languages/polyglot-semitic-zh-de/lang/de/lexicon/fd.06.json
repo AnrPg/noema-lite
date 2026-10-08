@@ -71,6 +71,13 @@
       "sense": "s1"
      },
      {
+      "text": "Ich habe zwei Schwestern und einen Bruder.",
+      "tr": "I have two sisters and a brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
       "text": "Wir haben Hunger!",
       "tr": "We're hungry! (lit. We have hunger)",
       "register": "informal",
@@ -155,9 +162,11 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German “has” hunger, thirst, fear and luck where English “is” hungry, thirsty, afraid and lucky."
+     "German “has” hunger, thirst, fear and luck where English “is” hungry, thirsty, afraid and lucky.",
+     "Many languages have no everyday verb “to have”: Russian says у меня есть (“at me there is”), Turkish kardeşim var (“my sibling exists”), Hebrew יֵשׁ לִי (“there is to me”), Arabic عِنْدِي (“at me”). German, Greek (έχω) and English use a verb."
     ],
     "pitfalls": [
+     "haben takes the accusative: Ich habe einen Bruder (der Bruder → einen Bruder); die, das and the plural do not change.",
      "du hast, er hat – the b disappears in these two forms.",
      "Age is said with sein, not haben: Ich bin 20 (Jahre alt), never *Ich habe 20 Jahre."
     ],
@@ -165,6 +174,3547 @@
      "Wir haben Montag / Wir haben Mai: “it is Monday / it is May” – haben for the date.",
      "“There is/are” is es gibt, not haben (except regionally)."
     ]
+   }
+  },
+  {
+   "id": "de:Familie",
+   "lemma": "Familie",
+   "pos": "NOUN",
+   "senses": [
+    "family.family"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Familie",
+    "N;ACC;SG": "Familie",
+    "N;DAT;SG": "Familie",
+    "N;GEN;SG": "Familie",
+    "N;NOM;PL": "Familien",
+    "N;ACC;PL": "Familien",
+    "N;DAT;PL": "Familien",
+    "N;GEN;PL": "Familien"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Home, belonging – the people closest to you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family (parents, children and relatives)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     },
+     {
+      "id": "s2",
+      "def": "family (in biology: a group of genera)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Familie ist sehr groß.",
+      "tr": "My family is very big.",
+      "register": "neutral",
+      "context": "introducing yourself",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sind eine Familie mit drei Kindern.",
+      "tr": "We are a family with three children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tomate gehört zur Familie der Nachtschattengewächse.",
+      "tr": "The tomato belongs to the nightshade family.",
+      "register": "technical",
+      "context": "biology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Familie gründen",
+      "tr": "to start a family"
+     },
+     {
+      "text": "die ganze Familie",
+      "tr": "the whole family"
+     },
+     {
+      "text": "Familie haben",
+      "tr": "to have a family (children)"
+     },
+     {
+      "text": "der Familienname",
+      "tr": "surname"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das liegt in der Familie.",
+      "tr": "That lies in the family.",
+      "kind": "idiom",
+      "meaning": "it runs in the family",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "die Angehörigen",
+      "register": "formal",
+      "nuance": "next of kin – official, e.g. in hospital"
+     },
+     {
+      "word": "die Verwandtschaft",
+      "register": "neutral",
+      "nuance": "all one’s relatives together"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Latin familia.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin familia first meant the whole household, slaves included (famulus = servant)."
+    ],
+    "pitfalls": [
+     "Stress on the second syllable: Fa-MI-lie [faˈmiːli̯ə] – the final -ie sounds like “-lje”, not a long “ie”.",
+     "Plural Familien (dative also Familien)."
+    ],
+    "subtleties": [
+     "Haben Sie Familie? (no article) means “Do you have a family / children?”"
+    ]
+   }
+  },
+  {
+   "id": "de:Eltern",
+   "lemma": "Eltern",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "family.parents"
+   ],
+   "forms": {
+    "N;NOM;PL": "Eltern",
+    "N;ACC;PL": "Eltern",
+    "N;DAT;PL": "Eltern",
+    "N;GEN;PL": "Eltern"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mother and father together.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parents (mother and father)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.parents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Eltern wohnen in Athen.",
+      "tr": "My parents live in Athens.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das sind meine Eltern.",
+      "tr": "These are my parents.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute ist Elternabend in der Schule.",
+      "tr": "Today is parents’ evening at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bei den Eltern wohnen",
+      "tr": "to live with one’s parents"
+     },
+     {
+      "text": "Eltern werden",
+      "tr": "to become parents"
+     },
+     {
+      "text": "der Elternabend",
+      "tr": "parents’ evening"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das ist nicht von schlechten Eltern.",
+      "tr": "That is not from bad parents.",
+      "kind": "idiom",
+      "meaning": "that is impressive, not bad at all",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mama und Papa",
+      "register": "informal",
+      "nuance": "mum and dad – what children say"
+     },
+     {
+      "word": "die Erziehungsberechtigten",
+      "register": "formal",
+      "nuance": "legal guardians – on school forms"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German eltern, from Old High German eltirōn, from Proto-Germanic *alþizô. Compare Dutch ouders, English elders. The form is equivalent to a nominalised comparative of alt (“old”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Eltern are “the older ones”: the word is an old comparative of alt, like English elders."
+    ],
+    "pitfalls": [
+     "Eltern exists only in the plural: one parent is ein Elternteil (der/das Elternteil).",
+     "Spelled with E, not Ä, although it comes from alt."
+    ],
+    "subtleties": [
+     "Großeltern (grandparents) and Schwiegereltern (parents-in-law) are built on it."
+    ]
+   }
+  },
+  {
+   "id": "de:Mutter",
+   "lemma": "Mutter",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Mutter",
+    "N;ACC;SG": "Mutter",
+    "N;DAT;SG": "Mutter",
+    "N;GEN;SG": "Mutter",
+    "N;NOM;PL": "Mütter",
+    "N;ACC;PL": "Mütter",
+    "N;DAT;PL": "Müttern",
+    "N;GEN;PL": "Mütter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warmth and care; the word for the most important woman in a child’s life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.mother"
+     },
+     {
+      "id": "s2",
+      "def": "nut (for a bolt; plural Muttern)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist meine Mutter.",
+      "tr": "This is my mother.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Mutter ist Lehrerin.",
+      "tr": "My mother is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich brauche eine Schraube und eine Mutter.",
+      "tr": "I need a screw and a nut.",
+      "register": "technical",
+      "context": "DIY",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Mutter und Kind",
+      "tr": "mother and child"
+     },
+     {
+      "text": "die Muttersprache",
+      "tr": "native language"
+     },
+     {
+      "text": "der Muttertag",
+      "tr": "Mother’s Day"
+     },
+     {
+      "text": "alleinerziehende Mutter",
+      "tr": "single mother"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Vorsicht ist die Mutter der Porzellankiste.",
+      "tr": "Caution is the mother of the china box.",
+      "kind": "saying",
+      "meaning": "better safe than sorry",
+      "register": "colloquial"
+     },
+     {
+      "text": "Mutter Natur",
+      "tr": "Mother Nature",
+      "kind": "fixed expression",
+      "meaning": "nature as a mother",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mama",
+      "register": "informal",
+      "nuance": "mum, mom – what children and adults call their own mother"
+     },
+     {
+      "word": "Mutti",
+      "register": "colloquial",
+      "nuance": "mum – a little old-fashioned"
+     },
+     {
+      "word": "Mami",
+      "register": "children",
+      "nuance": "mummy"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Vater",
+      "note": "father"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German muoter, from Old High German muoter, from Proto-West Germanic *mōder, from Proto-Germanic *mōdēr, from Proto-Indo-European *méh₂tēr. Compare Dutch moeder, English mother, Danish moder, Swedish moder.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Mutter, Greek μητέρα (μήτηρ), Russian мать (mat’) and Latin māter all go back to Indo-European *méh₂tēr.",
+     "Muttersprache (“mother tongue”) is the German word for native language."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Mütter (dative den Müttern). Muttern is the plural of Mutter “nut”.",
+     "Mutter has no ending in the singular: der Mutter (genitive and dative)."
+    ],
+    "subtleties": [
+     "Children address her as Mama, not Mutter; Mutter as an address sounds stiff or old-fashioned.",
+     "Without an article it can work like a name: Mutter ist in der Küche."
+    ]
+   }
+  },
+  {
+   "id": "de:Vater",
+   "lemma": "Vater",
+   "pos": "NOUN",
+   "senses": [
+    "family.father"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Vater",
+    "N;ACC;SG": "Vater",
+    "N;DAT;SG": "Vater",
+    "N;GEN;SG": "Vaters",
+    "N;NOM;PL": "Väter",
+    "N;ACC;PL": "Väter",
+    "N;DAT;PL": "Vätern",
+    "N;GEN;PL": "Väter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Father – protection and authority, today also everyday care.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "father",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.father"
+     },
+     {
+      "id": "s2",
+      "def": "father, founder (der Vater der Idee)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist mein Vater.",
+      "tr": "This is my father.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Vater kocht heute.",
+      "tr": "My father is cooking today.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist der Vater dieser Idee.",
+      "tr": "He is the father of this idea.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Vater werden",
+      "tr": "to become a father"
+     },
+     {
+      "text": "der Vatertag",
+      "tr": "Father’s Day"
+     },
+     {
+      "text": "Vater und Sohn",
+      "tr": "father and son"
+     },
+     {
+      "text": "das Vaterland",
+      "tr": "fatherland"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wie der Vater, so der Sohn.",
+      "tr": "As the father, so the son.",
+      "kind": "proverb",
+      "meaning": "like father, like son",
+      "register": "neutral"
+     },
+     {
+      "text": "Vater Staat",
+      "tr": "Father State",
+      "kind": "fixed expression",
+      "meaning": "the state as provider (often ironic, e.g. about taxes)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Papa",
+      "register": "informal",
+      "nuance": "dad – what children and adults call their own father"
+     },
+     {
+      "word": "Vati",
+      "register": "colloquial",
+      "nuance": "dad – a little old-fashioned"
+     },
+     {
+      "word": "der Erzeuger",
+      "register": "humorous",
+      "nuance": "begetter – the biological father, ironic or pejorative"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Mutter",
+      "note": "mother"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vater, from Old High German fater, from Proto-West Germanic *fader, from Proto-Germanic *fadēr, from Proto-Indo-European *ph₂tḗr. Germanic cognates include Dutch vader, English father, Danish fader, Gothic fadar.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Vater, Greek πατέρας (πατήρ), Latin pater: Indo-European *ph₂tḗr – the p became f in Germanic (and is written v in German)."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Väter (dative den Vätern).",
+     "V is pronounced f: [ˈfaːtɐ]."
+    ],
+    "subtleties": [
+     "Children say Papa; Vater is the neutral word when you talk about him.",
+     "In Germany Vatertag falls on Ascension Day (Christi Himmelfahrt)."
+    ]
+   }
+  },
+  {
+   "id": "de:Sohn",
+   "lemma": "Sohn",
+   "pos": "NOUN",
+   "senses": [
+    "family.son"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Sohn",
+    "N;ACC;SG": "Sohn",
+    "N;DAT;SG": "Sohn",
+    "N;GEN;SG": "Sohnes",
+    "N;NOM;PL": "Söhne",
+    "N;ACC;PL": "Söhne",
+    "N;DAT;PL": "Söhnen",
+    "N;GEN;PL": "Söhne"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A son – with pride, or worry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "son",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.son"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir haben einen Sohn und eine Tochter.",
+      "tr": "We have a son and a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Sohn ist zehn.",
+      "tr": "My son is ten.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist der Sohn eines Lehrers.",
+      "tr": "He is the son of a teacher.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der älteste Sohn",
+      "tr": "the eldest son"
+     },
+     {
+      "text": "der einzige Sohn",
+      "tr": "the only son"
+     },
+     {
+      "text": "Vater und Sohn",
+      "tr": "father and son"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "der verlorene Sohn",
+      "tr": "the lost son",
+      "kind": "fixed expression",
+      "meaning": "the prodigal son (from the Bible)",
+      "register": "neutral"
+     },
+     {
+      "text": "Wie der Vater, so der Sohn.",
+      "tr": "As the father, so the son.",
+      "kind": "proverb",
+      "meaning": "like father, like son",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "der Junge",
+      "register": "colloquial",
+      "nuance": "boy – parents say unser Junge for “our son”"
+     },
+     {
+      "word": "der Sprössling",
+      "register": "humorous",
+      "nuance": "offspring – jokey"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Tochter",
+      "note": "daughter"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German sun, from Old High German sunu, from Proto-West Germanic *sunu, from Proto-Germanic *sunuz, from Proto-Indo-European *suHnús. Compare Dutch zoon, English son, Danish søn, Yiddish זון (zun), Gothic sunus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sohn and Russian сын (syn) are the same Indo-European word *suHnús."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Söhne (dative den Söhnen).",
+     "Genitive des Sohnes or des Sohns."
+    ],
+    "subtleties": [
+     "The long o is written oh: Sohn [zoːn]."
+    ]
+   }
+  },
+  {
+   "id": "de:Tochter",
+   "lemma": "Tochter",
+   "pos": "NOUN",
+   "senses": [
+    "family.daughter"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tochter",
+    "N;ACC;SG": "Tochter",
+    "N;DAT;SG": "Tochter",
+    "N;GEN;SG": "Tochter",
+    "N;NOM;PL": "Töchter",
+    "N;ACC;PL": "Töchter",
+    "N;DAT;PL": "Töchtern",
+    "N;GEN;PL": "Töchter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A daughter – and, in business, a subsidiary.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "daughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.daughter"
+     },
+     {
+      "id": "s2",
+      "def": "subsidiary (company), short for Tochtergesellschaft",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tochter ist Studentin.",
+      "tr": "My daughter is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie haben zwei Töchter.",
+      "tr": "They have two daughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Firma hat eine Tochter in Spanien.",
+      "tr": "The company has a subsidiary in Spain.",
+      "register": "technical",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die älteste Tochter",
+      "tr": "the eldest daughter"
+     },
+     {
+      "text": "die einzige Tochter",
+      "tr": "the only daughter"
+     },
+     {
+      "text": "Mutter und Tochter",
+      "tr": "mother and daughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "das Mädchen",
+      "register": "colloquial",
+      "nuance": "girl – parents may say unser Mädchen for “our daughter”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Sohn",
+      "note": "son"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Old High German tohter. Compare Dutch dochter, English daughter, Swedish dotter.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tochter, Greek θυγατέρα (θυγάτηρ) and Russian дочь (doč’) all go back to one Indo-European word for “daughter”."
+    ],
+    "pitfalls": [
+     "Plural with umlaut only: die Töchter (dative den Töchtern).",
+     "No ending in the singular: der Tochter (genitive, dative)."
+    ],
+    "subtleties": [
+     "Mutter, Tochter and Schwester end in -er like Vater and Bruder, but they are feminine: the meaning decides."
+    ]
+   }
+  },
+  {
+   "id": "de:Bruder",
+   "lemma": "Bruder",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Bruder",
+    "N;ACC;SG": "Bruder",
+    "N;DAT;SG": "Bruder",
+    "N;GEN;SG": "Bruders",
+    "N;NOM;PL": "Brüder",
+    "N;ACC;PL": "Brüder",
+    "N;DAT;PL": "Brüdern",
+    "N;GEN;PL": "Brüder"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A brother – a companion, sometimes a rival.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     },
+     {
+      "id": "s2",
+      "def": "brother (monk; a title: Bruder Johannes)",
+      "register": [
+       "religious"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "bro, mate (address among friends)",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe einen Bruder.",
+      "tr": "I have a brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein großer Bruder ist Student.",
+      "tr": "My big brother is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Bruder Johannes betet.",
+      "tr": "Brother Johannes is praying.",
+      "register": "religious",
+      "context": "monastery",
+      "sense": "s2"
+     },
+     {
+      "text": "Alles klar, Bruder?",
+      "tr": "All good, bro?",
+      "register": "slang",
+      "context": "friends",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der große / kleine Bruder",
+      "tr": "the big / little brother"
+     },
+     {
+      "text": "der ältere / jüngere Bruder",
+      "tr": "the older / younger brother"
+     },
+     {
+      "text": "der Zwillingsbruder",
+      "tr": "twin brother"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Brüderschaft trinken",
+      "tr": "to drink brotherhood",
+      "kind": "fixed expression",
+      "meaning": "to drink together and agree to say du to each other",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "der Bro",
+      "register": "slang",
+      "nuance": "bro – youth slang from English"
+     },
+     {
+      "word": "die Geschwister",
+      "register": "neutral",
+      "nuance": "siblings – brothers and sisters together (plural)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Schwester",
+      "note": "sister"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German bruoder, from Old High German bruoder, from Proto-West Germanic *brōþer, from Proto-Germanic *brōþēr, from Proto-Indo-European *bʰréh₂tēr. Doublet of Frater.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bruder, Russian брат (brat) and Latin frāter are one Indo-European word; Greek φράτηρ meant a clan brother, while the usual Greek word is αδελφός."
+    ],
+    "pitfalls": [
+     "Plural with umlaut only: die Brüder (dative den Brüdern).",
+     "“Siblings” is a separate word: Geschwister (Hast du Geschwister?)."
+    ],
+    "subtleties": [
+     "großer / kleiner Bruder (big / little brother) is the everyday way to say older / younger."
+    ]
+   }
+  },
+  {
+   "id": "de:Schwester",
+   "lemma": "Schwester",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Schwester",
+    "N;ACC;SG": "Schwester",
+    "N;DAT;SG": "Schwester",
+    "N;GEN;SG": "Schwester",
+    "N;NOM;PL": "Schwestern",
+    "N;ACC;PL": "Schwestern",
+    "N;DAT;PL": "Schwestern",
+    "N;GEN;PL": "Schwestern"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A sister – and also a nurse or a nun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "nurse (short for Krankenschwester; also as a title)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "sister, nun",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Schwester heißt Anna.",
+      "tr": "My sister is called Anna.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe zwei Schwestern.",
+      "tr": "I have two sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Schwester, können Sie mir helfen?",
+      "tr": "Nurse, can you help me?",
+      "register": "colloquial",
+      "context": "hospital",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die große / kleine Schwester",
+      "tr": "the big / little sister"
+     },
+     {
+      "text": "die Zwillingsschwester",
+      "tr": "twin sister"
+     },
+     {
+      "text": "die Krankenschwester",
+      "tr": "nurse"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "das Schwesterherz",
+      "register": "colloquial",
+      "nuance": "dear sister – affectionate"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Bruder",
+      "note": "brother"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German swëster, from Old High German swëster, from Proto-Germanic *swestēr. Compare Low German swester, Dutch zuster, English sister, Danish søster, Swedish syster.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Schwester and Russian сестра (sestra) are cognates from Indo-European *swésōr."
+    ],
+    "pitfalls": [
+     "Plural Schwestern (the dative is the same).",
+     "In hospitals the official word today is Pflegerin / Pflegefachfrau; Schwester is the traditional one."
+    ],
+    "subtleties": [
+     "In compounds Schwester- means a “sister” organisation: die Schwesterfirma (sister company), das Schwesterschiff (sister ship)."
+    ]
+   }
+  },
+  {
+   "id": "de:Ehemann",
+   "lemma": "Ehemann",
+   "pos": "NOUN",
+   "senses": [
+    "family.husband"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Ehemann",
+    "N;ACC;SG": "Ehemann",
+    "N;DAT;SG": "Ehemann",
+    "N;GEN;SG": "Ehemannes",
+    "N;NOM;PL": "Ehemänner",
+    "N;ACC;PL": "Ehemänner",
+    "N;DAT;PL": "Ehemännern",
+    "N;GEN;PL": "Ehemänner"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal",
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Husband – the precise, a little formal word; in speech people say mein Mann.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "husband, married man",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.husband"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Bitte geben Sie den Namen Ihres Ehemannes an.",
+      "tr": "Please state your husband’s name.",
+      "register": "formal",
+      "context": "forms",
+      "sense": "s1"
+     },
+     {
+      "text": "Max ist mein Ehemann.",
+      "tr": "Max is my husband.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Ihr Ehemann arbeitet in Wien.",
+      "tr": "Her husband works in Vienna.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der zukünftige Ehemann",
+      "tr": "the future husband"
+     },
+     {
+      "text": "der Ex-Ehemann",
+      "tr": "the ex-husband"
+     },
+     {
+      "text": "Ehemann und Ehefrau",
+      "tr": "husband and wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der Mann",
+      "register": "neutral",
+      "nuance": "husband – the everyday word: mein Mann"
+     },
+     {
+      "word": "der Gatte",
+      "register": "formal",
+      "nuance": "spouse, husband – elevated or ironic"
+     },
+     {
+      "word": "der Partner",
+      "register": "neutral",
+      "nuance": "partner – married or not"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Ehefrau",
+      "note": "wife"
+     }
+    ],
+    "etymology": {
+     "text": "Ehe (“marriage”) + Mann (“husband”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "das Ehepaar (married couple) and die Ehe (marriage) share the first part with Ehemann and Ehefrau."
+    ],
+    "pitfalls": [
+     "In everyday German say mein Mann (my husband); mein Ehemann sounds official."
+    ],
+    "subtleties": [
+     "Ehe once meant “law, custom” (Old High German ēwa): marriage was the union “by law”."
+    ]
+   }
+  },
+  {
+   "id": "de:Ehefrau",
+   "lemma": "Ehefrau",
+   "pos": "NOUN",
+   "senses": [
+    "family.wife"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Ehefrau",
+    "N;ACC;SG": "Ehefrau",
+    "N;DAT;SG": "Ehefrau",
+    "N;GEN;SG": "Ehefrau",
+    "N;NOM;PL": "Ehefrauen",
+    "N;ACC;PL": "Ehefrauen",
+    "N;DAT;PL": "Ehefrauen",
+    "N;GEN;PL": "Ehefrauen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal",
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wife – the precise, a little formal word; in speech people say meine Frau.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wife, married woman",
+      "register": [
+       "formal"
+      ],
+      "concept": "family.wife"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Anna ist meine Ehefrau.",
+      "tr": "Anna is my wife.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kommt mit seiner Ehefrau.",
+      "tr": "He is coming with his wife.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Name der Ehefrau",
+      "tr": "Name of the wife",
+      "register": "formal",
+      "context": "forms",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die zukünftige Ehefrau",
+      "tr": "the future wife"
+     },
+     {
+      "text": "die Ex-Ehefrau",
+      "tr": "the ex-wife"
+     },
+     {
+      "text": "Ehemann und Ehefrau",
+      "tr": "husband and wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die Frau",
+      "register": "neutral",
+      "nuance": "wife – the everyday word: meine Frau"
+     },
+     {
+      "word": "die Gattin",
+      "register": "formal",
+      "nuance": "spouse, wife – elevated or ironic"
+     },
+     {
+      "word": "die Partnerin",
+      "register": "neutral",
+      "nuance": "partner – married or not"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Ehemann",
+      "note": "husband"
+     }
+    ],
+    "etymology": {
+     "text": "From Ehe (“marriage”) + Frau (“woman”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Ehe once meant “law, custom” (Old High German ēwa) – and it is the e- of Ehefrau."
+    ],
+    "pitfalls": [
+     "In everyday German say meine Frau (my wife); meine Ehefrau sounds official.",
+     "Plural Ehefrauen."
+    ],
+    "subtleties": [
+     "Frau alone is both “woman” and “wife”; Ehefrau removes the doubt."
+    ]
+   }
+  },
+  {
+   "id": "de:Baby",
+   "lemma": "Baby",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Baby",
+    "N;ACC;SG": "Baby",
+    "N;DAT;SG": "Baby",
+    "N;GEN;SG": "Babys",
+    "N;NOM;PL": "Babys",
+    "N;ACC;PL": "Babys",
+    "N;DAT;PL": "Babys",
+    "N;GEN;PL": "Babys"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tenderness – a tiny child; also a pet name in pop songs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby (infant)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     },
+     {
+      "id": "s2",
+      "def": "baby (term of endearment, mostly in pop songs)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Unsere Nachbarn haben ein Baby.",
+      "tr": "Our neighbours have a baby.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Baby schläft.",
+      "tr": "The baby is sleeping.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Baby, ich liebe dich!",
+      "tr": "Baby, I love you!",
+      "register": "colloquial",
+      "context": "songs",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Baby bekommen",
+      "tr": "to have a baby"
+     },
+     {
+      "text": "das Baby füttern",
+      "tr": "to feed the baby"
+     },
+     {
+      "text": "der Babysitter",
+      "tr": "babysitter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der Säugling",
+      "register": "formal",
+      "nuance": "infant – medical or official word"
+     },
+     {
+      "word": "das Kleinkind",
+      "register": "neutral",
+      "nuance": "toddler – from about one to three"
+     }
+    ],
+    "etymology": {
+     "text": "Mid-19th-century borrowing from English baby. The use as a term of endearment is a later borrowing from late-20th-century pop culture.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German nouns from English usually form the plural with -s: das Baby – die Babys, das Handy – die Handys."
+    ],
+    "pitfalls": [
+     "Plural Babys – the English spelling Babies is now proscribed.",
+     "Das Baby is neuter, like das Kind and das Mädchen."
+    ],
+    "subtleties": [
+     "German pronounces it the English way: [ˈbeːbi]."
+    ]
+   }
+  },
+  {
+   "id": "de:Großeltern",
+   "lemma": "Großeltern",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "family.grandparents"
+   ],
+   "forms": {
+    "N;NOM;PL": "Großeltern",
+    "N;ACC;PL": "Großeltern",
+    "N;DAT;PL": "Großeltern",
+    "N;GEN;PL": "Großeltern"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandparents – holidays, stories, spoiling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandparents",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandparents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Großeltern wohnen auf dem Land.",
+      "tr": "My grandparents live in the country.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Sommer sind wir bei den Großeltern.",
+      "tr": "In summer we stay with our grandparents.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Großeltern haben oft mehr Zeit.",
+      "tr": "Grandparents often have more time.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bei den Großeltern",
+      "tr": "at the grandparents’"
+     },
+     {
+      "text": "die Großeltern besuchen",
+      "tr": "to visit the grandparents"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Oma und Opa",
+      "register": "informal",
+      "nuance": "grandma and grandpa – what children say"
+     }
+    ],
+    "etymology": {
+     "text": "groß (“great”) + Eltern (“parents”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "groß- works like English grand-: Großvater, Großmutter, Großeltern."
+    ],
+    "pitfalls": [
+     "Plural only, like Eltern: one grandparent = ein Großelternteil (rare); say Großvater or Großmutter.",
+     "Spelled with ß: Großeltern (Swiss Grosseltern)."
+    ],
+    "subtleties": [
+     "Urgroßeltern = great-grandparents (one more generation: ur-)."
+    ]
+   }
+  },
+  {
+   "id": "de:Großvater",
+   "lemma": "Großvater",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Großvater",
+    "N;ACC;SG": "Großvater",
+    "N;DAT;SG": "Großvater",
+    "N;GEN;SG": "Großvaters",
+    "N;NOM;PL": "Großväter",
+    "N;ACC;PL": "Großväter",
+    "N;DAT;PL": "Großvätern",
+    "N;GEN;PL": "Großväter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The grandfather – the neutral word, a little formal for daily use.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandfather"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Großvater ist achtzig.",
+      "tr": "My grandfather is eighty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Sein Großvater war Lehrer.",
+      "tr": "His grandfather was a teacher.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Großvater erzählt eine Geschichte.",
+      "tr": "Grandfather tells a story.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Großvater väterlicherseits",
+      "tr": "the paternal grandfather"
+     },
+     {
+      "text": "der Großvater mütterlicherseits",
+      "tr": "the maternal grandfather"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der Opa",
+      "register": "informal",
+      "nuance": "grandpa – what everybody says in the family"
+     },
+     {
+      "word": "der Großpapa",
+      "register": "dated",
+      "nuance": "grandpapa – old-fashioned"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Großmutter",
+      "note": "grandmother"
+     }
+    ],
+    "etymology": {
+     "text": "From groß + Vater. Displaced Middle High German eltervater, altervater (“grandfather”). Compare English grandfather, which displaced eldfather in a similar manner.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German once said eltervater (“elder father”) – Großvater replaced it, just as English grandfather replaced eldfather."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Großväter (dative den Großvätern).",
+     "German needs a word for which side: Großvater väterlicherseits / mütterlicherseits (paternal / maternal)."
+    ],
+    "subtleties": [
+     "In the family people say Opa; Großvater is for talking about him, in writing or formally."
+    ]
+   }
+  },
+  {
+   "id": "de:Opa",
+   "lemma": "Opa",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Opa",
+    "N;ACC;SG": "Opa",
+    "N;DAT;SG": "Opa",
+    "N;GEN;SG": "Opas",
+    "N;NOM;PL": "Opas",
+    "N;ACC;PL": "Opas",
+    "N;DAT;PL": "Opas",
+    "N;GEN;PL": "Opas"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Opa as “grandpa”, the familiar word for grandfather"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "informal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandpa – warm and familiar; also any old man (sometimes unkind).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandpa, granddad",
+      "register": [
+       "informal"
+      ],
+      "concept": "family.grandfather"
+     },
+     {
+      "id": "s2",
+      "def": "old man (any elderly man; can be disrespectful)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Opa hat zehn Enkel.",
+      "tr": "My grandpa has ten grandchildren.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Opa, erzählst du uns eine Geschichte?",
+      "tr": "Grandpa, will you tell us a story?",
+      "register": "informal",
+      "context": "children",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Opa da fährt sehr langsam.",
+      "tr": "The old guy there is driving very slowly.",
+      "register": "colloquial",
+      "context": "traffic",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Oma und Opa",
+      "tr": "grandma and grandpa"
+     },
+     {
+      "text": "Opa werden",
+      "tr": "to become a grandpa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der Großvater",
+      "register": "neutral",
+      "nuance": "grandfather – the neutral word for talking about him"
+     },
+     {
+      "word": "der Opi",
+      "register": "children",
+      "nuance": "grandpa – even more affectionate"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Dutch opa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Opa and Oma are shared with Dutch, which says opa and oma too."
+    ],
+    "pitfalls": [
+     "Plural Opas (with -s).",
+     "Opa for a stranger can sound rude: Hey, Opa!"
+    ],
+    "subtleties": [
+     "Children call him Opa, adults talking about him say mein Opa or mein Großvater."
+    ]
+   }
+  },
+  {
+   "id": "de:Großmutter",
+   "lemma": "Großmutter",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Großmutter",
+    "N;ACC;SG": "Großmutter",
+    "N;DAT;SG": "Großmutter",
+    "N;GEN;SG": "Großmutter",
+    "N;NOM;PL": "Großmütter",
+    "N;ACC;PL": "Großmütter",
+    "N;DAT;PL": "Großmüttern",
+    "N;GEN;PL": "Großmütter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The grandmother – the neutral word, a little formal for daily use.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandmother"
+     },
+     {
+      "id": "s2",
+      "def": "old woman, elderly lady",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Großmutter ist achtzig.",
+      "tr": "My grandmother is eighty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Großmutter hat vier Enkelinnen.",
+      "tr": "The grandmother has four granddaughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Rotkäppchen besucht ihre Großmutter.",
+      "tr": "Little Red Riding Hood visits her grandmother.",
+      "register": "literary",
+      "context": "fairy tale",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Großmutter väterlicherseits",
+      "tr": "the paternal grandmother"
+     },
+     {
+      "text": "die Großmutter mütterlicherseits",
+      "tr": "the maternal grandmother"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die Oma",
+      "register": "informal",
+      "nuance": "grandma – what everybody says in the family"
+     },
+     {
+      "word": "die Großmama",
+      "register": "dated",
+      "nuance": "grandmama – old-fashioned"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Großvater",
+      "note": "grandfather"
+     }
+    ],
+    "etymology": {
+     "text": "From groß + Mutter. Displaced Middle High German eltermuoter, altermuoter (“grandmother”), related to English eldmother.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Grimms’ fairy tale Rotkäppchen, the wolf disguises himself as die Großmutter."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Großmütter (dative den Großmüttern).",
+     "No ending in the singular: der Großmutter."
+    ],
+    "subtleties": [
+     "In the family people say Oma; Großmutter is for talking about her, in writing or in fairy tales."
+    ]
+   }
+  },
+  {
+   "id": "de:Oma",
+   "lemma": "Oma",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Oma",
+    "N;ACC;SG": "Oma",
+    "N;DAT;SG": "Oma",
+    "N;GEN;SG": "Oma",
+    "N;NOM;PL": "Omas",
+    "N;ACC;PL": "Omas",
+    "N;DAT;PL": "Omas",
+    "N;GEN;PL": "Omas"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Oma as “grandma, granny, nan”, the familiar word for grandmother"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "informal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandma – warm and familiar; also any old woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandma, granny",
+      "register": [
+       "informal"
+      ],
+      "concept": "family.grandmother"
+     },
+     {
+      "id": "s2",
+      "def": "old woman (any elderly woman)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Oma und mein Opa sind da.",
+      "tr": "My grandma and grandpa are here.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Oma, wo ist mein Handy?",
+      "tr": "Grandma, where’s my phone?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kannst du deiner Oma erzählen!",
+      "tr": "Tell that to your grandma! (I don’t believe you)",
+      "register": "colloquial",
+      "context": "disbelief",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Oma und Opa",
+      "tr": "grandma and grandpa"
+     },
+     {
+      "text": "bei Oma",
+      "tr": "at grandma’s"
+     },
+     {
+      "text": "Oma werden",
+      "tr": "to become a grandma"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das kannst du deiner Oma erzählen!",
+      "tr": "You can tell that to your grandma!",
+      "kind": "idiom",
+      "meaning": "I don’t believe a word of it",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "die Großmutter",
+      "register": "neutral",
+      "nuance": "grandmother – the neutral word"
+     },
+     {
+      "word": "die Omi",
+      "register": "children",
+      "nuance": "granny – even more affectionate"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate to Dutch oma.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Opa and Oma are shared with Dutch, which says opa and oma too."
+    ],
+    "pitfalls": [
+     "Plural Omas (with -s).",
+     "Without an article it is used like a name: Oma kommt heute."
+    ],
+    "subtleties": [
+     "Omas Kuchen (grandma’s cake): the genitive -s without an article, like a name."
+    ]
+   }
+  },
+  {
+   "id": "de:Enkel",
+   "lemma": "Enkel",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandson"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Enkel",
+    "N;ACC;SG": "Enkel",
+    "N;DAT;SG": "Enkel",
+    "N;GEN;SG": "Enkels",
+    "N;NOM;PL": "Enkel",
+    "N;ACC;PL": "Enkel",
+    "N;DAT;PL": "Enkeln",
+    "N;GEN;PL": "Enkel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A grandson – or any grandchild.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandson",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandson"
+     },
+     {
+      "id": "s2",
+      "def": "grandchild (boy or girl; mostly plural: die Enkel)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "ankle (regional, north-western Germany)",
+      "register": [
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Enkel ist zwölf.",
+      "tr": "My grandson is twelve.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Ihr Enkel studiert in Berlin.",
+      "tr": "Her grandson studies in Berlin.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s1"
+     },
+     {
+      "text": "Unsere Großeltern haben sechs Enkel.",
+      "tr": "Our grandparents have six grandchildren.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Enkelkind",
+      "tr": "grandchild"
+     },
+     {
+      "text": "der Urenkel",
+      "tr": "great-grandson"
+     },
+     {
+      "text": "Kinder und Enkel",
+      "tr": "children and grandchildren"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "das Enkelkind",
+      "register": "neutral",
+      "nuance": "grandchild – clearly boy or girl"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German enikel, enenkel, eninkel, from Old High German *eninkil, from Proto-Germanic *aninkilaz, from Proto-Indo-European *h₂en- (“ancestor”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "There is a second Enkel: in north-western Germany it means “ankle”, the same word as English ankle.",
+     "der Enkeltrick (the grandchild trick): a scam in which a caller pretends to be a grandchild needing money."
+    ],
+    "pitfalls": [
+     "Plural Enkel – the same as the singular (dative den Enkeln).",
+     "A granddaughter is die Enkelin."
+    ],
+    "subtleties": [
+     "Plural Enkel usually means grandchildren of both sexes."
+    ]
+   }
+  },
+  {
+   "id": "de:Enkelin",
+   "lemma": "Enkelin",
+   "pos": "NOUN",
+   "senses": [
+    "family.granddaughter"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Enkelin",
+    "N;ACC;SG": "Enkelin",
+    "N;DAT;SG": "Enkelin",
+    "N;GEN;SG": "Enkelin",
+    "N;NOM;PL": "Enkelinnen",
+    "N;ACC;PL": "Enkelinnen",
+    "N;DAT;PL": "Enkelinnen",
+    "N;GEN;PL": "Enkelinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A granddaughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "granddaughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.granddaughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Enkelin ist acht.",
+      "tr": "My granddaughter is eight.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Großmutter hat vier Enkelinnen.",
+      "tr": "The grandmother has four granddaughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Enkelin besucht mich jeden Sonntag.",
+      "tr": "My granddaughter visits me every Sunday.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die älteste Enkelin",
+      "tr": "the eldest granddaughter"
+     },
+     {
+      "text": "die Urenkelin",
+      "tr": "great-granddaughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "das Enkelkind",
+      "register": "neutral",
+      "nuance": "grandchild – boy or girl"
+     }
+    ],
+    "etymology": {
+     "text": "Enkel + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The suffix -in makes a female word from almost any person noun – and its plural is always -innen: Enkelinnen, Lehrerinnen, Freundinnen."
+    ],
+    "pitfalls": [
+     "Plural with -nen: die Enkelinnen (double n)."
+    ],
+    "subtleties": [
+     "-in makes the female word: Enkel → Enkelin, Lehrer → Lehrerin."
+    ]
+   }
+  },
+  {
+   "id": "de:Onkel",
+   "lemma": "Onkel",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Onkel",
+    "N;ACC;SG": "Onkel",
+    "N;DAT;SG": "Onkel",
+    "N;GEN;SG": "Onkels",
+    "N;NOM;PL": "Onkel",
+    "N;ACC;PL": "Onkel",
+    "N;DAT;PL": "Onkeln",
+    "N;GEN;PL": "Onkel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An uncle – and, for small children, any friendly grown-up man.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle (a parent’s brother, or an aunt’s husband)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "man (for children: der Onkel Doktor)",
+      "register": [
+       "children"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Onkel hat viele Bücher.",
+      "tr": "My uncle has a lot of books.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist euer Onkel.",
+      "tr": "This is your uncle.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Sag dem Onkel guten Tag!",
+      "tr": "Say hello to the nice man!",
+      "register": "children",
+      "context": "parents to child",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Onkel väterlicherseits",
+      "tr": "the paternal uncle"
+     },
+     {
+      "text": "Onkel und Tante",
+      "tr": "uncle and aunt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "über den großen Onkel laufen",
+      "tr": "to walk over the big uncle",
+      "kind": "idiom",
+      "meaning": "to walk pigeon-toed (toes pointing inwards)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: the old German word Oheim is archaic.",
+    "antonyms": [
+     {
+      "word": "Tante",
+      "note": "aunt"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French oncle.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Onkel and Tante came from French and replaced the older German words Oheim and Muhme."
+    ],
+    "pitfalls": [
+     "Plural Onkel (colloquially Onkels); dative den Onkeln.",
+     "German has one word for the father’s and the mother’s brother; to be precise, add väterlicherseits / mütterlicherseits."
+    ],
+    "subtleties": [
+     "Onkel also covers the husband of an aunt."
+    ]
+   }
+  },
+  {
+   "id": "de:Tante",
+   "lemma": "Tante",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tante",
+    "N;ACC;SG": "Tante",
+    "N;DAT;SG": "Tante",
+    "N;GEN;SG": "Tante",
+    "N;NOM;PL": "Tanten",
+    "N;ACC;PL": "Tanten",
+    "N;DAT;PL": "Tanten",
+    "N;GEN;PL": "Tanten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An aunt – and, for children, any friendly woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt (a parent’s sister, or an uncle’s wife)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     },
+     {
+      "id": "s2",
+      "def": "woman (for children; colloquially also “old girl”)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tante hat drei Töchter.",
+      "tr": "My aunt has three daughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist seine Tante.",
+      "tr": "That is his aunt.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen im Tante-Emma-Laden ein.",
+      "tr": "We shop at the corner shop.",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Tante mütterlicherseits",
+      "tr": "the maternal aunt"
+     },
+     {
+      "text": "Onkel und Tante",
+      "tr": "uncle and aunt"
+     },
+     {
+      "text": "der Tante-Emma-Laden",
+      "tr": "the corner shop (“Aunt Emma shop”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: the old German word Muhme is archaic.",
+    "antonyms": [
+     {
+      "word": "Onkel",
+      "note": "uncle"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French tante.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Tante-Emma-Laden (“Aunt Emma shop”) is a small, old-style corner shop."
+    ],
+    "pitfalls": [
+     "Plural Tanten.",
+     "One word for both sides of the family; add mütterlicherseits / väterlicherseits if needed."
+    ],
+    "subtleties": [
+     "Small children call their parents’ friends Tante and Onkel without any family tie."
+    ]
+   }
+  },
+  {
+   "id": "de:Cousin",
+   "lemma": "Cousin",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Cousin",
+    "N;ACC;SG": "Cousin",
+    "N;DAT;SG": "Cousin",
+    "N;GEN;SG": "Cousins",
+    "N;NOM;PL": "Cousins",
+    "N;ACC;PL": "Cousins",
+    "N;DAT;PL": "Cousins",
+    "N;GEN;PL": "Cousins"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A (male) cousin – French in sound and spelling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (male)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Cousin heißt Max.",
+      "tr": "My cousin is called Max.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Du hast viele Cousins und Cousinen.",
+      "tr": "You have a lot of cousins.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Cousin wohnt in Hamburg.",
+      "tr": "My cousin lives in Hamburg.",
+      "register": "neutral",
+      "context": "where people live",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Cousin zweiten Grades",
+      "tr": "second cousin"
+     },
+     {
+      "text": "Cousins und Cousinen",
+      "tr": "cousins (male and female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der Vetter",
+      "register": "dated",
+      "nuance": "male cousin – the older German word, still used in the south"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Cousine",
+      "note": "female cousin"
+     }
+    ],
+    "etymology": {
+     "text": "Ca. 1600, from Middle French cousin, from Latin consobrinus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Cousin goes back to Latin consobrinus, “child of a mother’s sister”."
+    ],
+    "pitfalls": [
+     "Pronounced the French way, with a nasal vowel: [kuˈzɛ̃ː].",
+     "German distinguishes the sexes: der Cousin (male), die Cousine (female).",
+     "Plural Cousins (with -s)."
+    ],
+    "subtleties": [
+     "Cousins und Cousinen is the full way to say “cousins” of both sexes."
+    ]
+   }
+  },
+  {
+   "id": "de:Cousine",
+   "lemma": "Cousine",
+   "pos": "NOUN",
+   "senses": [
+    "family.cousin"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Cousine",
+    "N;ACC;SG": "Cousine",
+    "N;DAT;SG": "Cousine",
+    "N;GEN;SG": "Cousine",
+    "N;NOM;PL": "Cousinen",
+    "N;ACC;PL": "Cousinen",
+    "N;DAT;PL": "Cousinen",
+    "N;GEN;PL": "Cousinen"
+   },
+   "variants": [
+    {
+     "lemma": "Kusine",
+     "region": "alternative spelling"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A (female) cousin.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cousin (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.cousin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Cousine heißt Anna.",
+      "tr": "My cousin is called Anna.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Cousine ist Studentin.",
+      "tr": "My cousin is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir feiern mit allen Cousinen.",
+      "tr": "We celebrate with all the (female) cousins.",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Cousine zweiten Grades",
+      "tr": "second cousin (female)"
+     },
+     {
+      "text": "Cousins und Cousinen",
+      "tr": "cousins (male and female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die Kusine",
+      "register": "neutral",
+      "nuance": "the same word in German spelling – less common"
+     },
+     {
+      "word": "die Base",
+      "register": "archaic",
+      "nuance": "female cousin – old-fashioned or regional"
+     }
+    ],
+    "etymology": {
+     "text": "17th century, from French cousine, from Latin consobrina.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Cousine is French cousine; those who prefer a German spelling write Kusine."
+    ],
+    "pitfalls": [
+     "Pronounced [kuˈziːnə]: the -e is spoken.",
+     "Plural Cousinen."
+    ],
+    "subtleties": [
+     "The spelling Kusine is also correct (Wiktionary: alternative spelling)."
+    ]
+   }
+  },
+  {
+   "id": "de:Neffe",
+   "lemma": "Neffe",
+   "pos": "NOUN",
+   "senses": [
+    "family.nephew"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Neffe",
+    "N;ACC;SG": "Neffen",
+    "N;DAT;SG": "Neffen",
+    "N;GEN;SG": "Neffen",
+    "N;NOM;PL": "Neffen",
+    "N;ACC;PL": "Neffen",
+    "N;DAT;PL": "Neffen",
+    "N;GEN;PL": "Neffen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A nephew – a sibling’s son.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nephew (son of one’s brother or sister)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.nephew"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Neffe ist ein Baby.",
+      "tr": "My nephew is a baby.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe einen Neffen und zwei Nichten.",
+      "tr": "I have a nephew and two nieces.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Neffe meiner Frau studiert Medizin.",
+      "tr": "My wife’s nephew studies medicine.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Neffen und Nichten",
+      "tr": "nephews and nieces"
+     },
+     {
+      "text": "der Großneffe",
+      "tr": "great-nephew"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Neffe is the only word.",
+    "antonyms": [
+     {
+      "word": "Nichte",
+      "note": "niece"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German neve, from Old High German nefo, nevo, from Proto-West Germanic *nefō, from Proto-Germanic *nefô. Cognate with Dutch neef. Further from Proto-Indo-European *népōts. The form with -ff- is irregular and was spread by Luther.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Neffe and Latin nepōs (grandson, nephew) – the root of English nepotism – are the same Indo-European word."
+    ],
+    "pitfalls": [
+     "Neffe is a weak (n-) noun: every form except the nominative singular ends in -n – Ich habe einen Neffen, mit dem Neffen."
+    ],
+    "subtleties": [
+     "Like der Junge, der Student: masculine nouns of this type add -(e)n in the accusative, dative and genitive."
+    ]
+   }
+  },
+  {
+   "id": "de:Nichte",
+   "lemma": "Nichte",
+   "pos": "NOUN",
+   "senses": [
+    "family.niece"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Nichte",
+    "N;ACC;SG": "Nichte",
+    "N;DAT;SG": "Nichte",
+    "N;GEN;SG": "Nichte",
+    "N;NOM;PL": "Nichten",
+    "N;ACC;PL": "Nichten",
+    "N;DAT;PL": "Nichten",
+    "N;GEN;PL": "Nichten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A niece – a sibling’s daughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "niece (daughter of one’s brother or sister)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.niece"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Unsere Nichte ist Studentin.",
+      "tr": "Our niece is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe zwei Nichten.",
+      "tr": "I have two nieces.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Nichte feiert heute Geburtstag.",
+      "tr": "My niece is celebrating her birthday today.",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Neffen und Nichten",
+      "tr": "nephews and nieces"
+     },
+     {
+      "text": "die Großnichte",
+      "tr": "great-niece"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Nichte is the only word.",
+    "antonyms": [
+     {
+      "word": "Neffe",
+      "note": "nephew"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Middle Low German nichte, from Old Saxon *nifta, from Proto-Germanic *niftiz. This form replaced High German (obsolete) Niftel in the 17th century; it shows the Low German shift -ft- → -cht-. Related to Neffe.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nichte and Neffe are related: both go back to Proto-Germanic words for a sibling’s child."
+    ],
+    "pitfalls": [
+     "Plural Nichten.",
+     "Do not confuse it with nicht (not): die Nichte, with a capital and -e."
+    ],
+    "subtleties": [
+     "The cht comes from Low German (northern) ft: High German once said Niftel."
+    ]
+   }
+  },
+  {
+   "id": "de:Verwandter",
+   "lemma": "Verwandter",
+   "pos": "NOUN",
+   "class": "adj",
+   "senses": [
+    "family.relative"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG;INDF": "Verwandter",
+    "N;NOM;SG;DEF": "Verwandte",
+    "N;ACC;SG": "Verwandten",
+    "N;DAT;SG": "Verwandten",
+    "N;GEN;SG": "Verwandten",
+    "N;NOM;PL;INDF": "Verwandte",
+    "N;NOM;PL;DEF": "Verwandten",
+    "N;ACC;PL;INDF": "Verwandte",
+    "N;ACC;PL;DEF": "Verwandten",
+    "N;DAT;PL": "Verwandten",
+    "N;GEN;PL;DEF": "Verwandten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A relative – someone of your family, near or distant.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "relative (a man, or a person of either sex); a woman is die Verwandte / eine Verwandte",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.relative"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist ein Verwandter.",
+      "tr": "He is a relative.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das sind meine Verwandten.",
+      "tr": "These are my relatives.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben viele Verwandte in Griechenland.",
+      "tr": "We have a lot of relatives in Greece.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie ist eine entfernte Verwandte.",
+      "tr": "She is a distant relative.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein naher Verwandter",
+      "tr": "a close relative"
+     },
+     {
+      "text": "ein entfernter Verwandter",
+      "tr": "a distant relative"
+     },
+     {
+      "text": "Freunde und Verwandte",
+      "tr": "friends and relatives"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der/die Angehörige",
+      "register": "formal",
+      "nuance": "relative, next of kin – official (hospitals, police)"
+     },
+     {
+      "word": "die Verwandtschaft",
+      "register": "neutral",
+      "nuance": "all one’s relatives together (singular collective)"
+     },
+     {
+      "word": "das Familienmitglied",
+      "register": "neutral",
+      "nuance": "family member – also husband or wife"
+     }
+    ],
+    "etymology": {
+     "text": "From verwandt (“related”) + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "verwandt also means “related” for languages: Deutsch und Englisch sind verwandt."
+    ],
+    "pitfalls": [
+     "It declines like an adjective: der Verwandte, but ein Verwandter; die Verwandten, but (no article) Verwandte.",
+     "A woman: die Verwandte, eine Verwandte (dative der/einer Verwandten)."
+    ],
+    "subtleties": [
+     "Wiktionary gives two lemmas: Verwandter (a man, or anyone) and Verwandte (a woman); the plural Verwandte(n) covers everyone."
+    ]
+   }
+  },
+  {
+   "id": "de:mein",
+   "lemma": "mein",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.my"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "mein",
+    "DET;NOM;SG;FEM": "meine",
+    "DET;NOM;SG;NEUT": "mein",
+    "DET;ACC;SG;MASC": "meinen",
+    "DET;ACC;SG;FEM": "meine",
+    "DET;ACC;SG;NEUT": "mein",
+    "DET;DAT;SG;MASC": "meinem",
+    "DET;DAT;SG;FEM": "meiner",
+    "DET;DAT;SG;NEUT": "meinem",
+    "DET;GEN;SG;MASC": "meines",
+    "DET;GEN;SG;FEM": "meiner",
+    "DET;GEN;SG;NEUT": "meines",
+    "DET;NOM;PL": "meine",
+    "DET;ACC;PL": "meine",
+    "DET;DAT;PL": "meinen",
+    "DET;GEN;PL": "meiner"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mine – close to me.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "my",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.my"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist mein Bruder.",
+      "tr": "This is my brother.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Eltern wohnen in Athen.",
+      "tr": "My parents live in Athens.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Gott!",
+      "tr": "My God!",
+      "register": "colloquial",
+      "context": "exclamation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Middle High German and Old High German mīn, from Proto-West Germanic *mīn. Compare English my and mine.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mein and English mine are the same word (Old English mīn)."
+    ],
+    "pitfalls": [
+     "It takes the endings of ein: mein Bruder, meine Schwester, mein Kind – and meine in the plural (ein has no plural, mein has)."
+    ],
+    "subtleties": [
+     "The ending agrees with the thing owned, not with the owner: a woman says mein Mann, a man says meine Frau."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:dein",
+   "lemma": "dein",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.your.sg"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "dein",
+    "DET;NOM;SG;FEM": "deine",
+    "DET;NOM;SG;NEUT": "dein",
+    "DET;ACC;SG;MASC": "deinen",
+    "DET;ACC;SG;FEM": "deine",
+    "DET;ACC;SG;NEUT": "dein",
+    "DET;DAT;SG;MASC": "deinem",
+    "DET;DAT;SG;FEM": "deiner",
+    "DET;DAT;SG;NEUT": "deinem",
+    "DET;GEN;SG;MASC": "deines",
+    "DET;GEN;SG;FEM": "deiner",
+    "DET;GEN;SG;NEUT": "deines",
+    "DET;NOM;PL": "deine",
+    "DET;ACC;PL": "deine",
+    "DET;DAT;PL": "deinen",
+    "DET;GEN;PL": "deiner"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Your – to someone you say du to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "your (to one person you say du to)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.your.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ist das dein Handy?",
+      "tr": "Is that your phone?",
+      "register": "informal",
+      "context": "everyday conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Deine Schwester ist sehr nett.",
+      "tr": "Your sister is very nice.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Middle High German dīn, from Old High German dīn. Akin to Old Saxon thīn, English thine, thy.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "dein is English thine / thy – the old English “du”-possessive."
+    ],
+    "pitfalls": [
+     "dein goes with du; to a person you say Sie to, use Ihr: dein Vater → Ihr Vater."
+    ],
+    "subtleties": [
+     "In letters and messages Dein / Deine may be capitalised as a courtesy (Dein Max)."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:sein.poss",
+   "lemma": "sein",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.his"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "sein",
+    "DET;NOM;SG;FEM": "seine",
+    "DET;NOM;SG;NEUT": "sein",
+    "DET;ACC;SG;MASC": "seinen",
+    "DET;ACC;SG;FEM": "seine",
+    "DET;ACC;SG;NEUT": "sein",
+    "DET;DAT;SG;MASC": "seinem",
+    "DET;DAT;SG;FEM": "seiner",
+    "DET;DAT;SG;NEUT": "seinem",
+    "DET;GEN;SG;MASC": "seines",
+    "DET;GEN;SG;FEM": "seiner",
+    "DET;GEN;SG;NEUT": "seines",
+    "DET;NOM;PL": "seine",
+    "DET;ACC;PL": "seine",
+    "DET;DAT;PL": "seinen",
+    "DET;GEN;PL": "seiner"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "His – or its, for a masculine or neuter owner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "his",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.his"
+     },
+     {
+      "id": "s2",
+      "def": "its (when the owner is masculine or neuter: das Kind und sein Ball)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist seine Frau.",
+      "tr": "That is his wife.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Max und sein Bruder sind hier.",
+      "tr": "Max and his brother are here.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Kind sucht sein Buch.",
+      "tr": "The child is looking for its book.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Middle High German sein, sīn, from Old High German sīn, from Proto-West Germanic *sīn, from Proto-Germanic *sīnaz (“his own, her own, its own, their own”) (a reflexive possessive). Cognate with Dutch zijn (“his, its”), Danish sin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "sein was once a reflexive “his/her/its own” for any owner – Danish sin still works that way."
+    ],
+    "pitfalls": [
+     "sein (his) looks like the verb sein (to be) – the context decides: Das ist sein Vater.",
+     "The owner decides sein or ihr; the noun decides the ending: seine Schwester (his sister), ihr Bruder (her brother)."
+    ],
+    "subtleties": [
+     "For a neuter owner too: das Mädchen und sein Vater (grammatically correct, though people often say ihr Vater)."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:ihr.poss",
+   "lemma": "ihr",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.her",
+    "poss.their"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "ihr",
+    "DET;NOM;SG;FEM": "ihre",
+    "DET;NOM;SG;NEUT": "ihr",
+    "DET;ACC;SG;MASC": "ihren",
+    "DET;ACC;SG;FEM": "ihre",
+    "DET;ACC;SG;NEUT": "ihr",
+    "DET;DAT;SG;MASC": "ihrem",
+    "DET;DAT;SG;FEM": "ihrer",
+    "DET;DAT;SG;NEUT": "ihrem",
+    "DET;GEN;SG;MASC": "ihres",
+    "DET;GEN;SG;FEM": "ihrer",
+    "DET;GEN;SG;NEUT": "ihres",
+    "DET;NOM;PL": "ihre",
+    "DET;ACC;PL": "ihre",
+    "DET;DAT;PL": "ihren",
+    "DET;GEN;PL": "ihrer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Her, or their – the owner is a woman, a feminine noun, or several people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "her",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.her"
+     },
+     {
+      "id": "s2",
+      "def": "their",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.their"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie und ihr Mann sind hier.",
+      "tr": "She and her husband are here.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Anna liebt ihre Großmutter.",
+      "tr": "Anna loves her grandmother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder sind hier und ihre Eltern sind dort.",
+      "tr": "The children are here and their parents are there.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "Max und Anna besuchen ihre Großeltern.",
+      "tr": "Max and Anna visit their grandparents.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "her: from Old High German ira, from Proto-Germanic *hezōi; their: from Old High German iro.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Her, their and polite your all sound the same in German: ihr – one reason the polite form is written with a capital."
+    ],
+    "pitfalls": [
+     "ihr = her and their (and, capitalised, Ihr = your, polite). Also ihr = “you all” (pronoun) and ihr = “to her” – the context decides.",
+     "ihr Bruder = her/their brother; ihre Schwester = her/their sister."
+    ],
+    "subtleties": [
+     "At the start of a sentence Ihr / Ihre can mean her, their or your (polite) – only the context helps."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:unser",
+   "lemma": "unser",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.our"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "unser",
+    "DET;NOM;SG;FEM": "unsere",
+    "DET;NOM;SG;NEUT": "unser",
+    "DET;ACC;SG;MASC": "unseren",
+    "DET;ACC;SG;FEM": "unsere",
+    "DET;ACC;SG;NEUT": "unser",
+    "DET;DAT;SG;MASC": "unserem",
+    "DET;DAT;SG;FEM": "unserer",
+    "DET;DAT;SG;NEUT": "unserem",
+    "DET;GEN;SG;MASC": "unseres",
+    "DET;GEN;SG;FEM": "unserer",
+    "DET;GEN;SG;NEUT": "unseres",
+    "DET;NOM;PL": "unsere",
+    "DET;ACC;PL": "unsere",
+    "DET;DAT;PL": "unseren",
+    "DET;GEN;PL": "unserer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ours – shared by a group I belong to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "our",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.our"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Unsere Familie ist hier.",
+      "tr": "Our family is here.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist unser Haus.",
+      "tr": "This is our house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Vater unser im Himmel",
+      "tr": "Our Father in heaven",
+      "register": "religious",
+      "context": "prayer",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Middle High German unser, from Old High German unsēr, from Proto-West Germanic *unsar.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "unser is English our: the German keeps the n that English lost (compare uns / us)."
+    ],
+    "pitfalls": [
+     "The -er belongs to the stem, it is not an ending: unser Sohn, unsere Tochter, unsere Kinder.",
+     "In speech the e can drop: unsre, unsren – Wiktionary lists both."
+    ],
+    "subtleties": [
+     "Vater unser (the Lord’s Prayer) keeps the old order: the possessive after the noun."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:euer",
+   "lemma": "euer",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.your.pl"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "euer",
+    "DET;NOM;SG;FEM": "eure",
+    "DET;NOM;SG;NEUT": "euer",
+    "DET;ACC;SG;MASC": "euren",
+    "DET;ACC;SG;FEM": "eure",
+    "DET;ACC;SG;NEUT": "euer",
+    "DET;DAT;SG;MASC": "eurem",
+    "DET;DAT;SG;FEM": "eurer",
+    "DET;DAT;SG;NEUT": "eurem",
+    "DET;GEN;SG;MASC": "eures",
+    "DET;GEN;SG;FEM": "eurer",
+    "DET;GEN;SG;NEUT": "eures",
+    "DET;NOM;PL": "eure",
+    "DET;ACC;PL": "eure",
+    "DET;DAT;PL": "euren",
+    "DET;GEN;PL": "eurer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Your – to several people you say ihr to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "your (to several people you say ihr to)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.your.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist euer Onkel.",
+      "tr": "This is your uncle.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo sind eure Eltern?",
+      "tr": "Where are your parents?",
+      "register": "informal",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Middle High German iuwer, from Old High German iuwar. Compare English your, Dutch jouw, uw.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "euer is related to English your (Old English ēower)."
+    ],
+    "pitfalls": [
+     "With an ending the e before r usually drops: euer Sohn, but eure Tochter, euren Sohn (euere is possible but rare)."
+    ],
+    "subtleties": [
+     "euer goes with ihr (you all); to people you say Sie to, use Ihr."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
+   }
+  },
+  {
+   "id": "de:Ihr.poss",
+   "lemma": "Ihr",
+   "pos": "DET",
+   "class": "poss",
+   "senses": [
+    "poss.your.sg",
+    "poss.your.pl"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "Ihr",
+    "DET;NOM;SG;FEM": "Ihre",
+    "DET;NOM;SG;NEUT": "Ihr",
+    "DET;ACC;SG;MASC": "Ihren",
+    "DET;ACC;SG;FEM": "Ihre",
+    "DET;ACC;SG;NEUT": "Ihr",
+    "DET;DAT;SG;MASC": "Ihrem",
+    "DET;DAT;SG;FEM": "Ihrer",
+    "DET;DAT;SG;NEUT": "Ihrem",
+    "DET;GEN;SG;MASC": "Ihres",
+    "DET;GEN;SG;FEM": "Ihrer",
+    "DET;GEN;SG;NEUT": "Ihres",
+    "DET;NOM;PL": "Ihre",
+    "DET;ACC;PL": "Ihre",
+    "DET;DAT;PL": "Ihren",
+    "DET;GEN;PL": "Ihrer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Your – polite, to one or more people you say Sie to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "your (polite, to one person you say Sie to)",
+      "register": [
+       "formal"
+      ],
+      "concept": "poss.your.sg"
+     },
+     {
+      "id": "s2",
+      "def": "your (polite, to several people)",
+      "register": [
+       "formal"
+      ],
+      "concept": "poss.your.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ist das Ihr Vater?",
+      "tr": "Is that your father?",
+      "register": "formal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Hier ist Ihre Tochter.",
+      "tr": "Here is your daughter.",
+      "register": "formal",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Damen und Herren, Ihre Pässe bitte!",
+      "tr": "Ladies and gentlemen, your passports please!",
+      "register": "formal",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "Capitalised ihr (“their”; from Old High German iro): the polite form uses the third person plural, like Sie (“you”) = sie (“they”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German politeness speaks to you as “they”: Sie haben (you have) = sie haben (they have), Ihr Haus = ihr Haus (their house)."
+    ],
+    "pitfalls": [
+     "Always with a capital I: Ihr Vater (your father) – ihr Vater (her/their father)."
+    ],
+    "subtleties": [
+     "One form for one or many people: Ihr Sohn can be said to one parent or to both."
+    ],
+    "synonymsNone": "No synonym: the possessive is the only way to say it."
    }
   }
  ],

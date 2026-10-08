@@ -119,12 +119,21 @@ def build_lang_courses():
             data['langs'][code] = {'language': J(b + 'language.json'), 'lexicon': {n['id']: J(f'{b}lexicon/{n["id"]}.json') for n in nodes if J(f'{b}lexicon/{n["id"]}.json')},
                                    'grammar': {f['id']: J(f'{b}grammar/{f["id"]}.json') for f in data['functions'] if J(f'{b}grammar/{f["id"]}.json')},
                                    'bank': [s for f in ls(b + 'bank') for s in J(b + 'bank/' + f).get('sentences', [])]}
+        # the word profiles (half of the course) go into a second file that the app loads after the course has opened
+        profiles = {}
+        for L in data['langs'].values():
+            for lx in L['lexicon'].values():
+                for x in lx.get('lexemes', []):
+                    if 'profile' in x: profiles[x['id']] = x.pop('profile')
+        pbody = json.dumps(profiles, ensure_ascii=False, separators=(',', ':'))
+        wt(os.path.join(root, 'course.profiles.js'), f'/* GENERATED word profiles of the language course {course["id"]} — do not edit */\n(window.NOEMA_LANGPROFILES = window.NOEMA_LANGPROFILES || {{}})[{json.dumps(course["id"])}] = ' + pbody.replace('</', '<\\/') + ';\n')
         body = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
         wt(os.path.join(root, 'course.pack.js'), f'/* GENERATED language course: {course["id"]} — do not edit; edit the JSON files and run tools/build.py */\n(window.NOEMA_LANGPACKS = window.NOEMA_LANGPACKS || {{}})[{json.dumps(course["id"])}] = ' + body.replace('</', '<\\/') + ';\n')
         words = {c: sum(len(v['lexemes']) for v in data['langs'][c]['lexicon'].values()) for c in course['languages']}
         out.append({'id': course['id'], 'title': course['title'], 'emoji': course.get('emoji', '🌍'), 'languages': course['languages'], 'explainLang': course.get('explainLang', 'en'),
-                    'path': os.path.relpath(os.path.join(root, 'course.pack.js'), ROOT).replace(os.sep, '/'), 'words': words})
-        print(f'language course: {course["id"]} · ' + ' · '.join(f'{c} {n} words' for c, n in words.items()) + f' · {len(body)//1024} KB')
+                    'path': os.path.relpath(os.path.join(root, 'course.pack.js'), ROOT).replace(os.sep, '/'),
+                    'profiles': os.path.relpath(os.path.join(root, 'course.profiles.js'), ROOT).replace(os.sep, '/'), 'words': words})
+        print(f'language course: {course["id"]} · ' + ' · '.join(f'{c} {n} words' for c, n in words.items()) + f' · {len(body)//1024} KB + profiles {len(pbody)//1024} KB')
     return out, failed
 
 def build_site(metas):
@@ -140,7 +149,9 @@ def build_site(metas):
     for f in ('langcore.js', 'langui.js', 'langui.css'):
         if os.path.exists(os.path.join(ENGINE, f)): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     for m in LANG_METAS:
-        dst = os.path.join(out, m['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m['path']), dst)
+        for k in ('path', 'profiles'):
+            if not m.get(k): continue
+            dst = os.path.join(out, m[k]); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m[k]), dst)
     for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:

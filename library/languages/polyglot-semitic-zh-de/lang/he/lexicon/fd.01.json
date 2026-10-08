@@ -311,8 +311,8 @@
       "sense": "s1"
      },
      {
-      "text": "דָּוִד הוּא מוֹרֶה.",
-      "tr": "David is a teacher.",
+      "text": "יוֹסִי הוּא מוֹרֶה.",
+      "tr": "Yossi is a teacher.",
       "register": "neutral",
       "context": "introductions",
       "sense": "s2"
@@ -1269,7 +1269,8 @@
    "lemma": "אִשָּׁה",
    "pos": "NOUN",
    "senses": [
-    "person.woman"
+    "person.woman",
+    "family.wife"
    ],
    "gender": "FEM",
    "mishkal": "קִטְלָה",
@@ -1278,7 +1279,17 @@
     "N;SG;INDF": "אִשָּׁה",
     "N;SG;DEF": "הָאִשָּׁה",
     "N;PL;INDF": "נָשִׁים",
-    "N;PL;DEF": "הַנָּשִׁים"
+    "N;PL;DEF": "הַנָּשִׁים",
+    "N;POSS;1;SG": "אִשְׁתִּי",
+    "N;POSS;2;SG;MASC": "אִשְׁתְּךָ",
+    "N;POSS;2;SG;FEM": "אִשְׁתֵּךְ",
+    "N;POSS;3;SG;MASC": "אִשְׁתּוֹ",
+    "N;POSS;3;SG;FEM": "אִשְׁתָּהּ",
+    "N;POSS;1;PL": "אִשְׁתֵּנוּ",
+    "N;POSS;2;PL;MASC": "אִשְׁתְּכֶם",
+    "N;POSS;2;PL;FEM": "אִשְׁתְּכֶן",
+    "N;POSS;3;PL;MASC": "אִשְׁתָּם",
+    "N;POSS;3;PL;FEM": "אִשְׁתָּן"
    },
    "plene": {
     "N;SG;INDF": "אישה",
@@ -1310,7 +1321,8 @@
       "def": "wife (הָאִשָּׁה שֶׁלּוֹ “his wife”; with a suffix אִשְׁתִּי “my wife”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.wife"
      }
     ],
     "examples": [
@@ -1334,6 +1346,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s2"
+     },
+     {
+      "text": "אִשְׁתִּי מוֹרָה.",
+      "tr": "My wife is a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1348,6 +1367,10 @@
      {
       "text": "אֵשֶׁת עֲסָקִים",
       "tr": "a businesswoman"
+     },
+     {
+      "text": "בַּעַל וְאִשָּׁה",
+      "tr": "husband and wife"
      }
     ],
     "phrases": [
@@ -1370,6 +1393,16 @@
       "word": "בַּחוּרָה",
       "register": "colloquial",
       "nuance": "a young woman, a “gal”"
+     },
+     {
+      "word": "בַּת זוּג",
+      "register": "neutral",
+      "nuance": "“partner, spouse” (of a woman) — for “wife”, neutral and equal; many couples prefer it"
+     },
+     {
+      "word": "רַעְיָה",
+      "register": "formal",
+      "nuance": "“wife, consort” — formal and literary (invitations, speeches)"
      }
     ],
     "antonyms": [
@@ -1949,8 +1982,8 @@
     ],
     "examples": [
      {
-      "text": "דָּוִד הוּא חָבֵר טוֹב.",
-      "tr": "David is a good friend.",
+      "text": "יוֹסִי הוּא חָבֵר טוֹב.",
+      "tr": "Yossi is a good friend.",
       "register": "neutral",
       "context": "friendship",
       "sense": "s1"

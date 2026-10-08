@@ -815,7 +815,7 @@
   {
    "id": "zh.f1.026",
    "frame": "fr.greet",
-   "text": "晚安，小明！",
+   "text": "晚安，王明！",
    "tokens": [
     {
      "t": "晚安",
@@ -826,7 +826,7 @@
      "p": true
     },
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -837,9 +837,9 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "Good night, Xiaoming!",
+   "gloss": "Good night, Wang Ming!",
    "alts": [
-    "小明，晚安！"
+    "王明，晚安！"
    ],
    "level": "A1"
   },
@@ -917,10 +917,10 @@
   {
    "id": "zh.f1.030",
    "frame": "fr.greet",
-   "text": "小明，回头见！",
+   "text": "王明，回头见！",
    "tokens": [
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -939,9 +939,9 @@
    "functions": [
     "fn.greetings"
    ],
-   "gloss": "See you later, Xiaoming!",
+   "gloss": "See you later, Wang Ming!",
    "alts": [
-    "回头见，小明！"
+    "回头见，王明！"
    ],
    "level": "A1"
   },
@@ -1140,7 +1140,7 @@
   {
    "id": "zh.f1.037",
    "frame": "fr.greet",
-   "text": "我叫小明。",
+   "text": "我叫王明。",
    "tokens": [
     {
      "t": "我",
@@ -1151,7 +1151,7 @@
      "l": "zh:jiao"
     },
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -1163,7 +1163,7 @@
     "fn.greetings",
     "fn.pronoun.subject"
    ],
-   "gloss": "My name is Xiaoming.",
+   "gloss": "My name is Wang Ming.",
    "level": "A1"
   },
   {
@@ -1728,7 +1728,7 @@
   {
    "id": "zh.f1.056",
    "frame": "fr.greet",
-   "text": "你好，我叫小明，我是学生。",
+   "text": "你好，我叫王明，我是学生。",
    "tokens": [
     {
      "t": "你好",
@@ -1747,7 +1747,7 @@
      "l": "zh:jiao"
     },
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -1776,9 +1776,9 @@
     "fn.pronoun.subject",
     "fn.copula"
    ],
-   "gloss": "Hello, my name is Xiaoming, I am a student.",
+   "gloss": "Hello, my name is Wang Ming, I am a student.",
    "alts": [
-    "你好，我是学生，我叫小明。"
+    "你好，我是学生，我叫王明。"
    ],
    "level": "A1"
   },
@@ -2219,7 +2219,7 @@
   {
    "id": "zh.f1.068",
    "frame": "fr.be.person",
-   "text": "这是小明，那是安娜。",
+   "text": "这是王明，那是安娜。",
    "tokens": [
     {
      "t": "这",
@@ -2230,7 +2230,7 @@
      "l": "zh:shi"
     },
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -2258,9 +2258,9 @@
     "fn.demonstrative",
     "fn.copula"
    ],
-   "gloss": "This is Xiaoming, that is Anna.",
+   "gloss": "This is Wang Ming, that is Anna.",
    "alts": [
-    "那是安娜，这是小明。"
+    "那是安娜，这是王明。"
    ],
    "level": "A1"
   },
@@ -2310,10 +2310,10 @@
   {
    "id": "zh.f1.070",
    "frame": "fr.be.where",
-   "text": "小明在这里。",
+   "text": "王明在这里。",
    "tokens": [
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -2333,7 +2333,7 @@
     "fn.demonstrative",
     "fn.copula"
    ],
-   "gloss": "Xiaoming is here.",
+   "gloss": "Wang Ming is here.",
    "level": "A1"
   },
   {
@@ -2658,7 +2658,7 @@
   {
    "id": "zh.f1.080",
    "frame": "fr.be.where",
-   "text": "安娜和小明在那里。",
+   "text": "安娜和王明在那里。",
    "tokens": [
     {
      "t": "安娜",
@@ -2669,7 +2669,7 @@
      "l": "zh:he"
     },
     {
-     "t": "小明",
+     "t": "王明",
      "name": true
     },
     {
@@ -2689,9 +2689,9 @@
     "fn.demonstrative",
     "fn.copula"
    ],
-   "gloss": "Anna and Xiaoming are over there.",
+   "gloss": "Anna and Wang Ming are over there.",
    "alts": [
-    "小明和安娜在那里。"
+    "王明和安娜在那里。"
    ],
    "level": "A1"
   },

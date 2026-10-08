@@ -1,0 +1,223 @@
+{
+ "function": "fn.object",
+ "status": "realized",
+ "summary": "The direct object — what is eaten, drunk, bought or liked — simply follows the verb: 我吃面包 ‘I eat bread’, 妈妈买鱼 ‘Mum buys fish’. Chinese has no cases: a noun looks the same as subject (面包在这里 ‘the bread is here’) and as object (我吃面包), and only its place after the verb makes it the object. So the order cannot change: 妈妈喜欢孩子 ‘the mother likes the child’, 孩子喜欢妈妈 ‘the child likes the mother’. A counted object keeps number + measure word: 我要一杯咖啡. Indirect objects (‘give him tea’) and objects with a preposition (‘with a friend’) come with the coverbs 给, 跟 in S11–S13 and in C03; other ways to place the object — as a topic (茶我不喝) or with 把 (我把茶喝了) — come much later.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "subject",
+    "verb",
+    "object"
+   ],
+   "caption": "我 + 吃 + 面包"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Subject",
+    "Verb",
+    "Object",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "我",
+     "喝",
+     "茶",
+     "I drink tea."
+    ],
+    [
+     "妈妈",
+     "买",
+     "鱼",
+     "Mum buys fish."
+    ],
+    [
+     "孩子们",
+     "喜欢",
+     "水果",
+     "The children like fruit."
+    ],
+    [
+     "他",
+     "要",
+     "一杯咖啡",
+     "He wants a cup of coffee."
+    ],
+    [
+     "我们",
+     "想吃",
+     "米饭",
+     "We’d like to eat rice."
+    ]
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "The same noun as subject …",
+     "points": [
+      "面包在这里。 The bread is here.",
+      "茶是我的。 The tea is mine."
+     ]
+    },
+    {
+     "title": "… and as object",
+     "points": [
+      "我吃面包。 I eat bread.",
+      "我喝茶。 I drink tea."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The position is the case",
+   "text": "妈妈喜欢孩子 ‘the mother likes the child’ — 孩子喜欢妈妈 ‘the child likes the mother’. Swap the nouns and you swap the roles. German can say Den Kaffee trinkt er because den shows the accusative; Chinese cannot move the object that way."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Verb + verb + object",
+   "text": "喜欢, 想 and 要 can take a second verb: 我喜欢喝茶 ‘I like drinking tea’, 我想吃鱼 ‘I’d like to eat fish’ — the object follows the last verb."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No preposition, no marker",
+   "text": "喜欢 takes its object directly: 我喜欢茶 (no ‘of’, no ‘von’). And 的 is not an object marker: ‘I eat bread’ is 我吃面包, not *我吃的面包."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "What comes later",
+   "text": "The indirect object (‘give the child milk’ — 给孩子牛奶) and objects with a preposition (跟, 给, 从 — ‘with’, ‘for’, ‘from’) come in S11–S13 and C03; the 把 construction (我把茶喝了 ‘I drank the tea up’) and the object as a topic (茶我不喝 ‘tea, I don’t drink’) much later."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who acts, and what is acted on? → the doer before the verb, the thing after it.",
+   "Is the object counted? → number + measure word before it: 我要两杯茶.",
+   "Is there a second verb (喜欢, 想, 要 + verb)? → the object follows the last verb: 我想喝水.",
+   "Did I mark the object somehow? → don’t: no ending, no particle, no 的."
+  ],
+  "steps": [
+   "Subject",
+   "verb",
+   "object (with number + measure word if counted)"
+  ]
+ },
+ "traps": [
+  "*我面包吃 → 我吃面包 (the object follows the verb).",
+  "*我吃的面包 for ‘I eat bread’ → 我吃面包.",
+  "German Den Tee trinke ich cannot be copied word for word: *茶喝我 would mean ‘the tea drinks me’.",
+  "*我要咖啡一杯 → 我要一杯咖啡 (number + measure word before the noun)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:chi",
+   "zh:he.drink",
+   "zh:mai",
+   "zh:yao",
+   "zh:xiang",
+   "zh:xihuan",
+   "zh:you"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘Mum buys fish.’",
+   "options": [
+    "妈妈买鱼。",
+    "鱼买妈妈。",
+    "妈妈鱼买。"
+   ],
+   "answer": "妈妈买鱼。",
+   "why": "Subject – verb – object."
+  },
+  {
+   "q": "孩子喜欢妈妈。 means …",
+   "options": [
+    "The child likes the mother.",
+    "The mother likes the child.",
+    "The mother and the child like each other."
+   ],
+   "answer": "The child likes the mother.",
+   "why": "The noun after the verb is the object."
+  },
+  {
+   "q": "‘I’d like a cup of coffee.’",
+   "options": [
+    "我要一杯咖啡。",
+    "我要咖啡一杯。",
+    "我一杯咖啡要。"
+   ],
+   "answer": "我要一杯咖啡。",
+   "why": "Number + measure word + noun, after the verb."
+  },
+  {
+   "q": "How does Chinese mark the direct object?",
+   "options": [
+    "by its place after the verb",
+    "with an ending, like German den / einen",
+    "with the particle 的"
+   ],
+   "answer": "by its place after the verb",
+   "why": "There are no cases in Chinese."
+  },
+  {
+   "q": "‘I like drinking tea.’",
+   "options": [
+    "我喜欢喝茶。",
+    "我喜欢茶喝。",
+    "我喝茶喜欢。"
+   ],
+   "answer": "我喜欢喝茶。",
+   "why": "Verb + verb + object."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "German marks the object with the accusative (den Kaffee, einen Apfel) and can move it to the front; Chinese marks it only by its place after the verb."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "Arabic gives the object the ending -a / -an (أَكَلَ الْوَلَدُ تُفَّاحَةً ‘the boy ate an apple’); Chinese has no endings at all."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.object",
+   "note": "Hebrew puts אֶת before a definite object (אֲנִי אוֹכֵל אֶת הַלֶּחֶם); Chinese has no object marker — 我吃面包."
+  }
+ ]
+}

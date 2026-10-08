@@ -1,0 +1,321 @@
+{
+ "function": "fn.possessive",
+ "status": "realized",
+ "summary": "Hebrew says “my, your, his …” in two ways. (1) Everyday: the noun with the article, then שֶׁל “of” with a personal ending — הַבַּיִת שֶׁלִּי “my house”, literally “the house of-me”. The endings give שֶׁלִּי, שֶׁלְּךָ (to a man), שֶׁלָּךְ (to a woman), שֶׁלּוֹ, שֶׁלָּהּ, שֶׁלָּנוּ, שֶׁלָּכֶם, שֶׁלָּכֶן, שֶׁלָּהֶם, שֶׁלָּהֶן; they never agree with the thing owned — only the owner’s person, gender and number count (הָאָחוֹת שֶׁלּוֹ “his sister”). With a name or a noun as owner: הַתִּיק שֶׁל דָּנָה “Dana’s bag”. (2) The possessive suffix on the noun itself: אָחִי “my brother”, אִשְׁתִּי “my wife”, הוֹרַי “my parents”. For most nouns it is formal or written (אִמִּי, בְּנִי), but some family words take it in everyday speech too: אִשְׁתִּי, בַּעֲלִי, אָחִי, אֲחוֹתִי. A noun with a suffix is already definite and takes no הַ. The family words אִמָּא, אַבָּא, סַבָּא, סָבְתָא work like names: אִמָּא שֶׁלִּי, without הַ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "owner",
+    "word",
+    "example"
+   ],
+   "rows": [
+    [
+     "my",
+     "שֶׁלִּי",
+     "הַבַּיִת שֶׁלִּי"
+    ],
+    [
+     "your (to a man)",
+     "שֶׁלְּךָ",
+     "הַבַּיִת שֶׁלְּךָ"
+    ],
+    [
+     "your (to a woman)",
+     "שֶׁלָּךְ",
+     "הַבַּיִת שֶׁלָּךְ"
+    ],
+    [
+     "his",
+     "שֶׁלּוֹ",
+     "הַבַּיִת שֶׁלּוֹ"
+    ],
+    [
+     "her",
+     "שֶׁלָּהּ",
+     "הַבַּיִת שֶׁלָּהּ"
+    ],
+    [
+     "our",
+     "שֶׁלָּנוּ",
+     "הַבַּיִת שֶׁלָּנוּ"
+    ],
+    [
+     "your (pl.)",
+     "שֶׁלָּכֶם / שֶׁלָּכֶן",
+     "הַבַּיִת שֶׁלָּכֶם"
+    ],
+    [
+     "their",
+     "שֶׁלָּהֶם / שֶׁלָּהֶן",
+     "הַבַּיִת שֶׁלָּהֶם"
+    ],
+    [
+     "of + name or noun",
+     "שֶׁל",
+     "הַבַּיִת שֶׁל דָּנָה"
+    ]
+   ],
+   "caption": "Everyday possession: הַ + noun + שֶׁל with the owner’s ending."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "אָח brother",
+    "אָחוֹת sister",
+    "אִשָּׁה wife"
+   ],
+   "rows": [
+    [
+     "my",
+     "אָחִי",
+     "אֲחוֹתִי",
+     "אִשְׁתִּי"
+    ],
+    [
+     "your (m.)",
+     "אָחִיךָ",
+     "אֲחוֹתְךָ",
+     "אִשְׁתְּךָ"
+    ],
+    [
+     "your (f.)",
+     "אָחִיךְ",
+     "אֲחוֹתֵךְ",
+     "אִשְׁתֵּךְ"
+    ],
+    [
+     "his",
+     "אָחִיו",
+     "אֲחוֹתוֹ",
+     "אִשְׁתּוֹ"
+    ],
+    [
+     "her",
+     "אָחִיהָ",
+     "אֲחוֹתָהּ",
+     "אִשְׁתָּהּ"
+    ],
+    [
+     "our",
+     "אָחִינוּ",
+     "אֲחוֹתֵנוּ",
+     "אִשְׁתֵּנוּ"
+    ],
+    [
+     "your (pl. m.)",
+     "אֲחִיכֶם",
+     "אֲחוֹתְכֶם",
+     "אִשְׁתְּכֶם"
+    ],
+    [
+     "their (m.)",
+     "אֲחִיהֶם",
+     "אֲחוֹתָם",
+     "אִשְׁתָּם"
+    ]
+   ],
+   "caption": "The suffixes are the endings of שֶׁל and לְ; אָח and אָב add -ִי- (אָחִיו), feminines in -ָה show their old -ת- (אִשָּׁה → אִשְׁתִּי)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The noun must be definite",
+   "text": "“My house” is הַבַּיִת שֶׁלִּי, with הַ. Without it, בַּיִת שֶׁלִּי means “a house of mine” (הוּא חָבֵר שֶׁלִּי “he’s a friend of mine”). אִמָּא, אַבָּא, סַבָּא and סָבְתָא are used like names: אִמָּא שֶׁלִּי."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "It follows the owner, not the thing",
+   "text": "שֶׁלּוֹ is “his”, שֶׁלָּהּ “her” — whatever the thing: הָאָחוֹת שֶׁלּוֹ “his sister”, הַבֵּן שֶׁלָּהּ “her son”. The word never changes for the thing owned: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי, הַסְּפָרִים שֶׁלִּי. To one person: שֶׁלְּךָ to a man, שֶׁלָּךְ to a woman."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Which style?",
+   "text": "Everyday: noun + שֶׁל (אִמָּא שֶׁלִּי, הַבֵּן שֶׁלִּי). Formal or written: the suffix (אִמִּי, בְּנִי). Some family words take the suffix in everyday speech too: אִשְׁתִּי, בַּעֲלִי, אָחִי, אֲחוֹתִי. A noun with a suffix is definite already: never *הָאָחִי."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "who owns? (person, gender, number)",
+    "everyday or formal?",
+    "everyday: הַ + noun + שֶׁל…",
+    "formal and some family words: the suffix, no הַ"
+   ],
+   "caption": "Saying “my …”"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "הָאָח שֶׁלִּי — article + noun + “of me”",
+      "or the suffix: אָחִי",
+      "no agreement with the thing owned"
+     ]
+    },
+    {
+     "title": "Greek · Turkish",
+     "points": [
+      "ο αδερφός μου — the same order as הָאָח שֶׁלִּי",
+      "kardeşim — a suffix, like אָחִי"
+     ]
+    },
+    {
+     "title": "German · Arabic",
+     "points": [
+      "mein Bruder, meine Schwester — before the noun, agreeing with it",
+      "أَخِي (akhī) — Arabic uses the suffix every day"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Who is the owner (person, gender, number)?",
+    "Am I talking to a man or a woman?",
+    "Does my noun have הַ (or is it אִמָּא, אַבָּא …)?",
+    "Everyday or formal?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who owns it — which person, gender and number? → שֶׁלִּי, שֶׁלּוֹ, שֶׁלָּהּ, שֶׁלָּנוּ …",
+   "Am I speaking to one man or one woman? → שֶׁלְּךָ / שֶׁלָּךְ; to a group → שֶׁלָּכֶם / שֶׁלָּכֶן.",
+   "Does the noun have הַ? It must — except אִמָּא, אַבָּא, סַבָּא, סָבְתָא and names.",
+   "Everyday or formal? → noun + שֶׁל (אִמָּא שֶׁלִּי), or the suffix (אִמִּי).",
+   "Is it a suffix form (אָחִי, אִשְׁתִּי)? → then no הַ and no שֶׁל."
+  ],
+  "steps": [
+   "Find the owner.",
+   "Choose שֶׁל + ending, or the suffix.",
+   "Give the noun הַ when you use שֶׁל."
+  ]
+ },
+ "traps": [
+  "*בַּיִת שֶׁלִּי for “my house” — say הַבַּיִת שֶׁלִּי (without הַ it means “a house of mine”).",
+  "*הָאָחִי — a noun with a suffix never takes הַ: אָחִי.",
+  "שֶׁלִּי does not change for the thing owned: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי, הַסְּפָרִים שֶׁלִּי.",
+  "his / her follow the owner: הָאָחוֹת שֶׁלּוֹ “his sister”, הָאָח שֶׁלָּהּ “her brother”.",
+  "שֶׁלְּךָ is to a man, שֶׁלָּךְ to a woman.",
+  "*אִמָּאִי — “my mum” is אִמָּא שֶׁלִּי; the suffix form belongs to the formal אֵם: אִמִּי."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:sheli",
+   "he:shelcha",
+   "he:shelach",
+   "he:shelo",
+   "he:shela",
+   "he:shelanu",
+   "he:shelachem",
+   "he:shelachen",
+   "he:shelahem",
+   "he:shelahen",
+   "he:shel"
+  ],
+  "tags": [
+   "POSS"
+  ]
+ },
+ "paradigmCells": [
+  "N;POSS;1;SG",
+  "N;POSS;2;SG;MASC",
+  "N;POSS;2;SG;FEM",
+  "N;POSS;3;SG;MASC",
+  "N;POSS;3;SG;FEM",
+  "N;POSS;1;PL",
+  "N;POSS;2;PL;MASC",
+  "N;POSS;2;PL;FEM",
+  "N;POSS;3;PL;MASC",
+  "N;POSS;3;PL;FEM"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;POSS;1;SG",
+    "N;POSS;2;SG;MASC",
+    "N;POSS;2;SG;FEM",
+    "N;POSS;3;SG;MASC",
+    "N;POSS;3;SG;FEM",
+    "N;POSS;1;PL",
+    "N;POSS;2;PL;MASC",
+    "N;POSS;2;PL;FEM",
+    "N;POSS;3;PL;MASC",
+    "N;POSS;3;PL;FEM"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ],
+    "variant": "Formality"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.possessive",
+   "note": "Arabic puts the owner as a suffix on the noun in everyday speech (بَيْتِي “my house”, أَخِي “my brother”) — the form Hebrew keeps for formal style and some family words."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.possessive",
+   "note": "German possessives stand before the noun and agree with it (mein Bruder, meine Schwester, meinen Bruder); Hebrew שֶׁלִּי follows the noun and never agrees with it."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.possessive",
+   "note": "Chinese uses 的 after the owner (我的书) and drops it with close family (我妈妈) — as Hebrew drops הַ in אִמָּא שֶׁלִּי."
+  }
+ ]
+}

@@ -1,37 +1,203 @@
 {
  "function": "fn.negation",
  "status": "realized",
- "summary": "German has two negators. kein (declined like ein, with a plural keine) negates a noun that would otherwise have ein or no article: eine Gurke → keine Gurke, Zwiebeln → keine Zwiebeln, Knoblauch → keinen Knoblauch. nicht negates everything else: verbs, adjectives, adverbs, places and nouns with der/die/das or dieser. nicht usually stands after the object, at the end of a simple main clause (Ich esse die Tomate nicht), but before adjectives, places and a second verb (nicht hier, nicht frisch). The answer word is nein; to contradict a negative question, the answer “yes” is doch.",
+ "summary": "German has two everyday negators. kein (declined like ein, with a plural keine) negates a noun that would otherwise have ein or no article: ein Apfel → kein Apfel, Wasser → kein Wasser, Äpfel → keine Äpfel; as an object, the masculine is keinen (Ich trinke keinen Kaffee). nicht negates everything else: verbs, adjectives, places, and nouns with der/die/das, dieser or a possessive (Ich mag den Käse nicht. Das ist nicht mein Bruder.). In a simple sentence nicht stands at the end, after the object (Ich esse den Fisch nicht), but before an adjective, a place or a second verb (nicht gut, nicht hier, nicht kochen). The other negative words replace both: nichts (nothing), niemand (nobody; object niemanden), nie / niemals (never) and weder … noch (neither … nor). Standard German allows only ONE negation per clause: Ich esse nichts – never *Ich esse nicht nichts, although Greek (δεν τρώω τίποτα) and Russian (я ничего не ем) need two. The answer word is nein; “yes” to a negative question is doch (S09).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "what you negate",
+    "use",
+    "example"
+   ],
+   "rows": [
+    [
+     "a noun with ein",
+     "kein",
+     "Das ist ein Apfel. → Das ist kein Apfel."
+    ],
+    [
+     "a noun with no article",
+     "kein",
+     "Ich trinke Kaffee. → Ich trinke keinen Kaffee."
+    ],
+    [
+     "a noun with der / die / das, dieser, mein …",
+     "nicht",
+     "Ich mag den Käse. → Ich mag den Käse nicht."
+    ],
+    [
+     "the verb (the whole statement)",
+     "nicht",
+     "Mein Bruder kocht. → Mein Bruder kocht nicht."
+    ],
+    [
+     "an adjective, a place",
+     "nicht",
+     "nicht gut · nicht hier"
+    ]
+   ],
+   "caption": "kein or nicht?"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "subject (nominative)",
+     "kein Tee",
+     "keine Suppe",
+     "kein Brot",
+     "keine Eier"
+    ],
+    [
+     "object (accusative)",
+     "keinen Tee (!)",
+     "keine Suppe",
+     "kein Brot",
+     "keine Eier"
+    ]
+   ],
+   "caption": "kein takes the endings of ein – and has a plural"
+  },
+  {
+   "t": "table",
+   "head": [
+    "nicht stands …",
+    "example"
+   ],
+   "rows": [
+    [
+     "at the end of a simple sentence (after the object)",
+     "Ich esse den Fisch nicht."
+    ],
+    [
+     "before an adjective or a predicate noun with an article",
+     "Das Brot ist nicht gut. · Das ist nicht mein Bruder."
+    ],
+    [
+     "before a place word",
+     "Der Kaffee ist nicht hier."
+    ],
+    [
+     "before the infinitive at the end",
+     "Ich will nicht kochen."
+    ],
+    [
+     "before the part it contrasts (… sondern …)",
+     "Ich trinke nicht den Tee (sondern den Kaffee)."
+    ]
+   ],
+   "caption": "Where nicht goes"
+  },
+  {
+   "t": "table",
+   "head": [
+    "positive",
+    "negative",
+    "example"
+   ],
+   "rows": [
+    [
+     "etwas (something)",
+     "nichts",
+     "Ich esse nichts."
+    ],
+    [
+     "jemand (somebody)",
+     "niemand / niemanden",
+     "Niemand ist hier. · Er mag niemanden."
+    ],
+    [
+     "immer (always)",
+     "nie / niemals",
+     "Meine Oma trinkt nie Wein."
+    ],
+    [
+     "… und … (both)",
+     "weder … noch",
+     "Ich trinke weder Tee noch Kaffee."
+    ]
+   ],
+   "caption": "The other negative words – each one is the whole negation"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Only one negation",
+   "text": "Ich esse nichts. Niemand kocht. Ich trinke nie Kaffee. – No nicht or kein beside them. Greek and Russian double the negation (δεν … τίποτα, ничего не …); German does not."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "nein is an answer, not a negator",
+   "text": "Nein, danke. Ich will keinen Tee. – nein answers a question; inside the sentence you need nicht or kein."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek, Russian, Turkish",
+     "points": [
+      "one negator before the verb (δεν, не) or inside it (Turkish -me/-ma: yemiyorum)",
+      "a separate word for “there is no / not have” (Russian нет, Turkish yok)"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "kein inside the noun phrase (keinen Kaffee), nicht late in the clause",
+      "Ich habe kein Brot covers Greek δεν έχω ψωμί, Russian у меня нет хлеба, Turkish ekmeğim yok"
+     ]
+    }
+   ]
+  }
+ ],
  "procedure": {
   "askYourself": [
-   "Am I negating a noun with ein or with no article? → kein (with the ending of ein).",
-   "Otherwise (verb, adjective, place, noun with der/die/das) → nicht.",
-   "Where does nicht go? After the object at the end of the clause, but before an adjective, a place or a second verb.",
-   "Answering a question? nein = no; doch = yes after a negative question."
+   "Am I negating a noun with ein or with no article? → kein (with the ending of ein; masculine object keinen).",
+   "Otherwise (verb, adjective, place, noun with der/die/das or mein) → nicht.",
+   "Where does nicht go? At the end after the object – but before an adjective, a place or an infinitive.",
+   "Do I mean nothing / nobody / never / neither … nor? → nichts, niemand, nie, weder … noch – and no other negation.",
+   "Is it an answer? nein = no; doch = yes after a negative question."
   ],
   "steps": [
    "Find what is negated.",
-   "Choose kein or nicht.",
-   "Give kein the case ending; place nicht."
+   "Choose kein, nicht or a negative word.",
+   "Give kein its ending; place nicht."
   ]
  },
  "traps": [
-  "*Ich habe nicht eine Gurke is not the normal negation → Ich habe keine Gurke.",
-  "kein has a plural: keine Tomaten (ein has none).",
-  "Both are possible for a general dislike: Ich mag keine Gurken = Ich mag Gurken nicht (kein is more usual).",
-  "nein is only an answer word, never inside the clause: Ich mag keine Zwiebeln (not *Ich mag nein Zwiebeln).",
-  "Magst du keinen Spinat? – Doch! means “Yes, I do” – ja would be confusing here."
+  "*Ich habe nicht ein Brot is not the normal negation → Ich habe kein Brot.",
+  "kein has a plural: keine Äpfel (ein has none).",
+  "Masculine object: Ich trinke keinen Kaffee, not *kein Kaffee.",
+  "Both are possible for a general dislike: Ich mag keinen Käse = Ich mag Käse nicht (kein is more usual).",
+  "No double negation: Ich esse nichts, not *Ich esse nicht nichts.",
+  "nein is only an answer word: Ich mag keine Zwiebeln, not *Ich mag nein Zwiebeln.",
+  "weder … noch already negates: Ich habe weder Brot noch Käse (no kein)."
  ],
  "evidence": {
   "lemmas": [
    "de:nicht",
-   "de:kein"
+   "de:kein",
+   "de:nichts",
+   "de:niemand",
+   "de:nie",
+   "de:niemals",
+   "de:weder"
   ]
  },
  "paradigmCells": [
   "DET;NOM;SG;MASC",
   "DET;ACC;SG;MASC",
   "DET;ACC;SG;FEM",
+  "DET;ACC;SG;NEUT",
   "DET;ACC;PL"
  ],
  "needs": {
@@ -49,38 +215,114 @@
    }
   },
   {
-   "type": "contrast",
-   "bank": {
-    "functions": [
-     "fn.negation"
-    ]
-   },
-   "note": "kein vs nicht, with the reason"
-  },
-  {
    "type": "inflect",
    "pos": "DET",
    "lemmas": [
     "de:kein"
    ],
+   "cells": [
+    "DET;NOM;SG;MASC",
+    "DET;NOM;SG;FEM",
+    "DET;ACC;SG;MASC",
+    "DET;ACC;SG;FEM",
+    "DET;ACC;SG;NEUT",
+    "DET;ACC;PL"
+   ],
    "count": 8
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich trinke ___ Kaffee.",
+   "options": [
+    "keinen",
+    "nicht",
+    "kein",
+    "nein"
+   ],
+   "answer": "keinen",
+   "why": "Kaffee without an article → kein; der Kaffee is masculine and an object → keinen."
+  },
+  {
+   "q": "Ich mag den Käse ___.",
+   "options": [
+    "nicht",
+    "kein",
+    "keinen"
+   ],
+   "answer": "nicht",
+   "why": "A noun with der/die/das is negated with nicht, at the end."
+  },
+  {
+   "q": "“I’m not eating anything.”",
+   "options": [
+    "Ich esse nichts.",
+    "Ich esse nicht nichts.",
+    "Ich nicht esse nichts."
+   ],
+   "answer": "Ich esse nichts.",
+   "why": "One negation only."
+  },
+  {
+   "q": "“The coffee isn’t here.”",
+   "options": [
+    "Der Kaffee ist nicht hier.",
+    "Der Kaffee nicht ist hier.",
+    "Der Kaffee ist kein hier."
+   ],
+   "answer": "Der Kaffee ist nicht hier.",
+   "why": "The verb stays second; nicht goes before the place word; kein never negates a place."
+  },
+  {
+   "q": "Wir haben ___ Zucker ___ Milch. (neither … nor)",
+   "options": [
+    "weder … noch",
+    "nicht … nicht",
+    "kein … oder"
+   ],
+   "answer": "weder … noch",
+   "why": "weder … noch = neither … nor."
+  },
+  {
+   "q": "Er mag ___. (nobody)",
+   "options": [
+    "niemanden",
+    "niemand nicht",
+    "keinen niemand"
+   ],
+   "answer": "niemanden",
+   "why": "niemand as an object: niemanden (spoken also niemand)."
   }
  ],
  "seeAlso": [
   {
    "lang": "ar",
    "fn": "fn.negation",
-   "note": "Arabic chooses the negator by tense: lā, lam, lan, laysa, mā."
+   "note": "Arabic chooses the negator by tense: لَا lā (present), لَمْ lam (past), لَنْ lan (future), لَيْسَ laysa (“is not”), مَا mā."
   },
   {
    "lang": "he",
    "fn": "fn.negation",
-   "note": "Hebrew lo for verbs, ein for “there is not”."
+   "note": "Hebrew לֹא before the verb, אֵין for “there is no / not have”: אֵין לִי לֶחֶם (I have no bread)."
   },
   {
    "lang": "zh",
    "fn": "fn.negation",
-   "note": "Chinese 不 for the present and habits, 没 for the past and with 有."
+   "note": "Chinese 不 for the present and habits, 没 for the past and with 有: 我不喝咖啡, 我没有面包."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "doch – the “yes” that contradicts a negative question (S09)."
   }
  ]
 }

@@ -1,0 +1,305 @@
+{
+ "function": "fn.comparison",
+ "status": "periphrastic",
+ "summary": "Chinese never changes the adjective to compare: it adds words. ‘Taller than’ is A 比 B + adjective — 我哥哥比我高 ‘my brother is taller than me’ — with the adjective bare (no 很). How much more follows the adjective (高一点 ‘a bit taller’, 快多了 ‘much faster’, 大两岁 ‘two years older’); 更 or 还 before it says ‘even more’. ‘Not as … as’ is A 没有 B + adjective (我没有他高), ‘as … as’ is A 跟 B 一样 + adjective (我跟他一样高). 更 + adjective is ‘more …’ when the other thing is understood (这个更好 ‘this one is better’), and 最 + adjective is ‘the most …’ (他最高 ‘he is the tallest’, 最好的饭馆 ‘the best restaurant’).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Pattern",
+    "Example"
+   ],
+   "rows": [
+    [
+     "A is more … than B",
+     "A 比 B + adjective",
+     "我哥哥比我高。 My brother is taller than me."
+    ],
+    [
+     "much more",
+     "A 比 B + adjective + 多了",
+     "飞机比火车快多了。 Planes are much faster than trains."
+    ],
+    [
+     "a little more",
+     "A 比 B + adjective + 一点",
+     "这个比那个贵一点。 This one is a bit dearer than that one."
+    ],
+    [
+     "by an amount",
+     "A 比 B + adjective + amount",
+     "我比我妹妹大两岁。 I’m two years older than my sister."
+    ],
+    [
+     "even more",
+     "A 比 B + 更 / 还 + adjective",
+     "今天比昨天更冷。 Today is even colder than yesterday."
+    ],
+    [
+     "not as … as",
+     "A 没有 B + adjective",
+     "我没有我哥哥高。 I’m not as tall as my brother."
+    ],
+    [
+     "as … as",
+     "A 跟 B 一样 + adjective",
+     "我跟他一样高。 I’m as tall as him."
+    ],
+    [
+     "more (than understood)",
+     "更 + adjective",
+     "这个更好。 This one is better."
+    ],
+    [
+     "the most",
+     "最 + adjective",
+     "他最高。 He is the tallest."
+    ]
+   ],
+   "caption": "Comparing: the adjective never changes"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "我哥哥",
+    "比",
+    "我",
+    "高"
+   ],
+   "caption": "A 比 B + adjective — the adjective stays bare"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No 很 after 比",
+   "text": "*他比我很高 → 他比我高. To make it stronger, put 更 / 还 before the adjective (他比我还高 ‘even taller’) or 多了 after it (高多了 ‘much taller’)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The negative: 没有, not 不比",
+   "text": "他没有我高 ‘he is not as tall as me’ is the normal negative. 他不比我高 means ‘he is no taller than me’ — it corrects someone (we are about the same)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The amount goes after the adjective",
+   "text": "大两岁 ‘two years older’, 贵一点 ‘a bit dearer’, 快多了 ‘much faster’ — the quality first, then how much."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "更 — more",
+     "points": [
+      "这个更好。 This one is better.",
+      "我更喜欢茶。 I prefer tea."
+     ]
+    },
+    {
+     "title": "最 — the most",
+     "points": [
+      "这是最好的饭馆。 This is the best restaurant.",
+      "我最喜欢蓝色。 Blue is my favourite colour."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No -er, no -est",
+   "text": "高 · 比他高 · 更高 · 最高 — the adjective never changes. German and Greek change the word (größer, am größten; ψηλότερος, ο ψηλότερος); Chinese adds a word."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Questions",
+   "text": "他比你高吗？ ‘Is he taller than you?’ · 哪个更便宜？ ‘Which one is cheaper?’ · 谁最高？ ‘Who is the tallest?’"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Comparing without 比",
+   "text": "Two bare adjectives already contrast: 这个大，那个小 ‘this one is bigger, that one smaller’."
+  },
+  {
+   "t": "callout",
+   "kind": "analogy",
+   "title": "Like Turkish",
+   "text": "Turkish also keeps the adjective as it is: benden daha uzun ‘taller than me’ (-den ≈ 比, daha ≈ 更), en uzun ‘the tallest’ (en ≈ 最)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Colours: light and dark",
+   "text": "浅 ‘light’ and 深 ‘dark’ go straight before the colour: 浅蓝色 ‘light blue’, 深绿色 ‘dark green’. Colour nouns take 的 before a noun (红色的车) and 是…的 as a predicate (车是红色的); the one-syllable colours join a noun directly (红葡萄酒)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I comparing two things? → A 比 B + adjective.",
+   "Did I put 很 or 非常 after 比? → remove it: use 更 / 还 before the adjective, or 多了 / 一点 after it.",
+   "How much more? → after the adjective: 一点, 多了, or a number (大两岁).",
+   "Is it negative? → A 没有 B + adjective (‘not as … as’).",
+   "Are they equal? → A 跟 B 一样 + adjective.",
+   "The most of a group? → 最 + adjective (the group first: 我们家我爸爸最高).",
+   "Only one thing named, the other understood? → 更 + adjective (这个更好)."
+  ],
+  "steps": [
+   "Say A, then 比 + B.",
+   "Then the bare adjective.",
+   "Then, if needed, how much (一点, 多了, 两岁)."
+  ]
+ },
+ "traps": [
+  "*他比我很高 → 他比我高.",
+  "*他比我不高 → 他没有我高.",
+  "*他比我一点高 → 他比我高一点 (the amount after the adjective).",
+  "*我跟他一样很高 → 我跟他一样高.",
+  "*最很好, *更很好 → 最好, 更好.",
+  "他不比我高 (‘not taller — about the same’) ≠ 他没有我高 (‘not as tall’).",
+  "Older than (people) is 大, not 老: 他比我大两岁."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:bi.than",
+   "zh:geng",
+   "zh:zui",
+   "zh:yiyang",
+   "zh:mei"
+  ]
+ },
+ "needs": {
+  "ADJ": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘My brother is taller than me.’",
+   "options": [
+    "我哥哥比我高。",
+    "我哥哥比我很高。",
+    "我哥哥高比我。"
+   ],
+   "answer": "我哥哥比我高。",
+   "why": "A 比 B + the bare adjective — no 很."
+  },
+  {
+   "q": "‘I’m not as tall as my brother.’",
+   "options": [
+    "我没有我哥哥高。",
+    "我比我哥哥不高。",
+    "我不有我哥哥高。"
+   ],
+   "answer": "我没有我哥哥高。",
+   "why": "The negative comparison is A 没有 B + adjective."
+  },
+  {
+   "q": "‘He is two years older than me.’",
+   "options": [
+    "他比我大两岁。",
+    "他比我两岁大。",
+    "他比我老两岁。"
+   ],
+   "answer": "他比我大两岁。",
+   "why": "The amount follows the adjective, and age uses 大."
+  },
+  {
+   "q": "‘Blue is my favourite colour.’",
+   "options": [
+    "我最喜欢蓝色。",
+    "我喜欢最蓝色。",
+    "我很最喜欢蓝色。"
+   ],
+   "answer": "我最喜欢蓝色。",
+   "why": "最 goes before the verb or adjective it raises to the top."
+  },
+  {
+   "q": "‘I’m as tall as him.’",
+   "options": [
+    "我跟他一样高。",
+    "我跟他一样很高。",
+    "我一样他高。"
+   ],
+   "answer": "我跟他一样高。",
+   "why": "A 跟 B 一样 + the bare adjective."
+  },
+  {
+   "q": "‘Planes are much faster than trains.’",
+   "options": [
+    "飞机比火车快多了。",
+    "飞机比火车很快。",
+    "飞机比火车多快了。"
+   ],
+   "answer": "飞机比火车快多了。",
+   "why": "‘Much more’ is 多了 after the adjective."
+  },
+  {
+   "q": "‘light blue’",
+   "options": [
+    "浅蓝色",
+    "蓝色浅",
+    "黑蓝色"
+   ],
+   "answer": "浅蓝色",
+   "why": "浅 ‘light’ goes straight before the colour; dark blue is 深蓝色."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.comparison",
+   "note": "German changes the adjective: größer als, am größten / der größte (with umlaut); Chinese leaves 大 as it is and adds 比 before the second thing and 最 before the adjective."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.comparison",
+   "note": "Arabic builds a new form from the root, the elative أَفْعَلُ + مِنْ (أَكْبَرُ مِنْ ‘bigger than’), which also serves as the superlative (أَكْبَرُ بَيْتٍ ‘the biggest house’); Chinese uses separate words, 比 and 最."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.comparison",
+   "note": "Hebrew, like Chinese, adds words and leaves the adjective unchanged: יוֹתֵר גָּדוֹל מִ… ‘bigger than’, הֲכִי גָּדוֹל ‘the biggest’ — 更 / 比 and 最 do the same jobs."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.adjective",
+   "note": "The bare adjective (without 很) is the comparison form: 他比我高."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "没有 (S08) is also the negative of a comparison: 我没有他高."
+  }
+ ]
+}

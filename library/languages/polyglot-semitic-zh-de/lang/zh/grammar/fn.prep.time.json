@@ -1,0 +1,380 @@
+{
+ "function": "fn.prep.time",
+ "status": "realized",
+ "summary": "Chinese frames time with words AFTER the time phrase, and the whole phrase stands before the verb: 八点以前 ‘before eight’, 吃饭以后 ‘after eating’, 假期期间 ‘during the holidays’, 吃饭的时候 ‘while eating’, 从去年以来 ‘since last year’. ‘Until’ is 到 (after a verb: 工作到六点) or 直到 (直到十二点才回家 ‘not until twelve’); ‘since’ is 自从 … (以后 / 以来) or 从 … 以来; ‘from … to …’ is 从 … 到 …. ‘At / on / in’ a time has NO word at all: 我七点吃早饭 ‘at seven’, 星期一 ‘on Monday’, 五月 ‘in May’, 冬天 ‘in winter’ (formal writing may add 在). The clock: number + 点 (o’clock) + number + 分 (minutes), 半 for half past: 八点半, 下午三点十分. The date goes from big to small: 年 → 月 → 号 (spoken) / 日 (written): 2026年五月一号. Months are numbered: 一月 … 十二月; 三月 ‘March’ but 三个月 ‘three months’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "English / Greek",
+    "Chinese",
+    "Where the word goes"
+   ],
+   "rows": [
+    [
+     "before eight — πριν από τις οχτώ",
+     "八点以前 / 八点之前",
+     "after the time"
+    ],
+    [
+     "after eating — μετά το φαγητό",
+     "吃饭以后 / 吃饭之后",
+     "after the event"
+    ],
+    [
+     "until six — μέχρι τις έξι",
+     "(工作)到六点 · 直到六点",
+     "after the verb (到) / before the time (直到)"
+    ],
+    [
+     "since last year — από πέρσι",
+     "从去年以来 · 自从去年",
+     "frame: 从 … 以来 / 自从 …"
+    ],
+    [
+     "during the holidays — κατά τη διάρκεια των διακοπών",
+     "假期期间 · 假期里",
+     "after the noun"
+    ],
+    [
+     "while eating — ενώ τρώμε",
+     "吃饭的时候",
+     "after the clause, with 的"
+    ],
+    [
+     "at seven — στις επτά",
+     "七点",
+     "no word"
+    ],
+    [
+     "on Monday — τη Δευτέρα",
+     "星期一",
+     "no word"
+    ],
+    [
+     "in May — τον Μάιο",
+     "五月",
+     "no word"
+    ],
+    [
+     "from Monday to Friday — από Δευτέρα ως Παρασκευή",
+     "从星期一到星期五",
+     "从 … 到 …"
+    ]
+   ],
+   "caption": "Time phrases: the time comes first, the ‘preposition’ after it"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Time",
+    "Chinese",
+    "Read"
+   ],
+   "rows": [
+    [
+     "7:00",
+     "七点",
+     "qī diǎn"
+    ],
+    [
+     "2:00",
+     "两点",
+     "liǎng diǎn (not 二点)"
+    ],
+    [
+     "8:30",
+     "八点半",
+     "bā diǎn bàn"
+    ],
+    [
+     "3:10 p.m.",
+     "下午三点十分",
+     "xiàwǔ sān diǎn shí fēn"
+    ],
+    [
+     "12:00",
+     "中午十二点",
+     "zhōngwǔ shí’èr diǎn"
+    ],
+    [
+     "What time is it?",
+     "现在几点？",
+     "xiànzài jǐ diǎn?"
+    ]
+   ],
+   "caption": "The clock: 点 o’clock, 分 minutes, 半 half"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "2026年",
+    "五月",
+    "一号",
+    "星期五",
+    "上午",
+    "十点"
+   ],
+   "caption": "The date: from big to small (the reverse of Greek and German)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Postpositions of time — like the place words of S12",
+   "text": "桌子上 ‘on the table’ put the place word after the noun (S12); time works the same way: 八点以前, 吃饭以后, 假期期间. 以前 / 以后 even use the words for ‘front’ and ‘back’ (前面, 后面)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No ‘at / on / in’",
+   "text": "Greek στις πέντε, German um fünf, am Montag, im Mai — Chinese: 五点, 星期一, 五月, just before the verb: 我五点走. (Greek τη Δευτέρα and German heute also do without a preposition — Chinese does so everywhere.)"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "三月 — March",
+     "points": [
+      "我三月去。 I’m going in March."
+     ]
+    },
+    {
+     "title": "三个月 — three months",
+     "points": [
+      "我去三个月。 I’m going for three months."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Where a length of time goes",
+   "text": "WHEN comes before the verb (我八点工作 ‘I work at eight’); HOW LONG comes after it (我工作八个小时 ‘I work for eight hours’)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "到 — until (everyday)",
+     "points": [
+      "我们等到明天吧。 Let’s wait until tomorrow.",
+      "从早到晚 from morning till night"
+     ]
+    },
+    {
+     "title": "直到 … 才 … — not until",
+     "points": [
+      "他直到十二点才回家。 He didn’t come home until twelve."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking",
+   "text": "现在几点？ · 今天几号？ · 你的生日是几月几号？ · 你什么时候走？— 吃饭以后。"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it simply WHEN (at, on, in)? → the time word alone, before the verb: 七点, 星期一, 五月.",
+   "Before / after a time or an event? → time + 以前 / 之前, event + 以后 / 之后 — the word comes after.",
+   "Until? → verb + 到 + time (工作到六点); ‘not until’ → 直到 … 才 ….",
+   "Since (up to now)? → 从 … 以来 / 自从 … (以后).",
+   "During? → noun + 期间 / 里; a clause + 的时候.",
+   "From … to …? → 从 A 到 B.",
+   "Is it HOW LONG, not when? → after the verb (工作八个小时).",
+   "A clock time? → 点 + 分 / 半; 2 o’clock = 两点. A date? → 年 → 月 → 号, big to small."
+  ],
+  "steps": [
+   "Build the time phrase (time + 以前 / 以后 / 期间 …).",
+   "Put it before the verb (at the start or after the subject).",
+   "Then the verb and the rest."
+  ]
+ },
+ "traps": [
+  "*以前八点 → 八点以前.",
+  "*在五点 (speech) → 五点.",
+  "*二点 → 两点.",
+  "*一号五月 → 五月一号.",
+  "*我工作八点 (for ‘at eight’) → 我八点工作; 我工作八个小时 = ‘for eight hours’.",
+  "*三月 for ‘three months’ → 三个月.",
+  "*他直到十二点不回家 → 他直到十二点才回家.",
+  "*自从明天 → 从明天起 (自从 only for the past)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:yiqian.before",
+   "zh:zhiqian",
+   "zh:yihou",
+   "zh:zhihou",
+   "zh:dao",
+   "zh:zhidao",
+   "zh:zicong",
+   "zh:yilai",
+   "zh:qijian",
+   "zh:shihou",
+   "zh:dian",
+   "zh:fen.minute",
+   "zh:ban",
+   "zh:hao",
+   "zh:riqi",
+   "zh:shengri",
+   "zh:jiaqi",
+   "zh:fangjia",
+   "zh:nian",
+   "zh:yue",
+   "zh:zhou",
+   "zh:xiaoshi",
+   "zh:zhongtou",
+   "zh:fenzhong",
+   "zh:chuntian",
+   "zh:xiatian",
+   "zh:qiutian",
+   "zh:dongtian",
+   "zh:yiyue",
+   "zh:eryue",
+   "zh:sanyue",
+   "zh:siyue",
+   "zh:wuyue",
+   "zh:liuyue",
+   "zh:qiyue",
+   "zh:bayue",
+   "zh:jiuyue",
+   "zh:shiyue",
+   "zh:shiyiyue",
+   "zh:shieryue"
+  ]
+ },
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘before eight’",
+   "options": [
+    "八点以前",
+    "以前八点",
+    "在八点前面"
+   ],
+   "answer": "八点以前",
+   "why": "以前 follows the time."
+  },
+  {
+   "q": "‘I have breakfast at seven.’",
+   "options": [
+    "我七点吃早饭。",
+    "我吃早饭在七点。",
+    "我在七点吃早饭了。"
+   ],
+   "answer": "我七点吃早饭。",
+   "why": "No word for ‘at’; the time stands before the verb."
+  },
+  {
+   "q": "‘two o’clock’",
+   "options": [
+    "两点",
+    "二点",
+    "两个点"
+   ],
+   "answer": "两点",
+   "why": "With 点 ‘two’ is 两."
+  },
+  {
+   "q": "‘May 1st’",
+   "options": [
+    "五月一号",
+    "一号五月",
+    "五号一月"
+   ],
+   "answer": "五月一号",
+   "why": "Month before day: big to small."
+  },
+  {
+   "q": "‘three months’",
+   "options": [
+    "三个月",
+    "三月",
+    "月三个"
+   ],
+   "answer": "三个月",
+   "why": "三月 is March; a count needs 个."
+  },
+  {
+   "q": "‘He didn’t come home until twelve.’",
+   "options": [
+    "他直到十二点才回家。",
+    "他直到十二点不回家。",
+    "他回家直到十二点。"
+   ],
+   "answer": "他直到十二点才回家。",
+   "why": "‘Not until’ = 直到 … 才 …, without 不."
+  },
+  {
+   "q": "‘after eating’",
+   "options": [
+    "吃饭以后",
+    "以后吃饭",
+    "吃饭以前"
+   ],
+   "answer": "吃饭以后",
+   "why": "以后 follows the event; 以前 means ‘before’."
+  },
+  {
+   "q": "‘I work for eight hours.’",
+   "options": [
+    "我工作八个小时。",
+    "我八点工作。",
+    "我八个小时工作了。"
+   ],
+   "answer": "我工作八个小时。",
+   "why": "How long goes after the verb; 我八点工作 is ‘I work at eight’."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.prep.time",
+   "note": "German puts the preposition first and chooses the case: vor / nach dem Essen (dative), bis acht, seit einem Jahr (dative, with the present tense), während der Ferien (genitive), um acht, am Montag, im Mai; Chinese has postpositions (吃饭以前, 假期期间), no case, and nothing for um / am / im."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.time",
+   "note": "Arabic uses قَبْلَ and بَعْدَ (+ genitive), حَتَّى ‘until’, مُنْذُ ‘since’, خِلَالَ ‘during’ and فِي السَّاعَةِ الْخَامِسَةِ ‘at five’ — all before the noun; Chinese reverses the order: 吃饭以前, 五点."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.time",
+   "note": "Hebrew לִפְנֵי / אַחֲרֵי, עַד, מֵאָז, בְּמֶשֶׁךְ and בְּשָׁעָה חָמֵשׁ come before the time; לִפְנֵי is also ‘in front of’, just as 以前 shares 前 with 前面."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.time.day",
+   "note": "The same rule as S14: the time phrase stands before the verb."
+  }
+ ]
+}

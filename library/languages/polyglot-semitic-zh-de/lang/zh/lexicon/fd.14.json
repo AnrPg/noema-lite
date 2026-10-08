@@ -1,0 +1,3777 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:xingqiyi",
+   "lemma": "星期一",
+   "trad": "星期一",
+   "pinyin": "xīng qī yī",
+   "pos": "NOUN",
+   "senses": [
+    "time.monday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The week starts again — alarm clocks, school, work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Monday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.monday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期一我去学校。",
+      "py": "Xīngqīyī wǒ qù xuéxiào.",
+      "tr": "On Monday I go to school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "你星期一工作吗？",
+      "py": "Nǐ xīngqīyī gōngzuò ma?",
+      "tr": "Do you work on Monday?",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "今天是星期一。",
+      "py": "Jīntiān shì xīngqīyī.",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期一早上",
+      "tr": "Monday morning"
+     },
+     {
+      "text": "每个星期一",
+      "tr": "every Monday"
+     },
+     {
+      "text": "下个星期一",
+      "tr": "next Monday"
+     },
+     {
+      "text": "上个星期一",
+      "tr": "last Monday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周一",
+      "register": "formal",
+      "nuance": "zhōuyī: Monday — written, timetables, signs"
+     },
+     {
+      "word": "礼拜一",
+      "register": "colloquial",
+      "nuance": "lǐbàiyī: Monday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 一: ‘week-day 一’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 一 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek Δευτέρα ‘second’, Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday — Chinese counts from Monday: 星期一 ‘week-one’."
+    ],
+    "pitfalls": [
+     "No word for ‘on’: 星期一我工作 / 我星期一工作 — 在星期一 is bookish, and the day never goes at the end (*我工作星期一).",
+     "Monday is ONE in Chinese but ‘second’ in Greek: don’t translate Δευτέρα as *星期二."
+    ],
+    "subtleties": [
+     "Only Sunday has a name (星期天 / 星期日); Monday to Saturday are just numbers 1–6."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqier",
+   "lemma": "星期二",
+   "trad": "星期二",
+   "pinyin": "xīng qī èr",
+   "pos": "NOUN",
+   "senses": [
+    "time.tuesday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An ordinary weekday, the week in full swing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Tuesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tuesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期二我们吃鱼。",
+      "py": "Xīngqī'èr wǒmen chī yú.",
+      "tr": "On Tuesdays we eat fish.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "星期二你有时间吗？",
+      "py": "Xīngqī'èr nǐ yǒu shíjiān ma?",
+      "tr": "Do you have time on Tuesday?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "明天是星期二。",
+      "py": "Míngtiān shì xīngqī'èr.",
+      "tr": "Tomorrow is Tuesday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期二早上",
+      "tr": "Tuesday morning"
+     },
+     {
+      "text": "每个星期二",
+      "tr": "every Tuesday"
+     },
+     {
+      "text": "下个星期二",
+      "tr": "next Tuesday"
+     },
+     {
+      "text": "上个星期二",
+      "tr": "last Tuesday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周二",
+      "register": "formal",
+      "nuance": "zhōu’èr: Tuesday — written, timetables"
+     },
+     {
+      "word": "礼拜二",
+      "register": "colloquial",
+      "nuance": "lǐbài’èr: Tuesday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 二: ‘week-day 二’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 二 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Russian вторник (from второй ‘second’) and Chinese 星期二 ‘week-two’ agree: both count from Monday. Greek Τρίτη ‘third’ counts from Sunday."
+    ],
+    "pitfalls": [
+     "It is 星期二 with 二, never *星期两: 两 is only for counting things (两个人), not for names and order."
+    ],
+    "subtleties": [
+     "‘Every Tuesday’ is 每个星期二 or, in writing, 每周二."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqisan",
+   "lemma": "星期三",
+   "trad": "星期三",
+   "pinyin": "xīng qī sān",
+   "pos": "NOUN",
+   "senses": [
+    "time.wednesday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midweek — halfway to the weekend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Wednesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.wednesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期三下午我没有课。",
+      "py": "Xīngqīsān xiàwǔ wǒ méiyǒu kè.",
+      "tr": "On Wednesday afternoon I have no classes.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我们星期三见吧。",
+      "py": "Wǒmen xīngqīsān jiàn ba.",
+      "tr": "Let’s meet on Wednesday.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "今天不是星期三，是星期四。",
+      "py": "Jīntiān bú shì xīngqīsān, shì xīngqīsì.",
+      "tr": "Today isn’t Wednesday, it’s Thursday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期三早上",
+      "tr": "Wednesday morning"
+     },
+     {
+      "text": "每个星期三",
+      "tr": "every Wednesday"
+     },
+     {
+      "text": "下个星期三",
+      "tr": "next Wednesday"
+     },
+     {
+      "text": "上个星期三",
+      "tr": "last Wednesday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周三",
+      "register": "formal",
+      "nuance": "zhōusān: Wednesday — written"
+     },
+     {
+      "word": "礼拜三",
+      "register": "colloquial",
+      "nuance": "lǐbàisān: Wednesday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 三: ‘week-day 三’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 三 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "German Mittwoch ‘mid-week’ and Russian среда (‘middle’) name Wednesday after its place in the week; Chinese just counts: 3."
+    ],
+    "pitfalls": [
+     "The number after 星期 names the day (星期三 ‘Wednesday’); a number before it counts weeks: 三个星期 ‘three weeks’."
+    ],
+    "subtleties": [
+     "In writing and on timetables 周三 is common: 周三下午."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqisi",
+   "lemma": "星期四",
+   "trad": "星期四",
+   "pinyin": "xīng qī sì",
+   "pos": "NOUN",
+   "senses": [
+    "time.thursday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Almost there — the week tipping towards Friday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Thursday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.thursday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期四我去超市。",
+      "py": "Xīngqīsì wǒ qù chāoshì.",
+      "tr": "On Thursday I go to the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "星期四晚上你在家吗？",
+      "py": "Xīngqīsì wǎnshang nǐ zài jiā ma?",
+      "tr": "Are you home on Thursday evening?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "今天星期四。",
+      "py": "Jīntiān xīngqīsì.",
+      "tr": "Today is Thursday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期四早上",
+      "tr": "Thursday morning"
+     },
+     {
+      "text": "每个星期四",
+      "tr": "every Thursday"
+     },
+     {
+      "text": "下个星期四",
+      "tr": "next Thursday"
+     },
+     {
+      "text": "上个星期四",
+      "tr": "last Thursday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周四",
+      "register": "formal",
+      "nuance": "zhōusì: Thursday — written"
+     },
+     {
+      "word": "礼拜四",
+      "register": "colloquial",
+      "nuance": "lǐbàisì: Thursday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 四: ‘week-day 四’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 四 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Russian четверг (from четвёртый ‘fourth’) is Chinese 星期四 ‘week-four’; Greek Πέμπτη, Hebrew יוֹם חֲמִישִׁי and Arabic الخميس all say ‘fifth’."
+    ],
+    "pitfalls": [
+     "Listen for the tone: 星期四 xīngqīsì (4th tone) is Thursday; 十 shí (2nd tone) is ‘ten’."
+    ],
+    "subtleties": [
+     "With days and dates 是 can drop: 今天星期四 ‘today is Thursday’ — the time word itself is the predicate."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqiwu",
+   "lemma": "星期五",
+   "trad": "星期五",
+   "pinyin": "xīng qī wǔ",
+   "pos": "NOUN",
+   "senses": [
+    "time.friday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the working week — evenings out, plans for the weekend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Friday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.friday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期五晚上我们去饭馆吃饭。",
+      "py": "Xīngqīwǔ wǎnshang wǒmen qù fànguǎn chīfàn.",
+      "tr": "On Friday evening we go out to a restaurant.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "星期五我不工作。",
+      "py": "Xīngqīwǔ wǒ bù gōngzuò.",
+      "tr": "I don’t work on Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "下个星期五是我的生日。",
+      "py": "Xià ge xīngqīwǔ shì wǒ de shēngrì.",
+      "tr": "Next Friday is my birthday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期五早上",
+      "tr": "Friday morning"
+     },
+     {
+      "text": "每个星期五",
+      "tr": "every Friday"
+     },
+     {
+      "text": "下个星期五",
+      "tr": "next Friday"
+     },
+     {
+      "text": "上个星期五",
+      "tr": "last Friday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周五",
+      "register": "formal",
+      "nuance": "zhōuwǔ: Friday — written"
+     },
+     {
+      "word": "礼拜五",
+      "register": "colloquial",
+      "nuance": "lǐbàiwǔ: Friday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 五: ‘week-day 五’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 五 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek Παρασκευή ‘preparation’ (for the Sabbath), Arabic الجمعة ‘the gathering’ (Friday prayer; Turkish cuma comes from it), Russian пятница ‘fifth’ — Chinese 星期五 ‘week-five’ agrees with the Russian."
+    ],
+    "pitfalls": [
+     "‘Next Friday’ is 下个星期五 (or 下星期五), ‘last Friday’ 上个星期五: 下 ‘down’ is the future, 上 ‘up’ the past."
+    ],
+    "subtleties": [
+     "星期五晚上 ‘Friday evening’: the bigger unit comes first, as in dates."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqiliu",
+   "lemma": "星期六",
+   "trad": "星期六",
+   "pinyin": "xīng qī liù",
+   "pos": "NOUN",
+   "senses": [
+    "time.saturday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "No school, no office — the first day of the weekend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Saturday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.saturday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期六我们去公园。",
+      "py": "Xīngqīliù wǒmen qù gōngyuán.",
+      "tr": "On Saturday we go to the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "星期六你几点起床？",
+      "py": "Xīngqīliù nǐ jǐ diǎn qǐchuáng?",
+      "tr": "What time do you get up on Saturday?",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "星期六和星期天是周末。",
+      "py": "Xīngqīliù hé xīngqītiān shì zhōumò.",
+      "tr": "Saturday and Sunday are the weekend.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期六早上",
+      "tr": "Saturday morning"
+     },
+     {
+      "text": "每个星期六",
+      "tr": "every Saturday"
+     },
+     {
+      "text": "下个星期六",
+      "tr": "next Saturday"
+     },
+     {
+      "text": "上个星期六",
+      "tr": "last Saturday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周六",
+      "register": "formal",
+      "nuance": "zhōuliù: Saturday — written"
+     },
+     {
+      "word": "礼拜六",
+      "register": "colloquial",
+      "nuance": "lǐbàiliù: Saturday — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 六: ‘week-day 六’ — the days are numbered from Monday.",
+     "src": "morphemes: 星期 + 六 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek Σάββατο, Hebrew שַׁבָּת, Arabic السَّبْت, Russian суббота and German Samstag all come from the Hebrew Sabbath; Chinese simply says ‘week-six’."
+    ],
+    "pitfalls": [
+     "星期六 is the last numbered day: there is no *星期七 — Sunday is 星期天 / 星期日."
+    ],
+    "subtleties": [
+     "礼拜六 is heard in the south (Shanghai) and in older speech."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqitian",
+   "lemma": "星期天",
+   "trad": "星期天",
+   "pinyin": "xīng qī tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.sunday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A slow day — family lunch, a walk in the park.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Sunday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.sunday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期天我在家。",
+      "py": "Xīngqītiān wǒ zài jiā.",
+      "tr": "On Sunday I’m at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "星期天我们去奶奶家。",
+      "py": "Xīngqītiān wǒmen qù nǎinai jiā.",
+      "tr": "On Sundays we go to Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "今天是星期天，超市开门吗？",
+      "py": "Jīntiān shì xīngqītiān, chāoshì kāimén ma?",
+      "tr": "It’s Sunday today — is the supermarket open?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期天早上",
+      "tr": "Sunday morning"
+     },
+     {
+      "text": "每个星期天",
+      "tr": "every Sunday"
+     },
+     {
+      "text": "下个星期天",
+      "tr": "next Sunday"
+     },
+     {
+      "text": "上个星期天",
+      "tr": "last Sunday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "星期日",
+      "register": "formal",
+      "nuance": "xīngqīrì: Sunday — written, calendars"
+     },
+     {
+      "word": "礼拜天",
+      "register": "colloquial",
+      "nuance": "lǐbàitiān: Sunday — ‘service day’, southern and older speech"
+     },
+     {
+      "word": "周日",
+      "register": "formal",
+      "nuance": "zhōurì: Sunday — timetables, signs"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 天: 天 ‘day’ — the one day of the week with a name, not a number.",
+     "src": "morphemes: 星期 + 天 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek Κυριακή ‘the Lord’s day’, Russian воскресенье ‘resurrection’, Turkish pazar ‘market’, German Sonntag ‘sun-day’ — Chinese calls it the ‘week-day’ (天 ‘day’)."
+    ],
+    "pitfalls": [
+     "*星期七 does not exist: Sunday is 星期天 (spoken) or 星期日 (written)."
+    ],
+    "subtleties": [
+     "星期天 is the everyday spoken form; 星期日 is used on calendars and forms, 周日 on timetables."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqiri",
+   "lemma": "星期日",
+   "trad": "星期日",
+   "pinyin": "xīng qī rì",
+   "pos": "NOUN",
+   "senses": [
+    "time.sunday"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sunday as it is printed — calendars, opening hours, forms.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Sunday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.sunday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期日休息。",
+      "py": "Xīngqīrì xiūxi.",
+      "tr": "Closed on Sundays.",
+      "register": "formal",
+      "context": "signs",
+      "sense": "s1"
+     },
+     {
+      "text": "我们星期日见。",
+      "py": "Wǒmen xīngqīrì jiàn.",
+      "tr": "See you on Sunday.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这个月有五个星期日。",
+      "py": "Zhège yuè yǒu wǔ ge xīngqīrì.",
+      "tr": "This month has five Sundays.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期日早上",
+      "tr": "Sunday morning"
+     },
+     {
+      "text": "每个星期日",
+      "tr": "every Sunday"
+     },
+     {
+      "text": "下个星期日",
+      "tr": "next Sunday"
+     },
+     {
+      "text": "上个星期日",
+      "tr": "last Sunday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "星期天",
+      "register": "neutral",
+      "nuance": "xīngqītiān: Sunday — the spoken form"
+     },
+     {
+      "word": "周日",
+      "register": "formal",
+      "nuance": "zhōurì: Sunday — timetables, signs"
+     }
+    ],
+    "etymology": {
+     "text": "星期 ‘week’ + 日: 日 ‘day’ — the one day of the week with a name, not a number.",
+     "src": "morphemes: 星期 + 日 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "日 is both ‘sun’ and ‘day’ (日出 ‘sunrise’); German Sonntag and English Sunday are named after the sun."
+    ],
+    "pitfalls": [
+     "In conversation 星期日 can sound stiff; with friends say 星期天."
+    ],
+    "subtleties": [
+     "Forms, timetables and calendars use 星期日 or 周日."
+    ]
+   }
+  },
+  {
+   "id": "zh:xingqi",
+   "lemma": "星期",
+   "trad": "星期",
+   "pinyin": "xīng qī",
+   "pos": "NOUN",
+   "senses": [
+    "time.week"
+   ],
+   "measure": [
+    "个"
+   ],
+   "role": "week — in the day names 星期一 … 星期六 and 星期几 ‘which day?’ (S14); ‘week’ as a unit of time is the topic of S15",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The seven-day round: 星期一 … 星期天, and ‘which day is it?’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.week"
+     },
+     {
+      "id": "s2",
+      "def": "day of the week (with a number: 星期三; in 星期几 ‘which day?’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天星期几？",
+      "py": "Jīntiān xīngqī jǐ?",
+      "tr": "What day is it today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s2"
+     },
+     {
+      "text": "一个星期有七天。",
+      "py": "Yí ge xīngqī yǒu qī tiān.",
+      "tr": "A week has seven days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我下个星期去北京。",
+      "py": "Wǒ xià ge xīngqī qù Běijīng.",
+      "tr": "I’m going to Beijing next week.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "星期几",
+      "tr": "which day of the week?"
+     },
+     {
+      "text": "一个星期",
+      "tr": "one week"
+     },
+     {
+      "text": "下个星期",
+      "tr": "next week"
+     },
+     {
+      "text": "上个星期",
+      "tr": "last week"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "周",
+      "register": "formal",
+      "nuance": "zhōu: week — more written (一周, 每周, 下周)"
+     },
+     {
+      "word": "礼拜",
+      "register": "colloquial",
+      "nuance": "lǐbài: week — ‘(church) service’, southern and older speech (下礼拜)"
+     }
+    ],
+    "etymology": {
+     "text": "星 ‘star’ + 期 ‘set time, period’. Wiktionary also lists an old literary sense, the Qixi festival (the night two star-lovers meet); ‘week’ is the modern sense.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "礼拜 ‘(religious) service’ is a colloquial word for the week, and 礼拜天 ‘service day’ is Sunday."
+    ],
+    "pitfalls": [
+     "星期 + number names a day (星期三 ‘Wednesday’); number + 个 + 星期 counts weeks (三个星期 ‘three weeks’).",
+     "‘Which day is it?’ is 今天星期几？ — the question word 几 takes the place of the number."
+    ],
+    "subtleties": [
+     "星期 is more spoken, 周 more written: 下个星期 / 下周 ‘next week’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhoumo",
+   "lemma": "周末",
+   "trad": "週末",
+   "pinyin": "zhōu mò",
+   "pos": "NOUN",
+   "senses": [
+    "time.weekend"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Saturday and Sunday — sleeping in, friends, a trip out of town.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "weekend",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.weekend"
+     }
+    ],
+    "examples": [
+     {
+      "text": "周末你做什么？",
+      "py": "Zhōumò nǐ zuò shénme?",
+      "tr": "What are you doing at the weekend?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这个周末我们去北京。",
+      "py": "Zhège zhōumò wǒmen qù Běijīng.",
+      "tr": "This weekend we are going to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "周末超市人很多。",
+      "py": "Zhōumò chāoshì rén hěn duō.",
+      "tr": "At weekends the supermarket is crowded.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "这个周末",
+      "tr": "this weekend"
+     },
+     {
+      "text": "上个周末",
+      "tr": "last weekend"
+     },
+     {
+      "text": "周末愉快",
+      "tr": "have a nice weekend"
+     },
+     {
+      "text": "过周末",
+      "tr": "to spend the weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "双休日",
+      "register": "formal",
+      "nuance": "shuāngxiūrì: the two days off (Saturday and Sunday) — official language"
+     }
+    ],
+    "etymology": {
+     "text": "周 ‘week’ + 末 ‘end’: ‘week-end’, built exactly like English weekend and German Wochenende.",
+     "src": "morphemes: 周 + 末 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek says Σαββατοκύριακο ‘Saturday-Sunday’; Chinese copies the English idea instead: 周 ‘week’ + 末 ‘end’."
+    ],
+    "pitfalls": [
+     "‘At the weekend’ needs no ‘at’: 周末我在家 — *在周末 is only for written style."
+    ],
+    "subtleties": [
+     "周末愉快！ ‘Have a nice weekend!’ is the usual Friday goodbye."
+    ]
+   }
+  },
+  {
+   "id": "zh:tian",
+   "lemma": "天",
+   "trad": "天",
+   "pinyin": "tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.day"
+   ],
+   "measureNone": "天 is itself a counter: 三天 ‘three days’ (no 个)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The day — and the sky above it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "day (24 hours)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.day"
+     },
+     {
+      "id": "s2",
+      "def": "sky, heaven",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "weather (天很冷)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "daytime",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "一个星期有七天。",
+      "py": "Yí ge xīngqī yǒu qī tiān.",
+      "tr": "A week has seven days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我在北京待了三天。",
+      "py": "Wǒ zài Běijīng dāi le sān tiān.",
+      "tr": "I stayed in Beijing for three days.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "天上有很多星星。",
+      "py": "Tiān shang yǒu hěn duō xīngxing.",
+      "tr": "There are many stars in the sky.",
+      "register": "neutral",
+      "context": "night sky",
+      "sense": "s2"
+     },
+     {
+      "text": "今天天很冷。",
+      "py": "Jīntiān tiān hěn lěng.",
+      "tr": "It’s very cold today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "每天",
+      "tr": "every day"
+     },
+     {
+      "text": "三天",
+      "tr": "three days"
+     },
+     {
+      "text": "天天",
+      "tr": "day after day"
+     },
+     {
+      "text": "一天",
+      "tr": "one day; a whole day"
+     },
+     {
+      "text": "天上",
+      "tr": "in the sky"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "天下没有不散的筵席",
+      "tr": "there is no banquet under heaven that does not end",
+      "kind": "proverb",
+      "meaning": "all good things come to an end; every gathering must part",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "日",
+      "register": "formal",
+      "nuance": "rì: day — written (三日, 日期)"
+     },
+     {
+      "word": "白天",
+      "register": "neutral",
+      "nuance": "báitiān: daytime (as opposed to night)"
+     }
+    ],
+    "etymology": {
+     "text": "In the oracle bones a standing man (大) with a big mark on his head: ‘top (of the head)’ → ‘sky’ → ‘day’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "天 is both ‘sky’ and ‘day’; 天安门 is the ‘Gate of Heavenly Peace’."
+    ],
+    "pitfalls": [
+     "天 counts by itself — no measure word: 三天 ‘three days’, not *三个天 (compare 三个星期, 三个月)."
+    ],
+    "subtleties": [
+     "天天 ‘day-day’ means ‘every day’, like 每天."
+    ]
+   }
+  },
+  {
+   "id": "zh:yeli",
+   "lemma": "夜里",
+   "trad": "夜裡",
+   "pinyin": "yè li",
+   "pos": "ADV",
+   "senses": [
+    "time.night"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "The dark hours — quiet streets, everybody asleep.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at night, in the night (the late hours)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "time.night"
+     }
+    ],
+    "examples": [
+     {
+      "text": "夜里很冷。",
+      "py": "Yèli hěn lěng.",
+      "tr": "It’s cold at night.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "他夜里两点回家。",
+      "py": "Tā yèli liǎng diǎn huí jiā.",
+      "tr": "He came home at two in the night.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "昨天夜里你在哪里？",
+      "py": "Zuótiān yèli nǐ zài nǎli?",
+      "tr": "Where were you last night (late)?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "昨天夜里",
+      "tr": "last night (late)"
+     },
+     {
+      "text": "夜里两点",
+      "tr": "two in the morning"
+     },
+     {
+      "text": "半夜",
+      "tr": "midnight, the middle of the night"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "晚上",
+      "register": "neutral",
+      "nuance": "wǎnshang: evening and night until bedtime — the everyday word"
+     },
+     {
+      "word": "夜晚",
+      "register": "literary",
+      "nuance": "yèwǎn: night (poetic, descriptive)"
+     },
+     {
+      "word": "半夜",
+      "register": "neutral",
+      "nuance": "bànyè: the middle of the night"
+     }
+    ],
+    "etymology": {
+     "text": "夜 ‘night’ + 里 ‘in’: ‘in the night’. 夜 goes back to Proto-Sino-Tibetan *ja-n ‘night’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "夜宵 is the late-night snack — skewers and noodles after ten."
+    ],
+    "pitfalls": [
+     "‘Good night’ is 晚安, not *夜里好.",
+     "‘Tonight’ (this evening) is 今天晚上; 今天夜里 is the small hours of tonight."
+    ],
+    "subtleties": [
+     "晚上 covers the evening and the night until you sleep; 夜里 is the dark hours after that."
+    ]
+   }
+  },
+  {
+   "id": "zh:zaoshang",
+   "lemma": "早上",
+   "trad": "早上",
+   "pinyin": "zǎo shang",
+   "pos": "NOUN",
+   "senses": [
+    "time.morning"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Early morning — getting up, breakfast, the way to work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "morning (early morning)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "早上我喝咖啡。",
+      "py": "Zǎoshang wǒ hē kāfēi.",
+      "tr": "In the morning I drink coffee.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "明天早上我们去北京。",
+      "py": "Míngtiān zǎoshang wǒmen qù Běijīng.",
+      "tr": "Tomorrow morning we go to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我每天早上跑步。",
+      "py": "Wǒ měitiān zǎoshang pǎobù.",
+      "tr": "I go running every morning.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "今天早上",
+      "tr": "this morning"
+     },
+     {
+      "text": "每天早上",
+      "tr": "every morning"
+     },
+     {
+      "text": "早上七点",
+      "tr": "7 a.m."
+     },
+     {
+      "text": "早上好",
+      "tr": "good morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "早晨",
+      "register": "neutral",
+      "nuance": "zǎochen: morning, early morning — a little more written"
+     },
+     {
+      "word": "上午",
+      "register": "neutral",
+      "nuance": "shàngwǔ: the morning until noon (the working morning)"
+     },
+     {
+      "word": "清早",
+      "register": "colloquial",
+      "nuance": "qīngzǎo: early morning"
+     }
+    ],
+    "etymology": {
+     "text": "早 ‘early’ + 上 (as in 晚上): ‘the early part of the day’.",
+     "src": "morphemes: 早 + 上 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "早！ alone is a quick ‘morning!’ among colleagues."
+    ],
+    "pitfalls": [
+     "早上好 is the greeting (S02); ‘in the morning’ is just 早上 before the verb: 我早上喝咖啡."
+    ],
+    "subtleties": [
+     "早上 is the early morning (getting up, breakfast); from about nine to twelve it is 上午."
+    ]
+   }
+  },
+  {
+   "id": "zh:shangwu",
+   "lemma": "上午",
+   "trad": "上午",
+   "pinyin": "shàng wǔ",
+   "pos": "NOUN",
+   "senses": [
+    "time.morning"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The working morning — meetings, lessons, until lunch.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "morning, a.m. (until noon)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "上午我在办公室。",
+      "py": "Shàngwǔ wǒ zài bàngōngshì.",
+      "tr": "In the morning I’m at the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "明天上午你有时间吗？",
+      "py": "Míngtiān shàngwǔ nǐ yǒu shíjiān ma?",
+      "tr": "Do you have time tomorrow morning?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "我们上午十点见。",
+      "py": "Wǒmen shàngwǔ shí diǎn jiàn.",
+      "tr": "Let’s meet at 10 a.m.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "上午十点",
+      "tr": "10 a.m."
+     },
+     {
+      "text": "今天上午",
+      "tr": "this morning"
+     },
+     {
+      "text": "一个上午",
+      "tr": "a whole morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "早上",
+      "register": "neutral",
+      "nuance": "zǎoshang: early morning (getting up, breakfast)"
+     }
+    ],
+    "etymology": {
+     "text": "上 ‘upper, earlier’ + 午 ‘noon’: ‘the part before noon’.",
+     "src": "morphemes: 上 + 午 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "午 is the hour of the horse (11 a.m. – 1 p.m.) in the old twelve-part day: 上午 comes before it, 下午 after it, 中午 is the middle."
+    ],
+    "pitfalls": [
+     "Clock times need the part of the day FIRST to be clear: 上午十点 ‘10 a.m.’, 晚上十点 ‘10 p.m.’."
+    ],
+    "subtleties": [
+     "早上 is getting up and breakfast; 上午 is the working morning, until noon."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhongwu",
+   "lemma": "中午",
+   "trad": "中午",
+   "pinyin": "zhōng wǔ",
+   "pos": "NOUN",
+   "senses": [
+    "time.noon"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midday — the lunch break, a short nap.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "noon, midday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.noon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "中午我们吃饭。",
+      "py": "Zhōngwǔ wǒmen chīfàn.",
+      "tr": "At noon we eat.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "我中午在学校吃午饭。",
+      "py": "Wǒ zhōngwǔ zài xuéxiào chī wǔfàn.",
+      "tr": "I have lunch at school at midday.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "中午十二点我在家。",
+      "py": "Zhōngwǔ shí'èr diǎn wǒ zài jiā.",
+      "tr": "At twelve noon I’m at home.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "中午十二点",
+      "tr": "twelve noon"
+     },
+     {
+      "text": "今天中午",
+      "tr": "today at noon"
+     },
+     {
+      "text": "中午饭",
+      "tr": "lunch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "正午",
+      "register": "formal",
+      "nuance": "zhèngwǔ: high noon, exactly midday"
+     },
+     {
+      "word": "晌午",
+      "register": "regional",
+      "nuance": "shǎngwu: noon — northern colloquial"
+     }
+    ],
+    "etymology": {
+     "text": "中 ‘middle’ + 午 ‘noon (the hour of the horse)’.",
+     "src": "morphemes: 中 + 午 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Many Chinese take a 午睡 ‘midday nap’ after lunch."
+    ],
+    "pitfalls": [
+     "‘At noon’ is 中午 before the verb; 午饭 is the meal itself, ‘lunch’."
+    ],
+    "subtleties": [
+     "中午 is roughly eleven to one — the lunch break, not only 12:00."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiawu",
+   "lemma": "下午",
+   "trad": "下午",
+   "pinyin": "xià wǔ",
+   "pos": "NOUN",
+   "senses": [
+    "time.afternoon"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The afternoon — tea, the second half of the working day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "afternoon, p.m.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.afternoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "下午我在家。",
+      "py": "Xiàwǔ wǒ zài jiā.",
+      "tr": "In the afternoon I’m at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们下午三点见。",
+      "py": "Wǒmen xiàwǔ sān diǎn jiàn.",
+      "tr": "Let’s meet at 3 p.m.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s1"
+     },
+     {
+      "text": "星期六下午你做什么？",
+      "py": "Xīngqīliù xiàwǔ nǐ zuò shénme?",
+      "tr": "What are you doing on Saturday afternoon?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "下午三点",
+      "tr": "3 p.m."
+     },
+     {
+      "text": "今天下午",
+      "tr": "this afternoon"
+     },
+     {
+      "text": "下午茶",
+      "tr": "afternoon tea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "午后",
+      "register": "literary",
+      "nuance": "wǔhòu: afternoon"
+     },
+     {
+      "word": "后半天",
+      "register": "regional",
+      "nuance": "hòubàntiān: afternoon — northern colloquial"
+     }
+    ],
+    "etymology": {
+     "text": "下 ‘lower, later’ + 午 ‘noon’: ‘after noon’.",
+     "src": "morphemes: 下 + 午 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "English p.m. is Latin post meridiem ‘after midday’ — exactly 下午 ‘below noon’."
+    ],
+    "pitfalls": [
+     "下午三点 ‘3 p.m.’: the part of the day comes first, then the hour."
+    ],
+    "subtleties": [
+     "下午 lasts until about six; after that it is 晚上."
+    ]
+   }
+  },
+  {
+   "id": "zh:wanshang",
+   "lemma": "晚上",
+   "trad": "晚上",
+   "pinyin": "wǎn shang",
+   "pos": "NOUN",
+   "senses": [
+    "time.evening",
+    "time.night"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Evening and night — dinner, lights on, the day winding down.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.evening"
+     },
+     {
+      "id": "s2",
+      "def": "night (until bedtime): 昨天晚上 ‘last night’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.night"
+     }
+    ],
+    "examples": [
+     {
+      "text": "晚上我们在家吃饭。",
+      "py": "Wǎnshang wǒmen zài jiā chīfàn.",
+      "tr": "In the evening we eat at home.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "今天晚上你做什么？",
+      "py": "Jīntiān wǎnshang nǐ zuò shénme?",
+      "tr": "What are you doing this evening?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "他晚上不喝咖啡。",
+      "py": "Tā wǎnshang bù hē kāfēi.",
+      "tr": "He doesn’t drink coffee at night.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s2"
+     },
+     {
+      "text": "昨天晚上我很晚回家。",
+      "py": "Zuótiān wǎnshang wǒ hěn wǎn huí jiā.",
+      "tr": "Last night I came home late.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "今天晚上",
+      "tr": "this evening, tonight"
+     },
+     {
+      "text": "晚上八点",
+      "tr": "8 p.m."
+     },
+     {
+      "text": "每天晚上",
+      "tr": "every evening"
+     },
+     {
+      "text": "晚上好",
+      "tr": "good evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "夜里",
+      "register": "colloquial",
+      "nuance": "yèli: in the night — the late hours"
+     },
+     {
+      "word": "傍晚",
+      "register": "neutral",
+      "nuance": "bàngwǎn: dusk, early evening"
+     },
+     {
+      "word": "夜晚",
+      "register": "literary",
+      "nuance": "yèwǎn: night"
+     }
+    ],
+    "etymology": {
+     "text": "晚 ‘late; evening’ + 上 (as in 早上).",
+     "src": "morphemes: 晚 + 上 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "晚 is both ‘evening’ and ‘late’ — like Spanish tarde ‘afternoon; late’."
+    ],
+    "pitfalls": [
+     "‘Tonight’ is 今天晚上 (written 今晚).",
+     "晚上好 is the greeting ‘good evening’; 晚安 ‘good night’ is said when going to bed."
+    ],
+    "subtleties": [
+     "晚上 covers the whole evening and the night until you sleep — English ‘last night’ is usually 昨天晚上."
+    ]
+   }
+  },
+  {
+   "id": "zh:jintian",
+   "lemma": "今天",
+   "trad": "今天",
+   "pinyin": "jīn tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.today"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Today — here and now.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "today",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.today"
+     },
+     {
+      "id": "s2",
+      "def": "nowadays, the present time",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天星期几？",
+      "py": "Jīntiān xīngqī jǐ?",
+      "tr": "What day is it today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "今天我不去学校。",
+      "py": "Jīntiān wǒ bú qù xuéxiào.",
+      "tr": "I’m not going to school today.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "今天的中国",
+      "py": "jīntiān de Zhōngguó",
+      "tr": "China today",
+      "register": "formal",
+      "context": "news",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "今天早上",
+      "tr": "this morning"
+     },
+     {
+      "text": "今天晚上",
+      "tr": "this evening"
+     },
+     {
+      "text": "今天几号",
+      "tr": "what’s the date today?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "今日事，今日毕",
+      "tr": "today’s business is finished today",
+      "kind": "saying",
+      "meaning": "don’t put off till tomorrow what you can do today",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "今日",
+      "register": "formal",
+      "nuance": "jīnrì: today — written, news"
+     },
+     {
+      "word": "今儿",
+      "register": "regional",
+      "nuance": "jīnr: today — Beijing colloquial"
+     }
+    ],
+    "etymology": {
+     "text": "今 ‘now, the present’ + 天 ‘day’: ‘this day’.",
+     "src": "morphemes: 今 + 天 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Greek σήμερα, German heute and Russian сегодня (сего дня ‘of this day’) are all ‘this day’ — just like 今天."
+    ],
+    "pitfalls": [
+     "今天 goes before the verb, at the start or after the subject: 今天我不去 / 我今天不去 — never at the end (*我不去今天)."
+    ],
+    "subtleties": [
+     "With days and dates 是 can drop: 今天星期一 ‘today is Monday’."
+    ]
+   }
+  },
+  {
+   "id": "zh:mingtian",
+   "lemma": "明天",
+   "trad": "明天",
+   "pinyin": "míng tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.tomorrow"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Tomorrow — plans, hopes, ‘see you then’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomorrow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tomorrow"
+     },
+     {
+      "id": "s2",
+      "def": "the future",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "明天见！",
+      "py": "Míngtiān jiàn!",
+      "tr": "See you tomorrow!",
+      "register": "neutral",
+      "context": "farewell",
+      "sense": "s1"
+     },
+     {
+      "text": "明天我们去北京。",
+      "py": "Míngtiān wǒmen qù Běijīng.",
+      "tr": "Tomorrow we’re going to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "明天会更好。",
+      "py": "Míngtiān huì gèng hǎo.",
+      "tr": "Tomorrow will be better.",
+      "register": "neutral",
+      "context": "hope",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "明天见",
+      "tr": "see you tomorrow"
+     },
+     {
+      "text": "明天早上",
+      "tr": "tomorrow morning"
+     },
+     {
+      "text": "明天晚上",
+      "tr": "tomorrow evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "明日",
+      "register": "formal",
+      "nuance": "míngrì: tomorrow — written"
+     },
+     {
+      "word": "明儿",
+      "register": "regional",
+      "nuance": "míngr: tomorrow — Beijing colloquial"
+     }
+    ],
+    "etymology": {
+     "text": "明 ‘bright; next’ + 天 ‘day’: ‘the next day’.",
+     "src": "morphemes: 明 + 天 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "明 is sun 日 + moon 月 = ‘bright’; it also means ‘next’: 明年 ‘next year’."
+    ],
+    "pitfalls": [
+     "There is no future tense: 明天 alone makes it the future — 明天我去 ‘I’ll go tomorrow’. Don’t add 了."
+    ],
+    "subtleties": [
+     "明天 is also ‘the future’: 更好的明天 ‘a better tomorrow’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zuotian",
+   "lemma": "昨天",
+   "trad": "昨天",
+   "pinyin": "zuó tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.yesterday"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Yesterday — just gone, still remembered.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yesterday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.yesterday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "昨天我在家。",
+      "py": "Zuótiān wǒ zài jiā.",
+      "tr": "Yesterday I was at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "昨天是星期天。",
+      "py": "Zuótiān shì xīngqītiān.",
+      "tr": "Yesterday was Sunday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "昨天晚上你去哪里了？",
+      "py": "Zuótiān wǎnshang nǐ qù nǎli le?",
+      "tr": "Where did you go last night?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "昨天晚上",
+      "tr": "last night"
+     },
+     {
+      "text": "昨天早上",
+      "tr": "yesterday morning"
+     },
+     {
+      "text": "前天",
+      "tr": "the day before yesterday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "昨日",
+      "register": "formal",
+      "nuance": "zuórì: yesterday — written"
+     },
+     {
+      "word": "昨儿",
+      "register": "regional",
+      "nuance": "zuór: yesterday — Beijing colloquial"
+     }
+    ],
+    "etymology": {
+     "text": "昨 ‘yesterday’ + 天 ‘day’.",
+     "src": "morphemes: 昨 + 天 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The day before yesterday is 前天 ‘front day’ and the day after tomorrow 后天 ‘back day’."
+    ],
+    "pitfalls": [
+     "There is no past tense: 昨天 alone places it in the past — 昨天我在家 ‘I was at home yesterday’ (在 and 是 do not change)."
+    ],
+    "subtleties": [
+     "昨天晚上 is ‘last night’ (the evening); late in the night is 昨天夜里."
+    ]
+   }
+  },
+  {
+   "id": "zh:xianzai",
+   "lemma": "现在",
+   "trad": "現在",
+   "pinyin": "xiàn zài",
+   "pos": "NOUN",
+   "senses": [
+    "adv.now"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Now — this very moment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "now, at present",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.now"
+     },
+     {
+      "id": "s2",
+      "def": "the present",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "现在几点？",
+      "py": "Xiànzài jǐ diǎn?",
+      "tr": "What time is it now?",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "我现在很忙。",
+      "py": "Wǒ xiànzài hěn máng.",
+      "tr": "I’m busy now.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "你现在在哪里？",
+      "py": "Nǐ xiànzài zài nǎli?",
+      "tr": "Where are you now?",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "现在几点",
+      "tr": "what time is it now?"
+     },
+     {
+      "text": "从现在开始",
+      "tr": "from now on"
+     },
+     {
+      "text": "到现在",
+      "tr": "until now"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "目前",
+      "register": "formal",
+      "nuance": "mùqián: at present, currently"
+     },
+     {
+      "word": "此刻",
+      "register": "literary",
+      "nuance": "cǐkè: at this moment"
+     },
+     {
+      "word": "这会儿",
+      "register": "colloquial",
+      "nuance": "zhèhuìr: right now"
+     }
+    ],
+    "etymology": {
+     "text": "现 ‘to appear, present’ + 在 ‘to be at’: ‘being present’.",
+     "src": "morphemes: 现 + 在 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "现在 also names ‘the present’ in grammar books: 现在时 ‘present tense’ — a tense Chinese never marks."
+    ],
+    "pitfalls": [
+     "现在 goes before the verb: 我现在去 ‘I’m going now’ — not *我去现在."
+    ],
+    "subtleties": [
+     "现在 + … + 了 marks a change: 现在他是老师了 ‘now he is a teacher (he wasn’t before)’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yihou",
+   "lemma": "以后",
+   "trad": "以後",
+   "pinyin": "yǐ hòu",
+   "pos": "NOUN",
+   "senses": [
+    "adv.later",
+    "prep.after"
+   ],
+   "measureNone": "a time word: it is not counted with a measure word",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 以後 as ‘afterwards; after this; from now on; in the future’ — that is the sense ‘later’ taught here"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Later, afterwards — the time that comes behind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later, afterwards, in the future",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     },
+     {
+      "id": "s2",
+      "def": "after (a time or event): 吃饭以后 (S15)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.after"
+     }
+    ],
+    "examples": [
+     {
+      "text": "以后再说吧。",
+      "py": "Yǐhòu zài shuō ba.",
+      "tr": "Let’s talk about it later.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "我以后想去中国。",
+      "py": "Wǒ yǐhòu xiǎng qù Zhōngguó.",
+      "tr": "Later on I want to go to China.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "下课以后我去公园。",
+      "py": "Xiàkè yǐhòu wǒ qù gōngyuán.",
+      "tr": "After class I go to the park.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "十点以后我不喝咖啡。",
+      "py": "Shí diǎn yǐhòu wǒ bù hē kāfēi.",
+      "tr": "I don’t drink coffee after ten.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "以后再说",
+      "tr": "let’s talk about it later"
+     },
+     {
+      "text": "…以后",
+      "tr": "after …"
+     },
+     {
+      "text": "从今以后",
+      "tr": "from now on"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "之后",
+      "register": "neutral",
+      "nuance": "zhīhòu: after, afterwards — a little more written (S15)"
+     },
+     {
+      "word": "后来",
+      "register": "neutral",
+      "nuance": "hòulái: afterwards — about the past only"
+     },
+     {
+      "word": "将来",
+      "register": "formal",
+      "nuance": "jiānglái: in the future"
+     }
+    ],
+    "etymology": {
+     "text": "以 ‘by, from’ + 后 ‘behind, after’: ‘from then on, after’.",
+     "src": "morphemes: 以 + 后 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "以后 and 以前 use the same 后 / 前 as 后面 / 前面 (S12): space and time share words, like German vor / nach (vor dem Haus — vor dem Essen)."
+    ],
+    "pitfalls": [
+     "以后 comes AFTER what it refers to: 吃饭以后 ‘after eating’ — the opposite order of English after and German nach.",
+     "‘Later’ about the past (‘and then …’) is 后来, not 以后."
+    ],
+    "subtleties": [
+     "Alone at the start, 以后 means ‘from now on, in future’: 以后别这样了 ‘don’t do that again’."
+    ]
+   }
+  },
+  {
+   "id": "zh:dengyixia",
+   "lemma": "等一下",
+   "trad": "等一下",
+   "pinyin": "děng yī xià",
+   "pos": "ADV",
+   "senses": [
+    "adv.later"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In a bit — after this, later today.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later, in a little while",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) wait a moment!",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "等一下我给你打电话。",
+      "py": "Děng yíxià wǒ gěi nǐ dǎ diànhuà.",
+      "tr": "I’ll call you later.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "我们等一下去超市。",
+      "py": "Wǒmen děng yíxià qù chāoshì.",
+      "tr": "We’ll go to the supermarket in a bit.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "等一下！",
+      "py": "Děng yíxià!",
+      "tr": "Wait a moment!",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "等一下见",
+      "tr": "see you in a bit"
+     },
+     {
+      "text": "请等一下",
+      "tr": "please wait a moment"
+     },
+     {
+      "text": "等一下再说",
+      "tr": "let’s talk about it in a bit"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一会儿",
+      "register": "neutral",
+      "nuance": "yíhuìr: in a little while, soon"
+     },
+     {
+      "word": "待会儿",
+      "register": "colloquial",
+      "nuance": "dāihuìr: in a bit — northern speech"
+     },
+     {
+      "word": "回头",
+      "register": "colloquial",
+      "nuance": "huítóu: later (回头见 ‘see you later’)"
+     }
+    ],
+    "etymology": {
+     "text": "等 ‘to wait’ + 一下 ‘a moment, once’: ‘wait a moment’ → ‘in a moment, later’.",
+     "src": "morphemes: 等 + 一下 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "等一下 shows how Chinese turns verbs into time words: ‘wait a little’ becomes ‘later’."
+    ],
+    "pitfalls": [
+     "Said děng yíxià: 一 changes to yí before the 4th tone of 下 (dictionaries write yī)."
+    ],
+    "subtleties": [
+     "等一下 is ‘later today, in a little while’; for a far future use 以后."
+    ]
+   }
+  },
+  {
+   "id": "zh:mashang",
+   "lemma": "马上",
+   "trad": "馬上",
+   "pinyin": "mǎ shàng",
+   "pos": "ADV",
+   "senses": [
+    "adv.soon"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right away — ‘I’m coming!’, ‘we’re nearly there!’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at once, right away, soon, in a minute",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.soon"
+     },
+     {
+      "id": "s2",
+      "def": "(literally) on horseback",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我马上来！",
+      "py": "Wǒ mǎshàng lái!",
+      "tr": "I’ll be right there!",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "火车马上就开了。",
+      "py": "Huǒchē mǎshàng jiù kāi le.",
+      "tr": "The train is about to leave.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "马上就到星期五了。",
+      "py": "Mǎshàng jiù dào xīngqīwǔ le.",
+      "tr": "It’s almost Friday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "马上来",
+      "tr": "coming right away"
+     },
+     {
+      "text": "马上就…了",
+      "tr": "about to …"
+     },
+     {
+      "text": "马上回来",
+      "tr": "back in a minute"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "立刻",
+      "register": "formal",
+      "nuance": "lìkè: immediately — stronger, written"
+     },
+     {
+      "word": "一会儿",
+      "register": "neutral",
+      "nuance": "yíhuìr: in a little while"
+     },
+     {
+      "word": "很快",
+      "register": "neutral",
+      "nuance": "hěn kuài: soon, quickly"
+     }
+    ],
+    "etymology": {
+     "text": "From 马背上 ‘on horseback’: the horse was the fastest way to travel, so ‘at once’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "马上 ‘on horseback’ = ‘right away’: in old China nothing was faster than a horse."
+    ],
+    "pitfalls": [
+     "马上 often pairs with 就 … 了: 马上就到了 ‘we’re almost there’."
+    ],
+    "subtleties": [
+     "马上 is elastic: 我马上来 can mean one minute — or twenty."
+    ]
+   }
+  },
+  {
+   "id": "zh:yihui",
+   "lemma": "一会",
+   "trad": "一會",
+   "pinyin": "yí huì",
+   "pos": "ADV",
+   "senses": [
+    "adv.soon"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 一會 as ‘a little while; a moment’; before the verb (一会就来 ‘will come in a moment’) that is the sense ‘soon’ taught here"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little while — in a moment, back soon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in a moment, soon (before the verb: 一会就来)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.soon"
+     },
+     {
+      "id": "s2",
+      "def": "a little while (as a length of time, after the verb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他一会就来。",
+      "py": "Tā yíhuì jiù lái.",
+      "tr": "He’ll be here in a moment.",
+      "register": "neutral",
+      "context": "visiting",
+      "sense": "s1"
+     },
+     {
+      "text": "我们一会见！",
+      "py": "Wǒmen yíhuì jiàn!",
+      "tr": "See you in a bit!",
+      "register": "colloquial",
+      "context": "farewell",
+      "sense": "s1"
+     },
+     {
+      "text": "请等一会。",
+      "py": "Qǐng děng yíhuì.",
+      "tr": "Please wait a little while.",
+      "register": "neutral",
+      "context": "service",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一会见",
+      "tr": "see you in a bit"
+     },
+     {
+      "text": "等一会",
+      "tr": "to wait a little"
+     },
+     {
+      "text": "一会就",
+      "tr": "in a moment"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一会儿",
+      "register": "colloquial",
+      "nuance": "yíhuìr: the same with the Beijing ‘erhua’ ending — the usual northern spoken form"
+     },
+     {
+      "word": "马上",
+      "register": "neutral",
+      "nuance": "mǎshàng: right away"
+     },
+     {
+      "word": "等一下",
+      "register": "colloquial",
+      "nuance": "děng yíxià: in a bit, later"
+     },
+     {
+      "word": "片刻",
+      "register": "literary",
+      "nuance": "piànkè: a moment"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 会 ‘a moment’: ‘one moment’.",
+     "src": "morphemes: 一 + 会 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "In the north you hear 一会儿 yíhuìr: the 儿 is the ‘erhua’ r-ending of Beijing speech; southern speakers say 一会."
+    ],
+    "pitfalls": [
+     "Before the verb 一会 is ‘soon’ (一会就来); after the verb it is ‘a little while’ (等一会)."
+    ],
+    "subtleties": [
+     "一会 … 一会 … means ‘now … now …’: 一会冷，一会热 ‘now cold, now hot’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zao",
+   "lemma": "早",
+   "trad": "早",
+   "pinyin": "zǎo",
+   "pos": "ADJ",
+   "senses": [
+    "adv.early"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Early — the sun just up, the first bus.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "early",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.early"
+     },
+     {
+      "id": "s2",
+      "def": "good morning (greeting: 早！)",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "long ago, already (早就)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们明天早一点去吧。",
+      "py": "Wǒmen míngtiān zǎo yìdiǎn qù ba.",
+      "tr": "Let’s go a bit earlier tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "你今天来得很早。",
+      "py": "Nǐ jīntiān lái de hěn zǎo.",
+      "tr": "You came early today.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "早！",
+      "py": "Zǎo!",
+      "tr": "Morning!",
+      "register": "colloquial",
+      "context": "greeting",
+      "sense": "s2"
+     },
+     {
+      "text": "我早就知道了。",
+      "py": "Wǒ zǎo jiù zhīdào le.",
+      "tr": "I knew that long ago.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "早一点",
+      "tr": "a bit earlier"
+     },
+     {
+      "text": "很早",
+      "tr": "very early"
+     },
+     {
+      "text": "早就",
+      "tr": "long since"
+     },
+     {
+      "text": "早饭",
+      "tr": "breakfast"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "早起的鸟儿有虫吃",
+      "tr": "the early bird has worms to eat",
+      "kind": "saying",
+      "meaning": "the early bird catches the worm",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "提前",
+      "register": "neutral",
+      "nuance": "tíqián: in advance, ahead of time"
+     },
+     {
+      "word": "早早",
+      "register": "colloquial",
+      "nuance": "zǎozǎo: very early, in good time"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "晚",
+      "note": "wǎn: late"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic in the bronze inscriptions: 日 ‘sun’ + phonetic 棗 (earlier a drawing borrowed for its sound); the seal-script form was read as ‘sun’ + 甲 ‘first’ — when the sun first rises.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "早 ‘early’ gives 早饭 ‘early meal’ = breakfast and 早上 ‘morning’."
+    ],
+    "pitfalls": [
+     "After a verb, 早 / 晚 need 得: 你来得很早 ‘you came early’; before a verb add 一点: 早一点去 ‘go a bit earlier’."
+    ],
+    "subtleties": [
+     "早！ alone is a casual ‘good morning’."
+    ]
+   }
+  },
+  {
+   "id": "zh:wan.late",
+   "lemma": "晚",
+   "trad": "晚",
+   "pinyin": "wǎn",
+   "pos": "ADJ",
+   "senses": [
+    "adv.late"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Late — the last bus gone, the lights going out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "late",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.late"
+     },
+     {
+      "id": "s2",
+      "def": "evening, night (晚上, 晚饭)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你来晚了！",
+      "py": "Nǐ lái wǎn le!",
+      "tr": "You’re late!",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "现在很晚了，我们回家吧。",
+      "py": "Xiànzài hěn wǎn le, wǒmen huí jiā ba.",
+      "tr": "It’s late now — let’s go home.",
+      "register": "neutral",
+      "context": "evening",
+      "sense": "s1"
+     },
+     {
+      "text": "晚饭吃什么？",
+      "py": "Wǎnfàn chī shénme?",
+      "tr": "What’s for dinner?",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "来晚了",
+      "tr": "to be late"
+     },
+     {
+      "text": "很晚",
+      "tr": "very late"
+     },
+     {
+      "text": "晚饭",
+      "tr": "dinner"
+     },
+     {
+      "text": "晚安",
+      "tr": "good night"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "相见恨晚",
+      "tr": "to regret not having met earlier",
+      "kind": "idiom",
+      "meaning": "said of a new friend you feel you have always known",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "迟",
+      "register": "formal",
+      "nuance": "chí: late — written (迟到 ‘to arrive late’)"
+     },
+     {
+      "word": "迟到",
+      "register": "neutral",
+      "nuance": "chídào: to be late (for something)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "早",
+      "note": "zǎo: early"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 日 ‘sun’ + phonetic 免; from Proto-Sino-Tibetan *mor ‘night’. Wiktionary compares Spanish tarde, which also means both ‘evening’ and ‘late’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "晚 is both ‘evening’ and ‘late’, like Spanish tarde."
+    ],
+    "pitfalls": [
+     "‘I’m late’ (arriving) is 我来晚了 or 我迟到了 — not *我是晚."
+    ],
+    "subtleties": [
+     "晚 + 了 marks a change: 现在很晚了 ‘it’s got late’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zongshi",
+   "lemma": "总是",
+   "trad": "總是",
+   "pinyin": "zǒng shì",
+   "pos": "ADV",
+   "senses": [
+    "adv.always"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Always — every time, without fail (sometimes with a sigh).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "always",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.always"
+     },
+     {
+      "id": "s2",
+      "def": "after all, in the end",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他总是很忙。",
+      "py": "Tā zǒngshì hěn máng.",
+      "tr": "He’s always busy.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "我早上总是喝咖啡。",
+      "py": "Wǒ zǎoshang zǒngshì hē kāfēi.",
+      "tr": "In the morning I always drink coffee.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "你怎么总是来晚？",
+      "py": "Nǐ zěnme zǒngshì lái wǎn?",
+      "tr": "Why are you always late?",
+      "register": "colloquial",
+      "context": "complaint",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "总是很忙",
+      "tr": "always busy"
+     },
+     {
+      "text": "总是这样",
+      "tr": "always like this"
+     },
+     {
+      "text": "总是迟到",
+      "tr": "always late"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一直",
+      "register": "neutral",
+      "nuance": "yìzhí: all along, continuously"
+     },
+     {
+      "word": "老是",
+      "register": "colloquial",
+      "nuance": "lǎoshì: always (usually complaining)"
+     },
+     {
+      "word": "始终",
+      "register": "formal",
+      "nuance": "shǐzhōng: from start to finish, throughout"
+     }
+    ],
+    "etymology": {
+     "text": "总 ‘all, always’ + 是 ‘to be’.",
+     "src": "morphemes: 总 + 是 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "老是 ‘old-is’ is the grumbling ‘always’: 你老是迟到！"
+    ],
+    "pitfalls": [
+     "总是 goes before the verb, after the subject: 我总是喝茶 — never at the end.",
+     "A negation follows it: 他总是不吃早饭 ‘he never has breakfast’ (he always doesn’t)."
+    ],
+    "subtleties": [
+     "Like English ‘always’, 总是 can carry irritation: 你总是这样！ ‘you’re always like this!’"
+    ]
+   }
+  },
+  {
+   "id": "zh:changchang",
+   "lemma": "常常",
+   "trad": "常常",
+   "pinyin": "cháng cháng",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Often — a habit, a favourite place.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "often, frequently",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我常常去公园。",
+      "py": "Wǒ chángcháng qù gōngyuán.",
+      "tr": "I often go to the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "他常常坐公共汽车。",
+      "py": "Tā chángcháng zuò gōnggòng qìchē.",
+      "tr": "He often takes the bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "你常常来这里吗？",
+      "py": "Nǐ chángcháng lái zhèli ma?",
+      "tr": "Do you come here often?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "常常去",
+      "tr": "to go often"
+     },
+     {
+      "text": "常常见面",
+      "tr": "to meet often"
+     },
+     {
+      "text": "不常",
+      "tr": "not often"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "经常",
+      "register": "neutral",
+      "nuance": "jīngcháng: often, regularly — a little more formal"
+     },
+     {
+      "word": "常",
+      "register": "neutral",
+      "nuance": "cháng: often — the short form (不常 ‘not often’)"
+     },
+     {
+      "word": "时常",
+      "register": "formal",
+      "nuance": "shícháng: often, frequently"
+     }
+    ],
+    "etymology": {
+     "text": "常 ‘constant, often’ doubled.",
+     "src": "morphemes: 常 + 常 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Doubling makes adverbs of frequency: 常 → 常常, 天 → 天天 ‘every day’."
+    ],
+    "pitfalls": [
+     "The negation is 不常 ‘not often’ — *不常常 is avoided."
+    ],
+    "subtleties": [
+     "常常 is everyday speech; 经常 sounds more regular and is common in writing."
+    ]
+   }
+  },
+  {
+   "id": "zh:jingchang",
+   "lemma": "经常",
+   "trad": "經常",
+   "pinyin": "jīng cháng",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Regularly, frequently — a routine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "often, regularly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     },
+     {
+      "id": "s2",
+      "def": "(adjective) everyday, regular",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他经常出差。",
+      "py": "Tā jīngcháng chūchāi.",
+      "tr": "He often travels on business.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "我经常在这家饭馆吃饭。",
+      "py": "Wǒ jīngcháng zài zhè jiā fànguǎn chīfàn.",
+      "tr": "I often eat at this restaurant.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "这是经常性的工作。",
+      "py": "Zhè shì jīngchángxìng de gōngzuò.",
+      "tr": "This is routine work.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "经常去",
+      "tr": "to go often"
+     },
+     {
+      "text": "经常见面",
+      "tr": "to meet regularly"
+     },
+     {
+      "text": "不经常",
+      "tr": "not often"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "常常",
+      "register": "neutral",
+      "nuance": "chángcháng: often — more colloquial"
+     },
+     {
+      "word": "往往",
+      "register": "neutral",
+      "nuance": "wǎngwǎng: usually, tends to (a pattern from experience)"
+     },
+     {
+      "word": "时常",
+      "register": "formal",
+      "nuance": "shícháng: often"
+     }
+    ],
+    "etymology": {
+     "text": "经 ‘constant, regular’ + 常 ‘constant’.",
+     "src": "morphemes: 经 + 常 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "As an adjective 经常 means ‘everyday, regular’: 经常性的工作 ‘routine work’."
+    ],
+    "pitfalls": [
+     "不经常 ‘not often’ is fine; with 常常 it is 不常."
+    ],
+    "subtleties": [
+     "往往 states a tendency known from experience and is not used for the future or for wishes; 经常 can be: 以后我会经常来."
+    ]
+   }
+  },
+  {
+   "id": "zh:youshihou",
+   "lemma": "有时候",
+   "trad": "有時候",
+   "pinyin": "yǒu shí hou",
+   "pos": "ADV",
+   "senses": [
+    "adv.sometimes"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sometimes — now and then, it depends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sometimes, at times",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.sometimes"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有时候坐公共汽车，有时候走路。",
+      "py": "Wǒ yǒushíhou zuò gōnggòng qìchē, yǒushíhou zǒulù.",
+      "tr": "Sometimes I take the bus, sometimes I walk.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "有时候他不吃早饭。",
+      "py": "Yǒushíhou tā bù chī zǎofàn.",
+      "tr": "Sometimes he skips breakfast.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "北京有时候很冷。",
+      "py": "Běijīng yǒushíhou hěn lěng.",
+      "tr": "Beijing is sometimes very cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "有时候…有时候…",
+      "tr": "sometimes … sometimes …"
+     },
+     {
+      "text": "有时",
+      "tr": "sometimes (short)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "有时",
+      "register": "neutral",
+      "nuance": "yǒushí: the same, shorter — also written"
+     },
+     {
+      "word": "偶尔",
+      "register": "neutral",
+      "nuance": "ǒu’ěr: occasionally, once in a while"
+     },
+     {
+      "word": "间或",
+      "register": "literary",
+      "nuance": "jiànhuò: now and then"
+     }
+    ],
+    "etymology": {
+     "text": "有 ‘there is’ + 时候 ‘time, moment’: ‘there are times (when)’.",
+     "src": "morphemes: 有 + 时候 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Literally ‘there are times’ — like English ‘at times’."
+    ],
+    "pitfalls": [
+     "有时候 goes before the verb or at the very start: 有时候我走路 / 我有时候走路 — not at the end."
+    ],
+    "subtleties": [
+     "有时候 … 有时候 … balances two habits: 有时候喝茶，有时候喝咖啡."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhengzai",
+   "lemma": "正在",
+   "trad": "正在",
+   "pinyin": "zhèng zài",
+   "pos": "ADV",
+   "senses": [],
+   "role": "in the middle of …-ing: the progressive before a verb, 他正在吃饭 (S14)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right now, in the middle of it — the action caught as it happens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the middle of …-ing (progressive, before a verb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他正在吃饭。",
+      "py": "Tā zhèngzài chīfàn.",
+      "tr": "He’s eating (right now).",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "我们正在等公共汽车。",
+      "py": "Wǒmen zhèngzài děng gōnggòng qìchē.",
+      "tr": "We’re waiting for the bus.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈正在做饭。",
+      "py": "Māma zhèngzài zuòfàn.",
+      "tr": "Mum is cooking.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "正在 + verb",
+      "tr": "be …-ing"
+     },
+     {
+      "text": "正在…呢",
+      "tr": "be just …-ing"
+     },
+     {
+      "text": "正在开会",
+      "tr": "to be in a meeting"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "在",
+      "register": "neutral",
+      "nuance": "zài: the same, shorter — the everyday progressive"
+     },
+     {
+      "word": "正",
+      "register": "neutral",
+      "nuance": "zhèng: just then (正吃饭呢)"
+     }
+    ],
+    "etymology": {
+     "text": "正 ‘just, exactly’ + 在 ‘to be at’: ‘right at (doing)’.",
+     "src": "morphemes: 正 + 在 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "呢 at the end adds ‘right now’: 他在吃饭呢 ‘he’s eating at the moment’."
+    ],
+    "pitfalls": [
+     "正在 does not go with verbs that cannot last (到, 是, 知道): *他正在到 is wrong."
+    ],
+    "subtleties": [
+     "正在 stresses ‘at this very moment’; 在 alone is the everyday form."
+    ]
+   }
+  },
+  {
+   "id": "zh:le",
+   "lemma": "了",
+   "trad": "了",
+   "pinyin": "le",
+   "pos": "PART",
+   "senses": [],
+   "role": "aspect particle: after the verb, a completed action (买了两张票); at the end of the sentence, a new situation (他来了) (S14)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Done, or changed — the action is complete, the situation is new.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(after the verb) completed action: 买了两张票",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(at the end) change, new situation: 下雨了, 他来了",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(太 … 了) emphasis: 太好了",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我买了两张票。",
+      "py": "Wǒ mǎi le liǎng zhāng piào.",
+      "tr": "I bought two tickets.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "他来了！",
+      "py": "Tā lái le!",
+      "tr": "He’s here!",
+      "register": "neutral",
+      "context": "visiting",
+      "sense": "s2"
+     },
+     {
+      "text": "下雨了。",
+      "py": "Xià yǔ le.",
+      "tr": "It’s started raining.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "太好了！",
+      "py": "Tài hǎo le!",
+      "tr": "Great!",
+      "register": "colloquial",
+      "context": "emotions",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "verb + 了 + number + noun",
+      "tr": "did (so much)"
+     },
+     {
+      "text": "…了",
+      "tr": "now …, has become …"
+     },
+     {
+      "text": "太…了",
+      "tr": "so …!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word marks completion; 过 marks experience (去过) and 完 ‘to finish’ a result (吃完) — see the grammar page.",
+    "etymology": {
+     "text": "了 liǎo ‘to finish, to be completed’ weakened into the particle le: first the completed action (verb-了), then the new situation (sentence-final 了).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The particle 了 le and the verb 了 liǎo ‘to finish’ are one character: 了解 liǎojiě ‘to understand’ keeps the old reading."
+    ],
+    "pitfalls": [
+     "了 is not a past tense: a past habit takes no 了 (以前他常常来), and 了 can refer to the future (明天吃了饭再去 ‘tomorrow I’ll go after eating’).",
+     "没 negates without 了: 他没来 ‘he didn’t come’ — never *他没来了."
+    ],
+    "subtleties": [
+     "With a bare object, sentence-final 了 sounds more natural than verb-了: 我买票了 ‘I’ve bought the tickets’; verb-了 likes a number: 我买了两张票."
+    ]
+   }
+  },
+  {
+   "id": "zh:guo",
+   "lemma": "过",
+   "trad": "過",
+   "pinyin": "guo",
+   "pos": "PART",
+   "senses": [],
+   "role": "aspect particle: experience — have (ever) done, 去过北京 ‘have been to Beijing’ (S14)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Been there, done that — an experience you have had.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(after a verb) have ever / once done (experience)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(guò, verb) to cross, to pass, to spend (time): 过生日",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我去过北京。",
+      "py": "Wǒ qùguo Běijīng.",
+      "tr": "I’ve been to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "你吃过中国菜吗？",
+      "py": "Nǐ chīguo Zhōngguó cài ma?",
+      "tr": "Have you ever eaten Chinese food?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "我没坐过飞机。",
+      "py": "Wǒ méi zuòguo fēijī.",
+      "tr": "I’ve never flown.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "你怎么过生日？",
+      "py": "Nǐ zěnme guò shēngrì?",
+      "tr": "How do you celebrate your birthday?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去过",
+      "tr": "have been (to)"
+     },
+     {
+      "text": "没…过",
+      "tr": "have never …"
+     },
+     {
+      "text": "过生日",
+      "tr": "to celebrate a birthday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other particle marks experience; compare 了 (completion) on the grammar page.",
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 辵 ‘walk’ + phonetic 咼 — ‘to pass, to cross’. After a verb: the action has been passed through, i.e. experienced.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "过 is the same word as ‘to cross’ (过马路 ‘cross the street’): an experience is something you have ‘crossed’."
+    ],
+    "pitfalls": [
+     "Negation keeps 过: 我没去过 ‘I’ve never been’ — unlike 了, which drops after 没."
+    ],
+    "subtleties": [
+     "去过 = been there (and back): an experience; 去了 = went (and may still be there): 他去过北京 vs 他去北京了."
+    ]
+   }
+  },
+  {
+   "id": "zh:mei.every",
+   "lemma": "每",
+   "trad": "每",
+   "pinyin": "měi",
+   "pos": "DET",
+   "senses": [],
+   "role": "every, each — 每天 ‘every day’, 每个星期一 ‘every Monday’; usually with 都 before the verb (S14)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

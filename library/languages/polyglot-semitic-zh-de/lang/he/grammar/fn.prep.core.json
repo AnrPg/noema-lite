@@ -1,0 +1,330 @@
+{
+ "function": "fn.prep.core",
+ "status": "realized",
+ "summary": "Hebrew’s three most frequent prepositions are single letters written onto the next word: בְּ “in, at” (also “with” a tool), לְ “to, for” and מִ “from”. The others are separate words: עִם “with”, בְּלִי “without”, בִּשְׁבִיל “for”, עַל “about” (and “on”, lesson 12), אֵצֶל “at someone’s (place)”, and the formal אֶל “to”. בְּ and לְ swallow the article: בְּ + הַבַּיִת → בַּבַּיִת “at home, in the house”, לְ + הַשּׁוּק → לַשּׁוּק “to the market” — the ה disappears and its vowel moves to the prefix. מִ does not: מֵהַבַּיִת “from the house”. The prefixes also change their vowel: בִּ / לִ before a shva (בִּשְׂדֵה הַתְּעוּפָה), בַּ before a hataf patah (בַּחֲנוּת); מִ doubles the next letter (מִתֵּל אָבִיב) and becomes מֵ before ע, ח, א, ר and before the article (מֵחֵיפָה, מֵהַבַּיִת). The noun itself never changes for the preposition — Hebrew has no cases (see fn.case). With a pronoun, every preposition takes a personal ending: לִי “to me”, אִתִּי “with me”, אֶצְלִי “at my place”, בִּשְׁבִילִי “for me”. Greek σε is three Hebrew words: בְּ (in, at), לְ (to) and אֵצֶל (at someone’s).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Greek",
+    "Hebrew",
+    "example"
+   ],
+   "rows": [
+    [
+     "σε (in, at a place): στο σπίτι",
+     "בְּ",
+     "בַּבַּיִת — at home; בָּעֲבוֹדָה — at work"
+    ],
+    [
+     "σε (to, towards): στο σχολείο",
+     "לְ (formal אֶל)",
+     "לַשּׁוּק — to the market; לְאִמָּא — to / for Mum"
+    ],
+    [
+     "σε (at someone’s): στου παππού",
+     "אֵצֶל",
+     "אֵצֶל סָבְתָא — at Grandma’s"
+    ],
+    [
+     "από (from)",
+     "מִ / מֵ",
+     "מִתֵּל אָבִיב — from Tel Aviv; מֵהַבַּיִת — from home"
+    ],
+    [
+     "με (with someone, with milk)",
+     "עִם",
+     "קָפֶה עִם חָלָב — coffee with milk"
+    ],
+    [
+     "με (with a tool)",
+     "בְּ",
+     "בְּעֵט — with a pen"
+    ],
+    [
+     "για (for)",
+     "בִּשְׁבִיל (or לְ)",
+     "בִּשְׁבִיל אִמָּא — for Mum"
+    ],
+    [
+     "για / σχετικά με (about)",
+     "עַל",
+     "סֵפֶר עַל יְרוּשָׁלַיִם — a book about Jerusalem"
+    ],
+    [
+     "χωρίς (without)",
+     "בְּלִי",
+     "תֵּה בְּלִי סֻכָּר — tea without sugar"
+    ]
+   ],
+   "caption": "Your Greek prepositions in Hebrew: σε splits into בְּ, לְ and אֵצֶל; με into עִם and בְּ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "prefix",
+    "+ a noun without the article",
+    "+ the article (הַ)"
+   ],
+   "rows": [
+    [
+     "בְּ in, at",
+     "בְּמִסְעָדָה — in a restaurant",
+     "בַּמִּסְעָדָה — in the restaurant (ה falls away)"
+    ],
+    [
+     "לְ to, for",
+     "לְאַבָּא — to / for Dad",
+     "לַשּׁוּק — to the market (ה falls away)"
+    ],
+    [
+     "מִ from",
+     "מִתֵּל אָבִיב · מֵחֵיפָה",
+     "מֵהַבַּיִת — from the house (ה stays)"
+    ]
+   ],
+   "caption": "The article fuses with בְּ and לְ, but not with מִ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "me",
+    "you (m.)",
+    "you (f.)",
+    "him",
+    "her"
+   ],
+   "rows": [
+    [
+     "לְ to, for",
+     "לִי",
+     "לְךָ",
+     "לָךְ",
+     "לוֹ",
+     "לָהּ"
+    ],
+    [
+     "עִם with",
+     "אִתִּי",
+     "אִתְּךָ",
+     "אִתָּךְ",
+     "אִתּוֹ",
+     "אִתָּהּ"
+    ],
+    [
+     "אֵצֶל at …’s",
+     "אֶצְלִי",
+     "אֶצְלְךָ",
+     "אֶצְלֵךְ",
+     "אֶצְלוֹ",
+     "אֶצְלָהּ"
+    ],
+    [
+     "בִּשְׁבִיל for",
+     "בִּשְׁבִילִי",
+     "בִּשְׁבִילְךָ",
+     "בִּשְׁבִילֵךְ",
+     "בִּשְׁבִילוֹ",
+     "בִּשְׁבִילָהּ"
+    ]
+   ],
+   "caption": "With a pronoun the preposition takes an ending (עִם uses the stem אִתּ־)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "בַּ = בְּ + הַ, לַ = לְ + הַ",
+   "text": "בַּבַּיִת is “in the house / at home”, לַבַּיִת “to the house”. Never write *בְּהַבַּיִת or *לְהַבַּיִת. Before ה with qamats or segol the fused vowel follows the article: בָּעֲבוֹדָה, בָּעִיר, לָעֲבוֹדָה."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "מִ does not swallow the article",
+   "text": "מֵהַבַּיִת “from the house” — the ה stays. And מִ doubles the next letter: מִשְּׂמֹאל, מִתֵּל אָבִיב (only ע, ח, א, ר and ה refuse, and take מֵ)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "עִם or בְּ?",
+   "text": "עִם is “together with”: עִם חֲבֵרִים, קָפֶה עִם חָלָב. A tool or means takes בְּ: כּוֹתֵב בְּעֵט “writes with a pen”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "At school, at Grandma’s",
+   "text": "A place takes בְּ: בְּבֵית הַסֵּפֶר, בַּבַּנְק. A person (and their home or office) takes אֵצֶל: אֵצֶל סָבְתָא, אֵצֶל הָרוֹפֵא — like German bei."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "Compound nouns",
+   "text": "In בֵּית סֵפֶר the article sits on the second word (בֵּית הַסֵּפֶר), so nothing fuses: בְּבֵית הַסֵּפֶר “at school”. Note the soft ב after the prefix: b’veit."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "For you",
+   "text": "German needs a case after every preposition (mit dem Mann, in der Stadt, in die Stadt). Hebrew needs none: הָאִישׁ stays הָאִישׁ after any preposition — only the first letters of the word may change spelling (בַּ, לַ, a doubled letter after מִ)."
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "PFX (in the word tables)",
+     "def": "the form of a word right after an attached preposition, where it differs from the plain form: the definite form without its ה after בַּ / לַ (הַשּׁוּק → בַּשּׁוּק), or the first letter doubled after מִ (שְׂמֹאל → מִשְּׂמֹאל)."
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it in / at a place (בְּ), towards (לְ), or out of (מִ)?",
+    "Is there an article? → בַּ / לַ swallow it; מֵהַ keeps it.",
+    "Is it a person’s place? → אֵצֶל.",
+    "Together with (עִם) or by means of (בְּ)?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Where is it? → בְּ (in, at): בַּבַּיִת, בָּעֲבוֹדָה. At a person’s? → אֵצֶל.",
+   "Where to / to whom / for whom? → לְ: לַשּׁוּק, לְאִמָּא (formal אֶל); “for” a person or purpose → בִּשְׁבִיל.",
+   "From where / from whom? → מִ (מֵ before ע ח א ר ה): מִתֵּל אָבִיב, מֵהַבַּיִת.",
+   "Together with? → עִם. Without? → בְּלִי. About a topic? → עַל.",
+   "Does the noun have the article? → with בְּ / לְ the ה falls away (בַּ / לַ); with מִ it stays (מֵהַ).",
+   "Does the prefix stand before a shva or a hataf? → בִּ / לִ before a shva, בַּ before a hataf patah.",
+   "Is it a pronoun (me, you …)? → use the preposition with its ending: לִי, אִתִּי, אֶצְלִי, בִּשְׁבִילִי."
+  ],
+  "steps": [
+   "Choose the preposition by meaning.",
+   "Attach בְּ / לְ / מִ, or write the separate word.",
+   "Fuse the article with בְּ / לְ; keep it after מִ."
+  ]
+ },
+ "traps": [
+  "*בְּהַבַּיִת → בַּבַּיִת; *לְהַשּׁוּק → לַשּׁוּק.",
+  "מִ keeps the article: מֵהַבַּיִת (not *מַבַּיִת).",
+  "A tool takes בְּ, not עִם: בְּעֵט “with a pen”.",
+  "For people use אֵצֶל, not בְּ: אֵצֶל הָרוֹפֵא “at the doctor’s”.",
+  "בְּלִי is one word — not בְּ + לִי.",
+  "Unvowelled, בבית can be בְּבַיִת “in a house” or בַּבַּיִת “at home”: only the vowel shows the article.",
+  "“With me” is אִתִּי (not *עִם אֲנִי); “for me” is בִּשְׁבִילִי; “to me” is לִי."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:be",
+   "he:le",
+   "he:min",
+   "he:im",
+   "he:bli",
+   "he:bishvil",
+   "he:al",
+   "he:etsel",
+   "he:el"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“at home” (in the house) is written:",
+   "options": [
+    "בַּבַּיִת",
+    "בְּהַבַּיִת",
+    "בְּבַיִת הַ"
+   ],
+   "answer": "בַּבַּיִת",
+   "why": "בְּ + הַ fuse into בַּ: the ה disappears."
+  },
+  {
+   "q": "“from the house”:",
+   "options": [
+    "מֵהַבַּיִת",
+    "מַבַּיִת",
+    "מִן בַּיִת הַ"
+   ],
+   "answer": "מֵהַבַּיִת",
+   "why": "מִ does not fuse with the article: מֵ + הַבַּיִת."
+  },
+  {
+   "q": "Greek “Είμαι στου παππού” (I’m at Grandpa’s) — which Hebrew word for “at”?",
+   "options": [
+    "אֵצֶל",
+    "בְּ",
+    "לְ"
+   ],
+   "answer": "אֵצֶל",
+   "why": "At a person’s place Hebrew uses אֵצֶל: אֲנִי אֵצֶל סַבָּא."
+  },
+  {
+   "q": "“He writes with a pen”:",
+   "options": [
+    "הוּא כּוֹתֵב בְּעֵט.",
+    "הוּא כּוֹתֵב עִם עֵט.",
+    "הוּא כּוֹתֵב לְעֵט."
+   ],
+   "answer": "הוּא כּוֹתֵב בְּעֵט.",
+   "why": "A tool takes בְּ; עִם is “together with”."
+  },
+  {
+   "q": "“Coffee without milk”:",
+   "options": [
+    "קָפֶה בְּלִי חָלָב",
+    "קָפֶה עִם לֹא חָלָב",
+    "קָפֶה מֵחָלָב"
+   ],
+   "answer": "קָפֶה בְּלִי חָלָב",
+   "why": "בְּלִי = “without”."
+  },
+  {
+   "q": "“with me”:",
+   "options": [
+    "אִתִּי",
+    "עִם אֲנִי",
+    "לִי"
+   ],
+   "answer": "אִתִּי",
+   "why": "Prepositions take personal endings; עִם uses the stem אִתּ־: אִתִּי, אִתְּךָ, אִתָּהּ. לִי is “to me”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.core",
+   "note": "Arabic has the same prefixes بِـ and لِـ and the word مِنْ “from” (Hebrew מִן / מִ), but keeps the article (بِالْبَيْتِ) and puts the noun in the genitive -i after every preposition."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.core",
+   "note": "German in / an / zu / von / mit … each govern a case (mit dem, für den); Hebrew nouns never change after a preposition."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "Chinese uses coverbs before the verb — 在 (at), 从 (from), 跟 (with), 给 (for) — where Hebrew uses prefixes and prepositions."
+  }
+ ]
+}

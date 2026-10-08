@@ -1473,7 +1473,8 @@
    "pinyin": "hé",
    "pos": "CCONJ",
    "senses": [
-    "conj.and"
+    "conj.and",
+    "prep.with"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1501,7 +1502,8 @@
       "def": "with, together with (和…一起)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.with"
      },
      {
       "id": "s3",
@@ -1535,6 +1537,14 @@
       "context": "invitations",
       "sense": "s2",
       "py": "Wǒ xiǎng hé nǐ yìqǐ chīfàn."
+     },
+     {
+      "text": "我和妈妈一起做饭。",
+      "tr": "I cook with my mother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2",
+      "py": "Wǒ hé māma yìqǐ zuòfàn."
      },
      {
       "text": "我们都希望世界和平。",
@@ -1595,7 +1605,8 @@
      "Other readings: hè (附和 ‘to echo’), huó (和面 ‘to knead dough’), hú (winning at mahjong)."
     ],
     "subtleties": [
-     "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’."
+     "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’.",
+     "For ‘with (a person)’ 和 and 跟 are interchangeable before 一起: 我和 / 跟朋友一起吃饭; 跟 is more colloquial (S11)."
     ]
    }
   },
@@ -1606,7 +1617,7 @@
    "pinyin": "zài",
    "pos": "VERB",
    "senses": [],
-   "role": "to be (located) at — the ‘be’ of place: 土豆在这里; also ‘at/in’ before a place and the progressive marker",
+   "role": "to be (located) at — the ‘be’ of place: 土豆在这里; ‘at / in’ before a place and the verb (S11): 在家吃饭; before a verb, the progressive ‘be …-ing’ (S14): 他在吃饭",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1639,6 +1650,13 @@
       "def": "in the middle of doing (progressive: 在吃饭)",
       "register": [
        "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "(formal) at, in (a time): 在2008年 — everyday speech uses the time word alone (S15)",
+      "register": [
+       "formal"
       ]
      }
     ],
@@ -1674,6 +1692,22 @@
       "context": "meals",
       "sense": "s3",
       "py": "Tā zài chīfàn."
+     },
+     {
+      "text": "我们在等公共汽车。",
+      "py": "Wǒmen zài děng gōnggòng qìchē.",
+      "tr": "We are waiting for the bus.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s3"
+     },
+     {
+      "text": "他在2008年来到北京。",
+      "py": "Tā zài èr líng líng bā nián láidào Běijīng.",
+      "tr": "He came to Beijing in 2008.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1712,10 +1746,12 @@
     ],
     "pitfalls": [
      "Known thing + 在 + place: 西红柿在这里 ‘the tomatoes are here’. Place + 有 + new thing: 这里有西红柿 ‘there are tomatoes here’.",
-     "Negate with 不: 他不在 ‘he isn’t in’."
+     "Negate with 不: 他不在 ‘he isn’t in’.",
+     "Progressive 在 vs place 在: 他在吃饭 ‘he is eating’, 他在家吃饭 ‘he eats at home’ (or ‘is eating at home’) — the place version has a place after 在."
     ],
     "subtleties": [
-     "在 + place goes before the verb: 我在家吃饭, not *我吃饭在家."
+     "在 + place goes before the verb: 我在家吃饭, not *我吃饭在家.",
+     "The progressive can be strengthened with 正 and 呢: 他正在吃饭呢 ‘he’s eating right now’; its negation is 没(在): 他没在吃饭."
     ]
    }
   },
@@ -2040,9 +2076,9 @@
       "sense": "s1"
      },
      {
-      "text": "那个男孩叫小明。",
-      "py": "Nàge nánhái jiào Xiǎomíng.",
-      "tr": "That boy is called Xiaoming.",
+      "text": "那个男孩叫王明。",
+      "py": "Nàge nánhái jiào Wáng Míng.",
+      "tr": "That boy is called Wang Ming.",
       "register": "neutral",
       "context": "introductions",
       "sense": "s1"

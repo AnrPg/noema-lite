@@ -1,0 +1,292 @@
+{
+ "function": "fn.possessive",
+ "status": "realized",
+ "summary": "Arabic has no separate words for “my, your, his …”: a suffix goes on the noun. كِتَابِي my book, كِتَابُكَ your book (to a man), كِتَابُكِ (to a woman), كِتَابُهُ his book, كِتَابُهَا her book, كِتَابُنَا our book, كِتَابُكُمْ your book (several), كِتَابُهُمْ their book (for women only: -kunna, -hunna). The suffix makes the noun definite: no article, no tanwīn. The case vowel stays in front of the suffix (كِتَابُكَ subject, كِتَابَكَ object, كِتَابِكَ after a preposition) — only -ī swallows it. A final ة becomes t: غُرْفَتِي. أَب and أَخ lengthen: أَبُوكَ (your father), أَخُوهُ (his brother) — but أَبِي, أَخِي. A dual loses its -ni: وَالِدَايَ (my parents). In “X of Y” the suffix goes on the last noun: اِبْنُ عَمِّي (my cousin).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "suffix",
+    "meaning",
+    "كِتَاب",
+    "غُرْفَة",
+    "أَب"
+   ],
+   "rows": [
+    [
+     "-ī",
+     "my",
+     "كِتَابِي",
+     "غُرْفَتِي",
+     "أَبِي"
+    ],
+    [
+     "-ka",
+     "your (to a man)",
+     "كِتَابُكَ",
+     "غُرْفَتُكَ",
+     "أَبُوكَ"
+    ],
+    [
+     "-ki",
+     "your (to a woman)",
+     "كِتَابُكِ",
+     "غُرْفَتُكِ",
+     "أَبُوكِ"
+    ],
+    [
+     "-hu",
+     "his",
+     "كِتَابُهُ",
+     "غُرْفَتُهُ",
+     "أَبُوهُ"
+    ],
+    [
+     "-hā",
+     "her",
+     "كِتَابُهَا",
+     "غُرْفَتُهَا",
+     "أَبُوهَا"
+    ],
+    [
+     "-nā",
+     "our",
+     "كِتَابُنَا",
+     "غُرْفَتُنَا",
+     "أَبُونَا"
+    ],
+    [
+     "-kum (-kunna)",
+     "your (several)",
+     "كِتَابُكُمْ",
+     "غُرْفَتُكُمْ",
+     "أَبُوكُمْ"
+    ],
+    [
+     "-hum (-hunna)",
+     "their",
+     "كِتَابُهُمْ",
+     "غُرْفَتُهُمْ",
+     "أَبُوهُمْ"
+    ]
+   ],
+   "caption": "These are the subject (nominative) forms. The same suffixes go on prepositions: عِنْدِي (I have), عِنْدَكَ, عِنْدَهُ …"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "A noun with a suffix is definite.",
+   "text": "Never add the article: كِتَابِي, not *الْكِتَابِي; and no tanwīn: كِتَابُهُ, not *كِتَابٌهُ. That is why هٰذَا كِتَابِي is a sentence: “this is my book”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "ة → ت, and the special nouns أَب / أَخ.",
+   "text": "Before any suffix the tāʾ marbūṭa is written and said ت: أُسْرَتِي, زَوْجَتُهُ, خَالَتُكِ. أَب and أَخ add a long vowel that shows the case: أَبُوكَ (nom.), أَبَاكَ (acc.), أَبِيكَ (gen.) — but “my father” is أَبِي in every case."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "-hu and -hum after i.",
+   "text": "After i or y the suffixes -hu / -hum become -hi / -him: فِي بَيْتِهِ (in his house), عَلَيْهِمْ (on them). You will meet it after prepositions (lesson 11)."
+  },
+  {
+   "t": "table",
+   "head": [
+    "relative",
+    "Arabic (literally)",
+    "“my …”"
+   ],
+   "rows": [
+    [
+     "cousin (father's brother's son / daughter)",
+     "اِبْنُ عَمٍّ / بِنْتُ عَمٍّ",
+     "اِبْنُ عَمِّي / بِنْتُ عَمِّي"
+    ],
+    [
+     "cousin (father's sister's son / daughter)",
+     "اِبْنُ عَمَّةٍ / بِنْتُ عَمَّةٍ",
+     "اِبْنُ عَمَّتِي / بِنْتُ عَمَّتِي"
+    ],
+    [
+     "cousin (mother's brother's son / daughter)",
+     "اِبْنُ خَالٍ / بِنْتُ خَالٍ",
+     "اِبْنُ خَالِي / بِنْتُ خَالِي"
+    ],
+    [
+     "cousin (mother's sister's son / daughter)",
+     "اِبْنُ خَالَةٍ / بِنْتُ خَالَةٍ",
+     "اِبْنُ خَالَتِي / بِنْتُ خَالَتِي"
+    ],
+    [
+     "nephew",
+     "اِبْنُ الْأَخِ / اِبْنُ الْأُخْتِ",
+     "اِبْنُ أَخِي / اِبْنُ أُخْتِي"
+    ],
+    [
+     "niece",
+     "بِنْتُ الْأَخِ / بِنْتُ الْأُخْتِ",
+     "بِنْتُ أَخِي / بِنْتُ أُخْتِي"
+    ]
+   ],
+   "caption": "Arabic has no single word for cousin, nephew or niece: it always says whose child. The first noun is in the construct form (اِبْنُ — no article, no tanwīn) and the suffix goes on the last one."
+  },
+  {
+   "t": "p",
+   "text": "Dual and plural nouns take the suffixes too: وَالِدَايَ (my parents — the dual without -ni), أَجْدَادِي (my grandparents), إِخْوَتِي (my brothers). A sound masculine plural drops its -na: مُعَلِّمُوكَ (your teachers)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Whose is it? → the suffix: -ī, -ka / -ki, -hu / -hā, -nā, -kum (-kunna), -hum (-hunna).",
+   "Does the noun end in ة? → t before the suffix: غُرْفَتِي.",
+   "Remove the article and the tanwīn — the suffix already makes the noun definite.",
+   "Which case is the noun in? Keep -u / -a / -i before the suffix (not before -ī).",
+   "Is it أَب or أَخ? → أَبُو- / أَخُو- (nominative) before every suffix except -ī.",
+   "Is it “my cousin / nephew”? → construct + the suffix on the last noun: اِبْنُ عَمِّي."
+  ]
+ },
+ "traps": [
+  "*الْكِتَابِي — never the article with a suffix.",
+  "*غُرْفَةِي — ة becomes ت: غُرْفَتِي.",
+  "*أَبُكَ — “your father” is أَبُوكَ; “my father” is أَبِي.",
+  "“My parents” is وَالِدَايَ: the dual loses its -ni.",
+  "To a man -ka, to a woman -ki: unvocalized كتابك can be either.",
+  "In “my uncle's son” the suffix is on “uncle”: اِبْنُ عَمِّي, not *اِبْنِي عَمٍّ."
+ ],
+ "evidence": {
+  "tags": [
+   "POSS"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;SG;POSS;PSS1S",
+  "N;NOM;SG;POSS;PSS2SM",
+  "N;NOM;SG;POSS;PSS2SF",
+  "N;NOM;SG;POSS;PSS3SM",
+  "N;NOM;SG;POSS;PSS3SF",
+  "N;NOM;SG;POSS;PSS1P",
+  "N;NOM;SG;POSS;PSS2PM",
+  "N;NOM;SG;POSS;PSS3PM"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "class": "kin",
+   "cells": [
+    "N;NOM;SG;POSS;PSS1S",
+    "N;NOM;SG;POSS;PSS2SM",
+    "N;NOM;SG;POSS;PSS2SF",
+    "N;NOM;SG;POSS;PSS3SM",
+    "N;NOM;SG;POSS;PSS3SF",
+    "N;NOM;SG;POSS;PSS1P"
+   ],
+   "count": 12
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“my room”:",
+   "options": [
+    "غُرْفَتِي",
+    "الْغُرْفَتِي",
+    "غُرْفَةِي"
+   ],
+   "answer": "غُرْفَتِي",
+   "why": "ة → t before the suffix, and no article."
+  },
+  {
+   "q": "“your father” (to a man), as the subject:",
+   "options": [
+    "أَبُوكَ",
+    "أَبُكَ",
+    "أَبِيكَ"
+   ],
+   "answer": "أَبُوكَ",
+   "why": "أَب lengthens: أَبُو- in the nominative."
+  },
+  {
+   "q": "“her mother”:",
+   "options": [
+    "أُمُّهَا",
+    "أُمُّهُ",
+    "أُمِّي"
+   ],
+   "answer": "أُمُّهَا",
+   "why": "-hā = her; -hu = his; -ī = my."
+  },
+  {
+   "q": "“my parents”:",
+   "options": [
+    "وَالِدَايَ",
+    "وَالِدَانِي",
+    "الْوَالِدَانِي"
+   ],
+   "answer": "وَالِدَايَ",
+   "why": "The dual drops -ni before the suffix: wālidā + ya."
+  },
+  {
+   "q": "“my cousin” (my father's brother's son):",
+   "options": [
+    "اِبْنُ عَمِّي",
+    "اِبْنِي عَمٍّ",
+    "اِبْنُ الْعَمِّي"
+   ],
+   "answer": "اِبْنُ عَمِّي",
+   "why": "In “X of Y” the suffix goes on the last noun; the first is in the construct form."
+  },
+  {
+   "q": "What does كِتَابُكُمْ mean?",
+   "options": [
+    "your (pl.) book",
+    "your book (to one man)",
+    "their book"
+   ],
+   "answer": "your (pl.) book",
+   "why": "-kum = your (several people); -ka = one man; -hum = their."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.possessive",
+   "note": "Hebrew has both: a separate word, הַסֵּפֶר שֶׁלִּי (everyday), and suffixes cognate with the Arabic ones, סִפְרִי (formal) — compare كِتَابِي."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.possessive",
+   "note": "German uses separate words that decline like ein: mein Bruder, meine Schwester, unser Haus."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.possessive",
+   "note": "Chinese puts 的 after the owner: 我的书; with close family the 的 is often left out: 我妈妈."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.have",
+   "note": "The same suffixes on عِنْدَ give “to have”: عِنْدِي (at me = I have)."
+  }
+ ]
+}

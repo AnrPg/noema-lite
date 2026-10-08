@@ -1,0 +1,385 @@
+{
+ "function": "fn.direction",
+ "status": "realized",
+ "summary": "Chinese says ‘where to’ with the verb itself: 去 ‘go (there)’, 来 ‘come (here)’, 回 ‘go back’, 进 ‘enter’, 到 ‘arrive’ take the place as their object — 我去学校 ‘I go to school’, no word for ‘to’ and no case. ‘Where from’ is 从 + place before the verb: 他从北京来. A whole trip is 从 A 到 B: 从我家到学校. How you travel is a small verb phrase BEFORE the main verb: 坐 + vehicle you ride in (坐公共汽车去 ‘go by bus’), 骑 + what you sit astride (骑自行车去 ‘go by bike’), 开车 ‘drive’, 走路 ‘on foot’. After a verb of movement, 来 / 去 show the direction seen from the speaker: 进来 ‘come in’, 进去 ‘go in’, 回来 ‘come back’, 出去 ‘go out’. The order is always: who – (when) – from where / how – movement verb – where to.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "我",
+    "(明天)",
+    "从家",
+    "坐公共汽车",
+    "去",
+    "学校"
+   ],
+   "caption": "who – when – from where – how – the movement – where to"
+  },
+  {
+   "t": "table",
+   "head": [
+    "English / Greek",
+    "Chinese",
+    "How"
+   ],
+   "rows": [
+    [
+     "I go to school. — Πάω στο σχολείο.",
+     "我去学校。",
+     "the verb takes the place: no ‘to’"
+    ],
+    [
+     "He comes from Beijing. — Έρχεται από το Πεκίνο.",
+     "他从北京来。",
+     "从 + place BEFORE the verb"
+    ],
+    [
+     "I go to school by bus. — Πάω στο σχολείο με το λεωφορείο.",
+     "我坐公共汽车去学校。",
+     "vehicle phrase before 去"
+    ],
+    [
+     "We fly to Beijing. — Πετάμε για Πεκίνο.",
+     "我们坐飞机去北京。",
+     "坐飞机 ‘sit-plane’"
+    ],
+    [
+     "I cycle to the park. — Πάω στο πάρκο με το ποδήλατο.",
+     "我骑自行车去公园。",
+     "骑 for a bike"
+    ],
+    [
+     "My father drives to work. — Ο πατέρας μου πάει στη δουλειά με το αυτοκίνητο.",
+     "我爸爸开车去工作。",
+     "开车 ‘drive’"
+    ],
+    [
+     "I walk home. — Πάω σπίτι με τα πόδια.",
+     "我走路回家。",
+     "走路 ‘on foot’"
+    ],
+    [
+     "from my home to the station — από το σπίτι μου ως τον σταθμό",
+     "从我家到车站",
+     "从 … 到 …"
+    ]
+   ],
+   "caption": "Movement in Chinese"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "去 qù — away from here",
+     "points": [
+      "我去北京。 I’m going to Beijing.",
+      "进去 go in · 出去 go out · 回去 go back (there)"
+     ]
+    },
+    {
+     "title": "来 lái — towards here",
+     "points": [
+      "你来我家吧！ Come to my place!",
+      "进来 come in · 出来 come out · 回来 come back (here)"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Vehicle",
+    "Verb",
+    "Example",
+    "Measure word"
+   ],
+   "rows": [
+    [
+     "公共汽车 / 公交车 bus",
+     "坐",
+     "坐公交车去",
+     "辆"
+    ],
+    [
+     "火车 train",
+     "坐",
+     "坐火车去北京",
+     "列, 趟"
+    ],
+    [
+     "飞机 plane",
+     "坐 (passenger) · 开 (pilot)",
+     "坐飞机去",
+     "架"
+    ],
+    [
+     "出租车 taxi",
+     "坐 (passenger) · 开 (driver)",
+     "坐出租车去机场",
+     "辆"
+    ],
+    [
+     "汽车 / 车 car",
+     "坐 (passenger) · 开 (driver) — 开车",
+     "开车去超市",
+     "辆"
+    ],
+    [
+     "船 boat",
+     "坐",
+     "坐船去",
+     "条, 艘, 只"
+    ],
+    [
+     "自行车 bicycle",
+     "骑",
+     "骑自行车去学校",
+     "辆"
+    ],
+    [
+     "— on foot",
+     "走路",
+     "走路去公园",
+     "—"
+    ]
+   ],
+   "caption": "坐 what you ride in, 骑 what you sit astride, 开 what you drive"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Greek σε / German zu, nach, in — Chinese: nothing",
+   "text": "Πάω στο σχολείο, ich gehe in die Schule / zur Schule / nach Hause: the preposition (and in German the case) depends on the place. Chinese has none of this: 去学校, 去超市, 回家, 到北京 — the movement verb carries the ‘to’."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The vehicle comes BEFORE the main verb",
+   "text": "我坐火车去北京 ‘I go to Beijing by train’. Put the other way round, 我去北京坐火车 means ‘I go to Beijing to take a train’ — the second verb is the purpose."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "回家, not *去家",
+   "text": "Going to your own home is 回家 ‘return home’. 去 + home is only for someone else’s: 去我朋友家, 去奶奶家."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "离开 + place — leave (a place)",
+     "points": [
+      "他离开了北京。 He left Beijing.",
+      "The place is the object; no 从."
+     ]
+    },
+    {
+     "title": "走 — leave (no object)",
+     "points": [
+      "我走了！ I’m off!",
+      "我们走吧！ Let’s go!"
+     ]
+    },
+    {
+     "title": "出 / 出去 — go out",
+     "points": [
+      "他出去了。 He has gone out.",
+      "出门 ‘leave the house’"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "German gehen / fahren — Chinese 去 for both",
+   "text": "German must choose gehen (on foot) or fahren (by vehicle); Hebrew הָלַךְ / נָסַע makes the same split. Chinese uses 去 for every trip and adds HOW only if it matters: 走路去, 坐车去, 开车去."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking",
+   "text": "你去哪里？ ‘where are you going?’ · 你从哪里来？ ‘where are you coming from?’ · 你怎么去？ ‘how are you getting there?’ — 坐公共汽车。"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the movement towards me (or the listener) → 来, or away → 去? Going back → 回 (+ place) / 回来 / 回去.",
+   "Do I name the goal? → put it right after the verb: 去学校, 回家, 到北京 — no word for ‘to’.",
+   "Is it my own home? → 回家, never *去家.",
+   "Do I name the starting point? → 从 + place BEFORE the verb: 从北京来.",
+   "A whole stretch? → 从 A 到 B.",
+   "How do I travel? → 坐 / 骑 / 开 + vehicle, or 走路 — before the movement verb.",
+   "Leaving a place? → 离开 + place; just leaving → 走; going out → 出去.",
+   "Into / out of / back, seen from where I stand? → verb + 来 (towards me) or 去 (away).",
+   "Did I put the vehicle or 从-phrase at the end, as in English? → move it before the verb."
+  ],
+  "steps": [
+   "Who (and when).",
+   "From where (从 …) and how (坐 / 骑 / 开 / 走路).",
+   "The movement verb + where to."
+  ]
+ },
+ "traps": [
+  "*我去到学校 / *我去在学校 → 我去学校.",
+  "*我去家 → 我回家.",
+  "*我来从北京 → 我从北京来.",
+  "*我去学校坐公共汽车 (= I go to school to take the bus) → 我坐公共汽车去学校.",
+  "*我坐自行车 → 我骑自行车.",
+  "*走公共汽车 → 坐公共汽车.",
+  "*我从北京离开 (word by word from ‘leave from’) → 我离开北京.",
+  "来 is not only ‘towards the speaker’: answering someone who calls you, ‘I’m coming!’ is 来了！"
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:qu",
+   "zh:lai",
+   "zh:hui",
+   "zh:huilai",
+   "zh:jin.enter",
+   "zh:chu",
+   "zh:likai",
+   "zh:dao",
+   "zh:cong.from",
+   "zh:zuo",
+   "zh:qi.ride",
+   "zh:kaiche",
+   "zh:kai",
+   "zh:zou",
+   "zh:zoulu",
+   "zh:pao",
+   "zh:lvxing",
+   "zh:lvyou"
+  ]
+ },
+ "needs": {
+  "VERB": 4,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.direction"
+    ]
+   }
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘I go to school by bus.’",
+   "options": [
+    "我坐公共汽车去学校。",
+    "我去学校坐公共汽车。",
+    "我去学校公共汽车。"
+   ],
+   "answer": "我坐公共汽车去学校。",
+   "why": "How you travel comes before the movement verb; the other order means ‘to take the bus’ as the purpose."
+  },
+  {
+   "q": "‘He comes from Beijing.’",
+   "options": [
+    "他从北京来。",
+    "他来从北京。",
+    "他来北京从。"
+   ],
+   "answer": "他从北京来。",
+   "why": "从 + place stands before the verb."
+  },
+  {
+   "q": "‘Let’s go home.’",
+   "options": [
+    "我们回家吧。",
+    "我们去家吧。",
+    "我们回来家吧。"
+   ],
+   "answer": "我们回家吧。",
+   "why": "Your own home: 回家."
+  },
+  {
+   "q": "‘I ride my bike to the park.’",
+   "options": [
+    "我骑自行车去公园。",
+    "我坐自行车去公园。",
+    "我开自行车去公园。"
+   ],
+   "answer": "我骑自行车去公园。",
+   "why": "骑 for what you sit astride."
+  },
+  {
+   "q": "Someone knocks; you are inside. You say …",
+   "options": [
+    "请进！",
+    "请进去！",
+    "请出去！"
+   ],
+   "answer": "请进！",
+   "why": "Come in (towards me): 请进 / 请进来; 进去 would be ‘go in (there)’."
+  },
+  {
+   "q": "‘He left Beijing.’",
+   "options": [
+    "他离开了北京。",
+    "他从北京离开了。",
+    "他出北京了。"
+   ],
+   "answer": "他离开了北京。",
+   "why": "The place is the object of 离开."
+  },
+  {
+   "q": "Which measure word for a plane?",
+   "options": [
+    "架",
+    "辆",
+    "条"
+   ],
+   "answer": "架",
+   "why": "一架飞机; 辆 is for wheeled vehicles, 条 for boats (and streets, fish)."
+  },
+  {
+   "q": "‘from my home to the school’",
+   "options": [
+    "从我家到学校",
+    "从我家去学校到",
+    "到学校从我家"
+   ],
+   "answer": "从我家到学校",
+   "why": "从 A 到 B."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.direction",
+   "note": "German picks the verb by the means (gehen on foot, fahren by vehicle, fliegen) and the preposition and case by the place (in die Schule, zur Arbeit, nach Hause, mit dem Bus); Chinese uses 去 for every trip, puts 坐 / 骑 / 开 + vehicle before it and needs no preposition at all."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.direction",
+   "note": "Hebrew, like German, separates הָלַךְ (go on foot) from נָסַע (go by vehicle) and marks the goal with לְ־ / אֶל and the vehicle with בְּ־ (בָּאוֹטוֹבּוּס); Chinese marks neither — the vehicle is a verb phrase (坐公共汽车) before 去."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.direction",
+   "note": "Arabic says ‘go to’ with ذَهَبَ إِلَى (+ genitive), ‘from’ with مِنْ and the vehicle with بِ (بِالسَّيَّارَةِ ‘by car’); Chinese has 从 before the verb and nothing at all for ‘to’ and ‘by’."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "从 and 到 are the coverbs of S11; here they frame a whole trip: 从 A 到 B."
+  }
+ ]
+}

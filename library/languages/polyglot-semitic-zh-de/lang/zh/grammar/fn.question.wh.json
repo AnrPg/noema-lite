@@ -1,0 +1,373 @@
+{
+ "function": "fn.question.wh",
+ "status": "realized",
+ "summary": "A Chinese question word stands exactly where the answer will stand — nothing moves to the front and the verb does not change places (‘in situ’): 你喝茶。→ 你喝什么？ ‘What do you drink?’; 安娜是医生。→ 谁是医生？ ‘Who is a doctor?’. Write the answer sentence, then replace the unknown part by the question word. No 吗 is added: the question word already makes the question. The words: 什么 what, 谁 who, 谁的 whose, 哪里 / 哪儿 where, 什么时候 when, 怎么 how (the way), 怎么样 how is it / what is it like, 为什么 why, 几 how many (a small number, with a measure word), 多少 how many / how much (any number), 哪 + measure word which. Time, manner and reason words stand before the verb: 你什么时候吃早饭？ 你为什么不吃肉？",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "你喝茶。",
+    "茶 → 什么",
+    "你喝什么？"
+   ],
+   "caption": "Replace the unknown part — and stop: nothing moves, no 吗"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Question word",
+    "Answer (statement)",
+    "Question"
+   ],
+   "rows": [
+    [
+     "什么 shénme — what",
+     "爷爷喝茶。",
+     "爷爷喝什么？"
+    ],
+    [
+     "谁 shéi — who (subject)",
+     "安娜是医生。",
+     "谁是医生？"
+    ],
+    [
+     "谁 shéi — who (after 是)",
+     "他是我哥哥。",
+     "他是谁？"
+    ],
+    [
+     "谁的 shéi de — whose",
+     "这是老师的书。",
+     "这是谁的书？"
+    ],
+    [
+     "哪里 nǎli / 哪儿 nǎr — where",
+     "他在医院工作。",
+     "他在哪里工作？"
+    ],
+    [
+     "什么时候 shénme shíhou — when",
+     "我七点吃早饭。",
+     "你什么时候吃早饭？"
+    ],
+    [
+     "怎么 zěnme — how (the way)",
+     "我坐公共汽车去。",
+     "你怎么去？"
+    ],
+    [
+     "怎么样 zěnmeyàng — how is …?",
+     "我妈妈很好。",
+     "你妈妈怎么样？"
+    ],
+    [
+     "为什么 wèishénme — why",
+     "因为我不喜欢肉。(S18)",
+     "你为什么不吃肉？"
+    ],
+    [
+     "几 jǐ — how many (small, + measure word)",
+     "她有两个孩子。",
+     "她有几个孩子？"
+    ],
+    [
+     "多少 duōshao — how many / how much",
+     "这里有二十个人。",
+     "这里有多少人？"
+    ],
+    [
+     "哪 nǎ — which (+ measure word)",
+     "他要这本书。",
+     "他要哪本书？"
+    ]
+   ],
+   "caption": "The question word takes the place of the answer"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "In situ — the opposite of German, Greek and English",
+   "text": "German Was trinkst du?, Greek Τι πίνεις;, English What do you drink? all bring the question word to the front. Chinese leaves it in the object slot: 你喝什么？ (literally ‘you drink what?’). Only when the question word is the subject does it stand first — because the subject stands first anyway: 谁要咖啡？"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No 吗 with a question word",
+   "text": "你喝什么？ ‘What do you drink?’ — with 吗 the question word turns into ‘anything’: 你喝什么吗？ ‘Do you drink anything?’. A question has either a question word or 吗, not both."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Where it goes",
+    "Question words",
+    "Example"
+   ],
+   "rows": [
+    [
+     "subject slot (first)",
+     "谁, 什么, 哪 + MW",
+     "谁做饭？ 哪位是警察？"
+    ],
+    [
+     "object slot (after the verb)",
+     "什么, 谁, 多少 / 几 + noun, 哪 + MW",
+     "你要哪个？ 她有几个孩子？"
+    ],
+    [
+     "after 是",
+     "谁, 什么, 谁的",
+     "那个人是谁？ 这些是谁的？"
+    ],
+    [
+     "before the verb",
+     "什么时候, 怎么, 为什么, 在哪里",
+     "你什么时候吃早饭？ 你在哪里工作？"
+    ],
+    [
+     "as the predicate",
+     "怎么样",
+     "你妈妈怎么样？"
+    ]
+   ],
+   "caption": "Same slot as the answer"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "几 jǐ",
+     "points": [
+      "a small number is expected (under about ten)",
+      "always with a measure word: 几个孩子, 几本书",
+      "a child’s age: 你几岁？ the family: 你家有几口人？"
+     ]
+    },
+    {
+     "title": "多少 duōshao",
+     "points": [
+      "any number, big or small",
+      "the measure word may drop: 多少人, 多少书",
+      "prices: 多少钱？"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "怎么 + verb — how (the way)",
+     "points": [
+      "这个怎么吃？ How do you eat this?",
+      "怎么 + 不 = how come: 你怎么不喝茶？"
+     ]
+    },
+    {
+     "title": "怎么样 — how is it? how about it?",
+     "points": [
+      "你妈妈怎么样？ How is your mother?",
+      "我们喝茶，怎么样？ Let’s have tea — OK?"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking about jobs",
+   "text": "他是谁？— 他是我哥哥。他是医生。 The everyday job question is 你做什么工作？ ‘what work do you do?’ (做 ‘to do’) or 你是做什么的？ — answer 我是护士 (no 一位 for yourself)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Polite ‘who?’ and adults’ age",
+   "text": "On the phone or to a stranger say 您是哪位？ — 你是谁？ sounds blunt. Ask a child 你几岁？, an adult 你多大？ (an older person 您多大年纪？)."
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "哪 nǎ ≠ 那 nà",
+     "def": "‘which’ (3rd tone, with 口) vs ‘that’ (4th tone): 哪本书？ ‘which book?’ — 那本书 ‘that book’."
+    },
+    {
+     "term": "哪里 nǎli ≠ 那里 nàli",
+     "def": "‘where?’ vs ‘there’."
+    },
+    {
+     "term": "谁的",
+     "def": "谁 + 的, built like 我的: 谁的书 ‘whose book’."
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What do I want to know — a thing, a person, an owner, a place, a time, a way, a reason, a number, a choice?",
+   "Write the answer sentence first, then replace the unknown part with the question word.",
+   "A number? Small (a child’s age, the family) → 几 + measure word; any size or a price → 多少 (measure word optional).",
+   "A choice from a set I can see or name? → 哪 + measure word (+ noun).",
+   "The owner? → 谁的 + noun, or 是谁的 at the end.",
+   "A time, a way or a reason? → 什么时候 / 怎么 / 为什么 before the verb.",
+   "Asking how something is or what it is like? → 怎么样 as the predicate.",
+   "Did I add 吗? → remove it.",
+   "Did I move the question word to the front out of German, Greek or English habit? → put it back where the answer goes."
+  ],
+  "steps": [
+   "Say the statement.",
+   "Swap the unknown part for the question word, in the same place.",
+   "End with ？ — no 吗."
+  ]
+ },
+ "traps": [
+  "*什么你喝？ — the object stays after the verb: 你喝什么？",
+  "*你喝什么吗？ for ‘what do you drink?’ — with 吗, 什么 means ‘anything’.",
+  "*你来什么时候？ → 你什么时候来？ (time before the verb).",
+  "*几人, *几书 → 几个人, 几本书 (几 needs a measure word).",
+  "*哪书 → 哪本书.",
+  "你几岁？ to an adult sounds as if they were a child → 你多大？",
+  "怎么 asks for the way (怎么去？); 怎么样 asks how something is (这个怎么样？) — not interchangeable.",
+  "你是谁？ can sound rude to a stranger → 您是哪位？"
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:shenme",
+   "zh:nali",
+   "zh:shei",
+   "zh:sheide",
+   "zh:shenmeshihou",
+   "zh:zenme",
+   "zh:zenmeyang",
+   "zh:weishenme",
+   "zh:duoshao",
+   "zh:ji",
+   "zh:na.which"
+  ]
+ },
+ "needs": {
+  "PRON": 3,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘What does Grandpa drink?’",
+   "options": [
+    "爷爷喝什么？",
+    "什么爷爷喝？",
+    "爷爷喝什么吗？"
+   ],
+   "answer": "爷爷喝什么？",
+   "why": "The question word stays in the object slot, and there is no 吗."
+  },
+  {
+   "q": "‘When do you have breakfast?’",
+   "options": [
+    "你什么时候吃早饭？",
+    "你吃早饭什么时候？",
+    "什么时候你吃早饭吗？"
+   ],
+   "answer": "你什么时候吃早饭？",
+   "why": "Time words — also 什么时候 — come before the verb."
+  },
+  {
+   "q": "A child: ‘How old are you?’",
+   "options": [
+    "你几岁？",
+    "你多少岁吗？",
+    "你几个岁？"
+   ],
+   "answer": "你几岁？",
+   "why": "几 + 岁 for a child’s age; 岁 is itself the measure word."
+  },
+  {
+   "q": "‘Which book do you want?’",
+   "options": [
+    "你要哪本书？",
+    "你要哪书？",
+    "你要那本书？"
+   ],
+   "answer": "你要哪本书？",
+   "why": "哪 needs a measure word; 那 nà means ‘that’."
+  },
+  {
+   "q": "‘Whose book is this?’",
+   "options": [
+    "这是谁的书？",
+    "这是书谁的？",
+    "谁这是的书？"
+   ],
+   "answer": "这是谁的书？",
+   "why": "谁的 stands before the noun, like 我的."
+  },
+  {
+   "q": "你喝什么吗？ means …",
+   "options": [
+    "Do you drink anything?",
+    "What do you drink?",
+    "Why do you drink?"
+   ],
+   "answer": "Do you drink anything?",
+   "why": "With 吗 the question word becomes ‘anything’."
+  },
+  {
+   "q": "‘How is your mother?’",
+   "options": [
+    "你妈妈怎么样？",
+    "你妈妈怎么？",
+    "怎么你妈妈？"
+   ],
+   "answer": "你妈妈怎么样？",
+   "why": "怎么样 asks how someone or something is; 怎么 needs a verb after it."
+  },
+  {
+   "q": "Polite on the phone: ‘Who is speaking?’",
+   "options": [
+    "您是哪位？",
+    "你是谁吗？",
+    "谁您是？"
+   ],
+   "answer": "您是哪位？",
+   "why": "哪位 is the polite ‘which person’; no 吗 with a question word."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.question.wh",
+   "note": "German moves the W-word to the front and the verb into second place (Was trinkst du?); Chinese moves nothing: 你喝什么？"
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.question.wh",
+   "note": "Arabic, like German, opens with the question word (mā / mādhā, man, ayna, matā, kayfa, limādhā, kam); kam ‘how many’ takes a singular noun in the accusative, where Chinese 几 / 多少 take a measure word."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.question.wh",
+   "note": "Hebrew also puts the question word first (מָה, מִי, אֵיפֹה, מָתַי, אֵיךְ, לָמָּה, כַּמָּה); כַּמָּה covers both ‘how many’ and ‘how much’, like 多少."
+  }
+ ]
+}
