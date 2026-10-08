@@ -1,0 +1,138 @@
+/* noema-lite — interface languages (first pass: the menus, tabs and back buttons; the course material and the
+   AI conversations keep their own languages). Flat bundles per language; a missing key falls back to English.
+   Used by the subject/profile pickers (engine/loader.js, before a subject is open) and by the engine (t(), engine/src/05_i18n.js).
+   The language: settings.lang of the account (⚙️ Settings → Display & studying), else the browser's language. */
+(function (root) {
+  'use strict';
+  const NB = ' ', NN = ' ';   // French: no-break space before “:”, narrow no-break space before “; ! ?”
+  const B = {
+    en: {
+      'top.switchSubject': 'Switch subject', 'top.map': 'Map', 'top.mapTitle': 'Back to the map of this curriculum',
+      'top.curricula': 'Curricula', 'top.curriculaTitle': 'Curricula: type a goal, get a map of steps',
+      'top.explore': 'Explore', 'top.exploreTitle': 'Explore: every public subject — info, statistics, study it',
+      'top.focus': 'Focus', 'top.focusTitle': '15-minute focus sprint', 'top.streak': 'Day streak', 'top.notifications': 'Notifications',
+      'top.sources': 'Sources', 'top.theme': 'Theme', 'top.tutor': 'Tutor', 'top.tutorTitle': 'Open tutor',
+      'top.account': '{name} — profile, ⚙️ settings, backup & sync, ❓ help',
+      'home.lightning': 'Lightning round', 'home.lightningSub': '60 seconds of true/false traps',
+      'home.drills': 'Debug drills', 'home.drillsSub': 'Memorize the “ask yourself” checklists',
+      'home.cards': 'Flashcards', 'home.cardsSub': 'Spaced-repetition recall',
+      'home.mistakes': 'Mistakes gym', 'home.mistakesSub': 'Retry what you got wrong',
+      'home.mixed': 'Mixed practice', 'home.mixedSub': 'Random exercises from everything you read',
+      'home.tutor': 'Socratic tutor', 'home.tutorSub': 'Gemini questions you until it clicks',
+      'home.due': '{n} due', 'home.chapters': 'Chapters',
+      'ch.all': '← All chapters', 'ch.learn': '📖 Learn', 'ch.practice': '🎯 Practice', 'ch.debug': '🔧 Debug drills', 'ch.cards': '🃏 Cards', 'ch.traps': '⚠️ Traps',
+      'nav.home': '← Home',
+      'view.mistakes': '🔁 Mistakes gym', 'view.mixed': '🎲 Mixed practice', 'view.lightning': 'Lightning round', 'view.cards': '🃏 Flashcards',
+      'view.drills': '🔧 Debug drills', 'view.whatsNew': '✨ What’s new', 'view.latest': '✨ Latest additions',
+      'acc.profile': '👤 Profile', 'acc.settings': '⚙️ Settings', 'acc.subjects': '📚 Subjects', 'acc.backup': '💾 Backup & restore', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Help',
+      'set.uiLang': 'Language of the menus', 'set.uiLangAuto': 'Automatic ({lang})',
+      'set.uiLangTip': 'The menus and buttons translated so far. The course material and the AI conversations have their own language settings.',
+      'pick.who': 'Who is studying?', 'pick.local': 'local profile', 'pick.newProfile': 'New profile', 'pick.onDevice': 'on this device',
+      'pick.cloudSignIn': '☁️ Sign in / create a cloud account', 'pick.cloudHint': 'Study from any device — progress syncs automatically.',
+      'pick.what': 'What do you want to study?', 'pick.search': '🔎 Search subjects…',
+      'pick.subjects': '📚 Subjects', 'pick.subjectsSub': 'ready-made courses', 'pick.curricula': '🧭 Curricula', 'pick.curriculaSub': 'a goal → a map of steps',
+      'pick.noMatch': 'No subject matches.', 'pick.none': 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.',
+      'pick.create': '✨ Create with Claude', 'pick.explore': '🌍 Explore', 'pick.import': '📥 Import subject pack', 'pick.switchProfile': '👤 Switch profile',
+      'pick.close': 'Close', 'pick.other': 'Other', 'pick.shared': '📬 {n} subject(s) shared with you',
+    },
+    el: {
+      'top.switchSubject': 'Αλλαγή μαθήματος', 'top.map': 'Χάρτης', 'top.mapTitle': 'Πίσω στον χάρτη αυτού του προγράμματος σπουδών',
+      'top.curricula': 'Προγράμματα', 'top.curriculaTitle': 'Προγράμματα σπουδών: γράψε έναν στόχο και πάρε έναν χάρτη με βήματα',
+      'top.explore': 'Εξερεύνηση', 'top.exploreTitle': 'Εξερεύνηση: όλα τα δημόσια μαθήματα — πληροφορίες, στατιστικά, μελέτη',
+      'top.focus': 'Συγκέντρωση', 'top.focusTitle': '15 λεπτά συγκεντρωμένης μελέτης', 'top.streak': 'Συνεχόμενες μέρες', 'top.notifications': 'Ειδοποιήσεις',
+      'top.sources': 'Πηγές', 'top.theme': 'Εμφάνιση', 'top.tutor': 'Δάσκαλος', 'top.tutorTitle': 'Άνοιξε τον δάσκαλο',
+      'top.account': '{name} — προφίλ, ⚙️ ρυθμίσεις, αντίγραφα και συγχρονισμός, ❓ βοήθεια',
+      'home.lightning': 'Γύρος-αστραπή', 'home.lightningSub': '60 δευτερόλεπτα με παγίδες σωστού/λάθους',
+      'home.drills': 'Εξάσκηση στην αποσφαλμάτωση', 'home.drillsSub': 'Μάθε τις λίστες «ρώτα τον εαυτό σου»',
+      'home.cards': 'Κάρτες μνήμης', 'home.cardsSub': 'Ανάκληση με επαναλήψεις σε διαστήματα',
+      'home.mistakes': 'Γυμναστήριο λαθών', 'home.mistakesSub': 'Ξαναδοκίμασε όσα έκανες λάθος',
+      'home.mixed': 'Μικτή εξάσκηση', 'home.mixedSub': 'Τυχαίες ασκήσεις από όσα έχεις διαβάσει',
+      'home.tutor': 'Σωκρατικός δάσκαλος', 'home.tutorSub': 'Το Gemini σε ρωτάει μέχρι να το καταλάβεις',
+      'home.due': '{n} για σήμερα', 'home.chapters': 'Κεφάλαια',
+      'ch.all': '← Όλα τα κεφάλαια', 'ch.learn': '📖 Θεωρία', 'ch.practice': '🎯 Εξάσκηση', 'ch.debug': '🔧 Αποσφαλμάτωση', 'ch.cards': '🃏 Κάρτες', 'ch.traps': '⚠️ Παγίδες',
+      'nav.home': '← Αρχική',
+      'view.mistakes': '🔁 Γυμναστήριο λαθών', 'view.mixed': '🎲 Μικτή εξάσκηση', 'view.lightning': 'Γύρος-αστραπή', 'view.cards': '🃏 Κάρτες μνήμης',
+      'view.drills': '🔧 Εξάσκηση στην αποσφαλμάτωση', 'view.whatsNew': '✨ Τι νέο υπάρχει', 'view.latest': '✨ Οι τελευταίες προσθήκες',
+      'acc.profile': '👤 Προφίλ', 'acc.settings': '⚙️ Ρυθμίσεις', 'acc.subjects': '📚 Μαθήματα', 'acc.backup': '💾 Αντίγραφα και επαναφορά', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Βοήθεια',
+      'set.uiLang': 'Γλώσσα των μενού', 'set.uiLangAuto': 'Αυτόματα ({lang})',
+      'set.uiLangTip': 'Τα μενού και τα κουμπιά που έχουν μεταφραστεί ως τώρα. Το υλικό του μαθήματος και οι συζητήσεις με την ΤΝ έχουν τις δικές τους ρυθμίσεις γλώσσας.',
+      'pick.who': 'Ποιος διαβάζει;', 'pick.local': 'τοπικό προφίλ', 'pick.newProfile': 'Νέο προφίλ', 'pick.onDevice': 'σε αυτή τη συσκευή',
+      'pick.cloudSignIn': '☁️ Σύνδεση / νέος λογαριασμός cloud', 'pick.cloudHint': 'Διάβασε από όποια συσκευή θέλεις — η πρόοδος συγχρονίζεται μόνη της.',
+      'pick.what': 'Τι θέλεις να μελετήσεις;', 'pick.search': '🔎 Αναζήτηση μαθημάτων…',
+      'pick.subjects': '📚 Μαθήματα', 'pick.subjectsSub': 'έτοιμα μαθήματα', 'pick.curricula': '🧭 Προγράμματα', 'pick.curriculaSub': 'ένας στόχος → ένας χάρτης με βήματα',
+      'pick.noMatch': 'Κανένα μάθημα δεν ταιριάζει.', 'pick.none': 'Δεν έχεις ακόμη μαθήματα. Πάτα ✨ Δημιουργία με το Claude: οι πηγές σου γίνονται ένα πλήρες πακέτο μελέτης.',
+      'pick.create': '✨ Δημιουργία με το Claude', 'pick.explore': '🌍 Εξερεύνηση', 'pick.import': '📥 Εισαγωγή πακέτου μαθήματος', 'pick.switchProfile': '👤 Αλλαγή προφίλ',
+      'pick.close': 'Κλείσιμο', 'pick.other': 'Άλλα', 'pick.shared': '📬 Μαθήματα που μοιράστηκαν μαζί σου: {n}',
+    },
+    ru: {
+      'top.switchSubject': 'Сменить предмет', 'top.map': 'Карта', 'top.mapTitle': 'Вернуться к карте этой учебной программы',
+      'top.curricula': 'Программы', 'top.curriculaTitle': 'Учебные программы: напишите цель и получите карту шагов',
+      'top.explore': 'Обзор', 'top.exploreTitle': 'Обзор: все открытые предметы — описание, статистика, изучение',
+      'top.focus': 'Фокус', 'top.focusTitle': '15 минут сосредоточенной работы', 'top.streak': 'Дней подряд', 'top.notifications': 'Уведомления',
+      'top.sources': 'Источники', 'top.theme': 'Тема', 'top.tutor': 'Наставник', 'top.tutorTitle': 'Открыть наставника',
+      'top.account': '{name} — профиль, ⚙️ настройки, резервные копии и синхронизация, ❓ помощь',
+      'home.lightning': 'Блиц', 'home.lightningSub': '60 секунд ловушек «верно или неверно»',
+      'home.drills': 'Тренировка отладки', 'home.drillsSub': 'Запомните чек-листы «спросите себя»',
+      'home.cards': 'Карточки', 'home.cardsSub': 'Интервальные повторения',
+      'home.mistakes': 'Работа над ошибками', 'home.mistakesSub': 'Повторите то, в чём ошиблись',
+      'home.mixed': 'Смешанная практика', 'home.mixedSub': 'Случайные упражнения из всего прочитанного',
+      'home.tutor': 'Сократовский наставник', 'home.tutorSub': 'Gemini задаёт вопросы, пока всё не станет ясно',
+      'home.due': 'к повторению: {n}', 'home.chapters': 'Главы',
+      'ch.all': '← Все главы', 'ch.learn': '📖 Теория', 'ch.practice': '🎯 Практика', 'ch.debug': '🔧 Отладка', 'ch.cards': '🃏 Карточки', 'ch.traps': '⚠️ Ловушки',
+      'nav.home': '← Главная',
+      'view.mistakes': '🔁 Работа над ошибками', 'view.mixed': '🎲 Смешанная практика', 'view.lightning': 'Блиц', 'view.cards': '🃏 Карточки',
+      'view.drills': '🔧 Тренировка отладки', 'view.whatsNew': '✨ Что нового', 'view.latest': '✨ Последние добавления',
+      'acc.profile': '👤 Профиль', 'acc.settings': '⚙️ Настройки', 'acc.subjects': '📚 Предметы', 'acc.backup': '💾 Резервные копии', 'acc.cloud': '☁️ Облако', 'acc.help': '❓ Помощь',
+      'set.uiLang': 'Язык меню', 'set.uiLangAuto': 'Автоматически ({lang})',
+      'set.uiLangTip': 'Меню и кнопки, которые уже переведены. У материалов курса и разговоров с ИИ свои настройки языка.',
+      'pick.who': 'Кто занимается?', 'pick.local': 'локальный профиль', 'pick.newProfile': 'Новый профиль', 'pick.onDevice': 'на этом устройстве',
+      'pick.cloudSignIn': '☁️ Войти или создать облачный аккаунт', 'pick.cloudHint': 'Занимайтесь с любого устройства — прогресс синхронизируется сам.',
+      'pick.what': 'Что вы хотите изучать?', 'pick.search': '🔎 Поиск предметов…',
+      'pick.subjects': '📚 Предметы', 'pick.subjectsSub': 'готовые курсы', 'pick.curricula': '🧭 Программы', 'pick.curriculaSub': 'цель → карта шагов',
+      'pick.noMatch': 'Подходящих предметов нет.', 'pick.none': 'Предметов пока нет. Нажмите ✨ Создать с Claude: ваши материалы станут полноценным учебным пакетом.',
+      'pick.create': '✨ Создать с Claude', 'pick.explore': '🌍 Обзор', 'pick.import': '📥 Импорт пакета предмета', 'pick.switchProfile': '👤 Сменить профиль',
+      'pick.close': 'Закрыть', 'pick.other': 'Другое', 'pick.shared': '📬 С вами поделились предметами: {n}',
+    },
+    fr: {
+      'top.switchSubject': 'Changer de matière', 'top.map': 'Carte', 'top.mapTitle': 'Revenir à la carte de ce parcours',
+      'top.curricula': 'Parcours', 'top.curriculaTitle': `Parcours${NB}: écris un objectif, obtiens une carte d’étapes`,
+      'top.explore': 'Explorer', 'top.exploreTitle': `Explorer${NB}: toutes les matières publiques — infos, statistiques, étude`,
+      'top.focus': 'Concentration', 'top.focusTitle': 'Un sprint de concentration de 15 minutes', 'top.streak': 'Jours d’affilée', 'top.notifications': 'Notifications',
+      'top.sources': 'Sources', 'top.theme': 'Thème', 'top.tutor': 'Tuteur', 'top.tutorTitle': 'Ouvrir le tuteur',
+      'top.account': '{name} — profil, ⚙️ réglages, sauvegarde et synchro, ❓ aide',
+      'home.lightning': 'Manche éclair', 'home.lightningSub': '60 secondes de pièges vrai ou faux',
+      'home.drills': 'Exercices de débogage', 'home.drillsSub': `Retiens les listes «${NB}pose-toi la question${NB}»`,
+      'home.cards': 'Cartes mémoire', 'home.cardsSub': 'Mémorisation par répétition espacée',
+      'home.mistakes': 'Salle des erreurs', 'home.mistakesSub': 'Réessaie ce que tu as raté',
+      'home.mixed': 'Pratique mélangée', 'home.mixedSub': 'Des exercices au hasard parmi tout ce que tu as lu',
+      'home.tutor': 'Tuteur socratique', 'home.tutorSub': 'Gemini te pose des questions jusqu’au déclic',
+      'home.due': '{n} à revoir', 'home.chapters': 'Chapitres',
+      'ch.all': '← Tous les chapitres', 'ch.learn': '📖 Apprendre', 'ch.practice': '🎯 S’entraîner', 'ch.debug': '🔧 Débogage', 'ch.cards': '🃏 Cartes', 'ch.traps': '⚠️ Pièges',
+      'nav.home': '← Accueil',
+      'view.mistakes': '🔁 Salle des erreurs', 'view.mixed': '🎲 Pratique mélangée', 'view.lightning': 'Manche éclair', 'view.cards': '🃏 Cartes mémoire',
+      'view.drills': '🔧 Exercices de débogage', 'view.whatsNew': `✨ Quoi de neuf${NN}?`, 'view.latest': '✨ Derniers ajouts',
+      'acc.profile': '👤 Profil', 'acc.settings': '⚙️ Réglages', 'acc.subjects': '📚 Matières', 'acc.backup': '💾 Sauvegarde et restauration', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Aide',
+      'set.uiLang': 'Langue des menus', 'set.uiLangAuto': 'Automatique ({lang})',
+      'set.uiLangTip': 'Les menus et les boutons déjà traduits. Le contenu du cours et les conversations avec l’IA ont leurs propres réglages de langue.',
+      'pick.who': `Qui étudie${NN}?`, 'pick.local': 'profil local', 'pick.newProfile': 'Nouveau profil', 'pick.onDevice': 'sur cet appareil',
+      'pick.cloudSignIn': '☁️ Se connecter ou créer un compte cloud', 'pick.cloudHint': 'Étudie depuis n’importe quel appareil — ta progression se synchronise toute seule.',
+      'pick.what': `Qu’est-ce que tu veux étudier${NN}?`, 'pick.search': '🔎 Chercher une matière…',
+      'pick.subjects': '📚 Matières', 'pick.subjectsSub': 'des cours tout prêts', 'pick.curricula': '🧭 Parcours', 'pick.curriculaSub': 'un objectif → une carte d’étapes',
+      'pick.noMatch': 'Aucune matière ne correspond.', 'pick.none': `Pas encore de matière. Touche ✨ Créer avec Claude${NB}: tes sources deviennent un pack d’étude complet.`,
+      'pick.create': '✨ Créer avec Claude', 'pick.explore': '🌍 Explorer', 'pick.import': '📥 Importer un pack de matière', 'pick.switchProfile': '👤 Changer de profil',
+      'pick.close': 'Fermer', 'pick.other': 'Autres', 'pick.shared': `📬 Matières partagées avec toi${NB}: {n}`,
+    },
+  };
+  const LANGS = [['en', 'English'], ['el', 'Ελληνικά'], ['ru', 'Русский'], ['fr', 'Français']];
+  const pick = l => { l = String(l || '').toLowerCase().split(/[-_]/)[0]; return B[l] ? l : null; };
+  const browser = () => { try { return (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]).map(pick).find(Boolean) || 'en'; } catch (e) { return 'en'; } };
+  /** The language to show: the learner's choice (settings.lang) when supported, else the browser's, else English. */
+  const lang = pref => pick(pref) || browser();
+  /** t('home.due', { n: 3 }, settings.lang) → the string in that language ({name} placeholders filled in). */
+  function t(key, vars, pref) {
+    const L = lang(pref); let s = B[L][key] ?? B.en[key] ?? key;
+    if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => vars[k] != null ? String(vars[k]) : m);
+    return s;
+  }
+  root.NoemaI18n = { t, lang, browser, LANGS, bundles: B };
+})(typeof window !== 'undefined' ? window : globalThis);

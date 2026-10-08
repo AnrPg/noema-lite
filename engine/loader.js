@@ -106,6 +106,21 @@
     },
   };
 
+  /* ---------------- the Gemini key: on THIS device only, like the Claude key (engine/claude.js Key) ----------------
+     Never in a:settings, so never synced and never in a backup without secrets. Older versions kept it in a:settings
+     (synced) → migrate() moves it here once and rewrites a:settings without it, which also clears the cloud row. */
+  const GeminiKey = {
+    k: acc => 'noema-device:geminiKey:' + acc,
+    get(acc = KV.acc) { return ls.get(this.k(acc)) || ''; },
+    set(acc, key) { key = String(key || '').trim(); if (key && key !== (LOCAL.geminiKey || window.DEFAULT_GEMINI_KEY)) ls.set(this.k(acc), key); else ls.del(this.k(acc)); },
+    migrate(acc = KV.acc) {
+      const sk = KV.accountKey('settings', acc); const s = jget(sk, null);
+      if (!s || typeof s !== 'object' || !('apiKey' in s)) return;
+      if (s.apiKey && !this.get(acc)) this.set(acc, s.apiKey);
+      delete s.apiKey; KV.set(sk, JSON.stringify(s));
+    },
+  };
+
   /* ---------------- LEGACY: data written before the app was renamed noema-lite ----------------
      The ONLY place where the old names appear. Data is copied (never deleted) on first start. */
   const LEGACY = { kvPrefix: 'lq1:', idbName: 'learning-quest', backupFormats: ['learning-quest-backup'], packFormats: ['lq-pack'], schema: 'lq.conversation/v1' };
@@ -273,19 +288,22 @@
   function brandHead(title, sub) {
     return el('div', { class: 'noema-ovhead' }, el('div', { class: 'logo' }, '◆'), el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
   }
+  /** The interface language (engine/i18n.js): the account's settings.lang (else the last account's), else the browser's. */
+  const uiPref = (acc = KV.acc || jget(P + 'current', {}).acc) => acc ? jget(`${P}${acc}:a:settings`, {}).lang : null;
+  const tr = (key, vars, acc) => window.NoemaI18n ? NoemaI18n.t(key, vars, uiPref(acc)) : key;
   function pickAccount({ closable = false } = {}) {
     return new Promise(resolve => {
       overlay((box, close) => {
         const draw = () => {
           box.innerHTML = '';
           const accs = allAccounts();
-          box.append(brandHead(CFG.appName, 'Who is studying?'),
+          box.append(brandHead(CFG.appName, tr('pick.who')),
             el('div', { class: 'noema-accgrid' }, ...accs.map((a, i) => el('button', { class: 'noema-acc', style: { animationDelay: i * 50 + 'ms' }, onclick: async () => {
               if (a.pin) { const pin = await askPin(box, a); if (!pin) return; if ((await sha256(a.id + ':' + pin)) !== a.pin) { toastL('Wrong PIN'); return; } }
               close(); resolve(a);
-            } }, el('span', { class: 'noema-accemo' }, a.emoji || '🙂'), el('b', {}, a.name), el('small', {}, a.kind === 'cloud' ? '☁️ ' + a.email : (a.pin ? '🔒 local profile' : 'local profile')))),
-              el('button', { class: 'noema-acc add', onclick: () => newProfileForm(box, a => { saveLocalAccount(a); close(); resolve(getAccount(a.id)); }, draw) }, el('span', { class: 'noema-accemo' }, '➕'), el('b', {}, 'New profile'), el('small', {}, 'on this device'))),
-            CFG.supabaseUrl && window.NoemaCloud && !NoemaCloud.session() ? el('div', { class: 'noema-cloudrow' }, el('button', { class: 'btn ai', onclick: () => cloudForm(box, acc => { close(); resolve(acc); }, draw) }, '☁️ Sign in / create a cloud account'), el('span', { class: 'tiny' }, 'Study from any device — progress syncs automatically.')) : null);
+            } }, el('span', { class: 'noema-accemo' }, a.emoji || '🙂'), el('b', {}, a.name), el('small', {}, a.kind === 'cloud' ? '☁️ ' + a.email : (a.pin ? '🔒 ' : '') + tr('pick.local')))),
+              el('button', { class: 'noema-acc add', onclick: () => newProfileForm(box, a => { saveLocalAccount(a); close(); resolve(getAccount(a.id)); }, draw) }, el('span', { class: 'noema-accemo' }, '➕'), el('b', {}, tr('pick.newProfile')), el('small', {}, tr('pick.onDevice')))),
+            CFG.supabaseUrl && window.NoemaCloud && !NoemaCloud.session() ? el('div', { class: 'noema-cloudrow' }, el('button', { class: 'btn ai', onclick: () => cloudForm(box, acc => { close(); resolve(acc); }, draw) }, tr('pick.cloudSignIn')), el('span', { class: 'tiny' }, tr('pick.cloudHint'))) : null);
         };
         draw();
       }, { closable });
@@ -340,11 +358,11 @@
   }
   async function pickSubject(acc, { closable = false } = {}) {
     const subs = (await subjectsFor(acc)).filter(s => !s.hidden && !s.curriculum);   // curriculum steps live in 🧭 Curricula
-    const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: 'Other', emoji: '✨' });
+    const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: tr('pick.other', null, acc), emoji: '✨' });
     const a = getAccount(acc) || { name: acc, emoji: '🙂' };
     return new Promise(resolve => {
       overlay((box, close) => {
-        const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search subjects…', oninput: () => draw() });
+        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => draw() });
         const list = el('div');
         const draw = () => {
           list.innerHTML = '';
@@ -360,18 +378,18 @@
                 const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
                 return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
           });
-          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.')));
+          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
         };
-        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, `📬 ${pending.length} subject(s) shared with you`), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
+        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
         // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, '📚 Subjects', el('small', {}, 'ready-made courses')),
-          el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, '🧭 Curricula', el('small', {}, 'a goal → a map of steps')));
-        box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, '✨ Create with Claude'), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, '🌍 Explore'), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
-            closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, 'Close') : null));
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, tr('pick.subjects', null, acc), el('small', {}, tr('pick.subjectsSub', null, acc))),
+          el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
+        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
+            closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, tr('pick.close', null, acc)) : null));
         draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
       }, { closable });
     });
@@ -977,7 +995,7 @@
     async collect(acc, { includeSecrets = false } = {}) {
       const a = getAccount(acc) || { id: acc };
       const data = KV.accountData(acc);
-      if (!includeSecrets && data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; data['a:settings'] = JSON.stringify(s); } catch (e) { } }
+      if (data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; if (includeSecrets && GeminiKey.get(acc)) s.apiKey = GeminiKey.get(acc); data['a:settings'] = JSON.stringify(s); } catch (e) { } }   // the Gemini key lives on the device (GeminiKey)
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
       const conversations = window.NoemaConvos ? await NoemaConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
       return { format: 'noema-lite-backup', version: 2, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
@@ -1005,7 +1023,7 @@
       if (mode === 'replace') ls.keys(pre).forEach(k => { if (!k.slice(pre.length).startsWith('meta:')) ls.del(k); });
       for (const [suf, val] of Object.entries(obj.data)) {
         let v = val;
-        if (suf === 'a:settings' && !obj.includesSecrets) { try { const cur = jget(pre + 'a:settings', {}); const nv = JSON.parse(val); if (cur.apiKey && !nv.apiKey) nv.apiKey = cur.apiKey; v = JSON.stringify(nv); } catch (e) { } }
+        if (suf === 'a:settings') { try { const nv = JSON.parse(val); if (obj.includesSecrets && nv.apiKey) GeminiKey.set(targetAcc, nv.apiKey); delete nv.apiKey; v = JSON.stringify(nv); } catch (e) { } }   // without secrets: this device's key stays
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
@@ -1059,7 +1077,7 @@
 
   /* ---------------- public API ---------------- */
   const Noema = window.Noema = {
-    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
+    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
@@ -1086,6 +1104,7 @@
     const accs = allAccounts();
     if (!acc) acc = accs.length === 1 ? accs[0] : await pickAccount();
     KV.acc = acc.id; Noema.account = acc;
+    GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);

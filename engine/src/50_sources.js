@@ -9,8 +9,12 @@ const FULL_COURSE = COURSE.slice();
 FULL_COURSE.forEach((c, i) => {
   c._ci = i;
   c.src = [SRCREG.chapters?.[c.id], c.src].find(id => id && SRC_BY_ID[id]) || SOURCES[0].id;   // only ids that exist
-  c.flashcards.forEach((f, k) => { f._key = f._key || c.id + '#' + k; });   // stable SRS keys, independent of filtering
+  c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; });   // SRS keys: the card's id (packs without ids: its position), independent of filtering
 });
+{ /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
+  const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { }
+  if (!c.stableCardIds) Noema.kv.set(k, JSON.stringify({ ...c, stableCardIds: 1 }));
+}
 const srcOfItem = (it, c) => (it && it.src) || c.src;
 
 /* ---------- "new" = sources added AFTER the subject was first made (a later version), not yet marked as seen.
@@ -173,8 +177,8 @@ function whatsNewView() {
   const pbNew = FULL_COURSE.flatMap(c => c.debug.filter(d => ids.includes(srcOfItem(d, c))));
   const filterOnly = () => setSrcFilter(ids);
   const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ New exercises', count: 15, back: '#/new' }); };
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'),
-    h('h1', {}, none ? '✨ Latest additions' : '✨ What’s new'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+    h('h1', {}, none ? t('view.latest') : t('view.whatsNew')),
     h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ${SRC_BY_ID[id].title} (pages ${SRC_BY_ID[id].pages})`).join(' · ') + (none ? ' — already marked as seen.' : '')),
     h('div', { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
       ...[['chapters', newChs.length], ['sections', pick('sections') + pick('enriched')], ['exercises', pick('exercises')], ['debug drills', pick('playbooks')], ['flashcards', pick('cards')], ['traps', pick('pitfalls')]].map(([l, n]) => h('div', { class: 'stat' }, h('b', {}, n), h('span', { class: 'tiny' }, l)))),
