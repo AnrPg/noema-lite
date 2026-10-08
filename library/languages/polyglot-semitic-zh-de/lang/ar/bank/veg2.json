@@ -1,0 +1,2712 @@
+{
+ "sentences": [
+  {
+   "id": "ar.s2.001",
+   "frame": "fr.eat.def",
+   "text": "هِيَ تَأْكُلُ الْقُلْقَاسَةَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْقُلْقَاسَةَ",
+     "l": "ar:qulqas",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the taro.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.002",
+   "frame": "fr.eat.def",
+   "text": "هِيَ تَأْكُلُ الْقُلْقَاسَاتِ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْقُلْقَاسَاتِ",
+     "l": "ar:qulqas",
+     "f": "N;ACC;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the taros.",
+   "level": "A1",
+   "variantOf": "ar.s2.001",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.003",
+   "frame": "fr.eat.def",
+   "text": "أَنَا آكُلُ الْخُرْشُوفَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْخُرْشُوفَ",
+     "l": "ar:khurshuf",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I eat the artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.004",
+   "frame": "fr.eat.def",
+   "text": "هُمْ يَأْكُلُونَ الْمُلُوخِيَّةَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُونَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْمُلُوخِيَّةَ",
+     "l": "ar:mulukhiyya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They eat the molokhia.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.005",
+   "frame": "fr.eat.def",
+   "text": "نَحْنُ نَأْكُلُ الْبَامِيَةَ وَالْفُولَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْبَامِيَةَ",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْفُولَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْفُولَ",
+       "l": "ar:ful",
+       "f": "N;ACC;COLL;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "We eat the okra and the broad beans.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.006",
+   "frame": "fr.eat.def",
+   "text": "هُوَ يَأْكُلُ الْجَزَرَةَ الْبَيْضَاءَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْجَزَرَةَ الْبَيْضَاءَ",
+     "l": "ar:jazar_abyad",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the parsnip.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.007",
+   "frame": "fr.eat.def",
+   "text": "أَنْتِ تَأْكُلِينَ السِّلْقَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلِينَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "السِّلْقَ",
+     "l": "ar:silq",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (f) eat the chard.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.008",
+   "frame": "fr.buy.indef",
+   "text": "هُوَ يَشْتَرِي خُرْشُوفًا.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "خُرْشُوفًا",
+     "l": "ar:khurshuf",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys an artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.009",
+   "frame": "fr.buy.indef",
+   "text": "هُوَ يَشْتَرِي خَرَاشِيفَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "خَرَاشِيفَ",
+     "l": "ar:khurshuf",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "He buys (some) artichokes.",
+   "level": "A1",
+   "variantOf": "ar.s2.008",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.010",
+   "frame": "fr.buy.indef",
+   "text": "أَنَا أَشْتَرِي زَنْجَبِيلًا.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "زَنْجَبِيلًا",
+     "l": "ar:zanjabil",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I buy (some) ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.011",
+   "frame": "fr.buy.indef",
+   "text": "هِيَ تَشْتَرِي بَصَلَةً حَمْرَاءَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "بَصَلَةً حَمْرَاءَ",
+     "l": "ar:basal_ahmar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a red onion.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.012",
+   "frame": "fr.buy.indef",
+   "text": "نَحْنُ نَشْتَرِي قُلْقَاسَةً.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "قُلْقَاسَةً",
+     "l": "ar:qulqas",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.013",
+   "frame": "fr.buy.indef",
+   "text": "هُنَّ يَشْتَرِينَ جِرْجِيرًا.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرِينَ",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "جِرْجِيرًا",
+     "l": "ar:jirjir",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They (women) buy (some) rocket.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.014",
+   "frame": "fr.buy.indef",
+   "text": "أَنْتَ تَشْتَرِي دُبَّاءَةً.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "دُبَّاءَةً",
+     "l": "ar:dubba",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (m) buy a gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.015",
+   "frame": "fr.buy.indef",
+   "text": "هُمْ يَشْتَرُونَ مَلْفُوفًا أَحْمَرَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرُونَ",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "مَلْفُوفًا أَحْمَرَ",
+     "l": "ar:malfuf_ahmar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy (some) red cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.016",
+   "frame": "fr.like.generic",
+   "text": "أَنَا أُحِبُّ الْبَامِيَةَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْبَامِيَةَ",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I like okra.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.017",
+   "frame": "fr.like.generic",
+   "text": "هِيَ تُحِبُّ الْهِلْيَوْنَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْهِلْيَوْنَ",
+     "l": "ar:hilyawn",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She likes asparagus.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.018",
+   "frame": "fr.like.generic",
+   "text": "نَحْنُ نُحِبُّ الْمُلُوخِيَّةَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْمُلُوخِيَّةَ",
+     "l": "ar:mulukhiyya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "We like molokhia.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.019",
+   "frame": "fr.like.generic",
+   "text": "هُمْ يُحِبُّونَ الْفُولَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يُحِبُّونَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْفُولَ",
+     "l": "ar:ful",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They like broad beans.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.020",
+   "frame": "fr.like.generic",
+   "text": "أَنْتَ تُحِبُّ الْجِرْجِيرَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْجِرْجِيرَ",
+     "l": "ar:jirjir",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (m) like rocket.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.021",
+   "frame": "fr.like.generic",
+   "text": "هَلْ تُحِبُّ الْجِرْجِيرَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْجِرْجِيرَ",
+     "l": "ar:jirjir",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) like rocket?",
+   "level": "A1",
+   "variantOf": "ar.s2.020",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.s2.022",
+   "frame": "fr.like.generic",
+   "text": "هُوَ يُحِبُّ الشَّمَرَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الشَّمَرَ",
+     "l": "ar:shamar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He likes fennel.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.023",
+   "frame": "fr.like.generic",
+   "text": "أَنْتِ تُحِبِّينَ الرِّجْلَةَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الرِّجْلَةَ",
+     "l": "ar:rijla",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (f) like purslane.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.024",
+   "frame": "fr.like.generic",
+   "text": "هُنَّ يُحْبِبْنَ اللِّفْتَ.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يُحْبِبْنَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "اللِّفْتَ",
+     "l": "ar:lift",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They (women) like turnips.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.025",
+   "frame": "fr.like.generic",
+   "text": "أَنَا أُحِبُّ الْكُرُنْبَ الْأَجْعَدَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْكُرُنْبَ الْأَجْعَدَ",
+     "l": "ar:kurunb_ajad",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I like kale.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.026",
+   "frame": "fr.notlike.generic",
+   "text": "أَنَا لَا أُحِبُّ الْهِنْدِبَاءَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْهِنْدِبَاءَ",
+     "l": "ar:hindiba",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "I don’t like chicory.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.027",
+   "frame": "fr.notlike.generic",
+   "text": "هُوَ لَا يُحِبُّ الزَّنْجَبِيلَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الزَّنْجَبِيلَ",
+     "l": "ar:zanjabil",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "He doesn’t like ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.028",
+   "frame": "fr.notlike.generic",
+   "text": "هِيَ لَا تُحِبُّ الْحُمَّاضَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْحُمَّاضَ",
+     "l": "ar:hummad",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "She doesn’t like sorrel.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.029",
+   "frame": "fr.notlike.generic",
+   "text": "نَحْنُ لَا نُحِبُّ الْفُجْلَ الْحَارَّ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْفُجْلَ الْحَارَّ",
+     "l": "ar:fujl_harr",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "We don’t like horseradish.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.030",
+   "frame": "fr.notlike.generic",
+   "text": "هُمْ لَا يُحِبُّونَ الدُّبَّاءَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يُحِبُّونَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الدُّبَّاءَ",
+     "l": "ar:dubba",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "They don’t like gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.031",
+   "frame": "fr.notlike.generic",
+   "text": "أَنْتِ لَا تُحِبِّينَ الطَّرْخَشْقُونَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الطَّرْخَشْقُونَ",
+     "l": "ar:tarakhshaqun",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "You (f) don’t like dandelion greens.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.032",
+   "frame": "fr.notlike.generic",
+   "text": "أَنْتَ لَا تُحِبُّ الْمَلْفُوفَ الْأَحْمَرَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْمَلْفُوفَ الْأَحْمَرَ",
+     "l": "ar:malfuf_ahmar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "You (m) don’t like red cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.033",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ خُرْشُوفًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "خُرْشُوفًا",
+     "l": "ar:khurshuf",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want an artichoke?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.034",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ خَرَاشِيفَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "خَرَاشِيفَ",
+     "l": "ar:khurshuf",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want (some) artichokes?",
+   "level": "A1",
+   "variantOf": "ar.s2.033",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.035",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدِينَ بَامِيَةً؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "بَامِيَةً",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f) want (some) okra?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.036",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ فُولًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "فُولًا",
+     "l": "ar:ful",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want (some) broad beans?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.037",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدِينَ زَنْجَبِيلًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "زَنْجَبِيلًا",
+     "l": "ar:zanjabil",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f) want (some) ginger?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.038",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ قُرَّةً؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "قُرَّةً",
+     "l": "ar:qurra",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want (some) watercress?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.039",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدِينَ رَشَادًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "رَشَادًا",
+     "l": "ar:rashad",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f) want (some) cress?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.040",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ لُوفَةً؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "لُوفَةً",
+     "l": "ar:luf",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want a luffa?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.041",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ قُلْقَاسَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قُلْقَاسَةٌ",
+     "l": "ar:qulqas",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.042",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ قُلْقَاسَاتٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قُلْقَاسَاتٌ",
+     "l": "ar:qulqas",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "These are taros.",
+   "level": "A1",
+   "variantOf": "ar.s2.041",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.043",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ لَيْسَتْ قُلْقَاسَةً.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "لَيْسَتْ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;FEM"
+    },
+    {
+     "t": "قُلْقَاسَةً",
+     "l": "ar:qulqas",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This is not a taro.",
+   "level": "A1",
+   "variantOf": "ar.s2.041",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.s2.044",
+   "frame": "fr.this.is",
+   "text": "هَلْ هٰذِهِ قُلْقَاسَةٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قُلْقَاسَةٌ",
+     "l": "ar:qulqas",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this a taro?",
+   "level": "A1",
+   "variantOf": "ar.s2.041",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.s2.045",
+   "frame": "fr.this.is",
+   "text": "هٰذَا خُرْشُوفٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "خُرْشُوفٌ",
+     "l": "ar:khurshuf",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.046",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ خَرَاشِيفُ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "خَرَاشِيفُ",
+     "l": "ar:khurshuf",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "These are artichokes.",
+   "level": "A1",
+   "variantOf": "ar.s2.045",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.047",
+   "frame": "fr.this.is",
+   "text": "هٰذَا زَنْجَبِيلٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "زَنْجَبِيلٌ",
+     "l": "ar:zanjabil",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.048",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ مُلُوخِيَّةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "مُلُوخِيَّةٌ",
+     "l": "ar:mulukhiyya",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is molokhia.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.049",
+   "frame": "fr.this.is",
+   "text": "هٰذَا هِلْيَوْنٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "هِلْيَوْنٌ",
+     "l": "ar:hilyawn",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is asparagus.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.050",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ بَصَلَةٌ حَمْرَاءُ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "بَصَلَةٌ حَمْرَاءُ",
+     "l": "ar:basal_ahmar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a red onion.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.051",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ جَزَرَةٌ بَيْضَاءُ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "جَزَرَةٌ بَيْضَاءُ",
+     "l": "ar:jazar_abyad",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a parsnip.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.052",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ فُولَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "فُولَةٌ",
+     "l": "ar:ful",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a broad bean.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.053",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ لُوفَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "لُوفَةٌ",
+     "l": "ar:luf",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a luffa.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.054",
+   "frame": "fr.this.is",
+   "text": "هٰذَا طَرْخَشْقُونٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "طَرْخَشْقُونٌ",
+     "l": "ar:tarakhshaqun",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is dandelion.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.055",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ دُبَّاءَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "دُبَّاءَةٌ",
+     "l": "ar:dubba",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.056",
+   "frame": "fr.this.is",
+   "text": "هٰذَا قُرَّاصٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "قُرَّاصٌ",
+     "l": "ar:qurras",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is (stinging) nettle.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.057",
+   "frame": "fr.this.is",
+   "text": "هٰذَا سِلْقٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "سِلْقٌ",
+     "l": "ar:silq",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is chard.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.058",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ هِنْدِبَاءُ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "هِنْدِبَاءُ",
+     "l": "ar:hindiba",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is chicory (endive).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.059",
+   "frame": "fr.this.is",
+   "text": "هٰذَا ثُومٌ بَرِّيٌّ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "ثُومٌ بَرِّيٌّ",
+     "l": "ar:thum_barri",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is wild garlic.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.060",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الزَّنْجَبِيلُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الزَّنْجَبِيلُ",
+     "l": "ar:zanjabil",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the ginger?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.061",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْخُرْشُوفُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْخُرْشُوفُ",
+     "l": "ar:khurshuf",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the artichoke?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.062",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْخَرَاشِيفُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْخَرَاشِيفُ",
+     "l": "ar:khurshuf",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "Where are the artichokes?",
+   "level": "A1",
+   "variantOf": "ar.s2.061",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.s2.063",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الشَّمَرُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الشَّمَرُ",
+     "l": "ar:shamar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the fennel?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.064",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الثُّومُ الْبَرِّيُّ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الثُّومُ الْبَرِّيُّ",
+     "l": "ar:thum_barri",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the wild garlic?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.065",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْقُرَّةُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْقُرَّةُ",
+     "l": "ar:qurra",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the watercress?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.066",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْبَصَلَةُ الْحَمْرَاءُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْبَصَلَةُ الْحَمْرَاءُ",
+     "l": "ar:basal_ahmar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the red onion?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.067",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الرَّشَادُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الرَّشَادُ",
+     "l": "ar:rashad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the cress?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.068",
+   "frame": "fr.have.indef",
+   "text": "عِنْدِي قُلْقَاسَةٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "قُلْقَاسَةٌ",
+     "l": "ar:qulqas",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.069",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهَا خُرْشُوفٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "خُرْشُوفٌ",
+     "l": "ar:khurshuf",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has an artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.070",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَنَا فُولٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "فُولٌ",
+     "l": "ar:ful",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have (some) broad beans.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.071",
+   "frame": "fr.have.indef",
+   "text": "لَيْسَ عِنْدَنَا فُولٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "فُولٌ",
+     "l": "ar:ful",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "We don’t have (any) broad beans.",
+   "level": "A1",
+   "variantOf": "ar.s2.070",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.s2.072",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهُمْ بَامِيَةٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُمْ",
+     "l": "ar:inda",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "بَامِيَةٌ",
+     "l": "ar:bamiya",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They have (some) okra.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.073",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَكَ لِفْتٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "لِفْتٌ",
+     "l": "ar:lift",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (m) have (some) turnips.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.074",
+   "frame": "fr.have.indef",
+   "text": "هَلْ عِنْدَكَ لِفْتٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "لِفْتٌ",
+     "l": "ar:lift",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) have (any) turnips?",
+   "level": "A1",
+   "variantOf": "ar.s2.073",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.s2.075",
+   "frame": "fr.have.indef",
+   "text": "عِنْدِي دُبَّاءَاتٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "دُبَّاءَاتٌ",
+     "l": "ar:dubba",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "I have (some) gourds.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.076",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهُ حُمَّاضٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُ",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "حُمَّاضٌ",
+     "l": "ar:hummad",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has (some) sorrel.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.077",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهَا كُرُنْبٌ أَجْعَدُ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "كُرُنْبٌ أَجْعَدُ",
+     "l": "ar:kurunb_ajad",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has (some) kale.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.078",
+   "frame": "fr.have.indef",
+   "text": "عِنْدِي فُجْلٌ حَارٌّ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "فُجْلٌ حَارٌّ",
+     "l": "ar:fujl_harr",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have (some) horseradish.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.079",
+   "frame": "fr.here.def",
+   "text": "الْمُلُوخِيَّةُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمُلُوخِيَّةُ",
+     "l": "ar:mulukhiyya",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The molokhia is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.080",
+   "frame": "fr.here.def",
+   "text": "الْمُلُوخِيَّةُ لَيْسَتْ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمُلُوخِيَّةُ",
+     "l": "ar:mulukhiyya",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَيْسَتْ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;FEM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The molokhia is not here.",
+   "level": "A1",
+   "variantOf": "ar.s2.079",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.s2.081",
+   "frame": "fr.here.def",
+   "text": "الْهِلْيَوْنُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْهِلْيَوْنُ",
+     "l": "ar:hilyawn",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The asparagus is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.082",
+   "frame": "fr.here.def",
+   "text": "الْقُرَّاصُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقُرَّاصُ",
+     "l": "ar:qurras",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The nettles are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.083",
+   "frame": "fr.here.def",
+   "text": "الْجِرْجِيرُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْجِرْجِيرُ",
+     "l": "ar:jirjir",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The rocket is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.084",
+   "frame": "fr.here.def",
+   "text": "الْجِرْجِيرُ لَيْسَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْجِرْجِيرُ",
+     "l": "ar:jirjir",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The rocket is not here.",
+   "level": "A1",
+   "variantOf": "ar.s2.083",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.s2.085",
+   "frame": "fr.here.def",
+   "text": "الْفُولُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْفُولُ",
+     "l": "ar:ful",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The broad beans are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.086",
+   "frame": "fr.here.def",
+   "text": "اللُّوفُ هُنَا.",
+   "tokens": [
+    {
+     "t": "اللُّوفُ",
+     "l": "ar:luf",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The luffas are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.087",
+   "frame": "fr.here.def",
+   "text": "الرِّجْلَةُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الرِّجْلَةُ",
+     "l": "ar:rijla",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The purslane is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.088",
+   "frame": "fr.here.def",
+   "text": "الْهِنْدِبَاءُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْهِنْدِبَاءُ",
+     "l": "ar:hindiba",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The chicory is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.089",
+   "frame": "fr.here.def",
+   "text": "الْحُمَّاضُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْحُمَّاضُ",
+     "l": "ar:hummad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The sorrel is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.090",
+   "frame": "fr.here.def",
+   "text": "الْجَزَرُ الْأَبْيَضُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْجَزَرُ الْأَبْيَضُ",
+     "l": "ar:jazar_abyad",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The parsnips are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.091",
+   "frame": "fr.here.def",
+   "text": "الطَّرْخَشْقُونُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الطَّرْخَشْقُونُ",
+     "l": "ar:tarakhshaqun",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The dandelion greens are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.092",
+   "frame": "fr.drink.what",
+   "text": "مَاذَا تَشْرَبُ هِيَ؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "تَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What does she drink?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.093",
+   "frame": "fr.drink.what",
+   "text": "مَاذَا تَشْرَبُونَ؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "تَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What do you (pl) drink?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.094",
+   "frame": "fr.drink.what",
+   "text": "مَاذَا يَشْرَبْنَ؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "يَشْرَبْنَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What do they (women) drink?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s2.095",
+   "frame": "fr.drink.what",
+   "text": "مَاذَا أَشْرَبُ؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What shall I drink? / What do I drink?",
+   "level": "A1"
+  }
+ ]
+}

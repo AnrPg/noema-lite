@@ -1,0 +1,2091 @@
+{
+ "lexemes": [
+  {
+   "id": "he:zangvil",
+   "lemma": "זַנְגְּבִיל",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.ginger"
+   ],
+   "gender": "MASC",
+   "translit": "zangvil",
+   "forms": {
+    "N;SG;INDF": "זַנְגְּבִיל",
+    "N;SG;DEF": "הַזַּנְגְּבִיל"
+   },
+   "note": "Used as a mass noun; Wiktionary lists no plural.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A warming bite: ginger tea in winter, Asian dishes, spice jars.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ginger (the root, fresh or ground)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.ginger"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתָה תֵּה עִם זַנְגְּבִיל וְלִימוֹן.",
+      "tr": "I (f.) drink tea with ginger and lemon.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא מוֹסִיף זַנְגְּבִיל טָרִי לַמָּרָק.",
+      "tr": "He adds fresh ginger to the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף אֲנִי אוֹהֵב עוּגִיּוֹת זַנְגְּבִיל.",
+      "tr": "In winter I (m.) like ginger cookies.",
+      "register": "neutral",
+      "context": "baking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "זַנְגְּבִיל טָרִי",
+      "tr": "fresh ginger"
+     },
+     {
+      "text": "אַבְקַת זַנְגְּבִיל",
+      "tr": "ground ginger (ginger powder)"
+     },
+     {
+      "text": "תֵּה זַנְגְּבִיל",
+      "tr": "ginger tea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ג׳ינג׳ר",
+      "register": "colloquial",
+      "nuance": "the English loan (pronounced jínjer), usual on drink menus: תה ג׳ינג׳ר"
+     },
+     {
+      "word": "גִּנְבָּר",
+      "register": "literary",
+      "nuance": "a rare word from Babylonian Aramaic, known from old texts; never used in the kitchen"
+     }
+    ],
+    "etymology": {
+     "text": "Medieval borrowing from Arabic زَنْجَبِيل (zanjabīl), and earlier still from Aramaic זַנְגְּבִילָא (zangḇīlā). Compare the rare Hebrew גִּנְבָּר (ginbār), from Jewish Babylonian Aramaic גִּינְבְּרָא (ginbərā).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic زَنْجَبِيل, Turkish zencefil, German Ingwer and English ginger all go back to the same ancient word (Greek ζιγγίβερις, from a South Asian source).",
+     "The Quran (76:17) names زَنْجَبِيل as the flavour of a drink in paradise."
+    ],
+    "pitfalls": [
+     "Do not confuse the colloquial ג׳ינג׳ר (ginger) with ג׳ינג׳י — that is a redhead (also from English “ginger”, the hair colour).",
+     "A mass noun: “some ginger” is just זַנְגְּבִיל; there is no everyday plural."
+    ],
+    "subtleties": [
+     "On spice jars and in recipes the word is זַנְגְּבִיל; on café menus (ginger tea, ginger beer) the English loan ג׳ינג׳ר is very common."
+    ]
+   }
+  },
+  {
+   "id": "he:shumar",
+   "lemma": "שֻׁמָּר",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.fennel"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֻטָּל",
+   "translit": "shumar",
+   "forms": {
+    "N;SG;INDF": "שֻׁמָּר",
+    "N;SG;DEF": "הַשֻּׁמָּר"
+   },
+   "plene": {
+    "N;SG;INDF": "שומר",
+    "N;SG;DEF": "השומר"
+   },
+   "note": "Used as a mass noun; Wiktionary lists no plural.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Anise-scented crunch: Mediterranean salads, fish, fennel tea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fennel (the bulb vegetable, its leaves and seeds)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.fennel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מוֹסִיפָה שֻׁמָּר פָּרוּס לַסָּלָט.",
+      "tr": "I (f.) add sliced fennel to the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק קָנִיתִי שֻׁמָּר וְעַגְבָנִיּוֹת.",
+      "tr": "At the market I bought fennel and tomatoes.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשֻּׁמָּר הַזֶּה טָרִי מְאוֹד.",
+      "tr": "This fennel is very fresh.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "תֵּה שֻׁמָּר טוֹב לַבֶּטֶן.",
+      "tr": "Fennel tea is good for the stomach.",
+      "register": "informal",
+      "context": "home remedies",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט שֻׁמָּר",
+      "tr": "fennel salad"
+     },
+     {
+      "text": "זַרְעֵי שֻׁמָּר",
+      "tr": "fennel seeds"
+     },
+     {
+      "text": "תֵּה שֻׁמָּר",
+      "tr": "fennel tea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גּוּפְנָן",
+      "register": "dated",
+      "nuance": "the old native word, largely displaced by שֻׁמָּר (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From Akkadian 𒌑𒄩 (šimru, “fennel”). See Arabic شَمَر (šamar, “fennel”) for other cognates. Largely displaced the native Hebrew synonym גּוּפְנָן (gup̄nān, “fennel”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic شَمَر (šamar) is the same word, and Hebrew שָׁמִיר “dill” comes from the same Akkadian source (Wiktionary, Arabic شمر).",
+     "Greek μάραθο(ν) “fennel” gave its name to Marathon — the “fennel field”."
+    ],
+    "pitfalls": [
+     "The everyday spelling שומר is the same as שׁוֹמֵר “guard; keeps” — only the vowels or the context tell them apart.",
+     "The vowel is u: shu-MAR (kubutz, and a dagesh in the מ)."
+    ],
+    "subtleties": [
+     "The same word names the bulb, the feathery leaves and the seeds (זַרְעֵי שֻׁמָּר) used as a spice."
+    ]
+   }
+  },
+  {
+   "id": "he:asparagos",
+   "lemma": "אַסְפָּרָגוֹס",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.asparagus"
+   ],
+   "gender": "MASC",
+   "translit": "asparagos",
+   "forms": {
+    "N;SG;INDF": "אַסְפָּרָגוֹס",
+    "N;SG;DEF": "הָאַסְפָּרָגוֹס"
+   },
+   "note": "Used as a mass noun (no plural in everyday use). Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Spring, elegance, a restaurant side dish.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "asparagus",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.asparagus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא צוֹלָה אַסְפָּרָגוֹס עִם שֶׁמֶן זַיִת.",
+      "tr": "She grills asparagus with olive oil.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמִּסְעָדָה הִזְמַנְתִּי דָּג עִם אַסְפָּרָגוֹס.",
+      "tr": "At the restaurant I ordered fish with asparagus.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאַסְפָּרָגוֹס יָקָר מְאוֹד הַשָּׁנָה.",
+      "tr": "Asparagus is very expensive this year.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַסְפָּרָגוֹס יָרֹק",
+      "tr": "green asparagus"
+     },
+     {
+      "text": "אַסְפָּרָגוֹס לָבָן",
+      "tr": "white asparagus"
+     },
+     {
+      "text": "גִּבְעוֹלֵי אַסְפָּרָגוֹס",
+      "tr": "asparagus spears (stalks)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No native synonym: the vegetable is known only by its international name.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. The international word goes back (Wiktionary, English asparagus) to Medieval Latin asparagus, from Ancient Greek ἀσπάραγος (aspáragos).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Spargel and Greek σπαράγγι come from the same Greek word; Turkish calls it kuşkonmaz, “the bird does not land”."
+    ],
+    "pitfalls": [
+     "No plural in everyday use: “I bought asparagus” is קָנִיתִי אַסְפָּרָגוֹס; single spears are גִּבְעוֹלֵי אַסְפָּרָגוֹס."
+    ],
+    "subtleties": [
+     "White asparagus is the same plant, grown covered with soil so that it never sees light."
+    ]
+   }
+  },
+  {
+   "id": "he:kolkas",
+   "lemma": "קוֹלְקָס",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.taro"
+   ],
+   "gender": "MASC",
+   "translit": "kolkas",
+   "forms": {
+    "N;SG;INDF": "קוֹלְקָס",
+    "N;SG;DEF": "הַקּוֹלְקָס"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry; its Arabic entry قلقاس cites Mishnaic Hebrew קולקס (“taro”).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A starchy, slightly slimy corm from Egyptian and other Middle Eastern home cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taro (the edible corm of Colocasia esculenta)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.taro"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מְבַשֶּׁלֶת קוֹלְקָס עִם מַנְגּוֹלְד.",
+      "tr": "She cooks taro with chard.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת הַקּוֹלְקָס צָרִיךְ לְקַלֵּף בִּכְפָפוֹת.",
+      "tr": "Taro has to be peeled with gloves.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אַף פַּעַם לֹא אוֹכְלִים קוֹלְקָס חַי.",
+      "tr": "Taro is never eaten raw.",
+      "register": "neutral",
+      "context": "food safety",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קוֹלְקָס מְבֻשָּׁל",
+      "tr": "cooked taro"
+     },
+     {
+      "text": "עֲלֵי קוֹלְקָס",
+      "tr": "taro leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; some recipes use the English/Polynesian name “taro” in Hebrew letters.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. Its Arabic entry قُلْقَاس (qulqās, “taro”) derives the word from Classical Syriac ܩܠܩܐܣ (qōlqās) and cites Mishnaic Hebrew קולקס, קרקס (“taro”) from the same source.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic قُلْقَاس (qulqās) is the same word; in some Aramaic dialects it once meant a kind of cardoon or artichoke (Wiktionary).",
+     "The botanical genus Colocasia and the Cypriot Greek κολοκάσι (a Cypriot speciality) are the same ancient word."
+    ],
+    "pitfalls": [
+     "Raw taro contains needle-like crystals (calcium oxalate) that irritate the mouth and the skin: it is always cooked, and peeled with gloves."
+    ],
+    "subtleties": [
+     "A rare word for most Israelis; it lives on in families from Egypt and neighbouring countries and in botany books."
+    ]
+   }
+  },
+  {
+   "id": "he:shinan",
+   "lemma": "שִׁינָן",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.dandelion"
+   ],
+   "gender": "MASC",
+   "translit": "shinan",
+   "forms": {
+    "N;SG;INDF": "שִׁינָן",
+    "N;SG;DEF": "הַשִּׁינָן"
+   },
+   "note": "Used as a mass noun for the greens.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary’s Hebrew page שינן holds only the verb שִׁנֵּן “to memorize”; the noun is missing there, but Wiktionary’s English entry dandelion gives שינן (šinán, masculine) as the Hebrew name."
+    }
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A yellow weed of lawns and fields; bitter leaves for foragers; a wish blown into the wind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dandelion (the plant; its leaves are eaten as a bitter green)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.dandelion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בָּאָבִיב יֵשׁ שִׁינָן בְּכָל הַשָּׂדֶה.",
+      "tr": "In spring there are dandelions all over the field.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מוֹסִיפָה עֲלֵי שִׁינָן לַסָּלָט.",
+      "tr": "She adds dandelion leaves to the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיֶּלֶד נוֹשֵׁף עַל שִׁינָן וּמְבַקֵּשׁ מִשְׁאָלָה.",
+      "tr": "The child blows on a dandelion and makes a wish.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי שִׁינָן",
+      "tr": "dandelion leaves"
+     },
+     {
+      "text": "פְּרַח שִׁינָן",
+      "tr": "a dandelion flower"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No true synonym: סַבְיוֹן and מַרְגָּנִית, sometimes given as translations, are other wild plants (groundsel and pimpernel).",
+    "etymology": {
+     "text": "Wiktionary has no entry for the noun (the page שינן holds only the verb שִׁנֵּן); its English entry dandelion gives שינן (šinán, m.). English dandelion is from Old French dent de lion, “lion’s tooth”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Most European names mean “lion’s tooth”: French dent-de-lion, German Löwenzahn, English dandelion (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Same letters as the verb שִׁנֵּן “to memorize” (past tense שינן) — without vowels only the context separates them."
+    ],
+    "subtleties": [
+     "As food, Hebrew usually says עֲלֵי שִׁינָן (dandelion leaves); שִׁינָן alone is the plant."
+    ]
+   }
+  },
+  {
+   "id": "he:lefet",
+   "lemma": "לֶפֶת",
+   "pos": "NOUN",
+   "senses": [
+    "veg.turnip"
+   ],
+   "gender": "FEM",
+   "mishkal": "קֶטֶל",
+   "translit": "lefet",
+   "forms": {
+    "N;SG;INDF": "לֶפֶת",
+    "N;SG;DEF": "הַלֶּפֶת",
+    "N;PL;INDF": "לְפָתוֹת",
+    "N;PL;DEF": "הַלְּפָתוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pink pickled turnips next to falafel and shawarma; winter soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "turnip",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.turnip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אוֹהֵב לֶפֶת כְּבוּשָׁה.",
+      "tr": "He likes pickled turnip.",
+      "register": "neutral",
+      "context": "street food",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְבַשֶּׁלֶת מָרָק עִם לְפָתוֹת וּבָצָל.",
+      "tr": "I (f.) cook a soup with turnips and onion.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק הַלְּפָתוֹת זוֹלוֹת הַיּוֹם.",
+      "tr": "At the market the turnips are cheap today.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֶפֶת כְּבוּשָׁה",
+      "tr": "pickled turnip"
+     },
+     {
+      "text": "עֲלֵי לֶפֶת",
+      "tr": "turnip greens"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Modern Hebrew.",
+    "etymology": {
+     "text": "From Proto-Semitic *lapt-. Cognate with Arabic لِفْت (lift), Classical Syriac ܠܰܦܬܳܐ (laftā) and Akkadian laptu, all “turnip” (Wiktionary, Arabic لفت).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One of the oldest Semitic vegetable words: Arabic لِفْت, Syriac ܠܰܦܬܳܐ and Akkadian laptu are the same word.",
+     "The pink pickled turnips of Middle Eastern restaurants get their colour from a slice of beetroot (סֶלֶק) in the jar."
+    ],
+    "pitfalls": [
+     "Feminine: לֶפֶת כְּבוּשָׁה, not *כָּבוּשׁ; plural לְפָתוֹת."
+    ],
+    "subtleties": [
+     "Arabic لِفْت also covers kale and rutabaga (Wiktionary); Hebrew לֶפֶת is the turnip, and the swede has no everyday Hebrew name."
+    ]
+   }
+  },
+  {
+   "id": "he:olesh",
+   "lemma": "עֹלֶשׁ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.chicory"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֹטֶל",
+   "translit": "olesh",
+   "forms": {
+    "N;SG;INDF": "עֹלֶשׁ",
+    "N;SG;DEF": "הָעֹלֶשׁ"
+   },
+   "plene": {
+    "N;SG;INDF": "עולש",
+    "N;SG;DEF": "העולש"
+   },
+   "note": "Used as a mass noun; Wiktionary lists no plural. Covers both chicory and endive (Wiktionary: “chicory, endive”).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bitter wild leaves picked in winter; a bitter herb of the Seder.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicory, endive (Cichorium; bitter leaves, also the pale Belgian-endive heads)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chicory"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּחֹרֶף אוֹסְפִים עֹלֶשׁ בַּשָּׂדוֹת.",
+      "tr": "In winter people gather chicory in the fields.",
+      "register": "neutral",
+      "context": "foraging",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא מְטַגֵּן עֲלֵי עֹלֶשׁ עִם בָּצָל.",
+      "tr": "He fries chicory leaves with onion.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ מִשְׁפָּחוֹת שֶׁאוֹכְלוֹת עֹלֶשׁ בְּלֵיל הַסֵּדֶר.",
+      "tr": "Some families eat chicory on Seder night.",
+      "register": "religious",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי עֹלֶשׁ",
+      "tr": "chicory leaves"
+     },
+     {
+      "text": "עֹלֶשׁ מַר",
+      "tr": "bitter chicory"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֶנְדִּיב",
+      "register": "neutral",
+      "nuance": "the French loan used in shops for the pale, tight Belgian-endive heads"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. The word is old: the Mishnah (Pesachim 2:6) already lists עֻלְשִׁין among the bitter herbs of Passover.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Mishnah (Pesachim 2:6) lists עֻלְשִׁין among the vegetables that can serve as the bitter herb at the Seder, next to חֲזֶרֶת.",
+     "English endive goes back, via Byzantine Greek ἔντυβον and Latin intibus, to Aramaic הִנְדְּבָא — also the source of Arabic هِنْدِبَاء (hindibāʔ) (Wiktionary).",
+     "Roasted chicory root was a classic coffee substitute (German Zichorienkaffee)."
+    ],
+    "pitfalls": [
+     "Article with qamats before ע: הָעֹלֶשׁ.",
+     "Everyday spelling with ו: עולש."
+    ],
+    "subtleties": [
+     "Hebrew does not separate the two Cichorium salads: עֹלֶשׁ is chicory and endive alike (Wiktionary: “chicory, endive”)."
+    ]
+   }
+  },
+  {
+   "id": "he:regela",
+   "lemma": "רְגֵלָה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.purslane"
+   ],
+   "gender": "FEM",
+   "mishkal": "קְטֵלָה",
+   "translit": "regela",
+   "forms": {
+    "N;SG;INDF": "רְגֵלָה",
+    "N;SG;DEF": "הָרְגֵלָה"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A juicy, slightly sour weed — a garden pest and a summer salad green.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purslane (Portulaca oleracea)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.purslane"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָרְגֵלָה גְּדֵלָה בֵּין הָאֲבָנִים בַּגִּנָּה.",
+      "tr": "Purslane grows between the stones in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְכִינָה סְלַט רְגֵלָה עִם לִימוֹן.",
+      "tr": "She makes a purslane salad with lemon.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּקַּיִץ אֶפְשָׁר לִקְנוֹת רְגֵלָה בַּשּׁוּק.",
+      "tr": "In summer you can buy purslane at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט רְגֵלָה",
+      "tr": "purslane salad"
+     },
+     {
+      "text": "עֲלֵי רְגֵלָה",
+      "tr": "purslane leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday Hebrew.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. Compare Arabic رِجْلَة (rijla), an alternative form of رِجْل (rijl), “common purslane” (Wiktionary, Arabic entry).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek calls it γλιστρίδα and Turkish semizotu (“fat herb”); in Arabic it is رِجْلَة, the same word as Hebrew.",
+     "Purslane is one of the richest leafy sources of plant omega-3 fatty acids."
+    ],
+    "pitfalls": [
+     "Same letters as רַגְלָהּ “her leg” (רגלה); only the vowels and the context separate them."
+    ],
+    "subtleties": [
+     "The article takes qamats before ר: הָרְגֵלָה.",
+     "Feminine: רְגֵלָה טְרִיָּה (fresh purslane)."
+    ]
+   }
+  },
+  {
+   "id": "he:artishok-yerushalmi",
+   "lemma": "אַרְטִישׁוֹק יְרוּשַׁלְמִי",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.jerusalemartichoke"
+   ],
+   "gender": "MASC",
+   "translit": "artishok yerushalmi",
+   "forms": {
+    "N;SG;INDF": "אַרְטִישׁוֹק יְרוּשַׁלְמִי",
+    "N;SG;DEF": "הָאַרְטִישׁוֹק הַיְּרוּשַׁלְמִי"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first). Used as a mass noun.",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries אַרְטִישׁוֹק and יְרוּשַׁלְמִי (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Knobbly tubers, nutty winter soups — and a misleading name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Jerusalem artichoke, sunchoke (tuber of Helianthus tuberosus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.jerusalemartichoke"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְבַשֵּׁל מְרַק אַרְטִישׁוֹק יְרוּשַׁלְמִי.",
+      "tr": "I (m.) cook Jerusalem artichoke soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאַרְטִישׁוֹק הַיְּרוּשַׁלְמִי גָּדֵל מַהֵר מְאוֹד בַּגִּנָּה.",
+      "tr": "Jerusalem artichoke grows very fast in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי קִילוֹ אַרְטִישׁוֹק יְרוּשַׁלְמִי בַּשּׁוּק.",
+      "tr": "I bought a kilo of Jerusalem artichoke at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק אַרְטִישׁוֹק יְרוּשַׁלְמִי",
+      "tr": "Jerusalem artichoke soup"
+     },
+     {
+      "text": "אַרְטִישׁוֹק יְרוּשַׁלְמִי צָלוּי",
+      "tr": "roasted Jerusalem artichoke"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חַמָּנִית הַפְּקָעוֹת",
+      "register": "technical",
+      "nuance": "the botanical name (“tuber sunflower”), used in botany, not in shops"
+     }
+    ],
+    "etymology": {
+     "text": "אַרְטִישׁוֹק “artichoke” (ultimately from Italian articiocco … from Arabic الْخُرْشُوف, al-ḵuršūf; probably entered Hebrew through Russian and Yiddish) + יְרוּשַׁלְמִי “of Jerusalem” (ירושלים + ־י).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Hebrew name copies English “Jerusalem artichoke”, whose “Jerusalem” is popularly explained as a corruption of Italian girasole, “sunflower”.",
+     "Other languages: German and Russian Topinambur / топинамбур, Turkish yer elması (“earth apple”)."
+    ],
+    "pitfalls": [
+     "It is not an artichoke and not from Jerusalem: it is the tuber of a sunflower (Helianthus tuberosus).",
+     "The adjective agrees and takes the article too: הָאַרְטִישׁוֹק הַיְּרוּשַׁלְמִי."
+    ],
+    "subtleties": [
+     "On its own, יְרוּשַׁלְמִי means “a Jerusalemite”, and הַיְּרוּשַׁלְמִי can mean the Jerusalem Talmud; in the kitchen the phrase is fixed."
+    ]
+   }
+  },
+  {
+   "id": "he:sirpad",
+   "lemma": "סִרְפָּד",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.nettle"
+   ],
+   "gender": "MASC",
+   "translit": "sirpad",
+   "forms": {
+    "N;SG;INDF": "סִרְפָּד",
+    "N;SG;DEF": "הַסִּרְפָּד"
+   },
+   "note": "Used as a mass noun for the greens. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A stinging weed — painful to touch, good to eat once cooked.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stinging nettle (Urtica; the young leaves are eaten cooked)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.nettle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "נָגַעְתִּי בְּסִרְפָּד וְהַיָּד שׂוֹרֶפֶת.",
+      "tr": "I touched a nettle and my hand is burning.",
+      "register": "neutral",
+      "context": "outdoors",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְבַשֶּׁלֶת מְרַק סִרְפָּד.",
+      "tr": "She cooks nettle soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּגִּנָּה גָּדֵל הַרְבֵּה סִרְפָּד.",
+      "tr": "A lot of nettle grows in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק סִרְפָּד",
+      "tr": "nettle soup"
+     },
+     {
+      "text": "תֵּה סִרְפָּד",
+      "tr": "nettle tea"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְתַחַת הַסִּרְפַּד יַעֲלֶה הֲדַס",
+      "tr": "and instead of the nettle the myrtle shall come up",
+      "kind": "quote",
+      "meaning": "a promise of renewal: weeds give way to fragrant plants",
+      "register": "literary",
+      "source": "Isaiah 55:13"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Modern Hebrew.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. The word is Biblical: it occurs once, in Isaiah 55:13 (הַסִּרְפַּד), and Modern Hebrew gave it to the nettle. Arabic uses another word, قُرَّاص (qurrāṣ, “nettle”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Isaiah 55:13 promises that the myrtle will come up instead of the nettle — the only time סִרְפַּד appears in the Bible.",
+     "Turkish ısırgan (“the biting one”) and German Brennnessel (“burning nettle”) describe the sting; Greek says τσουκνίδα."
+    ],
+    "pitfalls": [
+     "The plant stings only raw: cooking or drying removes the sting.",
+     "Masculine: סִרְפָּד צָעִיר (young nettle)."
+    ],
+    "subtleties": [
+     "Mostly used without a plural for the plant as food: מְרַק סִרְפָּד, תֵּה סִרְפָּד."
+    ]
+   }
+  },
+  {
+   "id": "he:gezer-lavan",
+   "lemma": "גֶּזֶר לָבָן",
+   "pos": "NOUN",
+   "senses": [
+    "veg.parsnip"
+   ],
+   "gender": "MASC",
+   "translit": "gezer lavan",
+   "forms": {
+    "N;SG;INDF": "גֶּזֶר לָבָן",
+    "N;SG;DEF": "הַגֶּזֶר הַלָּבָן",
+    "N;PL;INDF": "גְּזָרִים לְבָנִים",
+    "N;PL;DEF": "הַגְּזָרִים הַלְּבָנִים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries גֶּזֶר and לָבָן (no Hebrew entry for the phrase; Wiktionary’s English entry parsnip gives גזר לבן)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pale, sweet, slightly spicy cousin of the carrot in winter soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parsnip",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.parsnip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מוֹסִיפָה גֶּזֶר לָבָן לִמְרַק הָעוֹף.",
+      "tr": "I (f.) add parsnip to the chicken soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "גְּזָרִים לְבָנִים צְלוּיִים בַּתַּנּוּר מְתוּקִים מְאוֹד.",
+      "tr": "Parsnips roasted in the oven are very sweet.",
+      "register": "neutral",
+      "context": "recipes",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק הוּא מְחַפֵּשׂ גֶּזֶר לָבָן.",
+      "tr": "At the market he is looking for parsnip.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גֶּזֶר לָבָן צָלוּי",
+      "tr": "roasted parsnip"
+     },
+     {
+      "text": "מְרַק גֶּזֶר לָבָן",
+      "tr": "parsnip soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym.",
+    "etymology": {
+     "text": "גֶּזֶר “carrot” + לָבָן “white” (from Proto-West Semitic *laban-; cognate with Arabic لَبَن, laban, “milk”). English parsnip is from Latin pastināca (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לָבָן “white” and Arabic لَبَن (laban) “milk” are the same Semitic word (Wiktionary).",
+     "Latin pastināca also gave German Pastinake and Greek παστινάκη."
+    ],
+    "pitfalls": [
+     "Both words agree and both take the article: הַגֶּזֶר הַלָּבָן, הַגְּזָרִים הַלְּבָנִים.",
+     "Do not mix it up with שֹׁרֶשׁ פֶּטְרוֹזִילְיָה (parsley root), which looks similar but is smaller and tastes of parsley."
+    ],
+    "subtleties": [
+     "Literally “white carrot”: Hebrew names the parsnip after its closest everyday relative."
+    ]
+   }
+  },
+  {
+   "id": "he:chuma",
+   "lemma": "חֻמְעָה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.sorrel"
+   ],
+   "gender": "FEM",
+   "translit": "chum'a",
+   "forms": {
+    "N;SG;INDF": "חֻמְעָה",
+    "N;SG;DEF": "הַחֻמְעָה"
+   },
+   "plene": {
+    "N;SG;INDF": "חומעה",
+    "N;SG;DEF": "החומעה"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sharp, lemony-sour leaves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorrel (Rumex)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sorrel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לַחֻמְעָה יֵשׁ טַעַם חָמוּץ.",
+      "tr": "Sorrel has a sour taste.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְבַשֶּׁלֶת מְרַק חֻמְעָה.",
+      "tr": "She cooks sorrel soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּטִּיּוּל מָצָאנוּ חֻמְעָה לְיַד הַשְּׁבִיל.",
+      "tr": "On the hike we found sorrel by the path.",
+      "register": "neutral",
+      "context": "foraging",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק חֻמְעָה",
+      "tr": "sorrel soup"
+     },
+     {
+      "text": "עֲלֵי חֻמְעָה",
+      "tr": "sorrel leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday Hebrew.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. Arabic names sorrel حُمَّاض (ḥummāḍ), from the root ح م ض “sour” (Wiktionary) — the root of Hebrew חֹמֶץ “vinegar” (Arabic ض = Hebrew צ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many languages name the plant after its taste: English sorrel (from Old French sur “sour”), German Sauerampfer, Arabic حُمَّاض (from “sour”)."
+    ],
+    "pitfalls": [
+     "Everyday spelling with ו: חומעה.",
+     "Feminine: חֻמְעָה טְרִיָּה."
+    ],
+    "subtleties": [
+     "The sourness comes from oxalic acid, so sorrel is eaten in moderation."
+    ]
+   }
+  },
+  {
+   "id": "he:chazeret",
+   "lemma": "חֲזֶרֶת",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.horseradish"
+   ],
+   "gender": "FEM",
+   "translit": "chazeret",
+   "forms": {
+    "N;SG;INDF": "חֲזֶרֶת",
+    "N;SG;DEF": "הַחֲזֶרֶת"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry for the word.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pungent red or white relish next to gefilte fish; the bitter herb of Passover.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "horseradish (the root and the grated relish)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.horseradish"
+     },
+     {
+      "id": "s2",
+      "def": "one of the bitter herbs (maror) of the Passover Seder",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָּא מַגִּישָׁה דָּג מְמֻלָּא עִם חֲזֶרֶת אֲדֻמָּה.",
+      "tr": "Grandma serves gefilte fish with red horseradish.",
+      "register": "neutral",
+      "context": "family meal",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲזֶרֶת הַזֹּאת חֲרִיפָה מְאוֹד!",
+      "tr": "This horseradish is very hot!",
+      "register": "informal",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּלֵיל הַסֵּדֶר אוֹכְלִים חֲזֶרֶת כְּמָרוֹר.",
+      "tr": "On Seder night horseradish is eaten as the bitter herb.",
+      "register": "religious",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲזֶרֶת אֲדֻמָּה",
+      "tr": "red horseradish (coloured with beetroot)"
+     },
+     {
+      "text": "חֲזֶרֶת לְבָנָה",
+      "tr": "white horseradish"
+     },
+     {
+      "text": "שֹׁרֶשׁ חֲזֶרֶת",
+      "tr": "horseradish root"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in standard Hebrew; some Ashkenazi families still use the Yiddish name for the red relish.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. The word is Mishnaic: חֲזֶרֶת heads the list of Passover bitter herbs in Mishnah Pesachim 2:6.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Mishnah, חֲזֶרֶת was most likely lettuce — the Talmud (Pesachim 39a) equates it with Aramaic חַסָּא; Ashkenazi Jews came to use horseradish, and Modern Hebrew gave the name to it.",
+     "Russian хрен, Yiddish כריין (khreyn) and Ashkenazi kitchens share one Slavic word for it; German says Meerrettich."
+    ],
+    "pitfalls": [
+     "Feminine: חֲזֶרֶת חֲרִיפָה.",
+     "Without vowels חזרת also spells חֲזָרַת, the construct form of חֲזָרָה “return; rehearsal” (Wiktionary)."
+    ],
+    "subtleties": [
+     "In shops it is sold ready-grated: red (with beetroot) or white."
+    ]
+   }
+  },
+  {
+   "id": "he:gargir-hanechalim",
+   "lemma": "גַּרְגִּיר הַנְּחָלִים",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.watercress"
+   ],
+   "gender": "MASC",
+   "translit": "gargir ha-nechalim",
+   "forms": {
+    "N;SG;INDF": "גַּרְגִּיר הַנְּחָלִים",
+    "N;SG;DEF": "גַּרְגִּיר הַנְּחָלִים"
+   },
+   "note": "A two-word lexeme (construct phrase whose second noun already has the article, so the definite form is the same as the citation form). Used as a mass noun. Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entry גַּרְגִּיר and the English entry watercress (Hebrew translation גרגיר הנחלים); no Hebrew entry for the phrase",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Peppery leaves from cool, clear streams.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "watercress (Nasturtium officinale)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.watercress"
+     }
+    ],
+    "examples": [
+     {
+      "text": "גַּרְגִּיר הַנְּחָלִים גָּדֵל בְּמַיִם זוֹרְמִים.",
+      "tr": "Watercress grows in flowing water.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא מוֹסִיף גַּרְגִּיר הַנְּחָלִים לַכָּרִיךְ.",
+      "tr": "He adds watercress to the sandwich.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי גַּרְגִּיר הַנְּחָלִים לַסָּלָט.",
+      "tr": "I bought watercress for the salad.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט גַּרְגִּיר הַנְּחָלִים",
+      "tr": "watercress salad"
+     },
+     {
+      "text": "מְרַק גַּרְגִּיר הַנְּחָלִים",
+      "tr": "watercress soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; plain גַּרְגִּיר means arugula.",
+    "etymology": {
+     "text": "גַּרְגִּיר (here “rocket, cress”) + הַנְּחָלִים “of the streams” (plural of נַחַל “stream, wadi”): “stream rocket”. Arabic جِرْجِير (jirjīr) covers both arugula and watercress and is borrowed from Aramaic גַּרְגִּירָא (“rocket”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English watercress, German Brunnenkresse (“well cress”) and Hebrew “stream rocket” all name the plant after the water it grows in."
+    ],
+    "pitfalls": [
+     "Already definite: say אֶת גַּרְגִּיר הַנְּחָלִים, never *הַגַּרְגִּיר הַנְּחָלִים.",
+     "Without הַנְּחָלִים, גַּרְגִּיר is arugula — a different plant."
+    ],
+    "subtleties": [
+     "נַחַל is a stream or a wadi; Israeli hiking trails are named after נְחָלִים."
+    ]
+   }
+  },
+  {
+   "id": "he:batsaltsal",
+   "lemma": "בְּצַלְצַל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.shallot"
+   ],
+   "gender": "MASC",
+   "translit": "batsaltsal",
+   "forms": {
+    "N;SG;INDF": "בְּצַלְצַל",
+    "N;SG;DEF": "הַבְּצַלְצַל",
+    "N;PL;INDF": "בְּצַלְצַלִּים",
+    "N;PL;DEF": "הַבְּצַלְצַלִּים"
+   },
+   "note": "Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small, mild, elegant onions of French cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shallot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.shallot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשֶּׁף קוֹצֵץ בְּצַלְצַל דַּק דַּק.",
+      "tr": "The chef chops a shallot very finely.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְטַגֶּנֶת בְּצַלְצַלִּים בְּחֶמְאָה.",
+      "tr": "I (f.) fry shallots in butter.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּסּוּפֶּר אֵין בְּצַלְצַלִּים הַיּוֹם.",
+      "tr": "There are no shallots at the supermarket today.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּצַלְצַל קָצוּץ",
+      "tr": "chopped shallot"
+     },
+     {
+      "text": "בְּצַלְצַלִּים מְקֻרְמָלִים",
+      "tr": "caramelized shallots"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; menus sometimes keep the French name.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. It is בָּצָל “onion” in the reduplicated diminutive pattern (compare כְּלַבְלַב “puppy” from כֶּלֶב): “little onion”. English shallot is from French échalote, from Latin ascalonia (cēpa), “onion of Ashkelon” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The European name remembers a city in Israel: Latin ascalonia “of Ashkelon” → French échalote → English shallot — and also English scallion (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The plural doubles the ל: בְּצַלְצַלִּים.",
+     "Not the same as בָּצָל יָרֹק (spring onion)."
+    ],
+    "subtleties": [
+     "The repeated צַל is a diminutive, as in כְּלַבְלַב “puppy” and חֲתַלְתּוּל “kitten”."
+    ]
+   }
+  },
+  {
+   "id": "he:mangold",
+   "lemma": "מַנְגּוֹלְד",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.chard"
+   ],
+   "gender": "MASC",
+   "translit": "mangold",
+   "forms": {
+    "N;SG;INDF": "מַנְגּוֹלְד",
+    "N;SG;DEF": "הַמַּנְגּוֹלְד"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Big glossy leaves with colourful stems; stuffed leaves and green stews.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Swiss chard, chard",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chard"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָּא מְמַלֵּאת עֲלֵי מַנְגּוֹלְד בְּאֹרֶז.",
+      "tr": "Grandma stuffs chard leaves with rice.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְבַשֵּׁל מַנְגּוֹלְד עִם שׁוּם וְלִימוֹן.",
+      "tr": "I (m.) cook chard with garlic and lemon.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּגִּנָּה שֶׁלָּנוּ גָּדֵל מַנְגּוֹלְד כָּל הַשָּׁנָה.",
+      "tr": "Chard grows in our garden all year round.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי מַנְגּוֹלְד",
+      "tr": "chard leaves"
+     },
+     {
+      "text": "מַנְגּוֹלְד מְמֻלָּא",
+      "tr": "stuffed chard"
+     },
+     {
+      "text": "גִּבְעוֹלֵי מַנְגּוֹלְד",
+      "tr": "chard stems"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סֶלֶק עָלִים",
+      "register": "technical",
+      "nuance": "the botanical name, “leaf beet”; not heard at the market"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From German Mangold (Wiktionary: from Middle High German man(e)golt; further origin unknown).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chard is the same species as beetroot (Beta vulgaris), bred for its leaves instead of its root — hence the botanical name סֶלֶק עָלִים, “leaf beet”.",
+     "Turkish calls it pazı and Greek σέσκουλο."
+    ],
+    "pitfalls": [
+     "A mass noun: מַנְגּוֹלְד טָרִי, no plural in everyday use; the leaves are עֲלֵי מַנְגּוֹלְד."
+    ],
+    "subtleties": [
+     "Hebrew took the German name; English says (Swiss) chard. Seed packets may add the botanical סֶלֶק עָלִים."
+    ]
+   }
+  },
+  {
+   "id": "he:gargir",
+   "lemma": "גַּרְגִּיר",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.arugula"
+   ],
+   "gender": "MASC",
+   "translit": "gargir",
+   "forms": {
+    "N;SG;INDF": "גַּרְגִּיר",
+    "N;SG;DEF": "הַגַּרְגִּיר"
+   },
+   "note": "As a salad green used as a mass noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s Hebrew entry גרגיר gives only “granule, grain; caryopsis”; the arugula sense (Eruca sativa) is standard Modern Hebrew, and Wiktionary’s Arabic entry جرجير traces the plant name to Aramaic גַּרְגִּירָא “rocket”. The profile shows both senses."
+    }
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Peppery salad leaves; a pizza topping.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "arugula, rocket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.arugula"
+     },
+     {
+      "id": "s2",
+      "def": "a grain, granule (גַּרְגִּיר אֹרֶז “a grain of rice”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹהֶבֶת סְלַט גַּרְגִּיר עִם לִימוֹן.",
+      "tr": "I (f.) like arugula salad with lemon.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא שָׂם גַּרְגִּיר עַל הַפִּיצָה.",
+      "tr": "He puts arugula on the pizza.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "עַל הַשֻּׁלְחָן נִשְׁאַר גַּרְגִּיר אֹרֶז.",
+      "tr": "A grain of rice was left on the table.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט גַּרְגִּיר",
+      "tr": "arugula salad"
+     },
+     {
+      "text": "גַּרְגִּיר חוֹל",
+      "tr": "a grain of sand"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym for the salad leaf; menus sometimes print the Italian name, but גַּרְגִּיר is the normal word.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. The plant name matches Arabic جِرْجِير (jirjīr, “arugula; watercress”), which Wiktionary derives from Aramaic גַּרְגִּירָא (gargīrā, “rocket”), from Akkadian girgirû.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic جِرْجِير (jirjīr) is the same word, from Aramaic and ultimately Akkadian (Wiktionary).",
+     "English rocket and arugula and Italian rucola come from Latin ērūca (Wiktionary)."
+    ],
+    "pitfalls": [
+     "גַּרְגִּיר also means “a grain, a granule” (גַּרְגִּיר אֹרֶז, גַּרְגִּיר חוֹל); the context decides.",
+     "As a salad green it is a mass noun: “some arugula” is just גַּרְגִּיר."
+    ],
+    "subtleties": [
+     "גַּרְגִּיר הַנְּחָלִים (“stream rocket”) is watercress — a different plant."
+    ]
+   }
+  },
+  {
+   "id": "he:melukhiya",
+   "lemma": "מְלוּחִיָּה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.molokhia"
+   ],
+   "gender": "FEM",
+   "translit": "melukhiya",
+   "forms": {
+    "N;SG;INDF": "מְלוּחִיָּה",
+    "N;SG;DEF": "הַמְּלוּחִיָּה"
+   },
+   "plene": {
+    "N;SG;INDF": "מלוחייה",
+    "N;SG;DEF": "המלוחייה"
+   },
+   "note": "Used as a mass noun (the leaves and the dish). Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A dark green, slippery stew of Egyptian and North African Jewish kitchens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "jute mallow, molokhia (the leaves and the dish cooked from them)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.molokhia"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָּא שֶׁלִּי מְבַשֶּׁלֶת מְלוּחִיָּה בְּשַׁבָּת.",
+      "tr": "My grandmother cooks molokhia on Shabbat.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ אֲנָשִׁים שֶׁלֹּא אוֹהֲבִים אֶת הַמְּלוּחִיָּה כִּי הִיא רִירִית.",
+      "tr": "Some people don’t like molokhia because it is slimy.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִינוּ מְלוּחִיָּה קְפוּאָה בַּסּוּפֶּר.",
+      "tr": "We bought frozen molokhia at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְלוּחִיָּה קְפוּאָה",
+      "tr": "frozen molokhia"
+     },
+     {
+      "text": "עֲלֵי מְלוּחִיָּה",
+      "tr": "molokhia leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday Hebrew; the word names both the leaves and the dish.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Arabic مُلُوخِيَّة (mulūḵiyya), which Wiktionary derives from Ancient Greek μολόχιον (molókhion, “mallow”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Arabic name goes back to Greek μολόχιον “mallow” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Not related to מָלוּחַ “salty”, although the letters מלוח look the same: Hebrew ח stands here for Arabic خ (kh).",
+     "Everyday spelling with double י: מלוחייה."
+    ],
+    "subtleties": [
+     "The plant is jute mallow (Corchorus olitorius) — the same genus that gives jute fibre."
+    ]
+   }
+  },
+  {
+   "id": "he:shoresh-seleri",
+   "lemma": "שֹׁרֶשׁ סֶלֶרִי",
+   "pos": "NOUN",
+   "senses": [
+    "veg.celeriac"
+   ],
+   "gender": "MASC",
+   "translit": "shoresh seleri",
+   "forms": {
+    "N;SG;INDF": "שֹׁרֶשׁ סֶלֶרִי",
+    "N;SG;DEF": "שֹׁרֶשׁ הַסֶּלֶרִי",
+    "N;PL;INDF": "שָׁרְשֵׁי סֶלֶרִי",
+    "N;PL;DEF": "שָׁרְשֵׁי הַסֶּלֶרִי"
+   },
+   "plene": {
+    "N;SG;INDF": "שורש סלרי",
+    "N;SG;DEF": "שורש הסלרי",
+    "N;PL;INDF": "שורשי סלרי",
+    "N;PL;DEF": "שורשי הסלרי"
+   },
+   "note": "A two-word lexeme (construct phrase: the article and the plural are marked as in תַּפּוּחַ אֲדָמָה). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entry שֹׁרֶשׁ (no Hebrew entries for סלרי or the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A knobbly root that perfumes chicken soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "celeriac, celery root",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.celeriac"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בִּמְרַק הָעוֹף שֶׁל סַבְתָּא יֵשׁ שֹׁרֶשׁ סֶלֶרִי.",
+      "tr": "There is celeriac in grandma’s chicken soup.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְקַלֶּפֶת אֶת שֹׁרֶשׁ הַסֶּלֶרִי.",
+      "tr": "She peels the celeriac.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי שְׁנֵי שָׁרְשֵׁי סֶלֶרִי.",
+      "tr": "I bought two celeriacs.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פִּירֶה שֹׁרֶשׁ סֶלֶרִי",
+      "tr": "celeriac purée"
+     },
+     {
+      "text": "שֹׁרֶשׁ סֶלֶרִי צָלוּי",
+      "tr": "roasted celeriac"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סֶלֶרִי",
+      "register": "colloquial",
+      "nuance": "on its own סֶלֶרִי can mean the root or the stalks; adding שֹׁרֶשׁ makes clear that the root is meant"
+     }
+    ],
+    "etymology": {
+     "text": "שֹׁרֶשׁ “root” (from Proto-Semitic *šurš-) + סֶלֶרִי “celery” (an international word; Wiktionary has no Hebrew entry for it). English celeriac is celery + -ac (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Celeriac and celery (כַּרְפַּס) are one species, Apium graveolens: one bred for its root, the other for its stalks.",
+     "שֹׁרֶשׁ is also the grammatical “root” of a Hebrew word — and ש־ר־ש is itself a root."
+    ],
+    "pitfalls": [
+     "The plural changes the first word: שָׁרְשֵׁי סֶלֶרִי (said shorshei, spelled שורשי).",
+     "The article goes on the second word: שֹׁרֶשׁ הַסֶּלֶרִי, not *הַשֹּׁרֶשׁ סֶלֶרִי."
+    ],
+    "subtleties": [
+     "In שָׁרְשֵׁי the first vowel is a qamats katan, pronounced o."
+    ]
+   }
+  },
+  {
+   "id": "he:radikyo",
+   "lemma": "רָדִיקְיוֹ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.radicchio"
+   ],
+   "gender": "MASC",
+   "translit": "radikyo",
+   "forms": {
+    "N;SG;INDF": "רָדִיקְיוֹ",
+    "N;SG;DEF": "הָרָדִיקְיוֹ"
+   },
+   "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wine-red, bitter Italian salad leaves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "radicchio (red-leaved chicory)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.radicchio"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּסָּלָט יֵשׁ רָדִיקְיוֹ וְחַסָּה.",
+      "tr": "There is radicchio and lettuce in the salad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הָרָדִיקְיוֹ מַר קְצָת.",
+      "tr": "The radicchio is a bit bitter.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשֶּׁף צוֹלֶה רָדִיקְיוֹ עַל הָאֵשׁ.",
+      "tr": "The chef grills radicchio over the fire.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רָדִיקְיוֹ צָלוּי",
+      "tr": "grilled radicchio"
+     },
+     {
+      "text": "סְלַט רָדִיקְיוֹ",
+      "tr": "radicchio salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No Hebrew synonym; the Italian name is used.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. Like English radicchio, “borrowed from Italian radicchio” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Radicchio is a red-leaved variety of chicory (Cichorium intybus) — botanically a kind of עֹלֶשׁ."
+    ],
+    "pitfalls": [
+     "Masculine: רָדִיקְיוֹ טָרִי. The Italian cch is pronounced k: ra-DIK-yo."
+    ],
+    "subtleties": [
+     "A loan that takes the Hebrew article normally: הָרָדִיקְיוֹ."
+    ]
+   }
+  },
+  {
+   "id": "he:batsal-sagol",
+   "lemma": "בָּצָל סָגֹל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.redonion"
+   ],
+   "gender": "MASC",
+   "translit": "batsal sagol",
+   "forms": {
+    "N;SG;INDF": "בָּצָל סָגֹל",
+    "N;SG;DEF": "הַבָּצָל הַסָּגֹל",
+    "N;PL;INDF": "בְּצָלִים סְגֻלִּים",
+    "N;PL;DEF": "הַבְּצָלִים הַסְּגֻלִּים"
+   },
+   "plene": {
+    "N;SG;INDF": "בצל סגול",
+    "N;SG;DEF": "הבצל הסגול",
+    "N;PL;INDF": "בצלים סגולים",
+    "N;PL;DEF": "הבצלים הסגולים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries בָּצָל and סָגֹל (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet purple rings in salads and on burgers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red onion (literally “purple onion”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.redonion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי פּוֹרֵס בָּצָל סָגֹל לַסָּלָט.",
+      "tr": "I (m.) slice a red onion for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּסָּלָט הַזֶּה יֵשׁ בְּצָלִים סְגֻלִּים וְעַגְבָנִיּוֹת.",
+      "tr": "This salad has red onions and tomatoes.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבָּצָל הַסָּגֹל מָתוֹק יוֹתֵר מֵהַבָּצָל הַלָּבָן.",
+      "tr": "Red onion is sweeter than white onion.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּצָל סָגֹל קָצוּץ",
+      "tr": "chopped red onion"
+     },
+     {
+      "text": "טַבְּעוֹת בָּצָל סָגֹל",
+      "tr": "red onion rings"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in standard use.",
+    "etymology": {
+     "text": "בָּצָל “onion” (cognate with Arabic بَصَل, baṣal) + סָגֹל “violet, purple” (from סֶגֶל “violet (flower)”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "סָגֹל comes from סֶגֶל “violet (the flower)”, while the vowel sign סֶגוֹל comes from Aramaic סְגוֹלָא “cluster” (Wiktionary).",
+     "Turkish can also say mor soğan, “purple onion”, just like Hebrew."
+    ],
+    "pitfalls": [
+     "Both words agree and take the article: הַבָּצָל הַסָּגֹל, הַבְּצָלִים הַסְּגֻלִּים.",
+     "Everyday spelling with ו: בצל סגול, בצלים סגולים."
+    ],
+    "subtleties": [
+     "Hebrew says “purple” (סָגֹל) where English says “red”; בָּצָל לָבָן (white onion) and בָּצָל יָרֹק (spring onion) follow the same noun + colour pattern."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.cassava",
+   "reason": "No established Hebrew word: cassava is hardly eaten in Israel.",
+   "use": "The foreign names in Hebrew letters, which vary (קסאווה, מניוק, יוקה)."
+  },
+  {
+   "concept": "veg.lotusroot",
+   "reason": "No lexicalized word; lotus root appears only in Asian recipes.",
+   "use": "A plain description: שֹׁרֶשׁ לוֹטוּס “lotus root” (לוֹטוּס “lotus”)."
+  },
+  {
+   "concept": "veg.wildgarlic",
+   "reason": "No everyday word: ramsons do not grow wild in Israel and are rarely sold.",
+   "use": "A description such as “wild-garlic leaves”, or a translation of the European “bear’s garlic”."
+  },
+  {
+   "concept": "veg.rutabaga",
+   "reason": "No everyday word: swedes are not grown or sold in Israel.",
+   "use": "Described as a kind of לֶפֶת (turnip), or the English/German name."
+  },
+  {
+   "concept": "veg.cress",
+   "reason": "No everyday word for garden cress (Lepidium sativum); it is not a common vegetable in Israel.",
+   "use": "The English name in Hebrew letters, or simply נְבָטִים (sprouts) for cress sprouts."
+  },
+  {
+   "concept": "veg.waterspinach",
+   "reason": "No established word; the vegetable is known only from Asian cooking.",
+   "use": "An Asian name (e.g. kangkong) or a literal translation of “water spinach”."
+  },
+  {
+   "concept": "veg.yam",
+   "reason": "True yams (Dioscorea) are almost unknown in Israel; the English word is often used loosely for sweet potatoes.",
+   "use": "The English name in Hebrew letters, or בָּטָטָה when (as often) a sweet potato is meant."
+  },
+  {
+   "concept": "veg.mustardgreens",
+   "reason": "No single word.",
+   "use": "עֲלֵי חַרְדָּל “mustard leaves” (חַרְדָּל “mustard”)."
+  },
+  {
+   "concept": "veg.bambooshoot",
+   "reason": "No single word; canned bamboo shoots are sold under a description.",
+   "use": "A description built on בַּמְבּוּק “bamboo”, such as נִבְטֵי בַּמְבּוּק “bamboo sprouts”."
+  },
+  {
+   "concept": "veg.lambslettuce",
+   "reason": "Not a common vegetable in Israel; no established Hebrew name.",
+   "use": "The French or German name (mâche, Feldsalat) in Hebrew letters."
+  },
+  {
+   "concept": "veg.garlicchives",
+   "reason": "No established word.",
+   "use": "Described as a kind of עִירִית (chives)."
+  },
+  {
+   "concept": "veg.blacksalsify",
+   "reason": "Not grown or sold in Israel; no everyday name.",
+   "use": "The European name (e.g. German Schwarzwurzel) in Hebrew letters."
+  },
+  {
+   "concept": "veg.daikon",
+   "reason": "No separate everyday word: the large (white or black) radish is simply צְנוֹן, the usual Israeli radish (veg.1); the small red one is צְנוֹנִית.",
+   "use": "צְנוֹן; in Japanese recipes also the name daikon in Hebrew letters."
+  },
+  {
+   "concept": "veg.romaine",
+   "reason": "No separate everyday word: the standard Israeli חַסָּה is already a long-leaved romaine-type lettuce.",
+   "use": "חַסָּה (veg.1)."
+  },
+  {
+   "concept": "veg.icebergl",
+   "reason": "No Hebrew word; the English name is added to חַסָּה.",
+   "use": "חסה אייסברג (חַסָּה + “iceberg”)."
+  },
+  {
+   "concept": "veg.endive",
+   "reason": "Hebrew does not separate endive from chicory: עֹלֶשׁ (veg.chicory) covers both (Wiktionary: “chicory, endive”).",
+   "use": "עֹלֶשׁ; for curly endive or escarole, the French names."
+  }
+ ]
+}

@@ -71,6 +71,14 @@ def entries_for(lang, lx, offline):
         for alt in dict.fromkeys(v for v in (lx.get('plene') or {}).values() if ' ' not in v or ' ' in lx['lemma']):
             es = fetch(lang, alt, offline) or []
             if es: break
+    if lang in ('he', 'ar'):   # a page that only says "defective spelling of X" / "alternative form of X": read X too
+        more = []
+        for e in es:
+            for sn in e.get('senses', []):
+                for g in sn.get('glosses', []):
+                    m = re.match(r'(?:defective|plene|alternative) (?:spelling|form) of (\S+)', g)
+                    if m: more += fetch(lang, m.group(1), offline) or []
+        es = es + more
     if lang == 'zh':   # the simplified page only redirects; read the traditional one too
         extra = []
         for e in fetch(lang, lx['lemma'], offline) or []:
@@ -155,7 +163,7 @@ def _check(lang, lx, gloss, offline):
     lemma = nfc(lx['lemma'])
     same = [e for e in pos_ok if canonical(e) == lemma] if lang in ('ar', 'he') else pos_ok
     words = [w for w in re.split(r'[^a-z]+', (gloss or '').lower()) if len(w) > 2 and w not in ('the', 'and', 'definite', 'indefinite', 'article')]
-    def means(e): return any(any(w in g.lower() for w in words) for s in e.get('senses', []) for g in s.get('glosses', []))
+    def means(e): return any(any(w in g.lower().replace('-', '') for w in words) for s in e.get('senses', []) for g in s.get('glosses', []))   # water-cress = watercress
     meant = [e for e in (same or pos_ok) if means(e)] if words else (same or pos_ok)
     pool = meant or same or pos_ok
     if words and not meant: res['problems'].append(f'meaning: no Wiktionary meaning of “{lookup_word(lang, lx)}” mentions “{gloss}”')
@@ -193,7 +201,7 @@ def _check(lang, lx, gloss, offline):
         else: res['problems'].append(f'{cell}: “{ours}” — Wiktionary has {" / ".join(sorted(cands))}')
     # Chinese
     if lang == 'zh':
-        pys = {re.sub(r'\s+', '', s.get('zh_pron', '')).lower() for e in pool for s in e.get('sounds', []) if 'Mandarin' in (s.get('tags') or []) and 'Pinyin' in (s.get('tags') or [])}
+        pys = {re.sub(r"[\s']+", '', s.get('zh_pron', '')).lower() for e in pool for s in e.get('sounds', []) if 'Mandarin' in (s.get('tags') or []) and 'Pinyin' in (s.get('tags') or [])}
         mine = ''.join(pinyin_split(lx.get('pinyin', '')))
         if pys:
             if mine in {p.replace(',', '') for p in pys} or any(mine in re.split(r'[,;/]', p) for p in pys): res['checked'].append('pinyin')

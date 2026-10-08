@@ -1,0 +1,883 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:bamiya",
+   "lemma": "بَامِيَة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.okra"
+   ],
+   "gender": "FEM",
+   "translit": "bāmiya",
+   "forms": {
+    "N;NOM;SG;INDF": "بَامِيَةٌ",
+    "N;ACC;SG;INDF": "بَامِيَةً",
+    "N;GEN;SG;INDF": "بَامِيَةٍ",
+    "N;NOM;SG;DEF": "الْبَامِيَةُ",
+    "N;ACC;SG;DEF": "الْبَامِيَةَ",
+    "N;GEN;SG;DEF": "الْبَامِيَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A tomato stew of okra and lamb with rice — home cooking from Egypt to Iraq; people love or hate its slime.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "okra, ladies’ fingers — the pods, and the stew made with them (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.okra"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَطْبُخُ أُمِّي الْبَامِيَةَ بِاللَّحْمِ وَالطَّمَاطِمِ.",
+      "tr": "My mother cooks okra with meat and tomatoes.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخْتَارُ الْبَامِيَةَ الصَّغِيرَةَ لِأَنَّهَا أَطْرَى.",
+      "tr": "I choose small okra because it is more tender.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "يُقَدَّمُ مَرَقُ الْبَامِيَةِ مَعَ الْأَرُزِّ فِي الْعِرَاقِ.",
+      "tr": "In Iraq okra stew is served with rice.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ بَامِيَةً مُجَمَّدَةً.",
+      "tr": "I bought frozen okra.",
+      "register": "neutral",
+      "context": "supermarket",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَامِيَةٌ بِاللَّحْمِ",
+      "tr": "okra with meat"
+     },
+     {
+      "text": "مَرَقُ الْبَامِيَةِ",
+      "tr": "okra stew"
+     },
+     {
+      "text": "بَامِيَةٌ مُجَفَّفَةٌ",
+      "tr": "dried okra"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مْلُوخِيَّة",
+      "register": "regional",
+      "nuance": "the Moroccan word for okra (Wiktionary)",
+      "region": "Morocco"
+     },
+     {
+      "word": "بَامْيَا",
+      "register": "neutral",
+      "nuance": "spelling of the pronunciation bāmya (Wiktionary translation tables)"
+     }
+    ],
+    "etymology": {
+     "text": "Origin unknown (Wiktionary). One suggestion: a dialectal form of إِبْهَام (“thumb”) + the dish suffix ـِيَّة — the pods look like fingers, as in English “ladies’ fingers”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish bamya and Greek μπάμια (bámia) come from this Arabic word."
+    ],
+    "pitfalls": [
+     "In Morocco okra is called مْلُوخِيَّة — elsewhere that word is jute mallow (Wiktionary).",
+     "Feminine: الْبَامِيَةُ طَازَجَةٌ (the okra is fresh)."
+    ],
+    "subtleties": [
+     "A mass noun: one pod is حَبَّةُ بَامِيَةٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ful",
+   "lemma": "فُول",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.broadbean"
+   ],
+   "gender": "MASC",
+   "translit": "fūl",
+   "forms": {
+    "N;NOM;COLL;INDF": "فُولٌ",
+    "N;ACC;COLL;INDF": "فُولًا",
+    "N;GEN;COLL;INDF": "فُولٍ",
+    "N;NOM;COLL;DEF": "الْفُولُ",
+    "N;ACC;COLL;DEF": "الْفُولَ",
+    "N;GEN;COLL;DEF": "الْفُولِ",
+    "N;NOM;SG;INDF": "فُولَةٌ",
+    "N;ACC;SG;INDF": "فُولَةً",
+    "N;GEN;SG;INDF": "فُولَةٍ",
+    "N;NOM;SG;DEF": "الْفُولَةُ",
+    "N;ACC;SG;DEF": "الْفُولَةَ",
+    "N;GEN;SG;DEF": "الْفُولَةِ",
+    "N;NOM;PL;INDF": "فُولَاتٌ",
+    "N;ACC;PL;INDF": "فُولَاتٍ",
+    "N;GEN;PL;INDF": "فُولَاتٍ",
+    "N;NOM;PL;DEF": "الْفُولَاتُ",
+    "N;ACC;PL;DEF": "الْفُولَاتِ",
+    "N;GEN;PL;DEF": "الْفُولَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The breakfast of Egypt: slow-cooked ful with oil, cumin and bread — and fresh green pods in spring.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "broad beans, fava beans (Vicia faba; collective, one bean = فُولَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.broadbean"
+     },
+     {
+      "id": "s2",
+      "def": "the dish of stewed dried fava beans (فُولٌ مُدَمَّسٌ, ful medames)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَشَّرْتُ الْفُولَ الْأَخْضَرَ لِلطَّبْخِ.",
+      "tr": "I shelled the green broad beans for cooking.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَى أَبِي كِيلُو فُولٍ أَخْضَرَ.",
+      "tr": "My father bought a kilo of green broad beans.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "تُصْنَعُ الطَّعْمِيَّةُ فِي مِصْرَ مِنَ الْفُولِ.",
+      "tr": "In Egypt, taʿmiyya (falafel) is made from fava beans.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ الْفُولَ الْمُدَمَّسَ عَلَى الْفُطُورِ.",
+      "tr": "We eat ful medames for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فُولٌ مُدَمَّسٌ",
+      "tr": "ful medames (stewed fava beans)"
+     },
+     {
+      "text": "فُولٌ أَخْضَرُ",
+      "tr": "fresh green broad beans"
+     },
+     {
+      "text": "فُولٌ سُودَانِيٌّ",
+      "tr": "peanuts (lit. “Sudanese beans”)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "زي الفولة واتقسمت نصين",
+      "tr": "like a fava bean split in two (Egyptian Arabic)",
+      "kind": "saying",
+      "meaning": "as alike as two peas in a pod (of two people who look the same)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "بَاقِلَّاء",
+      "register": "formal",
+      "nuance": "the classical word (also بَاقِلَاء), feminine and diptote; everyday in Iraq and the Gulf as باجلا (Wiktionary)",
+      "region": "Iraq, Gulf"
+     }
+    ],
+    "etymology": {
+     "text": "Claimed to be borrowed from Aramaic pōlā (“bean”), perhaps ultimately from Proto-Semitic *pūl- (Wiktionary); compare Hebrew פּוֹל (pol, broad bean).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Egyptian falafel (طَعْمِيَّة) is made from fava beans, not from chickpeas as in the Levant.",
+     "Hebrew פּוֹל (pol) is the same word."
+    ],
+    "pitfalls": [
+     "فُولٌ سُودَانِيٌّ is peanuts, not a kind of fava bean.",
+     "Collective: الْفُولُ = the beans in general; فُولَة = one bean; فُولَات = beans counted (Wiktionary also gives the plural أَفْوَال)."
+    ],
+    "subtleties": [
+     "فُول is both the raw legume and the famous cooked dish; فُولٌ مُدَمَّسٌ is the slow-simmered dried beans."
+    ]
+   }
+  },
+  {
+   "id": "ar:dubba",
+   "lemma": "دُبَّاء",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.bottlegourd"
+   ],
+   "gender": "MASC",
+   "root": "د ب ب",
+   "translit": "dubbāʾ",
+   "forms": {
+    "N;NOM;COLL;INDF": "دُبَّاءٌ",
+    "N;ACC;COLL;INDF": "دُبَّاءً",
+    "N;GEN;COLL;INDF": "دُبَّاءٍ",
+    "N;NOM;COLL;DEF": "الدُّبَّاءُ",
+    "N;ACC;COLL;DEF": "الدُّبَّاءَ",
+    "N;GEN;COLL;DEF": "الدُّبَّاءِ",
+    "N;NOM;SG;INDF": "دُبَّاءَةٌ",
+    "N;ACC;SG;INDF": "دُبَّاءَةً",
+    "N;GEN;SG;INDF": "دُبَّاءَةٍ",
+    "N;NOM;SG;DEF": "الدُّبَّاءَةُ",
+    "N;ACC;SG;DEF": "الدُّبَّاءَةَ",
+    "N;GEN;SG;DEF": "الدُّبَّاءَةِ",
+    "N;NOM;PL;INDF": "دُبَّاءَاتٌ",
+    "N;ACC;PL;INDF": "دُبَّاءَاتٍ",
+    "N;GEN;PL;INDF": "دُبَّاءَاتٍ",
+    "N;NOM;PL;DEF": "الدُّبَّاءَاتُ",
+    "N;ACC;PL;DEF": "الدُّبَّاءَاتِ",
+    "N;GEN;PL;DEF": "الدُّبَّاءَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "literary"
+    ],
+    "connotation": "neutral",
+    "feeling": "A word from the Prophet’s table: the gourd he loved, famous from the ḥadīth.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "gourd, especially the bottle gourd, calabash (Lagenaria siceraria) (collective; one gourd = دُبَّاءَة)",
+      "register": [
+       "literary"
+      ],
+      "concept": "veg.bottlegourd"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانَ النَّبِيُّ يُحِبُّ الدُّبَّاءَ.",
+      "tr": "The Prophet used to love gourd.",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبَخْنَا الدُّبَّاءَ مَعَ اللَّحْمِ.",
+      "tr": "We cooked the gourd with meat.",
+      "register": "literary",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "صُنِعَ هٰذَا الْإِنَاءُ مِنْ دُبَّاءَةٍ مُجَفَّفَةٍ.",
+      "tr": "This vessel was made from a dried gourd.",
+      "register": "literary",
+      "context": "crafts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "دُبَّاءٌ بِاللَّحْمِ",
+      "tr": "gourd with meat"
+     },
+     {
+      "text": "دُبَّاءَةٌ مُجَفَّفَةٌ",
+      "tr": "a dried gourd"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَرْع",
+      "register": "neutral",
+      "nuance": "the everyday word for pumpkins, squashes and gourds; it covers the bottle gourd too"
+     },
+     {
+      "word": "يَقْطِين",
+      "register": "literary",
+      "nuance": "the Qurʾānic word (37:146) for the gourd plant that shaded Jonah, which commentators identify with الدُّبَّاء"
+     }
+    ],
+    "etymology": {
+     "text": "From دَبَّ (dabba, “to crawl”) — the creeping vine (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Companion Anas ibn Mālik reported that after seeing the Prophet pick out the pieces of gourd from a dish, he himself always loved gourd (Ṣaḥīḥ al-Bukhārī).",
+     "Dried gourds served as vessels: a ḥadīth forbids making nabīdh in الدُّبَّاء and some other kinds of vessel."
+    ],
+    "pitfalls": [
+     "Unlike هِنْدِبَاءُ (a diptote), دُبَّاء takes tanwīn: دُبَّاءٌ, accusative دُبَّاءً (Wiktionary).",
+     "Classical and religious register: in today’s kitchens people mostly say قَرْع."
+    ],
+    "subtleties": [
+     "Collective: الدُّبَّاءُ (gourd as food), دُبَّاءَة (one gourd), دُبَّاءَات (gourds counted)."
+    ]
+   }
+  },
+  {
+   "id": "ar:khurshuf",
+   "lemma": "خُرْشُوف",
+   "pos": "NOUN",
+   "senses": [
+    "veg.artichoke"
+   ],
+   "gender": "MASC",
+   "translit": "ḫuršūf",
+   "forms": {
+    "N;NOM;SG;INDF": "خُرْشُوفٌ",
+    "N;ACC;SG;INDF": "خُرْشُوفًا",
+    "N;GEN;SG;INDF": "خُرْشُوفٍ",
+    "N;NOM;SG;DEF": "الْخُرْشُوفُ",
+    "N;ACC;SG;DEF": "الْخُرْشُوفَ",
+    "N;GEN;SG;DEF": "الْخُرْشُوفِ",
+    "N;NOM;PL;INDF": "خَرَاشِيفُ",
+    "N;ACC;PL;INDF": "خَرَاشِيفَ",
+    "N;GEN;PL;INDF": "خَرَاشِيفَ",
+    "N;NOM;PL;DEF": "الْخَرَاشِيفُ",
+    "N;ACC;PL;DEF": "الْخَرَاشِيفَ",
+    "N;GEN;PL;DEF": "الْخَرَاشِيفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A spring delicacy: hearts stuffed, or stewed with peas and dill — some work to clean.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artichoke (globe artichoke); plural خَرَاشِيف",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.artichoke"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَظَّفْتُ الْخُرْشُوفَ وَتَرَكْتُ الْقُلُوبَ فَقَطْ.",
+      "tr": "I cleaned the artichokes and kept only the hearts.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ خَرَاشِيفَ طَازَجَةً مِنَ السُّوقِ.",
+      "tr": "I bought fresh artichokes at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "قُلُوبُ الْخُرْشُوفِ الْمَحْشُوَّةُ طَبَقٌ رَبِيعِيٌّ.",
+      "tr": "Stuffed artichoke hearts are a spring dish.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قُلُوبُ الْخُرْشُوفِ",
+      "tr": "artichoke hearts"
+     },
+     {
+      "text": "خُرْشُوفٌ مَحْشِيٌّ",
+      "tr": "stuffed artichoke"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَرْضِي شَوْكِي",
+      "register": "regional",
+      "nuance": "Levantine name, refitted from English “artichoke” to native words meaning “earthy-thorny” (Wiktionary)",
+      "region": "Levant"
+     },
+     {
+      "word": "قوق",
+      "register": "regional",
+      "nuance": "Moroccan Arabic (Wiktionary)",
+      "region": "Morocco"
+     }
+    ],
+    "etymology": {
+     "text": "Perhaps connected to Akkadian arsuppu (a cereal or produce with a scaly look), or from Middle Persian *xār-čōp, “thorn stick” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English artichoke, Italian carciofo and Spanish alcachofa all come from Andalusian Arabic al-ḵaršūfa.",
+     "Modern Hebrew חֻרְשָׁף (ḥurshaf) is the same word."
+    ],
+    "pitfalls": [
+     "The plural خَرَاشِيف is a diptote: خَرَاشِيفُ, accusative and genitive خَرَاشِيفَ — no tanwīn (Wiktionary).",
+     "Not the Jerusalem artichoke, which is a tuber of the sunflower family."
+    ],
+    "subtleties": [
+     "An ordinary countable noun in Wiktionary (خُرْشُوفٌ, plural خَرَاشِيفُ); Egyptian Arabic says ḵaršūf, with a unit noun ḵaršūfa (Wiktionary).",
+     "Levantine أَرْضِي شَوْكِي is a phono-semantic match of English “artichoke”: “earthy-thorny” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:luf",
+   "lemma": "لُوف",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.luffa"
+   ],
+   "gender": "MASC",
+   "translit": "lūf",
+   "forms": {
+    "N;NOM;COLL;INDF": "لُوفٌ",
+    "N;ACC;COLL;INDF": "لُوفًا",
+    "N;GEN;COLL;INDF": "لُوفٍ",
+    "N;NOM;COLL;DEF": "اللُّوفُ",
+    "N;ACC;COLL;DEF": "اللُّوفَ",
+    "N;GEN;COLL;DEF": "اللُّوفِ",
+    "N;NOM;SG;INDF": "لُوفَةٌ",
+    "N;ACC;SG;INDF": "لُوفَةً",
+    "N;GEN;SG;INDF": "لُوفَةٍ",
+    "N;NOM;SG;DEF": "اللُّوفَةُ",
+    "N;ACC;SG;DEF": "اللُّوفَةَ",
+    "N;GEN;SG;DEF": "اللُّوفَةِ",
+    "N;NOM;PL;INDF": "لُوفَاتٌ",
+    "N;ACC;PL;INDF": "لُوفَاتٍ",
+    "N;GEN;PL;INDF": "لُوفَاتٍ",
+    "N;NOM;PL;DEF": "اللُّوفَاتُ",
+    "N;ACC;PL;DEF": "اللُّوفَاتِ",
+    "N;GEN;PL;DEF": "اللُّوفَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bath-house sponge more than a food: a dried luffa scrubs your back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "luffa, sponge gourd (Luffa) — the plant and its fruit (collective; one gourd = لُوفَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.luffa"
+     },
+     {
+      "id": "s2",
+      "def": "a bath sponge made from the dried fruit",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "household"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "arum (Arum spp., Arisarum vulgare), a wild plant (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "تُؤْكَلُ ثِمَارُ اللُّوفِ الصَّغِيرَةُ فِي آسِيَا.",
+      "tr": "The young luffa fruits are eaten in Asia.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "زَرَعَ جَارِي اللُّوفَ عَلَى السُّورِ.",
+      "tr": "My neighbour grew luffa on the fence.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْتَعْمَلْتُ لُوفَةً فِي الْحَمَّامِ.",
+      "tr": "I used a luffa (sponge) in the bath.",
+      "register": "neutral",
+      "context": "bathing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لُوفَةُ الْحَمَّامِ",
+      "tr": "bath luffa"
+     },
+     {
+      "text": "ثِمَارُ اللُّوفِ",
+      "tr": "luffa fruits"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لِيف",
+      "register": "neutral",
+      "nuance": "the MSA word for fibre and for the sponge; one sponge = لِيفَة (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Variant of لِيف (līf, “fibre”), more dialectal outside the botanical senses (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English loofah and the botanical name Luffa come from this Arabic word."
+    ],
+    "pitfalls": [
+     "Wiktionary also gives لُوف for arum, a wild plant — context decides.",
+     "In everyday MSA the sponge is mostly لِيفَة (from لِيف, fibre)."
+    ],
+    "subtleties": [
+     "Collective: اللُّوفُ (the plant, the gourds), لُوفَة (one gourd or one sponge), لُوفَات (counted)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kurunb_ajad",
+   "lemma": "كُرُنْب أَجْعَد",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.kale"
+   ],
+   "gender": "MASC",
+   "translit": "kurunb ʾajʿad",
+   "forms": {
+    "N;NOM;SG;INDF": "كُرُنْبٌ أَجْعَدُ",
+    "N;ACC;SG;INDF": "كُرُنْبًا أَجْعَدَ",
+    "N;GEN;SG;INDF": "كُرُنْبٍ أَجْعَدَ",
+    "N;NOM;SG;DEF": "الْكُرُنْبُ الْأَجْعَدُ",
+    "N;ACC;SG;DEF": "الْكُرُنْبَ الْأَجْعَدَ",
+    "N;GEN;SG;DEF": "الْكُرُنْبِ الْأَجْعَدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): translation table of English kale; كرنب, أجعد",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A new “superfood” on supermarket shelves: dark, crinkly leaves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kale, curly kale (literally “curly cabbage”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kale"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَضَفْتُ الْكُرُنْبَ الْأَجْعَدَ إِلَى الْعَصِيرِ الْأَخْضَرِ.",
+      "tr": "I added kale to the green juice.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "أَوْرَاقُ الْكُرُنْبِ الْأَجْعَدِ قَاسِيَةٌ قَلِيلًا.",
+      "tr": "Kale leaves are a little tough.",
+      "register": "neutral",
+      "context": "texture",
+      "sense": "s1"
+     },
+     {
+      "text": "يُبَاعُ الْكُرُنْبُ الْأَجْعَدُ فِي الْمَتَاجِرِ الْكَبِيرَةِ.",
+      "tr": "Kale is sold in the big stores.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَلَطَةُ الْكُرُنْبِ الْأَجْعَدِ",
+      "tr": "kale salad"
+     },
+     {
+      "text": "أَوْرَاقُ الْكُرُنْبِ الْأَجْعَدِ",
+      "tr": "kale leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No established single word: kale is new in Arab markets; the English name is often just transliterated.",
+    "etymology": {
+     "text": "كُرُنْب “cabbage, kale”, borrowed from Ancient Greek κράμβη + أَجْعَد “creased, frizzled”, a colour-or-defect adjective from the root ج ع د (Wiktionary).",
+     "src": "Wiktionary (kaikki.org): كرنب, أجعد and the translation table of English kale"
+    },
+    "funFacts": [
+     "كُرُنْب is Greek κράμβη; German Grünkohl, “green cabbage”, looks at the same plant from another angle."
+    ],
+    "pitfalls": [
+     "أَجْعَد is a diptote: كُرُنْبٌ أَجْعَدُ, genitive كُرُنْبٍ أَجْعَدَ.",
+     "Wiktionary’s translation is vocalized كُرْنُب (kurnub); its entry has كُرُنْب (kurunb), used here."
+    ],
+    "subtleties": [
+     "شَعْرٌ أَجْعَدُ = curly hair: the same adjective."
+    ]
+   }
+  },
+  {
+   "id": "ar:malfuf_ahmar",
+   "lemma": "مَلْفُوف أَحْمَر",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.redcabbage"
+   ],
+   "gender": "MASC",
+   "translit": "malfūf ʾaḥmar",
+   "forms": {
+    "N;NOM;SG;INDF": "مَلْفُوفٌ أَحْمَرُ",
+    "N;ACC;SG;INDF": "مَلْفُوفًا أَحْمَرَ",
+    "N;GEN;SG;INDF": "مَلْفُوفٍ أَحْمَرَ",
+    "N;NOM;SG;DEF": "الْمَلْفُوفُ الْأَحْمَرُ",
+    "N;ACC;SG;DEF": "الْمَلْفُوفَ الْأَحْمَرَ",
+    "N;GEN;SG;DEF": "الْمَلْفُوفِ الْأَحْمَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): ملفوف; the phrase has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A purple crunch in salads — and a little chemistry show in the pot.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red cabbage (literally “red cabbage”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.redcabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ سَلَطَةَ الْمَلْفُوفِ الْأَحْمَرِ بِاللَّيْمُونِ.",
+      "tr": "I like red cabbage salad with lemon.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "قَطَّعْتُ الْمَلْفُوفَ الْأَحْمَرَ شَرَائِحَ رَفِيعَةً.",
+      "tr": "I cut the red cabbage into thin strips.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "يَتَغَيَّرُ لَوْنُ الْمَلْفُوفِ الْأَحْمَرِ مَعَ الْخَلِّ.",
+      "tr": "The colour of red cabbage changes with vinegar.",
+      "register": "neutral",
+      "context": "science",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ رَأْسَ مَلْفُوفٍ أَحْمَرَ.",
+      "tr": "I bought a head of red cabbage.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَأْسُ مَلْفُوفٍ أَحْمَرَ",
+      "tr": "a head of red cabbage"
+     },
+     {
+      "text": "سَلَطَةُ الْمَلْفُوفِ الْأَحْمَرِ",
+      "tr": "red cabbage salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كُرُنْبٌ أَحْمَرُ",
+      "register": "regional",
+      "nuance": "with the Egyptian and classical word for cabbage",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "مَلْفُوف “cabbage”, literally “the wrapped one”, the passive participle of لَفَّ (Wiktionary) + أَحْمَر “red”.",
+     "src": "Wiktionary (kaikki.org): ملفوف; the phrase has no entry"
+    },
+    "funFacts": [
+     "Red cabbage juice is a natural pH indicator: it turns red with acid and blue-green with alkali.",
+     "German says Rotkohl or, in the south, Blaukraut — red or blue, depending on the region (and the cook’s vinegar)."
+    ],
+    "pitfalls": [
+     "The adjective is a diptote: مَلْفُوفٌ أَحْمَرُ, genitive مَلْفُوفٍ أَحْمَرَ."
+    ],
+    "subtleties": [
+     "Masculine agreement, because مَلْفُوف is masculine: الْمَلْفُوفُ الْأَحْمَرُ طَازَجٌ."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.bittermelon",
+   "reason": "Not part of most Arab cuisines; no established everyday word. Wiktionary lists قَاوُون, which otherwise means melon (from Turkish kavun), so it is ambiguous.",
+   "use": "descriptive names such as قَرْعٌ مُرٌّ (“bitter gourd”)"
+  },
+  {
+   "concept": "veg.kohlrabi",
+   "reason": "No established Arabic word; kohlrabi is rare in Arab markets.",
+   "use": "the European loan (كولرابي) or a description"
+  },
+  {
+   "concept": "veg.brusselssprout",
+   "reason": "No single word: the name is a fixed construct with a city name, so it has no indefinite form of its own.",
+   "use": "كُرُنْبُ بْرُوكْسِلَ (Wiktionary) or مَلْفُوفُ بْرُوكْسِلَ; one sprout = حَبَّةُ كُرُنْبِ بْرُوكْسِلَ"
+  },
+  {
+   "concept": "veg.chayote",
+   "reason": "Chayote is rare in Arab countries; no established word.",
+   "use": "the loan شَايُوت (Wiktionary’s translation table)"
+  },
+  {
+   "concept": "veg.wintermelon",
+   "reason": "Winter melon is not part of Arab cuisines and has no Arabic name.",
+   "use": "a translation of the English or Chinese name"
+  },
+  {
+   "concept": "veg.bokchoy",
+   "reason": "No established word: “Chinese cabbage” is used loosely for both bok choy and Napa cabbage.",
+   "use": "كُرُنْبٌ صِينِيٌّ or the loan بُوك تْشُوي (both in Wiktionary’s translation table)"
+  },
+  {
+   "concept": "veg.napacabbage",
+   "reason": "No established word: “Chinese cabbage” is used loosely for both Napa cabbage and bok choy.",
+   "use": "مَلْفُوفٌ صِينِيٌّ or كُرُنْبٌ صِينِيٌّ (“Chinese cabbage”)"
+  },
+  {
+   "concept": "veg.jalapeno",
+   "reason": "A Mexican variety with no Arabic name; the Spanish name is borrowed and its spelling varies.",
+   "use": "هَالَابِينْيُو or هَلَبِينْيُو (Wiktionary), often فِلْفِلُ هَالَابِينْيُو"
+  },
+  {
+   "concept": "veg.runnerbean",
+   "reason": "Runner beans are not distinguished from other green beans.",
+   "use": "فَاصُولِيَا خَضْرَاء (green beans, node veg.1)"
+  },
+  {
+   "concept": "veg.collards",
+   "reason": "No word of its own: collards are not distinguished from other leafy cabbages.",
+   "use": "كُرُنْب (cabbage; Wiktionary: also leafy brassicas) or كُرُنْبٌ أَجْعَدُ (kale)"
+  },
+  {
+   "concept": "veg.cherrytomato",
+   "reason": "No fixed term: the small variety is described.",
+   "use": "طماطم كرزية (“cherry-like tomatoes”) or طماطم شيري; in the Levant بندورة كرزية"
+  },
+  {
+   "concept": "veg.beansprout",
+   "reason": "No established name: sprouts are described by the bean they come from.",
+   "use": "بَرَاعِمُ الْمَاشِ (“mung-bean sprouts”; مَاش = mung bean, Wiktionary)"
+  },
+  {
+   "concept": "veg.butternut",
+   "reason": "No fixed name for this squash variety.",
+   "use": "described as a kind of قَرْع (pumpkin, squash); recipes often say قرع عسلي (“honey squash”), which also covers other sweet orange squashes, or use the English name"
+  },
+  {
+   "concept": "veg.snowpea",
+   "reason": "No established word for flat pea pods eaten whole.",
+   "use": "a description (pea pods eaten whole) or the English/French name"
+  }
+ ]
+}

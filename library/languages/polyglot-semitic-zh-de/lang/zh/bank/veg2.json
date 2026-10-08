@@ -1,0 +1,6151 @@
+{
+ "sentences": [
+  {
+   "id": "zh.s2.001",
+   "frame": "fr.eat.def",
+   "text": "他吃芋头。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.002",
+   "frame": "fr.eat.def",
+   "text": "我吃这个芋头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm eating this taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.003",
+   "frame": "fr.eat.def",
+   "text": "我们吃竹笋。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "竹笋",
+     "l": "zh:zhusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We eat the bamboo shoots.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.004",
+   "frame": "fr.eat.def",
+   "text": "他们吃苦瓜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They eat the bitter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.005",
+   "frame": "fr.eat.def",
+   "text": "他们不吃苦瓜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "They don't eat the bitter melon.",
+   "variantOf": "zh.s2.004",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.006",
+   "frame": "fr.eat.def",
+   "text": "她吃冬瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the winter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.007",
+   "frame": "fr.eat.def",
+   "text": "她没吃冬瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "She didn't eat the winter melon.",
+   "variantOf": "zh.s2.006",
+   "variant": {
+    "Polarity": "NEG",
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.008",
+   "frame": "fr.eat.def",
+   "text": "我吃这根白萝卜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "白萝卜",
+     "l": "zh:bailuobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm eating this daikon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.009",
+   "frame": "fr.eat.def",
+   "text": "他吃丝瓜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "丝瓜",
+     "l": "zh:sigua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the luffa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.010",
+   "frame": "fr.eat.def",
+   "text": "他吃秋葵。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the okra.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.011",
+   "frame": "fr.eat.def",
+   "text": "他吃秋葵吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does he eat the okra?",
+   "variantOf": "zh.s2.010",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.012",
+   "frame": "fr.eat.def",
+   "text": "我吃这颗圣女果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm eating this cherry tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.013",
+   "frame": "fr.eat.def",
+   "text": "她吃这个佛手瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "佛手瓜",
+     "l": "zh:foshougua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She's eating this chayote.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.014",
+   "frame": "fr.eat.def",
+   "text": "我们吃山药。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "山药",
+     "l": "zh:shanyao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We eat the yam.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.015",
+   "frame": "fr.eat.def",
+   "text": "他们吃莲藕。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They eat the lotus root.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.016",
+   "frame": "fr.eat.def",
+   "text": "她吃大白菜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the napa cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.017",
+   "frame": "fr.eat.def",
+   "text": "我吃这棵小白菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "小白菜",
+     "l": "zh:xiaobaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm eating this bok choy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.018",
+   "frame": "fr.eat.def",
+   "text": "他吃豆芽。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the bean sprouts.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.019",
+   "frame": "fr.eat.def",
+   "text": "他吃这个洋蓟。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "洋蓟",
+     "l": "zh:yangji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He's eating this artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.020",
+   "frame": "fr.eat.def",
+   "text": "她吃荷兰豆。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "荷兰豆",
+     "l": "zh:helandou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the snow peas.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.021",
+   "frame": "fr.eat.def",
+   "text": "我们吃蚕豆。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "蚕豆",
+     "l": "zh:candou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We eat the broad beans.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.022",
+   "frame": "fr.buy.indef",
+   "text": "我买一个芋头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.023",
+   "frame": "fr.buy.indef",
+   "text": "她买一根芦笋。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "芦笋",
+     "l": "zh:lusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys an asparagus spear.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.024",
+   "frame": "fr.buy.indef",
+   "text": "他们买一根山药。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "山药",
+     "l": "zh:shanyao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy a yam.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.025",
+   "frame": "fr.buy.indef",
+   "text": "我们买一个葫芦。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "葫芦",
+     "l": "zh:hulu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a bottle gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.026",
+   "frame": "fr.buy.indef",
+   "text": "他买一个苤蓝。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苤蓝",
+     "l": "zh:pielan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a kohlrabi.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.027",
+   "frame": "fr.buy.indef",
+   "text": "她买一个紫甘蓝。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "紫甘蓝",
+     "l": "zh:ziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a red cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.028",
+   "frame": "fr.buy.indef",
+   "text": "我买一棵大白菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a napa cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.029",
+   "frame": "fr.buy.indef",
+   "text": "他买一根苦瓜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a bitter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.030",
+   "frame": "fr.buy.indef",
+   "text": "我们买一根丝瓜。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "丝瓜",
+     "l": "zh:sigua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a luffa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.031",
+   "frame": "fr.buy.indef",
+   "text": "她买一个佛手瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "佛手瓜",
+     "l": "zh:foshougua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a chayote.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.032",
+   "frame": "fr.buy.indef",
+   "text": "他们买一个奶油南瓜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "奶油南瓜",
+     "l": "zh:naiyounangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy a butternut squash.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.033",
+   "frame": "fr.buy.indef",
+   "text": "我买一棵羽衣甘蓝。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "羽衣甘蓝",
+     "l": "zh:yuyiganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a kale plant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.034",
+   "frame": "fr.buy.indef",
+   "text": "他买一颗紫洋葱。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "紫洋葱",
+     "l": "zh:ziyangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a red onion.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.035",
+   "frame": "fr.buy.indef",
+   "text": "她买一个球生菜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "球生菜",
+     "l": "zh:qiushengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys an iceberg lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.036",
+   "frame": "fr.buy.indef",
+   "text": "我买一棵罗马生菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "罗马生菜",
+     "l": "zh:luomashengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a romaine lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.037",
+   "frame": "fr.buy.indef",
+   "text": "他们买一个洋蓟。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "洋蓟",
+     "l": "zh:yangji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy an artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.038",
+   "frame": "fr.buy.indef",
+   "text": "我买一根白萝卜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "白萝卜",
+     "l": "zh:bailuobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a daikon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.039",
+   "frame": "fr.buy.indef",
+   "text": "她买一个芜菁。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芜菁",
+     "l": "zh:wujing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a turnip.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.040",
+   "frame": "fr.buy.indef",
+   "text": "他买一根木薯。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "木薯",
+     "l": "zh:mushu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a cassava root.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.041",
+   "frame": "fr.buy.indef",
+   "text": "我们买一根欧防风。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "欧防风",
+     "l": "zh:oufangfeng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a parsnip.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.042",
+   "frame": "fr.buy.indef",
+   "text": "她买一个芜菁甘蓝。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芜菁甘蓝",
+     "l": "zh:wujingganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a rutabaga.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.043",
+   "frame": "fr.buy.indef",
+   "text": "我买一棵芥菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "芥菜",
+     "l": "zh:jiecai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a head of mustard greens.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.044",
+   "frame": "fr.buy.indef",
+   "text": "他买一棵莙荙菜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "莙荙菜",
+     "l": "zh:jundacai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a head of chard.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.045",
+   "frame": "fr.buy.indef",
+   "text": "她买一个红菊苣。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "红菊苣",
+     "l": "zh:hongjuju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a radicchio.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.046",
+   "frame": "fr.buy.indef",
+   "text": "我买一个墨西哥辣椒。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "墨西哥辣椒",
+     "l": "zh:moxigelajiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a jalapeño.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.047",
+   "frame": "fr.buy.indef",
+   "text": "他买一棵小白菜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "小白菜",
+     "l": "zh:xiaobaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a bok choy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.048",
+   "frame": "fr.buy.indef",
+   "text": "我们买一根竹笋。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "竹笋",
+     "l": "zh:zhusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a bamboo shoot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.049",
+   "frame": "fr.like.generic",
+   "text": "我喜欢姜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.050",
+   "frame": "fr.like.generic",
+   "text": "她喜欢茴香。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茴香",
+     "l": "zh:huixiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes fennel.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.051",
+   "frame": "fr.like.generic",
+   "text": "她喜欢茴香吗？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茴香",
+     "l": "zh:huixiang"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does she like fennel?",
+   "variantOf": "zh.s2.050",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.052",
+   "frame": "fr.like.generic",
+   "text": "他喜欢芦笋。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芦笋",
+     "l": "zh:lusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He likes asparagus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.053",
+   "frame": "fr.like.generic",
+   "text": "我们喜欢莲藕。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We like lotus root.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.054",
+   "frame": "fr.like.generic",
+   "text": "他们喜欢韭菜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "韭菜",
+     "l": "zh:jiucai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They like garlic chives.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.055",
+   "frame": "fr.like.generic",
+   "text": "我喜欢空心菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "空心菜",
+     "l": "zh:kongxincai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like water spinach.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.056",
+   "frame": "fr.like.generic",
+   "text": "她喜欢西洋菜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "西洋菜",
+     "l": "zh:xiyangcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes watercress.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.057",
+   "frame": "fr.like.generic",
+   "text": "他喜欢芝麻菜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芝麻菜",
+     "l": "zh:zhimacai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He likes arugula.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.058",
+   "frame": "fr.like.generic",
+   "text": "我喜欢秋葵。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like okra.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.059",
+   "frame": "fr.like.generic",
+   "text": "她喜欢蚕豆。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "蚕豆",
+     "l": "zh:candou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes broad beans.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.060",
+   "frame": "fr.like.generic",
+   "text": "他们喜欢冬瓜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They like winter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.061",
+   "frame": "fr.like.generic",
+   "text": "我喜欢豆芽。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like bean sprouts.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.062",
+   "frame": "fr.like.generic",
+   "text": "他喜欢荷兰豆。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "荷兰豆",
+     "l": "zh:helandou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He likes snow peas.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.063",
+   "frame": "fr.like.generic",
+   "text": "她喜欢圣女果。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes cherry tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.064",
+   "frame": "fr.like.generic",
+   "text": "我们喜欢小白菜和大白菜。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "小白菜",
+     "l": "zh:xiaobaicai"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We like bok choy and napa cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.065",
+   "frame": "fr.like.generic",
+   "text": "我喜欢菊苣和红菊苣。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "菊苣",
+     "l": "zh:juju"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "红菊苣",
+     "l": "zh:hongjuju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like chicory and radicchio.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.066",
+   "frame": "fr.like.generic",
+   "text": "她喜欢苦苣。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "苦苣",
+     "l": "zh:kuju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes endive.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.067",
+   "frame": "fr.like.generic",
+   "text": "他喜欢马齿苋。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "马齿苋",
+     "l": "zh:machixian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He likes purslane.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.068",
+   "frame": "fr.like.generic",
+   "text": "我喜欢红葱头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "红葱头",
+     "l": "zh:hongcongtou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like shallots.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.069",
+   "frame": "fr.like.generic",
+   "text": "他们喜欢野苣。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "野苣",
+     "l": "zh:yeju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They like lamb's lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.070",
+   "frame": "fr.like.generic",
+   "text": "她喜欢熊葱。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "熊葱",
+     "l": "zh:xiongcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes wild garlic.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.071",
+   "frame": "fr.like.generic",
+   "text": "我喜欢酸模。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "酸模",
+     "l": "zh:suanmo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like sorrel.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.072",
+   "frame": "fr.notlike.generic",
+   "text": "我不喜欢苦瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't like bitter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.073",
+   "frame": "fr.notlike.generic",
+   "text": "他不喜欢秋葵。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He doesn't like okra.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.074",
+   "frame": "fr.notlike.generic",
+   "text": "她不喜欢姜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "She doesn't like ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.075",
+   "frame": "fr.notlike.generic",
+   "text": "他们不喜欢芥菜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芥菜",
+     "l": "zh:jiecai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "They don't like mustard greens.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.076",
+   "frame": "fr.notlike.generic",
+   "text": "我们不喜欢辣根。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "辣根",
+     "l": "zh:lagen"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "We don't like horseradish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.077",
+   "frame": "fr.notlike.generic",
+   "text": "她们不喜欢抱子甘蓝。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "抱子甘蓝",
+     "l": "zh:baoziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "They (the women) don't like Brussels sprouts.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.078",
+   "frame": "fr.notlike.generic",
+   "text": "他不喜欢韭菜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "韭菜",
+     "l": "zh:jiucai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He doesn't like garlic chives.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.079",
+   "frame": "fr.notlike.generic",
+   "text": "我不喜欢芋头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't like taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.080",
+   "frame": "fr.notlike.generic",
+   "text": "她不喜欢芜菁。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芜菁",
+     "l": "zh:wujing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "She doesn't like turnips.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.081",
+   "frame": "fr.notlike.generic",
+   "text": "他不喜欢菊芋。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "菊芋",
+     "l": "zh:juyu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He doesn't like Jerusalem artichokes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.082",
+   "frame": "fr.notlike.generic",
+   "text": "我不喜欢荨麻。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "荨麻",
+     "l": "zh:qianma"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't like nettles.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.083",
+   "frame": "fr.notlike.generic",
+   "text": "她不喜欢墨西哥辣椒。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "墨西哥辣椒",
+     "l": "zh:moxigelajiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "She doesn't like jalapeños.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.084",
+   "frame": "fr.notlike.generic",
+   "text": "他们不喜欢欧防风。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "欧防风",
+     "l": "zh:oufangfeng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "They don't like parsnips.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.085",
+   "frame": "fr.want.q",
+   "text": "你要姜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want ginger?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.086",
+   "frame": "fr.want.q",
+   "text": "你要不要姜？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want ginger or not?",
+   "variantOf": "zh.s2.085",
+   "variant": {
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.087",
+   "frame": "fr.want.q",
+   "text": "您要芦笋吗？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "芦笋",
+     "l": "zh:lusun"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like asparagus? (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.088",
+   "frame": "fr.want.q",
+   "text": "你要秋葵吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want okra?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.089",
+   "frame": "fr.want.q",
+   "text": "你想吃苦瓜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like to eat bitter melon?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.090",
+   "frame": "fr.want.q",
+   "text": "你要圣女果吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want cherry tomatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.091",
+   "frame": "fr.want.q",
+   "text": "你要不要圣女果？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want cherry tomatoes or not?",
+   "variantOf": "zh.s2.090",
+   "variant": {
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.092",
+   "frame": "fr.want.q",
+   "text": "您要西洋菜吗？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "西洋菜",
+     "l": "zh:xiyangcai"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like watercress? (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.093",
+   "frame": "fr.want.q",
+   "text": "你想吃山药吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "山药",
+     "l": "zh:shanyao"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like to eat yam?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.094",
+   "frame": "fr.want.q",
+   "text": "你要豆芽吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want bean sprouts?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.095",
+   "frame": "fr.want.q",
+   "text": "你要空心菜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "空心菜",
+     "l": "zh:kongxincai"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want water spinach?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.096",
+   "frame": "fr.want.q",
+   "text": "你想吃蚕豆吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "蚕豆",
+     "l": "zh:candou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like to eat broad beans?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.097",
+   "frame": "fr.want.q",
+   "text": "您要羽衣甘蓝吗？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "羽衣甘蓝",
+     "l": "zh:yuyiganlan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like kale? (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.098",
+   "frame": "fr.want.q",
+   "text": "你要韭菜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "韭菜",
+     "l": "zh:jiucai"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want garlic chives?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.099",
+   "frame": "fr.want.q",
+   "text": "你要莲藕吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want lotus root?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.100",
+   "frame": "fr.want.q",
+   "text": "你要芝麻菜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "芝麻菜",
+     "l": "zh:zhimacai"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want arugula?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.101",
+   "frame": "fr.want.q",
+   "text": "你想吃丝瓜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "丝瓜",
+     "l": "zh:sigua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like to eat luffa?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.102",
+   "frame": "fr.want.q",
+   "text": "您要紫洋葱吗？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "紫洋葱",
+     "l": "zh:ziyangcong"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like red onion? (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.103",
+   "frame": "fr.want.q",
+   "text": "你要红葱头吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "红葱头",
+     "l": "zh:hongcongtou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want shallots?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.104",
+   "frame": "fr.want.q",
+   "text": "你要荷兰豆吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "荷兰豆",
+     "l": "zh:helandou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want snow peas?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.105",
+   "frame": "fr.this.is",
+   "text": "这是姜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.106",
+   "frame": "fr.this.is",
+   "text": "这是姜吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this ginger?",
+   "variantOf": "zh.s2.105",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.107",
+   "frame": "fr.this.is",
+   "text": "这不是姜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This isn't ginger.",
+   "variantOf": "zh.s2.105",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.108",
+   "frame": "fr.this.is",
+   "text": "这是茴香。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "茴香",
+     "l": "zh:huixiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is fennel.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.109",
+   "frame": "fr.this.is",
+   "text": "这是一个芋头。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.110",
+   "frame": "fr.this.is",
+   "text": "这是莲藕。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is lotus root.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.111",
+   "frame": "fr.this.is",
+   "text": "这是蒲公英。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "蒲公英",
+     "l": "zh:pugongying"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a dandelion.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.112",
+   "frame": "fr.this.is",
+   "text": "这是菊苣。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "菊苣",
+     "l": "zh:juju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is chicory.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.113",
+   "frame": "fr.this.is",
+   "text": "这是马齿苋。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "马齿苋",
+     "l": "zh:machixian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is purslane.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.114",
+   "frame": "fr.this.is",
+   "text": "这是菊芋。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "菊芋",
+     "l": "zh:juyu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a Jerusalem artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.115",
+   "frame": "fr.this.is",
+   "text": "这是荨麻。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "荨麻",
+     "l": "zh:qianma"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a nettle.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.116",
+   "frame": "fr.this.is",
+   "text": "这是熊葱。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "熊葱",
+     "l": "zh:xiongcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is wild garlic.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.117",
+   "frame": "fr.this.is",
+   "text": "这不是熊葱。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "熊葱",
+     "l": "zh:xiongcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This isn't wild garlic.",
+   "variantOf": "zh.s2.116",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.118",
+   "frame": "fr.this.is",
+   "text": "这是欧防风。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "欧防风",
+     "l": "zh:oufangfeng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a parsnip.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.119",
+   "frame": "fr.this.is",
+   "text": "这是酸模。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "酸模",
+     "l": "zh:suanmo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is sorrel.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.120",
+   "frame": "fr.this.is",
+   "text": "这是辣根。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "辣根",
+     "l": "zh:lagen"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is horseradish.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.121",
+   "frame": "fr.this.is",
+   "text": "这是芜菁甘蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "芜菁甘蓝",
+     "l": "zh:wujingganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a rutabaga.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.122",
+   "frame": "fr.this.is",
+   "text": "这是一个芜菁。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芜菁",
+     "l": "zh:wujing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a turnip.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.123",
+   "frame": "fr.this.is",
+   "text": "这是西洋菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "西洋菜",
+     "l": "zh:xiyangcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is watercress.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.124",
+   "frame": "fr.this.is",
+   "text": "这是红葱头。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "红葱头",
+     "l": "zh:hongcongtou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a shallot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.125",
+   "frame": "fr.this.is",
+   "text": "这是一根山药。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "山药",
+     "l": "zh:shanyao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a yam.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.126",
+   "frame": "fr.this.is",
+   "text": "这是芥菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "芥菜",
+     "l": "zh:jiecai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "These are mustard greens.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.127",
+   "frame": "fr.this.is",
+   "text": "这是莙荙菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "莙荙菜",
+     "l": "zh:jundacai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is chard.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.128",
+   "frame": "fr.this.is",
+   "text": "这是竹笋。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "竹笋",
+     "l": "zh:zhusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a bamboo shoot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.129",
+   "frame": "fr.this.is",
+   "text": "这是芝麻菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "芝麻菜",
+     "l": "zh:zhimacai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is arugula.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.130",
+   "frame": "fr.this.is",
+   "text": "这是野苣。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "野苣",
+     "l": "zh:yeju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is lamb's lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.131",
+   "frame": "fr.this.is",
+   "text": "这是一棵苦苣。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "苦苣",
+     "l": "zh:kuju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an endive.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.132",
+   "frame": "fr.this.is",
+   "text": "这是一棵罗马生菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "罗马生菜",
+     "l": "zh:luomashengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a romaine lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.133",
+   "frame": "fr.this.is",
+   "text": "这是红菊苣。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "红菊苣",
+     "l": "zh:hongjuju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is radicchio.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.134",
+   "frame": "fr.this.is",
+   "text": "这是一个球生菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "球生菜",
+     "l": "zh:qiushengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an iceberg lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.135",
+   "frame": "fr.this.is",
+   "text": "这是一个佛手瓜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "佛手瓜",
+     "l": "zh:foshougua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a chayote.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.136",
+   "frame": "fr.this.is",
+   "text": "这是葫芦。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "葫芦",
+     "l": "zh:hulu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a bottle gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.137",
+   "frame": "fr.this.is",
+   "text": "这是一个洋蓟。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "洋蓟",
+     "l": "zh:yangji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.138",
+   "frame": "fr.this.is",
+   "text": "这是苤蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "苤蓝",
+     "l": "zh:pielan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is kohlrabi.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.139",
+   "frame": "fr.this.is",
+   "text": "这是抱子甘蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "抱子甘蓝",
+     "l": "zh:baoziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "These are Brussels sprouts.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.140",
+   "frame": "fr.this.is",
+   "text": "这是羽衣甘蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "羽衣甘蓝",
+     "l": "zh:yuyiganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is kale.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.141",
+   "frame": "fr.this.is",
+   "text": "这是荷包豆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "荷包豆",
+     "l": "zh:hebaodou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "These are runner beans.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.142",
+   "frame": "fr.this.is",
+   "text": "这是一个奶油南瓜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "奶油南瓜",
+     "l": "zh:naiyounangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a butternut squash.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.143",
+   "frame": "fr.this.is",
+   "text": "这是墨西哥辣椒。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "墨西哥辣椒",
+     "l": "zh:moxigelajiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a jalapeño.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.144",
+   "frame": "fr.this.is",
+   "text": "这是紫甘蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "紫甘蓝",
+     "l": "zh:ziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is red cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.145",
+   "frame": "fr.this.is",
+   "text": "这不是紫甘蓝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "紫甘蓝",
+     "l": "zh:ziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This isn't red cabbage.",
+   "variantOf": "zh.s2.144",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.146",
+   "frame": "fr.this.is",
+   "text": "这是冬瓜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a winter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.147",
+   "frame": "fr.this.is",
+   "text": "这是冬瓜吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this a winter melon?",
+   "variantOf": "zh.s2.146",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.148",
+   "frame": "fr.where.def",
+   "text": "姜在哪里？",
+   "tokens": [
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where is the ginger?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.149",
+   "frame": "fr.where.def",
+   "text": "芦笋在哪里？",
+   "tokens": [
+    {
+     "t": "芦笋",
+     "l": "zh:lusun"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where is the asparagus?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.150",
+   "frame": "fr.where.def",
+   "text": "冬瓜在哪里？",
+   "tokens": [
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where is the winter melon?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.151",
+   "frame": "fr.where.def",
+   "text": "豆芽在哪里？",
+   "tokens": [
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where are the bean sprouts?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.152",
+   "frame": "fr.where.def",
+   "text": "韭菜在哪里？",
+   "tokens": [
+    {
+     "t": "韭菜",
+     "l": "zh:jiucai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where are the garlic chives?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.153",
+   "frame": "fr.where.def",
+   "text": "大白菜在哪里？",
+   "tokens": [
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where is the napa cabbage?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.154",
+   "frame": "fr.where.def",
+   "text": "圣女果在哪里？",
+   "tokens": [
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where are the cherry tomatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.155",
+   "frame": "fr.where.def",
+   "text": "木薯在哪里？",
+   "tokens": [
+    {
+     "t": "木薯",
+     "l": "zh:mushu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where is the cassava?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.156",
+   "frame": "fr.where.def",
+   "text": "蚕豆在哪里？",
+   "tokens": [
+    {
+     "t": "蚕豆",
+     "l": "zh:candou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where are the broad beans?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.157",
+   "frame": "fr.where.def",
+   "text": "荷包豆在哪里？",
+   "tokens": [
+    {
+     "t": "荷包豆",
+     "l": "zh:hebaodou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Where are the runner beans?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.158",
+   "frame": "fr.have.indef",
+   "text": "我有一个芋头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a taro.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.159",
+   "frame": "fr.have.indef",
+   "text": "我没有芋头。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't have a taro.",
+   "variantOf": "zh.s2.158",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.160",
+   "frame": "fr.have.indef",
+   "text": "她有一根白萝卜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "白萝卜",
+     "l": "zh:bailuobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has a daikon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.161",
+   "frame": "fr.have.indef",
+   "text": "她有白萝卜吗？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "白萝卜",
+     "l": "zh:bailuobo"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does she have a daikon?",
+   "variantOf": "zh.s2.160",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.162",
+   "frame": "fr.have.indef",
+   "text": "他有一个葫芦。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "葫芦",
+     "l": "zh:hulu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has a bottle gourd.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.163",
+   "frame": "fr.have.indef",
+   "text": "我们有一棵大白菜。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have a napa cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.164",
+   "frame": "fr.have.indef",
+   "text": "他们有一根苦瓜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They have a bitter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.165",
+   "frame": "fr.have.indef",
+   "text": "他有一个苤蓝。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苤蓝",
+     "l": "zh:pielan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has a kohlrabi.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.166",
+   "frame": "fr.have.indef",
+   "text": "我有一颗圣女果。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "圣女果",
+     "l": "zh:shengnvguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a cherry tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.167",
+   "frame": "fr.have.indef",
+   "text": "她有一根丝瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "丝瓜",
+     "l": "zh:sigua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has a luffa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.168",
+   "frame": "fr.have.indef",
+   "text": "我们有一根竹笋。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "竹笋",
+     "l": "zh:zhusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have a bamboo shoot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.169",
+   "frame": "fr.have.indef",
+   "text": "我们有没有竹笋？",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "竹笋",
+     "l": "zh:zhusun"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do we have a bamboo shoot or not?",
+   "variantOf": "zh.s2.168",
+   "variant": {
+    "Mood": "INT",
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.170",
+   "frame": "fr.have.indef",
+   "text": "我有一个墨西哥辣椒。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "墨西哥辣椒",
+     "l": "zh:moxigelajiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a jalapeño.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.171",
+   "frame": "fr.have.indef",
+   "text": "她有一颗抱子甘蓝。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "抱子甘蓝",
+     "l": "zh:baoziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has a Brussels sprout.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.172",
+   "frame": "fr.have.indef",
+   "text": "他们有一根秋葵。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "秋葵",
+     "l": "zh:qiukui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They have an okra pod.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.173",
+   "frame": "fr.have.indef",
+   "text": "我有一根芦笋。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "芦笋",
+     "l": "zh:lusun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have an asparagus spear.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.174",
+   "frame": "fr.have.indef",
+   "text": "他有一颗蚕豆。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "蚕豆",
+     "l": "zh:candou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has a broad bean.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.175",
+   "frame": "fr.have.indef",
+   "text": "她有一个紫甘蓝。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "紫甘蓝",
+     "l": "zh:ziganlan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has a red cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.176",
+   "frame": "fr.have.indef",
+   "text": "我们有一根木薯。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "木薯",
+     "l": "zh:mushu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have a cassava root.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.177",
+   "frame": "fr.have.indef",
+   "text": "他有一个菊芋。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "菊芋",
+     "l": "zh:juyu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has a Jerusalem artichoke.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.178",
+   "frame": "fr.here.def",
+   "text": "姜在这里。",
+   "tokens": [
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The ginger is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.179",
+   "frame": "fr.here.def",
+   "text": "姜不在这里。",
+   "tokens": [
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "The ginger isn't here.",
+   "variantOf": "zh.s2.178",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.180",
+   "frame": "fr.here.def",
+   "text": "冬瓜在这里。",
+   "tokens": [
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The winter melon is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.181",
+   "frame": "fr.here.def",
+   "text": "冬瓜在这里吗？",
+   "tokens": [
+    {
+     "t": "冬瓜",
+     "l": "zh:donggua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the winter melon here?",
+   "variantOf": "zh.s2.180",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.182",
+   "frame": "fr.here.def",
+   "text": "茴香在这里。",
+   "tokens": [
+    {
+     "t": "茴香",
+     "l": "zh:huixiang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The fennel is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.183",
+   "frame": "fr.here.def",
+   "text": "莲藕在这里。",
+   "tokens": [
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The lotus root is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.184",
+   "frame": "fr.here.def",
+   "text": "西洋菜在这里。",
+   "tokens": [
+    {
+     "t": "西洋菜",
+     "l": "zh:xiyangcai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The watercress is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.185",
+   "frame": "fr.here.def",
+   "text": "空心菜在这里。",
+   "tokens": [
+    {
+     "t": "空心菜",
+     "l": "zh:kongxincai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The water spinach is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.186",
+   "frame": "fr.here.def",
+   "text": "小白菜在这里。",
+   "tokens": [
+    {
+     "t": "小白菜",
+     "l": "zh:xiaobaicai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The bok choy is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.187",
+   "frame": "fr.here.def",
+   "text": "荷兰豆在这里。",
+   "tokens": [
+    {
+     "t": "荷兰豆",
+     "l": "zh:helandou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The snow peas are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.188",
+   "frame": "fr.here.def",
+   "text": "红葱头在这里。",
+   "tokens": [
+    {
+     "t": "红葱头",
+     "l": "zh:hongcongtou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The shallots are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.189",
+   "frame": "fr.here.def",
+   "text": "蒲公英在这里。",
+   "tokens": [
+    {
+     "t": "蒲公英",
+     "l": "zh:pugongying"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The dandelions are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.190",
+   "frame": "fr.here.def",
+   "text": "马齿苋在这里。",
+   "tokens": [
+    {
+     "t": "马齿苋",
+     "l": "zh:machixian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The purslane is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.191",
+   "frame": "fr.here.def",
+   "text": "熊葱在这里。",
+   "tokens": [
+    {
+     "t": "熊葱",
+     "l": "zh:xiongcong"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The wild garlic is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.192",
+   "frame": "fr.here.def",
+   "text": "酸模在这里。",
+   "tokens": [
+    {
+     "t": "酸模",
+     "l": "zh:suanmo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The sorrel is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.193",
+   "frame": "fr.here.def",
+   "text": "辣根在这里。",
+   "tokens": [
+    {
+     "t": "辣根",
+     "l": "zh:lagen"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The horseradish is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.194",
+   "frame": "fr.here.def",
+   "text": "豆芽在这里。",
+   "tokens": [
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The bean sprouts are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.195",
+   "frame": "fr.here.def",
+   "text": "苦苣在这里。",
+   "tokens": [
+    {
+     "t": "苦苣",
+     "l": "zh:kuju"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The endive is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.196",
+   "frame": "fr.here.def",
+   "text": "野苣在这里。",
+   "tokens": [
+    {
+     "t": "野苣",
+     "l": "zh:yeju"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The lamb's lettuce is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.197",
+   "frame": "fr.here.def",
+   "text": "荷包豆在这里。",
+   "tokens": [
+    {
+     "t": "荷包豆",
+     "l": "zh:hebaodou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The runner beans are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.198",
+   "frame": "fr.here.def",
+   "text": "奶油南瓜在这里。",
+   "tokens": [
+    {
+     "t": "奶油南瓜",
+     "l": "zh:naiyounangua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The butternut squash is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.199",
+   "frame": "fr.drink.what",
+   "text": "我们喝什么？",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "What shall we drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.200",
+   "frame": "fr.drink.what",
+   "text": "他们喝什么？",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "What do they drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.201",
+   "frame": "fr.drink.what",
+   "text": "她喝什么？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "What does she drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s2.202",
+   "frame": "fr.drink.what",
+   "text": "咱们喝什么？",
+   "tokens": [
+    {
+     "t": "咱们",
+     "l": "zh:zanmen"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "What shall we (you and I) drink?",
+   "level": "A1"
+  }
+ ]
+}

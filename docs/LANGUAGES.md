@@ -531,7 +531,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 | Batch | Nodes | ar | he | zh | de |
 |---|---|---|---|---|---|
 | 1 | core.1 (23 concepts) + veg.1 (25) | ✅ 51 words · 59 sentences | ✅ 53 · 75 | ✅ 60 · 48 | ✅ 51 · 67 |
-| 2 | veg.2a (37) + veg.2b (21) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2 | veg.2a (37) + veg.2b (21) | ✅ 26 words + 31 absent · 95 sentences | ✅ 34 + 24 absent · 109 | ✅ 53 + 4 absent · 202 | ✅ 56 + 2 absent · 184 |
 | 3 | veg.3a (40) + veg.3b (40) | ⬜ | ⬜ | ⬜ | ⬜ |
 | 4 | core.2 … (numbers, adjectives, colours, more verbs) | ⬜ | ⬜ | ⬜ | ⬜ |
 
@@ -569,3 +569,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 - 2026-10-07 — P0 and P1 done. Items are words, not concepts (§5.1); states are derived, never stored; `prefix`, `parts`, `senses: []` + `role`, `citationCells`, `plene` added to the model.
 - 2026-10-08 — Word profiles (§4.6): every content word in depth (senses, examples by register and context, collocations, particle verbs, phrases and quotes, synonyms by register, etymology, pitfalls, subtleties, feeling, fun facts) — schema, validator, mini course (24 profiles), `langcore.wordCard`; exercise types `register_pick`, `nuance_pick`, `connotation`, `idiom_meaning`, `example_cloze`, `sense_pick`, `etymology_link`. `tools/lang_refcheck.py` (Wiktionary via kaikki.org) found two real mistakes in the mini course (דְּלַעַת plural, 黄瓜 measure word), now fixed.
 - 2026-10-08 — P2 started: the vegetables field (163 concepts, tiers and subgroups, Wikidata ids), the core spine node core.1, 10 frames, 4 functions; batch 1 (core.1 + veg.1) written in all four languages, 215 words, 249 sentences, every word with its full profile, everything validated and ref-checked. Runtime and tools grown with it: nodes not yet written are “unprepared” (they block what follows, in that language only) and `validate_lang.py` treats them as warnings unless `--strict`; multi-word words (תַּפּוּחַ אֲדָמָה, Rote Bete) are one token; prefix spellings (`alts`: וּ for וְ); `evidence.punct` for questions; erhua pinyin (哪儿 nǎr); refcheck keys `pos | meaning | gender | <cell> | pinyin | trad | measure` for `ref.override`, all genders, determiners filed as pronouns, pronoun rows, German preterite, full spellings (plene) for Hebrew look-ups; `tests/lang_courses.js` reads every course back.
+- 2026-10-08 — P2 batch 2 (veg.2a + veg.2b) in all four languages (169 words, 61 marked absent with what people say instead, 590 sentences). Refcheck: hyphenated glosses (water-cress), apostrophes in Wiktionary pinyin (lián'ǒu), Hebrew/Arabic pages that only say “defective spelling of X” are followed to X.
