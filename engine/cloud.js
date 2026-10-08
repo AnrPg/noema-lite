@@ -88,7 +88,7 @@
             const m = local != null && local !== v && mergeCurriculum(r.key, v, local);   // keep the chapter plans only this copy has
             if (m) { v = m; st.pending.add(r.key); }
             if (local !== v) { try { localStorage.setItem(pre + r.key, v); changed++; } catch (e) { } }
-            mt[r.key] = t;
+            mt[r.key] = m ? Math.max(t + 1, Date.now()) : t;   // a merged copy is newer than the cloud row: pushed (even after a reload) and taken by the other devices
           }
         }
         // keys changed locally while offline (newer than server or missing there) → push
@@ -109,9 +109,11 @@
       try {
         // a curriculum is one record (last write wins): first take in the chapter plans the cloud copy has and this one lacks
         const curs = keys.filter(k => k.startsWith('a:curriculum:') && localStorage.getItem(pre + k) != null);
-        for (const k of curs) for (const r of (await call('/rest/v1/noema_kv?select=key,value&key=eq.' + enc(k))) || []) {
+        for (const k of curs) for (const r of (await call('/rest/v1/noema_kv?select=key,value,updated_at&key=eq.' + enc(k))) || []) {
           const m = mergeCurriculum(k, localStorage.getItem(pre + k), r.value); if (m) { try { localStorage.setItem(pre + k, m); } catch (e) { } }
+          const rt = Date.parse(r.updated_at) || 0; if (!(mt[k] > rt)) mt[k] = Math.max(rt + 1, Date.now());   // newer than the row it replaces, or devices that saw that row ignore it
         }
+        if (curs.length) jset(pre + 'meta:mtime', mt);
         keys.forEach(k => { const v = noSecrets(k, localStorage.getItem(pre + k)); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
         for (let i = 0; i < rows.length; i += 50) await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: rows.slice(i, i + 50), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive });
         for (const k of dels) await call('/rest/v1/noema_kv?key=eq.' + enc(k), { method: 'DELETE', keepalive });
