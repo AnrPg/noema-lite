@@ -69,7 +69,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const api = claude(); await new Promise(r => api.listen(APORT, r));
   // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
   const fn = path.join(os.tmpdir(), `noema-mcp-shelf-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] })};\nconst DOCS = ${JSON.stringify({ workflow: 'S', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks' }, { id: 'lib-free', title: 'A library subject on no step' }] })};\nconst DOCS = ${JSON.stringify({ workflow: 'S', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
   const { default: handler } = await import(fn);
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
@@ -161,6 +161,19 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const fresh = await p.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, pk = { version: 'databricks-new', chapters: [{ title: 'One', sections: [{ id: 's1' }], exercises: [{}, {}] }] };
     const k = C.Edit.refreshAssigned(acc, 'databricks', pk), again = C.Edit.refreshAssigned(acc, 'databricks', pk), c = C.get(acc, cid); return { k, again, f: c.nodes.forces, e: c.nodes.energy }; }, cid);
   ok(fresh.k === 1 && fresh.again === 0 && fresh.f.pack.version === 'databricks-new' && fresh.f.pack.sections.join() === 's1' && fresh.f.pack.exercises === 2 && fresh.f.replan && fresh.e.chapters[0].title === 'Energy 1', 'a new version of the subject (an update, an import): the step it teaches follows it and is re-planned — only that step');
+  const nov = await p.evaluate(() => { const C = NoemaCurriculum, acc = Noema.account.id, pk = { chapters: [{ title: 'One', sections: [{ id: 's1' }, { id: 's2' }], exercises: [{}] }] }; return [C.Edit.refreshAssigned(acc, 'databricks', pk), C.Edit.refreshAssigned(acc, 'databricks', pk)]; });
+  ok(nov[0] === 1 && nov[1] === 0, 'a pack without a version number (a plain import) is followed too: its content decides');
+  const sm = await makeMap(p), slow = A.slow; A.slow = 1500;
+  const st = await p.evaluate(async id => { const C = NoemaCurriculum, acc = Noema.account.id; await C.Edit.assign(acc, id, 'kinematics', 'demo-physics');
+    const run = C.Edit.plan(acc, id, ['kinematics']); await new Promise(r => setTimeout(r, 400)); await C.Edit.assign(acc, id, 'kinematics', 'databricks');
+    const r = await run, n = C.get(acc, id).nodes.kinematics; return { stale: r.stale, pack: n.pack.id, replan: !!n.replan, ch: n.chapters[0]?.title }; }, sm);
+  A.slow = slow;
+  ok(st.stale?.includes('kinematics') && st.pack === 'databricks' && st.replan && st.ch === 'Physics of motion 1', 'another subject attached while a re-plan runs: the answer for the old subject is not applied, the step still waits for its plan');
+  const via = await p.evaluate(({ cid, sm }) => { const acc = Noema.account.id, meta = { id: 'databricks' }, at = () => Noema.stepOf(acc, meta, null);
+    sessionStorage.removeItem('noema-device:viaStep'); const first = at();
+    const other = first.id === sm ? cid : sm; sessionStorage.setItem('noema-device:viaStep', JSON.stringify({ acc, sid: 'databricks', id: other, node: other === sm ? 'kinematics' : 'forces' })); const chosen = at();
+    sessionStorage.removeItem('noema-device:viaStep'); return { first, chosen, other }; }, { cid, sm });
+  ok(via.first && via.chosen.id === via.other && via.chosen.id !== via.first.id, 'a subject that teaches several steps knows the one it was opened from (📖 Study this step)');
 
   console.log('— D. creating a map: attach first, then plan');
   const app = await makeMap(p, { provider: 'claudeapp', planned: false, attachFirst: true });
@@ -181,6 +194,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const api2 = await makeMap(p, { planned: false, attachFirst: true });
   const built = await p.evaluate(id => NoemaCurriculum.build(Noema.account.id, NoemaCurriculum.get(Noema.account.id, id)), api2);
   ok(built.status === 'attach' && built.stage === 'plan' && !A.plans.some(x => x.ids.includes('forces') && x.text.includes(api2)), 'API key: the build stops before planning (📦 attach) and plans nothing yet');
+  const allOn = await p.evaluate(async id => { const C = NoemaCurriculum, acc = Noema.account.id; for (const nid of Object.keys(C.get(acc, id).nodes)) await C.Edit.assign(acc, id, nid, 'demo-physics'); const c = C.get(acc, id); return { hold: C.holding(c), all: Object.values(c.nodes).every(n => n.pack?.assigned), status: c.status }; }, api2);
+  ok(allOn.all && allOn.hold && allOn.status === 'attach', 'with a subject on every step the map still waits for ▶ Plan the steps now (the hold ends only there)');
   await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
 
   console.log('— E. the connector');
@@ -200,6 +215,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   ok(!r.error && /Shelf/.test(r.text), 'saved without a step: Claude is told it is on the learner’s 📚 Shelf (and how to attach it)');
   r = await tool('noema_list_subjects');
   ok(/my-energy .*teaches “Energy”/.test(r.text) && /loose-notes .*📚 on the Shelf/.test(r.text), 'noema_list_subjects says which step each subject teaches, or that it is on the Shelf');
+  const libLines = r.text.split('\n\n')[0].split('\n').filter(l => l.startsWith('- '));
+  ok(libLines.length === 2 && /databricks .*· teaches /.test(libLines.join('\n')) && /lib-free .*📚 on the Shelf/.test(libLines.join('\n')), 'library subjects say where they are too (on a step, or 📚 on the Shelf)');
 
   console.log('— F. 🧭 Put on a map… · ⚙️ Subjects · phone');
   await p.evaluate(p0 => Noema.importPack(Noema.account.id, p0), (() => { const x = JSON.parse(JSON.stringify(FX)); x.subject = { ...x.subject, id: 'kin-notes', title: 'Kinematics notes', owner: null }; return x; })());

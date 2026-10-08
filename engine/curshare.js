@@ -361,23 +361,23 @@
   Share.refresh = async (acc, cid) => {
     let c = C().get(acc, cid); if (!c?.shared || c.shared.ended || !cloudOn(acc)) return c;
     const head = ((await api(`${T.cur}?select=id,owner_name,public,version,updated_at,title,meta&id=eq.${enc(cid)}`)) || [])[0];
-    const before = JSON.stringify([c.shared, c.remote, c.nodes]);
     if (!head) {   // no longer shared (stopped, or I was removed): my copy stays, as my own curriculum
       c = C().get(acc, cid);
       if (c.shared.role === 'member') { c.shared = { ...c.shared, ended: true }; (c.log = c.log || []).push({ t: Date.now(), m: '👥 no longer shared with you — your copy and your prepared steps stay' }); }
       else c.shared = null;
       c.remote = null; save(acc, c); emit(); return c;
     }
-    if (c.shared.role === 'member' && head.version !== (c.shared.seen || c.shared.version)) {   // 🔔 the owner changed the map: nothing changes here until I take it
-      const full = ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0];
-      if (full?.record) {
-        const cur = C().get(acc, cid), list = Core.changes(cur, full.record, cur.shared.declined || {});
-        if (list.length) { c = cur; c.shared = { ...c.shared, seen: full.version, files: full.meta?.files || {}, incoming: { version: full.version, at: full.updated_at, count: list.length, lines: list.slice(0, 3).map(x => x.text) } }; }
-        else { c = Core.take(cur, full.record).c; c.shared = { ...c.shared, version: full.version, seen: full.version, at: full.updated_at, files: full.meta?.files || {}, incoming: null }; c.autoApprove = true; }   // nothing I would see
-      }
+    const newer = x => x.shared.role === 'member' && head.version !== (x.shared.seen || x.shared.version);
+    const full = newer(c) ? ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0] : null;
+    const rows = (await Core.rows(api, cid)) || [];
+    c = C().get(acc, cid); if (!c?.shared || c.shared.ended) return c;   // every await is done: from here on the newest copy (an edit made meanwhile — a subject attached, a plan — stays)
+    const before = JSON.stringify([c.shared, c.remote, c.nodes]);
+    if (full?.record && newer(c)) {   // 🔔 the owner changed the map: nothing changes here until I take it
+      const list = Core.changes(c, full.record, c.shared.declined || {});
+      if (list.length) c.shared = { ...c.shared, seen: full.version, files: full.meta?.files || {}, incoming: { version: full.version, at: full.updated_at, count: list.length, lines: list.slice(0, 3).map(x => x.text) } };
+      else { c = Core.take(c, full.record).c; c.shared = { ...c.shared, version: full.version, seen: full.version, at: full.updated_at, files: full.meta?.files || {}, incoming: null }; c.autoApprove = true; }   // nothing I would see
     }
     c.shared = { ...c.shared, ownerName: head.owner_name || c.shared.ownerName, public: !!head.public };
-    const rows = (await Core.rows(api, cid)) || [];
     c.remote = Core.remoteOf(rows, me());
     for (const [nid, n] of Object.entries(c.nodes || {})) {
       const x = c.remote[nid];

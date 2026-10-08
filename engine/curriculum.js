@@ -542,7 +542,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
 
   /** 📦 Planning waits until the learner has attached the subjects they already have (option of a new / imported curriculum). */
-  const holding = c => !!c.attachFirst && Object.values(c.nodes || {}).some(n => !n.chapters?.length && !n.pack?.assigned);
+  const holding = c => !!c.attachFirst && Object.values(c.nodes || {}).some(n => !n.chapters?.length);
   /** Create (or resume) a curriculum; each stage is saved, so a closed tab continues where it stopped. */
   async function build(acc, cOrOpts, { onLog = () => { }, signal } = {}) {
     const c = cOrOpts.format ? cOrOpts : blank(cOrOpts);
@@ -973,9 +973,11 @@ window.NoemaCurriculum.Edit = (() => {
       each step it teaches follows it — only those steps are re-planned (the subject is never changed by a plan). → how many */
   function refreshAssigned(acc, subjectId, pack) {
     let k = 0; const chapters = pack?.chapters || []; if (!chapters.length) return 0;
+    const next = { version: pack.version || null, sections: chapters.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chapters.length, outline: C.outlineOf(pack) };
+    const sig = p => JSON.stringify([p.sections || [], p.exercises || 0, p.chapters || 0, p.outline || []]);   // what the plan follows (a pack may have no version at all)
     for (const { c: c0, nid } of C.stepsOf(acc, subjectId)) {
-      const c = C.get(acc, c0.id), n = c?.nodes[nid]; if (!n?.pack?.assigned || n.pack.id !== subjectId || (n.pack.version || null) === (pack.version || null)) continue;
-      n.pack = { ...n.pack, version: pack.version || null, sections: chapters.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chapters.length, outline: C.outlineOf(pack) };
+      const c = C.get(acc, c0.id), n = c?.nodes[nid]; if (!n?.pack?.assigned || n.pack.id !== subjectId || sig(n.pack) === sig(next)) continue;
+      n.pack = { ...n.pack, ...JSON.parse(JSON.stringify(next)) };
       n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan';
       (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.pack.title}” has a new version — re-planning “${n.title}”` });
       C.save(acc, c); k++;
@@ -1006,12 +1008,14 @@ window.NoemaCurriculum.Edit = (() => {
       return { ok: true, queued: true };
     }
     const x = C.ctx(c); onLog('📚 Planning the chapters…');
+    const asked = n => JSON.stringify([n?.pack?.id || null, n?.assignedAt || null]), was = Object.fromEntries(ids.map(id => [id, asked(c.nodes[id])]));   // 📦 which subject teaches each step now
     const { data, usage } = await L().json({ acc, provider: L().pick(acc, c.provider), model: L().pick(acc, c.provider) === 'claude' ? c.model || undefined : undefined, system: C.prompts.PLANNER_SYSTEM,
       prompt: C.prompts.planPrompt(x, C.snapshot(c, { withSummaries: true }), ids) + C.prompts.materialText(c, ids) + C.packageText(c, ids) + await C.materialPages(acc, c, ids) + (instruction ? `\n\nThe learner's own wishes for these steps (follow them): ${instruction}` : ''), schema: C.schemas.S_PLAN, name: 'submit_chapter_plans', maxTokens: 16000,
       validate: d => C.validatePlans(d, ids, c) });
     const cur = C.get(acc, cid);
-    C.applyPlans(cur, data);
-    for (const k in cur.usage) cur.usage[k] += usage?.[k] || 0; C.save(acc, cur); return { ok: true };
+    const stale = data.plans.filter(p => p.nodeId in was && was[p.nodeId] !== asked(cur.nodes[p.nodeId])).map(p => p.nodeId);   // a subject attached / taken off meanwhile: this plan is for the old one
+    C.applyPlans(cur, { ...data, plans: data.plans.filter(p => !stale.includes(p.nodeId)) });
+    for (const k in cur.usage) cur.usage[k] += usage?.[k] || 0; C.save(acc, cur); return { ok: true, stale };
   }
   /** ✨ Re-plan every step that is not prepared yet, the way the curriculum is planned (its AI: the Claude app, an API key or
       Gemini). Prepared steps keep their chapters. The re-planned steps are reviewed again before they are prepared.

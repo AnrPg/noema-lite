@@ -306,7 +306,7 @@ async function callTool(name, args, ctx) {
       const on = {}; for (const c of await curricula(token).catch(() => [])) for (const [nid, n] of Object.entries(c.nodes || {})) if (n.pack?.id) (on[n.pack.id] = on[n.pack.id] || []).push(`“${n.title}” (${nid}) of “${c.title || c.goal}” (${c.id})`);
       const where = id => on[id] ? ` · teaches ${on[id].slice(0, 4).join(', ')}${on[id].length > 4 ? '…' : ''}` : ' · 📚 on the Shelf (no curriculum step)';
       const mine = (list || []).filter(o => o.name.endsWith('.json')).map(o => `- ${o.name.replace(/\.json$/, '')} (private, ${Math.round((o.metadata?.size || 0) / 1024)} KB)${where(o.name.replace(/\.json$/, ''))}`);
-      const lib = (CFG.library || []).map(s => `- ${s.id} — ${s.title} (library: ${s.counts?.chapters || '?'} chapters, ${s.counts?.exercises || '?'} exercises)${on[s.id] ? where(s.id) : ''}`);
+      const lib = (CFG.library || []).map(s => `- ${s.id} — ${s.title} (library: ${s.counts?.chapters || '?'} chapters, ${s.counts?.exercises || '?'} exercises)${s.kind === 'language' || String(s.id).startsWith('lang:') ? '' : where(s.id)}`);
       return text(`Library (shared, read-only — copy into a private pack to extend):\n${lib.join('\n') || '(none)'}\n\nThis user's private packs:\n${mine.join('\n') || '(none yet)'}\n\nA subject teaches a step of a curriculum (the way the learner studies) or waits on their 📚 Shelf; save a pack with curriculum_id + step to put it on a step.`);
     }
     case 'noema_get_pack_url': {

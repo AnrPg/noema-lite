@@ -322,14 +322,17 @@ window.NoemaCurMap = (() => {
       'The subject itself does not change, and your progress in it stays.',
       c.shared && !c.shared.ended ? el('div', { class: 'cm-attachshared' }, '👥 This curriculum is shared: the change is yours only. The others keep the shared step and its plan, and your subject is never shared with them.') : null);
   }
-  const replanBusy = new Set();
-  /** 🔄 Re-plan a step that a subject was attached to — here with an API key / Gemini (the Claude app does it by itself). */
+  /** 📖 The step a subject is studied from, in this tab: one subject may teach several steps (loader.js stepOf). */
+  const viaStep = (acc, cid, nid, sid) => { try { if (nid) sessionStorage.setItem('noema-device:viaStep', JSON.stringify({ acc, sid, id: cid, node: nid })); else sessionStorage.removeItem('noema-device:viaStep'); } catch (e) { } };
+  const replanBusy = new Set(), replanAgain = new Set();
+  /** 🔄 Re-plan a step that a subject was attached to — here with an API key / Gemini (the Claude app does it by itself).
+      Another subject attached while it runs: its answer is dropped (Edit.plan → stale) and the step is planned again. */
   async function replanNow(acc, cid, nid) {
-    const key = cid + '/' + nid; if (replanBusy.has(key)) return; replanBusy.add(key);
+    const key = cid + '/' + nid; if (replanBusy.has(key)) { replanAgain.add(key); return; } replanBusy.add(key);
     const c0 = C().get(acc, cid); const t = c0?.nodes[nid]?.title || nid;
-    try { const r = await C().Edit.plan(acc, cid, [nid]); if (r?.queued) toast(`🔄 Your Claude app re-plans “${t}” — copy the message from the 💬 bar of the map.`, 5000); else toast(`✅ “${t}” has its new plan${C().get(acc, cid)?.nodes[nid]?.pack?.assigned ? ' — it follows its subject and is open again' : ''}.`, 4000); }
+    try { let r; do { replanAgain.delete(key); r = await C().Edit.plan(acc, cid, [nid]); } while ((replanAgain.has(key) || r?.stale?.includes(nid)) && C().get(acc, cid)?.nodes[nid]?.replan); if (r?.queued) toast(`🔄 Your Claude app re-plans “${t}” — copy the message from the 💬 bar of the map.`, 5000); else toast(`✅ “${t}” has its new plan${C().get(acc, cid)?.nodes[nid]?.pack?.assigned ? ' — it follows its subject and is open again' : ''}.`, 4000); }
     catch (e) { toast(`⚠️ “${t}” was not re-planned: ${e.message} — tap ↻ Re-plan now on the step to try again.`, 7000); }
-    finally { replanBusy.delete(key); const cc = C().get(acc, cid); if (cc) C().save(acc, cc); }
+    finally { replanBusy.delete(key); replanAgain.delete(key); const cc = C().get(acc, cid); if (cc) C().save(acc, cc); }
   }
   /** Attach (C().Edit.assign), then re-plan only that step: right away here, or by the Claude app. → true when attached */
   async function doAttach(acc, cid, nid, sid, { from = 'me', quiet = false } = {}) {
@@ -876,7 +879,7 @@ window.NoemaCurMap = (() => {
         appBar.append(el('span', {}, '💬 ', el('b', {}, 'For your Claude app: '), [w.toPlan.length ? `${w.toPlan.length} step${w.toPlan.length > 1 ? 's' : ''} to plan` : null, w.steps.length ? `${w.steps.length} to prepare` : null].filter(Boolean).join(' · ')),
           el('button', { class: 'btn small primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
       };
-      const study = s => { close(); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
+      const study = (s, nid) => { close(); viaStep(acc, cid, nid, s); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
       const zoomTo = z => { const r = scroller.getBoundingClientRect(); const cx = (scroller.scrollLeft + r.width / 2) / zoom, cy = (scroller.scrollTop + r.height / 2) / zoom; zoom = Math.max(0.35, Math.min(1.6, z)); drawMap(); scroller.scrollLeft = cx * zoom - r.width / 2; scroller.scrollTop = cy * zoom - r.height / 2; };
       const tools = el('div', { class: 'cm-tools' },
         el('button', { class: 'btn small', title: 'Zoom out', 'aria-label': 'Zoom out', onclick: () => zoomTo(zoom / 1.2) }, '−'), el('button', { class: 'btn small', title: 'Zoom in', 'aria-label': 'Zoom in', onclick: () => zoomTo(zoom * 1.2) }, '+'),
@@ -946,15 +949,15 @@ window.NoemaCurMap = (() => {
             el('div', { class: 'row' }, c.provider !== 'claudeapp' ? el('button', { class: 'btn small cm-toapp', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 In my Claude app instead') : null, importBtn(acc, cid, id, () => { drawMap(); showPanel(id); })),
             el('p', { class: 'tiny' }, '💬 Your Claude app prepares it with your Claude plan (no API cost). 📥 Or import a .noema.zip that Claude made for this step.'));
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 shared: prepared / being prepared by somebody
-          const getIt = async b => { b.disabled = true; b.textContent = '⬇️ Getting it…'; try { const pid = await SH().download(acc, cid, id); study(pid); } catch (e) { toast('⚠️ ' + e.message, 6000); b.disabled = false; b.textContent = '↻ Try again'; } };
-          if (rx?.status === 'ready' && pk.status === 'ready' && pk.stale && !pk.own) act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
+          const getIt = async b => { b.disabled = true; b.textContent = '⬇️ Getting it…'; try { const pid = await SH().download(acc, cid, id); study(pid, id); } catch (e) { toast('⚠️ ' + e.message, 6000); b.disabled = false; b.textContent = '↻ Try again'; } };
+          if (rx?.status === 'ready' && pk.status === 'ready' && pk.stale && !pk.own) act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id, id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
             el('p', { class: 'tiny cm-byline' }, `🔔 ${rx.by || 'Its author'} made a new version of this step — yours stays until you take it`),
             el('div', { class: 'row' }, el('button', { class: 'btn small cm-getstep', onclick: e => getIt(e.currentTarget) }, '⬇️ Get the new version'), el('button', { class: 'btn small ghost cm-keepstep', onclick: () => { SH().keepStep(acc, cid, id); drawMap(); showPanel(id); } }, 'Keep mine')));
           else if (rx?.status === 'ready' && (pk.status !== 'ready' || pk.stale) && !pk.own) act.append(el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.mine ? 'you' : rx.by || 'another member'} — shared with everybody in this curriculum${pk.stale ? ' · its author made a new version' : ''}`),
             el('button', { class: 'btn primary cm-getstep', onclick: e => getIt(e.currentTarget) }, pk.stale ? '⬇️ Get the new version' : st.mastered ? '📖 Review' : '📖 Study this step'));
           else if (rx?.status === 'preparing' && !rx.mine && pk.status !== 'ready') act.append(el('div', { class: 'cm-live cm-othersprep' }, `⏳ ${rx.by || 'Another member'} is preparing this step`, el('span', { class: 'tiny' }, ' — it appears here for you when it is ready (nobody prepares it twice).')));
           else if (member && !n.chapters?.length && pk.status !== 'ready') act.append(el('div', { class: 'cm-live' }, '📝 Waiting for its chapter plan', el('span', { class: 'tiny' }, ` — ${c.shared.ownerName || 'the owner'} plans the steps of this map.`)));
-          else if (pk.status === 'ready') act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
+          else if (pk.status === 'ready') act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id, id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
             pk.shared && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.by || 'another member'}`) : null,
             pk.own && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `This is your own version — ${rx.by || 'another member'}’s version ${rx.status === 'ready' ? 'is' : 'will be'} the shared one.`) : null);
           else if (pk.status === 'app') act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Waiting for your Claude app', el('span', { class: 'tiny' }, ' — paste the message into a Claude chat; the step appears here by itself.')),

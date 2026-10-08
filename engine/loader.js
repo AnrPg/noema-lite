@@ -366,14 +366,18 @@
     const onItsWay = s => { const c = s.curriculum && CU?.get(acc, s.curriculum); return !!(c?.nodes[s.node] && !c.nodes[s.node].pack); };   // made for a step that has not picked it up yet
     return (await subjectsFor(acc)).filter(s => !s.hidden && !on.has(s.id) && !onItsWay(s) && s.kind !== 'language' && !String(s.id).startsWith('lang:'));
   }
-  /** The curriculum step a subject teaches → { id, node } | null: the step it was made for (while that step still uses it),
-      else the first step it is attached to. */
+  /** The curriculum step a subject teaches → { id, node } | null: the step it was opened from on the map (one subject may
+      teach several steps; curmap.js viaStep), else the step it was made for while that step still uses it, else the first
+      step it is attached to — or the step it was made for that has not picked it up yet. */
   function stepOf(acc, meta, pack) {
     const CU = window.NoemaCurriculum, ref = pack?.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);
     if (!CU?.stepsOf) return ref;
-    const n = ref && CU.get(acc, ref.id)?.nodes[ref.node];
-    if (ref && (!CU.get(acc, ref.id) || !n?.pack?.id || n.pack.id === meta.id)) return ref;
-    const on = CU.stepsOf(acc, meta.id)[0]; return on ? { id: on.c.id, node: on.nid } : null;
+    const on = CU.stepsOf(acc, meta.id), uses = r => !!r && on.some(x => x.c.id === r.id && x.nid === r.node);
+    let via = null; try { via = JSON.parse(sessionStorage.getItem('noema-device:viaStep') || 'null'); } catch (e) { }
+    if (via?.acc === acc && via.sid === meta.id && uses(via)) return { id: via.id, node: via.node };
+    if (uses(ref)) return ref;
+    if (on.length) return { id: on[0].c.id, node: on[0].nid };
+    const c = ref && CU.get(acc, ref.id); return ref && (!c || !c.nodes[ref.node]?.pack?.id) ? ref : null;
   }
   /** A subject's pack by its id (library, private or imported) — e.g. one attached to a curriculum step. */
   async function loadSubject(acc, id) { const meta = (await subjectsFor(acc)).find(s => s.id === id); if (!meta) throw new Error('That subject is not in your library.'); return getPack(acc, meta); }
@@ -776,7 +780,7 @@
   }
   const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 Review' : sh.kind === 'stepupdate' ? '⬇️ Get it' : '⬆️ Update';
   function updateRow(sh) {
-    const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toastL(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); } catch (er) { toastL('⚠️ ' + er.message, 5000); b.disabled = false; } };
+    const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toastL(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toastL('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
     return el('div', { class: 'nx-req nx-update' }, el('div', { class: 'grow' }, ...updateText(sh)),
       el('button', { class: 'btn small primary', onclick: act(true) }, updateLabel(sh)), el('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'));
   }
@@ -1195,7 +1199,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),

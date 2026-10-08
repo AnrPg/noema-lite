@@ -56,7 +56,7 @@ function shareBanner() {
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
     if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
-      const act = take => async e => { e.currentTarget.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } };
+      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toast('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
       bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
         h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'),
         h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));

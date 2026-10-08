@@ -97,6 +97,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(/Anna invites you to the curriculum “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar button:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
   await B.p.click('.sharebar button:has-text("Join")');
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'joined' && m.user_id === bob)), 'he joined');
+  await until(async () => (await cur(B, cid))?.shared?.role === 'member', 8000);   // the server has him first; his copy is saved right after
   let bc = await cur(B, cid);
   ok(bc && bc.id === cid && bc.shared?.role === 'member' && bc.shared.ownerName === 'Anna' && Object.keys(bc.nodes).length === 4 && bc.prefetch === 0, 'he has the map (the same id → the same step subjects), as a member: nothing is prepared for him automatically');
   ok(await until(async () => (await cur(B, cid)).remote?.atoms?.status === 'ready'), 'he sees that Anna prepared “Atoms”');
@@ -249,6 +250,13 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(await until(() => S.curs[cid].record.nodes.energy.title === 'Energy in cells', 10000), 'Anna renames another step');
   await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
   ok((await B.p.evaluate(cid => NoemaCurShare.incoming(Noema.account.id, cid).then(x => x.list.map(y => y.key)), cid)).join() === 'info:energy', 'what he left is not offered again (unless it changes again): only the new rename');
+  const later = await B.p.evaluate(async cid => { const sh = Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), row = Noema.shareRow(sh); document.body.append(row);
+    const pause = ms => new Promise(r => setTimeout(r, ms)), notNow = () => [...document.querySelectorAll('.cm-review button')].find(x => /Not now/.test(x.textContent));
+    const b = [...row.querySelectorAll('button')].find(x => /Review/.test(x.textContent)); b.click();
+    for (let i = 0; i < 50 && !notNow(); i++) await pause(100);
+    const nn = notNow(); nn?.click(); await pause(600);
+    const res = !!nn && !b.disabled && !document.querySelector('.cm-review') && Noema.notes.local().some(x => x.kind === 'curupdate'); row.remove(); return res; }, cid);
+  ok(later, '🔎 Review → “Not now”: the update keeps waiting in 🔔 and its button works again');
   bc = await B.p.evaluate(cid => Noema.notes.update(Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), false).then(() => NoemaCurriculum.get(Noema.account.id, cid)), cid);
   ok(bc.nodes.energy.title === 'Energy' && !bc.shared.incoming && !(await B.p.evaluate(() => Noema.notes.local().some(x => x.kind === 'curupdate'))), '“Keep my copy” in 🔔: nothing is taken, and the 🔔 is gone');
   const dt = await B.p.evaluate(cid => NoemaCurriculum.Edit.detach(Noema.account.id, cid, 'membranes'), cid);
