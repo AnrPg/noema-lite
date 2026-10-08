@@ -145,7 +145,12 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
       c.nodes[nid].replan = true; c.nodes[nid].replanAt = new Date(Date.now() - 6e4).toISOString(); const first = J.spec(c, 'plan', [nid]).id;
       if (!J.byId(c, first) || J.byId(c, 'plan:' + nid)) return false;   // the current request's task is open; an answer from before any request is not
       c.nodes[nid].replanAt = NoemaCurriculum.stampAfter(c.nodes[nid].replanAt); const second = J.spec(c, 'plan', [nid]).id;
-      return second !== first && !J.byId(c, first) && !!J.byId(c, second);
+      if (!(second !== first && !J.byId(c, first) && J.byId(c, second))) return false;
+      // two steps in one batch: a newer request for the step with the EARLIER stamp still changes the task id
+      const nid2 = Object.keys(c.nodes).find(k => k !== nid && c.nodes[k].chapters?.length && !['ready', 'generating'].includes(c.nodes[k].pack?.status));
+      c.nodes[nid].replanAt = new Date(Date.now() + 2000).toISOString(); c.nodes[nid2].replan = true; c.nodes[nid2].replanAt = new Date(Date.now() + 1000).toISOString();
+      const pair = J.spec(c, 'plan', [nid, nid2]).id; c.nodes[nid2].replanAt = new Date(Date.now() + 1500).toISOString();
+      return pair !== J.spec(c, 'plan', [nid, nid2]).id && !J.byId(c, pair);
     }, cid), 'a plan answer for an older re-plan request cannot settle a newer one');
   }
   await p.screenshot({ path: SHOTS + '/ca1_panel.png' }); await p.keyboard.press('Escape'); await p.locator('.noema-ovbox:has(.cm-apppanel) button:has-text("Close")').click().catch(() => { }); await wait(300);

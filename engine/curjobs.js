@@ -63,9 +63,13 @@
   const TITLES = { dag: 'Agent 1 — the map: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
-  /** Which re-plan request a plan task answers: the latest replanAt of its steps ('' when none was asked for). An answer
-      written for an older request (the learner asked again meanwhile) no longer matches, so it cannot settle the newer one. */
-  const planGen = (c, ids) => { const t = Math.max(0, ...ids.map(i => Date.parse(c.nodes[i]?.replanAt || '') || 0)); return t ? '@' + t.toString(36) : ''; };
+  /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
+      for). An answer written for an older request (the learner asked again for any of its steps) no longer matches. */
+  const planGen = (c, ids) => {
+    const v = ids.map(i => c.nodes[i]?.replanAt || ''); if (!v.some(Boolean)) return '';
+    let h = 5381; for (const ch of v.join('|')) h = (Math.imul(h, 33) ^ ch.charCodeAt(0)) >>> 0;
+    return '@' + h.toString(36);
+  };
   function spec(c, kind, ids) {
     const P = C().prompts, S = C().schemas, x = C().ctx(c);
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
