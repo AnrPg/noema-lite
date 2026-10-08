@@ -197,6 +197,14 @@ usage limits may spread a big one over days).
   checks each answer again, applies it, pushes the curriculum to the cloud and only then deletes the rows (so the connector
   always sees one or the other). A finished step: the app downloads the pack (pictures embedded), marks the step ⚡ and
   syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV.
+* **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
+  an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
+  overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the
+  step is saved (`noema_finish_upload`) or after 4 h (a run that died). A queued step whose subject (`a:packmeta:<packId>`)
+  was saved *after* it was queued counts as prepared — even when an older copy of the curriculum from another device put
+  it back in the queue; the app then heals it back to ⚡ itself. `peek = true` says what is next without claiming it;
+  `step` + `force = true` takes over a claimed step. Queueing an already-queued step changes nothing (it keeps its place).
+  Claim rows are never mirrored into the device's KV.
 * **The map** shows a 💬 bar (*N to plan · M to prepare* → 📋 Copy the message · How? · by hand); 💬 on steps waiting for the
   Claude app; the step panel offers the message, “by hand”, 📥 Import its package and ↩ Not now. A Claude-app curriculum
   is usable as soon as its graph exists; steps get their plans as they arrive.

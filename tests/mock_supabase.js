@@ -68,7 +68,16 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
         kv[uid] = kv[uid] || {};
         const kq = u.searchParams.get('key') || '', likeRe = /^like\./.test(kq) ? new RegExp('^' + kq.slice(5).replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$') : null;   // PostgREST like.<pattern> (* = %)
         if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
-        if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
+        if (req.method === 'POST') {   // upsert (merge-duplicates) or insert-if-absent (ignore-duplicates); return=representation → the rows written
+          const pref = req.headers.prefer || '', keep = /ignore-duplicates/.test(pref), out = [];
+          for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); if (keep && kv[uid][r.key]) continue; kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; out.push({ user_id: uid, key: r.key, value: r.value, updated_at: r.updated_at }); }
+          return /representation/.test(pref) ? json(res, 201, out) : json(res, 201);
+        }
+        if (req.method === 'PATCH') {   // ?key=eq.K[&updated_at=lt.T] — a conditional update; return=representation → the rows updated
+          const k = decodeURIComponent(q('key') || ''), lt = u.searchParams.get('updated_at'), row = kv[uid][k], out = [];
+          if (row && (!lt || !/^lt\./.test(lt) || Date.parse(row.updated_at) < Date.parse(lt.slice(3)))) { Object.assign(row, data.value != null ? { value: data.value } : {}, data.updated_at ? { updated_at: data.updated_at } : {}); out.push({ user_id: uid, key: k, ...row }); }
+          return /representation/.test(req.headers.prefer || '') ? json(res, 200, out) : json(res, 204);
+        }
         if (req.method === 'DELETE') { const k = decodeURIComponent(q('key')); delete kv[uid][k]; return json(res, 204); }
       }
       if (p === '/rest/v1/noema_conversations') {
