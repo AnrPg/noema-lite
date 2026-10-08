@@ -98,7 +98,7 @@ def build_site(metas):
     html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
     wt(os.path.join(out, 'index.html'), html)
     os.makedirs(os.path.join(out, 'engine'))
-    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:
         if m.get('owner'): continue
@@ -177,6 +177,7 @@ def build_bundle(metas):
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
+<script>{esc(rd("engine/i18n.js"))}</script>
 <script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
 <script>{esc(rd("engine/imglib.js"))}</script>

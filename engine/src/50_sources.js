@@ -177,8 +177,8 @@ function whatsNewView() {
   const pbNew = FULL_COURSE.flatMap(c => c.debug.filter(d => ids.includes(srcOfItem(d, c))));
   const filterOnly = () => setSrcFilter(ids);
   const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ New exercises', count: 15, back: '#/new' }); };
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'),
-    h('h1', {}, none ? '✨ Latest additions' : '✨ What’s new'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+    h('h1', {}, none ? t('view.latest') : t('view.whatsNew')),
     h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ${SRC_BY_ID[id].title} (pages ${SRC_BY_ID[id].pages})`).join(' · ') + (none ? ' — already marked as seen.' : '')),
     h('div', { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
       ...[['chapters', newChs.length], ['sections', pick('sections') + pick('enriched')], ['exercises', pick('exercises')], ['debug drills', pick('playbooks')], ['flashcards', pick('cards')], ['traps', pick('pitfalls')]].map(([l, n]) => h('div', { class: 'stat' }, h('b', {}, n), h('span', { class: 'tiny' }, l)))),
