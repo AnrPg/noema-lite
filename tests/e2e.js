@@ -58,9 +58,21 @@ async function mockGemini(ctx) {
   await page.screenshot({ path: SHOTS + '/a2b_tutor.png' });
   await page.evaluate(() => { T.showHistory = true; renderTutor(); }); await wait(300);
   await page.screenshot({ path: SHOTS + '/a2c_history.png' });
+  // a conversation written by Meletee (same schema, its own tutor modes): kept as written, not read as 'socratic'
+  const mel = await page.evaluate(async () => {
+    const base = { kind: 'tutor', subject: { id: 'databricks', title: 'Databricks' }, model: { provider: 'claude', name: 'claude-x' }, meta: { app: 'meletee', task: 'feynman' }, messages: [{ role: 'user', content: 'Delta in plain words' }, { role: 'assistant', content: 'Try again, simpler.' }] };
+    const a = await Noema.convos.put('anr', { ...base, id: 'cv_000000mel1aaaaaa', mode: 'feynman', title: 'Feynman: Delta' });
+    const b = Noema.convos.normalize({ ...base, mode: 'Not A Mode!' });
+    return [a.mode, a.meta?.app, b.mode, Noema.convos.normalize({ ...base, mode: 'why-chain' }).mode];
+  });
+  ok(mel.join() === 'feynman,meletee,socratic,why-chain', 'Meletee’s modes are kept (an invalid mode still reads as socratic): ' + mel.join());
   await page.evaluate(() => closeTutor());
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => CV.list.length >= 5 && CV.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
+  ok(await page.evaluate(() => { T.showHistory = true; openTutor(); renderTutor(); const c = [...$$('.cvcard')].find(x => x.textContent.includes('Feynman: Delta')); return !!c && c.querySelector('.cvfrom')?.textContent === 'from Meletee' && c.textContent.includes('Feynman coach'); }), 'conversation list: Meletee’s chat shows “from Meletee” and its mode');
+  await page.screenshot({ path: SHOTS + '/a2d_history_meletee.png' });
+  const melOpen = await page.evaluate(async () => { const cv = CV.list.find(c => c.id === 'cv_000000mel1aaaaaa'); openConvo(cv); const m = T.mode; cv.title = 'Feynman: Delta Lake'; cv.titleSource = 'user'; saveConvos(cv); await new Promise(r => setTimeout(r, 300)); const r = await Noema.convos.get('anr', cv.id); closeTutor(); return [m, r.mode, r.meta?.app, r.model?.provider, r.title]; });
+  ok(melOpen.join() === 'explain,feynman,meletee,claude,Feynman: Delta Lake', 'opened in the tutor as a plain explanation; saving again keeps its mode, app and provider: ' + melOpen.join());
   ok(await page.evaluate(() => Noema.stats.get().xp === 50 && Noema.stats.streakNow() >= 0), 'account-level stats seeded');
   ok(await page.evaluate(() => !!localStorage.getItem('noema1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
   // regression: every section renders, every exercise accepts its correct answer
