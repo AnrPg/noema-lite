@@ -262,6 +262,25 @@
         "type": "integer",
         "minimum": 0,
         "description": "lessons: the step of the foundations spine (S00–S18), the same in every path"
+       },
+       "stage": {
+        "enum": [
+         "foundations",
+         "core",
+         "advanced"
+        ],
+        "description": "foundations S00–S18, core C01–C48, advanced: open-ended modules (D17)"
+       },
+       "family": {
+        "enum": [
+         "field",
+         "grammar",
+         "lexicon",
+         "variety",
+         "text",
+         "culture"
+        ],
+        "description": "advanced modules (D17, §4.4.4)"
        }
       }
      }

@@ -133,8 +133,10 @@ Without the connector the learner gives you a step bundle (`TASK.md` + `files/` 
 back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
-Foreign-language courses are not subject packs: they follow `references/LANGUAGES.md` (the binding contract) and are checked
-with `tools/validate_lang.py` and `tools/lang_refcheck.py`. The hard rules:
+Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
+task on a language course** (the short form of decisions D1–D17; with the connector: `noema_authoring_guide` part
+"languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
+`tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
    special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
    one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
@@ -146,6 +148,7 @@ with `tools/validate_lang.py` and `tools/lang_refcheck.py`. The hard rules:
 4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
 5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
 6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
+7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then

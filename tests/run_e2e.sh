@@ -24,6 +24,7 @@ node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed
 # foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
+python3 "$ROOT/tests/lang_rules.py"
 python3 "$ROOT/tests/lang_validate.py"
 python3 "$ROOT/tests/lang_refcheck.py"
 python3 "$ROOT/tools/lang_phenomena.py" > /dev/null   # the catalogues of phenomena agree with the implementation (D14)

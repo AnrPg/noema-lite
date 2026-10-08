@@ -504,6 +504,8 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 if f not in functions: v.E(w, f'unknown function “{f}”')
             if n.get('step') is not None and not (isinstance(n['step'], int) and n['step'] >= 0): v.E(w, 'step must be a whole number ≥ 0')
         elif n.get('functions'): v.E(w, 'only lessons have functions')
+        if n.get('stage') is not None and n['stage'] not in ('foundations', 'core', 'advanced'): v.E(w, 'stage must be foundations, core or advanced (D17)')
+        if n.get('stage') == 'advanced' and n.get('family') not in ('field', 'grammar', 'lexicon', 'variety', 'text', 'culture'): v.E(w, 'an advanced module names its family: field, grammar, lexicon, variety, text or culture (D17, §4.4.4)')
         for x in n.get('langs') or []:
             if x not in langs: v.E(w, f'“{x}” in langs is not a course language')
         for cid in n.get('concepts') or []:

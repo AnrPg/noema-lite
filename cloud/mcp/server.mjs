@@ -171,7 +171,7 @@ const summary = (p, r) => `✅ “${p.subject.title}” (${p.subject.id}) is in 
 const TOOLS = [
   { name: 'noema_whoami', description: 'Which noema-lite account is connected, and its private subject packs.', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_authoring_guide', description: 'The noema-lite content contract. READ IT before creating or changing a subject pack: workflow, chapter/section/exercise schema, visual exercises & pictures (sources, web, function graphs), quantities, pack format.',
-    inputSchema: { type: 'object', properties: { part: { type: 'string', enum: ['workflow', 'content', 'visual', 'all'], description: 'Default: all' } } }, annotations: { readOnlyHint: true } },
+    inputSchema: { type: 'object', properties: { part: { type: 'string', enum: ['workflow', 'content', 'visual', 'languages', 'all'], description: 'Default: all (subject packs). "languages": the binding rules for language courses (docs/LANGUAGE_RULES.md)' } } }, annotations: { readOnlyHint: true } },
   { name: 'noema_get_toolkit', description: 'Use this when the noema-pack-builder skill is NOT installed: returns the download URL of the same toolkit (scripts: start_subject, pdf_text, extract_images, fetch_image, svgkit, make_pack, unpack + references) and the commands to unpack it in your sandbox. With it you work exactly as the skill describes.',
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_list_subjects', description: 'Subjects available to this account: the shared library and the user’s own private packs (id, title, size, version).', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
@@ -222,6 +222,7 @@ async function callTool(name, args, ctx) {
     case 'noema_authoring_guide': {
       const part = args?.part || 'all';
       const parts = { workflow: DOCS.workflow, content: DOCS.content, visual: DOCS.visual };
+      if (part === 'languages') return text(DOCS.languages || 'No language rules in this build.');   // language courses: the binding rules (D1–D17)
       return text(part === 'all' ? Object.values(parts).join('\n\n---\n\n') : parts[part] || DOCS.workflow);
     }
     case 'noema_get_toolkit': {
