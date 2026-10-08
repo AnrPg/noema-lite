@@ -211,6 +211,8 @@
     if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`]).catch(e => console.warn('[delete subject]', e));
     if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
     if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
+    // 📦 every other step it teaches (attached to them): the step is planned and prepared the usual way again
+    if (window.NoemaCurriculum?.stepsOf) for (const { c, nid } of NoemaCurriculum.stepsOf(acc, s.id)) { if (c.nodes[nid].pack?.assigned) NoemaCurriculum.Edit.detach(acc, c.id, nid); else { const cc = NoemaCurriculum.get(acc, c.id); cc.nodes[nid].pack = null; NoemaCurriculum.save(acc, cc); } }
     if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[s.id];
   }
   /** ✏️ Edit a subject: name, description, hide, delete (and share for your own). */
@@ -356,41 +358,100 @@
     };
     draw();
   }
-  async function pickSubject(acc, { closable = false } = {}) {
-    const subs = (await subjectsFor(acc)).filter(s => !s.hidden && !s.curriculum);   // curriculum steps live in 🧭 Curricula
+  /* ---------------- 📚 the Shelf (docs/CURRICULUM.md §9): subjects that teach no step of any curriculum ---------------- */
+  /** The subjects on the Shelf: studyable, but the curriculum map is the way to study. (Language courses are never on it.) */
+  async function shelf(acc) {
+    const CU = window.NoemaCurriculum, on = new Set();
+    for (const c of CU?.list(acc) || []) for (const n of Object.values(c.nodes || {})) if (n.pack?.id) on.add(n.pack.id);
+    const onItsWay = s => { const c = s.curriculum && CU?.get(acc, s.curriculum); return !!(c?.nodes[s.node] && !c.nodes[s.node].pack); };   // made for a step that has not picked it up yet
+    return (await subjectsFor(acc)).filter(s => !s.hidden && !on.has(s.id) && !onItsWay(s) && s.kind !== 'language' && !String(s.id).startsWith('lang:'));
+  }
+  /** The curriculum step a subject teaches → { id, node } | null: the step it was made for (while that step still uses it),
+      else the first step it is attached to. */
+  function stepOf(acc, meta, pack) {
+    const CU = window.NoemaCurriculum, ref = pack?.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);
+    if (!CU?.stepsOf) return ref;
+    const n = ref && CU.get(acc, ref.id)?.nodes[ref.node];
+    if (ref && (!CU.get(acc, ref.id) || !n?.pack?.id || n.pack.id === meta.id)) return ref;
+    const on = CU.stepsOf(acc, meta.id)[0]; return on ? { id: on.c.id, node: on.nid } : null;
+  }
+  /** A subject's pack by its id (library, private or imported) — e.g. one attached to a curriculum step. */
+  async function loadSubject(acc, id) { const meta = (await subjectsFor(acc)).find(s => s.id === id); if (!meta) throw new Error('That subject is not in your library.'); return getPack(acc, meta); }
+  /** A subject that just arrived (imported, from 🌍 Explore, shared with you) is on the Shelf: say how to put it on a map. */
+  function landed(acc, s) {
+    if (!s || !window.NoemaCurMap || !window.NoemaCurriculum || NoemaCurriculum.stepsOf(acc, s.id).length) return;
+    setTimeout(() => toastL(tr('pick.onShelf', { title: s.title || s.id }, acc), 6000), 3800);
+  }
+  /** The Shelf's subjects as chips, by group: tap = study it; ✏️ edit · 🔗 share · 🧭 put it on a map. → { list, draw(subs) } */
+  function shelfChips(acc, { q, onPick, onChange }) {
     const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: tr('pick.other', null, acc), emoji: '✨' });
+    const list = el('div'); let subs = [];
+    const draw = next => {
+      if (next) subs = next; list.innerHTML = '';
+      const term = (q?.value || '').trim().toLowerCase(); let n = 0;
+      groups.forEach(g => {
+        const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
+        if (!items.length) return;
+        list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
+          el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
+            const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+            const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
+            const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
+            return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
+      });
+      if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
+    };
+    return { list, draw };
+  }
+  /** 📚 The Shelf on its own (from 🧭 Curricula and ⚙️ → Subjects). onStudy(id) — default: open the subject. */
+  async function openShelf(acc, { onStudy } = {}) {
+    const study = id => onStudy ? onStudy(id) : Noema.switchTo(acc, id);
+    overlay(async (box, close) => {
+      const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+      const S = shelfChips(acc, { q, onPick: s => { close(); study(s.id); }, onChange: async () => S.draw(await shelf(acc)) });
+      const subs = await shelf(acc);
+      box.append(brandHead(tr('pick.shelf', { n: subs.length }, acc), tr('pick.shelfSub', null, acc)), q, S.list,
+        el('div', { class: 'row noema-ovfoot' }, window.NoemaCurMap ? el('button', { class: 'btn small', onclick: () => { close(); NoemaCurMap.library(acc, { onStudy }); } }, tr('pick.curricula', null, acc)) : null, el('button', { class: 'btn small', onclick: close }, tr('pick.close', null, acc))));
+      S.draw(subs);
+    }, { closable: true });
+  }
+  async function pickSubject(acc, { closable = false } = {}) {
+    let subs = await shelf(acc);   // 📚 on no step of any curriculum
     const a = getAccount(acc) || { name: acc, emoji: '🙂' };
+    const CU = window.NoemaCurriculum, CM = () => window.NoemaCurMap;
     return new Promise(resolve => {
       overlay((box, close) => {
-        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => draw() });
-        const list = el('div');
-        const draw = () => {
-          list.innerHTML = '';
-          const term = q.value.trim().toLowerCase();
-          let n = 0;
-          groups.forEach(g => {
-            const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
-            if (!items.length) return;
-            list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
-              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
-                const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
-                const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
-                return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
-          });
-          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
-        };
-        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const pick = s => { close(); resolve(s); };
+        const onStudy = async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) pick(s); };
+        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+        const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
+        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
-        // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
+        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
+        // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, tr('pick.subjects', null, acc), el('small', {}, tr('pick.subjectsSub', null, acc))),
-          el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
-        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
+        const curs = el('div', { class: 'pick-curs' });
+        const drawCurs = () => {
+          curs.innerHTML = ''; const list = CU?.list(acc) || [];
+          if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc, { onStudy }) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc, { onStudy }) }, tr('pick.importMap', null, acc)) : null)); return; }
+          curs.append(...list.slice(0, 6).map(c => { const sm = c.status === 'ready' ? CU.summary(acc, c) : null;
+            return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? CM()?.map(acc, c.id, { onStudy }) : CM()?.progress(acc, c, { onStudy }) },
+              el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (c.title || c.goal)), el('span', { class: 'tiny' }, sm ? `${sm.mastered}/${sm.total} · ${sm.open} open` : '⏳')); }),
+            list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
+        };
+        // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)
+        const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; try { remembered = localStorage.getItem(SK); } catch (e) { }
+        const sum = el('summary', {}, tr('pick.shelf', { n: subs.length }, acc));
+        const shelfBox = el('details', { class: 'pick-shelf', open: remembered != null ? remembered === '1' : !(CU?.list(acc) || []).length || !CM() },
+          sum, el('p', { class: 'tiny' }, tr('pick.shelfSub', null, acc)), q, S.list);
+        sum.addEventListener('click', () => setTimeout(() => { try { localStorage.setItem(SK, shelfBox.open ? '1' : '0'); } catch (e) { } if (shelfBox.open && subs.length > 8) q.focus(); }, 0));   // only the learner's own choice is remembered
+        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, curs, shelfBox,
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { landed(acc, s); pick(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { landed(acc, s); pick(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, tr('pick.close', null, acc)) : null));
-        draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
+        drawCurs(); S.draw(subs); if (shelfBox.open && subs.length > 8) setTimeout(() => q.focus(), 300);
+        const offC = CU?.onChange?.(() => { if (box.isConnected) drawCurs(); else offC?.(); });
       }, { closable });
     });
   }
@@ -1079,7 +1140,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
@@ -1127,7 +1188,7 @@
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
-    Noema.node = pack.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);   // a curriculum step?
+    Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     document.title = `${Noema.subject.title} · ${CFG.appName}`;
     document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS)
