@@ -111,7 +111,7 @@ def build_site(metas):
     build_skill(os.path.join(out, 'downloads', 'noema-pack-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
-    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n')
+    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n')
     print('site →', os.path.relpath(out, ROOT))
 
 SKILL_TOOLS = ['noema_lib.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
