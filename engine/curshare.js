@@ -28,7 +28,7 @@
   const T = { cur: '/rest/v1/noema_curricula_shared', mem: '/rest/v1/noema_curriculum_members', steps: '/rest/v1/noema_curriculum_steps' };
   /* what stays with each person (their own settings, progress and AI work) — everything else is the shared map */
   const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'updated'];
-  const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan'];
+  const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan', 'assignedAt', 'planFrom'];   // 📦 an attached subject is the learner's own
   const clone = o => JSON.parse(JSON.stringify(o));
 
   /** The map everybody shares: the curriculum without anybody's settings, progress or preparation state. */
