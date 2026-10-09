@@ -193,4 +193,6 @@ function exBuild(it, done) {
   draw(); box.append(slot, pool, h('div', { class: 'row' }, undo, giveUp));
   return box;
 }
-const exItem = (it, done) => it.type === 'build' ? exBuild(it, done) : exChoose(it, done);
+/** Widgets for item types added by later phases: WIDGETS[it.type] = (it, done) => element. */
+const WIDGETS = {};
+const exItem = (it, done) => WIDGETS[it.type] ? WIDGETS[it.type](it, done) : it.type === 'build' ? exBuild(it, done) : exChoose(it, done);
