@@ -1,4 +1,4 @@
-# ◆ noema-lite
+# noema-lite
 
 A subject-agnostic study app: **structured theory**, a **Socratic AI tutor** (Gemini), **12 types of interactive exercises**,
 debug/diagnosis drills, spaced-repetition flashcards, lightning rounds and boss battles — for *any* subject.

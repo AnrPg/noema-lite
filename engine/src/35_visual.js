@@ -63,7 +63,8 @@ function vStage(ex, { regions } = {}) {
   stage.style.setProperty('--ar', String(W / H));
   const below = h('div', { class: 'vx-below' });
   const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: 'Bigger picture (Esc to close)', 'aria-label': 'Toggle full screen picture', onclick: () => toggleFull() }, '⤢');
-  const wrap = h('div', { class: 'vx' }, h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn), stage, below);
+  const tools = h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn);
+  const wrap = h('div', { class: 'vx' }, tools, stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
   // and comes back to its placeholder afterwards; the accent colours travel with it.
   let holder = null;
@@ -129,7 +130,7 @@ function vStage(ex, { regions } = {}) {
     stage.addEventListener('blur', () => { cross.classList.remove('on'); shown = false; });
     stage.addEventListener('mousedown', () => { cross.classList.remove('on'); shown = false; });
   }
-  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
+  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, tools, zoomBtn, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.vx.full').forEach(w => w._exitFull?.()); });
 addEventListener('hashchange', () => $$('.vx.full').forEach(w => w._exitFull?.()));
@@ -447,7 +448,8 @@ function figureBlock(b) {
     st.layer.append(tipEl);
     let pinned = null;
     const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); Object.assign(tipEl.style, st.pos(x, y)); tipEl.classList.add('on'); tipEl.classList.toggle('below', y < st.H * 0.3); };
-    st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
+    const covered = r => r && st.masks[r.id] && !st.masks[r.id].classList.contains('off');   // a hidden label stays hidden until you peek
+    st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r && !covered(r) ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
     st.stage.addEventListener('mouseleave', () => { if (!pinned) tipEl.classList.remove('on'); });
     st.stage.addEventListener('click', ev => {
       const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0];
@@ -459,11 +461,17 @@ function figureBlock(b) {
     st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
       tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
       undo: () => '',
-      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return 'A hidden label. Enter peeks.'; } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
-    let hidden = false;
-    const hideBtn = h('button', { class: 'btn small ghost', onclick: () => { hidden = !hidden; named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; } }, '🙈 Hide labels');
-    st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is. Hide the labels to test yourself, then tap a cover to peek.'), named.length ? hideBtn : null));
+    if (named.length) {   // the labels start hidden (test yourself first); the switch and its line sit on top of the picture
+      let hidden = true;
+      const say = h('span', { class: 'vx-lbltext' }), hideBtn = h('button', { class: 'btn small vx-lblbtn', type: 'button' });
+      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; say.textContent = hidden ? 'Labels hidden: tap a cover to peek.' : 'Hover or tap a part to see what it is.'; };
+      hideBtn.onclick = () => { hidden = !hidden; draw(); };
+      const credit = $('.vx-credit', st.tools); if (credit) st.below.append(h('div', { class: 'vx-figbar' }, credit));
+      st.tools.prepend(h('div', { class: 'vx-labelbar' }, hideBtn, say));
+      draw();
+    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is.')));
   }
   if (cap) box.append(h('figcaption', { class: 'caption', html: fmt(cap) }));
   return box;

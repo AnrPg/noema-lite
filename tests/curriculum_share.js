@@ -33,7 +33,7 @@ async function signUp(browser, email, name, { phone = false } = {}) {
 const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(x => x.remove()));
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, storageChunkBytes: 200000 };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg, maxObject: 300000 });
   const S = srv.state, stepOf = (cid, nid) => S.steps.find(r => r.curriculum === cid && r.node_id === nid);
   // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
@@ -69,7 +69,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   });
   await finishStep(A, cid, 'atoms', 'Atoms', 'anna-atoms-v1');
   const pid = id => `cur-${cid.slice(1, 7)}-`;   // (prefix only)
-  await A.p.click('.cm-mode:has-text("Curricula")'); await wait(400);
+  await A.p.click('.cm-mode:has-text("Roadmaps")'); await wait(400);
   ok(await A.p.locator('.cm-explorebtn').isVisible() && await A.p.locator('.cm-sharebtn').count() === 1, '🧭 Curricula: 🌍 Explore curricula, and 👥 on her own curriculum');
   await A.p.click('.cm-sharebtn'); await wait(300);
   ok(/keeps their own progress/i.test(await A.p.locator('.cm-sharedlg').innerText()) && /Nobody can overwrite a step someone else prepared/.test(await A.p.locator('.cm-sharedlg').innerText()) && /Include the 1 step you prepared/.test(await A.p.locator('.cm-sharedlg').innerText()), 'the dialog says the rules: own progress, shared steps, nobody overwrites anybody — and offers her prepared step');
@@ -94,7 +94,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   const bob = Object.values(S.users).find(u => u.email === 'bob@example.com').id;
   await B.p.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   await B.p.evaluate(() => Noema.notes.refresh()); await wait(400);
-  ok(/Anna invites you to the curriculum “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar button:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
+  ok(/Anna invites you to the Roadmap “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar button:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
   await B.p.click('.sharebar button:has-text("Join")');
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'joined' && m.user_id === bob)), 'he joined');
   await until(async () => (await cur(B, cid))?.shared?.role === 'member', 8000);   // the server has him first; his copy is saved right after
@@ -173,7 +173,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(S.curs[cid].public === true, '🌍 public');
   const Cc = await signUp(browser, 'carl@example.com', 'Carl');
   const carl = Object.values(S.users).find(u => u.email === 'carl@example.com').id;
-  await Cc.p.click('.cm-mode:has-text("Curricula")'); await wait(300);
+  await Cc.p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
   await Cc.p.click('.cm-explorebtn'); await wait(800);
   const card = Cc.p.locator('.cm-pubcard:has-text("Cell biology")');
   ok(await card.count() === 1 && /Anna/.test(await card.innerText()) && /4 steps/.test(await card.innerText()) && /2 prepared/.test(await card.innerText()), '🌍 Explore curricula: “Cell biology” · 👤 Anna · 4 steps · ⚡ 2 prepared');
@@ -302,7 +302,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(/left/.test(await A.p.locator('.cm-members').innerText()) && /Carl/.test(await A.p.locator('.cm-members').innerText()), 'Anna’s list: Bob ↩ left, Carl ✅ joined');
   // phone
   const P = await signUp(browser, 'dora@example.com', 'Dora', { phone: true });
-  await P.p.click('.cm-mode:has-text("Curricula")'); await wait(300); await P.p.click('.cm-explorebtn'); await wait(700);
+  await P.p.click('.cm-mode:has-text("Roadmaps")'); await wait(300); await P.p.click('.cm-explorebtn'); await wait(700);
   const w = await P.p.evaluate(() => document.documentElement.scrollWidth);
   ok(w <= 392 && await P.p.locator('.cm-pubcard').count() === 1, 'phone: Explore curricula fits (' + w + ' px)');
   await P.p.screenshot({ path: SHOTS + '/cs6_phone.png' });

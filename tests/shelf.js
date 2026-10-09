@@ -64,7 +64,7 @@ const makeMap = (p, { provider = 'auto', planned = true, attachFirst = false } =
 const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(Noema.account.id, cid).nodes[nid], { cid, nid });
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = claude(); await new Promise(r => api.listen(APORT, r));
   // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
@@ -85,10 +85,10 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const box = () => p.locator('.noema-ovbox').last();
 
   console.log('— A. the picker: 🧭 Curricula first, 📚 the Shelf for the rest');
-  ok(await p.locator('.cm-mode').count() === 1 && /Curricula/.test(await p.locator('.cm-mode').innerText()), 'one way in: 🧭 Curricula (no 📚 Subjects tab)');
+  ok(await p.locator('.cm-mode').count() === 1 && /Roadmaps/.test(await p.locator('.cm-mode').innerText()), 'one way in: 🧭 Curricula (no 📚 Subjects tab)');
   ok(await p.locator('details.pick-shelf[open]').count() === 1, 'no curriculum yet: the 📚 Shelf is open');
   ok(/Shelf — 2 subject/.test(await p.locator('.pick-shelf > summary').innerText()) && await p.locator('.pick-shelf .noema-chip:has-text("Demo Physics")').isVisible(), 'the Shelf holds the library subjects (2), studyable as before');
-  ok(await p.locator('.pick-nocur button:has-text("New curriculum")').isVisible(), 'no map yet: ➕ New curriculum right there');
+  ok(await p.locator('.pick-nocur button:has-text("New Roadmap")').isVisible(), 'no map yet: ➕ New curriculum right there');
   ok(await p.locator('.pick-shelf .noema-mapbtn').count() === 2, 'every Shelf subject has 🧭 Put on a map…');
   await p.screenshot({ path: SHOTS + '/sh1_picker.png' });
   await p.evaluate(k => NoemaClaude.Key.set(Noema.account.id, k, true), KEY);
@@ -104,7 +104,9 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   console.log('— B. 📦 a subject you have, on a step');
   await p.click('.pick-cur:has-text("Mechanics")'); await wait(900);
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  await p.click('.cm-usesubject'); await wait(500);
+  ok(await p.locator('.cm-panel .cm-usesubject').count() === 0, 'the step panel stays short: “Use a subject I have” is in ✏️ Edit step');
+  await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
+  await p.click('.cm-ownfield .cm-usesubject'); await wait(500);
   ok(await box().locator('.cm-attachchip').count() === 2 && /on the Shelf/.test(await box().locator('.cm-attachchip:has-text("Demo Physics")').innerText()), 'the dialog lists my subjects and where each is (📚 on the Shelf)');
   ok(await p.locator('.cm-attachgo').isDisabled(), 'nothing chosen yet → Attach is disabled');
   await box().locator('.cm-attachchip:has-text("Demo Physics")').click(); await wait(150);
@@ -223,7 +225,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await p.evaluate(() => Noema.openShelf(Noema.account.id)); await wait(700);
   ok(await box().locator('.noema-chip:has-text("Kinematics notes")').isVisible(), '📚 the Shelf on its own lists the imported subject');
   await box().locator('.noema-chipwrap:has-text("Kinematics notes") .noema-mapbtn').click({ force: true }); await wait(600);
-  await box().locator('select[aria-label="Curriculum"]').selectOption(cid); await wait(200);
+  await box().locator('select[aria-label="Roadmap"]').selectOption(cid); await wait(200);
   ok(await box().locator('select[aria-label="Step"]').inputValue() === 'kinematics', 'Put on a map…: choose the curriculum; the matching step is suggested');
   await box().locator('.cm-attachgo').click();
   ok(await until(async () => { const n = await node(p, cid, 'kinematics'); return n.pack?.id === 'kin-notes' && !n.replan; }, 15000), 'attached and re-planned');

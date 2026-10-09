@@ -1,0 +1,1043 @@
+{
+  "Alegreya": {
+    "slug": "alegreya",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Alegreya",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 86380
+  },
+  "Alegreya Sans": {
+    "slug": "alegreya-sans",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Alegreya+Sans",
+    "weights": [
+      400,
+      500,
+      700,
+      800
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 345420
+  },
+  "EB Garamond": {
+    "slug": "eb-garamond",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/EB+Garamond",
+    "weights": [
+      600
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 140724
+  },
+  "Literata": {
+    "slug": "literata",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Literata",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 123644
+  },
+  "M PLUS Rounded 1c": {
+    "slug": "m-plus-rounded-1c",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/M+PLUS+Rounded+1c",
+    "weights": [
+      400,
+      500,
+      700,
+      800
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 376236
+  },
+  "Zen Antique": {
+    "slug": "zen-antique",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Zen+Antique",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 36796
+  },
+  "Murecho": {
+    "slug": "murecho",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Murecho",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 72332
+  },
+  "Oranienbaum": {
+    "slug": "oranienbaum",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Oranienbaum",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 50324
+  },
+  "Tektur": {
+    "slug": "tektur",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Tektur",
+    "weights": [
+      600
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 30472
+  },
+  "Geologica": {
+    "slug": "geologica",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Geologica",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 86192
+  },
+  "Brygada 1918": {
+    "slug": "brygada-1918",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Brygada+1918",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 49752
+  },
+  "Commissioner": {
+    "slug": "commissioner",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Commissioner",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 137324
+  },
+  "Kelly Slab": {
+    "slug": "kelly-slab",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Kelly+Slab",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 42588
+  },
+  "Playpen Sans": {
+    "slug": "playpen-sans",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Playpen+Sans",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 356048
+  },
+  "Zen Maru Gothic": {
+    "slug": "zen-maru-gothic",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Zen+Maru+Gothic",
+    "weights": [
+      400,
+      500,
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 72784
+  },
+  "Pangolin": {
+    "slug": "pangolin",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Pangolin",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 229132
+  },
+  "Alegreya SC": {
+    "slug": "alegreya-sc",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Alegreya+SC",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 122468
+  },
+  "Gentium Book Plus": {
+    "slug": "gentium-book-plus",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Gentium+Book+Plus",
+    "weights": [
+      400,
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 296728
+  },
+  "Ruslan Display": {
+    "slug": "ruslan-display",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Ruslan+Display",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 18576
+  },
+  "Mynerve": {
+    "slug": "mynerve",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Mynerve",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek"
+    ],
+    "greek": true,
+    "cyrillic": false,
+    "bytes": 116596
+  },
+  "Ysabeau": {
+    "slug": "ysabeau",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Ysabeau",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 139496
+  },
+  "Neucha": {
+    "slug": "neucha",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Neucha",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "cyrillic"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 44684
+  },
+  "Dela Gothic One": {
+    "slug": "dela-gothic-one",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Dela+Gothic+One",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 35440
+  },
+  "Ubuntu": {
+    "slug": "ubuntu",
+    "license": "UFL-1.0",
+    "source": "https://fonts.google.com/specimen/Ubuntu",
+    "weights": [
+      400,
+      500,
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 430692
+  },
+  "Russo One": {
+    "slug": "russo-one",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Russo+One",
+    "weights": [
+      400
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 16180
+  },
+  "Ysabeau Infant": {
+    "slug": "ysabeau-infant",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Ysabeau+Infant",
+    "weights": [
+      800
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 54860
+  },
+  "Comfortaa": {
+    "slug": "comfortaa",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Comfortaa",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 77144
+  },
+  "Vollkorn": {
+    "slug": "vollkorn",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Vollkorn",
+    "weights": [
+      800
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 93352
+  },
+  "Source Sans 3": {
+    "slug": "source-sans-3",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Source+Sans+3",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 142464
+  },
+  "Noto Serif Display": {
+    "slug": "noto-serif-display",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Noto+Serif+Display",
+    "weights": [
+      600,
+      700
+    ],
+    "italic": true,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 254160,
+    "styles": {
+      "italic": [
+        "700"
+      ],
+      "normal": [
+        "600"
+      ]
+    }
+  },
+  "Manrope": {
+    "slug": "manrope",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Manrope",
+    "weights": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 66452
+  },
+  "Piazzolla": {
+    "slug": "piazzolla",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Piazzolla",
+    "weights": [
+      700
+    ],
+    "italic": true,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 75692,
+    "styles": {
+      "italic": [
+        "700"
+      ]
+    }
+  },
+  "Fira Sans": {
+    "slug": "fira-sans",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Fira+Sans",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 376428
+  },
+  "Sofia Sans Extra Condensed": {
+    "slug": "sofia-sans-extra-condensed",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Sofia+Sans+Extra+Condensed",
+    "weights": [
+      800
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 41184
+  },
+  "IBM Plex Sans": {
+    "slug": "ibm-plex-sans",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/IBM+Plex+Sans",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 149256
+  },
+  "Roboto Slab": {
+    "slug": "roboto-slab",
+    "license": "Apache-2.0",
+    "source": "https://fonts.google.com/specimen/Roboto+Slab",
+    "weights": [
+      600
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 53364
+  },
+  "Inter Tight": {
+    "slug": "inter-tight",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Inter+Tight",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 212220
+  },
+  "Comic Relief": {
+    "slug": "comic-relief",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Comic+Relief",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 64608
+  },
+  "Jura": {
+    "slug": "jura",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Jura",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 47864
+  },
+  "Inter": {
+    "slug": "inter",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Inter",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 208260
+  },
+  "Noto Sans": {
+    "slug": "noto-sans",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Noto+Sans",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 327076
+  },
+  "JetBrains Mono": {
+    "slug": "jetbrains-mono",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/JetBrains+Mono",
+    "weights": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 60404
+  },
+  "Source Serif 4": {
+    "slug": "source-serif-4",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Source+Serif+4",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 167952
+  },
+  "Old Standard TT": {
+    "slug": "old-standard-tt",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Old+Standard+TT",
+    "weights": [
+      400,
+      700
+    ],
+    "italic": true,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 258084,
+    "styles": {
+      "italic": [
+        "400"
+      ],
+      "normal": [
+        "400",
+        "700"
+      ]
+    }
+  },
+  "Noto Serif": {
+    "slug": "noto-serif",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Noto+Serif",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 377528
+  },
+  "Fira Code": {
+    "slug": "fira-code",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Fira+Code",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 106048
+  },
+  "STIX Two Text": {
+    "slug": "stix-two-text",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/STIX+Two+Text",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 119248
+  },
+  "Fira Sans Condensed": {
+    "slug": "fira-sans-condensed",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Fira+Sans+Condensed",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 129096
+  }
+}

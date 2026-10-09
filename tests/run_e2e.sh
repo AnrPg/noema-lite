@@ -7,7 +7,10 @@ cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
 # (sed -i.bak works with both GNU sed on Linux and BSD sed on macOS)
 sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json" && rm -f "$T/accounts/anr/packs/secret-notes/subject.json.bak"
+# the older suites test the classic screens (shell: false: the subject picker at start, no first-time questions); tests/shell.js sets noema-test:newUI for the new frame
+echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
+node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"

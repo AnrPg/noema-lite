@@ -64,7 +64,7 @@ function messages(body, res, J) {
 }
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
   fs.mkdirSync(path.join(ROOT, 'dist/site/testimg'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'dist/site/testimg/heart.png'), PNG);
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   // the picture search's view of the web (scripted): Bing finds a figure on a publisher's page; the other sources are down
@@ -180,7 +180,7 @@ function messages(body, res, J) {
   ok(await p.locator('.accbox .tabs button.on').innerText() === '⚙️ Settings' && await p.locator('.accbox .accsec').count() === 5, 'the avatar menu has a ⚙️ Settings tab: Gemini · Claude · language of the AI conversations · Display & studying · this subject');
   await p.click('.accsec summary:has-text("Claude (optional)")'); await wait(300);
   ok(await until(async () => /The key works/.test(await p.locator('.accsec:has-text("Claude (optional)")').innerText()), 6000) && await p.locator('select[aria-label="Claude model"] option').count() === 4, 'the Claude key on this device is shown and checked; its models are listed');
-  await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per curriculum step"]', '5'); await p.selectOption('select[aria-label="AI for new curricula"]', 'claude');
+  await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per Roadmap step"]', '5'); await p.selectOption('select[aria-label="AI for new Roadmaps"]', 'claude');
   await p.click('button:has-text("Save settings")'); await wait(500);
   ok(await p.evaluate(() => [JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:claudeModel`)), JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).curProvider]).then(x => x[0] === 'claude-opus-9' && x[1] === 'claude'), 'saved: the Claude model and the AI for new curricula');
   await p.evaluate(() => NoemaCurMap.create(Noema.account.id)); await wait(400);
