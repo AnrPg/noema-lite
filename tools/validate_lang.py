@@ -949,11 +949,91 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 n_ = sum(1 for sid, s in sids.items() if fid in (s.get('functions') or []) and sent_lex.get(sid, set()) & words)
                 if n_ < 2 and (fld, fid) not in exempt:
                     (v.E if strict else v.W)(f'{lw}/bank', f'field {fld}: {n_} sentence(s) for {fid} with the field’s words — every field brings ≥ 2 for every node before it, or says why in fieldExemptions (D19)')
+        check_generators(v, lw, functions, frames, lex, sids, {fid: g for fid, g in grams.items() if g}, extra, strict)   # P5: generators, their parameters and pools
     if not only and strict:
         for cid in sorted(pending - meant): v.E(f'concept {cid}', 'is pending, but no word of the course has this meaning: remove it')
     for x in os.listdir(os.path.join(root, 'lang')) if os.path.isdir(os.path.join(root, 'lang')) else []:
         if x not in langs: v.W(f'lang/{x}', 'not a course language (ignored)')
     return v
+
+
+# ---------- P5: the generators of a realization (docs/LANGUAGES.md §6.7) ----------
+GEN_PARAMS = {'type', 'pos', 'class', 'cells', 'lemmas', 'exclude', 'concepts', 'count', 'bank', 'mode', 'reverse', 'tags', 'suffixes'}
+GEN_BANK = {'functions', 'frames', 'variant'}
+GEN_MODES = {'root_pattern': {'build', 'root', 'pattern'}, 'parse': {'case', 'pos'}}
+CELL_GENS = {'inflect', 'principal_parts', 'paradigm', 'analyze'}
+CONNECTOR_POS = {'CCONJ', 'SCONJ'}
+
+
+def check_generators(v, lw, functions, frames, lex, sids, grams, extra, strict):
+    """Types, parameters, parts of speech, cells (a cell no word has is an error), lemmas and bank filters of every generator;
+    with --strict a warning when a generator's pool is empty even for a learner who knows every word."""
+    def words_of(gen):
+        out = []
+        for lid, x in lex.items():
+            if gen.get('pos') and x.get('pos') != gen['pos']: continue
+            if gen.get('class') and x.get('class') != gen['class']: continue
+            if gen.get('lemmas') and lid not in gen['lemmas']: continue
+            if lid in (gen.get('exclude') or []): continue
+            if gen.get('concepts') and not any(c.startswith(p) for c in x.get('senses') or [] for p in gen['concepts']): continue
+            out.append(x)
+        return out
+    def flat(s):
+        out = []
+        for k in s.get('tokens') or []:
+            if k.get('p'): continue
+            out.extend(k['parts'] if k.get('parts') else [k])
+        return out
+    for fid, g in grams.items():
+        if not g: continue
+        where = f'{lw}/grammar/{fid}.json'
+        for i, gen in enumerate(g.get('generators') or []):
+            t = gen.get('type'); gw = f'{where} · generator {i + 1} ({t})'
+            for k in gen:
+                if k not in GEN_PARAMS: v.E(gw, f'unknown parameter “{k}” (known: {", ".join(sorted(GEN_PARAMS))})')
+            if gen.get('pos') and gen['pos'] not in UD_POS: v.E(gw, f'pos “{gen["pos"]}” is not a UD part of speech')
+            for k in ('cells', 'lemmas', 'exclude', 'concepts'):
+                if k in gen and not (isinstance(gen[k], list) and all(isinstance(x, str) for x in gen[k])): v.E(gw, f'{k} must be a list of strings')
+            for k in (gen.get('bank') or {}):
+                if k not in GEN_BANK: v.E(gw, f'bank: unknown filter “{k}” (functions, frames, variant)')
+            if t in GEN_MODES and gen.get('mode' if t == 'root_pattern' else 'tags') not in (None, *GEN_MODES[t]):
+                v.E(gw, f'{"mode" if t == "root_pattern" else "tags"} must be one of {", ".join(sorted(GEN_MODES[t]))}')
+            if 'reverse' in gen and not isinstance(gen['reverse'], bool): v.E(gw, 'reverse must be true or false')
+            for l in (gen.get('lemmas') or []) + (gen.get('exclude') or []):
+                if isinstance(l, str) and l not in lex: v.E(gw, f'“{l}” is not a word of this language')
+            ws = words_of(gen) if t in CELL_GENS | {'root_pattern'} else []
+            if t in CELL_GENS:
+                for c in gen.get('cells') or []:
+                    if not isinstance(c, str): continue
+                    errs = cell_errors(c, extra)
+                    for e in errs: v.E(gw, f'{c}: {e}')
+                    if not errs and not any(canon(c) in {canon(x) for x in (w.get('forms') or {})} for w in ws):
+                        v.E(gw, f'cell {c}: no word{" (" + gen["pos"] + ")" if gen.get("pos") else ""} of the language has it')
+            if not strict: continue
+            # the pool for a learner who knows every word
+            bank = gen.get('bank') or {}
+            fns = bank.get('functions') or [fid]
+            sents = [s for s in sids.values() if (s.get('frame') in bank['frames'] if bank.get('frames') else all(f in (s.get('functions') or []) for f in fns))]
+            n = None
+            if t in CELL_GENS:
+                cells = [canon(c) for c in gen.get('cells') or g.get('paradigmCells') or []]
+                n = sum(1 for w in ws if (not cells or any(canon(c) in cells for c in (w.get('forms') or {}))) and len(w.get('forms') or {}) >= (2 if t in ('paradigm', 'analyze') else 1))
+            elif t == 'root_pattern':
+                def rp(w):
+                    f = w.get('features') or {}
+                    return isinstance(f.get('root'), str) and any(isinstance(f.get(k), str) for k in ('pattern', 'verbForm', 'binyan'))
+                n = sum(1 for w in ws if rp(w))
+            elif t in ('agree', 'contrast', 'transform'):
+                def lists(s): return s.get('frame') in bank['frames'] if bank.get('frames') else all(f in (s.get('functions') or []) for f in fns) if bank.get('functions') else fid in (s.get('functions') or [])
+                n = sum(1 for s in sids.values() if s.get('variantOf') in sids and (lists(s) or (not bank.get('functions') and not bank.get('frames') and lists(sids[s['variantOf']])))
+                        and (not bank.get('variant') or bank['variant'] in (s.get('variant') or {})))
+            elif t == 'morph_build':
+                n = sum(1 for s in sents for k in s.get('tokens') or [] if k.get('parts'))
+            elif t == 'combine':
+                n = sum(1 for s in sents if sum(1 for k in flat(s) if (lex.get(k.get('l')) or {}).get('pos') in CONNECTOR_POS) == 1)
+            elif t in ('parse', 'gloss', 'proofread', 'build_sentence', 'word_order', 'sentence_meaning'):
+                n = len(sents)
+            if n == 0: v.W(gw, 'makes no exercise even for a learner who knows every word (the pool is empty)')
 
 
 def main(a):

@@ -120,7 +120,7 @@ ok(f.state === 'locked' && f.needs.NOUN[0] === 1 && f.unlockBy[0] === 'veg.1', `
 learnNode('de', 'veg.1', 'known_r');
 k = N.known(C, L, 'de');
 f = N.feasibility(C, L, 'de', 'fn.definite', { k });
-ok(f.state === 'thin' && f.sentences === 4, `after Vegetables I: thin (${f.sentences} sentences < 12)`);
+ok(f.state === 'thin' && f.sentences === 6, `after Vegetables I: thin (${f.sentences} sentences < 12, counted as D19 does: ≤ ⌈30 %⌉ unknown words)`);
 ok(N.feasibility(C, L, 'de', 'fn.definite', { k, minSentences: 4 }).state === 'ready', '…ready when the threshold is met');
 ok(N.feasibility(C, L, 'zh', 'fn.plural.noun').state === 'absent', 'a function absent in Chinese is reported as absent');
 // property: whatever the learner knows, the selected sentences only use known words; open nodes have done prerequisites
