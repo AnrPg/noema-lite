@@ -115,10 +115,10 @@ function runQueue(queue, { nid, langs, title }) {
     const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 Lesson check done' : '🎉 Well done'),
       h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, st[c] === 'passed' || st[c] === 'known' || st[c] === 'mastered' ? '✔ passed' : 'not yet (80 % passes)'))) : null,
+      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, !['passed', 'known', 'mastered'].includes(st[c]) ? 'not yet (80 % passes)' : R.c / R.n >= N.PASS ? '✔ passed' : `✔ passed before (best ${Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100)} %) — practise it again`))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
       newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
+      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }

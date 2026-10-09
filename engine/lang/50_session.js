@@ -69,7 +69,7 @@ function runSession(plan, { only = null } = {}) {
       h('p', {}, `${stats.introduced} new · ${stats.right} right · ${stats.wrong} to practise again`),
       opened.length ? h('ul', {}, ...opened.map(t => h('li', {}, t))) : null,
       newWordsList(),
-      h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map')));
+      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map'))));   // the next step offered (QA)
   };
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }

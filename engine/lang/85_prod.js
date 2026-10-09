@@ -358,7 +358,7 @@ function drawTutor() {
   if (!hist.length) msgs.append(h('div', { class: 'lx-tmsg sys' }, aiVendor() ? 'Pick what you want, or just write.' : 'Each button above works once you have added a key.'));
   box.addEventListener('keydown', e => { if (e.key === 'Escape') closeLangTutor(); });   // keyboard: Esc closes the drawer
   document.body.append(box); msgs.scrollTop = msgs.scrollHeight;
-  if (aiVendor()) setTimeout(() => ta.focus(), 50);
+  setTimeout(() => (aiVendor() ? ta : box.querySelector('.lx-keyhelp input') || box.querySelector('[aria-label="Close the tutor"]'))?.focus(), 50);   // focus in the drawer: Esc closes it, with or without a key
 }
 /** A light markdown: **bold**, line breaks; the language's own sentences in their font and direction. */
 function tutorText(c, text, targets) {

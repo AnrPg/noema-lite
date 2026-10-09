@@ -611,7 +611,7 @@
       if (val == null) continue;
       const show = v => v == null ? '' : typeof v === 'boolean' ? (v ? 'yes' : 'no') : Array.isArray(v) ? v.map(show).filter(Boolean).join(' · ')
         : typeof v === 'object' ? ('none' in v ? '— ' + v.none : Object.entries(v).filter(([k2]) => k2 !== 'senses').map(([, v2]) => show(v2)).filter(Boolean).join(' ')
-          + (v.senses ? ' (' + v.senses.map(sid => ((lx.profile || {}).senses || []).find(x => x.id === sid)?.def?.split(/[;,(—]/)[0].trim() || sid).join(', ') + ')' : '')) : String(v);
+          + (v.senses ? ' (' + v.senses.map(sid => ((lx.profile || {}).senses || []).find(x => x.id === sid)?.def?.split(/[;,(—]/)[0].trim() || sid).join(', ') + ')' : '')) : /^[A-Z]{2,}$/.test(v) && TAG_LABEL[v] ? TAG_LABEL[v] : String(v);   // MASC → masculine (QA)
       const text = show(val); if (text) out.push({ id: d.id, title: d.title || d.id, text, none: !!(val && typeof val === 'object' && 'none' in val) });
     }
     return out;
@@ -2852,7 +2852,8 @@
         const frames = {}; part.forEach(x => frames[x.s.frame] = (frames[x.s.frame] || 0) + 1);
         const main = Object.entries(frames).sort((a, b) => b[1] - a[1])[0][0];
         const unknown = uniqStr(part.flatMap(x => x.unknown));
-        out.push({ id: `${code}:${f}:${i / size}`, lang: code, family: f, title: (C.frames[main]?.meaning || f).replace(/\s*\(.*?\)\s*/g, ' ').trim(), frames: Object.keys(frames), sentences: part.map(x => x.s.id), unknown });
+        const lead = String(part[0].s.gloss || '').replace(/[.!?。！？]+$/, '').trim();   // titled by its first sentence, not by the frame's pattern (PERSON is ADJECTIVE)
+        out.push({ id: `${code}:${f}:${i / size}`, lang: code, family: f, title: lead ? `${lead} …` : (C.frames[main]?.meaning || f).replace(/\s*\(.*?\)\s*/g, ' ').trim(), pattern: C.frames[main]?.meaning || f, frames: Object.keys(frames), sentences: part.map(x => x.s.id), unknown });
       }
     }
     return out.sort((a, b) => a.unknown.length - b.unknown.length || b.sentences.length - a.sentences.length || (a.id < b.id ? -1 : 1));

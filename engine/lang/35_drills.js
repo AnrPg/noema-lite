@@ -69,14 +69,14 @@ VIEWS.parts = (v, r) => {
     stage.innerHTML = '';
     if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length}`), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'))); }
     const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
-    const others = shuffle([...(byLabel[label] || [])].filter(o => o !== val)).slice(0, 3);
+    const others = qaPartsDistractors(c, p, label, val, byLabel[label]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
     const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
     if (!others.length) {   // nothing to choose among: show it and go on
       box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →'));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
-    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, `Its ${label}?`),
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: label !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(label) ? label[0].toUpperCase() + label.slice(1) + ' …?' : `Its ${label}?`),   // the pinyin under the word would be the answer
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();

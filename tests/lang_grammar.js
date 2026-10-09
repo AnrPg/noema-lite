@@ -243,7 +243,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
     for (const nid of C.order.filter(n => C.nodes[n].kind === 'lesson' && C.lang.de.applies[n]).slice(0, 3)) { for (const id of C.lang.de.byNode[nid] || []) N.review(C, L, 'de', id, 'r', true, 0); N.recordCheck(C, L, 'de', nid, 1, 0); }
     const c = 'de', nid = C.order.find(n => C.nodes[n].kind === 'lesson' && N.nodeStates(C, L, c)[n] === 'open' && (C.lang[c].byNode[n] || []).length);
     const lex = (C.lang[c].byNode[nid] || []).filter(id => (C.lang[c].lex[id].senses || []).length).slice(0, 2);
-    const plan = { steps: [{ kind: 'learn', node: nid, concepts: lex.map(id => ({ concept: C.lang[c].lex[id].senses[0], langs: [{ lang: c, lex: id }] })) }] };
+    const plan = { day: N.dayNumber(), steps: [{ kind: 'learn', node: nid, concepts: lex.map(id => ({ concept: C.lang[c].lex[id].senses[0], langs: [{ lang: c, lex: id }] })) }] };
     const items = NoemaLangUI.grammar.sessionGrammarItems(plan);
     window.__sessFn = items[0]?.it.fn; window.__before = (L.langs.de.fns[window.__sessFn]?.log || []).reduce((a, e) => a + e.n, 0);
     return { n: items.length, fn: window.__sessFn, uses: items.filter(x => x.it.sentence ? C.lang[c].sentenceById[x.it.sentence].req.some(l => lex.includes(l)) : lex.includes(x.it.lex)).length, plan };
@@ -256,11 +256,12 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
     for (let guard = 0; guard < 200; guard++) {
       await wait(60);
       if (await page.$('.lx-result:has-text("Session done")')) break;
-      const cur = await page.evaluate(() => { const a = NoemaLangUI.UI.current; if (!a) return null; if (a.kind === 'item') return { kind: 'item', it: a.it }; const C = NoemaLangUI.UI.C, x = C.lang[a.lang].lex[a.lex]; return { kind: a.kind, gloss: C.concepts[(x.senses || [])[0]]?.gloss }; });
+      const cur = await page.evaluate(() => { const a = NoemaLangUI.UI.current; if (!a) return null; if (a.kind === 'item') return { kind: 'item', it: a.it }; if (!['rec', 'prod', 'intro', 'pic'].includes(a.kind)) return { kind: 'other' }; const C = NoemaLangUI.UI.C, x = C.lang[a.lang].lex[a.lex]; return { kind: a.kind, gloss: C.concepts[(x.senses || [])[0]]?.gloss }; });
       if (await page.$('.lx-stage .lx-next')) { await page.click('.lx-stage .lx-next'); continue; }
       if (!cur) continue;
       if (cur.kind === 'item') await answer(page, cur.it, true);
       else if (cur.kind === 'rec') { for (const o of await page.$$('.lx-stage .lx-opt')) if ((await o.innerText()).replace(/^\d+\s*/, '').trim() === cur.gloss) { await o.click(); break; } }
+      else if (cur.kind === 'other') { const o = await page.$('.lx-stage .lx-opts:not([data-done]) .lx-opt'); if (o) await o.click(); else { const g = await page.$('.lx-stage button:has-text("Show me")'); if (g) await g.click(); } }   // a letter or a deepening item of the daily plan
       else if (cur.kind === 'prod') { const o = await page.$('.lx-stage .lx-opts:not([data-done]) .lx-opt'); if (o) await o.click(); else await page.click('.lx-stage button:has-text("Show me")'); }   // then the article / measure word
     }
     if (process.env.DEBUG) { await page.screenshot({ path: SHOTS + '/lx_sess_end.png' }); console.log(await page.evaluate(() => JSON.stringify(NoemaLangUI.UI.current)?.slice(0, 300))); }

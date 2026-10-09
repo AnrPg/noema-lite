@@ -76,8 +76,8 @@ async function answer(page, right) {
   ok(await page.locator('.lx-lessonbtn').count() === 1 && /S00/.test(await page.locator('.lx-lessonbtn').innerText()), 'the course starts with the foundations: lesson S00, all four languages');
   const nl = await page.locator('.lx-lessonnode').count(), nn = await page.locator('.lx-node').count();
   ok(nl === 19 + 48 && nn === nl + 5, `the map: 19 foundation lessons, 48 core lessons and the 5 vegetable nodes (${nl}, ${nn})`);
-  const draftShown = await page.evaluate(() => [...document.querySelectorAll('.lx-lessonnode')].filter(b => /C48/.test(b.innerText))[0]?.innerText || '');
-  ok(/not written yet/.test(draftShown), 'a core lesson still being written shows ⏳ not written yet in every language');
+  const draftShown = await page.evaluate(() => [...[...document.querySelectorAll('.lx-lessonnode')].filter(b => /C48/.test(b.textContent))[0]?.querySelectorAll('.lx-ns') || []].map(x => x.title));   // the map's chips: a sign, the words in the tooltip (QA)
+  ok(draftShown.length === 4 && draftShown.every(t => /not written yet/.test(t)), 'a core lesson still being written shows ⏳ not written yet in every language');
   await page.screenshot({ path: SHOTS + '/lx1_home.png' });
 
   // ---------- the vocabulary lane (a copy of the course without its lessons) ----------
@@ -121,9 +121,10 @@ async function answer(page, right) {
     for (const id of C.lang.de.byNode['veg.1']) for (const t of ['r', 'p']) { NoemaLang.review(C, L, 'de', id, t, 'good', d); NoemaLang.review(C, L, 'de', id, t, 'good', d + 1); }
     const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) localStorage.setItem(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v)); });
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
-  const veg2 = await page.locator('.lx-node >> nth=1').innerText();
-  ok(/🇩🇪\s*○ open/.test(veg2) && /🇮🇱\s*🔒 locked/.test(veg2), 'Vegetables I known in German → the next node opens in German only');
-  ok(/🇩🇪\s*● known/.test(await page.locator('.lx-node >> nth=0').innerText()), 'Vegetables I shows “known” for German');
+  const chipsOf = i => page.evaluate(i => [...document.querySelectorAll('.lx-node')[i].querySelectorAll('.lx-ns')].map(x => x.title).join(' | '), i);   // the words of a state are in the chip's tooltip (QA)
+  const veg2 = await chipsOf(1);
+  ok(/German: ○ open/.test(veg2) && /Hebrew: 🔒 locked/.test(veg2), 'Vegetables I known in German → the next node opens in German only');
+  ok(/German: ● known/.test(await chipsOf(0)), 'Vegetables I shows “known” for German');
 
   // ---------- the flag card of a concept ----------
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/veg.carrot'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);

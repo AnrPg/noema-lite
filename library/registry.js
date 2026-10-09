@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-09T08:25:19+00:00",
+ "builtAt": "2026-10-09T09:56:28+00:00",
  "groups": [
   {
    "id": "data-cloud",

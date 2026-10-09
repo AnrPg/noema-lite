@@ -30,8 +30,12 @@ const LANG_INFO = {
   zh: { flag: '🇨🇳', name: 'Chinese', font: "'Noto Sans SC'" }, de: { flag: '🇩🇪', name: 'German' }, el: { flag: '🇬🇷', name: 'Greek' },
   en: { flag: '🇬🇧', name: 'English' }, ru: { flag: '🇷🇺', name: 'Russian' }, tr: { flag: '🇹🇷', name: 'Turkish' }, hi: { flag: '🇮🇳', name: 'Hindi' },
   fr: { flag: '🇫🇷', name: 'French' }, es: { flag: '🇪🇸', name: 'Spanish' }, it: { flag: '🇮🇹', name: 'Italian' }, ja: { flag: '🇯🇵', name: 'Japanese' },
+  pt: { flag: '🇵🇹' }, ko: { flag: '🇰🇷' }, fa: { flag: '🇮🇷' }, nl: { flag: '🇳🇱' }, pl: { flag: '🇵🇱' }, sw: { flag: '🇹🇿' }, vi: { flag: '🇻🇳' }, uk: { flag: '🇺🇦' }, fi: { flag: '🇫🇮' }, hu: { flag: '🇭🇺' },
 };
-const info = code => ({ flag: '🏳️', name: code, ...(LANG_INFO[code] || {}), ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
+/** A language's English name for codes without an entry above (Intl knows them all). */
+const LANG_DN = (() => { try { return new Intl.DisplayNames(['en'], { type: 'language' }); } catch (e) { return null; } })();
+const langDisplay = code => { try { return LANG_DN?.of(code) || code; } catch (e) { return code; } };
+const info = code => ({ flag: '🏳️', name: langDisplay(code), ...(LANG_INFO[code] || {}), ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';
@@ -554,14 +558,14 @@ VIEWS.parts = (v, r) => {
     stage.innerHTML = '';
     if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length}`), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'))); }
     const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
-    const others = shuffle([...(byLabel[label] || [])].filter(o => o !== val)).slice(0, 3);
+    const others = qaPartsDistractors(c, p, label, val, byLabel[label]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
     const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
     if (!others.length) {   // nothing to choose among: show it and go on
       box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →'));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
-    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, `Its ${label}?`),
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: label !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(label) ? label[0].toUpperCase() + label.slice(1) + ' …?' : `Its ${label}?`),   // the pinyin under the word would be the answer
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
@@ -948,7 +952,7 @@ function runSession(plan, { only = null } = {}) {
       h('p', {}, `${stats.introduced} new · ${stats.right} right · ${stats.wrong} to practise again`),
       opened.length ? h('ul', {}, ...opened.map(t => h('li', {}, t))) : null,
       newWordsList(),
-      h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map')));
+      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map'))));   // the next step offered (QA)
   };
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -1078,10 +1082,10 @@ function runQueue(queue, { nid, langs, title }) {
     const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 Lesson check done' : '🎉 Well done'),
       h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, st[c] === 'passed' || st[c] === 'known' || st[c] === 'mastered' ? '✔ passed' : 'not yet (80 % passes)'))) : null,
+      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, !['passed', 'known', 'mastered'].includes(st[c]) ? 'not yet (80 % passes)' : R.c / R.n >= N.PASS ? '✔ passed' : `✔ passed before (best ${Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100)} %) — practise it again`))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
       newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
+      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -1348,7 +1352,7 @@ function grammarLaneHome() {
     any = true;
     const n = s => lane.filter(x => x.state === s).length, ready = toPractise(lane);
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
-      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} points · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
+      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} point${lane.length === 1 ? '' : 's'} · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
         h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null,
         h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, 'All →')),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
@@ -1529,7 +1533,7 @@ function deepRun(holder, items, { again = null } = {}) {
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
     UI.current = { kind: 'deep', it };
-    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', DEEP_LABEL[it.kind] || it.kind, ' · ', word(it.lang, LX(it.lang).lex[it.lex].lemma, { sub: false })), el);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', DEEP_LABEL[it.kind] || it.kind), el);   // not the word: for some types it is the answer
   };
   document.onkeydown = e => {
     if (!stage.isConnected) { document.onkeydown = null; return; }
@@ -2317,7 +2321,7 @@ function drawTutor() {
   if (!hist.length) msgs.append(h('div', { class: 'lx-tmsg sys' }, aiVendor() ? 'Pick what you want, or just write.' : 'Each button above works once you have added a key.'));
   box.addEventListener('keydown', e => { if (e.key === 'Escape') closeLangTutor(); });   // keyboard: Esc closes the drawer
   document.body.append(box); msgs.scrollTop = msgs.scrollHeight;
-  if (aiVendor()) setTimeout(() => ta.focus(), 50);
+  setTimeout(() => (aiVendor() ? ta : box.querySelector('.lx-keyhelp input') || box.querySelector('[aria-label="Close the tutor"]'))?.focus(), 50);   // focus in the drawer: Esc closes it, with or without a key
 }
 /** A light markdown: **bold**, line breaks; the language's own sentences in their font and direction. */
 function tutorText(c, text, targets) {
@@ -3469,5 +3473,161 @@ function sessionSpeechItems(plan) {
   VIEWS.read = (v, r) => { read(v, r); if (!r.arg2) return; const c = UI.C.lang[r.arg] ? r.arg : UI.lang, reader = v.querySelector('.lx-reader'); if (reader) reader.before(h('div', { class: 'row lx-readaloud' }, h('button', { class: 'btn small lx-readall', onclick: e => readAloud(e.currentTarget, c) }, '🔊 Listen to the whole text'))); };
 }
 Object.assign(window.NoemaLangUI || {}, { speech: { say, loadVoices, speechCaps, pushCaps, sessionSpeechItems, LISTEN_SETS, SP, decorate } });
+
+/* ---- 99_qa.js ---- */
+/* ---------- QA — the whole language part, end to end (docs/LANGUAGES.md §13 QA): the home organized, foreign script marked ---------- */
+
+/* Every run of Arabic, Hebrew or Chinese script in a text the app writes (explanations, notes, glosses, buttons) gets its own
+   lang + dir, wherever the view forgot it (LANGUAGE_RULES: every foreign span gets lang + dir). One observer for every view. */
+const QA_SCRIPT = /[֐-׿יִ-ﭏ]+(?:[\s֐-׿יִ-ﭏ]*[֐-׿יִ-ﭏ])?|[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+(?:[\s؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿ً-ٟ]*[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿])?|[㐀-鿿豈-﫿]+/g;
+const QA_SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'OPTION', 'SELECT', 'TITLE', 'svg', 'SVG', 'text', 'CANVAS']);
+const QA_OTHER = { Arab: ['fa', 'ur', 'ps', 'ku', 'sd', 'ug'], Hebr: ['yi', 'lad'], Hani: ['ja', 'ko', 'yue', 'vi'] };
+function qaScriptOf(run) { return /[֐-׿יִ-ﭏ]/.test(run) ? 'Hebr' : /[㐀-鿿豈-﫿]/.test(run) ? 'Hani' : 'Arab'; }
+function qaLangOf(run, el) {
+  const sc = qaScriptOf(run), base = { Hebr: 'he', Arab: 'ar', Hani: 'zh' }[sc];
+  const forCode = el.closest('[data-for]')?.dataset.for;   // a comparison note about Persian, Yiddish, Japanese …
+  if (forCode && QA_OTHER[sc].includes(forCode)) return { lang: forCode, dir: sc === 'Hani' ? 'ltr' : 'rtl' };
+  return { lang: UI.C?.lang[base] ? base : 'und-' + sc, dir: sc === 'Hani' ? 'ltr' : 'rtl' };
+}
+/** Does this element already sit in a span of a language written in that script? */
+function qaMarked(el, sc) {
+  const holder = el.closest('[lang]'); if (!holder) return false;
+  const l = holder.getAttribute('lang').toLowerCase();
+  if (sc === 'Hebr') return /^(he|yi|lad|und-hebr)/.test(l);
+  if (sc === 'Arab') return /^(ar|fa|ur|ps|ku|sd|ug|und-arab)/.test(l);
+  return /^(zh|ja|ko|yue|vi|und-hani)/.test(l);
+}
+function qaMarkScripts(root) {
+  if (!root || !UI.C) return;
+  const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: t => {
+    const p = t.parentElement; if (!p || QA_SKIP.has(p.tagName) || p.closest('svg, textarea, select, [contenteditable], .lx-autolang')) return NodeFilter.FILTER_REJECT;
+    QA_SCRIPT.lastIndex = 0; return QA_SCRIPT.test(t.data) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+  } });
+  const todo = []; while (tw.nextNode()) todo.push(tw.currentNode);
+  for (const t of todo) {
+    const p = t.parentElement, s = t.data, parts = []; let last = 0, m, changed = false;
+    QA_SCRIPT.lastIndex = 0;
+    while ((m = QA_SCRIPT.exec(s))) {
+      if (qaMarked(p, qaScriptOf(m[0]))) continue;
+      if (m.index > last) parts.push(document.createTextNode(s.slice(last, m.index)));
+      const { lang, dir } = qaLangOf(m[0], p);
+      parts.push(h('span', { class: 'lx-autolang', lang, dir }, m[0])); last = m.index + m[0].length; changed = true;
+    }
+    if (!changed) continue;
+    if (last < s.length) parts.push(document.createTextNode(s.slice(last)));
+    t.replaceWith(...parts);
+  }
+}
+{
+  /* synchronously, in the observer's microtask: a view is marked before anything else runs (a timer may wait behind long tasks) */
+  const obs = new MutationObserver(list => {
+    const roots = new Set();
+    for (const mu of list) for (const n of mu.addedNodes) {
+      const el = n.nodeType === 1 ? n : n.parentElement;
+      if (el && el.isConnected && !el.classList?.contains('lx-autolang') && el.closest?.('.lx-main, .lx-pop, .lx-tutor, .lx-top, .lj-box, .lx-glyphcard')) roots.add(el);
+    }
+    for (const r of roots) { let up = r.parentElement, inner = false; while (up && !inner) { inner = roots.has(up); up = up.parentElement; } if (!inner) qaMarkScripts(r); }   // the outermost only
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+}
+
+/* ---------- the home: the session first, then the next lesson, the lanes of every language as one compact grid, the map near you ---------- */
+const QA_ICON = s => (STATE_LABEL[s] || s || '').split(' ')[0];
+const QA_FAR = new Set(['locked', 'unprepared']);
+{
+  const home1 = VIEWS.home;
+  VIEWS.home = (v, r) => {
+    home1(v, r);
+    if (!v.querySelector('.lx-hero')) return;   // an account course without its core: the ✨ page
+    const hero = v.querySelector('.lx-hero'), go1 = hero.querySelector('.lx-go');
+    // nothing due, but a lesson waits (a new learner): the big button starts it instead of saying "come back tomorrow"
+    const first = v.querySelector('.lx-lessonbtn');
+    if (go1 && go1.disabled && first) {
+      const nid = first.dataset.node, n = UI.C.nodes[nid];
+      const st = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() }).steps.find(s => s.kind === 'lesson' && s.node === nid);
+      const start = go1.cloneNode(false); start.disabled = false; start.textContent = `▶ Start: ${stepLabel(n)} ${n.title}`;   // a clone: without the session's listener
+      start.addEventListener('click', () => runLesson(nid, st?.langs?.length ? st.langs : lessonLangs(nid))); go1.replaceWith(start);
+    }
+    const poly = v.querySelector('.lx-polyhome'), today1 = poly?.querySelector('.lx-today');
+    if (today1) hero.append(today1);   // today's languages belong to the session
+    // the lanes: one row per language — grammar, writing, reading, script, peculiarities, tutor; then what spans languages
+    const lanes = v.querySelector('.lx-prodlanes');
+    if (lanes) {
+      lanes.querySelector('h2').textContent = '🧭 Your lanes';
+      for (const row of lanes.querySelectorAll('.lx-lanerow')) {
+        const c = row.dataset.lang, tutor = row.querySelector('.lx-totutor');
+        const gram = h('button', { class: 'btn small lx-togrammar', title: 'The grammar points of your open lessons', onclick: () => go('#/grammar/' + c) }, '📐 Grammar');
+        row.querySelector('.lx-towrite')?.before(gram);
+        const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
+        const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).name));
+        if (pec) { pec.textContent = '📚 Peculiarities'; pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
+      }
+      v.querySelector('.lx-libraries')?.remove();
+      const polyRow = poly?.querySelector('.lx-polydrills'); if (polyRow) lanes.append(polyRow);
+      const drills = v.querySelector('.lx-drills');
+      if (drills) {
+        const sorts = [...drills.querySelectorAll('button')].filter(b => b.textContent.startsWith('🧩'));
+        if (sorts.length) drills.append(h('details', { class: 'lx-sortfold' }, h('summary', { class: 'btn ghost small' }, `🧩 Sort a field into its groups (${sorts.length})`), h('div', { class: 'row' }, ...sorts)));
+        lanes.append(drills);
+      }
+      if (poly && !poly.children.length) poly.remove();
+      const lessonsBox = v.querySelector('.lx-lessons');
+      (lessonsBox || hero).after(lanes);
+      const glane = v.querySelector('.lx-glane'); if (glane) lanes.after(glane);
+    }
+    qaCompactMap(v);
+  };
+}
+/** The map: compact state chips (flag + sign, the words in the legend and the tooltip), the far, locked part folded. */
+function qaCompactMap(v) {
+  const box = v.querySelector('.lx-nodes'); if (!box) return;
+  const nodes = [...box.querySelectorAll('.lx-node')], seen = new Set();
+  let lastNear = -1;
+  nodes.forEach((n, i) => {
+    const chips = [...n.querySelectorAll('.lx-ns')], states = chips.map(ch => [...ch.classList].find(x => x.startsWith('ns-'))?.slice(3));
+    chips.forEach((ch, j) => { const flag = ch.textContent.trim().split(' ')[0]; seen.add(states[j]); ch.textContent = ''; ch.append(flag, ' ', h('span', { class: 'lx-nsi', 'aria-hidden': 'true' }, QA_ICON(states[j]))); ch.setAttribute('aria-label', ch.title); });
+    if (states.some(s => s && !QA_FAR.has(s) && s !== 'na')) lastNear = i;
+  });
+  const cut = lastNear + 4, hidden = nodes.slice(cut);
+  if (hidden.length > 2) {
+    hidden.forEach(n => { n.hidden = true; });
+    box.after(h('button', { class: 'btn ghost small lx-mapmore', onclick: e => { hidden.forEach(n => { n.hidden = false; }); e.currentTarget.remove(); } }, `🗺️ The whole map — ${hidden.length} more steps`));
+  }
+  const legend = [...seen].filter(Boolean).map(s => `${QA_ICON(s)} ${(STATE_LABEL[s] || s).split(' ').slice(1).join(' ')}`).join(' · ');
+  box.before(h('p', { class: 'tiny lx-maplegend' }, legend));
+}
+
+/* ---------- the next step offered at the end of a lesson ---------- */
+/** “▶ Next lesson” when another lesson waits (in today's languages, those of the lesson just run first), else null. */
+function qaNextLessonButton(nid, ran = []) {
+  const langs = todayLangs(), K = Object.fromEntries(langs.map(c => [c, N.known(UI.C, UI.L, c)])), mine = s => s.langs.some(c => ran.includes(c)) ? 0 : 1;
+  const st = N.nextLessons(UI.C, UI.L, langs, K).filter(s => s.node !== nid).sort((a, b) => mine(a) - mine(b))[0];   // the languages just learned first
+  if (!st) return null;
+  const n = UI.C.nodes[st.node];
+  return h('button', { class: 'btn primary lx-nextlesson', onclick: () => runLesson(st.node, st.langs) }, `▶ Next lesson: ${stepLabel(n)} ${n.title}`);
+}
+
+/* ---------- 🔁 principal parts: distractors that do not give the answer away ---------- */
+/** Wrong options for “its <label>?” of one word: German forms built from the same word (der / die / das + noun, the plural
+    and genitive patterns, du / er forms), then the word's other principal parts, then the same label of other words. */
+function qaPartsDistractors(c, p, label, val, pool) {
+  const lem = LX(c).lex[p.id].lemma, made = [];
+  if (c === 'de') {
+    const noun = val.replace(/^(der|die|das|des|dem|den) /, ''), uml = w => w.replace(/(au|a|o|u)(?=[^aou]*$)/i, x => ({ au: 'äu', a: 'ä', o: 'ö', u: 'ü', Au: 'Äu', A: 'Ä', O: 'Ö', U: 'Ü' }[x] || x));
+    const stem = lem.replace(/e?n$/, '');
+    if (label === 'article') made.push(...['der', 'die', 'das'].map(a => a + ' ' + noun));
+    else if (label === 'plural') made.push(...[lem, lem + 'e', lem + 'en', lem + 'n', lem + 'er', lem + 's', uml(lem) + 'e', uml(lem) + 'er', uml(lem)].map(x => 'die ' + x));
+    else if (label === 'genitive') made.push('des ' + lem + 's', 'des ' + lem + 'es', 'des ' + lem + 'en', 'des ' + lem, 'der ' + lem);
+    else if (label === 'er/sie/es') made.push(stem + 't', stem + 'et', uml(stem) + 't', lem);
+    else if (label === 'du') made.push(stem + 'st', stem + 'est', uml(stem) + 'st', lem);
+  }
+  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word
+  const own = FORM.includes(label) ? p.parts.filter(([l]) => l !== label && FORM.includes(l)).map(([, x]) => x).filter(x => x !== lem) : [];
+  const seen = new Set([val]), out = [];
+  const closed = c === 'de' && label === 'article';   // der / die / das: two wrong ones, nothing else
+  for (const x of [...shuffle(made), ...(closed ? [] : [...shuffle(own), ...shuffle([...(pool || [])])])]) if (!seen.has(x) && x && out.length < 3) { seen.add(x); out.push(x); }
+  return out;
+}
 
 })();

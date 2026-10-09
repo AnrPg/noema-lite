@@ -41,3 +41,4 @@ node "$ROOT/tests/lang_poly.js" "$T"   # P6 polyglot layer: parallel sentences, 
 node "$ROOT/tests/lang_prod.js" "$T"     # production and reading, the tutor (P7; Gemini mocked)
 node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: tasks, checks, connector, app (docs/LANGUAGES.md §10.1)
 node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech synthesis, dictation, shadowing, recognition (speech services mocked)
+node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
