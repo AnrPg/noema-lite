@@ -1,4 +1,25 @@
 /* GENERATED from engine/lang/*.css. Do not edit. */
+/* P5v — vocabulary depth (docs/LANGUAGES.md §6.2 “Deepening”): the item widgets and views of engine/lang/75_vocab2.js */
+.lx-deep .lx-prompt{overflow-wrap:anywhere}
+.lx-deep .lx-deepq{font-size:24px;line-height:1.7}
+.lx-deep .lx-deeptext{font-size:19px;line-height:1.5}
+.lx-deepsent .lx-target{background:var(--violet-bg);color:inherit;border-radius:4px;padding:0 3px}
+.lx-gap{display:inline-block;min-width:3em;border-bottom:2px solid var(--violet);color:var(--ink3);text-align:center}
+.lx-gap.filled{color:var(--ok);font-weight:650}
+.lx-out{border-bottom:1px dotted var(--ink3)}
+.lx-trafter{margin-top:6px}
+.lx-deep .lx-opt{overflow-wrap:anywhere;min-width:0}
+.lx-sortsent{text-align:start;white-space:normal;max-width:100%;font-size:17px}
+.lx-sortsent .lx-deepsent{font-size:19px}
+.lx-sortin{padding:4px 6px;border-radius:8px;background:var(--ok-bg);overflow-wrap:anywhere}
+.lx-cardtr{color:var(--ink2)}
+.lx-orderlist{min-height:48px;padding:8px 8px 8px 32px;border-radius:14px;border:2px dashed var(--line);font-size:22px;margin:8px 0}
+.lx-orderlist.right{border-color:var(--ok);background:var(--ok-bg)}.lx-orderlist.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.lx-vorder .lx-tile1{height:auto;min-height:48px;padding:6px 12px}
+.lx-deeptypes{margin:6px 0 10px}
+.lx-deepbtn,.lx-deepenbtn{white-space:nowrap}
+.lx-deeprun{margin-top:8px}
+@media (max-width:640px){.lx-deep .lx-deepq{font-size:20px}.lx-deep .lx-deeptext{font-size:17px}.lx-orderlist{font-size:19px}.lx-vsort .lx-sortbins{grid-template-columns:1fr}}
 /* noema-lite · language courses (docs/LANGUAGES.md §8) — built into engine/langui.css */
 body.lx main.lx-main{max-width:1000px}
 .lx-title{max-width:38vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

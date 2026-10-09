@@ -33,4 +33,5 @@ node "$ROOT/tests/langcore.js"
 node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"
 node "$ROOT/tests/lang_lessons.js" "$T"
+node "$ROOT/tests/lang_vocab2.js" "$T"   # vocabulary depth: the remaining §6.2 types (P5v)
 node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)

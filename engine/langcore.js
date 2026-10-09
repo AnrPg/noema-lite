@@ -859,7 +859,411 @@
     readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+  /* ---------- P5v — Vocabulary depth (the remaining §6.2 types): roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins ----------
+     Every item is made from the stored lexemes and their profiles (never written at runtime) and reviews its word: R track, or P where the
+     learner picks or completes the word itself. Other course words appear only when the learner has met them. Profile sentences follow D19 /
+     §7.1: at most ⌈30 %⌉ unknown words besides the word trained (course words not known yet are marked new, the others outside the course).
+     Item kinds (ask and prompt.text: a text or parts like why): {type:'vpick', ask, prompt:{word|text|sentence, tr?, trAfter?, lit?}, options, optLang, answer, why} · {type:'vsort', ask, buckets, cards, why}
+     · {type:'vorder', ask, cards (in the right order), why} · {type:'vsteps', prompt, steps:[{ask, options, optLang, answer}], why}; why = [text | {w, lang}]. */
+  const DEEP_TYPES = ['root_family', 'compound_split', 'sense_split', 'collocation', 'confusables', 'intensity_scale', 'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link'];
+  const DEEP_P = new Set(['sense_split', 'collocation', 'confusables', 'register_pick', 'nuance_pick', 'example_cloze']);   // the learner gives the word: production
+  const deepTrack = type => DEEP_P.has(type) ? 'p' : 'r';
+  const MET = new Set(['seen', 'learning', 'known_r', 'known_p', 'mastered']);
+  const profOf = lx => lx.profile || {};
+  const mainSenses = lx => (profOf(lx).senses || []).filter(s => !s.of);
+  /** The main sense a sense belongs to (a nuance says `of`). */
+  const senseMain = (lx, sid) => { const ss = profOf(lx).senses || []; let s = ss.find(x => x.id === sid); for (let i = 0; s && s.of && i < 5; i++) s = ss.find(x => x.id === s.of); return s || null; };
+  const plainOf = (code, s) => stripMarks(code, nfc(s)).toLowerCase().replace(/\s+/g, ' ').trim();
+  const regsOf = r => [].concat(r || []).filter(Boolean);
+  const glossOf = (C, X, id) => { const c = (X.lex[id].senses || [])[0]; return c ? C.concepts[c]?.gloss || c : X.lex[id].role || ''; };
+  const W = (w, lang) => ({ w, lang });
+  const firstSentences = (s, max = 260) => { s = String(s || '').trim(); if (s.length <= max) return s; const cut = s.slice(0, max), i = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; ')); return (i > 60 ? cut.slice(0, i + 1) : cut) + ' …'; };
+  const SCRIPT_MARKS = { Arab: '[\\u064B-\\u0652\\u0670]*', Hebr: '[\\u0591-\\u05BD\\u05BF\\u05C1\\u05C2\\u05C4\\u05C5\\u05C7]*' };
+  const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  /** Hide words in a text (an explanation that would give the answer away): with or without vowel marks, Latin words whole and in any case. */
+  const MASK_RE = new Map();
+  const loosePlain = s => stripMarks('he', stripMarks('ar', nfc(s))).toLowerCase();
+  function maskWords(text, words, mask = '…') {
+    let out = nfc(text); const lp = loosePlain(out);
+    const list = uniqStr((words || []).filter(Boolean).map(w => nfc(String(w)).trim()).filter(Boolean)).sort((a, b) => b.length - a.length);
+    for (const w0 of list) {
+      if (!lp.includes(loosePlain(w0).replace(/\s+/g, ' '))) continue;   // not in the text at all (the cheap test first)
+      if (MASK_RE.has(w0)) { const re = MASK_RE.get(w0); if (re) out = out.replace(re, mask); continue; }
+      const scr = /\p{Script=Arabic}/u.test(w0) ? 'Arab' : /\p{Script=Hebrew}/u.test(w0) ? 'Hebr' : /\p{Script=Han}/u.test(w0) ? 'Han' : 'Latn';
+      const w = scr === 'Arab' ? stripMarks('ar', w0) : scr === 'Hebr' ? stripMarks('he', w0) : w0, n = [...w.replace(/\s/g, '')].length;
+      if (scr === 'Latn' && n < 2) { MASK_RE.set(w0, null); continue; }
+      const body = [...w].map(ch => (/\s/.test(ch) ? '[\\s\\u05BE-]+' : escRe(ch) + (SCRIPT_MARKS[scr] || ''))).join('');
+      const re = scr === 'Han' ? new RegExp(body, 'gu') : (scr === 'Latn' || n < 3) ? new RegExp('(?<![\\p{L}\\p{M}])' + body + '(?![\\p{L}])', 'giu') : new RegExp(body, 'gu');
+      MASK_RE.set(w0, re); out = out.replace(re, mask);
+    }
+    return out;
+  }
+  /** A profile sentence as a vocabulary item shows it (D19): tokens with the trained word (target: its form, cell, attached prefixes),
+   *  course words not known yet (new, with the lexeme for its card) and words outside the course (out); ok when the unknown words besides
+   *  the target are at most ⌈30 %⌉ of the words ('auto') or maxUnknown. */
+  function deepSentence(C, code, text, lexId, K, maxUnknown = 'auto') {
+    const toks = tokenize(C, code, text), out = [], unknown = []; let words = 0, bad = 0, target = -1;
+    for (const k of toks) {
+      if (k.p) { out.push({ t: k.t, p: k.p }); continue; }
+      words++;
+      const parts = k.parts || [{ t: k.t, matches: k.matches || [] }];
+      const ti = target < 0 ? parts.findIndex(p => (p.matches || []).some(m => m.l === lexId)) : -1;
+      if (ti >= 0) {
+        const m = parts[ti].matches.find(x => x.l === lexId); target = out.length;
+        out.push({ t: k.t, target: true, form: parts[ti].t, cell: m.f || null, pre: parts.slice(0, ti).map(p => p.t).join(''), post: parts.slice(ti + 1).map(p => p.t).join('') });
+        continue;
+      }
+      const ls = parts.map(p => (p.matches || []).map(m => m.l));
+      if (ls.some(a => !a.length)) { bad++; out.push({ t: k.t, out: true }); continue; }
+      const miss = ls.find(a => !a.some(l => K.has(l)));
+      if (miss) { bad++; unknown.push(miss[0]); out.push({ t: k.t, l: miss[0], new: true }); continue; }
+      const last = ls[ls.length - 1]; out.push({ t: k.t, l: last.find(l => K.has(l)) || last[0] });
+    }
+    const cap = maxUnknown === 'auto' ? Math.ceil(UNKNOWN_SHARE * words) : (+maxUnknown || 0);
+    return { tokens: out, target, words, unknown: uniqStr(unknown), outside: out.filter(x => x.out).length, cap, ok: bad <= cap };
+  }
+  /** The tokens with the target replaced by a gap (its attached prefixes stay). */
+  const gapped = s => s.tokens.map((k, i) => i === s.target ? { gap: true, pre: k.pre, post: k.post } : k);
+  /** Where a compound splits (§6.2 compound_split): the parts of features.compound found from the end of the lemma (the head last; a
+   *  linker stays with the part before it: Kranken|pfleger). → {cuts, pieces, head} or null when the parts are not found in the word. */
+  function compoundSplit(lx) {
+    const comp = Array.isArray(lx.compound) ? lx.compound : Array.isArray(lx.features?.compound) ? lx.features.compound : null;
+    if (!comp || comp.length < 2) return null;
+    const lem = nfc(lx.lemma), low = lem.toLowerCase(), cuts = []; let end = lem.length;
+    for (let i = comp.length - 1; i >= 1; i--) {
+      const p = nfc(comp[i].part || '').toLowerCase(); if (!p || !low.slice(0, end).endsWith(p)) return null;
+      end -= p.length; if (end <= 0) return null; cuts.unshift(end);
+    }
+    return { cuts, pieces: [lem.slice(0, cuts[0]), ...cuts.map((c, i) => lem.slice(c, cuts[i + 1] ?? lem.length))], head: comp[comp.length - 1].part };
+  }
+  const oneEdit = (a, b) => {
+    if (a === b) return false; const A = [...a], B = [...b]; if (Math.abs(A.length - B.length) > 1) return false;
+    let i = 0, j = 0, d = 0;
+    while (i < A.length && j < B.length) { if (A[i] === B[j]) { i++; j++; continue; } if (++d > 1) return false; if (A.length > B.length) i++; else if (B.length > A.length) j++; else { i++; j++; } }
+    return d + (A.length - i) + (B.length - j) <= 1;
+  };
+  /** Per-language indexes the depth types share (built once): roots, look-alikes, collocation partners, phrases, intensity scales. */
+  function deepPools(C, code) {
+    const X = C.lang[code]; if (X._deep) return X._deep;
+    const P = X._deep = {}, lexes = Object.values(X.lex);
+    const lazy = (name, make) => Object.defineProperty(P, name, { configurable: true, get() { const v = make(); Object.defineProperty(P, name, { value: v }); return v; } });   // built when a type first needs it
+    P.rootKey = r => stripMarks(code, nfc(r || '')).replace(/[\s\-–.]+/g, ' ').trim();
+    P.byRoot = {}; for (const lx of lexes) if (typeof lx.root === 'string' && lx.root.trim()) (P.byRoot[P.rootKey(lx.root)] = P.byRoot[P.rootKey(lx.root)] || []).push(lx.id);
+    // look-alikes: one letter apart, the same unvocalized skeleton (ar, he), the same toneless pinyin or one character apart (zh)
+    const key = lx => code === 'zh' ? nfc(lx.lemma) : plainOf(code, lx.lemma).replace(/[\s\-]/g, '');
+    const py = lx => lx.pinyin ? pinyinMarksToNumbers(lx.pinyin).replace(/[\d\s']/g, '') : null;
+    lazy('look', () => { const look = {}; const cand = lexes.filter(lx => (lx.senses || []).length), K1 = cand.map(key), PY = cand.map(py), CH = K1.map(k => [...k]), LEM = cand.map(lx => nfc(lx.lemma));
+    for (let a = 0; a < cand.length; a++) for (let b = a + 1; b < cand.length; b++) {
+      if (Math.abs(CH[a].length - CH[b].length) > 1 && !(PY[a] && PY[a] === PY[b])) continue;   // too different in length (the cheap test first)
+      const x = cand[a], y = cand[b], kx = K1[a], ky = K1[b]; if (LEM[a] === LEM[b]) continue;
+      if ((x.senses || []).some(s => (y.senses || []).includes(s))) continue;   // the same concept: those are contrasts, not look-alikes
+      let hit = false;
+      if (code === 'zh') { const X1 = CH[a], Y1 = CH[b]; hit = (PY[a] && PY[a] === PY[b]) || (X1.length >= 2 && X1.length === Y1.length && X1.filter((ch, i) => ch !== Y1[i]).length === 1); }
+      else hit = kx === ky || (CH[a].length >= (code === 'de' ? 4 : 3) && oneEdit(kx, ky));
+      if (hit) { (look[x.id] = look[x.id] || []).push(y.id); (look[y.id] = look[y.id] || []).push(x.id); }
+    }
+    return look; });
+    // collocation partners: the collocation without the word, and on which side of it
+    lazy('partners', () => { const partners = [];
+    for (const lx of lexes) for (const col of profOf(lx).collocations || []) {
+      const s = deepSentence(C, code, col.text, lx.id, new Set(), 99); if (s.target < 0) continue;
+      const idx = s.tokens.map((k, i) => (!k.p && i !== s.target) ? i : -1).filter(i => i >= 0); if (!idx.length || idx[idx.length - 1] - idx[0] + 1 !== idx.length) continue;
+      const span = s.tokens.slice(idx[0], idx[idx.length - 1] + 1).map(k => ({ t: k.t, p: k.p }));
+      const text = joinTokens(span, X.language.tokenJoin);
+      partners.push({ lex: lx.id, pos: lx.pos, col: col.text, tr: col.tr || '', text, plain: plainOf(code, text), side: idx[0] < s.target ? 'before' : 'after', n: idx.length, from: idx[0], to: idx[idx.length - 1], s });
+    }
+    return partners; });
+    P.phrases = []; for (const lx of lexes) for (const ph of profOf(lx).phrases || []) if (ph.text && ph.meaning) P.phrases.push({ lex: lx.id, ...ph });
+    // intensity scales: words with a strength (1–5) that share a concept or name each other as synonym / antonym
+    const withI = lexes.filter(lx => typeof profOf(lx).intensity === 'number'), parent = {};
+    const find = id => parent[id] === id ? id : (parent[id] = find(parent[id])); withI.forEach(lx => parent[lx.id] = lx.id);
+    const names = lx => new Set([...(profOf(lx).synonyms || []), ...(profOf(lx).antonyms || [])].map(s => plainOf(code, s.word || '')));
+    for (const x of withI) for (const y of withI) if (x.id < y.id && ((x.senses || []).some(s => (y.senses || []).includes(s)) || names(x).has(plainOf(code, y.lemma)) || names(y).has(plainOf(code, x.lemma)))) parent[find(x.id)] = find(y.id);
+    P.scale = {}; for (const x of withI) (P.scale[find(x.id)] = P.scale[find(x.id)] || []).push(x.id);
+    P.scaleOf = id => parent[id] ? P.scale[find(id)].filter(i => i !== id) : [];
+    return P;
+  }
+  /** The words a learner might mix up with this one, with why: the other words of one of its concepts (contrasts) and look-alikes. */
+  function confusablesOf(C, code, lexId) {
+    const X = C.lang[code], lx = X.lex[lexId], P = deepPools(C, code), out = [];
+    for (const c of lx.senses || []) for (const id of X.byConcept[c] || []) if (id !== lexId && !out.some(o => o.lex === id)) out.push({ lex: id, why: 'contrast', concept: c });
+    for (const id of P.look[lexId] || []) if (!out.some(o => o.lex === id)) out.push({ lex: id, why: 'lookalike' });
+    return out;
+  }
+  const REG_SITUATION = { formal: 'in a formal letter or an official text', informal: 'talking to family and friends', colloquial: 'chatting with friends', slang: 'in slang, among young people',
+    literary: 'in literature', poetic: 'in poetry', technical: 'in a technical or specialist text', honorific: 'speaking respectfully to someone', neutral: 'in everyday neutral speech',
+    dated: 'in older texts (dated)', archaic: 'in very old texts (archaic)', humorous: 'as a joke', pejorative: 'to sound disparaging', euphemistic: 'to put it gently (a euphemism)',
+    children: 'talking to small children', religious: 'in a religious context', vulgar: 'vulgarly', dialectal: 'in a dialect' };
+  /** The generators: DEEP[type](x, lx) → items for one word; x = {C, L, code, X, K (known, for 🆕), M (met), rng, maxUnknown, P (pools)}. */
+  const DEEP = {};
+  const deepBase = (x, type, lx, more) => ({ deep: true, kind: type, lang: x.code, lex: lx.id, track: deepTrack(type), ...more });
+  const pickN = (x, arr, n) => shuffled(arr, x.rng).slice(0, n);
+  /** Sort by a score computed once per element (the scores may include a random tie-breaker). */
+  const rankBy = (arr, f) => arr.map(v => [f(v), v]).sort((a, b) => a[0] - b[0]).map(p => p[1]);
+  DEEP.root_family = (x, lx) => {
+    if (typeof lx.root !== 'string' || !lx.root.trim()) return [];
+    const { P, X, code } = x, r = P.rootKey(lx.root), fam = P.byRoot[r] || [], out = [];
+    const shared = q => q.split(' ').filter(ch => r.split(' ').includes(ch)).length;
+    const wrong = rankBy(shuffled(Object.keys(P.byRoot).filter(q => q !== r), x.rng), q => -shared(q)).slice(0, 3);
+    const rootShown = q => X.lex[P.byRoot[q][0]].root.trim();
+    const family = fam.filter(id => id !== lx.id && (x.M.has(id) || x.K.has(id)));
+    const why = [W(lx.lemma, code), ' — root ', W(lx.root.trim(), code), ...(family.length ? ['. The same root: ', ...family.slice(0, 6).flatMap((id, i) => [i ? ', ' : '', W(X.lex[id].lemma, code), ` (${glossOf(x.C, X, id)})`])] : [])];
+    if (wrong.length >= 2) out.push(deepBase(x, 'root_family', lx, { type: 'vpick', ask: 'Its root?', prompt: { word: lx.lemma }, options: shuffled([lx.root.trim(), ...wrong.map(rootShown)], x.rng), optLang: code, answer: lx.root.trim(), why }));
+    // sort met words into two families
+    const metFam = q => (P.byRoot[q] || []).filter(id => id === lx.id || x.M.has(id));
+    const mine = metFam(r);
+    if (mine.length >= 2) {
+      const other = shuffled(Object.keys(P.byRoot).filter(q => q !== r && metFam(q).length >= 2), x.rng)[0];
+      if (other) {
+        const cards = [...[lx.id, ...pickN(x, mine.filter(id => id !== lx.id), 2)].map(id => ({ id, bucket: r })), ...pickN(x, metFam(other), 3).map(id => ({ id, bucket: other }))];
+        out.push(deepBase(x, 'root_family', lx, { type: 'vsort', ask: 'Sort the words by their root', buckets: [r, other].map(q => ({ id: q, label: rootShown(q), lang: code })),
+          cards: shuffled(cards.map(c => ({ ...c, text: X.lex[c.id].lemma, lang: code, lex: c.id, note: glossOf(x.C, X, c.id) })), x.rng),
+          why: [r, other].flatMap((q, i) => [i ? ' · ' : '', W(rootShown(q), code), ': ', ...metFam(q).flatMap((id, j) => [j ? ', ' : '', W(X.lex[id].lemma, code)])]) }));
+      }
+    }
+    return out;
+  };
+  DEEP.compound_split = (x, lx) => {
+    const sp = compoundSplit(lx); if (!sp) return [];
+    const { X, code } = x, lem = nfc(lx.lemma), n = lem.length, show = cuts => [lem.slice(0, cuts[0]), ...cuts.map((c, i) => lem.slice(c, cuts[i + 1] ?? n))].join('·');
+    const right = show(sp.cuts), wrongs = [];
+    for (const d of shuffled([-3, -2, -1, 1, 2, 3], x.rng)) {
+      const j = Math.floor(x.rng() * sp.cuts.length), cuts = sp.cuts.slice(); cuts[j] += d;
+      if (cuts[j] < 2 || cuts[j] > n - 2 || cuts.some((c, i) => i && c <= cuts[i - 1])) continue;
+      const s = show(cuts); if (s !== right && !wrongs.includes(s)) wrongs.push(s);
+      if (wrongs.length === 3) break;
+    }
+    if (wrongs.length < 2) return [];
+    const head = Object.values(X.lex).find(y => y.id !== lx.id && y.pos === 'NOUN' && nfc(y.lemma) === nfc(sp.head));
+    const steps = [{ ask: 'Where does it split?', options: shuffled([right, ...wrongs], x.rng), optLang: code, answer: right }];
+    const g = GENDER_WORD[lx.gender];
+    if (g && lx.class !== 'plt') steps.push(code === 'de' ? { ask: 'And its article?', options: ['der', 'die', 'das'], optLang: code, answer: ARTICLE[lx.gender] } : { ask: 'And its gender?', options: ['masculine', 'feminine', 'neuter'], answer: g });
+    const last = sp.pieces[sp.pieces.length - 1], why = [W(right, code), ' — the last part, ', W(last, code), ', is the head: it decides the gender'];
+    if (g) why.push(` (${g}`, ...(head ? [', as in ', W((code === 'de' ? ARTICLE[head.gender] + ' ' : '') + head.lemma, code)] : []), ')', ...(code === 'de' ? [': ', W(ARTICLE[lx.gender] + ' ' + lx.lemma, code)] : []));
+    why.push('.');
+    return [deepBase(x, 'compound_split', lx, { type: 'vsteps', prompt: { word: lx.lemma }, steps, why })];
+  };
+  /** Profile examples of a word for one concept (its sense's concept), fit for an item (D19) and with the word found. */
+  const contexts = (x, lx, cid) => (profOf(lx).examples || []).filter(e => e.text && senseMain(lx, e.sense)?.concept === cid)
+    .map(e => ({ e, s: deepSentence(x.C, x.code, e.text, lx.id, x.K, x.maxUnknown) })).filter(o => o.s.ok && o.s.target >= 0);
+  DEEP.sense_split = (x, lx) => {
+    const { X, code } = x, out = [];
+    for (const cid of lx.senses || []) {
+      const group = uniqStr([lx.id, ...(X.byConcept[cid] || []).filter(id => id !== lx.id && x.M.has(id))]).slice(0, 4);
+      if (group.length < 2 || new Set(group.map(id => nfc(X.lex[id].lemma))).size !== group.length) continue;
+      const val = id => ((X.lex[id].contrasts || []).find(t => t.concept === cid) || {});
+      const axis = val(lx.id).axis || val(group[1]).axis || '';
+      const why = [`“${x.C.concepts[cid]?.gloss || cid}”${axis ? ' — ' + axis : ''}: `, ...group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), val(id).value ? ' = ' + val(id).value : ''])];
+      const mine = contexts(x, lx, cid);
+      const hint = e => [].concat(e.register || [], e.context || []).join(' · ');   // the register and context of the example: often what separates the words
+      for (const { e, s } of mine.slice(0, 3)) out.push(deepBase(x, 'sense_split', lx, { type: 'vpick', ask: 'Which word fills the gap?', prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '', hint: hint(e) },
+        options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma, unknown: s.unknown, why: [...why, '. ', W(e.text, code)] }));
+      // sorting contexts into the words (kennen / wissen)
+      const all = group.map(id => ({ id, cs: id === lx.id ? mine : contexts(x, X.lex[id], cid) })).filter(g => g.cs.length);
+      if (all.length >= 2 && all.reduce((a, g) => a + Math.min(2, g.cs.length), 0) >= 3) {
+        const cards = all.flatMap(g => g.cs.slice(0, 2).map((o, i) => ({ id: g.id + '#' + i, tokens: gapped(o.s), tr: o.e.tr || '', hint: hint(o.e), bucket: g.id, lex: g.id, lang: code, unknown: o.s.unknown })));
+        out.push(deepBase(x, 'sense_split', lx, { type: 'vsort', ask: 'Which word goes in each gap? Sort the sentences', buckets: all.map(g => ({ id: g.id, label: X.lex[g.id].lemma, lang: code })),
+          cards: shuffled(cards, x.rng), unknown: uniqStr(cards.flatMap(c => c.unknown)), why }));
+      }
+    }
+    return out;
+  };
+  DEEP.collocation = (x, lx) => {
+    const { X, code, P } = x, out = [], own = P.partners.filter(p => p.lex === lx.id);
+    const mine = [...(profOf(lx).collocations || []), ...(profOf(lx).examples || []), ...(profOf(lx).phrases || [])].map(o => plainOf(code, o.text || '')).join(' | ');
+    for (const p of own) {
+      const others = shuffled(P.partners, x.rng).filter(q => q.lex !== lx.id && q.plain !== p.plain && !mine.includes(q.plain)).slice(0, 150);
+      const wrong = uniqStr(rankBy(others, q => (q.side === p.side ? 0 : 2) + (q.n === p.n ? 0 : 1) + (X.lex[q.lex].pos === lx.pos ? 0 : 1) + x.rng()).map(q => q.text)).slice(0, 3);
+      if (wrong.length < 2) continue;
+      const toks = [...p.s.tokens.slice(0, p.from), { gap: true, pre: '', post: '' }, ...p.s.tokens.slice(p.to + 1)];
+      out.push(deepBase(x, 'collocation', lx, { type: 'vpick', ask: ['What goes with ', W(lx.lemma, code), ' here?'], prompt: { sentence: toks, tr: p.tr }, options: shuffled([p.text, ...wrong], x.rng), optLang: code, answer: p.text,
+        why: [W(p.col, code), p.tr ? ' — ' + p.tr : ''] }));
+    }
+    return out;
+  };
+  DEEP.confusables = (x, lx) => {
+    const { X, code, C } = x, out = [], conf = confusablesOf(C, code, lx.id).filter(o => x.M.has(o.lex));
+    for (const t of lx.contrasts || []) {
+      const group = uniqStr([lx.id, ...conf.filter(o => o.why === 'contrast' && o.concept === t.concept).map(o => o.lex)]).slice(0, 4);
+      const val = id => ((X.lex[id].contrasts || []).find(u => u.concept === t.concept) || {}).value || '';
+      if (group.length < 2 || !t.value || new Set(group.map(val)).size !== group.length || new Set(group.map(id => nfc(X.lex[id].lemma))).size !== group.length) continue;
+      const clue = maskWords(t.value, group.flatMap(id => [X.lex[id].lemma, ...Object.values(X.lex[id].forms || {})]));
+      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: 'Which word is it?', prompt: { text: `“${C.concepts[t.concept]?.gloss || t.concept}” — ${t.axis}: ${clue}` },
+        options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma, why: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), ' = ' + val(id)]) }));
+    }
+    const lemmas = new Set([nfc(lx.lemma)]), look = [];
+    for (const o of shuffled(conf, x.rng)) if (o.why === 'lookalike' && glossOf(C, X, o.lex) !== glossOf(C, X, lx.id) && !lemmas.has(nfc(X.lex[o.lex].lemma))) { lemmas.add(nfc(X.lex[o.lex].lemma)); look.push(o.lex); }
+    if (look.length) {
+      const group = [lx.id, ...look.slice(0, 3)];
+      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: `Which one means “${glossOf(C, X, lx.id)}”?`, prompt: { text: 'Words that look alike' }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma,
+        why: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), X.lex[id].pinyin ? ` ${X.lex[id].pinyin}` : '', ' = ' + glossOf(C, X, id)]) }));
+    }
+    return out;
+  };
+  DEEP.intensity_scale = (x, lx) => {
+    const { X, code, P } = x, me = profOf(lx).intensity; if (typeof me !== 'number') return [];
+    const others = P.scaleOf(lx.id).filter(id => x.M.has(id) && profOf(X.lex[id]).intensity !== me), byVal = {};
+    for (const id of shuffled(others, x.rng)) { const v = profOf(X.lex[id]).intensity; if (!byVal[v]) byVal[v] = id; }
+    const group = [lx.id, ...Object.values(byVal)].sort((a, b) => profOf(X.lex[a]).intensity - profOf(X.lex[b]).intensity);
+    if (group.length < 2) return [];
+    const why = group.flatMap((id, i) => [i ? ' < ' : '', W(X.lex[id].lemma, code), ` (${glossOf(x.C, X, id)}, ${profOf(X.lex[id]).intensity}/5)`]);
+    if (group.length >= 3) return [deepBase(x, 'intensity_scale', lx, { type: 'vorder', ask: 'Put them in order: the weakest first', cards: group.map(id => ({ text: X.lex[id].lemma, lang: code, lex: id, note: glossOf(x.C, X, id) })), why })];
+    const strong = group[group.length - 1];
+    return [deepBase(x, 'intensity_scale', lx, { type: 'vpick', ask: 'Which is stronger?', prompt: { text: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), ' = ' + glossOf(x.C, X, id)]) }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: X.lex[strong].lemma, why })];
+  };
+  DEEP.register_pick = (x, lx) => {
+    const p = profOf(lx), { code } = x, seen = new Set(), opts = [];
+    for (const o of [{ w: lx.lemma, regs: regsOf(p.register), nuance: mainSenses(lx)[0]?.def || '' }, ...(p.synonyms || []).map(s => ({ w: s.word, regs: regsOf(s.register), nuance: s.nuance || '', region: s.region })) ]) {
+      const k = plainOf(code, o.w || ''); if (!k || seen.has(k) || !o.regs.length) continue; seen.add(k); opts.push(o);
+    }
+    if (opts.length < 2) return [];
+    const out = [], gl = glossOf(x.C, x.X, lx.id);
+    for (const r of uniqStr(opts.flatMap(o => o.regs))) {
+      const holders = opts.filter(o => o.regs.includes(r)); if (holders.length !== 1) continue;
+      const others = opts.filter(o => !o.regs.includes(r)); if (!others.length) continue;
+      const h = holders[0], sit = r === 'regional' ? (h.region ? `in ${h.region}` : 'in one region (a regional word)') : REG_SITUATION[r] || `in ${r} use`;
+      const shown = [h, ...pickN(x, others, 3)];
+      out.push(deepBase(x, 'register_pick', lx, { type: 'vpick', ask: `Which word fits ${sit}?`, prompt: { text: `Words around “${gl}”` }, options: shuffled(shown.map(o => o.w), x.rng), optLang: code, answer: h.w,
+        why: shown.flatMap((o, i) => [i ? ' · ' : '', W(o.w, code), ` (${o.regs.join(', ')}${o.region ? ', ' + o.region : ''})`, o.nuance ? ' — ' + o.nuance : '']), register: r }));
+    }
+    return out.sort((a, b) => (a.register === 'neutral') - (b.register === 'neutral'));
+  };
+  DEEP.nuance_pick = (x, lx) => {
+    const p = profOf(lx), { code } = x, seen = new Set(), opts = [];
+    for (const o of [{ w: lx.lemma, nuance: mainSenses(lx)[0]?.def || '', forms: Object.values(lx.forms || {}) }, ...(p.synonyms || []).map(s => ({ w: s.word, nuance: s.nuance || '', forms: [] }))]) {
+      const k = plainOf(code, o.w || ''); if (!k || seen.has(k) || !o.nuance) continue; seen.add(k); opts.push(o);
+    }
+    if (opts.length < 2) return [];
+    const all = opts.flatMap(o => [o.w, ...o.forms, ...String(o.w).split(/\s+/).filter(t => [...t].length >= 2)]), out = [];
+    for (const o of opts) o.clue = maskWords(o.nuance, all);
+    for (const o of opts) {
+      const clue = o.clue; if (clue.replace(/[…\s\p{P}]/gu, '').length < 5) continue;
+      const shown = [o, ...pickN(x, opts.filter(q => q !== o && q.clue !== clue), 3)];
+      if (shown.length < 2) continue;
+      out.push(deepBase(x, 'nuance_pick', lx, { type: 'vpick', ask: 'Which word has this nuance?', prompt: { text: clue }, options: shuffled(shown.map(q => q.w), x.rng), optLang: code, answer: o.w,
+        why: shown.flatMap((q, i) => [i ? ' · ' : '', W(q.w, code), ' — ' + q.nuance]) }));
+    }
+    return out;
+  };
+  DEEP.connotation = (x, lx) => {
+    const p = profOf(lx), c = p.connotation; if (!['positive', 'negative', 'neutral', 'mixed'].includes(c)) return [];
+    return [deepBase(x, 'connotation', lx, { type: 'vpick', ask: 'What feeling does it carry?', prompt: { word: lx.lemma }, options: c === 'mixed' ? ['positive', 'neutral', 'negative', 'mixed'] : ['positive', 'neutral', 'negative'], answer: c,
+      why: [W(lx.lemma, x.code), ` — ${c}`, p.feeling ? '. ' + p.feeling : ''] })];
+  };
+  DEEP.idiom_meaning = (x, lx) => {
+    const { code, P } = x, out = [];
+    for (const ph of profOf(lx).phrases || []) {
+      if (!ph.text || !ph.meaning) continue;
+      const others = P.phrases.filter(q => q.lex !== lx.id && q.meaning !== ph.meaning && plainOf(code, q.text) !== plainOf(code, ph.text));
+      const near = rankBy(others, q => (q.kind === ph.kind ? 0 : 1) + x.rng());
+      const wrongM = uniqStr(near.map(q => q.meaning)).slice(0, 3), wrongT = uniqStr(near.map(q => q.text)).slice(0, 3);
+      const s = deepSentence(x.C, code, ph.text, lx.id, x.K, 99), why = [W(ph.text, code), ph.tr ? ` (“${ph.tr}”)` : '', ' — ' + ph.meaning, ph.source ? ` — ${ph.source}` : ''];
+      if (wrongM.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: `What does it mean${ph.kind ? ' (' + ph.kind + ')' : ''}?`, prompt: { sentence: s.tokens, lit: ph.tr || '' }, options: shuffled([ph.meaning, ...wrongM], x.rng), answer: ph.meaning, unknown: s.unknown, why }));
+      if (wrongT.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: 'Which expression says this?', prompt: { text: ph.meaning }, options: shuffled([ph.text, ...wrongT], x.rng), optLang: code, answer: ph.text, why }));
+    }
+    return out;
+  };
+  DEEP.example_cloze = (x, lx) => {
+    const { X, code } = x, out = [], ownForms = new Set([lx.lemma, ...Object.values(lx.forms || {}), ...(lx.alts || [])].map(f => plainOf(code, f)));
+    const con = x.C.concepts[(lx.senses || [])[0]] || {}, sc = y => { const k = x.C.concepts[(y.senses || [])[0]] || {}; return (x.M.has(y.id) ? 0 : 2) + (k.field && k.field === con.field ? 0 : 1) + x.rng(); };
+    const pool = shuffled(Object.values(X.lex).filter(y => y.id !== lx.id && y.pos === lx.pos && (y.senses || []).length && !(y.senses || []).some(c => (lx.senses || []).includes(c))), x.rng).slice(0, 80);
+    const ranked = rankBy(pool, sc);
+    for (const e of profOf(lx).examples || []) {
+      if (!e.text) continue;
+      const s = deepSentence(x.C, code, e.text, lx.id, x.K, x.maxUnknown); if (!s.ok || s.target < 0) continue;
+      const tg = s.tokens[s.target], ans = tg.form, cap = /^\p{Lu}/u.test(ans) && !/^\p{Lu}/u.test(lx.lemma);
+      const formOf = y => { if (tg.cell) { const f = y.forms || {}, kk = Object.keys(f).find(c => canon(c) === canon(tg.cell)); return kk ? f[kk] : null; } return Object.keys(y.forms || {}).length ? null : y.lemma; };
+      const wrong = uniqStr(ranked.map(formOf).filter(f => f && !ownForms.has(plainOf(code, f)) && plainOf(code, f) !== plainOf(code, ans)).map(f => cap ? capFirst(f) : f)).slice(0, 3);
+      if (wrong.length < 2) continue;
+      out.push(deepBase(x, 'example_cloze', lx, { type: 'vpick', ask: 'Which word fills the gap?', prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '' }, options: shuffled([ans, ...wrong], x.rng), optLang: code, answer: ans,
+        unknown: s.unknown, why: [W(e.text, code), e.tr ? ' — ' + e.tr : '', tg.cell ? ` (${cellLabel(tg.cell)})` : ''] }));
+    }
+    return out;
+  };
+  DEEP.sense_pick = (x, lx) => {
+    const ms = mainSenses(lx).filter(s => s.def); if (ms.length < 2) return [];
+    const out = [];
+    for (const e of profOf(lx).examples || []) {
+      const m = senseMain(lx, e.sense); if (!m || !ms.includes(m) || !e.text) continue;
+      const s = deepSentence(x.C, x.code, e.text, lx.id, x.K, x.maxUnknown); if (!s.ok) continue;
+      const shown = [m, ...pickN(x, ms.filter(o => o !== m && o.def !== m.def), 3)];
+      out.push(deepBase(x, 'sense_pick', lx, { type: 'vpick', ask: ['Which meaning of ', W(lx.lemma, x.code), ' is used here?'], prompt: { sentence: s.tokens, trAfter: [e.tr, e.py].filter(Boolean).join(' · ') }, options: shuffled(shown.map(o => o.def), x.rng), answer: m.def,
+        unknown: s.unknown, why: [W(e.text, x.code), e.tr ? ' — ' + e.tr : '', ' → ' + m.def] }));
+    }
+    return out;
+  };
+  DEEP.etymology_link = (x, lx) => {
+    const { X, code, C } = x, ety = profOf(lx).etymology; if (!ety?.text) return [];
+    const hide = [lx.lemma, ...Object.values(lx.forms || {}), lx.trad, lx.translit, lx.pinyin, lx.pinyin && pinyinMarksToNumbers(lx.pinyin).replace(/\d/g, ''), ...String(lx.lemma).split(/\s+/), ...(code === 'zh' ? [...lx.lemma, ...(lx.trad ? [...lx.trad] : [])] : [])];
+    const clue = firstSentences(maskWords(ety.text, hide));
+    if (plainOf(code, clue).includes(plainOf(code, lx.lemma)) || clue.replace(/[…\s\p{P}]/gu, '').length < 10) return [];
+    const con = C.concepts[(lx.senses || [])[0]] || {};
+    const pool = shuffled(Object.values(X.lex).filter(y => y.id !== lx.id && profOf(y).etymology?.text && profOf(y).etymology.text !== ety.text && nfc(y.lemma) !== nfc(lx.lemma)), x.rng).slice(0, 80);
+    const sc = y => (x.M.has(y.id) ? 0 : 2) + (y.pos === lx.pos ? 0 : 1) + ((C.concepts[(y.senses || [])[0]] || {}).field === con.field ? 0 : 1) + x.rng();
+    const wrong = uniqStr(rankBy(pool, sc).map(y => y.lemma)).slice(0, 3);
+    if (wrong.length < 2) return [];
+    return [deepBase(x, 'etymology_link', lx, { type: 'vpick', ask: 'Which word comes from this?', prompt: { text: clue }, options: shuffled([lx.lemma, ...wrong], x.rng), optLang: code, answer: lx.lemma,
+      why: [W(lx.lemma, code), ' — ' + ety.text, ety.src ? ` (${ety.src})` : ''] })];
+  };
+  /** Depth items for some words of one language, the types mixed (one per word and type in turn). opts: {types, max = 10, rng, k, maxUnknown = 'auto', strictKnown, perWord} */
+  function deepItems(C, L, code, lexIds, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 10, perWord = opts.perWord ?? (lexIds.length > 1 ? 2 : Infinity);
+    const M = new Set(Object.keys(k.state).filter(id => MET.has(k.state[id])));
+    const x = { C, L, code, X, K: k.R, M, rng, maxUnknown: opts.strictKnown ? 0 : (opts.maxUnknown ?? 'auto'), P: deepPools(C, code) };
+    const types = (opts.types || DEEP_TYPES).filter(t => DEEP[t]), pools = [];
+    for (const t of shuffled(types, rng)) {
+      const per = lexIds.filter(id => X.lex[id]).map(id => shuffled(DEEP[t](x, X.lex[id]) || [], rng)).filter(a => a.length), q = [];
+      for (let i = 0; per.some(a => a.length); i++) for (const a of per) if (a.length) q.push(a.shift());
+      if (q.length) pools.push(q);
+    }
+    const out = [], used = {}; let i = 0;
+    while (out.length < max && pools.some(p => p.length)) {
+      const p = pools[i++ % pools.length]; if (!p.length) continue;
+      const j = p.findIndex(it => (used[it.lex] || 0) < perWord); if (j < 0) { p.length = 0; continue; }
+      const it = p.splice(j, 1)[0]; used[it.lex] = (used[it.lex] || 0) + 1; out.push(it);
+    }
+    return out;
+  }
+  /** The depth types a word's data allows for this learner (for 🏋️ practise this word). */
+  function deepTypes(C, L, code, lexId, opts = {}) {
+    const its = deepItems(C, L, code, [lexId], { ...opts, max: 999, rng: opts.rng || (() => 0.5) });
+    return DEEP_TYPES.filter(t => its.some(it => it.kind === t));
+  }
+  /** Record a depth item as a review of its word(s): its track; a sorting item reviews every word on it (perLex: {lexId: right}). */
+  function deepRecord(C, L, code, item, ok, day, perLex) {
+    const X = C.lang[code];
+    if (perLex && Object.keys(perLex).length) { for (const [id, good] of Object.entries(perLex)) if (X.lex[id]) review(C, L, code, id, item.track || 'r', good ? 'good' : 'again', day); }
+    else review(C, L, code, item.lex, item.track || deepTrack(item.kind), ok ? 'good' : 'again', day);
+  }
+  /** Deepening for the daily session (§7.5): 1–3 items for words already known (≥ known_r), not due today, the least recently reviewed first,
+   *  languages in turn. → [{lang, lex, item}] */
+  function deepenPlan(C, L, { day, languages, n = 3, rng = Math.random } = {}) {
+    const langs = (languages || L.settings.languages || C.languages).filter(c => C.lang[c]), queues = [];
+    for (const c of langs) {
+      const k = known(C, L, c), items = L.langs[c]?.items || {};
+      const last = id => Math.max(items[id]?.r?.last ?? -1, items[id]?.p?.last ?? -1);
+      const due = id => ['r', 'p'].some(t => items[id]?.[t] && items[id][t].due <= day);
+      const cand = shuffled(Object.keys(C.lang[c].lex).filter(id => ['known_r', 'known_p', 'mastered'].includes(k.state[id]) && C.lang[c].lex[id].profile && !due(id)), rng).sort((a, b) => last(a) - last(b));
+      queues.push({ c, k, cand });
+    }
+    const out = []; let tries = 0;
+    while (out.length < n && queues.some(q => q.cand.length) && tries++ < 60) {
+      for (const q of queues) {
+        if (out.length >= n || !q.cand.length) continue;
+        const id = q.cand.shift(); let it = null;
+        for (const t of shuffled(DEEP_TYPES, rng)) if ((it = deepItems(C, L, q.c, [id], { k: q.k, rng, max: 1, types: [t] })[0])) break;   // one type at a time: only the indexes it needs are built
+        if (it) out.push({ lang: q.c, lex: id, item: it });
+      }
+    }
+    return out;
+  }
+  const deepGen = type => ctx => deepItems(ctx.C, ctx.L, ctx.code, [...ctx.K].filter(id => { const lx = ctx.C.lang[ctx.code].lex[id]; return lx && (!ctx.gen.pos || lx.pos === ctx.gen.pos) && (!ctx.gen.concepts || (lx.senses || []).some(c => ctx.gen.concepts.some(p => c.startsWith(p)))); }),
+    { k: ctx.k, rng: ctx.rng, types: [type], max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.root_family = deepGen('root_family'); GEN.compound_split = deepGen('compound_split'); GEN.sense_split = deepGen('sense_split'); GEN.collocation = deepGen('collocation');
+  GEN.confusables = deepGen('confusables'); GEN.intensity_scale = deepGen('intensity_scale'); GEN.register_pick = deepGen('register_pick'); GEN.nuance_pick = deepGen('nuance_pick');
+  GEN.connotation = deepGen('connotation'); GEN.idiom_meaning = deepGen('idiom_meaning'); GEN.example_cloze = deepGen('example_cloze'); GEN.sense_pick = deepGen('sense_pick'); GEN.etymology_link = deepGen('etymology_link');
   API.GEN = GEN;
+  Object.assign(API, { DEEP_TYPES, deepItems, deepTypes, deepSentence, deepTrack, deepRecord, deepenPlan, confusablesOf, compoundSplit, maskWords });
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

@@ -24,6 +24,7 @@
 | P3d | **Rules across all languages** (D13–D15): the parallel order as a validated constraint; the catalogue of phenomena of every language (ar, he, zh, de); the facade of every word (`wordFeatures` / `features`); contrasts; every meaning a concept | ✅ 2026-10-08 |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
+| P5v | **Vocabulary depth** — the remaining §6.2 types (roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins), all from the stored words and profiles; 🏋️ on the word card and the node page, 1–3 deepening items in the daily session | ✅ 2026-10-09 (`langcore` deepening section, `engine/lang/75_vocab2.*`, `tests/lang_vocab2.js`; intensity data exists for 6 words only) |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ⬜ |
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ⬜ |
@@ -618,19 +619,21 @@ Every new type gets a widget in `engine/lang/40_ex.js` with `check`, `reveal`, `
 | `gender_article` | gender | der/die/das; masc/fem incl. exceptions (fast bucket) | D |
 | `principal_parts` | key forms | plural / broken plural / construct form / verb principal parts | D |
 | `measure_word` | classifiers | pick the measure word for a noun | D |
-| `root_family` | roots | sort words by root; find the root; derive from root + pattern | D |
-| `compound_split` | compounds | split a German compound, find its gender | D |
-| `sense_split` | semantic splits | sort contexts into kennen / wissen etc. | D/B |
-| `collocation` | collocations | which verb/adjective goes with the noun | D |
-| `confusables` | look-alikes | pairs drilled together on purpose | D |
-| `intensity_scale` | nuance | order words by intensity (uses `order`) | D |
-| `register_pick` | register | which word fits this situation (formal letter, friends, slang, literary)? from the synonyms by register | D (profile) |
-| `nuance_pick` | subtleties | choose the synonym that fits the context; the explanation is its `nuance` | D (profile) |
-| `connotation` | feeling and strength | positive / negative / neutral, or order by intensity | D (profile) |
-| `idiom_meaning` | phrases | what does the idiom/proverb mean? (and the reverse: which idiom fits) | D (profile) |
-| `example_cloze` | the word in context | the word removed from its example sentences (any of its forms) | D (profile) |
-| `sense_pick` | polysemy | which meaning is used in this sentence? | D (profile) |
-| `etymology_link` | origins and bridges | match the word to its origin / its cognates in other languages | D (profile) |
+| `root_family` | roots | find the root of a word (distractors: roots sharing radicals); sort met words into their root families (ar, he: `root`) | D |
+| `compound_split` | compounds | choose where a German compound splits (from `features.compound`, the head found at the end, the linker kept with its part), then its article (the gender of the head = the word's `gender`) | D |
+| `sense_split` | semantic splits | a profile example of one of the words of a concept that several words share, the word gapped, with its translation, register and context → which of them (kennen / wissen, 还是 / 或者 …); several contexts sorted into the words; the explanation is their `contrasts` | D (profile) |
+| `collocation` | collocations | a profile collocation with the partner of the word gapped (its translation shown) → the partner; distractors = partners of other words' collocations that occur nowhere in this word's profile | D (profile) |
+| `confusables` | look-alikes | the words of one concept with its contrast as the clue (“you — social distance: formal”) → which word; look-alikes (one letter apart, the same unvocalized skeleton, the same toneless pinyin, one character apart) → which one means X; only words the learner has met | D |
+| `intensity_scale` | nuance | words of one scale (sharing a concept or naming each other as synonym / antonym) with `profile.intensity` → which is stronger / order them weakest → strongest (only where the data has two or more values) | D (profile) |
+| `register_pick` | register | the word and its synonyms → which fits this situation (formal letter, friends, literature, slang, a region …)? only when exactly one of them carries that register | D (profile) |
+| `nuance_pick` | subtleties | the nuance of one synonym (the words themselves masked) → which synonym; the explanation lists every nuance | D (profile) |
+| `connotation` | feeling and strength | positive / neutral / negative (/ mixed); the explanation is the word's `feeling` | D (profile) |
+| `idiom_meaning` | phrases | what does the idiom / proverb / fixed expression mean? and the reverse: which expression says this? | D (profile) |
+| `example_cloze` | the word in context | a profile example with the word gapped (any of its forms; the translation shown) → the form; distractors are the same paradigm cell of other words of the same part of speech | D (profile) |
+| `sense_pick` | polysemy | a profile example → which of the word's meanings (main senses; a nuance counts as its sense) is used? | D (profile) |
+| `etymology_link` | origins and bridges | the origin (`etymology`, the word and its forms masked) → which word comes from it | D (profile) |
+
+**Deepening (P5v).** The thirteen types from `root_family` to `etymology_link` are made by `langcore.deepItems(C, L, code, lexIds, {types, max, rng, k})` from the stored lexemes and their profiles only (nothing written at runtime), each item reviewing its word: the types where the learner picks or completes the word itself (`sense_split`, `collocation`, `confusables`, `register_pick`, `nuance_pick`, `example_cloze`) are reviews of the **P** track, the others of the **R** track (`deepTrack`, `deepRecord`; a sorting item reviews every met word on it). Other words of the course appear only when the learner has met them (state ≥ seen). The sentences are profile examples: they are vocabulary items, so §7.1 applies — at most ⌈30 %⌉ of the words unknown apart from the word trained (`maxUnknown: 'auto'`, `strictKnown` = none), course words not known yet carry 🆕 with their card on tap and are listed at the end, words outside the course are marked and the translation is shown. Collocations and idioms are units of vocabulary themselves and are shown whole (🆕 marked). Where they appear: **🏋️ practise this word** on the word card (the types its data allows, `#/deep/<lang>/<lexeme>`), **🏋️ deepen** on the node and lesson page (a mixed set over the node's met words, `#/deepen/<node>/<lang>`), and the daily session (§7.5). Every type is also a grammar generator (`GEN.<type>`), so a realization may list it in `generators`.
 
 ### 6.3 Morphology
 | id | trains | how | src |
@@ -719,6 +722,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 2. **New batch learned in parallel**: the same 10–15 concepts in each active language one after another (co-located), each language only if the node is open in it.
 3. One grammar function **using the words just learned** (bank + drills).
 4. Two minutes of reading or a polyglot exercise.
+5. **Deepening** (P5v): 1–3 items of the §6.2 depth types for words already known (≥ known_r), the words least recently reviewed first (`langcore.deepenPlan`), each recorded as a review of the word (§6.2 “Deepening”).
 
 ---
 
@@ -727,6 +731,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 * **Course home**: flags of the active languages, each with progress ring and "due" badge; lanes **Vocabulary · Grammar · Script · Reading · Writing · Compare**; the daily session button. The explanation language is shown in the header ("explained in English").
 * **Flag card** (one component for concepts, functions, sentences, fields): content in one language at a time; a vertical rail of small flags, each with a state dot (✅ mastered, 🟢 known, 🟡 learning, 🔓 open, 🔒 locked); click → that language's realization loads in place; **⇄ Compare** opens the aligned table of all course languages. The last chosen language is remembered per card type.
 * **Word card** (the flag card of a word, `langcore.wordCard`): principal parts (article/plural, unit noun, root, pinyin + measure word), then the profile in sections — Meanings · In sentences (register and context chips, translation, unknown words marked) · Goes with · Verbs built on it · Idioms, sayings and quotes · Synonyms by register · Opposites · ⚠️ Watch out · Subtleties · Where it comes from · Fun facts — and the feeling / connotation / status / frequency badges. The flags switch the same concept to another language.
+* **🏋️ Practise this word / 🏋️ deepen** (P5v): the word card offers the depth exercises its data allows; a node or lesson page offers a mixed set over its met words (§6.2 “Deepening”).
 * **Field map**: the whole field (e.g. 200 vegetables) as a picture grid grouped by subgroup, coloured by state in the chosen language; tier dividers; tap an item for its card.
 * **Vocabulary DAG view**: reuses the curriculum map component (`curmap`), with node states for the chosen language.
 * **Grammar function page**: realization in the chosen language (summary, blocks, paradigm, "ask yourself", traps, examples), the flag rail for the other languages, comparison strip at the bottom, the feasibility light and its exercises.
@@ -829,6 +834,10 @@ Existing subjects and curricula must keep working unchanged; the language part i
 - Function pages with procedures and traps; `paradigm`, `inflect`, `analyze`, `morph_build`, `root_pattern`, `agree`, `build_sentence`, `word_order`, `transform`, `contrast`, `parse`, `gloss`, `proofread`, `combine`; feasibility lights; refill tasks (queue + validation + merge).
 - ✔ Every generated item uses only known words (property test over random learner states); refill round-trip test with a mocked Claude answer.
 
+**P5v — Vocabulary depth (the remaining §6.2 types)** — ✅ 2026-10-09
+- Done: `root_family`, `compound_split`, `sense_split`, `collocation`, `confusables`, `intensity_scale`, `register_pick`, `nuance_pick`, `connotation`, `idiom_meaning`, `example_cloze`, `sense_pick`, `etymology_link` — the runtime in its own section of `engine/langcore.js` (`deepItems`, `deepTypes`, `deepSentence`, `deepTrack`, `deepRecord`, `deepenPlan`, `confusablesOf`, `compoundSplit`, every type registered as `GEN.<type>`); the widgets `vpick`, `vsort`, `vorder`, `vsteps` and the views `#/deep/<lang>/<lexeme>` (🏋️ practise this word, from the word card) and `#/deepen/<node>/<lang>` (🏋️ deepen, from the node and lesson pages) in `engine/lang/75_vocab2.js` / `.css`; 1–3 deepening items at the end of the daily session; `tools/lang_phenomena.py` also counts `GEN.<type>` registrations as implemented. Tests: `tests/lang_vocab2.js` (Node over the mini course and the pilot course: every answer comes from the stored data, D19 caps, tracks; Playwright: the word card, the node page, the session, keyboard, phone width).
+- Left out: deriving a word from root + pattern (that is `root_pattern`, §6.3, the grammar lane); cognates across languages (`cognate_bridge`, P6, needs `bridges.json`). `intensity_scale` has data for 6 words only (ar كَثِير / قَلِيل, zh 很好 / 还好): it works where the data exists and is silent elsewhere.
+
 **P6 — Polyglot layer**
 - Comparison tables and strips, bridges, confusables, `parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; interleaved sessions; depth per language.
 - ✔ Tests for comparison rendering and parallel exercises over shared frames.
@@ -846,6 +855,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-09 — P5v: vocabulary depth — the remaining §6.2 types made from the stored words and profiles (roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins), as reviews of the word (R or P track), D19 caps on their sentences; 🏋️ practise this word (word card), 🏋️ deepen (node and lesson pages), 1–3 deepening items in the daily session (§6.2, §7.5, §8, §13).
 - 2026-10-09 — Core batch K1 (C01–C04) in ar, he, zh, de; `main` merged into `languages` (sync rules, i18n; conflicts in `loader.js` and `build.py` resolved as docs/SHELF_AND_LANGUAGES.md says). P3b finished: pictures shown with an emoji fallback, picture → word, 🧩 field sorting, 🔁 principal parts, progress across devices (`mergeLang`, `noema:remote`, `tests/lang_sync.js`). German ordinals are ADJ class `attr`. §13.1 tech debt: the pictures themselves, content after K1 (the user: implementation first), the issues found while writing K1.
 - 2026-10-09 — D18 and D19 (asked by the user): the learner's languages (with levels) decide what is explained — familiar parts hidden in one line, inference by type / family for languages without a profile, comparison notes for a reference set of 21 languages of every type (+ Claude / Gemini notes on request), the library of peculiarities; vocabulary as its own track after the foundations, every other aspect trained with any vocabulary (≤ ⌈30 %⌉ unknown words per sentence, 🆕 with the word card, the list at the end of a lesson), every field with sentences for every non-vocabulary node before it.
 - 2026-10-08 — D17 (asked by the user): the core grows from C01–C07 to **C01–C48** (A2 → B2, §4.4.2; to be reviewed with the user before the content is written) and the **advanced stage** is open-ended (§4.4.4: fields, grammar, lexicon, varieties, texts, culture). `docs/LANGUAGE_RULES.md` — the binding short form of D1–D17 for every agent, tool and skill — with `CLAUDE.md`, `AGENTS.md`, the skill reference, `tools/lang_sources/AGENT_BRIEF.md` and `tests/lang_rules.py` that keeps them in step.

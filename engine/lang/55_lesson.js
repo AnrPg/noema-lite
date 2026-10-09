@@ -16,7 +16,7 @@ VIEWS.lesson = (v, r) => {
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ` · ${Math.round(UI.L.langs[x].checks[nid].best * 100)} %` : ''))),
     h('div', { class: 'row lx-actions' },
       can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + (can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'Practise' : 'Learn') + ' — ' + can.map(x => info(x).flag).join(' ')) : h('span', { class: 'lx-note' }, '🔒 Pass the lesson before it first.'),
-      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ Lesson check') : null));
+      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ Lesson check') : null, deepenButton(nid, c)));
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (fns.includes('fn.overview')) v.append(typologyCard());
   v.append(h('h2', { class: 'lx-h2' }, '📖 Grammar in ', info(c).name), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
@@ -96,6 +96,7 @@ function runQueue(queue, { nid, langs, title }) {
         if (a.check) { const R = results[it.lang] = results[it.lang] || { c: 0, n: 0 }; R.n++; if (ok) R.c++; }
         else if (it.fn) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
         if (it.lex && it.kind === 'word') N.review(UI.C, UI.L, it.lang, it.lex, 'r', ok ? 'good' : 'again', day);
+        else if (it.deep) N.deepRecord(UI.C, UI.L, it.lang, it, ok, day, it.perLex);   // a depth item listed as a generator (P5v)
       } else N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'rec' ? 'r' : 'p', ok ? 'good' : 'again', day);
       save(); ok ? stats.right++ : stats.wrong++;
       const key = JSON.stringify([a.kind, a.lang, a.lex, a.it?.prompt]);
