@@ -28,13 +28,17 @@
   const T = { cur: '/rest/v1/noema_curricula_shared', mem: '/rest/v1/noema_curriculum_members', steps: '/rest/v1/noema_curriculum_steps' };
   /* what stays with each person (their own settings, progress and AI work) — everything else is the shared map */
   const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'updated'];
-  const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan'];
+  const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan', 'assignedAt', 'planFrom', 'groupPlan'];   // 📦 an attached subject is the learner's own
+  const NODE_PLAN = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];   // a step's chapter plan (= NoemaCurriculum.PLAN_KEYS): with an attached subject, the learner's own
   const clone = o => JSON.parse(JSON.stringify(o));
 
   /** The map everybody shares: the curriculum without anybody's settings, progress or preparation state. */
   function strip(c) {
     const r = {}; for (const k of Object.keys(c)) if (!LOCAL.includes(k)) r[k] = c[k];
-    r.nodes = {}; for (const [id, n] of Object.entries(c.nodes || {})) { const x = { ...n }; for (const k of NODE_LOCAL) delete x[k]; r.nodes[id] = x; }
+    r.nodes = {}; for (const [id, n] of Object.entries(c.nodes || {})) {
+      const x = { ...n }; if (n.pack?.assigned && n.groupPlan) { for (const k of NODE_PLAN) delete x[k]; Object.assign(x, n.groupPlan); }   // 📦 my own subject teaches it: the group gets the step's shared plan, not mine
+      for (const k of NODE_LOCAL) delete x[k]; r.nodes[id] = x;
+    }
     return clone(r);
   }
   function hash(o) { const s = JSON.stringify(o); let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h.toString(36) + ':' + s.length.toString(36); }
@@ -43,9 +47,68 @@
     const out = { ...clone(rec) };
     for (const k of LOCAL) if (local && local[k] !== undefined) out[k] = local[k];
     out.nodes = {};
-    for (const [id, n] of Object.entries(rec.nodes || {})) { const old = local?.nodes?.[id]; const x = clone(n); if (old) for (const k of NODE_LOCAL) if (old[k] !== undefined) x[k] = old[k]; out.nodes[id] = x; }
+    for (const [id, n] of Object.entries(rec.nodes || {})) {
+      const old = local?.nodes?.[id]; const x = clone(n); if (old) for (const k of NODE_LOCAL) if (old[k] !== undefined) x[k] = old[k];
+      if (old?.pack?.assigned) { x.groupPlan = {}; for (const k of NODE_PLAN) { if (n[k] !== undefined) x.groupPlan[k] = clone(n[k]); if (old[k] !== undefined) x[k] = old[k]; else delete x[k]; } }   // 📦 my own subject teaches it: I keep my plan, the group's waits aside
+      out.nodes[id] = x;
+    }
     if (local?.id) out.id = local.id;
     return out;
+  }
+  /* ---------- 🔔 the owner's changes, offered to a member: they take what they want (docs/CURRICULUM.md §8) ---------- */
+  const TOP_INFO = ['title', 'goal', 'scope', 'depth', 'language', 'goalId', 'description'];
+  const nodeInfo = n => { const r = {}; for (const [k, v] of Object.entries(n || {})) if (!NODE_LOCAL.includes(k) && !NODE_PLAN.includes(k) && k !== 'material') r[k] = v; return r; };
+  const planSig = n => ({ chapters: n?.chapters || null, learningGoals: n?.learningGoals || null });
+  const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+  const edgeKey = e => e.from + '>' + e.to;
+  const topInfo = o => { const r = {}; for (const k of TOP_INFO) if (o?.[k] !== undefined) r[k] = o[k]; return r; };
+  /** What the newest shared map would change in my copy → [{ key, sig, kind, nid, text, own }], without what I said no to
+      (unless it changed again since). own: the step is taught by my own subject — taking its plan brings the group's step back. */
+  function changes(local, rec, declined = {}) {
+    const mine = strip(local || {}), out = [];
+    const add = (key, val, x) => { const sig = hash(val ?? null); if (declined[key] !== sig) out.push({ key, sig, ...x }); };
+    if (!same(topInfo(mine), topInfo(rec))) add('map', topInfo(rec), { kind: 'map', text: (rec.title || rec.goal) !== (mine.title || mine.goal) ? `The curriculum is now called “${rec.title || rec.goal}”` : 'The curriculum’s description changed' });
+    for (const [id, r] of Object.entries(rec.nodes || {})) {
+      const l = mine.nodes?.[id], own = !!local.nodes?.[id]?.pack?.assigned;
+      if (!l) { add('add:' + id, r, { kind: 'add', nid: id, text: `New step “${r.title}”` }); continue; }
+      if (!same(nodeInfo(l), nodeInfo(r))) add('info:' + id, nodeInfo(r), { kind: 'info', nid: id, text: l.title !== r.title ? `“${l.title}” is now called “${r.title}”` : `“${r.title}”: its description changed` });
+      if (!same(planSig(l), planSig(r))) add('plan:' + id, planSig(r), { kind: 'plan', nid: id, own, text: own ? `“${r.title}”: a new chapter plan for the group. You study this step from your own subject; taking this brings the group’s version of the step back` : `“${r.title}”: a new chapter plan` });
+      if (!same(l.material, r.material)) add('mat:' + id, r.material || null, { kind: 'mat', nid: id, text: `“${r.title}”: its material changed` });
+    }
+    for (const id of Object.keys(mine.nodes || {})) if (!rec.nodes?.[id]) add('del:' + id, 'gone', { kind: 'del', nid: id, text: `Step “${mine.nodes[id].title}” removed` });
+    const le = new Set((mine.edges || []).map(edgeKey)), re = new Set((rec.edges || []).map(edgeKey));
+    if (le.size !== re.size || [...re].some(k => !le.has(k))) add('links', [...re].sort(), { kind: 'links', text: 'The links between the steps changed' });
+    return out;
+  }
+  /** My copy with the changes I take (keys of changes()) → { c, declined: { key: sig } for the ones I leave }. Everything of
+      mine stays (progress, settings, my own subjects on steps); the group's plan of a step I teach with my own subject is kept
+      aside (n.groupPlan) whether or not I take it. */
+  function take(local, rec, keys = [], list = []) {
+    const pick = new Set(keys), c = clone(local), at = new Date().toISOString();
+    for (const k of Object.keys(rec)) if (!LOCAL.includes(k) && !['nodes', 'edges', 'files', ...TOP_INFO].includes(k)) c[k] = clone(rec[k]);   // the rest of the map's state, as it is
+    if (pick.has('map')) for (const k of TOP_INFO) { if (rec[k] !== undefined) c[k] = clone(rec[k]); else delete c[k]; }
+    c.files = { ...(local.files || {}), ...clone(rec.files || {}) };
+    c.nodes = c.nodes || {};
+    for (const [id, r] of Object.entries(rec.nodes || {})) {
+      const x = c.nodes[id];
+      if (!x) { if (pick.has('add:' + id)) c.nodes[id] = clone(r); continue; }
+      if (pick.has('info:' + id)) { for (const k of Object.keys(nodeInfo(x))) delete x[k]; Object.assign(x, clone(nodeInfo(r))); }
+      if (pick.has('mat:' + id)) { if (r.material) x.material = clone(r.material); else delete x.material; }
+      const gp = {}; for (const k of NODE_PLAN) if (r[k] !== undefined) gp[k] = clone(r[k]);
+      const toPlan = () => { for (const k of NODE_PLAN) delete x[k]; Object.assign(x, gp); };
+      if (x.pack?.assigned) {
+        if (pick.has('plan:' + id)) { toPlan(); x.pack = null; x.assignedAt = at; delete x.groupPlan; delete x.replan; delete x.planFrom; delete x.reviewed; }   // back to the group's version of the step
+        else x.groupPlan = gp;
+      } else if (pick.has('plan:' + id)) toPlan();
+    }
+    for (const id of Object.keys(local.nodes || {})) if (!rec.nodes?.[id] && pick.has('del:' + id)) delete c.nodes[id];
+    // links: the group's when taken (plus mine to steps the group does not have), else mine plus those of a step I took
+    const has = id => !!c.nodes[id], took = id => pick.has('add:' + id), mineE = new Set((local.edges || []).map(edgeKey));
+    c.edges = pick.has('links')
+      ? (rec.edges || []).filter(e => has(e.from) && has(e.to)).map(clone).concat((local.edges || []).filter(e => has(e.from) && has(e.to) && !(rec.nodes?.[e.from] && rec.nodes?.[e.to])))
+      : (local.edges || []).filter(e => has(e.from) && has(e.to)).concat((rec.edges || []).filter(e => (took(e.from) || took(e.to)) && has(e.from) && has(e.to) && !mineE.has(edgeKey(e))).map(clone));
+    const declined = {}; for (const ch of list) if (!pick.has(ch.key)) declined[ch.key] = ch.sig;
+    return { c, declined };
   }
   /** Step rows → c.remote. A reservation that ran out counts as nothing (anybody may take it over). */
   function remoteOf(rows, me, now = Date.now()) {
@@ -66,7 +129,7 @@
   /* ---------- the rules of a step, through any Supabase caller api(path, { method, body, headers }) → JSON ---------- */
   const one = (cid, nid) => `${T.steps}?curriculum=eq.${enc(cid)}&node_id=eq.${enc(nid)}`;
   const Core = {
-    BUCKET, LEASE, T, strip, merge, hash, remoteOf, taken, isMember, stepPath, filePath,
+    BUCKET, LEASE, T, strip, merge, changes, take, hash, remoteOf, taken, isMember, stepPath, filePath,
     rows: (api, cid) => api(`${T.steps}?select=*&curriculum=eq.${enc(cid)}&order=node_id`),
     async row(api, cid, nid) { return ((await api(one(cid, nid) + '&select=*')) || [])[0] || null; },
     /** Reserve a step for preparing it → { ok, row } — or { ok: false, row } when somebody else has it (prepared, or
@@ -159,7 +222,7 @@
     c = C().get(acc, cid);
     c.shared = { id: cid, role: 'owner', owner: me(), ownerName: myName(acc), public: !!isPublic, version: (old?.version || 0) + 1, at, hash: h, files: meta.files };
     (c.log = c.log || []).push({ t: Date.now(), m: isPublic ? '👥 shared — 🌍 public' : '👥 shared' }); save(acc, c); emit();
-    if (steps) for (const [nid, n] of Object.entries(c.nodes)) if (n.pack?.status === 'ready' && !(n.pack.author && n.pack.author !== me())) {
+    if (steps) for (const [nid, n] of Object.entries(c.nodes)) if (n.pack?.status === 'ready' && !n.pack.assigned && !(n.pack.author && n.pack.author !== me())) {
       onLog(`⚡ “${n.title}”…`);
       try { await Share.contribute(acc, cid, nid); } catch (e) { onLog(`⚠️ “${n.title}”: ${e.message}`); }
     }
@@ -179,6 +242,34 @@
     const cur = C().get(acc, cid); if (!cur?.shared) return false;
     if (!row) { cur.shared = null; cur.remote = null; save(acc, cur); emit(); return false; }   // the sharing was stopped elsewhere
     cur.shared = { ...cur.shared, hash: h, version: row.version, at: row.updated_at, files }; save(acc, cur); emit(); return true;
+  };
+  /** 🔔 The owner's newest map, as changes I may take → { list, record, version, at } (list empty: nothing new). */
+  Share.incoming = async (acc, cid) => {
+    const c = C().get(acc, cid); if (c?.shared?.role !== 'member' || c.shared.ended) return { list: [] };
+    const full = ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0]; if (!full?.record) return { list: [] };
+    return { list: Core.changes(c, full.record, c.shared.declined || {}), record: full.record, version: full.version, at: full.updated_at, files: full.meta?.files || {} };
+  };
+  /** Take some of the owner's changes (keys from Share.incoming; [] = keep my copy). The others are not offered again until they change. */
+  Share.takeChanges = async (acc, cid, keys, inc) => {
+    inc = inc || await Share.incoming(acc, cid); const cur = C().get(acc, cid); if (!cur?.shared || !inc.record) return cur;
+    const { c, declined } = Core.take(cur, inc.record, keys, inc.list);
+    const dec = { ...(cur.shared.declined || {}) }; for (const k of keys) delete dec[k]; Object.assign(dec, declined);
+    c.shared = { ...cur.shared, version: inc.version, seen: inc.version, at: inc.at, files: inc.files || cur.shared.files || {}, incoming: null, declined: dec }; c.autoApprove = true;
+    (c.log = c.log || []).push({ t: Date.now(), m: `👥 ${keys.length ? `took ${keys.length} of ${inc.list.length} change(s)` : 'kept my copy'} from ${cur.shared.ownerName || 'the owner'}` });
+    save(acc, c); emit(); return C().get(acc, cid);
+  };
+  /** Keep the version of a prepared step I have (its author made a new one) — until they make another. */
+  Share.keepStep = (acc, cid, nid) => { const c = C().get(acc, cid), x = c?.remote?.[nid]; if (!c?.nodes[nid]?.pack) return; c.nodes[nid].pack = { ...c.nodes[nid].pack, stale: false, keptAt: x?.at || null }; save(acc, c); emit(); };
+  /** 🔔 What waits for me in my shared curricula: the owner's changes, new versions of prepared steps I have. */
+  Share.updates = acc => {
+    const out = [];
+    for (const c of C().list(acc)) {
+      if (!c.shared || c.shared.ended) continue;
+      const t = c.title || c.goal;
+      if (c.shared.incoming) out.push({ id: 'curup:' + c.id, kind: 'curupdate', curriculum: c.id, title: t, from_name: c.shared.ownerName || '', count: c.shared.incoming.count, lines: c.shared.incoming.lines || [] });
+      for (const [nid, n] of Object.entries(c.nodes || {})) if (n.pack?.stale) out.push({ id: `stepup:${c.id}:${nid}`, kind: 'stepupdate', curriculum: c.id, node: nid, title: n.title, curTitle: t, from_name: n.pack.by || '' });
+    }
+    return out;
   };
   /** Stop sharing: the members keep their copies (and the steps they downloaded); the shared steps and files go. */
   Share.unpublish = async (acc, cid) => {
@@ -270,24 +361,28 @@
   Share.refresh = async (acc, cid) => {
     let c = C().get(acc, cid); if (!c?.shared || c.shared.ended || !cloudOn(acc)) return c;
     const head = ((await api(`${T.cur}?select=id,owner_name,public,version,updated_at,title,meta&id=eq.${enc(cid)}`)) || [])[0];
-    const before = JSON.stringify([c.shared, c.remote, c.nodes]);
     if (!head) {   // no longer shared (stopped, or I was removed): my copy stays, as my own curriculum
       c = C().get(acc, cid);
       if (c.shared.role === 'member') { c.shared = { ...c.shared, ended: true }; (c.log = c.log || []).push({ t: Date.now(), m: '👥 no longer shared with you — your copy and your prepared steps stay' }); }
       else c.shared = null;
       c.remote = null; save(acc, c); emit(); return c;
     }
-    if (c.shared.role === 'member' && head.version !== c.shared.version) {
-      const full = ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0];
-      if (full?.record) { c = Core.merge(C().get(acc, cid), full.record); c.shared = { ...c.shared, version: full.version, at: full.updated_at, files: full.meta?.files || {} }; c.autoApprove = true; }
+    const newer = x => x.shared.role === 'member' && head.version !== (x.shared.seen || x.shared.version);
+    const full = newer(c) ? ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0] : null;
+    const rows = (await Core.rows(api, cid)) || [];
+    c = C().get(acc, cid); if (!c?.shared || c.shared.ended) return c;   // every await is done: from here on the newest copy (an edit made meanwhile — a subject attached, a plan — stays)
+    const before = JSON.stringify([c.shared, c.remote, c.nodes]);
+    if (full?.record && newer(c)) {   // 🔔 the owner changed the map: nothing changes here until I take it
+      const list = Core.changes(c, full.record, c.shared.declined || {});
+      if (list.length) c.shared = { ...c.shared, seen: full.version, files: full.meta?.files || {}, incoming: { version: full.version, at: full.updated_at, count: list.length, lines: list.slice(0, 3).map(x => x.text) } };
+      else { c = Core.take(c, full.record).c; c.shared = { ...c.shared, version: full.version, seen: full.version, at: full.updated_at, files: full.meta?.files || {}, incoming: null }; c.autoApprove = true; }   // nothing I would see
     }
     c.shared = { ...c.shared, ownerName: head.owner_name || c.shared.ownerName, public: !!head.public };
-    const rows = (await Core.rows(api, cid)) || [];
     c.remote = Core.remoteOf(rows, me());
     for (const [nid, n] of Object.entries(c.nodes || {})) {
       const x = c.remote[nid];
       if (n.pack?.status === 'app' && Core.taken(c, nid)) n.pack = { ...n.pack, status: null, queuedAt: null };   // someone else has it: out of my Claude app's queue
-      if (n.pack?.status === 'ready' && x?.status === 'ready' && n.pack.shared && x.author === n.pack.author && x.at && n.pack.sharedAt && x.at > n.pack.sharedAt && !x.mine) n.pack = { ...n.pack, stale: true };   // its author replaced it
+      if (n.pack?.status === 'ready' && x?.status === 'ready' && n.pack.shared && x.author === n.pack.author && x.at && n.pack.sharedAt && x.at > n.pack.sharedAt && x.at !== n.pack.keptAt && !x.mine) n.pack = { ...n.pack, stale: true };   // its author replaced it: 🔔, it waits for me
     }
     if (JSON.stringify([c.shared, c.remote, c.nodes]) !== before) { save(acc, c); emit(); }
     return c;
@@ -318,7 +413,7 @@
   Share.release = (acc, c, nid) => c?.shared && !c.shared.ended && cloudOn(acc) ? Core.release(api, { cid: c.id, nid, me: me() }).catch(() => null) : null;
   /** A step I prepared (here, in my Claude app, or imported) → everybody gets it. → { ok } | { taken: row } */
   Share.contribute = async (acc, cid, nid) => {
-    let c = C().get(acc, cid); const n = c?.nodes[nid]; if (!c?.shared || c.shared.ended || !n || n.pack?.status !== 'ready' || !cloudOn(acc)) return { ok: false };
+    let c = C().get(acc, cid); const n = c?.nodes[nid]; if (!c?.shared || c.shared.ended || !n || n.pack?.status !== 'ready' || n.pack.assigned || !cloudOn(acc)) return { ok: false };   // 📦 a subject of my own on the step is never shared
     const pid = C().packId(c, nid), uid = me();
     const cur = await Core.row(api, cid, nid);
     if (cur && cur.author !== uid && (cur.status === 'ready' || Date.parse(cur.claimed_until || '') > Date.now())) {   // somebody else's: I keep my own version, theirs is the shared one
@@ -359,6 +454,7 @@
     const k = cid + '/' + nid; if (getting.has(k)) return getting.get(k);
     const job = (async () => {
       let c = await Share.refresh(acc, cid); const x = c?.remote?.[nid];
+      if (c?.nodes[nid]?.pack?.assigned) throw new Error('Your own subject teaches this step — take it off the step (↩) to get the shared one.');
       if (!x || x.status !== 'ready' || !x.path) throw new Error('This step is not prepared in the shared curriculum (any more).');
       const pid = C().packId(c, nid);
       const blob = await CL().getFile(BUCKET, x.path, x.meta?.chunks || 0, { type: 'application/json' });
@@ -383,7 +479,7 @@
   /** Get the next prepared steps ahead (in study order), so they open at once. */
   Share.prefetch = async (acc, cid, n = 2) => {
     const c = C().get(acc, cid); if (!c?.remote) return;
-    const want = C().nextUp(acc, c).filter(id => c.remote[id]?.status === 'ready' && (c.nodes[id].pack?.status !== 'ready' || c.nodes[id].pack.stale) && !c.nodes[id].pack?.own).slice(0, n);
+    const want = C().nextUp(acc, c).filter(id => c.remote[id]?.status === 'ready' && c.nodes[id].pack?.status !== 'ready' && !c.nodes[id].pack?.own).slice(0, n);   // a new version of one I have waits for me (🔔)
     for (const id of want) await Share.download(acc, cid, id).catch(e => console.warn('[curshare] prefetch', e.message));
   };
 

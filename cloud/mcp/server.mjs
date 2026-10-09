@@ -103,7 +103,7 @@ async function publishStep(token, uid, step, p, files) {
   } catch (e) { return `\n⚠️ Saved for the learner, but sharing it with the curriculum's members failed (${e.message.slice(0, 120)}) — the learner's app tries again when it opens.`; }
 }
 /** The pack is stored and valid: check its packaged files, then add it to the picker — or say which files to upload. */
-async function complete(token, uid, sid, p, res, fail, text, user = null) {
+async function complete(token, uid, sid, p, res, fail, text, user = null, attach = {}) {
   const need = packaged(p);
   const step = await findStep(token, sid).catch(() => null);   // a step of one of the learner's curricula?
   if (step) step.user = user;
@@ -125,7 +125,10 @@ async function complete(token, uid, sid, p, res, fail, text, user = null) {
     if (sharedOn(step.c)) more += await publishStep(token, uid, step, p, need.length);
     const left = CJ().work(await curState(token, step.c, uid)).steps.length;
     more += `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
-  }
+  } else if (attach.step) {
+    const a = await attachToStep(token, uid, sid, p, attach.curriculum_id, attach.step).catch(e => ({ error: e.message }));
+    more += a.error ? `\n⚠️ Saved, but not attached to a step: ${a.error}\n📚 Until then it is on the learner's Shelf.` : '\n' + a.line;
+  } else more += `\n📚 It is not on a step of any of the learner's curricula, so it is on their 📚 Shelf (study it from there, or “Put on a map…”). To attach it to a step of a curriculum, call this tool again with curriculum_id and step.`;
   return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : '') + more);
 }
 
@@ -169,6 +172,22 @@ async function claimStep(token, uid, cid, nid, { force = false, c = null, user =
   return mine;
 }
 const releaseStep = (token, cid, nid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(CJ().claimKey(cid, nid))}`, token, { method: 'DELETE' });
+/** 📦 Attach a saved subject to a step of one of the learner's curricula (docs/CURRICULUM.md §9): the app applies it from the
+    inbox (Edit.assign) — the step is taught by this subject from then on, and only that step is re-planned to match it. */
+async function attachToStep(token, uid, sid, p, cidArg, stepArg) {
+  if (!cidArg) return { error: 'curriculum_id is needed with step (see noema_curricula).' };
+  const pc = await pickCurriculum(token, cidArg); if (pc.error) return { error: pc.error };
+  const c = await curState(token, pc.c, uid), s = String(stepArg).trim().toLowerCase();
+  const nid = c.nodes[stepArg] ? stepArg : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
+  if (!nid) return { error: `No step “${stepArg}” in “${c.title || c.goal}”. Its steps: ${Object.keys(c.nodes).slice(0, 60).map(id => `${id} (“${c.nodes[id].title}”)`).join(', ')}` };
+  const no = CUR().Edit?.cannotAssign?.(c, c.nodes[nid]);
+  if (no) return { error: no };
+  const n = c.nodes[nid]; if (n.pack?.assigned && n.pack.id === sid) return { line: `📦 It already teaches the step “${n.title}” of “${c.title || c.goal}”.` };
+  const chs = p.chapters || [];
+  await kvPut(token, uid, CJ().inboxKey(c.id), { v: 1, kind: 'assign', nid, packId: sid, from: 'claude', at: new Date().toISOString(), title: p.subject.title, description: String(p.subject.description || '').slice(0, 400), outline: CUR().outlineOf(p),
+    sections: chs.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chs.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chs.length });
+  return { line: `📦 Attached to the step “${n.title}” of “${c.title || c.goal}”: that step is taught by this subject from now on (it is never prepared), and only that step is re-planned to match it${sharedOn(c) ? ' (for this learner only: the curriculum is shared, its other members keep the shared step)' : ''} — the learner's app applies it when it is open or next opened${c.provider === 'claudeapp' ? '; then noema_curriculum_task hands you its new chapter plan' : ''}.` };
+}
 async function findStep(token, sid) {
   const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
   for (const r of await kvRows(token, 'a:curriculum:c' + m[1])) {
@@ -219,7 +238,7 @@ async function pickCurriculum(token, id) {
   return { error: `Which curriculum? Call again with curriculum_id:\n${states.map(workLine).join('\n')}` };
 }
 const summary = (p, r) => `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters} chapters, ${r.counts.sections} sections, ${r.counts.exercises} exercises (${r.counts.visual} visual), ${r.counts.media} pictures.` +
-  `\nIt appears in the subject picker the next time the app opens (or after tapping ☁️ → Sync now).` + (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
+  `\nThe learner's app gets it the next time it opens (or after tapping ☁️ → Sync now).` + (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
 
 /* ---------- tools ---------- */
 const TOOLS = [
@@ -236,9 +255,9 @@ const TOOLS = [
   { name: 'noema_start_source_upload', description: 'Upload ONE original source file (PDF, slides, document… or one part of a split PDF) so the learner can open it inside noema-lite (👁 preview, at the cited page). Normally not needed: noema_finish_upload gives the commands for every source file the pack contains. Use it to add or replace a single file; returns a signed URL + curl command.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, source_id: { type: 'string', description: 'the id in sources.json' }, filename: { type: 'string', description: 'original file name, e.g. ecb-ch5.pdf' } }, required: ['subject_id', 'source_id', 'filename'] } },
   { name: 'noema_finish_upload', description: 'Step 2: checks the uploaded pack and its source files (every file packaged by make_pack.py — each part of a split PDF — must be uploaded, with the right size) and adds it to the user’s subject picker. Returns errors to fix, the upload commands of missing source files (run them, then call it again), or a summary.',
-    inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] } },
+    inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
-    inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' } }, required: ['pack_json'] } },
+    inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['pack_json'] } },
   { name: 'noema_image_search', description: 'Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner\'s personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.',
     inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'What the picture shows, usually in English (e.g. "DNA replication fork diagram labeled")' }, n: { type: 'integer', description: 'How many (default 12, max 30)' }, sources: { type: 'array', items: { type: 'string', enum: ['bing', 'duckduckgo', 'commons', 'openverse', 'nasa', 'inaturalist', 'wellcome', 'artic'] }, description: 'Only these (default: bing, commons, openverse, duckduckgo)' } }, required: ['query'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_image_fetch', description: 'Get one picture from the web — an image url, OR a page: Wikimedia / Wikipedia file pages (any language, “#/media/File:…”) and any other page are resolved to their picture. Shows you the picture and returns its file url, size (W×H pixels for regions) and a ready media.json entry ("fetch": "app": the noema-lite app downloads and embeds it). Use it when your sandbox cannot download the picture itself (no network to that site) — or simply to look at a candidate.',
@@ -284,9 +303,11 @@ async function callTool(name, args, ctx) {
     }
     case 'noema_list_subjects': {
       const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: `${uid}/packs/`, limit: 1000 } }).catch(() => []);
-      const mine = (list || []).filter(o => o.name.endsWith('.json')).map(o => `- ${o.name.replace(/\.json$/, '')} (private, ${Math.round((o.metadata?.size || 0) / 1024)} KB)`);
-      const lib = (CFG.library || []).map(s => `- ${s.id} — ${s.title} (library: ${s.counts?.chapters || '?'} chapters, ${s.counts?.exercises || '?'} exercises)`);
-      return text(`Library (shared, read-only — copy into a private pack to extend):\n${lib.join('\n') || '(none)'}\n\nThis user's private packs:\n${mine.join('\n') || '(none yet)'}`);
+      const on = {}; for (const c of await curricula(token).catch(() => [])) for (const [nid, n] of Object.entries(c.nodes || {})) if (n.pack?.id) (on[n.pack.id] = on[n.pack.id] || []).push(`“${n.title}” (${nid}) of “${c.title || c.goal}” (${c.id})`);
+      const where = id => on[id] ? ` · teaches ${on[id].slice(0, 4).join(', ')}${on[id].length > 4 ? '…' : ''}` : ' · 📚 on the Shelf (no curriculum step)';
+      const mine = (list || []).filter(o => o.name.endsWith('.json')).map(o => `- ${o.name.replace(/\.json$/, '')} (private, ${Math.round((o.metadata?.size || 0) / 1024)} KB)${where(o.name.replace(/\.json$/, ''))}`);
+      const lib = (CFG.library || []).map(s => `- ${s.id} — ${s.title} (library: ${s.counts?.chapters || '?'} chapters, ${s.counts?.exercises || '?'} exercises)${s.kind === 'language' || String(s.id).startsWith('lang:') ? '' : where(s.id)}`);
+      return text(`Library (shared, read-only — copy into a private pack to extend):\n${lib.join('\n') || '(none)'}\n\nThis user's private packs:\n${mine.join('\n') || '(none yet)'}\n\nA subject teaches a step of a curriculum (the way the learner studies) or waits on their 📚 Shelf; save a pack with curriculum_id + step to put it on a step.`);
     }
     case 'noema_get_pack_url': {
       if (!ID_RE.test(sid)) return fail('subject_id: lowercase letters, digits, hyphens');
@@ -325,7 +346,7 @@ async function callTool(name, args, ctx) {
       catch (e) { return fail(`No uploaded file found for "${sid}" (${e.message.slice(0, 120)}). Run the curl command from noema_start_upload first.`); }
       const res = checkPack(p, sid);
       if (res.errors.length) return fail(`The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`);
-      return complete(token, uid, sid, p, res, fail, text, user);
+      return complete(token, uid, sid, p, res, fail, text, user, { curriculum_id: args?.curriculum_id, step: args?.step });
     }
     case 'noema_save_pack': {
       const raw = String(args?.pack_json || '');
@@ -335,7 +356,7 @@ async function callTool(name, args, ctx) {
       if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
-      return complete(token, uid, p.subject.id, p, res, fail, text, user);
+      return complete(token, uid, p.subject.id, p, res, fail, text, user, { curriculum_id: args?.curriculum_id, step: args?.step });
     }
     case 'noema_image_search': {
       const q = String(args?.query || '').trim(); if (!q) return fail('query is empty');

@@ -207,7 +207,7 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .cg-steps>li,.cg-choices>*{min-width:0}.cg-sub>li{overflow-wrap:anywhere}
 kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border:1px solid var(--line);border-bottom-width:2px;background:var(--bg2)}
 /* 🧭 Curricula (engine/curmap.js) */
-.cm-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 12px}
+.cm-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:6px 0 12px}
 .cm-mode{display:grid;gap:2px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);font:inherit;font-weight:800;color:inherit;cursor:pointer;text-align:left}
 .cm-mode small{font-weight:500;color:var(--ink2);font-size:12.5px}.cm-mode.on{border-color:var(--violet);background:var(--violet-bg)}.cm-mode:not(.on):hover{border-color:var(--violet)}
 .cm-lib{width:min(860px,100%)}
@@ -369,3 +369,30 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cg-recommend{margin:6px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px}
 .cg-way-c>summary{border-left:4px solid var(--warn);padding-left:8px}
 .cg-choice-c{outline:2px solid var(--warn)}
+/* 📦 subjects you already have, on steps · 📚 the Shelf (docs/CURRICULUM.md §9) */
+.cm-holdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);font-size:14px}
+.cm-holdbar:empty{padding:0;border:0}
+.cm-attachwarn{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px;line-height:1.45}
+.cm-attachshared{margin-top:6px;font-weight:600}
+.cm-attachchips{max-height:42vh;overflow:auto;margin:8px 0}
+.cm-attachchip .o{opacity:.75;font-weight:500}
+.cm-attachlist{display:grid;gap:6px;margin:10px 0;padding-left:22px;max-height:48vh;overflow:auto}
+.cm-attachlist li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:8px;align-items:center}
+.cm-attachstep{font-weight:700;font-size:14px;overflow-wrap:anywhere}
+.cm-changes{display:flex;flex-direction:column;gap:6px;margin:10px 0;max-height:50vh;overflow:auto}
+.cm-change{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);line-height:1.4;font-size:14px;cursor:pointer;overflow-wrap:anywhere}
+.cm-change.own{background:var(--warn-bg)}
+.cm-change input{margin-top:3px;flex:none}
+.cm-replanning{background:var(--warn-bg)}
+.cm-flag{color:var(--ink2)}
+.pick-curs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin:4px 0 12px}
+.pick-cur{display:grid;gap:4px;text-align:left;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);font:inherit;color:inherit;cursor:pointer}
+.pick-cur:hover{border-color:var(--violet)}.pick-cur .tiny{color:var(--ink2)}
+.pick-nocur{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.pick-shelf{margin:6px 0 4px;border-top:1px solid var(--line);padding-top:8px}
+.pick-shelf>summary{cursor:pointer;font-weight:700;color:var(--ink2);font-size:14px;padding:4px 0}
+.pick-shelf[open]>summary{margin-bottom:6px}
+@media (max-width:560px){.cm-attachlist li{grid-template-columns:1fr}}
+.noema-mapbtn{position:absolute;bottom:-7px;right:-7px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:11px;display:grid;place-items:center;opacity:0;transition:opacity .15s,transform .15s;box-shadow:var(--shadow);padding:0;cursor:pointer;z-index:2}
+.noema-chipwrap:hover .noema-mapbtn,.noema-mapbtn:focus-visible{opacity:1}.noema-mapbtn:hover{transform:scale(1.12)}
+@media (hover:none){.noema-mapbtn{opacity:.85}}

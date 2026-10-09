@@ -5,7 +5,9 @@
      C. Bob's Claude app prepares an empty step: reserved for him (nobody else may take it), saved → shared with everybody
      D. nobody overwrites a step somebody else prepared — not the owner, not a member (app, connector and the API itself)
      E. Anna makes it public → Carl finds it in 🌍 Explore curricula, joins, prepares the last step; everybody sees it
-     F. the owner changes the map → it reaches the members (their progress stays); the owner removes a member's version
+     F. the owner changes the map → 🔔 the members review it and take what they want (their progress stays); the owner removes a member's version
+     F2. a member's own subject on a shared step: his only (own plan, the group's aside, never shared); what he leaves is not offered again
+     F3. the owner's own subject on a step: the shared map keeps the group's plan · F4. a new version of a prepared step waits (keep / get)
      G. Bob leaves, Anna stops sharing → Carl keeps his copy; phone layout; no page errors
    Usage: node tests/curriculum_share.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
@@ -95,6 +97,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(/Anna invites you to the curriculum “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar button:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
   await B.p.click('.sharebar button:has-text("Join")');
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'joined' && m.user_id === bob)), 'he joined');
+  await until(async () => (await cur(B, cid))?.shared?.role === 'member', 8000);   // the server has him first; his copy is saved right after
   let bc = await cur(B, cid);
   ok(bc && bc.id === cid && bc.shared?.role === 'member' && bc.shared.ownerName === 'Anna' && Object.keys(bc.nodes).length === 4 && bc.prefetch === 0, 'he has the map (the same id → the same step subjects), as a member: nothing is prepared for him automatically');
   ok(await until(async () => (await cur(B, cid)).remote?.atoms?.status === 'ready'), 'he sees that Anna prepared “Atoms”');
@@ -194,15 +197,101 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok((await cur(B, cid)).remote.energy?.by === 'Carl', 'Bob sees “Energy” by Carl');
 
   /* ---------- F. the owner changes the map ---------- */
-  console.log('— F. the owner’s changes reach the members; the owner removes a version');
+  console.log('— F. the owner’s changes wait for the members (🔔 → review); the owner removes a version');
   await A.p.evaluate(cid => NoemaCurriculum.Edit.update(Noema.account.id, cid, 'membranes', { title: 'Membranes and transport' }), cid);
   ok(await until(() => S.curs[cid].record.nodes.membranes.title === 'Membranes and transport', 10000), 'Anna renames a step → the shared map changes by itself');
   await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
   bc = await cur(B, cid);
-  ok(bc.nodes.membranes.title === 'Membranes and transport' && bc.nodes.atoms.pack?.status === 'ready' && bc.nodes.cells.pack?.status === 'ready' && bc.provider === 'claudeapp', 'Bob gets the new map — his steps, settings and progress stay');
+  ok(bc.nodes.membranes.title === 'Membranes' && bc.shared.incoming?.count === 1 && /Membranes and transport/.test(bc.shared.incoming.lines.join(' ')), '🔔 Bob is told about the change — nothing changes in his copy until he takes it');
+  ok((await B.p.evaluate(() => Noema.notes.local().map(x => x.kind))).includes('curupdate'), '…it waits in 🔔');
+  await closeAll(B.p); await B.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(700);
+  await B.p.click('.cm-reviewbtn'); await wait(600);
+  ok(await B.p.locator('.cm-review .cm-change').count() === 1 && /is now called “Membranes and transport”/.test(await B.p.locator('.cm-review').innerText()) && await B.p.isChecked('.cm-review .cm-change input'), '🔎 Review: each change with a tick box');
+  await B.p.click('.cm-takechanges'); await wait(500);
+  bc = await cur(B, cid);
+  ok(bc.nodes.membranes.title === 'Membranes and transport' && !bc.shared.incoming && bc.nodes.atoms.pack?.status === 'ready' && bc.nodes.cells.pack?.status === 'ready' && bc.provider === 'claudeapp', 'taken: Bob has the new map — his steps, settings and progress stay');
   ok(await B.p.evaluate(cid => NoemaCurriculum.statuses(Noema.account.id, NoemaCurriculum.get(Noema.account.id, cid)).atoms.mastered, cid), '…“Atoms” still mastered for him');
   await A.p.evaluate(cid => NoemaCurShare.removeStep(Noema.account.id, cid, 'energy'), cid);
   ok(!stepOf(cid, 'energy') && !Object.keys(S.curFiles).some(k => k.includes('/energy.json')), 'the owner removes Carl’s version of “Energy” (the step can be prepared again)');
+
+  /* ---------- F2. Bob's own subject on a shared step ---------- */
+  console.log('— F2. 📦 Bob’s own subject on a shared step: his only; he chooses what he takes');
+  await B.p.evaluate(async pack => { await Noema.importPack(Noema.account.id, pack); }, packFor('bob-membranes', 'Membrane physics', 'bob-own-v1'));
+  await closeAll(B.p); await B.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(700);
+  await B.p.click('.cm-node[data-id="membranes"]'); await wait(300);
+  ok(await B.p.locator('.cm-panel .cm-usesubject').isVisible() && await B.p.locator('.cm-panel .cm-editrow').count() === 0, 'a member may use a subject of his own on a step (still no ✏️ Edit step)');
+  await B.p.click('.cm-panel .cm-usesubject'); await wait(500);
+  await B.p.locator('.cm-attachchip:has-text("Membrane physics")').click(); await wait(150);
+  ok(/the change is yours only/.test(await B.p.locator('.cm-attachwarn').innerText()), 'the warning: in a shared curriculum the change is his only');
+  await B.p.click('.cm-attachgo'); await wait(800);
+  let m = (await cur(B, cid)).nodes.membranes;
+  ok(m.pack?.assigned && m.pack.id === 'bob-membranes' && m.replan && m.groupPlan?.chapters?.[0]?.title === 'Membranes I', 'attached: the step waits for its own plan; the group’s plan is kept aside');
+  ok(await until(() => { try { return !!JSON.parse(S.kv[bob]['a:curriculum:' + cid].value).nodes.membranes.pack?.assigned; } catch (e) { return false; } }), '…in his cloud copy too');
+  r = await tool(TB, 'noema_curriculum_task', { curriculum_id: cid });
+  ok(!r.error && /Agent 3/.test(r.text) && /Membranes/.test(r.text) && /Membrane physics/.test(r.text), 'his Claude app plans that step from his subject (a member plans only the steps his own subjects teach)');
+  await B.p.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid);
+    C.applyPlans(c, { plans: [{ nodeId: 'membranes', learningGoals: ['use membrane physics'], chapters: [{ ref: '1', title: 'Bob: membranes from physics', teachingGoals: ['g'], requiredCoverage: ['c'] }] }] }); C.save(acc, c); }, cid);
+  m = (await cur(B, cid)).nodes.membranes;
+  ok(m.chapters[0].title === 'Bob: membranes from physics' && !m.replan && m.groupPlan.chapters[0].title === 'Membranes I', 'his plan follows his subject; the group’s stays aside');
+  ok(!(await B.p.evaluate(cid => NoemaCurShare.contribute(Noema.account.id, cid, 'membranes'), cid)).ok && !stepOf(cid, 'membranes'), 'his own subject is never shared with the group');
+  await A.p.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid); c.nodes.membranes.chapters = [{ title: 'Membranes, revised', goals: ['a'], coverage: ['x'] }]; c.nodes.cells.title = 'Cells and organelles'; C.save(acc, c); }, cid);
+  ok(await until(() => S.curs[cid].record.nodes.cells.title === 'Cells and organelles' && S.curs[cid].record.nodes.membranes.chapters[0].title === 'Membranes, revised', 10000), 'Anna changes the plan of “Membranes” and renames “Cells”');
+  await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
+  bc = await cur(B, cid);
+  ok(bc.shared.incoming?.count === 2 && bc.nodes.cells.title === 'Cells' && bc.nodes.membranes.chapters[0].title === 'Bob: membranes from physics', '🔔 2 changes wait for Bob; his copy is unchanged');
+  await wait(300); await B.p.click('.cm-reviewbtn'); await wait(600);
+  const rv = B.p.locator('.cm-review');
+  ok(await rv.locator('.cm-change').count() === 2 && await rv.locator('.cm-change.own').count() === 1 && !(await rv.locator('.cm-change.own input').isChecked()) && /your own subject/.test(await rv.locator('.cm-change.own').innerText()), 'the review lists the change to the step he studies from his own subject too — unticked');
+  await B.p.screenshot({ path: SHOTS + '/cs7_review.png' });
+  await rv.locator('.cm-takechanges').click(); await wait(500);
+  bc = await cur(B, cid); m = bc.nodes.membranes;
+  ok(bc.nodes.cells.title === 'Cells and organelles' && m.pack?.id === 'bob-membranes' && m.chapters[0].title === 'Bob: membranes from physics' && m.groupPlan.chapters[0].title === 'Membranes, revised' && !bc.shared.incoming, 'he takes the rename and keeps his own step (the group’s new plan is kept aside)');
+  await A.p.evaluate(cid => NoemaCurriculum.Edit.update(Noema.account.id, cid, 'energy', { title: 'Energy in cells' }), cid);
+  ok(await until(() => S.curs[cid].record.nodes.energy.title === 'Energy in cells', 10000), 'Anna renames another step');
+  await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
+  ok((await B.p.evaluate(cid => NoemaCurShare.incoming(Noema.account.id, cid).then(x => x.list.map(y => y.key)), cid)).join() === 'info:energy', 'what he left is not offered again (unless it changes again): only the new rename');
+  const later = await B.p.evaluate(async cid => { const sh = Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), row = Noema.shareRow(sh); document.body.append(row);
+    const pause = ms => new Promise(r => setTimeout(r, ms)), notNow = () => [...document.querySelectorAll('.cm-review button')].find(x => /Not now/.test(x.textContent));
+    const b = [...row.querySelectorAll('button')].find(x => /Review/.test(x.textContent)); b.click();
+    for (let i = 0; i < 50 && !notNow(); i++) await pause(100);
+    const nn = notNow(); nn?.click(); await pause(600);
+    const res = !!nn && !b.disabled && !document.querySelector('.cm-review') && Noema.notes.local().some(x => x.kind === 'curupdate'); row.remove(); return res; }, cid);
+  ok(later, '🔎 Review → “Not now”: the update keeps waiting in 🔔 and its button works again');
+  bc = await B.p.evaluate(cid => Noema.notes.update(Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), false).then(() => NoemaCurriculum.get(Noema.account.id, cid)), cid);
+  ok(bc.nodes.energy.title === 'Energy' && !bc.shared.incoming && !(await B.p.evaluate(() => Noema.notes.local().some(x => x.kind === 'curupdate'))), '“Keep my copy” in 🔔: nothing is taken, and the 🔔 is gone');
+  const dt = await B.p.evaluate(cid => NoemaCurriculum.Edit.detach(Noema.account.id, cid, 'membranes'), cid);
+  m = (await cur(B, cid)).nodes.membranes;
+  ok(dt.group && !m.pack && !m.replan && m.chapters[0].title === 'Membranes, revised' && !m.groupPlan, '↩ taken off: the step has the group’s newest plan again, nothing to re-plan');
+
+  /* ---------- F3. Anna's own subject on a step she shares ---------- */
+  console.log('— F3. Anna’s own subject on a step: the shared map keeps the group’s plan');
+  await A.p.evaluate(async pack => { await Noema.importPack(Noema.account.id, pack); }, packFor('anna-energy', 'Energy physics', 'anna-own-v1'));
+  const ar = await A.p.evaluate(cid => NoemaCurriculum.Edit.assign(Noema.account.id, cid, 'energy', 'anna-energy'), cid);
+  await A.p.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid);
+    C.applyPlans(c, { plans: [{ nodeId: 'energy', learningGoals: ['mine'], chapters: [{ ref: '1', title: 'Anna: energy from physics', teachingGoals: ['g'], requiredCoverage: ['c'] }] }] });
+    c.nodes.atoms.summary = 'Atoms — revised'; C.save(acc, c); }, cid);
+  ok(ar.ok && await until(() => S.curs[cid].record.nodes.atoms.summary === 'Atoms — revised', 10000), 'Anna attaches a subject of hers to “Energy”, re-plans it, and changes another step (the map is pushed)');
+  const re = S.curs[cid].record.nodes.energy;
+  ok(re.chapters[0].title === 'Energy I' && !re.pack && !re.groupPlan && !JSON.stringify(S.curs[cid].record).includes('anna-energy') && (await cur(A, cid)).nodes.energy.chapters[0].title === 'Anna: energy from physics', 'the shared map keeps the group’s plan of “Energy” — her subject and her plan stay hers');
+
+  /* ---------- F4. a new version of a prepared step ---------- */
+  console.log('— F4. a new version of a prepared step waits for Bob');
+  await finishStep(A, cid, 'atoms', 'Atoms', 'anna-atoms-v2');
+  ok(await until(() => stepOf(cid, 'atoms').version === 'anna-atoms-v2'), 'Anna publishes a new version of “Atoms”');
+  await B.p.evaluate(async cid => { await NoemaCurShare.refresh(Noema.account.id, cid); await NoemaCurShare.prefetch(Noema.account.id, cid); }, cid);
+  let ba = (await cur(B, cid)).nodes.atoms.pack;
+  ok(ba.stale && ba.version === 'anna-atoms-v1' && (await B.p.evaluate(() => Noema.notes.local().map(x => x.kind))).includes('stepupdate'), '🔔 Bob is told; his version stays (it is not fetched by itself)');
+  await B.p.evaluate(() => Noema.notes.update(Noema.notes.local().find(x => x.kind === 'stepupdate' && x.node === 'atoms'), false));
+  await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
+  ba = (await cur(B, cid)).nodes.atoms.pack;
+  ok(!ba.stale && ba.version === 'anna-atoms-v1', '“Keep mine”: he keeps his version and is not asked again about this one');
+  await finishStep(A, cid, 'atoms', 'Atoms', 'anna-atoms-v3');
+  await until(() => stepOf(cid, 'atoms').version === 'anna-atoms-v3');
+  await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
+  ok((await cur(B, cid)).nodes.atoms.pack.stale, 'her next version is offered again');
+  await B.p.evaluate(() => Noema.notes.update(Noema.notes.local().find(x => x.kind === 'stepupdate' && x.node === 'atoms'), true));
+  ba = (await cur(B, cid)).nodes.atoms.pack;
+  ok(!ba.stale && ba.version === 'anna-atoms-v3', '⬇️ Get it: the new version replaces his');
 
   /* ---------- G. leave, stop ---------- */
   console.log('— G. leaving and stopping');

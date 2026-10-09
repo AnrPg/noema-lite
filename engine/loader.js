@@ -215,6 +215,8 @@
     if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`]).catch(e => console.warn('[delete subject]', e));
     if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
     if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
+    // 📦 every other step it teaches (attached to them): the step is planned and prepared the usual way again
+    if (window.NoemaCurriculum?.stepsOf) for (const { c, nid } of NoemaCurriculum.stepsOf(acc, s.id)) { if (c.nodes[nid].pack?.assigned) NoemaCurriculum.Edit.detach(acc, c.id, nid); else { const cc = NoemaCurriculum.get(acc, c.id); cc.nodes[nid].pack = null; NoemaCurriculum.save(acc, cc); } }
     if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[s.id];
   }
   /** ✏️ Edit a subject: name, description, hide, delete (and share for your own). */
@@ -360,41 +362,104 @@
     };
     draw();
   }
-  async function pickSubject(acc, { closable = false } = {}) {
-    const subs = (await subjectsFor(acc)).filter(s => !s.hidden && !s.curriculum);   // curriculum steps live in 🧭 Curricula
+  /* ---------------- 📚 the Shelf (docs/CURRICULUM.md §9): subjects that teach no step of any curriculum ---------------- */
+  /** The subjects on the Shelf: studyable, but the curriculum map is the way to study. (Language courses are never on it.) */
+  async function shelf(acc) {
+    const CU = window.NoemaCurriculum, on = new Set();
+    for (const c of CU?.list(acc) || []) for (const n of Object.values(c.nodes || {})) if (n.pack?.id) on.add(n.pack.id);
+    const onItsWay = s => { const c = s.curriculum && CU?.get(acc, s.curriculum); return !!(c?.nodes[s.node] && !c.nodes[s.node].pack); };   // made for a step that has not picked it up yet
+    return (await subjectsFor(acc)).filter(s => !s.hidden && !on.has(s.id) && !onItsWay(s) && s.kind !== 'language' && !String(s.id).startsWith('lang:'));
+  }
+  /** The curriculum step a subject teaches → { id, node } | null: the step it was opened from on the map (one subject may
+      teach several steps; curmap.js viaStep), else the step it was made for while that step still uses it, else the first
+      step it is attached to — or the step it was made for that has not picked it up yet. */
+  function stepOf(acc, meta, pack) {
+    const CU = window.NoemaCurriculum, ref = pack?.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);
+    if (!CU?.stepsOf) return ref;
+    const on = CU.stepsOf(acc, meta.id), uses = r => !!r && on.some(x => x.c.id === r.id && x.nid === r.node);
+    let via = null; try { via = JSON.parse(sessionStorage.getItem('noema-device:viaStep') || 'null'); } catch (e) { }
+    if (via?.acc === acc && via.sid === meta.id && uses(via)) return { id: via.id, node: via.node };
+    if (uses(ref)) return ref;
+    if (on.length) return { id: on[0].c.id, node: on[0].nid };
+    const c = ref && CU.get(acc, ref.id); return ref && (!c || !c.nodes[ref.node]?.pack?.id) ? ref : null;
+  }
+  /** A subject's pack by its id (library, private or imported) — e.g. one attached to a curriculum step. */
+  async function loadSubject(acc, id) { const meta = (await subjectsFor(acc)).find(s => s.id === id); if (!meta) throw new Error('That subject is not in your library.'); return getPack(acc, meta); }
+  /** A subject that just arrived (imported, from 🌍 Explore, shared with you) is on the Shelf: say how to put it on a map. */
+  function landed(acc, s) {
+    if (!s || !window.NoemaCurMap || !window.NoemaCurriculum || NoemaCurriculum.stepsOf(acc, s.id).length) return;
+    setTimeout(() => toastL(tr('pick.onShelf', { title: s.title || s.id }, acc), 6000), 3800);
+  }
+  /** The Shelf's subjects as chips, by group: tap = study it; ✏️ edit · 🔗 share · 🧭 put it on a map. → { list, draw(subs) } */
+  function shelfChips(acc, { q, onPick, onChange }) {
     const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: tr('pick.other', null, acc), emoji: '✨' });
+    const list = el('div'); let subs = [];
+    const draw = next => {
+      if (next) subs = next; list.innerHTML = '';
+      const term = (q?.value || '').trim().toLowerCase(); let n = 0;
+      groups.forEach(g => {
+        const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
+        if (!items.length) return;
+        list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
+          el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
+            const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+            const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
+            const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
+            return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
+      });
+      if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
+    };
+    return { list, draw };
+  }
+  /** 📚 The Shelf on its own (from 🧭 Curricula and ⚙️ → Subjects). onStudy(id) — default: open the subject. */
+  async function openShelf(acc, { onStudy } = {}) {
+    const study = id => onStudy ? onStudy(id) : Noema.switchTo(acc, id);
+    overlay(async (box, close) => {
+      const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+      const S = shelfChips(acc, { q, onPick: s => { close(); study(s.id); }, onChange: async () => S.draw(await shelf(acc)) });
+      const subs = await shelf(acc);
+      box.append(brandHead(tr('pick.shelf', { n: subs.length }, acc), tr('pick.shelfSub', null, acc)), q, S.list,
+        el('div', { class: 'row noema-ovfoot' }, window.NoemaCurMap ? el('button', { class: 'btn small', onclick: () => { close(); NoemaCurMap.library(acc, { onStudy }); } }, tr('pick.curricula', null, acc)) : null, el('button', { class: 'btn small', onclick: close }, tr('pick.close', null, acc))));
+      S.draw(subs);
+    }, { closable: true });
+  }
+  async function pickSubject(acc, { closable = false } = {}) {
+    let subs = await shelf(acc);   // 📚 on no step of any curriculum
     const a = getAccount(acc) || { name: acc, emoji: '🙂' };
+    const CU = window.NoemaCurriculum, CM = () => window.NoemaCurMap;
     return new Promise(resolve => {
       overlay((box, close) => {
-        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => draw() });
-        const list = el('div');
-        const draw = () => {
-          list.innerHTML = '';
-          const term = q.value.trim().toLowerCase();
-          let n = 0;
-          groups.forEach(g => {
-            const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
-            if (!items.length) return;
-            list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
-              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
-                const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
-                const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
-                return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
-          });
-          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
-        };
-        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const pick = s => { close(); resolve(s); };
+        const onStudy = async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) pick(s); };
+        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+        const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
+        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
-        // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
+        Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
+        // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, tr('pick.subjects', null, acc), el('small', {}, tr('pick.subjectsSub', null, acc))),
-          el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
-        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
+        const curs = el('div', { class: 'pick-curs' });
+        const drawCurs = () => {
+          curs.innerHTML = ''; const list = CU?.list(acc) || [];
+          if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc, { onStudy }) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc, { onStudy }) }, tr('pick.importMap', null, acc)) : null)); return; }
+          curs.append(...list.slice(0, 6).map(c => { const sm = c.status === 'ready' ? CU.summary(acc, c) : null;
+            return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? CM()?.map(acc, c.id, { onStudy }) : CM()?.progress(acc, c, { onStudy }) },
+              el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (c.title || c.goal)), el('span', { class: 'tiny' }, sm ? `${sm.mastered}/${sm.total} · ${sm.open} open` : '⏳')); }),
+            list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
+        };
+        // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)
+        const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; try { remembered = localStorage.getItem(SK); } catch (e) { }
+        const sum = el('summary', {}, tr('pick.shelf', { n: subs.length }, acc));
+        const shelfBox = el('details', { class: 'pick-shelf', open: remembered != null ? remembered === '1' : !(CU?.list(acc) || []).length || !CM() },
+          sum, el('p', { class: 'tiny' }, tr('pick.shelfSub', null, acc)), q, S.list);
+        sum.addEventListener('click', () => setTimeout(() => { try { localStorage.setItem(SK, shelfBox.open ? '1' : '0'); } catch (e) { } if (shelfBox.open && subs.length > 8) q.focus(); }, 0));   // only the learner's own choice is remembered
+        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, curs, shelfBox,
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { landed(acc, s); pick(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { landed(acc, s); pick(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, tr('pick.close', null, acc)) : null));
-        draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
+        drawCurs(); S.draw(subs); if (shelfBox.open && subs.length > 8) setTimeout(() => q.focus(), 300);
+        const offC = CU?.onChange?.(() => { if (box.isConnected) drawCurs(); else offC?.(); });
       }, { closable });
     });
   }
@@ -480,6 +545,7 @@
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...extra }));
     if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
+    window.NoemaCurriculum?.Edit?.refreshAssigned?.(acc, p.subject.id, p);   // 📦 a new version of a subject that teaches steps: those steps follow it
     return { ...p.subject, origin: 'imported', counts: p.counts, ...extra };
   }
 
@@ -563,7 +629,7 @@
       toastL('⬇️ Getting “' + s.title + '”…');
       const r = await fetch(NoemaCloud.publicPackUrl(s.owner, s.id)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
       const p = await r.json(); if (REG.subjects.some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(s.owner_name || 'shared');
-      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '' });
+      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '', publicId: s.id, publicAt: s.updated_at || null });
       await attachSharedFiles(acc, p, 'noema-public');
       toastL(`📥 “${p.subject.title}” added to your subjects`); choose(added);
     };
@@ -621,17 +687,49 @@
   }
 
   /* ---- 🔔 incoming shares: bell + banner (engine) and the picker ---- */
+  /* ---- 🔔 a new version of a subject taken from 🌍 Explore waits for the learner: ⬆️ Update or Keep mine ---- */
+  const SubjUpdates = {
+    list: [],
+    async check(acc) {
+      const metas = ls.keys(`${P}${acc}:a:packmeta:`).map(k => jget(k, null)).filter(m => m?.id && m.publicFrom);
+      if (!metas.length) return (this.list = []);
+      const rows = await NoemaCloud.publicRows([...new Set(metas.map(m => m.publicId || m.id))]).catch(() => null); if (!rows) return this.list;
+      const CU = window.NoemaCurriculum;
+      this.list = metas.map(m => {
+        const r = rows.find(x => x.owner === m.publicFrom && x.subject_id === (m.publicId || m.id)); if (!r) return null;
+        const v = r.meta?.version || null, mark = v || r.updated_at;
+        const newer = v ? v !== (m.version || null) : !!(m.publicAt && r.updated_at > m.publicAt);
+        if (!newer || m.publicSkip === mark) return null;
+        const steps = CU?.stepsOf ? CU.stepsOf(acc, m.id).filter(x => x.c.nodes[x.nid].pack?.assigned).length : 0;
+        return { id: 'subup:' + m.id, kind: 'subjupdate', subject: m.id, title: m.title, from_name: r.owner_name || m.publicOwner || '', owner: r.owner, publicId: r.subject_id, mark, at: r.updated_at, steps };
+      }).filter(Boolean);
+      return this.list;
+    },
+    /** ⬆️ Take the new version: the same subject id, so progress, notes and conversations stay; steps it teaches are re-planned. */
+    async apply(acc, u) {
+      const r = await fetch(NoemaCloud.publicPackUrl(u.owner, u.publicId)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
+      const p = await r.json(); p.subject.id = u.subject;
+      const s = await importPack(acc, p, { publicFrom: u.owner, publicOwner: u.from_name || '', publicId: u.publicId, publicAt: u.at });
+      await attachSharedFiles(acc, p, 'noema-public');
+      this.list = this.list.filter(x => x.id !== u.id); return s;
+    },
+    keep(acc, u) { const k = KV.accountKey('packmeta:' + u.subject, acc), m = jget(k, null); if (m) KV.set(k, JSON.stringify({ ...m, publicSkip: u.mark })); this.list = this.list.filter(x => x.id !== u.id); },
+  };
+  const UPDATE_KINDS = ['curupdate', 'stepupdate', 'subjupdate'];
   const Notes = {
-    pending: [], listeners: [], timer: null, acc: null,
+    pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
+    /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
+    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list]; this.emit(); return this.pending; },
     async refresh() {
       if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
       try {
         const subs = (await NoemaCloud.incomingShares()) || [];
         // 👥 invitations to curricula (engine/curshare.js) — in the same bell and banner
         const curs = window.NoemaCurShare ? ((await NoemaCurShare.invites().catch(e => { console.warn('[notes] curricula', e.message); return []; })) || []).map(i => ({ ...i, id: 'cur:' + i.curriculum, kind: 'curriculum', from_name: i.owner_name || '', meta: { ...(i.meta || {}), counts: i.meta?.counts || {} } })) : [];
-        this.pending = [...subs, ...curs]; this.emit();
+        await SubjUpdates.check(this.acc).catch(e => console.warn('[notes] updates', e.message));
+        this.remote = [...subs, ...curs]; this.local();
       } catch (e) { console.warn('[notes]', e.message); }
       return this.pending;
     },
@@ -639,6 +737,14 @@
       this.acc = acc; if (!isCloudAcc(acc)) return;
       this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
+      if (!this.curOn && window.NoemaCurShare?.onChange) { this.curOn = true; NoemaCurShare.onChange(() => this.local()); }
+    },
+    /** An update: take it (true) or keep mine (false). A shared map's changes open their review (you tick what you take). */
+    async update(sh, take) {
+      const acc = this.acc, done = () => { this.local(); };
+      if (sh.kind === 'curupdate') { if (take) { await window.NoemaCurMap?.reviewChanges(acc, sh.curriculum, { onDone: done }); return; } await NoemaCurShare.takeChanges(acc, sh.curriculum, []); return done(); }
+      if (sh.kind === 'stepupdate') { if (take) await NoemaCurShare.download(acc, sh.curriculum, sh.node); else NoemaCurShare.keepStep(acc, sh.curriculum, sh.node); return done(); }
+      if (sh.kind === 'subjupdate') { if (take) await SubjUpdates.apply(acc, sh); else SubjUpdates.keep(acc, sh); return done(); }
     },
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
@@ -658,6 +764,7 @@
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
+    if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
     const row = el('div', { class: 'nx-req' },
       sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the curriculum ', el('b', {}, `“${sh.title}”`),
         el('div', { class: 'tiny' }, `👥 ${nOf(sh.meta?.counts?.steps, 'step')} — your own progress, the prepared steps are shared` + (sh.message ? ` · “${sh.message}”` : '')))
@@ -667,6 +774,19 @@
       el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Curricula` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
       el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
     return row;
+  }
+
+  /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
+  function updateText(sh) {
+    if (sh.kind === 'curupdate') return [`🧭 ${sh.from_name || 'The owner'} changed the curriculum `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `${nOf(sh.count, 'change')}${sh.lines?.length ? ': ' + sh.lines.join(' · ') : ''} — nothing changes in your copy until you take it`)];
+    if (sh.kind === 'stepupdate') return [`⚡ ${sh.from_name || 'Its author'} made a new version of the step `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `in “${sh.curTitle}” — yours stays until you take it`)];
+    return [`🌍 ${sh.from_name || 'Its author'} published a new version of `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, 'your progress stays (the same subject)' + (sh.steps ? ` · the ${nOf(sh.steps, 'curriculum step')} it teaches ${sh.steps === 1 ? 'is' : 'are'} re-planned to follow it` : ''))];
+  }
+  const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 Review' : sh.kind === 'stepupdate' ? '⬇️ Get it' : '⬆️ Update';
+  function updateRow(sh) {
+    const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toastL(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toastL('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
+    return el('div', { class: 'nx-req nx-update' }, el('div', { class: 'grow' }, ...updateText(sh)),
+      el('button', { class: 'btn small primary', onclick: act(true) }, updateLabel(sh)), el('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'));
   }
 
   /* ---------------- Claude: two ways (docs/CLAUDE_CONNECTOR.md) ----------------
@@ -1084,7 +1204,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
@@ -1164,7 +1284,7 @@
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
-    Noema.node = pack.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);   // a curriculum step?
+    Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     document.title = `${Noema.subject.title} · ${CFG.appName}`;
     document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS)

@@ -31,16 +31,19 @@ window.NoemaCurMap = (() => {
           list.length ? el('div', { class: 'cm-cards' }, ...list.map(c => {
             const s = c.status === 'ready' ? C().summary(acc, c) : null;
             const sh = c.shared && !c.shared.ended ? c.shared : null;
-            const card = el('button', { class: 'cm-card', onclick: () => { close(); c.status === 'ready' ? map(acc, c.id, { onStudy }) : progress(acc, c, { onStudy }); } },
+            const card = el('button', { class: 'cm-card', onclick: () => { close(); c.status === 'ready' || c.status === 'attach' ? map(acc, c.id, { onStudy }) : progress(acc, c, { onStudy }); } },
               el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, sh ? '👥' : '🧭'), el('b', {}, c.title || c.goal)),
               sh ? el('div', { class: 'tiny cm-sharedby' }, sh.role === 'member' ? `👥 shared by ${sh.ownerName || 'its owner'}` : `👥 you share it${sh.public ? ' · 🌍 public' : ''}`) : null,
               s ? el('div', { class: 'cm-bar' }, el('i', { style: { width: fmtPct(s.pct) } })) : null,
-              el('div', { class: 'tiny' }, s ? `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (sh ? ` · ${Object.values(c.remote || {}).filter(x => x.status === 'ready').length} shared` : '') + (window.NoemaCurJobs && !J().work(c).done ? ' · 💬 waiting for your Claude app' : '') : c.status === 'waiting' ? '💬 waiting for your Claude app — tap' : c.status === 'building' ? '⏳ being built…' : c.status === 'paused' ? '⏸️ paused — tap to continue' : '⚠️ stopped — tap to continue'));
+              el('div', { class: 'tiny' }, s ? `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (sh ? ` · ${Object.values(c.remote || {}).filter(x => x.status === 'ready').length} shared` : '') + (window.NoemaCurJobs && !J().work(c).done ? ' · 💬 waiting for your Claude app' : '') : c.status === 'attach' ? '📦 attach the subjects you have, then its steps are planned — tap' : c.status === 'waiting' ? '💬 waiting for your Claude app — tap' : c.status === 'building' ? '⏳ being built…' : c.status === 'paused' ? '⏸️ paused — tap to continue' : '⚠️ stopped — tap to continue'));
             const canShare = !(c.shared?.role === 'member') && Object.keys(c.nodes || {}).length;
             return el('div', { class: 'cm-cardwrap' }, card, canShare ? el('button', { class: 'btn small ghost cm-sharebtn', title: sh ? 'Sharing: members, public, invitations' : 'Share this curriculum — everybody keeps their own progress, the prepared steps are shared', 'aria-label': 'Share ' + (c.title || c.goal), onclick: e => { e.stopPropagation(); shareCurriculum(acc, c.id, { onDone: draw }); } }, '👥') : null);
           })) : el('div', { class: 'empty' }, el('div', { class: 'e' }, '🧭'), el('p', {}, 'No curriculum yet. Tap ➕ New curriculum and type what you want to master.')),
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+          el('div', { class: 'row noema-ovfoot' }, shelfBtn, el('button', { class: 'btn small', onclick: close }, 'Close')));
       };
+      // 📚 the Shelf: the subjects that are on no step of a map (engine/loader.js) — reachable, but not in the way
+      const shelfBtn = el('button', { class: 'btn small ghost cm-shelflink', title: 'Subjects that are not on a step of any curriculum — study them, or put them on a map', onclick: () => { close(); window.Noema.openShelf?.(acc, { onStudy }); } }, '📚 Shelf');
+      window.Noema.shelf?.(acc).then(l => { shelfBtn.textContent = `📚 Shelf (${l.length})`; }).catch(() => { });
       // 📬 invitations to curricula other people share (cloud accounts)
       const invBox = el('div', { class: 'cm-invites' });
       const drawInv = async () => {
@@ -255,12 +258,14 @@ window.NoemaCurMap = (() => {
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
       const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(prefs(acc).curBudget || 8) });
       const err = el('div', { class: 'tiny cg-kstat bad' });
+      const attachFirst = el('input', { type: 'checkbox', class: 'cm-attachfirst' });
       const go = el('button', { class: 'btn primary cg-go', onclick: () => {
         err.textContent = '';
         if (goal.value.trim().length < 3) { err.textContent = '👆 Type the goal topic first.'; goal.focus(); return; }
         if (provider.value !== 'claudeapp' && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Add a Claude API key or a Gemini key first (above) — or choose the Claude app.'; return; }
         const [a1, a2] = apps.value.split('-').map(Number);
         const c = C().blank({ goal: goal.value, language: lang.value, learner: learner.value, depth: depth.value, apps: [a1, a2], scope: scope.value, constraints: constraints.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8) });
+        if (attachFirst.checked) c.attachFirst = true;   // 📦 the map waits for the learner's own subjects before its steps are planned
         C().save(acc, c); close(); progress(acc, c, { onStudy, start: true });
       } }, '🧭 Build my curriculum');
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'),
@@ -274,10 +279,154 @@ window.NoemaCurMap = (() => {
             el('details', { class: 'cg-faq' }, el('summary', {}, 'More options'), el('label', { class: 'cg-field' }, 'Scope', scope), el('label', { class: 'cg-field' }, 'Requirements', constraints))),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Preparing the steps'), tip('Every step becomes a full subject, made from official sources. noema-lite prepares the next open steps in the background while the app is open, so they are ready when you get there.')),
             el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch, tip('With the Claude app: how many of the next open steps wait in its queue, ready for you to paste the message into Claude.')), el('label', { class: 'cg-field' }, 'Claude API key: stop and ask me when one step costs more than $', budget)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Use subjects you already have'), tip('When the map is ready, before its steps are planned, you attach the subjects you already have (your own, imported or shared with you) to the steps they teach. Those steps are planned from the subject and never generated — no agent touches them. You can also do it later, on any step: 📦 Use a subject I have.')),
+            el('label', { class: 'tiny' }, attachFirst, ' Let me attach my subjects to its steps before they are planned')),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Build')), go, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       setTimeout(() => goal.focus(), 200);
     });
+  }
+
+  /* ======================= 🔔 a member takes the owner's changes they want (docs/CURRICULUM.md §8) ======================= */
+  const CHANGE_ICON = { map: '🧭', add: '➕', del: '➖', info: '✏️', plan: '📝', mat: '📎', links: '🔗' };
+  async function reviewChanges(acc, cid, { onDone = () => { } } = {}) {
+    let inc; try { inc = await SH().incoming(acc, cid); } catch (e) { toast('⚠️ ' + e.message, 5000); return; }
+    const c = C().get(acc, cid); if (!c) return;
+    if (!inc.list.length) { if (inc.record) await SH().takeChanges(acc, cid, [], inc); toast('Nothing new to take — your copy is up to date.', 3500); onDone(); return; }
+    overlay((box, close) => {
+      box.classList.add('cg-box', 'cm-review');
+      const rows = inc.list.map(ch => { const cb = el('input', { type: 'checkbox', 'data-key': ch.key }); cb.checked = !ch.own; return [ch, cb]; });
+      const done = async keys => { try { await SH().takeChanges(acc, cid, keys, inc); toast(keys.length ? `✅ Took ${keys.length} change${keys.length === 1 ? '' : 's'} into your copy` : '👍 You keep your copy — these changes are not offered again unless they change.', 4500); close(); onDone(); } catch (e) { toast('⚠️ ' + e.message, 5000); } };
+      box.append(head(`🔔 ${c.shared?.ownerName || 'The owner'} changed “${c.title || c.goal}”`, 'Tick what you take into your copy of the map. Your progress, your settings and your own subjects on steps stay as they are. What you leave is not offered again unless it changes again.'),
+        el('div', { class: 'cm-changes' }, ...rows.map(([ch, cb]) => el('label', { class: 'cm-change' + (ch.own ? ' own' : '') }, cb, el('span', {}, (CHANGE_ICON[ch.kind] || '•') + ' ' + ch.text)))),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary cm-takechanges', onclick: () => done(rows.filter(([, cb]) => cb.checked).map(([ch]) => ch.key)) }, '✓ Take the ticked changes'),
+          el('button', { class: 'btn small cm-keepmine', onclick: () => done([]) }, 'Keep my copy'), el('button', { class: 'btn small ghost', onclick: close }, 'Not now')));
+    });
+  }
+
+  /* ======================= 📦 subjects you already have, on steps (docs/CURRICULUM.md §9) ======================= */
+  const STOP = new Set(['the', 'and', 'for', 'with', 'from', 'into', 'your', 'how', 'what', 'its', 'introduction', 'intro', 'basics', 'fundamentals', 'part', 'step', 'course']);
+  const words = t => new Set(String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').split(/[^a-z0-9α-ωа-я]+/).filter(w => w.length > 2 && !STOP.has(w)));
+  /** How much two titles share (0–1) — the simple “suggest matches”, no AI. */
+  const likeness = (a, b) => { const A = words(a), B = words(b); if (!A.size || !B.size) return 0; let k = 0; for (const w of A) if (B.has(w)) k++; return k / Math.min(A.size, B.size); };
+  /** Subjects that may teach a step: the learner's library without language courses (they are studied on their own). */
+  const attachable = async acc => (await window.Noema.subjectsFor(acc)).filter(s => !s.hidden && s.kind !== 'language' && !String(s.id).startsWith('lang:'));
+  const whereOf = (acc, id) => { const on = C().stepsOf(acc, id); return on.length ? (on.length === 1 ? `on “${on[0].c.nodes[on[0].nid].title}”` : `on ${on.length} steps`) : '📚 on the Shelf'; };
+  /** The warning shown before a subject is attached: only this step changes. */
+  function attachWarning(c, nid) {
+    const n = c.nodes[nid]; if (!n) return null; const kids = c.edges.filter(e => e.from === nid).length;
+    return el('div', { class: 'cm-attachwarn', role: 'note' }, el('b', {}, '⚠️ Only this step is re-planned. '),
+      n.chapters?.length ? 'Its chapters and goals are redesigned to follow the subject, and the step stays closed until its new plan is here. ' : 'Its chapters are planned from the subject. ',
+      n.pack?.id && !n.pack.assigned && n.pack.status === 'ready' ? 'The subject prepared for it goes to your 📚 Shelf — nothing is deleted. ' : '',
+      kids ? `The ${kids} step${kids === 1 ? '' : 's'} after it keep${kids === 1 ? 's its' : ' their'} plan — check ${kids === 1 ? 'it' : 'them'} afterwards. ` : '',
+      'The subject itself does not change, and your progress in it stays.',
+      c.shared && !c.shared.ended ? el('div', { class: 'cm-attachshared' }, '👥 This curriculum is shared: the change is yours only. The others keep the shared step and its plan, and your subject is never shared with them.') : null);
+  }
+  /** 📖 The step a subject is studied from, in this tab: one subject may teach several steps (loader.js stepOf). */
+  const viaStep = (acc, cid, nid, sid) => { try { if (nid) sessionStorage.setItem('noema-device:viaStep', JSON.stringify({ acc, sid, id: cid, node: nid })); else sessionStorage.removeItem('noema-device:viaStep'); } catch (e) { } };
+  const replanBusy = new Set(), replanAgain = new Set();
+  /** 🔄 Re-plan a step that a subject was attached to — here with an API key / Gemini (the Claude app does it by itself).
+      Another subject attached while it runs: its answer is dropped (Edit.plan → stale) and the step is planned again. */
+  async function replanNow(acc, cid, nid) {
+    const key = cid + '/' + nid; if (replanBusy.has(key)) { replanAgain.add(key); return; } replanBusy.add(key);
+    const c0 = C().get(acc, cid); const t = c0?.nodes[nid]?.title || nid;
+    try { let r; do { replanAgain.delete(key); r = await C().Edit.plan(acc, cid, [nid]); } while ((replanAgain.has(key) || r?.stale?.includes(nid)) && C().get(acc, cid)?.nodes[nid]?.replan); if (r?.queued) toast(`🔄 Your Claude app re-plans “${t}” — copy the message from the 💬 bar of the map.`, 5000); else toast(`✅ “${t}” has its new plan${C().get(acc, cid)?.nodes[nid]?.pack?.assigned ? ' — it follows its subject and is open again' : ''}.`, 4000); }
+    catch (e) { toast(`⚠️ “${t}” was not re-planned: ${e.message} — tap ↻ Re-plan now on the step to try again.`, 7000); }
+    finally { replanBusy.delete(key); replanAgain.delete(key); const cc = C().get(acc, cid); if (cc) C().save(acc, cc); }
+  }
+  /** Attach (C().Edit.assign), then re-plan only that step: right away here, or by the Claude app. → true when attached */
+  async function doAttach(acc, cid, nid, sid, { from = 'me', quiet = false } = {}) {
+    const r = await C().Edit.assign(acc, cid, nid, sid, { from });
+    if (r.error) { toast('⚠️ ' + r.error, 6000); return false; }
+    const c = C().get(acc, cid), n = c.nodes[nid];
+    if (!r.replan) { if (!quiet) toast(`📦 “${n.pack.title}” now teaches “${n.title}”`, 3500); return true; }
+    if (c.provider === 'claudeapp') { toast(`📦 Attached — 🔄 your Claude app re-plans “${n.title}” (copy the message from the 💬 bar of the map).`, 6000); return true; }
+    if (!LLM().pick(acc, c.provider)) { toast(`📦 Attached — 🔄 “${n.title}” needs its new plan: add a Claude API key or a Gemini key, then tap ↻ Re-plan now on the step.`, 7000); return true; }
+    toast(`📦 Attached — 🔄 re-planning “${n.title}”…`, 3500); replanNow(acc, cid, nid);
+    return true;
+  }
+  /** 📦 Attach a subject to a step. With cid + nid: choose the subject. With subject: choose the curriculum and the step (“Put on a map…”). */
+  async function attachDialog(acc, { cid = null, nid = null, subject = null, onDone = () => { } } = {}) {
+    const subs = subject ? [] : (await attachable(acc)).filter(s => !(cid && C().get(acc, cid)?.nodes[nid]?.pack?.id === s.id));
+    const own = C().list(acc).filter(x => Object.keys(x.nodes || {}).length && !['dag', 'audit', 'expand'].includes(x.stage));
+    overlay((box, close) => {
+      box.classList.add('cg-box', 'cm-attach');
+      let pickS = subject?.id || null, pickC = cid || (own[0]?.id || null), pickN = nid;
+      const warn = el('div'), err = el('div', { class: 'tiny cg-kstat bad' });
+      const go = el('button', { class: 'btn primary cm-attachgo', disabled: true, onclick: async () => {
+        go.disabled = true; err.textContent = '';
+        const ok = await doAttach(acc, pickC, pickN, pickS);
+        if (ok) { close(); onDone({ cid: pickC, nid: pickN, subjectId: pickS }); } else go.disabled = false;
+      } }, '📦 Attach and re-plan this step');
+      const refresh = () => { warn.innerHTML = ''; const c = pickC && C().get(acc, pickC); if (c && pickN) warn.append(attachWarning(c, pickN)); go.disabled = !(pickS && pickC && pickN); };
+      let chooser;
+      if (!subject) {   // which of my subjects teaches this step?
+        const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search your subjects…', oninput: () => drawList() });
+        const list = el('div', { class: 'noema-chips cm-attachchips' });
+        const drawList = () => {
+          list.innerHTML = ''; const term = q.value.trim().toLowerCase();
+          const items = subs.filter(s => !term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term));
+          list.append(...items.map(s => el('button', { class: 'noema-chip cm-attachchip' + (pickS === s.id ? ' on' : ''), 'aria-pressed': String(pickS === s.id), 'data-id': s.id, title: s.description || '', onclick: () => { pickS = s.id; list.querySelectorAll('.cm-attachchip').forEach(b => { const on = b.dataset.id === s.id; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); }); refresh(); } },
+            el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), el('span', { class: 'o tiny' }, whereOf(acc, s.id)))));
+          if (!items.length) list.append(el('p', { class: 'tiny' }, subs.length ? 'No subject matches.' : 'You have no other subjects yet — import one (📥) or make one with ✨ Create with Claude.'));
+        };
+        drawList(); chooser = el('div', {}, q, list);
+      } else if (!own.length) {   // “Put on a map…” without a curriculum yet
+        chooser = el('div', { class: 'empty' }, el('p', {}, 'You have no curriculum yet. Make one for the goal this subject serves — then attach the subject to its step.'),
+          el('button', { class: 'btn', onclick: () => { close(); create(acc, {}); } }, '➕ New curriculum'));
+      } else {   // which curriculum, which step?
+        const csel = el('select', { class: 'noema-input', 'aria-label': 'Curriculum' }, ...own.map(x => el('option', { value: x.id }, (x.shared && !x.shared.ended ? '👥 ' : '🧭 ') + (x.title || x.goal))));
+        const nsel = el('select', { class: 'noema-input', 'aria-label': 'Step' });
+        const fill = () => {
+          const c = C().get(acc, csel.value); pickC = csel.value; nsel.innerHTML = '';
+          nsel.append(el('option', { value: '' }, '— choose the step it teaches —'), ...C().order(c).map(id => { const n = c.nodes[id], pk = n.pack || {};
+            return el('option', { value: id, disabled: pk.status === 'generating' || (pk.assigned && pk.id === subject.id) }, `${ICON[n.role] || '•'} ${n.title}${pk.assigned ? ` — 📦 ${pk.title || pk.id}` : pk.status === 'ready' ? ' — ⚡ prepared' : pk.status === 'generating' ? ' — ⏳ being prepared' : ''}`); }));
+          const best = C().order(c).map(id => [id, likeness(c.nodes[id].title + ' ' + (c.nodes[id].summary || ''), subject.title)]).sort((a, b) => b[1] - a[1])[0];
+          pickN = best && best[1] >= 0.5 && !c.nodes[best[0]].pack?.assigned ? best[0] : null; nsel.value = pickN || ''; refresh();
+        };
+        csel.value = pickC; csel.onchange = fill; nsel.onchange = () => { pickN = nsel.value || null; refresh(); };
+        chooser = el('div', { class: 'noema-form' }, el('label', { class: 'cg-field' }, 'Curriculum', csel), el('label', { class: 'cg-field' }, 'Step', nsel)); fill();
+      }
+      const n0 = cid && C().get(acc, cid)?.nodes[nid];
+      box.append(head('📦 ' + (subject ? `Put “${subject.title}” on a map` : `A subject for “${n0?.title || ''}”`),
+        subject ? 'Choose the step of a curriculum that this subject teaches. The step is then studied from it — never generated.' : 'Choose a subject you already have. This step is then studied from it — never generated, no agent touches it.'),
+        chooser, warn, err, el('div', { class: 'row noema-ovfoot' }, go, el('button', { class: 'btn small', onclick: close }, 'Cancel')));
+      refresh();
+    });
+  }
+  /** 📦 While a map is being created (or any time): attach subjects you already have to many steps at once. */
+  async function attachMany(acc, cid, { onDone = () => { } } = {}) {
+    const subs = await attachable(acc); const c = C().get(acc, cid); if (!c) return;
+    overlay((box, close) => {
+      box.classList.add('cg-box', 'cm-attachmany');
+      const rows = C().order(c).map(id => { const n = c.nodes[id]; const gen = n.pack?.status === 'generating';
+        const sel = el('select', { class: 'noema-input', 'aria-label': 'Subject for ' + n.title, disabled: gen }, el('option', { value: '' }, n.pack?.status === 'ready' && !n.pack.assigned ? '⚡ its own prepared subject' : '— none: planned and prepared as usual —'), ...subs.map(s => el('option', { value: s.id }, `${s.emoji || '📘'} ${s.title}`)));
+        sel.value = n.pack?.assigned ? n.pack.id : ''; return { id, n, sel }; });
+      const msg = el('span', { class: 'tiny' });
+      const suggest = () => {
+        let k = 0; const used = new Set(rows.map(r => r.sel.value).filter(Boolean));
+        for (const s of subs) { if (used.has(s.id)) continue; let best = null, bs = 0; for (const r of rows) { if (r.sel.value || r.sel.disabled) continue; const v = likeness(r.n.title + ' ' + (r.n.summary || ''), s.title); if (v > bs) { bs = v; best = r; } } if (best && bs >= 0.5) { best.sel.value = s.id; used.add(s.id); k++; } }
+        msg.textContent = k ? `✨ ${k} suggestion${k === 1 ? '' : 's'} — check them before you attach.` : 'No clear matches — choose them yourself.';
+      };
+      const go = el('button', { class: 'btn primary cm-attachmanygo', onclick: async () => {
+        go.disabled = true; let k = 0;
+        for (const r of rows) { const want = r.sel.value, cur = C().get(acc, cid).nodes[r.id]; if (!cur || r.sel.disabled) continue;
+          if (want && !(cur.pack?.assigned && cur.pack.id === want)) { if (await doAttach(acc, cid, r.id, want, { quiet: true })) k++; }
+          else if (!want && cur.pack?.assigned) C().Edit.detach(acc, cid, r.id); }
+        close(); if (k) toast(`📦 ${k} step${k === 1 ? ' is' : 's are'} taught by your own subjects now`, 4000); onDone(k);
+      } }, '📦 Attach the chosen subjects');
+      box.append(head('📦 Use subjects you already have', 'Attach them to the steps they teach: those steps are planned from the subject and never generated (no agent touches them). Steps without one are planned and prepared as usual.'),
+        el('div', { class: 'cm-attachwarn tiny', role: 'note' }, '⚠️ Only the steps you attach a subject to change. A step that already has its chapters is re-planned to follow its subject and stays closed until its new plan is here; a subject prepared for it goes to your 📚 Shelf.'),
+        subs.length ? el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: suggest }, '✨ Suggest matches'), msg) : el('p', { class: 'tiny' }, 'You have no subjects to attach yet.'),
+        el('ol', { class: 'cm-attachlist' }, ...rows.map(r => el('li', {}, el('span', { class: 'cm-attachstep' }, `${ICON[r.n.role] || '•'} ${r.n.title}`), r.sel))),
+        el('div', { class: 'row noema-ovfoot' }, go, el('button', { class: 'btn small', onclick: close }, 'Cancel')));
+    });
+  }
+  /** ▶ The learner is done attaching: the other steps are planned now. */
+  function planNow(acc, cid, { onStudy } = {}) {
+    const c = C().get(acc, cid); if (!c) return; delete c.attachFirst;
+    if (c.provider === 'claudeapp') { if (c.status === 'attach') c.status = 'ready'; C().save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); toast('💬 Your Claude app plans the steps now — copy the message from the 💬 bar of the map.', 5000); map(acc, cid, { onStudy, appHelp: false }); return; }
+    c.status = 'paused'; C().save(acc, c); progress(acc, c, { onStudy, start: true });
   }
 
   /* ======================= building progress ======================= */
@@ -292,12 +441,14 @@ window.NoemaCurMap = (() => {
         const SG = stagesOf(c); const i = SG.findIndex(s => s[0] === c.stage);
         stages.innerHTML = ''; SG.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : j === i && c.status === 'waiting' ? '💬 ' : '◻️ ') + t)));
         status.className = 'cg-status ' + c.status;
-        status.textContent = ctl ? '🧠 The agents are working — keep this page open (other tabs are fine).' : c.status === 'ready' ? '✅ Your curriculum is ready.' : c.status === 'waiting' ? '💬 Your Claude app builds the map — follow the steps below.' : c.status === 'failed' ? '⚠️ ' + (c.error || 'Stopped') : c.status === 'paused' ? '⏸️ Paused.' : '';
+        status.textContent = ctl ? '🧠 The agents are working — keep this page open (other tabs are fine).' : c.status === 'attach' ? '📦 The map is ready. Attach the subjects you already have to its steps — then the other steps are planned.' : c.status === 'ready' ? '✅ Your curriculum is ready.' : c.status === 'waiting' ? '💬 Your Claude app builds the map — follow the steps below.' : c.status === 'failed' ? '⚠️ ' + (c.error || 'Stopped') : c.status === 'paused' ? '⏸️ Paused.' : '';
         actions.innerHTML = '';
         appBox.style.display = c.provider === 'claudeapp' && c.status === 'waiting' ? '' : 'none';
         if (c.status === 'waiting') actions.append(el('button', { class: 'btn small', title: 'Use an API key or Gemini instead (everything runs here)', onclick: () => { const k = LLM().pick(acc, 'auto'); if (!k) { toast('Add a Claude API key or a Gemini key first (⚙️ Settings / ✨ Create with Claude).', 4000); return; } c = C().get(acc, c.id); c.provider = 'auto'; c.status = 'building'; C().save(acc, c); run(); } }, 'Use my API key here instead'), el('button', { class: 'btn small ghost', onclick: () => { if (confirm('Delete this curriculum?')) { C().remove(acc, c.id); close(); library(acc, { onStudy }); } } }, '🗑 Delete'));
         else if (ctl) actions.append(el('button', { class: 'btn', onclick: () => ctl.abort() }, '⏹ Stop'));
         else if (c.status === 'ready') actions.append(el('button', { class: 'btn primary', onclick: () => { close(); map(acc, c.id, { onStudy }); } }, '🗺️ Open the map'));
+        else if (c.status === 'attach') actions.append(el('button', { class: 'btn primary cm-attachsubs', onclick: () => attachMany(acc, c.id, { onDone: () => { c = C().get(acc, c.id); paint(); } }) }, '📦 Attach subjects'),
+          el('button', { class: 'btn cm-plannow', onclick: () => { close(); planNow(acc, c.id, { onStudy }); } }, '▶ Plan the steps now'), el('button', { class: 'btn small', onclick: () => { close(); map(acc, c.id, { onStudy }); } }, '🗺️ Open the map'));
         else actions.append(el('button', { class: 'btn primary', onclick: run }, '▶ Continue'), el('button', { class: 'btn small ghost', onclick: () => { if (confirm('Delete this curriculum?')) { C().remove(acc, c.id); close(); library(acc, { onStudy }); } } }, '🗑 Delete'));
       };
       const add = m => { log.append(el('li', {}, m)); while (log.children.length > 120) log.firstChild.remove(); log.scrollTop = log.scrollHeight; };
@@ -324,7 +475,7 @@ window.NoemaCurMap = (() => {
   /* ======================= ✏️ editing a step / 📝 reviewing it before it is prepared ======================= */
   const RLABEL = { foundation: '🧱 Prerequisite', intro: '🚪 Introduction to the goal', aspect: '🎯 Aspect of the goal', subtopic: '🔹 Sub-topic of the goal', related: '🔗 Related topic', synthesis: '🏁 Synthesis', application: '🚀 Application' };
   function editStep(acc, cid, id, { mode = 'edit', onDone = () => { } } = {}) {
-    const E = C().Edit; let c = C().get(acc, cid); const n = id ? c.nodes[id] : null; const locked = n && E.generated(n);
+    const E = C().Edit; let c = C().get(acc, cid); const n = id ? c.nodes[id] : null; const locked = n && E.planLocked(n);   // 📦 a step taught by an attached subject keeps an editable plan
     overlay((box, close) => {
       box.classList.add('cg-box', 'cm-editor');
       const T = x => c.nodes[x]?.title || x;
@@ -406,14 +557,15 @@ window.NoemaCurMap = (() => {
           : [el('button', { class: 'btn primary', onclick: () => { if (save()) { close(); onDone(); toast('✔ Saved'); } } }, 'Save'),
             el('button', { class: 'btn small danger', onclick: async () => {
               const bridge = confirm(`Remove “${n.title}” from the map?\n\nOK = its prerequisites become prerequisites of the steps after it (keeps the order).\nCancel = do not remove.`); if (!bridge) return;
-              const delMat = n.pack?.id ? confirm('Also delete the material already prepared for this step?\nOK = delete it · Cancel = keep it as a normal subject') : false;
+              const delMat = n.pack?.id && !n.pack.assigned && !C().stepsOf(acc, n.pack.id).some(x => x.c.id !== cid || x.nid !== id) ? confirm('Also delete the material already prepared for this step?\nOK = delete it · Cancel = keep it as a normal subject') : false;
               await E.remove(acc, cid, id, { bridge: true, deleteMaterial: delMat }); close(); onDone(null); toast('🗑 Step removed'); } }, '🗑 Remove the step')];
       box.append(head2,
         el('div', { class: 'noema-form' },
           el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'What it teaches', summary), el('label', { class: 'cg-field' }, 'Place in the curriculum', role),
           el('div', { class: 'cg-field' }, el('b', {}, '⬅️ Prerequisites (must be mastered first)'), links('prerequisite', () => parents, v => { parents = v; }, possibleP)),
           el('div', { class: 'cg-field' }, el('b', {}, '➡️ Opens these steps'), links('dependent step', () => children, v => { children = v; }, possibleK)),
-          n ? el('div', { class: 'cg-field' }, el('b', {}, '📎 Your material for this step'), tip('Files you give a step are its sources: its chapters are planned from them and its subject is built from them (with Claude: inside its sandbox; with Gemini: from their text) — no web research of the theory. Steps without files are researched as usual.'), matBox) : null,
+          n?.pack?.assigned ? el('div', { class: 'cg-field' }, el('b', {}, `📦 Taught by your subject “${n.pack.title || n.pack.id}”`), el('p', { class: 'tiny' }, 'Its chapters follow that subject; ✨ re-plan them to match it again.')) : null,
+          n && !n.pack?.assigned ? el('div', { class: 'cg-field' }, el('b', {}, '📎 Your material for this step'), tip('Files you give a step are its sources: its chapters are planned from them and its subject is built from them (with Claude: inside its sandbox; with Gemini: from their text) — no web research of the theory. Steps without files are researched as usual.'), matBox) : null,
           el('label', { class: 'cg-field' }, 'Learning goals' + (locked ? ' (fixed — already prepared)' : ''), goals),
           el('div', { class: 'cg-field' }, el('b', {}, `📖 Chapters${locked ? ' (fixed — already prepared)' : ''}`), chBox,
             locked ? null : el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { chapters.push({ title: '', goals: [], coverage: [] }); drawCh(); chBox.querySelector('li:last-child input')?.focus(); } }, '➕ Add a chapter'), replan),
@@ -448,6 +600,7 @@ window.NoemaCurMap = (() => {
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
       const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(prefs(acc).curBudget || 8) });
       const fileBox = el('div', { class: 'cm-files' }), fileSum = el('div', { class: 'tiny cm-filesum' });
+      const attachFirst = el('input', { type: 'checkbox', class: 'cm-attachfirst' });
       const drop = el('label', { class: 'cg-drop' }, '📎 Add the material (PDF, Word, slides, notes… or a .zip)', el('input', { type: 'file', multiple: true, onchange: e => { addFiles([...e.target.files]); e.target.value = ''; } }));
       const folder = el('label', { class: 'btn small' }, '📁 Add a folder', el('input', { type: 'file', multiple: true, webkitdirectory: true, style: { display: 'none' }, onchange: e => { addFiles([...e.target.files].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name))); e.target.value = ''; } }));
       ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop' && e.dataTransfer.files.length) addFiles([...e.dataTransfer.files]); }));
@@ -571,7 +724,11 @@ window.NoemaCurMap = (() => {
         go.disabled = true;
         try {
           const assignments = files.map(f => ({ file: f, targets: (A.get(f)?.targets || []).filter(t => parsed.nodes[t.id]) })).filter(a => a.targets.length);
-          const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), assignments, source: text.value, onLog: m => { busy.textContent = m; } });
+          let c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), assignments, source: text.value, onLog: m => { busy.textContent = m; } });
+          if (attachFirst.checked) {   // 📦 open the map and attach the learner's own subjects first; the other steps are planned afterwards (▶ Plan the steps now)
+            c.attachFirst = true; if (C().holding(c)) { c.status = c.provider === 'claudeapp' ? 'ready' : 'attach'; } C().save(acc, c); c = C().get(acc, c.id);
+            if (C().holding(c)) { close(); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); map(acc, c.id, { onStudy }); setTimeout(() => attachMany(acc, c.id), 350); return; }
+          }
           if (c.provider === 'claudeapp') { const r = await C().build(acc, c); close(); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); G().kick(); map(acc, r.id, { onStudy, appHelp: !J().work(r).done }); return; }
           close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
         } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
@@ -674,6 +831,8 @@ window.NoemaCurMap = (() => {
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip(filesGuide)), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip(el('div', {}, el('p', {}, 'The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.'), el('p', {}, el('b', {}, '💬 Claude app (recommended): '), 'nothing more to do in this form — press Import. The map opens with a 💬 bar: copy its message into a chat of your Claude app (or claude.ai); Claude plans the chapters and prepares the steps that wait in its queue, one per chat, and they appear here by themselves. Your files are given to Claude through the connector (or in a bundle you download, without it). Usually the cheapest way — no cost beyond your Claude plan, which matters most for big curricula.'), el('p', {}, el('b', {}, 'API key / Gemini: '), 'the work runs here, in the background while the app is open.')))), PP.box,
             el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude API key: stop and ask me when one step costs more than $', budget)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Use subjects you already have (optional)'), tip('Steps you attach one of your subjects to are planned from that subject and never generated — no agent touches them. You can also do it later, on any step: 📦 Use a subject I have.')),
+            el('label', { class: 'tiny' }, attachFirst, ' Open the map first so I can attach my subjects to its steps — then the other steps are planned')),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       setTimeout(() => text.focus(), 200);
@@ -693,6 +852,14 @@ window.NoemaCurMap = (() => {
       const sum = el('div', { class: 'cm-sum' }); const scroller = el('div', { class: 'cm-scroll' }); const canvas = el('div', { class: 'cm-canvas' }); scroller.append(canvas);
       const panel = el('aside', { class: 'cm-panel', 'aria-live': 'polite' });
       const appBar = el('div', { class: 'cm-appbar', role: 'status' });
+      const holdBar = el('div', { class: 'cm-holdbar', role: 'status' });   // 📦 the map waits for the learner's own subjects before its steps are planned
+      const drawHold = () => {
+        holdBar.innerHTML = ''; if (!C().holding(c)) return;
+        const k = Object.values(c.nodes).filter(n => n.pack?.assigned).length;
+        holdBar.append(el('span', { class: 'grow' }, '📦 ', el('b', {}, 'Before its steps are planned: '), 'attach the subjects you already have to the steps they teach.' + (k ? ` ${k} attached so far.` : '')),
+          el('button', { class: 'btn small primary cm-attachsubs', onclick: () => attachMany(acc, cid, { onDone: () => drawMap() }) }, '📦 Attach subjects'),
+          el('button', { class: 'btn small cm-plannow', onclick: () => { close(); planNow(acc, cid, { onStudy }); } }, '▶ Plan the steps now'));
+      };
       const member = SH()?.isMember(c);   // 👥 someone shared this curriculum with me: the map is theirs, my progress is mine
       const shareBar = el('div', { class: 'cm-sharebar', role: 'status' });
       const drawShareBar = () => {
@@ -701,7 +868,8 @@ window.NoemaCurMap = (() => {
         const R = Object.values(c.remote || {}), ready = R.filter(x => x.status === 'ready').length, busyN = R.filter(x => x.status === 'preparing' && !x.mine).length;
         shareBar.append(el('span', { class: 'grow' }, '👥 ', el('b', {}, sh.role === 'member' ? `Shared by ${sh.ownerName || 'its owner'}` : `You share it${sh.public ? ' · 🌍 public' : ''}`),
           ` · ${ready} step${ready === 1 ? '' : 's'} prepared for everybody${busyN ? ` · ⏳ ${busyN} being prepared by others` : ''} · your progress is your own`),
-          tip(SHARE_RULES, sh.role === 'member' ? ' The map and its chapter plans are the owner’s — their changes arrive here by themselves.' : ' Your changes to the map reach everybody by themselves.'),
+          tip(SHARE_RULES, sh.role === 'member' ? ' The map and its chapter plans are the owner’s. When they change it, 🔔 tells you and you take the changes you want into your copy.' : ' Your changes to the map are offered to everybody (each member takes what they want).'),
+          sh.role === 'member' && sh.incoming ? el('button', { class: 'btn small primary cm-reviewbtn', onclick: () => reviewChanges(acc, cid, { onDone: () => drawMap() }) }, `🔔 ${sh.incoming.count} change${sh.incoming.count === 1 ? '' : 's'} from ${sh.ownerName || 'the owner'} · Review`) : null,
           sh.role === 'owner' ? el('button', { class: 'btn small', onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥 People') : null);
       };
       const showApp = (nid = null) => overlay((b2, close2) => b2.append(head('💬 Your Claude app', 'Your own Claude (with your Claude plan) plans and prepares the steps; the results appear on this map by themselves.'), appPanel(acc, cid, { onStudy, nid }), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))));
@@ -711,7 +879,7 @@ window.NoemaCurMap = (() => {
         appBar.append(el('span', {}, '💬 ', el('b', {}, 'For your Claude app: '), [w.toPlan.length ? `${w.toPlan.length} step${w.toPlan.length > 1 ? 's' : ''} to plan` : null, w.steps.length ? `${w.steps.length} to prepare` : null].filter(Boolean).join(' · ')),
           el('button', { class: 'btn small primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
       };
-      const study = s => { close(); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
+      const study = (s, nid) => { close(); viaStep(acc, cid, nid, s); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
       const zoomTo = z => { const r = scroller.getBoundingClientRect(); const cx = (scroller.scrollLeft + r.width / 2) / zoom, cy = (scroller.scrollTop + r.height / 2) / zoom; zoom = Math.max(0.35, Math.min(1.6, z)); drawMap(); scroller.scrollLeft = cx * zoom - r.width / 2; scroller.scrollTop = cy * zoom - r.height / 2; };
       const tools = el('div', { class: 'cm-tools' },
         el('button', { class: 'btn small', title: 'Zoom out', 'aria-label': 'Zoom out', onclick: () => zoomTo(zoom / 1.2) }, '−'), el('button', { class: 'btn small', title: 'Zoom in', 'aria-label': 'Zoom in', onclick: () => zoomTo(zoom * 1.2) }, '+'),
@@ -721,12 +889,12 @@ window.NoemaCurMap = (() => {
         member ? null : el('button', { class: 'btn small cm-sharetool', title: 'Share this curriculum — everybody keeps their own progress, the prepared steps are shared', onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥'),
         el('button', { class: 'btn small', title: 'Settings of this curriculum', onclick: () => settings() }, '⚙️'));
       box.append(el('div', { class: 'cm-top' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'), el('div', { class: 'cm-title' }, el('b', {}, '🧭 ' + (c.title || c.goal)), sum), tools, el('button', { class: 'btn small', 'aria-label': 'Close', onclick: close }, '✕')),
-        appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
-        el('div', { class: 'cm-legend tiny' }, '✅ mastered · ', openIc(), ' open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app', tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
+        holdBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
+        el('div', { class: 'cm-legend tiny' }, el('span', {}, '✅ mastered · ', openIc(), ' open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app · 📦 taught by your own subject · 🔄 being re-planned'), tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
 
       function drawMap() {
         c = C().get(acc, cid) || c; const st = C().statuses(acc, c); const L = C().layout(c); const s = C().summary(acc, c);
-        sum.textContent = `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (G().paused() ? ' · ⏸ preparing paused' : ''); drawBar(); drawShareBar();
+        sum.textContent = `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (G().paused() ? ' · ⏸ preparing paused' : ''); drawBar(); drawShareBar(); drawHold();
         const rows = Math.max(...L.cols.map(col => col.length)); const W = L.cols.length * (NW + GX) + GX, H = TOP + rows * (NH + GY) + 30;
         canvas.dataset.w = W; canvas.dataset.h = H; canvas.style.width = W * zoom + 'px'; canvas.style.height = H * zoom + 'px'; canvas.innerHTML = '';
         const inner = el('div', { class: 'cm-inner', style: { width: W + 'px', height: H + 'px', transform: `scale(${zoom})` } }); canvas.append(inner);
@@ -746,9 +914,10 @@ window.NoemaCurMap = (() => {
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 what the others did with this step
           const prep = pk === 'ready' ? '⚡' : rx?.status === 'ready' ? '⚡' : rx && !rx.mine ? '⏳' : pk === 'app' || J().needsPlan(n) && c.provider === 'claudeapp' && !member ? '💬' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
           const byOther = rx && !rx.mine ? (rx.status === 'ready' ? `prepared by ${rx.by || 'another member'}` : `being prepared by ${rx.by || 'another member'}`) : '';
+          const prep2 = n.pack?.assigned ? (s2.replanning ? '🔄' : '📦') : prep;   // 📦 taught by the learner's own subject · 🔄 being re-planned to match it
           const b = el('button', { class: `cm-node cm-${state} cm-r-${n.role}` + (sel === id ? ' sel' : '') + (rel && !rel.has(id) ? ' dim' : ''), style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, 'data-id': id,
-            'aria-label': `${n.title} — ${ROLE[n.role]} — ${state}${pk === 'ready' ? ', prepared' : ''}${byOther ? ', ' + byOther : ''}`, onclick: () => { sel = id; drawMap(); showPanel(id); } },
-            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, byOther ? el('span', { class: 'cm-by', title: byOther }, prep, '👤') : prep, n.material?.files?.length ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
+            'aria-label': `${n.title} — ${ROLE[n.role]} — ${state}${n.pack?.assigned ? (s2.replanning ? ', being re-planned to match your subject' : ', taught by your subject') : pk === 'ready' ? ', prepared' : ''}${byOther ? ', ' + byOther : ''}`, onclick: () => { sel = id; drawMap(); showPanel(id); } },
+            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, byOther ? el('span', { class: 'cm-by', title: byOther }, prep2, '👤') : prep2, n.material?.files?.length && !n.pack?.assigned ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
             s2.score && !s2.mastered ? el('i', { class: 'cm-prog', style: { width: fmtPct(s2.score) } }) : null);
           inner.append(b);
         }
@@ -760,17 +929,35 @@ window.NoemaCurMap = (() => {
         const live = G().live[key];
         panel.innerHTML = ''; panel.classList.add('on');
         const act = el('div', { class: 'cm-actions' });
-        if (st.open || st.mastered) {
+        /** 📦 Use a subject I have · ↩ take it off — on any map, a shared one too (the change is the learner's own there). */
+        const ownBtns = () => [
+          pk.status !== 'generating' ? el('button', { class: 'btn small cm-usesubject', title: 'Study this step from a subject you already have — only this step is re-planned', onclick: () => attachDialog(acc, { cid, nid: id, onDone: () => { drawMap(); showPanel(id); } }) }, pk.assigned ? '📦 Use another subject' : '📦 Use a subject I have') : null,
+            pk.assigned ? el('button', { class: 'btn small ghost cm-detach', onclick: () => {
+              if (!confirm(`Take “${pk.title || pk.id}” off this step?\nThe subject stays (on your 📚 Shelf when no other step uses it). ${n.groupPlan ? 'The step gets the shared plan back, and the version prepared for everybody.' : 'The step is then planned again and prepared the usual way.'}`)) return;
+              const r = C().Edit.detach(acc, cid, id); if (r.error) { toast('⚠️ ' + r.error, 5000); return; }
+              if (C().get(acc, cid).nodes[id]?.replan && (c.provider === 'claudeapp' || LLM().pick(acc, c.provider))) replanNow(acc, cid, id);
+              drawMap(); showPanel(id); } }, '↩ Take it off this step') : null];
+        if (st.replanning) {   // 📦 a subject was attached: the step stays closed until its new plan is here — only this step is re-planned
+          const busyR = replanBusy.has(cid + '/' + id), withAll = C().holding(c) && !n.chapters?.length;
+          act.append(el('div', { class: 'cm-live cm-replanning' }, withAll ? `📦 Taught by “${pk.title || pk.id}”` : busyR ? '⏳ Re-planning it to match its subject…' : '🔄 Being re-planned to match its subject',
+            el('span', { class: 'tiny' }, withAll ? ' — its chapters are planned from it together with the other steps (▶ Plan the steps now).' : ' — it opens when its new plan is here. The steps after it keep their plans.')),
+            withAll || busyR ? null : c.provider === 'claudeapp' ? el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'))
+              : el('button', { class: 'btn primary cm-replannow', onclick: () => { replanNow(acc, cid, id); setTimeout(() => showPanel(id), 50); } }, '↻ Re-plan now'));
+        }
+        else if (st.open || st.mastered) {
           const appWay = () => el('details', { class: 'cg-faq cm-otherways' }, el('summary', {}, 'Other ways to prepare it'),
             el('div', { class: 'row' }, c.provider !== 'claudeapp' ? el('button', { class: 'btn small cm-toapp', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 In my Claude app instead') : null, importBtn(acc, cid, id, () => { drawMap(); showPanel(id); })),
             el('p', { class: 'tiny' }, '💬 Your Claude app prepares it with your Claude plan (no API cost). 📥 Or import a .noema.zip that Claude made for this step.'));
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 shared: prepared / being prepared by somebody
-          const getIt = async b => { b.disabled = true; b.textContent = '⬇️ Getting it…'; try { const pid = await SH().download(acc, cid, id); study(pid); } catch (e) { toast('⚠️ ' + e.message, 6000); b.disabled = false; b.textContent = '↻ Try again'; } };
-          if (rx?.status === 'ready' && (pk.status !== 'ready' || pk.stale) && !pk.own) act.append(el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.mine ? 'you' : rx.by || 'another member'} — shared with everybody in this curriculum${pk.stale ? ' · its author made a new version' : ''}`),
+          const getIt = async b => { b.disabled = true; b.textContent = '⬇️ Getting it…'; try { const pid = await SH().download(acc, cid, id); study(pid, id); } catch (e) { toast('⚠️ ' + e.message, 6000); b.disabled = false; b.textContent = '↻ Try again'; } };
+          if (rx?.status === 'ready' && pk.status === 'ready' && pk.stale && !pk.own) act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id, id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
+            el('p', { class: 'tiny cm-byline' }, `🔔 ${rx.by || 'Its author'} made a new version of this step — yours stays until you take it`),
+            el('div', { class: 'row' }, el('button', { class: 'btn small cm-getstep', onclick: e => getIt(e.currentTarget) }, '⬇️ Get the new version'), el('button', { class: 'btn small ghost cm-keepstep', onclick: () => { SH().keepStep(acc, cid, id); drawMap(); showPanel(id); } }, 'Keep mine')));
+          else if (rx?.status === 'ready' && (pk.status !== 'ready' || pk.stale) && !pk.own) act.append(el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.mine ? 'you' : rx.by || 'another member'} — shared with everybody in this curriculum${pk.stale ? ' · its author made a new version' : ''}`),
             el('button', { class: 'btn primary cm-getstep', onclick: e => getIt(e.currentTarget) }, pk.stale ? '⬇️ Get the new version' : st.mastered ? '📖 Review' : '📖 Study this step'));
           else if (rx?.status === 'preparing' && !rx.mine && pk.status !== 'ready') act.append(el('div', { class: 'cm-live cm-othersprep' }, `⏳ ${rx.by || 'Another member'} is preparing this step`, el('span', { class: 'tiny' }, ' — it appears here for you when it is ready (nobody prepares it twice).')));
           else if (member && !n.chapters?.length && pk.status !== 'ready') act.append(el('div', { class: 'cm-live' }, '📝 Waiting for its chapter plan', el('span', { class: 'tiny' }, ` — ${c.shared.ownerName || 'the owner'} plans the steps of this map.`)));
-          else if (pk.status === 'ready') act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
+          else if (pk.status === 'ready') act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id, id) }, st.mastered ? '📖 Review' : '📖 Study this step'),
             pk.shared && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.by || 'another member'}`) : null,
             pk.own && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `This is your own version — ${rx.by || 'another member'}’s version ${rx.status === 'ready' ? 'is' : 'will be'} the shared one.`) : null);
           else if (pk.status === 'app') act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Waiting for your Claude app', el('span', { class: 'tiny' }, ' — paste the message into a Claude chat; the step appears here by itself.')),
@@ -799,8 +986,12 @@ window.NoemaCurMap = (() => {
         panel.append(el('button', { class: 'btn small ghost cm-pclose', 'aria-label': 'Close the panel', onclick: () => { panel.classList.remove('on'); sel = null; drawMap(); } }, '✕'),
           el('div', { class: 'cm-ptitle' }, el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('div', {}, el('h3', {}, n.title), el('div', { class: 'tiny' }, ROLE[n.role] + (n.domains?.length ? ' · ' + n.domains.join(', ') : '')))),
           n.summary ? el('p', {}, n.summary) : null, prog ? el('p', { class: 'tiny' }, prog) : null, act,
+          pk.assigned ? el('p', { class: 'tiny cm-byline cm-taughtby' }, `📦 Taught by your subject “${pk.title || pk.id}”`, (() => { const k = C().stepsOf(acc, pk.id).length - 1; return k > 0 ? ` — it also teaches ${k} other step${k === 1 ? '' : 's'} (same progress)` : ''; })()) : null,
+          (() => { const from = C().planLocked(n) || member ? [] : st.parents.filter(p => c.nodes[p]?.pack?.assigned && c.nodes[p].assignedAt && (!n.plannedAt || c.nodes[p].assignedAt > n.plannedAt));
+            return from.length ? el('p', { class: 'tiny cm-flag' }, `⚑ ${from.map(p => '“' + T(p) + '”').join(', ')} ${from.length === 1 ? 'is' : 'are'} now taught by your own subject — check that this step still fits (✏️ Edit step → ✨ Re-plan).`) : null; })(),
           n.material?.files?.length ? el('div', { class: 'cm-matpanel' }, el('div', { class: 'nx-lbl' }, '📎 Your material — this step is taught from it'), el('ul', { class: 'cm-matlist' }, ...n.material.files.map(f => el('li', {}, el('button', { class: 'linklike', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), f.pages ? el('span', { class: 'tiny' }, ` · ${f.pages} pages`) : null)))) : null,
-          member ? null : el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small', onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️ Edit step'),
+          member ? el('div', { class: 'row cm-ownrow' }, ...ownBtns()) : el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small', onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️ Edit step'),
+            ...ownBtns(),
             c.shared?.role === 'owner' && c.remote?.[id] && !c.remote[id].mine ? el('button', { class: 'btn small ghost cm-removestep', title: 'Remove the version another member prepared (the step can then be prepared again)', onclick: async () => { if (!confirm(`Remove the version of “${n.title}” that ${c.remote[id].by || 'another member'} prepared? Everybody can then prepare it again.`)) return; try { await SH().removeStep(acc, cid, id); toast('🗑 Removed — the step can be prepared again'); } catch (e) { toast('⚠️ ' + e.message, 5000); } drawMap(); showPanel(id); } }, `🗑 ${c.remote[id].by || 'Member'}’s ${c.remote[id].status === 'ready' ? 'version' : 'reservation'}`) : null,
             !pk.status && !st.mastered && (n.reviewed || c.autoApprove) && !(st.open) && !c.remote?.[id] ? el('span', { class: 'tiny' }, '✔ reviewed — prepared when it opens') : null),
           n.learningGoals?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '🎯 After this step you can'), el('ul', { class: 'cm-goals' }, ...n.learningGoals.map(g => el('li', {}, g)))) : null,
@@ -910,5 +1101,5 @@ window.NoemaCurMap = (() => {
 
   /** In a node's subject: the curriculum it belongs to, mastery so far, back to the map. */
   function nodeInfo(acc, ref) { const c = C().get(acc, ref?.id); const n = c?.nodes[ref?.node]; if (!n) return null; const st = C().nodeStatus(acc, c, ref.node); return { c, n, st }; }
-  return { importMap, library, create, map, progress, nodeInfo, editStep };
+  return { importMap, library, create, map, progress, nodeInfo, editStep, attachDialog, attachMany, planNow, doAttach, likeness, reviewChanges };
 })();

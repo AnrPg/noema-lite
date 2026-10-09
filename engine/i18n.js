@@ -38,6 +38,9 @@
       'pick.noMatch': 'No subject matches.', 'pick.none': 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.',
       'pick.create': '✨ Create with Claude', 'pick.explore': '🌍 Explore', 'pick.import': '📥 Import subject pack', 'pick.switchProfile': '👤 Switch profile',
       'pick.close': 'Close', 'pick.other': 'Other', 'pick.shared': '📬 {n} subject(s) shared with you',
+      'pick.shelf': '📚 Shelf — {n} subject(s) not on any map', 'pick.shelfSub': 'Subjects that teach no step of a curriculum. Study them here, or 🧭 put them on a map — the map is the way to study.',
+      'pick.putOnMap': 'Put on a map…', 'pick.noCurricula': 'No curriculum yet. Type a goal and get a map of steps — then put the subjects you have on its steps.',
+      'pick.newCurriculum': '➕ New curriculum', 'pick.importMap': '📥 Import a map', 'pick.onShelf': '📚 “{title}” is on your Shelf — 🧭 put it on a map to study it as a step of a curriculum.',
     },
     el: {
       'top.switchSubject': 'Αλλαγή μαθήματος', 'top.map': 'Χάρτης', 'top.mapTitle': 'Πίσω στον χάρτη αυτού του προγράμματος σπουδών',
@@ -71,6 +74,9 @@
       'pick.noMatch': 'Κανένα μάθημα δεν ταιριάζει.', 'pick.none': 'Δεν έχεις ακόμη μαθήματα. Πάτα ✨ Δημιουργία με το Claude: οι πηγές σου γίνονται ένα πλήρες πακέτο μελέτης.',
       'pick.create': '✨ Δημιουργία με το Claude', 'pick.explore': '🌍 Εξερεύνηση', 'pick.import': '📥 Εισαγωγή πακέτου μαθήματος', 'pick.switchProfile': '👤 Αλλαγή προφίλ',
       'pick.close': 'Κλείσιμο', 'pick.other': 'Άλλα', 'pick.shared': '📬 Μαθήματα που μοιράστηκαν μαζί σου: {n}',
+      'pick.shelf': '📚 Ράφι — μαθήματα εκτός χάρτη: {n}', 'pick.shelfSub': 'Μαθήματα που δεν διδάσκουν κανένα βήμα προγράμματος. Μελέτησέ τα εδώ ή 🧭 βάλε τα σε έναν χάρτη — ο χάρτης είναι ο τρόπος μελέτης.',
+      'pick.putOnMap': 'Βάλ’ το σε χάρτη…', 'pick.noCurricula': 'Δεν έχεις ακόμη πρόγραμμα σπουδών. Γράψε έναν στόχο και πάρε έναν χάρτη με βήματα — μετά βάλε στα βήματά του τα μαθήματα που έχεις.',
+      'pick.newCurriculum': '➕ Νέο πρόγραμμα', 'pick.importMap': '📥 Εισαγωγή χάρτη', 'pick.onShelf': '📚 Το «{title}» είναι στο Ράφι σου — 🧭 βάλ’ το σε έναν χάρτη για να το μελετήσεις ως βήμα ενός προγράμματος.',
     },
     ru: {
       'top.switchSubject': 'Сменить предмет', 'top.map': 'Карта', 'top.mapTitle': 'Вернуться к карте этой учебной программы',
@@ -104,6 +110,9 @@
       'pick.noMatch': 'Подходящих предметов нет.', 'pick.none': 'Предметов пока нет. Нажмите ✨ Создать с Claude: ваши материалы станут полноценным учебным пакетом.',
       'pick.create': '✨ Создать с Claude', 'pick.explore': '🌍 Обзор', 'pick.import': '📥 Импорт пакета предмета', 'pick.switchProfile': '👤 Сменить профиль',
       'pick.close': 'Закрыть', 'pick.other': 'Другое', 'pick.shared': '📬 С вами поделились предметами: {n}',
+      'pick.shelf': '📚 Полка — предметов вне карт: {n}', 'pick.shelfSub': 'Предметы, которые не стоят ни на одном шаге программы. Изучайте их здесь или 🧭 поставьте на карту — карта и есть путь обучения.',
+      'pick.putOnMap': 'Поставить на карту…', 'pick.noCurricula': 'Программ пока нет. Введите цель и получите карту шагов — затем поставьте на её шаги свои предметы.',
+      'pick.newCurriculum': '➕ Новая программа', 'pick.importMap': '📥 Импорт карты', 'pick.onShelf': '📚 «{title}» на вашей полке — 🧭 поставьте его на карту, чтобы изучать как шаг программы.',
     },
     fr: {
       'top.switchSubject': 'Changer de matière', 'top.map': 'Carte', 'top.mapTitle': 'Revenir à la carte de ce parcours',
@@ -137,6 +146,9 @@
       'pick.noMatch': 'Aucune matière ne correspond.', 'pick.none': `Pas encore de matière. Touche ✨ Créer avec Claude${NB}: tes sources deviennent un pack d’étude complet.`,
       'pick.create': '✨ Créer avec Claude', 'pick.explore': '🌍 Explorer', 'pick.import': '📥 Importer un pack de matière', 'pick.switchProfile': '👤 Changer de profil',
       'pick.close': 'Fermer', 'pick.other': 'Autres', 'pick.shared': `📬 Matières partagées avec toi${NB}: {n}`,
+      'pick.shelf': `📚 Étagère — matières hors carte${NB}: {n}`, 'pick.shelfSub': 'Les matières qui n’enseignent aucune étape d’un parcours. Étudie-les ici, ou 🧭 place-les sur une carte — la carte est la façon d’étudier.',
+      'pick.putOnMap': 'Placer sur une carte…', 'pick.noCurricula': 'Pas encore de parcours. Écris un objectif et obtiens une carte d’étapes — puis place tes matières sur ses étapes.',
+      'pick.newCurriculum': '➕ Nouveau parcours', 'pick.importMap': '📥 Importer une carte', 'pick.onShelf': `📚 «${NB}{title}${NB}» est sur ton étagère — 🧭 place-la sur une carte pour l’étudier comme étape d’un parcours.`,
     },
   };
   const LANGS = [['en', 'English'], ['el', 'Ελληνικά'], ['ru', 'Русский'], ['fr', 'Français']];
