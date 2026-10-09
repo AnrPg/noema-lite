@@ -903,9 +903,11 @@ function runSession(plan, { only = null } = {}) {
       for (const e of cn.langs) queue.push({ kind: 'prod', ...e });
     }
   }
-  if (!only) queue.push(...scriptSessionSteps());   // a few letters / characters in the first weeks (P4, §5.5)
-  queue.push(...sessionDeep(plan, only));   // P5v: 1–3 deepening items for words already known (§7.5)
-  if (typeof sessionGrammarItems === 'function') queue.push(...sessionGrammarItems(plan));   // §7.5 step 3 (P5): one function with the words just learned
+  if (!only && plan.day != null) {   // the daily plan (planSession) — not a node's batch or a plan made for one drill
+    queue.push(...scriptSessionSteps());   // a few letters / characters in the first weeks (P4, §5.5)
+    queue.push(...sessionDeep(plan, only));   // P5v: 1–3 deepening items for words already known (§7.5)
+    if (typeof sessionGrammarItems === 'function') queue.push(...sessionGrammarItems(plan));   // §7.5 step 3 (P5): one function with the words just learned
+  }
   if (!queue.length) { go('#/'); return; }
   metNew.clear();
   const total = queue.length, stats = { right: 0, wrong: 0, introduced: 0 }, retried = new Set();
