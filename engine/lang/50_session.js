@@ -16,7 +16,7 @@ function runSession(plan, { only = null } = {}) {
   if (only) plan = nodePlan(only, [UI.lang]);
   const queue = [];
   for (const s of plan.steps) {
-    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? 'rec' : 'prod', lang: it.lang, lex: it.lex, review: true });
+    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? (hasPic(it.lang, it.lex) && Math.random() < 0.5 ? 'pic' : 'rec') : 'prod', lang: it.lang, lex: it.lex, review: true });
     if (s.kind === 'learn') for (const cn of s.concepts) {
       for (const e of cn.langs) queue.push({ kind: 'intro', ...e });
       for (const e of cn.langs) queue.push({ kind: 'rec', ...e });
@@ -37,14 +37,14 @@ function runSession(plan, { only = null } = {}) {
     const day = today();
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
-      N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'rec' ? 'r' : 'p', ok ? 'good' : 'again', day); save();
+      N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day); save();
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + a.lex;
       if (!ok && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
       const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
-    const ex = a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    const ex = a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, { kind: a.kind, lang: a.lang, lex: a.lex });   // for tests and styling
     stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.retry ? ' · once more' : ''), ex);
   };
@@ -65,4 +65,4 @@ function runSession(plan, { only = null } = {}) {
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
 function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
-window.NoemaLangUI = { start, UI, addProfiles };
+window.NoemaLangUI = { start, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce } };

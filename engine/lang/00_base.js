@@ -31,6 +31,14 @@ const info = code => ({ flag: '🏳️', name: code, ...(LANG_INFO[code] || {}),
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';
+/** The picture of a concept (core/media, docs/LANGUAGES.md §4.3) — its emoji when it has none or the file can't be loaded. */
+function conceptPic(cid, cls = 'lx-temoji') {
+  const con = UI.C.concepts[cid], m = con?.media && UI.C.data.media?.[con.media];
+  const emo = h('span', { class: cls }, conceptEmoji(cid)); if (!m) return emo;
+  const img = h('img', { class: cls + ' lx-pic', src: (UI.C.data.mediaBase || '') + m.file, alt: m.alt || con.gloss, loading: 'lazy', title: `📷 ${m.credit || ''} · ${m.license || ''}` });
+  img.addEventListener('error', () => img.replaceWith(emo));
+  return img;
+}
 
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true } = {}) {
@@ -107,5 +115,24 @@ function save(now = false) {
   };
   if (now) go(); else saveTimer = setTimeout(go, 250);
 }
+/** Another device changed this course's progress (docs/SYNC.md): fold the stored copies into what this page holds,
+    so the next save keeps both (the same rules as the cloud: NoemaCloud.mergeValue on s:lang:… keys). */
+function foldRemote(e) {
+  if (!UI.C || e.detail?.acc !== UI.acc) return;
+  const p = P(), keys = (e.detail.keys || []).filter(k => k.startsWith(p)); if (!keys.length) return;
+  const kv = N.toKV(UI.C, UI.L); kv.prefs = UI.prefs;
+  for (const full of keys) {
+    const k = full.slice(p.length), raw = localStorage.getItem(full); if (raw == null) continue;
+    let stored; try { stored = JSON.parse(raw); } catch (x) { continue; }
+    if (kv[k] === undefined) { kv[k] = stored; continue; }
+    const m = window.NoemaCloud?.mergeValue ? NoemaCloud.mergeValue('s:lang:' + UI.id + ':' + k, JSON.stringify(kv[k]), raw, true).value : raw;
+    try { kv[k] = JSON.parse(m); } catch (x) { }
+  }
+  const L2 = N.fromKV(UI.C, kv); UI.L.settings = L2.settings; UI.L.langs = L2.langs; UI.prefs = kv.prefs || UI.prefs;   // in place: a running session keeps writing into UI.L
+  save();
+  if (!document.querySelector('.lx-session')) render();
+  UI.remoteFolds = (UI.remoteFolds || 0) + 1;
+}
+addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);

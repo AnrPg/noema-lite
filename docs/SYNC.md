@@ -59,3 +59,10 @@ Every `Noema.kv` key of a cloud account syncs this way automatically. If a new k
 add a rule for it in `mergeValue` (`engine/cloud.js`). If a page keeps that data in memory, listen for
 `noema:remote` (`detail.keys` = full localStorage keys that another device changed) and fold the stored copy into it,
 the way `engine/src/10_core.js` does for `S`.
+
+## Language courses
+
+The keys `s:lang:<course>:…` (docs/LANGUAGES.md §5.6) have their own rule in `mergeValue` (`mergeLang`): per word and track the
+later review wins, the earliest first-seen day is kept, a lesson check keeps the best score and the most tries, and a grammar
+function's log keeps every day. The open course listens for `noema:remote` and folds the stored copies into what it holds
+(`foldRemote` in `engine/lang/00_base.js`). Tested by `tests/lang_sync.js` (two browsers, the Supabase emulator).

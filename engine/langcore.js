@@ -109,6 +109,7 @@
       const bank = []; for (const f of list(`${base}bank`)) bank.push(...((read(`${base}bank/${f}`) || {}).sentences || []));
       data.langs[code] = { language: read(base + 'language.json'), lexicon, grammar, bank };
     }
+    const mj = read('core/media/media.json'); if (mj) { data.media = {}; for (const m of mj.items || []) data.media[m.id] = { file: m.file, alt: m.alt, credit: m.credit, license: m.license, url: m.url }; data.mediaBase = 'core/media/'; }
     // D16: the shared typological vocabulary, the profiles of the world's languages, the catalogues of the course languages
     const tf = read('../_typology/features.json'), tl = read('../_typology/languages.json');
     if (tf && tl) data.world = { features: tf.features, languages: tl.languages,

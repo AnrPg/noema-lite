@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-09T05:44:51+00:00",
+ "builtAt": "2026-10-09T06:03:32+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -213,6 +213,13 @@ window.NOEMA_REGISTRY = {
    "explainLang": "en",
    "path": "library/languages/polyglot-semitic-zh-de/course.pack.js",
    "profiles": "library/languages/polyglot-semitic-zh-de/course.profiles.js",
+   "media": [
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-cucumber.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-garlic.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-onion.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-potato.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-tomato.webp"
+   ],
    "words": {
     "ar": 516,
     "he": 526,

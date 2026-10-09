@@ -105,6 +105,30 @@
     out.lastDay = w.lastDay ?? null; out.streak = w.streak || 0;
     return out;
   }
+  /* 🌍 language courses (s:lang:<course>:…, docs/LANGUAGES.md §5.6): progress only grows.
+     A word's recognition and production tracks: the later review wins (on the same day the one with more answers);
+     a lesson check keeps the best score and the most tries; a grammar function's log keeps every day (the fuller entry of a day). */
+  const laterTrack = (x, y) => !isObj(x) ? y : !isObj(y) ? x : (x.last || 0) !== (y.last || 0) ? ((x.last || 0) > (y.last || 0) ? x : y)
+    : ((x.reps || 0) + (x.lapses || 0) >= (y.reps || 0) + (y.lapses || 0) ? x : y);
+  function mergeLangItem(a, b) {
+    if (!isObj(a)) return b; if (!isObj(b)) return a;
+    const o = { ...b, ...a }; if (a.seen != null && b.seen != null) o.seen = Math.min(a.seen, b.seen);
+    for (const t of ['r', 'p']) { const v = laterTrack(a[t], b[t]); if (v) o[t] = v; }
+    return o;
+  }
+  function mergeLang(k, a, b) {
+    if (/:node:[^:]+$/.test(k)) {
+      const items = { ...(b.items || {}) }; for (const [id, it] of Object.entries(a.items || {})) items[id] = mergeLangItem(it, items[id]);
+      const out = { ...b, ...a, items }, ca = a.check, cb = b.check;
+      if (isObj(ca) && isObj(cb)) { const n = (ca.day || 0) >= (cb.day || 0) ? ca : cb; out.check = { ...n, best: Math.max(ca.best || 0, cb.best || 0), tries: Math.max(ca.tries || 0, cb.tries || 0) }; }
+      return out;
+    }
+    if (/:fn:[^:]+$/.test(k)) {
+      const by = {}; for (const e of [...(b.log || []), ...(a.log || [])]) if (isObj(e) && (!by[e.day] || (e.n || 0) > (by[e.day].n || 0))) by[e.day] = e;
+      return { ...b, ...a, log: Object.values(by).sort((x, y) => x.day - y.day).slice(-60) };
+    }
+    return null;   // settings, prefs: like any record
+  }
   /** Two copies of key `k` (strings) → { value, lost }: `lost` = something only this device had may be dropped (a restore point is kept first). */
   function mergeValue(k, local, remote, localNewer) {
     if (local === remote) return { value: local, lost: false };
@@ -115,6 +139,7 @@
     const a = pj(local), b = pj(remote);
     if (/^s:.+:state$/.test(k) && isObj(a) && isObj(b)) return { value: JSON.stringify(mergeState(a, b)), lost: false };
     if (k === 'a:stats' && isObj(a) && isObj(b)) return { value: JSON.stringify(mergeStats(a, b)), lost: false };
+    if (k.startsWith('s:lang:') && isObj(a) && isObj(b)) { const m = mergeLang(k, a, b); if (m) return { value: JSON.stringify(m), lost: false }; }
     if (isObj(a) && isObj(b)) {   // settings and other records: every field of both, the newer copy wins where both set one
       const out = localNewer ? { ...b, ...a } : { ...a, ...b };
       return { value: JSON.stringify(out), lost: Object.keys(a).some(f => JSON.stringify(out[f]) !== JSON.stringify(a[f])) };
@@ -299,7 +324,7 @@
       } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
     /** Combine two copies of a key (this device's and the cloud's) → { value, lost } — `lost`: something of `local` may be dropped. */
-    mergeValue, mergeState,
+    mergeValue, mergeState, mergeLang,
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },

@@ -27,11 +27,21 @@ function exRecognize(c, lid, done) {
     options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
 }
+/** picture_name (§6.2): the picture of the concept → which word is it? (reviews of words whose concept has a picture) */
+const hasPic = (c, lid) => { const cid = (LX(c).lex[lid].senses || [])[0], con = cid && UI.C.concepts[cid]; return !!(con?.media && UI.C.data.media?.[con.media]); };
+function exPicture(c, lid, done) {
+  const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-expic' });
+  const opts = shuffle([{ id: lid, ok: true }, ...neighbours(c, lid, 8).filter(x => x.lemma !== me.lemma).slice(0, 3).map(x => ({ id: x.id }))]);
+  box.append(h('div', { class: 'lx-q' }, `What is it in ${info(c).name}?`), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
+  box.append(options(opts.map(o => ({ ...o, label: word(c, X.lex[o.id].lemma, { sub: false }) })), (o, b, wrap) => {
+    b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
+  return box;
+}
 /** produce: the meaning → the word. Spelled with letter tiles (any script) — or chosen, for long words. */
 function exProduce(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exprod' });
   const cid = (me.senses || [])[0];
-  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptEmoji(cid) + ' ' : '', gloss(c, lid)));
+  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
   const parts = clusters(me.lemma).filter(t => t.trim());   // multi-word words: the spaces are not tiles
   const afterWord = ok => extraCheck(c, lid, box, ok2 => { feedback(box, ok && ok2, c, lid); done(ok && ok2); }, ok);
   if (parts.length > 14) {
@@ -83,7 +93,7 @@ function exIntro(c, lid, done) {
   const box = h('div', { class: 'lx-ex lx-intro' },
     h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}`),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
-    h('div', { class: 'lx-meaning' }, (me.senses?.[0] ? conceptEmoji(me.senses[0]) + ' ' : '') + card.gloss),
+    h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,

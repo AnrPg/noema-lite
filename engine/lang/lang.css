@@ -102,3 +102,16 @@ body.lx main.lx-main{max-width:1000px}
 .lx-sec .lx-parts{grid-template-columns:minmax(0,40%) minmax(0,1fr)}.lx-sec .lx-parts dd,.lx-sec .lx-parts dt{overflow-wrap:anywhere;min-width:0}.lx-senses li{overflow-wrap:anywhere}.lx-senses .lx-badge{white-space:normal;max-width:100%}
 .lx-tok{cursor:help;border-bottom:1px dotted transparent}.lx-tok:hover{border-bottom-color:var(--ink2)}.lx-new{background:rgba(255,200,0,.18);border-radius:3px}.lx-pop{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 12px}.lx-popbox{background:var(--bg,#fff);border-radius:12px;max-width:720px;width:100%;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,.25)}.lx-familiar>summary{color:var(--ink2);cursor:pointer;font-size:14px;margin:6px 0}.lx-notes li{margin:3px 0}.lx-familiarline{margin:4px 0;color:var(--ink2)}
 .lx-knows{max-width:100%}.lx-knows select{max-width:100%;min-width:0}.lx-knows .lx-setrow{flex-wrap:wrap;max-width:100%}.lx-knows label,.lx-knows p{overflow-wrap:anywhere}
+
+/* concept pictures (core/media): small tiles, the card head, exercises — the emoji stands in when there is none */
+img.lx-pic{display:block;object-fit:cover;border-radius:10px;background:var(--bg2,#eee)}
+img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}img.lx-exemoji{display:inline-block;vertical-align:middle;width:84px;height:64px;margin-right:6px}
+.lx-exemoji{font-size:1em}
+
+/* drills: field sorting, principal parts */
+.lx-sortchips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.lx-sortchip.on{outline:3px solid var(--accent,#4a7);}
+.lx-sortbins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.lx-sortbin{border:2px dashed var(--line,#ccc);border-radius:12px;padding:10px;min-height:80px;cursor:pointer}
+.lx-sorthead{font-weight:650;margin-bottom:6px}.lx-sortlist{display:flex;flex-direction:column;gap:4px}
+.lx-shake{animation:lxshake .35s}@keyframes lxshake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.lx-drills,.lx-libraries{flex-wrap:wrap}

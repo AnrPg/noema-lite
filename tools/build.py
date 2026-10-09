@@ -120,6 +120,9 @@ def build_lang_courses():
             trim = lambda p: {'id': p['id'], 'title': p.get('title'), 'area': p.get('area'), 'kind': p.get('kind', 'has'), 'typology': p.get('typology') or [], 'what': p.get('what'), 'examples': (p.get('examples') or [])[:2], 'when': p.get('when') or '', 'notes': p.get('notes') or [], **({'specific': True, 'alsoIn': p.get('alsoIn') or [], 'alsoNote': p.get('alsoNote') or ''} if p.get('specific') else {})}
             data['world'] = {'features': rj(os.path.join(tdir, 'features.json'))['features'], 'languages': rj(os.path.join(tdir, 'languages.json'))['languages'],
                              'phenomena': {c: [trim(p) for p in rj(os.path.join(pdir, c + '.json')).get('phenomena', [])] if os.path.exists(os.path.join(pdir, c + '.json')) else [] for c in course['languages']}}
+        mj = J('core/media/media.json') or {}   # pictures of the concepts (docs/LANGUAGES.md §4.3): files next to the pack, provenance here
+        data['media'] = {m['id']: {k: m.get(k) for k in ('file', 'alt', 'credit', 'license', 'url', 'w', 'h') if m.get(k) is not None} for m in mj.get('items', []) if os.path.exists(os.path.join(root, 'core', 'media', m.get('file', '')))}
+        data['mediaBase'] = os.path.relpath(os.path.join(root, 'core', 'media'), ROOT).replace(os.sep, '/') + '/'
         for code in course['languages']:
             b = f'lang/{code}/'
             data['langs'][code] = {'language': J(b + 'language.json'), 'lexicon': {n['id']: J(f'{b}lexicon/{n["id"]}.json') for n in nodes if J(f'{b}lexicon/{n["id"]}.json')},
@@ -138,7 +141,7 @@ def build_lang_courses():
         words = {c: sum(len(v['lexemes']) for v in data['langs'][c]['lexicon'].values()) for c in course['languages']}
         out.append({'id': course['id'], 'title': course['title'], 'emoji': course.get('emoji', '🌍'), 'languages': course['languages'], 'explainLang': course.get('explainLang', 'en'),
                     'path': os.path.relpath(os.path.join(root, 'course.pack.js'), ROOT).replace(os.sep, '/'),
-                    'profiles': os.path.relpath(os.path.join(root, 'course.profiles.js'), ROOT).replace(os.sep, '/'), 'words': words})
+                    'profiles': os.path.relpath(os.path.join(root, 'course.profiles.js'), ROOT).replace(os.sep, '/'), 'media': [data['mediaBase'] + m['file'] for m in data['media'].values()], 'words': words})
         print(f'language course: {course["id"]} · ' + ' · '.join(f'{c} {n} words' for c, n in words.items()) + f' · {len(body)//1024} KB + profiles {len(pbody)//1024} KB')
     return out, failed
 
@@ -158,6 +161,8 @@ def build_site(metas):
         for k in ('path', 'profiles'):
             if not m.get(k): continue
             dst = os.path.join(out, m[k]); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m[k]), dst)
+        for f in m.get('media') or []:
+            dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:

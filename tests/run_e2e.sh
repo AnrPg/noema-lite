@@ -33,3 +33,4 @@ node "$ROOT/tests/langcore.js"
 node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"
 node "$ROOT/tests/lang_lessons.js" "$T"
+node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)

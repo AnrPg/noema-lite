@@ -19,7 +19,7 @@
 | P0 | Spec, schemas, validator, mini fixture course | ✅ 2026-10-07 |
 | P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ✅ 2026-10-07 |
 | P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ✅ 2026-10-08 (the next core nodes continue as content batches alongside P3+) |
-| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ✅ v1 2026-10-08 (P3b: pictures, field sorting) |
+| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ✅ v1 2026-10-08 · P3b ✅ 2026-10-09 (pictures shown, picture → word, field sorting, principal-parts drill, progress across devices) — tech debt: the pictures themselves (§13.1) |
 | P3c | **Foundations** (D9–D12): S00 = overview of the language types and of the language; 19 parallel steps of mixed lessons (complete thematic word groups + grammar + first sentences), the grammar of each step per language type; grammar pages with links across the languages; sentence exercises | ✅ 2026-10-08 (ar, he, zh, de: S00–S18 written, validated `--strict`, ref-checked) |
 | P3d | **Rules across all languages** (D13–D15): the parallel order as a validated constraint; the catalogue of phenomena of every language (ar, he, zh, de); the facade of every word (`wordFeatures` / `features`); contrasts; every meaning a concept | ✅ 2026-10-08 |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
@@ -574,14 +574,20 @@ Using a word correctly inside a grammar or production exercise counts as a revie
 ### 5.5 Script stage (ar, he, zh)
 ar/he: letters introduced in groups; until the letter stage is complete, words always show the script **with** transliteration, and production in script is replaced by tiles. zh: characters become known through the words that contain them; `char_compose` and `trace` use known characters.
 
-### 5.6 Storage (synced like every key, last write wins per key)
+### 5.6 Storage (synced like every key — combined, never overwritten: docs/SYNC.md)
 ```
-noema1:<acc>:s:<course>:settings            active languages, depth, batch, vowel-mark policy, daily minutes
-noema1:<acc>:s:<course>:lang:<L>:node:<N>   { state, items: { conceptId: { st, r:{…}, p:{…} } } }   one key per node (small rows, few conflicts)
-noema1:<acc>:s:<course>:lang:<L>:fn:<F>     { state, history }
+noema1:<acc>:s:lang:<course>:settings            active languages, depth, batch, the learner's languages (D18), daily minutes
+noema1:<acc>:s:lang:<course>:prefs               view preferences (current language, vowel marks, compare, peek)
+noema1:<acc>:s:lang:<course>:lang:<L>:node:<N>   { items: { lexId: { seen, r:{sm2}, p:{sm2} } }, check: { day, score, best, tries } }   one key per node
+noema1:<acc>:s:lang:<course>:lang:<L>:fn:<F>     { log: [ { day, c, n } ] }
 noema1:<acc>:s:<course>:lang:<L>:script     letter/character stage
 noema1:<acc>:s:<course>:log:<day>           session log (for statistics)
 ```
+**Two devices** (docs/SYNC.md; `mergeLang` in `engine/cloud.js`, tested by `tests/lang_sync.js`): saves are version-checked; when both
+copies of a key changed they are combined — per word and track the later review wins (same day: the one with more answers),
+the earliest *seen* day is kept, a lesson check keeps the best score and the most tries, a function's log keeps every day
+(the fuller entry of a day), settings take every field of both. An open course folds in what another device changed
+(`noema:remote`), so its next save keeps both. Progress only grows.
 
 ---
 
@@ -800,7 +806,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 
 **P3 — UI shell and vocabulary lane** — ✅ v1 2026-10-08
 - Done: `tools/build.py` builds the course pack and the UI bundle and lists the course in the registry (`languages`); the subject picker has a 🌍 Languages tab and `?subject=lang:<id>` opens a course; top bar with the explanation language and one chip per language (progress ring); home with today's session and the vocabulary map (node states per language); node page; flag card with the state dot of every language, ⇄ compare table, the full word card (§4.6); field map (all tiers, subgroups, “show words not learned yet”); ⏱️ name them all (any form, without vowel marks, transliteration or pinyin; learned words named count as production reviews); settings (active languages, depth per language, batch, minutes, vowel marks / transliteration / pinyin); the session runner — reviews, then each new idea introduced in every language one after the other, recognized (meaning among same-subgroup distractors) and produced (letter or character tiles in any script, typing for Latin script; then the German article or the Chinese measure word), wrong answers once more a little later; state stored per (language, node) through `Noema.kv` (synced like every key). `tests/lang_ui.js` (34 checks, incl. phone width, per-language unlocking and the picker).
-- Still to do (P3b): pictures for the concepts (Wikidata P18 through the picture library), the field-map sorting exercise, a principal-parts drill of its own, a test of cloud sync with the emulator.
+- P3b ✅ 2026-10-09: concept pictures shown wherever a concept appears (tiles, card head, exercises; `conceptPic`, the emoji when there is none; files in `core/media/` copied next to the pack, provenance in `media.json`), the **picture → word** exercise in reviews, **🧩 sorting a field into its subgroups** (`#/sort/<field>`), the **🔁 principal-parts drill** (`#/parts/<lang>`), progress across devices (§5.6, `tests/lang_sync.js` over the Supabase emulator). Only 5 of the 162 vegetable pictures exist yet → §13.1.
 - Course in the picker (`kind: "language"`), course home with flags, flag card + compare, the word card with the whole profile, field map, DAG view, `learn_batch`, `recognize`, `picture_name`, `spell`, `gender_article`, `principal_parts`, `measure_word`, `exhaustive_recall`, `field_map` sorting; daily session v1; sync of the state keys.
 - ✔ Playwright: a new learner opens the course, learns a batch in two languages, reviews it, a node becomes known and the next opens only in that language; reload/sync keeps everything.
 
@@ -809,6 +815,11 @@ Existing subjects and curricula must keep working unchanged; the language part i
 - Grammar lane, the part the foundations need (pulled forward from P5): function page per language (summary, blocks, ask yourself, traps, bank examples, flags and comparison), generators `inflect`, `gender`, `measure`, `meaning`, `build`, `transform`, `quiz`; the lesson runner with path groups; the lesson check.
 - Content: the steps S00–S18 for the pilot languages (paths `fusional`: ar, he, de; `isolating`: zh; the `agglutinating` and `polysynthetic` columns are written as grammar plans now and realized with the first such language) — `core.1` reorganised into the steps and completed: words with full profiles, grammar realizations with `status`, generators and bank sentences with variants for every function, the overview of each language; validated `--strict` and ref-checked; produced in batches of steps, one worker per language, as in P2.
 - ✔ Playwright: a new learner does S00 and S01 in a fusional and the isolating language together, the next lesson opens only in the languages that passed, the vegetables stay locked until the foundations are done; every sentence shown uses only known words (property test); `na` lessons never show.
+
+**13.1 Tech debt** (to do after the implementation is finished and tested — asked by the user 2026-10-09)
+- **Pictures.** Fetch the pictures of the remaining 157 vegetables with `tools/lang_images.py COURSE --field food.vegetables` (re-runnable; Wikidata P18 → Commons thumbnail + author / licence). The cloud workspace is rate-limited by Wikimedia; it runs from the Mac (the P18 file names were already resolved there on 2026-10-09). Then give the concrete concepts of the other fields (animals, food, clothes, body, home, town, transport …) their Wikidata ids and pictures; check every picture by eye (P18 is sometimes a botanical plate or a field).
+- **Content after K1** (asked by the user 2026-10-09: no more content until the implementation is finished and tested): core batches K2–K12 (C05–C48) with `tools/lang_sources/core/mkcore.py` + the briefs; then the advanced stage.
+- **Found while writing K1** (to fix with the next content batches): the foundation verbs store only some cells (he: past 3sg / future 2nd person; de: Präteritum 3sg; ar: no jussive / subjunctive) — complete their paradigms; zh tokenizer: a new multi-character word can break older sentences that split it (回家), separable verbs split by 了 / 个 (洗了个澡), 第十一+; he: וָ before numbers, cardinals with the article; ar: لِلْـ, construct forms, kinship nouns in the accusative with a suffix; missing concepts: the future / passive auxiliary (de werden), the durative 着, grammar particles (لَمْ، لَنْ، سَـ، سَوْفَ، قَدْ), 次 (zh), pending senses reported by the workers (anziehen *attract*, 洗 *develop photos*, حَجَزَ *detain* …); a few concept glosses carry Chinese-only senses (verb.start, verb.finish) or the wrong focus (verb.visit "a sick person"); he `language.json`: NOUN class `cal` used for names (חוּץ לָאָרֶץ); is 是…的 too late at C43? (a D13 question).
 
 **P4 — Scripts and input**
 - `glyph_form`, `transliterate`, `vowelize`, `tone_mark`, `char_compose`, `trace`; script stages; keyboards and pinyin input; RTL and fonts; vowel-mark fading.
@@ -835,6 +846,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-09 — Core batch K1 (C01–C04) in ar, he, zh, de; `main` merged into `languages` (sync rules, i18n; conflicts in `loader.js` and `build.py` resolved as docs/SHELF_AND_LANGUAGES.md says). P3b finished: pictures shown with an emoji fallback, picture → word, 🧩 field sorting, 🔁 principal parts, progress across devices (`mergeLang`, `noema:remote`, `tests/lang_sync.js`). German ordinals are ADJ class `attr`. §13.1 tech debt: the pictures themselves, content after K1 (the user: implementation first), the issues found while writing K1.
 - 2026-10-09 — D18 and D19 (asked by the user): the learner's languages (with levels) decide what is explained — familiar parts hidden in one line, inference by type / family for languages without a profile, comparison notes for a reference set of 21 languages of every type (+ Claude / Gemini notes on request), the library of peculiarities; vocabulary as its own track after the foundations, every other aspect trained with any vocabulary (≤ ⌈30 %⌉ unknown words per sentence, 🆕 with the word card, the list at the end of a lesson), every field with sentences for every non-vocabulary node before it.
 - 2026-10-08 — D17 (asked by the user): the core grows from C01–C07 to **C01–C48** (A2 → B2, §4.4.2; to be reviewed with the user before the content is written) and the **advanced stage** is open-ended (§4.4.4: fields, grammar, lexicon, varieties, texts, culture). `docs/LANGUAGE_RULES.md` — the binding short form of D1–D17 for every agent, tool and skill — with `CLAUDE.md`, `AGENTS.md`, the skill reference, `tools/lang_sources/AGENT_BRIEF.md` and `tests/lang_rules.py` that keeps them in step.
 - 2026-10-08 — D16 (asked by the user): no built-in point of view — the shared typological vocabulary (130 features after WALS) and the profiles of 74 languages of 20 families (`_typology/`, checked against the WALS CLDF data: 2410 of 2459 comparable values agree, the rest deliberate); every phenomenon tagged with the feature values it is about, every feature covered for each language (absences as `kind: "lacks"`); what is new / familiar for a learner is computed from the learner's languages (the overview shows it).

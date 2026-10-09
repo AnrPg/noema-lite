@@ -35,6 +35,14 @@ const info = code => ({ flag: '🏳️', name: code, ...(LANG_INFO[code] || {}),
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';
+/** The picture of a concept (core/media, docs/LANGUAGES.md §4.3) — its emoji when it has none or the file can't be loaded. */
+function conceptPic(cid, cls = 'lx-temoji') {
+  const con = UI.C.concepts[cid], m = con?.media && UI.C.data.media?.[con.media];
+  const emo = h('span', { class: cls }, conceptEmoji(cid)); if (!m) return emo;
+  const img = h('img', { class: cls + ' lx-pic', src: (UI.C.data.mediaBase || '') + m.file, alt: m.alt || con.gloss, loading: 'lazy', title: `📷 ${m.credit || ''} · ${m.license || ''}` });
+  img.addEventListener('error', () => img.replaceWith(emo));
+  return img;
+}
 
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true } = {}) {
@@ -111,6 +119,25 @@ function save(now = false) {
   };
   if (now) go(); else saveTimer = setTimeout(go, 250);
 }
+/** Another device changed this course's progress (docs/SYNC.md): fold the stored copies into what this page holds,
+    so the next save keeps both (the same rules as the cloud: NoemaCloud.mergeValue on s:lang:… keys). */
+function foldRemote(e) {
+  if (!UI.C || e.detail?.acc !== UI.acc) return;
+  const p = P(), keys = (e.detail.keys || []).filter(k => k.startsWith(p)); if (!keys.length) return;
+  const kv = N.toKV(UI.C, UI.L); kv.prefs = UI.prefs;
+  for (const full of keys) {
+    const k = full.slice(p.length), raw = localStorage.getItem(full); if (raw == null) continue;
+    let stored; try { stored = JSON.parse(raw); } catch (x) { continue; }
+    if (kv[k] === undefined) { kv[k] = stored; continue; }
+    const m = window.NoemaCloud?.mergeValue ? NoemaCloud.mergeValue('s:lang:' + UI.id + ':' + k, JSON.stringify(kv[k]), raw, true).value : raw;
+    try { kv[k] = JSON.parse(m); } catch (x) { }
+  }
+  const L2 = N.fromKV(UI.C, kv); UI.L.settings = L2.settings; UI.L.langs = L2.langs; UI.prefs = kv.prefs || UI.prefs;   // in place: a running session keeps writing into UI.L
+  save();
+  if (!document.querySelector('.lx-session')) render();
+  UI.remoteFolds = (UI.remoteFolds || 0) + 1;
+}
+addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 
@@ -182,6 +209,9 @@ VIEWS.home = (v) => {
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));
   })));
+  v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ Drills: '),
+    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 Principal parts'),
+    ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
   v.append(h('h2', { class: 'lx-h2' }, '🗺️ The map'), nodeList());
@@ -221,7 +251,7 @@ function conceptTile(c, { cid, lex }, k) {
   const st = cid ? N.conceptState(UI.C, UI.L, c, cid, k) : k.state[lex];
   const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
   return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
-    h('span', { class: 'lx-temoji' }, cid ? conceptEmoji(cid) : '🔤'),
+    cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
     h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— no word') : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
 }
@@ -233,7 +263,7 @@ VIEWS.c = (v, r) => {
   const draw = () => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : 'Back'))),
-      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
+      h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
     if (UI.prefs.compare) v.append(compareTable(cid));
@@ -316,6 +346,7 @@ VIEWS.field = (v, r) => {
     h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny' }, ` · ${all.length} in all`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, t ? ['', 'common', 'less common', 'rare'][t] : 'all'))),
+      h('button', { class: 'btn small', onclick: () => go('#/sort/' + encodeURIComponent(fid)) }, '🧩 Sort into groups'),
       h('label', { class: 'tiny lx-peek' }, h('input', { type: 'checkbox', checked: UI.prefs.peek ? true : null, onchange: e => { UI.prefs.peek = e.target.checked; save(); render(); } }), ' show words not learned yet')));
   for (const sg of field.subgroups || [{ id: null, title: '' }]) {
     const items = all.filter(x => (sg.id == null || x.subgroup === sg.id) && (!tierPick || x.tier === tierPick)).sort((a, b) => a.tier - b.tier || a.rank - b.rank);
@@ -447,6 +478,96 @@ VIEWS.settings = (v) => {
     h('p', { class: 'tiny' }, `Explanations are in ${info(UI.C.explainLang).name}: the language chosen when the course was made.`));
 };
 
+/* ---- 35_drills.js ---- */
+/* ---------- drills of their own (docs/LANGUAGES.md §6.2, P3b) ----------
+   🧩 field sorting: the words of a field that the learner has met, sorted into the field's subgroups (tap a word, then its group).
+   🔁 principal parts: what is memorized with a word (plural, article, gender, root, pinyin, measure word …), asked one part at a time.
+   Both record their answers as recognition reviews of the words (first try right = good, otherwise again). */
+const MET = ['seen', 'learning', 'known_r', 'known_p', 'mastered'];
+
+/** The words of a field that the learner has met in language c → [{ id, cid, group }] (at most n, the least sure first). */
+function sortPool(c, fid, n = 12) {
+  const field = UI.C.data.fields.find(f => f.field === fid), X = LX(c), k = N.known(UI.C, UI.L, c), out = [];
+  for (const con of field?.concepts || []) for (const id of X.byConcept[con.id] || []) if (MET.includes(k.state[id]) && con.subgroup) out.push({ id, cid: con.id, group: con.subgroup, st: k.state[id] });
+  const order = ['seen', 'learning', 'known_r', 'known_p', 'mastered'];
+  return shuffle(out).sort((a, b) => order.indexOf(a.st) - order.indexOf(b.st)).slice(0, n);
+}
+VIEWS.sort = (v, r) => {
+  const fid = r.arg, field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
+  const c = UI.lang, X = LX(c), pool = sortPool(c, fid);
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, '← Field map')),
+    h('h1', {}, '🧩 Sort into groups', h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).name}`)),
+    h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); })));
+  if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, `Meet at least 4 words of this field in ${info(c).name} first (you have met ${pool.length}).`));
+  const groups = (field.subgroups || []).filter(g => pool.some(p => p.group === g.id));
+  const tries = {}; let picked = null, left = pool.length;
+  const chips = h('div', { class: 'lx-sortchips' }), bins = h('div', { class: 'lx-sortbins' }), status = h('div', { class: 'tiny lx-sortstatus' }, `${left} to sort`);
+  const finish = () => {
+    const day = today(); let right = 0;
+    for (const p of pool) { const ok = !tries[p.id]; if (ok) right++; N.review(UI.C, UI.L, c, p.id, 'r', ok ? 'good' : 'again', day); }
+    save(); status.textContent = '';
+    v.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length} right the first time`), ' ',
+      h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'), ' ', h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, 'Field map')));
+  };
+  for (const p of pool) {
+    const chip = h('button', { class: 'btn lx-sortchip', 'data-id': p.id, onclick: () => { if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { p, chip }; } }, word(c, X.lex[p.id].lemma, { sub: false }));
+    chips.append(chip);
+  }
+  for (const g of groups) {
+    const list = h('div', { class: 'lx-sortlist' });
+    const bin = h('div', { class: 'lx-sortbin', 'data-group': g.id, role: 'button', tabindex: '0', onclick: () => {
+      if (!picked) return;
+      const { p, chip } = picked;
+      if (p.group === g.id) { chip.disabled = true; chip.classList.remove('on'); chip.classList.add('right'); list.append(h('span', { class: 'lx-sortin' }, word(c, X.lex[p.id].lemma, { sub: false }), h('span', { class: 'tiny' }, ' ' + UI.C.concepts[p.cid].gloss))); chip.remove(); picked = null; left--; status.textContent = left ? `${left} to sort` : ''; if (!left) finish(); }
+      else { tries[p.id] = (tries[p.id] || 0) + 1; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = `Not ${g.title.toLowerCase()} — try another group`; }
+    } }, h('div', { class: 'lx-sorthead' }, (SUB_EMOJI[g.id] || '') + ' ' + g.title), list);
+    bins.append(bin);
+  }
+  v.append(h('p', { class: 'tiny' }, 'Tap a word, then the group it belongs to.'), chips, status, bins);
+};
+
+/** Words of language c the learner has met that have something to memorize besides the meaning → [{ id, parts }] */
+function partsPool(c) {
+  const X = LX(c), k = N.known(UI.C, UI.L, c), out = [];
+  for (const [id, x] of Object.entries(X.lex)) {
+    if (!MET.includes(k.state[id])) continue;
+    const parts = N.principalParts(UI.C, c, x).filter(([l]) => l !== 'transliteration');
+    if (parts.length) out.push({ id, parts });
+  }
+  return out;
+}
+VIEWS.parts = (v, r) => {
+  const c = UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), pool = shuffle(partsPool(c)).slice(0, 10);
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
+    h('h1', {}, '🔁 Principal parts', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
+  if (!pool.length) return v.append(h('p', { class: 'lx-note' }, `Nothing to drill yet in ${info(c).name}: learn some words first.`));
+  // every value a label takes among the words met: the distractors
+  const byLabel = {}; for (const p of partsPool(c)) for (const [l, val] of p.parts) (byLabel[l] = byLabel[l] || new Set()).add(val);
+  const stage = h('div', { class: 'lx-stage' }); v.append(stage);
+  let i = 0, right = 0; const day = today();
+  const next = () => {
+    stage.innerHTML = '';
+    if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length}`), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'))); }
+    const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
+    const others = shuffle([...(byLabel[label] || [])].filter(o => o !== val)).slice(0, 3);
+    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
+    if (!others.length) {   // nothing to choose among: show it and go on
+      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →'));
+      return stage.append(box);
+    }
+    const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, `Its ${label}?`),
+      options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
+        b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
+        N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
+        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →')));
+      }));
+    stage.append(box);
+  };
+  next();
+};
+
 /* ---- 40_ex.js ---- */
 /* ---------- exercises of the vocabulary lane (docs/LANGUAGES.md §6.2) ---------- */
 const clusters = s => { try { return [...new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(s)].map(x => x.segment); } catch (e) { return [...s]; } };
@@ -477,11 +598,21 @@ function exRecognize(c, lid, done) {
     options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
 }
+/** picture_name (§6.2): the picture of the concept → which word is it? (reviews of words whose concept has a picture) */
+const hasPic = (c, lid) => { const cid = (LX(c).lex[lid].senses || [])[0], con = cid && UI.C.concepts[cid]; return !!(con?.media && UI.C.data.media?.[con.media]); };
+function exPicture(c, lid, done) {
+  const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-expic' });
+  const opts = shuffle([{ id: lid, ok: true }, ...neighbours(c, lid, 8).filter(x => x.lemma !== me.lemma).slice(0, 3).map(x => ({ id: x.id }))]);
+  box.append(h('div', { class: 'lx-q' }, `What is it in ${info(c).name}?`), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
+  box.append(options(opts.map(o => ({ ...o, label: word(c, X.lex[o.id].lemma, { sub: false }) })), (o, b, wrap) => {
+    b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
+  return box;
+}
 /** produce: the meaning → the word. Spelled with letter tiles (any script) — or chosen, for long words. */
 function exProduce(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exprod' });
   const cid = (me.senses || [])[0];
-  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptEmoji(cid) + ' ' : '', gloss(c, lid)));
+  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
   const parts = clusters(me.lemma).filter(t => t.trim());   // multi-word words: the spaces are not tiles
   const afterWord = ok => extraCheck(c, lid, box, ok2 => { feedback(box, ok && ok2, c, lid); done(ok && ok2); }, ok);
   if (parts.length > 14) {
@@ -533,7 +664,7 @@ function exIntro(c, lid, done) {
   const box = h('div', { class: 'lx-ex lx-intro' },
     h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}`),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
-    h('div', { class: 'lx-meaning' }, (me.senses?.[0] ? conceptEmoji(me.senses[0]) + ' ' : '') + card.gloss),
+    h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,
@@ -758,7 +889,7 @@ function runSession(plan, { only = null } = {}) {
   if (only) plan = nodePlan(only, [UI.lang]);
   const queue = [];
   for (const s of plan.steps) {
-    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? 'rec' : 'prod', lang: it.lang, lex: it.lex, review: true });
+    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? (hasPic(it.lang, it.lex) && Math.random() < 0.5 ? 'pic' : 'rec') : 'prod', lang: it.lang, lex: it.lex, review: true });
     if (s.kind === 'learn') for (const cn of s.concepts) {
       for (const e of cn.langs) queue.push({ kind: 'intro', ...e });
       for (const e of cn.langs) queue.push({ kind: 'rec', ...e });
@@ -779,14 +910,14 @@ function runSession(plan, { only = null } = {}) {
     const day = today();
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
-      N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'rec' ? 'r' : 'p', ok ? 'good' : 'again', day); save();
+      N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day); save();
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + a.lex;
       if (!ok && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
       const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
-    const ex = a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    const ex = a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, { kind: a.kind, lang: a.lang, lex: a.lex });   // for tests and styling
     stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.retry ? ' · once more' : ''), ex);
   };
@@ -807,7 +938,7 @@ function runSession(plan, { only = null } = {}) {
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
 function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
-window.NoemaLangUI = { start, UI, addProfiles };
+window.NoemaLangUI = { start, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce } };
 
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */

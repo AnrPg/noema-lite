@@ -28,7 +28,12 @@ async function answer(page, right) {
   const ex = await page.$('.lx-stage .lx-ex'); if (!ex) return null;
   const d = await ex.evaluate(e => ({ ...e.dataset }));
   if (d.kind === 'intro') { await page.click('.lx-stage .lx-next'); return d; }
-  if (d.kind === 'rec') {
+  if (d.kind === 'pic') {   // the picture → which word
+    const lemma = await page.evaluate(({ lang, lex }) => NoemaLangUI.UI.C.lang[lang].lex[lex].lemma.normalize('NFC'), d);
+    const opts = await page.$$('.lx-stage .lx-opt'); let hit = null;
+    for (const o of opts) { const t = (await o.innerText()).replace(/^\d+\s*/, '').split('\n')[0].trim(); if ((t === lemma) === right) { hit = o; break; } }
+    await (hit || opts[0]).click();
+  } else if (d.kind === 'rec') {
     const g = await page.evaluate(({ lang, lex }) => { const C = NoemaLangUI.UI.C, x = C.lang[lang].lex[lex], c = (x.senses || [])[0]; return c ? C.concepts[c].gloss : x.role; }, d);
     const opts = await page.$$('.lx-stage .lx-opt'); let hit = null;
     for (const o of opts) { const t = (await o.innerText()).replace(/^\d+\s*/, '').trim(); if ((t === g) === right) { hit = o; break; } }
@@ -146,6 +151,40 @@ async function answer(page, right) {
   ok(await page.locator('.lx-tile').count() === 163 && await page.locator('.lx-h3').count() === 10, 'field map: all 163 vegetables in 10 subgroups');
   await page.click('.lx-seg button:has-text("rare")'); await wait(300);
   ok(await page.locator('.lx-tile').count() === 80, 'tier filter: the 80 rare ones');
+
+  // ---------- pictures (core/media) ----------
+  const nPics = await page.evaluate(() => Object.keys(NoemaLangUI.UI.C.data.media || {}).length);
+  await page.click('.lx-seg button:has-text("all")'); await wait(300);
+  const shown = await page.evaluate(() => [...document.querySelectorAll('img.lx-pic')].filter(i => i.complete && i.naturalWidth > 0).length);
+  ok(nPics >= 5 && shown === nPics, `the concepts with a picture show it on the field map (${shown} of ${nPics}); the others keep their emoji`);
+  const pic = await page.evaluate(() => { const U = NoemaLangUI.UI, id = U.C.lang.de.byConcept['veg.tomato'][0]; let got = null;
+    const box = NoemaLangUI.ex.exPicture('de', id, ok => { got = ok; }); document.body.append(box);
+    const right = [...box.querySelectorAll('.lx-opt')].find(b => b.innerText.includes(U.C.lang.de.lex[id].lemma)); right.click(); const r = { got, img: !!box.querySelector('img.lx-pic'), n: box.querySelectorAll('.lx-opt').length }; box.remove(); return r; });
+  ok(pic.got === true && pic.img && pic.n === 4, 'picture → word: the picture of the tomato, four German words to choose from');
+
+  // ---------- 🧩 sorting a field into its groups ----------
+  await page.click('.lx-flagchip:has-text("DE")'); await wait(200);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/sort/food.vegetables'); await wait(800);
+  const nChips = await page.locator('.lx-sortchip').count();
+  const wrongBin = await page.evaluate(() => { const U = NoemaLangUI.UI, id = document.querySelector('.lx-sortchip').dataset.id, g = U.C.concepts[U.C.lang.de.lex[id].senses[0]].subgroup;
+    return [...document.querySelectorAll('.lx-sortbin')].map(b => b.dataset.group).find(x => x !== g); });
+  await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${wrongBin}"]`); await wait(450);
+  while (await page.locator('.lx-sortchip').count()) {
+    const g = await page.evaluate(() => { const U = NoemaLangUI.UI, id = document.querySelector('.lx-sortchip').dataset.id; return U.C.concepts[U.C.lang.de.lex[id].senses[0]].subgroup; });
+    await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${g}"]`); await wait(40);
+  }
+  ok(nChips >= 4 && new RegExp(`${nChips - 1} of ${nChips} right`).test(await page.locator('.lx-sortdone').innerText()), `sorting: ${nChips} German vegetables into their groups, one wrong drop counted`);
+
+  // ---------- 🔁 principal parts ----------
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/parts/de'); await wait(700);
+  let pp = 0;
+  while (pp < 12 && await page.$('.lx-exparts')) {
+    const want = await page.evaluate(() => { const b = document.querySelector('.lx-exparts'), U = NoemaLangUI.UI; return NoemaLang.principalParts(U.C, 'de', U.C.lang.de.lex[b.dataset.lex]).find(([l]) => l === b.dataset.label)[1]; });
+    for (const o of await page.$$('.lx-exparts .lx-opt')) if ((await o.innerText()).replace(/^\d+\s*/, '').trim() === want.normalize('NFC')) { await o.click(); break; }
+    await page.click('.lx-exparts .lx-next'); await wait(40); pp++;
+  }
+  const ppRes = await page.locator('.lx-sortdone').innerText().catch(() => '');
+  ok(pp > 0 && new RegExp(`✅ ${pp} of ${pp}`).test(ppRes), `principal parts: ${pp} German words (article, plural, genitive …) — ${ppRes.split('\n')[0]}`);
 
   // ---------- name them all ----------
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await wait(500);

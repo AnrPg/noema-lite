@@ -22,7 +22,7 @@ function conceptTile(c, { cid, lex }, k) {
   const st = cid ? N.conceptState(UI.C, UI.L, c, cid, k) : k.state[lex];
   const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
   return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
-    h('span', { class: 'lx-temoji' }, cid ? conceptEmoji(cid) : '🔤'),
+    cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
     h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— no word') : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
 }
@@ -34,7 +34,7 @@ VIEWS.c = (v, r) => {
   const draw = () => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : 'Back'))),
-      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
+      h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
     if (UI.prefs.compare) v.append(compareTable(cid));

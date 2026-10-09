@@ -8,6 +8,7 @@ VIEWS.field = (v, r) => {
     h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny' }, ` · ${all.length} in all`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, t ? ['', 'common', 'less common', 'rare'][t] : 'all'))),
+      h('button', { class: 'btn small', onclick: () => go('#/sort/' + encodeURIComponent(fid)) }, '🧩 Sort into groups'),
       h('label', { class: 'tiny lx-peek' }, h('input', { type: 'checkbox', checked: UI.prefs.peek ? true : null, onchange: e => { UI.prefs.peek = e.target.checked; save(); render(); } }), ' show words not learned yet')));
   for (const sg of field.subgroups || [{ id: null, title: '' }]) {
     const items = all.filter(x => (sg.id == null || x.subgroup === sg.id) && (!tierPick || x.tier === tierPick)).sort((a, b) => a.tier - b.tier || a.rank - b.rank);
