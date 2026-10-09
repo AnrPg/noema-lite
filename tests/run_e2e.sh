@@ -34,3 +34,4 @@ node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"
 node "$ROOT/tests/lang_lessons.js" "$T"
 node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
+node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: tasks, checks, connector, app (docs/LANGUAGES.md §10.1)

@@ -1,4 +1,36 @@
 /* GENERATED from engine/lang/*.css. Do not edit. */
+/* P8 — Through Claude: ✨ new language course, the task queue, the refill card (docs/LANGUAGES.md §8, §10.1) */
+.lj-box{width:min(720px,100%)}
+.lj-box h2{margin:0 0 8px}
+.lj-field{display:grid;gap:6px;margin:12px 0}
+.lj-in{width:100%;max-width:100%;box-sizing:border-box;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:inherit;font:inherit}
+.lj-chips{display:flex;flex-wrap:wrap;gap:6px}
+.lj-lang{padding:5px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font:inherit;color:inherit;cursor:pointer}
+.lj-lang.on{border-color:var(--violet);background:var(--violet-bg);font-weight:700}
+.lj-depths{display:grid;gap:6px}
+.lj-depth{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.lj-depth select{padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit;max-width:100%}
+.lj-ways{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.lj-way.on{border-color:var(--violet);background:var(--violet-bg)}
+.lj-way:disabled{opacity:.55;cursor:not-allowed}
+.lj-msg{min-height:1.4em;margin:8px 0;color:var(--ink2)}
+.lj-text{width:100%;box-sizing:border-box;font:13px/1.45 'JetBrains Mono',monospace;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:inherit;resize:vertical}
+.lj-h1{margin:4px 0}
+.lj-stats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.lj-queue,.lj-ways2 .row{flex-wrap:wrap;gap:8px;margin:8px 0}
+.lj-log{font-size:13.5px;color:var(--ink2);max-height:180px;overflow:auto;display:grid;gap:2px}
+.lj-tasks{display:grid;gap:8px}
+.lj-task{margin:0;padding:12px 14px}
+.lj-taskhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.lj-taskhead code,.lj-tasks code,.lx-sec code{overflow-wrap:anywhere;font-size:13px}
+.lj-task .row{flex-wrap:wrap;gap:6px}
+.lj-pastebox{margin-top:10px;display:grid;gap:8px}
+.lj-errs ul{max-height:240px;overflow:auto}
+.lj-errs li{overflow-wrap:anywhere}
+.lj-homebar{justify-content:flex-end;margin:0 0 4px}
+.lj-refill .row{margin-top:8px}
+.lj-cmp th{white-space:nowrap}
+@media (max-width:640px){.lj-ways{grid-template-columns:1fr}.lj-box{padding:16px}.lj-cmp th{white-space:normal}}
 /* noema-lite · language courses (docs/LANGUAGES.md §8) — built into engine/langui.css */
 body.lx main.lx-main{max-width:1000px}
 .lx-title{max-width:38vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

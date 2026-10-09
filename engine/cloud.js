@@ -47,7 +47,7 @@
   // safety net: the Gemini key stays on the device (loader.js GeminiKey), so a:settings is never pushed with it
   const noSecrets = (k, v) => { if (k !== 'a:settings' || v == null) return v; try { const o = JSON.parse(v); if (o && typeof o === 'object' && 'apiKey' in o) { delete o.apiKey; return JSON.stringify(o); } } catch (e) { } return v; };
   // rows other writers append for the app to read and delete; never mirrored into localStorage
-  const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:');
+  const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:') || k.startsWith('a:langin:') || k.startsWith('a:langclaim:');   // + language courses through Claude (docs/LANGUAGES.md §10.1)
 
   /** Two JSON copies of a curriculum record → `base` with the newer chapter plans of `other` (string), or null when nothing changes. */
   function mergeCurriculum(key, base, other) {

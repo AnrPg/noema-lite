@@ -859,7 +859,643 @@
     readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+  /* ---------- P8 — Through Claude (course creation and generation): account courses, task queue, checks and merges (§7.4, §10.1) ---------- */
+  /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (cloud/mcp/server.mjs, bundled by tools/build.py):
+     a task, the check of its answer and the way the answer changes the course are identical everywhere. Pure: no DOM, no storage. */
+  const LANG_P8 = (() => {
+    const FORMAT = 'noema.langjobs/v1', DATA = 'noema.langdata/v1', PATCH = 'noema.langpatch/v1';
+    const IN = 'a:langin:', CLAIM = 'a:langclaim:', LEASE = 4 * 3600e3, KEEP = 400;
+    const KIND = { core: 'lang.core', node: 'lang.node', function: 'lang.function', compare: 'lang.compare', refill: 'lang.refill' };
+    const POS = new Set(['NOUN', 'PROPN', 'VERB', 'AUX', 'ADJ', 'ADV', 'PRON', 'DET', 'ADP', 'CCONJ', 'SCONJ', 'NUM', 'PART', 'INTJ', 'CLF', 'X']);
+    const CONTENT = new Set(['NOUN', 'VERB', 'ADJ', 'ADV']);
+    const GENDERED = new Set(['de', 'ar', 'he', 'fr', 'es', 'it', 'pt', 'ru', 'el', 'hi']);
+    // D18: the reference set (library/languages/_typology/reference.json) with the type of each language
+    const REF = { el: 'fusional', ru: 'fusional', es: 'fusional', en: 'fusional', fr: 'fusional', de: 'fusional', hi: 'fusional', fa: 'fusional', mr: 'fusional', ar: 'fusional', he: 'fusional',
+      tr: 'agglutinating', ja: 'agglutinating', ko: 'agglutinating', fi: 'agglutinating', hu: 'agglutinating', sw: 'agglutinating', lg: 'agglutinating', zh: 'isolating', vi: 'isolating', iu: 'polysynthetic' };
+    const STATUS = new Set(['realized', 'periphrastic', 'absent']);
+    const CATS = new Set(['overview', 'script', 'phonology', 'morphology', 'morphosyntax', 'syntax', 'semantics', 'pragmatics', 'lexicon', 'reading', 'writing', 'speaking', 'listening', 'production', 'culture']);
+    const GENS = new Set(['quiz', 'sentence_meaning', 'glyph_form', 'transliterate', 'vowelize', 'tone_mark', 'char_compose', 'trace', 'spell', 'learn_batch', 'recognize', 'picture_name', 'exhaustive_recall', 'field_map',
+      'gender_article', 'principal_parts', 'measure_word', 'root_family', 'compound_split', 'sense_split', 'collocation', 'confusables', 'intensity_scale', 'paradigm', 'inflect', 'analyze', 'morph_build', 'root_pattern', 'agree',
+      'build_sentence', 'word_order', 'transform', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'translate', 'rewrite', 'expand', 'guided_compose', 'graded_reader', 'number_words', 'clock', 'date', 'register',
+      'dialogue_turn', 'parallel_translate', 'parallel_align', 'which_language', 'cognate_bridge', 'compare_rule', 'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link']);
+    const clone = o => JSON.parse(JSON.stringify(o));
+    const isObj = x => !!x && typeof x === 'object' && !Array.isArray(x);
+    const str = v => typeof v === 'string' && v.trim() !== '';
+    const iso = now => new Date(now == null ? Date.now() : now).toISOString();
+    const NAMES = { ar: 'Arabic', he: 'Hebrew', zh: 'Chinese', de: 'German', en: 'English', el: 'Greek', ru: 'Russian', tr: 'Turkish', es: 'Spanish', fr: 'French', it: 'Italian', pt: 'Portuguese', ja: 'Japanese', ko: 'Korean', hi: 'Hindi', fa: 'Persian', fi: 'Finnish', hu: 'Hungarian', sw: 'Swahili', vi: 'Vietnamese', nl: 'Dutch', pl: 'Polish' };
+    const nameOf = c => NAMES[c] || c;
+
+    /* ---------- the account course: its record (synced key a:langcourse:<id>) and its content (device + cloud storage) ---------- */
+    const slug = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+    function newCourseId(title, rnd = Math.random) { let r = ''; for (let i = 0; i < 4; i++) r += 'abcdefghijkmnpqrstuvwxyz'[Math.floor(rnd() * 24)]; return `u-${slug(title) || 'course'}-${r}`; }
+    /** A new course made through Claude → {record, data}. library: built library courses (their language.json and typology are reused). */
+    function newCourse({ title, languages, explainLang = 'en', depth = {}, knownLanguages = [], provider = 'claudeapp', id = null, now = Date.now(), library = [] } = {}) {
+      const langs = [...new Set((languages || []).map(x => String(x).trim().toLowerCase()).filter(x => /^[a-z]{2,3}$/.test(x)))];
+      if (!str(title)) throw new Error('A course needs a title.');
+      if (!langs.length) throw new Error('Choose at least one language.');
+      id = id || newCourseId(title);
+      const dep = Object.fromEntries(langs.map(c => [c, [1, 2, 3].includes(+depth[c]) ? +depth[c] : 3]));
+      const known = [...new Set((knownLanguages || []).map(x => String(x).trim().toLowerCase()).filter(Boolean))];
+      const libLang = c => { for (const d of library || []) if (d?.langs?.[c]?.language) return clone(d.langs[c].language); return null; };
+      const data = { format: DATA, rev: 1, course: { format: 'noema.langcourse/v1', id, title: title.trim(), explainLang, languages: langs, defaults: { depth: dep, batch: 12, dailyMinutes: 30 }, knownLanguages: known, account: true, draft: [] },
+        typology: clone((library || []).find(d => d?.typology)?.typology || null), fields: [], nodes: [], functions: [], frames: [], compare: {},
+        langs: Object.fromEntries(langs.map(c => [c, { language: libLang(c), lexicon: {}, grammar: {}, bank: [] }])) };
+      const record = { format: FORMAT, id, origin: 'account', title: data.course.title, languages: langs, explainLang, depth: dep, knownLanguages: known, provider, created: iso(now), updated: iso(now), rev: 1, tasks: [], log: [] };
+      queueTask(record, KIND.core, {}, { now });
+      return { record, data };
+    }
+    /** The record of a library course: only its refill queue lives in the account (the learner's private patch). */
+    const libraryRecord = (C, now = Date.now()) => ({ format: FORMAT, id: C.id, origin: 'library', title: C.data.course.title, languages: C.languages.slice(), explainLang: C.explainLang, depth: {}, knownLanguages: C.data.course.knownLanguages || [], provider: 'claudeapp', created: iso(now), updated: iso(now), rev: 0, tasks: [], log: [] });
+    const emptyPatch = (cid) => ({ format: PATCH, course: cid, rev: 0, langs: {} });
+    /** A library course with the learner's patch laid over it (refill sentences, §7.4). Mutates and returns data. */
+    function applyPatch(data, patch) {
+      for (const [code, P] of Object.entries(patch?.langs || {})) {
+        const L = data.langs?.[code]; if (!L) continue;
+        const have = new Set((L.bank || []).map(s => s.id));
+        for (const s of P.bank || []) if (!have.has(s.id)) { L.bank.push(s); have.add(s.id); }
+      }
+      return data;
+    }
+
+    /* ---------- the queue ---------- */
+    const taskIdOf = (kind, a) => kind === KIND.core ? 'core' : kind === KIND.node ? `node:${a.node}:${a.lang}` : kind === KIND.function ? `function:${a.fn}:${a.lang}` : kind === KIND.compare ? `compare:${a.fn}` : `refill:${a.fn}:${a.lang}:${a.n}`;
+    const isOpen = t => t && (t.status === 'queued');
+    /** Queue a task (the open one when it is queued already) → the task. */
+    function queueTask(rec, kind, args = {}, { now = Date.now(), night = false } = {}) {
+      if (!Object.values(KIND).includes(kind)) throw new Error('unknown task kind ' + kind);
+      rec.tasks = rec.tasks || [];
+      if (kind === KIND.refill && args.n == null) args = { ...args, n: 1 + rec.tasks.filter(t => t.kind === KIND.refill && t.fn === args.fn && t.lang === args.lang).length };
+      const id = taskIdOf(kind, args);
+      const open = rec.tasks.find(t => t.id === id && isOpen(t)); if (open) return open;
+      const t = { id, kind, ...args, status: 'queued', queuedAt: iso(now), ...(night ? { night: true } : {}) };
+      rec.tasks.push(t); rec.updated = iso(now);
+      const done = rec.tasks.filter(x => !isOpen(x)); if (done.length > KEEP) rec.tasks = rec.tasks.filter(x => isOpen(x) || done.indexOf(x) >= done.length - KEEP);
+      return t;
+    }
+    const order = rec => (rec.tasks || []).filter(isOpen).sort((a, b) => (a.kind === KIND.core ? -1 : 0) - (b.kind === KIND.core ? -1 : 0) || String(a.queuedAt).localeCompare(String(b.queuedAt)) || (a.seq || 0) - (b.seq || 0));
+    /** The queue as it really is: a task with a live claim (KV a:langclaim:<course>:<task>) is being written by another run. */
+    function settle(rec, { claims = [], now = Date.now(), lease = LEASE } = {}) {
+      const r = clone(rec), pre = CLAIM + rec.id + ':';
+      const live = {}; for (const c of claims) { if (!String(c.key).startsWith(pre)) continue; const t = Date.parse(c.updated_at || '') || 0; if (now - t < lease) live[c.key.slice(pre.length)] = iso(t); }
+      for (const t of r.tasks || []) if (isOpen(t) && live[t.id]) t.claimedAt = live[t.id];
+      return r;
+    }
+    /** {queued: [free tasks in order], claimed: [taken by a run], done, refused} */
+    function work(rec) {
+      const o = order(rec);
+      return { queued: o.filter(t => !t.claimedAt), claimed: o.filter(t => t.claimedAt), done: (rec.tasks || []).filter(t => t.status === 'done').length, refused: (rec.tasks || []).filter(t => t.status === 'refused').length };
+    }
+    const byId = (rec, id) => (rec.tasks || []).find(t => t.id === id && isOpen(t)) || null;
+    /** The next task: want 'any' or a kind (lang.node …); task: one task id (even when another run took it, with force). */
+    function next(rec, { want = 'any', task = '', force = false } = {}) {
+      if (task) { const t = byId(rec, task); if (!t) return { error: `No open task “${task}” in “${rec.title}”.` }; if (t.claimedAt && !force) return { error: `“${task}” is being written by another run since ${t.claimedAt} — do not write it twice (force = true takes it over when that run stopped).` }; return t; }
+      if (rec.tasks?.some(t => isOpen(t) && t.kind === KIND.core) && want !== 'any' && want !== KIND.core) return null;   // nothing can be written before the core
+      const w = work(rec);
+      return w.queued.find(t => want === 'any' || t.kind === want || t.kind === 'lang.' + want) || null;
+    }
+    /** What the course still needs, in course order: {core, nodes: [{node, lang}], functions: [{fn, lang}], compare: [fn]} */
+    function needs(rec, data) {
+      const out = { core: !(data.nodes || []).length, nodes: [], functions: [], compare: [] };
+      if (out.core) return out;
+      let C; try { C = course(data); } catch (e) { return out; }
+      const langs = rec.languages || C.languages;
+      for (const nid of C.order) for (const code of langs) {
+        const X = C.lang[code]; if (!X || !X.applies[nid]) continue;
+        if (C.nodes[nid].concepts.length && !data.langs[code].lexicon[nid]) out.nodes.push({ node: nid, lang: code });
+        if (C.nodes[nid].kind === 'lesson') for (const fid of lessonFunctions(C, code, nid)) if (C.functions[fid] && !X.grammar[fid] && !out.functions.some(x => x.fn === fid && x.lang === code)) out.functions.push({ fn: fid, lang: code });
+      }
+      for (const fid of Object.keys(C.functions)) if (C.functions[fid].category !== 'overview' && langs.filter(c => C.lang[c]?.grammar[fid]).length >= 2 && !(data.compare || {})[fid]) out.compare.push(fid);
+      return out;
+    }
+    /** 🌙 Queue every unwritten node (and the realizations its lessons need) — for a night of scheduled runs → how many were queued. */
+    function queueNight(rec, data, { now = Date.now(), langs = null, functions = true } = {}) {
+      const nd = needs(rec, data); let n = 0, i = 0;
+      const want = c => !langs || langs.includes(c);
+      const before = new Set(order(rec).map(t => t.id));
+      const add = (kind, a) => { const t = queueTask(rec, kind, a, { now, night: true }); t.seq = t.seq || ++i; if (!before.has(t.id)) { before.add(t.id); n++; } };
+      for (const x of nd.nodes) if (want(x.lang)) add(KIND.node, x);
+      if (functions) for (const x of nd.functions) if (want(x.lang)) add(KIND.function, x);
+      return n;
+    }
+    /** The refill request of §7.4: the function, the language and the learner's known lexemes (R and P) right now. */
+    function refillRequest(C, L, code, fid) {
+      const k = known(C, L, code);
+      return { fn: fid, lang: code, R: [...k.R].sort(), P: [...k.P].sort(), have: selectSentences(C, code, { known: k.R, functions: [fid] }).length };
+    }
+
+    /* ---------- the parallel order (D13, §4.4.3) — the JS twin of validate_lang.course_paths / order_conflicts ---------- */
+    const lessonFns = (n, L, typ) => { const f = n.functions || []; if (Array.isArray(f)) return f.slice(); const out = []; for (const k of ['*', typ, L]) for (const x of f[k] || []) if (!out.includes(x)) out.push(x); return out; };
+    function topo(nodes) { const by = {}, seen = {}, out = []; for (const n of nodes) if (n.id) by[n.id] = n; const visit = id => { if (seen[id] || !by[id]) return; seen[id] = 1; for (const p of by[id].prereqs || []) visit(p); out.push(id); }; for (const n of nodes) visit(n.id); return { by, out }; }
+    /** The path of every language of the course and of every language type: [[name, [[node id, Set(subjects)]]]] */
+    function coursePaths(data, label = null) {
+      label = label || data.course?.id || 'course';
+      const { by, out } = topo(data.nodes || []);
+      const holders = [];
+      for (const L of data.course?.languages || []) { const typ = data.langs?.[L]?.language?.typology; if (typ) holders.push([`${label}/${L}`, L, typ]); }
+      for (const t of TYPES.slice().sort()) holders.push([`${label}/${t} type`, null, t]);
+      return holders.map(([name, L, typ]) => {
+        const seen = new Set(), steps = [];
+        for (const nid of out) {
+          const n = by[nid]; if (!applies(n, L, typ)) continue;
+          const g = new Set(['node ' + nid, ...lessonFns(n, L, typ).map(f => 'grammar ' + f), ...(n.concepts || []).map(c => 'word ' + c)].filter(x => !seen.has(x)));
+          g.forEach(x => seen.add(x)); steps.push([nid, g]);
+        }
+        return [name, steps];
+      });
+    }
+    /** Pairs of subjects taught in opposite orders by two paths (one of them starts with `mine`) → messages */
+    function orderConflicts(paths, mine = null, limit = 12) {
+      const pos = paths.map(([, steps]) => { const p = new Map(); steps.forEach(([nid, g], i) => g.forEach(x => p.set(x, [i, nid]))); return p; });
+      const found = new Map();
+      for (let a = 0; a < paths.length; a++) for (let b = a + 1; b < paths.length; b++) {
+        if (mine && !(paths[a][0].startsWith(mine) || paths[b][0].startsWith(mine))) continue;
+        const A = pos[a], B = pos[b];
+        const common = [...A.keys()].filter(x => B.has(x)).sort((x, y) => A.get(x)[0] - A.get(y)[0] || B.get(x)[0] - B.get(y)[0]);
+        let best = null, i = 0;
+        while (i < common.length) {
+          let j = i; while (j < common.length && A.get(common[j])[0] === A.get(common[i])[0]) j++;
+          for (const y of common.slice(i, j)) if (best && B.get(y)[0] < B.get(best)[0]) { const k = best + '|' + y; if (!found.has(k)) found.set(k, `“${best}” comes before “${y}” in ${paths[a][0]} (${A.get(best)[1]} → ${A.get(y)[1]}) but after it in ${paths[b][0]} (${B.get(y)[1]} → ${B.get(best)[1]})`); }
+          for (const y of common.slice(i, j)) if (best === null || B.get(y)[0] > B.get(best)[0]) best = y;
+          i = j;
+        }
+      }
+      const msgs = [...found.values()];
+      return msgs.slice(0, limit).concat(msgs.length > limit ? [`… and ${msgs.length - limit} more`] : []);
+    }
+
+    /* ---------- the answer schemas (the tool input of the in-app runner; the connector checks the same) ---------- */
+    const S_SENT = { type: 'object', required: ['id', 'frame', 'text', 'tokens', 'gloss'], properties: { id: { type: 'string' }, frame: { type: 'string' }, text: { type: 'string' }, gloss: { type: 'string' }, tokens: { type: 'array', minItems: 1, items: { type: 'object' } }, functions: { type: 'array', items: { type: 'string' } }, level: { type: 'string' }, variantOf: { type: 'string' }, variant: { type: 'object' } } };
+    const SCHEMA = {
+      [KIND.core]: { type: 'object', required: ['fields', 'nodes', 'functions', 'frames'], properties: { fields: { type: 'array', items: { type: 'object' } }, nodes: { type: 'array', minItems: 1, items: { type: 'object' } }, functions: { type: 'array', items: { type: 'object' } }, frames: { type: 'array', items: { type: 'object' } }, typology: { type: 'object' }, languages: { type: 'object', description: 'language.json of each course language that has none yet' } } },
+      [KIND.node]: { type: 'object', required: ['lexicon'], properties: { lexicon: { type: 'object', required: ['lexemes'], properties: { lexemes: { type: 'array', items: { type: 'object' } }, absent: { type: 'array', items: { type: 'object' } } } }, bank: { type: 'array', items: S_SENT }, grammar: { type: 'object', description: 'function id → realization (lang/<code>/grammar/<fn>.json), for the lesson\'s functions' } } },
+      [KIND.function]: { type: 'object', required: ['grammar'], properties: { grammar: { type: 'object' }, bank: { type: 'array', items: S_SENT } } },
+      [KIND.compare]: { type: 'object', required: ['compare'], properties: { compare: { type: 'object', required: ['function', 'rows'], properties: { function: { type: 'string' }, rows: { type: 'array', minItems: 1, items: { type: 'object', required: ['aspect', 'cells'], properties: { aspect: { type: 'string' }, cells: { type: 'object' } } } }, notes: { type: 'array', items: { type: 'object' } } } } } },
+      [KIND.refill]: { type: 'object', required: ['bank'], properties: { bank: { type: 'array', minItems: 1, items: S_SENT } } },
+    };
+    /** The JSON-Schema subset of the answer schemas → problems */
+    function shape(schema, v, at = '$', out = []) {
+      if (!schema || out.length > 40) return out;
+      const t = schema.type;
+      const ok = !t || (t === 'array' ? Array.isArray(v) : t === 'object' ? isObj(v) : t === 'integer' ? Number.isInteger(v) : typeof v === t);
+      if (!ok) { out.push(`${at}: expected ${t}`); return out; }
+      if (t === 'array') { if (schema.minItems && v.length < schema.minItems) out.push(`${at}: needs ≥ ${schema.minItems} items`); if (schema.items) v.forEach((x, i) => shape(schema.items, x, `${at}[${i}]`, out)); }
+      if (t === 'object') { for (const r of schema.required || []) if (v[r] === undefined) out.push(`${at}.${r}: missing`); for (const [k, x] of Object.entries(v)) if (schema.properties?.[k]) shape(schema.properties[k], x, `${at}.${k}`, out); }
+      return out;
+    }
+
+    /* ---------- checks: the validator's rules the app and the connector need (tools/validate_lang.py is the full check) ---------- */
+    /** Every lexeme of a language in the course (+ extra ones) → Map id → {x, node} */
+    function lexIndex(data, code, extra = [], skipNode = null) {
+      const m = new Map();
+      for (const [nid, f] of Object.entries(data.langs?.[code]?.lexicon || {})) { if (nid === skipNode) continue; for (const x of f.lexemes || []) m.set(x.id, { x, node: nid }); }
+      for (const [x, nid] of extra) m.set(x.id, { x, node: nid });
+      return m;
+    }
+    /** Which node teaches each concept in a language (ownership, §4.4). */
+    function owners(data, code) {
+      const typ = data.langs?.[code]?.language?.typology, own = {};
+      for (const n of data.nodes || []) if (applies(n, code, typ)) for (const c of n.concepts || []) if (!own[c]) own[c] = n.id;
+      return own;
+    }
+    const conceptsOf = data => { const m = {}; for (const f of data.fields || []) for (const c of f.concepts || []) m[c.id] = { ...c, field: f.field }; return m; };
+    function checkLexemes(E, data, code, nid, lexicon, lj) {
+      const where = `lang/${code}/lexicon/${nid}.json`, concepts = conceptsOf(data), own = owners(data, code), node = (data.nodes || []).find(n => n.id === nid);
+      const others = lexIndex(data, code, [], nid), ids = new Set(), covered = new Set(), pcells = lj.paradigmCells || {}, cite = lj.citationCells || {}, marks = !!lj.vowelMarks;
+      const wf = lj.wordFeatures || null;
+      const profiles = (data.course?.profiles || 'required') === 'required';
+      for (const x of lexicon.lexemes || []) {
+        const w = `${where} · ${x?.id}`;
+        if (!isObj(x)) { E.push(`${where}: a lexeme must be an object`); continue; }
+        if (!(str(x.id) && x.id.startsWith(code + ':'))) { E.push(`${w}: lexeme id must start with “${code}:”`); continue; }
+        if (ids.has(x.id) || others.has(x.id)) E.push(`${w}: lexeme id used twice`); ids.add(x.id);
+        if (!str(x.lemma)) E.push(`${w}: “lemma” is required (text)`);
+        if (!POS.has(x.pos)) E.push(`${w}: unknown part of speech “${x.pos}”`);
+        if (!Array.isArray(x.senses)) { E.push(`${w}: “senses” must be a list (empty for a word with no shared concept)`); continue; }
+        x.senses.forEach((s, i) => {
+          if (!concepts[s]) { E.push(`${w}: unknown concept “${s}”`); return; }
+          if (i === 0 && own[s] !== nid && !(x.role && (concepts[s].pending || own[s]))) E.push(`${w}: concept “${s}” belongs to node ${own[s] || '(none)'} in ${code}, not ${nid}`);
+          covered.add(s);
+        });
+        if (!x.senses.length && !str(x.role)) E.push(`${w}: a word without a concept needs its “role”`);
+        if (!isObj(x.ref)) E.push(`${w}: “ref” is required (how the word was checked: {"src": "kaikki", "checked": "<date>"}, tools/lang_refcheck.py)`);
+        const forms = x.forms == null ? {} : x.forms;
+        if (!isObj(forms)) { E.push(`${w}: “forms” must be an object`); continue; }
+        const seen = {};
+        for (const [c, f] of Object.entries(forms)) {
+          if (!cellParts(c).length) E.push(`${w}: an empty cell`);
+          if (seen[canon(c)]) E.push(`${w}: cells ${seen[canon(c)]} and ${c} are the same`); seen[canon(c)] = c;
+          if (!str(f)) E.push(`${w}: cell ${c}: empty form`);
+          else if (marks && [...stripMarks(code, f)].filter(ch => /\p{L}/u.test(ch)).length > 1 && !hasMarks(code, f)) E.push(`${w}: cell ${c}: “${f}” has no vowel marks (store ${code} forms fully vocalized)`);
+        }
+        const key = x.class ? `${x.pos}.${x.class}` : x.pos;
+        for (const c of pcells[key] || pcells[x.pos] || []) if (!seen[canon(c)]) E.push(`${w}: missing cell ${c}`);
+        const cc = cite[key] || cite[x.pos];
+        if (cc && Object.keys(forms).length) { if (!seen[canon(cc)]) E.push(`${w}: missing citation cell ${cc}`); else if (forms[seen[canon(cc)]] !== x.lemma) E.push(`${w}: the lemma “${x.lemma}” must be the ${cc} form “${forms[seen[canon(cc)]]}”`); }
+        if (marks && str(x.lemma) && [...stripMarks(code, x.lemma)].filter(ch => /\p{L}/u.test(ch)).length > 1 && !hasMarks(code, x.lemma)) E.push(`${w}: the lemma has no vowel marks`);
+        if (x.pos === 'NOUN' && GENDERED.has(code) && x.class !== 'plt' && !['MASC', 'FEM', 'NEUT'].includes(x.gender)) E.push(`${w}: gender is required (MASC, FEM or NEUT)`);
+        if (profiles && CONTENT.has(x.pos) && x.senses.length && !isObj(x.profile)) E.push(`${w}: a content word needs its profile (§4.6: senses, examples, collocations … — the validator checks it in full)`);
+        // D14: the facade — every parameter its language declares for the part of speech
+        if (wf) {
+          if (!Array.isArray(wf[x.pos])) E.push(`${w}: no wordFeatures for ${x.pos} in ${code} (language.json)`);
+          const feats = isObj(x.features) ? x.features : {};
+          const mine = (wf[x.pos] || []).filter(d => !d.classes || d.classes.includes(key)), known = new Set(mine.map(d => d.id));
+          for (const k of Object.keys(feats)) if (!known.has(k)) E.push(`${w}: features.${k}: not a parameter of ${key} in ${code} (wordFeatures)`);
+          for (const d of mine) {
+            const val = d.at === 'top' ? x[d.id] : feats[d.id];
+            if (val == null) { E.push(`${w}: the word does not state its ${d.title || d.id} (${d.id}${d.at === 'top' ? ' at the top level' : ''}): give a value${d.none ? ' or {"none": "<why>"}' : ''} (D14)`); continue; }
+            if (isObj(val) && Object.keys(val).length === 1 && 'none' in val) { if (!d.none) E.push(`${w} · ${d.id}: this parameter cannot be “none”`); else if (!str(val.none)) E.push(`${w} · ${d.id}: say why it is none`); continue; }
+            if (d.type === 'enum' && !(d.values || []).includes(val)) E.push(`${w} · ${d.id}: “${val}” is not one of ${(d.values || []).join(', ')}`);
+          }
+        }
+        for (const ct of x.contrasts || []) { if (!x.senses.includes(ct.concept)) E.push(`${w}: contrasts: “${ct.concept}” is not one of the word's concepts`); if (!str(ct.axis) || !str(ct.value)) E.push(`${w} · contrasts: axis and value are required`); }
+        if (code === 'zh') {
+          const lemma = String(x.lemma || ''), chars = [...lemma];
+          if (!chars.every(isHan)) E.push(`${w}: “${lemma}” must be written in characters only`);
+          if (!str(x.trad) || [...x.trad].length !== chars.length) E.push(`${w}: the traditional form (trad) is required, with as many characters as the lemma`);
+          const syl = pinyinSplit(x.pinyin || '');
+          const erhua = lemma.endsWith('儿') && chars.length > 1 && syl.length === chars.length - 1 && /r$/.test(syl[syl.length - 1] || '');
+          if (!syl.length) E.push(`${w}: pinyin is required (syllables separated by spaces)`);
+          else if (syl.length !== chars.length && !erhua) E.push(`${w}: ${syl.length} pinyin syllables for ${chars.length} characters`);
+          else syl.forEach((s, i) => { for (const e of pinyinSyllableErrors(erhua && i === syl.length - 1 ? s.slice(0, -1) : s)) E.push(`${w}: ${e}`); });
+          const ms = (x.features || {}).measure ?? x.measure;
+          if (x.pos === 'NOUN' && !ms && !x.measureNone) E.push(`${w}: a noun needs its measure word(s) (features.measure), or {"none": "<why>"}`);
+        }
+      }
+      for (const a of lexicon.absent || []) {
+        const w = `${where} · absent ${a?.concept}`;
+        if (!node || !(node.concepts || []).includes(a?.concept)) E.push(`${w}: concept “${a?.concept}” is not in node ${nid}`);
+        if (covered.has(a?.concept)) E.push(`${w}: the concept has a word and is also marked absent`);
+        if (!str(a?.reason)) E.push(`${w}: “reason” is required (and what is said instead: use)`);
+        covered.add(a?.concept);
+      }
+      // every concept of the node has a word or an absent entry (a word written elsewhere with this meaning counts too)
+      const elsewhere = new Set([...others.values()].flatMap(({ x }) => x.senses || []));
+      for (const cid of node?.concepts || []) if (!covered.has(cid) && !elsewhere.has(cid)) E.push(`${where}: concept “${cid}” has no word and is not marked absent`);
+      // D14: one concept, several words → each says what separates it, on one axis
+      const all = lexIndex(data, code, (lexicon.lexemes || []).filter(isObj).map(x => [x, nid]), nid), by = {};
+      for (const { x } of all.values()) for (const c of x.senses || []) (by[c] = by[c] || []).push(x);
+      for (const [cid, xs] of Object.entries(by)) {
+        if (xs.length < 2 || !xs.some(x => (lexicon.lexemes || []).includes(x))) continue;
+        const got = xs.map(x => (x.contrasts || []).find(ct => ct.concept === cid));
+        if (got.some(g => !g)) { E.push(`lang/${code} · concept ${cid}: ${xs.length} words (${xs.map(x => x.id).join(', ')}): each says what separates it (contrasts, D14) — missing in ${xs.filter((x, i) => !got[i]).map(x => x.id).join(', ')}`); continue; }
+        if (new Set(got.map(g => g.axis)).size > 1) E.push(`lang/${code} · concept ${cid}: the words of one concept are contrasted on ONE axis`);
+        if (new Set(got.map(g => g.value)).size < got.length) E.push(`lang/${code} · concept ${cid}: two words have the same contrast value`);
+      }
+    }
+    /** A realization (lang/<code>/grammar/<fn>.json). */
+    function checkRealization(E, data, code, fid, g, lj) {
+      const where = `lang/${code}/grammar/${fid}.json`, fn = (data.functions || []).find(f => f.id === fid);
+      if (!isObj(g)) { E.push(`${where}: the realization must be an object`); return; }
+      if (!fn) { E.push(`${where}: unknown function “${fid}”`); return; }
+      if (g.function !== fid) E.push(`${where}: function must be “${fid}”`);
+      if (!STATUS.has(g.status)) E.push(`${where}: status must be one of realized, periphrastic, absent`);
+      if (!str(g.summary)) E.push(`${where}: “summary” is required (text)`);
+      const fors = new Set([...(g.notes || []), ...(g.blocks || []).flatMap(b => isObj(b) ? b.notes || [] : [])].map(n => n?.for).filter(Boolean));
+      for (const n of [...(g.notes || []), ...(g.blocks || []).flatMap(b => isObj(b) ? b.notes || [] : [])]) if (!str(n?.for) || !str(n?.text)) E.push(`${where}: a comparison note needs “for” and “text”`);
+      const refs = [...fors].filter(f => REF[f]), types = new Set([...refs.map(f => REF[f]), ...[...fors].filter(f => String(f).startsWith('type:')).map(f => f.slice(5))]);
+      if (refs.length < 8 || !TYPES.every(t => types.has(t))) E.push(`${where}: comparison notes for the reference set: ${refs.length} of at least 8 languages, types ${[...types].sort().join(', ') || 'none'} of all four (D18: ${Object.keys(REF).join(' ')})`);
+      for (const gen of g.generators || []) {
+        if (!GENS.has(gen?.type)) E.push(`${where}: unknown exercise type “${gen?.type}”`);
+        if (gen?.type === 'inflect' && !gen.pos) E.push(`${where}: inflect needs pos`);
+        for (const fr of gen?.bank?.frames || []) if (!(data.frames || []).some(f => f.id === fr)) E.push(`${where}: generator bank: unknown frame “${fr}”`);
+        if (gen?.type === 'quiz' && !(g.quiz || []).length) E.push(`${where}: quiz: the questions (quiz) are missing`);
+      }
+      (g.quiz || []).forEach((q, i) => {
+        const qw = `${where} · quiz ${i + 1}`;
+        if (!str(q?.q) || !str(q?.why)) E.push(`${qw}: q and why are required`);
+        if (!Array.isArray(q?.options) || q.options.length < 2 || !q.options.every(str)) E.push(`${qw}: options: at least 2 non-empty strings`);
+        else if (new Set(q.options).size !== q.options.length) E.push(`${qw}: two options are the same`);
+        else if (!q.options.includes(q.answer)) E.push(`${qw}: answer must be one of the options (the text)`);
+      });
+      if (fn.category === 'overview') {
+        if (g.typology?.type !== lj?.typology) E.push(`${where}: typology.type must be the language's type “${lj?.typology}”`);
+        if ((g.facts || []).length < 3) E.push(`${where}: facts: at least 3`);
+        if ((g.peculiarities || []).length < 3) E.push(`${where}: peculiarities: at least 3 (D11)`);
+        if ((g.quiz || []).length < 3) E.push(`${where}: quiz: at least 3 questions`);
+      } else if (g.status !== 'absent' && !(g.procedure?.askYourself || []).length) E.push(`${where}: procedure.askYourself (the “ask yourself” checklist) is required`);
+    }
+    /** Sentences for the bank. opts: {lex (Map), grams {fid: realization}, fn (must list it), only (Set of lexeme ids the words must come from)} */
+    function checkBank(E, data, code, sents, lj, { lex, grams = {}, fn = null, only = null, label = 'bank' } = {}) {
+      const old = new Set((data.langs?.[code]?.bank || []).map(s => s.id)), mine = new Map();
+      for (const s of sents || []) if (isObj(s) && str(s.id)) mine.set(s.id, s);
+      const frames = new Set((data.frames || []).map(f => f.id)), fns = new Set((data.functions || []).map(f => f.id));
+      const seen = new Set();
+      for (const s of sents || []) {
+        const w = `lang/${code}/${label} · ${s?.id}`;
+        if (!isObj(s)) { E.push(`lang/${code}/${label}: a sentence must be an object`); continue; }
+        if (!(str(s.id) && s.id.startsWith(code + '.'))) E.push(`${w}: sentence id must start with “${code}.”`);
+        if (old.has(s.id) || seen.has(s.id)) E.push(`${w}: sentence id used twice (choose new ids)`); seen.add(s.id);
+        if (!frames.has(s.frame)) E.push(`${w}: unknown frame “${s.frame}”`);
+        if (!str(s.gloss)) E.push(`${w}: “gloss” is required (the meaning, in the explanation language)`);
+        const toks = Array.isArray(s.tokens) ? s.tokens : [];
+        if (!toks.length) { E.push(`${w}: tokens are required`); continue; }
+        const used = []; let first = true;
+        const one = (k, tw, isFirst) => {
+          const e = lex.get(k.l); if (!e) { E.push(`${tw}: unknown lexeme “${k.l}”`); return; }
+          const x = e.x, forms = x.forms || {}; let want;
+          if (k.f) { const cm = {}; for (const c of Object.keys(forms)) cm[canon(c)] = c; if (!cm[canon(k.f)]) { E.push(`${tw}: “${k.l}” has no cell ${k.f}`); used.push([k.l, k.f]); return; } want = forms[cm[canon(k.f)]]; }
+          else { if (Object.keys(forms).length) { E.push(`${tw}: “${k.l}” is inflected: the cell (f) is required`); used.push([k.l, null]); return; } want = x.lemma; }
+          used.push([k.l, k.f || null]);
+          if (!k.f && (x.alts || []).includes(k.t)) return;
+          if (code === 'ar' && !isFirst && k.t !== want && want.length > 2 && want[0] === 'ا' && 'َُِ'.includes(want[1]) && (k.t === 'ٱ' + want.slice(2) || k.t === 'ا' + want.slice(2))) return;   // hamzat al-waṣl inside a sentence
+          if (k.t !== want && !(isFirst && lj.capitalizeFirst && k.t === capFirst(want))) E.push(`${tw}: “${k.t}” is not the ${k.f || 'lemma'} form of ${k.l} (“${want}”)`);
+        };
+        toks.forEach((k, i) => {
+          const tw = `${w} · token ${i + 1} “${k?.t}”`;
+          if (!isObj(k)) { E.push(`${tw}: a token must be an object`); return; }
+          if (k.p) { if (k.t && '.?!。？！؟'.includes(String(k.t).slice(-1))) first = true; return; }
+          if (k.name) { if (k.l || k.f) E.push(`${tw}: a name has no lexeme (l) and no cell (f)`); first = false; return; }
+          if (k.parts) { if (k.parts.map(p => p.t || '').join('') !== k.t) E.push(`${tw}: the parts do not spell the token`); k.parts.forEach((p, j) => { if (!p.name) one(p, `${tw} · part ${j + 1}`, first && j === 0); }); }
+          else one(k, tw, first);
+          first = false;
+        });
+        if (joinTokens(toks, lj.tokenJoin) !== s.text) E.push(`${w}: text “${s.text}” ≠ the tokens joined “${joinTokens(toks, lj.tokenJoin)}”`);
+        if (only) { const out = used.map(u => u[0]).filter(l => !only.has(l)); if (out.length) E.push(`${w}: uses words the learner does not know yet: ${[...new Set(out)].join(', ')} (a refill uses only the known words listed in the task)`); }
+        if (fn && !(s.functions || []).includes(fn)) E.push(`${w}: must list ${fn} in functions (this task writes sentences for it)`);
+        for (const fid of s.functions || []) {
+          if (!fns.has(fid)) { E.push(`${w}: unknown function “${fid}”`); continue; }
+          const g = grams[fid] || data.langs?.[code]?.grammar?.[fid] || {};
+          if (g.status === 'absent') { E.push(`${w}: ${fid} is absent in ${code}; a sentence cannot show it`); continue; }
+          const ev = g.evidence || {};
+          if (!(ev.tags || ev.lemmas || ev.punct)) { E.push(`${w}: ${fid} has no evidence in its realization (tags, lemmas or punct) yet: a sentence cannot show it`); continue; }
+          let tagsets = ev.tags || []; tagsets = tagsets.length && Array.isArray(tagsets[0]) ? tagsets : tagsets.length ? [tagsets] : [];
+          let ok = used.some(([l]) => (ev.lemmas || []).includes(l)) || used.some(([, f]) => f && tagsets.some(ts => ts.length && ts.every(t => cellParts(f).includes(t)))) || toks.some(k => k.p && (ev.punct || []).includes(k.t));
+          if (ok && used.some(([l]) => (ev.exclude || []).includes(l))) ok = false;
+          if (!ok) E.push(`${w}: listed as ${fid}, but no word shows it (evidence ${JSON.stringify(ev)})`);
+        }
+        if (s.variantOf) { const o = mine.get(s.variantOf) || (data.langs?.[code]?.bank || []).find(x => x.id === s.variantOf); if (!o) E.push(`${w}: variantOf “${s.variantOf}” does not exist`); else if (o.frame !== s.frame) E.push(`${w}: a variant must have the frame of its original`); if (!s.variant) E.push(`${w}: a variant must say what changed (variant)`); }
+      }
+    }
+    function checkCore(E, rec, data, ans, peers) {
+      const langs = data.course.languages, concepts = {}, fns = {}, frames = {}, nodes = {};
+      for (const f of ans.fields || []) {
+        const where = `core/fields/${f?.field}.json`;
+        if (!str(f?.field) || !str(f?.title)) E.push(`${where}: field and title are required`);
+        if (!Array.isArray(f?.sources) || !f.sources.length) E.push(`${where}: “sources” is required: how the list was made complete`);
+        const subs = new Set((f?.subgroups || []).map(s => s.id)), ranks = {};
+        for (const c of f?.concepts || []) {
+          const w = `${where} · ${c?.id}`;
+          if (!str(c?.id)) { E.push(`${where}: a concept without id`); continue; }
+          if (concepts[c.id]) E.push(`${w}: concept id used twice`); concepts[c.id] = { ...c, field: f.field };
+          if (!str(c.gloss)) E.push(`${w}: “gloss” is required (in the explanation language)`);
+          if (subs.size && !subs.has(c.subgroup)) E.push(`${w}: unknown subgroup “${c.subgroup}”`);
+          if (![1, 2, 3].includes(c.tier)) E.push(`${w}: tier must be 1, 2 or 3`);
+          if (!(Number.isInteger(c.rank) && c.rank > 0)) E.push(`${w}: rank must be a positive integer`);
+          else if ((ranks[c.tier] = ranks[c.tier] || new Set()).has(c.rank)) E.push(`${w}: rank ${c.rank} used twice in tier ${c.tier}`); else ranks[c.tier].add(c.rank);
+        }
+      }
+      for (const f of ans.functions || []) {
+        if (!str(f?.id) || fns[f.id]) { E.push(`core/functions: function id missing or used twice (${f?.id})`); continue; }
+        fns[f.id] = f;
+        if (!str(f.title)) E.push(`core/functions/${f.id}.json: “title” is required`);
+        if (!CATS.has(f.category)) E.push(`core/functions/${f.id}.json: category must be one of ${[...CATS].join(', ')} (D19)`);
+      }
+      for (const f of Object.values(fns)) for (const a of f.after || []) if (!fns[a]) E.push(`core/functions/${f.id}.json: unknown function “${a}” in after`);
+      for (const f of ans.frames || []) { if (!str(f?.id) || frames[f.id]) E.push(`core/frames.json: frame id missing or used twice (${f?.id})`); else frames[f.id] = f; if (!str(f?.meaning)) E.push(`core/frames.json · ${f?.id}: “meaning” is required`); }
+      const own = {};
+      for (const n of ans.nodes || []) {
+        const w = `core/nodes.json · ${n?.id}`;
+        if (!str(n?.id)) { E.push('core/nodes.json: a node without id'); continue; }
+        if (nodes[n.id]) E.push(`${w}: node id used twice`); nodes[n.id] = n;
+        if (!str(n.title)) E.push(`${w}: “title” is required`);
+        if (!['core', 'field', 'lesson'].includes(n.kind)) E.push(`${w}: kind must be "core", "field" or "lesson"`);
+        if (!(n.concepts || []).length && n.kind !== 'lesson') E.push(`${w}: a node needs concepts`);
+        if (n.path != null && !TYPES.includes(n.path)) E.push(`${w}: path must be one of ${TYPES.join(', ')}`);
+        if (n.kind === 'lesson') {
+          const fl = n.functions, allf = Array.isArray(fl) ? fl : isObj(fl) ? Object.values(fl).flat() : [];
+          if (isObj(fl)) for (const k of Object.keys(fl)) if (k !== '*' && !TYPES.includes(k) && !langs.includes(k)) E.push(`${w}: functions: “${k}” is not "*", a language type or a course language`);
+          if (!allf.length) E.push(`${w}: a lesson needs its grammar (functions)`);
+          for (const f of allf) if (!fns[f]) E.push(`${w}: unknown function “${f}”`);
+          if (n.step != null && !(Number.isInteger(n.step) && n.step >= 0)) E.push(`${w}: step must be a whole number ≥ 0`);
+        } else if (n.functions) E.push(`${w}: only lessons have functions`);
+        if (n.stage != null && !['foundations', 'core', 'advanced'].includes(n.stage)) E.push(`${w}: stage must be foundations, core or advanced (D17)`);
+        if (n.stage === 'advanced' && !['field', 'grammar', 'lexicon', 'variety', 'text', 'culture'].includes(n.family)) E.push(`${w}: an advanced module names its family (D17)`);
+        for (const x of n.langs || []) if (!langs.includes(x)) E.push(`${w}: “${x}” in langs is not a course language`);
+        (n.concepts || []).forEach((cid, i) => {
+          if (!concepts[cid]) { E.push(`${w}: unknown concept “${cid}”`); return; }
+          if (n.concepts.indexOf(cid) !== i) E.push(`${w}: concept “${cid}” listed twice`);
+          (own[cid] = own[cid] || []).push(n.id);
+          if (n.kind === 'field' && (concepts[cid].field !== n.field || concepts[cid].tier !== n.tier)) E.push(`${w}: concept “${cid}” is ${concepts[cid].field} tier ${concepts[cid].tier}, the node is ${n.field} tier ${n.tier}`);
+        });
+      }
+      for (const n of Object.values(nodes)) for (const p of n.prereqs || []) if (!nodes[p]) E.push(`core/nodes.json · ${n.id}: unknown prerequisite “${p}”`);
+      for (const [cid, c] of Object.entries(concepts)) { if (c.pending && own[cid]) E.push(`concept ${cid}: is pending but node ${own[cid][0]} teaches it: remove "pending"`); else if (!c.pending && !own[cid]) E.push(`concept ${cid}: is in no node (a meaning not taught yet is "pending": true)`); }
+      const state = {}; const visit = (x, path) => { if (state[x] === 1) { E.push('core/nodes.json: cycle: ' + [...path, x].join(' → ')); return; } if (state[x] === 2 || !nodes[x]) return; state[x] = 1; for (const p of nodes[x].prereqs || []) visit(p, [...path, x]); state[x] = 2; };
+      Object.keys(nodes).forEach(x => visit(x, []));
+      // additive: a course that has content keeps every node and concept it had
+      for (const n of data.nodes || []) if (!nodes[n.id]) E.push(`core/nodes.json: node “${n.id}” is missing — the core of a course that has content only grows (progress is kept by its ids)`);
+      for (const c of Object.keys(conceptsOf(data))) if (!concepts[c]) E.push(`concept ${c}: is missing — concepts are never removed`);
+      // the declarations of every language (language.json): from the course, the library, or this answer
+      const decl = {};
+      for (const L of langs) {
+        const lj = ans.languages?.[L] || data.langs?.[L]?.language;
+        if (!isObj(lj)) { E.push(`lang/${L}/language.json: missing — give it in "languages" (code, typology, script, dir, tokenJoin, paradigmCells, citationCells, wordFeatures; its catalogue of phenomena comes first, D14)`); continue; }
+        decl[L] = lj;
+        if (ans.languages?.[L]) {
+          if (lj.code !== L) E.push(`lang/${L}/language.json: code must be “${L}”`);
+          if (!['ltr', 'rtl'].includes(lj.dir)) E.push(`lang/${L}/language.json: dir must be "ltr" or "rtl"`);
+          if (!['space', 'none'].includes(lj.tokenJoin)) E.push(`lang/${L}/language.json: tokenJoin must be "space" or "none"`);
+          if (!TYPES.includes(lj.typology)) E.push(`lang/${L}/language.json: typology must be one of ${TYPES.join(', ')} (D10)`);
+          if (!isObj(lj.paradigmCells)) E.push(`lang/${L}/language.json: paradigmCells is required (the cells every word of a part of speech fills)`);
+          if (!isObj(lj.wordFeatures)) E.push(`lang/${L}/language.json: wordFeatures is required (D14, §4.5.1)`);
+        }
+      }
+      for (const L of Object.keys(ans.languages || {})) if (!langs.includes(L)) E.push(`languages.${L}: not a course language`);
+      // per language: lessons form one chain, a concept is taught at most once
+      for (const L of Object.keys(decl)) {
+        const typ = decl[L].typology, app = new Set(Object.values(nodes).filter(n => applies(n, L, typ)).map(n => n.id));
+        for (const [cid, ns] of Object.entries(own)) { const m = ns.filter(x => app.has(x)); if (m.length > 1) E.push(`core/nodes.json · ${L}: concept “${cid}” is taught twice in ${L}: ${m.join(', ')}`); }
+      }
+      const lessons = Object.values(nodes).filter(n => n.kind === 'lesson');
+      const ty = ans.typology || data.typology;
+      if (lessons.length && !(isObj(ty) && Array.isArray(ty.types) && TYPES.every(t => ty.types.some(x => x.id === t)))) E.push('core/typology.json: the four language types (isolating, agglutinating, fusional, polysynthetic) are required when the course has lessons');
+      // D13: one common order of the subjects — within the course and against the library courses
+      if (!E.length) {
+        const mineData = { course: data.course, nodes: ans.nodes, langs: Object.fromEntries(Object.entries(decl).map(([L, lj]) => [L, { language: lj }])) };
+        const paths = coursePaths(mineData, rec.id);
+        for (const p of peers || []) { try { paths.push(...coursePaths(p)); } catch (e) { } }
+        for (const m of orderConflicts(paths, rec.id + '/')) E.push(`parallel order (D13): ${m} — a subject common to several paths keeps the same place in all of them (docs/LANGUAGES.md §4.4.3)`);
+      }
+    }
+    /** Is this answer good for this task? → [problems] (empty: accepted). peers: the library courses (D13). */
+    function checkAnswer(rec, data, task, ans, { peers = [] } = {}) {
+      if (!isObj(ans)) return ['the answer must be ONE JSON object (not a list, not text)'];
+      const E = shape(SCHEMA[task.kind], ans); if (E.length) return E;
+      if (task.kind === KIND.core) { checkCore(E, rec, data, ans, peers); return E.slice(0, 80); }
+      if (!(data.nodes || []).length) return ['the course has no core yet: its core task comes first'];
+      const code = task.lang, L = data.langs?.[code], lj = L?.language;
+      if (task.kind !== KIND.compare) {
+        if (!L) return [`“${code}” is not a language of this course`];
+        if (!isObj(lj)) return [`lang/${code}/language.json is missing — the course's core task gives it first`];
+      }
+      if (task.kind === KIND.node) {
+        const node = (data.nodes || []).find(n => n.id === task.node); if (!node) return [`node “${task.node}” is not in the course`];
+        if (!applies(node, code, lj.typology)) return [`node ${task.node} does not apply to ${code} (path / langs)`];
+        checkLexemes(E, data, code, task.node, ans.lexicon, lj);
+        const lex = lexIndex(data, code, (ans.lexicon.lexemes || []).filter(isObj).map(x => [x, task.node]), task.node);
+        const grams = isObj(ans.grammar) ? ans.grammar : {};
+        for (const [fid, g] of Object.entries(grams)) checkRealization(E, data, code, fid, g, lj);
+        checkBank(E, data, code, ans.bank || [], lj, { lex, grams, label: `bank/${task.node}.json` });
+      } else if (task.kind === KIND.function) {
+        checkRealization(E, data, code, task.fn, ans.grammar, lj);
+        checkBank(E, data, code, ans.bank || [], lj, { lex: lexIndex(data, code), grams: { [task.fn]: ans.grammar }, fn: task.fn, label: `bank/${task.fn}.json` });
+      } else if (task.kind === KIND.compare) {
+        const c = ans.compare;
+        if (c.function !== task.fn) E.push(`compare/${task.fn}.json: function must be “${task.fn}”`);
+        if (!(data.functions || []).some(f => f.id === task.fn)) E.push(`compare: unknown function “${task.fn}”`);
+        c.rows.forEach((r, i) => {
+          const ks = Object.keys(r.cells || {});
+          if (!str(r.aspect)) E.push(`compare/${task.fn}.json · row ${i + 1}: aspect is required`);
+          for (const k of ks) { if (!data.course.languages.includes(k)) E.push(`compare/${task.fn}.json · row ${i + 1}: “${k}” is not a course language`); else if (!str(r.cells[k])) E.push(`compare/${task.fn}.json · row ${i + 1}: empty cell for ${k}`); }
+          if (ks.length < 2) E.push(`compare/${task.fn}.json · row ${i + 1}: at least two languages side by side`);
+        });
+      } else if (task.kind === KIND.refill) {
+        const only = new Set([...(task.R || []), ...(task.P || [])]);
+        checkBank(E, data, code, ans.bank, lj, { lex: lexIndex(data, code), fn: task.fn, only, label: `bank/refill.json` });
+      }
+      return E.slice(0, 80);
+    }
+
+    /* ---------- merges: additive, by id ---------- */
+    const upsert = (arr, items, key = 'id') => { for (const it of items || []) { const i = arr.findIndex(x => x?.[key] === it?.[key]); if (i >= 0) arr[i] = it; else arr.push(it); } return arr; };
+    /** Apply a checked answer (mutates data — or, for a library course's refill, the patch — and the record) → a log line. */
+    function applyAnswer(rec, data, task, ans, { now = Date.now(), patch = null } = {}) {
+      let line;
+      if (task.kind === KIND.core) {
+        upsert(data.fields, clone(ans.fields), 'field'); upsert(data.nodes, clone(ans.nodes)); upsert(data.functions, clone(ans.functions)); upsert(data.frames, clone(ans.frames));
+        if (ans.typology) data.typology = clone(ans.typology);
+        for (const [L, lj] of Object.entries(ans.languages || {})) if (data.langs[L]) data.langs[L].language = clone(lj);
+        line = `the core: ${ans.nodes.length} nodes, ${ans.fields.reduce((a, f) => a + (f.concepts || []).length, 0)} concepts, ${ans.functions.length} grammar points, ${ans.frames.length} frames`;
+      } else if (task.kind === KIND.node) {
+        const L = data.langs[task.lang], f = L.lexicon[task.node] = L.lexicon[task.node] || { lexemes: [], absent: [] };
+        f.absent = f.absent || []; upsert(f.lexemes, clone(ans.lexicon.lexemes)); upsert(f.absent, clone(ans.lexicon.absent || []), 'concept');
+        for (const [fid, g] of Object.entries(ans.grammar || {})) L.grammar[fid] = clone(g);
+        upsert(L.bank, clone(ans.bank || []));
+        line = `${task.node} in ${nameOf(task.lang)}: ${ans.lexicon.lexemes.length} words, ${(ans.lexicon.absent || []).length} absent, ${(ans.bank || []).length} sentences`;
+      } else if (task.kind === KIND.function) {
+        const L = data.langs[task.lang]; L.grammar[task.fn] = clone(ans.grammar); upsert(L.bank, clone(ans.bank || []));
+        line = `${task.fn} in ${nameOf(task.lang)}: the realization + ${(ans.bank || []).length} sentences`;
+      } else if (task.kind === KIND.compare) {
+        (data.compare = data.compare || {})[task.fn] = clone(ans.compare); line = `${task.fn} compared across ${data.course.languages.length} languages`;
+      } else if (task.kind === KIND.refill) {
+        if (patch) { const P = patch.langs[task.lang] = patch.langs[task.lang] || { bank: [] }; upsert(P.bank, clone(ans.bank)); patch.rev = (patch.rev || 0) + 1; }
+        upsert(data.langs[task.lang].bank, clone(ans.bank));
+        line = `${ans.bank.length} new sentences for ${task.fn} in ${nameOf(task.lang)} with the words you know`;
+      }
+      if (!patch) { data.rev = (data.rev || 0) + 1; rec.rev = data.rev; }
+      const t = (rec.tasks || []).find(x => x.id === task.id && isOpen(x)); if (t) { t.status = 'done'; t.doneAt = iso(now); delete t.claimedAt; }
+      rec.updated = iso(now); (rec.log = rec.log || []).push({ t: now, m: '✓ ' + line }); if (rec.log.length > 200) rec.log = rec.log.slice(-200);
+      return line;
+    }
+    /** The course as it will be once the app has merged the answers waiting in the inbox (the connector works on this). */
+    function merged(rec, data, rows, { peers = [] } = {}) {
+      const r = clone(rec), d = clone(data);
+      for (const row of [...rows].sort((a, b) => String(a.key).localeCompare(String(b.key)))) {
+        let e; try { e = typeof row.value === 'string' ? JSON.parse(row.value) : row.value; } catch (x) { continue; }
+        const t = byId(r, e?.task); if (t && !checkAnswer(r, d, t, e.data, { peers }).length) applyAnswer(r, d, t, e.data);
+      }
+      return { rec: r, data: d };
+    }
+    const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
+    const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
+
+    /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D19 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+- D1 every gloss, rule text, trap and feedback is written in the course's explanation language.
+- D3/D5 correctness over speed: every form, gender, plural, vowel mark, tone and fact is grounded (Wiktionary via kaikki.org — tools/lang_refcheck.py —, CC-CEDICT, reference grammars); leave out what you are not sure of; ref.override only with a reason. You never invent an answer key: exercises are made by the app from the paradigms and sentences you store.
+- D6 UniMorph cells (N;NOM;SG, V;PRS;3;SG) and Universal Dependencies parts of speech.
+- D9 complete thematic word groups that combine with the words already taught (verbs take the nouns taught, adjectives fit them).
+- D10/D13 ONE common order of subjects across every language of every course and every language type: a node, grammar function or concept common to several paths keeps the same place in all of them; type- or language-specific grammar goes inside the common step (functions by "*" / type / code) or into an extra node (path, langs) between the common ones — never a different order for one language.
+- D14 every word states its language's whole facade: features for every parameter of wordFeatures (a value, or {"none": "<why>"}); several words for one concept each give contrasts (one axis per concept).
+- D15 every distinct meaning of a word is its own concept (pending until a node teaches it); a nuance says "of" the sense it belongs to.
+- D16 no built-in point of view: texts describe the language itself, never "unlike English / as in Greek"; comparisons go into notes.
+- D18 every grammar page has comparison notes ({for, rel: same|similar|different|new|trap, text}) for at least 8 languages of the reference set covering all four types: fusional el ru es en fr de hi fa mr ar he · agglutinating tr ja ko fi hu sw lg · isolating zh vi · polysynthetic iu.
+- D19 every word used anywhere is in the lexicon with its full facade; sentences for the other aspects may hold up to ⌈30 %⌉ unknown words; every field brings ≥ 2 sentences for every non-vocabulary node before it.
+- ar and he forms are stored fully vocalized; zh words give pinyin (syllables separated by spaces), trad, and measure words for nouns.`;
+    const fmtForms = x => { const f = x.forms || {}; const ks = Object.keys(f); return ks.length ? ' {' + ks.map(k => `${k}=${f[k]}`).join(', ') + '}' : ''; };
+    /** The words of a language written so far (before a node in course order when `before` is given): one line each, with all forms. */
+    function wordLines(data, code, { before = null, only = null, max = 1500 } = {}) {
+      const { out } = topo(data.nodes || []), stop = before ? out.indexOf(before) : out.length, lines = [];
+      for (const nid of out.slice(0, stop < 0 ? out.length : stop)) for (const x of data.langs?.[code]?.lexicon?.[nid]?.lexemes || []) {
+        if (only && !only.has(x.id)) continue;
+        lines.push(`${x.id} · ${x.lemma} · ${x.pos}${x.gender ? ' ' + x.gender : ''} · ${(x.senses || []).join(', ') || x.role || ''}${fmtForms(x)}`);
+      }
+      return lines.length > max ? lines.slice(0, max).concat([`… and ${lines.length - max} more (in the course file)`]) : lines;
+    }
+    const nodeLine = (n, code, typ) => `${n.id} (${n.kind}${n.stage ? ', ' + n.stage : ''}${n.field ? ', ' + n.field + ' tier ' + n.tier : ''}${n.path ? ', path ' + n.path : ''}${n.langs ? ', only ' + n.langs.join('/') : ''}) — ${n.title}${n.prereqs?.length ? ' · after ' + n.prereqs.join(', ') : ''}${n.kind === 'lesson' ? ' · grammar: ' + (code ? lessonFns(n, code, typ).join(', ') : JSON.stringify(n.functions)) : ''} · ${(n.concepts || []).length} concepts`;
+    /** {id, kind, title, system, prompt, schema} — the prompt says everything but how to deliver the answer. */
+    function taskSpec(rec, data, task, { peers = [], courseUrl = '' } = {}) {
+      const c = data.course, code = task.lang, lj = code ? data.langs?.[code]?.language : null, typ = lj?.typology;
+      const concepts = conceptsOf(data), head = `Course “${c.title}” (${c.id}) · languages: ${c.languages.map(x => `${nameOf(x)} (${x})`).join(', ')} · explanations in ${nameOf(c.explainLang)} (${c.explainLang})${(c.knownLanguages || []).length ? ' · the learner already speaks: ' + c.knownLanguages.join(', ') : ''}`;
+      const system = `You write content for a noema-lite language course (docs/LANGUAGES.md). Correctness first: every form, gender, plural, vowel mark, tone and fact is grounded in reference data. Answer only through the requested JSON structure.`;
+      const frames = (data.frames || []).map(f => `${f.id}: ${f.meaning}`).join('\n') || '(none yet)';
+      const fnsList = (data.functions || []).map(f => `${f.id} (${f.category}) — ${f.title}`).join('\n') || '(none yet)';
+      let title, what, ctx = '';
+      if (task.kind === KIND.core) {
+        title = 'The core of the course: concepts (fields), the node DAG, grammar functions, frames';
+        what = `Write the language-neutral core of this course (docs/LANGUAGES.md §4.1–§4.4, §4.7, §4.8): \`fields\` (core/fields/<field>.json each: field, title, subgroups, sources — how the list was made complete —, concepts {id, gloss, subgroup, tier 1–3, rank, wikidata?, pending?}), \`nodes\` (core/nodes.json: the foundations S00–S18 as lessons fd.00–fd.18 with step, stage and functions by "*" / type / language code, then the core lessons and the field branches with tiers; prerequisites; every non-pending concept in exactly one node), \`functions\` (core/functions/<id>.json: id, title, category, level, after), \`frames\` (core/frames.json: id, meaning), \`typology\` (core/typology.json: the four types, when the course has lessons) and \`languages\` (language.json for every course language that has none below).
+Depth per language: ${Object.entries(c.defaults?.depth || {}).map(([k, v]) => `${k} ${v}`).join(', ')}. Build on the library course: the same node ids, function ids and concept ids for the same subjects, in the same order (D13) — then the check of the parallel order passes. The library course file (with every concept) is ${courseUrl || 'library/languages/<id>/course.pack.js on the noema-lite website'}.`;
+        ctx = (peers || []).map(p => { const tp = topo(p.nodes || []); return `### The common order of the library course “${p.course?.title}” (${p.course?.id}) — keep it\n` + tp.out.map(id => nodeLine(tp.by[id])).join('\n') + `\nFunctions: ${(p.functions || []).map(f => f.id).join(', ')}`; }).join('\n\n');
+        ctx += `\n\n### The languages\n` + c.languages.map(L => `${L}: ${data.langs[L]?.language ? `language.json exists (typology ${data.langs[L].language.typology}) — do not repeat it` : 'NO language.json yet — give it in "languages" (its catalogue of phenomena must exist: library/languages/_phenomena/' + L + '.json, D14)'}`).join('\n');
+      } else if (task.kind === KIND.node) {
+        const n = (data.nodes || []).find(x => x.id === task.node) || { concepts: [] };
+        title = `${n.title} (${task.node}) in ${nameOf(code)}`;
+        what = `Write node ${task.node} in ${nameOf(code)} (${code}): \`lexicon\` = lang/${code}/lexicon/${task.node}.json — a lexeme for every concept of the node (or an "absent" entry with reason and what is said instead), each with id "${code}:<lemma>", lemma, pos, senses (concept ids; every meaning a concept, D15), forms (every cell of paradigmCells for its part of speech; fully vocalized for ar/he), gender, features (the whole facade, D14), contrasts when a concept has several words, ref, and its profile (§4.6) — and \`bank\`: sentences (lang/${code}/bank) that combine the new words with the earlier ones (at least 3 per new content word over the course's frames, variants for negation / questions / plural where the functions allow), every token {t, l, f} equal to its paradigm cell, ids "${code}.${task.node}.001"…, gloss in ${nameOf(c.explainLang)}; list in "functions" only grammar a word of the sentence shows (by the realization's evidence).` + (n.kind === 'lesson' ? ` This is a lesson: give in \`grammar\` the realization of every function of the lesson in ${code} that is not written yet (${lessonFns(n, code, typ).filter(f => !data.langs[code].grammar[f]).join(', ') || 'none'}).` : '');
+        ctx = `### The node\n${nodeLine(n, code, typ)}\nConcepts:\n${(n.concepts || []).map(cid => `- ${cid}: ${concepts[cid]?.gloss || ''}${concepts[cid]?.subgroup ? ' [' + concepts[cid].subgroup + ']' : ''}${concepts[cid]?.note ? ' — ' + concepts[cid].note : ''}`).join('\n')}\n\n### language.json of ${code}\n${JSON.stringify({ typology: lj?.typology, dir: lj?.dir, tokenJoin: lj?.tokenJoin, capitalizeFirst: lj?.capitalizeFirst, vowelMarks: lj?.vowelMarks, paradigmCells: lj?.paradigmCells, citationCells: lj?.citationCells, extraTags: lj?.extraTags, wordFeatures: lj?.wordFeatures })}\n\n### The words of ${code} written before this node (id · lemma · pos · concepts {cell=form})\n${wordLines(data, code, { before: task.node }).join('\n') || '(none yet)'}\n\n### Grammar realized in ${code} (a sentence may list these when a word shows them)\n${Object.entries(data.langs[code].grammar || {}).map(([fid, g]) => `${fid}: ${g.status}; evidence ${JSON.stringify(g.evidence || {})}`).join('\n') || '(none yet)'}`;
+      } else if (task.kind === KIND.function) {
+        const f = (data.functions || []).find(x => x.id === task.fn) || {};
+        title = `${f.title || task.fn} (${task.fn}) in ${nameOf(code)}`;
+        what = `Write the realization of ${task.fn} in ${nameOf(code)}: \`grammar\` = lang/${code}/grammar/${task.fn}.json (function, status realized | periphrastic | absent, summary, blocks, procedure.askYourself, traps, evidence {tags | lemmas | punct, exclude?}, paradigmCells, needs, generators — exercise ids of §6 —, notes for the reference set, D18; an absent point says how the language expresses the meaning instead) — and \`bank\`: at least 12 sentences that show it (each lists ${task.fn} in functions and a word of it shows the evidence), made only of words of the lexicon below.`;
+        ctx = `### The function\n${JSON.stringify(f)}\n\n### language.json of ${code}\n${JSON.stringify({ typology: lj?.typology, tokenJoin: lj?.tokenJoin, paradigmCells: lj?.paradigmCells, extraTags: lj?.extraTags })}\n\n### The words of ${code} (id · lemma · pos · concepts {cell=form})\n${wordLines(data, code).join('\n') || '(none yet)'}${data.langs[code]?.grammar?.[task.fn] ? `\n\n### The realization written so far (improve it, keep what is right)\n${JSON.stringify(data.langs[code].grammar[task.fn])}` : ''}`;
+      } else if (task.kind === KIND.compare) {
+        const f = (data.functions || []).find(x => x.id === task.fn) || {};
+        title = `${f.title || task.fn} (${task.fn}) across the course languages`;
+        what = `Write \`compare\` = compare/${task.fn}.json: {function: "${task.fn}", rows: [{aspect, cells: {<language code>: text}}], notes?} — one row per aspect of the point (form, position, agreement, what it marks, what is absent …), every course language side by side, neutral (D16), examples in the languages themselves.`;
+        ctx = c.languages.map(L => `### ${nameOf(L)} (${L})\n${data.langs[L]?.grammar?.[task.fn] ? JSON.stringify({ status: data.langs[L].grammar[task.fn].status, summary: data.langs[L].grammar[task.fn].summary, traps: data.langs[L].grammar[task.fn].traps }) : '(not written yet)'}`).join('\n\n');
+      } else {
+        const f = (data.functions || []).find(x => x.id === task.fn) || {}, g = data.langs?.[code]?.grammar?.[task.fn] || {};
+        const only = new Set([...(task.R || []), ...(task.P || [])]);
+        title = `More sentences for ${f.title || task.fn} in ${nameOf(code)} with the words the learner knows`;
+        what = `Write \`bank\`: new sentences (at least 12, more is better, all different) for ${task.fn} in ${nameOf(code)} that use ONLY the learner's known words below (§7.4: requirements ⊆ known) — every sentence lists ${task.fn} in functions and a word of it shows the evidence; tokens {t, l, f} equal to the paradigm cells; new ids "${code}.refill.${task.fn.replace(/^fn\./, '')}.${task.n}.001"…; gloss in ${nameOf(c.explainLang)}; frames from the list (the meaning of a frame may be stretched: the frame groups sentences of one pattern).`;
+        ctx = `### The point\n${task.fn}: ${f.title || ''} — ${g.summary || ''}\nevidence: ${JSON.stringify(g.evidence || {})}\nThe learner has ${task.have ?? '?'} usable sentences for it now.\n\n### The learner's known words in ${code} (R: recognized; the ones marked P are also produced)\n${wordLines(data, code, { only }).map(l => (task.P || []).includes(l.split(' · ')[0]) ? l + ' · P' : l).join('\n')}\n\n### language.json\n${JSON.stringify({ tokenJoin: lj?.tokenJoin, capitalizeFirst: lj?.capitalizeFirst })}`;
+      }
+      const prompt = `${head}\nTask ${task.id} (${task.kind})\n\n${RULES}\n\n## What to write\n${what}\n\n## The course\nFrames:\n${frames}\n\nGrammar functions:\n${fnsList}\n\n${ctx}`;
+      return { id: task.id, kind: task.kind, title, system, prompt, schema: SCHEMA[task.kind] };
+    }
+    /** The whole task as text. mode 'connector' (answer with noema_lang_submit) or 'paste' (answer with the JSON only). */
+    /** files: how Claude gets the course file(s) into its sandbox: [{url, name}] (the first one is unpacked; a library course
+        comes as course.pack.js + course.profiles.js; a library course's private patch as patch.json). */
+    function taskText(rec, data, task, { mode = 'connector', files = [], peers = [], libraryUrl = '' } = {}) {
+      const t = taskSpec(rec, data, task, { peers, courseUrl: libraryUrl });
+      const folder = `work/lang/${data.course.id}`, L = task.lang ? ` --lang ${task.lang}` : '';
+      const main = files[0]?.name || 'course.json', patch = files.find(f => f.name === 'patch.json');
+      const get = files.length ? files.map(f => `curl -sSL -o ${f.name} "${f.url}"`).join('\n   ') : `(the learner attaches the course file course-${data.course.id}.json to this chat — save it as course.json)`;
+      const check = `## Check it before you answer (the noema-pack-builder toolkit: the skill, or noema_get_toolkit)
+1. ${get}
+2. python3 scripts/lang_course.py unpack ${main} work/lang${patch ? ' --patch patch.json' : ''}        → the course as a folder: ${folder}
+3. Write your answer as ONE JSON object to answer.json (the structure below), then
+   python3 scripts/lang_course.py apply ${folder} answer.json ${task.id}   (writes it into the folder)
+4. python3 scripts/validate_lang.py ${folder}${L} --alone               → fix every ❌ (warnings about nodes not written yet are fine)
+${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scripts/lang_refcheck.py ${folder}${L}                       → every form against Wiktionary (kaikki.org); explain a deliberate difference in ref.override\n`}6. python3 scripts/lang_course.py answer ${folder} ${task.id} > answer.json   → the answer, read back from the folder`;
+      const how = mode === 'connector'
+        ? `## How to answer\nCall **noema_lang_submit** with course_id "${data.course.id}", task_id "${task.id}" and result_json = the answer (ONE JSON object, no prose, no code fence). It is checked exactly as noema-lite checks it: if it lists problems, fix ALL of them and submit the corrected object again. When it is accepted, call noema_lang_task for the next task.`
+        : `## How to answer\nAnswer with exactly ONE JSON object that matches the JSON Schema below — only the JSON, nothing before or after it. The learner pastes it into noema-lite, which checks it; if it lists problems, fix all of them and send the whole corrected object again.`;
+      return `# noema-lite language task — ${t.title}\n\n## Your role\n${t.system}\n\n${t.prompt}\n\n${check}\n\n${how}\n\n## JSON Schema of the answer\n${JSON.stringify(t.schema)}\nThe full schema of every file: schemas/noema.lang.v1.schema.json in the toolkit; the contract: references/LANGUAGES.md (§4) and the skill's LANGUAGES.md.`;
+    }
+    /** The message the learner pastes into a Claude chat with the connector. */
+    function message(rec, { count = 1 } = {}) {
+      const w = work(rec), n = w.queued.length;
+      return `Use the noema-lite connector to write my noema-lite language course “${rec.title}” (course_id ${rec.id}): ${n ? `do the next ${count > 1 ? Math.min(count, n) + ' queued tasks' : 'queued task'} (${n} waiting)` : 'see what is left to do'}.\nCall noema_lang_task with course_id "${rec.id}" and follow what it returns — check every answer with the toolkit (validate_lang.py, lang_refcheck.py) before noema_lang_submit; after each accepted answer call noema_lang_task again. Stop after ${count > 1 ? count + ' tasks' : 'one task'} or when it says there is nothing left. Do not ask me questions — choose sensible defaults.`;
+    }
+
+    return { LANGJOBS: { FORMAT, DATA, PATCH, IN, CLAIM, LEASE, KIND, SCHEMA, REF },
+      langNewCourseId: newCourseId, langNewCourse: newCourse, langLibraryRecord: libraryRecord, langEmptyPatch: emptyPatch, langApplyPatch: applyPatch,
+      langQueue: queueTask, langOpenTasks: order, langSettle: settle, langWork: work, langTaskById: byId, langNext: next, langNeeds: needs, langQueueNight: queueNight, langRefillRequest: refillRequest,
+      langCoursePaths: coursePaths, langOrderConflicts: orderConflicts, checkLangAnswer: checkAnswer, applyLangAnswer: applyAnswer, langMerged: merged, langInboxKey: inboxKey, langClaimKey: claimKey,
+      langTaskSpec: taskSpec, langTaskText: taskText, langMessage: message, langWordLines: wordLines };
+  })();
   API.GEN = GEN;
+  Object.assign(API, LANG_P8);   // P8 — Through Claude: account courses, tasks, checks, merges
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
