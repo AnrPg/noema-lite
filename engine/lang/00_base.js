@@ -55,7 +55,8 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
 }
 /* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
 /** The languages the learner knows: settings, else the course's known languages as native ones. */
-const knowsL = () => UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }));
+/** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
+const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
 const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */

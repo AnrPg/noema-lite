@@ -7,7 +7,7 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL());
+    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));
     const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
     // D18: a part the learner knows from a native / C2 language is folded into one line
     return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, `✓ familiar from ${from.join(', ')} — show`), body) : body;
@@ -95,7 +95,7 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const k = N.known(UI.C, UI.L, c);
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
   ex.forEach(s => noteNew(c, s.unknown));
-  const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL()) : [];
+  const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
   return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
     h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, `✓ This point works as in ${from.join(', ')}: the parts you know are folded.`) : null,

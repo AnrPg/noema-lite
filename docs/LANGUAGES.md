@@ -839,12 +839,8 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 1. Reviews (R then P), interleaved across languages but grouped by concept; a word with a bridge or false friend in another active language that is due too comes right after it (confusables drilled together, §9.5).
 2. **New batch learned in parallel**: the same 10–15 concepts in each active language one after another (co-located), each language only if the node is open in it.
 3. One grammar function **using the words just learned** (bank + drills): among the trainable, not mastered functions of the open lessons (in the common order), the one with the most items that use the new words; its items count for the function (`practiceFunction`).
-4. Two minutes of reading or a polyglot exercise.
+4. Two minutes of reading or a polyglot exercise: with ≥ 2 languages in the session, one polyglot item (`which_language` or `parallel_align`, alternating by day; the other when one cannot be made from what is known) — `{kind: "poly", items}` in `planSession`; otherwise the 📖 Reading lane of each language (P7).
 5. **Deepening** (P5v): 1–3 items of the §6.2 depth types for words already known (≥ known_r), the words least recently reviewed first (`langcore.deepenPlan`), each recorded as a review of the word (§6.2 “Deepening”).
-3. One grammar function **using the words just learned** (bank + drills).
-4. Two minutes of reading or a polyglot exercise: with ≥ 2 languages in the session, one polyglot item (`which_language` or `parallel_align`, alternating by day; the other when one cannot be made from what is known) — `{kind: "poly", items}` in `planSession`.
-3. One grammar function **using the words just learned** (bank + drills).
-4. Two minutes of reading or a polyglot exercise (the 📖 Reading lane of each language; P7).
 6. **Listening and speaking** (P9): after the new words, up to two items in today's languages that have a voice on the device
    (taking turns by day): one listening item (`listen_pick`, `listen_meaning` or a word `dictation`, rotating by day) and one
    speaking item (`speak`, or `shadowing` without recognition); none on a day marked “I can't listen / speak now” (`langcore.speechPlan`).
@@ -882,7 +878,6 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   refused), the three ways to get it done (▶ with the Claude key on this device · 💬 the message for the Claude app with
   the connector · 📋 copy the task and paste the answer), 🌙 queue every unwritten node for the night, and 🔄 fetch the
   answers the connector left. An account course without its core opens on this page.
-* **Tutor**: language context (function or node + language), known vocabulary of the language (capped list), rule "use known words; at most one new word per sentence, glossed"; intents per button (explain this rule, compare the languages, quiz this node, a conversation with only known words). The 💡 on any part works as elsewhere.
 * **🔊 Listening everywhere** (P9): a 🔊 after the head of every word card, every example and bank sentence shown (word card,
   grammar page and lesson screens, the reader — with ▶ the whole text —, the compare lane and the polyglot views) and, inside
   exercises, after the intro of a new word and in the feedback only (never on a prompt it would give away); `r` replays the

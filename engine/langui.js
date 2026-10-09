@@ -59,7 +59,8 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
 }
 /* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
 /** The languages the learner knows: settings, else the course's known languages as native ones. */
-const knowsL = () => UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }));
+/** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
+const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
 const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
@@ -688,7 +689,7 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL());
+    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));
     const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
     // D18: a part the learner knows from a native / C2 language is folded into one line
     return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, `✓ familiar from ${from.join(', ')} — show`), body) : body;
@@ -776,7 +777,7 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const k = N.known(UI.C, UI.L, c);
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
   ex.forEach(s => noteNew(c, s.unknown));
-  const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL()) : [];
+  const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
   return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
     h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, `✓ This point works as in ${from.join(', ')}: the parts you know are folded.`) : null,
