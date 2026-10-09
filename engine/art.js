@@ -235,6 +235,479 @@ window.NoemaArt = (() => {
     _: (N, c) => '<rect x="140" y="140" width="20" height="80" rx="8" fill="var(--deco2)" stroke="var(--t2i)" stroke-width="1" opacity=".9"/><ellipse cx="150" cy="105" rx="122" ry="84" fill="var(--t1)"/>' + c.scatter(150, 105, 110, 72, N, 15) + '<ellipse cx="150" cy="222" rx="70" ry="6" fill="var(--line)"/>',
   });
   Object.assign(CAP, { puss: 64, jack: 28, heron: 31, _: 90 });
+  /* ---- the nine serious characters of 2026-10-09: two philologists, two tech nerds, two maths-and-physics scientists, two
+     biochemists and the polyglot Hydra (drawings approved in mockup v2). Adult proportions and flat two-tone shading like
+     wolf, eagle, robot and heron; each profession's props stand beside the character wherever it appears. ---- */
+  {
+    const S = {
+      shadow: (rx = 24) => `<ellipse cx="60" cy="101" rx="${rx}" ry="4.2" fill="#000" opacity=".07"/>`,
+      legs: (c, shoe, top = 70) => `<path d="M49 ${top} L59.5 ${top} L59 97 L50 97Z" fill="${c}"/><path d="M60.5 ${top} L71 ${top} L70 97 L61 97Z" fill="${c}"/><path d="M60.5 ${top} L71 ${top} L70 97 L61 97Z" fill="#000" opacity=".08"/>
+        <path d="M49.6 96 L59.4 96 L59.4 100.4 L45.8 100.4 Q45.4 97.6 49.6 96Z" fill="${shoe}"/><path d="M60.6 96 L70.4 96 Q74.6 97.6 74.2 100.4 L60.6 100.4Z" fill="${shoe}"/>`,
+      torso: (c, bottom = 72) => `<path d="M48 41 Q48.5 35.5 54 34.5 L66 34.5 Q71.5 35.5 72 41 L73 ${bottom} L47 ${bottom}Z" fill="${c}"/><path d="M60 34.5 L66 34.5 Q71.5 35.5 72 41 L73 ${bottom} L60 ${bottom}Z" fill="#000" opacity=".07"/>`,
+      neck: skin => `<path d="M56.8 27 h6.4 v8.6 h-6.4Z" fill="${skin}"/><path d="M56.8 29 h6.4 v3.2 Q60 34 56.8 32.2Z" fill="#000" opacity=".1"/>`,
+      face: skin => `<ellipse cx="51.6" cy="20.4" rx="1.9" ry="2.8" fill="${skin}"/><ellipse cx="68.4" cy="20.4" rx="1.9" ry="2.8" fill="${skin}"/>
+        <path d="M51.5 17 C51.5 10 55 8 60 8 C65 8 68.5 10 68.5 17 L68.5 21 C68.5 27 65 31 60 31 C55 31 51.5 27 51.5 21Z" fill="${skin}"/>
+        <path d="M60 8 C65 8 68.5 10 68.5 17 L68.5 21 C68.5 27 65 31 60 31Z" fill="#000" opacity=".045"/>`,
+      feat: (o = {}) => { const e = o.eye || '#2a2522', b = o.brow || '#3a2c26', n = o.nose || 'rgba(120,60,40,.45)', m = o.mouth || '#8a4a3e';
+        return `<path d="M53.6 16.9 Q55.8 15.7 58 16.6 M62 16.6 Q64.2 15.7 66.4 16.9" stroke="${b}" stroke-width="${o.bw || 1}" fill="none" stroke-linecap="round"/>
+        <g class="eye"><ellipse cx="56" cy="19.9" rx="1" ry="1.3" fill="${e}"/><ellipse cx="64" cy="19.9" rx="1" ry="1.3" fill="${e}"/></g>
+        <path d="M54.4 18.6 Q56 18 57.6 18.6 M62.4 18.6 Q64 18 65.6 18.6" stroke="${e}" stroke-width=".45" fill="none" opacity=".6"/>
+        <path d="M60.3 20.2 Q59 23.6 60.7 24.2" stroke="${n}" stroke-width=".8" fill="none" stroke-linecap="round"/>
+        <path d="${o.smile || 'M57.8 27.1 Q60 28.3 62.2 27.1'}" stroke="${m}" stroke-width=".95" fill="none" stroke-linecap="round"/>`; },
+      arm: (d, c, w = 5.4) => `<path d="${d}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+      hand: (x, y, c, rx = 2.4, ry = 2.9) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${c}"/>`,
+      coat: (inner, bottom = 84) => `<path d="M48 41 Q48.5 35.5 54 34.5 L66 34.5 Q71.5 35.5 72 41 L74 ${bottom} L46 ${bottom}Z" fill="#f4f4f0"/><path d="M60 34.5 L66 34.5 Q71.5 35.5 72 41 L74 ${bottom} L60 ${bottom}Z" fill="#000" opacity=".05"/>
+        <path d="M56 34.5 L60 50 L64 34.5Z" fill="${inner}"/><path d="M56 34.5 L58.8 52 L56.6 ${bottom} M64 34.5 L61.2 52 L63.4 ${bottom}" stroke="#d3d3cb" stroke-width=".8" fill="none"/>
+        <path d="M55.8 34.6 L53.6 39 L58.4 44Z M64.2 34.6 L66.4 39 L61.6 44Z" fill="#e6e6df"/>
+        <rect x="64.6" y="45" width="5" height="4" rx=".6" fill="#e9e9e2"/><path d="M65.6 43.4v2.4M67.2 43v2.8" stroke="#5f84b0" stroke-width=".8"/><path d="M68.6 43.4v2.4" stroke="#c0504e" stroke-width=".8"/>
+        <rect x="49" y="62" width="6.4" height="5.2" rx=".8" fill="#e9e9e2"/>`,
+    };
+    const svgM = inner => `<svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" role="img">${inner}</svg>`;
+    const txt = (x, y, s, fill, t, fam, extra = '') => `<text x="${x}" y="${y}" font-size="${s}" fill="${fill}" font-family="'${fam}',serif" ${extra}>${t}</text>`;
+
+    const ART = {};
+
+    ART.litM = () => { const sk = '#efcfb3';
+      return svgM(`${S.shadow()}
+      ${S.legs('#4a4a52', '#5a3a26')}
+      ${S.torso('#8a6a4c')}
+      <path d="M56 34.5 L60 47 L64 34.5Z" fill="#e9dcc3"/><path d="M57 34.5 L60 38.6 L58 40Z M63 34.5 L60 38.6 L62 40Z" fill="#fff"/>
+      <path d="M56 34.5 L58.6 52 M64 34.5 L61.4 52" stroke="#6e523a" stroke-width="1" fill="none"/>
+      <circle cx="60" cy="56" r=".9" fill="#5a4230"/><circle cx="60" cy="62" r=".9" fill="#5a4230"/>
+      <path d="M54 66 h4 M62 66 h4" stroke="#6e523a" stroke-width=".8"/>
+      <path d="M66.5 35.5 L51 63" stroke="#5a3f2b" stroke-width="1.8"/>
+      ${S.arm('M49 38.5 Q45.5 48 46.2 62', '#8a6a4c')}<ellipse cx="45.6" cy="52" rx="1.6" ry="2.6" fill="#6e523a"/>
+      <rect x="40.5" y="60" width="12" height="10.5" rx="1.6" fill="#6e4e34"/><path d="M40.5 60 h12 v4.4 q-6 2.4 -12 0Z" fill="#7d5a3e"/><rect x="45.6" y="63.4" width="1.8" height="2.2" rx=".4" fill="#c9a65a"/>
+      ${S.hand(46.6, 64.4, sk)}
+      ${S.arm('M71 38.5 Q76.5 46 72 55', '#8a6a4c')}
+      <path d="M61 52.4 L67.6 51 L68 59.6 L61.6 61.2Z" fill="#7a3e2e"/><path d="M67.6 51 L74.4 49.6 L74.8 58.2 L68 59.6Z" fill="#7a3e2e"/>
+      <path d="M61.6 52 L67.6 50.6 L68 59 L62.2 60.4Z" fill="#faf5ea"/><path d="M67.6 50.6 L73.8 49.2 L74.2 57.6 L68 59Z" fill="#f2ebdc"/>
+      <path d="M62.8 53.6 l3.8 -.9 M62.9 55.4 l3.8 -.9 M63 57.2 l3.2 -.75 M69 52.4 l3.6 -.8 M69.1 54.2 l3.6 -.8 M69.2 56 l3.2 -.7" stroke="#bdb09a" stroke-width=".5"/>
+      ${S.hand(71.4, 59.6, sk)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M50.4 19.4 C48.6 9 54 4.4 61 4.8 C68.4 5.2 71.4 10 69.8 18.4 C68.8 14 66.4 11.6 62.6 12.2 C59 12.6 55.4 10.6 53.2 13.2 C51.9 14.8 51.4 17 50.4 19.4Z" fill="#6b4a32"/>
+      <path d="M55.6 6.4 C60 5.6 64.6 8.2 65.6 12.4 C62.4 10.6 58.4 10.4 55.6 6.4Z" fill="#5a3c28"/><path d="M58 5.4 Q64 4.6 68 9" stroke="#80593d" stroke-width=".7" fill="none"/>
+      ${S.feat({ brow: '#4f3524' })}
+      <circle cx="56" cy="20" r="2.9" stroke="#5a3b26" stroke-width=".85" fill="#fff" fill-opacity=".12"/><circle cx="64" cy="20" r="2.9" stroke="#5a3b26" stroke-width=".85" fill="#fff" fill-opacity=".12"/>
+      <path d="M58.9 19.6 Q60 18.9 61.1 19.6 M53.1 19.4 L51 18.6 M66.9 19.4 L69 18.6" stroke="#5a3b26" stroke-width=".8" fill="none"/>`); };
+
+    ART.litF = () => { const sk = '#f2d2bc';
+      return svgM(`${S.shadow()}
+      <rect x="51" y="86" width="7.6" height="11" fill="#3b3644"/><rect x="61.4" y="86" width="7.6" height="11" fill="#34303c"/>
+      <path d="M50 96 L58.6 96 L58.6 100.4 L46.4 100.4 Q46 97.6 50 96Z" fill="#7a3b3b"/><path d="M61.4 96 L70 96 Q74 97.6 73.6 100.4 L61.4 100.4Z" fill="#7a3b3b"/>
+      <path d="M48 70 L72 70 L74.5 89 L45.5 89Z" fill="#4a4a5e"/><path d="M60 70 L72 70 L74.5 89 L60 89Z" fill="#000" opacity=".08"/><path d="M54 72 L52.6 88 M66 72 L67.4 88" stroke="#3d3d50" stroke-width=".7"/>
+      <path d="M48 41 Q48.5 35.5 54 34.5 L66 34.5 Q71.5 35.5 72 41 L73.5 80 L46.5 80Z" fill="#7f9a8a"/><path d="M60 34.5 L66 34.5 Q71.5 35.5 72 41 L73.5 80 L60 80Z" fill="#000" opacity=".07"/>
+      <path d="M56.4 35 L63.6 35 L63.2 70 L56.8 70Z" fill="#f3eee3"/><path d="M56.4 35 L57 80 M63.6 35 L63 80" stroke="#6b8576" stroke-width=".9"/>
+      <path d="M48.6 74 h7 M64.4 74 h7" stroke="#6b8576" stroke-width=".6"/>
+      <path d="M53.6 33 Q60 37.6 66.4 33 L67 35.8 Q60 40.4 53 35.8Z" fill="#d4a64a"/><path d="M62 36.4 L64.6 50 L61.6 50.6 L60 37.4Z" fill="#c4963d"/><path d="M61.8 49.6 l.4 1.6 M63 49.4 l.5 1.6 M64.2 49.2 l.5 1.5" stroke="#c4963d" stroke-width=".5"/>
+      ${S.arm('M49 38.5 Q44.4 49 51.6 55.6', '#7f9a8a')}${S.arm('M71 38.5 Q75.6 49 68.4 55.6', '#7f9a8a')}
+      <rect x="51.6" y="47.6" width="16.4" height="3.8" rx=".5" fill="#6a6f9e"/><rect x="52.6" y="51.4" width="15.4" height="3.8" rx=".5" fill="#c98b6b"/><rect x="51.2" y="55.2" width="17" height="3.8" rx=".5" fill="#5f8573"/>
+      <path d="M53.4 48.4v2.2M54.4 52.2v2.2M53 56v2.2" stroke="#f3eee3" stroke-width=".7"/>
+      ${S.hand(52, 54.6, sk)}${S.hand(68, 54.6, sk)}
+      <circle cx="60" cy="5.6" r="4" fill="#8f4730"/>
+      <path d="M54 3.2 L67.2 8" stroke="#e8c25a" stroke-width="1.2"/><path d="M54 3.2 L52.4 2.6" stroke="#f0d9b0" stroke-width="1.2"/>
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M50.4 21 C49.4 9.4 54 5 60 5 C66 5 70.6 9.4 69.6 21 C68.4 14.4 64.4 11.6 60 11.8 C56.4 11.6 53.6 13.6 52.6 15.4 C51.8 17 51 19 50.4 21Z" fill="#9a4f34"/>
+      <path d="M60 5.2 Q55 6 53.4 11 M60 5.2 Q65.6 6 67.6 11.6" stroke="#b5664a" stroke-width=".55" fill="none"/>
+      <path d="M51 17.6 Q50 25.6 52.6 29.4" stroke="#9a4f34" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      ${S.feat({ brow: '#7a3a26', bw: .85, smile: 'M57.8 27 Q60 28.6 62.2 27' })}
+      <path d="M53 18.8 Q55.8 17.8 58.6 18.6 Q58.8 22.2 56 22.4 Q53.4 22.3 53.2 20.4 Q52.4 18.8 51.6 17.8Z M67 18.8 Q64.2 17.8 61.4 18.6 Q61.2 22.2 64 22.4 Q66.6 22.3 66.8 20.4 Q67.6 18.8 68.4 17.8Z" stroke="#7a3f5c" stroke-width=".8" fill="#fff" fill-opacity=".12" stroke-linejoin="round"/>
+      <path d="M58.6 19.2 Q60 18.6 61.4 19.2" stroke="#7a3f5c" stroke-width=".7" fill="none"/>
+      <path d="M51.8 18.6 Q49.6 27 54.6 35 M68.2 18.6 Q70.4 27 65.4 35" stroke="#c9a65a" stroke-width=".6" stroke-dasharray=".6 .9" fill="none"/>`); };
+
+    ART.techM = () => { const sk = '#f1d9c6';
+      return svgM(`${S.shadow()}
+      ${S.legs('#465676', '#ecebe6')}<path d="M47 98.6 h12 M61 98.6 h12" stroke="#2f7d6b" stroke-width=".8"/>
+      ${S.torso('#5c636b')}
+      <path d="M51.6 34.6 Q60 40.4 68.4 34.6 Q66.4 31 60 31.6 Q53.6 31 51.6 34.6Z" fill="#4a5058"/>
+      <path d="M57.4 37.4 L57 46 M62.6 37.4 L63 46" stroke="#d9dbdd" stroke-width=".7" stroke-linecap="round"/>
+      <path d="M51.6 58.6 L68.4 58.6 L70.6 68.6 L49.4 68.6Z" fill="#000" opacity=".09"/><path d="M47.2 70 h25.6" stroke="#4a5058" stroke-width="2"/>
+      <path d="M52 32.6 Q60 40 68 32.6" stroke="#222" stroke-width="1.6" fill="none"/><rect x="49.2" y="30" width="4.2" height="6.2" rx="1.6" fill="#222"/><rect x="66.6" y="30" width="4.2" height="6.2" rx="1.6" fill="#222"/><rect x="50" y="31" width="2" height="4" rx=".8" fill="#2f7d6b"/>
+      ${S.arm('M71 38.5 Q77.4 47 76.6 56', '#5c636b')}
+      <rect x="59.4" y="42" width="20" height="13.6" rx="1.2" fill="#3a4148"/><rect x="60.4" y="43" width="18" height="11.2" rx=".6" fill="#22302e"/>
+      ${[[61.6, 44.6, 5, '#7fd1a8'], [67.2, 44.6, 3, '#e3c56b'], [62.6, 46.6, 7.4, '#8ab4e8'], [62.6, 48.6, 4.8, '#7fd1a8'], [68, 48.6, 4, '#d98f8f'], [61.6, 50.6, 2.6, '#e3c56b'], [62.6, 52.4, 9, '#8ab4e8']].map(([x, y, w, c]) => `<rect x="${x}" y="${y}" width="${w}" height=".9" rx=".45" fill="${c}"/>`).join('')}
+      <path d="M58.2 55.6 L80.6 55.6 L82.2 58.4 L56.6 58.4Z" fill="#b8bfc6"/><path d="M60 56.6 h20" stroke="#9aa2aa" stroke-width=".5" stroke-dasharray="1 .6"/>
+      ${S.hand(77, 59, sk)}
+      ${S.arm('M49 38.5 Q46.4 51 58.6 56', '#5c636b')}${S.hand(60, 56.2, sk, 2.6, 2.2)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M53 25 Q54 30.6 60 31 Q66 30.6 67 25 Q65.4 28.8 60 29 Q54.6 28.8 53 25Z" fill="#3a302c" opacity=".14"/>
+      <path d="M50.4 19.4 C49.4 10 53 5.6 57 5.6 L56.2 3.6 L59.4 5.4 L61 3 L62.6 5.4 L66 4 L65.6 6.8 C69 8.2 70.6 12 69.6 19 C68.2 14.2 65.2 12.6 61 13 C57 13.4 53.2 13 50.4 19.4Z" fill="#2f2a28"/>
+      ${S.feat({ brow: '#2f2a28', bw: 1.05, smile: 'M57.6 27.2 Q60.4 28.4 62.6 26.6' })}
+      <path d="M54.4 22.4 Q56 23.2 57.6 22.4 M62.4 22.4 Q64 23.2 65.6 22.4" stroke="#c9a693" stroke-width=".5" fill="none"/>
+      <rect x="52.7" y="17.6" width="6.6" height="4.8" rx="1" stroke="#1e1e1e" stroke-width="1.1" fill="#fff" fill-opacity=".12"/><rect x="60.7" y="17.6" width="6.6" height="4.8" rx="1" stroke="#1e1e1e" stroke-width="1.1" fill="#fff" fill-opacity=".12"/>
+      <path d="M59.3 19.6 h1.4 M52.7 19 L51 18.4 M67.3 19 L69 18.4" stroke="#1e1e1e" stroke-width="1"/>`); };
+
+    ART.techF = () => { const sk = '#d8a77f';
+      return svgM(`${S.shadow()}
+      <path d="M66 8 Q77 10 76 23 Q75 31 70.6 35 Q72.6 23 66.6 14.6Z" fill="#2d2626"/><path d="M68 11 Q74 14 73.4 24" stroke="#463c3a" stroke-width=".6" fill="none"/>
+      ${S.legs('#3f4a63', '#f0efe9')}<path d="M47 98.6 h12 M61 98.6 h12" stroke="#9d86d6" stroke-width=".8"/>
+      ${S.torso('#6e8c96')}
+      <g stroke="#fff" stroke-opacity=".22" stroke-width=".5"><path d="M48 46 h7.6 M48 53 h7.6 M47.6 60 h8 M47.4 67 h8.2 M64.4 46 h7.6 M64.4 53 h7.6 M64.4 60 h8 M64.4 67 h8.2"/><path d="M51.6 36 V72 M68.4 36 V72"/></g>
+      <path d="M55.6 34.8 L64.4 34.8 L64 72 L56 72Z" fill="#b4a3dd"/><path d="M57.4 34.8 Q60 37 62.6 34.8" stroke="#9d86d6" stroke-width=".8" fill="none"/>
+      ${txt(60, 50, 4.8, '#fff', '{ }', 'Fira Code', 'text-anchor="middle" font-weight="700"')}
+      <path d="M55.6 34.8 L53.4 38.6 L56.4 41 M64.4 34.8 L66.6 38.6 L63.6 41" stroke="#5b7680" stroke-width=".9" fill="none"/>
+      ${S.arm('M49 38.5 Q42.6 48 49.2 58', '#6e8c96')}${S.hand(50, 59, sk)}
+      ${S.arm('M71 38.5 Q77.6 45.6 72.6 51.6', '#6e8c96')}
+      <path d="M71.4 44.2 q-1 -2 0 -3.6 M74 43.8 q-1 -2 0 -3.8" stroke="#cfc8dd" stroke-width=".6" fill="none" class="bob"/>
+      <rect x="70" y="45.6" width="7" height="7.4" rx="1" fill="#fff" stroke="#d9d3e6" stroke-width=".6"/><path d="M77 47.4 q2.6 0 2.6 2 q0 2 -2.6 2" stroke="#d9d3e6" stroke-width="1" fill="none"/>
+      ${txt(73.5, 50.6, 2.8, '#7b5cc4', '&lt;/&gt;', 'Fira Code', 'text-anchor="middle" font-weight="700"')}
+      ${S.hand(71.6, 52.4, sk)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M50.4 20 C49.4 9 54.4 5 60 5 C66 5 70.6 9 69.6 18 C67.2 12.4 63.4 11 59.2 11.6 C55.6 12 53 14.6 50.4 20Z" fill="#2d2626"/><path d="M50.6 18 Q50 25 52.2 28.6" stroke="#2d2626" stroke-width="1.2" fill="none"/>
+      <circle cx="67.4" cy="9.4" r="1.2" fill="#b49be6"/>
+      <path d="M50 20 Q50 3.4 60 3.4 Q70 3.4 70 20" stroke="#3a3a48" stroke-width="1.4" fill="none"/><rect x="48.4" y="17" width="3.6" height="6.4" rx="1.4" fill="#3a3a48"/><rect x="49" y="18" width="1.6" height="4.4" rx=".7" fill="#b49be6"/>
+      <path d="M50.6 22.6 Q51.6 28.2 56.4 27.8" stroke="#3a3a48" stroke-width=".9" fill="none"/><circle cx="57" cy="27.8" r=".9" fill="#b49be6"/>
+      ${S.feat({ brow: '#2d2626', bw: .85, nose: 'rgba(110,60,30,.5)', mouth: '#7a3a30', smile: 'M58 27 Q60.4 28.6 62.6 27' })}
+      <circle cx="56" cy="20" r="2.6" stroke="#5b4f73" stroke-width=".7" fill="#fff" fill-opacity=".12"/><circle cx="64" cy="20" r="2.6" stroke="#5b4f73" stroke-width=".7" fill="#fff" fill-opacity=".12"/><path d="M58.6 19.8 Q60 19.2 61.4 19.8" stroke="#5b4f73" stroke-width=".6" fill="none"/>`); };
+
+    const atomS = (cx, cy, rx, orbit, n1, n2) => `<g transform="translate(${cx} ${cy})"><g class="spin">${[0, 60, -60].map(a => `<g transform="rotate(${a})"><ellipse rx="${rx}" ry="${rx * .36}" stroke="${orbit}" stroke-width=".9" fill="none"/><circle cx="${rx}" cy="0" r="1.3" fill="${orbit}"/></g>`).join('')}</g><circle cx="-1" cy="-.6" r="1.7" fill="${n1}"/><circle cx="1" cy=".8" r="1.7" fill="${n1}"/><circle cx=".9" cy="-1.1" r="1.6" fill="${n2}"/><circle cx="-.9" cy="1.1" r="1.6" fill="${n2}"/></g>`;
+
+    ART.physM = () => { const sk = '#ecc9aa';
+      return svgM(`${S.shadow()}
+      ${atomS(99, 58, 13, '#6e95c8', '#e28b6b', '#8fb3e0')}
+      ${S.legs('#55595f', '#3a2f28')}
+      ${S.torso('#cfdbe8')}
+      <path d="M49.4 39.4 L54.6 35 L60 47.6 L65.4 35 L70.6 39.4 L72 72 L48 72Z" fill="#3d4f6e"/><path d="M60 47.6 L65.4 35 L70.6 39.4 L72 72 L60 72Z" fill="#000" opacity=".1"/>
+      <path d="M49 69 h22" stroke="#33445f" stroke-width="1.6"/>
+      <path d="M59.2 36.6 L60.8 36.6 L61.6 45.6 L60 47.8 L58.4 45.6Z" fill="#a85a4a"/><path d="M56.4 34.4 L60 37.6 L57.4 39.2Z M63.6 34.4 L60 37.6 L62.6 39.2Z" fill="#e6edf5"/>
+      <circle cx="63" cy="50" r=".5" fill="#fff" opacity=".6"/><circle cx="66" cy="47" r=".4" fill="#fff" opacity=".6"/>
+      ${S.arm('M49 38.5 Q45.6 44 45.6 49', '#cfdbe8', 5.8)}${S.arm('M45.6 50 Q45.4 56 46 62', sk, 4.4)}<path d="M43 49 h5.4" stroke="#b9c8da" stroke-width="2.4" stroke-linecap="round"/>
+      <rect x="41.4" y="58" width="6.6" height="9" rx=".6" fill="#2f3a4c" transform="rotate(-6 44.6 62.4)"/><path d="M42.6 60 h4.2 M42.6 61.6 h4.2" stroke="#e8c25a" stroke-width=".5" transform="rotate(-6 44.6 62.4)"/>
+      ${S.hand(46.2, 64, sk)}
+      ${S.arm('M71 38.5 Q76.4 36 77.4 31', '#cfdbe8', 5.8)}<path d="M75 31.2 h5" stroke="#b9c8da" stroke-width="2.4" stroke-linecap="round"/>${S.arm('M77.5 30 L78 25', sk, 3.8)}
+      <rect x="77.6" y="17" width="1.8" height="5.2" rx=".5" fill="#fff" stroke="#b9b9b0" stroke-width=".4" transform="rotate(16 78.5 19.6)"/><circle cx="82" cy="18" r=".5" fill="#c9c9c0"/><circle cx="83.4" cy="20.6" r=".4" fill="#c9c9c0"/>${S.hand(78.2, 23.6, sk, 2.3, 2.6)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M53 25 Q54 30.6 60 31 Q66 30.6 67 25 Q65.4 28.8 60 29 Q54.6 28.8 53 25Z" fill="#2f2622" opacity=".1"/>
+      <path d="M51 18.4 C50.4 10 54.6 7 60 7 C65.4 7 69.6 10 69 18.4 C67.4 14.2 64 12.8 60 13 C56 12.8 52.8 14.2 51 18.4Z" fill="#2f2622"/>
+      ${[[52, 13.2], [54.4, 9.4], [57.8, 7.2], [61.8, 6.8], [65.6, 8.4], [68.2, 12.4], [50.8, 17], [69.3, 16.4], [56, 11.2], [63.6, 10.6]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.6" fill="#2f2622"/>`).join('')}
+      <path d="M55 8.6 q1.4 -1 2.6 0 M61 7.8 q1.4 -1 2.6 .2 M66 10.4 q1.2 -.6 2 .6" stroke="#4a3d36" stroke-width=".5" fill="none"/>
+      ${S.feat({ brow: '#2f2622', bw: 1.05 })}`); };
+
+    ART.physF = () => { const sk = '#ebc3a0';
+      return svgM(`${S.shadow()}
+      ${atomS(22, 56, 12, '#b07ab8', '#e28b6b', '#8fb3e0')}
+      <path d="M50 22 C49 9 54 4.8 60 4.8 C66 4.8 71 9 70 22 L70.6 28.6 Q67.6 30.2 65.6 28.2 L54.4 28.2 Q52.4 30.2 49.4 28.6Z" fill="#3b2b2b"/>
+      ${S.legs('#48506a', '#7a3b3b')}
+      ${S.coat('#34446a')}
+      <rect x="56.6" y="30.4" width="6.8" height="4.6" rx="1.6" fill="#34446a"/><path d="M57 32.6 h6" stroke="#2b3958" stroke-width=".5"/>
+      ${S.arm('M49 38.5 Q45.4 50 46 62', '#f4f4f0')}
+      <rect x="41.2" y="57.6" width="7" height="9" rx=".6" fill="#e8c25a" transform="rotate(-6 44.6 62)"/><path d="M42.6 60 h4.4 M42.6 61.8 h4.4 M42.6 63.6 h3" stroke="#b08f3a" stroke-width=".5" transform="rotate(-6 44.6 62)"/>
+      ${S.hand(46.2, 64, sk)}
+      <path d="M75 55 L92 30" stroke="#8a6a4a" stroke-width="1.2" stroke-linecap="round"/><circle cx="92" cy="30" r=".9" fill="#3a2a1a"/>
+      ${S.arm('M71 38.5 Q76.6 46 75 54.4', '#f4f4f0')}${S.hand(75, 56, sk)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M51 17.4 C51 9.6 55 6.4 60 6.4 C65 6.4 69 9.6 69 17.4 L68.4 14.6 L51.6 14.6Z" fill="#3b2b2b"/><path d="M54 14.6 l.6 -4 M58 14.6 l.2 -5 M62 14.6 l-.2 -5 M66 14.6 l-.6 -4" stroke="#4d3a3a" stroke-width=".5"/>
+      <path d="M69.2 15.6 L74 11" stroke="#e8c25a" stroke-width="1.1"/><path d="M74 11 L75 10" stroke="#f0d9b0" stroke-width="1.1"/>
+      ${S.feat({ brow: '#3b2b2b', bw: .85, smile: 'M57.8 27 Q60 28.5 62.2 27' })}
+      <circle cx="56" cy="20" r="3.2" stroke="#6b5b8e" stroke-width=".9" fill="#fff" fill-opacity=".12"/><circle cx="64" cy="20" r="3.2" stroke="#6b5b8e" stroke-width=".9" fill="#fff" fill-opacity=".12"/><path d="M59.2 19.6 Q60 19 60.8 19.6" stroke="#6b5b8e" stroke-width=".8" fill="none"/>`); };
+
+    ART.bioM = () => { const sk = '#f1d1b6';
+      return svgM(`${S.shadow()}
+      ${S.legs('#5a5146', '#4a3426')}
+      ${S.coat('#6f9a57')}
+      <path d="M57 34.6 L60 38.6 L58 40.4Z M63 34.6 L60 38.6 L62 40.4Z" fill="#5d8648"/>
+      ${S.arm('M49 38.5 Q45.4 50 46 62', '#f4f4f0')}
+      <rect x="44.6" y="52.4" width="2.6" height="10.4" rx="1.3" fill="#fff" stroke="#c9d3d8" stroke-width=".4"/><path d="M44.8 57.6 h2.2 v4.2 q0 1 -1.1 1 q-1.1 0 -1.1 -1Z" fill="#e48fb0"/>
+      ${S.hand(46.2, 63.6, sk)}
+      ${S.arm('M71 38.5 Q77 44.6 75.4 51.4', '#f4f4f0')}
+      <path d="M73.6 38.4 H76.4 V43.6 L80.2 50.2 Q80.8 51.8 79.2 51.8 H70.8 Q69.2 51.8 69.8 50.2 L73.6 43.6Z" fill="#fff" fill-opacity=".85" stroke="#b9c8cf" stroke-width=".6"/>
+      <path d="M71.8 46.8 H78.2 L80.2 50.2 Q80.8 51.8 79.2 51.8 H70.8 Q69.2 51.8 69.8 50.2Z" fill="#8fd0a8"/><circle cx="73.4" cy="49.4" r=".6" fill="#fff" opacity=".8"/><circle cx="76.4" cy="48.6" r=".5" fill="#fff" opacity=".8"/>
+      <g class="bob"><circle cx="76.6" cy="34.6" r=".9" stroke="#8fd0a8" stroke-width=".5" fill="none"/><circle cx="74.6" cy="31" r=".7" stroke="#8fd0a8" stroke-width=".5" fill="none"/></g>
+      ${S.hand(75.2, 53.2, sk)}
+      ${S.neck(sk)}${S.face(sk)}
+      ${[[55.4, 22.6], [54.2, 23.8], [56.4, 24], [64.6, 22.6], [65.8, 23.8], [63.6, 24]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r=".32" fill="#c98a6a"/>`).join('')}
+      <path d="M50.4 19 C49.4 9.2 54 5 60 5 C66 5 70.6 9.2 69.6 19 C68.6 13 65 11 60.4 11.8 C56 11 52.4 13 50.4 19Z" fill="#b8612f"/>
+      ${[[53.4, 8], [57.6, 5.6], [62.4, 5.4], [66.4, 7.6], [51.4, 12], [68.8, 11.8]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.5" fill="#b8612f"/>`).join('')}
+      <path d="M54.6 6.6 q1.6 -1 3 .4 M62 5 q1.6 -.4 2.6 1" stroke="#cf7a46" stroke-width=".5" fill="none"/>
+      <path d="M50.4 13.4 Q60 9.4 69.6 13.4" stroke="#5a6a78" stroke-width="1.1" fill="none"/>
+      <circle cx="56" cy="12" r="2.7" fill="#bfe6ef" stroke="#5a6a78" stroke-width=".9"/><circle cx="64" cy="12" r="2.7" fill="#bfe6ef" stroke="#5a6a78" stroke-width=".9"/><path d="M54.8 11 l1.4 -1 M62.8 11 l1.4 -1" stroke="#fff" stroke-width=".5"/>
+      ${S.feat({ brow: '#a6522a', bw: 1, smile: 'M57.4 26.8 Q60 29 62.6 26.8' })}`); };
+
+    ART.bioF = () => { const sk = '#a8704a', glove = '#8e7cc3';
+      return svgM(`${S.shadow()}
+      <circle cx="60" cy="15" r="13.4" fill="#2b2220"/>
+      ${[...Array(16)].map((_, i) => { const a = i / 16 * Math.PI * 2; return `<circle cx="${(60 + 13.4 * Math.cos(a)).toFixed(1)}" cy="${(15 + 13.4 * Math.sin(a)).toFixed(1)}" r="3.1" fill="#2b2220"/>`; }).join('')}
+      ${S.legs('#3d3a48', '#2f2f3a')}
+      ${S.coat('#b0506e')}
+      ${S.arm('M49 38.5 Q44.4 46 47.6 54.6', '#f4f4f0')}
+      <ellipse cx="46.6" cy="53.2" rx="5.2" ry="1.9" fill="#eef4f6" stroke="#b9c8cf" stroke-width=".5"/><circle cx="44.8" cy="53" r=".6" fill="#e8a5c4"/><circle cx="47" cy="53.5" r=".5" fill="#a5c8e8"/><circle cx="48.6" cy="52.8" r=".55" fill="#f0d48f"/>
+      ${S.hand(48, 56, glove)}
+      <rect x="75.8" y="37" width="1.4" height="20" rx=".7" fill="#fff" stroke="#c9d3d8" stroke-width=".35"/><ellipse cx="76.5" cy="36.2" rx="1.4" ry="2.1" fill="#e48fb0"/>
+      <path class="bob" d="M76.5 59.4 q-1 1.6 0 2.3 q1 -.7 0 -2.3Z" fill="#8fd0e0"/>
+      ${S.arm('M71 38.5 Q77 41.6 76.6 48.4', '#f4f4f0')}${S.hand(76.6, 49.6, glove)}
+      ${S.neck(sk)}${S.face(sk)}
+      <path d="M51.3 17 C52 11 56 9.4 60 9.4 C64 9.4 68 11 68.7 17 C66 13.4 63 12.8 60 13 C57 12.8 54 13.4 51.3 17Z" fill="#2b2220"/>
+      <path d="M46.4 12.6 Q60 5.6 73.6 12.6" stroke="#8e7cc3" stroke-width="1.3" fill="none"/>
+      <circle cx="55.6" cy="8.6" r="2.7" fill="#d8f0f4" stroke="#8e7cc3" stroke-width=".9"/><circle cx="64.4" cy="8.6" r="2.7" fill="#d8f0f4" stroke="#8e7cc3" stroke-width=".9"/>
+      <circle cx="51.6" cy="24" r="1.1" stroke="#e2c27a" stroke-width=".6" fill="none"/><circle cx="68.4" cy="24" r="1.1" stroke="#e2c27a" stroke-width=".6" fill="none"/>
+      ${S.feat({ eye: '#1e1614', brow: '#1e1614', nose: 'rgba(70,35,20,.55)', mouth: '#5a2a22', smile: 'M57.6 26.8 Q60 28.8 62.4 26.8' })}`); };
+
+    const FLAG = {
+      gr: (x, y) => `<rect x="${x}" y="${y}" width="20" height="7" fill="#fff"/><rect x="${x}" y="${y}" width="20" height="1.4" fill="#2d5fa8"/><rect x="${x}" y="${y + 2.8}" width="20" height="1.4" fill="#2d5fa8"/><rect x="${x}" y="${y + 5.6}" width="20" height="1.4" fill="#2d5fa8"/><rect x="${x}" y="${y}" width="7" height="4.2" fill="#2d5fa8"/><rect x="${x + 2.8}" y="${y}" width="1.4" height="4.2" fill="#fff"/><rect x="${x}" y="${y + 1.4}" width="7" height="1.4" fill="#fff"/>`,
+      uk: (x, y) => `<rect x="${x}" y="${y}" width="20" height="7" fill="#24427e"/><path d="M${x} ${y}L${x + 20} ${y + 7}M${x + 20} ${y}L${x} ${y + 7}" stroke="#fff" stroke-width="1.6"/><path d="M${x} ${y}L${x + 20} ${y + 7}M${x + 20} ${y}L${x} ${y + 7}" stroke="#c8313e" stroke-width=".6"/><rect x="${x + 8.5}" y="${y}" width="3" height="7" fill="#fff"/><rect x="${x}" y="${y + 2.3}" width="20" height="2.4" fill="#fff"/><rect x="${x + 9.2}" y="${y}" width="1.6" height="7" fill="#c8313e"/><rect x="${x}" y="${y + 2.9}" width="20" height="1.2" fill="#c8313e"/>`,
+      fr: (x, y) => `<rect x="${x}" y="${y}" width="6.7" height="7" fill="#2d4fa0"/><rect x="${x + 6.7}" y="${y}" width="6.6" height="7" fill="#fff"/><rect x="${x + 13.3}" y="${y}" width="6.7" height="7" fill="#d6403a"/>`,
+      ru: (x, y) => `<rect x="${x}" y="${y}" width="20" height="2.34" fill="#fff"/><rect x="${x}" y="${y + 2.33}" width="20" height="2.34" fill="#2f5fb0"/><rect x="${x}" y="${y + 4.66}" width="20" height="2.34" fill="#d6403a"/>`,
+      cn: (x, y) => `<rect x="${x}" y="${y}" width="20" height="7" fill="#d63c2e"/><path d="M${x + 4} ${y + 1.2}l.7 1.6 1.7.1-1.3 1.1.4 1.7-1.5-.9-1.5.9.4-1.7-1.3-1.1 1.7-.1Z" fill="#f4d24a"/>`,
+    };
+    const TAIL = { gr: '#2d5fa8', uk: '#24427e', fr: '#d6403a', ru: '#2f5fb0', cn: '#d63c2e' };
+
+    ART.hydra = () => {
+      const B = '#4f9a8c', HB = '#5aa898', D = '#3f8577';
+      const HEADS = [[21, 54, 'gr', -1], [35, 31, 'uk', -1], [60, 21, 'cn', 0], [85, 31, 'fr', 1], [99, 54, 'ru', 1]];
+      const NECKS = ['M50 77 Q32 73 22 60', 'M54 73 Q40 53 35 37', 'M60 71 Q60 45 60 27', 'M66 73 Q80 53 85 37', 'M70 77 Q88 73 98 60'];
+      const head = ([x, y, f, d]) => { const sx = x + d * 1.2;
+        return `<path d="M${x - 3.6} ${y - 3.4} L${x - 5.6} ${y - 8.6} L${x - 1.6} ${y - 4.8}Z M${x + 3.6} ${y - 3.4} L${x + 5.6} ${y - 8.6} L${x + 1.6} ${y - 4.8}Z" fill="${D}"/>
+          <ellipse cx="${x}" cy="${y}" rx="5.8" ry="5.2" fill="${HB}"/><ellipse cx="${x + 1.6}" cy="${y - .4}" rx="3.6" ry="4.6" fill="#000" opacity=".06"/>
+          <ellipse cx="${sx}" cy="${y + 3.4}" rx="4.2" ry="2.7" fill="#78bcae"/><circle cx="${sx - 1.3}" cy="${y + 2.8}" r=".4" fill="#2f6a60"/><circle cx="${sx + 1.3}" cy="${y + 2.8}" r=".4" fill="#2f6a60"/>
+          <path d="M${sx - 2.2} ${y + 4.6} Q${sx} ${y + 5.6} ${sx + 2.2} ${y + 4.6}" stroke="#2f6a60" stroke-width=".55" fill="none" stroke-linecap="round"/>
+          <path d="M${x - 4} ${y - 1.9} Q${x - 2.4} ${y - 2.8} ${x - .9} ${y - 2.1} M${x + .9} ${y - 2.1} Q${x + 2.4} ${y - 2.8} ${x + 4} ${y - 1.9}" stroke="${D}" stroke-width=".9" fill="none" stroke-linecap="round"/>
+          <g class="eye"><ellipse cx="${x - 2.4 + d * .5}" cy="${y - .5}" rx=".85" ry="1.05" fill="#1d2b29"/><ellipse cx="${x + 2.4 + d * .5}" cy="${y - .5}" rx=".85" ry="1.05" fill="#1d2b29"/></g>
+          <g transform="translate(${x - 5.6} ${y + 5.4}) scale(.56 .46)">${FLAG[f](0, 0)}</g><rect x="${x - 5.6}" y="${y + 5.4}" width="11.2" height="3.2" fill="none" stroke="#000" stroke-opacity=".15" stroke-width=".3"/>
+          <rect x="${x + 1.6}" y="${y + 7.6}" width="2.4" height="4.4" rx=".6" fill="${TAIL[f]}" transform="rotate(${12 * (d || 1)} ${x + 2.8} ${y + 7.6})"/>`; };
+      return svgM(`${S.shadow(30)}
+      <path d="M77 88 Q98 94 102 82 Q105 73 99 71" stroke="${B}" stroke-width="4.6" fill="none" stroke-linecap="round"/><path d="M96 71.6 L100.6 64.6 L102.6 72.4Z" fill="${D}"/>
+      ${NECKS.map(d => `<path d="${d}" stroke="${B}" stroke-width="5.6" fill="none" stroke-linecap="round"/>`).join('')}
+      ${NECKS.map(d => `<path d="${d}" stroke="#000" stroke-opacity=".07" stroke-width="2" fill="none" stroke-linecap="round" transform="translate(1 0)"/>`).join('')}
+      <ellipse cx="60" cy="83" rx="21" ry="15" fill="${B}"/><path d="M60 68 C72 68 81 74 81 83 C81 92 72 98 60 98Z" fill="#000" opacity=".07"/>
+      <path d="M47 84 C49 94 71 94 73 84 C71 76 49 76 47 84Z" fill="#cfe5d6"/><path d="M48.6 82 h22.8 M48.4 86 h23.2 M50 90 h20" stroke="#b7d6c1" stroke-width=".7"/>
+      ${[[52, 72], [58, 70], [64, 70.4], [70, 72.6], [76, 77]].map(([x, y]) => `<path d="M${x - 2} ${y + 1.6} Q${x} ${y - 1} ${x + 2} ${y + 1.6}" stroke="${D}" stroke-width=".6" fill="none" opacity=".7"/>`).join('')}
+      <ellipse cx="49" cy="97" rx="6" ry="3.2" fill="${D}"/><ellipse cx="71" cy="97" rx="6" ry="3.2" fill="${D}"/><path d="M45.4 99.4 v-1.4 M49 100 v-1.4 M52.6 99.4 v-1.4 M67.4 99.4 v-1.4 M71 100 v-1.4 M74.6 99.4 v-1.4" stroke="#e9f4ee" stroke-width=".9" stroke-linecap="round"/>
+      ${HEADS.map(head).join('')}`);
+    };
+
+    /* ---------- landscapes at the foot of every page (1200x260, the character's pale deco colours) ---------- */
+    const LAND = {};
+    LAND.litM = (d1, d2, d3) => { let shelves = '';
+      for (const x0 of [60, 900]) { shelves += `<rect x="${x0}" y="40" width="240" height="160" fill="${d2}"/>`;
+        for (const y of [86, 136, 186]) { let x = x0 + 10; while (x < x0 + 228) { const w = 9 + ((x * 7) % 8), h = 32 + ((x * 13) % 12); shelves += `<rect x="${x}" y="${y - h}" width="${w}" height="${h}" fill="${d3}" opacity="${.55 + ((x * 3) % 4) * .1}"/>`; x += w + 3; } shelves += `<rect x="${x0}" y="${y}" width="240" height="6" fill="${d3}"/>`; } }
+      return `${shelves}<path d="M330 200 L380 40 M360 200 L410 40 M338 176 h28 M346 150 h28 M354 124 h28 M362 98 h28 M370 72 h28" stroke="${d3}" stroke-width="5" fill="none"/>
+      <path d="M760 200 V120 M740 120 h40 l-12 -26 h-16Z" stroke="${d3}" stroke-width="5" fill="${d3}"/><path d="M0 200 H1200 V260 H0Z" fill="${d1}"/><path d="M0 200 H1200" stroke="${d3}" stroke-width="3"/>`; };
+    LAND.litF = (d1, d2, d3) => `<path d="M560 200 V70 Q610 20 660 70 V200Z" fill="${d2}"/><path d="M610 46 V200 M560 120 H660" stroke="${d1}" stroke-width="5"/>
+      ${[[120, 200, 5], [880, 200, 4], [1060, 200, 6]].map(([x, y, n]) => [...Array(n)].map((_, i) => `<rect x="${x + (i % 2) * 8 - 4}" y="${y - (i + 1) * 18}" width="${110 - i * 6}" height="16" rx="2" fill="${d3}" opacity="${.6 + (i % 3) * .12}"/>`).join('')).join('')}
+      ${[['Α', 330, 90], ['ω', 430, 150], ['Ж', 760, 110], ['é', 300, 170], ['ß', 820, 60], ['ψ', 470, 70], ['Ω', 990, 80]].map(([c, x, y]) => `<text x="${x}" y="${y}" font-size="46" fill="${d3}" font-family="'Old Standard TT',serif" font-style="italic" opacity=".8">${c}</text>`).join('')}
+      <path d="M0 200 H1200 V260 H0Z" fill="${d1}"/>`;
+    LAND.techM = (d1, d2, d3) => `<path d="M0 196 H1200" stroke="${d3}" stroke-width="5"/>
+      ${[[340, 70], [560, 54]].map(([x, y]) => `<rect x="${x}" y="${y}" width="190" height="118" rx="8" fill="${d3}"/><rect x="${x + 10}" y="${y + 10}" width="170" height="98" rx="3" fill="${d2}"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${x + 22 + (i % 3) * 10}" y="${y + 22 + i * 14}" width="${50 + ((i * 37) % 70)}" height="6" rx="3" fill="${d3}" opacity=".7"/>`).join('')}<rect x="${x + 85}" y="${y + 118}" width="20" height="${196 - y - 118}" fill="${d3}"/>`).join('')}
+      <path d="M440 200 Q470 236 600 226 T820 240" stroke="${d3}" stroke-width="4" fill="none"/>
+      <rect x="800" y="156" width="34" height="40" rx="6" fill="${d3}"/><path d="M834 168 q16 0 16 12 q0 12 -16 12" stroke="${d3}" stroke-width="6" fill="none"/>
+      <ellipse cx="960" cy="186" rx="30" ry="18" fill="${d3}"/><circle cx="982" cy="160" r="15" fill="${d3}"/><path d="M995 158 L1012 163 L995 168Z" fill="${d2}"/>
+      <path d="M180 196 V140 M180 160 q-30 -10 -34 -40 M180 150 q28 -6 34 -34" stroke="${d3}" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M0 200 H1200 V260 H0Z" fill="${d1}"/>`;
+    LAND.techF = (d1, d2, d3) => { let racks = '';
+      for (const x of [100, 1000]) { racks += `<rect x="${x}" y="30" width="110" height="170" rx="6" fill="${d3}"/>`; for (let i = 0; i < 7; i++) racks += `<rect x="${x + 10}" y="${40 + i * 22}" width="90" height="16" rx="2" fill="${d2}"/><circle cx="${x + 22}" cy="${48 + i * 22}" r="3.4" fill="${d1}" class="led" style="animation-delay:${i * .4}s"/>`; }
+      const heart = [[1, 2, 4, 5], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5], [2, 3, 4], [3]].map((row, r) => row.map(c => `<rect x="${780 + c * 12}" y="${70 + r * 12}" width="11" height="11" fill="${d3}"/>`).join('')).join('');
+      return `${racks}<rect x="380" y="40" width="300" height="120" rx="12" fill="${d2}"/><rect x="380" y="40" width="300" height="24" rx="12" fill="${d3}"/>
+      ${[0, 1, 2].map(i => `<circle cx="${400 + i * 18}" cy="52" r="5" fill="${d1}"/>`).join('')}
+      <text x="400" y="100" font-size="26" fill="${d3}" font-family="'Fira Code',monospace">$ git push</text><text x="400" y="136" font-size="26" fill="${d3}" font-family="'Fira Code',monospace">✓ tests pass</text>
+      ${heart}<path d="M0 200 H1200 V260 H0Z" fill="${d1}"/>`; };
+    LAND.physM = (d1, d2, d3) => `<rect x="190" y="20" width="820" height="176" rx="10" fill="${d3}"/><rect x="204" y="34" width="792" height="148" rx="4" fill="${d2}"/>
+      ${[['E = mc²', 240, 92], ['F = ma', 240, 150], ['∇·E = ρ/ε₀', 470, 92], ['λ = h / p', 470, 150], ['∮ B·dl = μ₀I', 720, 150]].map(([t, x, y]) => `<text x="${x}" y="${y}" font-size="38" fill="${d1}" font-family="'STIX Two Text',serif" font-style="italic">${t}</text>`).join('')}
+      <text x="720" y="92" font-size="38" fill="${d1}" font-family="'STIX Two Text',serif" font-style="italic">e<tspan dy="-14" font-size="24">iπ</tspan><tspan dy="14"> + 1 = 0</tspan></text>
+      <rect x="204" y="182" width="792" height="10" fill="${d3}"/>
+      <g transform="translate(1100 110)">${[0, 60, -60].map(a => `<ellipse rx="62" ry="22" transform="rotate(${a})" stroke="${d3}" stroke-width="5" fill="none"/>`).join('')}<circle r="12" fill="${d3}"/></g>
+      <path d="M0 210 H1200 V260 H0Z" fill="${d1}"/>`;
+    LAND.physF = (d1, d2, d3) => `<rect x="190" y="20" width="820" height="176" rx="10" fill="${d3}"/><rect x="204" y="34" width="792" height="148" rx="4" fill="${d2}"/>
+      ${[['iħ ∂ψ/∂t = Ĥψ', 236, 88], ['Δx · Δp ≥ ħ/2', 236, 146], ['∑ 1/n² = π²/6', 560, 88]].map(([t, x, y]) => `<text x="${x}" y="${y}" font-size="36" fill="${d1}" font-family="'STIX Two Text',serif" font-style="italic">${t}</text>`).join('')}
+      <path d="M560 140 H960" stroke="${d1}" stroke-width="2" opacity=".6"/><path d="M560 140 Q585 100 610 140 T660 140 T710 140 T760 140 T810 140 T860 140 T910 140 T960 140" stroke="${d1}" stroke-width="4" fill="none"/>
+      <g transform="translate(100 110)">${[0, 60, -60].map(a => `<ellipse rx="56" ry="20" transform="rotate(${a})" stroke="${d3}" stroke-width="5" fill="none"/>`).join('')}<circle r="11" fill="${d3}"/></g>
+      <path d="M1060 210 Q1100 150 1140 210Z M1066 178 L1076 140 L1092 168Z M1108 168 L1124 140 L1134 178Z" fill="${d3}"/><circle cx="1086" cy="190" r="5" fill="${d1}"/><circle cx="1114" cy="190" r="5" fill="${d1}"/>
+      <rect x="1040" y="200" width="120" height="60" fill="${d3}"/><path d="M1040 200 L1020 176 L1040 176Z M1160 200 L1180 176 L1160 176Z" fill="${d3}"/>
+      <text x="1100" y="246" font-size="34" fill="${d1}" font-family="'STIX Two Text',serif" text-anchor="middle" font-weight="700">?</text>
+      <path d="M0 210 H1040 M1160 210 H1200 V260 H1160 M1040 260 H0Z" fill="${d1}"/>`;
+    LAND.bioM = (d1, d2, d3) => { let a = '', b = '', r = '';
+      for (const cx of [110, 1090]) { a = ''; b = ''; for (let y = 10; y <= 200; y += 4) { const s = Math.sin(y * .045) * 34; a += (y === 10 ? 'M' : 'L') + (cx + s).toFixed(1) + ' ' + y; b += (y === 10 ? 'M' : 'L') + (cx - s).toFixed(1) + ' ' + y; }
+        for (let y = 18; y <= 196; y += 14) { const s = Math.sin(y * .045) * 34; r += `<path d="M${(cx + s).toFixed(1)} ${y}H${(cx - s).toFixed(1)}" stroke="${d2}" stroke-width="5"/>`; }
+        r += `<path d="${a}" stroke="${d3}" stroke-width="7" fill="none"/><path d="${b}" stroke="${d3}" stroke-width="7" fill="none" opacity=".7"/>`; }
+      return `${r}<rect x="300" y="150" width="160" height="10" fill="${d3}"/><rect x="300" y="188" width="160" height="12" fill="${d3}"/>
+      ${[0, 1, 2, 3].map(i => `<rect x="${318 + i * 36}" y="96" width="20" height="100" rx="10" fill="${d2}" stroke="${d3}" stroke-width="4"/><rect x="${320 + i * 36}" y="150" width="16" height="44" rx="8" fill="${d3}"/>`).join('')}
+      <rect x="780" y="186" width="150" height="16" rx="5" fill="${d3}"/><path d="M890 186 Q940 120 870 70" stroke="${d3}" stroke-width="22" fill="none" stroke-linecap="round"/><rect x="800" y="140" width="100" height="12" fill="${d3}"/>
+      <g transform="rotate(-20 830 90)"><rect x="812" y="40" width="34" height="96" rx="6" fill="${d3}"/><rect x="806" y="30" width="46" height="18" rx="5" fill="${d3}"/></g>
+      ${[[600, 80, 14], [640, 40, 9], [560, 120, 10], [700, 100, 7]].map(([x, y, rr]) => `<circle cx="${x}" cy="${y}" r="${rr}" stroke="${d3}" stroke-width="4" fill="none"/>`).join('')}
+      <path d="M0 202 H1200 V260 H0Z" fill="${d1}"/>`; };
+    LAND.bioF = (d1, d2, d3) => { let mol = '';
+      const pts = [...Array(6)].map((_, i) => [160 + 60 * Math.cos(i * Math.PI / 3), 100 + 60 * Math.sin(i * Math.PI / 3)]);
+      pts.forEach((p, i) => { const q = pts[(i + 1) % 6]; mol += `<path d="M${p[0]} ${p[1]}L${q[0]} ${q[1]}" stroke="${d3}" stroke-width="8"/>`; });
+      pts.forEach(p => mol += `<circle cx="${p[0]}" cy="${p[1]}" r="17" fill="${d3}"/>`);
+      return `${mol}${[['6', 'C'], ['8', 'O'], ['7', 'N'], ['1', 'H']].map(([n, s], i) => `<rect x="${380 + i * 110}" y="50" width="94" height="104" rx="8" fill="${d2}" stroke="${d3}" stroke-width="4"/><text x="${392 + i * 110}" y="80" font-size="22" fill="${d3}" font-family="'Commissioner',sans-serif">${n}</text><text x="${427 + i * 110}" y="134" font-size="52" fill="${d3}" font-family="'Commissioner',sans-serif" font-weight="700" text-anchor="middle">${s}</text>`).join('')}
+      <path d="M900 200 L930 150 H1010 L1040 200Z" fill="${d3}"/>${[[-50, 40], [-20, 36], [15, 42], [45, 30], [-35, 34]].map(([a, l], i) => `<ellipse cx="${970 + Math.sin(a * Math.PI / 180) * l * 1.6}" cy="${150 - Math.cos(a * Math.PI / 180) * l * 1.6}" rx="${l * .7}" ry="${l * .32}" transform="rotate(${a - 90} ${970 + Math.sin(a * Math.PI / 180) * l * 1.6} ${150 - Math.cos(a * Math.PI / 180) * l * 1.6})" fill="${i % 2 ? d2 : d3}"/>`).join('')}
+      ${[0, 1, 2].map(i => `<ellipse cx="${1110}" cy="${190 - i * 16}" rx="56" ry="12" fill="${d2}" stroke="${d3}" stroke-width="4"/>`).join('')}
+      <path d="M0 200 H1200 V260 H0Z" fill="${d1}"/>`; };
+    LAND.hydra = (d1, d2, d3) => `<path d="M0 170 Q200 140 420 166 T820 158 T1200 164 V260 H0Z" fill="${d2}"/>
+      ${[[40, 0], [70, 1], [1110, 0], [1150, 1]].map(([x, i]) => `<path d="M${x} 210 Q${x - 6 + i * 12} 140 ${x + 4} ${80 + i * 20}" stroke="${d3}" stroke-width="5" fill="none"/><ellipse cx="${x + 4}" cy="${78 + i * 20}" rx="7" ry="20" fill="${d3}"/>`).join('')}
+      ${[['Γεια σου!', 210, 70], ['Hello!', 400, 40], ['你好!', 600, 80], ['Salut !', 790, 42], ['Привет!', 960, 76]].map(([t, x, y]) => `<g class="bob"><rect x="${x - 78}" y="${y - 30}" width="156" height="50" rx="25" fill="${d1}" stroke="${d3}" stroke-width="3"/><path d="M${x - 10} ${y + 20} L${x - 2} ${y + 38} L${x + 10} ${y + 20}" fill="${d1}" stroke="${d3}" stroke-width="3" stroke-linejoin="round"/><rect x="${x - 14}" y="${y + 14}" width="28" height="8" fill="${d1}"/><text x="${x}" y="${y + 6}" font-size="26" fill="${d3}" font-family="'Noto Sans',sans-serif" font-weight="600" text-anchor="middle">${t}</text></g>`).join('')}
+      <path d="M0 214 Q300 200 600 212 T1200 208 V260 H0Z" fill="${d1}"/>`;
+
+    /* ---------- profession items beside each mascot (drawn behind, in the free space left and right) ---------- */
+    const bk = (x, y, w, h, c) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx=".5" fill="${c}"/><rect x="${x + w - 2}" y="${y + .6}" width="1.4" height="${h - 1.2}" fill="#f6efe0"/>`;
+    const PROPS = {
+      litM: `<rect x="5" y="30" width="30" height="70" rx="1" fill="#b4916b"/><rect x="7.5" y="32.5" width="25" height="65" fill="#8f6d4c"/>
+        ${[[52, [[3.4, 15, '#8c3b3b'], [4, 17, '#3f5f7a'], [3, 14, '#c9a65a'], [4.4, 16, '#5e7a4d'], [3.4, 17, '#7a4f6b'], [3.6, 14, '#a8603c']]], [74, [[4, 16, '#3f5f7a'], [3.4, 14, '#c9a65a'], [4.4, 17, '#8c3b3b'], [3, 15, '#5e7a4d'], [4, 13, '#7a4f6b']]], [96, [[4.4, 17, '#5e7a4d'], [3.4, 15, '#a8603c'], [4, 16, '#3f5f7a'], [3.4, 14, '#7a4f6b'], [4, 17, '#8c3b3b']]]].map(([base, list]) => { let x = 8.5, o = ''; for (const [w, h, c] of list) { o += `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" fill="${c}"/><rect x="${x}" y="${base - h + 2.4}" width="${w}" height=".7" fill="#e9cf8a" opacity=".7"/>`; x += w + .5; } return o + `<rect x="7.5" y="${base}" width="25" height="2.2" fill="#b4916b"/>`; }).join('')}
+        ${bk(84, 93.4, 26, 5.6, '#3f5f7a')}${bk(86, 87.8, 23, 5.6, '#8c3b3b')}${bk(83, 82.2, 25, 5.6, '#c9a65a')}
+        <rect x="98" y="75" width="7.6" height="7.2" rx="1.6" fill="#2f3540"/><rect x="99.6" y="72.8" width="4.4" height="2.6" rx=".5" fill="#2f3540"/>
+        <path d="M101.4 74 Q103.6 62 112 54 Q110 64 102.6 73Z" fill="#f4efe2" stroke="#cfc6b2" stroke-width=".5"/><path d="M101.6 74 L110 57" stroke="#cfc6b2" stroke-width=".5"/>`,
+      litF: `${bk(6, 93.4, 30, 5.6, '#5f8573')}${bk(8, 87.8, 26, 5.6, '#c98b6b')}${bk(5, 82.2, 28, 5.6, '#6a6f9e')}${bk(8, 76.6, 25, 5.6, '#d4a64a')}${bk(7, 71, 27, 5.6, '#9a4f5a')}
+        <ellipse cx="20" cy="70.4" rx="7" ry="1.4" fill="#fff" stroke="#c9b9a6" stroke-width=".5"/><path d="M14.6 63 L25.4 63 Q24.8 70 20 70 Q15.2 70 14.6 63Z" fill="#fff" stroke="#c9b9a6" stroke-width=".5"/><circle cx="26" cy="65.4" r="1.8" stroke="#c9b9a6" stroke-width=".8" fill="none"/>
+        <path d="M18 60.6 q-1.6 -3 0 -5.4 q1.6 -2.4 0 -4.8 M21.6 60.6 q-1.6 -3 0 -5.4" stroke="#bfb8ab" stroke-width=".7" fill="none" opacity=".7"/>
+        <rect x="94" y="92" width="11" height="8" rx="2" fill="#334044"/><rect x="96.4" y="89.6" width="6" height="3" rx=".6" fill="#334044"/>
+        <path d="M99 91 Q100.6 72 113 58 Q109.4 74 100.6 90.4Z" fill="#e8efe9" stroke="#b5c4b9" stroke-width=".5"/><path d="M99.2 91 L110.6 62" stroke="#b5c4b9" stroke-width=".5"/>
+        ${[['Α', 90, 24, 11], ['ω', 106, 38, 9], ['Ж', 92, 46, 8], ['é', 14, 32, 10], ['ψ', 28, 18, 9]].map(([c, x, y, s]) => txt(x, y, s, '#8fa99b', c, 'Old Standard TT', 'font-style="italic" opacity=".6"')).join('')}`,
+      techM: `<rect x="4" y="34" width="34" height="24" rx="1.6" fill="#3a414a"/><rect x="5.6" y="35.6" width="30.8" height="20.4" rx=".6" fill="#22302e"/>
+        ${[[7.6, 38, 9, '#7fd1a8'], [17.6, 38, 5, '#e3c56b'], [9.6, 41, 13, '#8ab4e8'], [9.6, 44, 8, '#7fd1a8'], [18.6, 44, 7, '#d98f8f'], [7.6, 47, 5, '#e3c56b'], [9.6, 50, 15, '#8ab4e8'], [7.6, 53, 6, '#7fd1a8']].map(([x, y, w, c]) => `<rect x="${x}" y="${y}" width="${w}" height="1.2" rx=".6" fill="${c}"/>`).join('')}
+        <rect x="18.6" y="58" width="4.8" height="6" fill="#3a414a"/><rect x="13.6" y="63.6" width="14.8" height="2" rx=".6" fill="#3a414a"/>
+        <path d="M21 66 Q20 86 30 92 Q38 96 36 100" stroke="#59616b" stroke-width="1" fill="none"/>
+        <rect x="9" y="88" width="7" height="12" rx="1.2" fill="#4fb08a"/><ellipse cx="12.5" cy="88" rx="3.5" ry="1" fill="#9ad8c0"/><path d="M13.2 90.4 L11.2 94 H13.2 L11.8 97.6 L15 93 H13 L14.6 90.4Z" fill="#f3e27a"/>
+        <ellipse cx="102" cy="96" rx="7" ry="4.6" fill="#f4d24a"/><circle cx="106.4" cy="89.6" r="3.6" fill="#f4d24a"/><path d="M109.6 89.2 L113.4 90.4 L109.6 91.6Z" fill="#e98a3a"/><circle cx="107.2" cy="88.8" r=".7" fill="#222"/><path d="M97 94.4 Q100.6 92.4 103.4 95.6" stroke="#e2bd34" stroke-width=".9" fill="none"/>`,
+      techF: (() => { let r = `<rect x="6" y="34" width="26" height="66" rx="1.6" fill="#4a5160"/>`;
+        for (let i = 0; i < 7; i++) { const y = 37.4 + i * 9; r += `<rect x="8.6" y="${y}" width="20.8" height="6.6" rx=".8" fill="#5c6474"/><circle class="led" style="animation-delay:${i * .37}s" cx="11.4" cy="${y + 3.3}" r=".9" fill="#6fe3a8"/><circle cx="14.2" cy="${y + 3.3}" r=".9" fill="${i % 3 ? '#e3c56b' : '#b49be6'}"/><path d="M18.6 ${y + 2.2}h9 M18.6 ${y + 4.4}h9" stroke="#4a5160" stroke-width=".6"/>`; }
+        return r + `<path d="M98 88 L112 88 L110 100 L100 100Z" fill="#c98b6b"/><rect x="102.2" y="72" width="5.6" height="17" rx="2.8" fill="#6fa77d"/>
+        <path d="M102.2 80 Q98 80 98 75.4 M107.8 83 Q112 83 112 78" stroke="#6fa77d" stroke-width="3.4" fill="none" stroke-linecap="round"/><circle cx="105" cy="71.4" r="1.5" fill="#e48fb0"/>
+        <path d="M104 74v1.2M106 78v1.2M103.4 82v1.2" stroke="#4f8a5e" stroke-width=".5"/>
+        ${[[1, 2, 4, 5], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5], [2, 3, 4], [3]].map((row, ri) => row.map(c => `<rect x="${94 + c * 2}" y="${30 + ri * 2}" width="1.85" height="1.85" fill="#b49be6"/>`).join('')).join('')}`; })(),
+      physM: `<rect x="2" y="14" width="40" height="34" rx="1.6" fill="#9a7652"/><rect x="4" y="16" width="36" height="30" rx=".6" fill="#3f5a4e"/>
+        ${txt(7, 24.6, 5.4, '#eef0e2', 'E = mc²', 'STIX Two Text', 'font-style="italic"')}${txt(7, 33, 4.6, '#eef0e2', '∇·E = ρ/ε₀', 'STIX Two Text', 'font-style="italic"')}${txt(7, 41.4, 4.6, '#eef0e2', 'λ = h / p', 'STIX Two Text', 'font-style="italic"')}
+        <path d="M29 42 Q33.4 30 37.6 42" stroke="#eef0e2" stroke-width=".5" fill="none" stroke-dasharray="1 .7"/>
+        <path d="M10 48 L6 100 M34 48 L38 100 M22 48 V100" stroke="#86664a" stroke-width="1.4"/><rect x="4" y="46" width="36" height="2" fill="#86664a"/>`,
+      physF: `<rect x="80" y="6" width="38" height="34" rx="1.6" fill="#7d8796"/><rect x="82" y="8" width="34" height="30" rx=".6" fill="#34445e"/>
+        ${txt(84.6, 16.6, 4.4, '#e8edf5', 'iħ∂ψ/∂t = Ĥψ', 'STIX Two Text', 'font-style="italic"')}${txt(84.6, 25, 4.4, '#e8edf5', 'Δx·Δp ≥ ħ/2', 'STIX Two Text', 'font-style="italic"')}
+        <path d="M84.6 32.6 Q87 28.6 89.4 32.6 T94.2 32.6 T99 32.6 T103.8 32.6 T108.6 32.6 T113.4 32.6" stroke="#e8edf5" stroke-width=".6" fill="none"/>
+        <path d="M90 99 Q97 88 104 99Z" fill="#6b6b74"/><path d="M90.8 93.6 L92.4 87.4 L95 92Z M99 92 L101.6 87.4 L103.2 93.6Z" fill="#6b6b74"/><ellipse cx="94.6" cy="95.4" rx="1" ry=".9" fill="#f4d24a"/><ellipse cx="99.4" cy="95.4" rx="1" ry=".9" fill="#f4d24a"/>
+        <path d="M86 99 L82.4 95 L86 95Z M108 99 L111.6 95 L108 95Z" fill="#c9a46f"/><rect x="86" y="97" width="22" height="4" fill="#d6b483"/>`,
+      bioM: (() => { let a = '', b = '', r = ''; const cols = ['#e8a5a5', '#a5c8e8', '#e8d48f', '#a8dcb0'];
+        for (let y = 16; y <= 98; y += 2) { const s = 8 * Math.sin(y * .11); a += (y === 16 ? 'M' : 'L') + (20 + s).toFixed(1) + ' ' + y; b += (y === 16 ? 'M' : 'L') + (20 - s).toFixed(1) + ' ' + y; }
+        for (let y = 19, i = 0; y <= 96; y += 5, i++) { const s = 8 * Math.sin(y * .11); r += `<path d="M${(20 + s).toFixed(1)} ${y}H${(20 - s).toFixed(1)}" stroke="${cols[i % 4]}" stroke-width="1.4"/>`; }
+        return r + `<path d="${a}" stroke="#7a9cc6" stroke-width="1.7" fill="none"/><path d="${b}" stroke="#d98c8c" stroke-width="1.7" fill="none"/>
+        <rect x="88" y="96" width="24" height="4.4" rx="1.4" fill="#4f5a66"/><path d="M106 96 Q114 80 103 66" stroke="#4f5a66" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <rect x="90" y="82" width="19" height="2.6" rx=".6" fill="#6b7684"/><rect x="94" y="80.4" width="9" height="1.6" fill="#bfe0ea"/>
+        <g transform="rotate(-20 99 68)"><rect x="95.6" y="56" width="6.6" height="20" rx="1.4" fill="#8a95a3"/><rect x="94.6" y="53" width="8.6" height="4" rx="1" fill="#4f5a66"/><rect x="97" y="75.4" width="4" height="3.4" fill="#4f5a66"/></g>`; })(),
+      bioF: (() => { let mol = ''; const pts = [...Array(6)].map((_, i) => [20 + 10 * Math.cos(i * Math.PI / 3 - Math.PI / 2), 28 + 10 * Math.sin(i * Math.PI / 3 - Math.PI / 2)]);
+        const hs = [...Array(6)].map((_, i) => [20 + 17 * Math.cos(i * Math.PI / 3 - Math.PI / 2), 28 + 17 * Math.sin(i * Math.PI / 3 - Math.PI / 2)]);
+        pts.forEach((p, i) => { const q = pts[(i + 1) % 6]; mol += `<path d="M${p[0]} ${p[1]}L${q[0]} ${q[1]}" stroke="#b5aabf" stroke-width="1.6"/><path d="M${p[0]} ${p[1]}L${hs[i][0]} ${hs[i][1]}" stroke="#b5aabf" stroke-width="1.2"/>`; });
+        hs.forEach(h => mol += `<circle cx="${h[0]}" cy="${h[1]}" r="2" fill="#f7f4f8" stroke="#cfc8d6" stroke-width=".5"/>`);
+        pts.forEach(p => mol += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#5f5a66"/>`);
+        return mol + `<rect x="94" y="8" width="20" height="22" rx="1.6" fill="#f5e3e9" stroke="#b0506e" stroke-width=".5"/>${txt(96.4, 13.6, 4, '#b0506e', '6', 'Commissioner')}${txt(104, 24.4, 10, '#7a2f48', 'C', 'Commissioner', 'text-anchor="middle" font-weight="700"')}${txt(104, 28.4, 3, '#b0506e', '12.011', 'Commissioner', 'text-anchor="middle"')}
+        <path d="M102 86 L100 66 M102 86 L108 70 M102 86 L111 78 M102 86 L94 74" stroke="#5f8a52" stroke-width="1"/>
+        <ellipse cx="95" cy="72" rx="6.4" ry="3.2" fill="#79a96a" transform="rotate(-40 95 72)"/><ellipse cx="108.6" cy="67" rx="7" ry="3.2" fill="#86b577" transform="rotate(30 108.6 67)"/><ellipse cx="100" cy="62" rx="6" ry="2.9" fill="#79a96a" transform="rotate(-80 100 62)"/><ellipse cx="112" cy="77.6" rx="5.2" ry="2.6" fill="#86b577" transform="rotate(20 112 77.6)"/>
+        <path d="M92 86 L112 86 L109.4 100 L94.6 100Z" fill="#d9a38a"/><rect x="90.8" y="84.4" width="22.4" height="3.4" rx="1" fill="#c98f76"/>
+        ${[[18, 98], [19, 94], [18, 90]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="9" ry="2.4" fill="#eef4f6" stroke="#c9d3d8" stroke-width=".5"/>`).join('')}<circle cx="15.6" cy="89.6" r=".8" fill="#e8a5c4"/><circle cx="19" cy="90.3" r=".7" fill="#a5c8e8"/><circle cx="21.6" cy="89.4" r=".8" fill="#f0d48f"/>`; })(),
+      hydra: `<path d="M8 100 Q6 80 10 64 M13 100 Q14 84 12 70 M108 100 Q110 84 108 70 M113 100 Q114 82 111 66" stroke="#a8c99a" stroke-width="1.3" fill="none"/>
+        <ellipse cx="10" cy="62.6" rx="1.4" ry="3.8" fill="#b08a62"/><ellipse cx="111" cy="64.6" rx="1.4" ry="3.8" fill="#b08a62"/>
+        ${[['Ω', 4, 26, 9], ['あ', 104, 14, 8], ['Ж', 108, 42, 8], ['é', 8, 44, 8], ['字', 46, 10, 6.4]].map(([c, x, y, s]) => txt(x, y, s, '#7fb2a8', c, 'Noto Sans', 'opacity=".55"')).join('')}`,
+    };
+    // the art of mockup v2, in the app: the mascot with its props beside it, and the landscape in the character's deco colours
+    for (const k of Object.keys(ART)) MASCOTS[k] = ART[k]().replace(' role="img"', '').replace(/(<svg[^>]*>)/, `$1${PROPS[k]}`);
+    for (const k of Object.keys(LAND)) LANDS[k] = LAND[k]('var(--deco1)', 'var(--deco2)', 'var(--deco3)');
+    /* the little pictures on the treasure map, in one colour (and an accent) */
+    Object.assign(GLYPH, {
+      litM: (f, a) => `<rect x="-12" y="-1" width="24" height="7" rx="1" fill="${f}"/><rect x="-10" y="-8.5" width="20" height="7" rx="1" fill="${f}"/><rect x="-11" y="-16" width="21" height="7" rx="1" fill="${f}"/><path d="M-8 -1v7M7 -8.5v7M-7 -16v7" stroke="${a}" stroke-width="1.4"/>`,
+      litF: (f, a) => `<path d="M-9 6h18l-2.4 -9h-13.2z" fill="${f}"/><rect x="-4.4" y="-6.6" width="8.8" height="4" rx="1" fill="${f}"/><path d="M1 -5Q6 -17 16 -23Q13 -10 3.6 -4.4z" fill="${f}"/><path d="M1.6 -5L13 -19" stroke="${a}" stroke-width="1"/>`,
+      techM: (f, a) => `<rect x="-12" y="-15" width="24" height="15" rx="1.5" fill="${f}"/><path d="M-16 0h32l-3 5h-26z" fill="${f}"/><path d="M-4 -10.5l-3.2 3 3.2 3M4 -10.5l3.2 3 -3.2 3" stroke="${a}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`,
+      techF: (f, a) => `<ellipse cx="-1" cy="0" rx="12" ry="6.6" fill="${f}"/><circle cx="5" cy="-10" r="6" fill="${f}"/><path d="M10.4 -10.6L16.4 -8.6L10.4 -6.8z" fill="${f}"/><circle cx="6.2" cy="-11.2" r="1.3" fill="${a}"/><path d="M-9 -1q5 4 10 0" stroke="${a}" stroke-width="1.2" fill="none"/>`,
+      physM: (f, a) => `<g transform="translate(0 -6)">${[0, 60, -60].map(r => `<ellipse rx="15" ry="5.4" transform="rotate(${r})" stroke="${f}" stroke-width="2" fill="none"/>`).join('')}<circle r="3.6" fill="${f}"/><circle cx="15" r="2" fill="${a}"/></g>`,
+      physF: (f, a) => `<circle cy="-6" r="9" fill="${f}"/><path d="M-8.2 -9.6Q0 -12.4 8.2 -9.6" stroke="${a}" stroke-width="1.4" fill="none"/><ellipse cy="-6" rx="17" ry="4.6" transform="rotate(-18 0 -6)" stroke="${f}" stroke-width="2.2" fill="none"/>`,
+      bioM: (f, a) => `<path d="M-3.6 -18h7.2v8.4l8 13.6q1.6 3 -1.8 3h-19.6q-3.4 0 -1.8 -3l8 -13.6z" fill="${f}"/><path d="M-7.6 -1.4h15.2" stroke="${a}" stroke-width="1.6"/><circle cx="-2" cy="2.4" r="1.4" fill="${a}"/><circle cx="3" cy="3.6" r="1" fill="${a}"/>`,
+      bioF: (f, a) => `<path d="M-9 1L0 -10L10 -1" stroke="${f}" stroke-width="2.6" fill="none"/><circle cy="-10" r="6" fill="${f}"/><circle cx="-9" cy="1.6" r="4.6" fill="${f}"/><circle cx="10" cy="-.6" r="4.6" fill="${f}"/><circle cx="-1.6" cy="-11.8" r="1.6" fill="${a}"/>`,
+      hydra: (f, a) => `<path d="M-14 -20h24a3 3 0 0 1 3 3v11a3 3 0 0 1 -3 3h-13l-6 5v-5h-5a3 3 0 0 1 -3 -3v-11a3 3 0 0 1 3 -3z" fill="${f}"/><path d="M-9 -14.6h14M-9 -10h9" stroke="${a}" stroke-width="1.6" stroke-linecap="round"/>`,
+    });
+    /* the collection on Progress: one item per completed chapter (the mockup's drawings), each on its own spot */
+    const IT = {
+      book: c => `<rect x="-6" y="-10" width="12" height="20" rx="1.5" fill="${c}"/><rect x="-6" y="-7" width="12" height="1.6" fill="#e2c27a"/><rect x="-6" y="5" width="12" height="1.6" fill="#e2c27a"/><rect x="-6" y="-10" width="2.4" height="20" fill="#000" opacity=".15"/>`,
+      quill: c => `<path d="M-7 10 Q-3 -2 9 -11 Q6 2 -5 9Z" fill="${c}" stroke="#0002" stroke-width=".6"/><path d="M-8 11 L6 -7" stroke="#0003" stroke-width=".8"/>`,
+      chip: c => `<path d="M-4 -10v3M0 -10v3M4 -10v3M-4 7v3M0 7v3M4 7v3M-10 -4h3M-10 0h3M-10 4h3M7 -4h3M7 0h3M7 4h3" stroke="#3a414a" stroke-width="1.6"/><rect x="-7" y="-7" width="14" height="14" rx="2" fill="#3a414a"/><rect x="-3.5" y="-3.5" width="7" height="7" rx="1" fill="${c}"/>`,
+      duck: c => `<ellipse cx="-1" cy="4" rx="9" ry="6" fill="${c}"/><circle cx="4" cy="-4" r="5" fill="${c}"/><path d="M8.5 -4.6 L12.5 -3 L8.5 -1.6Z" fill="#e98a3a"/><circle cx="5" cy="-5" r=".9" fill="#222"/>`,
+      atom: c => `${[0, 60, -60].map(a => `<ellipse rx="10" ry="3.6" transform="rotate(${a})" stroke="${c}" stroke-width="1.3" fill="none"/>`).join('')}<circle r="2.6" fill="#e28b6b"/>`,
+      planet: c => `<circle r="6.5" fill="${c}"/><ellipse rx="11.5" ry="3.4" transform="rotate(-20)" stroke="#8a7aa8" stroke-width="1.4" fill="none"/><path d="M-5 -2 Q0 -4 5 -2" stroke="#fff" stroke-opacity=".4" fill="none"/>`,
+      flask: c => `<path d="M-2.5 -10 H2.5 V-3 L8 7 Q9 10 6 10 H-6 Q-9 10 -8 7 L-2.5 -3Z" fill="#fff" stroke="#b9c8cf"/><path d="M-5.3 3 H5.3 L8 7 Q9 10 6 10 H-6 Q-9 10 -8 7Z" fill="${c}"/>`,
+      mol: c => `<path d="M-6 3 L0 -4 L7 3" stroke="#b5aabf" stroke-width="2"/><circle cx="0" cy="-4" r="4.6" fill="${c}"/><circle cx="-6.5" cy="4" r="3.4" fill="#f7f4f8" stroke="#cfc8d6"/><circle cx="7" cy="4" r="3.4" fill="#f7f4f8" stroke="#cfc8d6"/>`,
+      stamp: f => `<rect x="-10" y="-11" width="20" height="22" fill="#fff" stroke="#c9d3d0" stroke-dasharray="1.6 1.2"/><g transform="translate(-8 -8) scale(.8 2)">${FLAG[f](0, 0)}</g>`,
+    };
+    const V = {
+      litM: ['#8c3b3b', '#3f5f7a', '#5e7a4d', '#c9a65a', '#7a4f6b', '#a8603c'], litF: ['#e8efe9', '#d4a64a', '#c98b6b', '#9fb4d8', '#e8c9d6', '#b9cbbf'],
+      techM: ['#7fd1a8', '#e3c56b', '#8ab4e8', '#d98f8f', '#b49be6', '#7fd1a8'], techF: ['#f4d24a', '#b49be6', '#7fd1a8', '#f2a3b8', '#8ab4e8', '#f4d24a'],
+      physM: ['#6e95c8', '#3d6b58', '#c98bd0', '#d9a54e', '#6e95c8', '#3d6b58'], physF: ['#e8c9a0', '#a8c4e8', '#e8a5a5', '#c9b6e8', '#a8dcb0', '#f0d48f'],
+      bioM: ['#8fd0a8', '#e48fb0', '#8fb8e4', '#f0d48f', '#c9a3e0', '#8fd0a8'], bioF: ['#5f5a66', '#d6403a', '#3f62a8', '#5e8f3e', '#d9a54e', '#b0506e'],
+      hydra: ['gr', 'uk', 'cn', 'fr', 'ru'],
+    };
+    const KIND = { litM: 'book', litF: 'quill', techM: 'chip', techF: 'duck', physM: 'atom', physF: 'planet', bioM: 'flask', bioF: 'mol', hydra: 'stamp' };
+    // the item's tilt from the rotation it is given: books, chips, flasks and planets stand straight, quills point away from the inkwell
+    const TILT = { litF: r => r, physM: r => r % 60, bioF: r => r % 20 - 10, hydra: r => r % 10 - 5 };
+    const SIZE = { duck: .7 };
+    for (const m of Object.keys(KIND)) ITEM[m] = (x, y, rot, f, op, k = rot | 0) => T(x, y, TILT[m] ? TILT[m](rot) : 0, op, `<g transform="scale(${SIZE[KIND[m]] || .8})">${IT[KIND[m]](V[m][k % V[m].length])}</g>`);
+    // the largest scale (up to 1.8×) whose spots still hold n items
+    const fit = (spots, n) => { for (const sc of [1.8, 1.6, 1.4, 1.2]) { const p = spots(sc); if (p.length >= n) return [p, sc]; } return [spots(1), 1]; };
+    // rows on shelves, from the bottom one up, left to right: [spots, the shelves' y]
+    const shelves = (x0, x1, yTop, yBot, w, hgt, gap, n) => { let ys = [];
+      const [pts, sc] = fit(sc => { const out = []; ys = []; for (let y = yBot; y - hgt * sc >= yTop; y -= hgt * sc + gap) { ys.push(y); const per = Math.floor((x1 - x0) / (w * sc));
+        for (let k = 0; k < per; k++) out.push([+(x0 + (k + .5) * w * sc + ((x1 - x0) - per * w * sc) / 2).toFixed(1), +(y - hgt * sc / 2).toFixed(1)]); } return out; }, n);
+      return [pts, sc, ys.slice()]; };
+    // spots on elliptical orbits around (cx, cy), the inner orbit first: [spots, the orbits]
+    const orbits = (cx, cy, rx0, ry0, drx, dry, rxMax, ryMax, step, n, rnd) => { let rs = [];
+      const [pts, sc] = fit(sc => { const out = []; rs = []; for (let k = 0; ; k++) { const rx = rx0 + (k + .5) * drx * sc, ry = ry0 + (k + .5) * dry * sc; if (rx + 9 * sc > rxMax || ry + 9 * sc > ryMax) break; rs.push([rx, ry]);
+        const per = Math.floor(Math.PI * (rx + ry) / (step * sc)), off = rnd(), ring = [];
+        for (let j = 0; j < per; j++) { const a = (j + off) / per * 2 * Math.PI; ring.push([+(cx + Math.cos(a) * rx).toFixed(1), +(cy + Math.sin(a) * ry).toFixed(1)]); }
+        // spread the first items of an orbit evenly around it
+        const order = []; for (let s = per; s >= 1 && order.length < per; s = Math.floor(s / 2)) for (let j = 0; j < per; j += s) if (!order.includes(j)) order.push(j);
+        for (let j = 0; j < per; j++) if (!order.includes(j)) order.push(j);
+        out.push(...order.map(j => ring[j])); } return out; }, n);
+      return [pts, sc, rs.slice()]; };
+    Object.assign(COLL, {
+      // a leather-bound book per chapter, standing on the shelves of his bookcase
+      litM: (N, c) => { const [pts, sc, ys] = shelves(52, 248, 22, 206, 11.6, 16.4, 8, N);
+        return '<rect x="40" y="12" width="220" height="204" rx="4" fill="var(--t2)"/><rect x="40" y="12" width="220" height="204" rx="4" fill="none" stroke="var(--t2i)" stroke-opacity=".35" stroke-width="3"/>'
+          + ys.map(y => `<rect x="44" y="${y}" width="212" height="4" fill="var(--t2i)" opacity=".35"/>`).join('') + c.place(pts, N, 0, sc); },
+      // a quill per chapter, fanned out around her inkwell
+      litF: (N, c) => { let rs = [];
+        const [pts, sc] = fit(sc => { const out = []; rs = []; for (let k = 0; ; k++) { const r = 40 + (k + .5) * 25 * sc; if (r + 12 * sc > 140) break; rs.push(r);
+          const per = Math.floor(Math.PI * r * 1.15 * .86 / (10 * sc)), ring = [];
+          for (let j = 0; j < per; j++) { const t = Math.PI * (-.07 - .86 * (j + .5) / per); ring.push([150 + Math.cos(t) * r, 204 + Math.sin(t) * r * 1.3, Math.atan2(Math.sin(t) * 1.3, Math.cos(t))]); }
+          ring.sort((p, q) => Math.abs(p[2] + Math.PI / 2) - Math.abs(q[2] + Math.PI / 2)); out.push(...ring); } return out; }, N);
+        void rs;
+        const q = pts.slice(0, N).map(([x, y, a], i) => { const g = c.item(+x.toFixed(1), +y.toFixed(1), Math.round(a * 180 / Math.PI) + 52, c.col(i), c.op(i), i);
+          return sc === 1 ? g : `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${sc}) translate(${(-x).toFixed(1)} ${(-y).toFixed(1)})">${g}</g>`; }).join('');
+        return q + '<ellipse cx="150" cy="218" rx="64" ry="6" fill="var(--line)"/><path d="M124 216Q120 192 134 186H166Q180 192 176 216Z" fill="var(--ink2)" opacity=".8"/><rect x="139" y="176" width="22" height="11" rx="2" fill="var(--ink2)"/><ellipse cx="150" cy="177" rx="11" ry="2.6" fill="var(--ink)"/><path d="M131 200Q150 194 169 200" stroke="var(--paper)" stroke-opacity=".3" stroke-width="2" fill="none"/>'; },
+      // a microchip per chapter, on his motherboard (the first ones in the middle)
+      techM: (N, c) => { const [pts, sc] = fit(sc => { const d = 20 * sc, out = []; for (let y = 36; y <= 196; y += d) for (let x = 34; x <= 266; x += d) out.push([x, y]);
+          const mx = out.reduce((s, p) => s + p[0], 0) / out.length, my = out.reduce((s, p) => s + p[1], 0) / out.length;
+          return out.map(([x, y]) => [+(x - mx + 150).toFixed(1), +(y - my + 115).toFixed(1)]).sort((p, q) => Math.hypot(p[0] - 150, (p[1] - 115) * 1.4) - Math.hypot(q[0] - 150, (q[1] - 115) * 1.4) || p[0] - q[0]); }, N);
+        return '<rect x="16" y="16" width="268" height="198" rx="10" fill="var(--t1)"/><g stroke="var(--t1i)" stroke-opacity=".22" stroke-width="2" fill="none"><path d="M16 50H60V24M284 90H244V206M100 214V196H200M16 170H46V208M190 16V30H250"/></g>'
+          + '<g fill="var(--t1i)" opacity=".25"><circle cx="28" cy="28" r="4"/><circle cx="272" cy="28" r="4"/><circle cx="28" cy="202" r="4"/><circle cx="272" cy="202" r="4"/></g>' + c.place(pts, N, 0, sc); },
+      // a rubber debugging duck per chapter, floating in her bathtub
+      techF: (N, c) => { const inTub = (x, y) => y >= 108 && y <= 198 && Math.abs(x - 150) <= 116 - Math.max(0, y - 164) * 1.1;
+        const [pts, sc] = fit(sc => c.grid(inTub, 150, 108, 198, 124, 17 * sc), N);
+        return '<path d="M20 100H280Q280 214 196 214H104Q20 214 20 100Z" fill="var(--t4)"/><path d="M14 100H286" stroke="var(--t4i)" stroke-opacity=".45" stroke-width="7" stroke-linecap="round"/><path d="M70 214l-8 10M230 214l8 10" stroke="var(--t4i)" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/>'
+          + '<g stroke="var(--paper)" stroke-opacity=".5" stroke-width="1.6" fill="none"><path d="M40 122q10 -4 20 0t20 0M200 150q10 -4 20 0t20 0M90 178q10 -4 20 0t20 0"/></g>' + c.place(c.shuffle(pts.slice(0, Math.max(N, Math.min(pts.length, N + 6)))), N, 0, sc); },
+      // an atom per chapter, on the orbits around his desk and blackboard
+      physM: (N, c) => { const [pts, sc, rs] = orbits(150, 115, 50, 33, 22, 17.5, 146, 112, 17, N, c.rnd);
+        return rs.map(([rx, ry]) => `<ellipse cx="150" cy="115" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="none" stroke="var(--ink3)" stroke-opacity=".3"/>`).join('')
+          + '<rect x="124" y="93" width="52" height="30" rx="2" fill="var(--t1i)" opacity=".8"/><path d="M130 103h12M130 110h20M156 103l6 6M162 103l-6 6M131 117h30" stroke="var(--paper)" stroke-opacity=".75" stroke-width="1.3" stroke-linecap="round"/><rect x="116" y="126" width="68" height="5" rx="2" fill="var(--t2i)" opacity=".6"/><path d="M122 131v8M178 131v8" stroke="var(--t2i)" stroke-opacity=".6" stroke-width="3"/>'
+          + c.place(pts, N, 0, sc); },
+      // a ringed planet per chapter, around her sun
+      physF: (N, c) => { const [pts, sc, rs] = orbits(150, 115, 30, 20, 23, 16.5, 146, 112, 18.6, N, c.rnd);
+        return rs.map(([rx, ry]) => `<ellipse cx="150" cy="115" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="none" stroke="var(--ink3)" stroke-opacity=".3"/>`).join('')
+          + '<circle cx="150" cy="115" r="17" fill="var(--t2)"/><circle cx="150" cy="115" r="17" fill="none" stroke="var(--t2i)" stroke-opacity=".45" stroke-width="2"/><circle cx="150" cy="115" r="21" fill="none" stroke="var(--t2i)" stroke-opacity=".18" stroke-width="3"/>' + c.place(pts, N, 0, sc); },
+      // a coloured flask per chapter, on the shelves of his lab bench
+      bioM: (N, c) => { const [pts, sc, ys] = shelves(34, 266, 22, 198, 15, 16.6, 9, N);
+        return '<rect x="22" y="198" width="256" height="12" rx="2" fill="var(--t1i)" opacity=".55"/><path d="M34 210v12M266 210v12" stroke="var(--t1i)" stroke-opacity=".55" stroke-width="5"/>'
+          + ys.slice(1).map(y => `<path d="M30 ${y}H270" stroke="var(--ink3)" stroke-opacity=".45" stroke-width="2.4"/>`).join('') + c.place(pts, N, 0, sc); },
+      // a molecule per chapter, in the compartments of her model kit
+      bioF: (N, c) => { let cells = [];
+        const [pts, sc] = fit(sc => { const w = 20 * sc, hh = 16 * sc, cols = Math.floor(244 / w), rows = Math.floor(160 / hh), x0 = 150 - cols * w / 2, y0 = 44 + (160 - rows * hh) / 2, out = []; cells = [x0, y0, w, hh, cols, rows];
+          for (let r = 0; r < rows; r++) for (let k = 0; k < cols; k++) out.push([+(x0 + (k + .5) * w).toFixed(1), +(y0 + (r + .5) * hh).toFixed(1)]); return out; }, N);
+        const [x0, y0, w, hh, cols, rows] = cells;
+        let out = '<path d="M30 40L44 16H256L270 40Z" fill="var(--t1)" opacity=".6"/><rect x="22" y="38" width="256" height="172" rx="8" fill="var(--t1)"/><g stroke="var(--t1i)" stroke-opacity=".2" stroke-width="1.2">';
+        for (let k = 1; k < cols; k++) out += `<path d="M${(x0 + k * w).toFixed(1)} ${y0.toFixed(1)}V${(y0 + rows * hh).toFixed(1)}"/>`;
+        for (let r = 1; r < rows; r++) out += `<path d="M${x0.toFixed(1)} ${(y0 + r * hh).toFixed(1)}H${(x0 + cols * w).toFixed(1)}"/>`;
+        return out + '</g>' + c.place(pts, N, 0, sc); },
+      // a postage stamp per chapter, in her album (the left page first)
+      hydra: (N, c) => { let rows = [];
+        const [pts, sc] = fit(sc => { const w = 17 * sc, hh = 19 * sc, out = []; rows = [];
+          for (const [a, b] of [[26, 146], [154, 274]]) { const cols = Math.floor((b - a) / w), x0 = a + (b - a - cols * w) / 2;
+            for (let y = 30; y + hh <= 210; y += hh + 1) { rows.push([a, b, y + hh]); for (let k = 0; k < cols; k++) out.push([+(x0 + (k + .5) * w).toFixed(1), +(y + hh / 2).toFixed(1)]); } }
+          return out; }, N);
+        return '<path d="M150 26Q96 14 22 22V214Q96 206 150 218Q204 206 278 214V22Q204 14 150 26Z" fill="var(--t4)"/><path d="M150 26V218" stroke="var(--t4i)" stroke-opacity=".35" stroke-width="2"/>'
+          + rows.map(([a, b, y]) => `<path d="M${a} ${(y + 1).toFixed(1)}H${b}" stroke="var(--t4i)" stroke-opacity=".18"/>`).join('') + c.place(pts, N, 0, sc); },
+    });
+    Object.assign(CAP, { litM: 100, litF: 100, techM: 100, techF: 72, physM: 100, physF: 90, bioM: 100, bioF: 100, hydra: 100 });
+  }
   const I2 = {
     back: '<path d="M15 5l-7 7 7 7"/>', close: '<path d="M6 6l12 12M18 6L6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>',
     share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',

@@ -76,7 +76,7 @@
       joinedToast: 'You joined “{title}”: your progress is your own, the prepared steps are shared', addedToast: '“{title}” added to your subjects', syncErr: 'Sync error: {e}', syncing: 'Syncing…', syncWait: 'Changes waiting to sync', synced: 'All changes synced',
       // one of something (L picks '<key>1' when n is 1)
       gymSub1: '1 exercise to try again', shelfN1: 'Shelf · 1 subject outside a Roadmap', invitesN1: '1 Roadmap shared with you', hiddenN1: '1 hidden subject', nChapters1: '1 chapter', nConcepts1: '1 section', quickCheckSub1: ' · 1 question',
-      allExercises1: 'The one exercise of this section', streakDays1: '1-day streak.', collNote1: 'Every {item} is a section you have read. The brightest one is from this week.', trailAria1: 'A 7-day trail, 1 day with study',
+      allExercises1: 'The one exercise of this section', streakDays1: '1-day streak.', collNote1: 'Every {item} is a chapter you have completed. The brightest one is from this week.', collNote0: 'Every {item} is a chapter you have completed.', trailAria1: 'A 7-day trail, 1 day with study',
     },
     el: {
       today: 'Σήμερα', knowledge: 'Γνώσεις', languages: 'Γλώσσες', discover: 'Ανακάλυψη', progress: 'Πρόοδος', me: 'Εγώ', meLong: 'Εγώ: ο λογαριασμός μου', myAccount: 'Ο λογαριασμός μου',
@@ -147,7 +147,7 @@
       keepCopy: 'Κράτα το αντίγραφό μου', keepMine: 'Κράτα τη δική μου', join: 'Συμμετοχή', accept: 'Αποδοχή', reject: 'Απόρριψη', someone: 'Κάποιος', invitesYou: '{who} σε προσκαλεί στον Οδικό χάρτη «{title}»', wantsShare: '{who} θέλει να μοιραστεί μαζί σου το «{title}»',
       joinedToast: 'Μπήκες στο «{title}»: η πρόοδος είναι δική σου, οι έτοιμοι σταθμοί κοινοί', addedToast: 'Το «{title}» μπήκε στα θέματά σου', syncErr: 'Σφάλμα συγχρονισμού: {e}', syncing: 'Συγχρονισμός…', syncWait: 'Αλλαγές περιμένουν συγχρονισμό', synced: 'Όλα συγχρονισμένα',
       gymSub1: '1 άσκηση για ξανά', shelfN1: 'Ράφι · 1 θέμα εκτός χάρτη', invitesN1: '1 Οδικός χάρτης μοιράστηκε μαζί σου', hiddenN1: '1 κρυμμένο θέμα', nChapters1: '1 κεφάλαιο', nConcepts1: '1 ενότητα', quickCheckSub1: ' · 1 ερώτηση',
-      allExercises1: 'Η άσκηση της ενότητας', streakDays1: '1 μέρα σερί.', collNote1: 'Κάθε {item} είναι μια ενότητα που διάβασες. Το πιο φωτεινό είναι αυτής της εβδομάδας.', trailAria1: 'Μονοπάτι 7 ημερών, 1 μέρα με μελέτη',
+      allExercises1: 'Η άσκηση της ενότητας', streakDays1: '1 μέρα σερί.', collNote1: 'Κάθε {item} είναι ένα κεφάλαιο που ολοκλήρωσες. Το πιο φωτεινό είναι αυτής της εβδομάδας.', collNote0: 'Κάθε {item} είναι ένα κεφάλαιο που ολοκλήρωσες.', trailAria1: 'Μονοπάτι 7 ημερών, 1 μέρα με μελέτη',
     },
     ru: {
       today: 'Сегодня', knowledge: 'Знания', languages: 'Языки', discover: 'Открытия', progress: 'Прогресс', me: 'Я', meLong: 'Я: мой аккаунт', myAccount: 'Мой аккаунт',
@@ -218,7 +218,7 @@
       keepCopy: 'Оставить мою копию', keepMine: 'Оставить мою', join: 'Присоединиться', accept: 'Принять', reject: 'Отклонить', someone: 'Кто-то', invitesYou: '{who} приглашает тебя в дорожную карту «{title}»', wantsShare: '{who} хочет поделиться с тобой «{title}»',
       joinedToast: 'Теперь ты в «{title}»: прогресс у каждого свой, подготовленные этапы общие', addedToast: '«{title}»: теперь в твоих предметах', syncErr: 'Ошибка синхронизации: {e}', syncing: 'Синхронизация…', syncWait: 'Изменения ждут синхронизации', synced: 'Всё синхронизировано',
       gymSub1: '1 упражнение на повтор', shelfN1: 'Полка · 1 предмет вне карт', invitesN1: 'С тобой поделились картой', hiddenN1: '1 скрытый предмет', nChapters1: '1 глава', nConcepts1: '1 раздел', quickCheckSub1: ' · 1 вопрос',
-      allExercises1: 'Упражнение раздела', streakDays1: 'Серия: 1 день.', collNote1: 'Каждый элемент ({item}) — прочитанный тобой раздел. Самый яркий — с этой недели.', trailAria1: 'Тропинка из 7 дней, 1 день с занятиями',
+      allExercises1: 'Упражнение раздела', streakDays1: 'Серия: 1 день.', collNote1: 'Каждый элемент ({item}) — пройденная тобой глава. Самый яркий — с этой недели.', collNote0: 'Каждый элемент ({item}) — пройденная тобой глава.', trailAria1: 'Тропинка из 7 дней, 1 день с занятиями',
     },
     fr: {
       today: 'Aujourd’hui', knowledge: 'Savoirs', languages: 'Langues', discover: 'Découvrir', progress: 'Progrès', me: 'Moi', meLong: 'Moi : mon compte', myAccount: 'Mon compte',
@@ -290,7 +290,7 @@
       keepCopy: 'Garder ma copie', keepMine: 'Garder la mienne', join: 'Rejoindre', accept: 'Accepter', reject: 'Refuser', someone: 'Quelqu’un', invitesYou: `{who} t’invite au parcours «${NB}{title}${NB}»`, wantsShare: `{who} veut partager «${NB}{title}${NB}» avec toi`,
       joinedToast: `Tu as rejoint «${NB}{title}${NB}»${NB}: ta progression reste la tienne, les étapes préparées sont partagées`, addedToast: `«${NB}{title}${NB}» ajouté à tes matières`, syncErr: `Erreur de synchronisation${NB}: {e}`, syncing: 'Synchronisation…', syncWait: 'Des changements attendent la synchronisation', synced: 'Tout est synchronisé',
       gymSub1: '1 exercice à refaire', shelfN1: 'Étagère · 1 matière hors parcours', invitesN1: '1 parcours partagé avec toi', hiddenN1: '1 matière masquée', nChapters1: '1 chapitre', nConcepts1: '1 section', quickCheckSub1: ' · 1 question',
-      allExercises1: 'L’exercice de la section', streakDays1: '1 jour d’affilée.', collNote1: 'Chaque élément ({item}) est une section que tu as lue. Le plus brillant date de cette semaine.', trailAria1: 'Un sentier de 7 jours, 1 jour d’étude',
+      allExercises1: 'L’exercice de la section', streakDays1: '1 jour d’affilée.', collNote1: 'Chaque élément ({item}) est un chapitre que tu as terminé. Le plus brillant date de cette semaine.', collNote0: 'Chaque élément ({item}) est un chapitre que tu as terminé.', trailAria1: 'Un sentier de 7 jours, 1 jour d’étude',
     },
   };
   root.NOEMA_SHELL_WORDS = W;

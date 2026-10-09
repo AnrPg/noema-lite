@@ -1,5 +1,5 @@
 /* The new frame (engine/shell.js, docs/UI_MAP.md), Playwright + Chromium:
-     A. first start: what do you learn → who comes with you (20 characters) → Today; tabs follow the choice
+     A. first start: what do you learn → who comes with you (29 characters) → Today; tabs follow the choice
      B. Knowledge, the Shelf and its ⋮ menus; a subject from the Shelf: chapters as a list or as cards, Practice ▾, the subject's ⋮
      C. chapter (Theory · Practice · Traps), section (reading mode, Ask ▾), the tutor sheet
      D. a Roadmap as a page: the path upwards, the character at the next station, map ↔ list, the station panel
@@ -34,7 +34,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await until(() => page.$('.ns-onb [data-pick="know"]')), 'the first-time questions open: what do you want to learn');
   ok(await page.$$eval('.ns-onb .ns-choice', l => l.length) === 3, 'three choices: knowledge · languages · both');
   await page.click('[data-pick="know"]'); await wait(300);
-  ok(await page.$$eval('.ns-pick button', l => l.length) === 20, 'who comes with you: 20 characters');
+  ok(await page.$$eval('.ns-pick button', l => l.length) === 29, 'who comes with you: 29 characters');
   ok(await page.$$eval('.ns-pickgroups .ns-chgrp', l => l.map(d => d.dataset.group + (d.open ? '+' : '')).join(',')) === 'animals,tales,grown', 'three folded groups: pet friends and fruits, fairy tales, serious');
   await page.click('.ns-chgrp[data-group="grown"] summary'); await wait(200);
   await page.click('[data-onbm="robot"]'); await wait(200);
@@ -150,9 +150,14 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.evaluate(() => NoemaThemes.game()) === 'calm', 'how much game: calm');
   await page.click('.ns-seg [data-v="playful"]'); await wait(200);
   await page.goto(url + '#/character'); await wait(500);
-  ok(await page.$$eval('.ns-gcard', l => l.length) === 20 && await page.$('.ns-gcard.cur[data-char="robot"]'), 'the gallery: 20 characters, each in its own clothes; yours marked');
+  ok(await page.$$eval('.ns-gcard', l => l.length) === 29 && await page.$('.ns-gcard.cur[data-char="robot"]'), 'the gallery: 29 characters, each in its own clothes; yours marked');
   { const found = await Promise.all(['berry', 'robot', 'heron', 'prism'].map(k => page.locator(`.ns-gcard[data-char="${k}"]`).count()));
     ok(found.every(n => n === 1), 'the four new ones: strawberry, robot, heron, prism'); }
+  { const serious = ['litM', 'litF', 'techM', 'techF', 'physM', 'physF', 'bioM', 'bioF', 'hydra'];
+    const inGrown = await page.$$eval('.ns-chgrp[data-group="grown"] .ns-gcard', l => l.map(e => e.dataset.char));
+    ok(serious.every(k => inGrown.includes(k)), 'the nine serious ones of 2026-10-09 sit in the Serious group: ' + serious.filter(k => !inGrown.includes(k)).join(','));
+    const art = await page.evaluate(ks => ks.map(k => [k, /<svg/.test(NoemaArt.MASCOTS[k] || ''), /var\(--deco/.test(NoemaArt.land(k)), NoemaArt.collection(k, 5, 1).split('scale(0.').length - 1]), serious);
+    ok(art.every(([, f, l, n]) => f && l && n === 5), 'each has a face with its props, a landscape in its deco colours and one item per chapter: ' + JSON.stringify(art.filter(([, f, l, n]) => !(f && l && n === 5)))); }
   ok(await page.$$eval('.ns-chgrp', l => l.length === 3 && l.every(d => !d.open)), 'the gallery: three groups, folded until opened');
   await page.click('.ns-chgrp[data-group="animals"] summary'); await wait(200);
   await page.click('[data-try="owl"]'); await wait(400);

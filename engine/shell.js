@@ -543,7 +543,7 @@ window.NoemaShell = (() => {
     const fresh = Math.max(0, done - base);
     v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, tx.coll || ''), pill(L('nChapters', { n: done }), 1)),
       h('div', { class: 'ns-coll', html: `<svg viewBox="0 0 300 230" role="img" aria-label="${(tx.coll || '').replace(/"/g, '')}: ${done}">${ART()?.collection(m, done, fresh) || ''}</svg>` }),
-      h('p', { class: 'tiny center' }, L('collNote', { item: tx.item || '', n: fresh }))));
+      h('p', { class: 'tiny center' }, L(fresh ? 'collNote' : 'collNote0', { item: tx.item || '', n: fresh }))));
     // the week's XP
     const max = Math.max(settings().goal || 120, ...days.map(d => (st.xpDay || {})[d.k] || 0)), wsum = days.reduce((a, d) => a + ((st.xpDay || {})[d.k] || 0), 0);
     v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, L('xpWeek')), pill(wsum, 1)),

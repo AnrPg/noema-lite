@@ -1,6 +1,6 @@
 # Self-hosted web fonts
 
-These are self-hosted copies of Google Fonts, so the app (the site and every page served from this repository) never depends on fonts.googleapis.com at runtime. The one exception is the one-file bundle (`python3 tools/build.py bundle`): a single HTML file cannot reasonably carry these 5.5 MB, so it links the same families from Google Fonts when it is online, as it did before this folder existed, and uses the system fonts offline. They were fetched as woff2 from the Google Fonts CSS2 API (Chrome User-Agent), keeping only the subsets latin, latin-ext, greek, greek-ext, cyrillic and cyrillic-ext that each family has; variable families were requested as a weight range (one `<subset>-var.woff2` per subset covers all weights in it), static families per weight. `fonts.css` holds the `@font-face` rules with the original weights and `unicode-range`, `fonts.json` the per-family metadata, and each `<slug>/LICENSE.txt` the licence from the google/fonts repository (M PLUS Rounded 1c: from its upstream repo coz-m/MPLUS_FONTS). Total 42 families, 5.5 MB. A "no" under Greek or Cyrillic means the family has no glyphs for that script, so the app needs a fallback font for that language.
+These are self-hosted copies of Google Fonts, so the app (the site and every page served from this repository) never depends on fonts.googleapis.com at runtime. The one exception is the one-file bundle (`python3 tools/build.py bundle`): a single HTML file cannot reasonably carry these 6.9 MB, so it links the same families from Google Fonts when it is online, as it did before this folder existed, and uses the system fonts offline. They were fetched as woff2 from the Google Fonts CSS2 API (Chrome User-Agent), keeping only the subsets latin, latin-ext, greek, greek-ext, cyrillic and cyrillic-ext that each family has; variable families were requested as a weight range (one `<subset>-var.woff2` per subset covers all weights in it), static families per weight. `fonts.css` holds the `@font-face` rules with the original weights and `unicode-range`, `fonts.json` the per-family metadata, and each `<slug>/LICENSE.txt` the licence from the google/fonts repository (M PLUS Rounded 1c: from its upstream repo coz-m/MPLUS_FONTS). Total 48 families, 6.9 MB. A "no" under Greek or Cyrillic means the family has no glyphs for that script, so the app needs a fallback font for that language.
 
 | Family | Licence | Weights | Greek | Cyrillic | Source |
 |---|---|---|---|---|---|
@@ -34,7 +34,7 @@ These are self-hosted copies of Google Fonts, so the app (the site and every pag
 | Vollkorn | OFL-1.1 | 800 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Vollkorn) |
 | Source Sans 3 | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Source+Sans+3) |
 | Noto Serif Display | OFL-1.1 | 600, 700 italic | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Noto+Serif+Display) |
-| Manrope | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Manrope) |
+| Manrope | OFL-1.1 | 400–800 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Manrope) |
 | Piazzolla | OFL-1.1 | 700 italic | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Piazzolla) |
 | Fira Sans | OFL-1.1 | 400, 600, 700 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Fira+Sans) |
 | Sofia Sans Extra Condensed | OFL-1.1 | 800 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Sofia+Sans+Extra+Condensed) |
@@ -45,4 +45,10 @@ These are self-hosted copies of Google Fonts, so the app (the site and every pag
 | Jura | OFL-1.1 | 700 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Jura) |
 | Inter | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Inter) |
 | Noto Sans | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Noto+Sans) |
-| JetBrains Mono | OFL-1.1 | 400–600 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/JetBrains+Mono) |
+| JetBrains Mono | OFL-1.1 | 400–800 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/JetBrains+Mono) |
+| Source Serif 4 | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Source+Serif+4) |
+| Old Standard TT | OFL-1.1 | 400, 700, 400 italic | no | yes | [Google Fonts](https://fonts.google.com/specimen/Old+Standard+TT) |
+| Noto Serif | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Noto+Serif) |
+| Fira Code | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Fira+Code) |
+| STIX Two Text | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/STIX+Two+Text) |
+| Fira Sans Condensed | OFL-1.1 | 700 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Fira+Sans+Condensed) |

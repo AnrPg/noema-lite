@@ -75,6 +75,13 @@ body.ns-on .srcdeck{top:56px}
 .ns-face svg{width:100%;height:100%;display:block;overflow:visible}
 .ns-face .eye{transform-box:fill-box;transform-origin:center;animation:ns-blink 6s infinite}
 @keyframes ns-blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+/* the serious characters' quiet props: a slowly turning atom, a server's blinking lights, greetings bobbing in the Hydra's landscape */
+.ns-face .spin{transform-box:view-box;animation:ns-turn 24s linear infinite}
+@keyframes ns-turn{to{transform:rotate(360deg)}}
+.ns-face .led{animation:ns-led 2.4s steps(2) infinite}
+@keyframes ns-led{50%{opacity:.25}}
+.ns-land .bob{animation:ns-bob 5s ease-in-out infinite}
+@keyframes ns-bob{50%{transform:translateY(-2px)}}
 .breathe svg{transform-origin:50% 92%;animation:ns-breathe 4.5s ease-in-out infinite}
 @keyframes ns-breathe{50%{transform:scale(1.02,1.03)}}
 .hop svg{animation:ns-hop .7s ease-out}

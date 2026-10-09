@@ -633,8 +633,10 @@
     "source": "https://fonts.google.com/specimen/Manrope",
     "weights": [
       400,
+      500,
       600,
-      700
+      700,
+      800
     ],
     "italic": false,
     "variable": true,
@@ -876,7 +878,10 @@
     "source": "https://fonts.google.com/specimen/JetBrains+Mono",
     "weights": [
       400,
-      600
+      500,
+      600,
+      700,
+      800
     ],
     "italic": false,
     "variable": true,
@@ -890,5 +895,149 @@
     "greek": true,
     "cyrillic": true,
     "bytes": 60404
+  },
+  "Source Serif 4": {
+    "slug": "source-serif-4",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Source+Serif+4",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 167952
+  },
+  "Old Standard TT": {
+    "slug": "old-standard-tt",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Old+Standard+TT",
+    "weights": [
+      400,
+      700
+    ],
+    "italic": true,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": false,
+    "cyrillic": true,
+    "bytes": 258084,
+    "styles": {
+      "italic": [
+        "400"
+      ],
+      "normal": [
+        "400",
+        "700"
+      ]
+    }
+  },
+  "Noto Serif": {
+    "slug": "noto-serif",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Noto+Serif",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 377528
+  },
+  "Fira Code": {
+    "slug": "fira-code",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Fira+Code",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 106048
+  },
+  "STIX Two Text": {
+    "slug": "stix-two-text",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/STIX+Two+Text",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "italic": false,
+    "variable": true,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 119248
+  },
+  "Fira Sans Condensed": {
+    "slug": "fira-sans-condensed",
+    "license": "OFL-1.1",
+    "source": "https://fonts.google.com/specimen/Fira+Sans+Condensed",
+    "weights": [
+      700
+    ],
+    "italic": false,
+    "variable": false,
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "greek",
+      "greek-ext",
+      "cyrillic",
+      "cyrillic-ext"
+    ],
+    "greek": true,
+    "cyrillic": true,
+    "bytes": 129096
   }
 }

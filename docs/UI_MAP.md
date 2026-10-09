@@ -111,7 +111,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | ASu1–ASu8 Subjects | Me › My subjects (unchanged), and each subject's ⋮ on the Shelf |
 | AB1–AB10 Backup & restore, AC1–AC13 Cloud | Me › Data and sync (cloud first, then backup and restore) |
 | AH1–AH11 Help | Me › Help (unchanged guides) |
-| — | Me › Character: the gallery of 20 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes", a new one every 15 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language |
+| — | Me › Character: the gallery of 29 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes", a new one every 15 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language. The Serious group holds the nine professions of 2026-10-09 (two philologists, two tech nerds, two maths-and-physics scientists, two biochemists, the polyglot Hydra), each with its props beside it and its own collection item |
 | — | Me › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
 
 ## 8. Before a subject: accounts, picker, Shelf, Explore, sharing, Claude (PA, SP, SH, SC, ES, SS, EX, CG, CS)
