@@ -7,6 +7,72 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
   const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,prefer,x-upsert', 'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' };
   const session = u => { const at = crypto.randomUUID(), rt = crypto.randomUUID(); tokens[at] = u.id; tokens['r:' + rt] = u.id; return { access_token: at, refresh_token: rt, expires_in: 3600, token_type: 'bearer', user: { id: u.id, email: u.email, user_metadata: u.meta } }; };
   const who = req => tokens[(req.headers.authorization || '').replace('Bearer ', '')];
+  /* ---------- 👥 shared curricula: tables noema_curricula_shared / _members / _steps + bucket noema-curricula ---------- */
+  const curs = {}, mems = [], steps = [], curFiles = {}; const now = () => new Date().toISOString();
+  const emailOf = uid => uid && users[uid] ? users[uid].email.toLowerCase() : '';
+  const access = (cid, uid) => {
+    const c = curs[cid]; if (!c) return null; const em = emailOf(uid);
+    if (uid && c.owner === uid) return 'owner';
+    if (uid && mems.some(m => m.curriculum === cid && m.user_id === uid && m.status === 'joined')) return 'member';
+    if (uid && mems.some(m => m.curriculum === cid && m.email === em && m.status === 'pending')) return 'invited';
+    return c.public ? 'public' : null;
+  };
+  const filt = (rows, sp) => rows.filter(r => { for (const [k, v] of sp) { if (['select', 'order', 'limit', 'offset', 'on_conflict'].includes(k)) continue; const m = /^(eq|neq|lt|gt|in)\.([\s\S]*)$/.exec(v); if (!m) continue; const x = r[k];
+    if (m[1] === 'eq' && String(x) !== m[2]) return false; if (m[1] === 'neq' && String(x) === m[2]) return false;
+    if (m[1] === 'lt' && !(x != null && Date.parse(x) < Date.parse(m[2]))) return false; if (m[1] === 'gt' && !(x != null && Date.parse(x) > Date.parse(m[2]))) return false;
+    if (m[1] === 'in' && !m[2].replace(/^\(|\)$/g, '').split(',').includes(String(x))) return false; } return true; });
+  const rls = res => json(res, 403, { code: '42501', message: 'new row violates row-level security policy' });
+  const dupe = res => json(res, 409, { code: '23505', message: 'duplicate key value violates unique constraint' });
+  const repr = (req, res, code, rows) => /representation/.test(req.headers.prefer || '') ? json(res, code, rows) : json(res, code === 201 ? 201 : 204);
+  const folder = k => k.split('/');
+  const canWriteFile = (k, uid) => { const f = folder(k), a = access(f[0], uid); return (f[1] === 'steps' && f[2] === uid && ['owner', 'member'].includes(a)) || (f[1] === 'files' && a === 'owner'); };
+  function sharedCurricula(req, res, p, u, uid, data, buf) {
+    const sp = [...u.searchParams.entries()], M = req.method, em = emailOf(uid);
+    if (p === '/rest/v1/noema_curricula_shared') {
+      const vis = Object.values(curs).filter(c => access(c.id, uid));
+      if (M === 'GET') return json(res, 200, filt(vis, sp).sort((a, b) => a.updated_at < b.updated_at ? 1 : -1));
+      if (!uid) return json(res, 401, { message: 'JWT required' });
+      if (M === 'POST') { const out = []; for (const r of data) { const row = { owner: uid, public: false, meta: {}, version: 1, published_at: now(), updated_at: now(), ...r }; if (row.owner !== uid || !/^c[a-z0-9]{2,30}$/.test(row.id)) return rls(res); if (curs[row.id]) return dupe(res); curs[row.id] = row; out.push(row); } return repr(req, res, 201, out); }
+      const mine = filt(vis.filter(c => c.owner === uid), sp);
+      if (M === 'PATCH') { if (data.owner && data.owner !== uid) return rls(res); for (const c of mine) Object.assign(c, data, { id: c.id, owner: c.owner, updated_at: now() }); return repr(req, res, 200, mine); }
+      if (M === 'DELETE') { for (const c of mine) { delete curs[c.id]; for (let i = mems.length - 1; i >= 0; i--) if (mems[i].curriculum === c.id) mems.splice(i, 1); for (let i = steps.length - 1; i >= 0; i--) if (steps[i].curriculum === c.id) steps.splice(i, 1); } return json(res, 204); }
+    }
+    if (p === '/rest/v1/noema_curriculum_members') {
+      if (!uid) return json(res, 401, { message: 'JWT required' });
+      const vis = mems.filter(m => m.user_id === uid || m.email === em || access(m.curriculum, uid) === 'owner');
+      if (M === 'GET') return json(res, 200, filt(vis, sp).sort((a, b) => a.created_at < b.created_at ? -1 : 1));
+      if (M === 'POST') { const out = []; for (const r of data) { const row = { user_id: null, name: null, status: 'pending', invited_by: uid, message: null, created_at: now(), responded_at: null, ...r };
+        const invite = access(row.curriculum, uid) === 'owner' && row.status === 'pending' && !row.user_id, join = row.status === 'joined' && row.user_id === uid && row.email === em && curs[row.curriculum]?.public;
+        if (!invite && !join) return rls(res); if (mems.some(m => m.curriculum === row.curriculum && m.email === row.email)) return dupe(res); mems.push(row); out.push(row); } return repr(req, res, 201, out); }
+      if (M === 'PATCH') { const out = [];
+        for (const m of filt(vis, sp)) { const own = access(m.curriculum, uid) === 'owner', self = (m.user_id === uid || m.email === em) && m.status !== 'revoked'; if (!own && !self) continue;
+          const nx = { ...m, ...data, curriculum: m.curriculum, email: m.email }; if (!own && !(nx.email === em && nx.user_id === uid && ['joined', 'rejected', 'left'].includes(nx.status))) return rls(res); Object.assign(m, nx); out.push(m); }
+        return repr(req, res, 200, out); }
+      if (M === 'DELETE') { for (const m of filt(vis, sp)) if (m.user_id === uid || access(m.curriculum, uid) === 'owner') mems.splice(mems.indexOf(m), 1); return json(res, 204); }
+    }
+    if (p === '/rest/v1/noema_curriculum_steps') {
+      const vis = steps.filter(r => access(r.curriculum, uid));
+      if (M === 'GET') return json(res, 200, filt(vis, sp).sort((a, b) => a.node_id < b.node_id ? -1 : 1));
+      if (!uid) return json(res, 401, { message: 'JWT required' });
+      const part = cid => ['owner', 'member'].includes(access(cid, uid));
+      if (M === 'POST') { const out = []; for (const r of data) { const row = { author: uid, author_name: null, pack_id: null, version: null, path: null, meta: {}, claimed_until: null, created_at: now(), updated_at: now(), ...r };
+        if (row.author !== uid || !part(row.curriculum) || !curs[row.curriculum]?.record?.nodes?.[row.node_id] || !['preparing', 'ready'].includes(row.status)) return rls(res);
+        if (steps.some(x => x.curriculum === row.curriculum && x.node_id === row.node_id)) return dupe(res); steps.push(row); out.push(row); } return repr(req, res, 201, out); }
+      if (M === 'PATCH') { const out = [], t = Date.now();
+        for (const r of filt(vis, sp)) { if (!part(r.curriculum) || !(r.author === uid || (r.status === 'preparing' && Date.parse(r.claimed_until || 0) < t))) continue;
+          const nx = { ...r, ...data, curriculum: r.curriculum, node_id: r.node_id, updated_at: new Date(Math.max(t, Date.parse(r.updated_at) + 1)).toISOString() }; if (nx.author !== uid) return rls(res); Object.assign(r, nx); out.push(r); }
+        server.state.stepWrites++; return repr(req, res, 200, out); }
+      if (M === 'DELETE') { for (const r of filt(vis, sp)) if (r.author === uid || access(r.curriculum, uid) === 'owner') steps.splice(steps.indexOf(r), 1); return json(res, 204); }
+    }
+    let m;
+    if (p === '/storage/v1/object/list/noema-curricula') return json(res, 200, []);
+    if ((m = p.match(/^\/storage\/v1\/object\/noema-curricula$/)) && M === 'DELETE') { for (const k of data.prefixes || []) { const f = folder(k); if ((f[1] === 'steps' && f[2] === uid) || access(f[0], uid) === 'owner') delete curFiles[k]; } return json(res, 200, []); }
+    if ((m = p.match(/^\/storage\/v1\/object\/noema-curricula\/(.+)$/)) && M === 'POST') { const k = decodeURIComponent(m[1]); if (!uid || !canWriteFile(k, uid)) return rls(res); curFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-curricula/' + k }); }
+    if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-curricula\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (!uid || !access(folder(k)[0], uid) || !curFiles[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': curFiles[k].type || 'application/octet-stream' }, cors)); return res.end(curFiles[k].data); }
+    if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-curricula\/(.+)$/)) && M === 'POST') { const k = decodeURIComponent(m[1]); if (!uid || !access(folder(k)[0], uid) || !curFiles[k]) return json(res, 400, { message: 'Object not found' }); const t = crypto.randomUUID(); signed[t] = 'cdl:' + k; return json(res, 200, { signedURL: `/object/sign/noema-curricula/${m[1]}?token=${t}` }); }
+    if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-curricula\/(.+)$/)) && M === 'GET') { const k = decodeURIComponent(m[1]); if (signed[u.searchParams.get('token')] !== 'cdl:' + k || !curFiles[k]) return json(res, 400, { message: 'invalid signature' }); res.writeHead(200, Object.assign({ 'Content-Type': curFiles[k].type || 'application/octet-stream' }, cors)); return res.end(curFiles[k].data); }
+    return undefined;
+  }
   const server = http.createServer((req, res) => {
     let body = []; req.on('data', c => body.push(c)); req.on('end', () => {
       const buf = Buffer.concat(body); const txt = buf.toString(); let data = null; try { data = txt ? JSON.parse(txt) : null; } catch (e) { }
@@ -33,6 +99,8 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       if (p === '/auth/v1/logout' || p === '/auth/v1/recover') return json(res, 204);
       const uid = who(req);
       const q = k => (u.searchParams.get(k) || '').replace(/^(eq|gt)\./, '');
+      // ---- 👥 shared curricula (rules as in cloud/supabase.sql §10; anonymous reads of public ones)
+      sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
       let pm;
@@ -68,8 +136,22 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
         kv[uid] = kv[uid] || {};
         const kq = u.searchParams.get('key') || '', likeRe = /^like\./.test(kq) ? new RegExp('^' + kq.slice(5).replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$') : null;   // PostgREST like.<pattern> (* = %)
         if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
-        if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
-        if (req.method === 'DELETE') { const k = decodeURIComponent(q('key')); delete kv[uid][k]; return json(res, 204); }
+        if (req.method === 'POST') {   // upsert (merge-duplicates) or insert-if-absent (ignore-duplicates); return=representation → the rows written
+          const pref = req.headers.prefer || '', keep = /ignore-duplicates/.test(pref), out = [];
+          for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); if (keep && kv[uid][r.key]) continue; kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; out.push({ user_id: uid, key: r.key, value: r.value, updated_at: r.updated_at }); }
+          return /representation/.test(pref) ? json(res, 201, out) : json(res, 201);
+        }
+        if (req.method === 'PATCH') {   // ?key=eq.K[&updated_at=lt.T|eq.T] — a conditional update; return=representation → the rows updated
+          const k = decodeURIComponent(q('key') || ''), lt = u.searchParams.get('updated_at'), row = kv[uid][k], out = [];
+          const when = !lt ? true : /^lt\./.test(lt) ? row && Date.parse(row.updated_at) < Date.parse(lt.slice(3)) : /^eq\./.test(lt) ? row && row.updated_at === lt.slice(3) : true;   // eq.: compare-and-swap on the version
+          if (row && when) { Object.assign(row, data.value != null ? { value: data.value } : {}, data.updated_at ? { updated_at: data.updated_at } : {}); out.push({ user_id: uid, key: k, ...row }); }
+          return /representation/.test(req.headers.prefer || '') ? json(res, 200, out) : json(res, 204);
+        }
+        if (req.method === 'DELETE') {   // [&updated_at=eq.T]: only that version; return=representation → the rows deleted
+          const k = decodeURIComponent(q('key')), ver = u.searchParams.get('updated_at'), row = kv[uid][k], out = [];
+          if (row && (!ver || !/^eq\./.test(ver) || row.updated_at === ver.slice(3))) { delete kv[uid][k]; out.push({ user_id: uid, key: k, ...row }); }
+          return /representation/.test(req.headers.prefer || '') ? json(res, 200, out) : json(res, 204);
+        }
       }
       if (p === '/rest/v1/noema_conversations') {
         server.state.convs[uid] = server.state.convs[uid] || {};
@@ -128,7 +210,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, curs, mems, steps, curFiles, stepWrites: 0 };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

@@ -17,6 +17,9 @@
   const SCHEMA = 'noema.conversation/v1';
   const KINDS = ['tutor', 'grading', 'code-review', 'question', 'drill-grading'];
   const MODES = ['socratic', 'explain', 'quiz', 'interview', 'debug', null];
+  // Sibling apps write the same schema with their own tutor modes (Meletee: hint, feynman, teach-back, why-chain,
+  // examples, mnemonic, method-lab, plan). Any short lowercase slug is kept as written, never rewritten to 'socratic'.
+  const validMode = m => MODES.includes(m) || (typeof m === 'string' && /^[a-z][a-z0-9-]{0,31}$/.test(m));
   const listeners = [];
   const iso = t => new Date(t ?? Date.now()).toISOString();
   const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => (b % 36).toString(36)).join('');
@@ -43,7 +46,7 @@
       account: r.account || defaults.account || null,                       // { id, kind }
       subject: r.subject || defaults.subject || null,                       // { id, title, packVersion }
       kind: KINDS.includes(r.kind) ? r.kind : 'tutor',
-      mode: r.kind && r.kind !== 'tutor' ? null : (MODES.includes(r.mode) ? r.mode : 'socratic'),
+      mode: r.kind && r.kind !== 'tutor' ? null : (validMode(r.mode) ? r.mode : 'socratic'),
       title: r.title || null,
       titleSource: r.titleSource || (r.title ? (r.titledLen >= 1e9 ? 'user' : 'ai') : 'none'),
       context: { type: ctx.type || 'course', id: ctx.id ?? null, label: ctx.label ?? null, ...(ctx.chapterId ? { chapterId: ctx.chapterId } : {}), ...(ctx.sectionId ? { sectionId: ctx.sectionId } : {}) },
@@ -62,19 +65,23 @@
 
   /** Human-readable Markdown rendition of a record (used for folder files and exports). */
   const KIND_NAME = { tutor: 'Tutor conversation', grading: 'AI grading', 'code-review': 'AI code review', question: 'AI-generated question', 'drill-grading': 'Debug-drill grading' };
-  const MODE_NAME = { socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };
+  const MODE_NAME = { socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation',
+    hint: 'Hint', feynman: 'Feynman coach', 'teach-back': 'Teach-back', 'why-chain': 'Why-chain', examples: 'Examples coach', mnemonic: 'Memory hook', 'method-lab': 'Method Lab', plan: 'Study plan' };   // the last ones come from Meletee
+  const APP_NAME = { meletee: 'Meletee' };
+  /** The other app that wrote this record (meta.app), as a name to show; null for noema-lite's own records. */
+  const fromApp = rec => { const a = rec?.meta?.app; return a && a !== 'noema-lite' ? (APP_NAME[a] || String(a)) : null; };
   const fmt = s => { const d = new Date(s), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; };
   function demote(text, minLevel) { let fence = false; return text.split('\n').map(l => { if (/^\s*(```|~~~)/.test(l)) fence = !fence; if (fence) return l; return l.replace(/^(#{1,6})\s+/, (m, hs) => '#'.repeat(Math.min(6, hs.length + minLevel - 1)) + ' '); }).join('\n'); }
   function toMarkdown(rec, { level = 1, tutorName = 'Tutor', tutorAvatar = '🦉', appName = 'noema-lite' } = {}) {
     const H = '#'.repeat(level), esc = s => String(s ?? '').replace(/\|/g, '\\|');
     const lines = [`${H} ${rec.title || (rec.context?.label ? rec.context.label : KIND_NAME[rec.kind])}`, '',
       '| | |', '|---|---|',
-      `| **Type** | ${KIND_NAME[rec.kind]}${rec.mode ? ' · ' + MODE_NAME[rec.mode] : ''} |`,
+      `| **Type** | ${KIND_NAME[rec.kind]}${rec.mode ? ' · ' + (MODE_NAME[rec.mode] || rec.mode) : ''} |`,
       `| **Subject** | ${esc(rec.subject?.title || rec.subject?.id || '—')} |`,
       `| **Context** | ${esc(rec.context?.label || 'Whole course')} |`,
       `| **Started** | ${fmt(rec.createdAt)} |`, `| **Last message** | ${fmt(rec.updatedAt)} |`,
       `| **Messages** | ${rec.stats.messages} |`, `| **Model** | ${esc(rec.model?.name || '—')} |`,
-      `| **Id** | \`${rec.id}\` |`, `| **Source** | ${appName} |`, '', '---', ''];
+      `| **Id** | \`${rec.id}\` |`, `| **Source** | ${fromApp(rec) || appName} |`, '', '---', ''];
     if (rec.deleted) lines.push('*This conversation was deleted.*');
     const lessons = rec.tutorState?.lessons || [];
     if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
@@ -88,7 +95,7 @@
   const dirtyKey = acc => `noema1:${acc}:meta:convoDirty`;
   function markDirty(acc, id) { const d = Noema.jget(dirtyKey(acc), []); if (!d.includes(id)) { d.push(id); Noema.jset(dirtyKey(acc), d); } Noema.jset(`noema1:${acc}:meta:dirty`, Date.now()); }
   const api = {
-    SCHEMA, KINDS, newId, msgId, normalize, toMarkdown, KIND_NAME, MODE_NAME,
+    SCHEMA, KINDS, newId, msgId, normalize, toMarkdown, KIND_NAME, MODE_NAME, fromApp,
     onChange(f) { listeners.push(f); },
     async list(acc, { subject = null, kinds = null, includeDeleted = false } = {}) {
       const rows = (await store().entries('convos', acc + '|')).map(([, v]) => v);

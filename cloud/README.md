@@ -21,10 +21,12 @@ Note: anyone who has the website address can open the shared study material (not
 5. From now on: when Claude has made changes, open GitHub Desktop → **Push origin**. (Claude commits; you push.)
 
 ## 2. Supabase (accounts + sync)
+
+How devices stay in sync without overwriting each other (version-checked saves, combining, one device at a time): [docs/SYNC.md](../docs/SYNC.md).
 1. https://supabase.com → *Start your project* → sign in with GitHub → **New project** (name `noema-lite`, region *Frankfurt (eu-central-1)*, generate a DB password and store it in your password manager).
 2. When ready: left menu **SQL Editor** → *New query* → paste the whole content of `cloud/supabase.sql` → **Run**.
    The last result lists the 6 `noema_` tables with `rls_enabled = true` (plus the storage buckets `noema-private`, `noema-public`, `noema-shared`). The script is idempotent: run it again after every update of the file.
-   Then in the app: ⚙️ → Cloud → 🩺 **Check the cloud connection** — 8 ✅ means everything works (or `node tests/live_cloud.js`).
+   Then in the app: ⚙️ → Cloud → 🩺 **Check the cloud connection** — 9 ✅ means everything works (or `node tests/live_cloud.js`).
 3. **Authentication → Sign In / Providers → Email**: enabled. (Optional for a personal app: turn off “Confirm email”.)
 4. The two values the app needs (both public by design):
    * **Project URL** = `https://<project-ref>.supabase.co`. The project ref is the id in your dashboard address

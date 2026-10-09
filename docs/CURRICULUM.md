@@ -43,7 +43,7 @@ the goal) and the number of applications. Then four agents run, one after the ot
 ## 2. The map
 
 Full screen, three coloured parts (**1 · Prerequisites · 2 · the goal · 3 · Applications**), layered
-left → right. Each step shows its state: **✅ mastered · 🔓 open · 🔒 locked**, and **⚡ prepared ·
+left → right. Each step shows its state: **✅ mastered · open (green open padlock) · 🔒 locked**, and **⚡ prepared ·
 ⏳ being prepared · ⚠️ failed**.
 
 * Click a step → panel (bottom sheet on phones): summary, role and disciplines, what it builds on and
@@ -197,6 +197,14 @@ usage limits may spread a big one over days).
   checks each answer again, applies it, pushes the curriculum to the cloud and only then deletes the rows (so the connector
   always sees one or the other). A finished step: the app downloads the pack (pictures embedded), marks the step ⚡ and
   syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV.
+* **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
+  an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
+  overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the
+  step is saved (`noema_finish_upload`) or after 4 h (a run that died). A queued step whose subject (`a:packmeta:<packId>`)
+  was saved *after* it was queued counts as prepared — even when an older copy of the curriculum from another device put
+  it back in the queue; the app then heals it back to ⚡ itself. `peek = true` says what is next without claiming it;
+  `step` + `force = true` takes over a claimed step. Queueing an already-queued step changes nothing (it keeps its place).
+  Claim rows are never mirrored into the device's KV.
 * **The map** shows a 💬 bar (*N to plan · M to prepare* → 📋 Copy the message · How? · by hand); 💬 on steps waiting for the
   Claude app; the step panel offers the message, “by hand”, 📥 Import its package and ↩ Not now. A Claude-app curriculum
   is usable as soon as its graph exists; steps get their plans as they arrive.
@@ -208,6 +216,51 @@ usage limits may spread a big one over days).
 * **Set up:** ❓ Help → Set up Claude → **C** (also ✨ Create with Claude → C): the connector steps of way B, then “choose
   💬 Claude app → paste the message → come back”, with a comparison of the ways.
 
+## 8. 👥 Shared curricula — together, each with their own progress (`engine/curshare.js`)
+
+The owner shares a curriculum (🧭 Curricula → **👥** on its card, or 👥 in the map's top bar; needs a ☁️ cloud account):
+**🌍 public** (anyone finds it in 🧭 Curricula → **🌍 Explore curricula** and joins) or **👥 with people** (by the e-mail they
+sign in with — they get it in 🔔 / the banner and in 🧭 Curricula, **✓ Join** or **No thanks**). The owner can add the steps
+prepared so far and the curriculum's material files go with the map.
+
+| | who | what |
+|---|---|---|
+| **the map** (steps, links, chapter plans, the files) | the owner | changes reach everybody by themselves (members cannot edit it; their copy is replaced by the newest map — their own state stays) |
+| **progress** (read, solved, mastered, placement tests) | everybody | in their **own** account, as for any curriculum — nobody sees anybody's progress |
+| **prepared steps** | **any participant** (owner or a member who joined) | prepares a step **nobody has prepared yet**, with their own AI (API key, Gemini or their Claude app). Everybody sees it (⚡👤 *prepared by …*) and gets it into their own account when they study it (the next prepared ones are fetched ahead) |
+| **overwriting** | nobody | a prepared step is **never overwritten by someone else** — not by the owner, not by a member. Only its author may publish a new version of it; the owner may *remove* it (moderation: 🗑 *X's version*) and then it can be prepared again |
+
+**First come, first served — and nobody prepares a step twice.** Before a step is prepared it is **reserved** for its preparer
+(a row with `status = preparing` and a 4-hour lease, renewed while an in-app build runs): in the app when the build starts, in
+the Claude app when `noema_curriculum_task` hands the step out. The others see *⏳ X is preparing this step* (no ⚡ Prepare
+button; their Claude app is told so and skips it). When the step is saved it is published (`ready`) and everybody's map shows
+⚡. A reservation that ran out (a run that died) may be taken over by anyone. If someone ends up with a version of a step
+somebody else published first (made by hand / imported), it stays **their own copy** and the shared one stays the first.
+
+**The database enforces it** (`cloud/supabase.sql` §10, tested on PostgreSQL by `tests/sql_policies.py`), not only the app:
+the step's primary key `(curriculum, node_id)` makes it first come, first served; only the author may update a row (or take
+over an expired reservation); the step files live in `noema-curricula/<cid>/steps/<author>/…`, writable only by that author.
+
+| data | where | who can read · write |
+|---|---|---|
+| the shared map (`record` = the curriculum without anybody's settings, progress or preparation state) | `noema_curricula_shared` | public: everybody · else owner, members, invited people · **owner** writes |
+| invitations and members | `noema_curriculum_members` | owner + each person their own row · owner invites / removes; a person joins, says no, leaves |
+| prepared / reserved steps | `noema_curriculum_steps` | everybody who sees the curriculum · participants insert an **empty** one; only its **author** changes it |
+| step subjects + their source files | bucket `noema-curricula/<cid>/steps/<author>/<step>.json` (+ `<step>/src-…`) | participants · its author |
+| the curriculum's material | `noema-curricula/<cid>/files/…` | participants · the owner |
+
+**Locally** a shared curriculum is an ordinary curriculum record with the **same id** for everybody (so a step's subject has
+the same id everywhere: `cur-<id>-<step>-<hash>`), plus `c.shared` (role `owner` / `member`, owner's name, public, version,
+the files) and `c.remote` (who prepared / is preparing which step). Members start with *prepare ahead* = 0 (nothing is
+prepared on their account by itself) and no review step (the plans are the owner's); they choose their own AI in ⚙️. A member
+who **leaves** loses the map from their curricula; the steps they studied stay their subjects, with their progress. When the
+owner **stops sharing**, the shared steps and files are removed; everybody keeps their copy (*no longer shared with you*).
+
+**The Claude app** (§7) follows the same rules through the connector: `noema_curricula` shows *👥 shared by …*, the queue skips
+steps others have (prepared or reserved), a step handed out is reserved in the shared curriculum too, `noema_finish_upload`
+publishes it at once (*👥 Shared: every member … sees this step*) and its source files follow from the learner's app; a member
+gets signed links to the owner's material files. Members are never given map / plan tasks.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
@@ -218,6 +271,11 @@ drawn diagrams and listed sources). `engine/packcheck.js` is also the connector'
 `tests/curriculum_app.js`: §7 end to end — the connector (run in-process as the learner's Claude) builds a curriculum's map
 (a wrong answer sent back), plans it in batches, prepares a reviewed step; an imported map with a PDF (signed link, the same
 file not uploaded twice); copy / paste, a step bundle and its package; re-plan with a wish; Set up Claude → C; phone.
+`tests/curriculum_share.js`: §8 with three people and the connector — share with a person (her prepared step + her file
+go with it), the invitation in the banner, join, a step fetched ahead and studied (own progress), a step reserved by a member's
+Claude app (the owner cannot take it, ⏳ on her map) and published on saving, nobody overwrites anybody (app, connector, API,
+files), public → 🌍 Explore curricula → join → prepare, the owner's renamed step reaches the members, removing a version,
+leaving, stopping, phone. `tests/sql_policies.py` checks every rule of §8 on PostgreSQL.
 `tests/curriculum_import.js`: the parser (tree art, nesting + independent, Mermaid, ⇄, JSON, Greek outline, loops, file
 matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
 first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a

@@ -29,7 +29,7 @@ const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
   const DOCS = { workflow: 'SKILL', content: 'CONTENT', visual: 'VISUAL' };
   const fn = path.join(os.tmpdir(), `noema-mcp-app-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
   const { default: handler } = await import(fn);
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
@@ -109,6 +109,50 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(/The map and all chapter plans are done/.test(r.text) || /Nothing is waiting/.test(r.text), `${batches} plan batches, then “all done”`);
   await p.click('.cm-appbar button:has-text("How?")'); await p.click('.cm-checknow'); await wait(800);
   ok(await until(() => p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return Object.values(c.nodes).every(n => n.chapters.length) && c.stage === 'done'; }, cid), 8000), '⟳ Check now → every step has its chapters; stage “done”');
+  // an older copy of the curriculum (another device, a background save) must not drop the accepted chapter plans:
+  // an older app or the connector may write the record whole — so plans are merged step by step on every pull and push
+  {
+    const ck = 'a:curriculum:' + cid, row = kvOf(uid)[ck], old = JSON.parse(row.value), strip = Object.keys(old.nodes).slice(0, 3);
+    for (const id of strip) { delete old.nodes[id].chapters; delete old.nodes[id].learningGoals; delete old.nodes[id].plannedAt; }
+    old.stage = 'plan'; srv.state.kv[uid][ck] = { value: JSON.stringify(old), updated_at: new Date(Date.now() + 864e5).toISOString() };
+    await p.evaluate(async () => { await NoemaCloud.pull(); await NoemaCloud.push(); });
+    const planned = c => strip.every(id => c.nodes[id].chapters?.length);
+    ok(await p.evaluate(([id, ids]) => ids.every(n => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters?.length), [cid, strip]) && planned(JSON.parse(kvOf(uid)[ck].value)),
+      'an older copy pushed from another device does not wipe the plans: pulled, merged, pushed back with every plan');
+    await p.evaluate(([id, ids]) => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const n of ids) { delete c.nodes[n].chapters; delete c.nodes[n].plannedAt; } NoemaCurriculum.save(Noema.account.id, c); }, [cid, strip.slice(0, 2)]);
+    await p.evaluate(() => NoemaCloud.push());
+    ok(planned(JSON.parse(kvOf(uid)[ck].value)) && await p.evaluate(([id, ids]) => ids.every(n => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters?.length), [cid, strip]),
+      'an older copy saved on this device does not wipe them either: the cloud’s plans are merged in before the push');
+    r = await tool('noema_curricula'); ok(!/need their chapter plan/.test(r.text), 'the connector still sees every step planned');
+    // the merged copy goes out NEWER than the stale row it replaces (devices that saw that row take it), and stays due after a reload
+    const stale = Date.now() + 2 * 864e5; old.stage = 'plan'; srv.state.kv[uid][ck] = { value: JSON.stringify(old), updated_at: new Date(stale).toISOString() };
+    const dueAfterPull = await p.evaluate(async k => { await NoemaCloud.pull(); return k in JSON.parse(localStorage.getItem('noema1:' + Noema.account.id + ':meta:unsynced') || '{}'); }, ck);
+    ok(dueAfterPull, 'a pull that merges plans in marks the copy as waiting to sync (so it is pushed even after a reload)');
+    await p.evaluate(() => NoemaCloud.push());
+    ok(Date.parse(kvOf(uid)[ck].updated_at) > stale && planned(JSON.parse(kvOf(uid)[ck].value)), 'pushed with a later timestamp than the stale row, every plan kept');
+    // stamps only move forward: a plan accepted under a re-plan stamped “in the future” (clock drift) still wins the merge
+    ok(await p.evaluate(() => { const f = new Date(Date.now() + 3600e3).toISOString(); const s = NoemaCurriculum.stampAfter(f, null, 'x'); return Date.parse(s) > Date.parse(f); }), 'stampAfter is later than every stamp it supersedes');
+    // the inbox is left alone when the pull before it fails: answers are never applied to a stale copy
+    ok(await p.evaluate(async () => {
+      const CL = NoemaCloud, J = NoemaCurJobs.App, orig = { pull: CL.pull, kvRows: CL.kvRows, kvDelete: CL.kvDelete }; let deleted = 0;
+      CL.pull = async () => { throw new Error('offline'); }; CL.kvRows = async () => [{ key: NoemaCurJobs.IN + 'x:1', value: '{}', updated_at: new Date().toISOString() }]; CL.kvDelete = async () => { deleted++; };
+      try { const n = await J.poll(Noema.account.id); return n === 0 && deleted === 0 && /offline/.test(J.error || ''); } finally { Object.assign(CL, orig); J.error = null; }
+    }), 'a failed pull leaves the answers in the inbox for the next poll');
+    // a plan answer belongs to the re-plan request it was written for: asked again meanwhile → the older answer is refused
+    ok(await p.evaluate(id => {
+      const J = NoemaCurJobs, c = JSON.parse(JSON.stringify(NoemaCurriculum.get(Noema.account.id, id))), nid = Object.keys(c.nodes).find(k => c.nodes[k].chapters?.length && !['ready', 'generating'].includes(c.nodes[k].pack?.status));
+      const plain = J.spec(c, 'plan', [nid]).id; if (/@/.test(plain) && !c.nodes[nid].replanAt) return false;
+      c.nodes[nid].replan = true; c.nodes[nid].replanAt = new Date(Date.now() - 6e4).toISOString(); const first = J.spec(c, 'plan', [nid]).id;
+      if (!J.byId(c, first) || J.byId(c, 'plan:' + nid)) return false;   // the current request's task is open; an answer from before any request is not
+      c.nodes[nid].replanAt = NoemaCurriculum.stampAfter(c.nodes[nid].replanAt); const second = J.spec(c, 'plan', [nid]).id;
+      if (!(second !== first && !J.byId(c, first) && J.byId(c, second))) return false;
+      // two steps in one batch: a newer request for the step with the EARLIER stamp still changes the task id
+      const nid2 = Object.keys(c.nodes).find(k => k !== nid && c.nodes[k].chapters?.length && !['ready', 'generating'].includes(c.nodes[k].pack?.status));
+      c.nodes[nid].replanAt = new Date(Date.now() + 2000).toISOString(); c.nodes[nid2].replan = true; c.nodes[nid2].replanAt = new Date(Date.now() + 1000).toISOString();
+      const pair = J.spec(c, 'plan', [nid, nid2]).id; c.nodes[nid2].replanAt = new Date(Date.now() + 1500).toISOString();
+      return pair !== J.spec(c, 'plan', [nid, nid2]).id && !J.byId(c, pair);
+    }, cid), 'a plan answer for an older re-plan request cannot settle a newer one');
+  }
   await p.screenshot({ path: SHOTS + '/ca1_panel.png' }); await p.keyboard.press('Escape'); await p.locator('.noema-ovbox:has(.cm-apppanel) button:has-text("Close")').click().catch(() => { }); await wait(300);
 
   /* ---------- B. a step prepared by the Claude app ---------- */
@@ -142,6 +186,44 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(qn.q.every((id, i) => i === 0 || qn.order.indexOf(id) > -1), 'queued in study order');
   await until(() => (JSON.parse(kvOf(uid)['a:curriculum:' + cid]?.value || '{"nodes":{}}').nodes ? Object.values(JSON.parse(kvOf(uid)['a:curriculum:' + cid].value).nodes).filter(n => n.pack?.status === 'app').length : 0) === qn.q.length, 8000);
   ok(new RegExp(`${qn.q.length} step\\(s\\) queued to prepare`).test((await tool('noema_curricula')).text) && (await tool('noema_curriculum_task', { curriculum_id: cid, want: 'step' })).text.includes(`(${qn.q[0]})`), 'the connector serves them one by one, first the first in study order');
+  // ♻️ each queued step is handed out ONCE (overlapping scheduled runs, two runs at the same moment, an older copy of the map)
+  {
+    const stepOf = t => (t.match(/^Step: “[^”]*” \(([^)]+)\)/m) || [])[1];
+    const task = (a = {}) => tool('noema_curriculum_task', { curriculum_id: cid, want: 'step', ...a });
+    ok(stepOf((await task()).text) === qn.q[1], 'a second run (while the first still builds its step) gets the NEXT queued step, not the same one');
+    const pk1 = (await task({ peek: true })).text, pk2 = (await task({ peek: true })).text;
+    ok(pk1.includes(`(${qn.q[2]})`) && pk2.includes(`(${qn.q[2]})`) && !kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[2]], 'peek says what is next without claiming it (asked twice → the same step, no claim)');
+    ok(/being prepared by another run right now/.test((await tool('noema_curricula')).text), 'noema_curricula shows the steps other runs are preparing');
+    r = await task({ step: qn.q[0] });
+    ok(r.error && /being prepared by another run/.test(r.text), 'asking for a claimed step by name is refused…');
+    ok(stepOf((await task({ step: qn.q[0], force: true })).text) === qn.q[0], '…unless force = true (a run that stopped without saving)');
+    kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].updated_at = new Date(Date.now() - 5 * 3600e3).toISOString();
+    ok(stepOf((await task()).text) === qn.q[0], 'a claim older than 4 h (its run died) expires: the step is handed out again');
+    if (qn.q.length >= 5) {
+      const [ra, rb] = await Promise.all([task(), task()]); const a = stepOf(ra.text), b = stepOf(rb.text);
+      ok(a && b && a !== b && ![qn.q[0], qn.q[1]].includes(a) && ![qn.q[0], qn.q[1]].includes(b), `two runs asking at the same moment get different steps (${a} · ${b})`);
+    }
+    // the second run saves its step → the claim ends, the step is ready
+    const sid1 = await p.evaluate(([id, n]) => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, id), n), [cid, qn.q[1]]);
+    const pk = JSON.parse(JSON.stringify(FX)); pk.subject = { ...pk.subject, id: sid1, title: 'Step two', owner: null }; pk.version = sid1 + '-v1';
+    const up1 = (await tool('noema_start_upload', { subject_id: sid1 })).text.match(/https?:\/\/\S+upload\/sign\S+/)[0];
+    await fetch(up1, { method: 'PUT', headers: { 'content-type': 'application/json', 'x-upsert': 'true' }, body: JSON.stringify(pk) });
+    ok(/This is the step/.test((await tool('noema_finish_upload', { subject_id: sid1 })).text) && !kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[1]], 'saving the step ends its claim');
+    ok(await until(() => p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack?.status === 'ready', [cid, qn.q[1]]), 25000), 'the app marks it ready');
+    // an older copy of the map (another device) puts the saved step back in the queue → it is NOT prepared again, and the app heals it
+    await p.evaluate(([id, n]) => { const c = NoemaCurriculum.get(Noema.account.id, id); c.nodes[n].pack = { ...c.nodes[n].pack, status: 'app', queuedAt: new Date(Date.now() - 864e5).toISOString() }; NoemaCurriculum.save(Noema.account.id, c); }, [cid, qn.q[1]]);
+    await until(() => JSON.parse(kvOf(uid)['a:curriculum:' + cid].value).nodes[qn.q[1]].pack.status === 'app', 8000);
+    const all = [];
+    for (let i = 0; i < qn.q.length + 2; i++) { const t = (await task({ peek: true })).text; const s = stepOf(t) || (t.match(/\(([a-z0-9_]+)\) · subject_id/) || [])[1]; if (!s) break; all.push(s); kvOf(uid)['a:curclaim:' + cid + ':' + s] = { value: '{}', updated_at: new Date().toISOString() }; }
+    ok(all.length && !all.includes(qn.q[1]) && new Set(all).size === all.length, `a step saved after it was queued is never served again, even when an older copy re-queues it (served: ${all.length}, each once)`);
+    for (const s of all) delete kvOf(uid)['a:curclaim:' + cid + ':' + s];
+    ok(await until(() => p.evaluate(async ([id, n]) => { await NoemaCurJobs.App.poll(); return NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack?.status === 'ready'; }, [cid, qn.q[1]]), 15000, 1000), 'the app heals the re-queued step back to ready (its subject is saved)');
+    // the app never queues a step twice: queueing a queued step again keeps its place
+    const before = await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack.queuedAt, [cid, qn.q[2]]);
+    const after = await p.evaluate(([id, n]) => { const c = NoemaCurriculum.get(Noema.account.id, id); NoemaCurriculum.Gen.toApp(c, n); NoemaCurriculum.Gen.request(c, n); return NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack.queuedAt; }, [cid, qn.q[2]]);
+    ok(before && before === after, 'queueing an already-queued step again changes nothing (idempotent: same place in the queue)');
+    for (const k of Object.keys(kvOf(uid))) if (k.startsWith('a:curclaim:')) delete kvOf(uid)[k];
+  }
   await p.evaluate(([id, ids]) => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const k of ids) c.nodes[k].pack = { ...c.nodes[k].pack, status: null }; NoemaCurriculum.save(Noema.account.id, c); }, [cid, qn.q]);
   await p.locator('.noema-ovbox:has(.cm-ahead) button:has-text("Close")').click(); await wait(200);
 
@@ -234,7 +316,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   await p.evaluate(() => NoemaClaude.Key.forget(Noema.account.id));
   await until(() => /more clinical examples/.test(kvOf(uid)['a:curriculum:' + cid3]?.value || ''), 8000);
   r = await tool('noema_curriculum_task', { curriculum_id: cid3, want: 'plan' });
-  ok(rp.queued && r.text.includes(`task plan:${other}\n`) && /more clinical examples/.test(r.text), '✨ re-plan in a Claude-app curriculum (even with an API key on the device) → a plan task for the Claude app, with the learner’s wish — no API cost');
+  ok(rp.queued && new RegExp(`task plan:${other}@[0-9a-z]+\\n`).test(r.text) && /more clinical examples/.test(r.text), '✨ re-plan in a Claude-app curriculum (even with an API key on the device) → a plan task for the Claude app, with the learner’s wish — no API cost');
   ok(await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters.length > 0, [cid3, other]), 'its current chapters stay until the new plan arrives');
   // ✨ re-plan the whole curriculum — a Claude-app curriculum: every step not prepared goes to the Claude app (the prepared one keeps its plan)
   await p.evaluate(() => NoemaCurJobs.App.poll()); await wait(300);
@@ -264,7 +346,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   console.log('— E. ❓ Set up Claude → way C; phone');
   const sv = await p.evaluate(() => { const d = Noema.claudeSetupView(Noema.account.id, { open: 'C' }); document.body.append(d); const c = d.querySelector('.cg-way-c'); const t = { open: c.open, text: c.innerText, order: [...d.querySelectorAll('.cg-way > summary b')].map(b => b.textContent.slice(0, 2)) }; d.remove(); return t; });
   ok(sv.open && /recommended for curricula/.test(sv.text) && /usually the cheapest/.test(sv.text) && /Add custom connector/.test(sv.text) && /Copy the message/.test(sv.text) && sv.order.length === 3, '❓ Set up Claude has a 3rd way, C — ⭐ recommended for curricula (usually the cheapest), with its own steps');
-  const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200);
+  const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(id => NoemaCurMap.map(Noema.account.id, id, { appHelp: true }), cid3).catch(() => { }); await wait(800);
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-apppanel, .cm-appbar')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the Claude-app panel fits');
   await ph.screenshot({ path: SHOTS + '/ca2_phone.png' });

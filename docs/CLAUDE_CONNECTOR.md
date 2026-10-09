@@ -97,7 +97,10 @@ subject id + signed links to the learner's files), `noema_curriculum_submit` (ch
 problems come back to fix). Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
 recognises a curriculum step by its subject id, registers it with its curriculum and node, links packaged files that are
 the learner's own (same SHA-256) instead of asking for them again, and tells the app through the inbox.
-The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`, `curjobs.js`, bundled by
+**Shared curricula** (docs/CURRICULUM.md §8): a step handed out is also reserved among the curriculum's participants (steps
+others prepared or are preparing are skipped, and asked for by name they are refused), and `noema_finish_upload` publishes it
+for everybody at once; members get signed links to the owner's material files and never get map / plan tasks.
+The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`, `curjobs.js`, `curshare.js`, bundled by
 `tools/build.py` → `MCP_ENGINE`), so tasks, checks and results are identical to the in-app agents.
 In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricula — usually the cheapest), and the
 “💬 Claude app” choice when creating or importing a curriculum.

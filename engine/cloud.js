@@ -3,17 +3,18 @@
    Every row/object is owned by the signed-in user and protected by row-level security
    (see cloud/supabase.sql). The browser only ever holds the public publishable key.
    Data model: noema_kv mirrors the local namespaced key/value store of a cloud account
-   (key = suffix after "noema1:u_<uid>:"), last-write-wins per key using timestamps.
+   (key = suffix after "noema1:u_<uid>:"). Writes are compare-and-swap on each row's updated_at, copies changed on two
+   devices are combined, and one device at a time is "in use" (see "key/value sync" and "one device at a time" below).
    ===================================================================================== */
 (function () {
   'use strict';
   const SKEY = 'noema1:cloud:session';
   let CFG = null, BASE = '', KEY = '';   // KEY = the project's publishable key (sb_publishable_…) or legacy anon JWT
-  const st = { syncing: false, lastSync: null, error: null, listeners: [], pending: new Set(), convoPending: new Set(), timer: null, ctimer: null };
+  const st = { syncing: false, lastSync: null, error: null, listeners: [], convoPending: new Set(), timer: null, ctimer: null, seq: 0, chain: null };
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
   const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { } });
-  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, pending: st.pending.size + st.convoPending.size });
+  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, pending: (session() ? Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:unsynced', {})).length : 0) + st.convoPending.size });
   function session() { return jget(SKEY, null); }
   function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
   function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }
@@ -43,9 +44,191 @@
   const uid = () => session()?.user.id;
   const accId = () => 'u_' + uid();
   const enc = s => encodeURIComponent(s);
+  // safety net: the Gemini key stays on the device (loader.js GeminiKey), so a:settings is never pushed with it
+  const noSecrets = (k, v) => { if (k !== 'a:settings' || v == null) return v; try { const o = JSON.parse(v); if (o && typeof o === 'object' && 'apiKey' in o) { delete o.apiKey; return JSON.stringify(o); } } catch (e) { } return v; };
+  // rows other writers append for the app to read and delete; never mirrored into localStorage
+  const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:');
+
+  /** Two JSON copies of a curriculum record → `base` with the newer chapter plans of `other` (string), or null when nothing changes. */
+  function mergeCurriculum(key, base, other) {
+    if (!key.startsWith('a:curriculum:') || !window.NoemaCurriculum?.mergePlans) return null;
+    try { const c = JSON.parse(base), o = JSON.parse(other); return window.NoemaCurriculum.mergePlans(c, o) ? JSON.stringify(c) : null; } catch (e) { return null; }
+  }
+
+  /* ---------- sync bookkeeping (per account, in localStorage so it survives reloads and is shared by the tabs) ---------- */
+  const meta = (acc, name) => jget('noema1:' + acc + ':meta:' + name, {});
+  const metaSave = (acc, name, v) => jset('noema1:' + acc + ':meta:' + name, v);
+  const metaSet = (acc, name, f) => { const m = meta(acc, name); f(m); metaSave(acc, name, m); };
+  const markDirty = (acc, k) => { metaSet(acc, 'unsynced', m => { m[k] = Date.now() * 1000 + (++st.seq % 1000); }); emit(); };
+  const clean = (acc, k, mark) => { metaSet(acc, 'unsynced', m => { if (mark === undefined || m[k] === mark) delete m[k]; }); emit(); };   // only if not changed again meanwhile
+  const put = (full, v) => { try { localStorage.setItem(full, v); return true; } catch (e) { st.full = true; return false; } };
+  const FULL = 'This device’s storage is full: some changes from your other devices could not be saved here.';
+  /** keys (full localStorage keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js) */
+  const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { } };
+  const serial = fn => (st.chain = (st.chain || Promise.resolve()).catch(() => { }).then(fn));   // one pull or push at a time
+  const isoAfter = prev => new Date(Math.max(Date.now(), (Date.parse(prev || '') || 0) + 1)).toISOString();   // a version stamp never equal to the one it replaces
+  const isObj = x => x != null && typeof x === 'object' && !Array.isArray(x);
+  const pj = s => { try { return JSON.parse(s); } catch (e) { return undefined; } };
+  async function restorePoint(acc) {   // before combining drops anything: at most one every 10 minutes
+    if (Date.now() - (st.rpAt || 0) < 10 * 60e3) return; st.rpAt = Date.now();
+    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device'); } catch (e) { }
+  }
+
+  /* ---------- combining two copies of a key (progress only grows) ---------- */
+  const perId = (x, y, pick) => { const o = { ...(y || {}) }; for (const [id, v] of Object.entries(x || {})) o[id] = id in o && isObj(v) && isObj(o[id]) ? pick(v, o[id]) : v; return o; };
+  const moreTries = (x, y) => (x.n || 0) !== (y.n || 0) ? ((x.n || 0) > (y.n || 0) ? x : y) : ((x.t || 0) >= (y.t || 0) ? x : y);
+  const laterReview = (x, y) => String(x.due || '') !== String(y.due || '') ? (String(x.due || '') > String(y.due || '') ? x : y) : ((x.box || 0) >= (y.box || 0) ? x : y);
+  /** A subject's progress (s:<subject>:state): a = this device's copy (wins on plain settings), b = the other one. */
+  function mergeState(a, b) {
+    const ra = a.resetAt || 0, rb = b.resetAt || 0;
+    if (ra !== rb) {   // reset on one side: the newer reset wins, plus the answers given after it on the other side
+      const [n, o] = ra > rb ? [a, b] : [b, a]; const out = { ...n, res: { ...(n.res || {}) } };
+      for (const [id, r] of Object.entries(o.res || {})) if (!(id in out.res) && (r?.t || 0) > n.resetAt) out.res[id] = r;
+      return out;
+    }
+    const out = { ...b, ...a };
+    for (const f of Object.keys(out)) {
+      if (isObj(a[f]) && isObj(b[f])) out[f] = { ...b[f], ...a[f] };   // read sections, beaten bosses, applied inbox rows…: both
+      else if (Array.isArray(a[f]) && Array.isArray(b[f])) out[f] = a[f].length >= b[f].length ? a[f] : b[f];
+    }
+    out.xp = Math.max(a.xp || 0, b.xp || 0);
+    out.res = perId(a.res, b.res, moreTries); out.fc = perId(a.fc, b.fc, laterReview); out.pb = perId(a.pb, b.pb, laterReview);
+    return out;
+  }
+  const maxMap = (x, y) => { const o = { ...(y || {}) }; for (const [k, v] of Object.entries(x || {})) o[k] = Math.max(v || 0, o[k] || 0); return o; };
+  const sum = m => Object.values(m || {}).reduce((s, v) => s + (v || 0), 0);
+  /** XP and streak across subjects (a:stats). */
+  function mergeStats(a, b) {
+    const xpDay = maxMap(a.xpDay, b.xpDay), top = (a.xp || 0) >= (b.xp || 0) ? a : b;
+    const out = { ...b, ...a, xpDay, bySubject: maxMap(a.bySubject, b.bySubject), xp: (top.xp || 0) + Math.max(0, sum(xpDay) - sum(top.xpDay)) };
+    const la = String(a.lastDay || ''), lb = String(b.lastDay || ''); const w = la === lb ? ((a.streak || 0) >= (b.streak || 0) ? a : b) : (la > lb ? a : b);
+    out.lastDay = w.lastDay ?? null; out.streak = w.streak || 0;
+    return out;
+  }
+  /** Two copies of key `k` (strings) → { value, lost }: `lost` = something only this device had may be dropped (a restore point is kept first). */
+  function mergeValue(k, local, remote, localNewer) {
+    if (local === remote) return { value: local, lost: false };
+    if (k.startsWith('a:curriculum:')) {   // the newer copy, with the newest chapter plans of both
+      const [nw, od] = localNewer ? [local, remote] : [remote, local]; const value = mergeCurriculum(k, nw, od) || nw;
+      return { value, lost: !localNewer };
+    }
+    const a = pj(local), b = pj(remote);
+    if (/^s:.+:state$/.test(k) && isObj(a) && isObj(b)) return { value: JSON.stringify(mergeState(a, b)), lost: false };
+    if (k === 'a:stats' && isObj(a) && isObj(b)) return { value: JSON.stringify(mergeStats(a, b)), lost: false };
+    if (isObj(a) && isObj(b)) {   // settings and other records: every field of both, the newer copy wins where both set one
+      const out = localNewer ? { ...b, ...a } : { ...a, ...b };
+      return { value: JSON.stringify(out), lost: Object.keys(a).some(f => JSON.stringify(out[f]) !== JSON.stringify(a[f])) };
+    }
+    return localNewer ? { value: local, lost: false } : { value: remote, lost: true };
+  }
+
+  /** The cloud copy `cur` (null = deleted there) of a key this device changed too → combine into this device's copy. Returns the full key if it changed here. */
+  async function resolve(acc, k, cur) {
+    const pre = 'noema1:' + acc + ':', full = pre + k, local = localStorage.getItem(full), mark = meta(acc, 'unsynced')[k];
+    if (!cur) { metaSet(acc, 'base', b => { delete b[k]; }); if (local == null) clean(acc, k, mark); return null; }   // deleted there: what this device has is uploaded again
+    if (local == null || local === cur.value) {   // deleted here but changed there (keep the data), or the same content
+      if (local == null && !put(full, cur.value)) return null;
+      metaSet(acc, 'base', b => { b[k] = cur.updated_at; }); clean(acc, k, mark); return local == null ? full : null;
+    }
+    const mt = jget(pre + 'meta:mtime', {});
+    const { value, lost } = mergeValue(k, local, cur.value, (mt[k] || 0) > (Date.parse(cur.updated_at) || 0));
+    if (lost) await restorePoint(acc);
+    if (localStorage.getItem(full) !== local) return null;   // changed again meanwhile: the next round combines that
+    if (value !== local && !put(full, value)) return null;
+    metaSet(acc, 'base', b => { b[k] = cur.updated_at; });
+    if (value === cur.value) clean(acc, k, mark); else markDirty(acc, k);
+    return value !== local ? full : null;
+  }
+  /** Upload one changed key, only over the cloud version this copy comes from; otherwise combine and try again. */
+  async function pushKey(acc, k, mark, keepalive, tries = 0) {
+    const b = meta(acc, 'base')[k], full = 'noema1:' + acc + ':' + k; let v = noSecrets(k, localStorage.getItem(full));
+    if (v != null && k.startsWith('a:curriculum:') && !tries) {   // an older copy saved on this device keeps the cloud's chapter plans (they are stamped, so merging is safe)
+      const row = ((await call('/rest/v1/noema_kv?select=value&key=eq.' + enc(k))) || [])[0];
+      const m = row && mergeCurriculum(k, v, row.value); if (m && put(full, m)) { v = m; notify(acc, [full]); }
+    }
+    const q = '/rest/v1/noema_kv?key=eq.' + enc(k) + (b ? '&updated_at=eq.' + enc(b) : ''), rep = { Prefer: 'return=representation' };
+    if (v == null) {
+      if (!b) { clean(acc, k, mark); return; }   // never reached the cloud
+      const r = await call(q, { method: 'DELETE', headers: rep, keepalive });
+      if (Array.isArray(r) && r.length) { metaSet(acc, 'base', x => { delete x[k]; }); clean(acc, k, mark); return; }
+    } else {
+      const at = isoAfter(b);
+      const r = b ? await call(q, { method: 'PATCH', body: { value: v, updated_at: at }, headers: rep, keepalive })
+        : await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: [{ user_id: uid(), key: k, value: v, updated_at: at }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' }, keepalive });
+      const row = Array.isArray(r) ? r[0] : null;
+      if (row) { metaSet(acc, 'base', x => { x[k] = row.updated_at; }); clean(acc, k, mark); return; }
+    }
+    // refused: another device (or the Claude connector) changed it since this device last saw it
+    if (tries >= 3) throw new Error(`“${k}” keeps changing on another device: trying again later`);
+    const cur = ((await call('/rest/v1/noema_kv?select=key,value,updated_at&key=eq.' + enc(k))) || [])[0] || null;
+    const changed = await resolve(acc, k, cur); if (changed) notify(acc, [changed]);
+    const m = meta(acc, 'unsynced')[k]; if (m !== undefined) return pushKey(acc, k, m, keepalive, tries + 1);
+  }
+
+  /* ---------- one device at a time: the "in use" row (a:inuse, cloud only) ----------
+     The tab the learner is using (visible, touched in the last 2 minutes) holds it and renews it every 30 s; a hidden or
+     closed tab lets it go. Another device takes it silently when it is free or stale; while it is fresh, the other device
+     shows "in use on …" (engine/loader.js) and nothing is saved there until the learner chooses "Use here". */
+  const LEASE = 'a:inuse', FRESH = 2 * 60e3, BEAT = 30e3;
+  const remoteOnly = k => inboxKey(k) || k === LEASE;
+  const L = { state: 'unknown', holder: null, acc: null, lastInput: Date.now(), lastBeat: 0, at: null, busy: null };
+  function deviceName() {
+    const u = navigator.userAgent || '';
+    const os = /iPhone/.test(u) ? 'iPhone' : /iPad/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'iPad' : /Android/.test(u) ? (/Mobile/.test(u) ? 'Android phone' : 'Android tablet')
+      : /CrOS/.test(u) ? 'Chromebook' : /Mac/.test(u) ? 'Mac' : /Windows/.test(u) ? 'Windows PC' : /Linux/.test(u) ? 'Linux PC' : 'another device';
+    const br = /Edg\//.test(u) ? 'Edge' : /OPR\//.test(u) ? 'Opera' : /Firefox\//.test(u) ? 'Firefox' : /Chrome\//.test(u) ? 'Chrome' : /Safari\//.test(u) ? 'Safari' : '';
+    return br ? os + ' · ' + br : os;
+  }
+  const rnd = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  const ME = (() => {
+    let dev = null, sid = null;
+    try { dev = localStorage.getItem('noema-device:id'); if (!dev) { dev = rnd(); localStorage.setItem('noema-device:id', dev); } } catch (e) { dev = rnd(); }
+    try { sid = sessionStorage.getItem('noema:tab'); if (!sid) { sid = rnd(); sessionStorage.setItem('noema:tab', sid); } } catch (e) { sid = rnd(); }   // one per tab, kept across reloads
+    return { dev, sid, name: deviceName() };
+  })();
+  const live = v => !!(v && !v.released && Date.now() - (v.at || 0) < FRESH);
+  const activeHere = () => document.visibilityState === 'visible' && Date.now() - L.lastInput < FRESH;
+  function setLease(state, holder) {
+    const was = L.state; L.state = state; L.holder = holder ? { ...holder, sameDevice: holder.dev === ME.dev } : null;
+    if (window.Noema?.kv) Noema.kv.frozen = state === 'other' ? L.acc : null;   // paused: this device saves nothing
+    if (was !== state || state === 'other') try { dispatchEvent(new CustomEvent('noema:inuse', { detail: { state, holder: L.holder, unsynced: Object.keys(meta(L.acc, 'unsynced')).length } })); } catch (e) { }
+  }
+  async function leaseWrite(prevAt, v, keepalive = false) {
+    const value = JSON.stringify(v), at = isoAfter(prevAt);
+    const r = prevAt ? await call('/rest/v1/noema_kv?key=eq.' + LEASE + '&updated_at=eq.' + enc(prevAt), { method: 'PATCH', body: { value, updated_at: at }, headers: { Prefer: 'return=representation' }, keepalive })
+      : await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: [{ user_id: uid(), key: LEASE, value, updated_at: at }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' }, keepalive });
+    return Array.isArray(r) && r[0] ? r[0].updated_at : null;
+  }
+  async function leaseCheck(take) {
+    const before = L.state;
+    for (let i = 0; i < 3; i++) {
+      const row = ((await call('/rest/v1/noema_kv?select=value,updated_at&key=eq.' + LEASE)) || [])[0] || null;
+      const v = row ? pj(row.value) : null, mine = v?.sid === ME.sid;
+      L.lastBeat = Date.now();
+      if (!mine && live(v) && !take) { setLease('other', v); return 'other'; }   // in use elsewhere right now
+      if (!take && !activeHere()) { setLease(mine ? 'mine' : 'unknown'); break; }   // nobody is using this tab: don't take it
+      const at = await leaseWrite(row?.updated_at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now() });
+      if (!at) continue;   // someone wrote it in between: look again
+      L.at = at; setLease('mine');
+      if (v && !mine) L.tookOver = true;   // another tab or device had it: bring in what it did
+      break;
+    }
+    if (before === 'other' && L.state !== 'other' || L.tookOver) {   // bring in what the other tab or device did, also when another tab of this browser already stored it
+      L.tookOver = false; await NoemaCloud.pull(L.acc).catch(() => { });
+      notify(L.acc, Object.keys(window.Noema?.kv?.accountData?.(L.acc) || {}).map(k => 'noema1:' + L.acc + ':' + k));
+    }
+    return L.state;
+  }
+  function leaseRelease() {
+    if (L.state !== 'mine' || !L.at || !session()) return;
+    const at = L.at; L.at = null; L.state = 'unknown';
+    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now(), released: true }, true).catch(() => { });
+  }
 
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
+    /** A raw Supabase call as the signed-in user (row-level security applies) — e.g. engine/curshare.js. */
+    api: (path, o) => call(path, o), uid,
     async init(cfg) { CFG = cfg; BASE = cfg.supabaseUrl.replace(/\/+$/, ''); KEY = cfg.supabaseKey || cfg.supabaseAnonKey || ''; if (session()) { try { await fresh(); } catch (e) { console.warn('[cloud] session refresh failed', e.message); } } },
     async signUp(email, password, name) {
       const j = await call('/auth/v1/signup', { method: 'POST', auth: false, body: { email, password, data: { name: name || email.split('@')[0] } } });
@@ -62,49 +245,93 @@
       jset('noema1:' + accId() + ':a:profile', { name: p.name, emoji: p.emoji, learner: p.learner });
     },
 
-    /* ---------- key/value sync ---------- */
-    async pull(acc = accId()) {
+    /* ---------- key/value sync ----------
+       Every device remembers, per key, the cloud version its copy comes from (meta:base = the row's updated_at) and which
+       keys it changed since (meta:unsynced). A push only replaces the row if it is still that version (compare-and-swap),
+       so no device can overwrite a newer copy, whatever its clock says. When both sides changed a key, the two copies are
+       combined (progress only grows: mergeValue); a restore point is kept before anything could be dropped. */
+    async pull(acc = accId()) { return serial(() => this._pull(acc)); },
+    async _pull(acc) {
       st.syncing = true; emit();
       try {
         const rows = await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key');
-        const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {}); let changed = 0;
+        const pre = 'noema1:' + acc + ':', base = meta(acc, 'base'), dirty = meta(acc, 'unsynced'), seen = new Set(), keys = [], conflicts = [];
         for (const r of rows || []) {
-          if (r.key.startsWith('a:curin:')) continue;   // answers from the Claude app: read and deleted by engine/curjobs.js, never stored here
-          const t = Date.parse(r.updated_at) || 0;
-          if (!mt[r.key] || t > mt[r.key]) { if (localStorage.getItem(pre + r.key) !== r.value) { try { localStorage.setItem(pre + r.key, r.value); changed++; } catch (e) { } } mt[r.key] = t; }
+          if (remoteOnly(r.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js), the "in use" row: never stored here
+          seen.add(r.key);
+          if (base[r.key] === r.updated_at) continue;   // the cloud still has the version this copy comes from
+          const local = localStorage.getItem(pre + r.key);
+          // changed here too (or a copy that never synced with this version): combine; else simply take the cloud's
+          if (r.key in dirty || (base[r.key] === undefined && local != null && local !== r.value)) { conflicts.push(r); continue; }
+          // a curriculum keeps the chapter plans only this copy has (an older app or the connector may write a stale copy whole)
+          const m = local != null && local !== r.value && mergeCurriculum(r.key, r.value, local), v = m || r.value;
+          if (local !== v && !put(pre + r.key, v)) continue;   // storage full: try again next time
+          if (local !== v) keys.push(pre + r.key);
+          base[r.key] = r.updated_at; if (m) markDirty(acc, r.key);
         }
-        // keys changed locally while offline (newer than server or missing there) → push
-        const remote = new Map((rows || []).filter(r => !r.key.startsWith('a:curin:')).map(r => [r.key, Date.parse(r.updated_at) || 0]));
-        Object.keys(mt).forEach(k => { if (!remote.has(k) || mt[k] > remote.get(k)) st.pending.add(k); });
-        jset(pre + 'meta:mtime', mt);
-        st.lastSync = Date.now(); st.error = null; return changed;
+        for (const k of Object.keys(base)) if (!seen.has(k)) {   // deleted on another device
+          if (!(k in dirty)) { if (localStorage.getItem(pre + k) != null) { localStorage.removeItem(pre + k); keys.push(pre + k); } }
+          delete base[k];   // changed here since: it is uploaded again (keeping data beats losing it)
+        }
+        metaSave(acc, 'base', base);
+        // data that never reached the cloud (made offline before this version, or the row was refused) → upload
+        Object.keys(window.Noema?.kv?.accountData?.(acc) || {}).forEach(k => { if (!seen.has(k) && !(k in base) && !remoteOnly(k)) markDirty(acc, k); });
+        for (const r of conflicts) { const k = await resolve(acc, r.key, r); if (k) keys.push(k); }
+        st.lastSync = Date.now(); st.error = st.full ? FULL : null; st.full = false;
+        if (keys.length) notify(acc, keys);
+        try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed: keys.length, keys } })); } catch (e) { }   // e.g. the open subject reads its results inbox
+        return keys.length;
       } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
     async push(acc = accId(), { keepalive = false } = {}) {
-      if (!st.pending.size || !session()) return 0;
-      const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {});
-      const keys = [...st.pending]; st.pending.clear();
-      const rows = [], dels = [];
-      keys.forEach(k => { const v = localStorage.getItem(pre + k); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
+      if (!session() || !Object.keys(meta(acc, 'unsynced')).length) return 0;
+      if (keepalive) return this._push(acc, true);   // the page is going away: send now, don't wait for a pull in progress
+      return serial(() => this._push(acc, false));
+    },
+    async _push(acc, keepalive) {
+      const dirty = meta(acc, 'unsynced'), keys = Object.keys(dirty); if (!keys.length || !session()) return 0;
       st.syncing = true; emit();
       try {
-        for (let i = 0; i < rows.length; i += 50) await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: rows.slice(i, i + 50), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive });
-        for (const k of dels) await call('/rest/v1/noema_kv?key=eq.' + enc(k), { method: 'DELETE', keepalive });
-        st.lastSync = Date.now(); st.error = null; return rows.length + dels.length;
-      } catch (e) { keys.forEach(k => st.pending.add(k)); st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
+        // the page is being hidden: every request leaves at once (keepalive), a slower loop could be cut off
+        if (keepalive) await Promise.all(keys.map(k => pushKey(acc, k, dirty[k], true)));
+        else for (const k of keys) await pushKey(acc, k, dirty[k], false);
+        st.lastSync = Date.now(); st.error = null; return keys.length;
+      } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
+    /** Combine two copies of a key (this device's and the cloud's) → { value, lost } — `lost`: something of `local` may be dropped. */
+    mergeValue, mergeState,
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },
+    /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, sameDevice, at } when 'other'. */
+    lease: {
+      get state() { return L.state; }, get holder() { return L.holder; }, device: ME,
+      /** Look at the "in use" row and take it if nobody else is using Noema right now; take = true: take it anyway ("Use here"). */
+      async check({ take = false } = {}) {
+        if (!session() || !L.acc) return L.state;
+        while (L.busy) await L.busy.catch(() => { });
+        L.busy = leaseCheck(take); try { return await L.busy; } catch (e) { return L.state; } finally { L.busy = null; }   // offline: keep going, the changes are combined later
+      },
+      release: leaseRelease,
+    },
     startAutoSync(acc) {
-      if (!window.Noema || st.autoAcc === acc) return; st.autoAcc = acc;   // once per page
+      if (!window.Noema || st.autoAcc === acc) return; st.autoAcc = acc; L.acc = acc;   // once per page
       // debounce 3 s, but never longer than 10 s after the first unsynced change (steady writes must not starve the sync)
-      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; st.pending.add(key.slice(('noema1:' + acc + ':').length)); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); emit(); });
-      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.push(acc, { keepalive: true }).catch(() => { }); else this.pull(acc).catch(() => { }); });
-      addEventListener('online', () => { this.push(acc).catch(() => { }); this.pushConvos(acc).catch(() => { }); });
+      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (remoteOnly(k)) return; markDirty(acc, k); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); });
+      const sync = () => this.lease.check().finally(() => this.pull(acc).then(() => this.push(acc)).catch(() => { }));
+      // leaving: save what the open page holds first (engine/src/10_core.js flushSave), then send it, then let the "in use" row go
+      const leave = () => { try { window.flushSave?.(); } catch (e) { } this.push(acc, { keepalive: true }).catch(() => { }); leaseRelease(); };
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') leave(); else { L.lastInput = Date.now(); sync(); } });
+      addEventListener('pagehide', leave);
+      addEventListener('online', () => { sync(); this.pushConvos(acc).catch(() => { }); });
+      // the learner touches this tab: renew (or take) the "in use" row at most every 30 s
+      const touched = () => { L.lastInput = Date.now(); if (L.state !== 'other' && Date.now() - L.lastBeat > BEAT) this.lease.check(); };
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev => addEventListener(ev, touched, { capture: true, passive: true }));
+      // while paused, notice when the other device is put away; while in use, keep the row fresh
+      setInterval(() => { if (document.visibilityState === 'visible' && Date.now() - L.lastBeat > BEAT && (L.state === 'other' || activeHere())) this.lease.check(); }, 10e3);
       if (window.NoemaConvos) NoemaConvos.onChange((a, r) => { if (a !== acc) return; st.convoPending.add(r.id); clearTimeout(st.ctimer); st.ctimer = setTimeout(() => this.pushConvos(acc).catch(() => { }), 2500); emit(); });
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.pushConvos(acc, { keepalive: true }).catch(() => { }); });
-      this.push(acc).catch(() => { });
+      this.lease.check().finally(() => this.push(acc).catch(() => { }));
       this.autoSnapshot().catch(() => { });
     },
 
@@ -291,6 +518,7 @@
         await this.deleteObjects('noema-public', [path]); if (!ok) throw new Error('public file not readable (bucket must be public)');
       });
       await step('Sharing with a person', async () => { await call('/rest/v1/noema_shares?select=id&limit=1'); await call('/storage/v1/object/list/noema-shared', { method: 'POST', body: { prefix: '', limit: 1 } }); });
+      await step('Shared curricula', async () => { await call('/rest/v1/noema_curricula_shared?select=id&limit=1'); await call('/rest/v1/noema_curriculum_steps?select=node_id&limit=1'); await call('/rest/v1/noema_curriculum_members?select=email&limit=1'); await call('/storage/v1/object/list/noema-curricula', { method: 'POST', body: { prefix: '', limit: 1 } }); });
       return out;
     },
 

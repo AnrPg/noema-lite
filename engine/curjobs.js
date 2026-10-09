@@ -15,29 +15,67 @@
   'use strict';
   const C = () => root.NoemaCurriculum, L = () => root.NoemaLLM;
   const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
+  /* A step handed to a run of the learner's Claude is CLAIMED (KV a:curclaim:<cid>:<nid>, a lease): other runs — e.g. the
+     hourly scheduled ones, while this one is still building — skip it, so every queued step is prepared once. The claim
+     ends when the step is saved, or after LEASE (a run that died without saving). */
+  const CLAIM = 'a:curclaim:', LEASE = 4 * 3600e3;
+  const claimKey = (cid, nid) => `${CLAIM}${cid}:${nid}`;
   const isApp = c => c?.provider === 'claudeapp';
   const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
   const needsPlan = n => !prepared(n) && (!n.chapters?.length || !!n.replan);
   const clone = o => JSON.parse(JSON.stringify(o));
+  const ms = v => Date.parse(v || '') || 0;
 
-  /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], done } */
+  /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], claimed: [ids], done }
+      steps: queued and free, in queue order · claimed: queued and being prepared by a run right now (see settle) */
+  const member = c => c?.shared?.role === 'member' && !c.shared.ended;   // 👥 a curriculum someone shared with the learner: its map and plans are the owner's
   function work(c) {
-    const graph = isApp(c) && GRAPH.includes(c.stage) ? c.stage : null;
-    const toPlan = isApp(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
-    const steps = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')));
-    return { graph, toPlan, steps, done: !graph && !toPlan.length && !steps.length };
+    const graph = isApp(c) && !member(c) && GRAPH.includes(c.stage) ? c.stage : null;
+    const toPlan = isApp(c) && !member(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
+    const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
+    const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
+    return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
+  }
+  /** Saved already? The step's subject (KV a:packmeta:<packId>, written when it is saved) is newer than the step's place in the queue. */
+  const savedSince = (c, nid, meta) => !!meta && meta.id === C().packId(c, nid) && meta.curriculum === c.id && meta.node === nid && ms(meta.updatedAt) >= ms(c.nodes[nid]?.pack?.queuedAt);
+  /** The queue as it really is (the connector works on this): a queued step whose subject was saved after it was queued is
+      prepared — even when an older copy of the curriculum (another device) put it back in the queue; a queued step with a
+      live claim is being prepared by another run.  claims: KV rows a:curclaim:<cid>:*  · packs: KV rows a:packmeta:* */
+  function settle(c, { claims = [], packs = [], remote = null, me = null, now = Date.now(), lease = LEASE } = {}) {
+    const cc = clone(c), live = {}, saved = {};
+    // 👥 a shared curriculum: what the other participants prepared / are preparing (rows of noema_curriculum_steps)
+    const rem = remote && cc.shared && !cc.shared.ended && root.NoemaCurShare ? root.NoemaCurShare.core.remoteOf(remote, me, now) : null;
+    if (rem) cc.remote = rem;
+    for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (now - t < lease) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
+    for (const r of packs) { let m; try { m = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; } if (m?.curriculum === c.id && m.node) saved[m.node] = m; }
+    for (const [nid, n] of Object.entries(cc.nodes || {})) {
+      if (n.pack?.status !== 'app') continue;
+      if (savedSince(cc, nid, saved[nid])) { n.pack = { ...n.pack, status: 'ready', version: saved[nid].version || null }; continue; }
+      const x = rem?.[nid];
+      if (x?.status === 'ready') { n.pack = { ...n.pack, status: 'ready', version: x.version || null, by: x.by }; continue; }   // prepared already (by somebody, or by me elsewhere)
+      if (x && !x.mine) { n.pack = { ...n.pack, claimedAt: x.at || new Date(now).toISOString(), by: x.by }; continue; }     // being prepared by somebody else
+      if (live[nid]) n.pack = { ...n.pack, claimedAt: new Date(live[nid]).toISOString() };
+    }
+    return cc;
   }
 
   /* ---------- tasks ---------- */
   const TITLES = { dag: 'Agent 1 — the map: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
+  /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
+      for). An answer written for an older request (the learner asked again for any of its steps) no longer matches. */
+  const planGen = (c, ids) => {
+    const v = ids.map(i => c.nodes[i]?.replanAt || ''); if (!v.some(Boolean)) return '';
+    let h = 5381; for (const ch of v.join('|')) h = (Math.imul(h, 33) ^ ch.charCodeAt(0)) >>> 0;
+    return '@' + h.toString(36);
+  };
   function spec(c, kind, ids) {
     const P = C().prompts, S = C().schemas, x = C().ctx(c);
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
     if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
     if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(','), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
+    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(',') + planGen(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
     return null;
   }
   /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
@@ -64,12 +102,14 @@
     return { kind: 'step', id: 'step:' + nid, nid, packId: C().packId(c, nid), title: `Prepare the step “${n.title}”`, stepTitle: n.title, language: c.language, brief: C().nodeBrief(c, nid), downloads, planned: !!n.chapters?.length };
   }
   /** The next task. want: 'any' | 'map' | 'plan' | 'step'; step: a step id or title (prepares that one). */
-  function next(c, { want = 'any', step = '' } = {}) {
+  function next(c, { want = 'any', step = '', force = false } = {}) {
     if (step) {
       const s = String(step).trim().toLowerCase(); const nid = c.nodes[step] ? step : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
-      if (!c.nodes[nid].chapters?.length) return isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
+      if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
+      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared curriculum — do not prepare it again (the learner gets it on the map).` };
+      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared curriculum plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
       return stepSpec(c, nid);
     }
     const w = work(c);
@@ -82,9 +122,9 @@
   function byId(c, id) {
     const w = work(c);
     if (GRAPH.includes(id)) return w.graph === id ? spec(c, id) : null;
-    const m = /^plan:(.+)$/.exec(String(id || '')); if (!m) return null;
+    const m = /^plan:([^@]+)(@[0-9a-z]+)?$/.exec(String(id || '')); if (!m) return null;
     const ids = m[1].split(',').filter(Boolean);
-    return ids.length && ids.every(i => c.nodes[i] && needsPlan(c.nodes[i])) ? spec(c, 'plan', ids) : null;
+    return ids.length && ids.every(i => c.nodes[i] && needsPlan(c.nodes[i])) && (m[2] || '') === planGen(c, ids) ? spec(c, 'plan', ids) : null;
   }
   /** Problems of an answer (JSON Schema + the same semantic checks as the in-app agents) → [] when it is good. */
   function check(c, t, data) {
@@ -172,6 +212,7 @@
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
+      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = x.message; return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];
@@ -186,6 +227,14 @@
           }
           done.push(r.key);
         } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+      }
+      // a queued step whose subject is saved already — its answer was handled on another device, then an older copy of the
+      // curriculum put the step back in the queue: finish it here, so it is not prepared a second time
+      for (const c of C().list(acc)) for (const [nid, nd] of Object.entries(c.nodes || {})) {
+        if (nd.pack?.status !== 'app') continue;
+        const pid = C().packId(c, nid), meta = C().kvGet(acc, 'packmeta:' + pid);
+        if (!savedSince(c, nid, meta)) continue;
+        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
       }
       // the changed curricula reach the cloud BEFORE their answers leave the inbox: the connector always sees one or the other
       if (n) await CL.push(acc);
@@ -244,5 +293,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, next, byId, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

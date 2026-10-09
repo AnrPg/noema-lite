@@ -158,7 +158,7 @@ def build_site(metas):
         for k in ('path', 'profiles'):
             if not m.get(k): continue
             dst = os.path.join(out, m[k]); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m[k]), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:
         if m.get('owner'): continue
@@ -171,7 +171,7 @@ def build_site(metas):
     build_skill(os.path.join(out, 'downloads', 'noema-pack-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
-    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n')
+    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n')
     print('site →', os.path.relpath(out, ROOT))
 
 SKILL_TOOLS = ['noema_lib.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
@@ -195,7 +195,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/imglib.js']
+MCP_ENGINE = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_mcp_function(metas, out_dir):
@@ -240,6 +240,7 @@ def build_bundle(metas):
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
+<script>{esc(rd("engine/i18n.js"))}</script>
 <script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
 <script>{esc(rd("engine/imglib.js"))}</script>
@@ -251,6 +252,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/packgen.js"))}</script>
 <script>{esc(rd("engine/curriculum.js"))}</script>
 <script>{esc(rd("engine/curjobs.js"))}</script>
+<script>{esc(rd("engine/curshare.js"))}</script>
 <script>{esc(rd("engine/curimport.js"))}</script>
 <script>{esc(rd("engine/curmap.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>

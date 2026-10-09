@@ -133,29 +133,63 @@ function mdLite(s) {
 
 /* ---------- state ---------- */
 /* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
-                        per-account settings  → noema1:<account>:a:settings   (API key, model, theme, goal…)
+                        per-account settings  → noema1:<account>:a:settings   (model, theme, goal…)
+                        the Gemini key        → noema-device:geminiKey:<account>  (this device only, Noema.geminiKey)
                         XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
 const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
+Noema.geminiKey.migrate(ACCOUNT.id);   // the Gemini key lives on this device only (never in a:settings → never synced)
 const S = (() => {
   let s = {}, g = {};
   try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
   try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
   const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
-  st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null });
+  delete g.apiKey; st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null }, Noema.geminiKey.get(ACCOUNT.id) ? { apiKey: Noema.geminiKey.get(ACCOUNT.id) } : {});
   delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
   return st;
 })();
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
+/* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
+   was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
+const CARD_KEYS_MOVED = (() => {
+  let n = 0;
+  COURSE.forEach(c => c.flashcards.forEach((f, k) => {
+    const old = c.id + '#' + k;
+    if (!f.id || !S.fc[old]) return;
+    if (!S.fc[f.id]) S.fc[f.id] = S.fc[old];
+    delete S.fc[old]; n++;
+  }));
+  return n;
+})();
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
+/* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
+   can't write the older copy back over them. Progress only grows: answers, reviews and read sections of both are kept. */
+addEventListener('noema:remote', e => {
+  if (e.detail?.acc !== ACCOUNT.id || !window.NoemaCloud?.mergeState) return;
+  const keys = e.detail.keys || [];
+  if (keys.includes(STATE_KEY) && Noema.kv.get(STATE_KEY) == null) {   // deleted on another device (e.g. a restore without this subject): start empty, don't upload the old copy again
+    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
+    Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
+  } else if (keys.includes(STATE_KEY)) {
+    let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { }
+    const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
+    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
+    Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
+    if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
+  }
+  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); } catch (x) { } }
+  if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
+});
+if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }

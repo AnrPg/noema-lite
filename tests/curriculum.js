@@ -139,7 +139,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await p.click('button:has-text("Open the map")'); await wait(800);
   ok(await p.locator('.cm-node').count() === 25 && await p.locator('.cm-band').count() === 3, 'map: 25 nodes in three parts (Prerequisites · goal · Applications)');
   const roots = ['sets_and_events', 'calculus_basics', 'philosophy_of_induction'];
-  ok(await p.evaluate(r => r.every(id => document.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open 🔓, the other 22 steps locked 🔒');
+  ok(await p.evaluate(r => r.every(id => document.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open, the other 22 steps locked 🔒');
   await p.click('.cm-node[data-id="likelihood"]'); await wait(300);
   const lockTxt = await p.locator('.cm-panel').innerText();
   ok(/Locked/.test(lockTxt) && /Probability distributions/.test(lockTxt) && await p.locator('.cm-panel .cm-chapters li').count() === 4 && !(await p.locator('.cm-panel button:has-text("Study")').count()), 'a locked step shows its info and chapters, what to master first — and no Study button');
@@ -223,7 +223,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
 
   console.log('— phone');
   const phc = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, storageState: await U.ctx.storageState() }); const ph = await phc.newPage(); const PE = []; ph.on('pageerror', e => PE.push(e.message));
-  await ph.goto(BASE + '/'); await wait(2500);
+  await ph.goto(BASE + '/'); await wait(2500); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(id => { Noema.curriculumMap(id); }, c.id); await wait(800);
   await ph.tap('.cm-node[data-id="calculus_basics"]'); await wait(400);
   const pb = await ph.locator('.cm-panel').boundingBox();

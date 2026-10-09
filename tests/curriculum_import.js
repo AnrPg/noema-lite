@@ -333,7 +333,7 @@ c.save()`, path.join(TF, 'textbook.pdf')]);
 
   console.log('— phone');
   const ph = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, storageState: await ctx.storageState() });
-  await ph.goto(BASE + '/'); await wait(1500);
+  await ph.goto(BASE + '/'); await wait(1500); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(() => { document.querySelectorAll('.noema-ov').forEach(o => o.remove()); NoemaCurMap.importMap(Noema.account.id); }); await wait(400);
   await ph.fill('.cm-maptext', TREE); await ph.setInputFiles('.cm-import .cg-drop input[type=file]', [path.join(TF, 'dna-replication.pdf')]); await wait(600);
   execFileSync('python3', ['-c', 'import zipfile,sys\nz=zipfile.ZipFile(sys.argv[1],"w")\nz.writestr("material/04 Translation/ribosomes.md","# Ribosomes")\nz.writestr("material/Quality control/qc-notes.txt","QC")\nz.writestr("__MACOSX/._x","")\nz.close()', path.join(TF, 'material.zip')]);

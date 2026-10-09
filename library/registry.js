@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-09T05:40:25+00:00",
+ "builtAt": "2026-10-09T05:44:51+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -80,7 +80,7 @@ window.NOEMA_REGISTRY = {
     "media": 19,
     "pictures": 19
    },
-   "version": "cc44939c9acaae9f",
+   "version": "b2ffda6dc42a6e5d",
    "chapters": [
     {
      "num": 1,

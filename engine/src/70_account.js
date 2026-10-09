@@ -1,5 +1,5 @@
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = [['profile', '👤 Profile'], ['settings', '⚙️ Settings'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
+const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   const d = h('details', { class: 'accsec', open: open || null },
@@ -18,7 +18,7 @@ function openAccountMenu(tab = 'profile') {
     const body = h('div', { class: 'accbody' });
     const tabs = h('div', { class: 'tabs' });
     const show = t => { tab = t; $$('button', tabs).forEach(b => b.classList.toggle('on', b.dataset.t === t)); body.innerHTML = ''; ACC_VIEWS[t](body, close); };
-    ACC_TABS.forEach(([k, l]) => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, l)));
+    ACC_TABS.forEach(k => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, t('acc.' + k))));
     const st = Noema.stats.get();
     box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
       h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? `☁️ Cloud account · ${ACCOUNT.email}` : '💻 Local profile on this device')),
@@ -38,7 +38,7 @@ const ACC_VIEWS = {
     const gstat = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'The model is detected on first use.');
     const geminiBox = h('div', {},
       !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
+      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Stored only in this browser. Add it once on each device.' : 'Stored only in this browser, for this profile.')),
       h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
         h('div', { class: 'row' },
           h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
@@ -77,15 +77,18 @@ const ACC_VIEWS = {
     const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
+    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LANGS.find(l => l[0] === NoemaI18n.browser())?.[1] })),
+      ...NoemaI18n.LANGS.map(([v, l]) => h('option', { value: v, selected: S.settings.lang === v }, l)));
     const chatL = chatLangSelect({ persist: false });
     const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
       h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
+      h('div', { class: 'field' }, h('label', {}, t('set.uiLang') + ' ', tip(t('set.uiLangTip'))), uiL),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
     const subject = h('div', { class: 'row' },
       h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 Backup & restore…'),
-      h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`));
+      h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`));
     const show = t => openAccountMenu(t);
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
@@ -96,10 +99,11 @@ const ACC_VIEWS = {
       accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
-          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; save();
+          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
+          if (relabel) { flushSave(); location.reload(); return; }   // the menus are drawn once: show them in the new language
           applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔');
         } }, 'Save settings')));
   },
@@ -176,7 +180,7 @@ const ACC_VIEWS = {
       if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, 'No restore points yet. One is created automatically before every restore or reset.')); return; }
       pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, p.label), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await Noema.backup.getRestorePoint(p.key)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)', async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
+        h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)' + (ACCOUNT.kind === 'cloud' ? ' Your other devices go back to it too.' : ''), async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
     };
     const pts0 = await Noema.backup.listRestorePoints(ACCOUNT.id);
     const nConv = (await Noema.convos.list(ACCOUNT.id)).length;
@@ -193,6 +197,7 @@ const ACC_VIEWS = {
           h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
             let obj; try { obj = Noema.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
             modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items · ${(obj.conversations || []).length} conversations`),
+              ACCOUNT.kind === 'cloud' ? h('p', { class: 'tiny' }, 'Replace and Merge change your account on all your devices, not only this one. A restore point of how things are now is kept on this device first, so you can undo it.') : null,
               h('div', { style: { display: 'grid', gap: '8px' } },
                 h('button', { class: 'btn primary', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
                 h('button', { class: 'btn', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
@@ -237,7 +242,7 @@ const ACC_VIEWS = {
       if (!list.length) snapBox.append(h('p', { class: 'tiny' }, 'No snapshots yet.'));
       list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, sn.label), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await NoemaCloud.getSnapshot(sn.id)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Restore your account to this snapshot? (a snapshot of the current state is taken first)', async () => { await NoemaCloud.snapshot('Before restoring a snapshot'); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 900); }) }, 'Restore'),
+        h('button', { class: 'btn small', onclick: () => confirmBox('Restore your account to this snapshot? All your devices go back to it, and anything newer is removed from them too. A snapshot of how things are now is taken first, so you can undo this.', async () => { await NoemaCloud.snapshot('Before restoring a snapshot'); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 900); }) }, 'Restore'),
         h('button', { class: 'iconbtn', onclick: async () => { await NoemaCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
     };
     body.append(h('p', { class: 'tiny' }, `Signed in as ${sess.user.email}. Progress, conversations and settings sync automatically; a daily snapshot is kept (last 30).`), stBox,
