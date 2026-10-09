@@ -2564,7 +2564,7 @@
     return out.slice(0, max);
   }
   /** parallel_translate: a sentence of one course language → build the same meaning in another with tiles. */
-  function translateItems(C, L, { langs, from, to, k, rng = Math.random, max = 6, sources, fn, frame } = {}) {
+  function parallelTranslateItems(C, L, { langs, from, to, k, rng = Math.random, max = 6, sources, fn, frame } = {}) {
     langs = polyLangs(C, L, langs); if (langs.length < 2) return [];
     const K = knownMap(C, L, langs, k), allowed = {};
     for (const c of langs) allowed[c] = new Map(selectSentences(C, c, { known: K[c].R, maxUnknown: 'auto' }).map(s => [s.id, s]));
@@ -2666,7 +2666,7 @@
   /** Polyglot items of one type for the learner (§6.6). opts: {langs, k: {lang: known()}, rng, max, fn, from, to, pivot, knows}. */
   function polyItems(C, L, type, opts = {}) {
     if (type === 'which_language') return whichItems(C, L, opts);
-    if (type === 'parallel_translate') return translateItems(C, L, opts);
+    if (type === 'parallel_translate') return parallelTranslateItems(C, L, opts);
     if (type === 'parallel_align') return alignItems(C, L, opts);
     if (type === 'cognate_bridge') return bridgeItems(C, L, opts);
     if (type === 'compare_rule') return compareItems(C, L, { ...opts, fns: opts.fn ? [opts.fn] : opts.fns });
@@ -2676,7 +2676,7 @@
   // as generators of a realization (§6.7): the function's sentences / the function itself, this language and the other active ones
   const genLangs = ctx => uniqStr([ctx.code, ...((ctx.gen.to || ctx.gen.langs) || (ctx.L.settings.languages || ctx.C.languages))]).filter(c => ctx.C.lang[c]);
   const genK = ctx => ({ [ctx.code]: ctx.k });
-  GEN.parallel_translate = ctx => translateItems(ctx.C, ctx.L, { langs: genLangs(ctx), from: ctx.code, k: genK(ctx), rng: ctx.rng, max: ctx.max, sources: ctx.bank(), fn: ctx.fid });
+  GEN.parallel_translate = ctx => parallelTranslateItems(ctx.C, ctx.L, { langs: genLangs(ctx), from: ctx.code, k: genK(ctx), rng: ctx.rng, max: ctx.max, sources: ctx.bank(), fn: ctx.fid });
   GEN.parallel_align = ctx => alignItems(ctx.C, ctx.L, { langs: genLangs(ctx), pivot: ctx.code, k: genK(ctx), rng: ctx.rng, max: ctx.max, sources: ctx.bank() }).map(it => ({ ...it, fn: ctx.fid }));
   GEN.which_language = ctx => whichItems(ctx.C, ctx.L, { langs: genLangs(ctx), k: genK(ctx), rng: ctx.rng, max: ctx.max });
   GEN.cognate_bridge = ctx => bridgeItems(ctx.C, ctx.L, { langs: genLangs(ctx), k: genK(ctx), rng: ctx.rng, max: ctx.max, focus: ctx.code });
@@ -2705,6 +2705,489 @@
   }
   API.GEN = GEN;
   Object.assign(API, { parallelGroups, parallelOf, equivalents, glossKey, bridges, bridgesOf, knownLinks, rootsCorrespond, mentionsIn, compareFn, polyItems, POLY_TYPES, romanOf, seeded });   // P6 — polyglot layer
+
+  /* ---------- P7 — Production and reading: translation, rewriting, writing, graded readers, numbers / clock / date, register, the tutor's context ----------
+     docs/LANGUAGES.md §6.5, §7.1 (3), §8 Tutor. Every automatic answer comes from stored data (the bank, the lexicon); an AI model only
+     grades open answers (labelled "AI-judged" by the UI) and talks in the tutor — what it writes is tokenized and checked against the form index. */
+  const glossOfLex = (C, X, l) => { const x = X.lex[l]; if (!x) return ''; const c = (x.senses || [])[0]; return c ? (C.concepts[c]?.gloss || c) : (x.role || ''); };
+  const sensesOf = (X, l) => (l && X.lex[l]?.senses) || [];
+  const numOf = (X, l) => { for (const s of sensesOf(X, l)) { const m = /^num\.(\d+)$/.exec(s); if (m) return +m[1]; } return null; };
+  const ordOf = (X, l) => { for (const s of sensesOf(X, l)) { const m = /^num\.ord\.(\d+)$/.exec(s); if (m) return +m[1]; } return null; };
+  /** The words of a stored sentence, a prefixed word split into its parts: [{t, l, f, name?}] (punctuation left out). */
+  const flatWords = s => { const out = []; const walk = ks => ks.forEach(k => { if (k.parts) walk(k.parts); else if (!k.p) out.push(k); }); walk(s.tokens || []); return out; };
+  const readKey = (l, f) => l + '|' + (f ? canon(f) : '');
+  /** The readings of a tokenized word, part by part: [[keys of part 1], [keys of part 2] …] */
+  const tokenReadings = k => k.parts ? k.parts.map(p => (p.matches || []).map(m => readKey(m.l, m.f))) : [(k.matches || []).map(m => readKey(m.l, m.f))];
+  /** Does a typed text say exactly the words (lexeme + form) of a stored sentence, spelled any way the form index accepts
+      (without vowel marks, full spelling, a capital at the start …)? Word order and every form must be the same. */
+  function sameWords(C, code, s, text) {
+    const X = C.lang[code], typed = tokenize(C, code, text).filter(k => !k.p), stored = flatWords(s), flat = [];
+    for (const k of typed) { if (k.parts) k.parts.forEach(p => flat.push({ t: p.t, keys: (p.matches || []).map(m => readKey(m.l, m.f)) })); else flat.push({ t: k.t, keys: (k.matches || []).map(m => readKey(m.l, m.f)) }); }
+    if (flat.length !== stored.length) return false;
+    const plain = w => stripMarks(code, nfc(w)).toLowerCase();
+    return stored.every((k, i) => {
+      const w = flat[i];
+      if (k.name || !k.l) return plain(w.t) === plain(k.t);   // a name: the same name
+      if (hasMarks(code, w.t) && nfc(w.t) !== nfc(k.t) && !Object.values(X.lex[k.l]?.forms || {}).some(f => nfc(f) === nfc(w.t))) return false;   // vowel marks written must be right
+      if (w.keys.includes(readKey(k.l, k.f))) return true;
+      if (!k.f && w.keys.some(x => x.startsWith(k.l + '|'))) return true;   // an invariant word or a prefix: the same word
+      const lx = X.lex[k.l], cell = k.f && Object.keys(lx?.forms || {}).find(c => canon(c) === canon(k.f)), alt = cell ? ((lx.formsAlt || {})[cell] || []) : [];   // Onkel / Onkels
+      return alt.some(a => plain(a) === plain(w.t));
+    });
+  }
+  /** A typed answer to a sentence (translate, rewrite with a stored variant) → {ok, how: 'exact' | 'variant' | null}.
+      Accepted: the sentence, its alts, and every orthographic variant the form index reads as the same words (without vowel
+      marks, the full spelling, a capital at the start …). Anything else is not decided here: the UI may send it to the AI, labelled "AI-judged". */
+  function typedAnswer(C, code, s, text, alts) {
+    const want = [s.text, ...(s.alts || []), ...(alts || [])];
+    if (!String(text || '').trim()) return { ok: false, how: null };
+    // letters as written (German nouns keep their capital), only the first letter of the answer is free; punctuation and spaces do not count
+    const norm = t => { const x = nfc(t).replace(/[\p{P}\s]+/gu, ' ').trim(); return C.lang[code].language.capitalizeFirst ? decapFirst(x) : x.toLowerCase(); };
+    const bare = !hasMarks(code, text);
+    if (want.some(a => norm(a) === norm(text) || bare && norm(stripMarks(code, a)) === norm(text))) return { ok: true, how: 'exact' };
+    if (sameWords(C, code, s, text)) return { ok: true, how: 'variant' };
+    return { ok: false, how: null };
+  }
+  /** A text written by the learner or by an AI, checked against the form index (§7.2): every word with its reading.
+      → {tokens, words: [{t, l, known, inCourse}], unknown: [not in the course], unlearned: [lexeme ids in the course, not known yet]} */
+  function checkText(C, code, text, knownSet) {
+    const X = C.lang[code], tokens = tokenize(C, code, text), words = [], unlearned = [], unknown = [];
+    for (const k of tokens) {
+      if (k.p) continue;
+      if (k.unknown) { words.push({ t: k.t, l: null, known: false, inCourse: false }); unknown.push(k.t); continue; }
+      const ids = k.parts ? k.parts.map(p => (p.matches || []).map(m => m.l)) : [(k.matches || []).map(m => m.l)];
+      const content = ids[ids.length - 1], kn = !knownSet || ids.every(alts => alts.some(l => knownSet.has(l)));
+      const l = content.find(x => knownSet?.has(x)) || content[0] || null;
+      words.push({ t: k.t, l, known: kn, inCourse: true });
+      if (!kn) for (const alts of ids) if (!alts.some(x => knownSet.has(x)) && X.lex[alts[0]] && !unlearned.includes(alts[0])) unlearned.push(alts[0]);
+    }
+    return { tokens, words, unknown, unlearned };
+  }
+
+  /* translate: the meaning → the sentence (early: tiles, later typed) */
+  function translateItems(C, L, code, opts = {}) {
+    const rng = opts.rng || Math.random, k = opts.k || known(C, L, code);
+    const pool = opts.sentences || selectSentences(C, code, { known: k.R, maxUnknown: opts.strictKnown ? 0 : 'auto', variants: opts.variants ?? true, ...(opts.functions ? { functions: opts.functions } : {}) });
+    const out = [], seen = new Set();
+    for (const s of shuffled(pool, rng)) {
+      if (!s.gloss || seen.has(s.gloss) || (s.nwords || 0) < 2) continue; seen.add(s.gloss);
+      const unknown = s.unknown || s.req.filter(l => !k.R.has(l));
+      // typed once every word of the sentence is known for production (§5.3 P); tiles before (or when asked)
+      const typed = opts.mode === 'typed' || (opts.mode !== 'tiles' && s.req.every(l => k.P.has(l)));
+      const tiles = sentenceTiles(s), wt = wrongTile(C, code, s, rng);
+      out.push({ type: 'translate', kind: 'translate', mode: typed ? 'typed' : 'tiles', ...(opts.fn ? { fn: opts.fn } : {}), lang: code, sentence: s.id, gloss: s.gloss,
+        answers: [s.text, ...(s.alts || [])], tiles: shuffled(wt ? [...tiles, wt] : tiles, rng), size: tiles.length, punct: endPunct(s), why: s.text, unknown });
+      if (out.length >= (opts.max ?? 8)) break;
+    }
+    return out;
+  }
+  /* rewrite / expand: the same sentence under a constraint. A constraint the bank holds a variant for (negative, question, plural …)
+     has stored answers (decided here); a paraphrase or an added detail is open: AI-judged, with the known-vocabulary check. */
+  const EXPAND = [
+    { id: 'time', text: 'Add when it happens (a time word).', need: x => (x.senses || []).some(c => /^time\./.test(c)) || x.pos === 'ADV' },
+    { id: 'place', text: 'Add where it happens (a place).', need: x => (x.senses || []).some(c => /^place\./.test(c)) },
+    { id: 'describe', text: 'Add a describing word (an adjective).', need: x => x.pos === 'ADJ' },
+    { id: 'reason', text: 'Add a reason (because …).', need: x => (x.senses || []).includes('conj.because') },
+    { id: 'and', text: 'Add a second sentence joined with “and” or “but”.', need: x => (x.senses || []).some(c => c === 'conj.and' || c === 'conj.but') }];
+  function rewriteItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), K = k.R, max = opts.max ?? 6;
+    const byBase = {}; for (const s of X.sentences) if (s.variantOf) (byBase[s.variantOf] = byBase[s.variantOf] || []).push(s);
+    const fits = s => s.req.filter(l => !K.has(l)).length <= s.cap;
+    const can = EXPAND.filter(e => [...K].some(l => X.lex[l] && e.need(X.lex[l])));
+    const out = [];
+    for (const s of shuffled(selectSentences(C, code, { known: K, maxUnknown: 'auto', variants: false }), rng)) {
+      if (!s.gloss || (s.nwords || 0) < 2) continue;
+      const vs = (byBase[s.id] || []).filter(fits);
+      const kind = opts.kind || (vs.length && rng() < 0.6 ? 'rewrite' : rng() < 0.5 ? 'expand' : 'rewrite');
+      const base = { type: 'rewrite', lang: code, sentence: s.id, source: s.text, sourceGloss: s.gloss, unknown: s.unknown };
+      if (kind === 'rewrite' && vs.length) { const v = vs[Math.floor(rng() * vs.length)]; out.push({ ...base, kind: 'rewrite', constraint: variantLabel(v.variant), target: v.id, gloss: v.gloss, answers: [v.text, ...(v.alts || [])], why: v.text }); }
+      else if (kind === 'rewrite' && !opts.storedOnly) out.push({ ...base, kind: 'rewrite', constraint: 'Say the same thing in other words.', answers: [] });
+      else if (kind === 'expand' && can.length) { const e = can[Math.floor(rng() * can.length)]; out.push({ ...base, kind: 'expand', constraint: e.text, expand: e.id, answers: [] }); }
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+  /* guided_compose: a prompt (or a picture) + required words → the learner writes a few sentences → the AI rubric per aspect */
+  const TEXT_TYPES = [{ id: 'message', title: 'a short message to a friend', sentences: '2–3' }, { id: 'description', title: 'a short description', sentences: '3–4' }, { id: 'narration', title: 'a short story of what happened', sentences: '3–5' }];
+  function composeTask(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code);
+    const content = l => ['NOUN', 'VERB', 'ADJ'].includes(X.lex[l]?.pos) && (X.lex[l].senses || []).length;
+    // the topic: the node asked for, else one of the learner's latest nodes with at least 3 known content words
+    const cand = (opts.node ? [opts.node] : C.order.slice().reverse()).filter(nid => (X.byNode[nid] || []).filter(l => k.R.has(l) && content(l)).length >= 3);
+    const nid = opts.node && cand.includes(opts.node) ? opts.node : cand[Math.floor(rng() * Math.min(3, cand.length))];
+    if (!nid) return null;
+    const words = shuffled((X.byNode[nid] || []).filter(l => k.R.has(l) && content(l)), rng);
+    const required = []; for (const pos of ['NOUN', 'VERB', 'ADJ']) { const w = words.find(l => X.lex[l].pos === pos && !required.includes(l)); if (w) required.push(w); }
+    for (const w of words) if (required.length < 3 && !required.includes(w)) required.push(w);
+    const pastKnown = X.grammar['fn.past'] && [...k.R].some(l => X.lex[l]?.pos === 'VERB') && functionState(C, L, code, 'fn.past') !== 'new';
+    const tt = TEXT_TYPES[k.R.size < 150 ? 0 : pastKnown && rng() < 0.4 ? 2 : Math.floor(rng() * 2)];
+    const pic = (C.nodes[nid].concepts || []).find(cid => C.concepts[cid]?.media && (X.byConcept[cid] || []).some(l => required.includes(l))) || null;
+    return { type: 'compose', kind: 'compose', lang: code, node: nid, topic: C.nodes[nid].title, textType: tt.id, prompt: `Write ${tt.title} (${tt.sentences} sentences) about “${C.nodes[nid].title}”.`, required, picture: pic };
+  }
+  /** The deterministic part of judging a written text: which required words it uses (in any form), which words are new or not in the course. */
+  function composeCheck(C, code, text, task, knownSet) {
+    const r = checkText(C, code, text, knownSet), used = new Set();
+    for (const k of r.tokens) { if (k.p || k.unknown) continue; for (const ids of (k.parts ? k.parts.map(p => p.matches || []) : [k.matches || []])) for (const m of ids) if ((task.required || []).includes(m.l)) used.add(m.l); }
+    const sentences = (String(text).match(/[^.!?。！？؟]+[.!?。！？؟]*/g) || []).filter(x => x.trim()).length;
+    return { ...r, used: [...used], missing: (task.required || []).filter(l => !used.has(l)), sentences };
+  }
+
+  /* graded_reader: texts made of bank sentences of related frames, at most one unknown word per sentence (§3.8) */
+  const frameFamily = id => { const f = String(id || '').split('.')[1] || String(id); return f === 'notlike' ? 'like' : f; };
+  function readerTexts(C, L, code, opts = {}) {
+    const X = C.lang[code], k = opts.k || known(C, L, code), K = k.R, size = opts.size || 6;
+    const fam = {};
+    for (const s of X.sentences) {
+      if (s.variantOf || !s.gloss) continue;
+      const unknown = s.req.filter(l => !K.has(l)); if (unknown.length > (opts.maxUnknown ?? 1)) continue;
+      (fam[frameFamily(s.frame)] = fam[frameFamily(s.frame)] || []).push({ s, unknown });
+    }
+    const out = [];
+    for (const [f, list] of Object.entries(fam)) {
+      const seen = new Set(), uniq = list.filter(x => !seen.has(x.s.gloss) && seen.add(x.s.gloss)).sort((a, b) => a.unknown.length - b.unknown.length || (a.s.id < b.s.id ? -1 : 1));
+      if (uniq.length < 4) continue;
+      for (let i = 0; i + 3 < uniq.length && out.filter(t => t.family === f).length < (opts.perFamily || 3); i += size) {
+        const part = uniq.slice(i, i + size).sort((a, b) => a.s.id < b.s.id ? -1 : 1); if (part.length < 4) break;
+        const frames = {}; part.forEach(x => frames[x.s.frame] = (frames[x.s.frame] || 0) + 1);
+        const main = Object.entries(frames).sort((a, b) => b[1] - a[1])[0][0];
+        const unknown = uniqStr(part.flatMap(x => x.unknown));
+        out.push({ id: `${code}:${f}:${i / size}`, lang: code, family: f, title: (C.frames[main]?.meaning || f).replace(/\s*\(.*?\)\s*/g, ' ').trim(), frames: Object.keys(frames), sentences: part.map(x => x.s.id), unknown });
+      }
+    }
+    return out.sort((a, b) => a.unknown.length - b.unknown.length || b.sentences.length - a.sentences.length || (a.id < b.id ? -1 : 1));
+  }
+  /** Comprehension questions of a text: "Which of these does the text say?" — the meaning of one of its sentences among meanings
+      of sentences of the same frames that are not in the text (never one that means the same). Answers from the stored glosses. */
+  function readerQuestions(C, L, code, text, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, n = opts.n || 3, ids = new Set(text.sentences);
+    const conceptKey = o => o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|');
+    const inText = text.sentences.map(id => X.sentenceById[id]), glosses = new Set(inText.map(s => s.gloss)), keys = new Set(inText.map(conceptKey));
+    const pool = X.sentences.filter(o => !ids.has(o.id) && o.gloss && !glosses.has(o.gloss) && !keys.has(conceptKey(o)) && frameFamily(o.frame) === text.family);
+    const wide = X.sentences.filter(o => !ids.has(o.id) && o.gloss && !glosses.has(o.gloss) && !keys.has(conceptKey(o)));
+    const out = [];
+    for (const s of shuffled(inText, rng)) {
+      const wrong = uniqStr([...shuffled(pool, rng), ...shuffled(wide, rng)].map(o => o.gloss)).slice(0, 3);
+      if (wrong.length < 2) continue;
+      out.push({ type: 'choose', kind: 'quiz', reader: text.id, lang: code, sentence: s.id, prompt: 'Which of these does the text say?', ask: '', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });
+      if (out.length >= n) break;
+    }
+    return out;
+  }
+
+  /* number_words: digits ↔ words, from the number words of the lexicon (concepts num.N) and the way the language builds 21–99 */
+  const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
+  const digitsIn = (code, n) => code === 'ar' ? String(n).replace(/\d/g, d => AR_DIGITS[d]) : String(n);
+  /** The stored number words of a language: n → [lexeme ids] (only known ones when K is given). */
+  function numberWords(C, code, K) {
+    const X = C.lang[code], out = {};
+    for (const [id, x] of Object.entries(X.lex)) { const n = numOf(X, id); if (n == null || x.pos !== 'NUM' || (K && !K.has(id))) continue; (out[n] = out[n] || []).push(id); }
+    return out;
+  }
+  const findCell = (lx, ...tagSets) => { const f = lx.forms || {}; for (const tags of tagSets) { const c = Object.keys(f).find(x => cellHas(x, tags) && !/(^|;)(CONST|PFX|ALT)(;|$)/.test(x)); if (c) return f[c]; } return null; };
+  /** A number word in the form used when counting things of one gender (ar / he; MASC is the form used with masculine nouns). */
+  function numberForm(C, code, id, gender) {
+    const lx = C.lang[code].lex[id]; if (!lx) return null;
+    if (!Object.keys(lx.forms || {}).length) return lx.lemma;
+    if (code === 'ar') return findCell(lx, ['NOM', gender, 'INDF'], ['NOM', gender], ['NOM', 'INDF'], ['NOM']) || lx.lemma;
+    return findCell(lx, [gender], []) || lx.lemma;
+  }
+  /** Hebrew וְ "and" before a word: וּ before a shva and before ב מ פ, וַ / וֶ / וָ before a hataf; null where the course has no rule (a begadkefat letter with dagesh). */
+  function heAnd(word) {
+    const cs = [...nfc(word)], first = cs[0], marks = []; for (let i = 1; i < cs.length && /\p{M}/u.test(cs[i]); i++) marks.push(cs[i]);
+    if ('בגדכפת'.includes(first) && marks.includes('ּ')) return null;
+    if (marks.includes('ְ') || 'במפ'.includes(first)) return nfc('וּ' + word);
+    if (marks.includes('ֲ')) return nfc('וַ' + word);
+    if (marks.includes('ֱ')) return nfc('וֶ' + word);
+    if (marks.includes('ֳ')) return nfc('וָ' + word);
+    return nfc('וְ' + word);
+  }
+  /** The number n in words, built from the stored number words (deterministic): 0–20, the tens, 100, 1000 as stored; 21–99 as the
+      language builds them (de einundzwanzig, zh 二十一, ar وَاحِدٌ وَعِشْرُونَ — unit + وَ + ten —, he עֶשְׂרִים וְאַחַת — ten + וְ + unit).
+      opts: {gender: 'MASC' | 'FEM' (ar, he), K: only known words}. → {text, lex: [ids]} or null when the course cannot say it. */
+  function numberWord(C, code, n, opts = {}) {
+    const X = C.lang[code], W = numberWords(C, code), g = opts.gender || 'MASC', K = opts.K;
+    const pick = v => (W[v] || []).filter(id => !(code === 'zh' && v === 2 && X.lex[id].lemma === '两'))[0] || null;   // zh: 二 inside numbers, 两 only before a measure word
+    const ok = ids => !K || ids.every(id => K.has(id));
+    const one = v => { const id = pick(v); if (!id) return null; return { text: code === 'ar' || code === 'he' ? numberForm(C, code, id, g) : X.lex[id].lemma, lex: [id] }; };
+    if (W[n]) { const r = one(n); return r && ok(r.lex) ? r : null; }
+    if (n < 21 || n > 99) return null;
+    const u = n % 10, t = n - u, ui = pick(u), ti = pick(t); if (!ui || !ti) return null;
+    const andId = Object.keys(X.lex).find(id => (X.lex[id].senses || []).includes('conj.and') && (code === 'de' || code === 'zh' || X.lex[id].prefix));
+    let text = null; const lex = [ui, ti];
+    if (code === 'de') { if (!andId) return null; text = (u === 1 ? 'ein' : X.lex[ui].lemma) + X.lex[andId].lemma + X.lex[ti].lemma; lex.push(andId); }   // einundzwanzig: eins loses its s
+    else if (code === 'zh') text = X.lex[ti].lemma + X.lex[ui].lemma;   // 二十 + 一
+    else if (code === 'ar') { if (!andId || (g === 'FEM' && u === 1)) return null; text = numberForm(C, code, ui, g) + ' ' + nfc(X.lex[andId].lemma + numberForm(C, code, ti, g)); lex.push(andId); }   // 21 with a feminine noun is إِحْدَى وَعِشْرُونَ: not built here
+    else if (code === 'he') { const a = heAnd(numberForm(C, code, ui, g)); if (!andId || !a) return null; text = X.lex[ti].lemma + ' ' + a; lex.push(andId); }
+    else return null;
+    return ok(lex) ? { text: nfc(text), lex } : null;
+  }
+  /** Numbers that are easily confused with n (13 / 30, 16 / 60, neighbours, swapped digits) — for the wrong options. */
+  const confusables = n => uniqStr([n < 20 && n > 12 ? (n - 10) * 10 : null, n % 10 === 0 && n >= 30 && n <= 90 ? n / 10 + 10 : null, n > 9 && n < 100 ? (n % 10) * 10 + Math.floor(n / 10) : null, n + 1, n - 1, n + 10, n - 10, n + 2].filter(x => x != null && x >= 0 && x !== n));
+  function numberItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), K = k.R, max = opts.max ?? 10, out = [];
+    const say = (n, g) => numberWord(C, code, n, { K, gender: g });
+    const range = []; for (let n = 0; n <= 1000; n++) if (say(n)) range.push(n);
+    for (const n of shuffled(range, rng)) {
+      const w = say(n); const others = confusables(n).filter(x => say(x));
+      for (const x of shuffled(range, rng)) if (others.length < 6 && x !== n && !others.includes(x)) others.push(x);
+      const wrong = uniqStr(others.map(x => say(x).text)).filter(t => t !== w.text).slice(0, 3);
+      if (wrong.length < 2) continue;
+      const g = code === 'ar' || code === 'he' ? ' (the form used with masculine nouns)' : '';
+      if (rng() < 0.5) out.push({ type: 'number', kind: 'digits2word', lang: code, n, prompt: digitsIn(code, n), ask: `How do you say it in words?${g}`, options: shuffled([w.text, ...wrong], rng), answer: w.text, why: `${n} = ${w.text}`, lex: w.lex });
+      else { const ws = others.slice(0, 3).map(String); out.push({ type: 'number', kind: 'word2digits', lang: code, n, prompt: w.text, ask: 'Which number is it?', options: shuffled([String(n), ...ws], rng), answer: String(n), why: `${w.text} = ${n}`, lex: w.lex }); }
+      if (out.length >= Math.ceil(max * 0.6)) break;
+    }
+    out.push(...countingItems(C, L, code, { k, rng, max: max - out.length }));
+    return shuffled(out, rng).slice(0, max);
+  }
+  /** Counting things: ar / he — the gender of 3–10 is the opposite of the noun's (ar ثَلَاثَةُ كُتُبٍ, he שְׁלוֹשָׁה סְפָרִים: the form in -a with a masculine noun);
+      zh — 两 before a measure word (两本书), never 二. Everything from the stored forms, the noun's gender and its measure word. */
+  function countingItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), K = k.R, out = [], max = opts.max ?? 4;
+    if (max <= 0) return out;
+    const nouns = shuffled(Object.values(X.lex).filter(x => K.has(x.id) && x.pos === 'NOUN' && ['MASC', 'FEM'].includes(x.gender) && x.class !== 'collective' && !x.collective), rng);
+    if (code === 'ar' || code === 'he') {
+      const W = numberWords(C, code, K), plCell = code === 'ar' ? ['N', 'GEN', 'PL', 'INDF'] : ['N', 'PL', 'INDF'];
+      for (const nn of nouns) {
+        const pl = findCell(nn, plCell); if (!pl) continue;
+        const n = 3 + Math.floor(rng() * 8), id = (W[n] || [])[0]; if (!id) continue;
+        const lx = X.lex[id], cell = g => code === 'ar' ? Object.keys(lx.forms || {}).find(c => cellHas(c, ['NOM', g, 'CONST'])) : Object.keys(lx.forms || {}).find(c => canon(c) === canon('NUM;' + g));
+        const m = cell('MASC'), f = cell('FEM'); if (!m || !f || lx.forms[m] === lx.forms[f]) continue;
+        const right = lx.forms[nn.gender === 'MASC' ? m : f], wrong = lx.forms[nn.gender === 'MASC' ? f : m];
+        out.push({ type: 'number', kind: 'counting', lang: code, n, noun: nn.id, prompt: `${digitsIn(code, n)} × ${nn.lemma}`, ask: `${n} — ${glossOfLex(C, X, nn.id)} (plural): which is right?`,
+          options: shuffled([right + ' ' + pl, wrong + ' ' + pl], rng), answer: right + ' ' + pl,
+          why: `${nn.lemma} is ${GENDER_WORD[nn.gender]} → ${right} ${pl}. From 3 to 10 the number takes the form of the other gender (the form in -a goes with masculine nouns).`, lex: [id, nn.id] });
+        if (out.length >= max) break;
+      }
+    } else if (code === 'zh') {
+      const two = Object.keys(X.lex).filter(id => numOf(X, id) === 2), liang = two.find(id => X.lex[id].lemma === '两'), er = two.find(id => X.lex[id].lemma === '二');
+      if (liang && er && K.has(liang)) for (const nn of shuffled(Object.values(X.lex).filter(x => K.has(x.id) && x.pos === 'NOUN' && (x.measure || []).length), rng)) {
+        const m = nn.measure[0], ph = w => w + m + nn.lemma;
+        out.push({ type: 'number', kind: 'counting', lang: code, n: 2, noun: nn.id, prompt: `2 × ${nn.lemma}`, ask: `two ${glossOfLex(C, X, nn.id)}: which is right?`, options: shuffled([ph('两'), ph('二')], rng), answer: ph('两'), why: `${ph('两')} — before a measure word “two” is 两; 二 is for counting and inside numbers (十二, 二十).`, lex: [liang, nn.id] });
+        if (out.length >= max) break;
+      }
+    }
+    return out;
+  }
+
+  /* clock and date: read from the annotated words of bank sentences — a time or a date is only taken when the gloss confirms it */
+  const EN_CARD = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+  const EN_ORD = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth', 'twentieth'];
+  for (const [t, o] of [[20, 'twenty'], [30, 'thirty']]) for (let u = 1; u <= 9 && t + u <= 31; u++) EN_ORD[t + u] = o + '-' + EN_ORD[u];
+  EN_ORD[30] = 'thirtieth';
+  /** Where the hour stands next to the clock word, and which kind of number it is (the clock patterns of the course languages, docs/LANGUAGES.md §6.5). */
+  const CLOCK = { de: { side: -1, num: 'card' }, zh: { side: -1, num: 'card' }, ar: { side: 1, num: 'ord' }, he: { side: 1, num: 'card' } };
+  const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'].map(m => 'time.' + m);
+  const WEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map(d => 'time.' + d);
+  /** The time a bank sentence names → {h, m} or null. */
+  function clockOf(C, code, s) {
+    const X = C.lang[code], spec = CLOCK[code]; if (!spec) return null;
+    const ws = flatWords(s), isClock = k => k.l && sensesOf(X, k.l).includes('time.oclock') && !/(^|;)(PL|DU)(;|$)/.test(k.f || ''), i = ws.findIndex(isClock);
+    if (i < 0 || ws.filter(isClock).length > 1) return null;   // one time per sentence
+    let h = null, hi = -1;
+    for (let d = 1; d <= 2 && h == null; d++) { const w = ws[i + spec.side * d]; if (!w || !w.l) continue; const v = spec.num === 'ord' ? ordOf(X, w.l) : numOf(X, w.l); if (v != null) { h = v; hi = i + spec.side * d; } }
+    if (h == null || h < 1 || h > 24) return null;
+    const isHalf = w => sensesOf(X, w.l).includes('num.half'), isQuarter = w => sensesOf(X, w.l).includes('num.quarter');
+    const end = Math.max(i, hi);
+    if (ws.slice(0, end + 1).some(w => isHalf(w) || isQuarter(w))) return null;   // German halb vier (= 3:30), a quarter to …: not read here
+    let m = 0; const next = ws.slice(end + 1, end + 4);
+    for (let j = 0; j < next.length; j++) {
+      const w = next[j];
+      if (isHalf(w)) { m = 30; break; }
+      if (isQuarter(w)) { m = 15; break; }
+      if (numOf(X, w.l) != null) { if (numOf(X, w.l) === 1 && next[j + 1] && isQuarter(next[j + 1])) { m = 15; break; } return null; }   // zh 一刻 = a quarter; minutes in numbers (三点十分, שָׁלוֹשׁ וְעֶשְׂרִים): not read here
+    }
+    // the gloss must confirm it (in English: "at six", "six o'clock", "half past three"; any language: "6:30")
+    const g = String(s.gloss || '').toLowerCase().replace(/’/g, "'"), hw = h <= 20 ? EN_CARD[h] : String(h);
+    const digits = new RegExp(`\\b${h}:${String(m).padStart(2, '0')}\\b`).test(g);
+    if (!digits && /\d:\d\d/.test(g)) return null;
+    const enHour = new RegExp(`\\b(at|by|until|till|from|since|after|before) (${hw}|${h})\\b`).test(g) || new RegExp(`\\b(${hw}|${h}) o'clock`).test(g) || new RegExp(`\\b(half|quarter) past (${hw}|${h})\\b`).test(g);
+    const enMin = m === 0 ? !/\b(half|quarter|past|to|minutes?)\b/.test(g.replace(/\b(at|by|until|from|since|after|before) /g, '')) : m === 30 ? new RegExp(`half past (${hw}|${h})\\b`).test(g) : new RegExp(`quarter past (${hw}|${h})\\b`).test(g);
+    return digits || (C.explainLang === 'en' && enHour && enMin) ? { h, m } : null;
+  }
+  /** The date a bank sentence names → {d, m} or null (a day number or ordinal next to a month word; the gloss must confirm it). */
+  function dateOf(C, code, s) {
+    const X = C.lang[code], ws = flatWords(s);
+    const isMonth = k => k.l && sensesOf(X, k.l).some(c => MONTHS.includes(c)), mi = ws.findIndex(isMonth); if (mi < 0 || ws.filter(isMonth).length > 1) return null;
+    const mc = sensesOf(X, ws[mi].l).find(c => MONTHS.includes(c)), m = MONTHS.indexOf(mc) + 1;
+    const between = w => !!w && !!w.l && (['ADP', 'DET'].includes(X.lex[w.l]?.pos) || !!X.lex[w.l]?.prefix);   // am dritten März, الْخَامِسُ مِنْ مَايُو, אַרְבָּעָה בְּ־יוּלִי
+    const near = []; for (const d of [-2, -1, 1, 2]) { const w = ws[mi + d]; if (!w || !w.l) continue; if (Math.abs(d) === 2 && !between(ws[mi + d / 2])) continue; const v = ordOf(X, w.l) ?? numOf(X, w.l); if (v != null && v >= 1 && v <= 31) near.push({ d: Math.abs(d), v }); }
+    near.sort((a, b) => a.d - b.d); if (!near.length || (near[1] && near[1].d === near[0].d && near[1].v !== near[0].v)) return null;
+    const day = near[0].v, g = String(s.gloss || '').toLowerCase(), mg = String(C.concepts[mc]?.gloss || '').toLowerCase();
+    const D = `(${day}(st|nd|rd|th)?${C.explainLang === 'en' && EN_ORD[day] ? '|' + EN_ORD[day] : ''})`;
+    const ok = mg && (new RegExp(`\\b(the )?${D} of ${mg}\\b`).test(g) || new RegExp(`\\b${mg} ${D}\\b`).test(g) || new RegExp(`\\b${D}\\.? ?${mg}\\b`).test(g));
+    return ok ? { d: day, m } : null;
+  }
+  const hm = t => `${t.h}:${String(t.m).padStart(2, '0')}`;
+  function clockItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 6;
+    const all = selectSentences(C, code, { known: k.R, maxUnknown: 'auto' }).map(s => ({ s, t: clockOf(C, code, s) })).filter(x => x.t);
+    const out = [];
+    for (const { s, t } of shuffled(all, rng)) {
+      const times = uniqStr([hm(t), ...shuffled([{ h: t.h % 12 + 1, m: t.m }, { h: t.h, m: (t.m + 30) % 60 }, { h: (t.h + 10) % 12 + 1, m: t.m }, { h: (t.h + 5) % 12 + 1, m: t.m === 0 ? 30 : 0 }], rng).map(hm)]).slice(0, 4);
+      const others = []; for (const o of shuffled(all, rng)) if (hm(o.t) !== hm(t) && !others.some(x => hm(x.t) === hm(o.t))) others.push(o);   // other times, one sentence each
+      if (others.length >= 2 && rng() < 0.5) {
+        out.push({ type: 'clock', kind: 'time2sentence', lang: code, time: t, sentence: s.id, ask: 'Which sentence says this time?', options: shuffled([s.id, ...others.slice(0, 3).map(o => o.s.id)], rng), answer: s.id, why: `${hm(t)} — ${s.text}`, unknown: s.unknown });
+      } else out.push({ type: 'clock', kind: 'sentence2time', lang: code, time: t, sentence: s.id, ask: 'What time does it say?', options: shuffled(times, rng), answer: hm(t), why: `${s.text} — ${hm(t)}`, unknown: s.unknown });
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+  function dateItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), K = k.R, max = opts.max ?? 8, out = [];
+    const words = cs => cs.map((c, i) => ({ c, i, ids: (X.byConcept[c] || []).filter(id => K.has(id)) })).filter(x => x.ids.length);
+    const months = words(MONTHS), days = words(WEEKDAYS);
+    const lemma = id => X.lex[id].lemma;
+    for (const mo of shuffled(months, rng).slice(0, 3)) {
+      const wrong = shuffled(months.filter(x => x.c !== mo.c), rng).slice(0, 3).map(x => lemma(x.ids[0])); if (wrong.length < 2) break;
+      const id = mo.ids[Math.floor(rng() * mo.ids.length)];
+      if (rng() < 0.5) out.push({ type: 'date', kind: 'month2word', lang: code, prompt: digitsIn(code, mo.i + 1) + '.', ask: 'Which month is it?', options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${mo.i + 1} = ${mo.ids.map(lemma).join(' / ')} (${C.concepts[mo.c].gloss})`, lex: [id] });
+      else { const nums = shuffled(months.filter(x => x.c !== mo.c), rng).slice(0, 3).map(x => String(x.i + 1)); out.push({ type: 'date', kind: 'word2month', lang: code, prompt: lemma(id), ask: 'Which month is it (its number)?', options: shuffled([String(mo.i + 1), ...nums], rng), answer: String(mo.i + 1), why: `${lemma(id)} = ${mo.i + 1} (${C.concepts[mo.c].gloss})`, lex: [id] }); }
+    }
+    for (const dy of shuffled(days, rng).slice(0, 2)) {
+      const nx = days.find(x => x.i === (dy.i + 1) % 7); if (!nx) continue;
+      const wrong = shuffled(days.filter(x => x.c !== nx.c && x.c !== dy.c), rng).slice(0, 3).map(x => lemma(x.ids[0])); if (wrong.length < 2) continue;
+      out.push({ type: 'date', kind: 'nextday', lang: code, prompt: lemma(dy.ids[0]), ask: 'Which day comes after it?', options: shuffled([lemma(nx.ids[0]), ...wrong], rng), answer: lemma(nx.ids[0]), why: `${lemma(dy.ids[0])} → ${lemma(nx.ids[0])} (${C.concepts[dy.c].gloss} → ${C.concepts[nx.c].gloss})`, lex: [dy.ids[0], nx.ids[0]] });
+    }
+    const ords = Object.keys(X.lex).filter(id => K.has(id) && ordOf(X, id) != null && (X.lex[id].senses || [])[0] === `num.ord.${ordOf(X, id)}`);
+    for (const id of shuffled(ords, rng).slice(0, 2)) {
+      const n = ordOf(X, id), wrong = uniqStr(shuffled(ords.filter(x => ordOf(X, x) !== n), rng).map(lemma)).slice(0, 3); if (wrong.length < 2) continue;
+      out.push({ type: 'date', kind: 'ordinal', lang: code, prompt: digitsIn(code, n) + '.', ask: `The ${EN_ORD[n] || n + 'th'}: which word?`, options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${n}. = ${lemma(id)}`, lex: [id] });
+    }
+    const fmt = t => `${t.d} ${C.concepts[MONTHS[t.m - 1]]?.gloss || t.m}`;
+    for (const s of shuffled(selectSentences(C, code, { known: K, maxUnknown: 'auto' }), rng)) {
+      const t = dateOf(C, code, s); if (!t) continue;
+      const opts2 = uniqStr([fmt(t), fmt({ d: t.d, m: t.m % 12 + 1 }), fmt({ d: t.d % 28 + 1, m: t.m }), fmt({ d: (t.d + 9) % 28 + 1, m: (t.m + 5) % 12 + 1 })]);
+      out.push({ type: 'date', kind: 'sentence2date', lang: code, sentence: s.id, ask: 'Which date does it say?', options: shuffled(opts2, rng), answer: fmt(t), why: `${s.text} — ${fmt(t)}`, unknown: s.unknown });
+      if (out.filter(x => x.kind === 'sentence2date').length >= 2) break;
+    }
+    return shuffled(out, rng).slice(0, max);
+  }
+
+  /* register and dialogue_turn: choose the right formula, complete a turn — from bank sentences with a register (variants by
+     formality or by the person addressed) and the exchanges the bank holds (greetings first). */
+  function registerItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 6, out = [];
+    const fits = s => s.req.filter(l => !k.R.has(l)).length <= s.cap;
+    const ASK = { Formality: { formal: 'Which one is polite (formal)?', informal: 'Which one is informal (familiar)?' }, Address: { formal: 'Which one is polite (formal)?', informal: 'Which one is informal (familiar)?' },
+      Addressee: { FEM: 'Which one do you say to a woman?', MASC: 'Which one do you say to a man?', PL: 'Which one do you say to several people?' } };
+    for (const s2 of shuffled(X.sentences.filter(s => s.variantOf && fits(s)), rng)) {
+      const [key, val] = Object.entries(s2.variant || {}).find(([kk]) => ASK[kk]) || []; if (!key) continue;
+      const ask = ASK[key][val] || ASK[key][String(val).toLowerCase()]; const s1 = X.sentenceById[s2.variantOf];
+      if (!ask || !s1 || !fits(s1) || cmpText(code, s1.text) === cmpText(code, s2.text)) continue;
+      out.push({ type: 'register', kind: 'register', lang: code, sentence: s2.id, ask, gloss: s2.gloss.replace(/\s*\((polite|formal|informal|to a (wo)?man|to several people)\)\s*/gi, ' ').trim(),
+        options: shuffled([s2.text, s1.text], rng), answer: s2.text, why: `${s2.text} — ${s2.gloss}`, unknown: uniqStr([...s2.req, ...s1.req].filter(l => !k.R.has(l))) });
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+  /** The turns of an exchange stored as one sentence (Wie geht's? Gut, danke.) → [[tokens of turn 1], [tokens of turn 2] …] */
+  function turnsOf(s) {
+    const ts = s.tokens || [], out = [[]];
+    ts.forEach((k, i) => { out[out.length - 1].push(k); if (k.p === true && /[.?!。？！؟]/.test(k.t) && ts.slice(i + 1).some(x => !x.p)) out.push([]); });
+    return out.filter(t => t.some(k => !k.p));
+  }
+  function dialogueItems(C, L, code, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 6, out = [];
+    const lem = ts => new Set(ts.flatMap(t => t.parts ? t.parts.map(p => p.l) : [t.l]).filter(Boolean));
+    const join = ts => joinTokens(ts, X.language.tokenJoin);
+    const ex = selectSentences(C, code, { known: k.R, maxUnknown: 'auto' }).map(s => ({ s, turns: turnsOf(s) })).filter(x => x.turns.length === 2)
+      .map(x => ({ ...x, a: join(x.turns[0]), b: join(x.turns[1]), la: lem(x.turns[0]), lb: lem(x.turns[1]) }));
+    const ordered = [...shuffled(ex.filter(x => x.s.frame === 'fr.greet'), rng), ...shuffled(ex.filter(x => x.s.frame !== 'fr.greet' && /[?？؟]\s*$/.test(x.a)), rng)];
+    const used = new Set();
+    for (const x of ordered) {
+      if (used.has(x.a)) continue;
+      const wrong = uniqStr(shuffled(ex.filter(o => o.b !== x.b && ![...o.la].some(l => x.la.has(l)) && ![...o.lb].some(l => x.lb.has(l))), rng).map(o => o.b)).slice(0, 3);
+      if (wrong.length < 2) continue; used.add(x.a);
+      const [ga, gb] = String(x.s.gloss).split(/\s+[–—]\s+/);
+      out.push({ type: 'dialogue', kind: 'dialogue', lang: code, sentence: x.s.id, prompt: x.a, promptGloss: gb ? ga : '', ask: 'What fits as the answer?', options: shuffled([x.b, ...wrong], rng), answer: x.b, why: `${x.s.text} — ${x.s.gloss}`, unknown: x.s.unknown });
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+
+  /* the AI's tasks — built here (pure), sent by the UI with the learner's own key; their answers are never an answer key */
+  const AI_VERDICT = { type: 'object', required: ['verdict', 'feedback'], properties: { verdict: { type: 'string', enum: ['correct', 'acceptable', 'wrong'] }, corrected: { type: 'string' },
+    mistakes: { type: 'array', items: { type: 'object', required: ['wrong', 'right', 'why'], properties: { wrong: { type: 'string' }, right: { type: 'string' }, why: { type: 'string' } } } }, feedback: { type: 'string' } } };
+  const AI_RUBRIC = { type: 'object', required: ['aspects', 'feedback'], properties: {
+    aspects: { type: 'object', required: ['grammar', 'vocabulary', 'spelling', 'cohesion'], properties: Object.fromEntries(['grammar', 'vocabulary', 'spelling', 'cohesion'].map(a => [a, { type: 'object', required: ['score', 'comment'], properties: { score: { type: 'integer', minimum: 0, maximum: 5 }, comment: { type: 'string' } } }])) },
+    corrections: { type: 'array', items: { type: 'object', required: ['from', 'to', 'why'], properties: { from: { type: 'string' }, to: { type: 'string' }, why: { type: 'string' } } } },
+    corrected: { type: 'string' }, feedback: { type: 'string' } } };
+  const langLabel = (C, code) => C.lang[code]?.language?.name || code;
+  /** The prompt for grading an open answer. task: {kind: translate | rewrite | expand | compose, lang, …} → {system, prompt, schema, name} */
+  function aiTask(C, L, code, task, opts = {}) {
+    const X = C.lang[code], name = langLabel(C, code), expl = opts.chatLang || C.explainLang || 'en';
+    const k = opts.k || known(C, L, code), words = [...k.R].slice(0, opts.cap || 120).map(l => `${X.lex[l].lemma} = ${glossOfLex(C, X, l)}`).join('; ');
+    const system = `[noema:lang-judge] You grade the open answer of a learner of ${name} (course "${C.data.course.title}"). Write every explanation in the language with code "${expl}". Judge only what is asked; be precise and kind. ` +
+      `The course's stored answers are the reference: you do not replace them. Accept every answer that is correct ${name} and says what was asked, even when it differs from the reference. ` +
+      `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\nThe learner knows these words: ${words || '(few yet)'}.`;
+    let prompt, schema = AI_VERDICT;
+    if (task.kind === 'translate') prompt = `The learner had to say in ${name}: "${task.gloss}".\nThe course's answer(s): ${task.reference.map(r => `"${r}"`).join(' / ')}.\nThe learner wrote: "${task.answer}".\nIs it correct ${name} with this meaning? verdict: correct (fully right), acceptable (right meaning, small slips), wrong. corrected: the learner's sentence, minimally corrected (or unchanged when it is right). mistakes: each error with the right form and why.`;
+    else if (task.kind === 'rewrite') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: ${task.constraint}\n${task.reference?.length ? `One answer the course knows: ${task.reference.map(r => `"${r}"`).join(' / ')}.\n` : ''}The learner wrote: "${task.answer}".\nDoes it do the task in correct ${name}? verdict: correct, acceptable (does it, small slips) or wrong (wrong language, wrong meaning or the task not done). corrected: the learner's sentence minimally corrected. mistakes: each error.`;
+    else if (task.kind === 'expand') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: keep the sentence and ${task.constraint.charAt(0).toLowerCase() + task.constraint.slice(1)}\nThe learner wrote: "${task.answer}".\nDoes it keep the meaning, add what was asked and stay correct ${name}? verdict: correct, acceptable or wrong. corrected: minimally corrected. mistakes: each error.`;
+    else { schema = AI_RUBRIC; prompt = `The task: ${task.prompt}\nWords the learner had to use: ${(task.required || []).map(l => `${X.lex[l]?.lemma} (${glossOfLex(C, X, l)})`).join(', ')}.\nThe learner wrote:\n"""${task.answer}"""\nGrade each aspect 0–5 with a short comment: grammar, vocabulary (fits the task, the required words used well), spelling (and vowel marks / characters as written), cohesion (the sentences connect). corrections: every error as {from: the exact wrong text, to: the fix, why}. corrected: the whole text minimally corrected. feedback: two or three sentences.`; }
+    return { system, prompt, schema, name: task.kind === 'compose' ? 'rubric' : 'verdict' };
+  }
+  /** The prompt for a new graded text written by the AI and checked by the tokenizer (the LLM proposes, the validator decides). */
+  function readerTask(C, L, code, opts = {}) {
+    const X = C.lang[code], k = opts.k || known(C, L, code), name = langLabel(C, code);
+    const words = [...k.R].slice(0, opts.cap || 200).map(l => X.lex[l].lemma).join(', ');
+    return { name: 'reader', system: `[noema:lang-reader] You write graded reading texts for a learner of ${name}. Use ONLY words from the learner's list, in any of their forms; at most one word per sentence may be outside it. Simple, natural, neutral sentences; no names of real people.`,
+      prompt: `The learner's words: ${words}.\nWrite a short text (${opts.sentences || 5} sentences) in ${name}${opts.topic ? ` about "${opts.topic}"` : ''}: one object per sentence, with its translation into the language with code "${opts.chatLang || C.explainLang}".`,
+      schema: { type: 'object', required: ['title', 'sentences'], properties: { title: { type: 'string' }, sentences: { type: 'array', minItems: 2, items: { type: 'object', required: ['text', 'gloss'], properties: { text: { type: 'string' }, gloss: { type: 'string' } } } } } },
+      // the validator decides: sentences that fail are dropped by the UI; a repair is asked only when fewer than three would remain
+      validate: data => { const errs = readerProblems(C, code, data, k.R), bad = new Set(errs.map(e => +e.match(/\d+/)[0])); return (data.sentences || []).length - bad.size >= Math.min(3, (data.sentences || []).length) ? [] : errs; } };
+  }
+  /** The checks of an AI-written text: every word in the course, at most one unknown word per sentence. → [problems] (empty = accepted) */
+  function readerProblems(C, code, data, knownSet) {
+    const errs = [];
+    (data.sentences || []).forEach((s, i) => { const r = checkText(C, code, s.text, knownSet); if (r.unknown.length) errs.push(`sentence ${i + 1}: words not in the course: ${r.unknown.join(', ')} — use other words`); if (r.unlearned.length > 1) errs.push(`sentence ${i + 1}: ${r.unlearned.length} words the learner does not know yet — at most one`); });
+    return errs;
+  }
+
+  /* the tutor in a language (§8 Tutor): the context, the learner's known words (capped), the rule, the intent of the button */
+  const TUTOR_RULE = 'Use the learner\'s known words for everything you write in the language; at most one new word per sentence, and gloss it right after the sentence (word = meaning). Never give the answers of the app\'s exercises: the app checks those against its stored answers.';
+  const TUTOR_INTENTS = {
+    explain: 'The learner pressed "Explain this rule": explain the grammar point below in depth — what it is, how it works, the traps — with short examples made of their known words.',
+    compare: 'The learner pressed "Compare the languages": show how the same point works in each language of the course (below), what is the same, what differs, and where one language misleads in another. Neutral: no language is the norm.',
+    quiz: 'The learner pressed "Quiz this node": ask one short question at a time about the words and the grammar below; wait for the answer, say whether it is right and why, then ask the next.',
+    chat: 'The learner pressed "A conversation at my level": hold a simple conversation in the language, one or two short sentences per turn, made of their known words; correct their mistakes gently after their turn.' };
+  function tutorContext(C, L, code, ctx = {}, opts = {}) {
+    const X = C.lang[code], k = opts.k || known(C, L, code), cap = opts.cap || 150;
+    const ids = [...k.P, ...[...k.R].filter(l => !k.P.has(l))].filter(l => X.lex[l]);
+    const words = ids.slice(0, cap).map(l => ({ lex: l, lemma: X.lex[l].lemma, gloss: glossOfLex(C, X, l), p: k.P.has(l) }));
+    const parts = [], blockText = b => [b.title, b.text, ...(b.items || []).map(x => typeof x === 'string' ? x : [x.title, ...(x.points || []), x.term, x.def].filter(Boolean).join(': ')), ...(b.rows || []).map(r => r.join(' | ')), ...(b.questions || [])].filter(Boolean).join(' ');
+    const fnText = (c, fid, full) => { const g = C.lang[c].grammar[fid]; if (!g) return `${langLabel(C, c)}: not written yet.`; return `${langLabel(C, c)} (${g.status || 'realized'}): ${g.summary || ''}` + (full ? `\n${(g.blocks || []).map(blockText).join('\n').slice(0, 6000)}\nAsk yourself: ${(g.procedure?.askYourself || []).join(' | ')}\nTraps: ${(g.traps || []).join(' | ')}` : ''); };
+    if (ctx.fn) {
+      parts.push(`THE GRAMMAR POINT: "${C.functions[ctx.fn]?.title || ctx.fn}"\n${fnText(code, ctx.fn, true)}`);
+      if (ctx.intent === 'compare') parts.push('THE SAME POINT IN THE OTHER COURSE LANGUAGES:\n' + C.languages.filter(c => c !== code).map(c => fnText(c, ctx.fn, false)).join('\n'));
+    }
+    if (ctx.node && C.nodes[ctx.node]) {
+      const n = C.nodes[ctx.node], nw = (X.byNode[ctx.node] || []).map(l => `${X.lex[l].lemma} = ${glossOfLex(C, X, l)}`);
+      parts.push(`THE LESSON / NODE: "${n.title}"\nIts words in ${langLabel(C, code)}: ${nw.join('; ') || '(none)'}\nIts grammar: ${lessonFunctions(C, code, ctx.node).map(f => C.functions[f]?.title || f).join(', ') || '—'}`);
+    }
+    return { lang: code, langName: langLabel(C, code), words, total: k.R.size, rule: TUTOR_RULE, intent: TUTOR_INTENTS[ctx.intent] || '', context: parts.join('\n\n') };
+  }
+  function tutorTask(C, L, code, ctx = {}, opts = {}) {
+    const t = tutorContext(C, L, code, ctx, opts), lang = opts.chatLang || C.explainLang;
+    const system = `[noema:lang-tutor] You are the tutor of a learner of ${t.langName} (course "${C.data.course.title}"). Explain in the language with code "${lang}"; write ${t.langName} where you give examples or talk in it. ` +
+      `Describe languages neutrally: no language is the norm.\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
+      `THE LEARNER'S KNOWN WORDS in ${t.langName} (${t.words.length} of ${t.total}${t.total > t.words.length ? ', the best known first' : ''}): ${t.words.map(w => `${w.lemma} = ${w.gloss}`).join('; ') || '(none yet — use very simple words and gloss each one)'}\n` +
+      (t.context ? '\n' + t.context + '\n' : '') +
+      `\nAnswer with: reply (your message; markdown **bold** allowed) and target (every sentence or phrase in ${t.langName} that your reply contains, exactly as written in it).`;
+    return { system, schema: { type: 'object', required: ['reply', 'target'], properties: { reply: { type: 'string' }, target: { type: 'array', items: { type: 'string' } } } }, name: 'tutor', context: t };
+  }
+
+  GEN.translate = ctx => translateItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, sentences: ctx.bank(), fn: ctx.fid, mode: ctx.gen.mode });
+  GEN.rewrite = ctx => rewriteItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, kind: 'rewrite' }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.expand = ctx => rewriteItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, kind: 'expand' }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.number_words = ctx => numberItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.clock = ctx => clockItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.date = ctx => dateItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.register = ctx => registerItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.dialogue_turn = ctx => dialogueItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max }).map(it => ({ ...it, fn: ctx.fid }));
+  API.GEN = GEN;
+  Object.assign(API, { typedAnswer, sameWords, checkText, translateItems, rewriteItems, composeTask, composeCheck, readerTexts, readerQuestions, numberWords, numberWord, numberItems, countingItems, heAnd, digitsIn, clockOf, dateOf, clockItems, dateItems, registerItems, dialogueItems, turnsOf, aiTask, readerTask, readerProblems, tutorContext, tutorTask, TUTOR_INTENTS, TUTOR_RULE, MONTHS, WEEKDAYS, frameFamily });
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

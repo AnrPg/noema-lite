@@ -5,7 +5,6 @@
 const FEAS_LIGHT = { ready: '🟢', thin: '🟡', locked: '🔒', absent: '—' };
 const FN_STATE = { new: '○ new', practicing: '◑ practising', solid: '● solid', mastered: '★ mastered' };
 const explainAttrs = () => ({ lang: UI.C.explainLang, dir: 'ltr' });
-const dirOf = c => LX(c).language.dir || 'ltr';
 
 /** The light of one function in one language (§7.3): 🟢 ready · 🟡 thin (n sentences) · 🔒 needs node X. */
 function feasText(c, f) {

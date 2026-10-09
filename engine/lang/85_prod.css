@@ -1,0 +1,65 @@
+/* P7 — production and reading (docs/LANGUAGES.md §6.5, §8 Tutor): the writing and reading lanes, their widgets, the tutor drawer */
+.lx-prodlanes{margin:8px 0 4px}
+.lx-lanes{display:grid;gap:8px}
+.lx-lanerow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.lx-lanerow b{margin-inline-end:auto}
+.lx-lanegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:14px 0}
+.lx-lanecard{display:grid;gap:4px;text-align:start;padding:14px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit;min-width:0}
+.lx-lanecard:hover:not([disabled]){border-color:var(--violet)}.lx-lanecard[disabled]{opacity:.55}
+.lx-laneicon{font-size:26px}.lx-lanen{color:var(--ink2)}
+.lx-badge.lx-ai{background:var(--violet-bg);border-color:var(--violet);font-weight:650}
+.lx-keyhelp .row{margin-top:8px}.lx-keyin{flex:1;min-width:0;max-width:340px}
+.lx-typebox{display:grid;gap:8px;margin:10px 0}
+.lx-typed{width:100%;box-sizing:border-box;font-size:20px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit}
+.lx-typed.lx-compose{font-size:18px;min-height:120px;resize:vertical}
+.lx-typed[lang=ar]{font-family:'Noto Naskh Arabic',serif}.lx-typed[lang=he]{font-family:'Noto Sans Hebrew',sans-serif}.lx-typed[lang=zh]{font-family:'Noto Sans SC',sans-serif}
+.lx-ref{margin:6px 0;padding:8px 12px;border-radius:12px;background:var(--bg2);font-size:18px}
+.lx-aiv,.lx-rubric{margin:10px 0;padding:10px 14px;border-radius:14px;border:1.5px dashed var(--violet);background:var(--violet-bg)}
+.lx-aiv.v-wrong{border-color:var(--bad)}
+.lx-aiv del,.lx-rubric del,.lx-cor del{color:var(--bad);text-decoration:line-through}.lx-aiv ins,.lx-rubric ins,.lx-cor ins{color:var(--ok);text-decoration:none;font-weight:650}
+.lx-aicorr{margin:8px 0;font-size:17px}
+.lx-notin{text-decoration:underline wavy var(--warn);text-underline-offset:3px}
+.lx-wordsnote{margin:4px 0}.lx-wordsnote>div{margin:2px 0}
+.lx-src{font-size:26px}.lx-constraint{margin:8px 0;font-weight:700}
+.lx-required{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.lx-req{gap:6px}
+.lx-badge.lx-used{background:var(--ok-bg)}.lx-badge.lx-missing{background:var(--bad-bg)}
+.lx-check1{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.lx-aspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
+.lx-aspect{padding:8px 10px;border-radius:10px;background:var(--card)}
+.lx-aspect b{text-transform:capitalize;display:block}.lx-score{color:var(--violet);letter-spacing:1px}
+.lx-marked{font-size:18px;line-height:1.7;margin:8px 0;overflow-wrap:anywhere}
+.lx-cor ins{margin-inline-start:3px}
+.lx-digits{font-variant-numeric:tabular-nums;font-weight:700}
+.lx-prompt.lx-digits{font-size:48px}
+.lx-dialog{display:grid;gap:6px;margin:10px 0}.lx-turn{padding:10px 14px;border-radius:14px;background:var(--bg2);font-size:20px;max-width:90%}.lx-turn.me{justify-self:end;background:var(--info-bg);color:var(--ink2)}
+.lx-clockface{width:140px;height:140px}.lx-clockface .f{fill:var(--card);stroke:var(--ink2);stroke-width:2}.lx-clockface .tick{stroke:var(--ink2);stroke-width:2}
+.lx-clockface .hh{stroke:var(--ink);stroke-width:4;stroke-linecap:round}.lx-clockface .mh{stroke:var(--violet);stroke-width:2.5;stroke-linecap:round}.lx-clockface .c{fill:var(--ink)}
+.lx-clockopt{display:inline-flex;align-items:center;gap:10px}.lx-clockopt .lx-clockface{width:52px;height:52px}
+.lx-texts{display:grid;gap:8px;margin:12px 0}
+.lx-textcard{display:grid;gap:2px;text-align:start;padding:12px 14px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit}
+.lx-textcard:hover{border-color:var(--violet)}
+.lx-reader{font-size:21px;line-height:1.9;padding:14px 16px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere}
+.lx-reader .lx-rsent{margin-inline-end:4px}
+.lx-eye{font-size:13px;padding:0 4px;border-radius:6px;opacity:.55;vertical-align:middle}.lx-eye:hover{opacity:1}
+.lx-rtr{display:block;font-size:15px;color:var(--ink2);margin:0 0 6px}.lx-rtr[hidden]{display:none}
+.lx-readtext .lx-reader{font-size:18px}
+.lx-tutorrow{margin:8px 0;flex-wrap:wrap}
+/* the tutor drawer */
+.lx-tutor{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);box-sizing:border-box;z-index:40;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg,#fff);border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.15)}
+.lx-thead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.lx-thead .spacer{flex:1}
+.lx-tctx{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.lx-tlang{max-width:150px;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
+.lx-tintents{display:flex;gap:6px;flex-wrap:wrap}.lx-tintents .chip.on{border-color:var(--violet);background:var(--violet-bg)}
+.lx-trule{color:var(--ink2)}
+.lx-tmsgs{flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px;min-height:80px}
+.lx-tmsg{padding:10px 12px;border-radius:14px;max-width:92%;overflow-wrap:anywhere;line-height:1.5}
+.lx-tmsg.me{align-self:flex-end;background:var(--info-bg)}.lx-tmsg.ai{align-self:flex-start;background:var(--card);border:1px solid var(--line)}
+.lx-tmsg.sys{align-self:center;color:var(--ink2);font-size:14px}.lx-tmsg.err{background:var(--bad-bg)}
+.lx-tl{font-weight:600}
+.lx-tcheck{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line);font-size:15px}
+.lx-tcomp{display:flex;gap:6px;align-items:flex-end}.lx-tin{flex:1;min-width:0;resize:none;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit;font:inherit}
+@media (max-width:640px){
+  .lx-lanegrid{grid-template-columns:1fr}.lx-prompt.lx-digits{font-size:38px}.lx-src{font-size:22px}.lx-reader{font-size:19px;padding:10px 12px}
+  .lx-tutor{width:100vw;border-left:0}
+}
