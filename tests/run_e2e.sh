@@ -34,5 +34,6 @@ node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"
 node "$ROOT/tests/lang_lessons.js" "$T"
 node "$ROOT/tests/lang_grammar.js" "$T"   # the grammar lane (P5): generators, validator, widgets, lane, session
+node "$ROOT/tests/lang_vocab2.js" "$T"   # vocabulary depth: the remaining §6.2 types (P5v)
 node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
 node "$ROOT/tests/lang_script.js" "$T"   # P4: script modules, keyboards, pinyin input, the 🔤 lane (docs/LANGUAGES.md §4.9, §6.1, §8)

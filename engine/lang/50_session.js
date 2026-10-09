@@ -24,6 +24,7 @@ function runSession(plan, { only = null } = {}) {
     }
   }
   if (!only) queue.push(...scriptSessionSteps());   // a few letters / characters in the first weeks (P4, §5.5)
+  queue.push(...sessionDeep(plan, only));   // P5v: 1–3 deepening items for words already known (§7.5)
   if (typeof sessionGrammarItems === 'function') queue.push(...sessionGrammarItems(plan));   // §7.5 step 3 (P5): one function with the words just learned
   if (!queue.length) { go('#/'); return; }
   metNew.clear();
@@ -42,6 +43,7 @@ function runSession(plan, { only = null } = {}) {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
       if (a.kind === 'script' && a.intro) return next();   // a new letter: recorded by its card (P4)
       if (a.kind === 'item') { if (a.it.fn) N.practiceFunction(UI.C, UI.L, a.it.lang, a.it.fn, ok ? 1 : 0, 1, day); }
+      else if (a.kind === 'deep') N.deepRecord(UI.C, UI.L, a.lang, a.it, ok, day, a.it.perLex);
       else if (a.kind !== 'script') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day);
       save();
       ok ? stats.right++ : stats.wrong++;
@@ -51,9 +53,9 @@ function runSession(plan, { only = null } = {}) {
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;
-    const ex = a.kind === 'script' ? scriptStep(a, done) : a.kind === 'item' ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    const ex = a.kind === 'script' ? scriptStep(a, done) : (a.kind === 'item' || a.kind === 'deep') ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
-    stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · once more' : ''), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';

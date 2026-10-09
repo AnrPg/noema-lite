@@ -10,7 +10,8 @@ VIEWS.node = (v, r) => {
     h('div', { class: 'row lx-actions' },
       ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ Learn / review this node') : null,
       n.kind === 'field' ? h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 Field map') : null,
-      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ Name them all') : null),
+      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ Name them all') : null,
+      deepenButton(n.id, c)),
     !X.prepared[n.id] ? h('p', { class: 'lx-note' }, `⏳ The ${info(c).name} words of this node are not written yet.`) : null);
   const grid = h('div', { class: 'lx-cgrid' });
   const ids = [...n.concepts.map(cid => ({ cid })), ...(X.byNode[n.id] || []).filter(id => !(X.lex[id].senses || []).length).map(id => ({ lex: id }))];
@@ -99,6 +100,7 @@ function wordCardView(c, lid, concept) {
         ...card.register.map(r => badge('🎭 ' + r, 'reg')), badge(card.connotation ? { positive: '🙂 positive', negative: '🙁 negative', neutral: '😐 neutral', mixed: '🤔 mixed' }[card.connotation] : null, 'ctx'),
         card.intensity ? badge('strength ' + '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
+    deepButton(c, lid),
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
     ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + (Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
