@@ -16,7 +16,8 @@ function runSession(plan, { only = null } = {}) {
   if (only) plan = nodePlan(only, [UI.lang]);
   const queue = [];
   for (const s of plan.steps) {
-    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? (hasPic(it.lang, it.lex) && Math.random() < 0.5 ? 'pic' : 'rec') : 'prod', lang: it.lang, lex: it.lex, review: true });
+    if (s.kind === 'review') for (const it of s.items) queue.push({ kind: it.track === 'r' ? (hasPic(it.lang, it.lex) && Math.random() < 0.5 ? 'pic' : 'rec') : 'prod', lang: it.lang, lex: it.lex, review: true, pair: it.pair });
+    if (s.kind === 'poly') for (const it of s.items) queue.push({ kind: 'poly', it, lang: it.lang });   // P6: one polyglot item (§7.5)
     if (s.kind === 'learn') for (const cn of s.concepts) {
       for (const e of cn.langs) queue.push({ kind: 'intro', ...e });
       for (const e of cn.langs) queue.push({ kind: 'rec', ...e });
@@ -44,18 +45,18 @@ function runSession(plan, { only = null } = {}) {
       if (a.kind === 'script' && a.intro) return next();   // a new letter: recorded by its card (P4)
       if (a.kind === 'item') { if (a.it.fn) N.practiceFunction(UI.C, UI.L, a.it.lang, a.it.fn, ok ? 1 : 0, 1, day); }
       else if (a.kind === 'deep') N.deepRecord(UI.C, UI.L, a.lang, a.it, ok, day, a.it.perLex);
-      else if (a.kind !== 'script') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day);
+      else if (a.kind !== 'script' && a.kind !== 'poly') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day);
       save();
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
-      if (!ok && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
+      if (!ok && a.kind !== 'poly' && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
       const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;
-    const ex = a.kind === 'script' ? scriptStep(a, done) : (a.kind === 'item' || a.kind === 'deep') ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
-    Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
-    stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · once more' : ''), ex);
+    const ex = a.kind === 'script' ? scriptStep(a, done) : ['item', 'deep', 'poly'].includes(a.kind) ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    Object.assign(ex.dataset, a.kind === 'poly' ? { kind: a.it.kind, lang: a.lang, poly: '1' } : { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
+    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 across your languages' : [info(a.lang).flag, ' ', info(a.lang).name], a.review ? ' · review' : '', a.pair ? ' · ⇄ with its relative' : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · once more' : ''), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';

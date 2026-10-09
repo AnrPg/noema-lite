@@ -24,7 +24,7 @@ function topbar() {
     h('span', { class: 'chip lx-explain', title: 'Explanations, meanings and feedback are written in this language (chosen when the course was made)' }, '💬 ' + info(UI.C.explainLang).name),
     ...activeLangs().map(c => {
       const total = Object.keys(LX(c).lex).length, kn = Object.values(k[c].state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-      return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), title: `${info(c).name}: ${kn} of ${total} words known`, onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
+      return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), 'data-lang': c, title: `${info(c).name}: ${kn} of ${total} words known`, onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
         h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
     }),
     h('button', { class: 'iconbtn', title: 'Settings', onclick: () => go('#/settings') }, '⚙️'),
@@ -43,14 +43,14 @@ function render() {
 function flagRail(cid, current, onPick) {
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': 'Languages' }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
-    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).name} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
+    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).name} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
       h('span', { class: 'lx-flag' }, info(c).flag), h('span', { class: 'lx-dot s-' + (st || 'none') }));
   }));
 }
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
-  const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20 });
+  const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
   const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0, nScript = scriptSessionSteps().length;   // letters / characters in the first weeks (P4)
@@ -60,6 +60,7 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), onclick: () => runSession(plan) }, nRev || nNew || nScript ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` + (nScript ? ` · ${nScript} letters & characters` : '') : '✅ Nothing due — come back tomorrow'),
       learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
+  v.append(polyHome());   // P6: today's languages, the compare lane, the polyglot drills
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? '🧱 Your next lesson' : '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),

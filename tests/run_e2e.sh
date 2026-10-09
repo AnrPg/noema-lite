@@ -37,3 +37,4 @@ node "$ROOT/tests/lang_grammar.js" "$T"   # the grammar lane (P5): generators, v
 node "$ROOT/tests/lang_vocab2.js" "$T"   # vocabulary depth: the remaining §6.2 types (P5v)
 node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
 node "$ROOT/tests/lang_script.js" "$T"   # P4: script modules, keyboards, pinyin input, the 🔤 lane (docs/LANGUAGES.md §4.9, §6.1, §8)
+node "$ROOT/tests/lang_poly.js" "$T"   # P6 polyglot layer: parallel sentences, bridges, comparisons, the five polyglot exercises, the compare lane
