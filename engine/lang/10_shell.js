@@ -60,7 +60,7 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew), onclick: () => runSession(plan) }, nRev || nNew ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` : '✅ Nothing due — come back tomorrow'),
       learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
-  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
+  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? '🧱 Your next lesson' : '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));

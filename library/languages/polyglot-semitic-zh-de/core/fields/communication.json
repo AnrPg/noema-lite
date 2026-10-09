@@ -15,9 +15,8 @@
   {
    "id": "comm.document",
    "gloss": "document, papers",
-   "tier": 2,
-   "rank": 2,
-   "pending": true
+   "tier": 1,
+   "rank": 7
   },
   {
    "id": "comm.firstreply",
@@ -29,9 +28,8 @@
   {
    "id": "comm.letter",
    "gloss": "letter (a written message)",
-   "tier": 2,
-   "rank": 4,
-   "pending": true
+   "tier": 1,
+   "rank": 1
   },
   {
    "id": "comm.mail",
@@ -50,9 +48,8 @@
   {
    "id": "comm.news",
    "gloss": "the news",
-   "tier": 2,
-   "rank": 7,
-   "pending": true
+   "tier": 1,
+   "rank": 4
   },
   {
    "id": "comm.phonecall",
@@ -74,6 +71,36 @@
    "tier": 2,
    "rank": 10,
    "pending": true
+  },
+  {
+   "id": "comm.message",
+   "gloss": "message",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "comm.address",
+   "gloss": "address",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "comm.email",
+   "gloss": "e-mail",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "comm.form",
+   "gloss": "form (to fill in)",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "comm.signature",
+   "gloss": "signature",
+   "tier": 1,
+   "rank": 8
   }
  ]
 }

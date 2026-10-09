@@ -53,6 +53,48 @@
    "tier": 2,
    "rank": 7,
    "pending": true
+  },
+  {
+   "id": "health.fever",
+   "gloss": "fever",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "health.cold",
+   "gloss": "a cold (illness)",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "health.cough",
+   "gloss": "cough",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "health.pain",
+   "gloss": "pain",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "health.medicine",
+   "gloss": "medicine (a remedy)",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "health.pill",
+   "gloss": "pill, tablet",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "health.appointment",
+   "gloss": "appointment (at the doctor)",
+   "tier": 1,
+   "rank": 7
   }
  ]
 }

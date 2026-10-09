@@ -57,9 +57,8 @@
   {
    "id": "body.nose",
    "gloss": "(big) nose",
-   "tier": 2,
-   "rank": 8,
-   "pending": true
+   "tier": 1,
+   "rank": 6
   },
   {
    "id": "body.righthand",
@@ -81,6 +80,156 @@
    "tier": 2,
    "rank": 11,
    "pending": true
+  },
+  {
+   "id": "body.head",
+   "gloss": "head",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "body.hair",
+   "gloss": "hair (on the head)",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "body.face",
+   "gloss": "face",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "body.eye",
+   "gloss": "eye",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "body.ear",
+   "gloss": "ear",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "body.mouth",
+   "gloss": "mouth",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "body.tooth",
+   "gloss": "tooth",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "body.tongue",
+   "gloss": "tongue",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "body.neck",
+   "gloss": "neck",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "body.shoulder",
+   "gloss": "shoulder",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "body.arm",
+   "gloss": "arm",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "body.hand",
+   "gloss": "hand",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "body.finger",
+   "gloss": "finger",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "body.chest",
+   "gloss": "chest",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "body.back",
+   "gloss": "back (of the body)",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "body.stomach",
+   "gloss": "stomach, belly",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "body.leg",
+   "gloss": "leg",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "body.knee",
+   "gloss": "knee",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "body.foot",
+   "gloss": "foot",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "body.toe",
+   "gloss": "toe",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "body.skin",
+   "gloss": "skin",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "body.heart",
+   "gloss": "heart",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "body.blood",
+   "gloss": "blood",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "body.bone",
+   "gloss": "bone",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "body.beard",
+   "gloss": "beard",
+   "tier": 1,
+   "rank": 26
   }
  ]
 }

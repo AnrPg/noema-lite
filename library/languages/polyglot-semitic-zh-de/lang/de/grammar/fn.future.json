@@ -1,0 +1,395 @@
+{
+ "function": "fn.future",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.future",
+   "value": "periphrastic"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  }
+ ],
+ "summary": "German has no future ending. Most of the time the present tense with a time word says the future: Nächste Woche fahre ich nach Berlin. Morgen buche ich das Hotel. When the plan or prediction should be clear without a time word, or to sound firm, German uses werden + infinitive (Futur I): werden is conjugated in second place (ich werde, du wirst, er wird, wir werden, ihr werdet, sie werden) and the infinitive goes to the very end: Ich werde ein Hotel buchen. Wir werden unsere Großeltern besuchen. A separable verb stays together in the infinitive: Ich werde um sechs aufstehen. The same construction also makes a guess about now: Er wird schon zu Hause sein (he is probably at home). werden on its own means “to become”: Es wird kalt. Sie wird Ärztin. Time words of the future: morgen, bald, später, nächste Woche, nächstes Jahr, im Sommer, am Montag.",
+ "blocks": [
+  {
+   "t": "table",
+   "caption": "werden + infinitive: werden changes for the person, the infinitive does not",
+   "head": [
+    "",
+    "werden",
+    "… + infinitive at the end"
+   ],
+   "rows": [
+    [
+     "ich",
+     "werde",
+     "… ein Hotel buchen"
+    ],
+    [
+     "du",
+     "wirst",
+     "… den Reisepass vergessen"
+    ],
+    [
+     "er / sie / es",
+     "wird",
+     "… ins Ausland reisen"
+    ],
+    [
+     "wir",
+     "werden",
+     "… unsere Großeltern besuchen"
+    ],
+    [
+     "ihr",
+     "werdet",
+     "… im Hotel essen"
+    ],
+    [
+     "sie / Sie",
+     "werden",
+     "… die Stadt besuchen"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "periphrastic"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Nächstes Jahr",
+    "werde",
+    "ich ins Ausland",
+    "reisen."
+   ],
+   "caption": "The bracket again: werden second, the infinitive last – whatever stands first",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Present or werden?",
+   "text": "With a time word the present is the normal way: Morgen besuche ich meine Oma. Nächste Woche fahren wir weg. werden + infinitive is used when there is no time word (Wir werden sehen. – We’ll see.), for promises and firm intentions (Ich werde dich nicht vergessen), for predictions (Es wird regnen) and in formal or written style."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "werden ≠ wollen",
+   "text": "Ich will reisen = I want to travel (wollen: a wish). Ich werde reisen = I will travel (werden: the future). The two look alike in the singular – ich will, ich werde – but mean different things."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "du wirst, er wird",
+   "text": "The singular is irregular: ich werde, du wirst, er wird – not *du werdest, *er werdet. The plural is regular: wir werden, ihr werdet, sie werden."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Talking about plans",
+   "text": "Ich habe einen Plan: Nächsten Sommer reise ich ins Ausland. Ich buche ein Hotel und besuche Freunde. – Questions: Was machst du nächste Woche? Wohin wirst du reisen? Wann wirst du die Reise buchen?"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "werden as a full verb",
+   "text": "Without an infinitive, werden means “to become, to get”: Es wird dunkel. Er wird Lehrer. Ich werde müde. The future of werden itself is rare; people say: Er wird Lehrer (= he is going to be a teacher)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there a time word (morgen, nächste Woche, nächstes Jahr, bald)? Then the present usually does the job.",
+   "Do I want to stress a plan, a promise or a prediction, or is there no time word? → werden + infinitive.",
+   "Which form of werden? ich werde, du wirst, er wird, wir werden, ihr werdet, sie werden.",
+   "Is werden in second place and the infinitive at the very end (separable verbs written together: aufstehen)?",
+   "Did I mean “want”? Then it is wollen, not werden."
+  ],
+  "steps": [
+   "Decide: present + time word, or werden + infinitive.",
+   "Conjugate werden for the subject.",
+   "Put the infinitive at the end of the clause."
+  ]
+ },
+ "traps": [
+  "du wirst, er wird – not *du werdest, *er werdet.",
+  "Ich werde morgen kommen – not *Ich werde kommen morgen (in writing) and not *Ich werde komme.",
+  "Ich werde um sechs aufstehen – the separable verb stays together in the infinitive.",
+  "Ich will kommen ≠ Ich werde kommen.",
+  "Nächste Woche fahre ich … is perfectly correct – the future does not need werden.",
+  "nächste Woche, nächstes Jahr, nächsten Monat – no preposition, and the ending follows the gender."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:werden",
+   "de:morgen",
+   "de:nächste_Woche",
+   "de:nächstes_Jahr",
+   "de:bald",
+   "de:später"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;1;SG",
+  "V;PRS;2;SG",
+  "V;PRS;3;SG",
+  "V;PRS;1;PL",
+  "V;PRS;2;PL",
+  "V;PRS;3;PL",
+  "V;NFIN"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:werden"
+   ],
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;1;PL",
+    "V;PRS;2;PL",
+    "V;PRS;3;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "du ___ (werden)",
+   "options": [
+    "wirst",
+    "werdest",
+    "wird",
+    "werdet"
+   ],
+   "answer": "wirst",
+   "why": "du wirst – irregular, without d."
+  },
+  {
+   "q": "Er ___ ins Ausland reisen.",
+   "options": [
+    "wird",
+    "werdet",
+    "will werden"
+   ],
+   "answer": "wird",
+   "why": "er wird + infinitive at the end."
+  },
+  {
+   "q": "“I will book a hotel.”",
+   "options": [
+    "Ich werde ein Hotel buchen.",
+    "Ich werde buchen ein Hotel.",
+    "Ich will ein Hotel buchen."
+   ],
+   "answer": "Ich werde ein Hotel buchen.",
+   "why": "werden second, the infinitive last; ich will … means “I want to …”."
+  },
+  {
+   "q": "Which sentence about next week is the most usual in speech?",
+   "options": [
+    "Nächste Woche fahre ich nach Berlin.",
+    "Nächste Woche ich fahre nach Berlin.",
+    "In nächste Woche fahre ich nach Berlin."
+   ],
+   "answer": "Nächste Woche fahre ich nach Berlin.",
+   "why": "Present + time word; verb second; no preposition before nächste Woche."
+  },
+  {
+   "q": "Ich werde morgen um sechs ___. (aufstehen)",
+   "options": [
+    "aufstehen",
+    "stehe auf",
+    "auf stehen",
+    "aufgestanden"
+   ],
+   "answer": "aufstehen",
+   "why": "After werden comes the infinitive, written as one word for a separable verb."
+  },
+  {
+   "q": "Es wird kalt. – What does wird mean here?",
+   "options": [
+    "becomes / is getting",
+    "will",
+    "wants"
+   ],
+   "answer": "becomes / is getting",
+   "why": "Without an infinitive werden means “to become”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.future",
+   "note": "Arabic puts سَـ sa- or سَوْفَ sawfa before the imperfect: سَأُسَافِرُ saʾusāfiru (I will travel)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.future",
+   "note": "Hebrew has a future form of its own with prefixes: אֶסַּע (I will travel), נִסַּע (we will travel)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.future",
+   "note": "Chinese uses 要, 会 or 打算 before the verb, or just a time word: 明天我去北京."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "The present with a time word is the most frequent way to talk about the future."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek builds the future with θα + verb (θα ταξιδέψω); German uses werden + infinitive at the end of the clause – and very often just the present with a time word."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Like the Russian буду + infinitive, German uses an auxiliary: werde + infinitive. And as the Russian perfective present (поеду) points to the future, the German present with a time word often does: Morgen fahre ich."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has a future ending (viajaré) and ir a + infinitive; German has neither: Ich werde reisen, or simply Ich reise morgen."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "Ich will means “I want”, not “I will”; the future auxiliary is werden. With a time word German prefers the present: Next week I’m going … = Nächste Woche fahre ich …"
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French has a future ending (je voyagerai) and aller + infinitive; German uses werden + infinitive, or the present with a time word."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has a future ending that also shows gender (जाऊँगा / जाऊँगी); German werden shows only person and number: ich werde gehen."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian forms the future with the auxiliary xāstan + the short past stem (xāham raft); German too uses an auxiliary (werden) + the infinitive, placed at the end."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has future endings on the verb; German uses a separate auxiliary werden and keeps the main verb in the infinitive."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks the future with sa- / sawfa before the imperfect; German uses the auxiliary werden and puts the infinitive at the end."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew has a separate future conjugation with prefixes (esa, tisa, yisa); German has none and uses werden + infinitive or the present."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has a future suffix -ecek / -acak (gideceğim); German adds the separate auxiliary werden, or uses the present with a time word."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese has no future form: the non-past (ikimasu) and a time word say it – just as German often says Morgen fahre ich."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses endings such as -(으)ㄹ 거예요 for future plans; German puts werden in second place and the infinitive at the end."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish has no future tense either: the present and a time word (huomenna menen) do the job, as in German Morgen gehe ich. German also has werden + infinitive."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian uses the present for the future or the auxiliary fog + infinitive (menni fogok); German: Morgen gehe ich, or Ich werde gehen."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili marks the future with the prefix -ta- (nitasafiri); German uses a separate auxiliary: Ich werde reisen."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese adds 要 / 会 / 打算 or only a time word and the verb never changes; German conjugates werden for the person (ich werde, du wirst) and puts the infinitive last."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese puts sẽ before the verb (tôi sẽ đi); German puts werden second and the infinitive at the end: Ich werde gehen."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks the future with a suffix inside the verb word; German uses the separate auxiliary werden + infinitive."
+  }
+ ]
+}

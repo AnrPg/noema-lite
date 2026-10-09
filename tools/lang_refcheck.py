@@ -32,6 +32,9 @@ def kaikki_url(lang, w):
     return f"https://kaikki.org/dictionary/{LANGNAME[lang]}/meaning/{urllib.parse.quote(w[0])}/{urllib.parse.quote(w[:2])}/{urllib.parse.quote(w)}.jsonl"
 
 
+DE_ARTICLES = {'der', 'die', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einen', 'einem', 'einer', 'eines'}
+
+
 def fetch(lang, word, offline=False):
     """All Wiktionary entries for a written word (cached). [] when Wiktionary has none."""
     word = nfc(word)
@@ -194,6 +197,8 @@ def _check(lang, lx, gloss, offline):
         # a pronoun's person, number and gender belong to the word itself, not to its cell (PRON;ACC of er = ihn)
         conflict = CONFLICT - ({'singular', 'plural', 'masculine', 'feminine', 'neuter'} - want if cell.startswith('PRON') else set())
         cands = {f for f, t in forms if want <= t and not ((t - want) & conflict)}
+        if lang == 'de' and lx['pos'] == 'ADJ':   # weak / mixed cells are printed with their article (der letzte, einem letzten)
+            cands |= {c.split(' ', 1)[1] for c in cands if c.split(' ', 1)[0] in DE_ARTICLES}
         if not cands: res['unverified'].append(cell); continue
         if lang in ('ar', 'he') and not any(has_marks(lang, c) for c in cands):
             # Wiktionary gives this cell only without vowel marks (often in full spelling): compare spellings

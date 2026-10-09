@@ -4012,7 +4012,14 @@
      "afterVerb",
      "sentenceFinal"
     ]
-   }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.finish",
+     "axis": "use",
+     "value": "(read liǎo) literary, or inside 得了 / 不了 ‘can / can’t manage’ (受不了)"
+    }
+   ]
   },
   {
    "id": "zh:guo",

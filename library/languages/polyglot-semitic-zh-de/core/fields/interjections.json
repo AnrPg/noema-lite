@@ -71,9 +71,8 @@
   {
    "id": "intj.well",
    "gloss": "well …, so … (starting or resuming)",
-   "tier": 2,
-   "rank": 10,
-   "pending": true
+   "tier": 1,
+   "rank": 5
   },
   {
    "id": "intj.yes.triumph",
@@ -81,6 +80,30 @@
    "tier": 2,
    "rank": 11,
    "pending": true
+  },
+  {
+   "id": "intj.really",
+   "gloss": "really? (surprise)",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "intj.exactly",
+   "gloss": "exactly!",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "intj.noway",
+   "gloss": "no way!",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "intj.isee",
+   "gloss": "I see",
+   "tier": 1,
+   "rank": 4
   }
  ]
 }

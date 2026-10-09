@@ -46,6 +46,41 @@ function word(code, text, { lex = null, cls = '', sub = true } = {}) {
     : X.language.vowelMarks && UI.prefs.translit !== false && lex.translit && text === lex.lemma ? lex.translit : null;
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
+/* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
+/** The languages the learner knows: settings, else the course's known languages as native ones. */
+const knowsL = () => UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }));
+const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
+const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
+/** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
+function sentenceView(c, s, unknown = []) {
+  if (!s?.tokens) return word(c, s?.text || '', { sub: false });
+  const X = LX(c), un = new Set(unknown), parts = [];
+  for (const k of s.tokens) {
+    const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
+    if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
+    const isNew = un.has(l), el = h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
+      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, X.language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, k.t) : k.t);
+    parts.push({ t: k.t, el });
+  }
+  const sp = X.language.tokenJoin !== 'none';
+  return h('span', { class: 'lx-sent', lang: c, dir: X.language.dir || 'ltr' }, ...parts.flatMap((p, i) => i && sp && !/^[.,!?;:،؟。，！？、)」]/.test(p.t) ? [' ', p.el] : [p.el]));
+}
+/** The card of a word over the page (translation first, then everything about it). */
+function wordPopup(c, lid) {
+  document.querySelector('.lx-pop')?.remove();
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
+    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
+  document.body.append(pop);
+}
+/** Words met before they were learned (D19): remembered per session, listed at the end of a lesson. */
+const metNew = new Map();
+function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
+function newWordsList(title = '🆕 Words you met before learning them') {
+  if (!metNew.size) return null;
+  const items = [...metNew.values()];
+  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + items.length)),
+    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l)))));
+}
 /** What a word means, in the explanation language. */
 function gloss(code, lid) {
   const x = LX(code).lex[lid], c = (x.senses || [])[0];
@@ -142,11 +177,13 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew), onclick: () => runSession(plan) }, nRev || nNew ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` : '✅ Nothing due — come back tomorrow'),
       learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
-  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
+  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? '🧱 Your next lesson' : '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));
   })));
+  if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
+    ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
   v.append(h('h2', { class: 'lx-h2' }, '🗺️ The map'), nodeList());
 };
 function nodeList() {
@@ -195,15 +232,15 @@ VIEWS.c = (v, r) => {
   const node = UI.C.nodes[LX(UI.lang).owner[cid] || UI.C.owner[cid]];
   const draw = () => {
     v.innerHTML = ''; topbar();
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/node/' + node.id) }, '← ' + node.title)),
-      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node.title, con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : 'Back'))),
+      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
     if (UI.prefs.compare) v.append(compareTable(cid));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, `${info(UI.lang).flag} No ${info(UI.lang).name} word for this. `), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, 'Instead: ', h('b', {}, X.absent[cid].use)) : null));
-    else if (!X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
-    for (const lid of lids) v.append(wordCardView(UI.lang, lid));
+    else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
+    for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
   };
   draw();
 };
@@ -222,8 +259,8 @@ function compareTable(cid) {
 }
 
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
-function wordCardView(c, lid) {
-  const card = N.wordCard(UI.C, UI.L, c, lid), X = LX(c), lx = X.lex[lid];
+function wordCardView(c, lid, concept) {
+  const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
@@ -233,7 +270,13 @@ function wordCardView(c, lid) {
     h('div', { class: 'lx-chips' }, badge('🎭 ' + [].concat(e.register).join(', '), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
       e.unknown?.length ? badge('🆕 ' + e.unknown.length + ' new word' + (e.unknown.length > 1 ? 's' : ''), 'new') : null));
   const sec = {
-    senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', {}, h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null))),
+    senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
+      h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null,
+      s.current ? badge('← this meaning', 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
+      ...s.forms.map(f => badge(f.label + ': ' + f.text, 'ctx')),
+      s.words.length ? h('div', { class: 'tiny' }, 'also said: ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': this word = ', s.contrast.value) : null) : null,
+      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge([].concat(n.register || []).join(', '), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
+    facade: items => h('dl', { class: 'lx-parts' }, ...items.flatMap(x => [h('dt', {}, x.title), h('dd', { class: x.none ? 'tiny' : null }, /[֐-ۿ一-鿿]/.test(x.text) ? word(c, x.text, { sub: false }) : x.text)])),
     examples: items => h('div', {}, ...items.map(ex)),
     collocations: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
     particleVerbs: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
@@ -256,7 +299,7 @@ function wordCardView(c, lid) {
         card.intensity ? badge('strength ' + '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
-    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'examples', 'pitfalls'].includes(s.key) ? true : null },
+    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + (Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
     card.synonymsNone ? h('p', { class: 'tiny' }, 'Synonyms: ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, 'A little word: ', gloss(c, lid)) : null);
@@ -334,6 +377,59 @@ VIEWS.recall = (v, r) => {
 };
 
 /* ---------- ⚙️ settings ---------- */
+/** D18: the learner's languages with their level; native / C2 ones fold what is familiar. A language without a profile is
+ *  described by its type (and family), and the app infers from them. */
+const LEVELS = [['native', 'native'], ['C2', 'C2 (near-native)'], ['C1', 'C1'], ['B2', 'B2'], ['B1', 'B1'], ['A2', 'A2 or less']];
+function knowsEditor() {
+  const S = UI.L.settings, W = UI.C.data.world, box = h('div', { class: 'lx-knows' });
+  const list = () => S.knows || (S.knows = knowsL().map(k => ({ ...k })));
+  const draw = () => {
+    box.innerHTML = '';
+    for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
+      h('b', {}, k.code ? langName(k.code) : k.name), k.code ? null : h('span', { class: 'tiny' }, ` (${k.type || '?'}${k.family ? ', ' + k.family : ''}: inferred)`), ' ',
+      h('select', { 'aria-label': 'level', onchange: e => { k.level = e.target.value; save(); } }, ...LEVELS.map(([v, t]) => h('option', { value: v, selected: (k.level || 'native') === v ? true : null }, t))),
+      h('button', { class: 'btn ghost small', onclick: () => { list().splice(i, 1); save(); draw(); } }, '✕')));
+    const langs = (W?.languages || []).slice().sort((a, b) => a.name.localeCompare(b.name));
+    const pick = h('select', { 'aria-label': 'add a language' }, h('option', { value: '' }, '+ add a language …'), ...langs.map(l => h('option', { value: l.code }, `${l.name} — ${l.family}`)), h('option', { value: '*' }, 'another language (not in the list) …'));
+    pick.onchange = () => {
+      if (pick.value === '*') {
+        const name = prompt('Name of the language?'); if (!name) return draw();
+        const type = prompt('Its type: isolating, agglutinating, fusional or polysynthetic?', 'agglutinating') || '';
+        const fams = [...new Set((W?.languages || []).map(l => l.family))].sort();
+        const family = prompt('Its family, if one of these (else leave empty): ' + fams.join(', '), '') || '';
+        list().push({ name, type: type.trim().toLowerCase(), ...(fams.includes(family.trim()) ? { family: family.trim() } : {}), level: 'native' });
+      } else if (pick.value && !list().some(k => k.code === pick.value)) list().push({ code: pick.value, level: 'native' });
+      save(); draw();
+    };
+    box.append(pick, h('p', { class: 'tiny' }, 'Native and C2 languages decide what is folded as familiar; comparison notes are shown for all of them.'),
+      h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: S.aiNotes ? true : null, onchange: e => { S.aiNotes = e.target.checked; save(); } }),
+        ' ✨ Let Claude or Gemini write comparison notes for my languages that the course has none for (needs your API key in the app’s ⚙️ Settings)'));
+  };
+  draw(); return box;
+}
+/** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
+VIEWS.peculiar = (v, r) => {
+  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back')),
+    h('h1', {}, `📚 ${info(c).name}: its peculiarities`), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
+  if (!W) return v.append(h('p', { class: 'lx-note' }, 'The catalogue is not in this build.'));
+  const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
+  const filt = UI.prefs.pecFilter || 'all';
+  v.append(h('p', { class: 'tiny' }, `${r2.new.length} new for you · ${r2.familiar.length} familiar from ${r2.knownProfiles.map(langName).join(', ') || '—'} · read them in any order. `,
+    ...['all', 'new', 'familiar'].map(f => h('button', { class: 'btn small' + (filt === f ? ' primary' : ''), onclick: () => { UI.prefs.pecFilter = f; save(); go('#/peculiar/' + c); render(); } }, f))));
+  const byArea = {};
+  for (const p of W.phenomena[c] || []) {
+    if (filt === 'new' && !isNew.has(p.id) || filt === 'familiar' && !fam[p.id]) continue;
+    (byArea[p.area] = byArea[p.area] || []).push(p);
+  }
+  for (const [area, ps] of Object.entries(byArea)) v.append(h('details', { class: 'lx-sec', open: true, 'data-area': area }, h('summary', {}, area, h('span', { class: 'tiny' }, ' ' + ps.length)),
+    ...ps.map(p => h('details', { class: 'lx-pec', 'data-id': p.id }, h('summary', {}, isNew.has(p.id) ? '✨ ' : fam[p.id] ? '✓ ' : '', p.kind === 'lacks' ? '∅ ' : '', h('b', {}, p.title),
+        fam[p.id] ? h('span', { class: 'tiny' }, ' — familiar from ' + fam[p.id].map(langName).join(', ')) : null),
+      h('p', {}, wordsIn(c, p.what)),
+      ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
+      (() => { const mine = N.notesFor(UI.C, p.notes, knowsL()); return mine.length ? notesList(mine) : null; })(),
+      p.when ? h('p', { class: 'tiny' }, '🛤️ In the course: ', p.when) : null))));
+};
 VIEWS.settings = (v) => {
   const S = UI.L.settings;
   const langBox = h('div', { class: 'lx-setrow' }, ...UI.C.languages.map(c => h('label', { class: 'lx-check' },
@@ -345,6 +441,7 @@ VIEWS.settings = (v) => {
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')), h('h1', {}, '⚙️ Settings'),
     h('h3', { class: 'lx-h3' }, 'Languages you study now'), langBox,
+    h('h3', { class: 'lx-h3' }, 'Languages you already know'), knowsEditor(),
     h('h3', { class: 'lx-h3' }, 'Sessions'), num('New ideas per session', 'batch', 3, 30, 12), num('Minutes per session', 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
     h('h3', { class: 'lx-h3' }, 'Reading help'), tog('Vowel marks in Arabic and Hebrew', 'marks'), tog('Transliteration under Arabic and Hebrew words', 'translit'), tog('Pinyin under Chinese words', 'pinyin'),
     h('p', { class: 'tiny' }, `Explanations are in ${info(UI.C.explainLang).name}: the language chosen when the course was made.`));
@@ -452,6 +549,16 @@ const STATUS_LABEL = { realized: '', periphrastic: '≈ said another way', absen
 function blocks(c, list) {
   const t = s => wordsIn(c, s);
   return (list || []).map(b => {
+    const el = block1(c, b, t);
+    if (!el || !b) return el;
+    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL());
+    const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
+    // D18: a part the learner knows from a native / C2 language is folded into one line
+    return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, `✓ familiar from ${from.join(', ')} — show`), body) : body;
+  });
+}
+function block1(c, b, t) {
+  {
     if (b.t === 'p') return h('p', {}, t(b.text));
     if (b.t === 'list') return h(b.ordered ? 'ol' : 'ul', { class: 'lx-list' }, ...(b.items || []).map(x => h('li', {}, t(x))));
     if (b.t === 'table') return h('div', { class: 'lx-compare' }, h('table', {}, b.head ? h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', {}, t(x))))) : null,
@@ -463,7 +570,40 @@ function blocks(c, list) {
     if (b.t === 'terms') return h('dl', { class: 'lx-parts' }, ...(b.items || []).flatMap(x => [h('dt', {}, x.term), h('dd', {}, t(x.def))]));
     if (b.t === 'reveal') return h('details', { class: 'lx-sec' }, h('summary', {}, b.label), h('p', {}, t(b.text)));
     return b.text ? h('p', {}, t(b.text)) : null;
-  });
+  }
+}
+const REL_LABEL = { same: '= the same', similar: '≈ similar', different: '≠ different', new: '✨ new', trap: '⚠️ trap' };
+function notesList(notes) {
+  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, langName(n.for)), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, 'AI') : null, ' ', wordsIn('en', n.text))));
+}
+/** Comparison notes (D18): those for the learner's languages open, the whole reference set folded. */
+function notesView(c, notes, fid) {
+  const all = [...(notes || []), ...((UI.prefs.aiNotes || {})[c + '|' + fid] || [])];
+  const mine = N.notesFor(UI.C, all, knowsL()), rest = all.filter(n => !mine.includes(n));
+  const wantAI = UI.L.settings.aiNotes && window.NoemaLLM?.pick?.(UI.acc);
+  const missing = knowsL().filter(k => k.code ? !all.some(n => n.for === k.code) : true);
+  const box = h('div', { class: 'lx-notesbox' });
+  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 From your languages '), notesList(mine)) : null,
+    rest.length ? h('details', { class: 'lx-sec' }, h('summary', {}, '🌐 The same point from other languages ', h('span', { class: 'tiny' }, rest.length)), notesList(rest)) : null,
+    wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, `✨ Notes for ${missing.map(k => k.name || langName(k.code)).join(', ')}`) : null);
+  return box;
+}
+/** D18: Claude / Gemini write notes for the learner's languages that the course has none for — only on request, with their key. */
+async function aiNotes(c, fid, langsWanted, btn) {
+  const g = LX(c).grammar[fid]; btn.disabled = true; btn.textContent = '✨ writing…';
+  try {
+    const r = await NoemaLLM.json({ acc: UI.acc, name: 'notes', schema: { type: 'object', required: ['notes'], properties: { notes: { type: 'array', items: { type: 'object', required: ['for', 'rel', 'text'],
+      properties: { for: { type: 'string' }, rel: { type: 'string', enum: ['same', 'similar', 'different', 'new', 'trap'] }, text: { type: 'string' } } } } } },
+      prompt: `You write short comparison notes for a language course. The point: "${UI.C.functions[fid]?.title}" in ${info(c).name}.
+What the course says:
+${g.summary}
+
+For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || langName(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
+Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.` });
+    const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
+    UI.prefs.aiNotes = { ...(UI.prefs.aiNotes || {}), [c + '|' + fid]: [...((UI.prefs.aiNotes || {})[c + '|' + fid] || []), ...notes] }; save();
+    btn.replaceWith(notesList(notes));
+  } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + (e.message || 'failed'); }
 }
 /** Mixed text: runs of Arabic, Hebrew or Chinese script get their own span (font, direction), the rest stays as it is. */
 function wordsIn(c, s) {
@@ -497,15 +637,19 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   if (!g) return h('div', { class: 'lx-card' }, h('h3', {}, fn.title), h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(c).name}.`));
   if (fn.category === 'overview') return overviewCard(c, g);
   const k = N.known(UI.C, UI.L, c);
-  const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 9 }).sort((a, b) => a.unknown.length - b.unknown.length).slice(0, compact ? 3 : 8);
+  const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
+  ex.forEach(s => noteNew(c, s.unknown));
+  const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL()) : [];
   return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
     h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
+    from.length ? h('div', { class: 'tiny lx-familiarline' }, `✓ This point works as in ${from.join(', ')}: the parts you know are folded.`) : null,
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
     ...blocks(c, g.blocks),
     g.procedure?.askYourself?.length ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🤔 Ask yourself '), h('ol', { class: 'lx-list' }, ...g.procedure.askYourself.map(x => h('li', {}, wordsIn(c, x))))) : null,
     g.traps?.length ? h('div', { class: 'lx-callout k-pitfall' }, h('b', {}, '⚠️ Traps '), h('ul', { class: 'lx-list' }, ...g.traps.map(x => h('li', {}, wordsIn(c, x))))) : null,
     ex.length ? h('details', { class: 'lx-sec', open: compact ? null : true }, h('summary', {}, 'In sentences ', h('span', { class: 'tiny' }, ex.length)),
-      ...ex.map(s => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, word(c, s.text, { sub: false })), h('div', { class: 'lx-tr' }, s.gloss), s.unknown.length ? h('div', { class: 'tiny' }, '🆕 ', s.unknown.length, ' word(s) not learned yet') : null))) : null,
+      ...ex.map(s => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, sentenceView(c, s, s.unknown)), h('div', { class: 'lx-tr' }, s.gloss), s.unknown.length ? h('div', { class: 'tiny' }, '🆕 ', s.unknown.map(l => LX(c).lex[l].lemma + ' = ' + gloss(c, l)).join(' · ')) : h('div', { class: 'tiny' }, '✓ fits your words')))) : null,
+    notesView(c, g.notes, fid),
     (g.seeAlso || []).length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 See also '), h('ul', { class: 'lx-list' }, ...g.seeAlso.map(x => h('li', {},
       h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note || '')))) : null,
     acrossLanguages(fid, c, onPick || (x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))));
@@ -531,8 +675,25 @@ function overviewCard(c, g) {
     h('h4', {}, '✨ What is special from the very beginning'),
     h('ul', { class: 'lx-list' }, ...(g.peculiarities || []).map(p => h('li', {}, h('b', {}, p.title), ' — ', wordsIn(c, p.text)))),
     g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ Its path through the steps '), wordsIn(c, g.pathNote)) : null,
-    (g.forYou || []).length ? [h('h4', {}, '🧭 For you'), h('ul', { class: 'lx-list' }, ...g.forYou.map(f => h('li', {}, info(f.lang).flag, ' ', wordsIn(c, f.text))))] : null,
+    notesView(c, g.notes, 'fn.overview'),
+    h('p', {}, h('button', { class: 'btn small', onclick: () => go('#/peculiar/' + c) }, `📚 The library of ${info(c).name}'s peculiarities`)),
+    learnerView(c),
     others.length ? h('p', { class: 'tiny' }, 'The same overview for: ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).name))) : null);
+}
+/** D16 — computed, not written from one point of view: what is new and what is familiar for this learner, from the languages they know. */
+function learnerView(c) {
+  const knows = knowsL(), r = N.forLearner(UI.C, c, knows);
+  if (!r || !knows.length) return null;
+  const name = k => langName(k);
+  const item = (x, extra) => h('li', {}, h('b', {}, x.p.kind === 'lacks' ? '∅ ' + x.p.title : x.p.title), ' — ', wordsIn(c, x.p.what || ''), extra);
+  return h('div', { class: 'lx-forlearner' },
+    h('h4', {}, `🧭 New for you, familiar to you`),
+    h('p', { class: 'tiny' }, 'Computed from the languages you know: ', r.knownProfiles.map(name).join(', ') || '—',
+      r.unknownLangs.length ? ` (no profile yet for ${r.unknownLangs.join(', ')})` : '', ` · ${r.new.length} new · ${r.familiar.length} familiar`),
+    h('details', { class: 'lx-sec', open: true }, h('summary', {}, `✨ New for you (${r.new.length})`),
+      h('ul', { class: 'lx-list' }, ...r.new.map(x => item(x, x.notes.length ? h('div', { class: 'tiny' }, ...x.notes.map(n => h('div', {}, '↳ ', h('b', {}, n.title + ': '), n.value, n.note ? ' — ' + n.note : ''))) : null)))),
+    h('details', { class: 'lx-sec' }, h('summary', {}, `🤝 Familiar from your languages (${r.familiar.length})`),
+      h('ul', { class: 'lx-list' }, ...r.familiar.map(x => item(x, h('span', { class: 'tiny' }, ' (as in ', x.from.map(name).join(', '), ')'))))));
 }
 VIEWS.fn = (v, r) => {
   const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid]) return VIEWS.home(v);
@@ -544,7 +705,10 @@ VIEWS.fn = (v, r) => {
 /* ---------- exercises from langcore.exercises (§6.7): choose one, build a sentence ---------- */
 function exChoose(it, done) {
   const box = h('div', { class: 'lx-ex lx-exchoose', 'data-kind': it.kind });
-  const prompt = it.kind === 'quiz' ? h('div', { class: 'lx-prompt lx-quizq' }, wordsIn(it.lang, it.prompt)) : h('div', { class: 'lx-prompt' }, word(it.lang, it.prompt, { lex: it.lex ? LX(it.lang).lex[it.lex] : null }));
+  noteNew(it.lang, it.unknown);
+  const prompt = it.kind === 'quiz' ? h('div', { class: 'lx-prompt lx-quizq' }, wordsIn(it.lang, it.prompt))
+    : it.sentence ? h('div', { class: 'lx-prompt' }, sentenceView(it.lang, LX(it.lang).sentenceById[it.sentence], it.unknown))
+    : h('div', { class: 'lx-prompt' }, word(it.lang, it.prompt, { lex: it.lex ? LX(it.lang).lex[it.lex] : null }));
   const opt = o => ['gender', 'word', 'meaning', 'quiz'].includes(it.kind) ? wordsIn(it.lang, o) : word(it.lang, o, { sub: false });
   const opts = it.options.map(o => ({ label: opt(o), ok: o === it.answer }));
   box.append(it.ask ? h('div', { class: 'lx-q' }, it.ask) : null, prompt,
@@ -556,6 +720,8 @@ function exBuild(it, done) {
   const X = LX(it.lang), box = h('div', { class: 'lx-ex lx-exbuild', 'data-kind': it.kind });
   if (it.kind === 'transform') box.append(h('div', { class: 'lx-q' }, it.change), h('div', { class: 'lx-prompt' }, word(it.lang, it.source, { sub: false })), h('div', { class: 'tiny' }, it.sourceGloss));
   else box.append(h('div', { class: 'lx-q' }, `Build it in ${info(it.lang).name}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.gloss));
+  noteNew(it.lang, it.unknown);
+  if ((it.unknown || []).length) box.append(h('div', { class: 'tiny lx-newwords' }, '🆕 ', ...it.unknown.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(it.lang, l) }, X.lex[l].lemma), ' = ' + gloss(it.lang, l)])));
   const built = [], slot = h('div', { class: 'lx-slot', lang: it.lang, dir: X.language.dir }), pool = h('div', { class: 'lx-tiles', lang: it.lang, dir: X.language.dir });
   const join = () => N.joinTokens(built.map(b => ({ t: b.t })), X.language.tokenJoin);
   const draw = () => { slot.textContent = built.length ? join() + (built.length === it.size ? it.punct : '') : '…'; };
@@ -645,7 +811,7 @@ window.NoemaLangUI = { start, UI, addProfiles };
 
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
-const stepLabel = n => n.step != null ? 'S' + String(n.step).padStart(2, '0') : '';
+const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n.step - 18).padStart(2, '0') : 'S' + String(n.step).padStart(2, '0');
 const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');
@@ -703,6 +869,7 @@ function runLesson(nid, langs, { checkOnly = false } = {}) {
 }
 
 function runQueue(queue, { nid, langs, title }) {
+  metNew.clear();   // the 🆕 words of this run, listed at the end (D19)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
@@ -761,6 +928,7 @@ function runQueue(queue, { nid, langs, title }) {
       h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
       Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, st[c] === 'passed' || st[c] === 'known' || st[c] === 'mastered' ? '✔ passed' : 'not yet (80 % passes)'))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
+      newWordsList(),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
   }
   document.onkeydown = e => {

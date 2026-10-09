@@ -29,23 +29,44 @@
   {
    "id": "edu.lesson",
    "gloss": "lesson, class (period at school)",
-   "tier": 2,
-   "rank": 4,
-   "pending": true
+   "tier": 1,
+   "rank": 6
   },
   {
    "id": "edu.mark",
    "gloss": "point, mark (in a test, a game)",
-   "tier": 2,
-   "rank": 5,
-   "pending": true
+   "tier": 1,
+   "rank": 3
   },
   {
    "id": "edu.test",
    "gloss": "test, written exam; paper (at school)",
-   "tier": 2,
-   "rank": 6,
-   "pending": true
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "edu.subject",
+   "gloss": "subject (at school)",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "edu.degree",
+   "gloss": "degree (from a university)",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "edu.course",
+   "gloss": "course (of study)",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "edu.homework",
+   "gloss": "homework",
+   "tier": 1,
+   "rank": 7
   }
  ]
 }

@@ -1,0 +1,2642 @@
+{
+ "lexemes": [
+  {
+   "id": "de:aufwachen",
+   "lemma": "aufwachen",
+   "pos": "VERB",
+   "senses": [
+    "verb.wakeup"
+   ],
+   "features": {
+    "principalParts": [
+     "aufwachen",
+     "wacht auf",
+     "wachte auf",
+     "aufgewacht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "auf",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "aufwachen",
+    "V;PRS;1;SG": "wache",
+    "V;PRS;2;SG": "wachst",
+    "V;PRS;3;SG": "wacht",
+    "V;PRS;1;PL": "wachen",
+    "V;PRS;2;PL": "wacht",
+    "V;PRS;3;PL": "wachen",
+    "V;PST;1;SG": "wachte",
+    "V;PST;2;SG": "wachtest",
+    "V;PST;3;SG": "wachte",
+    "V;PST;1;PL": "wachten",
+    "V;PST;2;PL": "wachtet",
+    "V;PST;3;PL": "wachten",
+    "V;PTCP;PST": "aufgewacht",
+    "V;IMP;2;SG": "wach",
+    "V;IMP;2;PL": "wacht",
+    "V;IMP;FORM": "wachen",
+    "V;SEP": "auf"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "wache"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wache”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wache auf”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first moment of the day – eyes open, the alarm still ringing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wake up (stop sleeping, by oneself)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wakeup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich wache jeden Tag um sechs Uhr auf.",
+      "tr": "I wake up at six every day.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute bin ich spät aufgewacht.",
+      "tr": "Today I woke up late.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Baby wacht in der Nacht oft auf.",
+      "tr": "The baby often wakes up in the night.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wach auf, es ist schon acht!",
+      "tr": "Wake up, it’s already eight!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "früh aufwachen",
+      "tr": "to wake up early"
+     },
+     {
+      "text": "mitten in der Nacht aufwachen",
+      "tr": "to wake up in the middle of the night"
+     },
+     {
+      "text": "aus einem Traum aufwachen",
+      "tr": "to wake up from a dream"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "wach werden",
+      "register": "neutral",
+      "nuance": "to become awake – the same event, said as a change of state"
+     },
+     {
+      "word": "erwachen",
+      "register": "literary",
+      "nuance": "to awaken – written and elevated style, also figurative (die Natur erwacht)"
+     }
+    ],
+    "etymology": {
+     "text": "From auf- (“up”) + wachen (“to be awake”), from Middle High German wachen, from Old High German wahhēn, from Proto-Germanic *wakāną; cognate with English wake.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "wachen alone means “to keep watch, to stay awake” (am Bett wachen), the same root as English wake and watch."
+    ],
+    "pitfalls": [
+     "aufwachen is intransitive: you wake up by yourself. To wake someone else is wecken: Ich wecke dich um sieben – not *Ich wache dich auf.",
+     "The perfect takes sein (a change of state): Ich bin aufgewacht – not *Ich habe aufgewacht."
+    ],
+    "subtleties": [
+     "Separable: the particle goes to the end (Ich wache um sechs auf), and ge- goes inside: aufgewacht.",
+     "aufwachen is the moment of waking; aufstehen is getting out of bed – Germans often say both: Ich wache um sechs auf und stehe um halb sieben auf."
+    ]
+   }
+  },
+  {
+   "id": "de:aufstehen",
+   "lemma": "aufstehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.getup"
+   ],
+   "features": {
+    "principalParts": [
+     "aufstehen",
+     "steht auf",
+     "stand auf",
+     "aufgestanden"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "auf",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "aufstehen",
+    "V;PRS;1;SG": "stehe",
+    "V;PRS;2;SG": "stehst",
+    "V;PRS;3;SG": "steht",
+    "V;PRS;1;PL": "stehen",
+    "V;PRS;2;PL": "steht",
+    "V;PRS;3;PL": "stehen",
+    "V;PST;1;SG": "stand",
+    "V;PST;2;SG": "standest",
+    "V;PST;3;SG": "stand",
+    "V;PST;1;PL": "standen",
+    "V;PST;2;PL": "standet",
+    "V;PST;3;PL": "standen",
+    "V;PTCP;PST": "aufgestanden",
+    "V;IMP;2;SG": "steh",
+    "V;IMP;2;PL": "steht",
+    "V;IMP;FORM": "stehen",
+    "V;SEP": "auf"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "stehe"
+    ],
+    "V;PST;2;SG": [
+     "standst"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“stehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“stehe auf”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Throwing off the duvet and putting your feet on the cold floor.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get up (out of bed; from a chair)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich stehe um halb sieben auf.",
+      "tr": "I get up at half past six.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Sonntag sind wir spät aufgestanden.",
+      "tr": "On Sunday we got up late.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "Er stand auf und ging zur Tür.",
+      "tr": "He got up and went to the door.",
+      "register": "literary",
+      "context": "story",
+      "sense": "s1"
+     },
+     {
+      "text": "Steh auf, wir müssen los!",
+      "tr": "Get up, we have to go!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "früh aufstehen",
+      "tr": "to get up early"
+     },
+     {
+      "text": "mit dem linken Fuß zuerst aufstehen",
+      "tr": "to get out of bed on the wrong side"
+     },
+     {
+      "text": "vom Tisch aufstehen",
+      "tr": "to get up from the table"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "mit dem linken Fuß zuerst aufgestanden sein",
+      "tr": "to have got up with the left foot first",
+      "kind": "idiom",
+      "meaning": "to be in a bad mood all day",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich erheben",
+      "register": "formal",
+      "nuance": "to rise – from a seat, solemn or written (Bitte erheben Sie sich)"
+     }
+    ],
+    "etymology": {
+     "text": "From auf- + stehen (“to stand”), from Middle High German stān, stēn, Old High German stān. Cognate with Dutch opstaan.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mit dem linken Fuß zuerst aufgestanden sein = to have got out of bed on the wrong side: in German it is the left foot."
+    ],
+    "pitfalls": [
+     "The perfect takes sein: Ich bin um sechs aufgestanden – not *Ich habe aufgestanden.",
+     "Präteritum stand – stand auf: Er stand auf. A common slip is *er stehte auf."
+    ],
+    "subtleties": [
+     "Separable: Ich stehe auf, …, weil ich früh aufstehe, aufgestanden.",
+     "aufstehen also means getting up from a chair or the floor, not only from bed."
+    ]
+   }
+  },
+  {
+   "id": "de:waschen",
+   "lemma": "waschen",
+   "pos": "VERB",
+   "senses": [
+    "verb.wash",
+    "verb.washoneself"
+   ],
+   "features": {
+    "principalParts": [
+     "waschen",
+     "wäscht",
+     "wusch",
+     "gewaschen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "a>ä",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "what is washed: das Auto, die Wäsche, die Hände"
+     }
+    ],
+    "reflexive": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "case": "DAT",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "waschen",
+    "V;PRS;1;SG": "wasche",
+    "V;PRS;2;SG": "wäschst",
+    "V;PRS;3;SG": "wäscht",
+    "V;PRS;1;PL": "waschen",
+    "V;PRS;2;PL": "wascht",
+    "V;PRS;3;PL": "waschen",
+    "V;PST;1;SG": "wusch",
+    "V;PST;2;SG": "wuschst",
+    "V;PST;3;SG": "wusch",
+    "V;PST;1;PL": "wuschen",
+    "V;PST;2;PL": "wuscht",
+    "V;PST;3;PL": "wuschen",
+    "V;PTCP;PST": "gewaschen",
+    "V;IMP;2;SG": "wasch",
+    "V;IMP;2;PL": "wascht",
+    "V;IMP;FORM": "waschen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "wasche"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Soap, warm water, the hum of the washing machine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wash (something: hands, clothes, the car)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wash"
+     },
+     {
+      "id": "s2",
+      "def": "sich waschen: to wash (oneself)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.washoneself"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich wasche mir die Hände.",
+      "tr": "I wash my hands.",
+      "register": "neutral",
+      "context": "hygiene",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Samstag hat er das Auto gewaschen.",
+      "tr": "On Saturday he washed the car.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer wäscht heute die Wäsche?",
+      "tr": "Who is doing the laundry today?",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Kind wäscht sich allein.",
+      "tr": "The child washes on his own.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe mich schon gewaschen.",
+      "tr": "I have already washed.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Hände waschen",
+      "tr": "to wash one’s hands"
+     },
+     {
+      "text": "Wäsche waschen",
+      "tr": "to do the laundry"
+     },
+     {
+      "text": "sich die Haare waschen",
+      "tr": "to wash one’s hair"
+     },
+     {
+      "text": "mit Seife waschen",
+      "tr": "to wash with soap"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "jemandem den Kopf waschen",
+      "tr": "to wash someone’s head",
+      "kind": "idiom",
+      "meaning": "to give someone a dressing-down",
+      "register": "colloquial"
+     },
+     {
+      "text": "eine Hand wäscht die andere",
+      "tr": "one hand washes the other",
+      "kind": "proverb",
+      "meaning": "you scratch my back and I’ll scratch yours",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "spülen",
+      "register": "neutral",
+      "nuance": "to rinse; to wash the dishes (Geschirr spülen)"
+     },
+     {
+      "word": "putzen",
+      "register": "neutral",
+      "nuance": "to clean – rooms, windows, teeth (Zähne putzen), not clothes"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German waschen, from Old High German wascan, waskan, from Proto-West Germanic *waskan. Cognate with Dutch wassen, English wash, Danish vaske.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Jemandem den Kopf waschen (to wash someone’s head) means to give them a good telling-off."
+    ],
+    "pitfalls": [
+     "du wäschst, er wäscht – the a becomes ä only in the du and er/sie/es forms; ihr wascht has no umlaut.",
+     "With body parts German prefers a dative reflexive to a possessive: Ich wasche mir die Hände (I wash to-me the hands) is more idiomatic than Ich wasche meine Hände.",
+     "Teeth are “cleaned”, not washed: Ich putze mir die Zähne."
+    ],
+    "subtleties": [
+     "sich waschen (accusative: Ich wasche mich) = to wash oneself; sich etwas waschen (dative: Ich wasche mir die Haare) = to wash a part of oneself.",
+     "Strong verb: waschen – wäscht – wusch – gewaschen."
+    ]
+   }
+  },
+  {
+   "id": "de:duschen",
+   "lemma": "duschen",
+   "pos": "VERB",
+   "senses": [
+    "verb.shower"
+   ],
+   "features": {
+    "principalParts": [
+     "duschen",
+     "duscht",
+     "duschte",
+     "geduscht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no meaning needs it: (sich) duschen – the reflexive pronoun is optional (Ich dusche / Ich dusche mich)"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "duschen",
+    "V;PRS;1;SG": "dusche",
+    "V;PRS;2;SG": "duschst",
+    "V;PRS;3;SG": "duscht",
+    "V;PRS;1;PL": "duschen",
+    "V;PRS;2;PL": "duscht",
+    "V;PRS;3;PL": "duschen",
+    "V;PST;1;SG": "duschte",
+    "V;PST;2;SG": "duschtest",
+    "V;PST;3;SG": "duschte",
+    "V;PST;1;PL": "duschten",
+    "V;PST;2;PL": "duschtet",
+    "V;PST;3;PL": "duschten",
+    "V;PTCP;PST": "geduscht",
+    "V;IMP;2;SG": "dusch",
+    "V;IMP;2;PL": "duscht",
+    "V;IMP;FORM": "duschen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "dusche"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hot water in the morning, the steam on the mirror.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to take a shower, to shower",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.shower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich dusche jeden Morgen.",
+      "tr": "I shower every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du schon geduscht?",
+      "tr": "Have you showered yet?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach dem Sport duschte er kalt.",
+      "tr": "After sport he took a cold shower.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie duscht sich nach der Arbeit.",
+      "tr": "She showers after work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "kalt duschen",
+      "tr": "to take a cold shower"
+     },
+     {
+      "text": "warm duschen",
+      "tr": "to take a warm shower"
+     },
+     {
+      "text": "nach dem Sport duschen",
+      "tr": "to shower after sport"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich duschen",
+      "register": "neutral",
+      "nuance": "the same verb with an optional reflexive pronoun"
+     },
+     {
+      "word": "eine Dusche nehmen",
+      "register": "neutral",
+      "nuance": "to take a shower – a little more formal or written"
+     }
+    ],
+    "etymology": {
+     "text": "From Dusche (“shower”), from French douche, from Italian doccia. The noun became much more common after World War II, as the native word Brausebad had developed bad connotations.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "die Dusche is both the shower (the device) and the act; kalt duschen is also used figuratively for a disappointment (eine kalte Dusche)."
+    ],
+    "pitfalls": [
+     "du duschst: the stem ends in -sch, so du takes -st (duschst), unlike du isst.",
+     "In everyday speech the verb alone is usual: Ich dusche (I shower); eine Dusche nehmen is rarer."
+    ],
+    "subtleties": [
+     "duschen is weak and regular in every tense: duschte, geduscht.",
+     "With a person or a thing as object it means to shower someone: Sie duscht das Kind."
+    ]
+   }
+  },
+  {
+   "id": "de:anziehen",
+   "lemma": "anziehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.getdressed",
+    "verb.puton"
+   ],
+   "features": {
+    "principalParts": [
+     "anziehen",
+     "zieht an",
+     "zog an",
+     "angezogen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "an",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "note": "the clothes: eine Jacke anziehen; optional dative of the person: sich (DAT) die Jacke anziehen"
+     }
+    ],
+    "reflexive": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "anziehen",
+    "V;PRS;1;SG": "ziehe",
+    "V;PRS;2;SG": "ziehst",
+    "V;PRS;3;SG": "zieht",
+    "V;PRS;1;PL": "ziehen",
+    "V;PRS;2;PL": "zieht",
+    "V;PRS;3;PL": "ziehen",
+    "V;PST;1;SG": "zog",
+    "V;PST;2;SG": "zogst",
+    "V;PST;3;SG": "zog",
+    "V;PST;1;PL": "zogen",
+    "V;PST;2;PL": "zogt",
+    "V;PST;3;PL": "zogen",
+    "V;PTCP;PST": "angezogen",
+    "V;IMP;2;SG": "zieh",
+    "V;IMP;2;PL": "zieht",
+    "V;IMP;FORM": "ziehen",
+    "V;SEP": "an"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "ziehe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“ziehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“ziehe an”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shirt, trousers, socks – getting ready to go out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sich anziehen: to get dressed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getdressed"
+     },
+     {
+      "id": "s2",
+      "def": "to put on (a piece of clothing)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.puton"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich ziehe mich schnell an.",
+      "tr": "I get dressed quickly.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder haben sich schon angezogen.",
+      "tr": "The children have already got dressed.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Zieh dich warm an, es ist kalt!",
+      "tr": "Dress warmly, it’s cold!",
+      "register": "informal",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Er zog seine Jacke an und ging.",
+      "tr": "He put on his jacket and left.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     },
+     {
+      "text": "Was ziehst du heute an?",
+      "tr": "What are you wearing today?",
+      "register": "informal",
+      "context": "clothes",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sich warm anziehen",
+      "tr": "to dress warmly"
+     },
+     {
+      "text": "eine Jacke anziehen",
+      "tr": "to put on a jacket"
+     },
+     {
+      "text": "sich schnell anziehen",
+      "tr": "to get dressed quickly"
+     },
+     {
+      "text": "die Kinder anziehen",
+      "tr": "to dress the children"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "ausziehen",
+      "tr": "to take off (clothes); to move out"
+     },
+     {
+      "text": "umziehen",
+      "tr": "to change (clothes); to move house"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich kleiden",
+      "register": "formal",
+      "nuance": "to dress (in a particular style) – written, about style rather than the morning routine"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "ausziehen",
+      "note": "to undress, to take off"
+     }
+    ],
+    "etymology": {
+     "text": "Compound of an- (“on, at”) + ziehen (“to pull”), from Middle High German ziehen, Old High German ziohan, from Proto-Indo-European *dewk- (“to pull, lead”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "anziehen also means “to attract” (a magnet attracts iron; the city attracts tourists) – the image of pulling something towards you."
+    ],
+    "pitfalls": [
+     "To get dressed needs the reflexive pronoun: Ich ziehe mich an – without mich it means you dress someone else or put something on.",
+     "Do not confuse anziehen (put on), ausziehen (take off; also move out) and umziehen (change clothes; also move house): Ich ziehe mich um.",
+     "Wearing is tragen or anhaben, not anziehen: Sie trägt ein Kleid (she is wearing a dress)."
+    ],
+    "subtleties": [
+     "Separable and strong: Ich ziehe mich an – zog an – angezogen.",
+     "With a dative reflexive the clothes become the object: Ich ziehe mir die Schuhe an."
+    ]
+   }
+  },
+  {
+   "id": "de:frühstücken",
+   "lemma": "frühstücken",
+   "pos": "VERB",
+   "senses": [
+    "verb.havebreakfast"
+   ],
+   "features": {
+    "principalParts": [
+     "frühstücken",
+     "frühstückt",
+     "frühstückte",
+     "gefrühstückt"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "optional: what one has for breakfast – Ich frühstücke ein Brot"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "frühstücken",
+    "V;PRS;1;SG": "frühstücke",
+    "V;PRS;2;SG": "frühstückst",
+    "V;PRS;3;SG": "frühstückt",
+    "V;PRS;1;PL": "frühstücken",
+    "V;PRS;2;PL": "frühstückt",
+    "V;PRS;3;PL": "frühstücken",
+    "V;PST;1;SG": "frühstückte",
+    "V;PST;2;SG": "frühstücktest",
+    "V;PST;3;SG": "frühstückte",
+    "V;PST;1;PL": "frühstückten",
+    "V;PST;2;PL": "frühstücktet",
+    "V;PST;3;PL": "frühstückten",
+    "V;PTCP;PST": "gefrühstückt",
+    "V;IMP;2;SG": "frühstück",
+    "V;IMP;2;PL": "frühstückt",
+    "V;IMP;FORM": "frühstücken"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "frühstücke"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee, fresh rolls, jam – a slow Sunday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.havebreakfast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir frühstücken um sieben Uhr.",
+      "tr": "We have breakfast at seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du schon gefrühstückt?",
+      "tr": "Have you had breakfast yet?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Sonntag frühstücken wir lange.",
+      "tr": "On Sundays we have a long breakfast.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Hotel frühstückten die Gäste im Garten.",
+      "tr": "At the hotel the guests had breakfast in the garden.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ausgiebig frühstücken",
+      "tr": "to have a big, leisurely breakfast"
+     },
+     {
+      "text": "zusammen frühstücken",
+      "tr": "to have breakfast together"
+     },
+     {
+      "text": "im Bett frühstücken",
+      "tr": "to have breakfast in bed"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No other word for this; one can say zum Frühstück essen (to eat for breakfast) with a food as object.",
+    "etymology": {
+     "text": "From Frühstück (“breakfast”) + -en; Frühstück is from Middle High German vrüestücke, equivalent to früh (“early”) + Stück (“piece”, here a bite).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "frühstücken is built from the noun Frühstück, literally “early piece (bite)”."
+    ],
+    "pitfalls": [
+     "frühstücken is one verb, not a separable one: ich frühstücke, ich habe gefrühstückt – not *ich stücke früh.",
+     "The noun is das Frühstück, the verb frühstücken: Was gibt es zum Frühstück? – Wann frühstückst du?"
+    ],
+    "subtleties": [
+     "Lunch and dinner have no everyday verb of their own: zu Mittag essen, zu Abend essen.",
+     "Optional object: Ich frühstücke ein Müsli (I have muesli for breakfast)."
+    ]
+   }
+  },
+  {
+   "id": "de:losgehen",
+   "lemma": "losgehen",
+   "pos": "VERB",
+   "senses": [
+    "verb.leavehome",
+    "verb.start"
+   ],
+   "features": {
+    "principalParts": [
+     "losgehen",
+     "geht los",
+     "ging los",
+     "losgegangen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "los",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": "on foot",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "losgehen",
+    "V;PRS;1;SG": "gehe",
+    "V;PRS;2;SG": "gehst",
+    "V;PRS;3;SG": "geht",
+    "V;PRS;1;PL": "gehen",
+    "V;PRS;2;PL": "geht",
+    "V;PRS;3;PL": "gehen",
+    "V;PST;1;SG": "ging",
+    "V;PST;2;SG": "gingst",
+    "V;PST;3;SG": "ging",
+    "V;PST;1;PL": "gingen",
+    "V;PST;2;PL": "gingt",
+    "V;PST;3;PL": "gingen",
+    "V;PTCP;PST": "losgegangen",
+    "V;IMP;2;SG": "geh",
+    "V;IMP;2;PL": "geht",
+    "V;IMP;FORM": "gehen",
+    "V;SEP": "los"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "gehe"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.start",
+     "axis": "register and use",
+     "value": "colloquial, an event that starts now or soon: Es geht los! Der Film geht um acht los."
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“gehe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“gehe los”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Keys, bag, door shut behind you – off you go.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to set off, to leave (home, a place) for somewhere",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leavehome"
+     },
+     {
+      "id": "s2",
+      "def": "to start (of an event; colloquial)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.start"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe um halb acht los.",
+      "tr": "I leave at half past seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann bist du heute losgegangen?",
+      "tr": "When did you leave today?",
+      "register": "informal",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir gingen früh los, weil der Weg lang war.",
+      "tr": "We set off early because the way was long.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s1"
+     },
+     {
+      "text": "Gleich geht es los!",
+      "tr": "It’s about to start!",
+      "register": "colloquial",
+      "context": "events",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Film geht um acht Uhr los.",
+      "tr": "The film starts at eight.",
+      "register": "colloquial",
+      "context": "cinema",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "früh losgehen",
+      "tr": "to set off early"
+     },
+     {
+      "text": "zur Arbeit losgehen",
+      "tr": "to set off for work"
+     },
+     {
+      "text": "Es geht los!",
+      "tr": "Here we go! It’s starting!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Es geht los!",
+      "tr": "It goes off!",
+      "kind": "fixed expression",
+      "meaning": "Here we go! It’s starting!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "aus dem Haus gehen",
+      "register": "neutral",
+      "nuance": "to leave the house – the most literal way to say it"
+     },
+     {
+      "word": "aufbrechen",
+      "register": "formal",
+      "nuance": "to set out (on a journey) – more formal, often for a longer trip"
+     },
+     {
+      "word": "losfahren",
+      "register": "neutral",
+      "nuance": "to set off by car, bus or train"
+     }
+    ],
+    "etymology": {
+     "text": "From los- (“off, loose”) + gehen (“to go”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "losgehen can also mean “to go off” (an alarm, a bomb) and “to go for someone” (auf jemanden losgehen = to attack)."
+    ],
+    "pitfalls": [
+     "losgehen is said of leaving on foot or in general; in a vehicle Germans say losfahren: Wir fahren um acht los.",
+     "The perfect takes sein: Ich bin um acht losgegangen."
+    ],
+    "subtleties": [
+     "Separable: Ich gehe los – ging los – losgegangen.",
+     "Es geht los is impersonal (es as subject): it’s starting; Auf geht’s! is a cheerful “let’s go”."
+    ]
+   }
+  },
+  {
+   "id": "de:anfangen",
+   "lemma": "anfangen",
+   "pos": "VERB",
+   "senses": [
+    "verb.start"
+   ],
+   "features": {
+    "principalParts": [
+     "anfangen",
+     "fängt an",
+     "fing an",
+     "angefangen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "a>ä",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "an",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "etwas anfangen: to start something (ein Buch, eine Arbeit)"
+     },
+     {
+      "case": "DAT",
+      "prep": "mit",
+      "senses": [
+       "s1"
+      ],
+      "note": "mit etwas anfangen: to start (on) something"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "anfangen",
+    "V;PRS;1;SG": "fange",
+    "V;PRS;2;SG": "fängst",
+    "V;PRS;3;SG": "fängt",
+    "V;PRS;1;PL": "fangen",
+    "V;PRS;2;PL": "fangt",
+    "V;PRS;3;PL": "fangen",
+    "V;PST;1;SG": "fing",
+    "V;PST;2;SG": "fingst",
+    "V;PST;3;SG": "fing",
+    "V;PST;1;PL": "fingen",
+    "V;PST;2;PL": "fingt",
+    "V;PST;3;PL": "fingen",
+    "V;PTCP;PST": "angefangen",
+    "V;IMP;2;SG": "fang",
+    "V;IMP;2;PL": "fangt",
+    "V;IMP;FORM": "fangen",
+    "V;SEP": "an"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "fange"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.start",
+     "axis": "register and use",
+     "value": "the everyday word, for people and events: Ich fange an. Die Schule fängt an."
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“fange”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“fange an”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first step of anything – a lesson, a job, a new life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to start, to begin",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Schule fängt um acht Uhr an.",
+      "tr": "School starts at eight.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe gestern einen neuen Job angefangen.",
+      "tr": "I started a new job yesterday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann fängst du mit der Arbeit an?",
+      "tr": "When do you start work?",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Plötzlich fing es an zu regnen.",
+      "tr": "Suddenly it started to rain.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit der Arbeit anfangen",
+      "tr": "to start work"
+     },
+     {
+      "text": "von vorn anfangen",
+      "tr": "to start again from the beginning"
+     },
+     {
+      "text": "ein neues Leben anfangen",
+      "tr": "to start a new life"
+     },
+     {
+      "text": "anfangen zu lachen",
+      "tr": "to start laughing"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Aller Anfang ist schwer.",
+      "tr": "Every beginning is hard.",
+      "kind": "proverb",
+      "meaning": "the first steps are always the hardest",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "beginnen",
+      "register": "formal",
+      "nuance": "to begin – the same meaning, more formal or written"
+     },
+     {
+      "word": "starten",
+      "register": "informal",
+      "nuance": "to start – an engine, a computer, a race, a project"
+     },
+     {
+      "word": "losgehen",
+      "register": "colloquial",
+      "nuance": "to start – an event that begins now: Es geht los!"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "aufhören",
+      "note": "to stop, to finish"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German anevāhen, from Old High German anafāhan, from Proto-West Germanic *anafą̄han; equivalent to an- + fangen (“to catch”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The base verb fangen means “to catch” (Ball fangen); anfangen is literally “to catch on”."
+    ],
+    "pitfalls": [
+     "du fängst, er fängt (a → ä), but ihr fangt.",
+     "Präteritum fing an, perfect hat angefangen – not *hat angefängt.",
+     "With another verb: anfangen + zu + infinitive: Ich fange an zu kochen."
+    ],
+    "subtleties": [
+     "Was soll ich damit anfangen? (What am I supposed to do with that?) – anfangen also means “to do with” in this idiom.",
+     "In the north-west, colloquial ist angefangen is also heard; the standard perfect is hat angefangen."
+    ]
+   }
+  },
+  {
+   "id": "de:beginnen",
+   "lemma": "beginnen",
+   "pos": "VERB",
+   "senses": [
+    "verb.start"
+   ],
+   "features": {
+    "principalParts": [
+     "beginnen",
+     "beginnt",
+     "begann",
+     "begonnen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": "be",
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "etwas beginnen: to begin something"
+     },
+     {
+      "case": "DAT",
+      "prep": "mit",
+      "senses": [
+       "s1"
+      ],
+      "note": "mit etwas beginnen"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "beginnen",
+    "V;PRS;1;SG": "beginne",
+    "V;PRS;2;SG": "beginnst",
+    "V;PRS;3;SG": "beginnt",
+    "V;PRS;1;PL": "beginnen",
+    "V;PRS;2;PL": "beginnt",
+    "V;PRS;3;PL": "beginnen",
+    "V;PST;1;SG": "begann",
+    "V;PST;2;SG": "begannst",
+    "V;PST;3;SG": "begann",
+    "V;PST;1;PL": "begannen",
+    "V;PST;2;PL": "begannt",
+    "V;PST;3;PL": "begannen",
+    "V;PTCP;PST": "begonnen",
+    "V;IMP;2;SG": "beginn",
+    "V;IMP;2;PL": "beginnt",
+    "V;IMP;FORM": "beginnen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "beginne"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.start",
+     "axis": "register and use",
+     "value": "more formal or written, the same uses: Der Unterricht beginnt um acht."
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Timetables, announcements, the first line of a story.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to begin, to start",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Unterricht beginnt um acht Uhr.",
+      "tr": "Lessons begin at eight.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Konzert hat schon begonnen.",
+      "tr": "The concert has already begun.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Herbst begann sie ein Studium.",
+      "tr": "In the autumn she began a degree.",
+      "register": "formal",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir beginnen mit der ersten Übung.",
+      "tr": "We begin with the first exercise.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit der Arbeit beginnen",
+      "tr": "to begin work"
+     },
+     {
+      "text": "ein Studium beginnen",
+      "tr": "to begin a degree"
+     },
+     {
+      "text": "pünktlich beginnen",
+      "tr": "to begin on time"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "anfangen",
+      "register": "neutral",
+      "nuance": "the everyday word for the same thing"
+     },
+     {
+      "word": "starten",
+      "register": "informal",
+      "nuance": "to start – an engine, a project, a race"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German beginnen, from Old High German biginnan, from Proto-Germanic *biginnaną. Cognate with Dutch beginnen and English begin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English begin – began – begun and German beginnen – begann – begonnen show the same Germanic vowel change."
+    ],
+    "pitfalls": [
+     "Strong and irregular: beginnen – begann – begonnen; not *beginnte, *gebeginnt.",
+     "be- is an inseparable prefix: the participle has no ge- (begonnen)."
+    ],
+    "subtleties": [
+     "In speech anfangen is far more common; beginnen is the word of timetables, programmes and writing.",
+     "A cognate of English begin: the meaning and even the vowels of the past (begann – began, begonnen – begun) match."
+    ]
+   }
+  },
+  {
+   "id": "de:aufhören",
+   "lemma": "aufhören",
+   "pos": "VERB",
+   "senses": [
+    "verb.finish",
+    "verb.stop"
+   ],
+   "features": {
+    "principalParts": [
+     "aufhören",
+     "hört auf",
+     "hörte auf",
+     "aufgehört"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "auf",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "DAT",
+      "prep": "mit",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "mit der Arbeit aufhören; or aufhören + zu + infinitive"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "aufhören",
+    "V;PRS;1;SG": "höre",
+    "V;PRS;2;SG": "hörst",
+    "V;PRS;3;SG": "hört",
+    "V;PRS;1;PL": "hören",
+    "V;PRS;2;PL": "hört",
+    "V;PRS;3;PL": "hören",
+    "V;PST;1;SG": "hörte",
+    "V;PST;2;SG": "hörtest",
+    "V;PST;3;SG": "hörte",
+    "V;PST;1;PL": "hörten",
+    "V;PST;2;PL": "hörtet",
+    "V;PST;3;PL": "hörten",
+    "V;PTCP;PST": "aufgehört",
+    "V;IMP;2;SG": "hör",
+    "V;IMP;2;PL": "hört",
+    "V;IMP;FORM": "hören",
+    "V;SEP": "auf"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "höre"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.finish",
+     "axis": "construction",
+     "value": "without a direct object: something ends, or someone stops (Die Schule hört um eins auf; mit der Arbeit aufhören)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“höre”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“höre auf”) or the subordinate-clause form.",
+     "meaning": "Wiktionary glosses aufhören “to stop; to quit; to cease”, which includes this use (an activity or a working day comes to an end: Die Schule hört um eins auf); the words of the concept gloss (“finish”, “cannot manage”) do not occur verbatim."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bell rings, the music stops, the day’s work is done.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to end, to finish (of an activity or event; of a person finishing for the day)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
+     },
+     {
+      "id": "s2",
+      "def": "to stop (doing something), to quit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.stop"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Schule hört um ein Uhr auf.",
+      "tr": "School finishes at one.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann hörst du heute mit der Arbeit auf?",
+      "tr": "When do you finish work today?",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Regen hat endlich aufgehört.",
+      "tr": "The rain has finally stopped.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Hör auf damit!",
+      "tr": "Stop it!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Er hat aufgehört zu rauchen.",
+      "tr": "He has stopped smoking.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "mit der Arbeit aufhören",
+      "tr": "to finish work"
+     },
+     {
+      "text": "aufhören zu rauchen",
+      "tr": "to stop smoking"
+     },
+     {
+      "text": "plötzlich aufhören",
+      "tr": "to stop suddenly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Da hört sich doch alles auf!",
+      "tr": "There everything stops!",
+      "kind": "colloquial",
+      "meaning": "That’s the limit!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "enden",
+      "register": "neutral",
+      "nuance": "to end – of things, not people: Der Film endet um zehn"
+     },
+     {
+      "word": "Schluss machen",
+      "register": "colloquial",
+      "nuance": "to call it a day; also to break up with someone"
+     },
+     {
+      "word": "beenden",
+      "register": "formal",
+      "nuance": "to finish something – with a direct object"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "anfangen",
+      "note": "to start"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ūfhœren (“to stop”), auf- (“up”) + hören (“to hear, listen, obey”); the sense is explained as a generalisation from “to obey a prohibition and desist”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb hides hören (to hear): the old idea was to listen to a warning and leave off."
+    ],
+    "pitfalls": [
+     "aufhören takes no direct object: mit der Arbeit aufhören, not *die Arbeit aufhören (that is: die Arbeit beenden).",
+     "Hör auf! is a sharp “stop it!”; politely: Könnten Sie bitte aufhören?"
+    ],
+    "subtleties": [
+     "Separable and weak: Ich höre auf – hörte auf – aufgehört.",
+     "aufhören + zu + infinitive: Er hört auf zu arbeiten."
+    ]
+   }
+  },
+  {
+   "id": "de:beenden",
+   "lemma": "beenden",
+   "pos": "VERB",
+   "senses": [
+    "verb.finish"
+   ],
+   "features": {
+    "principalParts": [
+     "beenden",
+     "beendet",
+     "beendete",
+     "beendet"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": "be",
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "what is finished: die Arbeit, das Studium, das Gespräch"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "beenden",
+    "V;PRS;1;SG": "beende",
+    "V;PRS;2;SG": "beendest",
+    "V;PRS;3;SG": "beendet",
+    "V;PRS;1;PL": "beenden",
+    "V;PRS;2;PL": "beendet",
+    "V;PRS;3;PL": "beenden",
+    "V;PST;1;SG": "beendete",
+    "V;PST;2;SG": "beendetest",
+    "V;PST;3;SG": "beendete",
+    "V;PST;1;PL": "beendeten",
+    "V;PST;2;PL": "beendetet",
+    "V;PST;3;PL": "beendeten",
+    "V;PTCP;PST": "beendet",
+    "V;IMP;2;SG": "beende",
+    "V;IMP;2;PL": "beendet",
+    "V;IMP;FORM": "beenden"
+   },
+   "contrasts": [
+    {
+     "concept": "verb.finish",
+     "axis": "construction",
+     "value": "with a direct object: to bring something to an end (die Arbeit beenden)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ticking the last box – the job is done.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to finish, to end (something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich beende die Arbeit um fünf Uhr.",
+      "tr": "I finish work at five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat ihr Studium im Sommer beendet.",
+      "tr": "She finished her degree in the summer.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "Er beendete das Gespräch schnell.",
+      "tr": "He ended the conversation quickly.",
+      "register": "formal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Arbeit beenden",
+      "tr": "to finish work"
+     },
+     {
+      "text": "das Studium beenden",
+      "tr": "to finish one’s studies"
+     },
+     {
+      "text": "ein Gespräch beenden",
+      "tr": "to end a conversation"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "abschließen",
+      "register": "formal",
+      "nuance": "to complete – studies, a project, a contract"
+     },
+     {
+      "word": "fertig machen",
+      "register": "colloquial",
+      "nuance": "to get something done"
+     },
+     {
+      "word": "aufhören mit",
+      "register": "neutral",
+      "nuance": "to stop (doing) something – no direct object"
+     }
+    ],
+    "etymology": {
+     "text": "From be- + enden (“to end”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The noun is das Ende (the end) – in a film: ENDE."
+    ],
+    "pitfalls": [
+     "The stem ends in -d, so an -e- is added: du beendest, er beendet, ich beendete.",
+     "beendet is both the present (er beendet) and the participle (hat beendet): the context decides."
+    ],
+    "subtleties": [
+     "be- is inseparable: no ge- in the participle (beendet).",
+     "In speech people often say mit etwas fertig sein (to be done with something): Ich bin um fünf fertig."
+    ]
+   }
+  },
+  {
+   "id": "de:heimkommen",
+   "lemma": "heimkommen",
+   "pos": "VERB",
+   "senses": [
+    "verb.comehome"
+   ],
+   "features": {
+    "principalParts": [
+     "heimkommen",
+     "kommt heim",
+     "kam heim",
+     "heimgekommen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "heim",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": "any means",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "heimkommen",
+    "V;PRS;1;SG": "komme",
+    "V;PRS;2;SG": "kommst",
+    "V;PRS;3;SG": "kommt",
+    "V;PRS;1;PL": "kommen",
+    "V;PRS;2;PL": "kommt",
+    "V;PRS;3;PL": "kommen",
+    "V;PST;1;SG": "kam",
+    "V;PST;2;SG": "kamst",
+    "V;PST;3;SG": "kam",
+    "V;PST;1;PL": "kamen",
+    "V;PST;2;PL": "kamt",
+    "V;PST;3;PL": "kamen",
+    "V;PTCP;PST": "heimgekommen",
+    "V;IMP;2;SG": "komm",
+    "V;IMP;2;PL": "kommt",
+    "V;IMP;FORM": "kommen",
+    "V;SEP": "heim"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "komme"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“komme”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“komme heim”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The door opens, the bag drops, the day is over.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come home",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.comehome"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich komme um sechs Uhr heim.",
+      "tr": "I come home at six.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Gestern ist er spät heimgekommen.",
+      "tr": "Yesterday he came home late.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann kommst du heute heim?",
+      "tr": "When are you coming home today?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Nach dem Krieg kam sein Vater nicht heim.",
+      "tr": "After the war his father did not come home.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "spät heimkommen",
+      "tr": "to come home late"
+     },
+     {
+      "text": "von der Arbeit heimkommen",
+      "tr": "to come home from work"
+     },
+     {
+      "text": "müde heimkommen",
+      "tr": "to come home tired"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nach Hause kommen",
+      "register": "neutral",
+      "nuance": "to come home – the most frequent way to say it everywhere"
+     },
+     {
+      "word": "zurückkommen",
+      "register": "neutral",
+      "nuance": "to come back – to any place, not only home"
+     }
+    ],
+    "etymology": {
+     "text": "From heim- (“home”) + kommen (“to come”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English home and German Heim are the same word; heim- in verbs keeps the meaning “homewards”."
+    ],
+    "pitfalls": [
+     "Everywhere you can also say nach Hause kommen, the most frequent expression.",
+     "The perfect takes sein: Ich bin heimgekommen."
+    ],
+    "subtleties": [
+     "Separable: Ich komme heim – kam heim – heimgekommen.",
+     "heim (homewards) is related to das Heim (home) and die Heimat; it also forms heimgehen, heimfahren and the noun das Heimweh (homesickness)."
+    ]
+   }
+  },
+  {
+   "id": "de:einschlafen",
+   "lemma": "einschlafen",
+   "pos": "VERB",
+   "senses": [
+    "verb.fallasleep"
+   ],
+   "features": {
+    "principalParts": [
+     "einschlafen",
+     "schläft ein",
+     "schlief ein",
+     "eingeschlafen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "a>ä",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "ein",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "einschlafen",
+    "V;PRS;1;SG": "schlafe",
+    "V;PRS;2;SG": "schläfst",
+    "V;PRS;3;SG": "schläft",
+    "V;PRS;1;PL": "schlafen",
+    "V;PRS;2;PL": "schlaft",
+    "V;PRS;3;PL": "schlafen",
+    "V;PST;1;SG": "schlief",
+    "V;PST;2;SG": "schliefst",
+    "V;PST;3;SG": "schlief",
+    "V;PST;1;PL": "schliefen",
+    "V;PST;2;PL": "schlieft",
+    "V;PST;3;PL": "schliefen",
+    "V;PTCP;PST": "eingeschlafen",
+    "V;IMP;2;SG": "schlaf",
+    "V;IMP;2;PL": "schlaft",
+    "V;IMP;FORM": "schlafen",
+    "V;SEP": "ein"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "schlafe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“schlafe”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“schlafe ein”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heavy eyelids, the book slipping from your hand.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to fall asleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.fallasleep"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schlafe abends schnell ein.",
+      "tr": "I fall asleep quickly in the evening.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Baby ist endlich eingeschlafen.",
+      "tr": "The baby has finally fallen asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er schlief vor dem Fernseher ein.",
+      "tr": "He fell asleep in front of the TV.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kann nicht einschlafen.",
+      "tr": "I can’t get to sleep.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "schnell einschlafen",
+      "tr": "to fall asleep quickly"
+     },
+     {
+      "text": "vor dem Fernseher einschlafen",
+      "tr": "to fall asleep in front of the TV"
+     },
+     {
+      "text": "wieder einschlafen",
+      "tr": "to go back to sleep"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "einnicken",
+      "register": "colloquial",
+      "nuance": "to nod off – briefly, often without meaning to"
+     },
+     {
+      "word": "entschlafen",
+      "register": "euphemistic",
+      "nuance": "to pass away (in death notices)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "aufwachen",
+      "note": "to wake up"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German īnslāfen; equivalent to ein- + schlafen (“to sleep”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A limb can “fall asleep” in German too: Mir ist das Bein eingeschlafen."
+    ],
+    "pitfalls": [
+     "The perfect takes sein (a change of state: from awake to asleep): Ich bin eingeschlafen; schlafen itself takes haben: Ich habe geschlafen.",
+     "du schläfst ein, er schläft ein (a → ä), but ihr schlaft ein."
+    ],
+    "subtleties": [
+     "Mein Fuß ist eingeschlafen = my foot has gone to sleep (is numb).",
+     "In death notices sanft eingeschlafen (peacefully fallen asleep) means died peacefully."
+    ]
+   }
+  },
+  {
+   "id": "de:schlafen",
+   "lemma": "schlafen",
+   "pos": "VERB",
+   "senses": [
+    "verb.sleep"
+   ],
+   "features": {
+    "principalParts": [
+     "schlafen",
+     "schläft",
+     "schlief",
+     "geschlafen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "a>ä",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "schlafen",
+    "V;PRS;1;SG": "schlafe",
+    "V;PRS;2;SG": "schläfst",
+    "V;PRS;3;SG": "schläft",
+    "V;PRS;1;PL": "schlafen",
+    "V;PRS;2;PL": "schlaft",
+    "V;PRS;3;PL": "schlafen",
+    "V;PST;1;SG": "schlief",
+    "V;PST;2;SG": "schliefst",
+    "V;PST;3;SG": "schlief",
+    "V;PST;1;PL": "schliefen",
+    "V;PST;2;PL": "schlieft",
+    "V;PST;3;PL": "schliefen",
+    "V;PTCP;PST": "geschlafen",
+    "V;IMP;2;SG": "schlaf",
+    "V;IMP;2;PL": "schlaft",
+    "V;IMP;FORM": "schlafen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "schlafe"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Night, a warm bed, eight hours if you are lucky.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to sleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sleep"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schlafe acht Stunden.",
+      "tr": "I sleep eight hours.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du gut geschlafen?",
+      "tr": "Did you sleep well?",
+      "register": "informal",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Kind schläft schon.",
+      "tr": "The child is already asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Urlaub schliefen wir in einem kleinen Hotel.",
+      "tr": "On holiday we slept in a small hotel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Schlaf gut!",
+      "tr": "Sleep well!",
+      "register": "informal",
+      "context": "evening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gut schlafen",
+      "tr": "to sleep well"
+     },
+     {
+      "text": "lange schlafen",
+      "tr": "to sleep in"
+     },
+     {
+      "text": "schlafen gehen",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "bei Freunden schlafen",
+      "tr": "to stay the night at friends’"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "wie ein Murmeltier schlafen",
+      "tr": "to sleep like a marmot",
+      "kind": "idiom",
+      "meaning": "to sleep like a log",
+      "register": "colloquial"
+     },
+     {
+      "text": "Schlaf gut!",
+      "tr": "Sleep well!",
+      "kind": "fixed expression",
+      "meaning": "Good night (said to someone going to bed)",
+      "register": "informal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "pennen",
+      "register": "colloquial",
+      "nuance": "to kip, to crash – slangy"
+     },
+     {
+      "word": "schlummern",
+      "register": "literary",
+      "nuance": "to slumber – light, peaceful sleep"
+     },
+     {
+      "word": "übernachten",
+      "register": "neutral",
+      "nuance": "to stay the night somewhere (in a hotel, with friends)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "wachen",
+      "note": "to be awake, to keep watch"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German slāfen, from Old High German slāfan, from Proto-West Germanic *slāpan. Compare Low German slapen, Dutch slapen, English sleep.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English sleep and German schlafen are the same Germanic word: s before l, m, n, w became sch in German (sleep – schlafen, snow – Schnee, swim – schwimmen)."
+    ],
+    "pitfalls": [
+     "du schläfst, er schläft (a → ä); ihr schlaft.",
+     "schlafen gehen (go to sleep) is the everyday way to say “go to bed”: Ich gehe um elf schlafen.",
+     "Ich schlafe = I sleep and I am sleeping (asleep): there is no separate form."
+    ],
+    "subtleties": [
+     "schlafen takes haben (it is a state), but einschlafen takes sein (a change).",
+     "Darüber muss ich schlafen = I need to sleep on it."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "verb.gotobed",
+   "reason": "No single word: German says it with gehen and a place or a purpose.",
+   "use": "ins Bett gehen (to go into the bed) or schlafen gehen (to go sleeping): Ich gehe um elf ins Bett. Ich gehe schlafen. Formal and dated: zu Bett gehen."
+  }
+ ]
+}

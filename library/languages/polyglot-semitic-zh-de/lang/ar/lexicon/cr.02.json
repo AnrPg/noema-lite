@@ -1,0 +1,1309 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:tufula",
+   "lemma": "طُفُولَة",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.childhood"
+   ],
+   "features": {
+    "root": "ط ف ل",
+    "pattern": "فُعُولَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "an abstract noun, used in the singular"
+    },
+    "dual": {
+     "none": "an abstract noun, used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ṭufūla",
+   "forms": {
+    "N;NOM;SG;INDF": "طُفُولَةٌ",
+    "N;NOM;SG;DEF": "الطُّفُولَةُ",
+    "N;ACC;SG;INDF": "طُفُولَةً",
+    "N;ACC;SG;DEF": "الطُّفُولَةَ",
+    "N;GEN;SG;INDF": "طُفُولَةٍ",
+    "N;GEN;SG;DEF": "الطُّفُولَةِ",
+    "N;NOM;SG;POSS;PSS1S": "طُفُولَتِي",
+    "N;GEN;SG;POSS;PSS1S": "طُفُولَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Long summers, toys on the floor, the smell of a grandmother’s kitchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "childhood",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَضَيْتُ الطُّفُولَةَ فِي قَرْيَةٍ صَغِيرَةٍ.",
+      "tr": "I spent my childhood in a small village.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ صَدِيقِي مُنْذُ الطُّفُولَةِ.",
+      "tr": "He has been my friend since childhood.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَتْ طُفُولَتِي سَعِيدَةً.",
+      "tr": "My childhood was happy.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَدِيقُ الطُّفُولَةِ",
+      "tr": "childhood friend"
+     },
+     {
+      "text": "ذِكْرَيَاتُ الطُّفُولَةِ",
+      "tr": "childhood memories"
+     },
+     {
+      "text": "فِي طُفُولَتِي",
+      "tr": "in my childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الصِّغَر",
+      "register": "neutral",
+      "nuance": "being small, young age: مُنْذُ الصِّغَرِ “since I was little”"
+     },
+     {
+      "word": "الصِّبَا",
+      "register": "literary",
+      "nuance": "boyhood, youth"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "الشَّيْخُوخَة",
+      "note": "old age"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ط ف ل of طِفْل “child”, with the abstract pattern فُعُولَة (Wiktionary: childhood).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pattern فُعُولَة makes abstract nouns of a state: طُفُولَة childhood, أُمُومَة motherhood, رُجُولَة manliness."
+    ],
+    "pitfalls": [
+     "“In my childhood” is فِي طُفُولَتِي: the ة becomes ت before an ending."
+    ],
+    "subtleties": [
+     "In speech “when I was little” is often عِنْدَمَا كُنْتُ صَغِيرًا rather than the noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:luba",
+   "lemma": "لُعْبَة",
+   "pos": "NOUN",
+   "senses": [
+    "obj.toy",
+    "abstract.game"
+   ],
+   "features": {
+    "root": "ل ع ب",
+    "pattern": "فُعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "لُعَب",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "لُعْبَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "luʿba",
+   "forms": {
+    "N;NOM;SG;INDF": "لُعْبَةٌ",
+    "N;NOM;SG;DEF": "اللُّعْبَةُ",
+    "N;ACC;SG;INDF": "لُعْبَةً",
+    "N;ACC;SG;DEF": "اللُّعْبَةَ",
+    "N;GEN;SG;INDF": "لُعْبَةٍ",
+    "N;GEN;SG;DEF": "اللُّعْبَةِ",
+    "N;NOM;PL;INDF": "لُعَبٌ",
+    "N;NOM;PL;DEF": "اللُّعَبُ",
+    "N;ACC;PL;INDF": "لُعَبًا",
+    "N;ACC;PL;DEF": "اللُّعَبَ",
+    "N;GEN;PL;INDF": "لُعَبٍ",
+    "N;GEN;PL;DEF": "اللُّعَبِ",
+    "N;NOM;DU;INDF": "لُعْبَتَانِ",
+    "N;NOM;DU;DEF": "اللُّعْبَتَانِ",
+    "N;ACC;DU;INDF": "لُعْبَتَيْنِ",
+    "N;ACC;DU;DEF": "اللُّعْبَتَيْنِ",
+    "N;GEN;DU;INDF": "لُعْبَتَيْنِ",
+    "N;GEN;DU;DEF": "اللُّعْبَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A box of toys; a board game on a rainy afternoon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "toy, plaything",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.toy"
+     },
+     {
+      "id": "s2",
+      "def": "game (with rules: a board game, a sport, a video game)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.game"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِشْتَرَى أَبِي لِي لُعْبَةً جَدِيدَةً.",
+      "tr": "My father bought me a new toy.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "اللُّعَبُ فِي الصُّنْدُوقِ.",
+      "tr": "The toys are in the box.",
+      "register": "neutral",
+      "context": "tidying up",
+      "sense": "s1"
+     },
+     {
+      "text": "الشِّطْرَنْجُ لُعْبَةٌ صَعْبَةٌ.",
+      "tr": "Chess is a difficult game.",
+      "register": "neutral",
+      "context": "games",
+      "sense": "s2"
+     },
+     {
+      "text": "كُرَةُ الْقَدَمِ لُعْبَةٌ شَعْبِيَّةٌ جِدًّا.",
+      "tr": "Football is a very popular game.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لُعْبَةُ أَطْفَالٍ",
+      "tr": "a children’s toy; child’s play"
+     },
+     {
+      "text": "لُعْبَةٌ إِلِكْتُرُونِيَّةٌ",
+      "tr": "an electronic game"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دُمْيَة",
+      "register": "neutral",
+      "nuance": "a doll (a toy figure)"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From the root ل ع ب of لَعِبَ “to play”; Wiktionary: toy, plaything; game; doll; (figuratively) laughingstock. Plurals لُعَب, لُعُبَات, لُعْبَات.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَلْعَب, “a place of playing”, is a stadium or a pitch; لَاعِب is a player — the same root."
+    ],
+    "pitfalls": [
+     "لُعْبَة (luʿba) is the toy or the game; لَعْبَة (laʿba) is one round, one go — the vowel of the first letter matters.",
+     "For games modern Arabic often uses the plural أَلْعَاب: أَلْعَابُ الْفِيدْيُو “video games”; لُعَب is mostly “toys”."
+    ],
+    "subtleties": [
+     "A non-human plural: اللُّعَبُ جَمِيلَةٌ “the toys are nice” — the adjective is feminine singular."
+    ]
+   }
+  },
+  {
+   "id": "ar:laiba",
+   "lemma": "لَعِبَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.play"
+   ],
+   "features": {
+    "root": "ل ع ب",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَلْعَبُ",
+    "masdar": [
+     "لَعِب",
+     "لِعْب"
+    ],
+    "participles": [
+     {
+      "form": "لَاعِب",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the game or sport (لَعِبَ كُرَةَ الْقَدَمِ، لَعِبَ الشِّطْرَنْجَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "مَعَ",
+      "what": "the playmate (لَعِبَ مَعَ أَصْدِقَائِهِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "بِـ",
+      "what": "the toy (لَعِبَ بِالْكُرَةِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "laʿiba",
+   "forms": {
+    "V;PST;1;SG": "لَعِبْتُ",
+    "V;PST;2;SG;MASC": "لَعِبْتَ",
+    "V;PST;2;SG;FEM": "لَعِبْتِ",
+    "V;PST;3;SG;MASC": "لَعِبَ",
+    "V;PST;3;SG;FEM": "لَعِبَتْ",
+    "V;PST;1;PL": "لَعِبْنَا",
+    "V;PST;2;PL;MASC": "لَعِبْتُمْ",
+    "V;PST;2;PL;FEM": "لَعِبْتُنَّ",
+    "V;PST;3;PL;MASC": "لَعِبُوا",
+    "V;PST;3;PL;FEM": "لَعِبْنَ",
+    "V;PRS;IND;1;SG": "أَلْعَبُ",
+    "V;PRS;IND;2;SG;MASC": "تَلْعَبُ",
+    "V;PRS;IND;2;SG;FEM": "تَلْعَبِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَلْعَبُ",
+    "V;PRS;IND;3;SG;FEM": "تَلْعَبُ",
+    "V;PRS;IND;1;PL": "نَلْعَبُ",
+    "V;PRS;IND;2;PL;MASC": "تَلْعَبُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَلْعَبْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَلْعَبُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَلْعَبْنَ",
+    "V;SBJV;1;SG": "أَلْعَبَ",
+    "V;SBJV;2;SG;MASC": "تَلْعَبَ",
+    "V;SBJV;3;SG;MASC": "يَلْعَبَ",
+    "V;SBJV;1;PL": "نَلْعَبَ",
+    "V;SBJV;2;PL;MASC": "تَلْعَبُوا",
+    "V;SBJV;3;PL;MASC": "يَلْعَبُوا",
+    "V;SBJV;2;SG;FEM": "تَلْعَبِي",
+    "V;SBJV;3;SG;FEM": "تَلْعَبَ",
+    "V;SBJV;2;PL;FEM": "تَلْعَبْنَ",
+    "V;SBJV;3;PL;FEM": "يَلْعَبْنَ",
+    "V;JUS;1;SG": "أَلْعَبْ",
+    "V;JUS;2;SG;MASC": "تَلْعَبْ",
+    "V;JUS;3;SG;MASC": "يَلْعَبْ",
+    "V;JUS;1;PL": "نَلْعَبْ",
+    "V;JUS;2;PL;MASC": "تَلْعَبُوا",
+    "V;JUS;3;PL;MASC": "يَلْعَبُوا",
+    "V;JUS;2;SG;FEM": "تَلْعَبِي",
+    "V;JUS;3;SG;FEM": "تَلْعَبْ",
+    "V;JUS;2;PL;FEM": "تَلْعَبْنَ",
+    "V;JUS;3;PL;FEM": "يَلْعَبْنَ",
+    "V;IMP;2;SG;MASC": "اِلْعَبْ",
+    "V;IMP;2;PL;MASC": "اِلْعَبُوا",
+    "V;IMP;2;SG;FEM": "اِلْعَبِي",
+    "V;IMP;2;PL;FEM": "اِلْعَبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Shouts in the street, a ball against a wall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to play (a game, a sport; with toys)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.play"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَعِبْنَا فِي الْحَدِيقَةِ بَعْدَ الْمَدْرَسَةِ.",
+      "tr": "We played in the park after school.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "يَلْعَبُ أَخِي كُرَةَ الْقَدَمِ يَوْمَ الْجُمُعَةِ.",
+      "tr": "My brother plays football on Fridays.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا تَلْعَبْ فِي الشَّارِعِ!",
+      "tr": "Don’t play in the street!",
+      "register": "neutral",
+      "context": "safety",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَعِبَ كُرَةَ الْقَدَمِ",
+      "tr": "to play football"
+     },
+     {
+      "text": "لَعِبَ مَعَ الْأَطْفَالِ",
+      "tr": "to play with the children"
+     },
+     {
+      "text": "لَعِبَ دَوْرًا",
+      "tr": "to play a part"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَهَا",
+      "register": "literary",
+      "nuance": "to amuse oneself (بِـ with something), to be distracted — with لَهْو “amusement”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "عَمِلَ",
+      "note": "to work"
+     }
+    ],
+    "etymology": {
+     "text": "Root ل ع ب; Wiktionary: to play; to trick, to cheat. لُعْبَة “toy, game”, لَاعِب “player” and مَلْعَب “playground, stadium” share the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَلْعَب, the place of playing (pattern مَفْعَل), is a stadium or a pitch."
+    ],
+    "pitfalls": [
+     "Past with i, present with a: لَعِبَ / يَلْعَبُ.",
+     "The game is a direct object (لَعِبَ الشِّطْرَنْجَ), the toy takes بِـ (لَعِبَ بِالْكُرَةِ)."
+    ],
+    "subtleties": [
+     "An instrument is not “played” with لَعِبَ: music is عَزَفَ عَلَى (عَزَفَ عَلَى الْعُودِ “he played the oud”)."
+    ]
+   }
+  },
+  {
+   "id": "ar:nashaa",
+   "lemma": "نَشَأَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.growup"
+   ],
+   "features": {
+    "root": "ن ش أ",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَنْشَأُ",
+    "masdar": [
+     "نُشُوء",
+     "نَشْء"
+    ],
+    "participles": [
+     {
+      "form": "نَاشِئ",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "فِي",
+      "what": "the place or family one grows up in (نَشَأَ فِي قَرْيَةٍ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "našaʾa",
+   "forms": {
+    "V;PST;1;SG": "نَشَأْتُ",
+    "V;PST;2;SG;MASC": "نَشَأْتَ",
+    "V;PST;2;SG;FEM": "نَشَأْتِ",
+    "V;PST;3;SG;MASC": "نَشَأَ",
+    "V;PST;3;SG;FEM": "نَشَأَتْ",
+    "V;PST;1;PL": "نَشَأْنَا",
+    "V;PST;2;PL;MASC": "نَشَأْتُمْ",
+    "V;PST;2;PL;FEM": "نَشَأْتُنَّ",
+    "V;PST;3;PL;MASC": "نَشَؤُوا",
+    "V;PST;3;PL;FEM": "نَشَأْنَ",
+    "V;PRS;IND;1;SG": "أَنْشَأُ",
+    "V;PRS;IND;2;SG;MASC": "تَنْشَأُ",
+    "V;PRS;IND;2;SG;FEM": "تَنْشَئِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَنْشَأُ",
+    "V;PRS;IND;3;SG;FEM": "تَنْشَأُ",
+    "V;PRS;IND;1;PL": "نَنْشَأُ",
+    "V;PRS;IND;2;PL;MASC": "تَنْشَؤُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَنْشَأْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَنْشَؤُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَنْشَأْنَ",
+    "V;SBJV;1;SG": "أَنْشَأَ",
+    "V;SBJV;2;SG;MASC": "تَنْشَأَ",
+    "V;SBJV;3;SG;MASC": "يَنْشَأَ",
+    "V;SBJV;1;PL": "نَنْشَأَ",
+    "V;SBJV;2;PL;MASC": "تَنْشَؤُوا",
+    "V;SBJV;3;PL;MASC": "يَنْشَؤُوا",
+    "V;SBJV;2;SG;FEM": "تَنْشَئِي",
+    "V;SBJV;3;SG;FEM": "تَنْشَأَ",
+    "V;SBJV;2;PL;FEM": "تَنْشَأْنَ",
+    "V;SBJV;3;PL;FEM": "يَنْشَأْنَ",
+    "V;JUS;1;SG": "أَنْشَأْ",
+    "V;JUS;2;SG;MASC": "تَنْشَأْ",
+    "V;JUS;3;SG;MASC": "يَنْشَأْ",
+    "V;JUS;1;PL": "نَنْشَأْ",
+    "V;JUS;2;PL;MASC": "تَنْشَؤُوا",
+    "V;JUS;3;PL;MASC": "يَنْشَؤُوا",
+    "V;JUS;2;SG;FEM": "تَنْشَئِي",
+    "V;JUS;3;SG;FEM": "تَنْشَأْ",
+    "V;JUS;2;PL;FEM": "تَنْشَأْنَ",
+    "V;JUS;3;PL;FEM": "يَنْشَأْنَ",
+    "V;IMP;2;SG;MASC": "اِنْشَأْ",
+    "V;IMP;2;PL;MASC": "اِنْشَؤُوا",
+    "V;IMP;2;SG;FEM": "اِنْشَئِي",
+    "V;IMP;2;PL;FEM": "اِنْشَأْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A village, a family house, the streets one knew as a child.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to grow up, to be brought up (in a place, a family)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.growup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشَأْتُ فِي قَرْيَةٍ صَغِيرَةٍ.",
+      "tr": "I grew up in a small village.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "نَشَأَ أَبِي فِي عَائِلَةٍ كَبِيرَةٍ.",
+      "tr": "My father grew up in a big family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ نَشَأْتِ؟",
+      "tr": "Where did you (a woman) grow up?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَشَأَ فِي …",
+      "tr": "to grow up in …"
+     },
+     {
+      "text": "نَشَأَ فِي عَائِلَةٍ فَقِيرَةٍ",
+      "tr": "to grow up in a poor family"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَرَعْرَعَ",
+      "register": "literary",
+      "nuance": "to grow up, to thrive (as a child) — warm and literary"
+     },
+     {
+      "word": "كَبُرَ",
+      "register": "neutral",
+      "nuance": "to grow, to get bigger or older — the growing, not the place of upbringing"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Root ن ش أ; Wiktionary: to be raised, to rise up; to grow (up), to be brought up; to originate; to arise. From Proto-Semitic *naśaʔ- “to lift, raise”; compare Biblical Hebrew נָשָׂא “to lift”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew נָשָׂא “to lift, to carry” is the cognate: to grow up is “to be raised”."
+    ],
+    "pitfalls": [
+     "Hamza as the last root letter: نَشَأْتُ (I grew up), نَشَؤُوا (they grew up), تَنْشَئِينَ (you f. grow up).",
+     "نَشَأَ has no object; to bring up a child is رَبَّى: رَبَّتْ أَوْلَادَهَا “she brought up her children”."
+    ],
+    "subtleties": [
+     "In formal style نَشَأَ also means “to arise, to come about”: نَشَأَتْ مُشْكِلَةٌ “a problem arose”."
+    ]
+   }
+  },
+  {
+   "id": "ar:tadhakkara",
+   "lemma": "تَذَكَّرَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.remember"
+   ],
+   "features": {
+    "root": "ذ ك ر",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "V",
+    "present": "يَتَذَكَّرُ",
+    "masdar": [
+     "تَذَكُّر"
+    ],
+    "participles": [
+     {
+      "form": "مُتَذَكِّر",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "what or whom one remembers (تَذَكَّرْتُ اسْمَهُ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "taḏakkara",
+   "forms": {
+    "V;PST;1;SG": "تَذَكَّرْتُ",
+    "V;PST;2;SG;MASC": "تَذَكَّرْتَ",
+    "V;PST;2;SG;FEM": "تَذَكَّرْتِ",
+    "V;PST;3;SG;MASC": "تَذَكَّرَ",
+    "V;PST;3;SG;FEM": "تَذَكَّرَتْ",
+    "V;PST;1;PL": "تَذَكَّرْنَا",
+    "V;PST;2;PL;MASC": "تَذَكَّرْتُمْ",
+    "V;PST;2;PL;FEM": "تَذَكَّرْتُنَّ",
+    "V;PST;3;PL;MASC": "تَذَكَّرُوا",
+    "V;PST;3;PL;FEM": "تَذَكَّرْنَ",
+    "V;PRS;IND;1;SG": "أَتَذَكَّرُ",
+    "V;PRS;IND;2;SG;MASC": "تَتَذَكَّرُ",
+    "V;PRS;IND;2;SG;FEM": "تَتَذَكَّرِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَتَذَكَّرُ",
+    "V;PRS;IND;3;SG;FEM": "تَتَذَكَّرُ",
+    "V;PRS;IND;1;PL": "نَتَذَكَّرُ",
+    "V;PRS;IND;2;PL;MASC": "تَتَذَكَّرُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَتَذَكَّرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَتَذَكَّرُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَتَذَكَّرْنَ",
+    "V;SBJV;1;SG": "أَتَذَكَّرَ",
+    "V;SBJV;2;SG;MASC": "تَتَذَكَّرَ",
+    "V;SBJV;3;SG;MASC": "يَتَذَكَّرَ",
+    "V;SBJV;1;PL": "نَتَذَكَّرَ",
+    "V;SBJV;2;PL;MASC": "تَتَذَكَّرُوا",
+    "V;SBJV;3;PL;MASC": "يَتَذَكَّرُوا",
+    "V;SBJV;2;SG;FEM": "تَتَذَكَّرِي",
+    "V;SBJV;3;SG;FEM": "تَتَذَكَّرَ",
+    "V;SBJV;2;PL;FEM": "تَتَذَكَّرْنَ",
+    "V;SBJV;3;PL;FEM": "يَتَذَكَّرْنَ",
+    "V;JUS;1;SG": "أَتَذَكَّرْ",
+    "V;JUS;2;SG;MASC": "تَتَذَكَّرْ",
+    "V;JUS;3;SG;MASC": "يَتَذَكَّرْ",
+    "V;JUS;1;PL": "نَتَذَكَّرْ",
+    "V;JUS;2;PL;MASC": "تَتَذَكَّرُوا",
+    "V;JUS;3;PL;MASC": "يَتَذَكَّرُوا",
+    "V;JUS;2;SG;FEM": "تَتَذَكَّرِي",
+    "V;JUS;3;SG;FEM": "تَتَذَكَّرْ",
+    "V;JUS;2;PL;FEM": "تَتَذَكَّرْنَ",
+    "V;JUS;3;PL;FEM": "يَتَذَكَّرْنَ",
+    "V;IMP;2;SG;MASC": "تَذَكَّرْ",
+    "V;IMP;2;PL;MASC": "تَذَكَّرُوا",
+    "V;IMP;2;SG;FEM": "تَذَكَّرِي",
+    "V;IMP;2;PL;FEM": "تَذَكَّرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A face, a smell, a name coming back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to remember, to recall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.remember"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَتَذَكَّرُ بَيْتَ جَدِّي جَيِّدًا.",
+      "tr": "I remember my grandfather’s house well.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تَتَذَكَّرُ اسْمَ الْمُعَلِّمَةِ؟",
+      "tr": "Do you remember the teacher’s name?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "تَذَكَّرْتُ الْمِفْتَاحَ فِي آخِرِ لَحْظَةٍ.",
+      "tr": "I remembered the key at the last moment.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَذَكَّرَ اسْمًا",
+      "tr": "to remember a name"
+     },
+     {
+      "text": "تَذَكَّرَ أَيَّامَ الطُّفُولَةِ",
+      "tr": "to remember the days of childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ذَكَرَ",
+      "register": "neutral",
+      "nuance": "to mention; in older style also to remember — form I of the same root"
+     },
+     {
+      "word": "اِسْتَرْجَعَ",
+      "register": "formal",
+      "nuance": "to recall, to call back to mind (a memory)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "نَسِيَ",
+      "note": "to forget"
+     }
+    ],
+    "etymology": {
+     "text": "Form V (تَفَعَّلَ) of the root ذ ك ر “to remember, to mention”; Wiktionary: to remember, to bear in mind; to take heed. ذِكْرَى “memory, anniversary” and ذَكَرَ “to mention” share the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "تَذْكِرَة, a ticket, comes from the same root: at first a note that reminds you of something."
+    ],
+    "pitfalls": [
+     "Form V: ta- in the past (تَذَكَّرْتُ) and a in the present stem (يَتَذَكَّرُ, not *يَتَذَكِّرُ).",
+     "أَتَذَكَّرُ is “I remember”; “do you remember?” is هَلْ تَتَذَكَّرُ؟"
+    ],
+    "subtleties": [
+     "Knowing by heart is حَفِظَ “to memorise”; تَذَكَّرَ is bringing something back to mind."
+    ]
+   }
+  },
+  {
+   "id": "ar:nasiya",
+   "lemma": "نَسِيَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.forget"
+   ],
+   "features": {
+    "root": "ن س ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "I",
+    "present": "يَنْسَى",
+    "masdar": [
+     "نِسْيَان",
+     "نَسْي"
+    ],
+    "participles": [
+     {
+      "form": "نَاسٍ",
+      "kind": "active"
+     },
+     {
+      "form": "مَنْسِيّ",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "what is forgotten (نَسِيتُ الْمِفْتَاحَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "أَنْ + subjunctive: forgot to do (نَسِيتُ أَنْ أَشْتَرِيَ الْخُبْزَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "nasiya",
+   "forms": {
+    "V;PST;1;SG": "نَسِيتُ",
+    "V;PST;2;SG;MASC": "نَسِيتَ",
+    "V;PST;2;SG;FEM": "نَسِيتِ",
+    "V;PST;3;SG;MASC": "نَسِيَ",
+    "V;PST;3;SG;FEM": "نَسِيَتْ",
+    "V;PST;1;PL": "نَسِينَا",
+    "V;PST;2;PL;MASC": "نَسِيتُمْ",
+    "V;PST;2;PL;FEM": "نَسِيتُنَّ",
+    "V;PST;3;PL;MASC": "نَسُوا",
+    "V;PST;3;PL;FEM": "نَسِينَ",
+    "V;PRS;IND;1;SG": "أَنْسَى",
+    "V;PRS;IND;2;SG;MASC": "تَنْسَى",
+    "V;PRS;IND;2;SG;FEM": "تَنْسَيْنَ",
+    "V;PRS;IND;3;SG;MASC": "يَنْسَى",
+    "V;PRS;IND;3;SG;FEM": "تَنْسَى",
+    "V;PRS;IND;1;PL": "نَنْسَى",
+    "V;PRS;IND;2;PL;MASC": "تَنْسَوْنَ",
+    "V;PRS;IND;2;PL;FEM": "تَنْسَيْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَنْسَوْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَنْسَيْنَ",
+    "V;SBJV;1;SG": "أَنْسَى",
+    "V;SBJV;2;SG;MASC": "تَنْسَى",
+    "V;SBJV;3;SG;MASC": "يَنْسَى",
+    "V;SBJV;1;PL": "نَنْسَى",
+    "V;SBJV;2;PL;MASC": "تَنْسَوْا",
+    "V;SBJV;3;PL;MASC": "يَنْسَوْا",
+    "V;SBJV;2;SG;FEM": "تَنْسَيْ",
+    "V;SBJV;3;SG;FEM": "تَنْسَى",
+    "V;SBJV;2;PL;FEM": "تَنْسَيْنَ",
+    "V;SBJV;3;PL;FEM": "يَنْسَيْنَ",
+    "V;JUS;1;SG": "أَنْسَ",
+    "V;JUS;2;SG;MASC": "تَنْسَ",
+    "V;JUS;3;SG;MASC": "يَنْسَ",
+    "V;JUS;1;PL": "نَنْسَ",
+    "V;JUS;2;PL;MASC": "تَنْسَوْا",
+    "V;JUS;3;PL;MASC": "يَنْسَوْا",
+    "V;JUS;2;SG;FEM": "تَنْسَيْ",
+    "V;JUS;3;SG;FEM": "تَنْسَ",
+    "V;JUS;2;PL;FEM": "تَنْسَيْنَ",
+    "V;JUS;3;PL;FEM": "يَنْسَيْنَ",
+    "V;IMP;2;SG;MASC": "اِنْسَ",
+    "V;IMP;2;PL;MASC": "اِنْسَوْا",
+    "V;IMP;2;SG;FEM": "اِنْسَيْ",
+    "V;IMP;2;PL;FEM": "اِنْسَيْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The key on the table — and the door already shut.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to forget",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.forget"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَسِيتُ مِفْتَاحَ الْبَيْتِ!",
+      "tr": "I forgot the house key!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا تَنْسَ جَوَازَ السَّفَرِ!",
+      "tr": "Don’t forget the passport!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "نَسِيَتْ أُخْتِي اسْمَ الْفُنْدُقِ.",
+      "tr": "My sister forgot the name of the hotel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَسِيَ الْمَوْعِدَ",
+      "tr": "to forget the appointment"
+     },
+     {
+      "text": "لَا تَنْسَ!",
+      "tr": "don’t forget!"
+     },
+     {
+      "text": "نَسِيَ أَنْ …",
+      "tr": "to forget to …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "غَفَلَ عَنْ",
+      "register": "formal",
+      "nuance": "to overlook, to be heedless of — not paying attention rather than forgetting"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "تَذَكَّرَ",
+      "note": "to remember"
+     }
+    ],
+    "etymology": {
+     "text": "Root ن س ي; Wiktionary: to forget. From Proto-West Semitic *n-š-y; compare Hebrew נָשָׁה “to forget”. نِسْيَان “forgetting” is its verbal noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arab grammarians liked to link إِنْسَان “human being” with نَسِيَ: “the one who forgets” — a traditional, not a historical, etymology."
+    ],
+    "pitfalls": [
+     "A defective verb with i: نَسِيتُ, نَسِيَتْ (she forgot), نَسُوا (they forgot); present يَنْسَى ending in ى.",
+     "“Don’t forget!” is لَا تَنْسَ (to a man) and لَا تَنْسَيْ (to a woman): the final vowel drops in the jussive."
+    ],
+    "subtleties": [
+     "نَسِيَ أَنْ + subjunctive is “forgot to do”: نَسِيتُ أَنْ أَتَّصِلَ “I forgot to call”."
+    ]
+   }
+  },
+  {
+   "id": "ar:rawda",
+   "lemma": "رَوْضَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.kindergarten"
+   ],
+   "features": {
+    "root": "ر و ض",
+    "pattern": "فَعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "رِيَاض",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "رِيَاضُ الْأَطْفَالِ “kindergartens”",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "رَوْضَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رَوْضَتَانِ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "رَوْضَةُ أَطْفَالٍ",
+      "what": "the full name (lit. “a garden of children”); in speech often just الرَّوْضَة",
+      "senses": [
+       "s1"
+      ]
+     }
+    ]
+   },
+   "gender": "FEM",
+   "translit": "rawḍa",
+   "forms": {
+    "N;NOM;SG;INDF": "رَوْضَةٌ",
+    "N;NOM;SG;DEF": "الرَّوْضَةُ",
+    "N;ACC;SG;INDF": "رَوْضَةً",
+    "N;ACC;SG;DEF": "الرَّوْضَةَ",
+    "N;GEN;SG;INDF": "رَوْضَةٍ",
+    "N;GEN;SG;DEF": "الرَّوْضَةِ",
+    "N;NOM;PL;INDF": "رِيَاضٌ",
+    "N;NOM;PL;DEF": "الرِّيَاضُ",
+    "N;ACC;PL;INDF": "رِيَاضًا",
+    "N;ACC;PL;DEF": "الرِّيَاضَ",
+    "N;GEN;PL;INDF": "رِيَاضٍ",
+    "N;GEN;PL;DEF": "الرِّيَاضِ",
+    "N;NOM;DU;INDF": "رَوْضَتَانِ",
+    "N;NOM;DU;DEF": "الرَّوْضَتَانِ",
+    "N;ACC;DU;INDF": "رَوْضَتَيْنِ",
+    "N;ACC;DU;DEF": "الرَّوْضَتَيْنِ",
+    "N;GEN;DU;INDF": "رَوْضَتَيْنِ",
+    "N;GEN;DU;DEF": "الرَّوْضَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Small chairs, songs, coloured pencils.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kindergarten (رَوْضَةُ أَطْفَالٍ, in speech often just الرَّوْضَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.kindergarten"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَذْهَبُ ابْنِي إِلَى الرَّوْضَةِ كُلَّ صَبَاحٍ.",
+      "tr": "My son goes to kindergarten every morning.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "كُنْتُ أُحِبُّ الرَّوْضَةَ كَثِيرًا.",
+      "tr": "I used to love kindergarten very much.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْحَيِّ رَوْضَةُ أَطْفَالٍ جَدِيدَةٌ.",
+      "tr": "There is a new kindergarten in the neighbourhood.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَوْضَةُ أَطْفَالٍ",
+      "tr": "kindergarten"
+     },
+     {
+      "text": "مُعَلِّمَةُ الرَّوْضَةِ",
+      "tr": "the kindergarten teacher"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَضَانَة",
+      "register": "neutral",
+      "nuance": "nursery, day care — for younger children"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Root ر و ض; Wiktionary: garden, meadow; kindergarten; plurals رَوْضَات and رِيَاض. The kindergarten is “the children’s garden”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "الرِّيَاض, Riyadh, the Saudi capital, is the plural of رَوْضَة: “the gardens, the meadows”."
+    ],
+    "pitfalls": [
+     "A garden or a park is حَدِيقَة; رَوْضَة on its own is now mostly the kindergarten (in literature also a green meadow)."
+    ],
+    "subtleties": [
+     "Kindergartens are رِيَاضُ الْأَطْفَالِ: the broken plural is the usual one in this phrase."
+    ]
+   }
+  },
+  {
+   "id": "ar:jar",
+   "lemma": "جَار",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "person.neighbour"
+   ],
+   "features": {
+    "root": "ج و ر",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "جِيرَان",
+      "kind": "broken",
+      "pattern": "فِعْلَان",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَارَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jār",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "جَارٌ",
+    "N;NOM;SG;MASC;DEF": "الْجَارُ",
+    "N;NOM;SG;FEM;INDF": "جَارَةٌ",
+    "N;NOM;SG;FEM;DEF": "الْجَارَةُ",
+    "N;NOM;PL;MASC;INDF": "جِيرَانٌ",
+    "N;NOM;PL;MASC;DEF": "الْجِيرَانُ",
+    "N;NOM;PL;FEM;INDF": "جَارَاتٌ",
+    "N;NOM;PL;FEM;DEF": "الْجَارَاتُ",
+    "N;ACC;SG;MASC;INDF": "جَارًا",
+    "N;ACC;SG;MASC;DEF": "الْجَارَ",
+    "N;ACC;SG;FEM;INDF": "جَارَةً",
+    "N;ACC;SG;FEM;DEF": "الْجَارَةَ",
+    "N;ACC;PL;MASC;INDF": "جِيرَانًا",
+    "N;ACC;PL;MASC;DEF": "الْجِيرَانَ",
+    "N;ACC;PL;FEM;INDF": "جَارَاتٍ",
+    "N;ACC;PL;FEM;DEF": "الْجَارَاتِ",
+    "N;GEN;SG;MASC;INDF": "جَارٍ",
+    "N;GEN;SG;MASC;DEF": "الْجَارِ",
+    "N;GEN;SG;FEM;INDF": "جَارَةٍ",
+    "N;GEN;SG;FEM;DEF": "الْجَارَةِ",
+    "N;GEN;PL;MASC;INDF": "جِيرَانٍ",
+    "N;GEN;PL;MASC;DEF": "الْجِيرَانِ",
+    "N;GEN;PL;FEM;INDF": "جَارَاتٍ",
+    "N;GEN;PL;FEM;DEF": "الْجَارَاتِ",
+    "N;NOM;DU;MASC;INDF": "جَارَانِ",
+    "N;NOM;DU;MASC;DEF": "الْجَارَانِ",
+    "N;ACC;DU;MASC;INDF": "جَارَيْنِ",
+    "N;ACC;DU;MASC;DEF": "الْجَارَيْنِ",
+    "N;GEN;DU;MASC;INDF": "جَارَيْنِ",
+    "N;GEN;DU;MASC;DEF": "الْجَارَيْنِ",
+    "N;NOM;DU;FEM;INDF": "جَارَتَانِ",
+    "N;NOM;DU;FEM;DEF": "الْجَارَتَانِ",
+    "N;ACC;DU;FEM;INDF": "جَارَتَيْنِ",
+    "N;ACC;DU;FEM;DEF": "الْجَارَتَيْنِ",
+    "N;GEN;DU;FEM;INDF": "جَارَتَيْنِ",
+    "N;GEN;DU;FEM;DEF": "الْجَارَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses جَار as “neighbor” (American spelling) — the same meaning as the concept “neighbour”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A knock on the door, a plate of sweets passed over the wall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "neighbour (feminine جَارَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَارُنَا طَبِيبٌ.",
+      "tr": "Our neighbour is a doctor.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ الْجِيرَانُ يَلْعَبُونَ مَعَنَا فِي الشَّارِعِ.",
+      "tr": "The neighbours used to play with us in the street.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَارَةُ امْرَأَةٌ لَطِيفَةٌ.",
+      "tr": "The (female) neighbour is a kind woman.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْجِيرَانُ الْجُدُدُ",
+      "tr": "the new neighbours"
+     },
+     {
+      "text": "حَقُّ الْجَارِ",
+      "tr": "the neighbour’s due (what one owes a neighbour)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْجَارُ قَبْلَ الدَّارِ",
+      "tr": "the neighbour before the house",
+      "kind": "proverb",
+      "meaning": "choose your neighbours before you choose your house",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: جَار is the only word for a neighbour; جِيرَة is the neighbourly relation, the neighbourhood.",
+    "antonyms": [],
+    "etymology": {
+     "text": "Root ج و ر; Wiktionary: neighbour; refugee; protégé — the stranger under someone’s protection; it suggests a possible loan from Aramaic גיורא (gīyōrā, “alien; proselyte”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew גֵּר (ger, “stranger, sojourner”) belongs to the same family of words."
+    ],
+    "pitfalls": [
+     "جَارٍ (jārin), “running, current”, is another word (a participle of جَرَى): الشَّهْرُ الْجَارِي “the current month”."
+    ],
+    "subtleties": [
+     "A human plural: الْجِيرَانُ طَيِّبُونَ “the neighbours are kind” — the adjective is plural."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "time.holidays",
+   "reason": "No separate word for “the (school) holidays”: Arabic uses the same word as for a holiday, عُطْلَة (lesson 15), or إِجَازَة (leave, vacation), with an adjective that says which.",
+   "use": "الْعُطْلَةُ الصَّيْفِيَّةُ “the summer holidays”, الْعُطْلَةُ الْمَدْرَسِيَّةُ “the school holidays”, فِي الْعُطْلَةِ “in the holidays”: كُنَّا نُسَافِرُ إِلَى الْقَرْيَةِ فِي الْعُطْلَةِ “we used to travel to the village in the holidays”."
+  },
+  {
+   "concept": "adv.usedto",
+   "reason": "Arabic has no word for “used to”: the habitual past is a construction, كَانَ (was) + a present verb, both agreeing with the subject.",
+   "use": "كُنْتُ أَلْعَبُ فِي الشَّارِعِ “I used to play in the street”, كَانَتْ تَذْهَبُ إِلَى الرَّوْضَةِ “she used to go to kindergarten”. A verb can make the habit explicit: اِعْتَادَ أَنْ + subjunctive “to be in the habit of”. The construction is taught in this lesson (كَانَ + present)."
+  }
+ ]
+}

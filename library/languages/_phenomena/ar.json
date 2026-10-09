@@ -1328,7 +1328,8 @@
     ],
     "grammar": [
      "fn.root.pattern",
-     "fn.direction"
+     "fn.direction",
+     "fn.past"
     ],
     "exercises": [
      "inflect"
@@ -1336,7 +1337,7 @@
     "other": ""
    },
    "status": "partial",
-   "gap": "rootClass is stated for verbs only (nouns show the root); no weak-verb page with the paradigm patterns per class.",
+   "gap": "rootClass is stated for verbs only (nouns show the root); fn.past (cr.01) has a table of hollow, defective and doubled verbs in the past, but no page lists the full paradigm pattern of every class.",
    "when": "fd.13"
   },
   {
@@ -1493,17 +1494,19 @@
     ],
     "grammar": [
      "fn.present",
-     "fn.copula"
+     "fn.copula",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "inflect",
      "transform"
     ],
-    "other": ""
+    "other": "fn.past (cr.01) teaches the suffix conjugation with tables of sound and weak verbs; the bank (c01_04) has Tense variants PST ↔ PRS and PRS ↔ FUT."
    },
-   "status": "partial",
-   "gap": "The past is stored but taught only as kāna (fd.01) until cr.01; no Tense transform beyond a few sentences.",
-   "when": "fd.07"
+   "status": "covered",
+   "gap": "",
+   "when": "cr.01"
   },
   {
    "id": "ar.morph.verb.stem_vowel",
@@ -1603,18 +1606,21 @@
    "model": {
     "wordFields": [],
     "paradigm": [
-     "V;SBJV;*"
+     "V;SBJV;*",
+     "V;JUS;*"
     ],
     "grammar": [
-     "fn.connectors"
+     "fn.connectors",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "inflect"
     ],
-    "other": "SBJV cells on 5 verbs only; no JUSS cells anywhere."
+    "other": "لَمْ + jussive in fn.past (cr.01), لَنْ + subjunctive in fn.future (cr.03); the jussive and subjunctive cells come from Wiktionary’s tables (formsAlt for doubled-verb variants)."
    },
    "status": "partial",
-   "gap": "V;JUSS cells in paradigmCells.VERB, SBJV for all verbs, a moods function; needed for لَمْ (cr.01), لَنْ (cr.02) and prohibitions (fn.imperative).",
+   "gap": "JUS and SBJV cells are stored only on the verbs of cr.01–cr.03 (paradigmCells.VERB does not require them, so older verbs lack them); no moods function of its own; the prohibitive لَا + jussive is not linked to fn.imperative.",
    "when": "cr.01"
   },
   {
@@ -1860,13 +1866,19 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
-    "exercises": [],
-    "other": "No lexeme for سَـ / سَوْفَ / لَنْ; the tokenizer would need سَـ as a prefix lexeme."
+    "grammar": [
+     "fn.future"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "build_sentence"
+    ],
+    "other": "Lexemes سَـ (prefix), سَوْفَ and لَنْ (cr.03, role words); Tense variants PRS ↔ FUT and Polarity variants with لَنْ in the bank."
    },
-   "status": "missing",
-   "gap": "Lexemes سَـ (prefix), سَوْفَ, لَنْ; Tense=FUT variants in the bank.",
-   "when": "cr.02"
+   "status": "covered",
+   "gap": "",
+   "when": "cr.03"
   },
   {
    "id": "ar.morph.verb.kana_aux",
@@ -1906,13 +1918,19 @@
      "profile.senses"
     ],
     "paradigm": [],
-    "grammar": [],
-    "exercises": [],
-    "other": "Only as sense s2 of ar:kana."
+    "grammar": [
+     "fn.past.ongoing"
+    ],
+    "exercises": [
+     "transform",
+     "build_sentence",
+     "sentence_meaning"
+    ],
+    "other": "fn.past.ongoing (cr.02, status periphrastic): كَانَ + present for the background and the habit; Aspect, Number, Mood and Polarity variants in the bank."
    },
-   "status": "partial",
-   "gap": "A function in cr.01 with bank sentences.",
-   "when": "cr.01"
+   "status": "covered",
+   "gap": "",
+   "when": "cr.02"
   },
   {
    "id": "ar.morph.masdar",
@@ -2886,15 +2904,16 @@
     "grammar": [
      "fn.prep.core",
      "fn.question.yesno",
-     "fn.connectors"
+     "fn.connectors",
+     "fn.future"
     ],
     "exercises": [
      "build_sentence"
     ],
-    "other": "Tokenizer strips up to two prefixes (langcore.lookup); prefix lexemes: وَ فَ بِ لِ أَ; bank tokens with parts."
+    "other": "Tokenizer strips up to two prefixes (langcore.lookup); prefix lexemes: وَ فَ بِ لِ أَ سَ (سَـ since cr.03); bank tokens with parts."
    },
    "status": "partial",
-   "gap": "كَـ and سَـ are not lexemes; لِـ + al- (لِلْـ, لِلّٰهِ) is not handled by the tokenizer (the rest لْبَيْتِ matches no form) and no bank sentence uses it.",
+   "gap": "كَـ is not a lexeme; لِـ + al- (لِلْـ, لِلّٰهِ) is not handled by the tokenizer (the rest لْبَيْتِ matches no form) and no bank sentence uses it.",
    "when": "fd.11"
   },
   {
@@ -3427,16 +3446,23 @@
     "wordFields": [
      "ordinal"
     ],
-    "paradigm": [],
-    "grammar": [
-     "fn.prep.time"
+    "paradigm": [
+     "ADJ;*"
     ],
-    "exercises": [],
-    "other": "time.oclock is marked absent; the ordinals are stated on the numbers but are not lexemes of their own."
+    "grammar": [
+     "fn.prep.time",
+     "fn.ordinals"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "quiz"
+    ],
+    "other": "Ordinal lexemes أَوَّل … عَاشِر and أَخِير (cr.04) with full ADJ paradigms; time.oclock stays absent (fd.15)."
    },
    "status": "partial",
-   "gap": "Ordinal lexemes with their paradigms (feminine ثَالِثَة …) and a clock/date exercise (§6.5).",
-   "when": "later"
+   "gap": "Ordinals above ten (الْحَادِيَ عَشَرَ …) are not lexemes; the clock and date exercises of §6.5 are not implemented (the lesson uses bank sentences, transforms and a quiz).",
+   "when": "cr.04"
   },
   {
    "id": "ar.syn.nominal_sentence",
@@ -3805,17 +3831,19 @@
      "VERB.defective"
     ],
     "grammar": [
-     "fn.negation"
+     "fn.negation",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "inflect",
      "transform",
      "build_sentence"
     ],
-    "other": ""
+    "other": "لَمْ (cr.01) and لَنْ (cr.03) are role words with Polarity variants in the bank."
    },
    "status": "partial",
-   "gap": "لَمْ and لَنْ are not lexemes and jussive cells are missing; a contrast exercise (§6.4) over the negators.",
+   "gap": "Jussive and subjunctive cells exist only on the verbs of cr.01–cr.03; no contrast exercise (§6.4) over the negators لَا / لَمْ / لَنْ / لَيْسَ / مَا.",
    "when": "fd.08"
   },
   {
@@ -6136,10 +6164,11 @@
     "paradigm": [],
     "grammar": [
      "fn.present",
-     "fn.aspect"
+     "fn.aspect",
+     "fn.past.ongoing"
     ],
     "exercises": [],
-    "other": "fn.present says that one form covers “I eat” and “I am eating” (block “One present for …”); its notes for en, es, fr and others compare it (D18)."
+    "other": "fn.present says that one form covers “I eat” and “I am eating”; fn.past.ongoing (cr.02) shows كَانَ + present for “was doing”; notes for the reference languages compare it (D18)."
    },
    "status": "covered",
    "gap": "",
@@ -6180,14 +6209,15 @@
     "paradigm": [],
     "grammar": [
      "fn.aspect",
-     "fn.overview"
+     "fn.overview",
+     "fn.past"
     ],
     "exercises": [],
     "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: en, de, es, el."
    },
    "status": "partial",
-   "gap": "قَدْ and بَعْدُ 'yet' are not lexemes.",
-   "when": "later"
+   "gap": "بَعْدُ “yet” (لَمْ … بَعْدُ) is not a lexeme; قَدْ is a role word (cr.01) without a concept of its own.",
+   "when": "cr.01"
   },
   {
    "id": "ar.verb.no_optative",
@@ -7079,11 +7109,11 @@
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": ""
+    "other": "ar:labisa (cr.01) has the senses verb.getdressed, verb.puton and verb.wear."
    },
-   "status": "missing",
-   "gap": "Clothing verbs are not in the course yet.",
-   "when": "later"
+   "status": "partial",
+   "gap": "خَلَعَ “to take off” is not a lexeme yet; the garments come in the clothes lesson (cr.08).",
+   "when": "cr.01"
   },
   {
    "id": "ar.lex.carry",
@@ -7367,14 +7397,15 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.time.day"
+     "fn.time.day",
+     "fn.ordinals"
     ],
     "exercises": [],
-    "other": ""
+    "other": "نِصْف and رُبْع are lexemes (cr.04) with construct cells (نِصْفَ سَاعَةٍ)."
    },
    "status": "partial",
-   "gap": "The hour with a feminine ordinal is taught; نِصْف / رُبْع (half and quarter hours) are not lexemes.",
-   "when": "fd.14"
+   "gap": "إِلَّا (in إِلَّا رُبْعًا “a quarter to”) is not a lexeme, so no bank sentence shows it; it is taught in fn.ordinals.",
+   "when": "cr.04"
   }
  ],
  "wordFeatures": {
@@ -8238,18 +8269,18 @@
     },
     {
      "lemma": "لَمْ",
-     "value": "past (with jussive) — not in the lexicon"
+     "value": "past (with the jussive)"
     },
     {
      "lemma": "لَنْ",
-     "value": "future (with subjunctive) — not in the lexicon"
+     "value": "future (with the subjunctive)"
     },
     {
      "lemma": "مَا",
      "value": "past, classical and dialectal"
     }
    ],
-   "note": ""
+   "note": "لَمْ (cr.01) and لَنْ (cr.03) are role words without a concept of their own; their contrast with لَا / لَيْسَ / مَا is taught in fn.past and fn.future."
   },
   {
    "concept": "conj.or",
@@ -8641,6 +8672,66 @@
     }
    ],
    "note": "هٰذِهِ is a form of هٰذَا in the lexicon."
+  },
+  {
+   "concept": "verb.visit",
+   "axis": "who or what is visited",
+   "words": [
+    {
+     "lemma": "زَارَ",
+     "value": "anyone and any place (friends, a city, a museum)"
+    },
+    {
+     "lemma": "عَادَ",
+     "value": "a sick person — formal (عَادَ الْمَرِيضَ)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "num.ord.last",
+   "axis": "position",
+   "words": [
+    {
+     "lemma": "أَخِير",
+     "value": "after the noun, as an adjective (الْيَوْمُ الْأَخِيرُ)"
+    },
+    {
+     "lemma": "آخِر",
+     "value": "before the noun, in a construct (آخِرُ يَوْمٍ)"
+    }
+   ],
+   "note": "آخِر is not a lexeme yet; it is named in the profile and in fn.ordinals."
+  },
+  {
+   "concept": "num.ord.1",
+   "axis": "position",
+   "words": [
+    {
+     "lemma": "الْأَوَّلُ / الْأُولَى",
+     "value": "after the noun, as an adjective (الْمَرَّةُ الْأُولَى)"
+    },
+    {
+     "lemma": "أَوَّلُ",
+     "value": "before an indefinite noun, in a construct (أَوَّلُ مَرَّةٍ)"
+    }
+   ],
+   "note": "one lexeme, two constructions"
+  },
+  {
+   "concept": "the future (fn.future): سَـ / سَوْفَ",
+   "axis": "form",
+   "words": [
+    {
+     "lemma": "سَـ",
+     "value": "joined to the verb; the everyday future"
+    },
+    {
+     "lemma": "سَوْفَ",
+     "value": "a separate word; often more distant or more emphatic"
+    }
+   ],
+   "note": "role words, not concepts"
   }
  ],
  "polysemy": [
@@ -10228,6 +10319,194 @@
     }
    ],
    "formsDiffer": "unvocalized رجل is also رِجْل 'leg, foot' (another word, plural أَرْجُل; رَجُل has رِجَال)"
+  },
+  {
+   "lexeme": "ar:nama",
+   "lemma": "نَامَ",
+   "meanings": [
+    {
+     "gloss": "to sleep",
+     "concept": "verb.sleep"
+    },
+    {
+     "gloss": "to fall asleep",
+     "concept": "verb.fallasleep"
+    },
+    {
+     "gloss": "to go to bed",
+     "concept": "verb.gotobed"
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:labisa",
+   "lemma": "لَبِسَ",
+   "meanings": [
+    {
+     "gloss": "to get dressed",
+     "concept": "verb.getdressed"
+    },
+    {
+     "gloss": "to put on",
+     "concept": "verb.puton"
+    },
+    {
+     "gloss": "to wear",
+     "concept": "verb.wear"
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:luba",
+   "lemma": "لُعْبَة",
+   "meanings": [
+    {
+     "gloss": "toy",
+     "concept": "obj.toy"
+    },
+    {
+     "gloss": "game",
+     "concept": "abstract.game"
+    }
+   ],
+   "formsDiffer": "modern usage often takes أَلْعَاب as the plural for “games”, لُعَب for “toys”"
+  },
+  {
+   "lexeme": "ar:aqd",
+   "lemma": "عَقْد",
+   "meanings": [
+    {
+     "gloss": "decade",
+     "concept": "time.decade"
+    },
+    {
+     "gloss": "contract",
+     "concept": "work.contract"
+    }
+   ],
+   "formsDiffer": "unvocalized عقد is also عِقْد “necklace” (another word)"
+  },
+  {
+   "lexeme": "ar:qarn",
+   "lemma": "قَرْن",
+   "meanings": [
+    {
+     "gloss": "century",
+     "concept": "time.century"
+    },
+    {
+     "gloss": "horn",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:dhikra",
+   "lemma": "ذِكْرَى",
+   "meanings": [
+    {
+     "gloss": "anniversary",
+     "concept": "time.anniversary"
+    },
+    {
+     "gloss": "memory, remembrance",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural ذِكْرَيَات is mostly “memories”"
+  },
+  {
+   "lexeme": "ar:rawda",
+   "lemma": "رَوْضَة",
+   "meanings": [
+    {
+     "gloss": "kindergarten",
+     "concept": "place.kindergarten"
+    },
+    {
+     "gloss": "garden, meadow (literary)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural رِيَاض (رِيَاضُ الْأَطْفَالِ) or رَوْضَات"
+  },
+  {
+   "lexeme": "ar:hajaza",
+   "lemma": "حَجَزَ",
+   "meanings": [
+    {
+     "gloss": "to book, to reserve",
+     "concept": "verb.book"
+    },
+    {
+     "gloss": "to hold back, to detain, to seize",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:nisf",
+   "lemma": "نِصْف",
+   "meanings": [
+    {
+     "gloss": "half",
+     "concept": "num.half"
+    },
+    {
+     "gloss": "middle",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:rub",
+   "lemma": "رُبْع",
+   "meanings": [
+    {
+     "gloss": "a quarter",
+     "concept": "num.quarter"
+    },
+    {
+     "gloss": "quarter, region (الرُّبْعُ الْخَالِي)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:nahada",
+   "lemma": "نَهَضَ",
+   "meanings": [
+    {
+     "gloss": "to get up",
+     "concept": "verb.getup"
+    },
+    {
+     "gloss": "to take on, to undertake (بِـ)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
+  },
+  {
+   "lexeme": "ar:nashaa",
+   "lemma": "نَشَأَ",
+   "meanings": [
+    {
+     "gloss": "to grow up",
+     "concept": "verb.growup"
+    },
+    {
+     "gloss": "to arise, to originate",
+     "concept": null
+    }
+   ],
+   "formsDiffer": ""
   }
  ],
  "conceptGaps": [
@@ -10405,6 +10684,36 @@
    "concept": "Hijri calendar months",
    "kind": "adds",
    "note": "Lunar months (مُحَرَّم … رَمَضَان … ذُو الْحِجَّة) used in religious life; not in the course."
+  },
+  {
+   "concept": "adv.usedto",
+   "kind": "lacks",
+   "note": "No word for “used to”: كَانَ + present (كُنْتُ أَلْعَبُ)."
+  },
+  {
+   "concept": "verb.leavehome / verb.comehome",
+   "kind": "lacks",
+   "note": "No verbs of their own: خَرَجَ مِنَ الْبَيْتِ, عَادَ إِلَى الْبَيْتِ."
+  },
+  {
+   "concept": "time.holidays",
+   "kind": "merges",
+   "note": "One word, عُطْلَة, for a holiday and the (school) holidays."
+  },
+  {
+   "concept": "verb.sleep / verb.fallasleep / verb.gotobed",
+   "kind": "merges",
+   "note": "One verb, نَامَ."
+  },
+  {
+   "concept": "verb.getdressed / verb.puton / verb.wear",
+   "kind": "merges",
+   "note": "One verb, لَبِسَ."
+  },
+  {
+   "concept": "obj.toy / abstract.game",
+   "kind": "merges",
+   "note": "One noun, لُعْبَة."
   }
  ]
 }

@@ -53,6 +53,48 @@
    "tier": 2,
    "rank": 7,
    "pending": true
+  },
+  {
+   "id": "sci.temperature",
+   "gloss": "temperature",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "sci.degree",
+   "gloss": "degree (of temperature)",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "sci.research",
+   "gloss": "research",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "sci.experiment",
+   "gloss": "experiment",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "sci.result",
+   "gloss": "result",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "sci.theory",
+   "gloss": "theory",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "sci.data",
+   "gloss": "data",
+   "tier": 1,
+   "rank": 7
   }
  ]
 }

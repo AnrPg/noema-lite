@@ -1,0 +1,2304 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Plan",
+   "lemma": "Plan",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.plan"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Pläne",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Plan",
+    "N;ACC;SG": "Plan",
+    "N;DAT;SG": "Plan",
+    "N;GEN;SG": "Plans",
+    "N;NOM;PL": "Pläne",
+    "N;ACC;PL": "Pläne",
+    "N;DAT;PL": "Plänen",
+    "N;GEN;PL": "Pläne"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Planes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A notebook full of ideas, a calendar, the trip you are dreaming of.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plan (what one intends to do; a way of doing it)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.plan"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was sind deine Pläne für den Sommer?",
+      "tr": "What are your plans for the summer?",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben einen Plan: Wir fahren nach Italien.",
+      "tr": "We have a plan: we’re going to Italy.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Plan hat nicht funktioniert.",
+      "tr": "The plan didn’t work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du schon Pläne fürs Wochenende?",
+      "tr": "Have you got plans for the weekend yet?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einen Plan haben",
+      "tr": "to have a plan"
+     },
+     {
+      "text": "Pläne machen",
+      "tr": "to make plans"
+     },
+     {
+      "text": "nach Plan",
+      "tr": "according to plan"
+     },
+     {
+      "text": "der Stadtplan",
+      "tr": "the city map"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "keinen Plan haben",
+      "tr": "to have no plan",
+      "kind": "colloquial",
+      "meaning": "to have no idea",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Vorhaben",
+      "register": "formal",
+      "nuance": "intention, project – what one means to do"
+     },
+     {
+      "word": "Absicht",
+      "register": "neutral",
+      "nuance": "intention – the will behind it, not the steps"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French plan.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "der Fahrplan (the “travel plan”) is the German word for a bus or train timetable."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: der Plan – die Pläne.",
+     "Pläne machen (to make plans) – not *Pläne tun."
+    ],
+    "subtleties": [
+     "Plan also means a map or chart: der Stadtplan (city map), der Fahrplan (timetable), der Stundenplan (school timetable).",
+     "Colloquially keinen Plan haben = to have no idea: Ich habe keinen Plan."
+    ]
+   }
+  },
+  {
+   "id": "de:Reise",
+   "lemma": "Reise",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.trip"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Reisen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Reise",
+    "N;ACC;SG": "Reise",
+    "N;DAT;SG": "Reise",
+    "N;GEN;SG": "Reise",
+    "N;NOM;PL": "Reisen",
+    "N;ACC;PL": "Reisen",
+    "N;DAT;PL": "Reisen",
+    "N;GEN;PL": "Reisen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Suitcases, train stations, the first look at a new city.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "trip, journey (travelling somewhere and back)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.trip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Gute Reise!",
+      "tr": "Have a good trip!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir machen nächste Woche eine Reise nach Spanien.",
+      "tr": "We are going on a trip to Spain next week.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Reise war lang, aber schön.",
+      "tr": "The journey was long but lovely.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf der Reise habe ich viele Leute kennengelernt.",
+      "tr": "On the trip I met lots of people.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Reise machen",
+      "tr": "to go on a trip"
+     },
+     {
+      "text": "eine Reise buchen",
+      "tr": "to book a trip"
+     },
+     {
+      "text": "auf Reisen sein",
+      "tr": "to be travelling"
+     },
+     {
+      "text": "Gute Reise!",
+      "tr": "Have a good trip!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Gute Reise!",
+      "tr": "Good journey!",
+      "kind": "fixed expression",
+      "meaning": "Have a good trip!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Ausflug",
+      "register": "neutral",
+      "nuance": "outing, day trip – short, back the same day"
+     },
+     {
+      "word": "Fahrt",
+      "register": "neutral",
+      "nuance": "ride, drive, journey – the travelling itself, often by vehicle"
+     },
+     {
+      "word": "Trip",
+      "register": "informal",
+      "nuance": "trip – a short, casual trip; also a drug trip"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German reise, reis, from Old High German reisa, from Proto-West Germanic *raisu.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Gute Reise! is the standard farewell to someone setting off; for a trip by car people also say Gute Fahrt!"
+    ],
+    "pitfalls": [
+     "eine Reise machen – the usual verb is machen, not *nehmen.",
+     "Do not confuse die Reise (trip) and der Reis (rice)."
+    ],
+    "subtleties": [
+     "reisen is the verb (to travel); die Reise is the noun: Ich reise gern – Die Reise war schön.",
+     "Many compounds: die Urlaubsreise, die Geschäftsreise (business trip), das Reisebüro (travel agency), der Reisepass."
+    ]
+   }
+  },
+  {
+   "id": "de:Hotel",
+   "lemma": "Hotel",
+   "pos": "NOUN",
+   "senses": [
+    "place.hotel"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Hotels",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Hotel",
+    "N;ACC;SG": "Hotel",
+    "N;DAT;SG": "Hotel",
+    "N;GEN;SG": "Hotels",
+    "N;NOM;PL": "Hotels",
+    "N;ACC;PL": "Hotels",
+    "N;DAT;PL": "Hotels",
+    "N;GEN;PL": "Hotels"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A key card, a reception desk, a view from a window you have never seen before.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hotel",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hotel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir schlafen in einem kleinen Hotel.",
+      "tr": "We are sleeping in a small hotel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Hotel liegt direkt am Meer.",
+      "tr": "The hotel is right by the sea.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe ein Zimmer im Hotel gebucht.",
+      "tr": "I have booked a room in the hotel.",
+      "register": "neutral",
+      "context": "booking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Hotel buchen",
+      "tr": "to book a hotel"
+     },
+     {
+      "text": "im Hotel übernachten",
+      "tr": "to stay the night in a hotel"
+     },
+     {
+      "text": "ein Zimmer im Hotel",
+      "tr": "a room in the hotel"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Pension",
+      "register": "neutral",
+      "nuance": "guest house – small, family-run, simpler"
+     },
+     {
+      "word": "Unterkunft",
+      "register": "formal",
+      "nuance": "accommodation – any place to stay"
+     },
+     {
+      "word": "Herberge",
+      "register": "neutral",
+      "nuance": "hostel (die Jugendherberge = youth hostel)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French hôtel.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In French hôtel also means a large town house or a public building (hôtel de ville = town hall); German borrowed only the inn meaning."
+    ],
+    "pitfalls": [
+     "das Hotel is neuter; plural die Hotels (with -s, as many borrowed words).",
+     "Stress on the second syllable: Ho-TEL."
+    ],
+    "subtleties": [
+     "im Hotel (in the hotel, where) – ins Hotel (to the hotel, where to).",
+     "Hotels are rated with stars: ein Vier-Sterne-Hotel."
+    ]
+   }
+  },
+  {
+   "id": "de:buchen",
+   "lemma": "buchen",
+   "pos": "VERB",
+   "senses": [
+    "verb.book"
+   ],
+   "features": {
+    "principalParts": [
+     "buchen",
+     "bucht",
+     "buchte",
+     "gebucht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "what is booked: einen Flug, eine Reise, ein Hotel"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "buchen",
+    "V;PRS;1;SG": "buche",
+    "V;PRS;2;SG": "buchst",
+    "V;PRS;3;SG": "bucht",
+    "V;PRS;1;PL": "buchen",
+    "V;PRS;2;PL": "bucht",
+    "V;PRS;3;PL": "buchen",
+    "V;PST;1;SG": "buchte",
+    "V;PST;2;SG": "buchtest",
+    "V;PST;3;SG": "buchte",
+    "V;PST;1;PL": "buchten",
+    "V;PST;2;PL": "buchtet",
+    "V;PST;3;PL": "buchten",
+    "V;PTCP;PST": "gebucht",
+    "V;IMP;2;SG": "buch",
+    "V;IMP;2;PL": "bucht",
+    "V;IMP;FORM": "buchen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "buche"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.book",
+     "axis": "what is booked",
+     "value": "travel and services paid in advance: a flight, a trip, a hotel, a course"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clicking “confirm”, the email with the booking number.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to book (a trip, a flight, a room)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.book"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich buche den Flug im Internet.",
+      "tr": "I’m booking the flight online.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben ein Hotel am Meer gebucht.",
+      "tr": "We have booked a hotel by the sea.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie buchte die Reise schon im Januar.",
+      "tr": "She booked the trip back in January.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Kurs ist leider ausgebucht.",
+      "tr": "Unfortunately the course is fully booked.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einen Flug buchen",
+      "tr": "to book a flight"
+     },
+     {
+      "text": "eine Reise buchen",
+      "tr": "to book a trip"
+     },
+     {
+      "text": "online buchen",
+      "tr": "to book online"
+     },
+     {
+      "text": "ausgebucht sein",
+      "tr": "to be fully booked"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "reservieren",
+      "register": "neutral",
+      "nuance": "to reserve – a table, a seat; a room held for you"
+     },
+     {
+      "word": "bestellen",
+      "register": "neutral",
+      "nuance": "to order – food, goods, a taxi"
+     }
+    ],
+    "etymology": {
+     "text": "From Buch (“book”) + -en, probably modelled on English to book.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb comes from das Buch (to enter in a book); the travel meaning probably followed English to book."
+    ],
+    "pitfalls": [
+     "buchen is regular: buchte, gebucht.",
+     "A table in a restaurant is usually reserviert, not gebucht."
+    ],
+    "subtleties": [
+     "buchen is also the accountant’s verb: to enter in the books (einen Betrag buchen).",
+     "ausgebucht = fully booked; die Buchung = the booking."
+    ]
+   }
+  },
+  {
+   "id": "de:reservieren",
+   "lemma": "reservieren",
+   "pos": "VERB",
+   "senses": [
+    "verb.book"
+   ],
+   "features": {
+    "principalParts": [
+     "reservieren",
+     "reserviert",
+     "reservierte",
+     "reserviert"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no prefix; the participle has no ge- because the verb ends in -ieren"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "what is reserved: einen Tisch, ein Zimmer; optional dative: jemandem einen Platz reservieren"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "reservieren",
+    "V;PRS;1;SG": "reserviere",
+    "V;PRS;2;SG": "reservierst",
+    "V;PRS;3;SG": "reserviert",
+    "V;PRS;1;PL": "reservieren",
+    "V;PRS;2;PL": "reserviert",
+    "V;PRS;3;PL": "reservieren",
+    "V;PST;1;SG": "reservierte",
+    "V;PST;2;SG": "reserviertest",
+    "V;PST;3;SG": "reservierte",
+    "V;PST;1;PL": "reservierten",
+    "V;PST;2;PL": "reserviertet",
+    "V;PST;3;PL": "reservierten",
+    "V;PTCP;PST": "reserviert",
+    "V;IMP;2;SG": "reservier",
+    "V;IMP;2;PL": "reserviert",
+    "V;IMP;FORM": "reservieren"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "reserviere"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.book",
+     "axis": "what is booked",
+     "value": "a place held for you: a table, a seat, a room"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little card on a restaurant table: “Reserviert”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to reserve, to book (a table, a seat, a room)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.book"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich reserviere einen Tisch für vier Personen.",
+      "tr": "I’m reserving a table for four.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Haben Sie ein Zimmer reserviert?",
+      "tr": "Have you reserved a room?",
+      "register": "formal",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir reservierten zwei Plätze im Zug.",
+      "tr": "We reserved two seats on the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einen Tisch reservieren",
+      "tr": "to reserve a table"
+     },
+     {
+      "text": "ein Zimmer reservieren",
+      "tr": "to reserve a room"
+     },
+     {
+      "text": "einen Platz reservieren",
+      "tr": "to reserve a seat"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "buchen",
+      "register": "neutral",
+      "nuance": "to book – travel and services, usually paid"
+     },
+     {
+      "word": "freihalten",
+      "register": "neutral",
+      "nuance": "to keep free (a seat for someone)"
+     }
+    ],
+    "etymology": {
+     "text": "From French réserver, from Latin reservāre (“to keep back”); -ieren is the usual German ending of borrowed verbs.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Every verb in -ieren is weak and has no ge-: reservieren, telefonieren, studieren – reserviert, telefoniert, studiert."
+    ],
+    "pitfalls": [
+     "Verbs in -ieren take no ge- in the participle: reserviert, not *gereserviert.",
+     "The stress is on -ie-: reser-VIE-ren."
+    ],
+    "subtleties": [
+     "die Reservierung = the reservation; reserviert also means reserved, aloof (of a person)."
+    ]
+   }
+  },
+  {
+   "id": "de:Reisepass",
+   "lemma": "Reisepass",
+   "pos": "NOUN",
+   "senses": [
+    "obj.passport"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Reisepässe",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Reise",
+      "role": "modifier"
+     },
+     {
+      "part": "Pass",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Reisepass",
+    "N;ACC;SG": "Reisepass",
+    "N;DAT;SG": "Reisepass",
+    "N;GEN;SG": "Reisepasses",
+    "N;NOM;PL": "Reisepässe",
+    "N;ACC;PL": "Reisepässe",
+    "N;DAT;PL": "Reisepässen",
+    "N;GEN;PL": "Reisepässe"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small booklet with stamps, a photo you do not like, the border control.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "passport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.passport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Vergiss deinen Reisepass nicht!",
+      "tr": "Don’t forget your passport!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Reisepass ist nicht mehr gültig.",
+      "tr": "My passport is no longer valid.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Für die Reise brauchst du einen Reisepass.",
+      "tr": "You need a passport for the trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Er hat einen neuen Reisepass beantragt.",
+      "tr": "He has applied for a new passport.",
+      "register": "formal",
+      "context": "authorities",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einen Reisepass beantragen",
+      "tr": "to apply for a passport"
+     },
+     {
+      "text": "der Reisepass ist gültig",
+      "tr": "the passport is valid"
+     },
+     {
+      "text": "den Reisepass zeigen",
+      "tr": "to show one’s passport"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Pass",
+      "register": "neutral",
+      "nuance": "the short everyday word (der Pass also means a mountain pass and a pass in football)"
+     },
+     {
+      "word": "Personalausweis",
+      "register": "formal",
+      "nuance": "identity card – the German ID card, also valid for travel in much of Europe (colloquially Perso)"
+     }
+    ],
+    "etymology": {
+     "text": "Compound of Reise (“travel”) + Pass (“passport”); Pass is a shortening of Early New High German paßport, borrowed from French passeport.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Pass (passport) comes from French passeport – the paper to pass the port (gate)."
+    ],
+    "pitfalls": [
+     "der Reisepass – masculine like der Pass; plural die Reisepässe.",
+     "Spelled with ss (short a); the old spelling was Reisepaß."
+    ],
+    "subtleties": [
+     "In speech most people say der Pass: Hast du deinen Pass dabei?",
+     "Germans travel inside much of Europe with the Personalausweis (ID card) and use the Reisepass for other countries."
+    ]
+   }
+  },
+  {
+   "id": "de:Koffer",
+   "lemma": "Koffer",
+   "pos": "NOUN",
+   "senses": [
+    "obj.suitcase"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Koffer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Koffer",
+    "N;ACC;SG": "Koffer",
+    "N;DAT;SG": "Koffer",
+    "N;GEN;SG": "Koffers",
+    "N;NOM;PL": "Koffer",
+    "N;ACC;PL": "Koffer",
+    "N;DAT;PL": "Koffern",
+    "N;GEN;PL": "Koffer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wheels rattling over cobblestones, a case that will not close.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "suitcase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.suitcase"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Koffer ist zu schwer.",
+      "tr": "My suitcase is too heavy.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du deinen Koffer schon gepackt?",
+      "tr": "Have you packed your suitcase yet?",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Flughafen warteten wir lange auf die Koffer.",
+      "tr": "At the airport we waited a long time for the suitcases.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "den Koffer packen",
+      "tr": "to pack the suitcase"
+     },
+     {
+      "text": "den Koffer auspacken",
+      "tr": "to unpack the suitcase"
+     },
+     {
+      "text": "ein schwerer Koffer",
+      "tr": "a heavy suitcase"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Koffer packen",
+      "tr": "to pack the suitcases",
+      "kind": "idiom",
+      "meaning": "to leave (a job, a place) for good",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Gepäck",
+      "register": "neutral",
+      "nuance": "luggage (uncountable): all one’s bags and cases"
+     },
+     {
+      "word": "Reisetasche",
+      "register": "neutral",
+      "nuance": "travel bag, holdall – soft, without a frame"
+     }
+    ],
+    "etymology": {
+     "text": "From Late Middle High German koffer, from Middle Dutch coffer, from Old French cofre.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English coffer (a strongbox) is the same word – from Old French cofre."
+    ],
+    "pitfalls": [
+     "The plural has no ending: der Koffer – die Koffer; dative plural den Koffern.",
+     "Luggage in general is das Gepäck (no plural): Wo ist mein Gepäck?"
+    ],
+    "subtleties": [
+     "die Koffer packen can also mean to leave for good: Er hat die Koffer gepackt.",
+     "In Austria Koffer is also an insult (idiot) – a different word of the same form."
+    ]
+   }
+  },
+  {
+   "id": "de:Ausland",
+   "lemma": "Ausland",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "place.abroad"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": {
+     "none": "no plural: das Ausland means all foreign countries together"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "aus",
+      "role": "modifier"
+     },
+     {
+      "part": "Land",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ausland",
+    "N;ACC;SG": "Ausland",
+    "N;DAT;SG": "Ausland",
+    "N;GEN;SG": "Auslands"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Auslandes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Other languages on the signs, another currency in your pocket.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "abroad, foreign countries (as a whole)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.abroad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Nächstes Jahr will ich im Ausland studieren.",
+      "tr": "Next year I want to study abroad.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie fährt im Sommer ins Ausland.",
+      "tr": "She is going abroad in the summer.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Bruder lebt seit zehn Jahren im Ausland.",
+      "tr": "My brother has been living abroad for ten years.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kommt gerade aus dem Ausland zurück.",
+      "tr": "He has just come back from abroad.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Ausland",
+      "tr": "abroad (where)"
+     },
+     {
+      "text": "ins Ausland",
+      "tr": "abroad (where to)"
+     },
+     {
+      "text": "aus dem Ausland",
+      "tr": "from abroad"
+     },
+     {
+      "text": "der Auslandsaufenthalt",
+      "tr": "a stay abroad"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "in der Fremde",
+      "register": "literary",
+      "nuance": "in foreign parts, far from home – emotional, old-fashioned"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Inland",
+      "note": "one’s own country"
+     }
+    ],
+    "etymology": {
+     "text": "Back-formation from Ausländer (“foreigner”), from Middle High German ūzlender; by surface analysis aus + Land. Compare English outland.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The genitive -s appears in compounds: der Auslandsaufenthalt, die Auslandsreise."
+    ],
+    "pitfalls": [
+     "German uses a noun with a preposition where other languages have an adverb: im Ausland (abroad, where?), ins Ausland (abroad, where to?), aus dem Ausland (from abroad).",
+     "das Ausland is neuter, like das Land; it has no plural."
+    ],
+    "subtleties": [
+     "The opposite is das Inland (home country): im In- und Ausland (at home and abroad).",
+     "der Ausländer / die Ausländerin = foreigner; the word can sound distancing, so people often say Menschen aus dem Ausland."
+    ]
+   }
+  },
+  {
+   "id": "de:besuchen",
+   "lemma": "besuchen",
+   "pos": "VERB",
+   "senses": [
+    "verb.visit"
+   ],
+   "features": {
+    "principalParts": [
+     "besuchen",
+     "besucht",
+     "besuchte",
+     "besucht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": "be",
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "whom or what one visits: die Oma besuchen, ein Museum besuchen"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "besuchen",
+    "V;PRS;1;SG": "besuche",
+    "V;PRS;2;SG": "besuchst",
+    "V;PRS;3;SG": "besucht",
+    "V;PRS;1;PL": "besuchen",
+    "V;PRS;2;PL": "besucht",
+    "V;PRS;3;PL": "besuchen",
+    "V;PST;1;SG": "besuchte",
+    "V;PST;2;SG": "besuchtest",
+    "V;PST;3;SG": "besuchte",
+    "V;PST;1;PL": "besuchten",
+    "V;PST;2;PL": "besuchtet",
+    "V;PST;3;PL": "besuchten",
+    "V;PTCP;PST": "besucht",
+    "V;IMP;2;SG": "besuch",
+    "V;IMP;2;PL": "besucht",
+    "V;IMP;FORM": "besuchen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "besuche"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A doorbell, coffee and cake at a friend’s, a hospital corridor with flowers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to visit (a person, a place; someone ill)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.visit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Wochenende besuche ich meine Großeltern.",
+      "tr": "At the weekend I’m visiting my grandparents.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben sie im Krankenhaus besucht.",
+      "tr": "We visited her in hospital.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Touristen besuchten das Museum.",
+      "tr": "The tourists visited the museum.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Besuch mich doch mal!",
+      "tr": "Come and see me some time!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Freunde besuchen",
+      "tr": "to visit friends"
+     },
+     {
+      "text": "jemanden im Krankenhaus besuchen",
+      "tr": "to visit someone in hospital"
+     },
+     {
+      "text": "ein Museum besuchen",
+      "tr": "to visit a museum"
+     },
+     {
+      "text": "die Schule besuchen",
+      "tr": "to attend school"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "vorbeikommen",
+      "register": "informal",
+      "nuance": "to drop by, to pop in: Komm doch mal vorbei!"
+     },
+     {
+      "word": "besichtigen",
+      "register": "neutral",
+      "nuance": "to visit a sight in order to see it – a castle, a church, a flat for rent"
+     },
+     {
+      "word": "aufsuchen",
+      "register": "formal",
+      "nuance": "to go and see (a doctor, an office)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German besuochen (“to seek, use, visit, investigate”), from Old High German bisuohhen, by surface analysis be- + suchen (“to seek”). Cognate with Dutch bezoeken, Swedish besöka, English beseech.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English beseech is a cousin of besuchen: both are “be- + seek”."
+    ],
+    "pitfalls": [
+     "besuchen takes a direct object (accusative): Ich besuche dich – not *Ich besuche zu dir.",
+     "be- is inseparable: the participle is besucht, without ge-."
+    ],
+    "subtleties": [
+     "besuchen also means to attend: eine Schule besuchen, einen Kurs besuchen.",
+     "der Besuch is the visit and the visitors: Wir haben Besuch (we have guests)."
+    ]
+   }
+  },
+  {
+   "id": "de:Tourist",
+   "lemma": "Tourist",
+   "pos": "NOUN",
+   "senses": [
+    "person.tourist"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Touristen",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "derived: Tour + -ist"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Tourist",
+    "N;ACC;SG": "Touristen",
+    "N;DAT;SG": "Touristen",
+    "N;GEN;SG": "Touristen",
+    "N;NOM;PL": "Touristen",
+    "N;ACC;PL": "Touristen",
+    "N;DAT;PL": "Touristen",
+    "N;GEN;PL": "Touristen"
+   },
+   "contrasts": [
+    {
+     "concept": "person.tourist",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified); plural for a mixed group"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A camera, a map, a crowd in front of the cathedral.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tourist (a man, or anyone in the plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Sommer kommen viele Touristen in die Stadt.",
+      "tr": "In summer many tourists come to the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Tourist fragt nach dem Weg.",
+      "tr": "The tourist asks the way.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe einem Touristen geholfen.",
+      "tr": "I helped a tourist.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "viele Touristen",
+      "tr": "lots of tourists"
+     },
+     {
+      "text": "die Touristen aus dem Ausland",
+      "tr": "the tourists from abroad"
+     },
+     {
+      "text": "als Tourist",
+      "tr": "as a tourist"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Urlauber",
+      "register": "neutral",
+      "nuance": "holidaymaker – someone on holiday, also at a resort"
+     },
+     {
+      "word": "Reisender",
+      "register": "formal",
+      "nuance": "traveller – anyone travelling, also on business"
+     }
+    ],
+    "etymology": {
+     "text": "Tour + -ist, from the second half of the 18th century, possibly influenced by English tourist, formed around the same time.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Words in -ist are masculine and weak in German: der Tourist, der Polizist, der Journalist – den Touristen, den Polizisten."
+    ],
+    "pitfalls": [
+     "A weak noun: den Touristen, dem Touristen, des Touristen – every form but the nominative singular ends in -en.",
+     "The stress is on -ist: Tou-RIST."
+    ],
+    "subtleties": [
+     "die Touristin is the woman; der Tourismus is tourism.",
+     "Tourist can sound slightly mocking (typisch Tourist!); Besucher (visitor) is neutral."
+    ]
+   }
+  },
+  {
+   "id": "de:Touristin",
+   "lemma": "Touristin",
+   "pos": "NOUN",
+   "senses": [
+    "person.tourist"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Touristinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Tourist + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Touristin",
+    "N;ACC;SG": "Touristin",
+    "N;DAT;SG": "Touristin",
+    "N;GEN;SG": "Touristin",
+    "N;NOM;PL": "Touristinnen",
+    "N;ACC;PL": "Touristinnen",
+    "N;DAT;PL": "Touristinnen",
+    "N;GEN;PL": "Touristinnen"
+   },
+   "contrasts": [
+    {
+     "concept": "person.tourist",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman with a guidebook, looking for the old town.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tourist (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Touristin sucht ihr Hotel.",
+      "tr": "The tourist is looking for her hotel.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Eine Touristin hat mich nach dem Bahnhof gefragt.",
+      "tr": "A tourist asked me the way to the station.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Touristin habe ich viel gesehen.",
+      "tr": "As a tourist I saw a lot.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Touristin aus Japan",
+      "tr": "a tourist from Japan"
+     },
+     {
+      "text": "als Touristin",
+      "tr": "as a tourist"
+     },
+     {
+      "text": "die Touristin fragen",
+      "tr": "to ask the tourist"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Urlauberin",
+      "register": "neutral",
+      "nuance": "holidaymaker (a woman)"
+     }
+    ],
+    "etymology": {
+     "text": "From Tourist + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Almost every person noun has a feminine in -in: Tourist – Touristin, Nachbar – Nachbarin."
+    ],
+    "pitfalls": [
+     "Touristin is not weak: die Touristin, der Touristin; plural Touristinnen (double n)."
+    ],
+    "subtleties": [
+     "For a mixed group German uses Touristen, or Touristinnen und Touristen."
+    ]
+   }
+  },
+  {
+   "id": "de:Reiseleiter",
+   "lemma": "Reiseleiter",
+   "pos": "NOUN",
+   "senses": [
+    "person.guide"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Reiseleiter",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Reise",
+      "role": "modifier"
+     },
+     {
+      "part": "Leiter",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Reiseleiter",
+    "N;ACC;SG": "Reiseleiter",
+    "N;DAT;SG": "Reiseleiter",
+    "N;GEN;SG": "Reiseleiters",
+    "N;NOM;PL": "Reiseleiter",
+    "N;ACC;PL": "Reiseleiter",
+    "N;DAT;PL": "Reiseleitern",
+    "N;GEN;PL": "Reiseleiter"
+   },
+   "contrasts": [
+    {
+     "concept": "person.guide",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified); plural for a mixed group"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A raised umbrella in a crowd, a voice explaining the history of a square.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tour guide (who leads and looks after a travel group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Reiseleiter zeigt uns die Altstadt.",
+      "tr": "The tour guide is showing us the old town.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Unser Reiseleiter sprach fünf Sprachen.",
+      "tr": "Our tour guide spoke five languages.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Fragen Sie bitte den Reiseleiter!",
+      "tr": "Please ask the tour guide!",
+      "register": "formal",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Reiseleiter der Gruppe",
+      "tr": "the group’s tour guide"
+     },
+     {
+      "text": "als Reiseleiter arbeiten",
+      "tr": "to work as a tour guide"
+     },
+     {
+      "text": "dem Reiseleiter folgen",
+      "tr": "to follow the guide"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Fremdenführer",
+      "register": "dated",
+      "nuance": "tourist guide who shows the sights of one place"
+     },
+     {
+      "word": "Stadtführer",
+      "register": "neutral",
+      "nuance": "city guide – a person, and also a guidebook"
+     },
+     {
+      "word": "Guide",
+      "register": "informal",
+      "nuance": "guide – borrowed from English, in tourism"
+     }
+    ],
+    "etymology": {
+     "text": "From Reise (“journey”) + Leiter (“leader”); Leiter is from Middle High German leitære, Old High German leitāri, equivalent to leiten (“to lead”) + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "der Leiter (leader) and die Leiter (ladder) are two different words that only look alike – the article tells them apart."
+    ],
+    "pitfalls": [
+     "der Reiseführer is usually the guidebook (a book), though it can also mean a guide; der Reiseleiter is always a person.",
+     "Do not confuse der Leiter (leader, manager) with die Leiter (ladder)."
+    ],
+    "subtleties": [
+     "A Reiseleiter travels with the group and organises; a Stadtführer or Gästeführer shows one town.",
+     "Plural without ending: die Reiseleiter; dative plural den Reiseleitern."
+    ]
+   }
+  },
+  {
+   "id": "de:Reiseleiterin",
+   "lemma": "Reiseleiterin",
+   "pos": "NOUN",
+   "senses": [
+    "person.guide"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Reiseleiterinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Reise",
+      "role": "modifier"
+     },
+     {
+      "part": "Leiterin",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Reiseleiterin",
+    "N;ACC;SG": "Reiseleiterin",
+    "N;DAT;SG": "Reiseleiterin",
+    "N;GEN;SG": "Reiseleiterin",
+    "N;NOM;PL": "Reiseleiterinnen",
+    "N;ACC;PL": "Reiseleiterinnen",
+    "N;DAT;PL": "Reiseleiterinnen",
+    "N;GEN;PL": "Reiseleiterinnen"
+   },
+   "contrasts": [
+    {
+     "concept": "person.guide",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman with the flag at the front of the group.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tour guide (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Reiseleiterin erklärt die Geschichte der Stadt.",
+      "tr": "The tour guide explains the history of the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Unsere Reiseleiterin war sehr freundlich.",
+      "tr": "Our tour guide was very friendly.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie arbeitet im Sommer als Reiseleiterin.",
+      "tr": "She works as a tour guide in the summer.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "als Reiseleiterin arbeiten",
+      "tr": "to work as a tour guide"
+     },
+     {
+      "text": "die Reiseleiterin fragen",
+      "tr": "to ask the tour guide"
+     },
+     {
+      "text": "eine erfahrene Reiseleiterin",
+      "tr": "an experienced tour guide"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Stadtführerin",
+      "register": "neutral",
+      "nuance": "city guide (a woman)"
+     }
+    ],
+    "etymology": {
+     "text": "From Reiseleiter + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German job titles come in pairs: Reiseleiter – Reiseleiterin, Lehrer – Lehrerin."
+    ],
+    "pitfalls": [
+     "Plural with double n: die Reiseleiterinnen."
+    ],
+    "subtleties": [
+     "A job title is used without an article after als and sein: Sie ist Reiseleiterin."
+    ]
+   }
+  },
+  {
+   "id": "de:nächste_Woche",
+   "lemma": "nächste Woche",
+   "pos": "ADV",
+   "senses": [
+    "time.nextweek"
+   ],
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The calendar page after this one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next week (as a time phrase: when?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Nächste Woche fahren wir nach Berlin.",
+      "tr": "Next week we are going to Berlin.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe nächste Woche Urlaub.",
+      "tr": "I’m on holiday next week.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sehen uns nächste Woche!",
+      "tr": "See you next week!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nächste Woche am Montag",
+      "tr": "next week on Monday"
+     },
+     {
+      "text": "bis nächste Woche",
+      "tr": "until next week; see you next week"
+     },
+     {
+      "text": "Anfang nächster Woche",
+      "tr": "at the beginning of next week"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "kommende Woche",
+      "register": "formal",
+      "nuance": "the coming week – a little more formal or written"
+     },
+     {
+      "word": "in der nächsten Woche",
+      "register": "neutral",
+      "nuance": "in the next week – the same, with a preposition"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "letzte Woche",
+      "note": "last week"
+     }
+    ],
+    "etymology": {
+     "text": "From nächste (“next”, the superlative of nah “near”) + Woche (“week”); the phrase is an accusative of time.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The opposite is letzte Woche (last week); diese Woche is this week."
+    ],
+    "pitfalls": [
+     "No preposition: nächste Woche (accusative of time), not *in nächste Woche.",
+     "Masculine and neuter nouns change the ending: nächsten Monat, nächstes Jahr – nächste Woche (feminine)."
+    ],
+    "subtleties": [
+     "After bis the phrase stays the same: Bis nächste Woche! (See you next week!).",
+     "nächste is the superlative of nah (near): the nearest week is the next one."
+    ]
+   }
+  },
+  {
+   "id": "de:nächstes_Jahr",
+   "lemma": "nächstes Jahr",
+   "pos": "ADV",
+   "senses": [
+    "time.nextyear"
+   ],
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "New plans, a new calendar, resolutions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next year (as a time phrase: when?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextyear"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Nächstes Jahr reise ich nach Japan.",
+      "tr": "Next year I’m travelling to Japan.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie wird nächstes Jahr dreißig.",
+      "tr": "She’ll be thirty next year.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "Was machst du nächstes Jahr?",
+      "tr": "What are you doing next year?",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nächstes Jahr im Sommer",
+      "tr": "next year in the summer"
+     },
+     {
+      "text": "bis nächstes Jahr",
+      "tr": "until next year"
+     },
+     {
+      "text": "Anfang nächsten Jahres",
+      "tr": "at the beginning of next year"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "kommendes Jahr",
+      "register": "formal",
+      "nuance": "the coming year – a little more formal"
+     },
+     {
+      "word": "im nächsten Jahr",
+      "register": "neutral",
+      "nuance": "in the next year – the same, with a preposition"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "letztes Jahr",
+      "note": "last year"
+     }
+    ],
+    "etymology": {
+     "text": "From nächstes (“next”, the superlative of nah “near”, neuter accusative) + Jahr (“year”); an accusative of time.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "letztes Jahr (last year) and dieses Jahr (this year) follow the same pattern."
+    ],
+    "pitfalls": [
+     "nächstes Jahr ends in -es because das Jahr is neuter and there is no article: not *nächste Jahr.",
+     "No preposition: nächstes Jahr, not *in nächstes Jahr."
+    ],
+    "subtleties": [
+     "In the genitive (written style): Anfang nächsten Jahres.",
+     "The future is often said with the present: Nächstes Jahr fahre ich nach Spanien."
+    ]
+   }
+  },
+  {
+   "id": "de:werden",
+   "lemma": "werden",
+   "pos": "VERB",
+   "senses": [
+    "verb.become"
+   ],
+   "role": "Taught here as the auxiliary of the future (werden + infinitive at the end of the clause); its own meaning “to become” is not a lesson concept yet.",
+   "features": {
+    "principalParts": [
+     "werden",
+     "wird",
+     "wurde",
+     "geworden"
+    ],
+    "conjugation": "irregular",
+    "presentChange": "irregular",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "NOM",
+      "senses": [
+       "s1"
+      ],
+      "note": "predicative nominative or an adjective: Er wird Lehrer. Es wird kalt."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "werden",
+    "V;PRS;1;SG": "werde",
+    "V;PRS;2;SG": "wirst",
+    "V;PRS;3;SG": "wird",
+    "V;PRS;1;PL": "werden",
+    "V;PRS;2;PL": "werdet",
+    "V;PRS;3;PL": "werden",
+    "V;PST;1;SG": "wurde",
+    "V;PST;2;SG": "wurdest",
+    "V;PST;3;SG": "wurde",
+    "V;PST;1;PL": "wurden",
+    "V;PST;2;PL": "wurdet",
+    "V;PST;3;PL": "wurden",
+    "V;PTCP;PST": "geworden",
+    "V;IMP;2;SG": "werde",
+    "V;IMP;2;PL": "werdet",
+    "V;IMP;FORM": "werden"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "werd"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Change and what is to come: it gets dark, she becomes a doctor, we will see.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to become, to get, to grow (a change of state): Es wird kalt.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.become"
+     },
+     {
+      "id": "s2",
+      "def": "auxiliary of the future: werden + infinitive (Ich werde morgen kommen)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es wird schon dunkel.",
+      "tr": "It’s already getting dark.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie wird Ärztin.",
+      "tr": "She is going to be a doctor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich werde nächstes Jahr in Berlin studieren.",
+      "tr": "I will study in Berlin next year.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir werden sehen.",
+      "tr": "We’ll see.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "Morgen wird es regnen.",
+      "tr": "It will rain tomorrow.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "müde werden",
+      "tr": "to get tired"
+     },
+     {
+      "text": "krank werden",
+      "tr": "to fall ill"
+     },
+     {
+      "text": "Lehrer werden",
+      "tr": "to become a teacher"
+     },
+     {
+      "text": "Wir werden sehen.",
+      "tr": "We’ll see."
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich verwandeln",
+      "register": "neutral",
+      "nuance": "to turn into, to transform (completely)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wërden, from Old High German wërdan, from Proto-Germanic *werþaną. Cognate with Dutch worden, obsolete English worth (“to become”), and Latin vertō (“to turn”). The use as a future auxiliary is a Middle High German innovation.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The future with werden is younger than the language itself: it became common only in Middle High German; before, the present did the job – and it still often does."
+    ],
+    "pitfalls": [
+     "werden is not “want”: Ich will kommen = I want to come; Ich werde kommen = I will come.",
+     "bekommen is a false friend: it means to get, to receive – not to become (that is werden).",
+     "du wirst, er wird – the vowel changes and the d of the stem disappears in du wirst; ihr werdet.",
+     "With the future the infinitive goes to the very end: Ich werde morgen nach Berlin fahren."
+    ],
+    "subtleties": [
+     "As a full verb it takes sein in the perfect: Er ist Lehrer geworden; as the passive auxiliary the participle is worden (Das Haus ist gebaut worden).",
+     "werden + infinitive can also express a guess about the present: Er wird schon zu Hause sein (he’s probably at home by now).",
+     "Präteritum wurde; the old form ward appears in literature."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -29,9 +29,8 @@
   {
    "id": "work.job",
    "gloss": "work, a job (employment; labour)",
-   "tier": 2,
-   "rank": 4,
-   "pending": true
+   "tier": 1,
+   "rank": 9
   },
   {
    "id": "work.livelihood",
@@ -53,6 +52,54 @@
    "tier": 2,
    "rank": 7,
    "pending": true
+  },
+  {
+   "id": "work.career",
+   "gloss": "career",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "work.company",
+   "gloss": "company, firm",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "work.boss",
+   "gloss": "boss",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "work.colleague",
+   "gloss": "colleague",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "work.meeting",
+   "gloss": "meeting",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "work.salary",
+   "gloss": "salary, wages",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "work.contract",
+   "gloss": "contract",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "work.interview",
+   "gloss": "job interview",
+   "tier": 1,
+   "rank": 8
   }
  ]
 }

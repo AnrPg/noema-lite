@@ -81,6 +81,42 @@
    "tier": 2,
    "rank": 11,
    "pending": true
+  },
+  {
+   "id": "tech.computer",
+   "gloss": "computer",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "tech.internet",
+   "gloss": "the internet",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "tech.website",
+   "gloss": "website",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "tech.app",
+   "gloss": "app (application)",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "tech.screen",
+   "gloss": "screen",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "tech.password",
+   "gloss": "password",
+   "tier": 1,
+   "rank": 6
   }
  ]
 }

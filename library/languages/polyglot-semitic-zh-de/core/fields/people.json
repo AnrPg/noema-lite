@@ -13,6 +13,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -445,6 +449,41 @@
    "rank": 35,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "person.neighbour",
+   "gloss": "neighbour",
+   "tier": 1,
+   "rank": 22,
+   "subgroup": "core"
+  },
+  {
+   "id": "person.tourist",
+   "gloss": "tourist",
+   "tier": 1,
+   "rank": 23,
+   "subgroup": "core"
+  },
+  {
+   "id": "person.guide",
+   "gloss": "guide (a person)",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "job.waiter",
+   "gloss": "waiter, waitress",
+   "tier": 1,
+   "rank": 25,
+   "subgroup": "core"
+  },
+  {
+   "id": "person.guest",
+   "gloss": "guest",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "core"
   }
  ]
 }

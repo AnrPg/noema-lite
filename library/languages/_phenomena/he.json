@@ -1749,17 +1749,19 @@
     "grammar": [
      "fn.root.pattern",
      "fn.direction",
-     "fn.present"
+     "fn.present",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "principal_parts",
      "inflect"
     ],
-    "other": "binyan on all 19 verbs (paal 14, piel 2, nifal 2, hifil 1); shown on the word card. fn.root.pattern teaches pa‘al and pi‘el, fn.direction lists nif‘al and hif‘il."
+    "other": "binyan on all 34 verbs (paal 20, piel 5, hifil 3, nifal 3, hitpael 3); shown on the word card. fn.root.pattern teaches pa‘al and pi‘el, fn.direction lists nif‘al and hif‘il, and fn.past / fn.future (cr.01, cr.03) give the past and future of the five binyanim in use, hitpa‘el (הִתְעוֹרֵר, הִתְקַלֵּחַ, הִתְלַבֵּשׁ) included."
    },
    "status": "partial",
-   "gap": "A validator check of the binyan values, the passive and reflexive binyanim (pu‘al, huf‘al, hitpa‘el) when cr.03 / cr.07 come, links between verbs of one root in different binyanim (he.morph.voice-binyan), and the root_pattern exercise.",
-   "when": "fd.07 (pa‘al, pi‘el), fd.13 (nif‘al, hif‘il), cr.01–cr.07"
+   "gap": "A validator check of the binyan values, the passive binyanim (pu‘al, huf‘al) when the passive comes (cr.28), links between verbs of one root in different binyanim (he.morph.voice-binyan), and the root_pattern exercise.",
+   "when": "fd.07 (pa‘al, pi‘el), fd.13 (nif‘al, hif‘il), cr.01 (hitpa‘el), cr.28 (pu‘al, huf‘al)"
   },
   {
    "id": "he.morph.weak-roots",
@@ -1811,12 +1813,14 @@
     ],
     "grammar": [
      "fn.root.pattern",
-     "fn.present"
+     "fn.present",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "inflect"
     ],
-    "other": "rootClass (the gizra: regular, pe-nun, pe-yod, pe-alef, pe-guttural, ayin-vav, ayin-guttural, lamed-he, lamed-alef, lamed-guttural, irregular …) on all 19 verbs; fn.root.pattern and a trap in fn.present explain ל״ה roots; all forms are stored."
+    "other": "rootClass on all 34 verbs (regular, pe-nun, pe-yod, ayin-vav, ayin-yod, ayin-guttural, lamed-he, lamed-guttural, irregular …); fn.past and fn.future (cr.01, cr.03) show hollow קָם / יָקוּם, pe-yod יָשַׁן / יִישַׁן, the merged נ of יָשַׁנּוּ and the guttural vowels of רָחֲצָה, שׁוֹכַחַת; all forms are stored."
    },
    "status": "partial",
    "gap": "A decision procedure per class and drills grouped by class.",
@@ -2775,22 +2779,35 @@
    "record": "the past cells V;PST;{1,2,3};{SG,PL};{MASC,FEM}",
    "model": {
     "wordFields": [
-     "binyan"
+     "binyan",
+     "rootClass"
     ],
     "paradigm": [
-     "V;PST;3;SG;MASC"
+     "V;PST;1;SG",
+     "V;PST;2;SG;MASC",
+     "V;PST;2;SG;FEM",
+     "V;PST;3;SG;MASC",
+     "V;PST;3;SG;FEM",
+     "V;PST;1;PL",
+     "V;PST;2;PL;MASC",
+     "V;PST;2;PL;FEM",
+     "V;PST;3;PL"
     ],
     "grammar": [
+     "fn.past",
      "fn.copula",
      "fn.have"
     ],
     "exercises": [
-     "inflect"
+     "inflect",
+     "transform",
+     "sentence_meaning",
+     "build_sentence"
     ],
-    "other": "Only the citation cell V;PST;3;SG;MASC on ordinary verbs; the copula הָיָה has the full past."
+    "other": "cr.01 realizes fn.past (endings table, the six binyanim of the course, the hifʿil i → a, the merged נ of יָשַׁנּוּ, no aspect). The 15 verbs of cr.01–cr.03 store the whole past (9 cells, from Wiktionary’s conjugation tables); הָיָה has it since fd.01. The bank has 49 sentences with fn.past and Polarity, Number, Gender, Person and Tense variants."
    },
    "status": "partial",
-   "gap": "The full past paradigm of every verb (VERB paradigmCells), and the cr.01 realization.",
+   "gap": "The 19 verbs of the foundations (fd.07, fd.13) still store only the 3rd person masculine singular of the past (their files belong to those lessons): their full past is to be added, then the past drills can use them too.",
    "when": "cr.01"
   },
   {
@@ -2876,23 +2893,32 @@
      "binyan"
     ],
     "paradigm": [
+     "V;FUT;1;SG",
      "V;FUT;2;SG;MASC",
      "V;FUT;2;SG;FEM",
-     "V;FUT;2;PL;MASC"
+     "V;FUT;3;SG;MASC",
+     "V;FUT;3;SG;FEM",
+     "V;FUT;1;PL",
+     "V;FUT;2;PL;MASC",
+     "V;FUT;3;PL;MASC"
     ],
     "grammar": [
+     "fn.future",
      "fn.imperative",
      "fn.copula",
      "fn.connectors"
     ],
     "exercises": [
-     "inflect"
+     "inflect",
+     "transform",
+     "sentence_meaning",
+     "build_sentence"
     ],
-    "other": "Every verb states its 3ms future (יֹאכַל, יִשְׁתֶּה, יֵלֵךְ, יִסַּע …, from Wiktionary); 15 verbs have the three 2nd-person future cells (for commands); הָיָה has 3rd- and 1st-person future cells."
+    "other": "cr.03 realizes fn.future (the prefixes אֶ / תִּ / יִ / נִ, one form for “you (m.)” and “she”, the vowels per binyan, אַל + future, the present and הוֹלֵךְ + infinitive for plans). The 15 verbs of cr.01–cr.03 store the 8 future cells in use (from Wiktionary; the nifʿal 1st person singular is left out, see the lexeme); הָיָה has the 1st and 3rd persons."
    },
    "status": "partial",
-   "gap": "The full future paradigm of every verb (cr.02).",
-   "when": "fd.13 (2nd person), cr.02"
+   "gap": "The foundation verbs (fd.07, fd.13) store only the 2nd person future; the literary feminine plural in ־נָה is described but not stored; the nifʿal 1st person singular (אֵרָדֵם — Wiktionary’s table has אֶרָדֵם) is left out until checked.",
+   "when": "fd.13 (2nd person), cr.03"
   },
   {
    "id": "he.morph.imperative",
@@ -3857,14 +3883,32 @@
    "record": null,
    "model": {
     "wordFields": [],
-    "paradigm": [],
-    "grammar": [],
-    "exercises": [],
-    "other": "Ordinals occur only inside the weekday lexemes (יוֹם שֵׁנִי …)."
+    "paradigm": [
+     "ADJ;SG;MASC",
+     "ADJ;SG;FEM",
+     "ADJ;PL;MASC",
+     "ADJ;PL;FEM",
+     "ADJ;SG;MASC;DEF",
+     "ADJ;SG;FEM;DEF",
+     "ADJ;PL;MASC;DEF",
+     "ADJ;PL;FEM;DEF"
+    ],
+    "grammar": [
+     "fn.ordinals",
+     "fn.time.day"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "sentence_meaning",
+     "build_sentence",
+     "quiz"
+    ],
+    "other": "cr.04: the ten ordinals and אַחֲרוֹן as ADJ lexemes with all 8 cells; fn.ordinals explains agreement, the article, the pattern קְטִילִי, the weekdays and the cardinal with the article above ten."
    },
-   "status": "missing",
-   "gap": "Ordinal lexemes (with their 8 adjective cells) and the cardinal-with-article rule, in a numbers II step.",
-   "when": "later (numbers II), fd.14 mentions"
+   "status": "partial",
+   "gap": "Above ten the cardinal with the article (הַיּוֹם הָעֶשְׂרִים) is explained but cannot be in the bank: the cardinals of fd.05 have no form with the article (a DEF cell or an article prefix token is needed).",
+   "when": "cr.04"
   },
   {
    "id": "he.numbers.clock-date-age",
@@ -3912,18 +3956,19 @@
     ],
     "grammar": [
      "fn.prep.time",
-     "fn.numerals"
+     "fn.numerals",
+     "fn.ordinals"
     ],
     "exercises": [
      "sentence_meaning",
      "build_sentence",
      "quiz"
     ],
-    "other": "fn.prep.time (clock, date) and fn.numerals (age) with bank sentences."
+    "other": "fn.prep.time (fd.15: hours, months) and fn.numerals (age); cr.04 (fn.ordinals) adds dates as masculine cardinal + בְּ + month (אַרְבָּעָה בְּיוּלִי), minutes with וְ, רֶבַע לְ… and חֲצִי / רֶבַע שָׁעָה, with bank sentences and a quiz."
    },
-   "status": "covered",
-   "gap": "",
-   "when": "fd.15"
+   "status": "partial",
+   "gap": "שָׁלוֹשׁ וָחֵצִי / שָׁלוֹשׁ וָרֶבַע are taught in fn.ordinals but cannot be in the bank: the conjunction וְ (fd.01) has no variant וָ among its alts.",
+   "when": "fd.15, cr.04"
   },
   {
    "id": "he.syntax.nominal",
@@ -5042,14 +5087,20 @@
     "paradigm": [],
     "grammar": [
      "fn.present",
+     "fn.past",
+     "fn.past.ongoing",
      "fn.time.day"
     ],
-    "exercises": [],
-    "other": "fn.present and fn.time.day state that there is no aspect; the habitual past is not taught."
+    "exercises": [
+     "transform",
+     "sentence_meaning",
+     "build_sentence"
+    ],
+    "other": "fn.present and fn.past state that one form covers simple, progressive and perfect meanings; cr.02 (fn.past.ongoing, periphrastic) teaches הָיָה + present for habits and backgrounds, with Aspect variants (plain past ↔ habitual) in the bank, and נָהַג + infinitive as the formal alternative; comparison notes for el and ru (aspect)."
    },
-   "status": "partial",
-   "gap": "The habitual הָיָה + participle in cr.01, and a seeAlso link to Greek/Russian aspect.",
-   "when": "fd.07, cr.01"
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07, cr.01, cr.02"
   },
   {
    "id": "he.morph.no-perfect",
@@ -5084,13 +5135,16 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.past"
     ],
-    "exercises": [],
-    "other": ""
+    "exercises": [
+     "sentence_meaning"
+    ],
+    "other": "fn.past (cr.01) says that קַמְתִּי is also “I have got up” and carries the verb.perfect = none tag, with notes for the languages that have a perfect."
    },
-   "status": "partial",
-   "gap": "fn.prep.time says it (מֵאָז + present, a note for English and a verb.perfect tag); it has to be said again with the past tense (cr.01).",
+   "status": "covered",
+   "gap": "",
    "when": "cr.01"
   },
   {
@@ -5126,13 +5180,18 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
-    "exercises": [],
-    "other": ""
+    "grammar": [
+     "fn.future",
+     "fn.connectors"
+    ],
+    "exercises": [
+     "sentence_meaning"
+    ],
+    "other": "fn.future (cr.03) says that the future is the verb after שֶׁ in wishes and requests (אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ) and after אַל in prohibitions; the bank of fd.18 has אִמָּא רוֹצָה שֶׁתֹּאכַל."
    },
-   "status": "missing",
-   "gap": "Say it with the future (cr.02) and the conditional (cr.05) for learners whose languages have a subjunctive.",
-   "when": "cr.02"
+   "status": "partial",
+   "gap": "The choice between שֶׁ + future (another subject) and the infinitive (the same subject) is not drilled yet; the conditional comes later.",
+   "when": "cr.03"
   },
   {
    "id": "he.morph.no-optative",

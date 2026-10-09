@@ -25,6 +25,66 @@
    "tier": 2,
    "rank": 3,
    "pending": true
+  },
+  {
+   "id": "art.music",
+   "gloss": "music",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "art.instrument",
+   "gloss": "musical instrument",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "art.guitar",
+   "gloss": "guitar",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "art.piano",
+   "gloss": "piano",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "art.art",
+   "gloss": "art",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "art.painting",
+   "gloss": "painting, picture",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "art.film",
+   "gloss": "film, movie",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "art.theatre",
+   "gloss": "theatre",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "art.actor",
+   "gloss": "actor, actress",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "art.exhibition",
+   "gloss": "exhibition",
+   "tier": 1,
+   "rank": 10
   }
  ]
 }

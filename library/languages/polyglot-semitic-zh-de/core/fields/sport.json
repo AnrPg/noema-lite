@@ -60,6 +60,24 @@
    "tier": 2,
    "rank": 8,
    "pending": true
+  },
+  {
+   "id": "sport.football",
+   "gloss": "football, soccer",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "sport.team",
+   "gloss": "team",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "sport.match",
+   "gloss": "match, game",
+   "tier": 1,
+   "rank": 3
   }
  ]
 }

@@ -1,0 +1,459 @@
+{
+ "function": "fn.future",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.future",
+   "value": "inflectional"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "verb.subjunctive",
+   "value": "none"
+  }
+ ],
+ "summary": "The Hebrew future (עָתִיד) marks the person mostly with prefixes: אֶ־ “I”, תִּ־ “you (m.)” and “she”, תִּ…־ִי “you (f.)”, יִ־ “he”, נִ־ “we”, תִּ…־וּ “you (pl.)”, יִ…־וּ “they”: אֶזְכֹּר, תִּזְכֹּר, תִּזְכְּרִי, יִזְכֹּר, תִּזְכֹּר, נִזְכֹּר, תִּזְכְּרוּ, יִזְכְּרוּ. One form serves both “you (m.)” and “she” (תִּזְכֹּר). The prefix vowel and the stem vowels depend on the pattern: paʿal יִזְכֹּר / יִגְדַּל / יִשְׁכַּח, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ. As in the past, the 1st and 2nd person often drop the pronoun (מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ). The future is also the everyday form of requests and, after אַל, of prohibitions (אַל תִּשְׁכַּח! — lesson 13), and after שֶׁ it is the verb of wishes and requests: אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ “I want you to visit us”. Plans that are already fixed are often in the present (מָחָר אֲנַחְנוּ נוֹסְעִים), and colloquial הוֹלֵךְ + infinitive means “going to”. The feminine plural forms in ־נָה (תִּזְכֹּרְנָה) are literary; speech uses the masculine plural for women too.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "prefix (+ ending)",
+    "זָכַר “remember”",
+    "said"
+   ],
+   "rows": [
+    [
+     "אֲנִי",
+     "אֶ־",
+     "אֶזְכֹּר",
+     "ezkor"
+    ],
+    [
+     "אַתָּה",
+     "תִּ־",
+     "תִּזְכֹּר",
+     "tizkor"
+    ],
+    [
+     "אַתְּ",
+     "תִּ־ … ־ִי",
+     "תִּזְכְּרִי",
+     "tizkeri"
+    ],
+    [
+     "הוּא",
+     "יִ־",
+     "יִזְכֹּר",
+     "yizkor"
+    ],
+    [
+     "הִיא",
+     "תִּ־",
+     "תִּזְכֹּר",
+     "tizkor"
+    ],
+    [
+     "אֲנַחְנוּ",
+     "נִ־",
+     "נִזְכֹּר",
+     "nizkor"
+    ],
+    [
+     "אַתֶּם / אַתֶּן",
+     "תִּ־ … ־וּ",
+     "תִּזְכְּרוּ",
+     "tizkeru"
+    ],
+    [
+     "הֵם / הֵן",
+     "יִ־ … ־וּ",
+     "יִזְכְּרוּ",
+     "yizkeru"
+    ]
+   ],
+   "caption": "The person is mostly in front. “You (m.)” and “she” share one form: תִּזְכֹּר.",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "inflectional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "אֶ־ תִּ־ יִ־ נִ־",
+   "text": "Four prefixes do most of the work: אֶ “I”, תִּ “you / she”, יִ “he / they”, נִ “we”. Endings add “you (f.)” (־ִי) and the plurals (־וּ). Remember the word אֵיתָן (EITAN): its letters א י ת ן are the future prefixes and endings."
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "I",
+    "he",
+    "she / you (m.)",
+    "they",
+    "verbs"
+   ],
+   "rows": [
+    [
+     "paʿal (o)",
+     "אֶזְכֹּר",
+     "יִזְכֹּר",
+     "תִּזְכֹּר",
+     "יִזְכְּרוּ",
+     "זָכַר"
+    ],
+    [
+     "paʿal (a)",
+     "אֶגְדַּל",
+     "יִגְדַּל",
+     "תִּגְדַּל",
+     "יִגְדְּלוּ",
+     "גָּדַל, שָׁכַח, רָחַץ, יָשַׁן (אִישַׁן, יִישַׁן)"
+    ],
+    [
+     "paʿal, hollow",
+     "אָקוּם",
+     "יָקוּם",
+     "תָּקוּם",
+     "יָקוּמוּ",
+     "קָם"
+    ],
+    [
+     "piʿel",
+     "אֲסַיֵּם",
+     "יְסַיֵּם",
+     "תְּסַיֵּם",
+     "יְסַיְּמוּ",
+     "סִיֵּם, שִׂחֵק, בִּקֵּר"
+    ],
+    [
+     "hifʿil",
+     "אַתְחִיל",
+     "יַתְחִיל",
+     "תַּתְחִיל",
+     "יַתְחִילוּ",
+     "הִתְחִיל, הִזְמִין"
+    ],
+    [
+     "nifʿal",
+     "—",
+     "יֵרָדֵם",
+     "תֵּרָדֵם",
+     "יֵרָדְמוּ",
+     "נִרְדַּם"
+    ],
+    [
+     "hitpaʿel",
+     "אֶתְלַבֵּשׁ",
+     "יִתְלַבֵּשׁ",
+     "תִּתְלַבֵּשׁ",
+     "יִתְלַבְּשׁוּ",
+     "הִתְלַבֵּשׁ, הִתְקַלֵּחַ, הִתְעוֹרֵר"
+    ]
+   ],
+   "caption": "The prefixes are the same; their vowel and the stem come with the pattern. The 3rd person masculine singular (יִזְכֹּר, יָקוּם …) is shown with every verb as its future."
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "הָיָה “be” in the future"
+   ],
+   "rows": [
+    [
+     "אֲנִי",
+     "אֶהְיֶה"
+    ],
+    [
+     "הוּא / הִיא",
+     "יִהְיֶה / תִּהְיֶה"
+    ],
+    [
+     "אֲנַחְנוּ",
+     "נִהְיֶה"
+    ],
+    [
+     "הֵם",
+     "יִהְיוּ"
+    ]
+   ],
+   "caption": "The present has no verb “to be”, but the future has: מָחָר הוּא יִהְיֶה בַּמָּלוֹן."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Three ways to talk about tomorrow",
+   "text": "The future form: מָחָר נְבַקֵּר אֶת סָבְתָא. The present with a word of time, for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים. Colloquial הוֹלֵךְ + infinitive, “going to”: אֲנִי הוֹלֵךְ לְהַזְמִין חֶדֶר."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "תִּ is two persons",
+   "text": "תִּזְכֹּר is “you (m.) will remember” and “she will remember”: the subject or the context decides (אַתָּה תִּזְכֹּר / הִיא תִּזְכֹּר). For a woman addressed: תִּזְכְּרִי."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Prohibitions use the future",
+   "text": "“Don’t forget!” is אַל + future: אַל תִּשְׁכַּח! / אַל תִּשְׁכְּחִי! — never אַל + imperative, and לֹא + future is a strong command (לֹא תִּגְנֹב “thou shalt not steal”).",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Who will do it?",
+    "Prefix: אֶ / תִּ / יִ / נִ",
+    "Stem of the verb’s pattern",
+    "Ending ־ִי / ־וּ if needed",
+    "לֹא before it for “not”"
+   ],
+   "caption": "Building a future form"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Who? → the prefix (and ending).",
+    "Which pattern? → the vowels (יִזְכֹּר, יְסַיֵּם, יַתְחִיל, יָקוּם …).",
+    "Is it a prohibition? → אַל + future."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who will do it? אֶ־ (I), תִּ־ (you m. / she), תִּ…־ִי (you f.), יִ־ (he), נִ־ (we), תִּ…־וּ (you pl.), יִ…־וּ (they).",
+   "Which pattern? paʿal יִזְכֹּר / יִגְדַּל, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ.",
+   "Is the form תִּ… without an ending? Check the subject: “you (m.)” or “she”.",
+   "Is it a fixed plan? The present with מָחָר is also fine; colloquially הוֹלֵךְ + infinitive.",
+   "Is it “don’t …!”? → אַל + future (אַל תִּשְׁכַּח!)."
+  ],
+  "steps": [
+   "Find the subject.",
+   "Choose the prefix (and the ending).",
+   "Use the verb’s future stem (its 3rd person masculine singular shows it).",
+   "Add לֹא for the negative, אַל for a prohibition."
+  ]
+ },
+ "traps": [
+  "*הִיא יִזְכֹּר — “she” takes תִּ־: הִיא תִּזְכֹּר.",
+  "*אֲנִי יִזְכֹּר — “I” takes אֶ־: אֶזְכֹּר (in hifʿil אַ־: אַתְחִיל; in piʿel אֲ־: אֲסַיֵּם).",
+  "*אַתְּ תִּזְכֹּר — to a woman add ־ִי: תִּזְכְּרִי.",
+  "*אַל תִּזְכֹּר … meaning “don’t remember” is fine, but *אַל זְכֹר is not Hebrew: prohibitions take the future.",
+  "The present of הָיָה does not exist, but its future does: יִהְיֶה, תִּהְיֶה.",
+  "The feminine plural in ־נָה (תִּזְכֹּרְנָה) is literary; say הֵן יִזְכְּרוּ."
+ ],
+ "evidence": {
+  "tags": [
+   "V",
+   "FUT"
+  ]
+ },
+ "paradigmCells": [
+  "V;FUT;1;SG",
+  "V;FUT;2;SG;MASC",
+  "V;FUT;2;SG;FEM",
+  "V;FUT;3;SG;MASC",
+  "V;FUT;3;SG;FEM",
+  "V;FUT;1;PL",
+  "V;FUT;2;PL;MASC",
+  "V;FUT;3;PL;MASC"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "he:hitorer",
+    "he:kam",
+    "he:rachats",
+    "he:hitkaleach",
+    "he:hitlabesh",
+    "he:hitchil",
+    "he:siyem",
+    "he:nirdam",
+    "he:yashan-v",
+    "he:sichek",
+    "he:gadal",
+    "he:zachar",
+    "he:shachach",
+    "he:hizmin",
+    "he:biker"
+   ],
+   "cells": [
+    "V;FUT;1;SG",
+    "V;FUT;2;SG;FEM",
+    "V;FUT;3;SG;MASC",
+    "V;FUT;1;PL",
+    "V;FUT;3;PL;MASC"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.future",
+   "note": "The Hebrew future uses the same person prefixes as the Arabic imperfect (أَذْكُرُ / אֶזְכֹּר, تَذْكُرُ / תִּזְכֹּר, يَذْكُرُ / יִזְכֹּר, نَذْكُرُ / נִזְכֹּר); Arabic adds سَ / سَوْفَ to make it future, Hebrew needs nothing."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.future",
+   "note": "German uses werden + infinitive, or the present with a time word (morgen fahre ich); Hebrew has a one-word future, נִסַּע, and also uses the present for fixed plans."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.future",
+   "note": "Chinese adds 要, 会 or 打算 before an unchanged verb; Hebrew changes the verb: אַזְמִין “I will book”."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek builds the future with θα + verb and chooses an aspect (θα κλείσω / θα κλείνω); Hebrew has one future form with person prefixes: אַזְמִין “I will book”."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian uses the perfective present (закажу) or буду + infinitive; Hebrew has one future form for both, אַזְמִין, and no aspect."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Like Spanish (reservaré / voy a reservar), Hebrew has a one-word future (אַזְמִין) and a colloquial “going to” (אֲנִי הוֹלֵךְ לְהַזְמִין) — but the person is marked mostly at the beginning of the word."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "No “will”: the future is one word, with the person in front — אַזְמִין “I will book”, נְבַקֵּר “we will visit”. הוֹלֵךְ + infinitive is close to “going to”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As French has a futur simple (je réserverai) and a futur proche (je vais réserver), Hebrew has אַזְמִין and the colloquial אֲנִי הוֹלֵךְ לְהַזְמִין; the Hebrew future shows the person by a prefix."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German needs werden (ich werde buchen) or uses the present; Hebrew has a one-word future with prefixes (אַזְמִין), though it also uses the present for fixed plans (מָחָר אֲנַחְנוּ נוֹסְעִים)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "The Hindi future (करूँगा / करूँगी) is one word with person, number and gender; the Hebrew future is too (אֶזְכֹּר, תִּזְכְּרִי), but its 1st person has no gender."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian builds a written future with خواستن (خواهم رفت) and uses the present (می‌روم) in speech; Hebrew has a one-word future, אֵלֵךְ / נֵלֵךְ, used in speech and writing."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi too has a one-word future with person endings (मी जाईन, तो जाईल); Hebrew marks the person mostly with prefixes: אֶזְכֹּר, יִזְכֹּר."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The prefixes are the Arabic ones (أَ تَ يَ نَ / אֶ תִּ יִ נִ), and here too “you (m.)” and “she” share a form (تَذْكُرُ / תִּזְכֹּר); Hebrew needs no سَ / سَوْفَ — the prefix form itself is the future."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the future suffix and the person at the end (rezervasyon yapacağım); Hebrew puts most of the person at the beginning: אַזְמִין."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese has no future form — the non-past and a time word (明日予約する); Hebrew must use the future form: מָחָר אַזְמִין."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean builds the future with -(으)ㄹ 거예요; Hebrew has a one-word form with person prefixes: אַזְמִין."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has no future tense and uses the present with a time word (huomenna varaan); Hebrew has a real future: מָחָר אַזְמִין — though it can also use the present for fixed plans."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses fog + infinitive or the present; Hebrew has a one-word future with person prefixes: אַזְמִין."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili, too, puts the person in front of the verb, with the future marker -ta- (nitakumbuka “I will remember”); Hebrew fuses person and future into one prefix: אֶזְכֹּר."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese leaves the verb unchanged and adds 要 / 会 / 打算; Hebrew changes the verb itself: אֶזְכֹּר “I will remember”."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese adds sẽ before an unchanged verb; Hebrew changes the verb: נְבַקֵּר “we will visit”."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person: נְבַקֵּר."
+  }
+ ]
+}

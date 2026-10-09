@@ -9,6 +9,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -247,9 +251,8 @@
   {
    "id": "adj.broken",
    "gloss": "broken, out of order; (of food) gone off",
-   "tier": 2,
-   "rank": 6,
-   "pending": true,
+   "tier": 1,
+   "rank": 66,
    "subgroup": "more"
   },
   {
@@ -263,9 +266,8 @@
   {
    "id": "adj.clever",
    "gloss": "bright, clever",
-   "tier": 2,
-   "rank": 8,
-   "pending": true,
+   "tier": 1,
+   "rank": 60,
    "subgroup": "more"
   },
   {
@@ -455,9 +457,8 @@
   {
    "id": "adj.honest",
    "gloss": "honest, sincere",
-   "tier": 2,
-   "rank": 32,
-   "pending": true,
+   "tier": 1,
+   "rank": 58,
    "subgroup": "more"
   },
   {
@@ -495,9 +496,8 @@
   {
    "id": "adj.kind",
    "gloss": "kind, good-hearted",
-   "tier": 2,
-   "rank": 37,
-   "pending": true,
+   "tier": 1,
+   "rank": 57,
    "subgroup": "more"
   },
   {
@@ -631,9 +631,8 @@
   {
    "id": "adj.possible",
    "gloss": "possible",
-   "tier": 2,
-   "rank": 54,
-   "pending": true,
+   "tier": 1,
+   "rank": 30,
    "subgroup": "more"
   },
   {
@@ -695,9 +694,8 @@
   {
    "id": "adj.short.person",
    "gloss": "short (of a person, not tall)",
-   "tier": 2,
-   "rank": 62,
-   "pending": true,
+   "tier": 1,
+   "rank": 54,
    "subgroup": "more"
   },
   {
@@ -743,9 +741,8 @@
   {
    "id": "adj.spicy",
    "gloss": "spicy, hot (food)",
-   "tier": 2,
-   "rank": 68,
-   "pending": true,
+   "tier": 1,
+   "rank": 36,
    "subgroup": "more"
   },
   {
@@ -843,6 +840,251 @@
    "rank": 80,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "adj.allowed",
+   "gloss": "allowed",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.forbidden",
+   "gloss": "forbidden",
+   "tier": 1,
+   "rank": 29,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.impossible",
+   "gloss": "impossible",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.necessary",
+   "gloss": "necessary",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.ill",
+   "gloss": "ill, sick",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.healthy",
+   "gloss": "healthy",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.vegetarian",
+   "gloss": "vegetarian",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sweet",
+   "gloss": "sweet",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sour",
+   "gloss": "sour",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.bitter",
+   "gloss": "bitter",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.salty",
+   "gloss": "salty",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sunny",
+   "gloss": "sunny",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.cloudy",
+   "gloss": "cloudy",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.wet",
+   "gloss": "wet",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.dry",
+   "gloss": "dry",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.angry",
+   "gloss": "angry",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.afraid",
+   "gloss": "afraid, scared",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.surprised",
+   "gloss": "surprised",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.bored",
+   "gloss": "bored",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.worried",
+   "gloss": "worried",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.proud",
+   "gloss": "proud",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.jealous",
+   "gloss": "jealous",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.nervous",
+   "gloss": "nervous",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.calm",
+   "gloss": "calm",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.fat",
+   "gloss": "fat",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.thin",
+   "gloss": "thin, slim",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.lazy",
+   "gloss": "lazy",
+   "tier": 1,
+   "rank": 59,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.shy",
+   "gloss": "shy",
+   "tier": 1,
+   "rank": 61,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.funny",
+   "gloss": "funny",
+   "tier": 1,
+   "rank": 62,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.polite",
+   "gloss": "polite",
+   "tier": 1,
+   "rank": 63,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.busy",
+   "gloss": "busy",
+   "tier": 1,
+   "rank": 64,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.lost",
+   "gloss": "lost (I am lost)",
+   "tier": 1,
+   "rank": 65,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.ancient",
+   "gloss": "ancient",
+   "tier": 1,
+   "rank": 67,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.formal",
+   "gloss": "formal",
+   "tier": 1,
+   "rank": 68,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.informal",
+   "gloss": "informal",
+   "tier": 1,
+   "rank": 69,
+   "subgroup": "core"
   }
  ]
 }

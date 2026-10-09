@@ -9,6 +9,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -172,9 +176,8 @@
   {
    "id": "place.abroad",
    "gloss": "abroad",
-   "tier": 2,
-   "rank": 1,
-   "pending": true,
+   "tier": 1,
+   "rank": 25,
    "subgroup": "more"
   },
   {
@@ -188,9 +191,8 @@
   {
    "id": "place.capital",
    "gloss": "capital city (首都)",
-   "tier": 2,
-   "rank": 3,
-   "pending": true,
+   "tier": 1,
+   "rank": 35,
    "subgroup": "more"
   },
   {
@@ -220,9 +222,8 @@
   {
    "id": "place.north",
    "gloss": "north (Biblical)",
-   "tier": 2,
-   "rank": 7,
-   "pending": true,
+   "tier": 1,
+   "rank": 30,
    "subgroup": "more"
   },
   {
@@ -244,9 +245,8 @@
   {
    "id": "place.south",
    "gloss": "south (Biblical)",
-   "tier": 2,
-   "rank": 10,
-   "pending": true,
+   "tier": 1,
+   "rank": 31,
    "subgroup": "more"
   },
   {
@@ -264,6 +264,97 @@
    "rank": 12,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "place.kindergarten",
+   "gloss": "kindergarten",
+   "tier": 1,
+   "rank": 23,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.hotel",
+   "gloss": "hotel",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.corner",
+   "gloss": "corner",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.crossroads",
+   "gloss": "crossroads, junction",
+   "tier": 1,
+   "rank": 27,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.trafficlight",
+   "gloss": "traffic light",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.bridge",
+   "gloss": "bridge",
+   "tier": 1,
+   "rank": 29,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.east",
+   "gloss": "east",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.west",
+   "gloss": "west",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.continent",
+   "gloss": "continent",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.border",
+   "gloss": "border",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.coast",
+   "gloss": "coast",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.world",
+   "gloss": "the world",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.townhall",
+   "gloss": "town hall",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
   }
  ]
 }

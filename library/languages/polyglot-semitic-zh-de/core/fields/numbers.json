@@ -5,6 +5,10 @@
   {
    "id": "num",
    "title": "Numbers"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -220,6 +224,153 @@
    "subgroup": "num",
    "tier": 1,
    "rank": 30
+  },
+  {
+   "id": "num.ord.1",
+   "gloss": "first",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.2",
+   "gloss": "second",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.3",
+   "gloss": "third",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.4",
+   "gloss": "fourth",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.5",
+   "gloss": "fifth",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.6",
+   "gloss": "sixth",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.7",
+   "gloss": "seventh",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.8",
+   "gloss": "eighth",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.9",
+   "gloss": "ninth",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.10",
+   "gloss": "tenth",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.last",
+   "gloss": "last",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.half",
+   "gloss": "half",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.quarter",
+   "gloss": "quarter",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.200",
+   "gloss": "two hundred",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.500",
+   "gloss": "five hundred",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.10000",
+   "gloss": "ten thousand",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.100000",
+   "gloss": "a hundred thousand",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.1000000",
+   "gloss": "a million",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.third",
+   "gloss": "a third",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.percent",
+   "gloss": "percent",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.half.adj",
+   "gloss": "half (a half kilo)",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
   }
  ]
 }

@@ -3240,7 +3240,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     }
-   }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.likely",
+     "axis": "construction",
+     "value": "容易 + verb: easily, prone to — a tendency (冬天很容易感冒)"
+    }
+   ]
   },
   {
    "id": "zh:nan",

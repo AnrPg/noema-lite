@@ -43,16 +43,14 @@
   {
    "id": "measure.pair",
    "gloss": "pair, couple; one of a pair",
-   "tier": 2,
-   "rank": 8,
-   "pending": true
+   "tier": 1,
+   "rank": 10
   },
   {
    "id": "measure.size",
    "gloss": "size (of clothes, shoes: 大号 large)",
-   "tier": 2,
-   "rank": 9,
-   "pending": true
+   "tier": 1,
+   "rank": 1
   },
   {
    "id": "measure.tael",
@@ -60,6 +58,60 @@
    "tier": 2,
    "rank": 10,
    "pending": true
+  },
+  {
+   "id": "measure.bottle",
+   "gloss": "bottle",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "measure.can",
+   "gloss": "can, tin",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "measure.box",
+   "gloss": "box",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "measure.packet",
+   "gloss": "packet",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "measure.kilo",
+   "gloss": "kilo(gram)",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "measure.gram",
+   "gloss": "gram",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "measure.litre",
+   "gloss": "litre",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "measure.piece",
+   "gloss": "piece",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "measure.slice",
+   "gloss": "slice",
+   "tier": 1,
+   "rank": 11
   }
  ]
 }

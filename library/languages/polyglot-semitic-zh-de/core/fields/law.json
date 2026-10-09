@@ -11,6 +11,24 @@
    "tier": 2,
    "rank": 1,
    "pending": true
+  },
+  {
+   "id": "law.law",
+   "gloss": "law",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "law.court",
+   "gloss": "court (of law)",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "law.rights",
+   "gloss": "rights",
+   "tier": 1,
+   "rank": 3
   }
  ]
 }

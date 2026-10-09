@@ -1537,6 +1537,13 @@
       "sense": "s2"
      },
      {
+      "text": "سَافَرَ أَخِي إِلَى الْخَارِجِ لِلدِّرَاسَةِ.",
+      "tr": "My brother went abroad to study.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s2"
+     },
+     {
       "text": "خَارِجُ قِسْمَةِ عَشَرَةٍ عَلَى اثْنَيْنِ خَمْسَةٌ.",
       "tr": "The quotient of ten divided by two is five.",
       "register": "technical",

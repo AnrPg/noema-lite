@@ -1,0 +1,2048 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:jihua",
+   "lemma": "计划",
+   "trad": "計劃",
+   "pinyin": "jì huà",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.plan"
+   ],
+   "contrasts": [
+    {
+     "concept": "abstract.plan",
+     "axis": "how firm and formal",
+     "value": "a worked-out plan, often written or official (旅行计划, 五年计划)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A list, a timetable, a map with arrows — the worked-out plan.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plan, project, programme",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.plan"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to plan (to): 我们计划明年去",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你有什么计划？",
+      "py": "Nǐ yǒu shénme jìhuà?",
+      "tr": "What are your plans?",
+      "register": "neutral",
+      "context": "chat",
+      "sense": "s1"
+     },
+     {
+      "text": "我们的旅行计划很简单。",
+      "py": "Wǒmen de lǚxíng jìhuà hěn jiǎndān.",
+      "tr": "Our travel plan is simple.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我们计划明年去中国。",
+      "py": "Wǒmen jìhuà míngnián qù Zhōngguó.",
+      "tr": "We are planning to go to China next year.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "旅行计划",
+      "tr": "travel plan"
+     },
+     {
+      "text": "做计划",
+      "tr": "to make a plan"
+     },
+     {
+      "text": "计划好了",
+      "tr": "it is all planned"
+     },
+     {
+      "text": "五年计划",
+      "tr": "five-year plan"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "计划赶不上变化",
+      "tr": "plans cannot keep up with changes",
+      "kind": "saying",
+      "meaning": "things rarely go as planned",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "打算",
+      "register": "neutral",
+      "nuance": "dǎsuàn: an intention, what one means to do — everyday"
+     },
+     {
+      "word": "安排",
+      "register": "neutral",
+      "nuance": "ānpái: arrangement, schedule"
+     },
+     {
+      "word": "规划",
+      "register": "formal",
+      "nuance": "guīhuà: long-term planning (of a city, a career)"
+     }
+    ],
+    "etymology": {
+     "text": "计 ‘to count, to calculate’ + 划 ‘to plan, to mark out’. Attested in Classical Chinese, and popularized from Japanese 計画 (keikaku) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "计划 is one of many modern words that Chinese and Japanese share: 計画 keikaku."
+    ],
+    "pitfalls": [
+     "Taiwan writes 計畫, Hong Kong and many older texts 計劃 — both are correct traditional spellings."
+    ],
+    "subtleties": [
+     "计划 sounds organised, often written down; for a simple personal intention people say 打算: 你明天有什么打算？"
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 計劃 for every sense (Taiwan’s standard spelling is 計畫)"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "项"
+    ]
+   }
+  },
+  {
+   "id": "zh:dasuan.plan",
+   "lemma": "打算",
+   "trad": "打算",
+   "pinyin": "dǎ suàn",
+   "pos": "VERB",
+   "senses": [
+    "abstract.plan"
+   ],
+   "contrasts": [
+    {
+     "concept": "abstract.plan",
+     "axis": "how firm and formal",
+     "value": "an intention, everyday speech (我打算明年去)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What you have in mind to do next — an intention, said casually.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to plan to, to intend to (+ verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.plan"
+     },
+     {
+      "id": "s2",
+      "def": "(noun) plan, intention: 你有什么打算？",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你暑假打算做什么？",
+      "py": "Nǐ shǔjià dǎsuàn zuò shénme?",
+      "tr": "What are you planning to do in the summer holidays?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "我打算明年出国。",
+      "py": "Wǒ dǎsuàn míngnián chūguó.",
+      "tr": "I intend to go abroad next year.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我还没有打算。",
+      "py": "Wǒ hái méiyǒu dǎsuàn.",
+      "tr": "I have no plans yet.",
+      "register": "neutral",
+      "context": "chat",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "打算去",
+      "tr": "to plan to go"
+     },
+     {
+      "text": "有什么打算",
+      "tr": "what plans do (you) have?"
+     },
+     {
+      "text": "不打算",
+      "tr": "not to intend to"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "计划",
+      "register": "neutral",
+      "nuance": "jìhuà: plan — more organised, often written"
+     },
+     {
+      "word": "准备",
+      "register": "neutral",
+      "nuance": "zhǔnbèi: get ready to; mean to (soon)"
+     },
+     {
+      "word": "想",
+      "register": "neutral",
+      "nuance": "xiǎng: would like to — a wish (S07)"
+     }
+    ],
+    "etymology": {
+     "text": "打 ‘to hit; to do’ + 算 ‘to calculate’: ‘work out the sums’ — to reckon, to plan.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "打 is the ‘do’ of many verbs: 打电话 ‘make a phone call’, 打球 ‘play ball’, 打算 ‘make plans’."
+    ],
+    "pitfalls": [
+     "打算 + verb needs no word for ‘to’: 我打算去. The negative is 不打算 ‘don’t intend to’ or 没打算 ‘hadn’t planned to’."
+    ],
+    "subtleties": [
+     "打算 tells an intention, not a certainty: 我打算去 ‘I mean to go’, 我会去 ‘I will go’, 我要去 ‘I’m going (it’s decided)’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:jiudian",
+   "lemma": "酒店",
+   "trad": "酒店",
+   "pinyin": "jiǔ diàn",
+   "pos": "NOUN",
+   "senses": [
+    "place.hotel"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A lobby, a key card, a view from the twentieth floor.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hotel",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hotel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们住在一家大酒店。",
+      "py": "Wǒmen zhù zài yì jiā dà jiǔdiàn.",
+      "tr": "We are staying in a big hotel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "这家酒店离机场很近。",
+      "py": "Zhè jiā jiǔdiàn lí jīchǎng hěn jìn.",
+      "tr": "This hotel is close to the airport.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     },
+     {
+      "text": "我已经预订了酒店。",
+      "py": "Wǒ yǐjīng yùdìngle jiǔdiàn.",
+      "tr": "I have already booked the hotel.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "预订酒店",
+      "tr": "to book a hotel"
+     },
+     {
+      "text": "住酒店",
+      "tr": "to stay in a hotel"
+     },
+     {
+      "text": "五星级酒店",
+      "tr": "five-star hotel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "宾馆",
+      "register": "neutral",
+      "nuance": "bīnguǎn: hotel, guesthouse — common in names, a little old-fashioned"
+     },
+     {
+      "word": "饭店",
+      "register": "neutral",
+      "nuance": "fàndiàn: hotel in names (北京饭店); otherwise ‘restaurant’"
+     },
+     {
+      "word": "旅馆",
+      "register": "neutral",
+      "nuance": "lǚguǎn: inn, a small simple hotel"
+     }
+    ],
+    "etymology": {
+     "text": "酒 ‘wine, liquor’ + 店 ‘shop’. Wiktionary still lists the senses ‘bar, tavern’ and ‘liquor shop’; today the word means above all ‘hotel’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "北京饭店 ‘Beijing Hotel’ is a hotel, not a restaurant: 饭店 in a name is often a hotel."
+    ],
+    "pitfalls": [
+     "酒店 is not a bar: a bar is 酒吧 (jiǔbā). In Taiwan 酒店 can also mean a hostess club — 饭店 or 旅馆 is safer there."
+    ],
+    "subtleties": [
+     "Staying at a hotel is 住酒店 / 住在酒店 (住 ‘to live, to stay’)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   }
+  },
+  {
+   "id": "zh:yuding",
+   "lemma": "预订",
+   "trad": "預訂",
+   "pinyin": "yù dìng",
+   "pos": "VERB",
+   "senses": [
+    "verb.book"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A click, a confirmation e-mail — the room is yours.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to book, to reserve (a room, a ticket, a table)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.book"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我想预订一个房间。",
+      "py": "Wǒ xiǎng yùdìng yí ge fángjiān.",
+      "tr": "I’d like to book a room.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "你预订酒店了吗？",
+      "py": "Nǐ yùdìng jiǔdiàn le ma?",
+      "tr": "Have you booked the hotel?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "飞机票我们已经预订了。",
+      "py": "Fēijīpiào wǒmen yǐjīng yùdìng le.",
+      "tr": "We have already booked the plane tickets.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "预订房间",
+      "tr": "to book a room"
+     },
+     {
+      "text": "预订机票",
+      "tr": "to book plane tickets"
+     },
+     {
+      "text": "网上预订",
+      "tr": "to book online"
+     },
+     {
+      "text": "提前预订",
+      "tr": "to book in advance"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "订",
+      "register": "colloquial",
+      "nuance": "dìng: book — the short everyday form (订票, 订房间)"
+     },
+     {
+      "word": "预约",
+      "register": "neutral",
+      "nuance": "yùyuē: make an appointment (doctor, hairdresser)"
+     },
+     {
+      "word": "订位",
+      "register": "neutral",
+      "nuance": "dìngwèi: reserve a table or a seat"
+     }
+    ],
+    "etymology": {
+     "text": "预 ‘in advance’ + 订 ‘to fix, to agree on’: ‘fix in advance’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "预 ‘in advance’ is also in 预报 ‘forecast’ (天气预报 ‘weather forecast’)."
+    ],
+    "pitfalls": [
+     "预订 ‘to book’ and 预定 ‘to fix beforehand, scheduled’ are both yùdìng — the characters are often mixed up."
+    ],
+    "subtleties": [
+     "In speech the short 订 is more common (订酒店, 订票); 预订 is the word of websites and hotel desks."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 預訂 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:huzhao",
+   "lemma": "护照",
+   "trad": "護照",
+   "pinyin": "hù zhào",
+   "pos": "NOUN",
+   "senses": [
+    "obj.passport"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The little booklet you check three times before a flight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "passport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.passport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "别忘了带护照！",
+      "py": "Bié wàngle dài hùzhào!",
+      "tr": "Don’t forget your passport!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我的护照在哪里？",
+      "py": "Wǒ de hùzhào zài nǎli?",
+      "tr": "Where is my passport?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "出国要有护照。",
+      "py": "Chūguó yào yǒu hùzhào.",
+      "tr": "You need a passport to go abroad.",
+      "register": "neutral",
+      "context": "documents",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "办护照",
+      "tr": "to get a passport issued"
+     },
+     {
+      "text": "护照号码",
+      "tr": "passport number"
+     },
+     {
+      "text": "带护照",
+      "tr": "to take one’s passport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other everyday word for a passport; a visa (签证 qiānzhèng) and an ID card (身份证 shēnfènzhèng) are different documents.",
+    "etymology": {
+     "text": "护 ‘to protect’ + 照 ‘licence, certificate’ (as in 驾照 ‘driving licence’): ‘a protecting document’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "照 also means ‘photo’ (照片) — and every 护照 has one."
+    ],
+    "pitfalls": [
+     "Getting a passport is 办护照 ‘handle a passport’, not *买护照."
+    ],
+    "subtleties": [
+     "A passport is counted like a book: 一本护照."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 護照 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "本"
+    ]
+   }
+  },
+  {
+   "id": "zh:xinglixiang",
+   "lemma": "行李箱",
+   "trad": "行李箱",
+   "pinyin": "xíng li xiāng",
+   "pos": "NOUN",
+   "senses": [
+    "obj.suitcase"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wheels rattling over the station floor.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "suitcase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.suitcase"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的行李箱很重。",
+      "py": "Wǒ de xínglixiāng hěn zhòng.",
+      "tr": "My suitcase is heavy.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "你带几个行李箱？",
+      "py": "Nǐ dài jǐ ge xínglixiāng?",
+      "tr": "How many suitcases are you taking?",
+      "register": "neutral",
+      "context": "packing",
+      "sense": "s1"
+     },
+     {
+      "text": "他把衣服放进行李箱。",
+      "py": "Tā bǎ yīfu fàng jìn xínglixiāng.",
+      "tr": "He put the clothes into the suitcase.",
+      "register": "neutral",
+      "context": "packing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "拉行李箱",
+      "tr": "to pull a suitcase"
+     },
+     {
+      "text": "收拾行李箱",
+      "tr": "to pack a suitcase"
+     },
+     {
+      "text": "大行李箱",
+      "tr": "a big suitcase"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "箱子",
+      "register": "neutral",
+      "nuance": "xiāngzi: box, case — any box"
+     },
+     {
+      "word": "旅行箱",
+      "register": "neutral",
+      "nuance": "lǚxíngxiāng: travel case"
+     },
+     {
+      "word": "行李",
+      "register": "neutral",
+      "nuance": "xíngli: luggage, baggage (all of it)"
+     }
+    ],
+    "etymology": {
+     "text": "行李 ‘luggage’ + 箱 ‘box, case’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "行 has two readings: xíng ‘to go’ (行李, 旅行) and háng ‘row, trade’ (银行 ‘bank’)."
+    ],
+    "pitfalls": [
+     "Luggage itself (行李) is counted with 件: 两件行李; a 行李箱 is counted with 个."
+    ],
+    "subtleties": [
+     "In a car, Wiktionary notes, 行李箱 is also the boot (trunk)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading: xínglixiāng (行 is xíng here, háng in 银行)"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:guowai",
+   "lemma": "国外",
+   "trad": "國外",
+   "pinyin": "guó wài",
+   "pos": "NOUN",
+   "senses": [
+    "place.abroad"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.abroad",
+     "axis": "noun or verb",
+     "value": "the place: abroad (在国外, 去国外)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Other countries, other languages — beyond the border.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "abroad, overseas (the place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.abroad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他在国外工作。",
+      "py": "Tā zài guówài gōngzuò.",
+      "tr": "He works abroad.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "你去过国外吗？",
+      "py": "Nǐ qùguo guówài ma?",
+      "tr": "Have you ever been abroad?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "这是从国外买的。",
+      "py": "Zhè shì cóng guówài mǎi de.",
+      "tr": "This was bought abroad.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在国外",
+      "tr": "abroad (where)"
+     },
+     {
+      "text": "去国外",
+      "tr": "to go abroad"
+     },
+     {
+      "text": "国外旅行",
+      "tr": "travel abroad"
+     },
+     {
+      "text": "国内外",
+      "tr": "at home and abroad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "外国",
+      "register": "neutral",
+      "nuance": "wàiguó: a foreign country; foreign (外国人)"
+     },
+     {
+      "word": "海外",
+      "register": "formal",
+      "nuance": "hǎiwài: overseas (海外华人 ‘overseas Chinese’)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "国内",
+      "note": "guónèi: inside the country, at home"
+     }
+    ],
+    "etymology": {
+     "text": "国 ‘country’ + 外 ‘outside’: ‘outside the country’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Order matters: 国外 ‘outside the country’ = abroad; 外国 ‘outside country’ = a foreign country."
+    ],
+    "pitfalls": [
+     "国外 is a place, 外国 a country: 在国外 ‘abroad’, but 外国人 ‘a foreigner’ — not *国外人."
+    ],
+    "subtleties": [
+     "国外 behaves like a place name: 在国外, 去国外, 从国外."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 國外 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word: it is not counted"
+    }
+   }
+  },
+  {
+   "id": "zh:chuguo",
+   "lemma": "出国",
+   "trad": "出國",
+   "pinyin": "chū guó",
+   "pos": "VERB",
+   "senses": [
+    "place.abroad"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.abroad",
+     "axis": "noun or verb",
+     "value": "the verb: to go abroad (出国旅游)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A first flight, a new country — going abroad.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go abroad, to leave the country",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.abroad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我明年要出国。",
+      "py": "Wǒ míngnián yào chūguó.",
+      "tr": "I am going abroad next year.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "她第一次出国。",
+      "py": "Tā dì-yī cì chūguó.",
+      "tr": "It is her first time abroad.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "很多学生出国留学。",
+      "py": "Hěn duō xuésheng chūguó liúxué.",
+      "tr": "Many students go abroad to study.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "出国旅游",
+      "tr": "to travel abroad"
+     },
+     {
+      "text": "出国留学",
+      "tr": "to study abroad"
+     },
+     {
+      "text": "出过国",
+      "tr": "to have been abroad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "去国外",
+      "register": "neutral",
+      "nuance": "qù guówài: go abroad — the same in two words"
+     },
+     {
+      "word": "出境",
+      "register": "formal",
+      "nuance": "chūjìng: leave the country (at the border)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "回国",
+      "note": "huíguó: to return to one’s country"
+     }
+    ],
+    "etymology": {
+     "text": "出 ‘to go out’ + 国 ‘country’: ‘go out of the country’; Wiktionary writes it 出⫽國 (separable).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Its opposite is 回国 ‘to return to one’s own country’."
+    ],
+    "pitfalls": [
+     "出国 takes no object: ‘go to France’ is 去法国, not *出国法国."
+    ],
+    "subtleties": [
+     "过 goes inside: 我没出过国 ‘I have never been abroad’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 出國 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "出",
+      "object": "国",
+      "example": "出过国"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:canguan",
+   "lemma": "参观",
+   "trad": "參觀",
+   "pinyin": "cān guān",
+   "pos": "VERB",
+   "senses": [
+    "verb.visit"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.visit",
+     "axis": "what is visited",
+     "value": "a place: a museum, a school, a factory (to look round)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Walking through halls and corridors, looking at everything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to visit (a place), to look round, to tour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.visit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "明天我们参观大学。",
+      "py": "Míngtiān wǒmen cānguān dàxué.",
+      "tr": "Tomorrow we are visiting the university.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "游客们在参观故宫。",
+      "py": "Yóukèmen zài cānguān Gùgōng.",
+      "tr": "The tourists are visiting the Forbidden City.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "欢迎参观！",
+      "py": "Huānyíng cānguān!",
+      "tr": "Visitors welcome!",
+      "register": "formal",
+      "context": "signs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "参观博物馆",
+      "tr": "to visit a museum"
+     },
+     {
+      "text": "参观工厂",
+      "tr": "to tour a factory"
+     },
+     {
+      "text": "欢迎参观",
+      "tr": "visitors welcome"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "游览",
+      "register": "neutral",
+      "nuance": "yóulǎn: tour, go sightseeing (a scenic place)"
+     },
+     {
+      "word": "访问",
+      "register": "formal",
+      "nuance": "fǎngwèn: pay an official visit; visit a website"
+     },
+     {
+      "word": "看",
+      "register": "colloquial",
+      "nuance": "kàn: go and see (去看看)"
+     }
+    ],
+    "etymology": {
+     "text": "参 ‘to join, to take part’ + 观 ‘to look at’: ‘join in and look’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "A sign saying 谢绝参观 means ‘no visitors’."
+    ],
+    "pitfalls": [
+     "参观 is for places and things, never for people: visiting a friend is 看朋友 / 看望朋友."
+    ],
+    "subtleties": [
+     "参观 is looking round as a visitor; staying somewhere is not 参观: *参观北京三天 → 在北京玩三天."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 參觀 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:kanwang",
+   "lemma": "看望",
+   "trad": "看望",
+   "pinyin": "kàn wàng",
+   "pos": "VERB",
+   "senses": [
+    "verb.visit"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.visit",
+     "axis": "what is visited",
+     "value": "a person: family, the sick, the elderly (to see how they are)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fruit in a bag, a knock on the door — going to see someone you care about.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to visit, to call on (a person: family, the sick, the elderly)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.visit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我明天去医院看望奶奶。",
+      "py": "Wǒ míngtiān qù yīyuàn kànwàng nǎinai.",
+      "tr": "Tomorrow I’m going to the hospital to visit Grandma.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "周末我们去看望爷爷。",
+      "py": "Zhōumò wǒmen qù kànwàng yéye.",
+      "tr": "At the weekend we are going to visit Grandpa.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "老师来看望生病的学生。",
+      "py": "Lǎoshī lái kànwàng shēngbìng de xuésheng.",
+      "tr": "The teacher came to see the sick student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "看望病人",
+      "tr": "to visit a patient"
+     },
+     {
+      "text": "看望父母",
+      "tr": "to visit one’s parents"
+     },
+     {
+      "text": "去看望",
+      "tr": "to go and visit"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "看",
+      "register": "colloquial",
+      "nuance": "kàn: visit, go and see (去看奶奶)"
+     },
+     {
+      "word": "探望",
+      "register": "formal",
+      "nuance": "tànwàng: visit (especially the sick)"
+     },
+     {
+      "word": "拜访",
+      "register": "formal",
+      "nuance": "bàifǎng: pay a call on (respectfully)"
+     }
+    ],
+    "etymology": {
+     "text": "看 ‘to look, to see’ + 望 ‘to look into the distance; to visit’: ‘go and see someone’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Visiting the sick with fruit or flowers is usual — but never with a clock: 送钟 ‘give a clock’ sounds like 送终 ‘attend a deathbed’."
+    ],
+    "pitfalls": [
+     "看望 is for people (family, the sick, older people), not for places: visiting a museum is 参观."
+    ],
+    "subtleties": [
+     "看望 sounds caring and respectful — a visit to someone older, ill or far away."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:youke",
+   "lemma": "游客",
+   "trad": "遊客",
+   "pinyin": "yóu kè",
+   "pos": "NOUN",
+   "senses": [
+    "person.tourist"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cameras, maps and crowds at the famous sights.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tourist, sightseer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     },
+     {
+      "id": "s2",
+      "def": "visitor (to a park, a museum)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "北京有很多游客。",
+      "py": "Běijīng yǒu hěn duō yóukè.",
+      "tr": "There are a lot of tourists in Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "游客们在等导游。",
+      "py": "Yóukèmen zài děng dǎoyóu.",
+      "tr": "The tourists are waiting for the guide.",
+      "register": "neutral",
+      "context": "tour",
+      "sense": "s1"
+     },
+     {
+      "text": "公园里游客很多。",
+      "py": "Gōngyuán li yóukè hěn duō.",
+      "tr": "The park is full of visitors.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "外国游客",
+      "tr": "foreign tourists"
+     },
+     {
+      "text": "很多游客",
+      "tr": "a lot of tourists"
+     },
+     {
+      "text": "游客中心",
+      "tr": "visitor centre"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "旅客",
+      "register": "neutral",
+      "nuance": "lǚkè: traveller, passenger (trains, planes)"
+     },
+     {
+      "word": "观光客",
+      "register": "regional",
+      "nuance": "guānguāngkè: tourist (common in Taiwan)"
+     }
+    ],
+    "etymology": {
+     "text": "游 ‘to roam, to tour’ + 客 ‘guest, visitor’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "客 ‘guest’ makes many words for people: 客人 ‘guest’, 乘客 ‘passenger’, 顾客 ‘customer’."
+    ],
+    "pitfalls": [
+     "A passenger on a train or a plane is 乘客 or 旅客, not 游客 — a 游客 is there to look round."
+    ],
+    "subtleties": [
+     "游客 is often said of the crowd; one visitor, politely, is 一位游客."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 遊客 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位",
+     "名"
+    ]
+   }
+  },
+  {
+   "id": "zh:daoyou",
+   "lemma": "导游",
+   "trad": "導遊",
+   "pinyin": "dǎo yóu",
+   "pos": "NOUN",
+   "senses": [
+    "person.guide"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little flag held high, a microphone, ‘this way, please’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tour guide",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们的导游会说英语。",
+      "py": "Wǒmen de dǎoyóu huì shuō Yīngyǔ.",
+      "tr": "Our guide speaks English.",
+      "register": "neutral",
+      "context": "tour",
+      "sense": "s1"
+     },
+     {
+      "text": "他是北京的导游。",
+      "py": "Tā shì Běijīng de dǎoyóu.",
+      "tr": "He is a guide in Beijing.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "导游明天带我们去长城。",
+      "py": "Dǎoyóu míngtiān dài wǒmen qù Chángchéng.",
+      "tr": "Tomorrow the guide is taking us to the Great Wall.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "当导游",
+      "tr": "to work as a guide"
+     },
+     {
+      "text": "跟着导游",
+      "tr": "to follow the guide"
+     },
+     {
+      "text": "中文导游",
+      "tr": "a Chinese-speaking guide"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "向导",
+      "register": "neutral",
+      "nuance": "xiàngdǎo: guide (on a route, in the mountains)"
+     },
+     {
+      "word": "讲解员",
+      "register": "formal",
+      "nuance": "jiǎngjiěyuán: guide in a museum, docent"
+     }
+    ],
+    "etymology": {
+     "text": "导 ‘to lead, to guide’ + 游 ‘to tour’: ‘the one who leads the tour’. Wiktionary also lists the verb ‘to conduct a tour’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "导 ‘lead’ also gives 导演 ‘film director’ and 导师 ‘tutor, supervisor’."
+    ],
+    "pitfalls": [
+     "A guidebook is not 导游 but 旅游指南 (lǚyóu zhǐnán)."
+    ],
+    "subtleties": [
+     "导游 is the person and the job: 他做导游 ‘he works as a guide’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 導遊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位",
+     "名"
+    ]
+   }
+  },
+  {
+   "id": "zh:xiaxingqi",
+   "lemma": "下星期",
+   "trad": "下星期",
+   "pinyin": "xià xīng qī",
+   "pos": "NOUN",
+   "senses": [
+    "time.nextweek"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.nextweek",
+     "axis": "register",
+     "value": "everyday speech (also 下个星期)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The diary page you have not turned yet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "下星期我们去北京。",
+      "py": "Xià xīngqī wǒmen qù Běijīng.",
+      "tr": "Next week we are going to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "下星期一见！",
+      "py": "Xià xīngqīyī jiàn!",
+      "tr": "See you next Monday!",
+      "register": "informal",
+      "context": "chat",
+      "sense": "s1"
+     },
+     {
+      "text": "我下星期很忙。",
+      "py": "Wǒ xià xīngqī hěn máng.",
+      "tr": "I’m busy next week.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "下星期一",
+      "tr": "next Monday"
+     },
+     {
+      "text": "下星期见",
+      "tr": "see you next week"
+     },
+     {
+      "text": "下个星期",
+      "tr": "next week (with 个, spoken)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "下周",
+      "register": "neutral",
+      "nuance": "xiàzhōu: next week — shorter, in writing and speech"
+     },
+     {
+      "word": "下个星期",
+      "register": "colloquial",
+      "nuance": "xià ge xīngqī: next week — the most spoken form"
+     },
+     {
+      "word": "下礼拜",
+      "register": "regional",
+      "nuance": "xià lǐbài: next week — southern and Taiwan speech"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "上星期",
+      "note": "last week"
+     }
+    ],
+    "etymology": {
+     "text": "下 ‘below; next’ + 星期 ‘week’: in Chinese, time runs downwards — 上 is before, 下 after.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "上个月 ‘last month’, 下个月 ‘next month’: earlier time is ‘up’, later time ‘down’."
+    ],
+    "pitfalls": [
+     "下星期一 is ‘next Monday’: 下 goes before the whole day name (*星期一下 is wrong)."
+    ],
+    "subtleties": [
+     "下星期 and 下个星期 mean the same; 个 makes it a little more colloquial."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted"
+    }
+   }
+  },
+  {
+   "id": "zh:xiazhou",
+   "lemma": "下周",
+   "trad": "下週",
+   "pinyin": "xià zhōu",
+   "pos": "NOUN",
+   "senses": [
+    "time.nextweek"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.nextweek",
+     "axis": "register",
+     "value": "shorter, neutral — timetables, messages, the news"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A date in an e-mail: ‘next week, Wednesday’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们下周见。",
+      "py": "Wǒmen xiàzhōu jiàn.",
+      "tr": "See you next week.",
+      "register": "neutral",
+      "context": "chat",
+      "sense": "s1"
+     },
+     {
+      "text": "会议改到下周三。",
+      "py": "Huìyì gǎi dào xiàzhōusān.",
+      "tr": "The meeting has been moved to next Wednesday.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "下周天气很好。",
+      "py": "Xiàzhōu tiānqì hěn hǎo.",
+      "tr": "The weather will be good next week.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "下周一",
+      "tr": "next Monday"
+     },
+     {
+      "text": "下周见",
+      "tr": "see you next week"
+     },
+     {
+      "text": "下周末",
+      "tr": "next weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "下星期",
+      "register": "neutral",
+      "nuance": "xià xīngqī: next week — everyday speech"
+     },
+     {
+      "word": "下个星期",
+      "register": "colloquial",
+      "nuance": "xià ge xīngqī: next week — the most spoken form"
+     }
+    ],
+    "etymology": {
+     "text": "下 ‘next’ + 周 ‘week’ (traditional 週).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "With 周 the weekdays are short too: 周一 … 周日 (S14) — so 下周三 is ‘next Wednesday’."
+    ],
+    "pitfalls": [
+     "Traditional characters write the week 週 (下週); 周 alone is also the Zhou dynasty, which keeps 周."
+    ],
+    "subtleties": [
+     "下周 is compact and neutral — the form of timetables, e-mails and the news."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 下週 (the week is 週; 周 alone is also the Zhou dynasty)"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted"
+    }
+   }
+  },
+  {
+   "id": "zh:mingnian",
+   "lemma": "明年",
+   "trad": "明年",
+   "pinyin": "míng nián",
+   "pos": "NOUN",
+   "senses": [
+    "time.nextyear"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A new calendar on the wall — the year to come.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextyear"
+     },
+     {
+      "id": "s2",
+      "def": "the following year (in a story)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我明年去中国。",
+      "py": "Wǒ míngnián qù Zhōngguó.",
+      "tr": "I’m going to China next year.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "明年我就二十岁了。",
+      "py": "Míngnián wǒ jiù èrshí suì le.",
+      "tr": "Next year I’ll be twenty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "明年见！",
+      "py": "Míngnián jiàn!",
+      "tr": "See you next year!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "明年夏天",
+      "tr": "next summer"
+     },
+     {
+      "text": "明年见",
+      "tr": "see you next year"
+     },
+     {
+      "text": "明年春节",
+      "tr": "next Spring Festival"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "来年",
+      "register": "formal",
+      "nuance": "láinián: the coming year"
+     },
+     {
+      "word": "次年",
+      "register": "formal",
+      "nuance": "cìnián: the following year (in narration)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "去年",
+      "note": "last year"
+     }
+    ],
+    "etymology": {
+     "text": "明 ‘bright; next (of days and years)’ + 年 ‘year’ — like 明天 ‘tomorrow’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The series: 前年 ‘the year before last’, 去年 ‘last year’, 今年 ‘this year’, 明年 ‘next year’, 后年 ‘the year after next’."
+    ],
+    "pitfalls": [
+     "Next month and next week take 下 (下个月, 下星期), but next year is 明年 — not *下年."
+    ],
+    "subtleties": [
+     "明年 is a time word: before the verb, with no preposition (我明年去)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted"
+    }
+   }
+  },
+  {
+   "id": "zh:hui.will",
+   "lemma": "会",
+   "trad": "會",
+   "pinyin": "huì",
+   "pos": "VERB",
+   "senses": [
+    "adj.likely",
+    "verb.can",
+    "work.meeting"
+   ],
+   "role": "will — the future of prediction, 明天会很冷 (C03); ‘can’ (a learned skill) is taught with the modal verbs (C05)",
+   "contrasts": [
+    {
+     "concept": "adj.likely",
+     "axis": "construction",
+     "value": "会 + verb: will, is likely to — a prediction (明天会很冷)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Looking ahead — what will probably happen; and what you know how to do.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "will, be likely to (a prediction): 明天会很冷",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.likely"
+     },
+     {
+      "id": "s2",
+      "def": "can, know how to (a learned skill): 会说中文",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.can"
+     },
+     {
+      "id": "s3",
+      "def": "meeting, gathering (开会 ‘to have a meeting’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.meeting"
+     }
+    ],
+    "examples": [
+     {
+      "text": "明天会很冷。",
+      "py": "Míngtiān huì hěn lěng.",
+      "tr": "It will be cold tomorrow.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "他不会来了。",
+      "py": "Tā bú huì lái le.",
+      "tr": "He won’t come now.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "我会说一点中文。",
+      "py": "Wǒ huì shuō yìdiǎn Zhōngwén.",
+      "tr": "I can speak a little Chinese.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s2"
+     },
+     {
+      "text": "你会开车吗？",
+      "py": "Nǐ huì kāichē ma?",
+      "tr": "Can you drive?",
+      "register": "neutral",
+      "context": "skills",
+      "sense": "s2"
+     },
+     {
+      "text": "我们明天开会。",
+      "py": "Wǒmen míngtiān kāihuì.",
+      "tr": "We have a meeting tomorrow.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "下午有个会。",
+      "py": "Xiàwǔ yǒu ge huì.",
+      "tr": "There’s a meeting this afternoon.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "会 + verb",
+      "tr": "will …"
+     },
+     {
+      "text": "不会",
+      "tr": "won’t; can’t"
+     },
+     {
+      "text": "开会",
+      "tr": "to have a meeting"
+     },
+     {
+      "text": "会说中文",
+      "tr": "can speak Chinese"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "要",
+      "register": "neutral",
+      "nuance": "yào: be going to — something decided or near"
+     },
+     {
+      "word": "能",
+      "register": "neutral",
+      "nuance": "néng: can — able, allowed (C05)"
+     },
+     {
+      "word": "将",
+      "register": "formal",
+      "nuance": "jiāng: will"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 合 ‘to meet’ + a phonetic part. Wiktionary derives its readings from one root ‘to join, to come together ~ to meet ~ to fit ~ to understand’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "‘Come together’ → ‘meet’, ‘meeting’; ‘understand’ → ‘know how’ → ‘will’: Wiktionary links the meanings of 会 to one root."
+    ],
+    "pitfalls": [
+     "不会 is both ‘won’t’ and ‘can’t (never learnt)’: 他不会来 ‘he won’t come’, 他不会游泳 ‘he can’t swim’ — the verb and the situation decide."
+    ],
+    "subtleties": [
+     "会 predicts (it will probably happen); 要 announces (it is decided or near): 明天会很冷, but 我明天要走 ‘I’m leaving tomorrow’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "huì in every sense here; kuài only in 会计 ‘accounting’, another word"
+    },
+    "tradPerSense": {
+     "none": "traditional 會 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu",
+    "separable": {
+     "none": "a single verb (as ‘will’ or ‘can’ it stands before another verb)"
+    }
+   }
+  }
+ ]
+}

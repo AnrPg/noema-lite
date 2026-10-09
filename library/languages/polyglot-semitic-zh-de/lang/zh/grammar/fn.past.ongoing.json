@@ -1,0 +1,390 @@
+{
+ "function": "fn.past.ongoing",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.progressive",
+   "value": "optional"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "particle"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  }
+ ],
+ "summary": "Chinese has no imperfect: ‘was doing’ and ‘used to do’ are built from words, around a verb that never changes. (1) Going on at a past moment: 在 / 正在 + verb, with a time or a …的时候 clause — 我回家的时候，爸爸在洗澡 ‘when I got home, Dad was in the shower’. (2) A lasting state: verb + 着 (zhe) — 门开着 ‘the door was open’, 他坐着等我 ‘he sat waiting for me’. (3) A habit, ‘used to’: a past frame — 以前, 小时候, 那时候 — with the plain verb, often with 常常, 总是 or 每天 — 小时候我常常去奶奶家 ‘as a child I used to go to Grandma’s’. None of these takes 了: they are the background, and only a completed event in the foreground does. ‘Wasn’t doing’ is 没在 + verb (他没在睡觉); ‘didn’t use to’ is 不 + verb in the past frame (以前我不喝咖啡); a change since then is 现在 … 了 (现在喝了).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "What",
+    "How",
+    "Example"
+   ],
+   "rows": [
+    [
+     "going on at that moment",
+     "在 / 正在 + verb (+ a time or …的时候)",
+     "昨天晚上八点我在做饭。 At eight last night I was cooking."
+    ],
+    [
+     "a lasting state",
+     "verb + 着",
+     "我回家的时候，门开着。 When I got home, the door was open."
+    ],
+    [
+     "a habit (used to)",
+     "以前 / 小时候 / 那时候 + (常常 / 总是 / 每天) + verb",
+     "小时候我每天跟邻居的孩子玩。 As a child I played with the neighbours’ children every day."
+    ]
+   ],
+   "caption": "Ongoing and habitual: no tense, three tools",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "在 + verb — an action in progress",
+     "points": [
+      "他在洗澡。 He is / was having a shower.",
+      "你来的时候，我正在睡觉。 When you came, I was asleep."
+     ]
+    },
+    {
+     "title": "verb + 着 — a state that lasts",
+     "points": [
+      "门开着。 The door is / was open.",
+      "他坐着等我。 He sat waiting for me."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No 了 for the background",
+   "text": "了 reports a completed event. What was going on, and what used to happen, is background and takes no 了: 小时候我常常去奶奶家 (not *去了奶奶家). The event that happens against it takes 了: 我回家的时候，妈妈在做饭，她做了一个汤 ‘when I got home Mum was cooking — she made a soup’.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "着 zhe or 着 zháo?",
+   "text": "着 after a verb is the toneless zhe of a lasting state (开着, 坐着, 等着). 睡着 shuìzháo (C01) is another word, ‘to fall asleep’: 灯开着，可是他已经睡着了 ‘the light was on, but he had already fallen asleep’."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Frame",
+    "Meaning",
+    "Example"
+   ],
+   "rows": [
+    [
+     "以前",
+     "before, in the past",
+     "以前我不喝咖啡。 I didn’t use to drink coffee."
+    ],
+    [
+     "小时候",
+     "when I was little",
+     "小时候我很喜欢玩玩具。 As a child I loved playing with toys."
+    ],
+    [
+     "那时候",
+     "at that time",
+     "那时候他在等我们。 At that time he was waiting for us."
+    ],
+    [
+     "…的时候",
+     "when …",
+     "我回家的时候，爸爸在洗澡。 When I got home, Dad was in the shower."
+    ]
+   ],
+   "caption": "Past frames: they stand first, and everything after them is in the past"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Frames, not tenses",
+   "text": "以前, 小时候 and 那时候 stand before the verb or at the very start, and everything after them is understood as past: 小时候我每天走路去幼儿园 ‘as a child I walked to kindergarten every day’. 小时候 already means ‘when I was little’ — no …的时候 is added."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Then and now",
+   "text": "A change from then to now: 以前 …，现在 … 了 — 以前我不喝咖啡，现在喝了 ‘I didn’t use to drink coffee; now I do’. The 了 marks the new situation."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Negating the background",
+   "text": "‘Wasn’t doing’ = 没在 + verb: 他没在睡觉. ‘Didn’t use to’ = 不 + verb in a past frame: 以前我不吃鱼. 没 + verb without 在 is ‘didn’t (do it at all, that time)’: 他没睡觉 ‘he didn’t sleep’."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Remembering and forgetting",
+   "text": "记得 + a clause recalls the past with no tense at all: 我记得小时候的幼儿园 ‘I remember the kindergarten of my childhood’. Forgetting is a completed change, so it takes 了: 我忘了 / 我忘记了 ‘I’ve forgotten’."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Was the action going on at a moment (at eight, when I came home)? → 在 / 正在 + verb, no 了.",
+   "Is it a state that lasted (open, sitting, waiting)? → verb + 着.",
+   "Is it a habit of the past (used to)? → 以前 / 小时候 / 那时候 + (常常 / 总是 / 每天) + verb, no 了.",
+   "Is there a completed event in the foreground? → that one takes 了.",
+   "Negative? → 没在 + verb (wasn’t doing), 不 + verb (didn’t use to).",
+   "Is it 睡着 shuìzháo ‘fall asleep’, or a state with 着 zhe?"
+  ],
+  "steps": [
+   "Set the frame: a past time word or …的时候.",
+   "Choose: in progress (在), lasting state (着), habit (常常 / 每天).",
+   "Leave out 了 unless an event is completed."
+  ]
+ },
+ "traps": [
+  "*小时候我常常去了奶奶家 → 小时候我常常去奶奶家.",
+  "*我回家的时候，爸爸洗澡了 (for ‘was showering’) → 爸爸在洗澡.",
+  "*门开了着 → 门开着 (it was open) / 门开了 (it opened).",
+  "*以前我没喝咖啡 (for ‘didn’t use to’) → 以前我不喝咖啡.",
+  "*我小时候的时候 → 我小时候.",
+  "他睡着了 (shuìzháo: fell asleep) ≠ 他在睡觉 (was sleeping)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:zai",
+   "zh:zhengzai",
+   "zh:zhe.part",
+   "zh:yiqian.before",
+   "zh:xiaoshihou",
+   "zh:shihou"
+  ]
+ },
+ "needs": {
+  "VERB": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘When I got home, Dad was in the shower.’",
+   "options": [
+    "我回家的时候，爸爸在洗澡。",
+    "我回家的时候，爸爸洗澡了。",
+    "我回家了的时候，爸爸洗澡。"
+   ],
+   "answer": "我回家的时候，爸爸在洗澡。",
+   "why": "What was going on takes 在 + verb; 洗澡了 would say he had his shower (done)."
+  },
+  {
+   "q": "‘As a child I often went to Grandma’s.’",
+   "options": [
+    "小时候我常常去奶奶家。",
+    "小时候我常常去了奶奶家。",
+    "我常常去奶奶家小时候。"
+   ],
+   "answer": "小时候我常常去奶奶家。",
+   "why": "A habit takes no 了, and the past frame comes first."
+  },
+  {
+   "q": "‘The door was open.’",
+   "options": [
+    "门开着。",
+    "门开了着。",
+    "门在开着了。"
+   ],
+   "answer": "门开着。",
+   "why": "A lasting state is verb + 着, with no 了."
+  },
+  {
+   "q": "‘I didn’t use to drink coffee.’",
+   "options": [
+    "以前我不喝咖啡。",
+    "以前我没喝咖啡。",
+    "以前我不喝咖啡过。"
+   ],
+   "answer": "以前我不喝咖啡。",
+   "why": "A past habit is negated with 不; 没喝 would be ‘didn’t drink it (that time)’."
+  },
+  {
+   "q": "他睡着了 (shuìzháo le) means:",
+   "options": [
+    "he has fallen asleep",
+    "he is lying in bed",
+    "he went to bed"
+   ],
+   "answer": "he has fallen asleep",
+   "why": "睡着 zháo = fall asleep; ‘is sleeping’ is 在睡觉, ‘went to bed’ 睡觉了."
+  },
+  {
+   "q": "‘He wasn’t sleeping.’",
+   "options": [
+    "他没在睡觉。",
+    "他不在睡觉了。",
+    "他没睡觉在。"
+   ],
+   "answer": "他没在睡觉。",
+   "why": "没在 + verb: an action that was not in progress."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "The Greek imperfect (έπαιζα ‘I was playing / I used to play’) holds both meanings in one verb form; Chinese splits them: 在玩 at a moment, 以前常常玩 as a habit."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "The Russian imperfective past (играл) is both ‘was playing’ and ‘used to play’; Chinese uses 在 for the first and a past frame (以前, 小时候) with the bare verb for the second."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "The imperfecto (jugaba) is both ‘was playing’ and ‘used to play’: estaba jugando ~ 在玩, solía jugar ~ 以前常常玩."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "‘Was playing’ ~ 在玩 in a past frame; ‘used to play / would play’ ~ 以前 / 小时候 + 常常 + 玩 — no 了 and no change of the verb."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "L’imparfait (je jouais) holds both meanings; être en train de ~ 在 / 正在, autrefois ~ 以前."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has no aspect form: Präteritum or Perfekt with früher, damals (früher spielte ich oft …) and gerade (ich war gerade unter der Dusche); Chinese uses 以前 / 那时候 and 在 in the same way, around a bare verb."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi has separate past forms: खेल रहा था ‘was playing’ ~ 在玩, खेलता था ‘used to play’ ~ 以前常常玩; Chinese builds both with words, not endings."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian mi- + past stem (bāzi mikardam) is both ‘I was playing’ and ‘I used to play’, and dāshtam bāzi mikardam is ‘I was in the middle of playing’ ~ 我在玩."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / he was playing’) does with an auxiliary what Chinese does with a frame word: 以前他常常玩 / 那时候他在玩."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’) marks the habitual past; Chinese uses 以前 / 小时候 and the bare verb."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish -iyordu ‘was …-ing’ (oynuyordu) ~ 在玩 and -ardı ‘used to’ (oynardı) ~ 以前常常玩 — suffixes where Chinese uses words."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese 遊んでいた ‘was playing’ ~ 在玩, よく遊んだ ‘often played’ ~ 以前常常玩; -ている also gives states, like 着: ドアが開いている ~ 门开着."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 놀고 있었어요 ‘was playing’ ~ 在玩, 놀곤 했어요 ‘used to play’ ~ 以前常常玩; 문이 열려 있었어요 ‘the door was open’ ~ 门开着."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses the same past for both (leikin ‘I played / was playing’), with olin leikkimässä for ‘I was in the middle of playing’ ~ 我在玩."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili nilikuwa ninacheza ‘I was playing’ uses kuwa ‘to be’ in the past + a present form — close to Chinese 在 + verb in a past frame."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese is close: đang ~ 在 (lúc đó tôi đang ăn ~ 那时候我在吃饭), hồi nhỏ ~ 小时候, hay / thường ~ 常常 — no tense anywhere."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Polysynthetic languages tend to put ‘ongoing’ and ‘habitual’ into suffixes inside one long verb word; Chinese uses separate words (在, 着, 常常) around a verb that never changes."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.past.ongoing",
+   "note": "German has no special form: the Präteritum of common verbs or the Perfekt with früher / damals (früher spielte ich oft), and gerade for ‘in progress’; Chinese uses 以前 / 小时候 and 在 / 着."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.past.ongoing",
+   "note": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / was playing’); Chinese: 以前常常玩 / 那时候在玩."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.past.ongoing",
+   "note": "Hebrew past of הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’); Chinese: 以前 / 小时候 + bare verb."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.aspect",
+   "note": "在 / 正在 for ‘in progress’ came in S14; 着 is new here."
+  }
+ ]
+}

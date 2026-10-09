@@ -2256,6 +2256,11 @@
      "concept": "time.hour",
      "axis": "register",
      "value": "hour — neutral"
+    },
+    {
+     "concept": "time.childhood",
+     "axis": "register",
+     "value": "literary, in set phrases (小时了了)"
     }
    ],
    "ref": {
@@ -2319,6 +2324,14 @@
       "tr": "Clever as a child does not mean good as a grown-up.",
       "register": "literary",
       "context": "saying",
+      "sense": "s2"
+     },
+     {
+      "text": "想君小时，必当了了。",
+      "py": "Xiǎng jūn xiǎoshí, bì dāng liǎoliǎo.",
+      "tr": "You, sir, must have been very bright as a child (Kong Rong’s reply, in the Shishuo Xinyu).",
+      "register": "literary",
+      "context": "anecdote",
       "sense": "s2"
      }
     ],
@@ -4482,7 +4495,14 @@
     "subtleties": [
      "期间 is a bit formal (news, notices); in speech …的时候 or …里 is usual."
     ]
-   }
+   },
+   "contrasts": [
+    {
+     "concept": "time.period",
+     "axis": "kind of period",
+     "value": "the time during which something happens, after the event (假期期间) — written"
+    }
+   ]
   },
   {
    "id": "zh:shihou",
@@ -4514,6 +4534,11 @@
      "concept": "conj.when",
      "axis": "construction",
      "value": "…的时候 after the clause: when, while"
+    },
+    {
+     "concept": "time.moment",
+     "axis": "register",
+     "value": "everyday: time, moment (那时候, 这个时候)"
     }
    ],
    "ref": {
@@ -4638,7 +4663,9 @@
    "trad": "半",
    "pinyin": "bàn",
    "pos": "NUM",
-   "senses": [],
+   "senses": [
+    "num.half"
+   ],
    "role": "half — 三点半 ‘half past three’, 半个小时 ‘half an hour’ (S15)",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4654,7 +4681,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     }
-   }
+   },
+   "contrasts": [
+    {
+     "concept": "num.half",
+     "axis": "bound or free",
+     "value": "bound: before a measure word or after the hour (半个小时, 三点半)"
+    }
+   ]
   }
  ],
  "absent": [

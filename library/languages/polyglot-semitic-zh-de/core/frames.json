@@ -135,6 +135,545 @@
   {
    "id": "fr.command",
    "meaning": "a command or request: Come! Go to PLACE! Wait! Please sit down."
+  },
+  {
+   "id": "fr.past.action",
+   "meaning": "PERSON did ACTION (yesterday / at TIME)",
+   "lessons": [
+    "cr.01"
+   ]
+  },
+  {
+   "id": "fr.past.neg",
+   "meaning": "PERSON did not do ACTION",
+   "lessons": [
+    "cr.01"
+   ]
+  },
+  {
+   "id": "fr.past.q",
+   "meaning": "Did PERSON do ACTION? / When did PERSON do ACTION?",
+   "lessons": [
+    "cr.01"
+   ]
+  },
+  {
+   "id": "fr.used.to",
+   "meaning": "When PERSON was a child, PERSON used to do ACTION",
+   "lessons": [
+    "cr.02"
+   ]
+  },
+  {
+   "id": "fr.was.doing",
+   "meaning": "PERSON was doing ACTION when …",
+   "lessons": [
+    "cr.02"
+   ]
+  },
+  {
+   "id": "fr.future.plan",
+   "meaning": "PERSON will / is going to do ACTION (next week)",
+   "lessons": [
+    "cr.03"
+   ]
+  },
+  {
+   "id": "fr.future.q",
+   "meaning": "What will PERSON do? Where will PERSON go?",
+   "lessons": [
+    "cr.03"
+   ]
+  },
+  {
+   "id": "fr.ordinal",
+   "meaning": "the ORDINAL THING / PERSON (the third house)",
+   "lessons": [
+    "cr.04"
+   ]
+  },
+  {
+   "id": "fr.date",
+   "meaning": "Today is the ORDINAL of MONTH; PERSON was born in YEAR",
+   "lessons": [
+    "cr.04"
+   ]
+  },
+  {
+   "id": "fr.clock",
+   "meaning": "It is (half / a quarter past) HOUR",
+   "lessons": [
+    "cr.04"
+   ]
+  },
+  {
+   "id": "fr.can",
+   "meaning": "PERSON can / cannot do ACTION",
+   "lessons": [
+    "cr.05"
+   ]
+  },
+  {
+   "id": "fr.must",
+   "meaning": "PERSON must / need not do ACTION",
+   "lessons": [
+    "cr.05"
+   ]
+  },
+  {
+   "id": "fr.allowed",
+   "meaning": "ACTION is allowed / forbidden here",
+   "lessons": [
+    "cr.05"
+   ]
+  },
+  {
+   "id": "fr.hurts",
+   "meaning": "PERSON's BODY-PART hurts",
+   "lessons": [
+    "cr.06"
+   ]
+  },
+  {
+   "id": "fr.body",
+   "meaning": "PERSON has (big / blue …) BODY-PARTs",
+   "lessons": [
+    "cr.06"
+   ]
+  },
+  {
+   "id": "fr.advice",
+   "meaning": "You should / had better do ACTION",
+   "lessons": [
+    "cr.07"
+   ]
+  },
+  {
+   "id": "fr.ill",
+   "meaning": "PERSON is ill / has a fever / a cold",
+   "lessons": [
+    "cr.07"
+   ]
+  },
+  {
+   "id": "fr.wear",
+   "meaning": "PERSON wears / puts on (COLOUR) CLOTHES",
+   "lessons": [
+    "cr.08"
+   ]
+  },
+  {
+   "id": "fr.clothes.adj",
+   "meaning": "The CLOTHES are (too) ADJECTIVE",
+   "lessons": [
+    "cr.08"
+   ]
+  },
+  {
+   "id": "fr.reflexive",
+   "meaning": "PERSON washes / dresses HIMSELF",
+   "lessons": [
+    "cr.09"
+   ]
+  },
+  {
+   "id": "fr.reciprocal",
+   "meaning": "PERSONS meet / see each other",
+   "lessons": [
+    "cr.09"
+   ]
+  },
+  {
+   "id": "fr.give",
+   "meaning": "PERSON gives / sends / shows THING to PERSON",
+   "lessons": [
+    "cr.10"
+   ]
+  },
+  {
+   "id": "fr.tell",
+   "meaning": "PERSON tells PERSON something",
+   "lessons": [
+    "cr.10"
+   ]
+  },
+  {
+   "id": "fr.price",
+   "meaning": "THING costs NUMBER (money)",
+   "lessons": [
+    "cr.11"
+   ]
+  },
+  {
+   "id": "fr.quantity",
+   "meaning": "NUMBER CONTAINER(S) of FOOD (two bottles of water)",
+   "lessons": [
+    "cr.11"
+   ]
+  },
+  {
+   "id": "fr.request",
+   "meaning": "I would like FOOD; could you bring THING?",
+   "lessons": [
+    "cr.12"
+   ]
+  },
+  {
+   "id": "fr.taste",
+   "meaning": "The FOOD is TASTE-ADJECTIVE",
+   "lessons": [
+    "cr.12"
+   ]
+  },
+  {
+   "id": "fr.weather",
+   "meaning": "It is raining / snowing / windy; it is COLD / HOT",
+   "lessons": [
+    "cr.13"
+   ]
+  },
+  {
+   "id": "fr.weather.when",
+   "meaning": "Yesterday / tomorrow the weather was / will be ADJECTIVE",
+   "lessons": [
+    "cr.13"
+   ]
+  },
+  {
+   "id": "fr.there.is",
+   "meaning": "There is / are (no) THING(S) at PLACE",
+   "lessons": [
+    "cr.14"
+   ]
+  },
+  {
+   "id": "fr.nature.where",
+   "meaning": "PLACE is near / behind THE MOUNTAIN …",
+   "lessons": [
+    "cr.14"
+   ]
+  },
+  {
+   "id": "fr.animals",
+   "meaning": "PERSON has / sees NUMBER ANIMALS",
+   "lessons": [
+    "cr.15"
+   ]
+  },
+  {
+   "id": "fr.animal.does",
+   "meaning": "The ANIMAL eats / lives / runs …",
+   "lessons": [
+    "cr.15"
+   ]
+  },
+  {
+   "id": "fr.feel",
+   "meaning": "PERSON is / feels (very / too) FEELING",
+   "lessons": [
+    "cr.16"
+   ]
+  },
+  {
+   "id": "fr.because.feel",
+   "meaning": "PERSON is FEELING because …",
+   "lessons": [
+    "cr.16"
+   ]
+  },
+  {
+   "id": "fr.relative",
+   "meaning": "the PERSON who / THING that …",
+   "lessons": [
+    "cr.17"
+   ]
+  },
+  {
+   "id": "fr.describe",
+   "meaning": "PERSON is ADJECTIVE and has BODY-FEATURE",
+   "lessons": [
+    "cr.17"
+   ]
+  },
+  {
+   "id": "fr.genitive",
+   "meaning": "the THING of PERSON / PLACE (my brother's car, the door of the house)",
+   "lessons": [
+    "cr.18"
+   ]
+  },
+  {
+   "id": "fr.chores",
+   "meaning": "PERSON cleans / tidies THE ROOM",
+   "lessons": [
+    "cr.18"
+   ]
+  },
+  {
+   "id": "fr.sequence",
+   "meaning": "First PERSON did X, then Y, finally Z",
+   "lessons": [
+    "cr.19"
+   ]
+  },
+  {
+   "id": "fr.before.past",
+   "meaning": "When PERSON arrived, OTHER had already left",
+   "lessons": [
+    "cr.19"
+   ]
+  },
+  {
+   "id": "fr.way",
+   "meaning": "Go straight / turn left / cross THE STREET (until PLACE)",
+   "lessons": [
+    "cr.20"
+   ]
+  },
+  {
+   "id": "fr.move.manner",
+   "meaning": "PERSON walks / drives / runs across / along / into PLACE",
+   "lessons": [
+    "cr.20"
+   ]
+  },
+  {
+   "id": "fr.like.to",
+   "meaning": "PERSON likes / wants / tries / starts to do ACTIVITY",
+   "lessons": [
+    "cr.21"
+   ]
+  },
+  {
+   "id": "fr.play",
+   "meaning": "PERSON plays SPORT / INSTRUMENT",
+   "lessons": [
+    "cr.21"
+   ]
+  },
+  {
+   "id": "fr.when.clause",
+   "meaning": "When / while / before / after CLAUSE, CLAUSE",
+   "lessons": [
+    "cr.22"
+   ]
+  },
+  {
+   "id": "fr.superlative",
+   "meaning": "PLACE is the ADJECTIVE-est PLACE in the world / of all",
+   "lessons": [
+    "cr.23"
+   ]
+  },
+  {
+   "id": "fr.as.as",
+   "meaning": "X is as ADJECTIVE as Y; the more …, the more …",
+   "lessons": [
+    "cr.23"
+   ]
+  },
+  {
+   "id": "fr.indefinite",
+   "meaning": "Someone / nobody / everyone did ACTION; PERSON saw something / nothing",
+   "lessons": [
+    "cr.24"
+   ]
+  },
+  {
+   "id": "fr.if.real",
+   "meaning": "If CLAUSE, (then) CLAUSE (present / future)",
+   "lessons": [
+    "cr.25"
+   ]
+  },
+  {
+   "id": "fr.wish",
+   "meaning": "I hope / wish that CLAUSE; may you …!",
+   "lessons": [
+    "cr.26"
+   ]
+  },
+  {
+   "id": "fr.if.unreal",
+   "meaning": "If CLAUSE (unreal), CLAUSE (would …)",
+   "lessons": [
+    "cr.27"
+   ]
+  },
+  {
+   "id": "fr.if.past.unreal",
+   "meaning": "If PERSON had done X, Y would have happened",
+   "lessons": [
+    "cr.27"
+   ]
+  },
+  {
+   "id": "fr.passive",
+   "meaning": "THING was built / invented / destroyed (by PERSON) (in YEAR)",
+   "lessons": [
+    "cr.28"
+   ]
+  },
+  {
+   "id": "fr.reported",
+   "meaning": "PERSON said / thinks / promised that CLAUSE",
+   "lessons": [
+    "cr.29"
+   ]
+  },
+  {
+   "id": "fr.indirect.q",
+   "meaning": "I don't know whether / where / why CLAUSE",
+   "lessons": [
+    "cr.30"
+   ]
+  },
+  {
+   "id": "fr.know",
+   "meaning": "PERSON knows THAT … / knows PERSON",
+   "lessons": [
+    "cr.30"
+   ]
+  },
+  {
+   "id": "fr.participle",
+   "meaning": "the THING done / written / bought (yesterday); the PERSON working (here)",
+   "lessons": [
+    "cr.31"
+   ]
+  },
+  {
+   "id": "fr.verbal.noun",
+   "meaning": "ACTIVITY-NOUN is ADJECTIVE / important; after the arrival of PERSON …",
+   "lessons": [
+    "cr.32"
+   ]
+  },
+  {
+   "id": "fr.change.state",
+   "meaning": "PERSON opened / broke / raised THING; THING opened / broke / rose",
+   "lessons": [
+    "cr.33"
+   ]
+  },
+  {
+   "id": "fr.cause",
+   "meaning": "Because of THING / so that CLAUSE / although CLAUSE, CLAUSE",
+   "lessons": [
+    "cr.34"
+   ]
+  },
+  {
+   "id": "fr.recipe",
+   "meaning": "Cut / mix / add NUMBER (FRACTION) of FOOD",
+   "lessons": [
+    "cr.35"
+   ]
+  },
+  {
+   "id": "fr.percent",
+   "meaning": "NUMBER percent of PEOPLE …",
+   "lessons": [
+    "cr.35"
+   ]
+  },
+  {
+   "id": "fr.formal",
+   "meaning": "a formal request, invitation or apology (letter, message)",
+   "lessons": [
+    "cr.36"
+   ]
+  },
+  {
+   "id": "fr.informal",
+   "meaning": "the same said informally to a friend",
+   "lessons": [
+    "cr.36"
+   ]
+  },
+  {
+   "id": "fr.attitude",
+   "meaning": "a short exchange where a particle or marker gives the speaker's attitude",
+   "lessons": [
+    "cr.37"
+   ]
+  },
+  {
+   "id": "fr.tech",
+   "meaning": "PERSON downloads / posts / charges TECH-THING",
+   "lessons": [
+    "cr.38"
+   ]
+  },
+  {
+   "id": "fr.causative",
+   "meaning": "PERSON has THING repaired / makes PERSON do ACTION / lets PERSON do ACTION",
+   "lessons": [
+    "cr.39"
+   ]
+  },
+  {
+   "id": "fr.aspect",
+   "meaning": "PERSON has already / not yet / ever done ACTION; PERSON is still doing ACTION",
+   "lessons": [
+    "cr.40"
+   ]
+  },
+  {
+   "id": "fr.nominal",
+   "meaning": "The ACTION-NOUN of THING leads to / requires …",
+   "lessons": [
+    "cr.41"
+   ]
+  },
+  {
+   "id": "fr.relative.complex",
+   "meaning": "the PERSON whose THING … / the PLACE in which …",
+   "lessons": [
+    "cr.42"
+   ]
+  },
+  {
+   "id": "fr.emphasis",
+   "meaning": "It was PERSON who …; THIS FILM I liked (topic first)",
+   "lessons": [
+    "cr.43"
+   ]
+  },
+  {
+   "id": "fr.epistemic",
+   "meaning": "PERSON may / might / must have done ACTION; probably …",
+   "lessons": [
+    "cr.44"
+   ]
+  },
+  {
+   "id": "fr.narration",
+   "meaning": "In YEAR the KING … ; then the people …",
+   "lessons": [
+    "cr.45"
+   ]
+  },
+  {
+   "id": "fr.word.formation",
+   "meaning": "a word built from another (the teacher → to teach → the teaching)",
+   "lessons": [
+    "cr.46"
+   ]
+  },
+  {
+   "id": "fr.idiom",
+   "meaning": "a sentence with an idiom or a proverb, and its meaning",
+   "lessons": [
+    "cr.47"
+   ]
+  },
+  {
+   "id": "fr.register.pair",
+   "meaning": "the same message in a formal and an informal / regional variety",
+   "lessons": [
+    "cr.48"
+   ]
   }
  ]
 }

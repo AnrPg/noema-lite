@@ -1,5 +1,5 @@
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
-const stepLabel = n => n.step != null ? 'S' + String(n.step).padStart(2, '0') : '';
+const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n.step - 18).padStart(2, '0') : 'S' + String(n.step).padStart(2, '0');
 const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');

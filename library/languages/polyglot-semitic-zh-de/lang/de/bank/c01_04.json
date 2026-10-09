@@ -1,0 +1,6134 @@
+{
+ "sentences": [
+  {
+   "id": "de.c01_04.001",
+   "frame": "fr.past.action",
+   "text": "Ich bin heute um sechs Uhr aufgewacht.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "aufgewacht",
+     "l": "de:aufwachen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I woke up at six today.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.002",
+   "frame": "fr.past.action",
+   "text": "Gestern bin ich spät aufgestanden.",
+   "tokens": [
+    {
+     "t": "Gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spät",
+     "l": "de:spät"
+    },
+    {
+     "t": "aufgestanden",
+     "l": "de:aufstehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "Yesterday I got up late.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.003",
+   "frame": "fr.past.action",
+   "text": "Ich stehe um sechs Uhr auf.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "stehe",
+     "l": "de:aufstehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "auf",
+     "l": "de:aufstehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "I get up at six.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.004",
+   "frame": "fr.past.action",
+   "text": "Ich bin um sechs Uhr aufgestanden.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "aufgestanden",
+     "l": "de:aufstehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.003",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "I got up at six.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.005",
+   "frame": "fr.past.action",
+   "text": "Wir frühstücken um sieben Uhr.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "frühstücken",
+     "l": "de:frühstücken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "We have breakfast at seven.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.006",
+   "frame": "fr.past.action",
+   "text": "Wir haben um sieben Uhr gefrühstückt.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "gefrühstückt",
+     "l": "de:frühstücken",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.005",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "We had breakfast at seven.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.007",
+   "frame": "fr.past.action",
+   "text": "Er duscht morgens.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "duscht",
+     "l": "de:duschen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "morgens",
+     "l": "de:morgens"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He showers in the mornings.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.008",
+   "frame": "fr.past.action",
+   "text": "Er hat morgens geduscht.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "morgens",
+     "l": "de:morgens"
+    },
+    {
+     "t": "geduscht",
+     "l": "de:duschen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.007",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "He showered in the mornings.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.009",
+   "frame": "fr.past.action",
+   "text": "Die Schule fängt um acht Uhr an.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fängt",
+     "l": "de:anfangen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "an",
+     "l": "de:anfangen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "School starts at eight.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.010",
+   "frame": "fr.past.action",
+   "text": "Die Schule hat um acht Uhr angefangen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "angefangen",
+     "l": "de:anfangen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.009",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "School started at eight.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.011",
+   "frame": "fr.past.action",
+   "text": "Ich schlafe schnell ein.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "schlafe",
+     "l": "de:einschlafen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "schnell",
+     "l": "de:schnell",
+     "f": "ADJ"
+    },
+    {
+     "t": "ein",
+     "l": "de:einschlafen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "I fall asleep quickly.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.012",
+   "frame": "fr.past.action",
+   "text": "Ich bin schnell eingeschlafen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "schnell",
+     "l": "de:schnell",
+     "f": "ADJ"
+    },
+    {
+     "t": "eingeschlafen",
+     "l": "de:einschlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.011",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "I fell asleep quickly.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.013",
+   "frame": "fr.past.action",
+   "text": "Ich habe mich schnell angezogen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "mich",
+     "l": "de:ich",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "schnell",
+     "l": "de:schnell",
+     "f": "ADJ"
+    },
+    {
+     "t": "angezogen",
+     "l": "de:anziehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I got dressed quickly.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.014",
+   "frame": "fr.past.action",
+   "text": "Am Samstag hat er das Auto gewaschen.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Samstag",
+     "l": "de:Samstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "gewaschen",
+     "l": "de:waschen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "On Saturday he washed the car.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.015",
+   "frame": "fr.past.action",
+   "text": "Ich habe um fünf Uhr mit der Arbeit aufgehört.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "fünf",
+     "l": "de:fünf"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "aufgehört",
+     "l": "de:aufhören",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I finished work at five.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.016",
+   "frame": "fr.past.action",
+   "text": "Sie hat die Arbeit um sechs Uhr beendet.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "beendet",
+     "l": "de:beenden",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "She finished the work at six.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.017",
+   "frame": "fr.past.action",
+   "text": "Er ist um sieben Uhr heimgekommen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "heimgekommen",
+     "l": "de:heimkommen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "He came home at seven.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.018",
+   "frame": "fr.past.action",
+   "text": "Die Arbeit hat um neun Uhr begonnen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Arbeit",
+     "l": "de:Arbeit",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "begonnen",
+     "l": "de:beginnen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "Work began at nine.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.019",
+   "frame": "fr.past.action",
+   "text": "Gestern bin ich um acht Uhr losgegangen.",
+   "tokens": [
+    {
+     "t": "Gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "losgegangen",
+     "l": "de:losgehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "Yesterday I left at eight.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.020",
+   "frame": "fr.past.action",
+   "text": "Er stand um sechs Uhr auf und duschte.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "stand",
+     "l": "de:aufstehen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "auf",
+     "l": "de:aufstehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "duschte",
+     "l": "de:duschen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "He got up at six and had a shower.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.021",
+   "frame": "fr.past.action",
+   "text": "Wir haben uns gewaschen und dann sind wir zur Schule gegangen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "uns",
+     "l": "de:wir",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "gewaschen",
+     "l": "de:waschen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "dann",
+     "l": "de:dann"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "zur",
+     "l": "de:zur"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "gegangen",
+     "l": "de:gehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "We washed and then we went to school.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.022",
+   "frame": "fr.past.action",
+   "text": "Ich habe gut geschlafen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": "geschlafen",
+     "l": "de:schlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I slept well.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.023",
+   "frame": "fr.past.neg",
+   "text": "Ich habe heute nicht gefrühstückt.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "gefrühstückt",
+     "l": "de:frühstücken",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I didn’t have breakfast today.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.024",
+   "frame": "fr.past.neg",
+   "text": "Er ist gestern heimgekommen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "heimgekommen",
+     "l": "de:heimkommen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "He came home yesterday.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.025",
+   "frame": "fr.past.neg",
+   "text": "Er ist gestern nicht heimgekommen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "heimgekommen",
+     "l": "de:heimkommen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "variantOf": "de.c01_04.024",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "He didn’t come home yesterday.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.026",
+   "frame": "fr.past.neg",
+   "text": "Das Baby hat geschlafen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "geschlafen",
+     "l": "de:schlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The baby slept.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.027",
+   "frame": "fr.past.neg",
+   "text": "Das Baby hat nicht geschlafen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "geschlafen",
+     "l": "de:schlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "variantOf": "de.c01_04.026",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "The baby didn’t sleep.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.028",
+   "frame": "fr.past.neg",
+   "text": "Du hast heute geduscht.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "geduscht",
+     "l": "de:duschen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "You showered today.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.029",
+   "frame": "fr.past.neg",
+   "text": "Du hast heute nicht geduscht.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "geduscht",
+     "l": "de:duschen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "variantOf": "de.c01_04.028",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "You didn’t shower today.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.030",
+   "frame": "fr.past.neg",
+   "text": "Ich bin nicht früh aufgewacht.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "aufgewacht",
+     "l": "de:aufwachen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "I didn’t wake up early.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.031",
+   "frame": "fr.past.q",
+   "text": "Hast du heute gefrühstückt?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "gefrühstückt",
+     "l": "de:frühstücken",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Did you have breakfast today?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.032",
+   "frame": "fr.past.q",
+   "text": "Wann bist du gestern aufgestanden?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gestern",
+     "l": "de:gestern"
+    },
+    {
+     "t": "aufgestanden",
+     "l": "de:aufstehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "When did you get up yesterday?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.033",
+   "frame": "fr.past.q",
+   "text": "Wann hat die Schule angefangen?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "angefangen",
+     "l": "de:anfangen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "When did school start?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.034",
+   "frame": "fr.past.q",
+   "text": "Du hast gut geschlafen.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": "geschlafen",
+     "l": "de:schlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "You slept well.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.035",
+   "frame": "fr.past.q",
+   "text": "Hast du gut geschlafen?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": "geschlafen",
+     "l": "de:schlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.c01_04.034",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Did you sleep well?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.036",
+   "frame": "fr.past.q",
+   "text": "Ihr seid früh aufgestanden.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "aufgestanden",
+     "l": "de:aufstehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "You got up early.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.037",
+   "frame": "fr.past.q",
+   "text": "Seid ihr früh aufgestanden?",
+   "tokens": [
+    {
+     "t": "Seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "früh",
+     "l": "de:früh"
+    },
+    {
+     "t": "aufgestanden",
+     "l": "de:aufstehen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.c01_04.036",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Did you get up early?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.038",
+   "frame": "fr.past.q",
+   "text": "Wann ist das Kind eingeschlafen?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "eingeschlafen",
+     "l": "de:einschlafen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "When did the child fall asleep?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.039",
+   "frame": "fr.used.to",
+   "text": "Früher spielte ich oft im Garten.",
+   "tokens": [
+    {
+     "t": "Früher",
+     "l": "de:früher"
+    },
+    {
+     "t": "spielte",
+     "l": "de:spielen",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I used to play in the garden a lot.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.040",
+   "frame": "fr.used.to",
+   "text": "Als er ein Kind war, spielte er immer mit dem Nachbarn.",
+   "tokens": [
+    {
+     "t": "Als",
+     "l": "de:als"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "spielte",
+     "l": "de:spielen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Nachbarn",
+     "l": "de:Nachbar",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "When he was a child, he always played with the neighbour.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.041",
+   "frame": "fr.used.to",
+   "text": "In seiner Kindheit hatte er viel Spielzeug.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "seiner",
+     "l": "de:sein.poss",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Kindheit",
+     "l": "de:Kindheit",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "hatte",
+     "l": "de:haben",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "viel",
+     "l": "de:viel",
+     "f": "DET;SG"
+    },
+    {
+     "t": "Spielzeug",
+     "l": "de:Spielzeug",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "In his childhood he had a lot of toys.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.042",
+   "frame": "fr.used.to",
+   "text": "Früher war das Dorf klein.",
+   "tokens": [
+    {
+     "t": "Früher",
+     "l": "de:früher"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Dorf",
+     "l": "de:Dorf",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "klein",
+     "l": "de:klein",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The village used to be small.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.043",
+   "frame": "fr.used.to",
+   "text": "Als Kind spielte sie oft mit ihrer Nachbarin.",
+   "tokens": [
+    {
+     "t": "Als",
+     "l": "de:als"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "spielte",
+     "l": "de:spielen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "ihrer",
+     "l": "de:ihr.poss",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Nachbarin",
+     "l": "de:Nachbarin",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "As a child she often played with her neighbour.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.044",
+   "frame": "fr.used.to",
+   "text": "In den Schulferien spielten wir immer draußen.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Schulferien",
+     "l": "de:Schulferien",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "draußen",
+     "l": "de:draußen"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "In the school holidays we always played outside.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.045",
+   "frame": "fr.used.to",
+   "text": "Früher ging er in den Kindergarten.",
+   "tokens": [
+    {
+     "t": "Früher",
+     "l": "de:früher"
+    },
+    {
+     "t": "ging",
+     "l": "de:gehen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kindergarten",
+     "l": "de:Kindergarten",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "He used to go to kindergarten.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.046",
+   "frame": "fr.used.to",
+   "text": "Ich bin in einem kleinen Dorf aufgewachsen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "einem",
+     "l": "de:ein",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "kleinen",
+     "l": "de:klein",
+     "f": "ADJ;DAT;SG;NEUT;MIX"
+    },
+    {
+     "t": "Dorf",
+     "l": "de:Dorf",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "aufgewachsen",
+     "l": "de:aufwachsen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I grew up in a small village.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.047",
+   "frame": "fr.used.to",
+   "text": "Sie wuchs bei ihren Großeltern auf.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wuchs",
+     "l": "de:aufwachsen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "bei",
+     "l": "de:bei"
+    },
+    {
+     "t": "ihren",
+     "l": "de:ihr.poss",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Großeltern",
+     "l": "de:Großeltern",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "auf",
+     "l": "de:aufwachsen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "She grew up with her grandparents.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.048",
+   "frame": "fr.used.to",
+   "text": "Erinnerst du dich an deine Kindheit?",
+   "tokens": [
+    {
+     "t": "Erinnerst",
+     "l": "de:erinnern",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "dich",
+     "l": "de:du",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "an",
+     "l": "de:an"
+    },
+    {
+     "t": "deine",
+     "l": "de:dein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Kindheit",
+     "l": "de:Kindheit",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Do you remember your childhood?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.049",
+   "frame": "fr.used.to",
+   "text": "Als Kind vergaß ich oft meine Tasche.",
+   "tokens": [
+    {
+     "t": "Als",
+     "l": "de:als"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "vergaß",
+     "l": "de:vergessen",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tasche",
+     "l": "de:Tasche",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "As a child I often forgot my bag.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.050",
+   "frame": "fr.used.to",
+   "text": "Die Kinder spielten ein Spiel im Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Spiel",
+     "l": "de:Spiel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The children were playing a game in the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.051",
+   "frame": "fr.used.to",
+   "text": "Früher hatte der Nachbar ein Auto.",
+   "tokens": [
+    {
+     "t": "Früher",
+     "l": "de:früher"
+    },
+    {
+     "t": "hatte",
+     "l": "de:haben",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Nachbar",
+     "l": "de:Nachbar",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The neighbour used to have a car.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.052",
+   "frame": "fr.used.to",
+   "text": "Wir spielen oft im Park.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spielen",
+     "l": "de:spielen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "We often play in the park.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.053",
+   "frame": "fr.used.to",
+   "text": "Wir spielten oft im Park.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Park",
+     "l": "de:Park",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.052",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "We often played in the park.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.054",
+   "frame": "fr.used.to",
+   "text": "Er vergisst immer seinen Schlüssel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "vergisst",
+     "l": "de:vergessen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "seinen",
+     "l": "de:sein.poss",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Schlüssel",
+     "l": "de:Schlüssel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He always forgets his key.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.055",
+   "frame": "fr.used.to",
+   "text": "Er vergaß immer seinen Schlüssel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "vergaß",
+     "l": "de:vergessen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "immer",
+     "l": "de:immer"
+    },
+    {
+     "t": "seinen",
+     "l": "de:sein.poss",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Schlüssel",
+     "l": "de:Schlüssel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.054",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "He always forgot his key.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.056",
+   "frame": "fr.used.to",
+   "text": "Das Kind schläft im Kindergarten.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "schläft",
+     "l": "de:schlafen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Kindergarten",
+     "l": "de:Kindergarten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The child sleeps at kindergarten.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.057",
+   "frame": "fr.used.to",
+   "text": "Das Kind schlief im Kindergarten.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "schlief",
+     "l": "de:schlafen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Kindergarten",
+     "l": "de:Kindergarten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.056",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "The child slept at kindergarten.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.058",
+   "frame": "fr.used.to",
+   "text": "Ich erinnere mich an meine Kindheit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "erinnere",
+     "l": "de:erinnern",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "mich",
+     "l": "de:ich",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "an",
+     "l": "de:an"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Kindheit",
+     "l": "de:Kindheit",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "I remember my childhood.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.059",
+   "frame": "fr.used.to",
+   "text": "Ich erinnerte mich an meine Kindheit.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "erinnerte",
+     "l": "de:erinnern",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "mich",
+     "l": "de:ich",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "an",
+     "l": "de:an"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Kindheit",
+     "l": "de:Kindheit",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.058",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "I remembered my childhood.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.060",
+   "frame": "fr.used.to",
+   "text": "Die Kinder spielen im Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "spielen",
+     "l": "de:spielen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The children play in the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.061",
+   "frame": "fr.used.to",
+   "text": "Die Kinder spielten im Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": "de.c01_04.060",
+   "variant": {
+    "Tense": "PST"
+   },
+   "gloss": "The children played in the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.062",
+   "frame": "fr.was.doing",
+   "text": "Als die Mutter nach Hause kam, schlief das Baby.",
+   "tokens": [
+    {
+     "t": "Als",
+     "l": "de:als"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": "kam",
+     "l": "de:kommen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "schlief",
+     "l": "de:schlafen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "When the mother came home, the baby was sleeping.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.063",
+   "frame": "fr.was.doing",
+   "text": "Die Kinder spielten im Garten, als der Vater kam.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kam",
+     "l": "de:kommen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The children were playing in the garden when the father came.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.064",
+   "frame": "fr.was.doing",
+   "text": "Wir frühstückten noch, als der Bus kam.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "frühstückten",
+     "l": "de:frühstücken",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "noch",
+     "l": "de:noch"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kam",
+     "l": "de:kommen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "We were still having breakfast when the bus came.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.065",
+   "frame": "fr.was.doing",
+   "text": "Während ich schlief, spielten die Kinder im Garten.",
+   "tokens": [
+    {
+     "t": "Während",
+     "l": "de:während"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "schlief",
+     "l": "de:schlafen",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "spielten",
+     "l": "de:spielen",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "While I was sleeping, the children were playing in the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.066",
+   "frame": "fr.was.doing",
+   "text": "Ich spielte mit dem Spielzeug, als meine Mutter kam.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "spielte",
+     "l": "de:spielen",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Spielzeug",
+     "l": "de:Spielzeug",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kam",
+     "l": "de:kommen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "I was playing with the toy when my mother came.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.067",
+   "frame": "fr.was.doing",
+   "text": "Die Nachbarin kochte, als ihr Sohn nach Hause kam.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Nachbarin",
+     "l": "de:Nachbarin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kochte",
+     "l": "de:kochen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr.poss",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Sohn",
+     "l": "de:Sohn",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": "kam",
+     "l": "de:kommen",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "The neighbour was cooking when her son came home.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.068",
+   "frame": "fr.future.plan",
+   "text": "Nächste Woche werden wir nach Berlin fahren.",
+   "tokens": [
+    {
+     "t": "Nächste Woche",
+     "l": "de:nächste_Woche"
+    },
+    {
+     "t": "werden",
+     "l": "de:werden",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": "fahren",
+     "l": "de:fahren",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "Next week we will go to Berlin.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.069",
+   "frame": "fr.future.plan",
+   "text": "Nächstes Jahr fahre ich ins Ausland.",
+   "tokens": [
+    {
+     "t": "Nächstes Jahr",
+     "l": "de:nächstes_Jahr"
+    },
+    {
+     "t": "fahre",
+     "l": "de:fahren",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ins",
+     "l": "de:ins"
+    },
+    {
+     "t": "Ausland",
+     "l": "de:Ausland",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "Next year I’m going abroad.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.070",
+   "frame": "fr.future.plan",
+   "text": "Ich buche ein Hotel.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "buche",
+     "l": "de:buchen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Hotel",
+     "l": "de:Hotel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "I’m booking a hotel.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.071",
+   "frame": "fr.future.plan",
+   "text": "Ich werde ein Hotel buchen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "werde",
+     "l": "de:werden",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Hotel",
+     "l": "de:Hotel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "buchen",
+     "l": "de:buchen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": "de.c01_04.070",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "gloss": "I will book a hotel.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.072",
+   "frame": "fr.future.plan",
+   "text": "Wir besuchen unsere Großeltern.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "besuchen",
+     "l": "de:besuchen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "unsere",
+     "l": "de:unser",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Großeltern",
+     "l": "de:Großeltern",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "We are visiting our grandparents.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.073",
+   "frame": "fr.future.plan",
+   "text": "Wir werden unsere Großeltern besuchen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "werden",
+     "l": "de:werden",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "unsere",
+     "l": "de:unser",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Großeltern",
+     "l": "de:Großeltern",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "besuchen",
+     "l": "de:besuchen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": "de.c01_04.072",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "gloss": "We will visit our grandparents.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.074",
+   "frame": "fr.future.plan",
+   "text": "Er reist ins Ausland.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "reist",
+     "l": "de:reisen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ins",
+     "l": "de:ins"
+    },
+    {
+     "t": "Ausland",
+     "l": "de:Ausland",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He is travelling abroad.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.075",
+   "frame": "fr.future.plan",
+   "text": "Er wird ins Ausland reisen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wird",
+     "l": "de:werden",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ins",
+     "l": "de:ins"
+    },
+    {
+     "t": "Ausland",
+     "l": "de:Ausland",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": "de.c01_04.074",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "gloss": "He will travel abroad.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.076",
+   "frame": "fr.future.plan",
+   "text": "Die Reiseleiterin wartet am Bahnhof.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Reiseleiterin",
+     "l": "de:Reiseleiterin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wartet",
+     "l": "de:warten",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The tour guide is waiting at the station.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.077",
+   "frame": "fr.future.plan",
+   "text": "Die Reiseleiterin wird am Bahnhof warten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Reiseleiterin",
+     "l": "de:Reiseleiterin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wird",
+     "l": "de:werden",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Bahnhof",
+     "l": "de:Bahnhof",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "warten",
+     "l": "de:warten",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": "de.c01_04.076",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "gloss": "The tour guide will wait at the station.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.078",
+   "frame": "fr.future.plan",
+   "text": "Du reservierst einen Tisch.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "reservierst",
+     "l": "de:reservieren",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "You are reserving a table.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.079",
+   "frame": "fr.future.plan",
+   "text": "Du wirst einen Tisch reservieren.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "wirst",
+     "l": "de:werden",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "reservieren",
+     "l": "de:reservieren",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": "de.c01_04.078",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "gloss": "You will reserve a table.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.080",
+   "frame": "fr.future.plan",
+   "text": "Morgen werde ich einen Koffer kaufen.",
+   "tokens": [
+    {
+     "t": "Morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "werde",
+     "l": "de:werden",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Koffer",
+     "l": "de:Koffer",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "Tomorrow I will buy a suitcase.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.081",
+   "frame": "fr.future.plan",
+   "text": "Die Touristen werden die Stadt besuchen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Touristen",
+     "l": "de:Tourist",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "werden",
+     "l": "de:werden",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Stadt",
+     "l": "de:Stadt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "besuchen",
+     "l": "de:besuchen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "The tourists will visit the city.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.082",
+   "frame": "fr.future.plan",
+   "text": "Die Touristin wird im Hotel schlafen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Touristin",
+     "l": "de:Touristin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wird",
+     "l": "de:werden",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Hotel",
+     "l": "de:Hotel",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "schlafen",
+     "l": "de:schlafen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "The tourist will sleep in the hotel.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.083",
+   "frame": "fr.future.plan",
+   "text": "Der Reiseleiter wird um neun Uhr kommen.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Reiseleiter",
+     "l": "de:Reiseleiter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "wird",
+     "l": "de:werden",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "kommen",
+     "l": "de:kommen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "The tour guide will come at nine.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.084",
+   "frame": "fr.future.plan",
+   "text": "Ich werde den Reisepass vergessen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "werde",
+     "l": "de:werden",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Reisepass",
+     "l": "de:Reisepass",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "vergessen",
+     "l": "de:vergessen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "I will forget the passport.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.085",
+   "frame": "fr.future.plan",
+   "text": "Ich werde den Reisepass nicht vergessen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "werde",
+     "l": "de:werden",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Reisepass",
+     "l": "de:Reisepass",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "vergessen",
+     "l": "de:vergessen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.negation"
+   ],
+   "variantOf": "de.c01_04.084",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "I won’t forget the passport.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.086",
+   "frame": "fr.future.plan",
+   "text": "Die Reise beginnt nächste Woche.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Reise",
+     "l": "de:Reise",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "beginnt",
+     "l": "de:beginnen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nächste Woche",
+     "l": "de:nächste_Woche"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "The trip begins next week.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.087",
+   "frame": "fr.future.plan",
+   "text": "Wir haben einen Plan.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Plan",
+     "l": "de:Plan",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "We have a plan.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.088",
+   "frame": "fr.command",
+   "text": "Vergiss deinen Reisepass nicht!",
+   "tokens": [
+    {
+     "t": "Vergiss",
+     "l": "de:vergessen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "deinen",
+     "l": "de:dein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Reisepass",
+     "l": "de:Reisepass",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t forget your passport!",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.089",
+   "frame": "fr.future.q",
+   "text": "Wann wirst du die Reise buchen?",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "wirst",
+     "l": "de:werden",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Reise",
+     "l": "de:Reise",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "buchen",
+     "l": "de:buchen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "When will you book the trip?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.090",
+   "frame": "fr.future.q",
+   "text": "Wohin wirst du nächstes Jahr reisen?",
+   "tokens": [
+    {
+     "t": "Wohin",
+     "l": "de:wohin"
+    },
+    {
+     "t": "wirst",
+     "l": "de:werden",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nächstes Jahr",
+     "l": "de:nächstes_Jahr"
+    },
+    {
+     "t": "reisen",
+     "l": "de:reisen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "Where will you travel next year?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.091",
+   "frame": "fr.future.q",
+   "text": "Was wirst du morgen kochen?",
+   "tokens": [
+    {
+     "t": "Was",
+     "l": "de:was",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "wirst",
+     "l": "de:werden",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "What will you cook tomorrow?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.092",
+   "frame": "fr.future.q",
+   "text": "Ihr werdet im Hotel essen.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "werdet",
+     "l": "de:werden",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Hotel",
+     "l": "de:Hotel",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "variantOf": null,
+   "gloss": "You will eat at the hotel.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.093",
+   "frame": "fr.future.q",
+   "text": "Werdet ihr im Hotel essen?",
+   "tokens": [
+    {
+     "t": "Werdet",
+     "l": "de:werden",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Hotel",
+     "l": "de:Hotel",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.c01_04.092",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Will you eat at the hotel?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.094",
+   "frame": "fr.future.q",
+   "text": "Wo wird die Touristin schlafen?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "wird",
+     "l": "de:werden",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Touristin",
+     "l": "de:Touristin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "schlafen",
+     "l": "de:schlafen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "variantOf": null,
+   "gloss": "Where will the tourist sleep?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.095",
+   "frame": "fr.future.q",
+   "text": "Was ist dein Plan?",
+   "tokens": [
+    {
+     "t": "Was",
+     "l": "de:was",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dein",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Plan",
+     "l": "de:Plan",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "What is your plan?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.096",
+   "frame": "fr.future.q",
+   "text": "Wirst du nächste Woche deine Oma besuchen?",
+   "tokens": [
+    {
+     "t": "Wirst",
+     "l": "de:werden",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nächste Woche",
+     "l": "de:nächste_Woche"
+    },
+    {
+     "t": "deine",
+     "l": "de:dein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "besuchen",
+     "l": "de:besuchen",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Will you visit your grandma next week?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.097",
+   "frame": "fr.ordinal",
+   "text": "Das ist mein erstes Auto.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "erstes",
+     "l": "de:erste",
+     "f": "ADJ;NOM;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "This is my first car.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.098",
+   "frame": "fr.ordinal",
+   "text": "Das dritte Haus links ist unser Haus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "dritte",
+     "l": "de:dritte",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "links",
+     "l": "de:links"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "unser",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The third house on the left is our house.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.099",
+   "frame": "fr.ordinal",
+   "text": "Er ist der zweite Sohn.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "zweite",
+     "l": "de:zweite",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Sohn",
+     "l": "de:Sohn",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He is the second son.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.100",
+   "frame": "fr.ordinal",
+   "text": "Am vierten Tag sind wir nach Hause gefahren.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "vierten",
+     "l": "de:vierte",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": "gefahren",
+     "l": "de:fahren",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "On the fourth day we went home.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.101",
+   "frame": "fr.ordinal",
+   "text": "Das ist die fünfte Reise in diesem Jahr.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "fünfte",
+     "l": "de:fünfte",
+     "f": "ADJ;NOM;SG;FEM;WEAK"
+    },
+    {
+     "t": "Reise",
+     "l": "de:Reise",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "diesem",
+     "l": "de:dieser",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Jahr",
+     "l": "de:Jahr",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "This is the fifth trip this year.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.102",
+   "frame": "fr.ordinal",
+   "text": "Der sechste Monat ist der Juni.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "sechste",
+     "l": "de:sechste",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Monat",
+     "l": "de:Monat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Juni",
+     "l": "de:Juni",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The sixth month is June.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.103",
+   "frame": "fr.ordinal",
+   "text": "Am siebten Tag sind wir heimgekommen.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "siebten",
+     "l": "de:siebte",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heimgekommen",
+     "l": "de:heimkommen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "On the seventh day we came home.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.104",
+   "frame": "fr.ordinal",
+   "text": "Heute ist sein achter Geburtstag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sein",
+     "l": "de:sein.poss",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "achter",
+     "l": "de:achte",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Today is his eighth birthday.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.105",
+   "frame": "fr.ordinal",
+   "text": "Am neunten Tag ist sie in Rom angekommen.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "neunten",
+     "l": "de:neunte",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Rom",
+     "name": true
+    },
+    {
+     "t": "angekommen",
+     "l": "de:ankommen",
+     "f": "V;PTCP;PST"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "On the ninth day she arrived in Rome.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.106",
+   "frame": "fr.ordinal",
+   "text": "Heute ist unser zehnter Jahrestag.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "unser",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "zehnter",
+     "l": "de:zehnte",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Jahrestag",
+     "l": "de:Jahrestag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Today is our tenth anniversary.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.107",
+   "frame": "fr.ordinal",
+   "text": "Das ist der letzte Bus.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "letzte",
+     "l": "de:letzte",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "This is the last bus.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.108",
+   "frame": "fr.ordinal",
+   "text": "Letzte Woche war mein Bruder in Berlin.",
+   "tokens": [
+    {
+     "t": "Letzte",
+     "l": "de:letzte",
+     "f": "ADJ;ACC;SG;FEM;STRG"
+    },
+    {
+     "t": "Woche",
+     "l": "de:Woche",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "Berlin",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "Last week my brother was in Berlin.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.109",
+   "frame": "fr.ordinal",
+   "text": "Die Hälfte der Kinder ist im Garten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Hälfte",
+     "l": "de:Hälfte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;GEN;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;GEN;PL"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Half of the children are in the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.110",
+   "frame": "fr.ordinal",
+   "text": "Der erste Tag ist schwer.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "erste",
+     "l": "de:erste",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Tag",
+     "l": "de:Tag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "schwer",
+     "l": "de:schwer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The first day is hard.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.111",
+   "frame": "fr.ordinal",
+   "text": "Die ersten Tage sind schwer.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "ersten",
+     "l": "de:erste",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Tage",
+     "l": "de:Tag",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "schwer",
+     "l": "de:schwer",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": "de.c01_04.110",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "The first days are hard.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.112",
+   "frame": "fr.ordinal",
+   "text": "Das letzte Zimmer ist klein.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "letzte",
+     "l": "de:letzte",
+     "f": "ADJ;NOM;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "klein",
+     "l": "de:klein",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The last room is small.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.113",
+   "frame": "fr.ordinal",
+   "text": "Die letzten Zimmer sind klein.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "letzten",
+     "l": "de:letzte",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "klein",
+     "l": "de:klein",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": "de.c01_04.112",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "The last rooms are small.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.114",
+   "frame": "fr.ordinal",
+   "text": "Er kauft ein zweites Auto.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "zweites",
+     "l": "de:zweite",
+     "f": "ADJ;ACC;SG;NEUT;MIX"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "He is buying a second car.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.115",
+   "frame": "fr.ordinal",
+   "text": "Er kauft das zweite Auto.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "zweite",
+     "l": "de:zweite",
+     "f": "ADJ;ACC;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Auto",
+     "l": "de:Auto",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": "de.c01_04.114",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "gloss": "He is buying the second car.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.116",
+   "frame": "fr.ordinal",
+   "text": "Das ist ein erster Plan.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "erster",
+     "l": "de:erste",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Plan",
+     "l": "de:Plan",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "This is a first plan.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.117",
+   "frame": "fr.ordinal",
+   "text": "Das ist der erste Plan.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "erste",
+     "l": "de:erste",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Plan",
+     "l": "de:Plan",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": "de.c01_04.116",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "gloss": "This is the first plan.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.118",
+   "frame": "fr.date",
+   "text": "Heute ist der erste Mai.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "erste",
+     "l": "de:erste",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Mai",
+     "l": "de:Mai",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Today is the first of May.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.119",
+   "frame": "fr.date",
+   "text": "Mein Geburtstag ist am dritten März.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "dritten",
+     "l": "de:dritte",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "März",
+     "l": "de:März",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "My birthday is on the third of March.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.120",
+   "frame": "fr.date",
+   "text": "Wann hast du Geburtstag? Am zehnten Juni.",
+   "tokens": [
+    {
+     "t": "Wann",
+     "l": "de:wann"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Geburtstag",
+     "l": "de:Geburtstag",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "zehnten",
+     "l": "de:zehnte",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "Juni",
+     "l": "de:Juni",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "When is your birthday? On the tenth of June.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.121",
+   "frame": "fr.date",
+   "text": "Heute ist der achte Oktober.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "achte",
+     "l": "de:achte",
+     "f": "ADJ;NOM;SG;MASC;WEAK"
+    },
+    {
+     "t": "Oktober",
+     "l": "de:Oktober",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Today is the eighth of October.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.122",
+   "frame": "fr.date",
+   "text": "Das Dorf ist aus dem zehnten Jahrhundert.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Dorf",
+     "l": "de:Dorf",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "zehnten",
+     "l": "de:zehnte",
+     "f": "ADJ;DAT;SG;NEUT;WEAK"
+    },
+    {
+     "t": "Jahrhundert",
+     "l": "de:Jahrhundert",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The village dates from the tenth century.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.123",
+   "frame": "fr.date",
+   "text": "Er war ein Jahrzehnt im Ausland.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "war",
+     "l": "de:sein",
+     "f": "V;PST;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Jahrzehnt",
+     "l": "de:Jahrzehnt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Ausland",
+     "l": "de:Ausland",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "variantOf": null,
+   "gloss": "He was abroad for a decade.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.124",
+   "frame": "fr.date",
+   "text": "Das Jubiläum der Schule ist im Mai.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Jubiläum",
+     "l": "de:Jubiläum",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;GEN;SG;FEM"
+    },
+    {
+     "t": "Schule",
+     "l": "de:Schule",
+     "f": "N;GEN;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Mai",
+     "l": "de:Mai",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The school’s anniversary is in May.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.125",
+   "frame": "fr.date",
+   "text": "Am sechsten Dezember kommt der Nikolaus.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "sechsten",
+     "l": "de:sechste",
+     "f": "ADJ;DAT;SG;MASC;WEAK"
+    },
+    {
+     "t": "Dezember",
+     "l": "de:Dezember",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Nikolaus",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "On the sixth of December Saint Nicholas comes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.126",
+   "frame": "fr.clock",
+   "text": "Es ist halb acht.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "halb",
+     "l": "de:halb"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "It is half past seven.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.127",
+   "frame": "fr.clock",
+   "text": "Es ist Viertel nach zehn.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Viertel",
+     "l": "de:Viertel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "It is a quarter past ten.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.128",
+   "frame": "fr.clock",
+   "text": "Der Bus kommt um Viertel vor neun.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bus",
+     "l": "de:Bus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:kommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "Viertel",
+     "l": "de:Viertel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "vor",
+     "l": "de:vor"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The bus comes at a quarter to nine.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.129",
+   "frame": "fr.clock",
+   "text": "Wir frühstücken um halb sieben.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "frühstücken",
+     "l": "de:frühstücken",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "halb",
+     "l": "de:halb"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "We have breakfast at half past six.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.130",
+   "frame": "fr.clock",
+   "text": "Ich stehe um Viertel nach sechs auf.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "stehe",
+     "l": "de:aufstehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "Viertel",
+     "l": "de:Viertel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nach",
+     "l": "de:nach"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "auf",
+     "l": "de:aufstehen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "I get up at a quarter past six.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.c01_04.131",
+   "frame": "fr.clock",
+   "text": "Der Zug fährt um halb neun.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Zug",
+     "l": "de:Zug",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "um",
+     "l": "de:um"
+    },
+    {
+     "t": "halb",
+     "l": "de:halb"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The train leaves at half past eight.",
+   "alts": [],
+   "level": "A2"
+  }
+ ]
+}

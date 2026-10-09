@@ -1,0 +1,2364 @@
+{
+ "lexemes": [
+  {
+   "id": "de:erste",
+   "lemma": "erste",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.1"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "erster",
+    "ADJ;NOM;SG;FEM;STRG": "erste",
+    "ADJ;NOM;SG;NEUT;STRG": "erstes",
+    "ADJ;NOM;PL;STRG": "erste",
+    "ADJ;ACC;SG;MASC;STRG": "ersten",
+    "ADJ;ACC;SG;FEM;STRG": "erste",
+    "ADJ;ACC;SG;NEUT;STRG": "erstes",
+    "ADJ;ACC;PL;STRG": "erste",
+    "ADJ;DAT;SG;MASC;STRG": "erstem",
+    "ADJ;DAT;SG;FEM;STRG": "erster",
+    "ADJ;DAT;SG;NEUT;STRG": "erstem",
+    "ADJ;DAT;PL;STRG": "ersten",
+    "ADJ;NOM;SG;MASC;WEAK": "erste",
+    "ADJ;NOM;SG;FEM;WEAK": "erste",
+    "ADJ;NOM;SG;NEUT;WEAK": "erste",
+    "ADJ;NOM;PL;WEAK": "ersten",
+    "ADJ;ACC;SG;MASC;WEAK": "ersten",
+    "ADJ;ACC;SG;FEM;WEAK": "erste",
+    "ADJ;ACC;SG;NEUT;WEAK": "erste",
+    "ADJ;ACC;PL;WEAK": "ersten",
+    "ADJ;DAT;SG;MASC;WEAK": "ersten",
+    "ADJ;DAT;SG;FEM;WEAK": "ersten",
+    "ADJ;DAT;SG;NEUT;WEAK": "ersten",
+    "ADJ;DAT;PL;WEAK": "ersten",
+    "ADJ;NOM;SG;MASC;MIX": "erster",
+    "ADJ;NOM;SG;FEM;MIX": "erste",
+    "ADJ;NOM;SG;NEUT;MIX": "erstes",
+    "ADJ;NOM;PL;MIX": "ersten",
+    "ADJ;ACC;SG;MASC;MIX": "ersten",
+    "ADJ;ACC;SG;FEM;MIX": "erste",
+    "ADJ;ACC;SG;NEUT;MIX": "erstes",
+    "ADJ;ACC;PL;MIX": "ersten",
+    "ADJ;DAT;SG;MASC;MIX": "ersten",
+    "ADJ;DAT;SG;FEM;MIX": "ersten",
+    "ADJ;DAT;SG;NEUT;MIX": "ersten",
+    "ADJ;DAT;PL;MIX": "ersten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 1 in a row: the first one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "first (1.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute ist der erste Mai.",
+      "tr": "Today is the first of May.",
+      "register": "neutral",
+      "context": "dates",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist mein erstes Auto.",
+      "tr": "This is my first car.",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1"
+     },
+     {
+      "text": "Am ersten Tag war ich sehr müde.",
+      "tr": "On the first day I was very tired.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der erste Tag",
+      "tr": "the first day"
+     },
+     {
+      "text": "zum ersten Mal",
+      "tr": "for the first time"
+     },
+     {
+      "text": "am ersten Mai",
+      "tr": "on the first of May"
+     },
+     {
+      "text": "die erste Klasse",
+      "tr": "first class; the first year of school"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (1.).",
+    "etymology": {
+     "text": "From Middle High German ērest, from Old High German ērist, from Proto-West Germanic *airist – originally a superlative (“earliest”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "erste was originally the superlative of an old word for “early” – the earliest one."
+    ],
+    "pitfalls": [
+     "Irregular: erste, not *einte – it does not come from eins.",
+     "Written with a dot: der 1. Mai = der erste Mai."
+    ],
+    "subtleties": [
+     "Like an adjective, the ending depends on the article: der erste Tag, ein erster Tag, am ersten Tag.",
+     "erst as an adverb means “only, not until”: Ich komme erst morgen (not until tomorrow)."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:zweite",
+   "lemma": "zweite",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.2"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "zweiter",
+    "ADJ;NOM;SG;FEM;STRG": "zweite",
+    "ADJ;NOM;SG;NEUT;STRG": "zweites",
+    "ADJ;NOM;PL;STRG": "zweite",
+    "ADJ;ACC;SG;MASC;STRG": "zweiten",
+    "ADJ;ACC;SG;FEM;STRG": "zweite",
+    "ADJ;ACC;SG;NEUT;STRG": "zweites",
+    "ADJ;ACC;PL;STRG": "zweite",
+    "ADJ;DAT;SG;MASC;STRG": "zweitem",
+    "ADJ;DAT;SG;FEM;STRG": "zweiter",
+    "ADJ;DAT;SG;NEUT;STRG": "zweitem",
+    "ADJ;DAT;PL;STRG": "zweiten",
+    "ADJ;NOM;SG;MASC;WEAK": "zweite",
+    "ADJ;NOM;SG;FEM;WEAK": "zweite",
+    "ADJ;NOM;SG;NEUT;WEAK": "zweite",
+    "ADJ;NOM;PL;WEAK": "zweiten",
+    "ADJ;ACC;SG;MASC;WEAK": "zweiten",
+    "ADJ;ACC;SG;FEM;WEAK": "zweite",
+    "ADJ;ACC;SG;NEUT;WEAK": "zweite",
+    "ADJ;ACC;PL;WEAK": "zweiten",
+    "ADJ;DAT;SG;MASC;WEAK": "zweiten",
+    "ADJ;DAT;SG;FEM;WEAK": "zweiten",
+    "ADJ;DAT;SG;NEUT;WEAK": "zweiten",
+    "ADJ;DAT;PL;WEAK": "zweiten",
+    "ADJ;NOM;SG;MASC;MIX": "zweiter",
+    "ADJ;NOM;SG;FEM;MIX": "zweite",
+    "ADJ;NOM;SG;NEUT;MIX": "zweites",
+    "ADJ;NOM;PL;MIX": "zweiten",
+    "ADJ;ACC;SG;MASC;MIX": "zweiten",
+    "ADJ;ACC;SG;FEM;MIX": "zweite",
+    "ADJ;ACC;SG;NEUT;MIX": "zweites",
+    "ADJ;ACC;PL;MIX": "zweiten",
+    "ADJ;DAT;SG;MASC;MIX": "zweiten",
+    "ADJ;DAT;SG;FEM;MIX": "zweiten",
+    "ADJ;DAT;SG;NEUT;MIX": "zweiten",
+    "ADJ;DAT;PL;MIX": "zweiten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 2 in a row: the second one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "second (2.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er wohnt im zweiten Stock.",
+      "tr": "He lives on the second floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist schon mein zweiter Kaffee.",
+      "tr": "That’s already my second coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat am zweiten Juni Geburtstag.",
+      "tr": "Her birthday is on the second of June.",
+      "register": "neutral",
+      "context": "dates",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zum zweiten Mal",
+      "tr": "for the second time"
+     },
+     {
+      "text": "der zweite Stock",
+      "tr": "the second floor"
+     },
+     {
+      "text": "die zweite Chance",
+      "tr": "the second chance"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (2.).",
+    "etymology": {
+     "text": "From zwei + -te; it displaced the older word ander (“other, second”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Older German used ander (“other”) for “second”; zweite replaced it."
+    ],
+    "pitfalls": [
+     "Regular: zwei + -te = zweite. Written 2.",
+     "In speech on the phone zwo is sometimes said for zwei, but the ordinal is always zweite."
+    ],
+    "subtleties": [
+     "Floors are counted from the ground floor (Erdgeschoss): der erste Stock is one floor up."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:dritte",
+   "lemma": "dritte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.3"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "dritter",
+    "ADJ;NOM;SG;FEM;STRG": "dritte",
+    "ADJ;NOM;SG;NEUT;STRG": "drittes",
+    "ADJ;NOM;PL;STRG": "dritte",
+    "ADJ;ACC;SG;MASC;STRG": "dritten",
+    "ADJ;ACC;SG;FEM;STRG": "dritte",
+    "ADJ;ACC;SG;NEUT;STRG": "drittes",
+    "ADJ;ACC;PL;STRG": "dritte",
+    "ADJ;DAT;SG;MASC;STRG": "drittem",
+    "ADJ;DAT;SG;FEM;STRG": "dritter",
+    "ADJ;DAT;SG;NEUT;STRG": "drittem",
+    "ADJ;DAT;PL;STRG": "dritten",
+    "ADJ;NOM;SG;MASC;WEAK": "dritte",
+    "ADJ;NOM;SG;FEM;WEAK": "dritte",
+    "ADJ;NOM;SG;NEUT;WEAK": "dritte",
+    "ADJ;NOM;PL;WEAK": "dritten",
+    "ADJ;ACC;SG;MASC;WEAK": "dritten",
+    "ADJ;ACC;SG;FEM;WEAK": "dritte",
+    "ADJ;ACC;SG;NEUT;WEAK": "dritte",
+    "ADJ;ACC;PL;WEAK": "dritten",
+    "ADJ;DAT;SG;MASC;WEAK": "dritten",
+    "ADJ;DAT;SG;FEM;WEAK": "dritten",
+    "ADJ;DAT;SG;NEUT;WEAK": "dritten",
+    "ADJ;DAT;PL;WEAK": "dritten",
+    "ADJ;NOM;SG;MASC;MIX": "dritter",
+    "ADJ;NOM;SG;FEM;MIX": "dritte",
+    "ADJ;NOM;SG;NEUT;MIX": "drittes",
+    "ADJ;NOM;PL;MIX": "dritten",
+    "ADJ;ACC;SG;MASC;MIX": "dritten",
+    "ADJ;ACC;SG;FEM;MIX": "dritte",
+    "ADJ;ACC;SG;NEUT;MIX": "drittes",
+    "ADJ;ACC;PL;MIX": "dritten",
+    "ADJ;DAT;SG;MASC;MIX": "dritten",
+    "ADJ;DAT;SG;FEM;MIX": "dritten",
+    "ADJ;DAT;SG;NEUT;MIX": "dritten",
+    "ADJ;DAT;PL;MIX": "dritten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 3 in a row: the third one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "third (3.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir wohnen im dritten Haus links.",
+      "tr": "We live in the third house on the left.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute ist der dritte März.",
+      "tr": "Today is the third of March.",
+      "register": "neutral",
+      "context": "dates",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist bei der Wahl Dritter geworden.",
+      "tr": "He came third in the election.",
+      "register": "neutral",
+      "context": "competition",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das dritte Haus",
+      "tr": "the third house"
+     },
+     {
+      "text": "zu dritt",
+      "tr": "the three of us / three together"
+     },
+     {
+      "text": "die Dritte Welt",
+      "tr": "the Third World (dated)"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (3.).",
+    "etymology": {
+     "text": "From Old High German dritto; equivalent to drei + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Aller guten Dinge sind drei – and the third attempt (der dritte Versuch) is the lucky one."
+    ],
+    "pitfalls": [
+     "Irregular: dritte, not *dreite.",
+     "zu dritt = as a group of three: Wir sind zu dritt."
+    ],
+    "subtleties": [
+     "As a noun with a capital: der/die Dritte (the third person, the one in third place)."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:vierte",
+   "lemma": "vierte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.4"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "vierter",
+    "ADJ;NOM;SG;FEM;STRG": "vierte",
+    "ADJ;NOM;SG;NEUT;STRG": "viertes",
+    "ADJ;NOM;PL;STRG": "vierte",
+    "ADJ;ACC;SG;MASC;STRG": "vierten",
+    "ADJ;ACC;SG;FEM;STRG": "vierte",
+    "ADJ;ACC;SG;NEUT;STRG": "viertes",
+    "ADJ;ACC;PL;STRG": "vierte",
+    "ADJ;DAT;SG;MASC;STRG": "viertem",
+    "ADJ;DAT;SG;FEM;STRG": "vierter",
+    "ADJ;DAT;SG;NEUT;STRG": "viertem",
+    "ADJ;DAT;PL;STRG": "vierten",
+    "ADJ;NOM;SG;MASC;WEAK": "vierte",
+    "ADJ;NOM;SG;FEM;WEAK": "vierte",
+    "ADJ;NOM;SG;NEUT;WEAK": "vierte",
+    "ADJ;NOM;PL;WEAK": "vierten",
+    "ADJ;ACC;SG;MASC;WEAK": "vierten",
+    "ADJ;ACC;SG;FEM;WEAK": "vierte",
+    "ADJ;ACC;SG;NEUT;WEAK": "vierte",
+    "ADJ;ACC;PL;WEAK": "vierten",
+    "ADJ;DAT;SG;MASC;WEAK": "vierten",
+    "ADJ;DAT;SG;FEM;WEAK": "vierten",
+    "ADJ;DAT;SG;NEUT;WEAK": "vierten",
+    "ADJ;DAT;PL;WEAK": "vierten",
+    "ADJ;NOM;SG;MASC;MIX": "vierter",
+    "ADJ;NOM;SG;FEM;MIX": "vierte",
+    "ADJ;NOM;SG;NEUT;MIX": "viertes",
+    "ADJ;NOM;PL;MIX": "vierten",
+    "ADJ;ACC;SG;MASC;MIX": "vierten",
+    "ADJ;ACC;SG;FEM;MIX": "vierte",
+    "ADJ;ACC;SG;NEUT;MIX": "viertes",
+    "ADJ;ACC;PL;MIX": "vierten",
+    "ADJ;DAT;SG;MASC;MIX": "vierten",
+    "ADJ;DAT;SG;FEM;MIX": "vierten",
+    "ADJ;DAT;SG;NEUT;MIX": "vierten",
+    "ADJ;DAT;PL;MIX": "vierten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 4 in a row: the fourth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fourth (4.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist im vierten Monat schwanger.",
+      "tr": "She is four months pregnant (in the fourth month).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Am vierten Tag sind wir nach Hause gefahren.",
+      "tr": "On the fourth day we went home.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen im vierten Stock.",
+      "tr": "We live on the fourth floor.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der vierte Tag",
+      "tr": "the fourth day"
+     },
+     {
+      "text": "zu viert",
+      "tr": "as four, the four of us"
+     },
+     {
+      "text": "am vierten Juli",
+      "tr": "on the fourth of July"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (4.).",
+    "etymology": {
+     "text": "From Middle High German vierde, from Old High German fiordo, from Proto-West Germanic *feurþō; equivalent to vier + -te. Cognate with Dutch vierde, English fourth.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ein Viertel (a quarter) is literally “a fourth part” (vier + Teil)."
+    ],
+    "pitfalls": [
+     "Do not confuse vierte (fourth) with das Viertel (a quarter): der vierte Teil = ein Viertel."
+    ],
+    "subtleties": [
+     "Regular from vier: vier + -te."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:fünfte",
+   "lemma": "fünfte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.5"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "fünfter",
+    "ADJ;NOM;SG;FEM;STRG": "fünfte",
+    "ADJ;NOM;SG;NEUT;STRG": "fünftes",
+    "ADJ;NOM;PL;STRG": "fünfte",
+    "ADJ;ACC;SG;MASC;STRG": "fünften",
+    "ADJ;ACC;SG;FEM;STRG": "fünfte",
+    "ADJ;ACC;SG;NEUT;STRG": "fünftes",
+    "ADJ;ACC;PL;STRG": "fünfte",
+    "ADJ;DAT;SG;MASC;STRG": "fünftem",
+    "ADJ;DAT;SG;FEM;STRG": "fünfter",
+    "ADJ;DAT;SG;NEUT;STRG": "fünftem",
+    "ADJ;DAT;PL;STRG": "fünften",
+    "ADJ;NOM;SG;MASC;WEAK": "fünfte",
+    "ADJ;NOM;SG;FEM;WEAK": "fünfte",
+    "ADJ;NOM;SG;NEUT;WEAK": "fünfte",
+    "ADJ;NOM;PL;WEAK": "fünften",
+    "ADJ;ACC;SG;MASC;WEAK": "fünften",
+    "ADJ;ACC;SG;FEM;WEAK": "fünfte",
+    "ADJ;ACC;SG;NEUT;WEAK": "fünfte",
+    "ADJ;ACC;PL;WEAK": "fünften",
+    "ADJ;DAT;SG;MASC;WEAK": "fünften",
+    "ADJ;DAT;SG;FEM;WEAK": "fünften",
+    "ADJ;DAT;SG;NEUT;WEAK": "fünften",
+    "ADJ;DAT;PL;WEAK": "fünften",
+    "ADJ;NOM;SG;MASC;MIX": "fünfter",
+    "ADJ;NOM;SG;FEM;MIX": "fünfte",
+    "ADJ;NOM;SG;NEUT;MIX": "fünftes",
+    "ADJ;NOM;PL;MIX": "fünften",
+    "ADJ;ACC;SG;MASC;MIX": "fünften",
+    "ADJ;ACC;SG;FEM;MIX": "fünfte",
+    "ADJ;ACC;SG;NEUT;MIX": "fünftes",
+    "ADJ;ACC;PL;MIX": "fünften",
+    "ADJ;DAT;SG;MASC;MIX": "fünften",
+    "ADJ;DAT;SG;FEM;MIX": "fünften",
+    "ADJ;DAT;SG;NEUT;MIX": "fünften",
+    "ADJ;DAT;PL;MIX": "fünften"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 5 in a row: the fifth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifth (5.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Sohn ist in der fünften Klasse.",
+      "tr": "My son is in the fifth year (grade 5).",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist schon die fünfte Reise in diesem Jahr.",
+      "tr": "That’s already the fifth trip this year.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kam als Fünfter ins Ziel.",
+      "tr": "He finished fifth.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die fünfte Klasse",
+      "tr": "the fifth year at school"
+     },
+     {
+      "text": "zum fünften Mal",
+      "tr": "for the fifth time"
+     },
+     {
+      "text": "zu fünft",
+      "tr": "as five"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (5.).",
+    "etymology": {
+     "text": "From Old High German fimfto, from Proto-Germanic *fimftô; equivalent to fünf + -te. Cognate with English fifth.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English fifth and German fünfte both keep the f-sound of five / fünf."
+    ],
+    "pitfalls": [
+     "Regular: fünf + -te = fünfte; the umlaut stays."
+    ],
+    "subtleties": [
+     "In German schools, die fünfte Klasse is the first year of secondary school in most states."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:sechste",
+   "lemma": "sechste",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.6"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "sechster",
+    "ADJ;NOM;SG;FEM;STRG": "sechste",
+    "ADJ;NOM;SG;NEUT;STRG": "sechstes",
+    "ADJ;NOM;PL;STRG": "sechste",
+    "ADJ;ACC;SG;MASC;STRG": "sechsten",
+    "ADJ;ACC;SG;FEM;STRG": "sechste",
+    "ADJ;ACC;SG;NEUT;STRG": "sechstes",
+    "ADJ;ACC;PL;STRG": "sechste",
+    "ADJ;DAT;SG;MASC;STRG": "sechstem",
+    "ADJ;DAT;SG;FEM;STRG": "sechster",
+    "ADJ;DAT;SG;NEUT;STRG": "sechstem",
+    "ADJ;DAT;PL;STRG": "sechsten",
+    "ADJ;NOM;SG;MASC;WEAK": "sechste",
+    "ADJ;NOM;SG;FEM;WEAK": "sechste",
+    "ADJ;NOM;SG;NEUT;WEAK": "sechste",
+    "ADJ;NOM;PL;WEAK": "sechsten",
+    "ADJ;ACC;SG;MASC;WEAK": "sechsten",
+    "ADJ;ACC;SG;FEM;WEAK": "sechste",
+    "ADJ;ACC;SG;NEUT;WEAK": "sechste",
+    "ADJ;ACC;PL;WEAK": "sechsten",
+    "ADJ;DAT;SG;MASC;WEAK": "sechsten",
+    "ADJ;DAT;SG;FEM;WEAK": "sechsten",
+    "ADJ;DAT;SG;NEUT;WEAK": "sechsten",
+    "ADJ;DAT;PL;WEAK": "sechsten",
+    "ADJ;NOM;SG;MASC;MIX": "sechster",
+    "ADJ;NOM;SG;FEM;MIX": "sechste",
+    "ADJ;NOM;SG;NEUT;MIX": "sechstes",
+    "ADJ;NOM;PL;MIX": "sechsten",
+    "ADJ;ACC;SG;MASC;MIX": "sechsten",
+    "ADJ;ACC;SG;FEM;MIX": "sechste",
+    "ADJ;ACC;SG;NEUT;MIX": "sechstes",
+    "ADJ;ACC;PL;MIX": "sechsten",
+    "ADJ;DAT;SG;MASC;MIX": "sechsten",
+    "ADJ;DAT;SG;FEM;MIX": "sechsten",
+    "ADJ;DAT;SG;NEUT;MIX": "sechsten",
+    "ADJ;DAT;PL;MIX": "sechsten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 6 in a row: the sixth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixth (6.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir wohnen im sechsten Stock.",
+      "tr": "We live on the sixth floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Am sechsten Dezember kommt der Nikolaus.",
+      "tr": "On the sixth of December Saint Nicholas comes.",
+      "register": "neutral",
+      "context": "traditions",
+      "sense": "s1"
+     },
+     {
+      "text": "Am sechsten Tag ruhten sie sich aus.",
+      "tr": "On the sixth day they rested.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der sechste Sinn",
+      "tr": "the sixth sense"
+     },
+     {
+      "text": "im sechsten Stock",
+      "tr": "on the sixth floor"
+     },
+     {
+      "text": "am sechsten Dezember",
+      "tr": "on the sixth of December"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (6.).",
+    "etymology": {
+     "text": "From Old High German sehsto, from Proto-Germanic *sehstô; equivalent to sechs + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "On 6 December (Nikolaustag) children in German-speaking countries put out a shoe for small presents."
+    ],
+    "pitfalls": [
+     "Spelling: sechste (sechs + -te), pronounced with ks: [ˈzɛkstə]."
+    ],
+    "subtleties": [
+     "einen sechsten Sinn haben = to have a sixth sense."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:siebte",
+   "lemma": "siebte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.7"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "siebter",
+    "ADJ;NOM;SG;FEM;STRG": "siebte",
+    "ADJ;NOM;SG;NEUT;STRG": "siebtes",
+    "ADJ;NOM;PL;STRG": "siebte",
+    "ADJ;ACC;SG;MASC;STRG": "siebten",
+    "ADJ;ACC;SG;FEM;STRG": "siebte",
+    "ADJ;ACC;SG;NEUT;STRG": "siebtes",
+    "ADJ;ACC;PL;STRG": "siebte",
+    "ADJ;DAT;SG;MASC;STRG": "siebtem",
+    "ADJ;DAT;SG;FEM;STRG": "siebter",
+    "ADJ;DAT;SG;NEUT;STRG": "siebtem",
+    "ADJ;DAT;PL;STRG": "siebten",
+    "ADJ;NOM;SG;MASC;WEAK": "siebte",
+    "ADJ;NOM;SG;FEM;WEAK": "siebte",
+    "ADJ;NOM;SG;NEUT;WEAK": "siebte",
+    "ADJ;NOM;PL;WEAK": "siebten",
+    "ADJ;ACC;SG;MASC;WEAK": "siebten",
+    "ADJ;ACC;SG;FEM;WEAK": "siebte",
+    "ADJ;ACC;SG;NEUT;WEAK": "siebte",
+    "ADJ;ACC;PL;WEAK": "siebten",
+    "ADJ;DAT;SG;MASC;WEAK": "siebten",
+    "ADJ;DAT;SG;FEM;WEAK": "siebten",
+    "ADJ;DAT;SG;NEUT;WEAK": "siebten",
+    "ADJ;DAT;PL;WEAK": "siebten",
+    "ADJ;NOM;SG;MASC;MIX": "siebter",
+    "ADJ;NOM;SG;FEM;MIX": "siebte",
+    "ADJ;NOM;SG;NEUT;MIX": "siebtes",
+    "ADJ;NOM;PL;MIX": "siebten",
+    "ADJ;ACC;SG;MASC;MIX": "siebten",
+    "ADJ;ACC;SG;FEM;MIX": "siebte",
+    "ADJ;ACC;SG;NEUT;MIX": "siebtes",
+    "ADJ;ACC;PL;MIX": "siebten",
+    "ADJ;DAT;SG;MASC;MIX": "siebten",
+    "ADJ;DAT;SG;FEM;MIX": "siebten",
+    "ADJ;DAT;SG;NEUT;MIX": "siebten",
+    "ADJ;DAT;PL;MIX": "siebten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 7 in a row: the seventh one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventh (7.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am siebten Tag haben wir uns ausgeruht.",
+      "tr": "On the seventh day we rested.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin im siebten Himmel!",
+      "tr": "I’m in seventh heaven!",
+      "register": "colloquial",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie war im siebten Himmel.",
+      "tr": "She was in seventh heaven.",
+      "register": "colloquial",
+      "context": "idioms",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im siebten Himmel sein",
+      "tr": "to be in seventh heaven"
+     },
+     {
+      "text": "der siebte Tag",
+      "tr": "the seventh day"
+     },
+     {
+      "text": "am siebten Mai",
+      "tr": "on the seventh of May"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (7.).",
+    "etymology": {
+     "text": "Syncope of siebente, from Middle High German sibente, from Old High German sibunto, from Proto-Germanic *sebundô; equivalent to sieben + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "im siebten Himmel sein (to be in seventh heaven) – German uses the same image."
+    ],
+    "pitfalls": [
+     "Irregular: siebte, not *siebente in everyday use (siebente is an older, still correct variant)."
+    ],
+    "subtleties": [
+     "The -en of sieben drops: sieb- + -te."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:achte",
+   "lemma": "achte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.8"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "achter",
+    "ADJ;NOM;SG;FEM;STRG": "achte",
+    "ADJ;NOM;SG;NEUT;STRG": "achtes",
+    "ADJ;NOM;PL;STRG": "achte",
+    "ADJ;ACC;SG;MASC;STRG": "achten",
+    "ADJ;ACC;SG;FEM;STRG": "achte",
+    "ADJ;ACC;SG;NEUT;STRG": "achtes",
+    "ADJ;ACC;PL;STRG": "achte",
+    "ADJ;DAT;SG;MASC;STRG": "achtem",
+    "ADJ;DAT;SG;FEM;STRG": "achter",
+    "ADJ;DAT;SG;NEUT;STRG": "achtem",
+    "ADJ;DAT;PL;STRG": "achten",
+    "ADJ;NOM;SG;MASC;WEAK": "achte",
+    "ADJ;NOM;SG;FEM;WEAK": "achte",
+    "ADJ;NOM;SG;NEUT;WEAK": "achte",
+    "ADJ;NOM;PL;WEAK": "achten",
+    "ADJ;ACC;SG;MASC;WEAK": "achten",
+    "ADJ;ACC;SG;FEM;WEAK": "achte",
+    "ADJ;ACC;SG;NEUT;WEAK": "achte",
+    "ADJ;ACC;PL;WEAK": "achten",
+    "ADJ;DAT;SG;MASC;WEAK": "achten",
+    "ADJ;DAT;SG;FEM;WEAK": "achten",
+    "ADJ;DAT;SG;NEUT;WEAK": "achten",
+    "ADJ;DAT;PL;WEAK": "achten",
+    "ADJ;NOM;SG;MASC;MIX": "achter",
+    "ADJ;NOM;SG;FEM;MIX": "achte",
+    "ADJ;NOM;SG;NEUT;MIX": "achtes",
+    "ADJ;NOM;PL;MIX": "achten",
+    "ADJ;ACC;SG;MASC;MIX": "achten",
+    "ADJ;ACC;SG;FEM;MIX": "achte",
+    "ADJ;ACC;SG;NEUT;MIX": "achtes",
+    "ADJ;ACC;PL;MIX": "achten",
+    "ADJ;DAT;SG;MASC;MIX": "achten",
+    "ADJ;DAT;SG;FEM;MIX": "achten",
+    "ADJ;DAT;SG;NEUT;MIX": "achten",
+    "ADJ;DAT;PL;MIX": "achten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 8 in a row: the eighth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighth (8.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute ist der achte Oktober.",
+      "tr": "Today is the eighth of October.",
+      "register": "neutral",
+      "context": "dates",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist sein achter Geburtstag.",
+      "tr": "It’s his eighth birthday.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Büro ist im achten Stock.",
+      "tr": "The office is on the eighth floor.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der achte Tag",
+      "tr": "the eighth day"
+     },
+     {
+      "text": "am achten Oktober",
+      "tr": "on the eighth of October"
+     },
+     {
+      "text": "zu acht",
+      "tr": "as eight"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (8.).",
+    "etymology": {
+     "text": "From Middle High German ahtode, from Old High German ahtodo, from Proto-West Germanic *ahtudō; equivalent to acht + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "acht + te merge into one t: achte."
+    ],
+    "pitfalls": [
+     "Only one t: acht + -e = achte, not *achtte."
+    ],
+    "subtleties": [
+     "achte is also a form of the verb achten (to pay attention): ich achte darauf – a different word."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:neunte",
+   "lemma": "neunte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.9"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "neunter",
+    "ADJ;NOM;SG;FEM;STRG": "neunte",
+    "ADJ;NOM;SG;NEUT;STRG": "neuntes",
+    "ADJ;NOM;PL;STRG": "neunte",
+    "ADJ;ACC;SG;MASC;STRG": "neunten",
+    "ADJ;ACC;SG;FEM;STRG": "neunte",
+    "ADJ;ACC;SG;NEUT;STRG": "neuntes",
+    "ADJ;ACC;PL;STRG": "neunte",
+    "ADJ;DAT;SG;MASC;STRG": "neuntem",
+    "ADJ;DAT;SG;FEM;STRG": "neunter",
+    "ADJ;DAT;SG;NEUT;STRG": "neuntem",
+    "ADJ;DAT;PL;STRG": "neunten",
+    "ADJ;NOM;SG;MASC;WEAK": "neunte",
+    "ADJ;NOM;SG;FEM;WEAK": "neunte",
+    "ADJ;NOM;SG;NEUT;WEAK": "neunte",
+    "ADJ;NOM;PL;WEAK": "neunten",
+    "ADJ;ACC;SG;MASC;WEAK": "neunten",
+    "ADJ;ACC;SG;FEM;WEAK": "neunte",
+    "ADJ;ACC;SG;NEUT;WEAK": "neunte",
+    "ADJ;ACC;PL;WEAK": "neunten",
+    "ADJ;DAT;SG;MASC;WEAK": "neunten",
+    "ADJ;DAT;SG;FEM;WEAK": "neunten",
+    "ADJ;DAT;SG;NEUT;WEAK": "neunten",
+    "ADJ;DAT;PL;WEAK": "neunten",
+    "ADJ;NOM;SG;MASC;MIX": "neunter",
+    "ADJ;NOM;SG;FEM;MIX": "neunte",
+    "ADJ;NOM;SG;NEUT;MIX": "neuntes",
+    "ADJ;NOM;PL;MIX": "neunten",
+    "ADJ;ACC;SG;MASC;MIX": "neunten",
+    "ADJ;ACC;SG;FEM;MIX": "neunte",
+    "ADJ;ACC;SG;NEUT;MIX": "neuntes",
+    "ADJ;ACC;PL;MIX": "neunten",
+    "ADJ;DAT;SG;MASC;MIX": "neunten",
+    "ADJ;DAT;SG;FEM;MIX": "neunten",
+    "ADJ;DAT;SG;NEUT;MIX": "neunten",
+    "ADJ;DAT;PL;MIX": "neunten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 9 in a row: the ninth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ninth (9.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die neunte Symphonie von Beethoven ist berühmt.",
+      "tr": "Beethoven’s Ninth Symphony is famous.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     },
+     {
+      "text": "Am neunten Tag kamen wir in Rom an.",
+      "tr": "On the ninth day we arrived in Rome.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Beethovens Neunte ist sehr berühmt.",
+      "tr": "Beethoven’s Ninth is very famous.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Neunte",
+      "tr": "Beethoven’s Ninth (the Ninth Symphony)"
+     },
+     {
+      "text": "am neunten November",
+      "tr": "on the ninth of November"
+     },
+     {
+      "text": "zum neunten Mal",
+      "tr": "for the ninth time"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (9.).",
+    "etymology": {
+     "text": "From Middle High German niunte, from Old High German niunto, from Proto-Germanic *newundô; equivalent to neun + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Freude, schöner Götterfunken” from Beethoven’s Ninth is the anthem of the European Union (without words)."
+    ],
+    "pitfalls": [
+     "Regular: neun + -te = neunte."
+    ],
+    "subtleties": [
+     "der neunte November (9 November) is a much-remembered date in German history: the fall of the Berlin Wall in 1989."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:zehnte",
+   "lemma": "zehnte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.10"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "zehnter",
+    "ADJ;NOM;SG;FEM;STRG": "zehnte",
+    "ADJ;NOM;SG;NEUT;STRG": "zehntes",
+    "ADJ;NOM;PL;STRG": "zehnte",
+    "ADJ;ACC;SG;MASC;STRG": "zehnten",
+    "ADJ;ACC;SG;FEM;STRG": "zehnte",
+    "ADJ;ACC;SG;NEUT;STRG": "zehntes",
+    "ADJ;ACC;PL;STRG": "zehnte",
+    "ADJ;DAT;SG;MASC;STRG": "zehntem",
+    "ADJ;DAT;SG;FEM;STRG": "zehnter",
+    "ADJ;DAT;SG;NEUT;STRG": "zehntem",
+    "ADJ;DAT;PL;STRG": "zehnten",
+    "ADJ;NOM;SG;MASC;WEAK": "zehnte",
+    "ADJ;NOM;SG;FEM;WEAK": "zehnte",
+    "ADJ;NOM;SG;NEUT;WEAK": "zehnte",
+    "ADJ;NOM;PL;WEAK": "zehnten",
+    "ADJ;ACC;SG;MASC;WEAK": "zehnten",
+    "ADJ;ACC;SG;FEM;WEAK": "zehnte",
+    "ADJ;ACC;SG;NEUT;WEAK": "zehnte",
+    "ADJ;ACC;PL;WEAK": "zehnten",
+    "ADJ;DAT;SG;MASC;WEAK": "zehnten",
+    "ADJ;DAT;SG;FEM;WEAK": "zehnten",
+    "ADJ;DAT;SG;NEUT;WEAK": "zehnten",
+    "ADJ;DAT;PL;WEAK": "zehnten",
+    "ADJ;NOM;SG;MASC;MIX": "zehnter",
+    "ADJ;NOM;SG;FEM;MIX": "zehnte",
+    "ADJ;NOM;SG;NEUT;MIX": "zehntes",
+    "ADJ;NOM;PL;MIX": "zehnten",
+    "ADJ;ACC;SG;MASC;MIX": "zehnten",
+    "ADJ;ACC;SG;FEM;MIX": "zehnte",
+    "ADJ;ACC;SG;NEUT;MIX": "zehntes",
+    "ADJ;ACC;PL;MIX": "zehnten",
+    "ADJ;DAT;SG;MASC;MIX": "zehnten",
+    "ADJ;DAT;SG;FEM;MIX": "zehnten",
+    "ADJ;DAT;SG;NEUT;MIX": "zehnten",
+    "ADJ;DAT;PL;MIX": "zehnten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files zehnte only as an ordinal numeral (“num”), while erste … neunte are filed as adjectives; it is the same kind of word (not comparable, attributive, declined like an adjective), so the course files all ordinals as ADJ (class attr). Its 36 cells were compared by hand with Wiktionary’s declension table (articles removed)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Number 10 in a row: the tenth one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tenth (10.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er wohnt im zehnten Stock.",
+      "tr": "He lives on the tenth floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute feiern wir den zehnten Geburtstag.",
+      "tr": "Today we are celebrating the tenth birthday.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "Jeder zehnte Schüler fährt mit dem Fahrrad.",
+      "tr": "Every tenth pupil cycles.",
+      "register": "neutral",
+      "context": "statistics",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der zehnte Tag",
+      "tr": "the tenth day"
+     },
+     {
+      "text": "zum zehnten Mal",
+      "tr": "for the tenth time"
+     },
+     {
+      "text": "am zehnten Juni",
+      "tr": "on the tenth of June"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (10.).",
+    "etymology": {
+     "text": "From Middle High German zëhente, from Old High German zehanto, from Proto-Germanic *tehundô; equivalent to zehn + -te.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Up to 19 the ordinal adds -te (der neunzehnte), from 20 -ste (der zwanzigste, der hundertste)."
+    ],
+    "pitfalls": [
+     "Regular: zehn + -te; from 20 on the ending is -ste: der zwanzigste."
+    ],
+    "subtleties": [
+     "der Zehnte (masculine noun) is the historical tithe, a tenth of the harvest paid to the church or lord."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:letzte",
+   "lemma": "letzte",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.last"
+   ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "the ending is added to the base form"
+    }
+   },
+   "forms": {
+    "ADJ;NOM;SG;MASC;STRG": "letzter",
+    "ADJ;NOM;SG;FEM;STRG": "letzte",
+    "ADJ;NOM;SG;NEUT;STRG": "letztes",
+    "ADJ;NOM;PL;STRG": "letzte",
+    "ADJ;ACC;SG;MASC;STRG": "letzten",
+    "ADJ;ACC;SG;FEM;STRG": "letzte",
+    "ADJ;ACC;SG;NEUT;STRG": "letztes",
+    "ADJ;ACC;PL;STRG": "letzte",
+    "ADJ;DAT;SG;MASC;STRG": "letztem",
+    "ADJ;DAT;SG;FEM;STRG": "letzter",
+    "ADJ;DAT;SG;NEUT;STRG": "letztem",
+    "ADJ;DAT;PL;STRG": "letzten",
+    "ADJ;NOM;SG;MASC;WEAK": "letzte",
+    "ADJ;NOM;SG;FEM;WEAK": "letzte",
+    "ADJ;NOM;SG;NEUT;WEAK": "letzte",
+    "ADJ;NOM;PL;WEAK": "letzten",
+    "ADJ;ACC;SG;MASC;WEAK": "letzten",
+    "ADJ;ACC;SG;FEM;WEAK": "letzte",
+    "ADJ;ACC;SG;NEUT;WEAK": "letzte",
+    "ADJ;ACC;PL;WEAK": "letzten",
+    "ADJ;DAT;SG;MASC;WEAK": "letzten",
+    "ADJ;DAT;SG;FEM;WEAK": "letzten",
+    "ADJ;DAT;SG;NEUT;WEAK": "letzten",
+    "ADJ;DAT;PL;WEAK": "letzten",
+    "ADJ;NOM;SG;MASC;MIX": "letzter",
+    "ADJ;NOM;SG;FEM;MIX": "letzte",
+    "ADJ;NOM;SG;NEUT;MIX": "letztes",
+    "ADJ;NOM;PL;MIX": "letzten",
+    "ADJ;ACC;SG;MASC;MIX": "letzten",
+    "ADJ;ACC;SG;FEM;MIX": "letzte",
+    "ADJ;ACC;SG;NEUT;MIX": "letztes",
+    "ADJ;ACC;PL;MIX": "letzten",
+    "ADJ;DAT;SG;MASC;MIX": "letzten",
+    "ADJ;DAT;SG;FEM;MIX": "letzten",
+    "ADJ;DAT;SG;NEUT;MIX": "letzten",
+    "ADJ;DAT;PL;MIX": "letzten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the line: the last bus, the last day of the holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "last (the final one in a row; also the most recent: last week)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.last"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist der letzte Bus heute.",
+      "tr": "That’s the last bus today.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Letzte Woche war ich in Berlin.",
+      "tr": "Last week I was in Berlin.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Am letzten Tag haben wir viel gekauft.",
+      "tr": "On the last day we bought a lot.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum letzten Mal: Räum dein Zimmer auf!",
+      "tr": "For the last time: tidy your room!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der letzte Bus",
+      "tr": "the last bus"
+     },
+     {
+      "text": "letzte Woche",
+      "tr": "last week"
+     },
+     {
+      "text": "zum letzten Mal",
+      "tr": "for the last time"
+     },
+     {
+      "text": "in letzter Zeit",
+      "tr": "lately, recently"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "vorig",
+      "register": "neutral",
+      "nuance": "previous: voriges Jahr = letztes Jahr (last year)"
+     },
+     {
+      "word": "final",
+      "register": "formal",
+      "nuance": "final – the definitive last one"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German lest, a contraction of leȥȥest, from Old High German leȥȥist, the superlative of laȥ (“slow, sluggish”), cognate with English late.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English last and German letzte both go back to a superlative of late."
+    ],
+    "pitfalls": [
+     "letzte Woche = last week (the one before this); die letzte Woche can also mean the final week (of the holidays). Context decides.",
+     "Declined like an adjective: der letzte, ein letzter, am letzten."
+    ],
+    "subtleties": [
+     "letzt- was once a superlative of an old word for late: last is “latest”.",
+     "Never used predicatively without an ending: Er war der Letzte (he was the last one)."
+    ]
+   },
+   "class": "attr"
+  },
+  {
+   "id": "de:Hälfte",
+   "lemma": "Hälfte",
+   "pos": "NOUN",
+   "senses": [
+    "num.half"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Hälften",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: halb + -te (with the old alternation b → f)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Hälfte",
+    "N;ACC;SG": "Hälfte",
+    "N;DAT;SG": "Hälfte",
+    "N;GEN;SG": "Hälfte",
+    "N;NOM;PL": "Hälften",
+    "N;ACC;PL": "Hälften",
+    "N;DAT;PL": "Hälften",
+    "N;GEN;PL": "Hälften"
+   },
+   "contrasts": [
+    {
+     "concept": "num.half",
+     "axis": "kind of word",
+     "value": "a noun: die Hälfte (von) – half of something, one of two parts"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A cake cut in two, a glass half-empty, a match at half-time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "half (one of two equal parts; fifty per cent of something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.half"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse die Hälfte vom Kuchen.",
+      "tr": "I’m eating half of the cake.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Hälfte der Schüler war krank.",
+      "tr": "Half of the pupils were ill.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben die Hälfte der Reise schon hinter uns.",
+      "tr": "We already have half the journey behind us.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Hälfte von",
+      "tr": "half of"
+     },
+     {
+      "text": "zur Hälfte",
+      "tr": "half, by half (zur Hälfte fertig = half finished)"
+     },
+     {
+      "text": "in der zweiten Hälfte",
+      "tr": "in the second half"
+     },
+     {
+      "text": "meine bessere Hälfte",
+      "tr": "my better half"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "meine bessere Hälfte",
+      "tr": "my better half",
+      "kind": "idiom",
+      "meaning": "my husband or wife (humorous)",
+      "register": "humorous"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "halb",
+      "register": "neutral",
+      "nuance": "half – the adjective or adverb: ein halber Kuchen, halb voll"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle Low German helfte, derived from half (“half”); equivalent to halb + -te. The alternation -b- / -ft- also occurs in schreiben / Schrift.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In football the usual word for a half is die Halbzeit: die erste Halbzeit, die zweite Halbzeit."
+    ],
+    "pitfalls": [
+     "die Hälfte + genitive or von + dative: die Hälfte des Geldes, die Hälfte vom Geld.",
+     "With a plural noun the verb is usually singular: Die Hälfte der Schüler war krank (also waren in speech)."
+    ],
+    "subtleties": [
+     "Half of a thing as an adjective is halb: ein halbes Brot; the noun is die Hälfte: die Hälfte des Brotes.",
+     "meine bessere Hälfte (my better half) = my partner, said jokingly."
+    ]
+   }
+  },
+  {
+   "id": "de:halb",
+   "lemma": "halb",
+   "pos": "ADV",
+   "senses": [
+    "num.half"
+   ],
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "num.half",
+     "axis": "kind of word",
+     "value": "an adverb before the next clock hour (halb acht = 7:30) or before an adjective (halb voll)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary’s adverb sense is exactly this one – “a half-hour before … (used with the number of the following hour)” – written “half-hour”, which the automatic word match does not read as “half”."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The clock face, thirty minutes before the hour strikes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "half – with clock times, half an hour before the hour named (halb acht = 7:30); before an adjective: half (halb voll)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.half"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es ist halb acht.",
+      "tr": "It’s half past seven.",
+      "register": "neutral",
+      "context": "clock",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug fährt um halb neun.",
+      "tr": "The train leaves at half past eight.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Glas ist halb voll.",
+      "tr": "The glass is half full.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "um halb acht",
+      "tr": "at half past seven"
+     },
+     {
+      "text": "halb voll",
+      "tr": "half full"
+     },
+     {
+      "text": "halb so viel",
+      "tr": "half as much"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zur Hälfte",
+      "register": "neutral",
+      "nuance": "half, by half – with a verb or adjective: zur Hälfte fertig"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German halp, from Old High German halb, from Proto-Germanic *halbaz. Compare Dutch half, English half.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same “half to the next hour” clock is used in Dutch (half acht) and in the Scandinavian languages."
+    ],
+    "pitfalls": [
+     "halb counts towards the next hour: halb acht = 7:30, not 8:30. Think: half (on the way to) eight.",
+     "Before a noun halb is an adjective and takes endings: eine halbe Stunde (half an hour), ein halbes Jahr."
+    ],
+    "subtleties": [
+     "In speech the 12-hour clock is normal: um halb acht (morning or evening); official times use 24 hours: 19:30 = neunzehn Uhr dreißig.",
+     "anderthalb / eineinhalb = one and a half; zweieinhalb = two and a half."
+    ]
+   }
+  },
+  {
+   "id": "de:Viertel",
+   "lemma": "Viertel",
+   "pos": "NOUN",
+   "senses": [
+    "num.quarter"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Viertel",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "vier",
+      "role": "modifier"
+     },
+     {
+      "part": "Teil",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Viertel",
+    "N;ACC;SG": "Viertel",
+    "N;DAT;SG": "Viertel",
+    "N;GEN;SG": "Viertels",
+    "N;NOM;PL": "Viertel",
+    "N;ACC;PL": "Viertel",
+    "N;DAT;PL": "Vierteln",
+    "N;GEN;PL": "Viertel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A quarter of an hour, a quarter of a cake, the minute hand at three or nine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "quarter, fourth (also of an hour: Viertel nach / vor)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.quarter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es ist Viertel nach acht.",
+      "tr": "It’s a quarter past eight.",
+      "register": "neutral",
+      "context": "clock",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir treffen uns um Viertel vor neun.",
+      "tr": "We’re meeting at a quarter to nine.",
+      "register": "neutral",
+      "context": "clock",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Viertel der Leute war schon da.",
+      "tr": "A quarter of the people were already there.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich warte schon eine Viertelstunde.",
+      "tr": "I’ve been waiting for a quarter of an hour.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Viertel nach acht",
+      "tr": "a quarter past eight"
+     },
+     {
+      "text": "Viertel vor neun",
+      "tr": "a quarter to nine"
+     },
+     {
+      "text": "ein Viertel des Kuchens",
+      "tr": "a quarter of the cake"
+     },
+     {
+      "text": "die Viertelstunde",
+      "tr": "the quarter of an hour"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "der vierte Teil",
+      "register": "formal",
+      "nuance": "the fourth part – the same, spelled out"
+     }
+    ],
+    "etymology": {
+     "text": "From Old High German fiorteil; equivalent to vier (“four”) + Teil (“part”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fractions add -tel to the ordinal stem: Drittel, Viertel, Fünftel, Zehntel – from Teil (part)."
+    ],
+    "pitfalls": [
+     "das Viertel is neuter, like every fraction in -tel: das Drittel, das Fünftel.",
+     "Clock: Viertel nach acht (8:15), Viertel vor neun (8:45). In parts of the east and south: viertel neun (8:15), dreiviertel neun (8:45) – counted towards the next hour like halb."
+    ],
+    "subtleties": [
+     "das Viertel is also a part of a town, a quarter or neighbourhood (das Altstadtviertel); in Austria and Bavaria ein Viertel (Wein) is a quarter litre of wine.",
+     "Fractions are built the same way: ein Drittel (a third), ein Fünftel (a fifth)."
+    ]
+   }
+  },
+  {
+   "id": "de:Jahrhundert",
+   "lemma": "Jahrhundert",
+   "pos": "NOUN",
+   "senses": [
+    "time.century"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jahrhunderte",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Jahr",
+      "role": "modifier"
+     },
+     {
+      "part": "hundert",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jahrhundert",
+    "N;ACC;SG": "Jahrhundert",
+    "N;DAT;SG": "Jahrhundert",
+    "N;GEN;SG": "Jahrhunderts",
+    "N;NOM;PL": "Jahrhunderte",
+    "N;ACC;PL": "Jahrhunderte",
+    "N;DAT;PL": "Jahrhunderten",
+    "N;GEN;PL": "Jahrhunderte"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "History books, old buildings, the turn of an era.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "century (a period of a hundred years)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.century"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Haus ist aus dem neunzehnten Jahrhundert.",
+      "tr": "The house is from the nineteenth century.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir leben im einundzwanzigsten Jahrhundert.",
+      "tr": "We live in the twenty-first century.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kirche ist seit Jahrhunderten hier.",
+      "tr": "The church has been here for centuries.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im zwanzigsten Jahrhundert",
+      "tr": "in the twentieth century"
+     },
+     {
+      "text": "seit Jahrhunderten",
+      "tr": "for centuries"
+     },
+     {
+      "text": "die Jahrhundertwende",
+      "tr": "the turn of the century"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Säkulum",
+      "register": "technical",
+      "nuance": "saeculum, an age – learned, rare"
+     }
+    ],
+    "etymology": {
+     "text": "Jahr (“year”) + hundert (“hundred”). Compare Dutch jaarhonderd.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The 1900s are das zwanzigste Jahrhundert – like in English, the century number is one higher than the hundreds."
+    ],
+    "pitfalls": [
+     "Centuries are ordinal numbers: im 19. Jahrhundert = im neunzehnten Jahrhundert (dot = ordinal).",
+     "das Jahrhundert is neuter; plural die Jahrhunderte."
+    ],
+    "subtleties": [
+     "Abbreviations: Jh. or Jhdt.: im 18. Jh.",
+     "Jahrhundert- as a first part means “of the century, exceptional”: das Jahrhunderthochwasser (the flood of the century)."
+    ]
+   }
+  },
+  {
+   "id": "de:Jahrzehnt",
+   "lemma": "Jahrzehnt",
+   "pos": "NOUN",
+   "senses": [
+    "time.decade"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jahrzehnte",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "formed from Jahr + zehn (+ t), on the model of Jahrhundert; -zehnt is not a word of its own"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jahrzehnt",
+    "N;ACC;SG": "Jahrzehnt",
+    "N;DAT;SG": "Jahrzehnt",
+    "N;GEN;SG": "Jahrzehnts",
+    "N;NOM;PL": "Jahrzehnte",
+    "N;ACC;PL": "Jahrzehnte",
+    "N;DAT;PL": "Jahrzehnten",
+    "N;GEN;PL": "Jahrzehnte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Jahrzehntes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ten years: the fashion, the music, the way people lived.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "decade (a period of ten years)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.decade"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er hat zwei Jahrzehnte im Ausland gelebt.",
+      "tr": "He lived abroad for two decades.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "Das war das wichtigste Jahrzehnt in meinem Leben.",
+      "tr": "That was the most important decade of my life.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Seit Jahrzehnten wohnen sie in diesem Dorf.",
+      "tr": "They have lived in this village for decades.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "seit Jahrzehnten",
+      "tr": "for decades"
+     },
+     {
+      "text": "im letzten Jahrzehnt",
+      "tr": "in the last decade"
+     },
+     {
+      "text": "ein ganzes Jahrzehnt",
+      "tr": "a whole decade"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Dekade",
+      "register": "formal",
+      "nuance": "decade – learned; it can also mean a period of ten days"
+     }
+    ],
+    "etymology": {
+     "text": "An 18th-century coinage replacing the older ambiguous Dekade (“ten years; ten days”): Jahr (“year”) + zehn (“ten”) with a final -t, probably on the model of Jahrhundert, or possibly from zehnter (“tenth”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German needed a new word only in the 18th century: before that Dekade could mean ten years or ten days."
+    ],
+    "pitfalls": [
+     "das Jahrzehnt is neuter like das Jahrhundert; plural die Jahrzehnte.",
+     "The decades of a century are named with the plural of the tens: die Achtzigerjahre / die achtziger Jahre (the eighties)."
+    ],
+    "subtleties": [
+     "In speech people often say die Achtziger (the 80s) instead of naming the decade."
+    ]
+   }
+  },
+  {
+   "id": "de:Jahrestag",
+   "lemma": "Jahrestag",
+   "pos": "NOUN",
+   "senses": [
+    "time.anniversary"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jahrestage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Jahr",
+      "role": "modifier",
+      "linker": "-es-"
+     },
+     {
+      "part": "Tag",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jahrestag",
+    "N;ACC;SG": "Jahrestag",
+    "N;DAT;SG": "Jahrestag",
+    "N;GEN;SG": "Jahrestags",
+    "N;NOM;PL": "Jahrestage",
+    "N;ACC;PL": "Jahrestage",
+    "N;DAT;PL": "Jahrestagen",
+    "N;GEN;PL": "Jahrestage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Jahrestages"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.anniversary",
+     "axis": "what is celebrated",
+     "value": "the date of an event, any year: a couple’s day, a historic day"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flowers on the day you met; a nation remembering a date.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "anniversary (the same date, a number of years after an event)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.anniversary"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute ist unser Jahrestag.",
+      "tr": "Today is our anniversary.",
+      "register": "neutral",
+      "context": "couples",
+      "sense": "s1"
+     },
+     {
+      "text": "Am dritten Oktober ist der Jahrestag der deutschen Einheit.",
+      "tr": "The third of October is the anniversary of German unity.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum zehnten Jahrestag gab es ein Fest.",
+      "tr": "There was a party for the tenth anniversary.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der zehnte Jahrestag",
+      "tr": "the tenth anniversary"
+     },
+     {
+      "text": "den Jahrestag feiern",
+      "tr": "to celebrate the anniversary"
+     },
+     {
+      "text": "am Jahrestag",
+      "tr": "on the anniversary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Hochzeitstag",
+      "register": "neutral",
+      "nuance": "wedding anniversary (also the wedding day itself)"
+     },
+     {
+      "word": "Jubiläum",
+      "register": "neutral",
+      "nuance": "a round anniversary celebrated publicly"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German jārestac, from Old High German *jāres tag; equivalent to Jahr (“year”) + -es- + Tag (“day”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "der Tag der Deutschen Einheit (3 October) is the national holiday of Germany."
+    ],
+    "pitfalls": [
+     "The joining -es- is the old genitive: Jahr-es-tag (the day of the year).",
+     "Jahrestag counts with an ordinal: der zwanzigste Jahrestag (the twentieth anniversary)."
+    ],
+    "subtleties": [
+     "A couple’s Jahrestag is the day they got together; the wedding anniversary is the Hochzeitstag."
+    ]
+   }
+  },
+  {
+   "id": "de:Jubiläum",
+   "lemma": "Jubiläum",
+   "pos": "NOUN",
+   "senses": [
+    "time.anniversary"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jubiläen",
+      "pattern": "foreign",
+      "senses": [
+       "s1"
+      ],
+      "note": "Latin -um → -en"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jubiläum",
+    "N;ACC;SG": "Jubiläum",
+    "N;DAT;SG": "Jubiläum",
+    "N;GEN;SG": "Jubiläums",
+    "N;NOM;PL": "Jubiläen",
+    "N;ACC;PL": "Jubiläen",
+    "N;DAT;PL": "Jubiläen",
+    "N;GEN;PL": "Jubiläen"
+   },
+   "contrasts": [
+    {
+     "concept": "time.anniversary",
+     "axis": "what is celebrated",
+     "value": "a round anniversary celebrated publicly: 25 years of a firm, a club, a job"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Speeches, a cake with a big number, a company photo.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "anniversary, jubilee (a round-number anniversary of an institution or of a service)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.anniversary"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Firma feiert ihr fünfzigjähriges Jubiläum.",
+      "tr": "The company is celebrating its fiftieth anniversary.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Jubiläum gab es ein großes Fest.",
+      "tr": "There was a big party for the anniversary.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Vater hatte im Mai sein Jubiläum: dreißig Jahre bei der Bahn.",
+      "tr": "My father had his anniversary in May: thirty years with the railway.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das zehnjährige Jubiläum",
+      "tr": "the tenth anniversary"
+     },
+     {
+      "text": "ein Jubiläum feiern",
+      "tr": "to celebrate an anniversary"
+     },
+     {
+      "text": "das Firmenjubiläum",
+      "tr": "the company anniversary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Jahrestag",
+      "register": "neutral",
+      "nuance": "the date of an event, any year – also private"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Late Latin iūbilaeum, from iūbilaeus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word goes back to the biblical jubilee year, which came every fifty years."
+    ],
+    "pitfalls": [
+     "Plural Jubiläen (Latin -um → -en), not *Jubiläums.",
+     "A Jubiläum is counted with an adjective in -jährig: das 25-jährige (fünfundzwanzigjährige) Jubiläum."
+    ],
+    "subtleties": [
+     "Jubiläum is for institutions, firms, clubs and long service; for a couple one says Jahrestag or Hochzeitstag."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -276,7 +276,8 @@
     "paradigm": [],
     "grammar": [
      "fn.connectors",
-     "fn.numerals"
+     "fn.numerals",
+     "fn.ordinals"
     ],
     "exercises": [
      "build_sentence"
@@ -284,7 +285,7 @@
     "other": "fn.connectors trap: “A comma before weil, dass, wenn, ob, obwohl, aber, denn”; fn.numerals callout “Points and commas”. build_sentence takes the punctuation from the bank sentence (endPunct) but commas inside are not tiles."
    },
    "status": "partial",
-   "gap": "The ordinal dot and dates (am 3. Mai) are not taught; comma placement is never trained (a `proofread` item); „…“ never appears in the bank.",
+   "gap": "Comma placement is never trained (a `proofread` item); „…“ never appears in the bank; the ordinal dot is explained (fn.ordinals) but bank sentences write ordinals as words.",
    "when": "fd.18"
   },
   {
@@ -3603,14 +3604,16 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.present"
+     "fn.present",
+     "fn.past",
+     "fn.past.ongoing"
     ],
     "exercises": [],
-    "other": "Comparison notes (D18): fn.present notes (ru: aspect pairs; es, hi, tr, fa, zh, vi: progressive forms)."
+    "other": "fn.past says that the Perfekt / Präteritum choice is register, not aspect; fn.past.ongoing (status periphrastic) shows habits and backgrounds with früher, immer, oft, als / während and the colloquial am-progressive; comparison notes for el, ru, es, fr, hi, tr, ko, fi … (aspect pairs, imperfect, progressive forms)."
    },
    "status": "covered",
    "gap": "",
-   "when": "cr.01"
+   "when": "cr.01 / cr.02"
   },
   {
    "id": "de.morph.verb.classes",
@@ -3664,17 +3667,26 @@
      "conjugation"
     ],
     "paradigm": [
+     "V;PST;1;SG",
+     "V;PST;2;SG",
      "V;PST;3;SG",
+     "V;PST;1;PL",
+     "V;PST;2;PL",
+     "V;PST;3;PL",
      "V;PTCP;PST"
     ],
     "grammar": [
-     "fn.time.day"
+     "fn.time.day",
+     "fn.past",
+     "fn.past.ongoing"
     ],
-    "exercises": [],
-    "other": "All 23 verbs state their four principal parts (separable ones with the particle: kommt an, kam an, angekommen) and their class; every verb now stores V;PST;3;SG (the 5 separable verbs had none). langcore principalParts still shows only the du/er forms and the auxiliary."
+    "exercises": [
+     "inflect"
+    ],
+    "other": "All verbs state their four principal parts and their class; the 22 verbs of cr.01–cr.03 store the whole Präteritum. fn.past drills the Partizip II (inflect V;PTCP;PST, separable verbs listed by lemma), fn.past.ongoing the Präteritum rows."
    },
    "status": "partial",
-   "gap": "The word card does not show the Präteritum and the Partizip II from principalParts yet; no ablaut series; V;PST;3;SG and V;PTCP;PST are not required cells in language.json.",
+   "gap": "The word card does not show the Präteritum and the Partizip II from principalParts yet (langcore shows the du / er forms and the auxiliary); no ablaut-series exercise; V;PST;* and V;PTCP;PST are not required cells in language.json, and the foundation verbs store only V;PST;3;SG.",
    "when": "cr.01"
   },
   {
@@ -3783,16 +3795,17 @@
     "grammar": [
      "fn.direction",
      "fn.imperative",
-     "fn.connectors"
+     "fn.connectors",
+     "fn.past"
     ],
     "exercises": [
      "build_sentence",
      "transform"
     ],
-    "other": "5 verbs with `separable` and a V;SEP cell (extraTags SEP); the tokenizer reads the particle as a V;SEP token (21 in the bank); inflect skips separable verbs unless listed, because one cell holds only the stem form. particleVerbs lists on 14 lexemes; 5 separable verb lexemes."
+    "other": "14 verbs with `separable` and a V;SEP cell (aufwachen, aufstehen, anziehen, losgehen, anfangen, aufhören, heimkommen, einschlafen, aufwachsen added in cr.01–cr.02); fn.past teaches ge- inside the participle (aufgestanden); inflect skips separable verbs unless listed, because one cell holds only the stem form. A separable verb in a subordinate clause (… als er heimkam) cannot be written yet: there is no joined finite form."
    },
    "status": "partial",
-   "gap": "No zu-infinitive cell; no drill of the whole form (kommt … an) and of the particle position; particle verbs listed in profiles are not lexemes.",
+   "gap": "No zu-infinitive cell and no joined finite form for subordinate clauses (heimkam, ankommt); no drill of the whole form (kommt … an) and of the particle position; particle verbs listed in profiles are not lexemes.",
    "when": "fd.13"
   },
   {
@@ -3848,13 +3861,14 @@
      "V;PTCP;PST"
     ],
     "grammar": [
-     "fn.direction"
+     "fn.direction",
+     "fn.past"
     ],
     "exercises": [],
-    "other": "de:verlassen states ver- (participle verlassen, no ge-); every other verb says none."
+    "other": "Inseparable prefixes: verlassen (ver-), beginnen, beenden, besuchen (be-), erinnern (er-), vergessen (ver-); fn.past teaches “no ge-” (begonnen, beendet, vergessen) together with -ieren (reserviert)."
    },
    "status": "partial",
-   "gap": "Only one verb with an inseparable prefix in the course; no drill that contrasts separable and inseparable verbs, and no stress information (no ipa).",
+   "gap": "No drill that contrasts separable and inseparable verbs, and no stress information (no ipa).",
    "when": "fd.13 / cr.01"
   },
   {
@@ -3948,12 +3962,17 @@
     "paradigm": [
      "V;PTCP;PST"
     ],
-    "grammar": [],
-    "exercises": [],
-    "other": "All 23 verbs: 12 sein, 10 haben, 1 both (de:fahren: haben with a direct object, s1; sein without one, s1–s3); principalParts shows ‘perfect with …’."
+    "grammar": [
+     "fn.past"
+    ],
+    "exercises": [
+     "quiz",
+     "transform"
+    ],
+    "other": "All 45 verbs state aux; fn.past (cr.01) teaches haben / sein (callout and quiz), with sein for aufstehen, aufwachen, einschlafen, losgehen, heimkommen, aufwachsen and haben for reflexive verbs (Ich habe mich angezogen)."
    },
    "status": "partial",
-   "gap": "The perfect itself is taught in cr.01; south German / Austrian sein with stehen, sitzen, liegen is not recorded (those verbs are not course words).",
+   "gap": "South German / Austrian sein with stehen, sitzen, liegen is not recorded (those verbs are not course words).",
    "when": "cr.01"
   },
   {
@@ -4000,17 +4019,28 @@
    "model": {
     "wordFields": [],
     "paradigm": [
+     "V;PST;1;SG",
+     "V;PST;2;SG",
      "V;PST;3;SG",
+     "V;PST;1;PL",
+     "V;PST;2;PL",
+     "V;PST;3;PL",
      "V;PTCP;PST"
     ],
     "grammar": [
-     "fn.time.day"
+     "fn.time.day",
+     "fn.past",
+     "fn.past.ongoing"
     ],
-    "exercises": [],
-    "other": "war is used in fn.time.day (5 V;PST tokens in the bank); otherwise cr.01."
+    "exercises": [
+     "inflect",
+     "transform",
+     "build_sentence"
+    ],
+    "other": "fn.past (cr.01) teaches the Perfekt and the register split (Perfekt in speech, Präteritum in writing; war / hatte in speech); fn.past.ongoing (cr.02) the Präteritum of weak and strong verbs. The 22 verbs of cr.01–cr.03 store the full Präteritum (6 cells) and the Partizip II; Tense transforms (present → Perfekt / Präteritum) in lang/de/bank/c01_04.json."
    },
    "status": "partial",
-   "gap": "Full Präteritum paradigms (at least sein, haben, modals) and the Perfekt lesson cr.01 with the register note.",
+   "gap": "sein, haben, the modals and the other verbs of the foundations store only V;PST;3;SG (their lexicon files predate cr.01), so the bank can use war / hatte only with er / sie / es; their full Präteritum rows are needed.",
    "when": "cr.01"
   },
   {
@@ -4050,14 +4080,19 @@
     "paradigm": [],
     "grammar": [
      "fn.time.day",
-     "fn.present"
+     "fn.present",
+     "fn.future"
     ],
-    "exercises": [],
-    "other": "fn.time.day and fn.present say that the present covers the future."
+    "exercises": [
+     "inflect",
+     "transform",
+     "quiz"
+    ],
+    "other": "de:werden (cr.03: the future auxiliary, role; its meaning “to become” is the pending concept verb.become); fn.future (status periphrastic): present + time word (nächste Woche, nächstes Jahr, morgen) and werden + infinitive, Tense transforms present → Futur I."
    },
-   "status": "partial",
-   "gap": "werden as a lexeme (auxiliary and full verb) and cr.02.",
-   "when": "cr.02"
+   "status": "covered",
+   "gap": "",
+   "when": "cr.03"
   },
   {
    "id": "de.morph.verb.konj2",
@@ -4822,22 +4857,25 @@
     "wordFields": [],
     "paradigm": [
      "V;SEP",
-     "V;NFIN"
+     "V;NFIN",
+     "V;PTCP;PST"
     ],
     "grammar": [
      "fn.present",
      "fn.direction",
-     "fn.imperative"
+     "fn.imperative",
+     "fn.past",
+     "fn.future"
     ],
     "exercises": [
      "build_sentence",
      "transform"
     ],
-    "other": "Modal brackets (fd.07) and separable brackets (fd.13) appear in the bank; no exercise asks for the slot of the second verb part."
+    "other": "Modal brackets (fd.07), separable brackets (fd.13), perfect brackets (auxiliary … participle, cr.01) and future brackets (werden … infinitive, cr.03) appear in the bank; no exercise asks for the slot of the second verb part."
    },
    "status": "partial",
-   "gap": "A `word_order` generator that removes the bracket's second part and asks where it goes; perfect and passive brackets after cr.01.",
-   "when": "fd.07 / fd.13"
+   "gap": "A `word_order` generator that removes the bracket’s second part and asks where it goes; passive brackets come later.",
+   "when": "fd.07 / fd.13 / cr.01 / cr.03"
   },
   {
    "id": "de.syn.middle.field",
@@ -6863,14 +6901,15 @@
     "paradigm": [],
     "grammar": [
      "fn.time.day",
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.ordinals"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.ordinals (cr.04) teaches dates (der achte Oktober, am achten Oktober, 08.10.2026, years read as neunzehnhundertneunzig) and the 24-hour clock."
    },
    "status": "partial",
-   "gap": "The date (ordinal numbers) and the 24-hour clock are not taught; no `date` / `clock` exercise.",
-   "when": "fd.15"
+   "gap": "No `date` / `clock` exercise; calendar weeks (KW) are not taught.",
+   "when": "fd.15 / cr.04"
   },
   {
    "id": "de.num.unit.ten",
@@ -6981,16 +7020,18 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.ordinals"
     ],
     "exercises": [
-     "quiz"
+     "quiz",
+     "build_sentence"
     ],
-    "other": "fn.prep.time callouts ‘halb neun = 8:30’ and ‘Uhr or Stunde?’."
+    "other": "fn.ordinals (cr.04): halb neun = 8:30, Viertel nach / vor, the regional viertel neun / dreiviertel neun, the 24-hour official time; lexemes de:halb (adverb), de:Viertel, de:Hälfte."
    },
    "status": "partial",
-   "gap": "Viertel nach/vor and the regional forms; the `clock` exercise.",
-   "when": "fd.15"
+   "gap": "The `clock` exercise is not implemented; times are trained through bank sentences (fr.clock) and the quiz only.",
+   "when": "fd.15 / cr.04"
   },
   {
    "id": "de.num.ordinals",
@@ -7032,16 +7073,25 @@
     "wordFields": [
      "ordinal"
     ],
-    "paradigm": [],
-    "grammar": [
-     "fn.prep.time"
+    "paradigm": [
+     "ADJ;NOM;SG;MASC;WEAK",
+     "ADJ;DAT;SG;MASC;WEAK",
+     "ADJ;NOM;SG;NEUT;MIX"
     ],
-    "exercises": [],
-    "other": "Every NUM lexeme states its ordinal; the ordinals are not lexemes and have no paradigm yet."
+    "grammar": [
+     "fn.prep.time",
+     "fn.ordinals"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "quiz"
+    ],
+    "other": "cr.04: erste … zehnte and letzte with the full strong / weak / mixed declension (36 cells each); fn.ordinals teaches -te / -ste, the irregular erste, dritte, siebte, achte, the dot (der 3. Mai), dates with am, centuries; Number and Definiteness transforms."
    },
    "status": "partial",
-   "gap": "Ordinal lexemes (ADJ-like paradigm) and the date lesson (fn.prep.time says ‘the ordinal numbers come later’).",
-   "when": "fd.15 / later"
+   "gap": "Ordinals above 10 are not lexemes (every cardinal names its ordinal in features.ordinal); the ordinals are filed as NUM with the adjective cells because language.json has no adjective class without the predicative and comparison cells (an ADJ class for ordinals would fix it); no genitive cells.",
+   "when": "cr.04"
   }
  ],
  "wordFeatures": {

@@ -1,0 +1,1780 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:diyi",
+   "lemma": "第一",
+   "trad": "第一",
+   "pinyin": "dì yī",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.1"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "first",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.1"
+     },
+     {
+      "id": "s2",
+      "def": "number one, first place, the best (考第一)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "firstly (in a list of points)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我第一次来中国。",
+      "py": "Zhè shì wǒ dì-yī cì lái Zhōngguó.",
+      "tr": "This is my first time in China.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他考试考了第一。",
+      "py": "Tā kǎoshì kǎole dì-yī.",
+      "tr": "He came first in the exam.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "第一，要早睡；第二，要早起。",
+      "py": "Dì-yī, yào zǎo shuì; dì-èr, yào zǎo qǐ.",
+      "tr": "First, go to bed early; second, get up early.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第一次",
+      "tr": "the first time"
+     },
+     {
+      "text": "第一天",
+      "tr": "the first day"
+     },
+     {
+      "text": "第一名",
+      "tr": "first place"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "安全第一",
+      "tr": "safety first",
+      "kind": "fixed expression",
+      "meaning": "safety comes before everything",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "头",
+      "register": "colloquial",
+      "nuance": "tóu: first — before a number + measure word (头一次, 头两天)"
+     },
+     {
+      "word": "首",
+      "register": "formal",
+      "nuance": "shǒu: first (首次 ‘the first time’)"
+     }
+    ],
+    "etymology": {
+     "text": "第 ‘order, rank’ + 一 ‘one’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "第一 is also ‘the best, number one’: 他是我们班第一 ‘he is top of our class’."
+    ],
+    "pitfalls": [
+     "一 keeps its first tone in ordinals: dì-yī, also before a fourth tone (第一次 dì-yī cì) — the spoken yí / yì of 一 does not apply."
+    ],
+    "subtleties": [
+     "In a list of points, 第一, 第二 … mean ‘firstly, secondly …’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "一 keeps its first tone in ordinals: dì-yī, before any syllable"
+    }
+   }
+  },
+  {
+   "id": "zh:dier",
+   "lemma": "第二",
+   "trad": "第二",
+   "pinyin": "dì èr",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.2"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The second in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "second",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.2"
+     },
+     {
+      "id": "s2",
+      "def": "next, following (第二天 ‘the next day’)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我是第二个到的。",
+      "py": "Wǒ shì dì-èr ge dào de.",
+      "tr": "I was the second to arrive.",
+      "register": "neutral",
+      "context": "arrival",
+      "sense": "s1"
+     },
+     {
+      "text": "第二天我们去了长城。",
+      "py": "Dì-èr tiān wǒmen qùle Chángchéng.",
+      "tr": "The next day we went to the Great Wall.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第二天",
+      "tr": "the next day"
+     },
+     {
+      "text": "第二次",
+      "tr": "the second time"
+     },
+     {
+      "text": "第二名",
+      "tr": "second place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "次",
+      "register": "formal",
+      "nuance": "cì: second, next in order (次日 ‘the next day’)"
+     }
+    ],
+    "etymology": {
+     "text": "第 ‘order, rank’ + 二 ‘two’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "第二天 in a story is simply ‘the next day’, whichever day the story began."
+    ],
+    "pitfalls": [
+     "Ordinals always use 二: 第二, never *第两 — even before a measure word (第二个)."
+    ],
+    "subtleties": [
+     "Months, weekdays and dates use the bare number: 二月 ‘February’, 星期二 ‘Tuesday’, 二号 ‘the 2nd’ — no 第."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:disan",
+   "lemma": "第三",
+   "trad": "第三",
+   "pinyin": "dì sān",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.3"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The third in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "third",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是他的第三本书。",
+      "py": "Zhè shì tā de dì-sān běn shū.",
+      "tr": "This is his third book.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "第三个孩子是女儿。",
+      "py": "Dì-sān ge háizi shì nǚ’ér.",
+      "tr": "The third child is a daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第三天",
+      "tr": "the third day"
+     },
+     {
+      "text": "第三次",
+      "tr": "the third time"
+     },
+     {
+      "text": "第三者",
+      "tr": "a third party; the other woman / man (in an affair)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 三 ‘three’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "第三者 ‘the third person’ is a third party — and, in everyday talk, a lover who breaks up a marriage."
+    ],
+    "pitfalls": [
+     "The measure word follows the ordinal: 第三本书 ‘the third book’, 第三个人 ‘the third person’."
+    ],
+    "subtleties": [
+     "Floors use the bare number: 三楼 ‘the third floor’, not 第三楼."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:disi",
+   "lemma": "第四",
+   "trad": "第四",
+   "pinyin": "dì sì",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.4"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The fourth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fourth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天是我们旅行的第四天。",
+      "py": "Jīntiān shì wǒmen lǚxíng de dì-sì tiān.",
+      "tr": "Today is the fourth day of our trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他在比赛中得了第四名。",
+      "py": "Tā zài bǐsài zhōng déle dì-sì míng.",
+      "tr": "He came fourth in the race.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第四天",
+      "tr": "the fourth day"
+     },
+     {
+      "text": "第四名",
+      "tr": "fourth place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 四 ‘four’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "四 sì ‘four’ sounds like 死 sǐ ‘to die’, so some buildings have no fourth floor."
+    ],
+    "pitfalls": [
+     "第四 dì-sì and 第十 dì-shí are easily confused by ear — the tones differ (sì / shí)."
+    ],
+    "subtleties": [
+     "A rank is 第四名 (名 for places in a ranking); a day is 第四天 (天 counts itself)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:diwu",
+   "lemma": "第五",
+   "trad": "第五",
+   "pinyin": "dì wǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.5"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The fifth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "第五课很难。",
+      "py": "Dì-wǔ kè hěn nán.",
+      "tr": "Lesson five is hard.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这是我们第五次见面。",
+      "py": "Zhè shì wǒmen dì-wǔ cì jiànmiàn.",
+      "tr": "This is the fifth time we have met.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第五课",
+      "tr": "lesson five"
+     },
+     {
+      "text": "第五次",
+      "tr": "the fifth time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 五 ‘five’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "第五 is also a rare Chinese surname, Dìwǔ (Wiktionary)."
+    ],
+    "pitfalls": [
+     "第五课 ‘lesson five’ needs 第; a room or a bus number does not: 五号 ‘number five’, 五路车 ‘bus route 5’."
+    ],
+    "subtleties": [
+     "次 counts times: 第五次 ‘the fifth time’ (次 is a verbal measure word)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:diliu",
+   "lemma": "第六",
+   "trad": "第六",
+   "pinyin": "dì liù",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.6"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The sixth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的座位在第六排。",
+      "py": "Wǒ de zuòwèi zài dì-liù pái.",
+      "tr": "My seat is in the sixth row.",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s1"
+     },
+     {
+      "text": "第六天我们回家了。",
+      "py": "Dì-liù tiān wǒmen huí jiā le.",
+      "tr": "On the sixth day we went home.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第六天",
+      "tr": "the sixth day"
+     },
+     {
+      "text": "第六排",
+      "tr": "the sixth row"
+     },
+     {
+      "text": "第六感",
+      "tr": "the sixth sense"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 六 ‘six’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "第六感 ‘the sixth sense’ is intuition, the sense beyond the five."
+    ],
+    "pitfalls": [
+     "六 is liù; it does not change in ordinals: 第六 dì-liù."
+    ],
+    "subtleties": [
+     "Rows, seats and pages that are numbered (第六排, 第六页) take 第."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:diqi",
+   "lemma": "第七",
+   "trad": "第七",
+   "pinyin": "dì qī",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.7"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The seventh in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventh",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一个星期的第七天是星期天。",
+      "py": "Yí ge xīngqī de dì-qī tiān shì xīngqītiān.",
+      "tr": "The seventh day of the week is Sunday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "他是家里的第七个孩子。",
+      "py": "Tā shì jiā li de dì-qī ge háizi.",
+      "tr": "He is the seventh child in the family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第七天",
+      "tr": "the seventh day"
+     },
+     {
+      "text": "第七个",
+      "tr": "the seventh one"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 七 ‘seven’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Chinese weekdays are numbered from Monday, so the seventh day is 星期天, the one without a number."
+    ],
+    "pitfalls": [
+     "七 qī keeps its first tone in the ordinal: dì-qī."
+    ],
+    "subtleties": [
+     "第七个孩子 with 个; 第七天 without (天 counts itself)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:diba",
+   "lemma": "第八",
+   "trad": "第八",
+   "pinyin": "dì bā",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.8"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The eighth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我第八次来北京。",
+      "py": "Zhè shì wǒ dì-bā cì lái Běijīng.",
+      "tr": "This is my eighth time in Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "第八个学生是谁？",
+      "py": "Dì-bā ge xuésheng shì shéi?",
+      "tr": "Who is the eighth student?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第八次",
+      "tr": "the eighth time"
+     },
+     {
+      "text": "第八天",
+      "tr": "the eighth day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 八 ‘eight’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "八 bā rhymes with 发 fā ‘to prosper’ — the luckiest number in Chinese culture."
+    ],
+    "pitfalls": [
+     "八 is bā in ordinals: dì-bā."
+    ],
+    "subtleties": [
+     "第几 ‘the how-many-th?’ asks for an ordinal: 你是第几个？ — 第八个."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:dijiu",
+   "lemma": "第九",
+   "trad": "第九",
+   "pinyin": "dì jiǔ",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.9"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The ninth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ninth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "第九个月是九月。",
+      "py": "Dì-jiǔ ge yuè shì jiǔyuè.",
+      "tr": "The ninth month is September.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "他排第九。",
+      "py": "Tā pái dì-jiǔ.",
+      "tr": "He is ninth in line.",
+      "register": "neutral",
+      "context": "queue",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第九天",
+      "tr": "the ninth day"
+     },
+     {
+      "text": "第九名",
+      "tr": "ninth place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 九 ‘nine’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "九 jiǔ sounds like 久 jiǔ ‘long-lasting’ — a popular number for weddings."
+    ],
+    "pitfalls": [
+     "第九个月 ‘the ninth month (of something)’ is not the name of the month: September is 九月."
+    ],
+    "subtleties": [
+     "排第九 ‘be ninth in line, ranked ninth’: 排 ‘to line up, to rank’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:dishi",
+   "lemma": "第十",
+   "trad": "第十",
+   "pinyin": "dì shí",
+   "pos": "NUM",
+   "senses": [
+    "num.ord.10"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files the ordinals 第一 … 第十 as nouns and adverbs (第二 … 第六 also as adjectives); the course files every number word (一, 二 … and the ordinals built on them) as NUM."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The tenth in a row — counting places in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tenth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "第十天我们回国了。",
+      "py": "Dì-shí tiān wǒmen huíguó le.",
+      "tr": "On the tenth day we went back home.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他在班里考了第十名。",
+      "py": "Tā zài bān li kǎole dì-shí míng.",
+      "tr": "He came tenth in his class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "第十天",
+      "tr": "the tenth day"
+     },
+     {
+      "text": "第十名",
+      "tr": "tenth place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word: an ordinal is always 第 + the number.",
+    "etymology": {
+     "text": "第 ‘order, rank’ + 十 ‘ten’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "After 第十 the pattern simply goes on: 第十一, 第二十, 第一百 — no number is irregular."
+    ],
+    "pitfalls": [
+     "第十 dì-shí and 第四 dì-sì are easily confused by ear."
+    ],
+    "subtleties": [
+     "第十一 ‘eleventh’ is 第 + 十一, not 第十 + 一."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:di",
+   "lemma": "第",
+   "trad": "第",
+   "pinyin": "dì",
+   "pos": "NUM",
+   "senses": [],
+   "role": "ordinal prefix: 第 + any number makes an ordinal — 第十一 ‘eleventh’, 第一百 ‘hundredth’, 第几 ‘which (in order)?’; before a noun with a measure word: 第三个孩子 (C04)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading: dì"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:zuihou",
+   "lemma": "最后",
+   "trad": "最後",
+   "pinyin": "zuì hòu",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.last",
+    "adv.finally"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last page, the last train — and what happened in the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "last, final",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.last"
+     },
+     {
+      "id": "s2",
+      "def": "finally, in the end",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.finally"
+     },
+     {
+      "id": "s3",
+      "def": "(noun) the end: 到最后 ‘to the very end’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是最后一个问题。",
+      "py": "Zhè shì zuìhòu yí ge wèntí.",
+      "tr": "This is the last question.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     },
+     {
+      "text": "我们是最后到的。",
+      "py": "Wǒmen shì zuìhòu dào de.",
+      "tr": "We were the last to arrive.",
+      "register": "neutral",
+      "context": "arrival",
+      "sense": "s1"
+     },
+     {
+      "text": "最后，他还是去了。",
+      "py": "Zuìhòu, tā háishi qù le.",
+      "tr": "In the end he went after all.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     },
+     {
+      "text": "我们最后决定坐火车。",
+      "py": "Wǒmen zuìhòu juédìng zuò huǒchē.",
+      "tr": "In the end we decided to take the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "最后一天",
+      "tr": "the last day"
+     },
+     {
+      "text": "最后一次",
+      "tr": "the last time"
+     },
+     {
+      "text": "到最后",
+      "tr": "to the very end"
+     },
+     {
+      "text": "最后一名",
+      "tr": "last place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "末",
+      "register": "formal",
+      "nuance": "mò: end, last (月末 ‘the end of the month’, 周末 ‘weekend’)"
+     },
+     {
+      "word": "终于",
+      "register": "neutral",
+      "nuance": "zhōngyú: finally, at last — after a long wait"
+     },
+     {
+      "word": "上",
+      "register": "neutral",
+      "nuance": "shàng: last = previous (上个月 ‘last month’) — not ‘final’"
+     }
+    ],
+    "etymology": {
+     "text": "最 ‘most’ + 后 ‘behind, after’ (traditional 後): ‘the very last’ — a frozen superlative (S17).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "最后 is a superlative frozen into a word: 最 ‘most’ (S17) + 后 ‘after’."
+    ],
+    "pitfalls": [
+     "‘Last week, last month’ (the previous one) is 上个星期, 上个月; 最后一个月 is ‘the final month’."
+    ],
+    "subtleties": [
+     "As ‘last’ it comes before a number + measure word (最后一个, 最后两天); as ‘finally’ it opens the sentence or stands before the verb."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 最後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:yiban",
+   "lemma": "一半",
+   "trad": "一半",
+   "pinyin": "yī bàn",
+   "pos": "NUM",
+   "senses": [
+    "num.half"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.half",
+     "axis": "bound or free",
+     "value": "free: (one) half of something, alone or with 的 (吃了一半, 一半的人)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One cake, two plates — half each.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(one) half (of something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.half"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我吃了一半。",
+      "py": "Wǒ chīle yíbàn.",
+      "tr": "I ate half (of it).",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "一半的学生是女孩。",
+      "py": "Yíbàn de xuésheng shì nǚhái.",
+      "tr": "Half of the students are girls.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这个苹果我们一人一半。",
+      "py": "Zhège píngguǒ wǒmen yì rén yíbàn.",
+      "tr": "Let’s share this apple, half each.",
+      "register": "informal",
+      "context": "sharing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一半的人",
+      "tr": "half of the people"
+     },
+     {
+      "text": "一人一半",
+      "tr": "half each"
+     },
+     {
+      "text": "一大半",
+      "tr": "more than half"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "好的开始是成功的一半",
+      "tr": "a good start is half the success",
+      "kind": "saying",
+      "meaning": "well begun is half done",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "半",
+      "register": "neutral",
+      "nuance": "bàn: half — before a measure word or after the hour (半个, 三点半)"
+     },
+     {
+      "word": "二分之一",
+      "register": "technical",
+      "nuance": "èr fēn zhī yī: one half (in mathematics)"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 半 ‘half’: ‘one half’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The saying 好的开始是成功的一半 ‘a good start is half the success’ is the Chinese ‘well begun is half done’."
+    ],
+    "pitfalls": [
+     "一半 is a whole word and takes no measure word: 一半的苹果 / 苹果的一半; with a measure word use 半: 半个苹果."
+    ],
+    "subtleties": [
+     "一半 can be the subject or the object: 一半是你的 ‘half is yours’, 我吃了一半 ‘I ate half’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yí bàn"
+   }
+  },
+  {
+   "id": "zh:ke",
+   "lemma": "刻",
+   "trad": "刻",
+   "pinyin": "kè",
+   "pos": "NOUN",
+   "senses": [
+    "num.quarter",
+    "time.moment"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.moment",
+     "axis": "register",
+     "value": "written: a moment, in set phrases (一刻, 此刻, 立刻)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The clock face cut in four — and a fleeting moment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a quarter of an hour (15 minutes): 三点一刻 ‘a quarter past three’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.quarter"
+     },
+     {
+      "id": "s2",
+      "def": "a moment (written; in set phrases: 一刻, 此刻, 立刻)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.moment"
+     }
+    ],
+    "examples": [
+     {
+      "text": "现在三点一刻。",
+      "py": "Xiànzài sān diǎn yí kè.",
+      "tr": "It’s a quarter past three.",
+      "register": "neutral",
+      "context": "clock",
+      "sense": "s1"
+     },
+     {
+      "text": "我等了你一刻钟。",
+      "py": "Wǒ děngle nǐ yí kè zhōng.",
+      "tr": "I waited a quarter of an hour for you.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s1"
+     },
+     {
+      "text": "八点三刻我们出门。",
+      "py": "Bā diǎn sān kè wǒmen chūmén.",
+      "tr": "We leave at a quarter to nine.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "他一刻也不休息。",
+      "py": "Tā yí kè yě bù xiūxi.",
+      "tr": "He doesn’t rest for a single moment.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一刻钟",
+      "tr": "a quarter of an hour"
+     },
+     {
+      "text": "三点一刻",
+      "tr": "a quarter past three"
+     },
+     {
+      "text": "三刻",
+      "tr": "three quarters (of an hour)"
+     },
+     {
+      "text": "立刻",
+      "tr": "at once, immediately"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "春宵一刻值千金",
+      "tr": "a moment of a spring night is worth a thousand pieces of gold",
+      "kind": "quote",
+      "meaning": "precious moments must be enjoyed",
+      "register": "literary",
+      "source": "Su Shi (苏轼, 1037–1101), the poem 春宵"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "十五分",
+      "register": "neutral",
+      "nuance": "shíwǔ fēn: fifteen minutes — the same time said in minutes (三点十五分)"
+     },
+     {
+      "word": "一会",
+      "register": "neutral",
+      "nuance": "yíhuì: a while, a moment — everyday speech (S14)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 亥 + semantic 刂 ‘knife’ — first ‘to carve, to engrave’. As a unit of time Wiktionary gives two values: historically 1/100 of a day (14.4 minutes), today a quarter of an hour.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Clock quarters: 一刻 15 minutes, 半 30 minutes (never *两刻), 三刻 45 minutes."
+    ],
+    "pitfalls": [
+     "刻 takes no measure word (一刻, not *一个刻); half an hour is 半, not *两刻.",
+     "The main meaning of the character is still ‘to carve, to engrave’ (刻字 ‘engrave characters’) — 刻 on a clock is a different use."
+    ],
+    "subtleties": [
+     "In everyday speech 三点十五分 is as common as 三点一刻; 刻 sounds a little traditional."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "counts by itself: 一刻, 三刻 (never *一个刻)"
+    }
+   }
+  },
+  {
+   "id": "zh:shiji",
+   "lemma": "世纪",
+   "trad": "世紀",
+   "pinyin": "shì jì",
+   "pos": "NOUN",
+   "senses": [
+    "time.century"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "History measured in hundreds of years.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "century",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.century"
+     }
+    ],
+    "examples": [
+     {
+      "text": "现在是二十一世纪。",
+      "py": "Xiànzài shì èrshíyī shìjì.",
+      "tr": "We are in the twenty-first century.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "这座房子有一个世纪了。",
+      "py": "Zhè zuò fángzi yǒu yí ge shìjì le.",
+      "tr": "This house is a century old.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢上个世纪的音乐。",
+      "py": "Wǒ xǐhuan shàng ge shìjì de yīnyuè.",
+      "tr": "I like music from the last century.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "二十一世纪",
+      "tr": "the twenty-first century"
+     },
+     {
+      "text": "上个世纪",
+      "tr": "the last century"
+     },
+     {
+      "text": "半个世纪",
+      "tr": "half a century"
+     },
+     {
+      "text": "世纪末",
+      "tr": "the end of the century"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "百年",
+      "register": "neutral",
+      "nuance": "bǎinián: a hundred years (百年老店 ‘a shop a century old’)"
+     }
+    ],
+    "etymology": {
+     "text": "世 ‘generation, age’ + 纪 ‘record; era’ (as in 纪元 ‘era’).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Centuries take no 第: 二十一世纪 is ‘the 21st century’ — the bare number works as an ordinal."
+    ],
+    "pitfalls": [
+     "The 1900s as a century are 二十世纪; ‘the 1990s’ is 九十年代 (with 年代)."
+    ],
+    "subtleties": [
+     "上个世纪 ‘last century’, 下个世纪 ‘next century’ — 上 / 下 as with months and weeks."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 世紀 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:niandai",
+   "lemma": "年代",
+   "trad": "年代",
+   "pinyin": "nián dài",
+   "pos": "NOUN",
+   "senses": [
+    "time.decade",
+    "time.period"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.period",
+     "axis": "kind of period",
+     "value": "an era, a time in history (那个年代) — also a decade of a century (八十年代)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Music, clothes and photos that belong to one decade.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a decade of a century (八十年代 ‘the eighties’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.decade"
+     },
+     {
+      "id": "s2",
+      "def": "an era, a period, the times (那个年代)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.period"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸是八十年代的大学生。",
+      "py": "Wǒ bàba shì bāshí niándài de dàxuéshēng.",
+      "tr": "My father was a university student in the eighties.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这是九十年代的音乐。",
+      "py": "Zhè shì jiǔshí niándài de yīnyuè.",
+      "tr": "This is music from the nineties.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     },
+     {
+      "text": "那个年代，生活很难。",
+      "py": "Nàge niándài, shēnghuó hěn nán.",
+      "tr": "In those days life was hard.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "八十年代",
+      "tr": "the eighties"
+     },
+     {
+      "text": "二十世纪五十年代",
+      "tr": "the 1950s"
+     },
+     {
+      "text": "那个年代",
+      "tr": "in those days"
+     },
+     {
+      "text": "年代久远",
+      "tr": "of great age"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "十年",
+      "register": "neutral",
+      "nuance": "shí nián: ten years — any stretch of ten years"
+     },
+     {
+      "word": "时代",
+      "register": "neutral",
+      "nuance": "shídài: era, epoch, the times"
+     }
+    ],
+    "etymology": {
+     "text": "年 ‘year’ + 代 ‘generation, era’: ‘an era of years’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "八十年代 alone means the 1980s; with a century it can be any: 十九世纪八十年代 ‘the 1880s’."
+    ],
+    "pitfalls": [
+     "‘A decade’ as ten years of time is 十年 (我在北京住了十年); 年代 is a decade of the calendar (the ’80s) or an era."
+    ],
+    "subtleties": [
+     "Big before small again: 二十世纪八十年代 ‘the 1980s’ — the century first, then the decade."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:zhounian",
+   "lemma": "周年",
+   "trad": "週年",
+   "pinyin": "zhōu nián",
+   "pos": "NOUN",
+   "senses": [
+    "time.anniversary"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Candles, flowers and a date that comes round again.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "anniversary (a full year, counted: 十周年)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.anniversary"
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天是我们结婚十周年。",
+      "py": "Jīntiān shì wǒmen jiéhūn shí zhōunián.",
+      "tr": "Today is our tenth wedding anniversary.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "明年是学校的一百周年。",
+      "py": "Míngnián shì xuéxiào de yìbǎi zhōunián.",
+      "tr": "Next year is the school’s hundredth anniversary.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在饭馆庆祝五周年。",
+      "py": "Wǒmen zài fànguǎn qìngzhù wǔ zhōunián.",
+      "tr": "We celebrated our fifth anniversary at a restaurant.",
+      "register": "neutral",
+      "context": "celebration",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "结婚十周年",
+      "tr": "tenth wedding anniversary"
+     },
+     {
+      "text": "一百周年",
+      "tr": "the centenary"
+     },
+     {
+      "text": "周年纪念",
+      "tr": "anniversary celebration"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "纪念日",
+      "register": "neutral",
+      "nuance": "jìniànrì: commemoration day; an anniversary as a day (结婚纪念日)"
+     }
+    ],
+    "etymology": {
+     "text": "周 ‘a full circle’ (traditional 週) + 年 ‘year’: ‘a full turn of the year’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Like 世纪, 周年 needs no 第: 十周年 is ‘the 10th anniversary’."
+    ],
+    "pitfalls": [
+     "周年 follows the number directly, without a measure word: 五周年 (not *五个周年)."
+    ],
+    "subtleties": [
+     "A child’s first birthday is 一周岁 ‘one full year of age’ — the same 周 ‘full circle’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 週年 (the 周 of 週 ‘a full circle’)"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "counts by itself after the number: 十周年"
+    }
+   }
+  }
+ ]
+}

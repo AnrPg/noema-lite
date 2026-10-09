@@ -967,6 +967,1445 @@
    "prereqs": [
     "veg.2b"
    ]
+  },
+  {
+   "id": "cr.01",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 19,
+   "level": "A2",
+   "title": "Yesterday: the past",
+   "concepts": [
+    "verb.wakeup",
+    "verb.getup",
+    "verb.wash",
+    "verb.shower",
+    "verb.getdressed",
+    "verb.havebreakfast",
+    "verb.leavehome",
+    "verb.start",
+    "verb.finish",
+    "verb.comehome",
+    "verb.gotobed",
+    "verb.fallasleep",
+    "verb.sleep"
+   ],
+   "functions": {
+    "*": [
+     "fn.past"
+    ]
+   },
+   "prereqs": [
+    "fd.18"
+   ]
+  },
+  {
+   "id": "cr.02",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 20,
+   "level": "A2",
+   "title": "How it used to be: the ongoing and the habitual past",
+   "concepts": [
+    "time.childhood",
+    "obj.toy",
+    "abstract.game",
+    "verb.play",
+    "verb.growup",
+    "verb.remember",
+    "verb.forget",
+    "place.kindergarten",
+    "person.neighbour",
+    "time.holidays",
+    "adv.usedto"
+   ],
+   "functions": {
+    "*": [
+     "fn.past.ongoing"
+    ]
+   },
+   "prereqs": [
+    "cr.01"
+   ]
+  },
+  {
+   "id": "cr.03",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 21,
+   "level": "A2",
+   "title": "Tomorrow: plans and the future",
+   "concepts": [
+    "abstract.plan",
+    "abstract.trip",
+    "place.hotel",
+    "verb.book",
+    "obj.passport",
+    "obj.suitcase",
+    "place.abroad",
+    "verb.visit",
+    "person.tourist",
+    "person.guide",
+    "time.nextweek",
+    "time.nextyear"
+   ],
+   "functions": {
+    "*": [
+     "fn.future"
+    ]
+   },
+   "prereqs": [
+    "cr.02"
+   ]
+  },
+  {
+   "id": "cr.04",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 22,
+   "level": "A2",
+   "title": "First, second …: ordinal numbers, dates and the clock",
+   "concepts": [
+    "num.ord.1",
+    "num.ord.2",
+    "num.ord.3",
+    "num.ord.4",
+    "num.ord.5",
+    "num.ord.6",
+    "num.ord.7",
+    "num.ord.8",
+    "num.ord.9",
+    "num.ord.10",
+    "num.ord.last",
+    "num.half",
+    "num.quarter",
+    "time.century",
+    "time.decade",
+    "time.anniversary"
+   ],
+   "functions": {
+    "*": [
+     "fn.ordinals"
+    ]
+   },
+   "prereqs": [
+    "cr.03"
+   ]
+  },
+  {
+   "id": "cr.05",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 23,
+   "level": "A2",
+   "title": "Can, must, may, need: modality",
+   "concepts": [
+    "verb.can",
+    "verb.must",
+    "verb.may",
+    "verb.need",
+    "verb.should",
+    "adj.allowed",
+    "adj.forbidden",
+    "abstract.rule",
+    "obj.sign",
+    "abstract.permission",
+    "adj.possible",
+    "adj.impossible",
+    "adj.necessary"
+   ],
+   "functions": {
+    "*": [
+     "fn.modal"
+    ]
+   },
+   "prereqs": [
+    "cr.04"
+   ]
+  },
+  {
+   "id": "cr.06",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 24,
+   "level": "A2",
+   "title": "The body — \"it hurts\": who feels",
+   "concepts": [
+    "body.head",
+    "body.hair",
+    "body.face",
+    "body.eye",
+    "body.ear",
+    "body.nose",
+    "body.mouth",
+    "body.tooth",
+    "body.tongue",
+    "body.neck",
+    "body.shoulder",
+    "body.arm",
+    "body.hand",
+    "body.finger",
+    "body.chest",
+    "body.back",
+    "body.stomach",
+    "body.leg",
+    "body.knee",
+    "body.foot",
+    "body.toe",
+    "body.skin",
+    "body.heart",
+    "body.blood",
+    "body.bone",
+    "verb.hurt"
+   ],
+   "functions": {
+    "*": [
+     "fn.experiencer"
+    ]
+   },
+   "prereqs": [
+    "cr.05"
+   ]
+  },
+  {
+   "id": "cr.07",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 25,
+   "level": "A2",
+   "title": "At the doctor: advice and obligation",
+   "concepts": [
+    "adj.ill",
+    "adj.healthy",
+    "health.fever",
+    "health.cold",
+    "health.cough",
+    "health.pain",
+    "health.medicine",
+    "health.pill",
+    "health.appointment",
+    "verb.rest",
+    "verb.getwell",
+    "verb.take.medicine"
+   ],
+   "functions": {
+    "*": [
+     "fn.advice"
+    ]
+   },
+   "prereqs": [
+    "cr.06"
+   ]
+  },
+  {
+   "id": "cr.08",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 26,
+   "level": "A2",
+   "title": "Clothes and wearing",
+   "concepts": [
+    "clothes.shirt",
+    "clothes.tshirt",
+    "clothes.trousers",
+    "clothes.skirt",
+    "clothes.dress",
+    "clothes.jacket",
+    "clothes.coat",
+    "clothes.sweater",
+    "clothes.shoe",
+    "clothes.boot",
+    "clothes.sock",
+    "clothes.hat",
+    "clothes.glove",
+    "clothes.scarf",
+    "clothes.belt",
+    "clothes.pocket",
+    "measure.size",
+    "verb.wear",
+    "verb.puton",
+    "verb.takeoff"
+   ],
+   "functions": {
+    "*": [
+     "fn.wear"
+    ],
+    "fusional": [
+     "fn.agreement.plural"
+    ]
+   },
+   "prereqs": [
+    "cr.07"
+   ]
+  },
+  {
+   "id": "cr.09",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 27,
+   "level": "A2",
+   "title": "Washing myself, meeting each other: reflexive and reciprocal verbs",
+   "concepts": [
+    "verb.washoneself",
+    "verb.shave",
+    "verb.comb",
+    "verb.brushteeth",
+    "verb.dryoneself",
+    "obj.towel",
+    "obj.soap",
+    "obj.toothbrush",
+    "obj.mirror",
+    "obj.shampoo",
+    "verb.meet",
+    "pron.eachother"
+   ],
+   "functions": {
+    "*": [
+     "fn.reflexive"
+    ]
+   },
+   "prereqs": [
+    "cr.08"
+   ]
+  },
+  {
+   "id": "cr.10",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 28,
+   "level": "A2",
+   "title": "Giving, sending, telling: two objects",
+   "concepts": [
+    "verb.give",
+    "verb.send",
+    "verb.show",
+    "verb.tell",
+    "verb.bring",
+    "verb.lend",
+    "verb.borrow",
+    "verb.explain",
+    "obj.present",
+    "comm.letter",
+    "obj.parcel",
+    "comm.message",
+    "obj.card",
+    "comm.address"
+   ],
+   "functions": {
+    "*": [
+     "fn.indirect.object"
+    ]
+   },
+   "prereqs": [
+    "cr.09"
+   ]
+  },
+  {
+   "id": "cr.11",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 29,
+   "level": "A2",
+   "title": "Shopping: big numbers, prices and quantities",
+   "concepts": [
+    "num.200",
+    "num.500",
+    "num.10000",
+    "num.100000",
+    "num.1000000",
+    "money.price",
+    "verb.cost",
+    "money.money",
+    "money.change",
+    "money.receipt",
+    "measure.bottle",
+    "measure.can",
+    "measure.box",
+    "measure.packet",
+    "measure.kilo",
+    "measure.gram",
+    "measure.litre",
+    "measure.piece",
+    "measure.pair",
+    "measure.slice"
+   ],
+   "functions": {
+    "*": [
+     "fn.quantity"
+    ]
+   },
+   "prereqs": [
+    "cr.10"
+   ]
+  },
+  {
+   "id": "cr.12",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 30,
+   "level": "A2",
+   "title": "At the restaurant: polite requests",
+   "concepts": [
+    "food.menu",
+    "verb.order",
+    "money.bill",
+    "job.waiter",
+    "money.tip",
+    "food.dish",
+    "food.starter",
+    "food.dessert",
+    "adj.vegetarian",
+    "adj.spicy",
+    "adj.sweet",
+    "adj.sour",
+    "adj.bitter",
+    "adj.salty",
+    "verb.wouldlike"
+   ],
+   "functions": {
+    "*": [
+     "fn.polite.request"
+    ]
+   },
+   "prereqs": [
+    "cr.11"
+   ]
+  },
+  {
+   "id": "cr.13",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 31,
+   "level": "A2",
+   "title": "The weather: sentences without a doer",
+   "concepts": [
+    "nature.sky",
+    "nature.sun",
+    "nature.moon",
+    "nature.star",
+    "nature.cloud",
+    "nature.rain",
+    "nature.snow",
+    "nature.wind",
+    "nature.storm",
+    "nature.fog",
+    "nature.ice",
+    "nature.weather",
+    "sci.temperature",
+    "sci.degree",
+    "adj.sunny",
+    "adj.cloudy",
+    "adj.wet",
+    "adj.dry",
+    "verb.rain",
+    "verb.snow"
+   ],
+   "functions": {
+    "*": [
+     "fn.impersonal"
+    ]
+   },
+   "prereqs": [
+    "cr.12"
+   ]
+  },
+  {
+   "id": "cr.14",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 32,
+   "level": "A2",
+   "title": "Nature: there is, there are",
+   "concepts": [
+    "nature.sea",
+    "nature.river",
+    "nature.lake",
+    "nature.mountain",
+    "nature.hill",
+    "nature.forest",
+    "nature.field",
+    "nature.desert",
+    "nature.island",
+    "nature.beach",
+    "nature.valley",
+    "nature.ground",
+    "nature.stone",
+    "nature.tree",
+    "nature.flower",
+    "nature.grass",
+    "nature.leaf"
+   ],
+   "functions": {
+    "*": [
+     "fn.existential"
+    ]
+   },
+   "prereqs": [
+    "cr.13"
+   ]
+  },
+  {
+   "id": "cr.15",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 33,
+   "level": "A2",
+   "title": "Animals: irregular and collective plurals",
+   "concepts": [
+    "animal.dog",
+    "animal.cat",
+    "animal.horse",
+    "animal.cow",
+    "animal.sheep",
+    "animal.goat",
+    "animal.pig",
+    "animal.chicken",
+    "animal.duck",
+    "animal.bird",
+    "animal.fish",
+    "animal.mouse",
+    "animal.rabbit",
+    "animal.lion",
+    "animal.tiger",
+    "animal.bear",
+    "animal.wolf",
+    "animal.fox",
+    "animal.elephant",
+    "animal.monkey",
+    "animal.snake",
+    "animal.insect",
+    "animal.bee",
+    "animal.fly",
+    "animal.butterfly",
+    "animal.animal"
+   ],
+   "functions": {
+    "*": [
+     "fn.plural.irregular"
+    ]
+   },
+   "prereqs": [
+    "cr.14"
+   ]
+  },
+  {
+   "id": "cr.16",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 34,
+   "level": "A2",
+   "title": "Feelings: how much — very, too, enough",
+   "concepts": [
+    "adj.angry",
+    "adj.afraid",
+    "adj.surprised",
+    "adj.bored",
+    "adj.worried",
+    "adj.proud",
+    "adj.jealous",
+    "adj.nervous",
+    "adj.calm",
+    "verb.love",
+    "verb.hate",
+    "verb.feel",
+    "verb.laugh",
+    "verb.cry",
+    "verb.smile",
+    "adv.very",
+    "adv.too",
+    "adv.enough",
+    "adv.quite"
+   ],
+   "functions": {
+    "*": [
+     "fn.degree"
+    ]
+   },
+   "prereqs": [
+    "cr.15"
+   ]
+  },
+  {
+   "id": "cr.17",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 35,
+   "level": "A2",
+   "title": "Describing people: relative clauses",
+   "concepts": [
+    "adj.short.person",
+    "adj.fat",
+    "adj.thin",
+    "body.beard",
+    "obj.glasses",
+    "adj.kind",
+    "adj.honest",
+    "adj.lazy",
+    "adj.clever",
+    "adj.shy",
+    "adj.funny",
+    "adj.polite",
+    "pron.who",
+    "pron.which"
+   ],
+   "functions": {
+    "*": [
+     "fn.relative"
+    ]
+   },
+   "prereqs": [
+    "cr.16"
+   ]
+  },
+  {
+   "id": "cr.18",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 36,
+   "level": "A2",
+   "title": "Whose is it: possession in depth",
+   "concepts": [
+    "home.armchair",
+    "home.carpet",
+    "home.curtain",
+    "home.washingmachine",
+    "home.oven",
+    "home.sink",
+    "verb.clean",
+    "verb.washdishes",
+    "verb.iron",
+    "verb.tidy",
+    "verb.sweep",
+    "home.rubbish",
+    "obj.lock",
+    "home.roof"
+   ],
+   "functions": {
+    "*": [
+     "fn.genitive"
+    ]
+   },
+   "prereqs": [
+    "cr.17"
+   ]
+  },
+  {
+   "id": "cr.19",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 37,
+   "level": "A2",
+   "title": "Telling a story: one thing after another",
+   "concepts": [
+    "adv.first",
+    "adv.afterthat",
+    "adv.finally",
+    "adv.suddenly",
+    "adv.meanwhile",
+    "verb.happen",
+    "verb.find",
+    "verb.lose",
+    "verb.decide",
+    "verb.notice",
+    "abstract.event",
+    "abstract.story"
+   ],
+   "functions": {
+    "*": [
+     "fn.sequence"
+    ]
+   },
+   "prereqs": [
+    "cr.18"
+   ]
+  },
+  {
+   "id": "cr.20",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 38,
+   "level": "A2",
+   "title": "The way: path and manner of moving",
+   "concepts": [
+    "verb.turn",
+    "verb.cross",
+    "adv.straight",
+    "prep.along",
+    "prep.past",
+    "prep.around",
+    "place.corner",
+    "place.crossroads",
+    "place.trafficlight",
+    "place.bridge",
+    "obj.map",
+    "place.north",
+    "place.south",
+    "place.east",
+    "place.west"
+   ],
+   "functions": {
+    "*": [
+     "fn.path"
+    ],
+    "isolating": [
+     "fn.complement.direction"
+    ]
+   },
+   "prereqs": [
+    "cr.19"
+   ]
+  },
+  {
+   "id": "cr.21",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 39,
+   "level": "A2",
+   "title": "Free time: verb + verb",
+   "concepts": [
+    "abstract.sport",
+    "sport.football",
+    "verb.swim",
+    "verb.dance",
+    "verb.sing",
+    "art.music",
+    "art.instrument",
+    "art.guitar",
+    "art.piano",
+    "sport.team",
+    "sport.match",
+    "verb.win",
+    "verb.losegame",
+    "abstract.hobby",
+    "verb.try",
+    "verb.stop"
+   ],
+   "functions": {
+    "*": [
+     "fn.verb.verb"
+    ]
+   },
+   "prereqs": [
+    "cr.20"
+   ]
+  },
+  {
+   "id": "cr.22",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 40,
+   "level": "A2",
+   "title": "When, while, before, after: time clauses",
+   "concepts": [
+    "adj.busy",
+    "abstract.freetime",
+    "abstract.schedule",
+    "adv.ontime",
+    "conj.while",
+    "conj.before",
+    "conj.after",
+    "conj.until",
+    "conj.since",
+    "conj.assoonas"
+   ],
+   "functions": {
+    "*": [
+     "fn.time.clause"
+    ]
+   },
+   "prereqs": [
+    "cr.21"
+   ]
+  },
+  {
+   "id": "cr.23",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 41,
+   "level": "A2",
+   "title": "The biggest: comparison in depth",
+   "concepts": [
+    "place.continent",
+    "place.capital",
+    "abstract.population",
+    "place.border",
+    "place.coast",
+    "place.world",
+    "conj.asas",
+    "adv.less",
+    "adv.least"
+   ],
+   "functions": {
+    "*": [
+     "fn.superlative"
+    ]
+   },
+   "prereqs": [
+    "cr.22"
+   ]
+  },
+  {
+   "id": "cr.24",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 42,
+   "level": "A2",
+   "title": "Someone, nobody, everything: indefinite words",
+   "concepts": [
+    "pron.someone",
+    "pron.something",
+    "pron.everything",
+    "pron.everyone",
+    "pron.anything",
+    "pron.anyone",
+    "adv.somewhere",
+    "adv.everywhere",
+    "adv.nowhere",
+    "quant.every",
+    "quant.both",
+    "quant.either",
+    "quant.neither"
+   ],
+   "functions": {
+    "*": [
+     "fn.indefinite"
+    ]
+   },
+   "prereqs": [
+    "cr.23"
+   ]
+  },
+  {
+   "id": "cr.25",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 43,
+   "level": "B1",
+   "title": "If: real conditions",
+   "concepts": [
+    "adj.lost",
+    "adj.broken",
+    "verb.miss",
+    "abstract.mistake",
+    "verb.repair",
+    "abstract.problem",
+    "verb.solve",
+    "verb.help"
+   ],
+   "functions": {
+    "*": [
+     "fn.condition.real"
+    ]
+   },
+   "prereqs": [
+    "cr.24"
+   ]
+  },
+  {
+   "id": "cr.26",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 44,
+   "level": "B1",
+   "title": "Wishes and hopes",
+   "concepts": [
+    "abstract.dream",
+    "verb.hope",
+    "verb.wish",
+    "abstract.success",
+    "work.career",
+    "abstract.goal",
+    "time.future",
+    "abstract.luck"
+   ],
+   "functions": {
+    "*": [
+     "fn.wish"
+    ]
+   },
+   "prereqs": [
+    "cr.25"
+   ]
+  },
+  {
+   "id": "cr.27",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 45,
+   "level": "B1",
+   "title": "If I were …: unreal conditions",
+   "concepts": [
+    "verb.regret",
+    "abstract.chance",
+    "abstract.decision",
+    "verb.choose"
+   ],
+   "functions": {
+    "*": [
+     "fn.condition.unreal"
+    ]
+   },
+   "prereqs": [
+    "cr.26"
+   ]
+  },
+  {
+   "id": "cr.28",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 46,
+   "level": "B1",
+   "title": "The passive: what was done",
+   "concepts": [
+    "verb.build",
+    "verb.invent",
+    "verb.discover",
+    "verb.found",
+    "verb.destroy",
+    "verb.elect",
+    "verb.report",
+    "abstract.accident",
+    "comm.news"
+   ],
+   "functions": {
+    "*": [
+     "fn.passive"
+    ]
+   },
+   "prereqs": [
+    "cr.27"
+   ]
+  },
+  {
+   "id": "cr.29",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 47,
+   "level": "B1",
+   "title": "He said that …: reported speech",
+   "concepts": [
+    "verb.say",
+    "verb.ask",
+    "verb.answer",
+    "verb.think",
+    "verb.believe",
+    "verb.claim",
+    "verb.mean",
+    "verb.promise"
+   ],
+   "functions": {
+    "*": [
+     "fn.reported"
+    ]
+   },
+   "prereqs": [
+    "cr.28"
+   ]
+  },
+  {
+   "id": "cr.30",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 48,
+   "level": "B1",
+   "title": "Knowing: indirect questions; knowing a fact, knowing someone",
+   "concepts": [
+    "verb.know.fact",
+    "verb.know.person",
+    "verb.understand",
+    "verb.learn",
+    "verb.teach",
+    "edu.subject",
+    "edu.test",
+    "edu.mark",
+    "edu.degree",
+    "edu.course",
+    "edu.lesson",
+    "edu.homework",
+    "conj.whether"
+   ],
+   "functions": {
+    "*": [
+     "fn.indirect.question",
+     "fn.know"
+    ]
+   },
+   "prereqs": [
+    "cr.29"
+   ]
+  },
+  {
+   "id": "cr.31",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 49,
+   "level": "B1",
+   "title": "Work: participles",
+   "concepts": [
+    "work.company",
+    "work.boss",
+    "work.colleague",
+    "work.meeting",
+    "work.salary",
+    "work.contract",
+    "work.interview",
+    "verb.apply",
+    "verb.employ",
+    "verb.retire",
+    "work.job"
+   ],
+   "functions": {
+    "*": [
+     "fn.participle"
+    ]
+   },
+   "prereqs": [
+    "cr.30"
+   ]
+  },
+  {
+   "id": "cr.32",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 50,
+   "level": "B1",
+   "title": "Reading, learning, the arrival: verbal nouns",
+   "concepts": [
+    "abstract.reading",
+    "abstract.writing",
+    "abstract.travel",
+    "abstract.arrival",
+    "abstract.departure",
+    "abstract.development",
+    "abstract.help",
+    "abstract.change"
+   ],
+   "functions": {
+    "*": [
+     "fn.verbal.noun"
+    ]
+   },
+   "prereqs": [
+    "cr.31"
+   ]
+  },
+  {
+   "id": "cr.33",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 51,
+   "level": "B1",
+   "title": "Building verbs from verbs and roots",
+   "concepts": [
+    "verb.open",
+    "verb.close",
+    "verb.rise",
+    "verb.raise",
+    "verb.fall",
+    "verb.drop",
+    "verb.wake",
+    "verb.break",
+    "verb.fix",
+    "verb.grow"
+   ],
+   "functions": {
+    "*": [
+     "fn.verb.derivation"
+    ],
+    "isolating": [
+     "fn.complement.result"
+    ]
+   },
+   "prereqs": [
+    "cr.32"
+   ]
+  },
+  {
+   "id": "cr.34",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 52,
+   "level": "B1",
+   "title": "Because of, so that, although: cause, purpose, concession",
+   "concepts": [
+    "abstract.opinion",
+    "abstract.reason",
+    "abstract.example",
+    "verb.agree",
+    "verb.disagree",
+    "abstract.argument",
+    "abstract.advantage",
+    "abstract.disadvantage",
+    "prep.becauseof",
+    "conj.inorderto",
+    "prep.despite"
+   ],
+   "functions": {
+    "*": [
+     "fn.cause.purpose"
+    ]
+   },
+   "prereqs": [
+    "cr.33"
+   ]
+  },
+  {
+   "id": "cr.35",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 53,
+   "level": "B1",
+   "title": "Numbers in use: fractions, percentages, measures",
+   "concepts": [
+    "num.third",
+    "num.percent",
+    "num.half.adj",
+    "verb.cut",
+    "verb.boil",
+    "verb.fry",
+    "verb.bake",
+    "verb.mix",
+    "verb.add",
+    "obj.spoon",
+    "home.pan",
+    "home.pot",
+    "food.recipe"
+   ],
+   "functions": {
+    "*": [
+     "fn.fractions"
+    ]
+   },
+   "prereqs": [
+    "cr.34"
+   ]
+  },
+  {
+   "id": "cr.36",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 54,
+   "level": "B1",
+   "title": "Politeness and register",
+   "concepts": [
+    "verb.invite",
+    "abstract.party",
+    "person.guest",
+    "verb.congratulate",
+    "abstract.wedding",
+    "verb.celebrate",
+    "verb.thank",
+    "verb.apologise"
+   ],
+   "functions": {
+    "*": [
+     "fn.register"
+    ]
+   },
+   "prereqs": [
+    "cr.35"
+   ]
+  },
+  {
+   "id": "cr.37",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 55,
+   "level": "B1",
+   "title": "Attitude in the sentence: particles and discourse markers",
+   "concepts": [
+    "intj.really",
+    "intj.exactly",
+    "intj.noway",
+    "intj.isee",
+    "intj.well",
+    "adv.anyway"
+   ],
+   "functions": {
+    "*": [
+     "fn.attitude.particles"
+    ]
+   },
+   "prereqs": [
+    "cr.36"
+   ]
+  },
+  {
+   "id": "cr.38",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 56,
+   "level": "B1",
+   "title": "New words: loanwords and technology",
+   "concepts": [
+    "tech.computer",
+    "tech.internet",
+    "tech.website",
+    "comm.email",
+    "tech.app",
+    "tech.screen",
+    "verb.download",
+    "verb.post",
+    "tech.password",
+    "verb.charge"
+   ],
+   "functions": {
+    "*": [
+     "fn.loanwords"
+    ]
+   },
+   "prereqs": [
+    "cr.37"
+   ]
+  },
+  {
+   "id": "cr.39",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 57,
+   "level": "B1",
+   "title": "Having something done: causatives",
+   "concepts": [
+    "place.townhall",
+    "comm.form",
+    "comm.document",
+    "comm.signature",
+    "abstract.queue",
+    "verb.deliver",
+    "verb.let"
+   ],
+   "functions": {
+    "*": [
+     "fn.causative"
+    ]
+   },
+   "prereqs": [
+    "cr.38"
+   ]
+  },
+  {
+   "id": "cr.40",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 58,
+   "level": "B1",
+   "title": "Aspect in depth: done, ongoing, experienced, resulting",
+   "concepts": [
+    "adv.already",
+    "adv.still",
+    "adv.yet",
+    "adv.ever",
+    "adv.justnow"
+   ],
+   "functions": {
+    "*": [
+     "fn.aspect.depth"
+    ]
+   },
+   "prereqs": [
+    "cr.39"
+   ]
+  },
+  {
+   "id": "cr.41",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 59,
+   "level": "B2",
+   "title": "Society and the environment: the nominal style",
+   "concepts": [
+    "abstract.environment",
+    "abstract.pollution",
+    "nature.climate",
+    "abstract.energy",
+    "abstract.society",
+    "abstract.solution",
+    "verb.protect",
+    "verb.reduce"
+   ],
+   "functions": {
+    "*": [
+     "fn.nominal.style"
+    ]
+   },
+   "prereqs": [
+    "cr.40"
+   ]
+  },
+  {
+   "id": "cr.42",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 60,
+   "level": "B2",
+   "title": "Institutions: complex relative clauses",
+   "concepts": [
+    "pol.government",
+    "law.law",
+    "law.court",
+    "law.rights",
+    "pol.citizen",
+    "pol.election",
+    "pol.party",
+    "pol.vote",
+    "pron.whose"
+   ],
+   "functions": {
+    "*": [
+     "fn.relative.complex"
+    ]
+   },
+   "prereqs": [
+    "cr.41"
+   ]
+  },
+  {
+   "id": "cr.43",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 61,
+   "level": "B2",
+   "title": "The arts: emphasis and word order",
+   "concepts": [
+    "art.art",
+    "art.painting",
+    "art.film",
+    "art.theatre",
+    "lit.novel",
+    "lit.poem",
+    "art.actor",
+    "lit.author",
+    "art.exhibition"
+   ],
+   "functions": {
+    "*": [
+     "fn.emphasis"
+    ]
+   },
+   "prereqs": [
+    "cr.42"
+   ]
+  },
+  {
+   "id": "cr.44",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 62,
+   "level": "B2",
+   "title": "Science: probability and certainty",
+   "concepts": [
+    "sci.research",
+    "sci.experiment",
+    "sci.result",
+    "sci.theory",
+    "verb.prove",
+    "verb.measure",
+    "sci.data",
+    "adv.probably",
+    "adv.certainly"
+   ],
+   "functions": {
+    "*": [
+     "fn.epistemic"
+    ]
+   },
+   "prereqs": [
+    "cr.43"
+   ]
+  },
+  {
+   "id": "cr.45",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 63,
+   "level": "B2",
+   "title": "History: the tenses of narration",
+   "concepts": [
+    "pol.empire",
+    "pol.king",
+    "pol.queen",
+    "pol.war",
+    "pol.peace",
+    "pol.revolution",
+    "pol.independence",
+    "adj.ancient",
+    "abstract.history"
+   ],
+   "functions": {
+    "*": [
+     "fn.narrative.tenses"
+    ]
+   },
+   "prereqs": [
+    "cr.44"
+   ]
+  },
+  {
+   "id": "cr.46",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 64,
+   "level": "B2",
+   "title": "Word formation: compounds, derivation, word families",
+   "concepts": [
+    "abstract.word",
+    "abstract.meaning",
+    "abstract.family.word"
+   ],
+   "functions": {
+    "*": [
+     "fn.word.formation"
+    ]
+   },
+   "prereqs": [
+    "cr.45"
+   ]
+  },
+  {
+   "id": "cr.47",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 65,
+   "level": "B2",
+   "title": "Idioms, proverbs and culture",
+   "concepts": [
+    "abstract.tradition",
+    "abstract.custom",
+    "abstract.festival",
+    "relig.religion",
+    "abstract.proverb"
+   ],
+   "functions": {
+    "*": [
+     "fn.idioms"
+    ]
+   },
+   "prereqs": [
+    "cr.46"
+   ]
+  },
+  {
+   "id": "cr.48",
+   "kind": "lesson",
+   "stage": "core",
+   "step": 66,
+   "level": "B2",
+   "title": "Registers and varieties",
+   "concepts": [
+    "abstract.dialect",
+    "abstract.accent",
+    "abstract.slang",
+    "adj.formal",
+    "adj.informal"
+   ],
+   "functions": {
+    "*": [
+     "fn.varieties"
+    ]
+   },
+   "prereqs": [
+    "cr.47"
+   ]
   }
  ]
 }

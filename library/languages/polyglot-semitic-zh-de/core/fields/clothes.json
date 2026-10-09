@@ -8,9 +8,98 @@
   {
    "id": "clothes.pocket",
    "gloss": "pocket",
-   "tier": 2,
-   "rank": 1,
-   "pending": true
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "clothes.shirt",
+   "gloss": "shirt",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "clothes.tshirt",
+   "gloss": "T-shirt",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "clothes.trousers",
+   "gloss": "trousers",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "clothes.skirt",
+   "gloss": "skirt",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "clothes.dress",
+   "gloss": "dress",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "clothes.jacket",
+   "gloss": "jacket",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "clothes.coat",
+   "gloss": "coat",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "clothes.sweater",
+   "gloss": "sweater, jumper",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "clothes.shoe",
+   "gloss": "shoe",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "clothes.boot",
+   "gloss": "boot",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "clothes.sock",
+   "gloss": "sock",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "clothes.hat",
+   "gloss": "hat",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "clothes.glove",
+   "gloss": "glove",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "clothes.scarf",
+   "gloss": "scarf",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "clothes.belt",
+   "gloss": "belt",
+   "tier": 1,
+   "rank": 15
   }
  ]
 }

@@ -1244,6 +1244,13 @@
      }
     ]
    },
+   "contrasts": [
+    {
+     "concept": "verb.visit",
+     "axis": "who or what is visited",
+     "value": "a sick person (عَادَ الْمَرِيضَ) — formal"
+    }
+   ],
    "translit": "ʿāda",
    "forms": {
     "V;PST;1;SG": "عُدْتُ",
@@ -1334,6 +1341,13 @@
      {
       "text": "عَادَ الطَّبِيبُ الْمَرِيضَ.",
       "tr": "The doctor visited the sick man.",
+      "register": "formal",
+      "context": "health",
+      "sense": "s3"
+     },
+     {
+      "text": "عُدْنَا جَدِّي فِي الْمُسْتَشْفَى.",
+      "tr": "We visited my grandfather in hospital.",
       "register": "formal",
       "context": "health",
       "sense": "s3"

@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-08T13:47:05+00:00",
+ "builtAt": "2026-10-09T05:40:25+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -214,10 +214,10 @@ window.NOEMA_REGISTRY = {
    "path": "library/languages/polyglot-semitic-zh-de/course.pack.js",
    "profiles": "library/languages/polyglot-semitic-zh-de/course.profiles.js",
    "words": {
-    "ar": 466,
-    "he": 476,
-    "zh": 633,
-    "de": 575
+    "ar": 516,
+    "he": 526,
+    "zh": 692,
+    "de": 635
    }
   }
  ]

@@ -1,0 +1,1647 @@
+{
+ "lexemes": [
+  {
+   "id": "he:yaldut",
+   "lemma": "יַלְדוּת",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "time.childhood"
+   ],
+   "gender": "FEM",
+   "translit": "yaldut",
+   "features": {
+    "spelling": "ילדות",
+    "root": "י ל ד",
+    "pattern": "קַטְלוּת",
+    "plurals": {
+     "none": "no plural in everyday use (Wiktionary lists the rare יַלְדֻיּוֹת)"
+    },
+    "dual": {
+     "none": "no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יַלְדוּת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יַלְדוּת",
+    "N;SG;DEF": "הַיַּלְדוּת",
+    "N;SG;DEF;PFX": "יַּלְדוּת",
+    "N;SG;CONST": "יַלְדוּת"
+   },
+   "note": "Childhood. Feminine (־וּת); used without a plural. בַּיַּלְדוּת שֶׁלִּי “in my childhood”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Memories: a village, grandparents, long summer days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "childhood",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּיַּלְדוּת שֶׁלִּי גַּרְתִּי בִּכְפָר.",
+      "tr": "In my childhood I lived in a village.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "הָיְתָה לוֹ יַלְדוּת מְאֻשֶּׁרֶת.",
+      "tr": "He had a happy childhood.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חָבֵר שֶׁלִּי מֵהַיַּלְדוּת.",
+      "tr": "He is a friend of mine from childhood.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲבֵר יַלְדוּת",
+      "tr": "a childhood friend"
+     },
+     {
+      "text": "זִכְרוֹנוֹת יַלְדוּת",
+      "tr": "childhood memories"
+     },
+     {
+      "text": "יַלְדוּת מְאֻשֶּׁרֶת",
+      "tr": "a happy childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use: the time of life is also said with a clause, כְּשֶׁהָיִיתִי יֶלֶד / יַלְדָּה “when I was a child”.",
+    "antonyms": [
+     {
+      "word": "בַּגְרוּת",
+      "note": "adulthood, maturity"
+     }
+    ],
+    "etymology": {
+     "text": "From יֶלֶד “child” with the abstract ending ־וּת (Wiktionary gives no etymology); the ending also in נַעֲרוּת “youth” and בַּגְרוּת “maturity”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The school-leaving exam is the בַּגְרוּת, the “maturity” — the same ending ־וּת on another root."
+    ],
+    "pitfalls": [
+     "Feminine, like every noun in ־וּת: יַלְדוּת יָפָה, יַלְדוּת מְאֻשֶּׁרֶת.",
+     "With בְּ and the article: בַּיַּלְדוּת (the י keeps the doubling of the article)."
+    ],
+    "subtleties": [
+     "About oneself people often prefer the clause כְּשֶׁהָיִיתִי יֶלֶד / יַלְדָּה to the noun."
+    ]
+   }
+  },
+  {
+   "id": "he:tsaatsua",
+   "lemma": "צַעֲצוּעַ",
+   "pos": "NOUN",
+   "senses": [
+    "obj.toy"
+   ],
+   "gender": "MASC",
+   "translit": "tsa'atsu'a",
+   "features": {
+    "spelling": "צעצוע",
+    "root": {
+     "none": "a reduplicated stem (צַעֲ־צוּעַ); Wiktionary gives no root"
+    },
+    "pattern": {
+     "none": "a reduplicated stem, not one of the common patterns"
+    },
+    "plurals": [
+     {
+      "form": "צַעֲצוּעִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צַעֲצוּעַ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "צַעֲצוּעֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "צַעֲצוּעַ",
+    "N;SG;DEF": "הַצַּעֲצוּעַ",
+    "N;PL;INDF": "צַעֲצוּעִים",
+    "N;PL;DEF": "הַצַּעֲצוּעִים",
+    "N;SG;CONST": "צַעֲצוּעַ",
+    "N;PL;CONST": "צַעֲצוּעֵי"
+   },
+   "note": "A toy. Masculine, plural צַעֲצוּעִים.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A box of toys on the floor of a child’s room.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a toy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.toy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיֶּלֶד מְשַׂחֵק עִם הַצַּעֲצוּעַ הֶחָדָשׁ.",
+      "tr": "The boy is playing with the new toy.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהֶם הַרְבֵּה צַעֲצוּעִים.",
+      "tr": "They have lots of toys.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִינוּ לוֹ צַעֲצוּעַ לְיוֹם הַהֻלֶּדֶת.",
+      "tr": "We bought him a toy for his birthday.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲנוּת צַעֲצוּעִים",
+      "tr": "a toy shop"
+     },
+     {
+      "text": "צַעֲצוּעַ חָדָשׁ",
+      "tr": "a new toy"
+     },
+     {
+      "text": "שִׂחֵק בְּצַעֲצוּעַ",
+      "tr": "played with a toy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִשְׂחָק",
+      "register": "neutral",
+      "nuance": "“a game” — also a toy that is a game (a puzzle, a board game)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology for צַעֲצוּעַ “a toy; a decoration”; the related verb צִעְצֵעַ “to decorate” (Wiktionary) has the same doubled stem. In the Bible צַעֲצֻעִים are carved figures.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word is built by repeating a syllable: tsa-’a-tsu-a."
+    ],
+    "pitfalls": [
+     "The final ע takes a furtive patach: tsa’atsúa.",
+     "Playing with a toy: מְשַׂחֵק בְּ / עִם צַעֲצוּעַ."
+    ],
+    "subtleties": [
+     "Wiktionary also gives “a decoration”, an older use; today the word means a toy."
+    ]
+   }
+  },
+  {
+   "id": "he:mischak",
+   "lemma": "מִשְׂחָק",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.game",
+    "sport.match"
+   ],
+   "gender": "MASC",
+   "translit": "mischak",
+   "features": {
+    "spelling": "משחק",
+    "root": "שׂ ח ק",
+    "pattern": "מִקְטָל",
+    "plurals": [
+     {
+      "form": "מִשְׂחָקִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִשְׂחַק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִשְׂחֲקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מִשְׂחָק",
+    "N;SG;DEF": "הַמִּשְׂחָק",
+    "N;PL;INDF": "מִשְׂחָקִים",
+    "N;PL;DEF": "הַמִּשְׂחָקִים",
+    "N;SG;CONST": "מִשְׂחַק",
+    "N;PL;CONST": "מִשְׂחֲקֵי"
+   },
+   "note": "A game; a match. From שׂ־ח־ק (שִׂחֵק “to play”). Construct מִשְׂחַק.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Children in the yard, a board game on a rainy day, a football match on TV.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a game",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.game"
+     },
+     {
+      "id": "s2",
+      "def": "a match (in sport)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "sport.match"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בּוֹא נְשַׂחֵק מִשְׂחָק!",
+      "tr": "Let’s play a game!",
+      "register": "informal",
+      "context": "children",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים מִשְׂחֲקֵי מַחְשֵׁב.",
+      "tr": "The children love computer games.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "רָאִינוּ אֶת הַמִּשְׂחָק בַּטֶּלֶוִיזְיָה.",
+      "tr": "We watched the match on TV.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     },
+     {
+      "text": "הַמִּשְׂחָק הִסְתַּיֵּם בְּתֵיקוּ.",
+      "tr": "The match ended in a draw.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִשְׂחַק כַּדּוּרֶגֶל",
+      "tr": "a football match"
+     },
+     {
+      "text": "מִשְׂחַק קֻפְסָה",
+      "tr": "a board game (“box game”)"
+     },
+     {
+      "text": "מִשְׂחַק מַחְשֵׁב",
+      "tr": "a computer game"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תַּחֲרוּת",
+      "register": "neutral",
+      "nuance": "“a competition, contest” — a whole event; a מִשְׂחָק is one game or match"
+     }
+    ],
+    "etymology": {
+     "text": "From the root שׂ־ח־ק “play, laugh” in the pattern מִקְטָל (Wiktionary); the verb is שִׂחֵק “to play”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root in the Bible means “to laugh”; a game is, at heart, something to laugh at."
+    ],
+    "pitfalls": [
+     "The ש is שׂ (s): mis-chák.",
+     "In the construct the second vowel shortens: מִשְׂחַק כַּדּוּרֶגֶל, plural מִשְׂחֲקֵי מַחְשֵׁב."
+    ],
+    "subtleties": [
+     "מִשְׂחָק is also an actor’s acting (the verb שִׂחֵק means “to act” too).",
+     "The game and the match are one word: context decides."
+    ]
+   }
+  },
+  {
+   "id": "he:sichek",
+   "lemma": "שִׂחֵק",
+   "pos": "VERB",
+   "senses": [
+    "verb.play"
+   ],
+   "translit": "sichek",
+   "features": {
+    "spelling": "שיחק",
+    "root": "שׂ ח ק",
+    "binyan": "piel",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יְשַׂחֵק",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "im",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "the verbal noun שִׂחוּק is rare; the noun in use is מִשְׂחָק “game”"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "שִׂחַקְתִּי",
+    "V;PST;2;SG;MASC": "שִׂחַקְתָּ",
+    "V;PST;2;SG;FEM": "שִׂחַקְתְּ",
+    "V;PST;3;SG;MASC": "שִׂחֵק",
+    "V;PST;3;SG;FEM": "שִׂחֲקָה",
+    "V;PST;1;PL": "שִׂחַקְנוּ",
+    "V;PST;2;PL;MASC": "שִׂחַקְתֶּם",
+    "V;PST;2;PL;FEM": "שִׂחַקְתֶּן",
+    "V;PST;3;PL": "שִׂחֲקוּ",
+    "V;PRS;SG;MASC": "מְשַׂחֵק",
+    "V;PRS;SG;FEM": "מְשַׂחֶקֶת",
+    "V;PRS;PL;MASC": "מְשַׂחֲקִים",
+    "V;PRS;PL;FEM": "מְשַׂחֲקוֹת",
+    "V;FUT;1;SG": "אֲשַׂחֵק",
+    "V;FUT;2;SG;MASC": "תְּשַׂחֵק",
+    "V;FUT;2;SG;FEM": "תְּשַׂחֲקִי",
+    "V;FUT;3;SG;MASC": "יְשַׂחֵק",
+    "V;FUT;3;SG;FEM": "תְּשַׂחֵק",
+    "V;FUT;1;PL": "נְשַׂחֵק",
+    "V;FUT;2;PL;MASC": "תְּשַׂחֲקוּ",
+    "V;FUT;3;PL;MASC": "יְשַׂחֲקוּ",
+    "V;IMP;2;SG;MASC": "שַׂחֵק",
+    "V;IMP;2;SG;FEM": "שַׂחֲקִי",
+    "V;IMP;2;PL;MASC": "שַׂחֲקוּ",
+    "V;NFIN": "לְשַׂחֵק"
+   },
+   "plene": {
+    "V;PST;1;SG": "שיחקתי",
+    "V;PST;2;SG;MASC": "שיחקת",
+    "V;PST;2;SG;FEM": "שיחקת",
+    "V;PST;3;SG;MASC": "שיחק",
+    "V;PST;3;SG;FEM": "שיחקה",
+    "V;PST;1;PL": "שיחקנו",
+    "V;PST;2;PL;MASC": "שיחקתם",
+    "V;PST;2;PL;FEM": "שיחקתן",
+    "V;PST;3;PL": "שיחקו"
+   },
+   "note": "To play. Pi‘el of שׂ־ח־ק: past שִׂחֵק / שִׂחַקְתִּי (full spelling שיחק), present מְשַׂחֵק, future יְשַׂחֵק, infinitive לְשַׂחֵק. Music: נִגֵּן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Children running in the garden, a ball, a game of cards.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to play (a game, a sport, with toys, with someone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.play"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים מְשַׂחֲקִים בַּגִּנָּה.",
+      "tr": "The children are playing in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי כָּל הַיּוֹם בַּחוּץ.",
+      "tr": "When I was a child, I played outside all day.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה מְשַׂחֵק כַּדּוּרֶגֶל?",
+      "tr": "Do you (m.) play football?",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שִׂחֵק כַּדּוּרֶגֶל",
+      "tr": "played football"
+     },
+     {
+      "text": "שִׂחֵק בְּכַדּוּר",
+      "tr": "played with a ball"
+     },
+     {
+      "text": "שִׂחֵק עִם חֲבֵרִים",
+      "tr": "played with friends"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שִׂחַקְתָּ אוֹתָהּ!",
+      "tr": "you played it!",
+      "kind": "slang",
+      "meaning": "you nailed it, well done!",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "נִגֵּן",
+      "register": "neutral",
+      "nuance": "not a synonym but the partner: playing music, an instrument (נִגֵּן בִּפְסַנְתֵּר)"
+     },
+     {
+      "word": "הִשְׁתַּעֲשֵׁעַ",
+      "register": "literary",
+      "nuance": "“to amuse oneself, play around”"
+     }
+    ],
+    "etymology": {
+     "text": "Pi‘el of the root שׂ־ח־ק (Wiktionary gives no etymology; its senses are “to play” and “to act”). In the Bible the root also means “to laugh” (שְׂחוֹק “laughter”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "An actor is a שַׂחְקָן and a player a שַׂחְקָן too — the same word for the stage and the pitch."
+    ],
+    "pitfalls": [
+     "Music is not שִׂחֵק: “to play the piano” is נִגֵּן בִּפְסַנְתֵּר.",
+     "Games and sports are a bare object (שִׂחֵק כַּדּוּרֶגֶל, שַׁחְמָט); a toy or a ball takes בְּ (שִׂחֵק בְּכַדּוּר); a partner takes עִם.",
+     "The ח cannot be doubled, so the past keeps i without dagesh: שִׂחֵק (full spelling שיחק)."
+    ],
+    "subtleties": [
+     "Wiktionary’s second sense is “to act” (in a play, a film): הִיא מְשַׂחֶקֶת בַּתֵּאַטְרוֹן."
+    ]
+   }
+  },
+  {
+   "id": "he:gadal",
+   "lemma": "גָּדַל",
+   "pos": "VERB",
+   "senses": [
+    "verb.growup",
+    "verb.grow"
+   ],
+   "translit": "gadal",
+   "features": {
+    "spelling": "גדל",
+    "root": "ג ד ל",
+    "binyan": "paal",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יִגְדַּל",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "גְּדִילָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "גָּדַלְתִּי",
+    "V;PST;2;SG;MASC": "גָּדַלְתָּ",
+    "V;PST;2;SG;FEM": "גָּדַלְתְּ",
+    "V;PST;3;SG;MASC": "גָּדַל",
+    "V;PST;3;SG;FEM": "גָּדְלָה",
+    "V;PST;1;PL": "גָּדַלְנוּ",
+    "V;PST;2;PL;MASC": "גְּדַלְתֶּם",
+    "V;PST;2;PL;FEM": "גְּדַלְתֶּן",
+    "V;PST;3;PL": "גָּדְלוּ",
+    "V;PRS;SG;MASC": "גָּדֵל",
+    "V;PRS;SG;FEM": "גְּדֵלָה",
+    "V;PRS;PL;MASC": "גְּדֵלִים",
+    "V;PRS;PL;FEM": "גְּדֵלוֹת",
+    "V;FUT;1;SG": "אֶגְדַּל",
+    "V;FUT;2;SG;MASC": "תִּגְדַּל",
+    "V;FUT;2;SG;FEM": "תִּגְדְּלִי",
+    "V;FUT;3;SG;MASC": "יִגְדַּל",
+    "V;FUT;3;SG;FEM": "תִּגְדַּל",
+    "V;FUT;1;PL": "נִגְדַּל",
+    "V;FUT;2;PL;MASC": "תִּגְדְּלוּ",
+    "V;FUT;3;PL;MASC": "יִגְדְּלוּ",
+    "V;IMP;2;SG;MASC": "גְּדַל",
+    "V;IMP;2;SG;FEM": "גִּדְלִי",
+    "V;IMP;2;PL;MASC": "גִּדְלוּ",
+    "V;NFIN": "לִגְדֹּל"
+   },
+   "plene": {
+    "V;NFIN": "לגדול"
+   },
+   "note": "To grow up; to grow. A stative pa‘al: present גָּדֵל / גְּדֵלָה, future יִגְדַּל, infinitive לִגְדֹּל (full spelling לגדול). Raising (children, plants) is the pi‘el גִּדֵּל.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pencil marks on a door frame; a village childhood; tomatoes in the garden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to grow up (a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.growup"
+     },
+     {
+      "id": "s2",
+      "def": "to grow, get bigger (plants, children, a city, numbers)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.grow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "גָּדַלְתִּי בִּירוּשָׁלַיִם.",
+      "tr": "I grew up in Jerusalem.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה גְּדַלְתֶּם?",
+      "tr": "Where did you (pl.) grow up?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים גָּדְלוּ כָּל כָּךְ מַהֵר!",
+      "tr": "The children have grown up so fast!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "עַגְבָנִיּוֹת גְּדֵלוֹת בַּגִּנָּה שֶׁלָּנוּ.",
+      "tr": "Tomatoes grow in our garden.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s2"
+     },
+     {
+      "text": "הָעֵץ גָּדַל מְאוֹד.",
+      "tr": "The tree has grown a lot.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גָּדַל בִּכְפָר",
+      "tr": "grew up in a village"
+     },
+     {
+      "text": "גָּדַל בְּמִשְׁפָּחָה גְּדוֹלָה",
+      "tr": "grew up in a big family"
+     },
+     {
+      "text": "גָּדֵל מַהֵר",
+      "tr": "grows quickly"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הִתְבַּגֵּר",
+      "register": "neutral",
+      "nuance": "“to mature, become an adult” — adolescence"
+     },
+     {
+      "word": "צָמַח",
+      "register": "neutral",
+      "nuance": "“to grow, sprout” — of plants"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ג־ד־ל, the root of גָּדוֹל “big” (lesson 16): to grow is “to become big”. Wiktionary’s first sense is “to be big, great”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives גֹּדֶל “size” and מִגְדָּל “tower” — a “big” building."
+    ],
+    "pitfalls": [
+     "Raising children is the pi‘el גִּדֵּל: הִיא גִּדְּלָה שְׁלוֹשָׁה יְלָדִים; גָּדַל is growing up yourself.",
+     "The present is like an adjective (a stative verb): גָּדֵל, גְּדֵלָה (Wiktionary) — not *גּוֹדֵל.",
+     "The future has a: יִגְדַּל, תִּגְדְּלִי."
+    ],
+    "subtleties": [
+     "גָּדַל and גָּדוֹל share the root: הוּא גָּדַל “he grew up”, הוּא גָּדוֹל “he is big”."
+    ]
+   }
+  },
+  {
+   "id": "he:zachar",
+   "lemma": "זָכַר",
+   "pos": "VERB",
+   "senses": [
+    "verb.remember"
+   ],
+   "translit": "zachar",
+   "features": {
+    "spelling": "זכר",
+    "root": "ז כ ר",
+    "binyan": "paal",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יִזְכֹּר",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "זְכִירָה",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "זָכַרְתִּי",
+    "V;PST;2;SG;MASC": "זָכַרְתָּ",
+    "V;PST;2;SG;FEM": "זָכַרְתְּ",
+    "V;PST;3;SG;MASC": "זָכַר",
+    "V;PST;3;SG;FEM": "זָכְרָה",
+    "V;PST;1;PL": "זָכַרְנוּ",
+    "V;PST;2;PL;MASC": "זְכַרְתֶּם",
+    "V;PST;2;PL;FEM": "זְכַרְתֶּן",
+    "V;PST;3;PL": "זָכְרוּ",
+    "V;PRS;SG;MASC": "זוֹכֵר",
+    "V;PRS;SG;FEM": "זוֹכֶרֶת",
+    "V;PRS;PL;MASC": "זוֹכְרִים",
+    "V;PRS;PL;FEM": "זוֹכְרוֹת",
+    "V;FUT;1;SG": "אֶזְכֹּר",
+    "V;FUT;2;SG;MASC": "תִּזְכֹּר",
+    "V;FUT;2;SG;FEM": "תִּזְכְּרִי",
+    "V;FUT;3;SG;MASC": "יִזְכֹּר",
+    "V;FUT;3;SG;FEM": "תִּזְכֹּר",
+    "V;FUT;1;PL": "נִזְכֹּר",
+    "V;FUT;2;PL;MASC": "תִּזְכְּרוּ",
+    "V;FUT;3;PL;MASC": "יִזְכְּרוּ",
+    "V;IMP;2;SG;MASC": "זְכֹר",
+    "V;IMP;2;SG;FEM": "זִכְרִי",
+    "V;IMP;2;PL;MASC": "זִכְרוּ",
+    "V;NFIN": "לִזְכֹּר"
+   },
+   "plene": {
+    "V;FUT;1;SG": "אזכור",
+    "V;FUT;2;SG;MASC": "תזכור",
+    "V;FUT;3;SG;MASC": "יזכור",
+    "V;FUT;3;SG;FEM": "תזכור",
+    "V;FUT;1;PL": "נזכור",
+    "V;IMP;2;SG;MASC": "זכור",
+    "V;NFIN": "לזכור"
+   },
+   "note": "To remember. Pa‘al with o in the future: יִזְכֹּר (full spelling יזכור), infinitive לִזְכֹּר (לזכור). “I remember” is the present אֲנִי זוֹכֵר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An old photograph, a name on the tip of the tongue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to remember",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.remember"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי זוֹכֵר אֶת הַבַּיִת שֶׁל סָבָא.",
+      "tr": "I (m.) remember Grandpa’s house.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה זוֹכֵר אוֹתִי?",
+      "tr": "Do you (m.) remember me?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "תִּזְכֹּר לִקְנוֹת לֶחֶם!",
+      "tr": "Remember to buy bread!",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אִם אֲנִי זוֹכֵר נָכוֹן",
+      "tr": "if I remember correctly"
+     },
+     {
+      "text": "זוֹכֵר טוֹב",
+      "tr": "remembers well"
+     },
+     {
+      "text": "זָכַר אֶת הַשֵּׁם",
+      "tr": "remembered the name"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נִזְכַּר",
+      "register": "neutral",
+      "nuance": "“to recall, suddenly remember” — a moment of remembering (נִזְכַּרְתִּי שֶׁ…)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׁכַח",
+      "note": "to forget"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic ذَكَرَ (ḏakara) (Wiktionary). From the same root: זִכָּרוֹן “memory” and מַזְכֶּרֶת “souvenir”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Israel’s Memorial Day is יוֹם הַזִּכָּרוֹן, “the day of remembrance” — the same root."
+    ],
+    "pitfalls": [
+     "“I remember” now is the present: אֲנִי זוֹכֵר — the past זָכַרְתִּי means “I remembered (then)”.",
+     "Reminding is another binyan: הִזְכִּיר — זֶה מַזְכִּיר לִי … “it reminds me of …”.",
+     "Do not confuse זָכַר “remembered” with the noun זָכָר “male” (Wiktionary): the second vowel differs."
+    ],
+    "subtleties": [
+     "A definite object takes אֶת: זוֹכֵר אֶת הַשֵּׁם; a fact takes שֶׁ: אֲנִי זוֹכֵר שֶׁ…"
+    ]
+   }
+  },
+  {
+   "id": "he:shachach",
+   "lemma": "שָׁכַח",
+   "pos": "VERB",
+   "senses": [
+    "verb.forget"
+   ],
+   "translit": "shachach",
+   "features": {
+    "spelling": "שכח",
+    "root": "שׁ כ ח",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-guttural"
+    ],
+    "future": "יִשְׁכַּח",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "Wiktionary lists no verbal noun in use"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "שָׁכַחְתִּי",
+    "V;PST;2;SG;MASC": "שָׁכַחְתָּ",
+    "V;PST;2;SG;FEM": "שָׁכַחְתְּ",
+    "V;PST;3;SG;MASC": "שָׁכַח",
+    "V;PST;3;SG;FEM": "שָׁכְחָה",
+    "V;PST;1;PL": "שָׁכַחְנוּ",
+    "V;PST;2;PL;MASC": "שְׁכַחְתֶּם",
+    "V;PST;2;PL;FEM": "שְׁכַחְתֶּן",
+    "V;PST;3;PL": "שָׁכְחוּ",
+    "V;PRS;SG;MASC": "שׁוֹכֵחַ",
+    "V;PRS;SG;FEM": "שׁוֹכַחַת",
+    "V;PRS;PL;MASC": "שׁוֹכְחִים",
+    "V;PRS;PL;FEM": "שׁוֹכְחוֹת",
+    "V;FUT;1;SG": "אֶשְׁכַּח",
+    "V;FUT;2;SG;MASC": "תִּשְׁכַּח",
+    "V;FUT;2;SG;FEM": "תִּשְׁכְּחִי",
+    "V;FUT;3;SG;MASC": "יִשְׁכַּח",
+    "V;FUT;3;SG;FEM": "תִּשְׁכַּח",
+    "V;FUT;1;PL": "נִשְׁכַּח",
+    "V;FUT;2;PL;MASC": "תִּשְׁכְּחוּ",
+    "V;FUT;3;PL;MASC": "יִשְׁכְּחוּ",
+    "V;IMP;2;SG;MASC": "שְׁכַח",
+    "V;IMP;2;SG;FEM": "שִׁכְחִי",
+    "V;IMP;2;PL;MASC": "שִׁכְחוּ",
+    "V;NFIN": "לִשְׁכֹּחַ"
+   },
+   "plene": {
+    "V;NFIN": "לשכוח"
+   },
+   "note": "To forget. Pa‘al with a final ח: present שׁוֹכֵחַ / שׁוֹכַחַת, future יִשְׁכַּח, infinitive לִשְׁכֹּחַ (full spelling לשכוח).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Keys left on the table, a name gone from memory.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to forget (something; to do something: + infinitive)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.forget"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׁכַחְתִּי אֶת הַמַּפְתֵּחַ בַּבַּיִת.",
+      "tr": "I forgot the key at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא שׁוֹכַחַת הַכֹּל.",
+      "tr": "She forgets everything.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁכַחְתִּי לְהִתְקַשֵּׁר אֵלֶיהָ.",
+      "tr": "I forgot to call her.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּשְׁכַּח אֶת הַדַּרְכּוֹן!",
+      "tr": "Don’t forget the passport!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׁכַח לְ…",
+      "tr": "forgot to …"
+     },
+     {
+      "text": "שָׁכַח אֶת הַשֵּׁם",
+      "tr": "forgot the name"
+     },
+     {
+      "text": "אַל תִּשְׁכַּח!",
+      "tr": "don’t forget!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אִם אֶשְׁכָּחֵךְ יְרוּשָׁלַיִם",
+      "tr": "if I forget you, Jerusalem",
+      "kind": "quote",
+      "meaning": "a vow never to forget one’s home",
+      "register": "literary",
+      "source": "Psalm 137:5"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; “it slipped my mind” is the idiom פָּרַח מִזִּכְרוֹנִי, literally “it flew from my memory”.",
+    "antonyms": [
+     {
+      "word": "זָכַר",
+      "note": "to remember"
+     }
+    ],
+    "etymology": {
+     "text": "From the root שׁ־כ־ח (Wiktionary gives no etymology); the passive is נִשְׁכַּח “was forgotten” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Psalm 137 — “If I forget you, Jerusalem” — is the best-known line with this verb."
+    ],
+    "pitfalls": [
+     "The final ח gives a furtive patach in the present: שׁוֹכֵחַ, and -ַחַת in the feminine: שׁוֹכַחַת.",
+     "Forgetting to do something: שָׁכַח + infinitive (שָׁכַחְתִּי לִקְנוֹת).",
+     "The future has a, not o: יִשְׁכַּח, תִּשְׁכַּח (because of the ח)."
+    ],
+    "subtleties": [
+     "“Don’t forget!” is אַל + future: אַל תִּשְׁכַּח! / אַל תִּשְׁכְּחִי!"
+    ]
+   }
+  },
+  {
+   "id": "he:gan-yeladim",
+   "lemma": "גַּן יְלָדִים",
+   "pos": "NOUN",
+   "senses": [
+    "place.kindergarten"
+   ],
+   "gender": "MASC",
+   "translit": "gan yeladim",
+   "features": {
+    "spelling": "גן ילדים",
+    "root": {
+     "none": "a compound of two words (גַּן + יְלָדִים): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "גַּנֵּי יְלָדִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "גַּן יְלָדִים",
+    "N;SG;DEF": "גַּן הַיְלָדִים",
+    "N;PL;INDF": "גַּנֵּי יְלָדִים",
+    "N;PL;DEF": "גַּנֵּי הַיְלָדִים",
+    "N;SG;DEF;PFX": "גַן הַיְלָדִים"
+   },
+   "note": "Kindergarten. A compound: the article goes on the second word (גַּן הַיְלָדִים); in speech usually just הַגַּן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "N;PL;INDF": "Wiktionary joins the compound with a maqaf (גַּנֵּי־יְלָדִים); the course writes compounds with a space, as בָּתֵּי סֵפֶר."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Small chairs, songs, a sandpit and a nursery teacher called by her first name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kindergarten, nursery school (about ages 3–6)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.kindergarten"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבֵּן שֶׁלִּי הוֹלֵךְ לְגַן הַיְלָדִים.",
+      "tr": "My son goes to kindergarten.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּגַן הַיְלָדִים שָׁרִים וּמְשַׂחֲקִים.",
+      "tr": "In kindergarten they sing and play.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "גַּן הַיְלָדִים קָרוֹב לַבַּיִת.",
+      "tr": "The kindergarten is close to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גַּנֶּנֶת בְּגַן יְלָדִים",
+      "tr": "a kindergarten teacher"
+     },
+     {
+      "text": "הָלַךְ לְגַן הַיְלָדִים",
+      "tr": "went to kindergarten"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גַּן",
+      "register": "colloquial",
+      "nuance": "the everyday short form: הַיְּלָדִים בַּגַּן — Wiktionary lists it as an ellipsis; גַּן alone is also “garden”"
+     },
+     {
+      "word": "גַּן חוֹבָה",
+      "register": "neutral",
+      "nuance": "the compulsory last year of kindergarten, at about five"
+     },
+     {
+      "word": "מְעוֹן",
+      "register": "neutral",
+      "nuance": "a day-care centre for babies and toddlers (מְעוֹן יוֹם)"
+     }
+    ],
+    "etymology": {
+     "text": "Calque of German Kindergarten (Wiktionary): גַּן “garden” + יְלָדִים “children”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The teacher is a גַּנֶּנֶת (or a גַּנָּן) — named after the “garden”."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: גַּן הַיְלָדִים “the kindergarten”; the plural changes the first: גַּנֵּי יְלָדִים.",
+     "After בְּ / לְ the ג loses its dot: בְּגַן הַיְלָדִים, לְגַן הַיְלָדִים."
+    ],
+    "subtleties": [
+     "In speech the whole is usually just הַגַּן: הוּא בַּגַּן “he’s at kindergarten”."
+    ]
+   }
+  },
+  {
+   "id": "he:shachen",
+   "lemma": "שָׁכֵן",
+   "pos": "NOUN",
+   "senses": [
+    "person.neighbour"
+   ],
+   "gender": "MASC",
+   "translit": "shachen",
+   "features": {
+    "spelling": "שכן",
+    "root": "שׁ כ ן",
+    "pattern": "קָטֵל",
+    "plurals": [
+     {
+      "form": "שְׁכֵנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used in the construct in everyday Hebrew: “the neighbour of …” is said with שֶׁל"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שָׁכֵן",
+    "N;SG;DEF": "הַשָּׁכֵן",
+    "N;PL;INDF": "שְׁכֵנִים",
+    "N;PL;DEF": "הַשְּׁכֵנִים"
+   },
+   "note": "A neighbour (a man). A woman: שְׁכֵנָה. Plural שְׁכֵנִים.",
+   "contrasts": [
+    {
+     "concept": "person.neighbour",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses שָׁכֵן as “neighbor” (American spelling); the check does not match the course gloss “neighbour”."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The stairwell of a block of flats: greetings, borrowed sugar, noise from upstairs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a neighbour (a man; the plural also for a mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשָּׁכֵן שֶׁלִּי נֶחְמָד מְאוֹד.",
+      "tr": "My neighbour is very nice.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשְּׁכֵנִים מִלְּמַעְלָה עוֹשִׂים רַעַשׁ.",
+      "tr": "The neighbours upstairs make noise.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי עִם הַיְּלָדִים שֶׁל הַשְּׁכֵנִים.",
+      "tr": "As a child I played with the neighbours’ children.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שְׁכֵנִים טוֹבִים",
+      "tr": "good neighbours"
+     },
+     {
+      "text": "הַשָּׁכֵן מִמּוּל",
+      "tr": "the neighbour across the way"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "טוֹב שָׁכֵן קָרוֹב מֵאָח רָחוֹק",
+      "tr": "better a near neighbour than a far brother",
+      "kind": "proverb",
+      "meaning": "the people close by help more than relatives far away",
+      "register": "literary",
+      "source": "Proverbs 27:10"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בֶּן שְׁכוּנָה",
+      "register": "colloquial",
+      "nuance": "someone from the same neighbourhood, not necessarily next door"
+     }
+    ],
+    "etymology": {
+     "text": "From the root שׁ־כ־ן “to dwell”; cognate with Arabic سَكَنَ (sakana, “to reside, inhabit”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The neighbourhood is the שְׁכוּנָה — the same root “to dwell”."
+    ],
+    "pitfalls": [
+     "A neighbour (person) is שָׁכֵן; the neighbourhood is שְׁכוּנָה.",
+     "A woman is a שְׁכֵנָה; a mixed group is שְׁכֵנִים."
+    ],
+    "subtleties": [
+     "As an adjective שָׁכֵן means “neighbouring” (Wiktionary): מְדִינָה שְׁכֵנָה “a neighbouring country”."
+    ]
+   }
+  },
+  {
+   "id": "he:shchena",
+   "lemma": "שְׁכֵנָה",
+   "pos": "NOUN",
+   "senses": [
+    "person.neighbour"
+   ],
+   "gender": "FEM",
+   "translit": "shchena",
+   "features": {
+    "spelling": "שכנה",
+    "root": "שׁ כ ן",
+    "pattern": "קְטֵלָה",
+    "plurals": [
+     {
+      "form": "שְׁכֵנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used in the construct in everyday Hebrew: “the neighbour of …” is said with שֶׁל"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שְׁכֵנָה",
+    "N;SG;DEF": "הַשְּׁכֵנָה",
+    "N;PL;INDF": "שְׁכֵנוֹת",
+    "N;PL;DEF": "הַשְּׁכֵנוֹת"
+   },
+   "note": "A neighbour (a woman). Plural שְׁכֵנוֹת.",
+   "contrasts": [
+    {
+     "concept": "person.neighbour",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman next door who waters your plants when you travel.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a neighbour (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשְּׁכֵנָה שֶׁלָּנוּ מוֹרָה.",
+      "tr": "Our neighbour (f.) is a teacher.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "שְׁכֵנָה טוֹבָה תָּמִיד עוֹזֶרֶת.",
+      "tr": "A good neighbour always helps.",
+      "register": "neutral",
+      "context": "community",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשְּׁכֵנוֹת יוֹשְׁבוֹת בַּחוּץ בָּעֶרֶב.",
+      "tr": "The neighbours (f.) sit outside in the evening.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַשְּׁכֵנָה מִמּוּל",
+      "tr": "the neighbour (f.) across the way"
+     },
+     {
+      "text": "שְׁכֵנָה טוֹבָה",
+      "tr": "a good neighbour (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בַּת שְׁכוּנָה",
+      "register": "colloquial",
+      "nuance": "a woman from the same neighbourhood"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of שָׁכֵן “neighbour” (Wiktionary lists it as its feminine counterpart); root שׁ־כ־ן “to dwell”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "As an adjective the same form means “neighbouring”: עִיר שְׁכֵנָה “a neighbouring town”."
+    ],
+    "pitfalls": [
+     "Women only: a group with one man is שְׁכֵנִים."
+    ],
+    "subtleties": [
+     "The first vowel is reduced: שָׁכֵן but שְׁכֵנָה (sh’chena)."
+    ]
+   }
+  },
+  {
+   "id": "he:chofesh",
+   "lemma": "חֹפֶשׁ",
+   "pos": "NOUN",
+   "senses": [
+    "time.holidays"
+   ],
+   "gender": "MASC",
+   "translit": "chofesh",
+   "features": {
+    "spelling": "חופש",
+    "root": "ח פ שׁ",
+    "pattern": "קֹטֶל",
+    "plurals": [
+     {
+      "form": "חֳפָשִׁים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "rare"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֹפֶשׁ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חׇפְשֵׁי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חֹפֶשׁ",
+    "N;SG;DEF": "הַחֹפֶשׁ",
+    "N;PL;INDF": "חֳפָשִׁים",
+    "N;PL;DEF": "הַחֳפָשִׁים",
+    "N;SG;DEF;PFX": "חֹפֶשׁ",
+    "N;SG;CONST": "חֹפֶשׁ",
+    "N;PL;CONST": "חׇפְשֵׁי"
+   },
+   "plene": {
+    "N;SG;INDF": "חופש",
+    "N;SG;DEF": "החופש",
+    "N;PL;INDF": "חופשים",
+    "N;PL;DEF": "החופשים",
+    "N;SG;DEF;PFX": "חופש",
+    "N;SG;CONST": "חופש",
+    "N;PL;CONST": "חופשי"
+   },
+   "note": "The (school) holidays. Masculine; הַחֹפֶשׁ הַגָּדוֹל = the summer holidays. Adults’ time off is more often חֻפְשָׁה (lesson 15).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article and keep its doubling: הַחֹפֶשׁ → (בַּ / לַ)חֹפֶשׁ; Wiktionary lists only the full definite form הַחֹפֶשׁ."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The end of June: no school until September, the beach, the summer camp.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the holidays, vacation — above all from school (הַחֹפֶשׁ הַגָּדוֹל “the summer holidays”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holidays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּחֹפֶשׁ הַגָּדוֹל נָסַעְנוּ לַיָּם.",
+      "tr": "In the summer holidays we went to the sea.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי מַתְחִיל הַחֹפֶשׁ?",
+      "tr": "When do the holidays start?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי צָרִיךְ חֹפֶשׁ!",
+      "tr": "I (m.) need a holiday!",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "יְלָדִים, חֹפֶשׁ נָעִים!",
+      "tr": "Children, have a nice holiday!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַחֹפֶשׁ הַגָּדוֹל",
+      "tr": "the (long) summer holidays"
+     },
+     {
+      "text": "חֹפֶשׁ נָעִים!",
+      "tr": "have a nice holiday!"
+     },
+     {
+      "text": "בַּחֹפֶשׁ",
+      "tr": "in the holidays, on holiday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֻפְשָׁה",
+      "register": "neutral",
+      "nuance": "“a holiday, time off” — for adults, from work; a trip (יָצָאנוּ לְחֻפְשָׁה)"
+     },
+     {
+      "word": "פַּגְרָה",
+      "register": "formal",
+      "nuance": "“recess” — of parliament, the courts, universities"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ח־פ־שׁ “free” in the pattern קֹטֶל (Wiktionary, whose senses are “freedom” and “a vacation, especially from school”). From the same root: חָפְשִׁי “free” and חֻפְשָׁה “a holiday”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“The big holiday”, הַחֹפֶשׁ הַגָּדוֹל, is what every Israeli child calls July and August."
+    ],
+    "pitfalls": [
+     "Masculine — הַחֹפֶשׁ הַגָּדוֹל — while חֻפְשָׁה is feminine.",
+     "The first vowel is o: chófesh (full spelling חופש)."
+    ],
+    "subtleties": [
+     "In set phrases חֹפֶשׁ keeps its older meaning “freedom” (Wiktionary): חֹפֶשׁ הַבִּטּוּי “freedom of expression”."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "adv.usedto",
+   "reason": "Hebrew has no adverb or particle for “used to”: the habitual past is a verb construction.",
+   "use": "הָיָה + the present form of the verb (fn.past.ongoing): הָיִיתִי מְשַׂחֵק בַּחוּץ “I used to play outside”; in formal style נָהַג + infinitive (lesson 13: הוּא נָהַג לָשֶׁבֶת כָּאן “he used to sit here”); often just the past with a word of time (תָּמִיד, כָּל יוֹם)."
+  }
+ ]
+}

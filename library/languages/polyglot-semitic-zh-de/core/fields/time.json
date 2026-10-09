@@ -29,6 +29,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -396,9 +400,8 @@
   {
    "id": "time.childhood",
    "gloss": "childhood (小时候)",
-   "tier": 2,
-   "rank": 2,
-   "pending": true,
+   "tier": 1,
+   "rank": 51,
    "subgroup": "more"
   },
   {
@@ -428,9 +431,8 @@
   {
    "id": "time.future",
    "gloss": "the future, tomorrow (as a noun)",
-   "tier": 2,
-   "rank": 6,
-   "pending": true,
+   "tier": 1,
+   "rank": 58,
    "subgroup": "more"
   },
   {
@@ -496,6 +498,48 @@
    "rank": 14,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "time.holidays",
+   "gloss": "the (school) holidays",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.nextweek",
+   "gloss": "next week",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.nextyear",
+   "gloss": "next year",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.century",
+   "gloss": "century",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.decade",
+   "gloss": "decade",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.anniversary",
+   "gloss": "anniversary",
+   "tier": 1,
+   "rank": 57,
+   "subgroup": "core"
   }
  ]
 }

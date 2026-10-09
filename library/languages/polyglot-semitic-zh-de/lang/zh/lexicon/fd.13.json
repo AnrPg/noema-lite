@@ -935,6 +935,11 @@
      "concept": "verb.drive",
      "axis": "with or without an object",
      "value": "drive, operate + the vehicle (开出租车)"
+    },
+    {
+     "concept": "verb.start",
+     "axis": "general or in set words",
+     "value": "only in set verb–object words: 开会 hold a meeting, 开学 school starts, 开店 open a shop"
     }
    ],
    "ref": {
@@ -1039,6 +1044,14 @@
       "register": "neutral",
       "context": "seasons",
       "sense": "s5"
+     },
+     {
+      "text": "学校九月一号开学。",
+      "py": "Xuéxiào jiǔyuè yī hào kāixué.",
+      "tr": "School starts on 1 September.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1128,7 +1141,8 @@
    "pinyin": "lǚ xíng",
    "pos": "VERB",
    "senses": [
-    "verb.travel"
+    "verb.travel",
+    "abstract.trip"
    ],
    "contrasts": [
     {
@@ -1160,11 +1174,11 @@
      },
      {
       "id": "s2",
-      "def": "(noun) a trip, a journey",
+      "def": "(noun) a trip, a journey: 这次旅行",
       "register": [
        "neutral"
       ],
-      "of": "s1"
+      "concept": "abstract.trip"
      }
     ],
     "examples": [
@@ -1190,6 +1204,14 @@
       "tr": "How was the trip?",
       "register": "neutral",
       "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "祝你旅行愉快！",
+      "py": "Zhù nǐ lǚxíng yúkuài!",
+      "tr": "Have a good trip!",
+      "register": "neutral",
+      "context": "wishes",
       "sense": "s2"
      }
     ],

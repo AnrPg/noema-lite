@@ -1,0 +1,1880 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Kindheit",
+   "lemma": "Kindheit",
+   "pos": "NOUN",
+   "senses": [
+    "time.childhood"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kindheiten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ],
+      "note": "rare: different people’s childhoods"
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Kind + the suffix -heit"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kindheit",
+    "N;ACC;SG": "Kindheit",
+    "N;DAT;SG": "Kindheit",
+    "N;GEN;SG": "Kindheit",
+    "N;NOM;PL": "Kindheiten",
+    "N;ACC;PL": "Kindheiten",
+    "N;DAT;PL": "Kindheiten",
+    "N;GEN;PL": "Kindheiten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer afternoons, scraped knees, the smell of a grandmother’s kitchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "childhood",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich hatte eine schöne Kindheit.",
+      "tr": "I had a happy childhood.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "In meiner Kindheit wohnten wir auf dem Land.",
+      "tr": "In my childhood we lived in the country.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Er erzählt gern von seiner Kindheit.",
+      "tr": "He likes to talk about his childhood.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kindheit prägt den Menschen.",
+      "tr": "Childhood shapes a person.",
+      "register": "formal",
+      "context": "psychology",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine glückliche Kindheit",
+      "tr": "a happy childhood"
+     },
+     {
+      "text": "in meiner Kindheit",
+      "tr": "in my childhood"
+     },
+     {
+      "text": "seit der Kindheit",
+      "tr": "since childhood"
+     },
+     {
+      "text": "Erinnerungen an die Kindheit",
+      "tr": "memories of childhood"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kinderjahre",
+      "register": "neutral",
+      "nuance": "the childhood years (plural only), a little more emotional"
+     },
+     {
+      "word": "Jugend",
+      "register": "neutral",
+      "nuance": "youth – the teenage years after childhood, not a synonym but the next stage"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German kintheit, from Old High German kindheit (also kindesheit), equivalent to Kind (“child”) + -heit.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "-heit is the cousin of English -hood: Kindheit – childhood, Mannheit – manhood."
+    ],
+    "pitfalls": [
+     "“When I was a child” is als ich ein Kind war or als ich klein war – not *in meinem Kind.",
+     "die Kindheit is feminine like every noun in -heit."
+    ],
+    "subtleties": [
+     "The adverb of childhood memories is früher (in the past) or als Kind (as a child): Als Kind spielte ich oft im Garten.",
+     "Nouns in -heit, -keit, -ung are always feminine: die Kindheit, die Freiheit, die Wohnung."
+    ]
+   }
+  },
+  {
+   "id": "de:Spielzeug",
+   "lemma": "Spielzeug",
+   "pos": "NOUN",
+   "senses": [
+    "obj.toy"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spielzeuge",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ],
+      "note": "the singular also means toys in general: viel Spielzeug"
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Spiel",
+      "role": "modifier"
+     },
+     {
+      "part": "Zeug",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Spielzeug",
+    "N;ACC;SG": "Spielzeug",
+    "N;DAT;SG": "Spielzeug",
+    "N;GEN;SG": "Spielzeugs",
+    "N;NOM;PL": "Spielzeuge",
+    "N;ACC;PL": "Spielzeuge",
+    "N;DAT;PL": "Spielzeugen",
+    "N;GEN;PL": "Spielzeuge"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Spielzeuges"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A box of bricks, a teddy with one eye, a wooden train.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "toy; (singular, uncountable) toys",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.toy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Kind hat viel Spielzeug.",
+      "tr": "The child has lots of toys.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein liebstes Spielzeug war ein Teddy.",
+      "tr": "My favourite toy was a teddy bear.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Räum bitte dein Spielzeug auf!",
+      "tr": "Please tidy up your toys!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Laden gibt es Spielzeuge aus Holz.",
+      "tr": "In the shop there are wooden toys.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "viel Spielzeug",
+      "tr": "lots of toys"
+     },
+     {
+      "text": "Spielzeug aus Holz",
+      "tr": "wooden toys"
+     },
+     {
+      "text": "das Spielzeug aufräumen",
+      "tr": "to tidy up the toys"
+     },
+     {
+      "text": "der Spielzeugladen",
+      "tr": "the toy shop"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Spielsachen",
+      "register": "neutral",
+      "nuance": "toys (plural only) – a very common everyday word for a child’s toys"
+     }
+    ],
+    "etymology": {
+     "text": "Compound of Spiel (“game”) + Zeug (“stuff, gear”), or spielen (“to play”) + Zeug; Zeug is from Middle High German ziuc (“stuff, gear”) and is related to English toy.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Zeug (stuff, gear) and English toy may be related: Wiktionary connects the two words."
+    ],
+    "pitfalls": [
+     "In the singular Spielzeug often means “toys” as a mass: Er hat viel Spielzeug (lots of toys) – not *viele Spielzeug.",
+     "das Spielzeug is neuter like its last part, das Zeug."
+    ],
+    "subtleties": [
+     "Spielzeuge (plural) counts kinds or pieces; viel Spielzeug (singular) is the usual way to talk about a pile of toys.",
+     "Figuratively: Er ist nur ihr Spielzeug (he is just her plaything)."
+    ]
+   }
+  },
+  {
+   "id": "de:Spiel",
+   "lemma": "Spiel",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.game",
+    "sport.match"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spiele",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Spiel",
+    "N;ACC;SG": "Spiel",
+    "N;DAT;SG": "Spiel",
+    "N;GEN;SG": "Spiels",
+    "N;NOM;PL": "Spiele",
+    "N;ACC;PL": "Spiele",
+    "N;DAT;PL": "Spielen",
+    "N;GEN;PL": "Spiele"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Spieles"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dice on the table, a ball in the yard, the crowd in the stadium.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "game (something one plays: a board game, a computer game, a children’s game)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.game"
+     },
+     {
+      "id": "s2",
+      "def": "match, game (in sport)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "sport.match"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir spielen ein Spiel.",
+      "tr": "We are playing a game.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Kind war das mein liebstes Spiel.",
+      "tr": "As a child, that was my favourite game.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Kennst du die Regeln von diesem Spiel?",
+      "tr": "Do you know the rules of this game?",
+      "register": "informal",
+      "context": "board games",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Spiel endete zwei zu eins.",
+      "tr": "The match ended two–one.",
+      "register": "neutral",
+      "context": "football",
+      "sense": "s2"
+     },
+     {
+      "text": "Wann beginnt das Spiel heute?",
+      "tr": "When does the match start today?",
+      "register": "neutral",
+      "context": "football",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Spiel spielen",
+      "tr": "to play a game"
+     },
+     {
+      "text": "ein Spiel gewinnen",
+      "tr": "to win a game / match"
+     },
+     {
+      "text": "ein Spiel verlieren",
+      "tr": "to lose a game / match"
+     },
+     {
+      "text": "die Regeln des Spiels",
+      "tr": "the rules of the game"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "etwas aufs Spiel setzen",
+      "tr": "to put something on the game",
+      "kind": "idiom",
+      "meaning": "to risk something",
+      "register": "neutral"
+     },
+     {
+      "text": "auf dem Spiel stehen",
+      "tr": "to stand on the game",
+      "kind": "idiom",
+      "meaning": "to be at stake",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Partie",
+      "register": "neutral",
+      "nuance": "one round of a game – chess, cards"
+     },
+     {
+      "word": "Match",
+      "register": "informal",
+      "nuance": "match – sport, especially tennis"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German spil, from Old High German spil, from Proto-West Germanic *spil (“dance”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Olympic Games are die Olympischen Spiele – plural, like in English."
+    ],
+    "pitfalls": [
+     "ein Spiel spielen – the noun and the verb go together naturally; one does not *machen a game.",
+     "Genitive des Spiels or des Spieles, dative plural den Spielen."
+    ],
+    "subtleties": [
+     "auf dem Spiel stehen = to be at stake; aufs Spiel setzen = to put at risk.",
+     "Spiel is also play in a machine (a loose part has Spiel – slack) and leeway (Spielraum)."
+    ]
+   }
+  },
+  {
+   "id": "de:spielen",
+   "lemma": "spielen",
+   "pos": "VERB",
+   "senses": [
+    "verb.play"
+   ],
+   "features": {
+    "principalParts": [
+     "spielen",
+     "spielt",
+     "spielte",
+     "gespielt"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "optional: the game, the sport – Fußball spielen, Karten spielen"
+     },
+     {
+      "case": "DAT",
+      "prep": "mit",
+      "senses": [
+       "s1"
+      ],
+      "note": "with whom or with what: mit Freunden spielen, mit dem Ball spielen"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "spielen",
+    "V;PRS;1;SG": "spiele",
+    "V;PRS;2;SG": "spielst",
+    "V;PRS;3;SG": "spielt",
+    "V;PRS;1;PL": "spielen",
+    "V;PRS;2;PL": "spielt",
+    "V;PRS;3;PL": "spielen",
+    "V;PST;1;SG": "spielte",
+    "V;PST;2;SG": "spieltest",
+    "V;PST;3;SG": "spielte",
+    "V;PST;1;PL": "spielten",
+    "V;PST;2;PL": "spieltet",
+    "V;PST;3;PL": "spielten",
+    "V;PTCP;PST": "gespielt",
+    "V;IMP;2;SG": "spiel",
+    "V;IMP;2;PL": "spielt",
+    "V;IMP;FORM": "spielen"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "spiele"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Children’s voices in the yard, a ball, a game of cards on a rainy day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to play (for fun; a game or a sport)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.play"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder spielen im Garten.",
+      "tr": "The children are playing in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Früher spielten wir jeden Tag Fußball.",
+      "tr": "We used to play football every day.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Spielst du mit mir Karten?",
+      "tr": "Will you play cards with me?",
+      "register": "informal",
+      "context": "games",
+      "sense": "s1"
+     },
+     {
+      "text": "Gestern haben wir lange gespielt.",
+      "tr": "Yesterday we played for a long time.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Fußball spielen",
+      "tr": "to play football"
+     },
+     {
+      "text": "Karten spielen",
+      "tr": "to play cards"
+     },
+     {
+      "text": "mit Freunden spielen",
+      "tr": "to play with friends"
+     },
+     {
+      "text": "draußen spielen",
+      "tr": "to play outside"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das spielt keine Rolle.",
+      "tr": "That plays no role.",
+      "kind": "fixed expression",
+      "meaning": "It doesn’t matter.",
+      "register": "neutral"
+     },
+     {
+      "text": "mit dem Feuer spielen",
+      "tr": "to play with fire",
+      "kind": "idiom",
+      "meaning": "to take a dangerous risk",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zocken",
+      "register": "slang",
+      "nuance": "to play video games; also to gamble"
+     },
+     {
+      "word": "sich vergnügen",
+      "register": "formal",
+      "nuance": "to amuse oneself – not about games in particular"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German spil(e)n, from Old High German spilōn, from Proto-West Germanic *spilōn. Cognate with Bavarian spuin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Das spielt keine Rolle – literally “that plays no part” – is the everyday German for “it doesn’t matter”."
+    ],
+    "pitfalls": [
+     "spielen is regular (weak): spielte, gespielt.",
+     "Sports and games need no article: Fußball spielen, Tennis spielen, Schach spielen."
+    ],
+    "subtleties": [
+     "spielen also covers playing music and acting: Klavier spielen (play the piano), eine Rolle spielen (to play a part; also: to matter – Das spielt keine Rolle = it doesn’t matter).",
+     "A story spielt somewhere: Der Film spielt in Berlin (is set in Berlin)."
+    ]
+   }
+  },
+  {
+   "id": "de:aufwachsen",
+   "lemma": "aufwachsen",
+   "pos": "VERB",
+   "senses": [
+    "verb.growup"
+   ],
+   "features": {
+    "principalParts": [
+     "aufwachsen",
+     "wächst auf",
+     "wuchs auf",
+     "aufgewachsen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "a>ä",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": "auf",
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": {
+     "none": "intransitive: no object in any meaning"
+    },
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "aufwachsen",
+    "V;PRS;1;SG": "wachse",
+    "V;PRS;2;SG": "wächst",
+    "V;PRS;3;SG": "wächst",
+    "V;PRS;1;PL": "wachsen",
+    "V;PRS;2;PL": "wachst",
+    "V;PRS;3;PL": "wachsen",
+    "V;PST;1;SG": "wuchs",
+    "V;PST;2;SG": "wuchsest",
+    "V;PST;3;SG": "wuchs",
+    "V;PST;1;PL": "wuchsen",
+    "V;PST;2;PL": "wuchst",
+    "V;PST;3;PL": "wuchsen",
+    "V;PTCP;PST": "aufgewachsen",
+    "V;IMP;2;SG": "wachs",
+    "V;IMP;2;PL": "wachst",
+    "V;IMP;FORM": "wachsen",
+    "V;SEP": "auf"
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "wachse"
+    ],
+    "V;PST;2;SG": [
+     "wuchst"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "V;PRS;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PRS;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PRS;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PRS;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PRS;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PRS;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;1;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;3;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;1;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;PST;3;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;IMP;2;SG": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form.",
+     "V;IMP;2;PL": "Separable verb: the course stores the finite verb as it stands in a main clause, without its particle (“wachse”); the particle is its own token with the cell V;SEP. Wiktionary lists the two together (“wachse auf”) or the subordinate-clause form."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A town, a street, a house where you became who you are.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to grow up",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.growup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin in einem kleinen Dorf aufgewachsen.",
+      "tr": "I grew up in a small village.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo bist du aufgewachsen?",
+      "tr": "Where did you grow up?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie wuchs bei ihren Großeltern auf.",
+      "tr": "She grew up with her grandparents.",
+      "register": "literary",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder wachsen zweisprachig auf.",
+      "tr": "The children are growing up bilingual.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf dem Land aufwachsen",
+      "tr": "to grow up in the country"
+     },
+     {
+      "text": "in der Stadt aufwachsen",
+      "tr": "to grow up in the city"
+     },
+     {
+      "text": "zweisprachig aufwachsen",
+      "tr": "to grow up bilingual"
+     },
+     {
+      "text": "bei den Großeltern aufwachsen",
+      "tr": "to grow up with one’s grandparents"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "groß werden",
+      "register": "informal",
+      "nuance": "to grow up (literally become big): Ich bin in Hamburg groß geworden"
+     },
+     {
+      "word": "erwachsen werden",
+      "register": "neutral",
+      "nuance": "to become an adult – the end point, not the years of growing"
+     }
+    ],
+    "etymology": {
+     "text": "From auf- + wachsen (“to grow”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "erwachsen (adult) is the participle of the verb erwachsen (to grow, to arise), a relative of wachsen."
+    ],
+    "pitfalls": [
+     "The perfect takes sein: Ich bin in Berlin aufgewachsen – the usual way to tell where you grew up.",
+     "du wächst, er wächst: the stem ends in s, so du gets only -t after the umlaut (wächst)."
+    ],
+    "subtleties": [
+     "Separable and strong: wächst auf – wuchs auf – aufgewachsen.",
+     "wachsen alone is to grow (plants, children, a city): Das Kind wächst schnell."
+    ]
+   }
+  },
+  {
+   "id": "de:erinnern",
+   "lemma": "erinnern",
+   "pos": "VERB",
+   "senses": [
+    "verb.remember"
+   ],
+   "features": {
+    "principalParts": [
+     "erinnern",
+     "erinnert",
+     "erinnerte",
+     "erinnert"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": "er",
+    "governs": [
+     {
+      "case": "ACC",
+      "prep": "an",
+      "senses": [
+       "s1"
+      ],
+      "note": "sich an etwas / jemanden erinnern"
+     }
+    ],
+    "reflexive": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "erinnern",
+    "V;PRS;1;SG": "erinnere",
+    "V;PRS;2;SG": "erinnerst",
+    "V;PRS;3;SG": "erinnert",
+    "V;PRS;1;PL": "erinnern",
+    "V;PRS;2;PL": "erinnert",
+    "V;PRS;3;PL": "erinnern",
+    "V;PST;1;SG": "erinnerte",
+    "V;PST;2;SG": "erinnertest",
+    "V;PST;3;SG": "erinnerte",
+    "V;PST;1;PL": "erinnerten",
+    "V;PST;2;PL": "erinnertet",
+    "V;PST;3;PL": "erinnerten",
+    "V;PTCP;PST": "erinnert",
+    "V;IMP;2;SG": "erinnere",
+    "V;IMP;2;PL": "erinnert",
+    "V;IMP;FORM": "erinnern"
+   },
+   "formsAlt": {
+    "V;PRS;1;SG": [
+     "erinnre"
+    ],
+    "V;IMP;2;SG": [
+     "erinnre"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An old photo, a smell, a song – and suddenly you are back there.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sich erinnern (an + accusative): to remember",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.remember"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich erinnere mich gut an meine Kindheit.",
+      "tr": "I remember my childhood well.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Erinnerst du dich an unseren Lehrer?",
+      "tr": "Do you remember our teacher?",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie erinnerte sich an jeden Tag im Urlaub.",
+      "tr": "She remembered every day of the holiday.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s1"
+     },
+     {
+      "text": "Daran kann ich mich nicht erinnern.",
+      "tr": "I can’t remember that.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sich gut erinnern",
+      "tr": "to remember well"
+     },
+     {
+      "text": "sich an die Kindheit erinnern",
+      "tr": "to remember one’s childhood"
+     },
+     {
+      "text": "sich gern erinnern",
+      "tr": "to like remembering"
+     },
+     {
+      "text": "wenn ich mich richtig erinnere",
+      "tr": "if I remember rightly"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich merken",
+      "register": "neutral",
+      "nuance": "to make a note of, to keep in mind (for the future): Ich merke mir die Nummer"
+     },
+     {
+      "word": "noch wissen",
+      "register": "informal",
+      "nuance": "to still know: Weißt du noch? (Do you remember?)"
+     },
+     {
+      "word": "gedenken",
+      "register": "formal",
+      "nuance": "to commemorate (+ genitive): der Opfer gedenken"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German erinnern, erinneren, from er- + innern, from Old High German innarōn (“to make someone perceive inwardly”), from innar (“inner”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word hides inner: erinnern once meant “to make someone aware inwardly”."
+    ],
+    "pitfalls": [
+     "To remember needs the reflexive pronoun and an: Ich erinnere mich an dich – not *Ich erinnere dich (that means “I remind you”).",
+     "Without sich, erinnern means to remind: Erinnere mich bitte an den Termin! (Please remind me of the appointment.)",
+     "an + accusative: Ich erinnere mich an den Tag (not *an dem Tag)."
+    ],
+    "subtleties": [
+     "er- is inseparable: no ge- in the participle (erinnert).",
+     "Regionally and colloquially also without sich and an: Ich erinnere das nicht (nonstandard) – the standard is Ich erinnere mich nicht daran."
+    ]
+   }
+  },
+  {
+   "id": "de:vergessen",
+   "lemma": "vergessen",
+   "pos": "VERB",
+   "senses": [
+    "verb.forget"
+   ],
+   "features": {
+    "principalParts": [
+     "vergessen",
+     "vergisst",
+     "vergaß",
+     "vergessen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "e>i",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "no separable particle"
+    },
+    "inseparable": "ver",
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "what is forgotten: den Schlüssel, den Namen; or zu + infinitive"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "vergessen",
+    "V;PRS;1;SG": "vergesse",
+    "V;PRS;2;SG": "vergisst",
+    "V;PRS;3;SG": "vergisst",
+    "V;PRS;1;PL": "vergessen",
+    "V;PRS;2;PL": "vergesst",
+    "V;PRS;3;PL": "vergessen",
+    "V;PST;1;SG": "vergaß",
+    "V;PST;2;SG": "vergaßest",
+    "V;PST;3;SG": "vergaß",
+    "V;PST;1;PL": "vergaßen",
+    "V;PST;2;PL": "vergaßt",
+    "V;PST;3;PL": "vergaßen",
+    "V;PTCP;PST": "vergessen",
+    "V;IMP;2;SG": "vergiss",
+    "V;IMP;2;PL": "vergesst",
+    "V;IMP;FORM": "vergessen"
+   },
+   "formsAlt": {
+    "V;PST;2;SG": [
+     "vergaßt"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Keys left on the table, a name on the tip of your tongue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to forget; to leave behind (by mistake)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.forget"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe seinen Namen vergessen.",
+      "tr": "I have forgotten his name.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Vergiss deinen Schlüssel nicht!",
+      "tr": "Don’t forget your key!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er vergisst immer meinen Geburtstag.",
+      "tr": "He always forgets my birthday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Kind vergaß ich oft meine Tasche in der Schule.",
+      "tr": "As a child I often left my bag at school.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "den Namen vergessen",
+      "tr": "to forget the name"
+     },
+     {
+      "text": "den Schlüssel vergessen",
+      "tr": "to forget the key"
+     },
+     {
+      "text": "nie vergessen",
+      "tr": "never to forget"
+     },
+     {
+      "text": "vergessen, etwas zu tun",
+      "tr": "to forget to do something"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Vergiss es!",
+      "tr": "Forget it!",
+      "kind": "colloquial",
+      "meaning": "Never mind! / No way!",
+      "register": "informal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "verlernen",
+      "register": "neutral",
+      "nuance": "to forget how to do something (a skill)"
+     },
+     {
+      "word": "verschwitzen",
+      "register": "colloquial",
+      "nuance": "to clean forget (an appointment)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "sich erinnern",
+      "note": "to remember"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vergëȥȥen, from Old High German firgëȥȥan, from Proto-West Germanic *fragetan.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English forget and German vergessen are twins: for-/ver- + get/gessen."
+    ],
+    "pitfalls": [
+     "Infinitive and participle are the same: vergessen – ich habe vergessen (no ge-, because ver- is an inseparable prefix).",
+     "du vergisst, er vergisst, imperative vergiss! (e → i); ihr vergesst.",
+     "Präteritum with ß: vergaß, vergaßen."
+    ],
+    "subtleties": [
+     "vergessen also means to leave something behind: Ich habe meinen Schirm im Bus vergessen.",
+     "Vergiss es! (forget it!) is an informal “never mind / no way”."
+    ]
+   }
+  },
+  {
+   "id": "de:Kindergarten",
+   "lemma": "Kindergarten",
+   "pos": "NOUN",
+   "senses": [
+    "place.kindergarten"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kindergärten",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Kind",
+      "role": "modifier",
+      "linker": "-er-"
+     },
+     {
+      "part": "Garten",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kindergarten",
+    "N;ACC;SG": "Kindergarten",
+    "N;DAT;SG": "Kindergarten",
+    "N;GEN;SG": "Kindergartens",
+    "N;NOM;PL": "Kindergärten",
+    "N;ACC;PL": "Kindergärten",
+    "N;DAT;PL": "Kindergärten",
+    "N;GEN;PL": "Kindergärten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little coats on low hooks, finger paint, songs in a circle.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kindergarten, nursery school (for children before school age)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.kindergarten"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Sohn geht in den Kindergarten.",
+      "tr": "My son goes to kindergarten.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich hole die Kinder um vier vom Kindergarten ab.",
+      "tr": "I pick the children up from kindergarten at four.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Kindergarten spielten wir den ganzen Tag.",
+      "tr": "At kindergarten we played all day.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in den Kindergarten gehen",
+      "tr": "to go to kindergarten"
+     },
+     {
+      "text": "im Kindergarten",
+      "tr": "at kindergarten"
+     },
+     {
+      "text": "das Kind vom Kindergarten abholen",
+      "tr": "to pick the child up from kindergarten"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kita",
+      "register": "informal",
+      "nuance": "short for Kindertagesstätte: day-care centre, also for babies; the common word in many regions"
+     },
+     {
+      "word": "Kiga",
+      "register": "informal",
+      "nuance": "short form of Kindergarten"
+     }
+    ],
+    "etymology": {
+     "text": "From Kind (“child”) + -er- + Garten (“garden”). Coined by the German educator Friedrich Fröbel in 1840 in the metaphorical sense of a place where children can grow in a natural way.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English borrowed the word kindergarten from German together with Fröbel’s idea."
+    ],
+    "pitfalls": [
+     "der Kindergarten is masculine like der Garten; plural die Kindergärten.",
+     "In German it is for children of about three to six, before school; it is not the first school year."
+    ],
+    "subtleties": [
+     "in den Kindergarten gehen (to attend) – accusative of direction; im Kindergarten sein (to be there) – dative.",
+     "Colloquially Kindergarten also means childish squabbling: Das ist doch Kindergarten!"
+    ]
+   }
+  },
+  {
+   "id": "de:Nachbar",
+   "lemma": "Nachbar",
+   "pos": "NOUN",
+   "senses": [
+    "person.neighbour"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nachbarn",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "one word today (historically nah + Bauer “near dweller”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Nachbar",
+    "N;ACC;SG": "Nachbarn",
+    "N;DAT;SG": "Nachbarn",
+    "N;GEN;SG": "Nachbarn",
+    "N;NOM;PL": "Nachbarn",
+    "N;ACC;PL": "Nachbarn",
+    "N;DAT;PL": "Nachbarn",
+    "N;GEN;PL": "Nachbarn"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Nachbars"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "person.neighbour",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified); plural for a mixed group"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The man next door, the voice through the wall, the parcel taken in for you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "neighbour (a man, or anyone in the plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Unser Nachbar ist sehr nett.",
+      "tr": "Our neighbour is very nice.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe den Nachbarn gestern im Park gesehen.",
+      "tr": "I saw the neighbour in the park yesterday.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Früher spielte ich oft mit den Kindern der Nachbarn.",
+      "tr": "I often used to play with the neighbours’ children.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Nachbarn feiern heute eine Party.",
+      "tr": "The neighbours are having a party today.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der nette Nachbar",
+      "tr": "the nice neighbour"
+     },
+     {
+      "text": "die Nachbarn von nebenan",
+      "tr": "the next-door neighbours"
+     },
+     {
+      "text": "ein guter Nachbar sein",
+      "tr": "to be a good neighbour"
+     },
+     {
+      "text": "das Nachbarland",
+      "tr": "the neighbouring country"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Anwohner",
+      "register": "formal",
+      "nuance": "resident (of a street, an area) – official language"
+     },
+     {
+      "word": "Nachbarschaft",
+      "register": "neutral",
+      "nuance": "the neighbourhood, the neighbours as a group"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German nāchbūr, nāchgebūr, from Old High German nāhgibūr, from Proto-Germanic *nēhwagabūrô (“neighbour”); equivalent to nah (“near”) + Bauer (“dweller”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nachbar and English neighbour share their history: “near” + “dweller”, Bauer being the old word for a dweller before it meant farmer."
+    ],
+    "pitfalls": [
+     "A weak noun: den Nachbarn, dem Nachbarn, des Nachbarn (colloquially des Nachbars, and den/dem Nachbar are heard, but the -n forms are the standard).",
+     "The plural is Nachbarn – the same as the singular forms after den/dem: context or the article decides."
+    ],
+    "subtleties": [
+     "The woman is die Nachbarin; for a group of men and women the plural die Nachbarn is used (or Nachbarinnen und Nachbarn).",
+     "English neighbour has the same two parts: neigh- (near) + -bour (dweller, cf. German Bauer)."
+    ]
+   }
+  },
+  {
+   "id": "de:Nachbarin",
+   "lemma": "Nachbarin",
+   "pos": "NOUN",
+   "senses": [
+    "person.neighbour"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nachbarinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Nachbar + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Nachbarin",
+    "N;ACC;SG": "Nachbarin",
+    "N;DAT;SG": "Nachbarin",
+    "N;GEN;SG": "Nachbarin",
+    "N;NOM;PL": "Nachbarinnen",
+    "N;ACC;PL": "Nachbarinnen",
+    "N;DAT;PL": "Nachbarinnen",
+    "N;GEN;PL": "Nachbarinnen"
+   },
+   "contrasts": [
+    {
+     "concept": "person.neighbour",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses it “female neighbor” (American spelling); the concept gloss is spelled “neighbour”."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman next door who waters your plants when you are away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "neighbour (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Nachbarin hat eine Katze.",
+      "tr": "My neighbour has a cat.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Nachbarin hat mir gestern geholfen.",
+      "tr": "The neighbour helped me yesterday.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Kind besuchte ich oft unsere alte Nachbarin.",
+      "tr": "As a child I often visited our old neighbour.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Nachbarin von oben",
+      "tr": "the neighbour upstairs"
+     },
+     {
+      "text": "eine freundliche Nachbarin",
+      "tr": "a friendly neighbour"
+     },
+     {
+      "text": "die Nachbarin fragen",
+      "tr": "to ask the neighbour"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Anwohnerin",
+      "register": "formal",
+      "nuance": "resident (a woman) – official language"
+     }
+    ],
+    "etymology": {
+     "text": "From Nachbar + -in (the feminine suffix).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The plural doubles the n: Nachbarinnen, like Freundinnen and Lehrerinnen."
+    ],
+    "pitfalls": [
+     "Nachbarin is not a weak noun: die Nachbarin, der Nachbarin – only the plural has an ending (Nachbarinnen, double n)."
+    ],
+    "subtleties": [
+     "Feminine forms in -in exist for almost every person noun: Nachbar – Nachbarin, Freund – Freundin, Lehrer – Lehrerin."
+    ]
+   }
+  },
+  {
+   "id": "de:Schulferien",
+   "lemma": "Schulferien",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "time.holidays"
+   ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Schulferien)"
+    },
+    "compound": [
+     {
+      "part": "Schule",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Ferien",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;PL": "Schulferien",
+    "N;ACC;PL": "Schulferien",
+    "N;DAT;PL": "Schulferien",
+    "N;GEN;PL": "Schulferien"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Six free weeks of summer, the last day of school, the empty classrooms.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the school holidays",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holidays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "In den Schulferien fuhren wir immer ans Meer.",
+      "tr": "In the school holidays we always went to the seaside.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Schulferien beginnen im Juli.",
+      "tr": "The school holidays begin in July.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Was machst du in den Schulferien?",
+      "tr": "What are you doing in the school holidays?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in den Schulferien",
+      "tr": "in the school holidays"
+     },
+     {
+      "text": "die Schulferien beginnen",
+      "tr": "the school holidays begin"
+     },
+     {
+      "text": "die langen Schulferien",
+      "tr": "the long school holidays"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Ferien",
+      "register": "neutral",
+      "nuance": "the holidays – the usual word; Schulferien makes clear that the school holidays are meant"
+     },
+     {
+      "word": "Sommerferien",
+      "register": "neutral",
+      "nuance": "the summer holidays (the longest school break)"
+     }
+    ],
+    "etymology": {
+     "text": "Compound of Schule (“school”) + Ferien (“holidays”); Ferien is from Latin fēriae (15th century), with the Latin plural ending -ae replaced by German -en.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Because the Länder stagger the summer holidays, German motorways see waves of holiday traffic from June to September."
+    ],
+    "pitfalls": [
+     "Plural only: die Schulferien, in den Schulferien – there is no *die Schulferie.",
+     "Ferien are school (or university) holidays; adults at work have Urlaub: Ich habe im Juli Urlaub."
+    ],
+    "subtleties": [
+     "In everyday speech Germans just say die Ferien; Schulferien is used when it must be clear (dates, calendars, news).",
+     "In Germany each federal state has its own school-holiday dates, so the summer holidays are staggered."
+    ]
+   }
+  },
+  {
+   "id": "de:früher",
+   "lemma": "früher",
+   "pos": "ADV",
+   "senses": [
+    "adv.usedto",
+    "adv.formerly"
+   ],
+   "features": {
+    "comparison": {
+     "none": "itself the comparative of früh (earlier); in this meaning not compared"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Old photos, grandparents’ stories, “back then”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the past (of habits: used to): Früher spielte ich Fußball",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.usedto"
+     },
+     {
+      "id": "s2",
+      "def": "formerly, before (a past state: there used to be …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.formerly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Früher spielte ich jeden Tag im Garten.",
+      "tr": "I used to play in the garden every day.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Früher bin ich oft mit dem Fahrrad zur Schule gefahren.",
+      "tr": "I often used to cycle to school.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "Früher war hier ein Kino.",
+      "tr": "There used to be a cinema here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Dorf war früher sehr klein.",
+      "tr": "The village used to be very small.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "früher einmal",
+      "tr": "once, in the old days"
+     },
+     {
+      "text": "wie früher",
+      "tr": "as before, as in the old days"
+     },
+     {
+      "text": "früher und heute",
+      "tr": "then and now"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Früher war alles besser.",
+      "tr": "In the past everything was better.",
+      "kind": "saying",
+      "meaning": "the nostalgic (often ironic) complaint about modern times",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "damals",
+      "register": "neutral",
+      "nuance": "back then, at that time – a definite moment in the past"
+     },
+     {
+      "word": "einst",
+      "register": "literary",
+      "nuance": "once, formerly – written style"
+     },
+     {
+      "word": "ehemals",
+      "register": "formal",
+      "nuance": "formerly – written, official"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "heute",
+      "note": "today, nowadays"
+     },
+     {
+      "word": "heutzutage",
+      "note": "nowadays"
+     }
+    ],
+    "etymology": {
+     "text": "Comparative of früh (“early”); as an adverb it has come to mean “formerly, in the past (often years ago, in contrast to nowadays)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Früher war alles besser” (everything used to be better) is the classic German grumble about the present."
+    ],
+    "pitfalls": [
+     "German has no verb form for “used to”: früher (+ the Präteritum or the perfect) does the job – Früher wohnte ich in Berlin.",
+     "früher is also simply “earlier”: Komm bitte früher! (Please come earlier!) – the context decides."
+    ],
+    "subtleties": [
+     "früher contrasts with heute (today, nowadays): Früher war alles anders – heute …",
+     "The adjective früher means former: mein früherer Lehrer (my former teacher)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

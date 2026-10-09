@@ -1742,13 +1742,15 @@
      "separable"
     ],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.past"
+    ],
     "exercises": [],
-    "other": "做饭 (做了一顿饭), 开车 (开了两个小时车), 走路 (走了很多路), 放假 (放了三天假)"
+    "other": "做饭, 开车, 走路, 放假, and from cr.01–cr.03 起床, 洗澡, 睡觉, 出门, 穿衣, 出国 with their split parts (features.separable); fn.past block ‘Verb–object words open up’"
    },
    "status": "partial",
-   "gap": "No grammar block and no build exercise that inserts 了 / a number between the parts; 见面, 睡觉, 帮忙 are not in the course yet.",
-   "when": "fd.07 / cr.01"
+   "gap": "No build exercise inserts 了 / 个 / a length between the parts, and the bank cannot hold split forms (洗了个澡: 澡 alone is not a word of the lexicon, so the tokenizer cannot read it); 见面 and 帮忙 are not in the course yet.",
+   "when": "fd.07, cr.01"
   },
   {
    "id": "zh.morph.suffix.zi",
@@ -2048,7 +2050,9 @@
     "paradigm": [],
     "grammar": [
      "fn.aspect",
-     "fn.present"
+     "fn.present",
+     "fn.past",
+     "fn.past.ongoing"
     ],
     "exercises": [
      "transform",
@@ -2056,11 +2060,11 @@
      "build_sentence",
      "quiz"
     ],
-    "other": "zh:le, zh:guo, zh:zai, zh:zhengzai lexemes; bank variant Aspect"
+    "other": "zh:le, zh:guo, zh:zai, zh:zhengzai, zh:zhe.part (着, cr.02) lexemes; bank variants Aspect, Tense, Polarity"
    },
    "status": "partial",
-   "gap": "着 is not in the course; the two 了 (verbal / sentence-final) are one lexeme; verbs carry no aktionsart, so the app cannot tell that 到 or 是 take no 在 / 着; the contrast exercise (了 vs 过) is listed but not implemented.",
-   "when": "fd.14, cr.01"
+   "gap": "The two 了 (verbal / sentence-final) are one lexeme; verbs carry no aktionsart, so the app cannot tell that 到 or 是 take no 在 / 着; the contrast exercise (了 vs 过 vs 着) is not implemented.",
+   "when": "fd.14, cr.01, cr.02"
   },
   {
    "id": "zh.morph.noroots",
@@ -2467,14 +2471,20 @@
     "paradigm": [],
     "grammar": [
      "fn.present",
-     "fn.aspect"
+     "fn.aspect",
+     "fn.past"
     ],
-    "exercises": [],
-    "other": ""
+    "exercises": [
+     "transform",
+     "sentence_meaning",
+     "build_sentence",
+     "quiz"
+    ],
+    "other": "fn.past (cr.01): time words + 了 for completion, 没 for negation; bank variants Tense PST"
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.14"
+   "when": "fd.14, cr.01"
   },
   {
    "id": "zh.verb.nofuture",
@@ -2510,14 +2520,20 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.present"
+     "fn.present",
+     "fn.future"
     ],
-    "exercises": [],
-    "other": ""
+    "exercises": [
+     "transform",
+     "sentence_meaning",
+     "build_sentence",
+     "quiz"
+    ],
+    "other": "fn.future (cr.03): time words, 要, 会 (zh:hui.will), 打算 / 计划; bank variants Tense FUT, Polarity, Mood"
    },
    "status": "partial",
-   "gap": "fn.present says that time words show the future; 会 ‘will (likely)’, 打算 and 将 are not in the course and the optional future words are not taught as a set.",
-   "when": "fd.14"
+   "gap": "将 / 将要 (the written future) is named in the page but is not a lexeme of the course.",
+   "when": "fd.14, cr.03"
   },
   {
    "id": "zh.verb.noperfect",
@@ -2553,14 +2569,15 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.aspect"
+     "fn.aspect",
+     "fn.past"
     ],
     "exercises": [],
-    "other": ""
+    "other": "已经 (zh:yijing, cr.01, role: its concept adv.already is taught in C40) with 已经 … 了 in fn.past"
    },
    "status": "partial",
-   "gap": "fn.aspect teaches 了 and 过; 已经 is not in the course, and the overview does not relate sentence-final 了 to ‘current relevance’.",
-   "when": "fd.14"
+   "gap": "fn.past teaches 已经 … 了 and the new-situation 了; the overview does not yet relate sentence-final 了 to ‘current relevance’, and 还没 (not yet) has no lexeme 还.",
+   "when": "fd.14, cr.01"
   },
   {
    "id": "zh.verb.nosubjunctive",
@@ -2805,7 +2822,8 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.past"
     ],
     "exercises": [
      "build_sentence",
@@ -2814,7 +2832,7 @@
     "other": "trap in fn.prep.time"
    },
    "status": "partial",
-   "gap": "Bank sentences with durations after the verb (and with an object: 我学了三年中文) and a contrast exercise.",
+   "gap": "The bank now has durations after the verb (睡了八个小时, 等了你半个小时, 待两个星期); still missing: durations with an object (我学了三年中文) and a contrast exercise (when vs how long).",
    "when": "fd.15, cr.01"
   },
   {
@@ -3171,8 +3189,8 @@
     "other": "回 has a sense ‘times’; 一下 only inside 打扰一下, 等一下"
    },
    "status": "missing",
-   "gap": "Lexemes 次, 遍, 下 and a function with bank sentences (frequency after the verb).",
-   "when": "cr.01"
+   "gap": "Lexemes 次, 遍, 下 and a function with bank sentences (frequency after the verb); cr.04 avoids 第一次 because 次 is not a lexeme yet.",
+   "when": "later (not in cr.01–cr.04)"
   },
   {
    "id": "zh.syntax.coverbs",
@@ -3800,8 +3818,8 @@
     "other": "only sense texts (到 s4 ‘managed to’, 不 s3 ‘cannot’)"
    },
    "status": "missing",
-   "gap": "A grammar function, lexemes 懂, 完, 见, and bank sentences; it is central for verbs of perception and success.",
-   "when": "cr.01 or a new core step"
+   "gap": "A grammar function, lexemes 懂, 完, 见, and bank sentences; 睡着 (cr.01) and 长大 (cr.02) are stored as whole words with a note on their result part.",
+   "when": "cr.33 (fn.complement.result)"
   },
   {
    "id": "zh.syntax.complement.direction",
@@ -4080,8 +4098,8 @@
     "other": "senses of 请 and 叫 mention it; 让 is not in the course"
    },
    "status": "missing",
-   "gap": "A function (with cr.03 or cr.05) and bank sentences; 让 as a lexeme.",
-   "when": "cr.03 / cr.05"
+   "gap": "A function with the causatives (cr.39) and bank sentences; 让 as a lexeme.",
+   "when": "cr.39 (fn.causative)"
   },
   {
    "id": "zh.syntax.shide",
@@ -4131,8 +4149,8 @@
     "other": "是 sense s3 names the construction"
    },
    "status": "missing",
-   "gap": "A function in cr.01 (past) with bank sentences and its contrast with 了.",
-   "when": "cr.01"
+   "gap": "Not taught yet: fn.past (cr.01) only points to 是…的 for the circumstances of a past event (你几点睡的？); the common plan puts it with emphasis in C43, although learners meet it from A2.",
+   "when": "C43 (fn.emphasis); pointed to in cr.01"
   },
   {
    "id": "zh.syntax.particles",
@@ -4438,11 +4456,11 @@
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": "要 and 想 exist (verb.want); 会, 能, 可以, 应该 not yet"
+    "other": "要 and 想 exist (verb.want); 会 exists from cr.03 (zh:hui.will, senses ‘will’ and ‘can’); 能, 可以, 应该 not yet"
    },
    "status": "missing",
-   "gap": "Lexemes and a realization of the modal function of cr.04 with the 会 / 能 / 可以 decision procedure.",
-   "when": "cr.04"
+   "gap": "Lexemes 能, 可以, 应该 and a realization of fn.modal (cr.05) with the 会 / 能 / 可以 decision procedure.",
+   "when": "cr.05 (fn.modal)"
   },
   {
    "id": "zh.nom.noarticle",
@@ -4802,14 +4820,16 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.past",
+     "fn.past.ongoing"
     ],
     "exercises": [],
     "other": ""
    },
    "status": "partial",
-   "gap": "以后 after a clause is taught (fn.prep.time); 着 and the general pattern are not.",
-   "when": "fd.15"
+   "gap": "以后 after a clause (fn.prep.time), V1 了 … 就 V2 (fn.past) and V1 着 V2 (fn.past.ongoing: 他坐着等我) are taught; the general picture of clause chaining waits for C19 (fn.sequence).",
+   "when": "fd.15, cr.01, cr.02"
   },
   {
    "id": "zh.verb.noparticiples",
@@ -5463,7 +5483,7 @@
    },
    "status": "missing",
    "gap": "Concepts and lexemes (know a fact / know a person / know how) and a sense_split exercise — a basic early verb set.",
-   "when": "fd.07 area / cr.04"
+   "when": "cr.30 (fn.know)"
   },
   {
    "id": "zh.sem.wear",
@@ -5660,8 +5680,8 @@
     "other": "not in the course"
    },
    "status": "missing",
-   "gap": "借 with both senses and the two frames when ditransitives come (cr.03).",
-   "when": "cr.03"
+   "gap": "借 with both senses and the two frames when ditransitives come (cr.10).",
+   "when": "cr.10 (fn.indirect.object)"
   },
   {
    "id": "zh.sem.play",
@@ -5803,7 +5823,7 @@
    },
    "status": "missing",
    "gap": "Lexemes 再 and 又 and a contrast exercise.",
-   "when": "cr.01 / cr.02"
+   "when": "later (not in cr.01–cr.02)"
   },
   {
    "id": "zh.sem.want",
@@ -6069,14 +6089,15 @@
     "paradigm": [],
     "grammar": [
      "fn.copula",
-     "fn.prep.place"
+     "fn.prep.place",
+     "fn.past.ongoing"
     ],
     "exercises": [],
     "other": ""
    },
    "status": "partial",
-   "gap": "在 is covered (fn.copula, fn.prep.place); posture verbs with 着 are not in the course.",
-   "when": "fd.01, fd.12"
+   "gap": "着 is taught in cr.02 (坐着, 开着); posture verbs other than 坐 (站, 躺) are not in the course.",
+   "when": "fd.01, fd.12, cr.02"
   },
   {
    "id": "zh.lex.loans",
@@ -6975,17 +6996,20 @@
     "paradigm": [],
     "grammar": [
      "fn.time.day",
-     "fn.prep.time"
+     "fn.prep.time",
+     "fn.ordinals"
     ],
     "exercises": [
      "sentence_meaning",
-     "quiz"
+     "quiz",
+     "transform",
+     "build_sentence"
     ],
-    "other": "dates and day names are taught; 第 is not a lexeme"
+    "other": "第一 … 第十 (NUM, num.ord.1–10) and 第 (role, for every other number and 第几); fn.ordinals lists the bare-number ordinals (months, dates, floors, centuries, decades)"
    },
-   "status": "partial",
-   "gap": "第 as a lexeme with an ordinal function (it is used in the S00 tone table but never taught).",
-   "when": "fd.05 / fd.15"
+   "status": "covered",
+   "gap": "",
+   "when": "cr.04"
   },
   {
    "id": "zh.num.approx",
@@ -7121,7 +7145,8 @@
     "paradigm": [],
     "grammar": [
      "fn.prep.time",
-     "fn.time.day"
+     "fn.time.day",
+     "fn.ordinals"
     ],
     "exercises": [
      "build_sentence",
@@ -7132,7 +7157,7 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.14, fd.15"
+   "when": "fd.14, fd.15, cr.04"
   },
   {
    "id": "zh.time.weekdays",
@@ -9536,7 +9561,7 @@
      "value": "permission"
     }
    ],
-   "note": "cr.04"
+   "note": "cr.05 (会 is in the course from cr.03)"
   },
   {
    "concept": "gloss: to know",
@@ -9703,6 +9728,220 @@
     }
    ],
    "note": "All pronounced de."
+  },
+  {
+   "concept": "verb.start",
+   "axis": "general or in set words",
+   "words": [
+    {
+     "lemma": "开始",
+     "value": "the general verb: begin (+ verb or noun)"
+    },
+    {
+     "lemma": "开",
+     "value": "only in set verb–object words: 开会, 开学, 开店"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "verb.finish",
+   "axis": "use",
+   "words": [
+    {
+     "lemma": "结束",
+     "value": "an event ends / is ended (会议结束了)"
+    },
+    {
+     "lemma": "了 (liǎo)",
+     "value": "literary, or in 得了 / 不了 ‘can / can’t manage’"
+    }
+   ],
+   "note": "完 after a verb (吃完) comes with result complements (C33)."
+  },
+  {
+   "concept": "verb.sleep",
+   "axis": "construction",
+   "words": [
+    {
+     "lemma": "睡觉",
+     "value": "the plain activity, often alone"
+    },
+    {
+     "lemma": "睡",
+     "value": "with a length, a result or a place after it (睡八个小时, 睡着)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.childhood",
+   "axis": "register",
+   "words": [
+    {
+     "lemma": "小时候",
+     "value": "everyday time word"
+    },
+    {
+     "lemma": "童年",
+     "value": "written, reflective noun"
+    },
+    {
+     "lemma": "小时",
+     "value": "literary, set phrases (小时了了)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "verb.forget",
+   "axis": "length and register",
+   "words": [
+    {
+     "lemma": "忘记",
+     "value": "the full word"
+    },
+    {
+     "lemma": "忘",
+     "value": "short and spoken, mostly 忘了"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.holidays",
+   "axis": "which holidays",
+   "words": [
+    {
+     "lemma": "暑假",
+     "value": "summer (July – August)"
+    },
+    {
+     "lemma": "寒假",
+     "value": "winter (around the Spring Festival)"
+    }
+   ],
+   "note": "The general word for time off is 假期 (time.holiday)."
+  },
+  {
+   "concept": "abstract.plan",
+   "axis": "how firm and formal",
+   "words": [
+    {
+     "lemma": "计划",
+     "value": "a worked-out plan, often written"
+    },
+    {
+     "lemma": "打算",
+     "value": "an intention, everyday"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "place.abroad",
+   "axis": "noun or verb",
+   "words": [
+    {
+     "lemma": "国外",
+     "value": "the place: abroad"
+    },
+    {
+     "lemma": "出国",
+     "value": "the verb: to go abroad"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "verb.visit",
+   "axis": "what is visited",
+   "words": [
+    {
+     "lemma": "参观",
+     "value": "a place (to look round)"
+    },
+    {
+     "lemma": "看望",
+     "value": "a person (to see how they are)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.nextweek",
+   "axis": "register",
+   "words": [
+    {
+     "lemma": "下星期",
+     "value": "everyday (also 下个星期)"
+    },
+    {
+     "lemma": "下周",
+     "value": "shorter, timetables and messages"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "num.half",
+   "axis": "bound or free",
+   "words": [
+    {
+     "lemma": "半",
+     "value": "before a measure word or after the hour"
+    },
+    {
+     "lemma": "一半",
+     "value": "on its own: (one) half of something"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "adj.likely",
+   "axis": "construction",
+   "words": [
+    {
+     "lemma": "会",
+     "value": "will, is likely to — a prediction"
+    },
+    {
+     "lemma": "容易",
+     "value": "easily, prone to — a tendency"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.moment",
+   "axis": "register",
+   "words": [
+    {
+     "lemma": "时候",
+     "value": "everyday"
+    },
+    {
+     "lemma": "刻",
+     "value": "written, set phrases (一刻, 此刻)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.period",
+   "axis": "kind of period",
+   "words": [
+    {
+     "lemma": "期间",
+     "value": "the time during which something happens"
+    },
+    {
+     "lemma": "年代",
+     "value": "an era; a decade of a century"
+    }
+   ],
+   "note": ""
   }
  ],
  "polysemy": [
@@ -10888,7 +11127,7 @@
     },
     {
      "gloss": "to start, to open (a shop)",
-     "concept": null
+     "concept": "verb.start"
     },
     {
      "gloss": "to bloom",
@@ -11819,6 +12058,120 @@
     }
    ],
    "formsDiffer": null
+  },
+  {
+   "lexeme": "zh:hui.will",
+   "lemma": "会",
+   "meanings": [
+    {
+     "gloss": "will, be likely to",
+     "concept": "adj.likely"
+    },
+    {
+     "gloss": "can, know how to",
+     "concept": "verb.can"
+    },
+    {
+     "gloss": "meeting (开会)",
+     "concept": "work.meeting"
+    },
+    {
+     "gloss": "a moment (一会)",
+     "concept": null
+    },
+    {
+     "gloss": "kuài: accounting (会计)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "kuài in 会计"
+  },
+  {
+   "lexeme": "zh:ke",
+   "lemma": "刻",
+   "meanings": [
+    {
+     "gloss": "a quarter of an hour",
+     "concept": "num.quarter"
+    },
+    {
+     "gloss": "a moment",
+     "concept": "time.moment"
+    },
+    {
+     "gloss": "to carve, to engrave",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "zh:niandai",
+   "lemma": "年代",
+   "meanings": [
+    {
+     "gloss": "a decade of a century",
+     "concept": "time.decade"
+    },
+    {
+     "gloss": "an era, a period",
+     "concept": "time.period"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "zh:zuihou",
+   "lemma": "最后",
+   "meanings": [
+    {
+     "gloss": "last, final",
+     "concept": "num.ord.last"
+    },
+    {
+     "gloss": "finally, in the end",
+     "concept": "adv.finally"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "zh:shuijiao",
+   "lemma": "睡觉",
+   "meanings": [
+    {
+     "gloss": "to go to bed",
+     "concept": "verb.gotobed"
+    },
+    {
+     "gloss": "to sleep",
+     "concept": "verb.sleep"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "zh:xi",
+   "lemma": "洗",
+   "meanings": [
+    {
+     "gloss": "to wash",
+     "concept": "verb.wash"
+    },
+    {
+     "gloss": "to develop (photos)",
+     "concept": null
+    },
+    {
+     "gloss": "to shuffle (cards)",
+     "concept": null
+    },
+    {
+     "gloss": "to launder (money)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
   }
  ],
  "conceptGaps": [
@@ -12046,6 +12399,26 @@
    "concept": "gloss: can",
    "kind": "splits",
    "note": "会 / 能 / 可以."
+  },
+  {
+   "concept": "adv.usedto",
+   "kind": "lacks",
+   "note": "No word or form for the habitual past: 以前 / 小时候 / 那时候 + the plain verb (often with 常常, 每天), no 了."
+  },
+  {
+   "concept": "verb.havebreakfast",
+   "kind": "lacks",
+   "note": "No verb: 吃早饭 ‘eat breakfast’."
+  },
+  {
+   "concept": "verb.comehome",
+   "kind": "lacks",
+   "note": "Said with two taught words, 回 + 家 (回家)."
+  },
+  {
+   "concept": "num.ord.1 … num.ord.10",
+   "kind": "adds",
+   "note": "One prefix 第 for every ordinal; months, dates, weekdays, floors, centuries and decades use the bare number."
   }
  ]
 }

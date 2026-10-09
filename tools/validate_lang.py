@@ -580,6 +580,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         for p in n.get('prereqs') or []:
             if p not in nodes: v.E(f'core/nodes.json · {nid}', f'unknown prerequisite “{p}”')
     pending = {cid for cid, c in concepts.items() if c.get('pending')}   # meanings known from words, not taught yet (D15)
+    in_draft = {cid for cid, ns in owners.items() if ns and all(x in draft and not (batch and x in batch) for x in ns)}   # meanings of lessons still being written
     for cid in concepts:
         if cid in pending:
             if cid in owners: v.E(f'concept {cid}', f'is pending but node {owners[cid][0]} teaches it: remove "pending"')
@@ -694,7 +695,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 if exists: v.E(where, f'node {nid} does not apply to {L} (path / langs)')
                 continue
             if not exists and not n.get('concepts'): continue   # a grammar-only lesson needs no word file
-            if not strict and not exists:
+            if not exists and (not strict or (nid in draft and not (batch and nid in batch))):   # a draft node (§4.2) is being written
                 v.W(where, 'not prepared yet'); continue
             d = v.load(where)
             if d is None: continue
@@ -742,7 +743,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                     if canon(cc) not in seen: v.E(w, f'missing citation cell {cc}')
                     elif forms[seen[canon(cc)]] != x.get('lemma'): v.E(w, f'the lemma “{x.get("lemma")}” must be the {cc} form “{forms[seen[canon(cc)]]}”')
                 if marks and len(letters(x.get('lemma', ''))) > 1 and not has_marks(L, x.get('lemma', '')): v.E(w, f'the lemma has no vowel marks')
-                check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required', pending)
+                check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required', pending | in_draft)
                 if 'wordFeatures' in lj:
                     if x.get('pos') not in decls: v.E(w, f'no wordFeatures for {x.get("pos")} in {L}: declare the parameters of this part of speech (an empty list if it has none)')
                     check_features(v, w, x, decls, lex)
@@ -791,7 +792,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         for nid in mylessons:
             for fid in lesson_functions(nodes[nid], L, typ):
                 if fid in functions and not os.path.exists(os.path.join(root, f'{lw}/grammar/{fid}.json')):
-                    (v.E if strict else v.W)(f'{lw}/grammar/{fid}.json', f'lesson {nid} needs this realization')
+                    (v.E if strict and (nid not in draft or (batch and nid in batch)) else v.W)(f'{lw}/grammar/{fid}.json', f'lesson {nid} needs this realization')
         for fid in functions:
             where = f'{lw}/grammar/{fid}.json'
             if not os.path.exists(os.path.join(root, where)): continue
@@ -928,7 +929,8 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 elif sids[vo].get('frame') != s.get('frame'): v.E(f'{lw}/bank · {sid}', 'a variant must have the frame of its original')
                 if not s.get('variant'): v.E(f'{lw}/bank · {sid}', 'a variant must say what changed (variant)')
         for fid, f in frames.items():
-            if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
+            fr_draft = f.get("lessons") and all(x in draft and not (batch and x in batch) for x in f['lessons'])   # a frame of lessons still being written
+            if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict and not fr_draft else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
         # D19: every field brings ≥ 2 sentences (with its own words) for every non-vocabulary node taught before it
         order_ = [nid for nid in topo_order(nodes) if nid in app]
         fields_ = {}

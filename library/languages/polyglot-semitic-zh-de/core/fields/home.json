@@ -21,6 +21,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -312,9 +316,8 @@
   {
    "id": "obj.card",
    "gloss": "card (a bank card, a greeting card, a playing card)",
-   "tier": 2,
-   "rank": 10,
-   "pending": true,
+   "tier": 1,
+   "rank": 42,
    "subgroup": "more"
   },
   {
@@ -392,9 +395,8 @@
   {
    "id": "obj.parcel",
    "gloss": "parcel, package",
-   "tier": 2,
-   "rank": 20,
-   "pending": true,
+   "tier": 1,
+   "rank": 41,
    "subgroup": "more"
   },
   {
@@ -436,6 +438,174 @@
    "rank": 26,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "obj.toy",
+   "gloss": "toy",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.passport",
+   "gloss": "passport",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.suitcase",
+   "gloss": "suitcase",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.sign",
+   "gloss": "sign (a notice)",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.towel",
+   "gloss": "towel",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.soap",
+   "gloss": "soap",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.toothbrush",
+   "gloss": "toothbrush",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.mirror",
+   "gloss": "mirror",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.shampoo",
+   "gloss": "shampoo",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.present",
+   "gloss": "present, gift",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.glasses",
+   "gloss": "glasses, spectacles",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.armchair",
+   "gloss": "armchair",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.carpet",
+   "gloss": "carpet, rug",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.curtain",
+   "gloss": "curtain",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.washingmachine",
+   "gloss": "washing machine",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.oven",
+   "gloss": "oven",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.sink",
+   "gloss": "sink",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.rubbish",
+   "gloss": "rubbish, garbage",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.lock",
+   "gloss": "lock",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.roof",
+   "gloss": "roof",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.map",
+   "gloss": "map",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.spoon",
+   "gloss": "spoon",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.pan",
+   "gloss": "pan (frying pan)",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.pot",
+   "gloss": "pot, saucepan",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
   }
  ]
 }

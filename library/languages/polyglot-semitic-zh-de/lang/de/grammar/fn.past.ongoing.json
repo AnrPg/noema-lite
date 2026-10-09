@@ -1,0 +1,461 @@
+{
+ "function": "fn.past.ongoing",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "optional"
+  },
+  {
+   "feature": "verb.past",
+   "value": "past"
+  }
+ ],
+ "summary": "German has no verb form of its own for “used to” or “was doing”. It uses the past – in descriptions and memories mostly the one-word Präteritum – and lets words carry the meaning: früher (in the past, used to), immer, oft, manchmal, als Kind, in meiner Kindheit for habits; a clause with als (when, one moment in the past) or während (while) for something that was going on: Früher spielte ich oft im Garten. Als die Mutter nach Hause kam, schlief das Baby. The Präteritum of weak verbs adds -te- and the past endings (ich spielte, du spieltest, er spielte, wir spielten, ihr spieltet, sie spielten); strong verbs change the stem vowel and have no ending in ich and er/sie/es (ich schlief, er schlief, wir schliefen; ich vergaß, sie wuchs … auf). sein and haben: war, hatte. A separable particle stays at the end: Sie wuchs bei den Großeltern auf. In everyday speech the Perfekt with früher says the same: Früher bin ich oft mit dem Fahrrad gefahren.",
+ "blocks": [
+  {
+   "t": "table",
+   "caption": "The Präteritum: weak verbs add -te-, strong verbs change the vowel; ich = er/sie/es",
+   "head": [
+    "",
+    "spielen (weak)",
+    "schlafen (strong)",
+    "sein",
+    "haben"
+   ],
+   "rows": [
+    [
+     "ich",
+     "spielte",
+     "schlief",
+     "war",
+     "hatte"
+    ],
+    [
+     "du",
+     "spieltest",
+     "schliefst",
+     "warst",
+     "hattest"
+    ],
+    [
+     "er / sie / es",
+     "spielte",
+     "schlief",
+     "war",
+     "hatte"
+    ],
+    [
+     "wir",
+     "spielten",
+     "schliefen",
+     "waren",
+     "hatten"
+    ],
+    [
+     "ihr",
+     "spieltet",
+     "schlieft",
+     "wart",
+     "hattet"
+    ],
+    [
+     "sie / Sie",
+     "spielten",
+     "schliefen",
+     "waren",
+     "hatten"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "past"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Strong verbs of the lessons so far: the vowel to learn",
+   "head": [
+    "infinitive",
+    "Präteritum (er)",
+    "Partizip II"
+   ],
+   "rows": [
+    [
+     "schlafen",
+     "schlief",
+     "geschlafen"
+    ],
+    [
+     "aufstehen",
+     "stand … auf",
+     "aufgestanden"
+    ],
+    [
+     "aufwachsen",
+     "wuchs … auf",
+     "aufgewachsen"
+    ],
+    [
+     "vergessen",
+     "vergaß",
+     "vergessen"
+    ],
+    [
+     "gehen",
+     "ging",
+     "gegangen"
+    ],
+    [
+     "kommen",
+     "kam",
+     "gekommen"
+    ],
+    [
+     "essen",
+     "aß",
+     "gegessen"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Habit or background: say it with words",
+   "text": "Habit: früher, immer, oft, manchmal, als Kind – Früher spielte ich oft im Park (I used to play in the park). Background: a clause with als or während – Die Kinder spielten im Garten, als der Vater kam (were playing … when). The verb form is the same as for a single finished event: Ich spielte = I played, I was playing, I used to play.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Als die Mutter nach Hause kam,",
+    "schlief",
+    "das Baby."
+   ],
+   "caption": "The als-clause sends its verb to the end; it counts as the first element, so the main clause starts with its verb"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "als or wenn?",
+   "text": "For one moment or one period in the past use als: Als ich ein Kind war … Als die Mutter kam … For something that happened again and again use (immer) wenn: Immer wenn es regnete, spielten wir drinnen."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No “was …-ing”, no “used to” verb",
+   "text": "Not *Ich war spielend. Say Ich spielte (gerade). For a habit add früher or immer: Früher spielte ich Fußball. In colloquial speech, in some regions, a progressive with am + noun-like infinitive is heard (Ich war am Kochen); the written standard uses gerade: Ich kochte gerade.",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Präteritum or Perfekt?",
+   "text": "Telling memories, either is fine: Früher spielte ich oft im Garten = Früher habe ich oft im Garten gespielt. With sein, haben and in written stories the Präteritum is the natural choice: In meiner Kindheit war das Dorf klein."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a habit (used to) or a background (was doing)? German uses the same past form for both – which word shows it: früher, immer, oft, als …, während …?",
+   "Weak verb? stem + -te + ending: spielte, spieltest, spielten. Strong verb? the new vowel, no ending for ich and er: schlief.",
+   "Is it sein or haben? war, warst, war, waren, wart, waren – hatte, hattest …",
+   "Separable verb? The particle goes to the end of the main clause: Sie wuchs bei den Großeltern auf.",
+   "One moment in the past (als) or repeated (wenn)?",
+   "Did the als- or während-clause come first? Then the main clause starts with its verb."
+  ],
+  "steps": [
+   "Choose the past form (Präteritum, or Perfekt in speech).",
+   "Add the word that makes it a habit or a background.",
+   "Check the word order in both clauses."
+  ]
+ },
+ "traps": [
+  "ich spielte, er spielte – no -t in the er-form: not *er spieltet.",
+  "ich schlief, er schlief – strong verbs have no ending in ich and er.",
+  "Not *Ich war spielend; not *Ich pflegte zu spielen in everyday speech (formal only).",
+  "Als ich ein Kind war … (one period) – not *Wenn ich ein Kind war …",
+  "früher (in the past) is not “earlier today”: Früher wohnte ich in Berlin = I used to live in Berlin.",
+  "Als die Mutter kam, schlief das Baby – after the als-clause the verb comes first: not *…, das Baby schlief."
+ ],
+ "evidence": {
+  "tags": [
+   [
+    "V",
+    "PST",
+    "SG"
+   ],
+   [
+    "V",
+    "PST",
+    "PL"
+   ]
+  ],
+  "lemmas": [
+   "de:früher"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;2;SG",
+  "V;PST;3;SG",
+  "V;PST;1;PL",
+  "V;PST;2;PL",
+  "V;PST;3;PL"
+ ],
+ "needs": {
+  "VERB": 5
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG",
+    "V;PST;3;SG",
+    "V;PST;1;PL",
+    "V;PST;2;PL",
+    "V;PST;3;PL"
+   ],
+   "count": 14,
+   "exclude": [
+    "de:zurückkommen",
+    "de:hereinkommen",
+    "de:hineingehen",
+    "de:weggehen",
+    "de:ankommen"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:sein",
+    "de:haben",
+    "de:spielen",
+    "de:schlafen",
+    "de:vergessen",
+    "de:erinnern"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;3;SG",
+    "V;PST;1;PL"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Früher ___ ich oft im Garten. (spielen)",
+   "options": [
+    "spielte",
+    "spielt",
+    "spieltete",
+    "gespielt"
+   ],
+   "answer": "spielte",
+   "why": "Präteritum of a weak verb: stem + -te; ich and er have the same form."
+  },
+  {
+   "q": "Als die Mutter kam, ___ das Baby. (schlafen)",
+   "options": [
+    "schlief",
+    "schlafte",
+    "schläft",
+    "hat geschlafen"
+   ],
+   "answer": "schlief",
+   "why": "schlafen is strong: schlief; after the als-clause the verb comes first."
+  },
+  {
+   "q": "How does German say “I used to play football”?",
+   "options": [
+    "Früher spielte ich Fußball.",
+    "Ich war Fußball spielend.",
+    "Ich spielte früher zu Fußball."
+   ],
+   "answer": "Früher spielte ich Fußball.",
+   "why": "No special verb form: the past + früher."
+  },
+  {
+   "q": "___ ich ein Kind war, wohnten wir auf dem Land.",
+   "options": [
+    "Als",
+    "Wenn",
+    "Wann"
+   ],
+   "answer": "Als",
+   "why": "One period in the past → als; wenn is for repeated events, wann for questions."
+  },
+  {
+   "q": "wir ___ (sein, Präteritum)",
+   "options": [
+    "waren",
+    "warten",
+    "wart",
+    "sind gewesen"
+   ],
+   "answer": "waren",
+   "why": "sein: war, warst, war, waren, wart, waren. (warten is a different verb: to wait.)"
+  },
+  {
+   "q": "Sie ___ bei ihren Großeltern ___. (aufwachsen, Präteritum)",
+   "options": [
+    "wuchs … auf",
+    "aufwuchs … –",
+    "wachste … auf"
+   ],
+   "answer": "wuchs … auf",
+   "why": "Strong and separable: wuchs, with the particle auf at the end of the main clause."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.past.ongoing",
+   "note": "Arabic uses كَانَ kāna + the imperfect for habits and ongoing actions in the past: كَانَ يَلْعَبُ kāna yalʿabu (he used to play / was playing)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.past.ongoing",
+   "note": "Hebrew uses הָיָה + the present form for past habits: הוּא הָיָה מְשַׂחֵק (he used to play)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past.ongoing",
+   "note": "Chinese uses 在 / 正在 for ongoing actions and 以前, 小时候 for habits; the verb itself does not change."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past",
+   "note": "The Perfekt and the participle (previous lesson) say the same past in speech."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has a separate imperfect for habits and ongoing actions (έπαιζα vs έπαιξα); German has one Präteritum (spielte) and adds früher, immer or gerade."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian uses the imperfective past (играл) for habits and background; German has no aspect pair: spielte, plus früher or oft."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "There is no imperfecto: jugaba and jugué are both spielte (or habe gespielt). The habit is shown with früher, immer, oft."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "Neither “used to” nor “was …-ing” has a German verb form: Früher spielte ich … / Als er kam, schlief ich. Not *Ich war schlafend."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "The imparfait (je jouais) has no German twin: Präteritum or Perfekt + früher / gerade. The German Präteritum is not an imparfait – it is used for finished events too."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has a habitual past (खेलता था) and a progressive past (खेल रहा था); German uses one past and adverbs: früher spielte er / er spielte gerade."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian marks the continuous and habitual past with mi- (mirāftam “I used to go / was going”); German says früher ging ich or ich ging gerade."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic kāna + imperfect (kāna yalʿabu) marks the habitual or ongoing past; German only has the past form and adds früher or gerade."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew uses haya + the present form for past habits; German also leaves the habit to the context, but with a past verb and früher: Früher spielte er."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has oynuyordu (was playing) and oynardı (used to play); German has spielte for both and adds gerade or früher."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese -te ita (asonde ita, “was playing”) marks ongoing past; German uses the plain past + gerade or an als-clause."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks a progressive past (-고 있었다) and a habitual past (-곤 했다); German has no such endings: spielte + gerade / früher."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also has no aspect in the verb: the imperfect leikin covers “I played”, “I was playing” and “I used to play”, as German spielte does; time words do the rest."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian likewise uses its one past (játszottam) with adverbs such as régen or mindig for habits – German: früher, immer."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili builds an ongoing past with kuwa “to be” + a second verb (nilikuwa ninasoma, “I was reading”); German uses one past verb: ich las (gerade)."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese marks ongoing with 在 / 正在 and habits with 以前, 小时候, 常; German must change the verb to the past and adds früher, oft."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese uses đang for ongoing actions and words like trước đây for the past, with an unchanged verb; German also uses words (gerade, früher), but the verb must be in the past."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses many such meanings with suffixes inside the verb word; German uses separate words – früher, immer, oft, gerade – with the past form."
+  }
+ ]
+}

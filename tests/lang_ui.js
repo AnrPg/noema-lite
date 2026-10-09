@@ -70,7 +70,9 @@ async function answer(page, right) {
   ok(/English/.test(await page.locator('.lx-explain').innerText()), 'the explanation language is shown');
   ok(await page.locator('.lx-lessonbtn').count() === 1 && /S00/.test(await page.locator('.lx-lessonbtn').innerText()), 'the course starts with the foundations: lesson S00, all four languages');
   const nl = await page.locator('.lx-lessonnode').count(), nn = await page.locator('.lx-node').count();
-  ok(nl === 19 && nn === 24, `the map: 19 lessons, then the 5 vegetable nodes (${nl}, ${nn})`);
+  ok(nl === 19 + 48 && nn === nl + 5, `the map: 19 foundation lessons, 48 core lessons and the 5 vegetable nodes (${nl}, ${nn})`);
+  const draftShown = await page.evaluate(() => [...document.querySelectorAll('.lx-lessonnode')].filter(b => /C48/.test(b.innerText))[0]?.innerText || '');
+  ok(/not written yet/.test(draftShown), 'a core lesson still being written shows ⏳ not written yet in every language');
   await page.screenshot({ path: SHOTS + '/lx1_home.png' });
 
   // ---------- the vocabulary lane (a copy of the course without its lessons) ----------

@@ -102,6 +102,12 @@
    "tier": 2,
    "rank": 14,
    "pending": true
+  },
+  {
+   "id": "relig.religion",
+   "gloss": "religion",
+   "tier": 1,
+   "rank": 1
   }
  ]
 }

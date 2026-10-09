@@ -1,0 +1,514 @@
+{
+ "function": "fn.future",
+ "status": "realized",
+ "summary": "The future is the present (the imperfect) with سَـ joined to it or the separate word سَوْفَ before it: أُسَافِرُ “I travel” → سَأُسَافِرُ / سَوْفَ أُسَافِرُ “I will travel”. The person prefix stays: سَأُسَافِرُ, سَتُسَافِرُ, سَيُسَافِرُ, سَنُسَافِرُ. سَـ is the everyday form; سَوْفَ is a word of its own and often sounds more distant or more emphatic. A plan with a time word may also stay in the present: أَزُورُ الْجِيرَانَ غَدًا “I’m visiting the neighbours tomorrow”. The future is negated with لَنْ + the subjunctive (the present with -a): لَنْ أُسَافِرَ “I will not travel” — لَنْ takes the place of سَـ / سَوْفَ. Questions put هَلْ or a question word in front: هَلْ سَتَحْجِزِينَ غُرْفَةً؟ — أَيْنَ سَتَذْهَبُونَ؟. Time words for the future: غَدًا, الْأُسْبُوعَ الْقَادِمَ, السَّنَةَ الْقَادِمَةَ, قَرِيبًا, بَعْدَ سَاعَةٍ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "present",
+    "future (سَـ)",
+    "will not (لَنْ)"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "أُسَافِرُ",
+     "سَأُسَافِرُ",
+     "لَنْ أُسَافِرَ"
+    ],
+    [
+     "أَنْتَ you (to a man)",
+     "تُسَافِرُ",
+     "سَتُسَافِرُ",
+     "لَنْ تُسَافِرَ"
+    ],
+    [
+     "أَنْتِ you (to a woman)",
+     "تُسَافِرِينَ",
+     "سَتُسَافِرِينَ",
+     "لَنْ تُسَافِرِي"
+    ],
+    [
+     "هُوَ he",
+     "يُسَافِرُ",
+     "سَيُسَافِرُ",
+     "لَنْ يُسَافِرَ"
+    ],
+    [
+     "هِيَ she",
+     "تُسَافِرُ",
+     "سَتُسَافِرُ",
+     "لَنْ تُسَافِرَ"
+    ],
+    [
+     "نَحْنُ we",
+     "نُسَافِرُ",
+     "سَنُسَافِرُ",
+     "لَنْ نُسَافِرَ"
+    ],
+    [
+     "أَنْتُمْ you (several)",
+     "تُسَافِرُونَ",
+     "سَتُسَافِرُونَ",
+     "لَنْ تُسَافِرُوا"
+    ],
+    [
+     "أَنْتُنَّ you (women only)",
+     "تُسَافِرْنَ",
+     "سَتُسَافِرْنَ",
+     "لَنْ تُسَافِرْنَ"
+    ],
+    [
+     "هُمْ they",
+     "يُسَافِرُونَ",
+     "سَيُسَافِرُونَ",
+     "لَنْ يُسَافِرُوا"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "يُسَافِرْنَ",
+     "سَيُسَافِرْنَ",
+     "لَنْ يُسَافِرْنَ"
+    ]
+   ],
+   "caption": "سَافَرَ “to travel”: the future is سَـ + the present; the negative is لَنْ + the subjunctive.",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "inflectional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "سَـ + present = future.",
+   "text": "Nothing else changes: the prefix and the ending of the present stay (سَأَزُورُ، سَتَزُورِينَ، سَيَزُورُونَ). سَوْفَ works the same way as a separate word: سَوْفَ نَحْجِزُ غُرْفَةً."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "لَنْ + subjunctive.",
+   "text": "The subjunctive changes -u to -a (أُسَافِرُ → لَنْ أُسَافِرَ), drops the -na of -īna / -ūna (تُسَافِرِينَ → لَنْ تُسَافِرِي، يُسَافِرُونَ → لَنْ يُسَافِرُوا, with a silent alif) and keeps the -na of the feminine plural (لَنْ يُسَافِرْنَ). Verbs in -ā do not change: لَنْ أَنْسَى.",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "inflectional"
+    },
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "سَـ",
+     "points": [
+      "سَأَزُورُ جَدَّتِي.",
+      "joined to the verb; the everyday future, near or general"
+     ]
+    },
+    {
+     "title": "سَوْفَ",
+     "points": [
+      "سَوْفَ أَزُورُ جَدَّتِي.",
+      "a separate word; often further away in time or more emphatic"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The present can be enough.",
+   "text": "With a time word the plain present often says the future: أُسَافِرُ غَدًا “I’m travelling tomorrow”, أَزُورُ الْجِيرَانَ غَدًا. سَـ makes the future explicit."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Arabic",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "غَدًا",
+     "tomorrow"
+    ],
+    [
+     "بَعْدَ غَدٍ",
+     "the day after tomorrow"
+    ],
+    [
+     "الْأُسْبُوعَ الْقَادِمَ",
+     "next week"
+    ],
+    [
+     "السَّنَةَ الْقَادِمَةَ",
+     "next year"
+    ],
+    [
+     "قَرِيبًا",
+     "soon"
+    ],
+    [
+     "لَاحِقًا",
+     "later"
+    ],
+    [
+     "بَعْدَ سَاعَةٍ",
+     "in an hour"
+    ]
+   ],
+   "caption": "Time words for the future. الْقَادِم “coming” agrees with its noun: الْأُسْبُوعَ الْقَادِمَ but السَّنَةَ الْقَادِمَةَ."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No سَـ with a negation.",
+   "text": "Not *سَلَا أُسَافِرُ, not *لَا سَأُسَافِرُ: “I will not travel” is لَنْ أُسَافِرَ. لَا أُسَافِرُ is “I don’t travel / I’m not travelling”."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "“Will be”: سَيَكُونُ.",
+   "text": "The future of كَانَ is سَيَكُونُ / سَتَكُونُ, and like كَانَ it puts its predicate in the accusative: سَتَكُونُ الرِّحْلَةُ طَوِيلَةً “the trip will be long”."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a plan, a promise or a prediction for later? → سَـ + present (or سَوْفَ + present).",
+   "Who? Keep the person prefix of the present: سَأَـ (I), سَتَـ (you / she), سَيَـ (he / they), سَنَـ (we).",
+   "Is the time already clear from a word like غَدًا? → the plain present is also possible.",
+   "Negative? → لَنْ + subjunctive: drop سَـ / سَوْفَ, -u → -a (لَنْ أُسَافِرَ), -īna / -ūna lose -na.",
+   "A question? → هَلْ or a question word before the future verb: هَلْ سَتُسَافِرُ؟ / مَتَى سَتَعُودُ؟",
+   "“Will be”? → سَيَكُونُ + accusative predicate."
+  ]
+ },
+ "traps": [
+  "سَـ is written joined to the verb: سَأُسَافِرُ, never *سَ أُسَافِرُ.",
+  "The negation is لَنْ, not لَا: لَنْ أَنْسَى “I won’t forget”; لَا أَنْسَى is “I don’t forget”.",
+  "After لَنْ the verb ends in -a: لَنْ نَحْجِزَ, not *لَنْ نَحْجِزُ.",
+  "لَنْ تُسَافِرُوا: -ūna loses -na and an alif is written (تُسَافِرُونَ → تُسَافِرُوا).",
+  "سَـ never goes before a past verb: *سَسَافَرْتُ is impossible."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:sa",
+   "ar:sawfa",
+   "ar:lan"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;IND;1;SG",
+  "V;PRS;IND;2;SG;MASC",
+  "V;PRS;IND;2;SG;FEM",
+  "V;PRS;IND;3;SG;MASC",
+  "V;PRS;IND;3;SG;FEM",
+  "V;PRS;IND;1;PL",
+  "V;PRS;IND;2;PL;MASC",
+  "V;PRS;IND;2;PL;FEM",
+  "V;PRS;IND;3;PL;MASC",
+  "V;PRS;IND;3;PL;FEM",
+  "V;SBJV;1;SG",
+  "V;SBJV;2;SG;MASC",
+  "V;SBJV;2;SG;FEM",
+  "V;SBJV;3;SG;MASC",
+  "V;SBJV;3;SG;FEM",
+  "V;SBJV;1;PL",
+  "V;SBJV;2;PL;MASC",
+  "V;SBJV;2;PL;FEM",
+  "V;SBJV;3;PL;MASC",
+  "V;SBJV;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:akala",
+    "ar:shariba",
+    "ar:ishtara",
+    "ar:dhahaba",
+    "ar:safara",
+    "ar:hajaza",
+    "ar:zara",
+    "ar:nasiya",
+    "ar:nama",
+    "ar:laiba",
+    "ar:tadhakkara",
+    "ar:nashaa"
+   ],
+   "cells": [
+    "V;SBJV;1;SG",
+    "V;SBJV;2;SG;MASC",
+    "V;SBJV;2;SG;FEM",
+    "V;SBJV;3;SG;MASC",
+    "V;SBJV;3;SG;FEM",
+    "V;SBJV;1;PL",
+    "V;SBJV;2;PL;MASC",
+    "V;SBJV;2;PL;FEM",
+    "V;SBJV;3;PL;MASC",
+    "V;SBJV;3;PL;FEM"
+   ],
+   "count": 10
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“We will travel” — which form?",
+   "options": [
+    "سَنُسَافِرُ",
+    "سَافَرْنَا",
+    "سَيُسَافِرُ",
+    "نُسَافِرَ"
+   ],
+   "answer": "سَنُسَافِرُ",
+   "why": "سَـ + نُسَافِرُ (the present of “we”)."
+  },
+  {
+   "q": "“I won’t forget” — which is correct?",
+   "options": [
+    "لَنْ أَنْسَى",
+    "لَا سَأَنْسَى",
+    "سَلَا أَنْسَى",
+    "لَمْ أَنْسَ"
+   ],
+   "answer": "لَنْ أَنْسَى",
+   "why": "The future is negated with لَنْ + subjunctive; لَمْ أَنْسَ is “I didn’t forget”."
+  },
+  {
+   "q": "“They will not book” — which form?",
+   "options": [
+    "لَنْ يَحْجِزُوا",
+    "لَنْ يَحْجِزُونَ",
+    "لَنْ سَيَحْجِزُونَ",
+    "لَا يَحْجِزُونَ"
+   ],
+   "answer": "لَنْ يَحْجِزُوا",
+   "why": "After لَنْ, -ūna loses -na: يَحْجِزُوا (with a silent alif)."
+  },
+  {
+   "q": "How is سَوْفَ written?",
+   "options": [
+    "as a separate word before the verb",
+    "joined to the verb",
+    "after the verb",
+    "only with the past"
+   ],
+   "answer": "as a separate word before the verb",
+   "why": "سَوْفَ أَزُورُ; the short form سَـ is the one written joined: سَأَزُورُ."
+  },
+  {
+   "q": "أَزُورُ الْجِيرَانَ غَدًا means …",
+   "options": [
+    "I’m visiting the neighbours tomorrow.",
+    "I visited the neighbours yesterday.",
+    "I used to visit the neighbours.",
+    "I won’t visit the neighbours."
+   ],
+   "answer": "I’m visiting the neighbours tomorrow.",
+   "why": "With a time word the present can speak about the future."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.future",
+   "note": "In Hebrew the prefix conjugation itself is the future (אֶסַּע “I will travel”); in Arabic the same kind of form is the present, and سَـ makes it future (سَأُسَافِرُ)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.future",
+   "note": "German has werden + infinitive (ich werde reisen) but often uses the present with a time word (ich reise morgen) — exactly like أُسَافِرُ غَدًا."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.future",
+   "note": "Chinese puts 要 / 会 / 打算 before an unchanged verb; Arabic joins سَـ to a verb that already carries the person."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "The future is built on the present: سَـ + أُسَافِرُ; its negation uses the subjunctive, which also follows أَنْ “to” (أُرِيدُ أَنْ أُسَافِرَ)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.future",
+   "value": "inflectional"
+  },
+  {
+   "feature": "verb.subjunctive",
+   "value": "inflectional"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "obligatory"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek forms the future with θα + verb (θα ταξιδέψω); Arabic’s سَـ is similar but written joined to the verb, and the negation changes the particle: لَنْ أُسَافِرَ (Greek keeps θα: δεν θα ταξιδέψω)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian has a one-word future of perfective verbs (поеду) and буду + infinitive (буду ездить); Arabic always builds the future from the present with سَـ / سَوْفَ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish has a one-word future (viajaré) and ir a + infinitive; Arabic’s present for plans (أُسَافِرُ غَدًا) matches “viajo mañana”, and سَأُسَافِرُ the future tense."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "“will” is a separate word like سَوْفَ; Arabic usually joins its short form سَـ to the verb, and “won’t” is another particle, لَنْ, with a changed verb ending (لَنْ أُسَافِرَ)."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French has a one-word future (je voyagerai) and aller + infinitive (je vais voyager); Arabic builds it from the present with سَـ / سَوْفَ and negates it with لَنْ."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German uses werden + infinitive or simply the present with a time word (ich reise morgen); Arabic does both: سَأُسَافِرُ or أُسَافِرُ غَدًا."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has a one-word future that shows the speaker’s gender (मैं जाऊँगा / जाऊँगी); the Arabic future is the present with سَـ, and its “I” form has no gender (سَأَذْهَبُ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian builds the written future with خواستن + the short past stem (خواهم رفت “I will go”) and in speech uses the present (می‌روم), as Arabic can (أَذْهَبُ غَدًا)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has a future ending (मी जाईन “I will go”); Arabic adds the prefix سَـ to the present (سَأَذْهَبُ)."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew’s future is the prefix conjugation (אֶסַּע “I will travel”), the twin of the Arabic present; Arabic needs سَـ to make that form future (سَأُسَافِرُ)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has a future suffix (gideceğim “I will go”); Arabic puts a particle in front of the present (سَأَذْهَبُ)."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese has no future form: the non-past (行く) covers it, as the Arabic present can (أَذْهَبُ غَدًا); Arabic adds سَـ when the future is meant explicitly."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses -(으)ㄹ 거예요 for plans and predictions (갈 거예요 “I will go”); Arabic uses سَـ + present (سَأَذْهَبُ)."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish has no future tense: the present with a time word does the job (matkustan huomenna); Arabic can do the same (أُسَافِرُ غَدًا) or add سَـ."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian uses the present for the future (holnap utazom) or fog + infinitive; Arabic uses the present or سَـ + present."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili marks the future with -ta- inside the verb (nitasafiri “I will travel” — the verb itself comes from Arabic سَافَرَ); Arabic puts سَـ in front of the present (سَأُسَافِرُ)."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda distinguishes a near and a remote future in the verb; Arabic has one future, سَـ / سَوْفَ + present, and shows distance with time words."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese uses 要, 会 or 打算 before an unchanged verb (我要去埃及); Arabic joins سَـ to a verb that already carries the person (سَأُسَافِرُ)."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese puts sẽ before the verb (tôi sẽ đi), a separate word like سَوْفَ; but the Vietnamese verb does not change, while the Arabic verb carries the person (سَأَذْهَبُ / سَنَذْهَبُ)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks the future with a suffix inside the verb word (-langa-); Arabic puts سَـ before the present."
+  }
+ ]
+}

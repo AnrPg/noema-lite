@@ -17,6 +17,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -367,6 +371,41 @@
    "rank": 23,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "food.menu",
+   "gloss": "menu",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.dish",
+   "gloss": "dish (food), course",
+   "tier": 1,
+   "rank": 25,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.starter",
+   "gloss": "starter",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.dessert",
+   "gloss": "dessert",
+   "tier": 1,
+   "rank": 27,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.recipe",
+   "gloss": "recipe",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
   }
  ]
 }

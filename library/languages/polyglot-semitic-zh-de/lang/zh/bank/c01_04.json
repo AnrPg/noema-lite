@@ -1,0 +1,4863 @@
+{
+ "sentences": [
+  {
+   "id": "zh.c01_04.001",
+   "frame": "fr.past.action",
+   "text": "我昨天六点就醒了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "醒",
+     "l": "zh:xing"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Yesterday I was awake by six.",
+   "alts": [
+    "昨天我六点就醒了。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.002",
+   "frame": "fr.past.action",
+   "text": "他起床了。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "起床",
+     "l": "zh:qichuang"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He has got up. / He’s up.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.003",
+   "frame": "fr.past.action",
+   "text": "他没起床。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "起床",
+     "l": "zh:qichuang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He didn’t get up. / He hasn’t got up.",
+   "variantOf": "zh.c01_04.002",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.004",
+   "frame": "fr.past.action",
+   "text": "他起床了吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "起床",
+     "l": "zh:qichuang"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Is he up?",
+   "variantOf": "zh.c01_04.002",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.005",
+   "frame": "fr.past.action",
+   "text": "我已经洗澡了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "已经",
+     "l": "zh:yijing"
+    },
+    {
+     "t": "洗澡",
+     "l": "zh:xizao"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve already had a shower.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.006",
+   "frame": "fr.time",
+   "text": "他每天睡八个小时。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "睡",
+     "l": "zh:shui.sleep"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小时",
+     "l": "zh:xiaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He sleeps eight hours a night.",
+   "alts": [
+    "他每天睡八个小时。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.007",
+   "frame": "fr.time",
+   "text": "他昨天睡了八个小时。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "睡",
+     "l": "zh:shui.sleep"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小时",
+     "l": "zh:xiaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He slept eight hours last night.",
+   "variantOf": "zh.c01_04.006",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "昨天他睡了八个小时。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.008",
+   "frame": "fr.past.action",
+   "text": "我吃了早饭就出门了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "出门",
+     "l": "zh:chumen"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "After breakfast I went out.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.009",
+   "frame": "fr.past.action",
+   "text": "昨天晚上我十一点睡觉。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "十一",
+     "l": "zh:shiyi"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "睡觉",
+     "l": "zh:shuijiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Last night I went to bed at eleven.",
+   "alts": [
+    "我昨天晚上十一点睡觉。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.010",
+   "frame": "fr.past.neg",
+   "text": "昨天晚上我没睡着。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "睡着",
+     "l": "zh:shuizhao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I couldn’t get to sleep last night.",
+   "alts": [
+    "我昨天晚上没睡着。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.011",
+   "frame": "fr.past.neg",
+   "text": "他今天没洗澡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "洗澡",
+     "l": "zh:xizao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He didn’t shower today.",
+   "alts": [
+    "今天他没洗澡。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.012",
+   "frame": "fr.past.action",
+   "text": "我吃早饭了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve had breakfast.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.013",
+   "frame": "fr.past.action",
+   "text": "我没吃早饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I haven’t had breakfast. / I didn’t have breakfast.",
+   "variantOf": "zh.c01_04.012",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.014",
+   "frame": "fr.past.q",
+   "text": "你吃早饭了吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.object",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Have you had breakfast?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.015",
+   "frame": "fr.past.q",
+   "text": "你吃早饭了没有？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.object",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Have you had breakfast or not?",
+   "variantOf": "zh.c01_04.014",
+   "variant": {
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.016",
+   "frame": "fr.past.q",
+   "text": "你昨天几点睡觉？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "睡觉",
+     "l": "zh:shuijiao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "What time did you go to bed yesterday?",
+   "alts": [
+    "昨天你几点睡觉？"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.017",
+   "frame": "fr.past.q",
+   "text": "孩子醒了吗？",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "醒",
+     "l": "zh:xing"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the child awake yet?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.018",
+   "frame": "fr.past.q",
+   "text": "他出门了吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "出门",
+     "l": "zh:chumen"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Has he gone out?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.019",
+   "frame": "fr.time",
+   "text": "我起床、洗澡、穿衣，然后吃早饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "起床",
+     "l": "zh:qichuang"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "洗澡",
+     "l": "zh:xizao"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "穿衣",
+     "l": "zh:chuanyi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "然后",
+     "l": "zh:ranhou"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "早饭",
+     "l": "zh:zaofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I get up, shower, get dressed and then have breakfast.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.020",
+   "frame": "fr.past.action",
+   "text": "妈妈洗了两个苹果。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "洗",
+     "l": "zh:xi"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "Mum washed two apples.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.021",
+   "frame": "fr.past.action",
+   "text": "他已经开始工作了。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "已经",
+     "l": "zh:yijing"
+    },
+    {
+     "t": "开始",
+     "l": "zh:kaishi"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He has already started work.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.022",
+   "frame": "fr.past.action",
+   "text": "假期结束了。",
+   "tokens": [
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "结束",
+     "l": "zh:jieshu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.prep.time"
+   ],
+   "gloss": "The holidays are over.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.023",
+   "frame": "fr.past.action",
+   "text": "假期结束了吗？",
+   "tokens": [
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "结束",
+     "l": "zh:jieshu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.prep.time",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are the holidays over?",
+   "variantOf": "zh.c01_04.022",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.024",
+   "frame": "fr.past.action",
+   "text": "孩子睡着了。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "睡着",
+     "l": "zh:shuizhao"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect"
+   ],
+   "gloss": "The child has fallen asleep.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.025",
+   "frame": "fr.past.neg",
+   "text": "他昨天晚上没睡觉。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "睡觉",
+     "l": "zh:shuijiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He didn’t sleep last night.",
+   "alts": [
+    "昨天晚上他没睡觉。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.026",
+   "frame": "fr.past.action",
+   "text": "我今天八点就出门了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "出门",
+     "l": "zh:chumen"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Today I was out of the door by eight.",
+   "alts": [
+    "今天我八点就出门了。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.027",
+   "frame": "fr.past.q",
+   "text": "你昨天几点回家？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "What time did you get home yesterday?",
+   "alts": [
+    "昨天你几点回家？"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.028",
+   "frame": "fr.past.action",
+   "text": "爸爸已经回家了。",
+   "tokens": [
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "已经",
+     "l": "zh:yijing"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.direction"
+   ],
+   "gloss": "Dad has already come home.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.029",
+   "frame": "fr.past.action",
+   "text": "我们去过那个公园。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have been to that park.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.030",
+   "frame": "fr.past.action",
+   "text": "我今天六点就起床了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "起床",
+     "l": "zh:qichuang"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Today I was up by six.",
+   "alts": [
+    "今天我六点就起床了。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.101",
+   "frame": "fr.used.to",
+   "text": "小时候我常常去奶奶家。",
+   "tokens": [
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "As a child I often went to Grandma’s.",
+   "alts": [
+    "我小时候常常去奶奶家。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.102",
+   "frame": "fr.used.to",
+   "text": "以前我不喝咖啡。",
+   "tokens": [
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I didn’t use to drink coffee.",
+   "alts": [
+    "我以前不喝咖啡。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.103",
+   "frame": "fr.time",
+   "text": "我每天跟邻居的孩子玩。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "邻居",
+     "l": "zh:linju"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "玩",
+     "l": "zh:wan.play"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I play with the neighbours’ children every day.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.104",
+   "frame": "fr.time",
+   "text": "小时候我每天跟邻居的孩子玩。",
+   "tokens": [
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "邻居",
+     "l": "zh:linju"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "玩",
+     "l": "zh:wan.play"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "As a child I played with the neighbours’ children every day.",
+   "variantOf": "zh.c01_04.103",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "我小时候每天跟邻居的孩子玩。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.105",
+   "frame": "fr.used.to",
+   "text": "小时候我很喜欢玩玩具。",
+   "tokens": [
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "玩",
+     "l": "zh:wan.play"
+    },
+    {
+     "t": "玩具",
+     "l": "zh:wanju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "As a child I loved playing with toys.",
+   "alts": [
+    "我小时候很喜欢玩玩具。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.106",
+   "frame": "fr.used.to",
+   "text": "以前我们每个暑假都去北京。",
+   "tokens": [
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "暑假",
+     "l": "zh:shujia"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We used to go to Beijing every summer holiday.",
+   "alts": [
+    "我们以前每个暑假都去北京。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.107",
+   "frame": "fr.be.person",
+   "text": "他是我童年的朋友。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "童年",
+     "l": "zh:tongnian"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is my childhood friend.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.108",
+   "frame": "fr.was.doing",
+   "text": "我回家的时候，爸爸在洗澡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "洗澡",
+     "l": "zh:xizao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.connectors",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When I got home, Dad was in the shower.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.109",
+   "frame": "fr.was.doing",
+   "text": "昨天晚上八点我在做饭。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "At eight last night I was cooking.",
+   "alts": [
+    "我昨天晚上八点在做饭。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.110",
+   "frame": "fr.was.doing",
+   "text": "昨天晚上八点我没在做饭。",
+   "tokens": [
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.negation",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "At eight last night I wasn’t cooking.",
+   "variantOf": "zh.c01_04.109",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "我昨天晚上八点没在做饭。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.111",
+   "frame": "fr.was.doing",
+   "text": "你来的时候，我正在睡觉。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "正在",
+     "l": "zh:zhengzai"
+    },
+    {
+     "t": "睡觉",
+     "l": "zh:shuijiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.connectors",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When you came, I was asleep.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.112",
+   "frame": "fr.was.doing",
+   "text": "那时候他在等我们。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "At that time he was waiting for us.",
+   "alts": [
+    "他那时候在等我们。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.113",
+   "frame": "fr.was.doing",
+   "text": "那时候他在等我们吗？",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.aspect",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Was he waiting for us at that time?",
+   "variantOf": "zh.c01_04.112",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.114",
+   "frame": "fr.was.doing",
+   "text": "我回家的时候，门开着。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "开",
+     "l": "zh:kai"
+    },
+    {
+     "t": "着",
+     "l": "zh:zhe.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When I got home, the door was open.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.115",
+   "frame": "fr.was.doing",
+   "text": "他坐着等我。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "着",
+     "l": "zh:zhe.part"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He sat waiting for me.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.116",
+   "frame": "fr.used.to",
+   "text": "我记得小时候的幼儿园。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "记得",
+     "l": "zh:jide"
+    },
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "幼儿园",
+     "l": "zh:youeryuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.possessive",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I remember the kindergarten of my childhood.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.117",
+   "frame": "fr.past.action",
+   "text": "我忘记了那个游戏。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "忘记",
+     "l": "zh:wangji"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "游戏",
+     "l": "zh:youxi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’ve forgotten that game.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.118",
+   "frame": "fr.past.action",
+   "text": "对不起，我忘了！",
+   "tokens": [
+    {
+     "t": "对不起",
+     "l": "zh:duibuqi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "忘",
+     "l": "zh:wang"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Sorry, I forgot!",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.119",
+   "frame": "fr.past.action",
+   "text": "孩子们都长大了。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "长大",
+     "l": "zh:zhangda"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect"
+   ],
+   "gloss": "The children have all grown up.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.120",
+   "frame": "fr.used.to",
+   "text": "小时候我每天走路去幼儿园。",
+   "tokens": [
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "走路",
+     "l": "zh:zoulu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "幼儿园",
+     "l": "zh:youeryuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "As a child I walked to kindergarten every day.",
+   "alts": [
+    "我小时候每天走路去幼儿园。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.121",
+   "frame": "fr.used.to",
+   "text": "以前每个寒假我们都回爷爷家。",
+   "tokens": [
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "寒假",
+     "l": "zh:hanjia"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We used to go back to Grandpa’s every winter holiday.",
+   "alts": [
+    "我们以前每个寒假都回爷爷家。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.122",
+   "frame": "fr.used.to",
+   "text": "我们的邻居以前是老师。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "邻居",
+     "l": "zh:linju"
+    },
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Our neighbour used to be a teacher.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.123",
+   "frame": "fr.time",
+   "text": "小时候我们常常一起玩这个游戏。",
+   "tokens": [
+    {
+     "t": "小时候",
+     "l": "zh:xiaoshihou"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "玩",
+     "l": "zh:wan.play"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "游戏",
+     "l": "zh:youxi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "As children we often played this game together.",
+   "variantOf": "zh.c01_04.124",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "我们小时候常常一起玩这个游戏。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.124",
+   "frame": "fr.time",
+   "text": "我们常常一起玩这个游戏。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "玩",
+     "l": "zh:wan.play"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "游戏",
+     "l": "zh:youxi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We often play this game together.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.125",
+   "frame": "fr.used.to",
+   "text": "以前我不喝咖啡，现在喝了。",
+   "tokens": [
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.negation",
+    "fn.object",
+    "fn.aspect",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I didn’t use to drink coffee, but now I do.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.126",
+   "frame": "fr.was.doing",
+   "text": "灯开着，可是他已经睡着了。",
+   "tokens": [
+    {
+     "t": "灯",
+     "l": "zh:deng"
+    },
+    {
+     "t": "开",
+     "l": "zh:kai"
+    },
+    {
+     "t": "着",
+     "l": "zh:zhe.part"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "可是",
+     "l": "zh:keshi"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "已经",
+     "l": "zh:yijing"
+    },
+    {
+     "t": "睡着",
+     "l": "zh:shuizhao"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.aspect",
+    "fn.connectors",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "The light was on, but he had already fallen asleep.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.201",
+   "frame": "fr.future.plan",
+   "text": "我明年要出国。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "出国",
+     "l": "zh:chuguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m going abroad next year.",
+   "alts": [
+    "明年我要出国。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.202",
+   "frame": "fr.future.plan",
+   "text": "他打算明年出国。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "出国",
+     "l": "zh:chuguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He intends to go abroad next year.",
+   "alts": [
+    "他明年打算出国。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.203",
+   "frame": "fr.future.plan",
+   "text": "他不打算明年出国。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "出国",
+     "l": "zh:chuguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He doesn’t intend to go abroad next year.",
+   "variantOf": "zh.c01_04.202",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.204",
+   "frame": "fr.future.plan",
+   "text": "他打算明年出国吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "出国",
+     "l": "zh:chuguo"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Is he planning to go abroad next year?",
+   "variantOf": "zh.c01_04.202",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.205",
+   "frame": "fr.future.plan",
+   "text": "明天会很冷。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "会",
+     "l": "zh:hui.will"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day",
+    "fn.adjective"
+   ],
+   "gloss": "It will be cold tomorrow.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.206",
+   "frame": "fr.future.plan",
+   "text": "明天不会很冷。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "会",
+     "l": "zh:hui.will"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day",
+    "fn.adjective",
+    "fn.negation"
+   ],
+   "gloss": "It won’t be very cold tomorrow.",
+   "variantOf": "zh.c01_04.205",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.207",
+   "frame": "fr.future.plan",
+   "text": "下星期我们去北京旅游。",
+   "tokens": [
+    {
+     "t": "下星期",
+     "l": "zh:xiaxingqi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "旅游",
+     "l": "zh:lvyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Next week we’re going to Beijing on holiday.",
+   "alts": [
+    "我们下星期去北京旅游。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.208",
+   "frame": "fr.future.plan",
+   "text": "我们明天要预订酒店。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "预订",
+     "l": "zh:yuding"
+    },
+    {
+     "t": "酒店",
+     "l": "zh:jiudian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Tomorrow we have to book the hotel.",
+   "alts": [
+    "明天我们要预订酒店。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.209",
+   "frame": "fr.future.plan",
+   "text": "明天导游跟我们一起去。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "导游",
+     "l": "zh:daoyou"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.direction"
+   ],
+   "gloss": "Tomorrow the guide is coming with us.",
+   "alts": [
+    "导游明天跟我们一起去。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.210",
+   "frame": "fr.future.q",
+   "text": "你暑假打算去哪里？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "暑假",
+     "l": "zh:shujia"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where are you planning to go in the summer holidays?",
+   "alts": [
+    "暑假你打算去哪里？"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.211",
+   "frame": "fr.future.q",
+   "text": "你们明年会来中国吗？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "会",
+     "l": "zh:hui.will"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Will you come to China next year?",
+   "alts": [
+    "明年你们会来中国吗？"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.212",
+   "frame": "fr.future.q",
+   "text": "我们什么时候去酒店？",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "什么时候",
+     "l": "zh:shenmeshihou"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "酒店",
+     "l": "zh:jiudian"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "When are we going to the hotel?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.213",
+   "frame": "fr.future.q",
+   "text": "你下个星期要去哪里？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "下",
+     "l": "zh:xia"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Where are you going next week?",
+   "alts": [
+    "下个星期你要去哪里？"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.214",
+   "frame": "fr.future.plan",
+   "text": "游客们明天参观大学。",
+   "tokens": [
+    {
+     "t": "游客",
+     "l": "zh:youke"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "参观",
+     "l": "zh:canguan"
+    },
+    {
+     "t": "大学",
+     "l": "zh:daxue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "The tourists are visiting the university tomorrow.",
+   "alts": [
+    "明天游客们参观大学。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.215",
+   "frame": "fr.future.plan",
+   "text": "周末我要去看望奶奶。",
+   "tokens": [
+    {
+     "t": "周末",
+     "l": "zh:zhoumo"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "看望",
+     "l": "zh:kanwang"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "At the weekend I’m going to visit Grandma.",
+   "alts": [
+    "我周末要去看望奶奶。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.216",
+   "frame": "fr.place.on",
+   "text": "护照在行李箱里。",
+   "tokens": [
+    {
+     "t": "护照",
+     "l": "zh:huzhao"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "行李箱",
+     "l": "zh:xinglixiang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.prep.core",
+    "fn.copula"
+   ],
+   "gloss": "The passport is in the suitcase.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.217",
+   "frame": "fr.future.plan",
+   "text": "我们打算在国外待两个星期。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "国外",
+     "l": "zh:guowai"
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.prep.core",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We plan to stay abroad for two weeks.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.218",
+   "frame": "fr.future.plan",
+   "text": "我们明年的计划是去中国旅行。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "计划",
+     "l": "zh:jihua"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "旅行",
+     "l": "zh:lvxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.possessive",
+    "fn.copula",
+    "fn.direction"
+   ],
+   "gloss": "Our plan for next year is to travel to China.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.219",
+   "frame": "fr.future.plan",
+   "text": "下周我们开会。",
+   "tokens": [
+    {
+     "t": "下周",
+     "l": "zh:xiazhou"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "开",
+     "l": "zh:kai"
+    },
+    {
+     "t": "会",
+     "l": "zh:hui.will"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We have a meeting next week.",
+   "alts": [
+    "我们下周开会。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.220",
+   "frame": "fr.past.action",
+   "text": "我已经预订了酒店。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "已经",
+     "l": "zh:yijing"
+    },
+    {
+     "t": "预订",
+     "l": "zh:yuding"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "酒店",
+     "l": "zh:jiudian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have already booked the hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.221",
+   "frame": "fr.go.to",
+   "text": "去年我们去了国外。",
+   "tokens": [
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "年",
+     "l": "zh:nian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "国外",
+     "l": "zh:guowai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.direction",
+    "fn.prep.time",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Last year we went abroad.",
+   "alts": [
+    "我们去年去了国外。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.222",
+   "frame": "fr.go.to",
+   "text": "明年我们要去国外。",
+   "tokens": [
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "国外",
+     "l": "zh:guowai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Next year we’re going abroad.",
+   "variantOf": "zh.c01_04.221",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "alts": [
+    "我们明年要去国外。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.223",
+   "frame": "fr.future.q",
+   "text": "你们打算在酒店待几天？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "打算",
+     "l": "zh:dasuan.plan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "酒店",
+     "l": "zh:jiudian"
+    },
+    {
+     "t": "待",
+     "l": "zh:dai"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh",
+    "fn.prep.core",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How many days do you plan to stay at the hotel?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.224",
+   "frame": "fr.future.plan",
+   "text": "火车快要开了！",
+   "tokens": [
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "快",
+     "l": "zh:kuai.fast"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "开",
+     "l": "zh:kai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.aspect"
+   ],
+   "gloss": "The train is about to leave!",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.225",
+   "frame": "fr.future.plan",
+   "text": "明年我就二十岁了。",
+   "tokens": [
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Next year I’ll be twenty.",
+   "alts": [
+    "我明年就二十岁了。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.301",
+   "frame": "fr.ordinal",
+   "text": "他是我的第一个老师。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第一",
+     "l": "zh:diyi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He was my first teacher.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.302",
+   "frame": "fr.ordinal",
+   "text": "这是他的第三本书。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第三",
+     "l": "zh:disan"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive",
+    "fn.measure.word"
+   ],
+   "gloss": "This is his third book.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.303",
+   "frame": "fr.ordinal",
+   "text": "第二天我们去了北京。",
+   "tokens": [
+    {
+     "t": "第二",
+     "l": "zh:dier"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "The next day we went to Beijing.",
+   "alts": [
+    "我们第二天去了北京。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.304",
+   "frame": "fr.ordinal",
+   "text": "他是第四个到的。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "第四",
+     "l": "zh:disi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He was the fourth to arrive.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.305",
+   "frame": "fr.ordinal",
+   "text": "他是第几个到的？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "第",
+     "l": "zh:di"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Which number was he to arrive?",
+   "variantOf": "zh.c01_04.304",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.306",
+   "frame": "fr.ordinal",
+   "text": "他是家里的第五个孩子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第五",
+     "l": "zh:diwu"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.prep.place",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is the fifth child in the family.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.307",
+   "frame": "fr.ordinal",
+   "text": "他是家里的第几个孩子？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第",
+     "l": "zh:di"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.prep.place",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.question.wh",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Which child is he in the family (first, second …)?",
+   "variantOf": "zh.c01_04.306",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.308",
+   "frame": "fr.ordinal",
+   "text": "第六天我们回家了。",
+   "tokens": [
+    {
+     "t": "第六",
+     "l": "zh:diliu"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.aspect",
+    "fn.direction",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "On the sixth day we went home.",
+   "alts": [
+    "我们第六天回家了。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.309",
+   "frame": "fr.ordinal",
+   "text": "一个星期的第七天是星期天。",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "星期",
+     "l": "zh:xingqi"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第七",
+     "l": "zh:diqi"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "星期天",
+     "l": "zh:xingqitian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.possessive",
+    "fn.time.day"
+   ],
+   "gloss": "The seventh day of the week is Sunday.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.310",
+   "frame": "fr.ordinal",
+   "text": "第八个学生是谁？",
+   "tokens": [
+    {
+     "t": "第八",
+     "l": "zh:diba"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁",
+     "l": "zh:shei"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.question.wh"
+   ],
+   "gloss": "Who is the eighth student?",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.311",
+   "frame": "fr.ordinal",
+   "text": "九月是第九个月。",
+   "tokens": [
+    {
+     "t": "九月",
+     "l": "zh:jiuyue"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "第九",
+     "l": "zh:dijiu"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.prep.time"
+   ],
+   "gloss": "September is the ninth month.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.312",
+   "frame": "fr.ordinal",
+   "text": "这是我们在北京的第十天。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "第十",
+     "l": "zh:dishi"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.prep.core",
+    "fn.possessive"
+   ],
+   "gloss": "This is our tenth day in Beijing.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.313",
+   "frame": "fr.ordinal",
+   "text": "今天是假期的最后一天。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "最后",
+     "l": "zh:zuihou"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.possessive",
+    "fn.numerals",
+    "fn.time.day",
+    "fn.prep.time"
+   ],
+   "gloss": "Today is the last day of the holidays.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.314",
+   "frame": "fr.ordinal",
+   "text": "我吃了一半。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "一半",
+     "l": "zh:yiban"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I ate half (of it).",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.315",
+   "frame": "fr.ordinal",
+   "text": "一半的学生是女孩。",
+   "tokens": [
+    {
+     "t": "一半",
+     "l": "zh:yiban"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "女孩",
+     "l": "zh:nvhai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Half of the students are girls.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.316",
+   "frame": "fr.clock",
+   "text": "现在三点一刻。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "刻",
+     "l": "zh:ke"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.numerals"
+   ],
+   "gloss": "It’s a quarter past three.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.317",
+   "frame": "fr.clock",
+   "text": "现在八点半。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "半",
+     "l": "zh:ban"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.numerals"
+   ],
+   "gloss": "It’s half past eight.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.318",
+   "frame": "fr.clock",
+   "text": "现在几点？",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.prep.time",
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What time is it now?",
+   "variantOf": "zh.c01_04.316",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.319",
+   "frame": "fr.clock",
+   "text": "八点三刻我们出门。",
+   "tokens": [
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "刻",
+     "l": "zh:ke"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "出门",
+     "l": "zh:chumen"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We leave at a quarter to nine.",
+   "alts": [
+    "我们八点三刻出门。"
+   ],
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.320",
+   "frame": "fr.clock",
+   "text": "我等了你半个小时。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "等",
+     "l": "zh:deng.wait"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "半",
+     "l": "zh:ban"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小时",
+     "l": "zh:xiaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.aspect",
+    "fn.prep.time",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I waited half an hour for you.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.321",
+   "frame": "fr.date",
+   "text": "今天是十月九号。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "十月",
+     "l": "zh:shiyue"
+    },
+    {
+     "t": "九",
+     "l": "zh:jiu"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.numerals"
+   ],
+   "gloss": "Today is the 9th of October.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.322",
+   "frame": "fr.date",
+   "text": "今天是几月几号？",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "月",
+     "l": "zh:yue"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.question.wh"
+   ],
+   "gloss": "What’s the date today?",
+   "variantOf": "zh.c01_04.321",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.323",
+   "frame": "fr.date",
+   "text": "我的生日是五月一号。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "生日",
+     "l": "zh:shengri"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "五月",
+     "l": "zh:wuyue"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "号",
+     "l": "zh:hao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.possessive",
+    "fn.prep.time",
+    "fn.numerals"
+   ],
+   "gloss": "My birthday is the 1st of May.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.324",
+   "frame": "fr.date",
+   "text": "现在是二十一世纪。",
+   "tokens": [
+    {
+     "t": "现在",
+     "l": "zh:xianzai"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "世纪",
+     "l": "zh:shiji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.time.day",
+    "fn.numerals"
+   ],
+   "gloss": "We are in the twenty-first century.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.325",
+   "frame": "fr.date",
+   "text": "我爸爸八十年代在北京工作。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "八十",
+     "l": "zh:bashi"
+    },
+    {
+     "t": "年代",
+     "l": "zh:niandai"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.prep.core",
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My dad worked in Beijing in the eighties.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.326",
+   "frame": "fr.date",
+   "text": "明年是学校的一百周年。",
+   "tokens": [
+    {
+     "t": "明年",
+     "l": "zh:mingnian"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学校",
+     "l": "zh:xuexiao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "一百",
+     "l": "zh:yibai"
+    },
+    {
+     "t": "周年",
+     "l": "zh:zhounian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "Next year is the school’s hundredth anniversary.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.327",
+   "frame": "fr.date",
+   "text": "他一九九五年去了中国。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "九",
+     "l": "zh:jiu"
+    },
+    {
+     "t": "九",
+     "l": "zh:jiu"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "年",
+     "l": "zh:nian"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "中国",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.aspect",
+    "fn.direction",
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "In 1995 he went to China.",
+   "level": "A2"
+  },
+  {
+   "id": "zh.c01_04.328",
+   "frame": "fr.ordinal",
+   "text": "我们是最后到的。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "最后",
+     "l": "zh:zuihou"
+    },
+    {
+     "t": "到",
+     "l": "zh:dao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We were the last to arrive.",
+   "level": "A2"
+  }
+ ]
+}

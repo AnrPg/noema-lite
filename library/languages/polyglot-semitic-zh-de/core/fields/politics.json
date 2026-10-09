@@ -99,9 +99,8 @@
   {
    "id": "pol.peace",
    "gloss": "peace (as opposed to war); well-being",
-   "tier": 2,
-   "rank": 14,
-   "pending": true
+   "tier": 1,
+   "rank": 10
   },
   {
    "id": "pol.police",
@@ -134,9 +133,8 @@
   {
    "id": "pol.vote",
    "gloss": "vote, ballot",
-   "tier": 2,
-   "rank": 19,
-   "pending": true
+   "tier": 1,
+   "rank": 5
   },
   {
    "id": "pol.zhoudynasty",
@@ -144,6 +142,66 @@
    "tier": 2,
    "rank": 20,
    "pending": true
+  },
+  {
+   "id": "pol.government",
+   "gloss": "government",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "pol.citizen",
+   "gloss": "citizen",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "pol.election",
+   "gloss": "election",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "pol.party",
+   "gloss": "party (political)",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "pol.empire",
+   "gloss": "empire",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "pol.king",
+   "gloss": "king",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "pol.queen",
+   "gloss": "queen",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "pol.war",
+   "gloss": "war",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "pol.revolution",
+   "gloss": "revolution",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "pol.independence",
+   "gloss": "independence",
+   "tier": 1,
+   "rank": 12
   }
  ]
 }

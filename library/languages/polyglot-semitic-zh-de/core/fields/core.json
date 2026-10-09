@@ -53,6 +53,10 @@
   {
    "id": "more",
    "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
   }
  ],
  "sources": [
@@ -753,9 +757,8 @@
   {
    "id": "adv.already",
    "gloss": "already",
-   "tier": 2,
-   "rank": 6,
-   "pending": true,
+   "tier": 1,
+   "rank": 139,
    "subgroup": "more"
   },
   {
@@ -817,9 +820,8 @@
   {
    "id": "adv.ever",
    "gloss": "ever (in a question: have you ever …?)",
-   "tier": 2,
-   "rank": 14,
-   "pending": true,
+   "tier": 1,
+   "rank": 142,
    "subgroup": "more"
   },
   {
@@ -953,9 +955,8 @@
   {
    "id": "adv.probably",
    "gloss": "probably, most likely",
-   "tier": 2,
-   "rank": 31,
-   "pending": true,
+   "tier": 1,
+   "rank": 145,
    "subgroup": "more"
   },
   {
@@ -1009,17 +1010,15 @@
   {
    "id": "adv.somewhere",
    "gloss": "somewhere",
-   "tier": 2,
-   "rank": 38,
-   "pending": true,
+   "tier": 1,
+   "rank": 127,
    "subgroup": "more"
   },
   {
    "id": "adv.still",
    "gloss": "still; nevertheless",
-   "tier": 2,
-   "rank": 39,
-   "pending": true,
+   "tier": 1,
+   "rank": 140,
    "subgroup": "more"
   },
   {
@@ -1049,9 +1048,8 @@
   {
    "id": "adv.too",
    "gloss": "too (too big)",
-   "tier": 2,
-   "rank": 43,
-   "pending": true,
+   "tier": 1,
+   "rank": 97,
    "subgroup": "more"
   },
   {
@@ -1073,9 +1071,8 @@
   {
    "id": "adv.very",
    "gloss": "very, quite",
-   "tier": 2,
-   "rank": 46,
-   "pending": true,
+   "tier": 1,
+   "rank": 96,
    "subgroup": "more"
   },
   {
@@ -1089,17 +1086,15 @@
   {
    "id": "adv.yet",
    "gloss": "yet (not yet)",
-   "tier": 2,
-   "rank": 48,
-   "pending": true,
+   "tier": 1,
+   "rank": 141,
    "subgroup": "more"
   },
   {
    "id": "conj.asas",
    "gloss": "as … as (A 跟 B 一样 + adjective)",
-   "tier": 2,
-   "rank": 49,
-   "pending": true,
+   "tier": 1,
+   "rank": 118,
    "subgroup": "more"
   },
   {
@@ -1113,9 +1108,8 @@
   {
    "id": "conj.assoonas",
    "gloss": "as soon as (一…就…)",
-   "tier": 2,
-   "rank": 51,
-   "pending": true,
+   "tier": 1,
+   "rank": 117,
    "subgroup": "more"
   },
   {
@@ -1145,25 +1139,22 @@
   {
    "id": "conj.inorderto",
    "gloss": "in order to, so that",
-   "tier": 2,
-   "rank": 55,
-   "pending": true,
+   "tier": 1,
+   "rank": 136,
    "subgroup": "more"
   },
   {
    "id": "conj.whether",
    "gloss": "whether (in a reported question)",
-   "tier": 2,
-   "rank": 56,
-   "pending": true,
+   "tier": 1,
+   "rank": 134,
    "subgroup": "more"
   },
   {
    "id": "conj.while",
    "gloss": "while, as (at the same time)",
-   "tier": 2,
-   "rank": 57,
-   "pending": true,
+   "tier": 1,
+   "rank": 112,
    "subgroup": "more"
   },
   {
@@ -1401,9 +1392,8 @@
   {
    "id": "prep.around",
    "gloss": "around (round something)",
-   "tier": 2,
-   "rank": 88,
-   "pending": true,
+   "tier": 1,
+   "rank": 110,
    "subgroup": "more"
   },
   {
@@ -1425,9 +1415,8 @@
   {
    "id": "prep.becauseof",
    "gloss": "because of",
-   "tier": 2,
-   "rank": 91,
-   "pending": true,
+   "tier": 1,
+   "rank": 135,
    "subgroup": "more"
   },
   {
@@ -1473,9 +1462,8 @@
   {
    "id": "prep.despite",
    "gloss": "in spite of, despite",
-   "tier": 2,
-   "rank": 97,
-   "pending": true,
+   "tier": 1,
+   "rank": 137,
    "subgroup": "more"
   },
   {
@@ -1609,49 +1597,43 @@
   {
    "id": "pron.anyone",
    "gloss": "anyone, everyone (with 都 / 也); nobody (with a negation)",
-   "tier": 2,
-   "rank": 114,
-   "pending": true,
+   "tier": 1,
+   "rank": 126,
    "subgroup": "more"
   },
   {
    "id": "pron.anything",
    "gloss": "anything (after a negation or in a question)",
-   "tier": 2,
-   "rank": 115,
-   "pending": true,
+   "tier": 1,
+   "rank": 125,
    "subgroup": "more"
   },
   {
    "id": "pron.eachother",
    "gloss": "each other",
-   "tier": 2,
-   "rank": 116,
-   "pending": true,
+   "tier": 1,
+   "rank": 95,
    "subgroup": "more"
   },
   {
    "id": "pron.everything",
    "gloss": "everything, anything at all",
-   "tier": 2,
-   "rank": 117,
-   "pending": true,
+   "tier": 1,
+   "rank": 123,
    "subgroup": "more"
   },
   {
    "id": "pron.someone",
    "gloss": "someone, somebody",
-   "tier": 2,
-   "rank": 118,
-   "pending": true,
+   "tier": 1,
+   "rank": 121,
    "subgroup": "more"
   },
   {
    "id": "pron.something",
    "gloss": "something",
-   "tier": 2,
-   "rank": 119,
-   "pending": true,
+   "tier": 1,
+   "rank": 122,
    "subgroup": "more"
   },
   {
@@ -1681,17 +1663,15 @@
   {
    "id": "pron.which",
    "gloss": "who, which, that (relative pronoun after a noun: the book that I read)",
-   "tier": 2,
-   "rank": 123,
-   "pending": true,
+   "tier": 1,
+   "rank": 101,
    "subgroup": "more"
   },
   {
    "id": "pron.who",
    "gloss": "who, the one who; whoever (relative)",
-   "tier": 2,
-   "rank": 124,
-   "pending": true,
+   "tier": 1,
+   "rank": 100,
    "subgroup": "more"
   },
   {
@@ -1729,17 +1709,15 @@
   {
    "id": "quant.both",
    "gloss": "both, either (of two)",
-   "tier": 2,
-   "rank": 129,
-   "pending": true,
+   "tier": 1,
+   "rank": 131,
    "subgroup": "more"
   },
   {
    "id": "quant.every",
    "gloss": "every, each",
-   "tier": 2,
+   "tier": 1,
    "rank": 130,
-   "pending": true,
    "subgroup": "more"
   },
   {
@@ -1749,6 +1727,195 @@
    "rank": 131,
    "pending": true,
    "subgroup": "more"
+  },
+  {
+   "id": "adv.usedto",
+   "gloss": "used to (habitually, in the past)",
+   "tier": 1,
+   "rank": 94,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.enough",
+   "gloss": "enough",
+   "tier": 1,
+   "rank": 98,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.quite",
+   "gloss": "quite, rather",
+   "tier": 1,
+   "rank": 99,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.first",
+   "gloss": "first (adverb)",
+   "tier": 1,
+   "rank": 102,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.afterthat",
+   "gloss": "after that, afterwards",
+   "tier": 1,
+   "rank": 103,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.finally",
+   "gloss": "finally, in the end",
+   "tier": 1,
+   "rank": 104,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.suddenly",
+   "gloss": "suddenly",
+   "tier": 1,
+   "rank": 105,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.meanwhile",
+   "gloss": "meanwhile",
+   "tier": 1,
+   "rank": 106,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.straight",
+   "gloss": "straight on",
+   "tier": 1,
+   "rank": 107,
+   "subgroup": "core"
+  },
+  {
+   "id": "prep.along",
+   "gloss": "along",
+   "tier": 1,
+   "rank": 108,
+   "subgroup": "core"
+  },
+  {
+   "id": "prep.past",
+   "gloss": "past (go past the bank)",
+   "tier": 1,
+   "rank": 109,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.ontime",
+   "gloss": "on time",
+   "tier": 1,
+   "rank": 111,
+   "subgroup": "core"
+  },
+  {
+   "id": "conj.before",
+   "gloss": "before (+ clause)",
+   "tier": 1,
+   "rank": 113,
+   "subgroup": "core"
+  },
+  {
+   "id": "conj.after",
+   "gloss": "after (+ clause)",
+   "tier": 1,
+   "rank": 114,
+   "subgroup": "core"
+  },
+  {
+   "id": "conj.until",
+   "gloss": "until (+ clause)",
+   "tier": 1,
+   "rank": 115,
+   "subgroup": "core"
+  },
+  {
+   "id": "conj.since",
+   "gloss": "since (+ clause)",
+   "tier": 1,
+   "rank": 116,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.less",
+   "gloss": "less",
+   "tier": 1,
+   "rank": 119,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.least",
+   "gloss": "least, the least",
+   "tier": 1,
+   "rank": 120,
+   "subgroup": "core"
+  },
+  {
+   "id": "pron.everyone",
+   "gloss": "everyone, everybody",
+   "tier": 1,
+   "rank": 124,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.everywhere",
+   "gloss": "everywhere",
+   "tier": 1,
+   "rank": 128,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.nowhere",
+   "gloss": "nowhere",
+   "tier": 1,
+   "rank": 129,
+   "subgroup": "core"
+  },
+  {
+   "id": "quant.either",
+   "gloss": "either (of two)",
+   "tier": 1,
+   "rank": 132,
+   "subgroup": "core"
+  },
+  {
+   "id": "quant.neither",
+   "gloss": "neither (of two)",
+   "tier": 1,
+   "rank": 133,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.anyway",
+   "gloss": "anyway",
+   "tier": 1,
+   "rank": 138,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.justnow",
+   "gloss": "just (a moment ago)",
+   "tier": 1,
+   "rank": 143,
+   "subgroup": "core"
+  },
+  {
+   "id": "pron.whose",
+   "gloss": "whose (relative)",
+   "tier": 1,
+   "rank": 144,
+   "subgroup": "core"
+  },
+  {
+   "id": "adv.certainly",
+   "gloss": "certainly",
+   "tier": 1,
+   "rank": 146,
+   "subgroup": "core"
   }
  ]
 }
