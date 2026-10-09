@@ -3562,9 +3562,12 @@ const QA_FAR = new Set(['locked', 'unprepared']);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
         const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).name));
         if (pec) { pec.textContent = '📚 Peculiarities'; pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
+        if (lis) { lis.textContent = '🎧 Listening & speaking'; tutor ? tutor.before(lis) : row.append(lis); }
         row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
       }
       v.querySelector('.lx-libraries')?.remove();
+      v.querySelector('.lx-speechlanes')?.remove();
       const polyRow = poly?.querySelector('.lx-polydrills'); if (polyRow) lanes.append(polyRow);
       const drills = v.querySelector('.lx-drills');
       if (drills) {

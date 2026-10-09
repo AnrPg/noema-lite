@@ -220,7 +220,7 @@ let BROWSER = null;
       if (U.C.nodes[nid].kind === 'lesson') N.recordCheck(U.C, U.L, c, nid, 1, d - 6); }
     NoemaLangUI.save(true); });
   await open('#/', 1000);
-  ok(await page.locator('.lx-speechlanes .lx-lanerow .lx-tolisten').count() === 4, 'the home: a 🎧 Listening & speaking lane for every language');
+  ok(await page.locator('.lx-lanerow .lx-tolisten').count() === 4, 'the home: a 🎧 Listening & speaking button in every language’s lane row');
   await page.screenshot({ path: SHOTS + '/p9_home.png' });
 
   // ---------- 🔊 on a word card: the stored text, the voice of the language ----------
