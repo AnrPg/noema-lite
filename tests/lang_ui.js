@@ -69,7 +69,7 @@ async function answer(page, right) {
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
   let url = 'file://' + ROOT + '/index.html';
   await page.goto(url); await page.evaluate(() => localStorage.clear());
-  await page.goto(url + '?account=anr&subject=' + SUBJ); await wait(1200);
+  await page.goto(url + '?account=anr&subject=' + SUBJ); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(1200);
   ok(await page.evaluate(() => !!window.NoemaLangUI && !window.COURSE), 'the language course opens with its own UI (the subject engine is not loaded)');
   ok(await page.locator('.lx-flagchip').count() === 4, 'four language chips in the top bar');
   ok(/English/.test(await page.locator('.lx-explain').innerText()), 'the explanation language is shown');
@@ -83,7 +83,7 @@ async function answer(page, right) {
   // ---------- the vocabulary lane (a copy of the course without its lessons) ----------
   const ROOT2 = strippedCopy(ROOT); url = 'file://' + ROOT2 + '/index.html';
   await page.goto(url); await page.evaluate(() => localStorage.clear());
-  await page.goto(url + '?account=anr&subject=' + SUBJ); await wait(1200);
+  await page.goto(url + '?account=anr&subject=' + SUBJ); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(1200);
   ok(await page.locator('.lx-node').count() === 5, 'the vocabulary map: 5 vegetable nodes'); if (E.length) console.log(E);
   const home = await page.locator('.lx-go').innerText();
   ok(/0 reviews · \d+ new/.test(home), 'today: no reviews yet, new words: ' + home);
@@ -100,10 +100,10 @@ async function answer(page, right) {
   ok(keys.some(k => k.endsWith(':lang:de:node:veg.1')) && keys.some(k => k.endsWith(':lang:zh:node:veg.1')), `state stored per language and node (${keys.length} keys)`);
 
   // ---------- wrong answers come back once ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/node/veg.1'); await wait(900);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/node/veg.1'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   const before = await page.evaluate(() => Object.keys(NoemaLangUI.UI.L.langs.ar.items).length);
   await page.click('.lx-flagchip:has-text("AR")'); await wait(200);
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/node/veg.1'); await wait(900);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/node/veg.1'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   ok(await page.evaluate(() => NoemaLangUI.UI.lang) === 'ar', 'the chosen language is remembered');
   await page.click('button:has-text("Learn / review this node")'); await wait(200);
   let again = 0, steps = 0;
@@ -120,13 +120,13 @@ async function answer(page, right) {
   await page.evaluate(() => { const { C, L } = NoemaLangUI.UI, d = NoemaLang.dayNumber() - 10;
     for (const id of C.lang.de.byNode['veg.1']) for (const t of ['r', 'p']) { NoemaLang.review(C, L, 'de', id, t, 'good', d); NoemaLang.review(C, L, 'de', id, t, 'good', d + 1); }
     const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) localStorage.setItem(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v)); });
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await wait(900);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   const veg2 = await page.locator('.lx-node >> nth=1').innerText();
   ok(/🇩🇪\s*○ open/.test(veg2) && /🇮🇱\s*🔒 locked/.test(veg2), 'Vegetables I known in German → the next node opens in German only');
   ok(/🇩🇪\s*● known/.test(await page.locator('.lx-node >> nth=0').innerText()), 'Vegetables I shows “known” for German');
 
   // ---------- the flag card of a concept ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/veg.carrot'); await wait(900);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/veg.carrot'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   ok(await page.locator('.lx-railbtn').count() === 4, 'flag rail with 4 languages');
   await page.click('.lx-railbtn >> nth=1'); await wait(150);   // he
   const heLemma = await page.locator('.lx-card .lx-lemma .lx-w').first();
@@ -142,12 +142,12 @@ async function answer(page, right) {
   ok(zhCards >= 1 && (await page.locator('.lx-card').first().innerText()).includes('measure'), `the facade of the Chinese word (measure words) on its card (${zhCards} word(s) for carrot)`);
   await page.screenshot({ path: SHOTS + '/lx3_card.png', fullPage: true });
   const noAr = await page.evaluate(() => Object.keys(NoemaLangUI.UI.C.lang.ar.absent).find(c => c.startsWith('veg.')));
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/' + noAr); await wait(800);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/' + noAr); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(800);
   await page.click('.lx-railbtn >> nth=0'); await wait(150);
   ok(/No Arabic word/.test(await page.locator('.lx-absent').innerText()), 'a concept without an Arabic word says so and what is used instead');
 
   // ---------- the field map ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/field/food.vegetables/0'); await wait(900);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/field/food.vegetables/0'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   ok(await page.locator('.lx-tile').count() === 163 && await page.locator('.lx-h3').count() === 10, 'field map: all 163 vegetables in 10 subgroups');
   await page.click('.lx-seg button:has-text("rare")'); await wait(300);
   ok(await page.locator('.lx-tile').count() === 80, 'tier filter: the 80 rare ones');
@@ -164,7 +164,7 @@ async function answer(page, right) {
 
   // ---------- 🧩 sorting a field into its groups ----------
   await page.click('.lx-flagchip:has-text("DE")'); await wait(200);
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/sort/food.vegetables'); await wait(800);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/sort/food.vegetables'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(800);
   const nChips = await page.locator('.lx-sortchip').count();
   const wrongBin = await page.evaluate(() => { const U = NoemaLangUI.UI, id = document.querySelector('.lx-sortchip').dataset.id, g = U.C.concepts[U.C.lang.de.lex[id].senses[0]].subgroup;
     return [...document.querySelectorAll('.lx-sortbin')].map(b => b.dataset.group).find(x => x !== g); });
@@ -176,7 +176,7 @@ async function answer(page, right) {
   ok(nChips >= 4 && new RegExp(`${nChips - 1} of ${nChips} right`).test(await page.locator('.lx-sortdone').innerText()), `sorting: ${nChips} German vegetables into their groups, one wrong drop counted`);
 
   // ---------- 🔁 principal parts ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/parts/de'); await wait(700);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/parts/de'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(700);
   let pp = 0;
   while (pp < 12 && await page.$('.lx-exparts')) {
     const want = await page.evaluate(() => { const b = document.querySelector('.lx-exparts'), U = NoemaLangUI.UI; return NoemaLang.principalParts(U.C, 'de', U.C.lang.de.lex[b.dataset.lex]).find(([l]) => l === b.dataset.label)[1]; });
@@ -187,30 +187,30 @@ async function answer(page, right) {
   ok(pp > 0 && new RegExp(`✅ ${pp} of ${pp}`).test(ppRes), `principal parts: ${pp} German words (article, plural, genitive …) — ${ppRes.split('\n')[0]}`);
 
   // ---------- name them all ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await wait(500);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(500);
   await page.click('.lx-flagchip:has-text("DE")'); await wait(200);
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/recall/food.vegetables'); await wait(800);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/recall/food.vegetables'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(800);
   for (const w of ['Karotte', 'kartoffel', 'Zwiebeln', 'Quatsch']) { await page.fill('.lx-recallin', w); await page.press('.lx-recallin', 'Enter'); await wait(60); }
   ok(await page.locator('.lx-hit').count() === 3, 'name them all: any form, any capitalization; nonsense is refused');
   await page.click('button:has-text("Done")'); await wait(200);
   ok(/3 of \d+ vegetables in German/.test(await page.locator('.lx-result h2').innerText()), 'result: ' + await page.locator('.lx-result h2').innerText());
 
   // ---------- settings: reading help ----------
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/settings'); await wait(600);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/settings'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(600);
   await page.click('label:has-text("Vowel marks") input'); await wait(100);
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/veg.onion'); await wait(800);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/veg.onion'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(800);
   await page.click('.lx-railbtn >> nth=0'); await wait(150);
   ok(!/[ً-ْ]/.test(await page.locator('.lx-card .lx-lemma .lx-w').first().innerText()), 'vowel marks can be switched off');
 
   // ---------- phones ----------
   await page.setViewportSize({ width: 390, height: 844 });
   for (const hsh of ['#/', '#/c/veg.carrot', '#/field/food.vegetables/1', '#/settings']) {
-    await page.goto(url + '?account=anr&subject=' + SUBJ + hsh); await wait(700);
+    await page.goto(url + '?account=anr&subject=' + SUBJ + hsh); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(700);
     const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     ok(over <= 1, `phone: no sideways scrolling on ${hsh} (${over}px)`);
   }
   await page.screenshot({ path: SHOTS + '/lx4_phone.png' });
-  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await wait(700);
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(700);
   await page.click('.lx-go').catch(() => { }); await wait(200);
   const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   ok(over <= 1, `phone: the session fits (${over}px)`);
@@ -221,7 +221,7 @@ async function answer(page, right) {
   const tab = p2.locator('.cm-mode:has-text("Languages")');
   ok(await tab.count() === 1, 'the subject picker has a 🌍 Languages tab');
   await tab.click(); await wait(300);
-  await p2.click('.noema-chip:has-text("Arabic")'); await wait(1500);
+  await p2.click('.noema-chip:has-text("Arabic")'); await p2.waitForFunction(() => !!window.NoemaLangUI?.UI?.C, null, { timeout: 20000 }).catch(() => { });
   ok(await p2.evaluate(() => !!window.NoemaLangUI), 'choosing the course opens it');
   ok(!E.length && !E2.length, 'no page errors ' + JSON.stringify([...E, ...E2].slice(0, 3)));
   await browser.close(); fs.rmSync(ROOT2, { recursive: true, force: true }); console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

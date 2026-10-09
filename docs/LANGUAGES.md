@@ -27,7 +27,7 @@
 | P5v | **Vocabulary depth** — the remaining §6.2 types (roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins), all from the stored words and profiles; 🏋️ on the word card and the node page, 1–3 deepening items in the daily session | ✅ 2026-10-09 (`langcore` deepening section, `engine/lang/75_vocab2.*`, `tests/lang_vocab2.js`; intensity data exists for 6 words only) |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ✅ 2026-10-09 (`parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; the ⇄ compare lane per concept / function / frame; bridges and false friends on the word card; one polyglot item in every daily session of ≥ 2 languages, confusables side by side; a colour per language; today's languages chosen on the home) |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ✅ 2026-10-09 (✍️ Writing and 📖 Reading lanes per language: translate tiles → typed with deterministic acceptance and an AI-judged fallback, rewrite / expand, guided writing with a rubric, numbers / clock / date, register and dialogue turns, graded readers with questions and AI-written texts checked by the tokenizer; 🎓 the tutor in a language) |
-| P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ⬜ |
+| P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ✅ 2026-10-09 — ✨ new language course (account course: skeleton, three ways), task kinds `lang.core` · `lang.node` · `lang.function` · `lang.compare` · `lang.refill` with checks in JS and merges, 🌙 night queue, connector tools `noema_lang_*`, skill `LANGUAGES.md` + `lang_course.py` in the toolkit |
 | P9 | Listening and speaking (later) | ⬜ later |
 
 ## 0. Development isolation (until the feature is finished)
@@ -783,6 +783,14 @@ For (function F, language L): trainable when, with the current known sets, the b
 
 ### 7.4 Refill tasks (robust "dynamic" content)
 When F is 🟡 or 🔒 only because of the bank, the app offers **"✨ Ask Claude for more sentences with what I know"**: a task with F, L, the learner's known lemma ids (R and P) and the schema. Claude writes annotated sentences, `tools/validate_lang.py` checks them (forms, requirements ⊆ known, functions present), and the result is merged as a learner patch (`patches/`, private). Same mechanism and queue as the curriculum steps (§10).
+* **How it works (P8):** the button sits on the function page under the feasibility light (🟡 / 🔒, and always as "✨ more
+  sentences" when the learner wants more). It queues the task `refill:<fn>:<L>:<n>` with the request `{fn, lang, R, P}`
+  (the lexeme ids of the learner's R and P sets at that moment) — the answer is `{bank: [sentences]}`; every sentence lists F
+  in `functions`, uses **only** lexemes of R (`requirements ⊆ known`, D3 — the refill is for exercises with known words), and
+  passes the bank checks of `langcore.checkLangAnswer` (forms equal the paradigm cells, text = joined tokens, the function
+  shown by its evidence, new unique ids). Merged additively: into the account course itself, or — for a library course —
+  into the learner's private **patch** (`langs/<course>.patch.json`, IndexedDB on the device), which is laid over the
+  course when it opens.
 
 ### 7.5 Daily session
 Input: due reviews (per language), next batches of open nodes, one trainable function, minutes. Default plan:
@@ -824,6 +832,11 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   first); de ä ö ü ß Ä Ö Ü.
 * **🔤 Script lane** (`#/script/<L>`, from the home): the stage meter, the letters / characters by group with their state (tap → its card:
   forms, sound, readings, parts, words of the course, ✍️ trace), 🆕 the next letters, and a drill per exercise type of §6.1 (or mixed).
+* **✨ Through Claude** (`#/claude`, P8): the course's task queue — what Claude still has to write (the core, each node
+  in each language, grammar realizations, comparisons, refills), each with its state (queued · taken by a run · done ·
+  refused), the three ways to get it done (▶ with the Claude key on this device · 💬 the message for the Claude app with
+  the connector · 📋 copy the task and paste the answer), 🌙 queue every unwritten node for the night, and 🔄 fetch the
+  answers the connector left. An account course without its core opens on this page.
 * **Tutor**: language context (function or node + language), known vocabulary of the language (capped list), rule "use known words; at most one new word per sentence, glossed"; intents per button (explain this rule, compare the languages, quiz this node, a conversation with only known words). The 💡 on any part works as elsewhere.
 * **Tutor**: language context (function or node + language), known vocabulary of the language (capped list), rule "use known words; at most one new word per sentence, glossed"; intents per button (explain this rule, compare the languages, quiz this node, a conversation with only known words). The 💡 on any part works as elsewhere. P7: a drawer of its own in the language UI (the subject engine's tutor is not loaded there) — buttons on the grammar page (📘 explain this rule · ⇄ compare the languages · ❓ quiz), on lesson and node pages (❓ quiz this node · 💬 a conversation at my level), in the home row and the lanes; context = the function's realization in the language (summary, blocks, ask-yourself, traps; for “compare” the other languages' summaries) or the node (its words, its grammar) + the learner's known words (150 at most, production-known first) + the rule + the intent of the button + “never give the answers of the app's exercises”; it writes in `chatLang` (a choice in the drawer, stored in the course's prefs) or `explainLang`. Its answer is `{reply, target}`: every sentence in the language it used is tokenized and checked against the course (🆕 glossed, “not in the course” marked) and set in the language's font and direction. Conversations are kept with the others (`NoemaConvos`, mode `lang-<intent>`). With the learner's own Gemini or Claude key; without one the drawer and its buttons say how to add one.
 
@@ -842,10 +855,56 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 ## 10. Creating courses and content through Claude
 
-* **✨ New language course** (subject picker): title, languages, explanation language (default English), depth per language, known languages. Like curricula, three ways: the app with a Claude key, the Claude app with the connector (recommended), or Claude here in Cowork for the shared library.
+* **✨ New language course** (subject picker → 🌍 Languages): title, languages, explanation language (default English), depth per language, known languages. Like curricula, three ways: the app with a Claude key, the Claude app with the connector (recommended), or Claude here in Cowork for the shared library.
 * **Task kinds** (same queue machinery as `NoemaCurJobs`): `lang.core` (spine + field lists + DAG), `lang.node` (one node × one language: lexemes + paradigms + bank sentences), `lang.function` (realization + paradigm cells + bank), `lang.compare` (one function across the course languages), `lang.script`, `lang.refill` (§7.4). Each task text contains the relevant part of this spec, the schema and the validator command — and the parallel order (D13, §4.4.3): a task that adds a language or a node, or moves one, places it on the common order of all the languages of the app. **Adding a language starts with its typological profile** (`_typology/languages.json`, every feature) **and its catalogue of phenomena** (§4.11: tagged, every feature it has or lacks, no point of view, D16) and its `wordFeatures`; every word task fills the word's whole facade (D14) and gives every meaning its concept (D15).
 * **Skill**: `skill/noema-pack-builder/LANGUAGES.md` (authoring rules from §4 and §11), tools in the toolkit.
 * Night generation works as for curricula: queue many `lang.node` tasks.
+
+### 10.1 How it is built (P8)
+* **An account course** (private, in the learner's account — the ✨ dialog makes one; the way "Claude here in Cowork"
+  instead gives the brief for a shared course in `library/languages/`, written and validated in the repository):
+  * the record `a:langcourse:<id>` (format `noema.langjobs/v1`, a synced account key like a curriculum): title, languages,
+    explanation language, depth, known languages, the way chosen (`provider`: `claudeapp` · `claude` · `cowork`), `origin`
+    (`account`, or `library` for the refill queue of a shared course), the content revision `rev`, the task queue and a log;
+  * the content (format `noema.langdata/v1`, the same shape as a built `course.pack.js`: course, typology, fields, nodes,
+    functions, frames, langs{code: {language, lexicon, grammar, bank}}, compare) in IndexedDB on the device and, for a cloud
+    account, in the private storage `langs/<id>.json` — written by the app only (like private packs: the device copy, the
+    cloud copy and the record's `rev` say which is newer);
+  * course ids `u-<slug>-<4 letters>`; the skeleton copies `language.json` and the shared `typology.json` from a library
+    course when the language is there, so a known language needs no new declaration; other languages get theirs from
+    `lang.core` (with their catalogue of phenomena written first, D14 — in the repository, through "Claude here").
+  * The picker's 🌍 Languages overlay lists the account courses with the library courses; `lang:<id>` opens either (the
+    loader takes the content from the device or the cloud instead of `course.pack.js`).
+* **Tasks** (`engine/langcore.js`, P8 section — the same code in the app and in the connector): ids `core`,
+  `node:<node>:<L>`, `function:<fn>:<L>`, `compare:<fn>`, `refill:<fn>:<L>:<n>`; queued in the record with `queuedAt`;
+  `langTaskSpec` gives the text (role, the binding rules D1–D19 in short, what to write, the course's concepts, nodes,
+  frames, the words already written with their forms, the language's paradigm cells and facade, the common order of the
+  library courses for `lang.core`, the answer's JSON Schema, the validator commands); `checkLangAnswer` checks an answer
+  with the validator's rules that matter at run time (structure, ids, references, the DAG and the parallel order within the
+  course and against the library courses, every concept of a node realized or `absent`, paradigm cells complete, vowel
+  marks, citation forms, the facade per `wordFeatures`, contrasts, zh characters / pinyin / traditional form / measure
+  words, bank tokens equal to their cells, text = joined tokens, functions shown by their evidence, notes for ≥ 8 reference
+  languages of all four types); `applyLangAnswer` merges it **additively** (lexemes, absent entries, sentences by id;
+  realizations and comparisons by function) and marks the task done. The full check is `tools/validate_lang.py` +
+  `tools/lang_refcheck.py`, which the task tells Claude to run in its sandbox before answering
+  (`tools/lang_course.py unpack` writes the course as a folder, `… answer <folder> <task id>` turns the folder back into the
+  answer of the task).
+* **Answers** (one JSON object): `lang.core` `{fields, nodes, functions, frames, typology?, languages?: {code: language.json}}`
+  · `lang.node` `{lexicon: {lexemes, absent?}, bank?, grammar?: {fn: realization}}` · `lang.function` `{grammar, bank?}` ·
+  `lang.compare` `{compare: {function, rows: [{aspect, cells: {code: text}}], notes?}}` (shown under the function page) ·
+  `lang.refill` `{bank}`.
+* **Three ways**, as for curricula: ▶ **the Claude key on this device** runs the queued tasks one after another
+  (`NoemaLLM.json`, the check as its validator: a wrong answer goes back to Claude with its problems); 💬 **the Claude app
+  with the connector** (recommended): `noema_lang_courses` → `noema_lang_task` (claims the task for 4 hours, so scheduled
+  runs never write the same node twice; gives a signed link to the course file) → `noema_lang_submit` (the same check;
+  accepted answers go to the inbox `a:langin:<course>:<seq>`, which the app checks again, merges, saves and empties —
+  the connector never writes the course); 📋 **without the connector**: copy a task into any Claude chat, paste the
+  answer back.
+* **🌙 Night generation:** "Queue every unwritten node" queues `lang.node` for every applicable node without words, in
+  the course order, for every language (and `lang.function` for the realizations its lessons need); a scheduled Claude run
+  (or the key on a device left open) works through them; each run takes the next unclaimed task.
+* **Not here:** `lang.script` (the script modules come with P4) and catalogues of phenomena for new languages (written in
+  the repository, where `tools/lang_phenomena.py` checks them against the implementation).
 
 ## 11. Correctness and validation
 
@@ -948,9 +1007,18 @@ Existing subjects and curricula must keep working unchanged; the language part i
 - Done: `engine/langcore.js` section P7 — `typedAnswer` / `sameWords` (stored sentence, alts, every spelling the form index reads as the same words), `checkText` (any text against the form index), `translateItems`, `rewriteItems`, `composeTask` / `composeCheck`, `readerTexts` / `readerQuestions`, `numberWord` / `numberItems` / `countingItems` / `heAnd`, `clockOf` / `dateOf` / `clockItems` / `dateItems`, `registerItems`, `dialogueItems` / `turnsOf`, the AI prompts `aiTask` / `readerTask` (+ `readerProblems`) / `tutorTask` / `tutorContext`, generators `GEN.translate` … `GEN.dialogue_turn` (§6.7); `engine/lang/85_prod.js` + `85_prod.css` — the widgets (`translate`, `rewrite`, `compose`, `number`, `clock`, `date`, `register`, `dialogue`, `readq`), the ✍️ Writing lane (`#/write/<lang>[/<set>]`), the 📖 Reading lane (`#/read/<lang>[/<text>]`, ✨ AI texts), the 🎓 tutor drawer, the home row and the tutor buttons (by wrapping `VIEWS.home`, `VIEWS.fn`, `VIEWS.lesson`, `VIEWS.node` — no edit of the other UI files); `tests/lang_prod.js` (Node over the pilot course + Playwright with Gemini mocked, ~120 checks).
 - Left out, for lack of data: Chinese 万 and numbers above 100 / 1000 (the core's big numbers come with C11), German *halb vier* / *Viertel vor* clock times (none in the bank is read; the rule names the next hour), Arabic 21 / 31 … with a feminine noun (إِحْدَى), Hebrew compound numbers with 9 (dagesh after וְ), times with minutes in numbers; `register` has no Arabic formality variants (Arabic is drilled by the person addressed). The P7 generators are not listed in any grammar file yet (a content task): the lanes use them directly.
 
-**P8 — Through Claude**
+**P8 — Through Claude** — ✅ 2026-10-09
 - New-course flow, task kinds in the app queue and the connector, skill guide, refcheck in the toolkit, night queueing of nodes.
 - ✔ Connector and app-queue tests like the curriculum ones.
+- Done (§10.1): `engine/langcore.js` (P8 section: account course skeleton, task queue, task texts, `checkLangAnswer`,
+  `applyLangAnswer`, inbox merge, the parallel order in JS, refill requests, night queue), `engine/lang/95_claude.js` +
+  `95_claude.css` (✨ new course dialog, `#/claude` queue page, ▶ key runner, 📋 copy / paste, 💬 connector message, inbox
+  poll, refill card on the function page, comparison tables, account course storage), hooks in `engine/loader.js` (the
+  🌍 overlay lists account courses and offers ✨; account courses open from the device or the cloud), `engine/cloud.js`
+  (`a:langin:` / `a:langclaim:` stay in the cloud), connector tools `noema_lang_courses` · `noema_lang_task` ·
+  `noema_lang_submit` (`cloud/mcp/server.mjs`, langcore bundled by `tools/build.py`), `tools/lang_course.py` (course ↔
+  folder, answer from a folder), the skill's `LANGUAGES.md` and its toolkit (validate_lang, lang_refcheck, langlib,
+  lang_course, the schema, `_typology`, `_phenomena`); `tests/lang_claude.js`.
 
 **P9 — Listening and speaking** (later): speech synthesis for words and sentences, dictation, shadowing; then speech recognition.
 
@@ -962,6 +1030,7 @@ Working rules for every phase: read this file first; keep existing subjects unto
 - 2026-10-09 — P5v: vocabulary depth — the remaining §6.2 types made from the stored words and profiles (roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins), as reviews of the word (R or P track), D19 caps on their sentences; 🏋️ practise this word (word card), 🏋️ deepen (node and lesson pages), 1–3 deepening items in the daily session (§6.2, §7.5, §8, §13).
 - 2026-10-09 — P6 polyglot layer: `parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule` (answers from parallel bank sentences, bridges computed from roots / etymologies / pitfalls, typological values and status); the ⇄ compare lane; bridges on the word card; one polyglot item per daily session of ≥ 2 languages and confusables side by side; a colour per language; today's languages on the home; depth-skipped words stay locked.
 - 2026-10-09 — P7 production and reading: ✍️ Writing and 📖 Reading lanes per language (translate tiles → typed, accepted = the bank sentence, its alts and every spelling the form index reads as the same words, anything else AI-judged and labelled; rewrite / expand; guided writing with the AI rubric and the required words checked by the tokenizer; numbers built from the lexicon, counting with gender polarity and 两, clock and dates read from the bank; register and dialogue turns; graded readers of related frames with questions from the glosses; AI-written texts kept only when the tokenizer accepts them) and the 🎓 tutor in a language (context, known words, the rule, intents; AI text checked against the course) — `engine/langcore.js` (P7 section), `engine/lang/85_prod.*`, `tests/lang_prod.js`.
+- 2026-10-09 — P8 done: courses and content through Claude — ✨ new language course (an account course, private and synced), the task kinds `lang.core` / `lang.node` / `lang.function` / `lang.compare` / `lang.refill` in one queue with checks in JS and additive merges, 🌙 night queue, the connector tools `noema_lang_courses` / `noema_lang_task` / `noema_lang_submit`, the skill's `LANGUAGES.md` and `tools/lang_course.py` in the toolkit (§7.4, §8, §10.1, §13).
 - 2026-10-09 — Core batch K1 (C01–C04) in ar, he, zh, de; `main` merged into `languages` (sync rules, i18n; conflicts in `loader.js` and `build.py` resolved as docs/SHELF_AND_LANGUAGES.md says). P3b finished: pictures shown with an emoji fallback, picture → word, 🧩 field sorting, 🔁 principal parts, progress across devices (`mergeLang`, `noema:remote`, `tests/lang_sync.js`). German ordinals are ADJ class `attr`. §13.1 tech debt: the pictures themselves, content after K1 (the user: implementation first), the issues found while writing K1.
 - 2026-10-09 — D18 and D19 (asked by the user): the learner's languages (with levels) decide what is explained — familiar parts hidden in one line, inference by type / family for languages without a profile, comparison notes for a reference set of 21 languages of every type (+ Claude / Gemini notes on request), the library of peculiarities; vocabulary as its own track after the foundations, every other aspect trained with any vocabulary (≤ ⌈30 %⌉ unknown words per sentence, 🆕 with the word card, the list at the end of a lesson), every field with sentences for every non-vocabulary node before it.
 - 2026-10-08 — D17 (asked by the user): the core grows from C01–C07 to **C01–C48** (A2 → B2, §4.4.2; to be reviewed with the user before the content is written) and the **advanced stage** is open-ended (§4.4.4: fields, grammar, lexicon, varieties, texts, culture). `docs/LANGUAGE_RULES.md` — the binding short form of D1–D17 for every agent, tool and skill — with `CLAUDE.md`, `AGENTS.md`, the skill reference, `tools/lang_sources/AGENT_BRIEF.md` and `tests/lang_rules.py` that keeps them in step.

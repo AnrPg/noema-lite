@@ -39,3 +39,4 @@ node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
 node "$ROOT/tests/lang_script.js" "$T"   # P4: script modules, keyboards, pinyin input, the 🔤 lane (docs/LANGUAGES.md §4.9, §6.1, §8)
 node "$ROOT/tests/lang_poly.js" "$T"   # P6 polyglot layer: parallel sentences, bridges, comparisons, the five polyglot exercises, the compare lane
 node "$ROOT/tests/lang_prod.js" "$T"     # production and reading, the tutor (P7; Gemini mocked)
+node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: tasks, checks, connector, app (docs/LANGUAGES.md §10.1)

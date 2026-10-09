@@ -152,6 +152,12 @@ task on a language course** (the short form of decisions D1–D19; with the conn
 9. **Vocabulary is its own track** (D19): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
+**Tasks of a language course** (the learner's ✨ new course, ✨ more sentences — connector: `noema_lang_courses` →
+`noema_lang_task` → `noema_lang_submit`): follow **`LANGUAGES.md`** in this skill — what each task kind (`lang.core`,
+`lang.node`, `lang.function`, `lang.compare`, `lang.refill`) writes, and the checks to run first:
+`scripts/lang_course.py` (course file ↔ folder, answer from the folder), `scripts/validate_lang.py`,
+`scripts/lang_refcheck.py` (the schema: `schemas/noema.lang.v1.schema.json`).
+
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then
 `python3 scripts/unpack.py PACK.noema.zip|PACK.json work` (a package gives back its source files too; from a .json

@@ -390,7 +390,7 @@
         // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
           el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, tr('pick.subjects', null, acc), el('small', {}, tr('pick.subjectsSub', null, acc))),
-          (REG.languages || []).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null,
+          (REG.languages || []).length || langAccount(acc).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null,
           el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
         box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
@@ -400,14 +400,18 @@
     });
   }
   /* ---------------- language courses (docs/LANGUAGES.md): their own runtime and UI, loaded instead of the subject engine ---------------- */
-  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); return m ? { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' } : null; };
+  /** The account's own language courses, made through Claude (docs/LANGUAGES.md §10.1): records a:langcourse:<id>. */
+  const langAccount = acc => ls.keys(`${P}${acc}:a:langcourse:`).map(k => jget(k, null)).filter(r => r && r.origin === 'account' && r.id);
+  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); if (m) return { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' };
+    const r = KV.acc && langAccount(KV.acc).find(x => 'lang:' + x.id === id); return r ? { id: 'lang:' + r.id, courseId: r.id, title: r.title, languages: r.languages, kind: 'language', account: true } : null; };
+  const loadLangUI = async () => { const base = window.NOEMA_ENGINE_BASE || 'engine/'; await loadCSS(base + 'langui.css'); if (!window.NoemaLang) await loadScript(base + 'langcore.js'); if (!window.NoemaLangUI) await loadScript(base + 'langui.js'); };
   const LANG_FLAGS = { ar: '🇸🇦', he: '🇮🇱', zh: '🇨🇳', de: '🇩🇪', el: '🇬🇷', en: '🇬🇧', ru: '🇷🇺', tr: '🇹🇷', hi: '🇮🇳', fr: '🇫🇷', es: '🇪🇸', it: '🇮🇹', ja: '🇯🇵' };
   function pickLanguage(acc, onPick) {
     overlay((box, close) => {
       box.append(brandHead('🌍 Language courses', 'Several languages learned side by side: the same idea in each of them'),
-        el('div', { class: 'noema-chips' }, ...(REG.languages || []).map(m => el('button', { class: 'noema-chip', onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
-          el('span', { class: 'e' }, m.languages.map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title)))),
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+        el('div', { class: 'noema-chips' }, ...[...(REG.languages || []), ...langAccount(acc).map(r => ({ ...r, mine: true }))].map(m => el('button', { class: 'noema-chip', 'data-course': m.id, onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
+          el('span', { class: 'e' }, m.languages.map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title), m.mine ? el('span', { class: 'o', title: 'your own course, written through Claude' }, '🔒') : null))),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + e.message, 4000); } } }, '✨ New language course'), el('button', { class: 'btn small', onclick: close }, 'Close')));
     }, { closable: true });
   }
   async function startLanguage(acc, meta) {
@@ -415,11 +419,14 @@
     Noema.subject = { id: meta.id, title: meta.title, kind: 'language', tutor: {}, hero: {}, features: {} };
     const base = window.NOEMA_ENGINE_BASE || 'engine/';
     await loadCSS(base + 'langui.css');
-    await loadScript(base + 'langcore.js');
-    if (!(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
-    await loadScript(base + 'langui.js');
+    if (!window.NoemaLang) await loadScript(base + 'langcore.js');
+    if (!meta.account && !(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
+    if (!window.NoemaLangUI) await loadScript(base + 'langui.js');
+    // an account course comes from the device / the cloud; a library course gets the learner's private refills (docs/LANGUAGES.md §10.1)
+    const data = await (meta.account ? NoemaLangUI.claude.loadCourse(acc.id, meta.courseId) : NoemaLangUI.claude.withPatch(acc.id, meta.courseId, window.NOEMA_LANGPACKS[meta.courseId])).catch(e => e);
     document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
-    NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data: window.NOEMA_LANGPACKS[meta.courseId] });
+    if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, data.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
+    NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data }); NoemaLangUI.claude.startPolling(acc.id);
     if (meta.profiles) loadScript(meta.profiles).then(() => NoemaLangUI.addProfiles((window.NOEMA_LANGPROFILES || {})[meta.courseId])).catch(e => console.warn('[noema] word profiles', e));   // the depth of every word, loaded after the course is open
     AutoBackup.start(acc.id).catch(() => { });
   }

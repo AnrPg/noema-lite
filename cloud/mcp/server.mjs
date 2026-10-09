@@ -221,6 +221,83 @@ async function pickCurriculum(token, id) {
 const summary = (p, r) => `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters} chapters, ${r.counts.sections} sections, ${r.counts.exercises} exercises (${r.counts.visual} visual), ${r.counts.media} pictures.` +
   `\nIt appears in the subject picker the next time the app opens (or after tapping ☁️ → Sync now).` + (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
 
+/* ---------- language courses through Claude (docs/LANGUAGES.md §10.1): the app's own code (engine/langcore.js, P8 section) ----------
+   The record a:langcourse:<id> lists the tasks; the content is the account's langs/<id>.json (written by the app only) or a
+   library course on the website (+ the learner's patch langs/<id>.patch.json). Answers go to the inbox a:langin:<id>:<seq>;
+   the app checks them again, merges them and empties the inbox. A task handed out is claimed (a:langclaim:<id>:<task>). */
+const NL = () => globalThis.NoemaLang;
+const LANG_PEERS = {};   // the library courses (D13), fetched once per instance
+async function langRecords(token) {
+  const out = [];
+  for (const r of await kvRows(token, 'a:langcourse:')) { try { const c = JSON.parse(r.value); if (c?.format === NL().LANGJOBS.FORMAT && c.id) out.push(c); } catch (e) { } }
+  return out.sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
+}
+const siteFile = rel => CFG.siteUrl.replace(/\/$/, '') + '/' + String(rel).replace(/^\//, '');
+async function fetchPack(rel) {
+  const r = await fetch(siteFile(rel)); if (!r.ok) throw new Error(`${rel}: HTTP ${r.status}`);
+  const t = await r.text(); return JSON.parse(t.slice(t.indexOf('] = ') + 4).trim().replace(/;$/, ''));
+}
+async function langPeers() {
+  const out = [];
+  for (const m of CFG.languages || []) { if (!LANG_PEERS[m.id]) LANG_PEERS[m.id] = fetchPack(m.path).catch(() => null); const d = await LANG_PEERS[m.id]; if (d) out.push(d); }
+  return out;
+}
+const langPath = (uid, id, ext = 'json') => `${uid}/langs/${id}.${ext}`;
+async function storageJSON(token, path) { try { const r = await sb(`/storage/v1/object/authenticated/noema-private/${path}`, token, { raw: true }); return JSON.parse(await r.text()); } catch (e) { return null; } }
+/** The course content as the app last saved it (+ for a library course: the learner's patch laid over it). */
+async function langContent(token, uid, rec) {
+  if (rec.origin === 'library') {
+    const m = (CFG.languages || []).find(x => x.id === rec.id); if (!m) throw new Error(`The library course “${rec.id}” is not on this website.`);
+    const d = JSON.parse(JSON.stringify(await (LANG_PEERS[m.id] = LANG_PEERS[m.id] || fetchPack(m.path))));
+    const patch = await storageJSON(token, langPath(uid, rec.id, 'patch.json'));
+    return { data: patch ? NL().langApplyPatch(d, patch) : d, meta: m, patch: !!patch };
+  }
+  const d = await storageJSON(token, langPath(uid, rec.id));
+  if (!d) throw new Error(`The content of “${rec.title}” is not in the cloud yet — open the course once in noema-lite (signed in), then try again.`);
+  return { data: d };
+}
+/** The course as it will be once the app has merged the answers in the inbox — with the queue as it really is (claims). */
+async function langState(token, uid, rec, { peers = [] } = {}) {
+  const [inbox, claims, content] = await Promise.all([kvRows(token, `${NL().LANGJOBS.IN}${rec.id}:`), kvRows(token, `${NL().LANGJOBS.CLAIM}${rec.id}:`), langContent(token, uid, rec)]);
+  const m = NL().langMerged(rec, content.data, inbox, { peers });
+  return { rec: NL().langSettle(m.rec, { claims }), data: m.data, content, pending: inbox.length };
+}
+async function claimLangTask(token, uid, cid, tid, force = false) {
+  const key = NL().langClaimKey(cid, tid), now = new Date().toISOString(), value = JSON.stringify({ v: 1, task: tid, at: now });
+  const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
+  if (Array.isArray(ins) && ins.length) return true;
+  const stale = new Date(Date.now() - NL().LANGJOBS.LEASE).toISOString();
+  const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (force ? '' : `&updated_at=lt.${encodeURIComponent(stale)}`), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
+  return Array.isArray(upd) && upd.length > 0;
+}
+const releaseLangTask = (token, cid, tid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(NL().langClaimKey(cid, tid))}`, token, { method: 'DELETE' });
+function langLine(rec) {
+  const w = NL().langWork(rec);
+  const bits = [w.queued.length ? `${w.queued.length} task(s) queued: ${w.queued.slice(0, 5).map(t => t.id).join(', ')}${w.queued.length > 5 ? '…' : ''}` : '', w.claimed.length ? `${w.claimed.length} being written by another run: ${w.claimed.slice(0, 5).map(t => t.id).join(', ')}` : ''].filter(Boolean);
+  return `- “${rec.title}” — course_id ${rec.id} · ${rec.origin === 'library' ? 'a library course (its refills)' : 'the learner\'s own course'} · ${rec.languages.join(', ')} · ${w.done} task(s) done\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
+}
+async function pickLangCourse(token, id) {
+  const all = await langRecords(token);
+  if (!all.length) return { error: 'This account has no language course made through Claude yet. In noema-lite: 🌍 Languages → ✨ New language course (or ✨ Ask Claude for more sentences on a grammar page).' };
+  if (id) { const c = all.find(x => x.id === id) || all.find(x => String(x.title).toLowerCase() === String(id).toLowerCase()); return c ? { rec: c } : { error: `No language course “${id}”. The learner's courses:\n${all.map(x => `- ${x.id}: “${x.title}”`).join('\n')}` }; }
+  const busy = all.filter(c => NL().langWork(c).queued.length);
+  if (busy.length === 1) return { rec: busy[0] };
+  return { error: `Which course? Call again with course_id:\n${all.map(langLine).join('\n')}` };
+}
+/** How Claude gets the course into its sandbox: a signed link (2 h) to the account's copy — or to a working copy with the
+    answers still waiting in the inbox merged in (the connector never writes the course itself). */
+async function langFiles(token, uid, st) {
+  const sign = async path => `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${(await sb(`/storage/v1/object/sign/noema-private/${path}`, token, { method: 'POST', body: { expiresIn: 7200 } })).signedURL}`;
+  if (st.rec.origin === 'library') {
+    const files = [{ url: siteFile(st.content.meta.path), name: 'course.pack.js' }]; if (st.content.meta.profiles) files.push({ url: siteFile(st.content.meta.profiles), name: 'course.profiles.js' });
+    if (st.content.patch) files.push({ url: await sign(langPath(uid, st.rec.id, 'patch.json')), name: 'patch.json' });
+    return files;
+  }
+  let path = langPath(uid, st.rec.id);
+  if (st.pending) { path = langPath(uid, st.rec.id, 'view.json'); await sb(`/storage/v1/object/noema-private/${path}`, token, { method: 'POST', body: JSON.stringify(st.data), headers: { 'content-type': 'application/json', 'x-upsert': 'true' } }); }
+  return [{ url: await sign(path), name: 'course.json' }];
+}
+
 /* ---------- tools ---------- */
 const TOOLS = [
   { name: 'noema_whoami', description: 'Which noema-lite account is connected, and its private subject packs.', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
@@ -247,6 +324,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). A step handed to you is claimed for you: other runs skip it until you save it (or for 4 hours), so each queued step is prepared once — prepare the step you got. When the learner only asks what is next, pass peek = true. Call it again after each accepted answer or saved step.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string', description: 'from noema_curricula (may be omitted when only one curriculum has work)' }, want: { type: 'string', enum: ['any', 'map', 'plan', 'step'], description: 'only this kind of work (default any: map first, then plans, then queued steps)' }, step: { type: 'string', description: 'prepare this step (id or title) even if it is not queued' }, peek: { type: 'boolean', description: 'true = only SAY what is next (the learner asked what is next, you will not do it now): the step is not claimed, so another run can still take it' }, force: { type: 'boolean', description: 'with step: take over a step that another run claimed but stopped preparing without saving' } } } },
+  { name: 'noema_lang_courses', description: 'The learner\'s language courses made through Claude (🌍 Languages → ✨ New language course) and the refill queues of library courses, with the tasks waiting in each: the core of a course, a node in a language (words + paradigms + sentences), a grammar realization, a comparison, more sentences with the words the learner knows.',
+    inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
+  { name: 'noema_lang_task', description: 'The next task of a language course, as complete instructions: what to write, the binding rules, the course context, the link to the course file, the checks to run in your sandbox (lang_course.py, validate_lang.py, lang_refcheck.py from the toolkit) and the JSON Schema of the answer. The task is claimed for you (other runs skip it for 4 hours) — write the task you got and answer with noema_lang_submit. peek = true only says what is next.',
+    inputSchema: { type: 'object', properties: { course_id: { type: 'string', description: 'from noema_lang_courses (may be omitted when only one course has work)' }, want: { type: 'string', enum: ['any', 'core', 'node', 'function', 'compare', 'refill'], description: 'only this kind of task (default any, in queue order)' }, task: { type: 'string', description: 'this task id (e.g. "node:fd.03:de")' }, peek: { type: 'boolean' }, force: { type: 'boolean', description: 'with task: take over a task another run claimed but stopped writing' } } } },
+  { name: 'noema_lang_submit', description: 'Submit your answer to a task from noema_lang_task. It is checked exactly as noema-lite checks it (forms against the paradigm cells, the facade of every word, sentences, the parallel order …); problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
+    inputSchema: { type: 'object', properties: { course_id: { type: 'string' }, task_id: { type: 'string' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['course_id', 'task_id', 'result_json'] } },
   { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
@@ -261,6 +344,10 @@ const PROMPTS = [{
   name: 'curriculum_work', title: 'Work on my noema-lite curriculum', description: 'Build the map, plan the chapters and prepare the queued steps of a noema-lite curriculum — with your Claude plan.',
   arguments: [{ name: 'curriculum', description: 'Its name or id (optional when only one curriculum has work)', required: false }, { name: 'steps', description: 'How many steps to prepare in this chat (default 1)', required: false }],
   text: a => `Use the noema-lite connector to work on my noema-lite curriculum${a.curriculum ? ` “${a.curriculum}”` : ''}: build its map and plan the chapters of its steps if that is still open, then prepare ${+a.steps > 1 ? `the next ${+a.steps} queued steps, one after the other` : 'the next queued step'}.\nStart with noema_curricula, then call noema_curriculum_task${a.curriculum ? ` with that curriculum_id` : ''} and follow what it returns; after each accepted answer or saved step call it again. Do not ask me questions — choose sensible defaults.`,
+}, {
+  name: 'language_course_work', title: 'Write my noema-lite language course', description: 'Work through the tasks of a language course made through Claude (the core, the nodes in each language, grammar, comparisons, refills) — with your Claude plan.',
+  arguments: [{ name: 'course', description: 'Its name or id (optional when only one course has work)', required: false }, { name: 'tasks', description: 'How many tasks to do in this chat (default 1)', required: false }],
+  text: a => `Use the noema-lite connector to write my noema-lite language course${a.course ? ` “${a.course}”` : ''}: do ${+a.tasks > 1 ? `the next ${+a.tasks} queued tasks, one after the other` : 'the next queued task'}.\nStart with noema_lang_courses, then call noema_lang_task${a.course ? ' with that course_id' : ''} and follow what it returns — check every answer in your sandbox with the toolkit (lang_course.py, validate_lang.py, lang_refcheck.py) before noema_lang_submit; after each accepted answer call noema_lang_task again. Do not ask me questions — choose sensible defaults.`,
 }];
 
 async function callTool(name, args, ctx) {
@@ -383,6 +470,48 @@ async function callTool(name, args, ctx) {
       const lines = t.downloads.length ? await downloadLines(token, uid, `work/${t.packId}/sources`, t.downloads, sharedOn(c) ? c.shared.files : null) : [];
       return text(CJ().stepText(c, t, { mode: 'connector', fileLines: lines }));
     }
+    case 'noema_lang_courses': {
+      const all = await langRecords(token);
+      if (!all.length) return text('No language course made through Claude yet. In noema-lite: 🌍 Languages → ✨ New language course, and choose “Claude app”.');
+      const states = await Promise.all(all.map(async r => { try { return (await langState(token, uid, r)).rec; } catch (e) { return r; } }));
+      return text(`The learner's language courses:\n${states.map(langLine).join('\n')}\n\nCall noema_lang_task with a course_id to get the next task.`);
+    }
+    case 'noema_lang_task': {
+      const pk = await pickLangCourse(token, String(args?.course_id || '').trim()); if (pk.error) return pk.error.startsWith('Which') ? text(pk.error) : fail(pk.error);
+      const peek = args?.peek === true || args?.peek === 'true', force = args?.force === true || args?.force === 'true';
+      const want = args?.want && args.want !== 'any' ? 'lang.' + args.want : 'any';
+      let st; try { st = await langState(token, uid, pk.rec); } catch (e) { return fail(e.message); }
+      let t = null;
+      for (let tries = 0; tries < 8; tries++) {
+        t = NL().langNext(st.rec, { want, task: String(args?.task || '').trim(), force });
+        if (!t || t.error) break;
+        if (peek) return text(`Next task (not claimed — peek): ${t.id} (${t.kind}). ${NL().langWork(st.rec).queued.length} task(s) queued in all. To write it, call noema_lang_task again without peek.`);
+        if (await claimLangTask(token, uid, st.rec.id, t.id, force && !!args?.task)) break;
+        if (args?.task) { t = { error: `“${t.id}” has just been taken by another run — do not write it twice. If that run stopped, call again with force = true.` }; break; }
+        t.claimedAt = new Date().toISOString(); t = null;
+      }
+      if (t?.error) return fail(t.error);
+      if (!t) { const busy = NL().langWork(st.rec).claimed; return text(`✅ Nothing is waiting in “${st.rec.title}”${want !== 'any' ? ` (${args.want})` : ''}. ` + (busy.length ? `${busy.length} task(s) are being written by other runs right now (${busy.slice(0, 5).map(x => x.id).join(', ')}) — do NOT write them again; stop here.` : 'The learner queues more in the app (✨ Through Claude, 🌙 night queue, ✨ more sentences).')); }
+      const peers = t.kind === NL().LANGJOBS.KIND.core ? await langPeers() : [];
+      const files = await langFiles(token, uid, st);
+      const lib = (CFG.languages || [])[0];
+      return text(NL().langTaskText(st.rec, st.data, t, { mode: 'connector', files, peers, libraryUrl: lib ? siteFile(lib.path) : '' }));
+    }
+    case 'noema_lang_submit': {
+      const pk = await pickLangCourse(token, String(args?.course_id || '').trim()); if (pk.error) return fail(pk.error);
+      const tid = String(args?.task_id || '').trim();
+      let st; try { st = await langState(token, uid, pk.rec); } catch (e) { return fail(e.message); }
+      const t = NL().langTaskById(st.rec, tid);
+      if (!t) return fail(`Task "${tid}" is not open any more (already answered, or not queued). Call noema_lang_task for the current one.`);
+      let data; try { data = globalThis.NoemaLLM ? globalThis.NoemaLLM.parseJSON(String(args?.result_json || '')) : JSON.parse(String(args?.result_json || '')); } catch (e) { return fail('result_json is not valid JSON — send ONE JSON object (no prose around it).'); }
+      const errs = NL().checkLangAnswer(st.rec, st.data, t, data, { peers: t.kind === NL().LANGJOBS.KIND.core ? await langPeers() : [] });
+      if (errs.length) return fail(`Your answer has ${errs.length} problem(s) — fix ALL of them (validate_lang.py in your sandbox shows them too) and call noema_lang_submit again with the complete corrected object:\n- ${errs.slice(0, 40).join('\n- ')}`);
+      await kvPut(token, uid, NL().langInboxKey(st.rec.id), { v: 1, kind: t.kind, task: t.id, data, at: new Date().toISOString(), via: 'claude-app' });
+      await releaseLangTask(token, st.rec.id, t.id).catch(() => { });
+      const after = NL().langMerged(st.rec, st.data, [{ key: NL().langInboxKey(st.rec.id, 'zzzz'), value: JSON.stringify({ task: t.id, data }) }]);
+      const w = NL().langWork(after.rec);
+      return text(`✅ Accepted (${t.id}). It reaches the learner's app by itself (merged into the course when noema-lite is open).\n` + (w.queued.length ? `${w.queued.length} task(s) still queued — call noema_lang_task with course_id "${st.rec.id}" if the learner asked for more.` : 'Nothing else is queued in this course 🎉.'));
+    }
     case 'noema_curriculum_submit': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);
       const c = await curState(token, pk.c, uid); const tid = String(args?.task_id || '').trim();
@@ -410,7 +539,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step.' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step. Language courses: noema_lang_courses → noema_lang_task → noema_lang_submit (check every answer with the toolkit first).' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});
