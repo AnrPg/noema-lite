@@ -414,7 +414,7 @@
     if (!g) return { state: 'absent', reason: 'no realization file', sentences: 0, needs: {}, unlockBy: [] };
     if (g.status === 'absent') return { state: 'absent', reason: g.summary, sentences: 0, needs: {}, unlockBy: [] };
     const k = opts.k || known(C, L, code);
-    const ok = selectSentences(C, code, { known: k.R, functions: [fid] });
+    const ok = selectSentences(C, code, { known: k.R, functions: [fid], maxUnknown: 'auto' });   // D19: the sentences the exercises really use
     const needs = {}; let needsMet = true;
     for (const [pos, n] of Object.entries(g.needs || {})) {
       const have = [...k.R].filter(id => X.lex[id].pos === pos).length;
@@ -425,8 +425,9 @@
     for (const s of selectSentences(C, code, { known: k.R, functions: [fid], maxUnknown: 99 })) for (const l of s.unknown) { const n = X.lex[l].node; votes[n] = (votes[n] || 0) + 1; }
     for (const [pos, [have, n]] of Object.entries(needs)) if (have < n) for (const lx of Object.values(X.lex)) if (lx.pos === pos && !k.R.has(lx.id)) votes[lx.node] = (votes[lx.node] || 0) + 1;
     const unlockBy = Object.keys(votes).filter(n => !['known', 'mastered'].includes(k.nodes[n])).sort((a, b) => votes[b] - votes[a] || C.order.indexOf(a) - C.order.indexOf(b));
-    const state = !needsMet || !ok.length ? 'locked' : ok.length >= min ? 'ready' : 'thin';
-    return { state, sentences: ok.length, needs, unlockBy };
+    const gens = g.generators?.length ? g.generators : [{ type: 'sentence_meaning' }], usesBank = gens.some(x => BANK_TYPES.has(x.type)) || !gens.some(x => x.type !== 'quiz');   // only paradigm drills: no sentence needed (a quiz alone is not training)
+    const state = !needsMet || (usesBank && !ok.length) ? 'locked' : (!usesBank || ok.length >= min) ? 'ready' : 'thin';
+    return { state, sentences: ok.length, needs, unlockBy, usesBank };
   }
 
   /* ---------- reading text: form index, clitics, segmentation ---------- */
@@ -667,7 +668,8 @@
     const X = C.lang[code], g = X.grammar[fid], rng = opts.rng || Math.random, max = opts.max ?? 12;
     if (!g || g.status === 'absent' && !(g.quiz || []).length) return [];
     const k = opts.k || known(C, L, code), K = k.R;
-    const gens = (g.generators && g.generators.length) ? g.generators : [{ type: 'sentence_meaning' }, { type: 'build_sentence' }, { type: 'transform' }];
+    const gens0 = (g.generators && g.generators.length) ? g.generators : [{ type: 'sentence_meaning' }, { type: 'build_sentence' }, { type: 'transform' }];
+    const gens = opts.auto ? gens0.concat(autoGenerators(C, code, fid, gens0)) : gens0;   // P5: the types its data allows (grammar lane, function page, session)
     const fnsOf = gen => gen.bank?.functions || [fid];
     // the sentences a generator draws on: by functions (default: this one) or by frames (for points no word shows, e.g. a verbless “to be”)
     const U = opts.strictKnown ? 0 : 'auto';   // D19: up to ⌈30 %⌉ unknown words (marked 🆕); strictKnown: only known words
@@ -675,7 +677,7 @@
     const pools = [];
     for (const gen of gens) {
       const items = [];
-      if (['inflect', 'principal_parts', 'paradigm'].includes(gen.type)) {
+      if (['inflect', 'principal_parts'].includes(gen.type)) {
         for (const lx of Object.values(X.lex)) {
           if (!K.has(lx.id) || (gen.pos && lx.pos !== gen.pos) || (gen.class && lx.class !== gen.class) || (gen.lemmas && !gen.lemmas.includes(lx.id)) || (gen.exclude || []).includes(lx.id)) continue;
           if (gen.concepts && !(lx.senses || []).some(c => gen.concepts.some(p => c.startsWith(p)))) continue;
@@ -708,8 +710,8 @@
         const ss = bankFor(gen);
         const all = selectSentences(C, code, { known: K, maxUnknown: U });
         // two sentences mean the same when their words stand for the same concepts (再见 / 拜拜, 你 / 您): never offer one as a wrong meaning of the other
-        const conceptKey = o => o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|');
-        for (const s of ss) {
+        const ck = new Map(), conceptKey = o => { if (!ck.has(o.id)) ck.set(o.id, o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|')); return ck.get(o.id); };   // computed once per sentence
+        for (const s of ss.length > max * 3 + 30 ? shuffled(ss, rng).slice(0, max * 3 + 30) : ss) {   // a big bank: a sample is enough (the pool is cut to max anyway)
           const key = conceptKey(s);
           const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
           const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).slice(0, 3);
@@ -735,7 +737,7 @@
             unknown: [...new Set([...s2.unknown, ...s1.req.filter(l => !K.has(l))])] });
         }
       } else if (GEN[gen.type]) {   // generators added by later phases (P4–P7): GEN[type](ctx) → items
-        items.push(...(GEN[gen.type]({ C, L, code, fid, g, gen, k, K, rng, bank: () => bankFor(gen), max }) || []));
+        items.push(...(GEN[gen.type]({ C, L, code, fid, g, gen, k, K, rng, bank: () => bankFor(gen), max, U }) || []));
       } else if (gen.type === 'quiz') {
         for (const q of g.quiz || []) items.push({ type: 'choose', kind: 'quiz', fn: fid, lang: code, prompt: q.q, ask: '', options: shuffled(q.options, rng), answer: q.answer, why: q.why });
       }
@@ -748,7 +750,7 @@
   }
   /** Is a built sentence right? (the tiles in order vs the sentence and its alternatives) */
   function checkBuilt(C, code, item, tiles) {
-    const X = C.lang[code], text = joinTokens(tiles.map(t => ({ t })), X.language.tokenJoin);
+    const X = C.lang[code], text = joinTokens(tiles.map(t => ({ t })), item.join || X.language.tokenJoin);
     return item.answers.some(a => cmpText(code, a) === cmpText(code, text));
   }
   /** Recognition items for words: the word → its meaning (distractors: other words of the same lesson/node first). */
@@ -1337,6 +1339,517 @@
 
   API.GEN = GEN;
   Object.assign(API, { scriptModule, letterClusters, glyphPositions, glyphForm, glyphTrackState, introduceGlyph, reviewGlyph, scriptState, needsTranslit, markLevel, fadeMarks, textMarkLevel, toneSandhi, parsePinyin, pinyinCandidates, letterDiff, checkTyped, scriptTypes, scriptItems, scriptSession, strokeMatch, resample, idsParts, ownSegmentation, knownSplit, GEN_SCRIPT });   // P4 — scripts and input
+  /* ---------- P5 — Grammar lane: paradigm tables, analysis, morphemes, roots and patterns, agreement, contrasts, roles, glosses, proofreading, joining (§6.3, §6.4, §7.3, §7.5) ----------
+     Every answer comes from the course files: the lexemes' forms and features, the bank's tokens and variant pairs. Item types:
+       {type:'table'}      paradigm — rows [{cell, label, form, hidden, options, accept}]
+       {type:'slots'}      analyze (layout 'rows': one choice per dimension, `combos` = the accepted combinations) · agree · parse · gloss (layout 'inline': one unit per word)
+       {type:'proofread'}  units, wrongAt, fix {options, accept}
+       {type:'contrast'}   a meaning → one of the sentences of a variant group
+       {type:'morph'} / {type:'combine'}   tiles like 'build' (checkBuilt), morph joined without spaces (join: 'none') */
+  for (const [t, l] of Object.entries({ JUS: 'jussive', HAB: 'habitual', INT: 'question', CSTR: 'construct state', DIR: 'directional', POS: 'positive' })) if (!(t in TAG_LABEL)) TAG_LABEL[t] = l;
+  const POS_OF_TAG = { N: 'NOUN', V: 'VERB', ADJ: 'ADJ', DET: 'DET', PRON: 'PRON', NUM: 'NUM', ADP: 'ADP', PART: 'PART', ADV: 'ADV', CLF: 'CLF' };
+  const POS_LABEL = { NOUN: 'noun', PROPN: 'name', VERB: 'verb', AUX: 'auxiliary verb', ADJ: 'adjective', DET: 'determiner / article', PRON: 'pronoun', ADP: 'preposition', ADV: 'adverb',
+    PART: 'particle', CCONJ: 'conjunction (and, but …)', SCONJ: 'subordinator (that, because …)', NUM: 'number', CLF: 'measure word', INTJ: 'interjection' };
+  const POS_ORDER = Object.keys(POS_LABEL);
+  const DIMS = [['Case', ['NOM', 'ACC', 'DAT', 'GEN']], ['Number', ['SG', 'DU', 'PL', 'COLL']], ['Gender', ['MASC', 'FEM', 'NEUT']], ['Person', ['1', '2', '3']],
+    ['Definiteness', ['DEF', 'INDF', 'CONST', 'CSTR']], ['Tense', ['PRS', 'PST', 'FUT']], ['Mood', ['IND', 'SBJV', 'JUS', 'JUSS', 'IMP']], ['Aspect', ['PFV', 'IPFV', 'HAB']],
+    ['Form', ['NFIN', 'PTCP', 'MSDR']], ['Degree', ['CMPR', 'SPRL']], ['Ending', ['STRG', 'WEAK', 'MIX']], ['Address', ['FORM', 'INFM']], ['Polarity', ['NEG']]];
+  const DIM_OF = {}; for (const [d, vs] of DIMS) for (const x of vs) DIM_OF[x] = d;
+  const DIM_ORDER = [...DIMS.map(d => d[0]), 'Owner'];
+  const DIM_TITLE = { Case: 'Case', Number: 'Number', Gender: 'Gender', Person: 'Person', Definiteness: 'Definiteness', Tense: 'Tense', Mood: 'Mood', Aspect: 'Aspect',
+    Form: 'Form', Degree: 'Degree', Ending: 'Ending', Address: 'Address', Polarity: 'Polarity', Owner: 'Owner' };
+  const NOT_MARKED = '— (not marked)';
+  const GLOSS_ORDER = ['Tense', 'Mood', 'Aspect', 'Form', 'Degree', 'Polarity', 'Person', 'Number', 'Gender', 'Case', 'Definiteness', 'Ending', 'Address', 'Owner'];
+  const SKIP_CELL = /(^|;)(PFX|ALT|SEP)(;|$)/;
+  const AGREE_DIMS = ['Case', 'Number', 'Gender', 'Person'];
+  const AGREE_KEYS = ['Number', 'Gender', 'Definiteness', 'Person', 'Addressee', 'Case'];
+  const BANK_TYPES = new Set(['sentence_meaning', 'build_sentence', 'word_order', 'transform', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'morph_build']);
+  const P5_TYPES = ['paradigm', 'analyze', 'morph_build', 'root_pattern', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine'];
+  const CANON = new WeakMap();   // lexeme → Map(canonical cell → its key in forms), built once
+  const keyOf = (lx, cell) => { let m = CANON.get(lx); if (!m) { m = new Map(Object.keys(lx.forms || {}).map(x => [canon(x), x])); CANON.set(lx, m); } return m.get(canon(cell)) || null; };
+  const formOf = (lx, cell) => { const k = keyOf(lx, cell); return k ? lx.forms[k] : null; };
+  const acceptOf = (lx, key) => uniqStr([lx.forms[key], ...((lx.formsAlt || {})[key] || [])].map(nfc));
+  const sameWord = (code, a, b) => stripMarks(code, nfc(a)).toLowerCase() === stripMarks(code, nfc(b)).toLowerCase();
+  const shortGloss = g => { const a = String(g || '').replace(/\([^)]*\)/g, ' ').split(/[;,/]/)[0].replace(/\s+/g, ' ').trim(), b = a.replace(/^(to|the|a|an) /i, ''); return b || a; };   // “the (school) holidays” → holidays
+  /** What a word means, briefly (the concept's gloss, else its role). */
+  const meaningOf = (C, code, l) => { const x = C.lang[code].lex[l]; if (!x) return ''; const c = (x.senses || [])[0]; return shortGloss(c ? C.concepts[c]?.gloss : x.role) || x.lemma; };
+  /** The dimension values of a cell → {Case: 'NOM', …} or null when a tag belongs to no dimension (such cells are not analysed). */
+  function cellDims(cell) {
+    const p = cellParts(canon(cell)).slice(1), out = {}, pss = p.find(t => /^PSS/.test(t));
+    for (const t of p) {
+      if (t === 'POSS' && pss) continue;
+      const d = /^PSS/.test(t) ? 'Owner' : DIM_OF[t];
+      if (!d || out[d]) return null;
+      out[d] = t;
+    }
+    return out;
+  }
+  /** A cell in words, in the order a table reads (person · number · gender · case · definiteness …), not alphabetically. */
+  const labelOf = cell => { const p = cellParts(canon(cell)).slice(1); if (p.some(t => t === 'POSS' || /^PSS/.test(t))) return cellLabel(cell); const rk = t => { const i = GLOSS_ORDER.indexOf(DIM_OF[t]); return i < 0 ? 99 : i; }; return p.sort((a, b) => rk(a) - rk(b)).map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form'; };
+  const valLabel = t => t == null ? NOT_MARKED : /^PSS/.test(t) ? (OWNER[t.slice(3)] || t.slice(3)) : (TAG_LABEL[t] || t);
+  /** The known words a drill may use (the same filters as inflect: pos, class, lemmas, exclude, concepts). */
+  function drillLexemes(X, gen, K, rng) {
+    return shuffled(Object.values(X.lex).filter(lx => K.has(lx.id) && (!gen.pos || lx.pos === gen.pos) && (!gen.class || lx.class === gen.class) && (!gen.lemmas || gen.lemmas.includes(lx.id))
+      && !(gen.exclude || []).includes(lx.id) && (!gen.concepts || (lx.senses || []).some(c => gen.concepts.some(p => c.startsWith(p)))) && !(lx.separable && !gen.lemmas)), rng);
+  }
+  const capOf = ctx => Math.max(30, (ctx.max || 12) * 3);
+  /** The words of a sentence one by one: prefixed words split into their parts; punctuation kept ({p:true}). */
+  function sentenceUnits(C, code, s) {
+    const X = C.lang[code], cache = X._units || (X._units = new Map());
+    if (s.id && cache.has(s.id)) return cache.get(s.id);
+    const out = [];
+    (s.tokens || []).forEach((k, ti) => {
+      if (k.p) { out.push({ t: k.t, p: true, tok: ti }); return; }
+      if (k.parts) { k.parts.forEach((q, j) => out.push({ t: q.t, l: q.l || null, f: q.f || null, name: !!q.name, tok: ti, pre: j < k.parts.length - 1, pos: unitPos(X, q) })); return; }
+      out.push({ t: k.t, l: k.l || null, f: k.f || null, name: !!k.name, tok: ti, pos: unitPos(X, k) });
+    });
+    if (s.id) cache.set(s.id, out);
+    return out;
+  }
+  function unitPos(X, k) { if (k.name) return 'PROPN'; const lx = X.lex[k.l]; if (lx?.pos && lx.pos !== 'NOUN' && lx.pos !== 'VERB') return lx.pos; return (k.f && POS_OF_TAG[cellParts(k.f)[0]]) || lx?.pos || null; }
+  /** The gloss of one word: its meaning + the tags of its cell (carrot.ACC.SG), Leipzig style. */
+  function unitGloss(C, code, u, cell) {
+    const f = cell === undefined ? u.f : cell, rk = t => { const i = GLOSS_ORDER.indexOf(/^PSS/.test(t) ? 'Owner' : DIM_OF[t]); return i < 0 ? 99 : i; };
+    const tags = f ? cellParts(canon(f)).slice(1).filter(t => !['PFX', 'ALT', 'POSS'].includes(t)).sort((a, b) => rk(a) - rk(b)) : [];
+    return meaningOf(C, code, u.l) + (tags.length ? '.' + tags.join('.') : '');
+  }
+  const unknownOf = (s, K) => s.req.filter(l => !K.has(l));
+  const fits = (s, K, U) => unknownOf(s, K).length <= (U === 'auto' ? s.cap : 0);
+  /** Variant groups of a language: original id → [original, variants …] (cached). */
+  function variantGroups(X) {
+    if (X._groups) return X._groups;
+    const g = {}; for (const s of X.sentences) if (s.variantOf && X.sentenceById[s.variantOf]) (g[s.variantOf] = g[s.variantOf] || [X.sentenceById[s.variantOf]]).push(s);
+    return (X._groups = g);
+  }
+  const lemmaKey = k => k.l || (k.parts || []).map(p => p.l || p.t).join('+') || (k.name ? 'name:' + k.t : k.t);
+  const wordToks = s => (s.tokens || []).map((k, i) => ({ k, i })).filter(x => !x.k.p);
+
+  /* paradigm: a known word's table, cells hidden by how far the function is (new → a third, practising → half, solid → all but one, mastered → all) */
+  GEN.paradigm = ctx => {
+    const { C, L, code, fid, g, gen, K, rng } = ctx, X = C.lang[code], out = [];
+    const share = { new: 0.34, practicing: 0.5, solid: 0.75, mastered: 1 }[functionState(C, L, code, fid)] || 0.34;
+    const base = gen.cells || g.paradigmCells || null;
+    for (const lx of drillLexemes(X, gen, K, rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const keys = Object.keys(lx.forms || {}).filter(c => !SKIP_CELL.test(c));
+      let rows = base ? keys.filter(c => base.some(b => canon(b) === canon(c))) : [];
+      if (rows.length < 3) rows = keys.slice(0, 12);
+      if (rows.length < 2) continue;
+      const forms = uniqStr(rows.map(c => nfc(lx.forms[c])));
+      if (forms.length < 2) continue;
+      const n = rows.length, nh = Math.min(n, Math.max(1, Math.round(n * share)));
+      const lemmaRow = rows.find(c => nfc(lx.forms[c]) === nfc(lx.lemma));
+      const order = shuffled(rows, rng).sort((a, b) => (a === lemmaRow ? 1 : 0) - (b === lemmaRow ? 1 : 0));   // the lemma's cell is hidden last
+      const hide = new Set(order.slice(0, nh));
+      const extra = uniqStr(Object.keys(lx.forms).filter(c => !SKIP_CELL.test(c) && !rows.includes(c)).map(c => nfc(lx.forms[c]))).filter(f => !forms.includes(f));
+      const pool = uniqStr([...forms, ...shuffled(extra, rng).slice(0, 1)]);
+      const optsFor = c => shuffled(uniqStr([nfc(lx.forms[c]), ...shuffled(pool.filter(f => !acceptOf(lx, c).includes(f)), rng).slice(0, 5)]), rng);   // the answer + five others
+      out.push({ type: 'table', kind: 'paradigm', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: `Fill in the table of ${lx.lemma}`,
+        rows: rows.map(c => ({ cell: canon(c), label: labelOf(c), form: lx.forms[c], hidden: hide.has(c), ...(hide.has(c) ? { options: optsFor(c), accept: acceptOf(lx, c) } : {}) })),
+        why: rows.map(c => `${labelOf(c)}: ${lx.forms[c]}`).join(' · ') });
+    }
+    return out;
+  };
+  /* analyze: a form → one choice per dimension that varies in the word's table; every cell with that form is accepted */
+  GEN.analyze = ctx => {
+    const { C, code, fid, g, gen, K, rng } = ctx, X = C.lang[code], out = [];
+    const base = gen.cells || g.paradigmCells || null;
+    for (const lx of drillLexemes(X, gen, K, rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const all = Object.keys(lx.forms || {}).filter(c => !SKIP_CELL.test(c)).map(c => ({ key: c, cell: canon(c), dims: cellDims(c), form: nfc(lx.forms[c]), accept: acceptOf(lx, c) })).filter(x => x.dims);
+      const uni = base && all.filter(x => base.some(b => canon(b) === x.cell)).length >= 2 ? all.filter(x => base.some(b => canon(b) === x.cell)) : all;
+      if (uni.length < 2) continue;
+      const dims = DIM_ORDER.filter(d => new Set(uni.map(x => x.dims[d] || null)).size > 1);
+      if (!dims.length) continue;
+      const fixed = DIM_ORDER.filter(d => !dims.includes(d) && uni[0].dims[d]).map(d => valLabel(uni[0].dims[d]));
+      const done = new Set();
+      for (const x of shuffled(uni, rng)) {
+        if (done.has(x.form)) continue; done.add(x.form);
+        const matches = uni.filter(o => o.accept.includes(x.form));
+        const units = dims.map(d => {
+          const vals = DIMS.find(z => z[0] === d)?.[1] || [], present = uniqStr(uni.map(o => o.dims[d] || null).map(String));
+          const ordered = present.sort((a, b) => (a === 'null' ? 99 : vals.indexOf(a) < 0 ? 50 : vals.indexOf(a)) - (b === 'null' ? 99 : vals.indexOf(b) < 0 ? 50 : vals.indexOf(b)));
+          return { label: DIM_TITLE[d], slot: { options: ordered.map(v => valLabel(v === 'null' ? null : v)), answer: uniqStr(matches.map(m => valLabel(m.dims[d]))) } };
+        });
+        out.push({ type: 'slots', kind: 'analyze', layout: 'rows', fn: fid, lang: code, lex: lx.id, prompt: lx.forms[x.key], ask: `Which form of ${lx.lemma} is it?`, fixed: fixed.join(' · '),
+          units, combos: matches.map(m => dims.map(d => valLabel(m.dims[d]))), why: `${lx.forms[x.key]} = ${matches.map(m => labelOf(m.cell)).join(' or ')} of ${lx.lemma}` });
+      }
+    }
+    return out;
+  };
+  /* morph_build: prefix + word (the bank's parts), Arabic stem + owner suffix (the pronoun's suffix) → the word */
+  GEN.morph_build = ctx => {
+    const { C, code, fid, gen, K, rng } = ctx, X = C.lang[code], out = [], seen = new Set(), U = ctx.U;
+    const prefixes = uniqStr(X.prefixes.map(p => p.t));
+    for (const s of ctx.bank()) {
+      if (out.length >= capOf(ctx)) break;
+      for (const k of s.tokens || []) {
+        if (!k.parts || k.parts.some(q => q.name || !q.l || !K.has(q.l)) || seen.has(nfc(k.t))) continue;
+        if (nfc(k.parts.map(q => q.t).join('')) !== nfc(k.t)) continue;
+        seen.add(nfc(k.t));
+        const host = k.parts[k.parts.length - 1], hx = X.lex[host.l];
+        const otherPre = shuffled(prefixes.filter(p => !k.parts.some(q => nfc(q.t) === nfc(p))), rng).slice(0, 1);
+        const otherForm = shuffled(Object.entries(hx.forms || {}).filter(([c, f]) => !SKIP_CELL.test(c) && !sameWord(code, f, host.t)).map(([, f]) => f), rng).slice(0, 1);
+        const pieces = k.parts.map(q => q.t);
+        out.push({ type: 'morph', kind: 'morph', fn: fid, lang: code, lex: host.l, join: 'none', pieces, tiles: shuffled(uniqStr([...pieces, ...otherPre, ...otherForm]), rng), size: pieces.length,
+          answers: [k.t], punct: '', gloss: k.parts.map(q => unitGloss(C, code, q)).join(' + '), why: `${pieces.join(' + ')} → ${k.t}` });
+      }
+    }
+    // Arabic: a possessed form = the stem + the owner's suffix (from the pronoun's `suffix`)
+    const sufs = Object.values(X.lex).filter(x => x.pos === 'PRON' && typeof x.suffix === 'string').map(x => nfc(x.suffix.split(/[,(]/)[0].replace(/ـ/g, '').trim())).filter(Boolean);
+    if (sufs.length >= 2 && (gen.suffixes || /possess|suffix|pronoun/.test(fid))) for (const lx of drillLexemes(X, { pos: 'NOUN' }, K, rng)) {
+      if (out.length >= capOf(ctx) * 2) break;
+      for (const [c, f] of Object.entries(lx.forms || {})) {
+        const pss = cellParts(c).find(t => /^PSS/.test(t)); if (!pss || SKIP_CELL.test(c) || seen.has(nfc(f))) continue;
+        const suf = sufs.filter(x => nfc(f).endsWith(x)).sort((a, b) => b.length - a.length)[0]; if (!suf) continue;
+        const stem = nfc(f).slice(0, -suf.length); if (!stem) continue;
+        seen.add(nfc(f));
+        const tiles = shuffled(uniqStr([stem, suf, ...shuffled(sufs.filter(x => x !== suf), rng).slice(0, 2), ...(nfc(lx.lemma) !== stem && !nfc(lx.lemma).includes(' ') ? [nfc(lx.lemma)] : [])]), rng);
+        out.push({ type: 'morph', kind: 'morph', fn: fid, lang: code, lex: lx.id, join: 'none', pieces: [stem, suf], tiles, size: 2, answers: [f], punct: '',
+          gloss: `${lx.lemma} + ${valLabel(pss)}`, why: `${stem} + ${suf} → ${f} (${cellLabel(c)})` });
+      }
+    }
+    return out;
+  };
+  /* root_pattern: root × pattern → word; word → root; word → pattern (Arabic and Hebrew; verbs: the verb form / binyan) */
+  const rootOf = x => typeof x.root === 'string' && x.root.trim() ? x.root : null;
+  const patternOf = x => typeof x.pattern === 'string' && x.pattern.trim() ? x.pattern : typeof x.verbForm === 'string' ? 'Form ' + x.verbForm : typeof x.binyan === 'string' ? x.binyan : null;
+  GEN.root_pattern = ctx => {
+    const { C, code, fid, gen, K, rng } = ctx, X = C.lang[code], out = [];
+    const all = Object.values(X.lex).filter(x => rootOf(x) && patternOf(x) && (!gen.pos || x.pos === gen.pos));
+    const knownAll = all.filter(x => K.has(x.id));
+    const pickFrom = (cands, n) => { const kn = shuffled(cands.filter(x => K.has(x.id)), rng), un = shuffled(cands.filter(x => !K.has(x.id)), rng); return [...kn, ...un].slice(0, n); };
+    const modes = gen.mode ? [gen.mode] : ['build', 'root', 'pattern'];
+    for (const lx of drillLexemes(X, { ...gen, pos: gen.pos }, K, rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const r = rootOf(lx), p = patternOf(lx); if (!r || !p) continue;
+      const lem = nfc(lx.lemma), unknown = [];
+      for (const mode of modes) {
+        let options, answer, ask, prompt, why;
+        if (mode === 'build') {
+          const d = pickFrom(all.filter(x => x.id !== lx.id && nfc(x.lemma) !== lem && (rootOf(x) === r || patternOf(x) === p)), 3);
+          const more = d.length < 2 ? pickFrom(all.filter(x => x.id !== lx.id && nfc(x.lemma) !== lem && !d.includes(x) && x.pos === lx.pos), 3 - d.length) : [];
+          const ds = [...d, ...more]; if (ds.length < 2) continue;
+          ds.forEach(x => { if (!K.has(x.id)) unknown.push(x.id); });
+          options = uniqStr([lx.lemma, ...ds.map(x => x.lemma)]); answer = lx.lemma; ask = 'Root × pattern — which word?'; prompt = `${r} + ${p}`; why = `${r} + ${p} → ${lx.lemma} (${meaningOf(C, code, lx.id)})`;
+        } else if (mode === 'root') {
+          const letters = new Set(r.split(/\s+/));
+          const roots = uniqStr(all.map(rootOf).filter(x => x !== r)).sort((a, b) => b.split(/\s+/).filter(z => letters.has(z)).length - a.split(/\s+/).filter(z => letters.has(z)).length || (rng() - 0.5));
+          if (roots.length < 2) continue;
+          options = [r, ...roots.slice(0, 3)]; answer = r; ask = 'Its root?'; prompt = lx.lemma; why = `${lx.lemma}: root ${r}, pattern ${p}`;
+        } else {
+          const pats = shuffled(uniqStr(all.filter(x => x.pos === lx.pos).map(patternOf).filter(x => x !== p)), rng);
+          if (pats.length < 2) continue;
+          options = [p, ...pats.slice(0, 3)]; answer = p; ask = 'Its pattern?'; prompt = lx.lemma; why = `${lx.lemma}: pattern ${p}, root ${r}`;
+        }
+        out.push({ type: 'choose', kind: 'root', mode, fn: fid, lang: code, lex: lx.id, prompt, ask, options: shuffled(uniqStr(options), rng), answer, why, unknown: mode === 'build' ? uniqStr(unknown) : [] });
+      }
+    }
+    return knownAll.length ? out : [];
+  };
+  /* agree: an original and its variant that differ in ≥ 2 aligned words — the first changed noun / pronoun is given, the learner updates the rest */
+  GEN.agree = ctx => {
+    const { C, code, fid, gen, K, rng, U } = ctx, X = C.lang[code], out = [], want = gen.bank?.variant;
+    for (const s2 of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      if (!s2.variantOf || !Object.keys(s2.variant || {}).some(k => AGREE_KEYS.includes(k)) || (want && !(want in (s2.variant || {})))) continue;
+      const s1 = X.sentenceById[s2.variantOf]; if (!s1 || !fits(s1, K, U)) continue;
+      const w1 = wordToks(s1), w2 = wordToks(s2);
+      if (w1.length !== w2.length || w1.some((a, i) => lemmaKey(a.k) !== lemmaKey(w2[i].k))) continue;
+      const changed = w1.map((a, i) => nfc(a.k.t) !== nfc(w2[i].k.t));
+      if (changed.filter(Boolean).length < 2) continue;
+      const posAt = i => unitPos(X, w1[i].k.parts ? w1[i].k.parts[w1[i].k.parts.length - 1] : w1[i].k);   // the noun is given (else a pronoun): the rest agrees with it
+      let tr = changed.findIndex((c, i) => c && posAt(i) === 'NOUN'); if (tr < 0) tr = changed.findIndex((c, i) => c && ['PRON', 'PROPN'].includes(posAt(i))); if (tr < 0) tr = changed.indexOf(true);
+      const units = []; let nslots = 0;
+      for (const [ti, k] of (s1.tokens || []).entries()) {
+        if (k.p) { units.push({ t: k.t, p: true }); continue; }
+        const wi = w1.findIndex(x => x.i === ti), k2 = w2[wi].k;
+        if (wi === tr) { units.push({ t: k2.t, from: k.t, l: k.l || null, trigger: true }); continue; }
+        const lx = k.l && X.lex[k.l];
+        const others = lx && k.f ? shuffled(Object.entries(lx.forms || {}).filter(([c, f]) => !SKIP_CELL.test(c) && !sameWord(code, f, k.t) && !sameWord(code, f, k2.t)).map(([, f]) => f), rng).slice(0, 2) : [];
+        if (!changed[wi] && !others.length) { units.push({ t: k.t, l: k.l || null }); continue; }
+        const key2 = lx && k2.f ? keyOf(lx, k2.f) : null;
+        units.push({ t: k.t, l: k.l || null, slot: { options: shuffled(uniqStr([k.t, k2.t, ...others]), rng), answer: key2 ? uniqStr([k2.t, ...acceptOf(lx, key2)]) : [k2.t], value: k.t } });
+        nslots++;
+      }
+      if (!nslots) continue;
+      const un = uniqStr([...unknownOf(s2, K), ...unknownOf(s1, K)]);
+      out.push({ type: 'slots', kind: 'agree', layout: 'inline', fn: fid, lang: code, sentence: s2.id, sentences: [s1.id, s2.id], source: s1.text, sourceGloss: s1.gloss, gloss: s2.gloss,
+        change: variantLabel(s2.variant), ask: `${variantLabel(s2.variant)}: ${w1[tr].k.t} → ${w2[tr].k.t}. Change the words that agree with it.`, units, why: s2.text, unknown: un });
+    }
+    return out;
+  };
+  /* contrast: a meaning → which sentence of one variant group (minimal pairs) says it, with what separates them */
+  const variantWords = v => Object.entries(v || {}).map(([k, x]) => TAG_LABEL[x] || TAG_LABEL[String(x).toUpperCase()] || `${k}: ${x}`).join(', ');
+  GEN.contrast = ctx => {
+    const { C, code, fid, gen, K, rng, U } = ctx, X = C.lang[code], out = [], groups = variantGroups(X), want = gen.bank?.variant, seen = new Set();
+    for (const s of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const gid = s.variantOf || (groups[s.id] ? s.id : null); if (!gid || seen.has(gid)) continue; seen.add(gid);
+      const grp = (groups[gid] || []).filter(x => fits(x, K, U) && (!want || x === groups[gid][0] || want in (x.variant || {})));
+      if (grp.length < 2) continue;
+      for (const t of grp) {
+        if (grp.some(o => o !== t && (o.gloss === t.gloss || nfc(o.text) === nfc(t.text)))) continue;   // the meaning must tell them apart
+        const others = grp.filter(o => o !== t);
+        out.push({ type: 'contrast', kind: 'contrast', fn: fid, lang: code, sentence: t.id, sentences: grp.map(x => x.id), prompt: t.gloss, ask: 'Which sentence says this?',
+          options: shuffled(uniqStr(grp.map(x => x.text)), rng), answer: t.text,
+          why: `${t.text} — ${t.variant ? variantWords(t.variant) : 'the starting sentence'}` + others.map(o => ` · ${o.text} = “${o.gloss}”${o.variant ? ' (' + variantWords(o.variant) + ')' : ''}`).join(''),
+          unknown: uniqStr(grp.flatMap(x => unknownOf(x, K))) });
+      }
+    }
+    return out;
+  };
+  /* parse: the case of every case-marked word (languages with case), otherwise the part of speech of every word */
+  GEN.parse = ctx => {
+    const { C, code, fid, gen, K, rng } = ctx, X = C.lang[code], out = [];
+    for (const s of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const us = sentenceUnits(C, code, s);
+      const cased = us.filter(u => u.f && cellParts(u.f).some(t => DIM_OF[t] === 'Case'));
+      const mode = gen.tags || (new Set(cased.map(u => cellParts(u.f).find(t => DIM_OF[t] === 'Case'))).size >= 2 ? 'case' : 'pos');
+      let asked;
+      if (mode === 'case') {
+        const caseOf = u => cellParts(u.f || '').find(t => DIM_OF[t] === 'Case');
+        const all = uniqStr(DIMS[0][1].filter(cs => X._cases ? X._cases.has(cs) : true));
+        if (!X._cases) { X._cases = new Set(); for (const lx of Object.values(X.lex)) for (const c of Object.keys(lx.forms || {})) for (const t of cellParts(c)) if (DIM_OF[t] === 'Case') X._cases.add(t); }
+        const opts = DIMS[0][1].filter(cs => X._cases.has(cs)).map(cs => TAG_LABEL[cs]);
+        if (opts.length < 2) continue;
+        asked = us.map(u => !u.p && !u.name && caseOf(u) ? { ...u, slot: { options: opts, answer: [TAG_LABEL[caseOf(u)]] } } : u);
+        void all;
+      } else {
+        const ps = us.filter(u => !u.p && !u.name && u.pos && POS_LABEL[u.pos]);
+        if (ps.length < 2) continue;
+        const fill = ['NOUN', 'VERB', 'PRON', 'ADJ', 'ADP', 'ADV'];
+        const opts = POS_ORDER.filter(p => ps.some(u => u.pos === p) || fill.includes(p)).map(p => POS_LABEL[p]);
+        asked = us.map(u => !u.p && !u.name && u.pos && POS_LABEL[u.pos] ? { ...u, slot: { options: opts, answer: [POS_LABEL[u.pos]] } } : u);
+      }
+      const slots = asked.filter(u => u.slot);
+      if (slots.length < 2 || new Set(slots.map(u => u.slot.answer[0])).size < 2) continue;
+      out.push({ type: 'slots', kind: 'parse', mode, layout: 'inline', fn: fid, lang: code, sentence: s.id, gloss: s.gloss,
+        ask: mode === 'case' ? 'Which case is each marked word in?' : 'Which part of speech is each word?', units: asked.map(stripUnit),
+        why: slots.map(u => `${u.t} = ${u.slot.answer[0]}`).join(' · '), unknown: s.unknown });
+    }
+    return out;
+  };
+  const stripUnit = u => { const o = { t: u.t }; for (const k of ['p', 'l', 'pre', 'name', 'slot', 'gloss', 'trigger', 'from']) if (u[k]) o[k] = u[k]; return o; };
+  /* gloss: the interlinear gloss under every word (meaning + the cell's tags), or the reverse */
+  GEN.gloss = ctx => {
+    const { C, code, fid, gen, K, rng } = ctx, X = C.lang[code], out = [];
+    for (const s of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const us = sentenceUnits(C, code, s), words = us.filter(u => !u.p && !u.name && u.l && X.lex[u.l]);
+      if (words.length < 2 || words.length > 9) continue;
+      const memo = new Map(), glossOf = u => { if (!memo.has(u)) memo.set(u, unitGloss(C, code, u)); return memo.get(u); };
+      const units = us.map(u => {
+        if (u.p || u.name || !u.l || !X.lex[u.l]) return stripUnit(u);
+        const lx = X.lex[u.l], right = glossOf(u);
+        if (gen.reverse) {
+          const forms = shuffled(uniqStr([u.t, ...Object.entries(lx.forms || {}).filter(([c, f]) => !SKIP_CELL.test(c) && !sameWord(code, f, u.t)).map(([, f]) => f)]), rng).slice(0, 3);
+          const opts = shuffled(uniqStr([u.t, ...forms.filter(f => f !== u.t).slice(0, 2), ...shuffled(words.filter(w => w.l !== u.l).map(w => w.t), rng).slice(0, 1)]), rng);
+          return { ...stripUnit(u), gloss: right, slot: { options: opts, answer: [u.t] } };
+        }
+        const cells = u.f ? shuffled(Object.entries(lx.forms || {}).filter(([c, f]) => !SKIP_CELL.test(c) && !sameWord(code, f, u.t)), rng).slice(0, 2).map(([c]) => glossOf({ ...u, f: c })).filter(x => x !== right) : [];
+        const other = shuffled(words.filter(w => w.l !== u.l).map(glossOf), rng);
+        const opts = shuffled(uniqStr([right, ...shuffled(cells, rng).slice(0, 1), ...other.slice(0, 2)]).filter((x, i, a) => a.indexOf(x) === i).slice(0, 4), rng);
+        if (opts.length < 2) return { ...stripUnit(u), gloss: right };
+        return { ...stripUnit(u), slot: { options: opts.includes(right) ? opts : [...opts.slice(0, 3), right], answer: [right] } };
+      });
+      if (units.filter(u => u.slot).length < 2) continue;
+      out.push({ type: 'slots', kind: 'gloss', reverse: !!gen.reverse, layout: 'inline', fn: fid, lang: code, sentence: s.id, gloss: s.gloss,
+        ask: gen.reverse ? 'Choose the word for every gloss' : 'Gloss every word (meaning.FEATURES)', units, why: words.map(u => `${u.t} = ${glossOf(u)}`).join(' · '), unknown: s.unknown });
+    }
+    return out;
+  };
+  /* proofread: one word replaced by another cell of its own paradigm that breaks agreement with a partner (never another correct sentence) */
+  const NOMINAL = new Set(['N', 'PRON', 'DET', 'ADJ', 'NUM']), MODIFIER = new Set(['DET', 'ADJ', 'NUM']);
+  function tagsWithGender(X, k) { const p = cellParts(canon(k.f)), lx = X.lex[k.l]; if (lx?.gender && !p.some(t => DIM_OF[t] === 'Gender') && p[0] === 'N') p.push(lx.gender); return p; }
+  /** The other cell with one value changed: the same tags with v → v2 (or without a gender, as plural cells often are). */
+  function changedCell(lx, cell, v, v2) {
+    const p = cellParts(canon(cell)), q = p.includes(v) ? p.map(t => t === v ? v2 : t) : [...p, v2];
+    for (const c of [q, q.filter(t => DIM_OF[t] !== 'Gender')]) { const k = keyOf(lx, c.join(';')); if (k) return k; }
+    return null;
+  }
+  function errorsOf(C, code, s, rng) {
+    const X = C.lang[code], cache = X._errs || (X._errs = new Map());
+    if (!cache.has(s.id)) cache.set(s.id, findErrors(C, code, s));
+    return cache.get(s.id).map(e => e.clfs ? { ...e, wrong: e.clfs[Math.floor(rng() * e.clfs.length)] } : e);
+  }
+  function findErrors(C, code, s) {
+    const X = C.lang[code], toks = s.tokens || [], out = [];
+    const isW = k => k && !k.p && !k.parts && !k.name && k.l && k.f && X.lex[k.l]?.forms;
+    toks.forEach((T, i) => {
+      if (!isW(T) || SKIP_CELL.test(T.f)) return;
+      const lx = X.lex[T.l], tKey = keyOf(lx, T.f); if (!tKey) return;
+      const tp = cellParts(canon(T.f)), catT = tp[0], accept = uniqStr([nfc(T.t), ...acceptOf(lx, tKey)]);
+      const cap = X.language.capitalizeFirst && i === toks.findIndex(k => !k.p) && T.t !== decapFirst(T.t) ? capFirst : x => x;   // the first word keeps its capital
+      for (const d of AGREE_DIMS) {
+        const v = tp.find(t => DIM_OF[t] === d); if (!v) continue;
+        for (const v2 of (DIMS.find(z => z[0] === d)[1]).filter(x => x !== v)) {
+          const k2 = changedCell(lx, T.f, v, v2); if (!k2 || SKIP_CELL.test(k2)) continue;
+          const wrong = cap(lx.forms[k2]); if (accept.some(a => sameWord(code, a, wrong))) continue;
+          // a partner whose form would have to change too
+          let partner = null;
+          toks.forEach((P, j) => {
+            if (partner || j === i || !isW(P)) return;
+            const pp = tagsWithGender(X, P), catP = pp[0], dist = Math.abs(i - j);
+            const between = toks.slice(Math.min(i, j) + 1, Math.max(i, j));
+            const np = NOMINAL.has(catT) && NOMINAL.has(catP) && (MODIFIER.has(catT) || MODIFIER.has(catP)) && dist <= 2 && between.every(b => isW(b) && MODIFIER.has(cellParts(b.f)[0]))
+              && (!pp.some(t => DIM_OF[t] === 'Case') || !tp.some(t => DIM_OF[t] === 'Case') || pp.find(t => DIM_OF[t] === 'Case') === tp.find(t => DIM_OF[t] === 'Case'));
+            const subj = (catT === 'V' && ['PRON', 'N'].includes(catP) || catP === 'V' && ['PRON', 'N'].includes(catT)) && dist <= 3 && (() => {
+              const nomTags = catT === 'V' ? pp : tp, hasCase = nomTags.some(t => DIM_OF[t] === 'Case');
+              return hasCase ? nomTags.includes('NOM') : (catT === 'V' ? j < i : i < j);   // without case: the subject comes before its verb
+            })();
+            if (!np && !subj) return;
+            if (!pp.includes(v)) return;
+            const plx = X.lex[P.l];
+            if (!cellParts(canon(P.f)).includes(v)) { if (d === 'Gender' && catP === 'N') partner = P; return; }   // a noun's own gender cannot follow
+            const pk = changedCell(plx, P.f, v, v2); if (!pk) return;
+            if (!sameWord(code, plx.forms[pk], P.t)) partner = P;
+          });
+          if (partner) out.push({ i, wrong, right: T.t, accept, why: `${labelOf(T.f)}, to agree with ${partner.t}` });
+        }
+      }
+    });
+    // Chinese: a measure word the noun does not take
+    const clfs = Object.values(X.lex).filter(x => x.pos === 'CLF').map(x => x.lemma);
+    toks.forEach((T, i) => {
+      if (T.p || !T.l || X.lex[T.l]?.pos !== 'CLF') return;
+      const nk = toks.slice(i + 1, i + 3).find(k => k.l && X.lex[k.l]?.pos === 'NOUN'), noun = nk && X.lex[nk.l];
+      if (!noun || !(noun.measure || []).length || !noun.measure.includes(T.t)) return;
+      const bad = clfs.filter(m => !noun.measure.includes(m) && m !== '个' && m !== T.t);
+      if (bad.length) out.push({ i, clfs: bad, right: T.t, accept: [T.t, ...noun.measure.filter(m => m !== T.t)], why: `${noun.lemma} takes ${noun.measure.join(' / ')}` });
+    });
+    return out;
+  }
+  GEN.proofread = ctx => {
+    const { C, code, fid, K, rng } = ctx, X = C.lang[code], out = [];
+    const texts = X._texts || (X._texts = new Set(X.sentences.flatMap(s => [s.text, ...(s.alts || [])]).map(t => cmpText(code, t))));
+    for (const s of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const errs = shuffled(errorsOf(C, code, s, rng), rng);
+      for (const e of errs) {
+        const units = (s.tokens || []).map((k, i) => k.p ? { t: k.t, p: true } : { t: i === e.i ? e.wrong : k.t, ...(k.l ? { l: k.l } : {}) });
+        const text = joinTokens(units.map(u => ({ t: u.t, p: u.p })), X.language.tokenJoin);
+        if (texts.has(cmpText(code, text))) continue;   // the "error" is another stored sentence: not an error
+        const lx = s.tokens[e.i].l && X.lex[s.tokens[e.i].l];
+        const capF = X.language.capitalizeFirst && e.i === (s.tokens || []).findIndex(k => !k.p) && e.right !== decapFirst(e.right) ? capFirst : x => x;
+        const more = lx?.forms ? shuffled(Object.values(lx.forms).filter(f => !sameWord(code, f, e.right) && !sameWord(code, f, e.wrong)), rng).slice(0, 1).map(capF) : [];
+        out.push({ type: 'proofread', kind: 'proofread', fn: fid, lang: code, sentence: s.id, gloss: s.gloss, units, wrongAt: e.i,
+          fix: { options: shuffled(uniqStr([e.right, e.wrong, ...more]), rng), accept: uniqStr(e.accept.map(nfc)) }, why: `${e.wrong} → ${e.right}: ${e.why}`, unknown: s.unknown });
+        break;
+      }
+    }
+    return out;
+  };
+  /* combine: a sentence with one connector whose two clauses are, word for word, two other bank sentences */
+  const CONNECTOR = new Set(['CCONJ', 'SCONJ']);
+  const wordKey = (code, ws) => ws.map(w => nfc(w).toLowerCase()).sort().join('\u0001');
+  function clauseIndex(C, code) {
+    const X = C.lang[code]; if (X._clauses) return X._clauses;
+    const m = new Map();
+    for (const s of X.sentences) { const key = wordKey(code, sentenceUnits(C, code, s).filter(u => !u.p).map(u => u.t)); (m.get(key) || m.set(key, []).get(key)).push(s); }
+    return (X._clauses = m);
+  }
+  GEN.combine = ctx => {
+    const { C, code, fid, K, rng, U } = ctx, X = C.lang[code], out = [], idx = clauseIndex(C, code);
+    for (const s of shuffled(ctx.bank(), rng)) {
+      if (out.length >= capOf(ctx)) break;
+      const us = sentenceUnits(C, code, s), conn = us.filter(u => !u.p && u.l && CONNECTOR.has(X.lex[u.l]?.pos));
+      if (conn.length !== 1) continue;
+      const ci = us.indexOf(conn[0]), words = (a, b) => us.slice(a, b).filter(u => !u.p).map(u => u.t);
+      let A, B;
+      if (!us.slice(0, ci).some(u => !u.p)) {   // the clause with the connector comes first: … , main clause
+        const comma = us.findIndex((u, i) => i > ci && u.p && /^[,،，、]$/.test(u.t)); if (comma < 0) continue;
+        A = words(ci + 1, comma); B = words(comma + 1, us.length);
+      } else { A = words(0, ci); B = words(ci + 1, us.length); }
+      if (!A.length || !B.length) continue;
+      const find = ws => (idx.get(wordKey(code, ws)) || []).find(x => x.id !== s.id && fits(x, K, U));
+      const pa = find(A), pb = find(B); if (!pa || !pb || pa.id === pb.id) continue;
+      const tiles = sentenceTiles(s), wt = wrongTile(C, code, s, rng);
+      out.push({ type: 'combine', kind: 'combine', fn: fid, lang: code, sentence: s.id, sentences: [pa.id, pb.id, s.id], sources: [pa.text, pb.text], sourceGlosses: [pa.gloss, pb.gloss],
+        connector: conn[0].t, connectorGloss: meaningOf(C, code, conn[0].l), gloss: s.gloss, tiles: shuffled(wt ? [...tiles, wt] : tiles, rng), size: tiles.length,
+        answers: [s.text, ...(s.alts || [])], punct: endPunct(s), why: s.text, unknown: uniqStr([...s.unknown, ...unknownOf(pa, K), ...unknownOf(pb, K)]) });
+    }
+    return out;
+  };
+
+  /** The P5 types a function gets on top of its listed generators where its data allows (§6.7 “offered automatically”). */
+  function autoGenerators(C, code, fid, have = []) {
+    const X = C.lang[code], g = X.grammar[fid], fn = C.functions[fid] || {};
+    if (!g || g.status === 'absent' || fn.category === 'overview') return [];
+    const types = new Set(have.map(x => x.type)), out = [];
+    const byPos = {}; for (const c of g.paradigmCells || []) { const pos = POS_OF_TAG[cellParts(c)[0]]; if (pos) (byPos[pos] = byPos[pos] || []).push(c); }
+    for (const [pos, cells] of Object.entries(byPos)) { if (!types.has('paradigm')) out.push({ type: 'paradigm', pos, cells, auto: true }); if (!types.has('analyze')) out.push({ type: 'analyze', pos, cells, auto: true }); }
+    if (X.sentences.some(s => (s.functions || []).includes(fid)))
+      for (const t of ['agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'morph_build']) if (!types.has(t)) out.push({ type: t, auto: true });
+    if (/root|pattern|derivation|word\.formation/.test(fid) && !types.has('root_pattern') && Object.values(X.lex).some(x => rootOf(x) && patternOf(x))) out.push({ type: 'root_pattern', auto: true });
+    return out;
+  }
+  /** Is a slots item right? values: the chosen value of every slot, in order → {ok, wrong: [slot indexes]} */
+  function checkSlots(item, values) {
+    const slots = (item.units || []).filter(u => u.slot);
+    if (item.combos) {
+      const score = combo => combo.filter((v, i) => v === values[i]).length, best = item.combos.slice().sort((a, b) => score(b) - score(a))[0];
+      const wrong = best.map((v, i) => v === values[i] ? -1 : i).filter(i => i >= 0);
+      return { ok: !wrong.length, wrong };
+    }
+    const wrong = slots.map((u, i) => u.slot.answer.some(a => nfc(a) === nfc(values[i] ?? '')) ? -1 : i).filter(i => i >= 0);
+    return { ok: !wrong.length, wrong };
+  }
+  /** Is a filled table right? values: the chosen form of every hidden row, in order */
+  function checkTable(item, values) {
+    const hid = item.rows.filter(r => r.hidden);
+    const wrong = hid.map((r, i) => r.accept.includes(nfc(values[i] ?? '')) ? -1 : i).filter(i => i >= 0);
+    return { ok: !wrong.length, wrong };
+  }
+  /** Proofreading: the word tapped and the fix chosen → {found, fixed, ok} */
+  function checkProofread(item, at, fix) { const found = at === item.wrongAt, fixed = found && item.fix.accept.includes(nfc(fix ?? '')); return { found, fixed, ok: found && fixed }; }
+
+  /** The 📐 grammar lane of one language: the functions of the learner's open lessons (common order) with state and feasibility. */
+  const OPEN = new Set(['open', 'learning', 'passed', 'known', 'mastered']);
+  function grammarLane(C, L, code, opts = {}) {
+    const X = C.lang[code], k = opts.k || known(C, L, code), out = [], seen = new Set();
+    const lessons = C.order.filter(nid => C.nodes[nid].kind === 'lesson' && X.applies[nid]);
+    const ids = lessons.length ? lessons.filter(nid => OPEN.has(k.nodes[nid])).flatMap(nid => lessonFunctions(C, code, nid).map(f => [f, nid]))
+      : Object.keys(C.functions).map(f => [f, null]);   // a course without lessons: every function
+    for (const [fid, nid] of ids) {
+      if (seen.has(fid) || C.functions[fid]?.category === 'overview') continue; seen.add(fid);
+      const g = X.grammar[fid]; if (!g || g.status === 'absent') continue;
+      out.push({ fn: fid, title: C.functions[fid]?.title || fid, lesson: nid, state: functionState(C, L, code, fid), feasibility: feasibility(C, L, code, fid, { k, minSentences: opts.minSentences }) });
+    }
+    return out;
+  }
+  /** A block of mixed items over several functions of one language (round robin), with the P5 types added where the data allows. */
+  function practiceBlock(C, L, code, fids, opts = {}) {
+    const k = opts.k || known(C, L, code), rng = opts.rng || Math.random, max = opts.max || 10;
+    const pools = fids.map(f => exercises(C, L, code, f, { k, rng, max, auto: opts.auto !== false })).filter(p => p.length);
+    const out = []; let i = 0;
+    while (out.length < max && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
+    return out;
+  }
+  /** Does an item use one of these words (the words just learned)? */
+  const touches = (C, code, it, words) => (it.lex && words.has(it.lex)) || [it.sentence, ...(it.sentences || [])].some(id => id && (C.lang[code].sentenceById[id]?.req || []).some(l => words.has(l)));
+  /** §7.5 step 3: one trainable function using the words just learned. words: {code: [lexIds]} → {lang, fn, items, feasibility} | null */
+  function sessionGrammar(C, L, opts = {}) {
+    const langs = (opts.langs || L.settings.languages || C.languages).filter(c => C.lang[c]), rng = opts.rng || Math.random, max = opts.max || 6;
+    let best = null;
+    for (const code of langs) {
+      const words = new Set((opts.words || {})[code] || []), k0 = known(C, L, code);
+      const k = { ...k0, R: new Set([...k0.R, ...words]) };   // the words of this session are learned by the time the grammar comes
+      const lane = grammarLane(C, L, code, { k, minSentences: 1 }).filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).slice(0, opts.limit || 24);
+      for (const x of lane) {
+        const items = exercises(C, L, code, x.fn, { k, rng, max: 40, auto: true });
+        if (!items.length) continue;
+        const hit = items.filter(it => touches(C, code, it, words));
+        const score = hit.length * 100 + Math.min(items.length, 20);
+        if (!best || score > best.score) best = { score, lang: code, fn: x.fn, feasibility: x.feasibility.state, items: [...hit, ...items.filter(it => !hit.includes(it))].slice(0, max), usesNew: hit.length };
+        if (best.usesNew >= max) break;
+      }
+    }
+    return best && { lang: best.lang, fn: best.fn, feasibility: best.feasibility, items: best.items, usesNew: best.usesNew };
+  }
+  API.GEN = GEN;
+  Object.assign(API, { autoGenerators, checkSlots, checkTable, checkProofread, grammarLane, practiceBlock, sessionGrammar, sentenceUnits, P5_TYPES, POS_LABEL });   // P5 — grammar lane
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

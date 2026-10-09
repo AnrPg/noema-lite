@@ -24,7 +24,9 @@ function runSession(plan, { only = null } = {}) {
     }
   }
   if (!only) queue.push(...scriptSessionSteps());   // a few letters / characters in the first weeks (P4, §5.5)
+  if (typeof sessionGrammarItems === 'function') queue.push(...sessionGrammarItems(plan));   // §7.5 step 3 (P5): one function with the words just learned
   if (!queue.length) { go('#/'); return; }
+  metNew.clear();
   const total = queue.length, stats = { right: 0, wrong: 0, introduced: 0 }, retried = new Set();
   const before = Object.fromEntries(activeLangs().map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   const m = $('.lx-main'); const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
@@ -39,15 +41,18 @@ function runSession(plan, { only = null } = {}) {
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
       if (a.kind === 'script' && a.intro) return next();   // a new letter: recorded by its card (P4)
-      if (a.kind !== 'script') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day); save();
+      if (a.kind === 'item') { if (a.it.fn) N.practiceFunction(UI.C, UI.L, a.it.lang, a.it.fn, ok ? 1 : 0, 1, day); }
+      else if (a.kind !== 'script') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day);
+      save();
       ok ? stats.right++ : stats.wrong++;
-      const key = a.kind + a.lang + a.lex;
+      const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
       if (!ok && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
       const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
-    const ex = a.kind === 'script' ? scriptStep(a, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
-    Object.assign(ex.dataset, { kind: a.kind, lang: a.lang, lex: a.lex });   // for tests and styling
+    UI.current = a;
+    const ex = a.kind === 'script' ? scriptStep(a, done) : a.kind === 'item' ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
     stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.retry ? ' · once more' : ''), ex);
   };
   const finish = () => {
@@ -57,6 +62,7 @@ function runSession(plan, { only = null } = {}) {
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Session done'),
       h('p', {}, `${stats.introduced} new · ${stats.right} right · ${stats.wrong} to practise again`),
       opened.length ? h('ul', {}, ...opened.map(t => h('li', {}, t))) : null,
+      newWordsList(),
       h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map')));
   };
   document.onkeydown = e => {

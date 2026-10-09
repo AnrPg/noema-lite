@@ -1,0 +1,35 @@
+/* P5 — the grammar lane (docs/LANGUAGES.md §6.3, §6.4, §7.3, §8) */
+.lx-feas{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 10px;padding:6px 10px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);font-size:14px}
+.lx-feas.s-ready{background:var(--ok-bg)}.lx-feas.s-thin{background:var(--warn-bg)}.lx-feas.s-locked{opacity:.85}
+.lx-light{font-weight:650}.lx-kinds{flex-basis:100%}
+.lx-glane .lx-card{margin:8px 0;padding:12px 14px}
+.lx-lane{display:grid;gap:8px;margin:12px 0}
+.lx-lanerow{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 10px;border-radius:12px;background:var(--card);border:1px solid var(--line);margin-top:6px}
+.lx-lanerow.s-locked{opacity:.75}.lx-lanetitle{display:flex;gap:6px;align-items:center;min-width:0;flex-wrap:wrap}.lx-lanetitle .btn{white-space:normal;text-align:start}
+.lx-lanemeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px}
+.lx-sel{font:inherit;font-size:16px;max-width:100%;padding:6px 8px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:inherit}
+.lx-sel[lang=ar]{font-family:'Noto Naskh Arabic',serif;font-size:19px}.lx-sel[lang=he]{font-family:'Noto Sans Hebrew',sans-serif;font-size:18px}.lx-sel[lang=zh]{font-family:'Noto Sans SC',sans-serif}
+.lx-sel.right{border-color:var(--ok);background:var(--ok-bg)}.lx-sel.wrong{border-color:var(--bad);background:var(--bad-bg)}.lx-sel.shown.wrong{background:var(--warn-bg)}
+.lx-units{display:flex;flex-wrap:wrap;gap:10px 8px;justify-content:center;margin:12px 0}
+.lx-unit{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;max-width:100%}
+.lx-unitw{font-size:22px;text-align:center;overflow-wrap:anywhere}.lx-trigger .lx-unitw{background:var(--violet-bg);border-radius:10px;padding:0 6px}
+.lx-unit .lx-sel{font-size:14px;max-width:min(44vw,220px)}
+.lx-ugloss{font-size:13px;color:var(--ink2)}
+.lx-dims{display:grid;gap:8px;max-width:420px;margin:10px auto}
+.lx-dim{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:center}.lx-dimlabel{font-weight:650;color:var(--ink2)}
+.lx-src{font-size:22px;text-align:center;margin:8px 0}
+.lx-checkrow{justify-content:center;margin-top:10px}
+.lx-legend{margin-top:6px}
+.lx-ptab{margin:10px 0}.lx-ptab table{border-collapse:collapse;width:100%;table-layout:fixed}
+.lx-ptab th,.lx-ptab td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:middle;overflow-wrap:anywhere}
+.lx-ptab th{font-weight:500;font-size:13px;color:var(--ink2);width:48%;white-space:normal;background:none}.lx-ptab td{font-size:20px}.lx-ptab td .lx-sel{width:100%}
+.lx-proofline{font-size:24px;text-align:center;margin:14px 0;line-height:2}
+.lx-pword{font:inherit;padding:0 6px;border-radius:10px;border:1.5px solid transparent;background:var(--bg2);color:inherit;cursor:pointer}
+.lx-pword:hover,.lx-pword:focus-visible{border-color:var(--violet)}.lx-pword.found,.lx-pword.right{border-color:var(--ok);background:var(--ok-bg)}.lx-pword.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.lx-proofline[lang=ar] .lx-pword{font-family:'Noto Naskh Arabic',serif}.lx-proofline[lang=he] .lx-pword{font-family:'Noto Sans Hebrew',sans-serif}.lx-proofline[lang=zh] .lx-pword{font-family:'Noto Sans SC',sans-serif}
+.lx-sources{font-size:20px}
+.lx-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:10px 16px;border-radius:12px;background:var(--ink);color:var(--card);z-index:50}
+@media (max-width:640px){
+  .lx-dim{grid-template-columns:1fr}.lx-unitw{font-size:19px}.lx-proofline{font-size:21px}.lx-ptab td{font-size:18px}.lx-ptab th{width:44%}
+}
+.lx-exbuild[data-kind=morph] .lx-prompt{font-size:22px}

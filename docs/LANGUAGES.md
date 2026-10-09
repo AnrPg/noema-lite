@@ -23,7 +23,7 @@
 | P3c | **Foundations** (D9–D12): S00 = overview of the language types and of the language; 19 parallel steps of mixed lessons (complete thematic word groups + grammar + first sentences), the grammar of each step per language type; grammar pages with links across the languages; sentence exercises | ✅ 2026-10-08 (ar, he, zh, de: S00–S18 written, validated `--strict`, ref-checked) |
 | P3d | **Rules across all languages** (D13–D15): the parallel order as a validated constraint; the catalogue of phenomena of every language (ar, he, zh, de); the facade of every word (`wordFeatures` / `features`); contrasts; every meaning a concept | ✅ 2026-10-08 |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ✅ 2026-10-09 (script modules as data + `tools/lang_script.py`; 🔤 script lane with stage; glyph_form · transliterate · vowelize · tone_mark · char_compose · trace · spell; keyboards and pinyin input for every typed answer; vowel-mark fading; tokenizer fixes) |
-| P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
+| P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ✅ 2026-10-09 — the ten missing exercise types of §6.3 / §6.4 (paradigm, analyze, morph_build, root_pattern, agree, contrast, parse, gloss, proofread, combine) as generators + widgets, offered automatically where the data allows; feasibility lights by the D19 rule; the 📐 grammar lane on the home; one function with the words just learned in the daily session; the validator checks the generators — refill tasks (§7.4) wait for the P8 queue |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ⬜ |
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ⬜ |
@@ -663,12 +663,12 @@ a widget per type in `engine/lang/90_script.js` records the answer on the letter
 ### 6.3 Morphology
 | id | trains | how | src |
 |---|---|---|---|
-| `paradigm` | inflection tables | fill a table; cells hidden progressively | D |
+| `paradigm` | inflection tables | fill a table; cells hidden progressively (a third of the cells while the function is new, half while practising, all but one when solid, all when mastered) | D |
 | `inflect` | one form | lemma + feature chips → the form | D |
-| `analyze` | parsing a form | form → features (case, number, tense, person, binyan/verb form…) | D |
-| `morph_build` | morpheme order | assemble stem + affixes (pronominal suffixes, prefixes) | D |
-| `root_pattern` | non-concatenative morphology | root × pattern → word; word → root + pattern | D |
-| `agree` | agreement | change one element (gender, number, definiteness, case) and update the dependents | B |
+| `analyze` | parsing a form | form → features (case, number, tense, person, binyan/verb form…): one choice per dimension that varies in the word's table; a form shared by several cells accepts each of them | D |
+| `morph_build` | morpheme order | assemble stem + affixes (pronominal suffixes, prefixes): the bank's prefixed words (`parts`: וְ + אָחוֹת) and Arabic possessed forms (stem + the owner suffix of the pronoun's `suffix`); distractors: another prefix / suffix, another form of the stem | D |
+| `root_pattern` | non-concatenative morphology | root × pattern → word; word → root; word → pattern (nouns: `pattern`, verbs: the Arabic verb form / the Hebrew binyan); words of the same root or pattern are the distractors | D |
+| `agree` | agreement | change one element (gender, number, definiteness, case) and update the dependents: a bank variant pair whose words align one to one and differ in ≥ 2 words; the first changed noun / pronoun is given, every other inflected word is a choice (its forms from the paradigm) | B |
 
 ### 6.4 Syntax
 | id | trains | how | src |
@@ -676,11 +676,11 @@ a widget per type in `engine/lang/90_script.js` records the answer on the letter
 | `build_sentence` | word order + morphology | **inflecting tiles**: each tile is a lemma; order them and choose each form; distractor tiles | B |
 | `word_order` | V2, verb-final, zh time/place | place the verb (or the time phrase) in the right slot | B |
 | `transform` | structure changes | tense, number, question, negation, passive, 把/被, direct → reported | B (variants) |
-| `contrast` | choosing between structures | 了 vs 过, Akk vs Dat with two-way prepositions, lā/lam/lan/laysa, VSO agreement — with the reason | B |
-| `parse` | sentence roles | tag subject/object/verb/case on the tokens | B |
-| `gloss` | interlinear glossing | fill the morpheme gloss under each word (or the reverse) | B |
-| `proofread` | error detection | find and fix the error (the language twin of `spotbug`) | B (errors made from a known paradigm cell) |
-| `combine` | complex sentences | join two sentences with a connector or a relative clause | B |
+| `contrast` | choosing between structures | 了 vs 过, Akk vs Dat with two-way prepositions, lā/lam/lan/laysa, VSO agreement — with the reason: a meaning → which of the sentences of one variant group (the original and its variants, minimal pairs) says it; the reason names the feature that separates them | B |
+| `parse` | sentence roles | tag subject/object/verb/case on the tokens: the case of every case-marked word (languages with case), otherwise the part of speech of every word — from the tokens' cells and the lexemes | B |
+| `gloss` | interlinear glossing | fill the morpheme gloss under each word (or the reverse, `reverse: true`): meaning + the cell's tags (`carrot.ACC.SG`); prefixes are glossed on their own; distractors: another cell of the same word, another word's gloss | B |
+| `proofread` | error detection | find and fix the error (the language twin of `spotbug`): one word replaced by another cell of its own paradigm that differs in case, number, gender or person **and breaks agreement with a partner** (a modifier next to its noun, a verb and its subject) whose own form would have to change — so the result is never another correct sentence; Chinese: a measure word the noun does not take | B (errors made from a known paradigm cell) |
+| `combine` | complex sentences | join two sentences with a connector or a relative clause: a bank sentence with one connector whose two clauses are, word for word, two other bank sentences (Ich habe Hunger. + Ich esse nichts. → Ich habe Hunger, aber ich esse nichts.); none when the bank has no such pair | B |
 
 ### 6.5 Production and reading
 | id | trains | how | src |
@@ -715,7 +715,18 @@ Lesson S00 (overview) runs: the typology text → the language overview → its 
 | `build_sentence` (also `word_order`) `{bank?}` | tiles of the sentence's words + a wrong form of one of them | the sentence `text` and its `alts` (other correct orders) |
 | `transform` `{bank: {functions?, variant?: "Polarity" \| "Mood" \| "Number" …}}` | a sentence + the change → build the changed sentence | the bank pair `variantOf` / `variant` |
 | `quiz` | multiple choice written with the realization (`quiz: [{q, options, answer, why}]`) — for the overview and for facts that no paradigm holds | the author's answer, checked by the validator for form only |
-A generator's sentences are those listing the function, or `bank: {functions: [...]}` / `bank: {frames: [...]}` (for a point no word shows, e.g. the verbless *to be* of Arabic and Hebrew). Without `generators` a function gets `sentence_meaning`, `build_sentence` and every `transform` its sentences allow. Generator names are the exercise ids of §6 (`inflect`, `gender_article`, `measure_word`, `sentence_meaning`, `build_sentence`, `transform`, `quiz`; other ids are kept for later phases and ignored by the runtime until implemented).
+| `paradigm` `{pos, class?, lemmas?, exclude?, concepts?, cells?}` (cells: else `paradigmCells`, else the word's table) | a known word's table with cells hidden by the function's state | the lexeme's `forms` (+ `formsAlt`) |
+| `analyze` `{pos, …, cells?}` | a form → one choice per varying dimension | every cell whose form it is |
+| `morph_build` `{bank?, suffixes?}` (`suffixes: true`: the owner suffixes also outside the possession functions) | pieces (prefix + word, stem + suffix) and distractors → the word | the token's `parts`; the possessed cell and the pronoun's `suffix` |
+| `root_pattern` `{pos?, mode?: build \| root \| pattern}` | root × pattern → word, word → root, word → pattern | the lexeme's `root`, `pattern`, `verbForm`, `binyan` |
+| `agree` `{bank?: {functions?, variant?}}` | the original with one element changed → choose the forms of the others | the variant sentence |
+| `contrast` `{bank?}` | a meaning → the sentence of the variant group that says it, with the reason | the group's `gloss` / `variant` |
+| `parse` `{bank?, tags?: case \| pos}` | the role of every word | the tokens' cells, the lexemes' `pos` |
+| `gloss` `{bank?, reverse?}` | the gloss under every word (or the word under every gloss) | the concepts' glosses + the tokens' cells |
+| `proofread` `{bank?}` | find the wrong word, then fix it | the stored token (the error is made from its own paradigm) |
+| `combine` `{bank?}` | two sentences + the connector → the joined sentence (tiles) | the bank sentence and its `alts` |
+A generator's sentences are those listing the function, or `bank: {functions: [...]}` / `bank: {frames: [...]}` (for a point no word shows, e.g. the verbless *to be* of Arabic and Hebrew). Without `generators` a function gets `sentence_meaning`, `build_sentence` and every `transform` its sentences allow. Generator names are the exercise ids of §6 (`inflect`, `gender_article`, `measure_word`, `sentence_meaning`, `build_sentence`, `transform`, `quiz`, and since P5 `paradigm`, `analyze`, `morph_build`, `root_pattern`, `agree`, `contrast`, `parse`, `gloss`, `proofread`, `combine`; other ids are kept for later phases and ignored by the runtime until implemented).
+**Offered automatically (P5).** In the grammar lane, on the function page and in the daily session (`exercises(…, {auto: true})`) a function also gets the P5 types it does not list, wherever its data allows: `paradigm` and `analyze` for the parts of speech of its `paradigmCells`; `parse`, `gloss`, `proofread`, `agree`, `contrast`, `combine` and `morph_build` over its bank sentences; `root_pattern` for the functions about roots, patterns and word formation. A type the data cannot feed yields nothing. Lessons keep the listed generators (the author's choice for the lesson). The validator checks every generator's type, parameters, parts of speech, cells (a cell no word of the language has is an error), lemmas, bank filters, and — with `--strict` — warns when a generator's pool is empty even for a learner who knows every word.
 
 | id | trains | how | src |
 |---|---|---|---|
@@ -742,6 +753,9 @@ A generator's sentences are those listing the function, or `bank: {functions: [.
 
 ### 7.3 Feasibility of a function
 For (function F, language L): trainable when, with the current known sets, the bank yields ≥ 12 usable sentences for F and the paradigms give ≥ `needs` items. The grammar lane shows **🟢 ready · 🟡 thin (n sentences) · 🔒 needs node X**.
+* **Usable** follows D19: a sentence counts when at most ⌈30 %⌉ of its words are unknown (`maxUnknown: 'auto'`) — the same sentences the exercises use.
+* A function whose generators need no sentence (only paradigm drills, a quiz) is 🟢 once `needs` is met; one that needs sentences is 🔒 without any.
+* The light stands on the function page, on every grammar card of a lesson and in the grammar lane; 🔒 names the node that would unlock it (the node of most missing words).
 
 ### 7.4 Refill tasks (robust "dynamic" content)
 When F is 🟡 or 🔒 only because of the bank, the app offers **"✨ Ask Claude for more sentences with what I know"**: a task with F, L, the learner's known lemma ids (R and P) and the schema. Claude writes annotated sentences, `tools/validate_lang.py` checks them (forms, requirements ⊆ known, functions present), and the result is merged as a learner patch (`patches/`, private). Same mechanism and queue as the curriculum steps (§10).
@@ -750,7 +764,7 @@ When F is 🟡 or 🔒 only because of the bank, the app offers **"✨ Ask Claud
 Input: due reviews (per language), next batches of open nodes, one trainable function, minutes. Default plan:
 1. Reviews (R then P), interleaved across languages but grouped by concept.
 2. **New batch learned in parallel**: the same 10–15 concepts in each active language one after another (co-located), each language only if the node is open in it.
-3. One grammar function **using the words just learned** (bank + drills).
+3. One grammar function **using the words just learned** (bank + drills): among the trainable, not mastered functions of the open lessons (in the common order), the one with the most items that use the new words; its items count for the function (`practiceFunction`).
 4. Two minutes of reading or a polyglot exercise.
 
 ---
@@ -763,6 +777,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 * **Field map**: the whole field (e.g. 200 vegetables) as a picture grid grouped by subgroup, coloured by state in the chosen language; tier dividers; tap an item for its card.
 * **Vocabulary DAG view**: reuses the curriculum map component (`curmap`), with node states for the chosen language.
 * **Grammar function page**: realization in the chosen language (summary, blocks, paradigm, "ask yourself", traps, examples), the flag rail for the other languages, comparison strip at the bottom, the feasibility light and its exercises.
+* **📐 Grammar lane** (home and `#/grammar/<lang>`): per language, the functions of the learner's open lessons with their state (new · practising · solid · mastered) and feasibility light; ▶ practise runs a block of mixed items of one function (or of all the open functions not mastered) and records the answers (`practiceFunction`).
 * **Text rendering**: `lang` and `dir` on every foreign span; fonts Noto Naskh Arabic, Noto Sans Hebrew, Noto Sans SC/TC; vowel-mark level per language; transliteration toggle; zh pinyin ruby above characters (toggle).
   Vowel-mark level per language in ⚙️ Settings: *full*, *fading* (a new word shows every mark; known for reading → only šadda / dagesh
   and the shin / sin dot; known for writing → none; `markLevel`, `fadeMarks`, `textMarkLevel` for text without its word), *none*; the old
@@ -877,9 +892,11 @@ Existing subjects and curricula must keep working unchanged; the language part i
   card, keyboards and pinyin input used by every typed answer, fading in `word()` and sentences, the session step); tokenizer fixes
   of §13.1 (Hebrew prefix spellings and וָ, Arabic لِلْـ, Chinese segmentation that keeps the bank's splits); `tests/lang_script.js`.
 
-**P5 — Grammar lane**
+**P5 — Grammar lane** — ✅ 2026-10-09
 - Function pages with procedures and traps; `paradigm`, `inflect`, `analyze`, `morph_build`, `root_pattern`, `agree`, `build_sentence`, `word_order`, `transform`, `contrast`, `parse`, `gloss`, `proofread`, `combine`; feasibility lights; refill tasks (queue + validation + merge).
 - ✔ Every generated item uses only known words (property test over random learner states); refill round-trip test with a mocked Claude answer.
+- Done: `engine/langcore.js` (section *P5 — Grammar lane*): the generators `GEN.paradigm`, `analyze`, `morph_build`, `root_pattern`, `agree`, `contrast`, `parse`, `gloss`, `proofread`, `combine` (§6.3, §6.4, §6.7), `autoGenerators` (the types a function's data allows, added by `exercises(…, {auto: true})`), `checkSlots` / `checkTable` / `checkProofread`, `grammarLane`, `practiceBlock`, `sessionGrammar` (§7.5 step 3), `sentenceUnits`; `feasibility` counts sentences by D19 and needs none for paradigm-only functions (§7.3). `engine/lang/70_grammar2.js` + `.css`: the widgets (`table`, `slots`, `proofread`, `contrast`, `morph`, `combine`; check, reveal, Enter / digit keys, `lang` + `dir`, 🆕), the feasibility light on every grammar card (function page, lesson page), the 📐 lane on the home and `#/grammar/<lang>`, practice blocks that record `practiceFunction`, the grammar step of the daily session; hook lines in `10_shell.js`, `45_grammar.js`, `50_session.js`. `tools/validate_lang.py`: the generators' types, parameters, parts of speech, cells, lemmas, bank filters, empty pools (warning with `--strict`); `tools/lang_phenomena.py` sees the `GEN.<type>` generators. Tests: `tests/lang_grammar.js` (langcore over the mini and the pilot course with every answer checked against the data, a property test over random learners, the validator's negative cases, the widgets / lane / session in a browser at 390 px).
+- Left for later: refill tasks (§7.4) need the task queue of P8; `combine` finds few pairs in the pilot bank (a joined sentence whose two clauses are themselves bank sentences: 9 in de and ar) — more come with content that writes such pairs; `parse` tags case or part of speech, not subject / object (the bank does not annotate roles).
 
 **P6 — Polyglot layer**
 - Comparison tables and strips, bridges, confusables, `parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; interleaved sessions; depth per language.
@@ -899,6 +916,7 @@ Working rules for every phase: read this file first; keep existing subjects unto
 
 ## 14. Changelog
 - 2026-10-09 — P4 scripts and input: script modules as reference data (`tools/lang_script.py`, §4.9: ar / he alphabets with forms derived from Unicode, zh characters from Make Me a Hanzi + Unihan), the script stage stored in `lang:<L>:script` (§5.5, merged like words), the 🔤 lane and the exercise types of §6.1, keyboards / pinyin input for every typed answer and vowel-mark fading (§8), tokenizer fixes (§7.2: prefix spellings and וָ, لِلْـ, the bank's own Chinese splits).
+- 2026-10-09 — P5 grammar lane: the ten exercise types of §6.3 / §6.4 still missing (paradigm, analyze, morph_build, root_pattern, agree, contrast, parse, gloss, proofread, combine) as generators with widgets, offered automatically where a function's data allows (grammar lane, function page, session; lessons keep their listed generators); proofreading errors only where they break agreement with a partner; feasibility counts sentences by D19 (§7.3); the 📐 grammar lane (§8); the session's grammar step uses the words just learned (§7.5); the validator checks generators and their pools.
 - 2026-10-09 — Core batch K1 (C01–C04) in ar, he, zh, de; `main` merged into `languages` (sync rules, i18n; conflicts in `loader.js` and `build.py` resolved as docs/SHELF_AND_LANGUAGES.md says). P3b finished: pictures shown with an emoji fallback, picture → word, 🧩 field sorting, 🔁 principal parts, progress across devices (`mergeLang`, `noema:remote`, `tests/lang_sync.js`). German ordinals are ADJ class `attr`. §13.1 tech debt: the pictures themselves, content after K1 (the user: implementation first), the issues found while writing K1.
 - 2026-10-09 — D18 and D19 (asked by the user): the learner's languages (with levels) decide what is explained — familiar parts hidden in one line, inference by type / family for languages without a profile, comparison notes for a reference set of 21 languages of every type (+ Claude / Gemini notes on request), the library of peculiarities; vocabulary as its own track after the foundations, every other aspect trained with any vocabulary (≤ ⌈30 %⌉ unknown words per sentence, 🆕 with the word card, the list at the end of a lesson), every field with sentences for every non-vocabulary node before it.
 - 2026-10-08 — D17 (asked by the user): the core grows from C01–C07 to **C01–C48** (A2 → B2, §4.4.2; to be reviewed with the user before the content is written) and the **advanced stage** is open-ended (§4.4.4: fields, grammar, lexicon, varieties, texts, culture). `docs/LANGUAGE_RULES.md` — the binding short form of D1–D17 for every agent, tool and skill — with `CLAUDE.md`, `AGENTS.md`, the skill reference, `tools/lang_sources/AGENT_BRIEF.md` and `tests/lang_rules.py` that keeps them in step.

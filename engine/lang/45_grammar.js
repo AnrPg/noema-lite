@@ -99,6 +99,7 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
     h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, `✓ This point works as in ${from.join(', ')}: the parts you know are folded.`) : null,
+    typeof feasibilityBar === 'function' ? feasibilityBar(c, fid, compact) : null,   // P5: the feasibility light (§7.3) and ▶ practise
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
     ...blocks(c, g.blocks),
     g.procedure?.askYourself?.length ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🤔 Ask yourself '), h('ol', { class: 'lx-list' }, ...g.procedure.askYourself.map(x => h('li', {}, wordsIn(c, x))))) : null,
@@ -179,7 +180,7 @@ function exBuild(it, done) {
   noteNew(it.lang, it.unknown);
   if ((it.unknown || []).length) box.append(h('div', { class: 'tiny lx-newwords' }, '🆕 ', ...it.unknown.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(it.lang, l) }, X.lex[l].lemma), ' = ' + gloss(it.lang, l)])));
   const built = [], slot = h('div', { class: 'lx-slot', lang: it.lang, dir: X.language.dir }), pool = h('div', { class: 'lx-tiles', lang: it.lang, dir: X.language.dir });
-  const join = () => N.joinTokens(built.map(b => ({ t: b.t })), X.language.tokenJoin);
+  const join = () => N.joinTokens(built.map(b => ({ t: b.t })), it.join || X.language.tokenJoin);   // it.join: pieces of one word (P5 morph_build)
   const draw = () => { slot.textContent = built.length ? join() + (built.length === it.size ? it.punct : '') : '…'; };
   let over = false;
   const check = () => {
