@@ -108,7 +108,8 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
     notesView(c, g.notes, fid),
     (g.seeAlso || []).length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 See also '), h('ul', { class: 'lx-list' }, ...g.seeAlso.map(x => h('li', {},
       h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note || '')))) : null,
-    acrossLanguages(fid, c, onPick || (x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))));
+    acrossLanguages(fid, c, onPick || (x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
+    polyFnStrip(fid));   // P6: the comparison strip, the compare lane
 }
 
 /** Lesson S00: the four types of languages (shared) and this language at a glance (D11). */

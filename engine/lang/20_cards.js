@@ -37,7 +37,7 @@ VIEWS.c = (v, r) => {
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
-    if (UI.prefs.compare) v.append(compareTable(cid));
+    if (UI.prefs.compare) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, `${info(UI.lang).flag} No ${info(UI.lang).name} word for this. `), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, 'Instead: ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
@@ -102,6 +102,7 @@ function wordCardView(c, lid, concept) {
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
     ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + (Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
+    polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages
     card.synonymsNone ? h('p', { class: 'tiny' }, 'Synonyms: ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, 'A little word: ', gloss(c, lid)) : null);
 }

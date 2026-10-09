@@ -24,7 +24,7 @@
 | P3d | **Rules across all languages** (D13–D15): the parallel order as a validated constraint; the catalogue of phenomena of every language (ar, he, zh, de); the facade of every word (`wordFeatures` / `features`); contrasts; every meaning a concept | ✅ 2026-10-08 |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
-| P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
+| P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ✅ 2026-10-09 (`parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; the ⇄ compare lane per concept / function / frame; bridges and false friends on the word card; one polyglot item in every daily session of ≥ 2 languages, confusables side by side; a colour per language; today's languages chosen on the home) |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ⬜ |
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ⬜ |
 | P9 | Listening and speaking (later) | ⬜ later |
@@ -667,11 +667,31 @@ Every new type gets a widget in `engine/lang/40_ex.js` with `check`, `reveal`, `
 ### 6.6 Polyglot
 | id | trains | how | src |
 |---|---|---|---|
-| `parallel_translate` | L2 → L3 | translate between two course languages | B (shared frame) |
-| `parallel_align` | structure across languages | match the words of 2–4 realizations of one frame | B |
-| `which_language` | separation | which course language is this word/sentence in (anti-interference) | D |
-| `cognate_bridge` | cognates and loans | link the related words; spot the false friend | D (bridges) |
-| `compare_rule` | contrastive grammar | which statement holds for which language (bucket by language) | D (compare) |
+| `parallel_translate` | L2 → L3 | a sentence of one course language → build it with tiles in another, without the explanation language (its meaning only on request); answers = every realization of the same meaning in the target language + their `alts` | B (shared frame) |
+| `parallel_align` | structure across languages | 2–4 realizations of one meaning side by side; for a word of the first, tap the word(s) that carry the same concept in each other one (a word with attached prefixes carries the concepts of all its parts) | B |
+| `which_language` | separation | a known word in romanization (transliteration, pinyin) — or a sentence, when two course languages share a script — → which course language is it? cognates and false friends are asked first; never when the same romanization exists in another option language | D |
+| `cognate_bridge` | cognates and loans | a word → its related word in another course language; a word of one of the learner's languages (from the etymology) → the course word linked to it; the false friend among pairs of related words | D (bridges) |
+| `compare_rule` | contrastive grammar | statements about one function × the course languages: each statement goes to every language it holds for (bucket by language; several may be right) — or, for the first sentence of each language's page (language names masked), the one language whose page says it | D (compare) |
+
+**Where a polyglot item's answer comes from (D3).** *Parallel sentences*: two bank sentences of two languages realize the
+same meaning when they have the same `frame` and the same gloss (lower case, punctuation and contractions folded, the notes
+in brackets set aside); the bracket notes that matter — the gender of the person (“to a woman”, “f.”), the number of
+*you* (“pl.”, “two”), formality — must not disagree, and when the target language has the noted variant only that one is
+accepted. *Bridges* (`langcore.bridges`, computed when the course opens and again when the word profiles arrive; the files
+of §4.10 add to them once content writes them): **roots** — an Arabic and a Hebrew word whose radicals correspond by the
+regular sound correspondences (ث ش س → ש/ס, ح خ → ח, ذ ز → ז, ص ض ظ → צ, ع غ → ע, و ي ↔ ו י …) **and** that share a
+concept; **etymologies** — a profile etymology that names a word of another course language (its script, or “German X”)
+that resolves through the form index (cognate, or loan when it says borrowed / loan); **shared sources** — two course words
+with a shared concept borrowed from the same word of a third language; **false friends** — a pitfall, subtlety or
+etymology that says “false friend” and names a word of another course language with no shared concept. **Links to the
+learner's languages**: “<language> <word>” in an etymology, for a language of `_typology/languages.json` without an
+older-stage qualifier (Old, Middle, Ottoman …), with the kind its sentence states (loan, cognate, false friend, compare);
+`compare` links are shown on the card but never asked. *Comparison statements*: the typological values a function's
+realizations are tagged with (`typology`), filled for the other languages from their profile (`_typology/languages.json`),
+and the realizations' `status`; a statement is asked only when its value is known for every language of the item.
+Every polyglot item uses words the learner has met (R) — sentences with at most ⌈30 %⌉ unknown words (D19), marked 🆕.
+The items are made by `langcore.polyItems(C, L, type, {langs, fn?, max})` and registered as generators (`GEN.<type>`), so a
+realization may list them too (`{type: "parallel_translate", to: ["he"]}`); widgets in `engine/lang/80_poly.js`.
 
 ### 6.7 Lessons (D9–D11)
 All active languages take the same step together (D10). A lesson runs (flags to switch language; ⇄ to see the step's point in every course language side by side, with links to each language's own page; a realization's `seeAlso: [{lang, fn, note}]` adds pointers to related points elsewhere, e.g. German compounds ↔ Turkish suffix chains): **① the grammar** (each function's page: summary, blocks, "ask yourself", traps, examples from the bank) → **② the words** (intro → recognize → produce, in every language of the group) → **③ drills** from the stored paradigms (the function's `generators`) → **④ sentences** from the bank with only known words → **⑤ the lesson check**: 10 mixed items; ≥ 80 % passes the lesson (§5.2), otherwise the missed parts come again.
@@ -715,10 +735,10 @@ When F is 🟡 or 🔒 only because of the bank, the app offers **"✨ Ask Claud
 
 ### 7.5 Daily session
 Input: due reviews (per language), next batches of open nodes, one trainable function, minutes. Default plan:
-1. Reviews (R then P), interleaved across languages but grouped by concept.
+1. Reviews (R then P), interleaved across languages but grouped by concept; a word with a bridge or false friend in another active language that is due too comes right after it (confusables drilled together, §9.5).
 2. **New batch learned in parallel**: the same 10–15 concepts in each active language one after another (co-located), each language only if the node is open in it.
 3. One grammar function **using the words just learned** (bank + drills).
-4. Two minutes of reading or a polyglot exercise.
+4. Two minutes of reading or a polyglot exercise: with ≥ 2 languages in the session, one polyglot item (`which_language` or `parallel_align`, alternating by day; the other when one cannot be made from what is known) — `{kind: "poly", items}` in `planSession`.
 
 ---
 
@@ -727,6 +747,9 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 * **Course home**: flags of the active languages, each with progress ring and "due" badge; lanes **Vocabulary · Grammar · Script · Reading · Writing · Compare**; the daily session button. The explanation language is shown in the header ("explained in English").
 * **Flag card** (one component for concepts, functions, sentences, fields): content in one language at a time; a vertical rail of small flags, each with a state dot (✅ mastered, 🟢 known, 🟡 learning, 🔓 open, 🔒 locked); click → that language's realization loads in place; **⇄ Compare** opens the aligned table of all course languages. The last chosen language is remembered per card type.
 * **Word card** (the flag card of a word, `langcore.wordCard`): principal parts (article/plural, unit noun, root, pinyin + measure word), then the profile in sections — Meanings · In sentences (register and context chips, translation, unknown words marked) · Goes with · Verbs built on it · Idioms, sayings and quotes · Synonyms by register · Opposites · ⚠️ Watch out · Subtleties · Where it comes from · Fun facts — and the feeling / connotation / status / frequency badges. The flags switch the same concept to another language.
+* **⇄ Compare lane** (`#/cmp`, P6; `engine/lang/80_poly.js`): the course languages chosen for comparing side by side — every grammar function with its status in each (→ `#/cmp/fn/<fn>`: status and first sentence of each realization with a link to its page, an example sentence of the same meaning in every language when the bank has one, the **comparison strip** = the function's typological values × the languages, the `seeAlso` pointers between the course languages, 🏋️ `compare_rule`), every frame with its parallel sentences (→ `#/cmp/frame/<frame>`: the same meaning in every language, 🏋️ `parallel_align` / `parallel_translate`), a concept (→ `#/cmp/c/<concept>`: the compare table of the flag card + its bridges) and the bridges of the course (cognates, loans, false friends); 🏋️ drills of every polyglot type (`#/poly/<type>`). The flag card's ⇄ table and the function page's strip show the same parts in place and link here.
+* **Word card — across your languages** (P6): the word's bridges to the other course languages (root, etymology, shared source; ⚠️ false friends first, with the sentence that says so) and the links to the learner's own languages from its etymology.
+* **A colour per language** (§9.5): every language has one fixed colour (by code, the same in every course) on its chips, flags, rail buttons and the underline of its words (`[lang|=xx]`); exercises that ask *which* language hide it until answered.
 * **Field map**: the whole field (e.g. 200 vegetables) as a picture grid grouped by subgroup, coloured by state in the chosen language; tier dividers; tap an item for its card.
 * **Vocabulary DAG view**: reuses the curriculum map component (`curmap`), with node states for the chosen language.
 * **Grammar function page**: realization in the chosen language (summary, blocks, paradigm, "ask yourself", traps, examples), the flag rail for the other languages, comparison strip at the bottom, the feasibility light and its exercises.
@@ -740,10 +763,10 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 1. **Shared concepts, independent progress**: one DAG; states per language (D2).
 2. **One common order (D13, hard constraint)**: every subject shared by several languages has the same place in all their paths (§4.4.3); a language may have extra steps or skip some, never a different order.
-3. **Same thing at the same time**: the daily session teaches a batch in all open languages back to back; grammar pages always carry the other languages (flags + comparison strip); a function absent in a language says how that language expresses the meaning.
-4. **Bridges**: cognates and loans across course languages and the learner's known languages (Semitic roots shared by ar and he; Arabic loans known from Turkish; …). Shown on the card and trained with `cognate_bridge`.
-5. **Interference control**: a fixed colour per language; cross-language confusables drilled together; `which_language`; comparison notes flag the classic transfers (e.g. ar vs he negation, gender of cognate nouns that differs).
-6. **Load control**: `depth[lang]` and the active languages of a session; the field map shows tiers so the exhaustive tail is a choice, not a wall.
+3. **Same thing at the same time**: the daily session teaches a batch in all open languages back to back and interleaves the languages while grouping by concept (reviews of one idea in every language one after the other); with ≥ 2 languages it adds one polyglot item (§7.5); grammar pages always carry the other languages (flags + comparison strip); a function absent in a language says how that language expresses the meaning.
+4. **Bridges**: cognates and loans across course languages and the learner's known languages (Semitic roots shared by ar and he; Arabic loans known from Turkish; …), computed from the stored data (§6.6). Shown on the card (“across your languages”), listed in the ⇄ compare lane and trained with `cognate_bridge`.
+5. **Interference control**: a fixed colour per language (chips, flags, the underline of its words; §8); cross-language confusables (bridged words, false friends) drilled together — side by side in the reviews, first in `which_language`, as pairs in `cognate_bridge`; comparison notes flag the classic transfers (e.g. ar vs he negation, gender of cognate nouns that differs).
+6. **Load control**: `depth[lang]` (⚙️ Settings; a field node above the depth is `skipped` and its words stay locked — in the session, the field map, the drills and the polyglot items) and **today's languages**, chosen on the home among the active ones (for today only; the next day starts with all of them again); the field map shows tiers so the exhaustive tail is a choice, not a wall.
 
 ---
 
@@ -829,9 +852,11 @@ Existing subjects and curricula must keep working unchanged; the language part i
 - Function pages with procedures and traps; `paradigm`, `inflect`, `analyze`, `morph_build`, `root_pattern`, `agree`, `build_sentence`, `word_order`, `transform`, `contrast`, `parse`, `gloss`, `proofread`, `combine`; feasibility lights; refill tasks (queue + validation + merge).
 - ✔ Every generated item uses only known words (property test over random learner states); refill round-trip test with a mocked Claude answer.
 
-**P6 — Polyglot layer**
+**P6 — Polyglot layer** — ✅ 2026-10-09
 - Comparison tables and strips, bridges, confusables, `parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; interleaved sessions; depth per language.
 - ✔ Tests for comparison rendering and parallel exercises over shared frames.
+- Done: `engine/langcore.js` section “P6 — Polyglot layer” — `parallelGroups` / `parallelOf` (the same meaning across the languages, §6.6), `bridges` / `bridgesOf` / `knownLinks` (roots, etymologies, shared sources, false friends, links to the learner's languages), `compareFn` (the comparison strip of a function), `polyItems` and the generators `GEN.parallel_translate | parallel_align | which_language | cognate_bridge | compare_rule`, the polyglot step and the confusable pairs of `planSession` (§7.5); a depth-skipped node keeps its words locked (`itemState`). UI `engine/lang/80_poly.js` + `80_poly.css`: the five widgets, the ⇄ compare lane (`#/cmp`, `#/cmp/fn|frame|c/<id>`), the drills (`#/poly/<type>`), “across your languages” on the word card, the strips on the flag card's compare table and on the function page, today's languages on the home, a fixed colour per language; the daily session runs the polyglot item. `tools/lang_phenomena.py` also counts the generators registered with `GEN.<type>`. Tests: `tests/lang_poly.js` (72 checks: Node over the mini course and the pilot course — every item's answer checked against the data, D19 caps, sessions, generators, depth — and Playwright over the built pilot course: colours, today's languages, the session's polyglot item, the compare lane, the word card, every widget answered by mouse and keyboard, phone width).
+- Left for later: the files of §4.10 (`compare/<fn>.json`, `confusables.json`, `bridges.json`) are not read yet — no content has them; bridges and statements are computed from what is stored (§6.6). Look-alike words without a shared origin (`lookAlike`) need such a file.
 
 **P7 — Production and reading**
 - `translate` (tiles → typed → AI fallback labelled), `rewrite`, `expand`, `guided_compose`, `graded_reader`, numbers/time/date, `register`, `dialogue_turn`; tutor language mode and intents.
@@ -846,6 +871,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-09 — P6 polyglot layer: `parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule` (answers from parallel bank sentences, bridges computed from roots / etymologies / pitfalls, typological values and status); the ⇄ compare lane; bridges on the word card; one polyglot item per daily session of ≥ 2 languages and confusables side by side; a colour per language; today's languages on the home; depth-skipped words stay locked.
 - 2026-10-09 — Core batch K1 (C01–C04) in ar, he, zh, de; `main` merged into `languages` (sync rules, i18n; conflicts in `loader.js` and `build.py` resolved as docs/SHELF_AND_LANGUAGES.md says). P3b finished: pictures shown with an emoji fallback, picture → word, 🧩 field sorting, 🔁 principal parts, progress across devices (`mergeLang`, `noema:remote`, `tests/lang_sync.js`). German ordinals are ADJ class `attr`. §13.1 tech debt: the pictures themselves, content after K1 (the user: implementation first), the issues found while writing K1.
 - 2026-10-09 — D18 and D19 (asked by the user): the learner's languages (with levels) decide what is explained — familiar parts hidden in one line, inference by type / family for languages without a profile, comparison notes for a reference set of 21 languages of every type (+ Claude / Gemini notes on request), the library of peculiarities; vocabulary as its own track after the foundations, every other aspect trained with any vocabulary (≤ ⌈30 %⌉ unknown words per sentence, 🆕 with the word card, the list at the end of a lesson), every field with sentences for every non-vocabulary node before it.
 - 2026-10-08 — D17 (asked by the user): the core grows from C01–C07 to **C01–C48** (A2 → B2, §4.4.2; to be reviewed with the user before the content is written) and the **advanced stage** is open-ended (§4.4.4: fields, grammar, lexicon, varieties, texts, culture). `docs/LANGUAGE_RULES.md` — the binding short form of D1–D17 for every agent, tool and skill — with `CLAUDE.md`, `AGENTS.md`, the skill reference, `tools/lang_sources/AGENT_BRIEF.md` and `tests/lang_rules.py` that keeps them in step.

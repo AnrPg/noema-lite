@@ -34,3 +34,4 @@ node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"
 node "$ROOT/tests/lang_lessons.js" "$T"
 node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
+node "$ROOT/tests/lang_poly.js" "$T"   # P6 polyglot layer: parallel sentences, bridges, comparisons, the five polyglot exercises, the compare lane

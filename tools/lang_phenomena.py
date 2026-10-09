@@ -24,6 +24,7 @@ def implemented_generators():
     src = open(os.path.join(ROOT, 'engine', 'langcore.js'), encoding='utf-8').read()
     out = set(re.findall(r"gen\.type === '([a-z_]+)'", src))
     for m in re.finditer(r"\[((?:'[a-z_]+',?\s*)+)\]\.includes\(gen\.type\)", src): out |= set(re.findall(r"'([a-z_]+)'", m.group(1)))
+    out |= set(re.findall(r"\bGEN\.([a-z_]+)\s*=", src))   # generators registered by the later phases (GEN.<type> = ctx => items)
     return out | {'learn_batch', 'recognize'}   # the vocabulary lane (engine/lang/30_vocab.js)
 
 

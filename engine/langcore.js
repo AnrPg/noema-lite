@@ -322,7 +322,7 @@
   function itemState(C, L, code, lexId, nodeStates) {
     const it = L.langs[code]?.items[lexId];
     const ns = (nodeStates || {})[C.lang[code].lex[lexId].node];
-    if (!it || (it.seen == null && !it.r && !it.p)) return ns && ns !== 'locked' ? 'ready' : 'locked';
+    if (!it || (it.seen == null && !it.r && !it.p)) return ns && !['locked', 'skipped', 'unprepared'].includes(ns) ? 'ready' : 'locked';   // above the depth (§9.6) or not written yet: still locked
     if (!it.r && !it.p) return 'seen';
     if (!trackOk(it.r, 3, 2)) return 'learning';
     if (!trackOk(it.p, 3, 2)) return 'known_r';
@@ -827,6 +827,7 @@
         if (f.state === 'ready' || f.state === 'thin') { steps.push({ kind: 'grammar', lang: c, fn: fid, feasibility: f.state }); budget -= SECONDS.grammar; break outer; }
       }
     }
+    budget -= polyPlan(C, L, steps, langs, K, day, minutes * 60);   // 5 · P6: confusables side by side, one polyglot item (§7.5, §9)
     return { day, steps, seconds: minutes * 60 - budget };
   }
 
@@ -859,7 +860,455 @@
     readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+  /* ---------- P6 — Polyglot layer: parallel sentences, bridges, comparison statements, polyglot exercises, interleaved sessions (§6.6, §7.5, §9) ---------- */
+  /** A small seeded random generator: the plan of a day stays the same when the home is drawn again. */
+  function seeded(n) { let a = (n >>> 0) || 1; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  const polyFold = (code, s) => stripMarks(code, nfc(s)).normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+  const sharedSenses = (a, b) => (a?.senses || []).filter(s => (b?.senses || []).includes(s));
+  /** The active languages of a learner (or the ones asked for) that the course has. */
+  const polyLangs = (C, L, langs) => uniqStr((langs || L.settings.languages || C.languages).filter(c => C.lang[c]));
+  const knownMap = (C, L, langs, k) => { const K = { ...(k || {}) }; for (const c of langs) if (!K[c]) K[c] = known(C, L, c); return K; };
+
+  // ---- the same meaning in several languages: same frame + same gloss (bracket notes set aside, but never contradicting) ----
+  const CONTRACT = [[/\bcan't\b/g, 'can not'], [/\bwon't\b/g, 'will not'], [/\bcannot\b/g, 'can not'], [/n't\b/g, ' not'], [/'m\b/g, ' am'], [/'re\b/g, ' are'], [/'ve\b/g, ' have'], [/'ll\b/g, ' will'], [/'d\b/g, ' would'], [/'s\b/g, ' is']];
+  function noteMarks(s, m) {
+    s = s.toLowerCase();
+    if (/\b(wom[ae]n|female|feminine|fem|f|girls?)\b/.test(s)) m.G = 'F'; else if (/\b(m[ae]n|male|masculine|masc|m|boys?)\b/.test(s)) m.G = 'M';
+    if (/\b(pl|plural|you all|all of you|several people|a group)\b/.test(s)) m.N = 'PL'; else if (/\b(two|dual|both)\b/.test(s)) m.N = 'DU'; else if (/\b(sg|singular|one person)\b/.test(s)) m.N = 'SG';
+    if (/\b(informal|familiar|casual)\b/.test(s)) m.R = 'INF'; else if (/\b(formal|polite|respectful)\b/.test(s)) m.R = 'FORM';
+    return m;
+  }
+  /** A gloss → {key: the meaning folded, marks: {G: gender of the person, N: number of “you”, R: formality}} */
+  function glossKey(g) {
+    const marks = {};
+    let t = nfc(g).replace(/[’‘`´]/g, "'").replace(/[(\[]([^)\]]*)[)\]]/g, (x, inner) => { noteMarks(inner, marks); return ' '; }).toLowerCase();
+    for (const [re, to] of CONTRACT) t = t.replace(re, to);
+    return { key: t.replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim(), marks };
+  }
+  /** Groups of bank sentences that mean the same in ≥ 2 course languages: [{key, frame, gloss, by: {lang: [{id, marks}]}}] (cached). */
+  function parallelGroups(C) {
+    if (C._par) return C._par.groups;
+    const map = new Map(), of = {};
+    for (const code of C.languages) for (const s of C.lang[code].sentences) {
+      if (!s.frame || !s.gloss) continue;
+      const g = glossKey(s.gloss), key = s.frame + '|' + g.key;
+      let G = map.get(key); if (!G) map.set(key, G = { key, frame: s.frame, gloss: s.gloss, by: {} });
+      (G.by[code] = G.by[code] || []).push({ id: s.id, marks: g.marks });
+      of[code + '|' + s.id] = G;
+    }
+    const groups = [...map.values()].filter(G => Object.keys(G.by).length >= 2);
+    C._par = { groups, of };
+    return groups;
+  }
+  /** The sentences of language `to` that say what sentence `sid` of `code` says (the bracket notes decide between variants). */
+  function equivalents(C, code, sid, to) {
+    parallelGroups(C);
+    const G = C._par.of[code + '|' + sid]; if (!G || !G.by[to] || code === to) return [];
+    const src = (G.by[code] || []).find(x => x.id === sid); let cands = G.by[to].slice();
+    for (const cat of ['G', 'N', 'R']) {
+      const want = src?.marks[cat];
+      if (want) { const same = cands.filter(x => x.marks[cat] === want); cands = same.length ? same : cands.filter(x => !x.marks[cat]); }
+      else { const plain = cands.filter(x => !x.marks[cat]); if (plain.length) cands = plain; }
+    }
+    return cands.map(x => x.id);
+  }
+  /** {lang: [ids]} — the same meaning as sentence `sid` in every other language (langs: which ones). */
+  function parallelOf(C, code, sid, langs) {
+    const out = {};
+    for (const c of (langs || C.languages)) { if (c === code) continue; const e = equivalents(C, code, sid, c); if (e.length) out[c] = e; }
+    return out;
+  }
+
+  // ---- bridges: related words across the course languages and to the learner's languages (computed from the stored data) ----
+  const AR_HE = { 'ا': 'א', 'أ': 'א', 'إ': 'א', 'آ': 'א', 'ء': 'א', 'ئ': 'א', 'ؤ': 'א', 'ب': 'ב', 'ت': 'ת', 'ث': 'ש', 'ج': 'ג', 'ح': 'ח', 'خ': 'ח', 'د': 'ד', 'ذ': 'ז',
+    'ر': 'ר', 'ز': 'ז', 'س': 'שס', 'ش': 'ש', 'ص': 'צ', 'ض': 'צ', 'ط': 'ט', 'ظ': 'צט', 'ع': 'ע', 'غ': 'ע', 'ف': 'פ', 'ق': 'ק', 'ك': 'כ', 'ل': 'ל', 'م': 'מ', 'ن': 'נ', 'ه': 'ה',
+    'و': 'וי', 'ي': 'יו', 'ى': 'יו' };
+  const HE_FINAL = { 'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ' };
+  const rootLetters = (code, r) => typeof r === 'string' ? [...stripMarks(code, r)].filter(ch => /\p{L}/u.test(ch)).map(ch => HE_FINAL[ch] || ch) : [];
+  /** The root of a word as its facade states it (D14: {none: why} = no root), else the top-level field. */
+  const rootOf = lx => { const f = lx?.features; if (f && 'root' in f) return typeof f.root === 'string' ? f.root : null; return typeof lx?.root === 'string' ? lx.root : null; };
+  /** Do an Arabic and a Hebrew root correspond by the regular sound correspondences? */
+  function rootsCorrespond(ra, rh) { const a = rootLetters('ar', ra), b = rootLetters('he', rh); return a.length >= 2 && a.length === b.length && a.every((ch, i) => (AR_HE[ch] || '').includes(b[i])); }
+  const QUALIFIER = /(?:Proto-|Pre-|Old|Middle|Classical|Ancient|Byzantine|Late|Medieval|Biblical|Mishnaic|Koine|Vulgar|Early|Ottoman|Egyptian|Levantine|Gulf|Literary|Moroccan|Iraqi|Syrian|Palestinian|Swiss|Austrian|American|British|Brazilian|Western|Eastern|Northern|Southern|Upper|Lower|High|Low|Judeo-|Jewish|Imperial|Archaic|Colloquial|Dialectal|Regional|Taiwanese|Mainland|Hong Kong)\s*$/;
+  const NOT_A_WORD = new Set(('and or for entry word words people the a an in au la le el from speakers speaker also via with to of as is was are has have it its this that which who form forms name names spelling origin source sense meaning ' +
+    'edition cognate cognates loan loanword term verb noun adjective plural dialect dialects variety cousin equivalent translation calque version influence ultimately itself one same').split(' '));
+  const CUES = [['other', /\b(another word|other words?|different word|unrelated|not related|instead)\b/g], ['calque', /\b(calques?|loan[- ]translation|translated from|built (?:exactly )?like)\b/g], ['loan', /\b(borrow\w*|loan\w*|internationalism|from|via|through|passed into|whence|derived?s?|adopted|taken over|goes back|go back)\b/g], ['cognate', /\b(cognates?|related|akin|inherited|same root|continues|shares?|doublet)\b/g], ['compare', /\b(compare[sd]?|cf|see|like|as in|matches|similar)\b/g]];
+  function cueOf(before, after, sentence) {
+    if (/false friend/i.test(sentence)) return 'falseFriend';
+    let best = 'mention', at = -1;
+    for (const [kind, re] of CUES) for (const m of before.toLowerCase().matchAll(re)) if (m.index > at) { at = m.index; best = kind; }
+    if (best === 'mention') for (const [kind, re] of CUES.slice(2, 4)) if (new RegExp(re.source).test(after.toLowerCase())) { best = kind; break; }
+    return best;
+  }
+  const SCRIPT_RUN = { Arab: /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+(?:\s[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+)?/g, Hebr: /[֐-׿יִ-ﭏ]+(?:\s[֐-׿יִ-ﭏ]+)?/g, Hani: /[㐀-鿿豈-﫿]+/g, Hans: /[㐀-鿿豈-﫿]+/g, Hant: /[㐀-鿿豈-﫿]+/g };
+  /** The language names a text may use: those of the world profiles and of the course languages → code (cached on C). */
+  function nameIndex(C) {
+    if (C._names) return C._names;
+    const names = {};
+    for (const l of (C.data.world?.languages || [])) names[l.name.split(' (')[0]] = l.code;
+    for (const c of C.languages) { const n = C.lang[c].language.name; if (n) names[n.split(' (')[0]] = c; }
+    if (names.Chinese) names.Mandarin = names.Chinese;
+    const list = Object.keys(names).sort((a, b) => b.length - a.length).map(n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    return C._names = { names, re: list.length ? new RegExp(`(?<![\\p{L}\\p{M}-])(${list.join('|')})(?![\\p{L}-])[ \\u00a0]+`, 'gu') : null };
+  }
+  /** Words of other languages named in a text: [{code, word, kind: loan|cognate|compare|falseFriend|mention, note, named}] */
+  function mentionsIn(C, text, ownCode) {
+    const out = [], spans = [], subjects = [], NI = nameIndex(C); text = nfc(text || ''); if (!text) return out;
+    const sentenceAt = i => { const s = Math.max(text.lastIndexOf('. ', i), text.lastIndexOf('; ', i), text.lastIndexOf('? ', i)) + 1; let e = text.slice(i).search(/[.;?](\s|$)/); e = e < 0 ? text.length : i + e + 1; return [s, e]; };
+    if (NI.re) for (const m of text.matchAll(NI.re)) {
+      const pre = text.slice(Math.max(0, m.index - 14), m.index), [s, e] = sentenceAt(m.index), before = text.slice(s, m.index);
+      // a sentence about another word (“English shallot is from French échalote”): a language named with no cue before it; what follows is about that word
+      const subject = NI.names[m[1]] !== ownCode && !CUES.some(([, re]) => new RegExp(re.source, 'i').test(before)), about = subjects.some(x => x.s === s && x.at < m.index);
+      if (subject && !QUALIFIER.test(pre)) subjects.push({ s, at: m.index });
+      if (QUALIFIER.test(pre) || /\b(an?|the)\s+$/i.test(pre) || /[“‘"]\s*$/.test(pre)) continue;
+      const rest = text.slice(m.index + m[0].length);
+      let word = null;
+      if (/^[A-Za-zÀ-ɏ]/.test(rest)) {
+        const w = (rest.match(/^[\p{L}\p{M}'’-]+/u) || [''])[0].replace(/['’-]+$/, ''), after = rest.slice(w.length);
+        if (w.length >= 2 && !NOT_A_WORD.has(w.toLowerCase()) && /^(?:['’]?\s*[(,;:.)”’—–]|\s+(?:and|or)\b|\s*$)/u.test(after)) word = w;
+      } else if (!/^[“"‘(\s]/.test(rest)) {
+        const w = (rest.match(/^[^\s,;:.()“”"!?،؛。，、]+/u) || [''])[0];
+        if ([...w].length >= 2 || /[㐀-鿿]/.test(w)) word = w;
+      }
+      if (!word) continue;
+      const code = NI.names[m[1]], at = m.index + m[0].length, sentence = text.slice(s, e).trim();
+      spans.push([at, at + word.length]);
+      const ff = /false friend/i.test(sentence), again = ff && out.some(x => x.s === s && x.code === code);   // a false-friend sentence: the first word of each language is the one it is about
+      if (code !== ownCode) out.push({ code, word, kind: again ? 'other' : about && !ff ? 'other' : cueOf(before, text.slice(at + word.length, e), sentence), note: sentence, named: true, s });
+      else out.push({ code, word, kind: 'own', note: sentence, named: true, s });
+    }
+    // runs of another course language's own script, without its name (they count only when they mean the same, or in a false-friend sentence: see bridges)
+    for (const c of C.languages) {
+      const re = SCRIPT_RUN[C.lang[c].language.script]; if (!re || c === ownCode || C.lang[ownCode]?.language.script === C.lang[c].language.script) continue;
+      for (const m of text.matchAll(re)) {
+        if (spans.some(([a, b]) => m.index < b && m.index + m[0].length > a)) continue;
+        const [s, e] = sentenceAt(m.index), sentence = text.slice(s, e).trim();
+        out.push({ code: c, word: m[0], kind: cueOf(text.slice(s, m.index), text.slice(m.index + m[0].length, e), sentence), note: sentence, named: false });
+      }
+    }
+    return out;
+  }
+  const familyOf = (C, code) => (C.data.world?.languages || []).find(l => l.code === code)?.family || null;
+  /** A word named in a text → the lexemes of a course language it is (direct readings of the form index; a two-word span is tried first). */
+  function resolveWord(C, code, w) {
+    const X = C.lang[code], tries = w.includes(' ') ? [w, w.split(' ')[0]] : [w];
+    const trimEnd = t => code === 'ar' ? nfc(t).replace(/[\u064B-\u0650\u0652]+$/u, '') : nfc(t);   // the case ending a citation may leave out
+    for (const t0 of tries) {
+      const t = nfc(t0.replace(/[“”"'’(),.;:]+/g, ''));
+      let ms = X.forms.get(t) || (X.language.capitalizeFirst ? X.forms.get(decapFirst(t)) : null);
+      if (!ms) {
+        ms = X.forms.get(stripMarks(code, t)) || [];
+        if (hasMarks(code, t)) ms = ms.filter(m => { const lx = X.lex[m.l]; return [lx.lemma, ...Object.values(lx.forms || {})].some(f => trimEnd(f) === trimEnd(t)); });   // a vocalized word must match as written (أَبّ is not أَب)
+      }
+      if (ms && ms.length) return uniqStr(ms.map(m => m.l));
+    }
+    return [];
+  }
+  /** Every bridge of the course: {bridges: [{kind: cognate|loan|falseFriend, a:{lang,lex}, b:{lang,lex}, via: [root|etymology|source|pitfall], same, note, roots?}],
+   *  known: [{lang, lex, code, word, kind, note}] — links to languages outside the course (the learner's, by their etymology)}. Cached until the profiles change. */
+  function bridges(C) {
+    const stamp = C.languages.reduce((n, c) => n + Object.values(C.lang[c].lex).filter(x => x.profile).length, 0);
+    if (C._bridges && C._bridges.stamp === stamp) return C._bridges;
+    const pairs = new Map(), knownL = [], bySource = new Map();
+    const RANK = { cognate: 1, loan: 2, falseFriend: 3 };
+    const add = (kind, a, b, via, note, extra = {}) => {
+      if (a.lang === b.lang) return;
+      const [x, y] = [a, b].sort((p, q) => (p.lang + p.lex < q.lang + q.lex ? -1 : 1)), key = `${x.lang}:${x.lex}|${y.lang}:${y.lex}`;
+      const same = sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length > 0;
+      if (kind === 'falseFriend' && same) return;   // the course gives them a meaning in common: not a false friend here
+      const o = pairs.get(key);
+      if (!o) { pairs.set(key, { kind, a: x, b: y, via: [via], same, note: note || '', ...extra }); return; }
+      if (RANK[kind] > RANK[o.kind]) { o.kind = kind; if (note) o.note = note; } else if (note && !o.note) o.note = note;
+      if (!o.via.includes(via)) o.via.push(via);
+      Object.assign(o, extra);
+    };
+    // 1 · roots: an Arabic and a Hebrew word with corresponding radicals and a meaning in common
+    if (C.lang.ar && C.lang.he) {
+      const heBy = new Map();
+      for (const lx of Object.values(C.lang.he.lex)) if (rootOf(lx)) { const k = rootLetters('he', rootOf(lx)).join(''); if (!heBy.has(k)) heBy.set(k, []); heBy.get(k).push(lx); }
+      for (const lx of Object.values(C.lang.ar.lex)) {
+        const ra = rootOf(lx); if (!ra) continue;
+        let keys = [''];
+        for (const ch of rootLetters('ar', ra)) { const opts = AR_HE[ch] || ''; keys = keys.flatMap(k => [...opts].map(o => k + o)); if (!keys.length) break; }
+        for (const k of uniqStr(keys)) for (const h of heBy.get(k) || []) if (rootsCorrespond(ra, rootOf(h)) && sharedSenses(lx, h).length)
+          add('cognate', { lang: 'ar', lex: lx.id }, { lang: 'he', lex: h.id }, 'root', '', { roots: [ra, rootOf(h)] });
+      }
+    }
+    // 2 · texts: etymologies (cognates, loans, the sources of loans), and the sentences that say “false friend”
+    for (const code of C.languages) for (const lx of Object.values(C.lang[code].lex)) {
+      const p = lx.profile; if (!p) continue;
+      const texts = [[p.etymology?.text || '', 'etymology'], ...(p.pitfalls || []).map(t => [t, 'pitfall']), ...(p.subtleties || []).map(t => [t, 'pitfall'])];
+      for (const [text, src] of texts) {
+        if (!text || (src === 'pitfall' && !/false friend/i.test(text))) continue;
+        for (const m of mentionsIn(C, text, code)) {
+          if (['own', 'other', 'calque'].includes(m.kind) || (src === 'pitfall' && m.kind !== 'falseFriend')) continue;
+          if (C.lang[m.code]) {   // a word of another course language
+            const ids = resolveWord(C, m.code, m.word); if (!ids.length) continue;
+            const best = ids.find(id => sharedSenses(lx, C.lang[m.code].lex[id]).length) || ids[0], same = sharedSenses(lx, C.lang[m.code].lex[best]).length > 0;
+            if (m.kind === 'falseFriend') { if (!same) add('falseFriend', { lang: code, lex: lx.id }, { lang: m.code, lex: best }, 'pitfall', m.note); continue; }
+            if (!m.named && !same) continue;   // a bare word in that script: only when it means the same (it may be a word of another language written alike)
+            if (m.kind === 'compare' && !(same && familyOf(C, code) && familyOf(C, code) === familyOf(C, m.code))) continue;   // “compare”: a relation only between words of one family with the same meaning
+            add(m.kind === 'loan' ? 'loan' : 'cognate', { lang: code, lex: lx.id }, { lang: m.code, lex: best }, 'etymology', m.note);
+          } else if (m.named && m.kind !== 'mention') {   // a language outside the course (the learner may speak it)
+            knownL.push({ lang: code, lex: lx.id, code: m.code, word: m.word, kind: m.kind, note: m.note });
+            if (m.kind === 'loan' && src === 'etymology') { const k = m.code + '|' + polyFold('', m.word); if (!bySource.has(k)) bySource.set(k, []); bySource.get(k).push({ lang: code, lex: lx.id, word: m.word }); }
+          }
+        }
+      }
+    }
+    // 3 · the same source: two course words borrowed from the same word of a third language, with a meaning in common
+    const NI = nameIndex(C), nameOf = cd => Object.keys(NI.names).find(n => NI.names[n] === cd) || cd;
+    for (const [k, ws] of bySource) for (let i = 0; i < ws.length; i++) for (let j = i + 1; j < ws.length; j++) {
+      const a = ws[i], b = ws[j]; if (a.lang === b.lang) continue;
+      if (sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length) add('loan', a, b, 'source', `Both from ${nameOf(k.split('|')[0])} ${a.word}.`);
+    }
+    const list = [...pairs.values()];
+    for (const b of list) if (!b.note && b.roots) b.note = `Root ${b.roots[0]} ↔ ${b.roots[1]}: the same radicals by the regular sound correspondences, and a meaning in common.`;
+    const byWord = new Map(); for (const b of list) for (const w of [b.a, b.b]) { const k = w.lang + '|' + w.lex; if (!byWord.has(k)) byWord.set(k, []); byWord.get(k).push(b); }
+    return C._bridges = { stamp, list, known: knownL, byWord };
+  }
+  /** The bridges of one word: [{…bridge, other: {lang, lex}}], false friends first. */
+  function bridgesOf(C, code, lexId) {
+    const B = bridges(C), RANK = { falseFriend: 0, loan: 1, cognate: 2 };
+    return (B.byWord.get(code + '|' + lexId) || []).map(b => ({ ...b, other: b.a.lang === code && b.a.lex === lexId ? b.b : b.a })).sort((x, y) => RANK[x.kind] - RANK[y.kind]);
+  }
+  const knowCodes = knows => (knows || []).map(k => typeof k === 'string' ? k : k.code).filter(Boolean);
+  /** Links of one word to the learner's own languages (from its etymology): [{code, word, kind, note}] — all of them when knows is not given. */
+  function knownLinks(C, code, lexId, knows) {
+    const ks = knows ? new Set(knowCodes(knows)) : null;
+    return bridges(C).known.filter(x => x.lang === code && x.lex === lexId && (!ks || ks.has(x.code)));
+  }
+
+  // ---- comparison statements of a function across the languages ----
+  const STATUS_TEXT = { realized: 'has a form or construction of its own for it', periphrastic: 'says it with other means (other words, word order)', absent: 'does not mark it at all' };
+  /** One function across the languages: {fn, title, langs, rows: [{lang, status, first, typology}], features: [{feature, title, values: {lang: {value, title, from}}}], seeAlso: [{from, lang, fn, note}]} */
+  function compareFn(C, fid, langs) {
+    const W = C.data.world, feat = Object.fromEntries((W?.features || []).map(f => [f.id, f])), prof = Object.fromEntries((W?.languages || []).map(l => [l.code, l]));
+    langs = (langs || C.languages).filter(c => C.lang[c]?.grammar[fid]);
+    const rows = langs.map(c => { const g = C.lang[c].grammar[fid]; return { lang: c, status: g.status, first: (String(g.summary || '').match(/^.*?[.!?](\s|$)/) || [g.summary || ''])[0].trim(), summary: g.summary || '', typology: Array.isArray(g.typology) ? g.typology : [] }; });
+    const ids = uniqStr(rows.flatMap(r => r.typology.map(t => t.feature))).filter(f => feat[f]);
+    const features = ids.map(f => {
+      const values = {};
+      for (const r of rows) {
+        const tag = r.typology.find(t => t.feature === f), v = tag ? tag.value : prof[r.lang]?.values?.[f];
+        const vt = (feat[f].values || []).find(x => x.id === v);
+        values[r.lang] = v && v !== 'unknown' ? { value: v, title: vt?.title || v, from: tag ? 'tag' : 'profile' } : null;
+      }
+      return { feature: f, title: feat[f].title, values };
+    });
+    const seeAlso = rows.flatMap(r => (C.lang[r.lang].grammar[fid].seeAlso || []).filter(x => langs.includes(x.lang) && x.lang !== r.lang).map(x => ({ from: r.lang, lang: x.lang, fn: x.fn || fid, note: x.note || '' })));
+    return { fn: fid, title: C.functions[fid]?.title || fid, langs, rows, features, seeAlso };
+  }
+  /** compare_rule (§6.6): statements × languages from the typological values and the status of the realizations; and “whose page says this?” */
+  function compareItems(C, L, { langs, fns, rng = Math.random, max = 4 } = {}) {
+    langs = polyLangs(C, L, langs); if (langs.length < 2) return [];
+    const order = {}; C.order.forEach((nid, i) => { const f = C.nodes[nid].functions || []; for (const x of (Array.isArray(f) ? f : Object.values(f).flat())) if (!(x in order)) order[x] = i; });
+    fns = (fns || Object.keys(C.functions).filter(f => f !== 'fn.overview').sort((a, b) => (order[a] ?? 1e9) - (order[b] ?? 1e9)));
+    const names = C.languages.flatMap(c => [C.lang[c].language.name, (C.lang[c].language.name || '').split(' (')[0], C.lang[c].language.nativeName]).filter(Boolean).concat(['Mandarin', 'MSA']);
+    const mask = s => { let t = s; for (const n of names) t = t.split(n).join('…'); for (const re of Object.values(SCRIPT_RUN)) t = t.replace(new RegExp(re.source, 'g'), '…'); return t.replace(/(…\s*){2,}/g, '… '); };
+    const out = [];
+    for (const fid of fns) {
+      const cf = compareFn(C, fid, langs); if (cf.langs.length < 2) continue;
+      const st = [];
+      for (const f of cf.features) {
+        if (cf.langs.some(c => !f.values[c])) continue;   // every value known, or the statement is not asked
+        const by = {}; for (const c of cf.langs) (by[f.values[c].value] = by[f.values[c].value] || []).push(c);
+        const groups = Object.entries(by);
+        for (const [v, hs] of groups) st.push({ text: `${f.title}: ${f.values[hs[0]].title}`, holds: hs, differs: groups.length > 1, feature: f.feature });
+      }
+      const sts = {}; for (const r of cf.rows) (sts[r.status] = sts[r.status] || []).push(r.lang);
+      if (Object.keys(sts).length > 1) for (const [s, hs] of Object.entries(sts)) st.push({ text: `This language ${STATUS_TEXT[s] || s}.`, holds: hs, differs: true, feature: 'status' });
+      const diff = shuffled(st.filter(s => s.differs), rng), samek = shuffled(st.filter(s => !s.differs), rng);
+      const pick = [...diff.slice(0, 4)]; if (pick.length < 4 && samek.length) pick.push(samek[0]);
+      if (pick.length >= 2 && pick.some(s => s.holds.length < cf.langs.length))
+        out.push({ type: 'compare_rule', kind: 'compare', fn: fid, lang: cf.langs[0], langs: cf.langs, title: cf.title, multi: true, statements: shuffled(pick, rng).map(({ text, holds }) => ({ text, holds })),
+          why: `${cf.title}: ` + cf.langs.map(c => `${c} — ${cf.rows.find(r => r.lang === c).first}`).join(' · ') });
+      const firsts = cf.rows.filter(r => r.first);
+      if (firsts.length >= 2) out.push({ type: 'compare_rule', kind: 'whose', fn: fid, lang: cf.langs[0], langs: cf.langs, title: cf.title, multi: false,
+        statements: shuffled(firsts.map(r => ({ text: mask(r.first), holds: [r.lang] })), rng), why: cf.title });
+      if (out.length >= max * 2) break;
+    }
+    const a = out.filter(x => x.kind === 'compare'), b = out.filter(x => x.kind === 'whose'), mix = [];
+    while ((a.length || b.length) && mix.length < max) { if (a.length) mix.push(a.shift()); if (b.length && mix.length < max) mix.push(b.shift()); }
+    return mix;
+  }
+
+  // ---- the polyglot items (§6.6): every answer from the stored data ----
+  /** The romanization a learner reads a word in (transliteration, pinyin), or the word itself in Latin script; null when there is none. */
+  function romanOf(C, code, lx) {
+    if (lx.translit) return lx.translit;
+    if (lx.pinyin) return lx.pinyin.replace(/\s+/g, '');
+    return C.lang[code].language.script === 'Latn' ? lx.lemma : null;
+  }
+  const usable = lx => (lx.senses || []).length && !lx.prefix && lx.pos !== 'PROPN' && lx.pos !== 'PUNCT';
+  /** which_language: a known word (romanized) or a sentence (when two languages share a script) → which course language? */
+  function whichItems(C, L, { langs, k, rng = Math.random, max = 6 } = {}) {
+    langs = polyLangs(C, L, langs); if (langs.length < 2) return [];
+    const K = knownMap(C, L, langs, k), all = C._romans = C._romans || {};
+    for (const c of langs) if (!all[c]) { all[c] = new Set(); for (const lx of Object.values(C.lang[c].lex)) { const r = romanOf(C, c, lx); if (r) all[c].add(polyFold(c, r)); all[c].add(polyFold(c, lx.lemma)); } }
+    const ok = (c, lx) => { const r = romanOf(C, c, lx); if (!r || !usable(lx) || !K[c].R.has(lx.id) || [...polyFold(c, r)].length < 2) return null; const f = polyFold(c, r); return langs.some(o => o !== c && all[o].has(f)) ? null : r; };
+    const item = (c, lx, r) => ({ type: 'which_language', kind: 'which', lang: c, lex: lx.id, prompt: r, roman: r !== lx.lemma, options: langs.slice(), answer: c, gloss: C.concepts[lx.senses[0]]?.gloss || '',
+      why: `${lx.lemma}${r !== lx.lemma ? ' (' + r + ')' : ''} — ${C.concepts[lx.senses[0]]?.gloss || ''}` });
+    const out = [], used = new Set();
+    // confusables first: the two words of a bridge, both known, one after the other (§9.5)
+    for (const b of shuffled(bridges(C).list.filter(b => langs.includes(b.a.lang) && langs.includes(b.b.lang)), rng)) {
+      if (out.length + 2 > max) break;
+      const A = C.lang[b.a.lang].lex[b.a.lex], B = C.lang[b.b.lang].lex[b.b.lex], ra = ok(b.a.lang, A), rb = ok(b.b.lang, B);
+      if (!ra || !rb || used.has(A.id) || used.has(B.id)) continue;
+      out.push({ ...item(b.a.lang, A, ra), pair: true }, { ...item(b.b.lang, B, rb), pair: true }); used.add(A.id); used.add(B.id);
+    }
+    // sentences, only where two of the languages share a script (otherwise the script alone answers it)
+    const scripts = {}; for (const c of langs) (scripts[C.lang[c].language.script] = scripts[C.lang[c].language.script] || []).push(c);
+    for (const group of Object.values(scripts)) if (group.length > 1) for (const c of group) {
+      const s = shuffled(selectSentences(C, c, { known: K[c].R, maxUnknown: 'auto' }).slice(0, 20), rng)[0];
+      if (s && out.length < max) out.push({ type: 'which_language', kind: 'which', lang: c, sentence: s.id, prompt: s.text, roman: false, options: langs.slice(), answer: c, gloss: s.gloss, why: `${s.text} — ${s.gloss}`, unknown: s.unknown });
+    }
+    const pools = langs.map(c => shuffled(Object.values(C.lang[c].lex).filter(lx => !used.has(lx.id) && ok(c, lx)), rng).map(lx => [c, lx]));
+    let i = 0; while (out.length < max && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) { const [c, lx] = p.shift(); out.push(item(c, lx, ok(c, lx))); } }
+    return out.slice(0, max);
+  }
+  /** parallel_translate: a sentence of one course language → build the same meaning in another with tiles. */
+  function translateItems(C, L, { langs, from, to, k, rng = Math.random, max = 6, sources, fn, frame } = {}) {
+    langs = polyLangs(C, L, langs); if (langs.length < 2) return [];
+    const K = knownMap(C, L, langs, k), allowed = {};
+    for (const c of langs) allowed[c] = new Map(selectSentences(C, c, { known: K[c].R, maxUnknown: 'auto' }).map(s => [s.id, s]));
+    const pairsL = []; for (const a of (from ? [from] : langs)) for (const b of (to ? [].concat(to) : langs)) if (a !== b && allowed[a] && allowed[b]) pairsL.push([a, b]);
+    const pools = pairsL.map(([a, b]) => {
+      const src = (sources ? sources.filter(s => allowed[a].has(s.id)).map(s => allowed[a].get(s.id)) : [...allowed[a].values()]).filter(s => !frame || s.frame === frame);
+      const items = [];
+      for (const sA of shuffled(src, rng)) {
+        const eq = equivalents(C, a, sA.id, b); if (!eq.length) continue;
+        const ok = eq.map(id => allowed[b].get(id)).filter(Boolean).sort((x, y) => x.unknown.length - y.unknown.length); if (!ok.length) continue;
+        const sB = ok[0], tiles = sentenceTiles(sB); if (tiles.length < 2) continue;
+        const wt = wrongTile(C, b, sB, rng), answers = uniqStr(eq.flatMap(id => { const s = C.lang[b].sentenceById[id]; return s ? [s.text, ...(s.alts || [])] : []; }));
+        items.push({ type: 'parallel_translate', kind: 'parallel', lang: b, from: a, source: sA.id, sentence: sB.id, frame: sA.frame, gloss: sA.gloss, tiles: shuffled(wt ? [...tiles, wt] : tiles, rng), size: tiles.length,
+          answers, punct: endPunct(sB), why: sB.text, unknown: sB.unknown, unknownFrom: sA.unknown, ...(fn && C.lang[b].grammar[fn] ? { fn } : {}) });
+        if (items.length >= max) break;
+      }
+      return items;
+    });
+    const out = []; let i = 0; while (out.length < max && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
+    return out;
+  }
+  const tokConcepts = (X, t) => uniqStr((t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boolean)).flatMap(l => X.lex[l]?.senses || []));
+  /** parallel_align: 2–4 realizations of one meaning; for words of the first, the words of the others with the same concept. */
+  function alignItems(C, L, { langs, k, rng = Math.random, max = 4, pivot, sources, frame } = {}) {
+    langs = polyLangs(C, L, langs); if (langs.length < 2) return [];
+    const K = knownMap(C, L, langs, k), allowed = {};
+    for (const c of langs) allowed[c] = new Map(selectSentences(C, c, { known: K[c].R, maxUnknown: 'auto' }).map(s => [s.id, s]));
+    const srcIds = sources ? new Set(sources.map(s => (pivot || '') + '|' + s.id)) : null;
+    const out = [];
+    for (const G of shuffled(parallelGroups(C), rng)) {
+      if (out.length >= max) break;
+      if (frame && G.frame !== frame) continue;
+      const present = langs.filter(c => (G.by[c] || []).some(x => allowed[c].has(x.id)));
+      if (present.length < 2 || (pivot && !present.includes(pivot))) continue;
+      const pv = pivot || present[Math.floor(rng() * present.length)];
+      const sP = (G.by[pv] || []).map(x => allowed[pv].get(x.id)).filter(Boolean).sort((a, b) => a.unknown.length - b.unknown.length)[0];
+      if (!sP || (srcIds && !srcIds.has(pv + '|' + sP.id))) continue;
+      const sents = { [pv]: sP };
+      for (const c of shuffled(present.filter(c => c !== pv), rng).slice(0, 3)) {
+        const id = equivalents(C, pv, sP.id, c).find(x => allowed[c].has(x)); if (id) sents[c] = allowed[c].get(id);
+      }
+      const others = Object.keys(sents).filter(c => c !== pv); if (!others.length) continue;
+      const XP = C.lang[pv], rows = [], usedTok = new Set();
+      const conceptsP = sP.tokens.map(t => t.p || t.name ? [] : tokConcepts(XP, t));
+      for (const cid of uniqStr(conceptsP.flat())) {
+        const at = conceptsP.map((cs, i) => cs.includes(cid) ? i : -1).filter(i => i >= 0);
+        if (at.length !== 1 || usedTok.has(at[0])) continue;
+        const hits = {};
+        for (const c of others) { const X = C.lang[c], hs = sents[c].tokens.map((t, i) => !t.p && !t.name && tokConcepts(X, t).includes(cid) ? i : -1).filter(i => i >= 0); if (hs.length) hits[c] = hs; }
+        if (!Object.keys(hits).length) continue;
+        usedTok.add(at[0]); rows.push({ concept: cid, gloss: C.concepts[cid]?.gloss || cid, pivot: at[0], hits });
+        if (rows.length >= 5) break;
+      }
+      if (rows.length < 2) continue;
+      out.push({ type: 'parallel_align', kind: 'align', lang: pv, langs: [pv, ...others], sentences: Object.fromEntries(Object.entries(sents).map(([c, s]) => [c, s.id])), rows, gloss: sP.gloss, frame: G.frame,
+        unknown: Object.fromEntries(Object.entries(sents).map(([c, s]) => [c, s.unknown])), why: Object.entries(sents).map(([c, s]) => s.text).join(' · ') });
+    }
+    return out;
+  }
+  /** cognate_bridge: related words across the course languages, the links to the learner's languages, the false friend among related pairs. */
+  function bridgeItems(C, L, { langs, k, rng = Math.random, max = 6, knows, focus } = {}) {
+    langs = polyLangs(C, L, langs); if (!langs.length) return [];
+    const K = knownMap(C, L, langs, k), B = bridges(C), isKnown = w => K[w.lang]?.R.has(w.lex);
+    const mine = B.list.filter(b => langs.includes(b.a.lang) && langs.includes(b.b.lang) && isKnown(b.a) && isKnown(b.b) && (!focus || b.a.lang === focus || b.b.lang === focus));
+    const linked = (w, x) => (B.byWord.get(w.lang + '|' + w.lex) || []).some(b => (b.a.lang === x.lang && b.a.lex === x.lex) || (b.b.lang === x.lang && b.b.lex === x.lex));
+    const cand = {}; for (const c of langs) cand[c] = Object.values(C.lang[c].lex).filter(x => K[c].R.has(x.id) && usable(x));
+    const distract = (lang, answer, prompt, n) => {
+      const P = C.lang[prompt.lang].lex[prompt.lex], A = C.lang[lang].lex[answer];
+      return shuffled(shuffled(cand[lang], rng).slice(0, 60).filter(x => x.id !== answer && x.lemma !== A.lemma && !sharedSenses(x, P).length && !linked(prompt, { lang, lex: x.id })
+        && !(rootOf(x) && rootOf(P) && (lang === 'ar' ? rootsCorrespond(rootOf(x), rootOf(P)) : lang === 'he' ? rootsCorrespond(rootOf(P), rootOf(x)) : false))), rng)
+        .sort((x, y) => (x.pos === A.pos ? 0 : 1) - (y.pos === A.pos ? 0 : 1)).slice(0, n).map(x => x.id);
+    };
+    const bridgeQ = [], ffQ = [], knownQ = [];
+    for (const b of shuffled(mine.filter(b => b.kind !== 'falseFriend'), rng)) {
+      if (bridgeQ.length >= max) break;
+      const [p, a] = rng() < 0.5 ? [b.a, b.b] : [b.b, b.a]; if (focus && a.lang !== focus && p.lang !== focus) continue;
+      const wrong = distract(a.lang, a.lex, p, 3); if (wrong.length < 2) continue;
+      bridgeQ.push({ type: 'cognate_bridge', kind: 'bridge', lang: a.lang, from: p.lang, lex: p.lex, prompt: C.lang[p.lang].lex[p.lex].lemma, options: shuffled([a.lex, ...wrong], rng), answer: a.lex, bridge: b.kind, via: b.via, why: b.note });
+    }
+    for (const f of shuffled(mine.filter(b => b.kind === 'falseFriend'), rng)) {
+      if (ffQ.length >= max) break;
+      const same = shuffled(B.list.filter(b => b.kind !== 'falseFriend' && b.same && isKnown(b.a) && isKnown(b.b) && [b.a.lang, b.b.lang].sort().join() === [f.a.lang, f.b.lang].sort().join()), rng).slice(0, 3);
+      if (!same.length) continue;
+      const pairsQ = shuffled([f, ...same], rng);
+      ffQ.push({ type: 'cognate_bridge', kind: 'false_friend', lang: f.a.lang, pairs: pairsQ.map(b => ({ a: b.a, b: b.b })), answer: pairsQ.indexOf(f), why: f.note });
+    }
+    const ks = new Set(knowCodes(knows || L.settings.knows || (C.data.course.knownLanguages || [])));
+    for (const x of shuffled(B.known.filter(x => ks.has(x.code) && langs.includes(x.lang) && ['loan', 'cognate', 'falseFriend'].includes(x.kind) && K[x.lang].R.has(x.lex)), rng)) {
+      if (knownQ.length >= max) break;
+      if (focus && x.lang !== focus) continue;
+      const others = new Set(B.known.filter(y => y.code === x.code && polyFold('', y.word) === polyFold('', x.word) && y.lang === x.lang).map(y => y.lex));
+      const wrong = distract(x.lang, x.lex, { lang: x.lang, lex: x.lex }, 5).filter(id => !others.has(id)).slice(0, 3); if (wrong.length < 2) continue;
+      knownQ.push({ type: 'cognate_bridge', kind: 'known', lang: x.lang, other: { code: x.code, word: x.word }, options: shuffled([x.lex, ...wrong], rng), answer: x.lex, bridge: x.kind, why: x.note });
+    }
+    const out = []; const qs = [ffQ, bridgeQ, knownQ]; let i = 0;
+    while (out.length < max && qs.some(q => q.length)) { const q = qs[i++ % qs.length]; if (q.length) out.push(q.shift()); }
+    return out;
+  }
+  /** Polyglot items of one type for the learner (§6.6). opts: {langs, k: {lang: known()}, rng, max, fn, from, to, pivot, knows}. */
+  function polyItems(C, L, type, opts = {}) {
+    if (type === 'which_language') return whichItems(C, L, opts);
+    if (type === 'parallel_translate') return translateItems(C, L, opts);
+    if (type === 'parallel_align') return alignItems(C, L, opts);
+    if (type === 'cognate_bridge') return bridgeItems(C, L, opts);
+    if (type === 'compare_rule') return compareItems(C, L, { ...opts, fns: opts.fn ? [opts.fn] : opts.fns });
+    return [];
+  }
+  const POLY_TYPES = ['which_language', 'parallel_translate', 'parallel_align', 'cognate_bridge', 'compare_rule'];
+  // as generators of a realization (§6.7): the function's sentences / the function itself, this language and the other active ones
+  const genLangs = ctx => uniqStr([ctx.code, ...((ctx.gen.to || ctx.gen.langs) || (ctx.L.settings.languages || ctx.C.languages))]).filter(c => ctx.C.lang[c]);
+  const genK = ctx => ({ [ctx.code]: ctx.k });
+  GEN.parallel_translate = ctx => translateItems(ctx.C, ctx.L, { langs: genLangs(ctx), from: ctx.code, k: genK(ctx), rng: ctx.rng, max: ctx.max, sources: ctx.bank(), fn: ctx.fid });
+  GEN.parallel_align = ctx => alignItems(ctx.C, ctx.L, { langs: genLangs(ctx), pivot: ctx.code, k: genK(ctx), rng: ctx.rng, max: ctx.max, sources: ctx.bank() }).map(it => ({ ...it, fn: ctx.fid }));
+  GEN.which_language = ctx => whichItems(ctx.C, ctx.L, { langs: genLangs(ctx), k: genK(ctx), rng: ctx.rng, max: ctx.max });
+  GEN.cognate_bridge = ctx => bridgeItems(ctx.C, ctx.L, { langs: genLangs(ctx), k: genK(ctx), rng: ctx.rng, max: ctx.max, focus: ctx.code });
+  GEN.compare_rule = ctx => compareItems(ctx.C, ctx.L, { langs: genLangs(ctx), fns: [ctx.fid], rng: ctx.rng, max: ctx.max });
+
+  /** The daily session (§7.5, §9.5): bridged words that are due together come one after the other; with ≥ 2 languages one polyglot item
+   *  (in every session of 5 minutes or more, however full it is). → seconds used */
+  function polyPlan(C, L, steps, langs, K, day, total) {
+    const rv = steps.find(s => s.kind === 'review');
+    if (rv && langs.length > 1) {
+      const B = bridges(C), items = rv.items, placed = new Set(), out = [], key = x => x.lang + '|' + x.lex;
+      for (let i = 0; i < items.length; i++) {
+        if (placed.has(i)) continue; placed.add(i); out.push(items[i]);
+        const partners = new Set((B.byWord.get(key(items[i])) || []).flatMap(b => [key(b.a), key(b.b)]));
+        for (let j = i + 1; j < items.length; j++) if (!placed.has(j) && partners.has(key(items[j])) && key(items[j]) !== key(items[i])) { placed.add(j); out.push({ ...items[j], pair: true }); }
+      }
+      rv.items = out;
+    }
+    if (langs.length < 2 || total < 300) return 0;
+    const rng = seeded(day * 7919 + 17), first = day % 2 ? 'parallel_align' : 'which_language';
+    for (const type of [first, first === 'which_language' ? 'parallel_align' : 'which_language']) {
+      const items = polyItems(C, L, type, { langs, k: K, rng, max: 1 });
+      if (items.length) { steps.push({ kind: 'poly', type, items }); return SECONDS.extra; }
+    }
+    return 0;
+  }
   API.GEN = GEN;
+  Object.assign(API, { parallelGroups, parallelOf, equivalents, glossKey, bridges, bridgesOf, knownLinks, rootsCorrespond, mentionsIn, compareFn, polyItems, POLY_TYPES, romanOf, seeded });   // P6 — polyglot layer
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
