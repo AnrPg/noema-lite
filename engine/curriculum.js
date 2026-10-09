@@ -411,7 +411,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
   async function stageExpand(acc, c, on) {
     const goal = c.nodes[c.goalId];
-    on(`🎯 Agent 2 — expanding the goal “${goal.title}” into its full curriculum (${c.depth})…`);
+    on(`🎯 Agent 2 — expanding the goal “${goal.title}” into its full Roadmap (${c.depth})…`);
     const { data: x, usage } = await L().json(llmOpts(acc, c, { system: 'You are a curriculum graph editor. Answer only through the requested structure.', prompt: expandPrompt(ctx(c), snapshot(c), goal), schema: S_EXPAND, name: 'submit_goal_expansion', maxTokens: 24000, validate: d => validateExpand(d, c), onRepair: e => on(`   ↻ fixing ${e.length} problem(s)…`), signal: on.signal }));
     addUsage(c, usage);
     applyExpansion(c, x);
@@ -659,7 +659,32 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   const curStore = cid => 'curfiles-' + cid;
   /** The file of a step's material entry (new: in the curriculum store; older ones: with the step's subject). */
   const materialFile = (acc, c, nid, f) => window.NoemaSrcFiles.get(acc, f.fileId ? curStore(c.id) : packId(c, nid), f.fileId || f.srcId);
-  return { packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
+  /* ======================= domains: how Explore groups what others share ======================= */
+  /** The domains, in the order Explore shows them. A Roadmap is filed by its goal's knowledge domain, its title and its goal;
+      a subject by its group, title and description. Stems in the four interface languages; the domain with most hits wins (ties: the earlier one). */
+  const DOMAINS = ['cs', 'math', 'health', 'science', 'eng', 'business', 'society', 'humanities', 'lang', 'other'];
+  const DOMAIN_STEMS = {
+    cs: ['data', 'databricks', 'spark', 'sql', 'python', 'javascript', 'typescript', ' java ', 'programm', 'software', 'comput', 'machine learning', 'deep learning', ' ai ', 'artificial intelligence', 'llm', 'cloud', 'devops', 'kubernetes', 'docker', 'network', 'cyber', ' web ', 'algorithm', 'database', 'lakehouse', ' etl ', 'analytics', 'linux', ' rust ', 'golang', 'frontend', 'backend', 'πληροφορ', 'προγραμματ', 'δεδομέν', 'υπολογιστ', 'τεχνητή νοημοσύνη', 'αλγόριθ', 'данн', 'программ', 'информат', 'компьют', 'нейросет', 'informatique', 'donnée', 'logiciel', 'réseau', 'intelligence artificielle'],
+    math: ['math', 'algebra', 'calculus', 'geometr', 'statistic', 'probabilit', 'topolog', 'number theory', 'μαθηματ', 'άλγεβρ', 'γεωμετρ', 'στατιστ', 'πιθανοτ', 'λογισμ', 'математ', 'алгебр', 'геометр', 'статист', 'вероятн', 'mathémat', 'algèbre', 'géométr', 'statistique'],
+    health: ['medic', 'anatom', 'physiolog', 'pharmac', 'nursing', 'health', 'clinical', 'radiolog', 'patholog', 'surgery', 'dentist', 'nutrition', 'ιατρ', 'ανατομ', 'φυσιολογ', 'φαρμακ', 'νοσηλ', 'υγεί', 'κλινικ', 'ακτινολ', 'медиц', 'анатом', 'физиолог', 'фармак', 'здоров', 'médec', 'médical', 'santé'],
+    science: ['physic', 'chemi', 'biolog', 'astronom', 'geolog', 'ecolog', 'genetic', 'quantum', 'neuroscien', 'evolution', 'φυσικ', 'χημ', 'βιολογ', 'αστρον', 'γεωλογ', 'γενετικ', 'κβαντ', 'физик', 'хими', 'биолог', 'астроном', 'геолог', 'physique', 'chimie', 'biologie', 'astronomie'],
+    eng: ['engineer', 'mechanic', 'electric', 'electronic', 'robotic', 'circuit', 'thermodynam', 'control system', 'μηχανικ', 'ηλεκτρ', 'ρομποτ', 'инженер', 'механ', 'электр', 'ingénier', 'mécaniq', 'électr'],
+    business: ['business', 'econom', 'financ', 'accounting', 'marketing', 'management', 'invest', 'startup', 'οικονομ', 'χρηματ', 'λογιστ', 'μάρκετινγκ', 'διοίκησ', 'επιχειρ', 'эконом', 'финанс', 'бухгалт', 'маркет', 'менеджм', 'бизнес', 'économ', 'comptab', 'entreprise'],
+    society: ['psycholog', 'sociolog', 'politic', ' law ', 'legal', 'education', 'pedagog', 'linguistic', 'anthropolog', 'ψυχολογ', 'κοινωνιολ', 'πολιτικ', 'δίκαι', 'νομικ', 'εκπαίδ', 'психолог', 'социолог', 'политик', 'право', 'юрид', 'образован', 'politique', 'droit', 'juridique', 'éducation'],
+    humanities: ['histor', 'philosoph', 'religio', 'theolog', 'literatur', 'music', ' art ', ' arts ', 'archaeolog', 'ιστορ', 'φιλοσοφ', 'θρησκ', 'λογοτεχν', 'μουσικ', 'τέχν', 'αρχαιολ', 'истор', 'философ', 'религ', 'литерат', 'музык', 'искусств', 'histoire', 'littérat', 'musique'],
+    lang: ['language', 'grammar', 'vocabular', 'γλώσσ', 'γραμματικ', 'λεξιλόγ', 'язык', 'граммат', 'langue', 'grammaire', 'vocabulaire'],
+  };
+  function domainOf(x) {
+    if (x && typeof x === 'object') { if (DOMAINS.includes(x.domain)) return x.domain; const g = x.nodes?.[x.goalId] || {};
+      const own = [x.group, g.kDomain, ...(g.domains || [])];   // what the author named counts twice
+      x = [x.title, x.goal, x.description, ...own, ...own].filter(Boolean).join(' '); }
+    const t = ' ' + String(x || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ') + ' ';
+    let best = 'other', n = 0;
+    for (const d of DOMAINS) { const k = (DOMAIN_STEMS[d] || []).reduce((a, w) => a + t.split(w).length - 1, 0); if (k > n) { n = k; best = d; } }
+    return best;
+  }
+
+  return { DOMAINS, domainOf, packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
     schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART };
 })();
 
@@ -946,7 +971,7 @@ window.NoemaCurriculum.Edit = (() => {
    * from: who chose it ('me' | 'import' | 'claude' | 'share'). → { ok, replan } | { error }
    */
   async function assign(acc, cid, nid, subjectId, { from = 'me' } = {}) {
-    let c = C.get(acc, cid); let n = c?.nodes[nid]; const no = c ? cannotAssign(c, n) : 'Curriculum not found.'; if (no) return { error: no };
+    let c = C.get(acc, cid); let n = c?.nodes[nid]; const no = c ? cannotAssign(c, n) : 'Roadmap not found.'; if (no) return { error: no };
     if (n.pack?.id === subjectId && n.pack.assigned) return { ok: true, replan: !!n.replan };
     if (String(subjectId).startsWith('lang:')) return { error: 'Language courses are studied on their own — they cannot be attached to a step.' };
     const meta = (await window.Noema?.subjectsFor?.(acc) || []).find(s => s.id === subjectId);
@@ -1021,7 +1046,7 @@ window.NoemaCurriculum.Edit = (() => {
       Gemini). Prepared steps keep their chapters. The re-planned steps are reviewed again before they are prepared.
       → { ok, count, queued } (queued: the Claude app will do it) */
   async function replanAll(acc, cid, { instruction = '', onLog = () => { }, signal } = {}) {
-    let c = C.get(acc, cid); if (!c) return { error: 'Curriculum not found.' };
+    let c = C.get(acc, cid); if (!c) return { error: 'Roadmap not found.' };
     const ids = C.order(c).filter(id => c.nodes[id] && !generated(c.nodes[id]));
     if (!ids.length) return { ok: true, count: 0 };
     for (const id of ids) { const n = c.nodes[id]; if (!c.autoApprove) delete n.reviewed; if (n.pack?.status === 'app' || n.pack?.status === 'failed' || n.pack?.status === 'paused') n.pack = { ...n.pack, status: null, queuedAt: null }; }

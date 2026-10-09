@@ -50,7 +50,8 @@ window.NoemaThemes = (() => {
     heron: { en: ['Grey heron', 'Heron', 'The wetland at dawn', 'The reed lake', 'Your reeds', 'reed'], el: ['Σταχτοτσικνιάς', 'Ερωδιός', 'Ο υγρότοπος την αυγή', 'Η λίμνη με τα καλάμια', 'Οι καλαμιές σου', 'καλάμι'], ru: ['Серая цапля', 'Цапля', 'Болото на рассвете', 'Озеро в камышах', 'Твои камыши', 'камыш'], fr: ['Héron cendré', 'Héron', 'Le marais à l’aube', 'Le lac aux roseaux', 'Tes roseaux', 'roseau'] },
     prism: { en: ['Prism', 'Prism', 'The grid', 'The core', 'Your facets', 'facet'], el: ['Πρίσμα', 'Πρίσμα', 'Το πλέγμα', 'Ο πυρήνας', 'Οι έδρες σου', 'έδρα'], ru: ['Призма', 'Призма', 'Сетка', 'Ядро', 'Твои грани', 'грань'], fr: ['Prisme', 'Prisme', 'La grille', 'Le noyau', 'Tes facettes', 'facette'] },
   };
-  /* The tutor is the character. One name per UI language (picked by the owner on 2026-10-08).
+  /* The tutor is the character. One name per UI language (picked by the owner on 2026-10-08); characters of fairy tales keep
+     the name their tale gives them in each language, when it gives one (2026-10-09).
      el: [name, gender m|f|n|p, accusative with article?, nominative with article?] · ru: [name, accusative] · fr: [name, "à …" form] · en: [name] */
   const NAMES = {
     hedge: { el: ['Αγκαθούλης', 'm'], en: ['Prickles'], ru: ['Колючка', 'Колючку'], fr: ['Piquou', 'à Piquou'] },
@@ -62,12 +63,12 @@ window.NoemaThemes = (() => {
     fruit: { el: ['Ζουμερούλης', 'm'], en: ['Clemmie'], ru: ['Мандаринка', 'Мандаринку'], fr: ['Clémentine', 'à Clémentine'] },
     knight: { el: ['Σερ Λεβέντης', 'm'], en: ['Sir Pip'], ru: ['Сэр Храбрик', 'Сэра Храбрика'], fr: ['Sire Vaillant', 'à Sire Vaillant'] },
     berry: { el: ['Φραουλίτσα', 'f'], en: ['Berrie'], ru: ['Клубничка', 'Клубничку'], fr: ['Fraisinette', 'à Fraisinette'] },
-    hood: { el: ['Κοκκινούλα', 'f'], en: ['Ruby'], ru: ['Шапочка', 'Шапочку'], fr: ['Chapi', 'à Chapi'] },
-    piglet: { el: ['Τουβλάκης', 'm'], en: ['Bricksy'], ru: ['Наф-Наф', 'Наф-Нафа'], fr: ['Groin-Groin', 'à Groin-Groin'] },
-    candy: { el: ['Γκρέτα και Χανς', 'p', 'την Γκρέτα και τον Χανς', 'η Γκρέτα και ο Χανς'], en: ['Sugar & Crumb', null, true], ru: ['Конфетки', 'Конфеток', true], fr: ['Sucre et Cannelle', 'à Sucre et Cannelle', true] },
-    jack: { el: ['Φασολάκης', 'm'], en: ['Beanie'], ru: ['Фасолька', 'Фасольку'], fr: ['Haricot', 'à Haricot'] },
+    hood: { el: ['Κοκκινοσκουφίτσα', 'f'], en: ['Little Red Riding Hood'], ru: ['Красная Шапочка', 'Красную Шапочку'], fr: ['Le Petit Chaperon rouge', 'au Petit Chaperon rouge'] },
+    piglet: { el: ['Τουβλάκης', 'm'], en: ['Bricksy'], ru: ['Наф-Наф', 'Наф-Нафа'], fr: ['Naf-Naf', 'à Naf-Naf'] },
+    candy: { el: ['Χάνσελ και Γκρέτελ', 'p', 'τον Χάνσελ και την Γκρέτελ', 'ο Χάνσελ και η Γκρέτελ'], en: ['Hansel and Gretel', null, true], ru: ['Гензель и Гретель', 'Гензеля и Гретель', true], fr: ['Hansel et Gretel', 'à Hansel et Gretel', true] },
+    jack: { el: ['Τζακ', 'm'], en: ['Jack'], ru: ['Джек', 'Джека'], fr: ['Jack', 'à Jack'] },
     frog: { el: ['Πρίγκιπας Κουάξ', 'm'], en: ['Prince Ribbit'], ru: ['Принц Ква', 'Принца Ква'], fr: ['Prince Croâ', 'au Prince Croâ'] },
-    puss: { el: ['Μαρκήσιος Νιάου', 'm'], en: ['Sir Whiskers'], ru: ['Кот Маркиз', 'Кота Маркиза'], fr: ['Marquis de Miaou', 'au Marquis de Miaou'] },
+    puss: { el: ['Παπουτσωμένος Γάτος', 'm'], en: ['Puss in Boots'], ru: ['Кот в сапогах', 'Кота в сапогах'], fr: ['Le Chat botté', 'au Chat botté'] },
     wolf: { el: ['Λυκούργος', 'm'], en: ['Ridge'], ru: ['Север', 'Севера'], fr: ['Mistral', 'à Mistral'] },
     eagle: { el: ['Αιθέρας', 'm'], en: ['Skye'], ru: ['Беркут', 'Беркута'], fr: ['Aquilon', 'à Aquilon'] },
     robot: { el: ['Κόβαλτ', 'm'], en: ['Cobalt'], ru: ['Кобальт', 'Кобальта'], fr: ['Cobalt', 'à Cobalt'] },

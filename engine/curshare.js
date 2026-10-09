@@ -67,7 +67,7 @@
   function changes(local, rec, declined = {}) {
     const mine = strip(local || {}), out = [];
     const add = (key, val, x) => { const sig = hash(val ?? null); if (declined[key] !== sig) out.push({ key, sig, ...x }); };
-    if (!same(topInfo(mine), topInfo(rec))) add('map', topInfo(rec), { kind: 'map', text: (rec.title || rec.goal) !== (mine.title || mine.goal) ? `The curriculum is now called “${rec.title || rec.goal}”` : 'The curriculum’s description changed' });
+    if (!same(topInfo(mine), topInfo(rec))) add('map', topInfo(rec), { kind: 'map', text: (rec.title || rec.goal) !== (mine.title || mine.goal) ? `The Roadmap is now called “${rec.title || rec.goal}”` : 'The Roadmap’s description changed' });
     for (const [id, r] of Object.entries(rec.nodes || {})) {
       const l = mine.nodes?.[id], own = !!local.nodes?.[id]?.pack?.assigned;
       if (!l) { add('add:' + id, r, { kind: 'add', nid: id, text: `New step “${r.title}”` }); continue; }
@@ -183,7 +183,7 @@
   const toast = (m, ms) => root.Noema?.toast?.(m, ms);
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
   Share.onChange = f => { listeners.add(f); return () => listeners.delete(f); };
-  const need = acc => { if (!cloudOn(acc)) throw new Error('Sharing a curriculum needs a ☁️ cloud account (⚙️ → Cloud).'); };
+  const need = acc => { if (!cloudOn(acc)) throw new Error('Sharing a Roadmap needs a ☁️ cloud account (⚙️ → Cloud).'); };
   const save = (acc, c) => C().save(acc, c);
   function patchNode(acc, cid, nid, pack) { const c = C().get(acc, cid); if (!c?.nodes[nid]) return null; c.nodes[nid].pack = { ...(c.nodes[nid].pack || {}), ...pack }; save(acc, c); return c; }
   const stats = c => ({ steps: Object.keys(c.nodes || {}).length, files: Object.keys(c.files || {}).length, chapters: Object.values(c.nodes || {}).reduce((a, n) => a + (n.chapters?.length || 0), 0) });
@@ -206,15 +206,15 @@
   /** Share one of my curricula (or change how): isPublic, the steps prepared so far, the material files. */
   Share.publish = async (acc, cid, { isPublic = false, steps = true, onLog = () => { } } = {}) => {
     need(acc); let c = C().get(acc, cid);
-    if (!c) throw new Error('Curriculum not found.');
-    if (isMember(c)) throw new Error('This curriculum belongs to ' + (c.shared.ownerName || 'someone else') + ' — only its owner shares it.');
-    if (!Object.keys(c.nodes || {}).length || (!c.imported && ['dag', 'audit', 'expand'].includes(c.stage) && c.status !== 'ready')) throw new Error('Its map is not ready yet — share it when the map is built.');
-    if (!/^c[a-z0-9]{2,30}$/.test(c.id)) throw new Error('This curriculum has an old id that cannot be shared.');
+    if (!c) throw new Error('Roadmap not found.');
+    if (isMember(c)) throw new Error('This Roadmap belongs to ' + (c.shared.ownerName || 'someone else') + ' — only its owner shares it.');
+    if (!Object.keys(c.nodes || {}).length || (!c.imported && ['dag', 'audit', 'expand'].includes(c.stage) && c.status !== 'ready')) throw new Error('Its Roadmap is not ready yet — share it when the Roadmap is built.');
+    if (!/^c[a-z0-9]{2,30}$/.test(c.id)) throw new Error('This Roadmap has an old id that cannot be shared.');
     const rec = Core.strip(c), h = Core.hash(rec), at = new Date().toISOString();
-    onLog('🗺️ The map…');
+    onLog('🗺️ The Roadmap…');
     const base = { id: cid, owner: me(), owner_name: myName(acc), title: c.title || c.goal, description: c.goal !== c.title ? c.goal : (c.scope || null), language: c.language || null, public: !!isPublic, record: rec };
     const old = ((await api(`${T.cur}?select=id,version,meta&id=eq.${enc(cid)}`).catch(() => [])) || [])[0];
-    const meta = { ...(old?.meta || {}), counts: stats(c) };
+    const meta = { ...(old?.meta || {}), counts: stats(c), domain: C().domainOf(c) };
     if (old) await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { ...base, meta, version: (old.version || 1) + 1 }, headers: { Prefer: 'return=minimal' } });
     else await api(T.cur, { method: 'POST', body: [{ ...base, meta, version: 1 }], headers: { Prefer: 'return=minimal' } });
     meta.files = await uploadFiles(acc, c, meta.files || {}, onLog);
@@ -238,7 +238,7 @@
     const c = C().get(acc, cid); if (c?.shared?.role !== 'owner' || !cloudOn(acc)) return false;
     const rec = Core.strip(c), h = Core.hash(rec); if (h === c.shared.hash) return false;
     const files = await uploadFiles(acc, c, c.shared.files || {});
-    const [row] = (await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { record: rec, title: c.title || c.goal, meta: { counts: stats(c), files }, version: (c.shared.version || 1) + 1 }, headers: { Prefer: 'return=representation' } })) || [];
+    const [row] = (await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { record: rec, title: c.title || c.goal, meta: { counts: stats(c), files, domain: C().domainOf(c) }, version: (c.shared.version || 1) + 1 }, headers: { Prefer: 'return=representation' } })) || [];
     const cur = C().get(acc, cid); if (!cur?.shared) return false;
     if (!row) { cur.shared = null; cur.remote = null; save(acc, cur); emit(); return false; }   // the sharing was stopped elsewhere
     cur.shared = { ...cur.shared, hash: h, version: row.version, at: row.updated_at, files }; save(acc, cur); emit(); return true;
@@ -288,7 +288,7 @@
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('Please type a valid e-mail address.');
     if (to === (CL().session().user.email || '').toLowerCase()) throw new Error('That is your own e-mail address.');
     const old = ((await api(`${T.mem}?select=status&curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`).catch(() => [])) || [])[0];
-    if (old?.status === 'joined') throw new Error(to + ' is already in this curriculum.');
+    if (old?.status === 'joined') throw new Error(to + ' is already in this Roadmap.');
     if (old) await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`, { method: 'DELETE' });   // invited again (after a “no”, leaving or removal)
     await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: to, message: message || null, status: 'pending', invited_by: me() }], headers: { Prefer: 'return=minimal' } });
     emit();
@@ -330,13 +330,13 @@
   Share.join = async (acc, cid) => {
     need(acc);
     const row = ((await api(`${T.cur}?select=*&id=eq.${enc(cid)}`)) || [])[0];
-    if (!row) throw new Error('This curriculum is not shared any more.');
-    if (row.owner === me()) throw new Error('This is your own curriculum.');
+    if (!row) throw new Error('This Roadmap is not shared any more.');
+    if (row.owner === me()) throw new Error('This is your own Roadmap.');
     const em = CL().session().user.email.toLowerCase(), body = { status: 'joined', user_id: me(), name: myName(acc), responded_at: new Date().toISOString() };
-    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw new Error(/row-level|403|permission/i.test(e.message) ? 'You cannot join this curriculum (the owner removed you, or it is not public).' : e.message); });
+    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw new Error(/row-level|403|permission/i.test(e.message) ? 'You cannot join this Roadmap (the owner removed you, or it is not public).' : e.message); });
     if (!upd?.length) {
-      if (!row.public) throw new Error('This curriculum is shared with invited people only.');
-      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw new Error(dup(e) || /row-level|403/i.test(e.message) ? 'You cannot join this curriculum any more (its owner removed you).' : e.message); });
+      if (!row.public) throw new Error('This Roadmap is shared with invited people only.');
+      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw new Error(dup(e) || /row-level|403/i.test(e.message) ? 'You cannot join this Roadmap any more (its owner removed you).' : e.message); });
     }
     const local = C().get(acc, cid);
     const L = root.NoemaLLM; const provider = local?.provider || (L?.pick?.(acc, 'auto') ? 'auto' : 'claudeapp');
@@ -405,7 +405,7 @@
     if (!cloudOn(acc)) return false;
     let r;
     try { r = await Core.claim(api, { cid: c.id, nid, me: me(), name: myName(acc), packId: C().packId(c, nid) }); }
-    catch (e) { console.warn('[curshare] claim', e.message); toast(/row-level|403|permission/i.test(e.message) ? '👥 You cannot prepare steps of this curriculum any more (you left it, or its owner removed you).' : '⚠️ ' + e.message, 6000); r = { ok: false }; }
+    catch (e) { console.warn('[curshare] claim', e.message); toast(/row-level|403|permission/i.test(e.message) ? '👥 You cannot prepare steps of this Roadmap any more (you left it, or its owner removed you).' : '⚠️ ' + e.message, 6000); r = { ok: false }; }
     if (!r.ok) await Share.refresh(acc, c.id).catch(() => { });
     return r.ok;
   };
@@ -455,7 +455,7 @@
     const job = (async () => {
       let c = await Share.refresh(acc, cid); const x = c?.remote?.[nid];
       if (c?.nodes[nid]?.pack?.assigned) throw new Error('Your own subject teaches this step — take it off the step (↩) to get the shared one.');
-      if (!x || x.status !== 'ready' || !x.path) throw new Error('This step is not prepared in the shared curriculum (any more).');
+      if (!x || x.status !== 'ready' || !x.path) throw new Error('This step is not prepared in the shared Roadmap (any more).');
       const pid = C().packId(c, nid);
       const blob = await CL().getFile(BUCKET, x.path, x.meta?.chunks || 0, { type: 'application/json' });
       const pack = JSON.parse(await blob.text());

@@ -246,13 +246,13 @@ function confetti(n = 120) {
 }
 function toast(msg, ms = 2200) {
   let t = $('.toasts'); if (!t) { t = h('div', { class: 'toasts' }); document.body.append(t); }
-  const el = h('div', { class: 'toast' }, msg); t.append(el); setTimeout(() => el.remove(), ms);
+  const el = h('div', { class: 'toast' }, window.Noema?.plain ? Noema.plain.text(msg) : msg); t.append(el); setTimeout(() => el.remove(), ms);
 }
 function modal(build) {
   const m = h('div', { class: 'modal', onclick: e => { if (e.target === m) close(); } });
   const box = h('div', { class: 'box' }); m.append(box);
   const close = () => m.remove();
-  build(box, close); document.body.append(m);
+  build(box, close); window.Noema?.plain?.watch(box); document.body.append(m);
   return close;
 }
 function confirmBox(text, onYes) {

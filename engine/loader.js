@@ -43,7 +43,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slugify = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
   const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`; };
-  const toastL = (m, ms = 2400) => { if (window.toast) return window.toast(m, ms); let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); } const x = el('div', { class: 'toast' }, m); t.append(x); setTimeout(() => x.remove(), ms); };
+  const toastL = (m, ms = 2400) => { m = plainText(m); if (window.toast) return window.toast(m, ms); let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); } const x = el('div', { class: 'toast' }, m); t.append(x); setTimeout(() => x.remove(), ms); };
   async function sha256(s) { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); } catch (e) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return 'x' + h; } }
 
   /* ---------------- IndexedDB (imported packs, folder handles, restore points) ---------------- */
@@ -198,7 +198,8 @@
       const newer = !!(extra.version && extra.version !== (p.version || null));
       list.push(newer
         ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
-        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner });
+        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner,
+          chapters: (p.chapters || []).map(c => ({ id: c.id, num: c.num, sections: (c.sections || []).length })) });
     });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
@@ -285,15 +286,39 @@
     catch (e) { try { await loadCSS('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'); } catch (e2) { console.warn('[Noema] math rendering unavailable'); } }
   }
 
+  /* ---------------- 🧹 the new frame speaks without the older screens' emoji ----------------
+     A dialog of the older screens opened from the new frame, the Roadmap page and the toasts lose their pictographs (the
+     frame uses line icons). Kept: arrows and ©®™, anything inside an element whose class names an emoji (a subject's own
+     icon: .nx-emo, .cm-emo…), [data-emoji], what the learner typed (inputs) and lesson text (.md, .lesson). */
+  const EMO = /(?![\u00A9\u00AE\u2122\u2190-\u21FF\u25A0-\u25FF])[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}](?:\uFE0F|\u20E3|[\u{1F3FB}-\u{1F3FF}]|\u200D[\p{Extended_Pictographic}\u2640\u2642])*\uFE0F?[ \u00A0]?/gu;
+  const plainOn = () => !!(SHELL() && NoemaShell.mounted);
+  const plainText = t => { if (typeof t !== 'string') return t; const r = t.replace(EMO, ''); return r === t ? t : r.replace(/[ \u00A0]{2,}/g, ' ').replace(/^[ \u00A0]+(?=\S)/, ''); };
+  const KEEP = '[class*="emo"],[data-emoji],.md,.lesson,.ns-ico,script,style,textarea';
+  function plainTree(root) {
+    if (!root || !plainOn()) return root;
+    if (root.nodeType === 3) { if (!root.parentElement?.closest(KEEP)) { const t = plainText(root.nodeValue); if (t !== root.nodeValue) root.nodeValue = t; } return root; }
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = []; let n;
+    while ((n = w.nextNode())) list.push(n);
+    for (const x of list) plainTree(x);
+    root.querySelectorAll?.('[title],[aria-label],[placeholder]').forEach(e => { for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v) { const t = plainText(v); if (t !== v) e.setAttribute(a, t); } } });
+    return root;
+  }
+  /** keep a part of the page plain while it redraws itself */
+  function plainWatch(root) {
+    if (!root || !plainOn() || root._plain) return root; root._plain = true; plainTree(root);
+    new MutationObserver(ms => { for (const m of ms) { if (m.type === 'characterData') plainTree(m.target); else m.addedNodes.forEach(x => plainTree(x)); } }).observe(root, { childList: true, subtree: true, characterData: true });
+    return root;
+  }
+
   /* ---------------- overlays (account + subject pickers) ---------------- */
   function overlay(build, { closable = true } = {}) {
     const o = el('div', { class: 'noema-overlay' }); const box = el('div', { class: 'noema-ovbox' }); o.append(box);
     const close = () => { o.classList.add('out'); setTimeout(() => o.remove(), 250); };
     if (closable) o.addEventListener('click', e => { if (e.target === o) close(); });
-    build(box, close); document.body.append(o); return close;
+    build(box, close); plainWatch(box); document.body.append(o); return close;
   }
   function brandHead(title, sub) {
-    return el('div', { class: 'noema-ovhead' }, el('div', { class: 'logo' }, '◆'), el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
+    return el('div', { class: 'noema-ovhead' }, el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
   }
   /** The interface language (engine/i18n.js): the account's settings.lang (else the last account's), else the browser's. */
   const uiPref = (acc = KV.acc || jget(P + 'current', {}).acc) => acc ? jget(`${P}${acc}:a:settings`, {}).lang : null;
@@ -615,15 +640,15 @@
   }
 
   /* ---- 🌍 Explore: every public subject (library + published by users) ---- */
-  async function explore(acc, { onChoose } = {}) {
-    const choose = onChoose || (s => Noema.switchTo(acc, s.id));
+  /** every public subject (library + published by users) and how to study one: the shell's Explore page and the dialog below */
+  async function publicSubjects(acc) {
     let pub = [];
     try { if (window.NoemaCloud && CFG.supabaseUrl) pub = (await NoemaCloud.listPublic()) || []; } catch (e) { console.warn('[explore]', e.message); }
     const mine = new Map((await subjectsFor(acc)).map(s => [s.id, s]));
     const lib = (REG.subjects || []).filter(s => !s.owner).map(s => ({ kind: 'library', id: s.id, title: s.title, emoji: s.emoji, description: s.description, language: s.language, counts: s.counts, meta: { counts: s.counts, chapters: s.chapters, sources: s.sources, language: s.language } }));
     const users = pub.map(r => ({ kind: 'public', id: r.subject_id, owner: r.owner, owner_name: r.owner_name, title: r.title, emoji: r.emoji, description: r.description, language: r.language, counts: r.meta?.counts || {}, meta: r.meta || {}, updated_at: r.updated_at }));
-    const all = [...lib, ...users];
-    const study = async s => {
+    const all = [...lib, ...users].map(s => ({ ...s, domain: window.NoemaCurriculum?.domainOf ? NoemaCurriculum.domainOf({ group: s.group || s.meta?.group || (REG.subjects || []).find(x => x.id === s.id)?.group, title: s.title, description: s.description }) : 'other' }));
+    const study = async (s, choose) => {
       if (s.kind === 'library') return choose(s);
       const have = mine.get(s.id);
       if (have && have.origin !== 'library' && (have.version || null) === (s.meta.version || null)) return choose(have);
@@ -634,6 +659,11 @@
       await attachSharedFiles(acc, p, 'noema-public');
       toastL(`📥 “${p.subject.title}” added to your subjects`); choose(added);
     };
+    return { all, study };
+  }
+  async function explore(acc, { onChoose } = {}) {
+    const choose = onChoose || (s => Noema.switchTo(acc, s.id));
+    const { all, study: studyIt } = await publicSubjects(acc), study = s => studyIt(s, choose);
     overlay((box, close) => {
       const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search public subjects…', oninput: () => draw() });
       const grid = el('div', { class: 'nx-grid' });
@@ -767,21 +797,21 @@
   function shareRow(sh, { onAccepted } = {}) {
     if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
     const row = el('div', { class: 'nx-req' },
-      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the curriculum ', el('b', {}, `“${sh.title}”`),
+      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the Roadmap ', el('b', {}, `“${sh.title}”`),
         el('div', { class: 'tiny' }, `👥 ${nOf(sh.meta?.counts?.steps, 'step')} — your own progress, the prepared steps are shared` + (sh.message ? ` · “${sh.message}”` : '')))
       : el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || sh.from_email}`), ` wants to share `, el('b', {}, `“${sh.title}”`), ' with you',
         el('div', { class: 'tiny' }, `${nOf(sh.meta?.counts?.chapters, 'chapter')} · ${nOf(sh.meta?.counts?.exercises, 'exercise')}` + (sh.message ? ` · “${sh.message}”` : ''))),
       sh.kind === 'curriculum' ? null : el('button', { class: 'btn small ghost', title: 'Details', onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, 'Back')))) }, 'ℹ️'),
-      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Curricula` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
+      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Roadmaps` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
       el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
     return row;
   }
 
   /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
   function updateText(sh) {
-    if (sh.kind === 'curupdate') return [`🧭 ${sh.from_name || 'The owner'} changed the curriculum `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `${nOf(sh.count, 'change')}${sh.lines?.length ? ': ' + sh.lines.join(' · ') : ''} — nothing changes in your copy until you take it`)];
+    if (sh.kind === 'curupdate') return [`🧭 ${sh.from_name || 'The owner'} changed the Roadmap `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `${nOf(sh.count, 'change')}${sh.lines?.length ? ': ' + sh.lines.join(' · ') : ''} — nothing changes in your copy until you take it`)];
     if (sh.kind === 'stepupdate') return [`⚡ ${sh.from_name || 'Its author'} made a new version of the step `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `in “${sh.curTitle}” — yours stays until you take it`)];
-    return [`🌍 ${sh.from_name || 'Its author'} published a new version of `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, 'your progress stays (the same subject)' + (sh.steps ? ` · the ${nOf(sh.steps, 'curriculum step')} it teaches ${sh.steps === 1 ? 'is' : 'are'} re-planned to follow it` : ''))];
+    return [`🌍 ${sh.from_name || 'Its author'} published a new version of `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, 'your progress stays (the same subject)' + (sh.steps ? ` · the ${nOf(sh.steps, 'Roadmap step')} it teaches ${sh.steps === 1 ? 'is' : 'are'} re-planned to follow it` : ''))];
   }
   const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 Review' : sh.kind === 'stepupdate' ? '⬇️ Get it' : '⬆️ Update';
   function updateRow(sh) {
@@ -871,25 +901,25 @@
   function claudeCurriculumSteps(acc) {
     const lib = () => window.NoemaCurMap?.library(acc);
     return [
-      el('p', { class: 'cg-recommend' }, '⭐ ', el('b', {}, 'Recommended for curricula — usually the cheapest way. '), 'A curriculum has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the curriculum. The catch: your plan has usage limits, so a big curriculum may be prepared over a few days — prepare the next steps while you study the first ones.'),
+      el('p', { class: 'cg-recommend' }, '⭐ ', el('b', {}, 'Recommended for Roadmaps — usually the cheapest way. '), 'A Roadmap has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the Roadmap. The catch: your plan has usage limits, so a big Roadmap may be prepared over a few days — prepare the next steps while you study the first ones.'),
       el('ol', { class: 'cg-steps' },
         ...claudeConnectSteps(acc),
-        step('Choose “Claude app” in noema-lite', 'It is preselected when you have a cloud account. Your curricula made with an API key can switch too: open the map → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.',
-          sub('Open ', el('button', { class: 'btn small', onclick: lib }, '🧭 Curricula'), ' → ', el('b', {}, '➕ New curriculum'), ' or ', el('b', {}, '📥 Import a map'), '.'),
+        step('Choose “Claude app” in noema-lite', 'It is preselected when you have a cloud account. Your Roadmaps made with an API key can switch too: open the Roadmap → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.',
+          sub('Open ', el('button', { class: 'btn small', onclick: lib }, '🧭 Roadmaps'), ' → ', el('b', {}, '➕ New Roadmap'), ' or ', el('b', {}, '📥 Import a Roadmap'), '.'),
           sub('At “Which AI…?” choose ', el('b', {}, '💬 Claude app — with your Claude plan'), '.'),
           sub('Press ', el('b', {}, 'Build'), ' / ', el('b', {}, 'Import'), '. Nothing runs in noema-lite: it waits for your Claude app.')),
-        step('Paste one message into a Claude chat', 'Claude asks the connector for the next task — the map’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.',
-          sub('In noema-lite press ', el('b', {}, '📋 Copy the message'), ' (on the waiting curriculum, in the 💬 bar of its map, or on a step).'),
+        step('Paste one message into a Claude chat', 'Claude asks the connector for the next task — the Roadmap’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.',
+          sub('In noema-lite press ', el('b', {}, '📋 Copy the message'), ' (on the waiting Roadmap, in the 💬 bar of its Roadmap, or on a step).'),
           sub(ext('https://claude.ai/new', 'Open a new chat'), ' — in the chat, make sure the noema-lite connector is on (', el('b', {}, '+ → Connectors'), ').'),
-          sub('Paste the message and send it. Claude works for a few minutes (the map) up to 10–40 minutes (a step with big files).')),
-        step('Come back to noema-lite', 'The app checks when you return to it and every 20 seconds while something waits. ⚡ on the map = ready to study.',
-          sub('What Claude saved appears by itself: the map, the chapters, the prepared steps.'),
+          sub('Paste the message and send it. Claude works for a few minutes (the Roadmap) up to 10–40 minutes (a step with big files).')),
+        step('Come back to noema-lite', 'The app checks when you return to it and every 20 seconds while something waits. ⚡ on the Roadmap = ready to study.',
+          sub('What Claude saved appears by itself: the Roadmap, the chapters, the prepared steps.'),
           sub('No connector (or no cloud account)? Press ', el('b', {}, 'How? · by hand'), ': copy a task into any Claude chat and paste the answer back; for a step, download its bundle (task + your files + toolkit), give it to Claude, and import the .noema.zip it makes with ', el('b', {}, '📥 Import its package'), '.'))),
       el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Which way should I choose?'),
-        el('ul', {}, el('li', {}, el('b', {}, 'C (Claude plan): '), 'cheapest for curricula, best for big ones; you paste a message per step and the plan’s limits set the pace.'),
+        el('ul', {}, el('li', {}, el('b', {}, 'C (Claude plan): '), 'cheapest for Roadmaps, best for big ones; you paste a message per step and the plan’s limits set the pace.'),
           el('li', {}, el('b', {}, 'A (API key): '), 'fully automatic — steps are prepared in the background while the app is open; you pay per step (you set a limit).'),
           el('li', {}, el('b', {}, 'Gemini (free key): '), 'free and automatic, simpler subjects (no web pictures).'),
-          el('li', {}, 'You can mix them: switch a curriculum in ⚙️, or send single steps to the Claude app.'))),
+          el('li', {}, 'You can mix them: switch a Roadmap in ⚙️, or send single steps to the Claude app.'))),
     ];
   }
   /** ❓ Help → “Set up Claude”: all ways, always available (the same steps as in ✨ Create with Claude). open: 'A' | 'B' | 'C' */
@@ -899,10 +929,10 @@
     wrap.append(
       el('details', { class: 'cg-way', open: open === 'A' }, el('summary', {}, el('b', {}, '🏠 A. Here in noema-lite — with a Claude API key'), el('span', { class: 'tiny' }, ' · you pay Anthropic per use; everything happens in this app')),
         A ? el('ol', { class: 'cg-steps' }, ...A.steps) : el('p', {}, 'This installation has no Claude module.'),
-        el('div', { class: 'row' }, el('button', { class: 'btn ai', onclick: () => claudeGuide(acc, { way: 'A' }) }, '✨ Create a subject this way'), el('button', { class: 'btn small', onclick: () => window.NoemaCurMap?.library(acc) }, '🧭 Curricula (use the same key)'))),
+        el('div', { class: 'row' }, el('button', { class: 'btn ai', onclick: () => claudeGuide(acc, { way: 'A' }) }, '✨ Create a subject this way'), el('button', { class: 'btn small', onclick: () => window.NoemaCurMap?.library(acc) }, '🧭 Roadmaps (use the same key)'))),
       el('details', { class: 'cg-way', open: open === 'B' }, el('summary', {}, el('b', {}, '💬 B. In the Claude app or website — with the noema-lite connector'), el('span', { class: 'tiny' }, ' · uses your Claude plan; the subject arrives here by itself')),
         ...claudeAppSteps(acc)),
-      el('details', { class: 'cg-way cg-way-c', open: open === 'C' }, el('summary', {}, el('b', {}, '🧭 C. Curricula with your Claude plan — the Claude app plans and prepares the steps'), el('span', { class: 'cg-badge' }, '⭐ recommended for curricula · usually cheapest'), el('span', { class: 'tiny' }, ' · no API cost; results arrive here by themselves')),
+      el('details', { class: 'cg-way cg-way-c', open: open === 'C' }, el('summary', {}, el('b', {}, '🧭 C. Roadmaps with your Claude plan — the Claude app plans and prepares the steps'), el('span', { class: 'cg-badge' }, '⭐ recommended for Roadmaps · usually cheapest'), el('span', { class: 'tiny' }, ' · no API cost; results arrive here by themselves')),
         ...claudeCurriculumSteps(acc)));
     return wrap;
   }
@@ -969,8 +999,8 @@
               el('ul', {}, el('li', {}, 'You never leave this app'), el('li', {}, 'Needs a Claude API key: you pay Anthropic per use (a few dollars per subject — you see the cost live and set a limit)'), el('li', {}, 'Simplest: everything happens on this page'))),
             el('button', { class: 'cg-choice', onclick: wayB }, el('span', { class: 'cg-ico' }, '💬'), el('b', {}, 'B. In the Claude app or website'),
               el('ul', {}, el('li', {}, 'Uses your Claude plan (Free, Pro or Max) — no extra cost'), el('li', {}, 'You chat with Claude there; the finished subject arrives here by itself'), el('li', {}, 'Best for very big sources (Pro / Max)'))),
-            el('button', { class: 'cg-choice cg-choice-c', onclick: wayC }, el('span', { class: 'cg-ico' }, '🧭'), el('b', {}, 'C. A whole curriculum with your Claude plan'), el('span', { class: 'cg-badge' }, '⭐ usually cheapest'),
-              el('ul', {}, el('li', {}, 'A map of steps (from a goal, or your own map + files); every step becomes a subject'), el('li', {}, 'Your Claude app plans and prepares the steps — no API cost'), el('li', {}, 'The bigger the curriculum, the bigger the saving')))),
+            el('button', { class: 'cg-choice cg-choice-c', onclick: wayC }, el('span', { class: 'cg-ico' }, '🧭'), el('b', {}, 'C. A whole Roadmap with your Claude plan'), el('span', { class: 'cg-badge' }, '⭐ usually cheapest'),
+              el('ul', {}, el('li', {}, 'A Roadmap of steps (from a goal, or your own Roadmap + files); every step becomes a subject'), el('li', {}, 'Your Claude app plans and prepares the steps — no API cost'), el('li', {}, 'The bigger the Roadmap, the bigger the saving')))),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       };
       const back = () => el('button', { class: 'btn small ghost cg-back', onclick: home }, '← Back');
@@ -1071,7 +1101,7 @@
       /* ---------- C: curricula with the Claude plan ---------- */
       function wayC() {
         box.innerHTML = '';
-        box.append(back(), brandHead('🧭 A curriculum with your Claude plan', 'Steps 1–4 are needed only the first time (the same as way B).'), ...claudeCurriculumSteps(acc),
+        box.append(back(), brandHead('🧭 A Roadmap with your Claude plan', 'Steps 1–4 are needed only the first time (the same as way B).'), ...claudeCurriculumSteps(acc),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       }
       /* ---------- B: the Claude app / website + connector ---------- */
@@ -1108,7 +1138,7 @@
       box.append(brandHead('🔗 Connect Claude to noema-lite', who ? 'Signed in as ' + who : ''),
         el('div', { class: 'noema-form' },
           el('p', {}, el('b', {}, det?.client?.client_name || 'Claude'), ' wants to use your noema-lite account.'),
-          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'), el('li', {}, '✅ read your curricula and send their map, chapter plans and prepared steps (you see them arrive in noema-lite)'),
+          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'), el('li', {}, '✅ read your Roadmaps and send their steps, chapter plans and prepared steps (you see them arrive in noema-lite)'),
             el('li', {}, '🚫 it gets only the connector’s tools: no access to your conversations, progress or keys through them')),
           back ? el('p', { class: 'tiny' }, 'After approving you return to ', el('b', {}, back), '.') : null,
           el('div', { class: 'row' }, el('button', { class: 'btn', onclick: e => go('deny', e.currentTarget) }, 'Deny'), el('button', { class: 'btn primary', onclick: e => go('approve', e.currentTarget) }, 'Allow'))));
@@ -1210,7 +1240,7 @@
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
-    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
+    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },

@@ -60,7 +60,7 @@
   }
 
   /* ---------- tasks ---------- */
-  const TITLES = { dag: 'Agent 1 — the map: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
+  const TITLES = { dag: 'Agent 1 — the Roadmap: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
   /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
@@ -109,8 +109,8 @@
       if (c.nodes[nid].pack?.assigned) return needsPlan(c.nodes[nid]) && isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” is taught by “${c.nodes[nid].pack.title || c.nodes[nid].pack.id}”, a subject the learner attached to it — it is not prepared.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
       if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
-      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared curriculum — do not prepare it again (the learner gets it on the map).` };
-      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared curriculum plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
+      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared Roadmap — do not prepare it again (the learner gets it on the map).` };
+      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared Roadmap plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
       return stepSpec(c, nid);
     }
     const w = work(c);
@@ -275,8 +275,8 @@
 
   /** Without the connector: the learner pasted Claude's answer to a copied task → { ok, line } | { errors } */
   App.paste = (acc, cid, taskId, text) => {
-    const c = C().get(acc, cid); if (!c) return { errors: ['This curriculum is not on this device.'] };
-    const t = byId(c, taskId); if (!t) return { errors: ['This task is already done (or the curriculum changed) — copy the current task again.'] };
+    const c = C().get(acc, cid); if (!c) return { errors: ['This Roadmap is not on this device.'] };
+    const t = byId(c, taskId); if (!t) return { errors: ['This task is already done (or the Roadmap changed) — copy the current task again.'] };
     let data; try { data = L().parseJSON(text); } catch (e) { return { errors: ['That is not a JSON answer — paste exactly what Claude answered (the JSON object).'] }; }
     const errs = check(c, t, data); if (errs.length) return { errors: errs };
     const line = apply(c, t, data); C().save(acc, c); C().Gen.kick(); return { ok: true, line };

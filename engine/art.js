@@ -87,19 +87,11 @@ window.NoemaArt = (() => {
     eagle: (fill, alt) => `<ellipse cx="0" cy="-4" rx="14" ry="5.5" fill="${fill}"/><ellipse cx="-4" cy="-8" rx="7" ry="6" fill="${fill}"/><ellipse cx="5" cy="-9" rx="6" ry="5" fill="${fill}"/>`,
   };
   const ITEM = {
-    hedge: (x, y, rot, fill, op) => `<ellipse cx="${x}" cy="${y}" rx="7" ry="3.6" transform="rotate(${rot} ${x} ${y})" fill="${fill}" opacity="${op}"/>`,
-    axo: (x, y, rot, fill, op) => `<circle cx="${x}" cy="${y}" r="4.6" fill="${fill}" opacity="${op}"/><circle cx="${x - 1.4}" cy="${y - 1.4}" r="1.3" fill="#fff" opacity=".8"/>`,
-    dragon: (x, y, rot, fill, op) => `<path d="M${x} ${y - 6} l5 4 l-2 6 h-6 l-2 -6z" fill="${fill}" opacity="${op}" transform="rotate(${rot % 40 - 20} ${x} ${y})"/>`,
-    alien: (x, y, rot, fill, op) => `<circle cx="${x}" cy="${y}" r="${4 + (rot % 3)}" fill="${fill}" opacity="${op}"/>`,
-    bear: (x, y, rot, fill, op) => `<ellipse cx="${x}" cy="${y}" rx="6.5" ry="3.6" fill="${fill}" opacity="${op}"/><ellipse cx="${x}" cy="${y - .6}" rx="3.6" ry="1.6" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".8"/>`,
-    fruit: (x, y, rot, fill, op) => `<circle cx="${x}" cy="${y}" r="5.4" fill="${fill}" opacity="${op}"/><circle cx="${x - 1.6}" cy="${y - 1.8}" r="1.4" fill="#fff" opacity=".6"/>`,
-    hood: (x, y, rot, fill, op) => `<g opacity="${op}">${[0, 72, 144, 216, 288].map(a => `<circle cx="${(x + Math.cos((a + rot) * Math.PI / 180) * 3.6).toFixed(1)}" cy="${(y + Math.sin((a + rot) * Math.PI / 180) * 3.6).toFixed(1)}" r="2.7" fill="${fill}"/>`).join('')}<circle cx="${x}" cy="${y}" r="1.9" fill="#f2d27a"/></g>`,
     owl: (x, y, rot, fill, op) => `<rect x="${x - 4}" y="${y - 6}" width="8" height="12" rx="1.5" fill="${fill}" opacity="${op}" transform="rotate(${rot} ${x} ${y})"/>`,
     knight: (x, y, rot, fill, op) => `<path d="M${x - 4} ${y - 6} h8 v12 l-4 -3 l-4 3z" fill="${fill}" opacity="${op}" transform="rotate(${rot % 60 - 30} ${x} ${y})"/>`,
     piglet: (x, y, rot, fill, op) => `<rect x="${x - 6}" y="${y - 3}" width="12" height="6" rx="1" fill="${fill}" opacity="${op}" transform="rotate(${rot} ${x} ${y})"/>`,
     candy: (x, y, rot, fill, op) => `<g opacity="${op}" transform="rotate(${rot} ${x} ${y})"><circle cx="${x}" cy="${y}" r="3.8" fill="${fill}"/><path d="M${x - 3.4} ${y} l-3.8 -3.2 v6.4z M${x + 3.4} ${y} l3.8 -3.2 v6.4z" fill="${fill}"/></g>`,
     jack: (x, y, rot, fill, op) => `<path d="M${x} ${y + 5} C${x - 7} ${y} ${x - 5} ${y - 6} ${x} ${y - 3} C${x + 5} ${y - 6} ${x + 7} ${y} ${x} ${y + 5}Z" fill="${fill}" opacity="${op}" transform="rotate(${rot % 90 - 45} ${x} ${y})"/>`,
-    frog: (x, y, rot, fill, op) => `<path d="M${x} ${y} L${x + 5} ${y - 1.6} A5.2 5.2 0 1 1 ${x + 5} ${y + 1.6}Z" fill="${fill}" opacity="${op}" transform="rotate(${rot} ${x} ${y})"/>`,
     puss: (x, y, rot, fill, op) => `<g opacity="${op}" transform="rotate(${rot} ${x} ${y})"><ellipse cx="${x}" cy="${y}" rx="2.6" ry="7.5" fill="${fill}"/><path d="M${x} ${y + 8} V${y - 6}" stroke="#fff" stroke-opacity=".55" stroke-width=".7"/></g>`,
     wolf: (x, y, rot, fill, op) => `<g opacity="${op}"><path d="M${x - 2.6} ${y + 6} V${y - 6}" stroke="var(--ink2)" stroke-width="1.1"/><path d="M${x - 2.2} ${y - 6} L${x + 5} ${y - 3.4} L${x - 2.2} ${y - .8}Z" fill="${fill}"/></g>`,
     eagle: (x, y, rot, fill, op) => `<path d="M${x} ${y - 5} L${x + 1.3} ${y - 1.3} L${x + 5} ${y} L${x + 1.3} ${y + 1.3} L${x} ${y + 5} L${x - 1.3} ${y + 1.3} L${x - 5} ${y} L${x - 1.3} ${y - 1.3}Z" fill="${fill}" opacity="${op}"/>`,
@@ -112,18 +104,9 @@ window.NoemaArt = (() => {
       for (let s = 0; s < 4; s++) { const base = 60 + s * 48; out += `<rect x="30" y="${base}" width="240" height="5" fill="var(--t1i)" opacity=".35"/>`; let x = 38;
         while (x < 258 && i < N) { const w = 9 + Math.round(c.rnd() * 4), hh = 28 + Math.round(c.rnd() * 12); out += `<rect x="${x}" y="${base - hh}" width="${w}" height="${hh}" rx="1.5" fill="${c.col(i)}" opacity="${c.op(i)}"/>`; x += w + 2; i++; } }
       return out; },
-    axo: (N, c) => `<path d="M60 215 Q150 170 240 215Z" fill="var(--t3)"/><g stroke="var(--t2i)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".35"><path d="M150 210 V120 M150 160 L118 128 M150 145 L184 112 M118 128 L104 96 M184 112 L198 84"/></g>` + c.dome(150, 120, 115, 80, N),
-    dragon: (N, c) => `<ellipse cx="150" cy="200" rx="130" ry="26" fill="var(--t2)"/><path d="M40 205 Q150 70 260 205Z" fill="var(--t2)"/>` + c.dome(150, 160, 100, 48, N),
-    alien: (N, c) => { let out = `<circle cx="150" cy="115" r="16" fill="var(--t4)" stroke="var(--t4i)" stroke-opacity=".4"/>`; const R = [[40, 22], [70, 38], [100, 54], [130, 70]];
-      R.forEach(([rx, ry]) => out += `<ellipse cx="150" cy="115" rx="${rx}" ry="${ry}" fill="none" stroke="var(--ink3)" stroke-opacity=".35"/>`);
-      for (let i = 0; i < N; i++) { const [rx, ry] = R[i % 4], a = c.rnd() * 6.283; out += c.item(+(150 + Math.cos(a) * rx).toFixed(1), +(115 + Math.sin(a) * ry).toFixed(1), Math.round(c.rnd() * 9), c.col(i), c.op(i)); }
-      return out; },
-    bear: (N, c) => c.dome(150, 118, 92, 44, N) + `<rect x="92" y="138" width="116" height="66" rx="8" fill="var(--t3)"/><path d="M92 150 h116" stroke="var(--t3i)" stroke-opacity=".5" stroke-width="3"/><path d="M88 140 q62 -50 124 0z" fill="var(--t3)" opacity=".7" transform="rotate(-12 88 140)"/><rect x="142" y="150" width="16" height="20" rx="3" fill="var(--t2i)" opacity=".6"/>`,
-    fruit: (N, c) => c.dome(150, 108, 104, 52, N) + `<path d="M40 128 Q150 250 260 128Z" fill="var(--t2)"/><path d="M40 128 H260" stroke="var(--t2i)" stroke-opacity=".4" stroke-width="3"/>`,
     knight: (N, c) => { let out = `<rect x="20" y="40" width="260" height="170" fill="var(--t1)"/><path d="M20 40 ${Array.from({ length: 13 }, () => 'h10 v-12 h10 v12').join(' ')}" fill="var(--t1)"/>`; let i = 0;
       for (let r = 0; r < 4; r++) for (let k = 0; k < 16; k++, i++) { if (i >= N) return out; const x = 32 + k * 15.5, y = 58 + r * 38; out += `<path d="M${x} ${y} h10 v20 l-5 -5 l-5 5z" fill="${c.col(i)}" opacity="${c.op(i)}"/>`; }
       return out; },
-    hood: (N, c) => c.dome(150, 100, 108, 56, N) + `<path d="M70 140 h160 l-16 66 h-128z" fill="var(--t3)"/><path d="M80 158 h140 M84 176 h132 M88 194 h124" stroke="var(--t3i)" stroke-opacity=".35" stroke-width="2"/><path d="M84 140 q66 -70 132 0" stroke="var(--t3i)" stroke-opacity=".45" stroke-width="5" fill="none"/>`,
     piglet: (N, c) => { let out = `<path d="M30 92 L150 24 L270 92Z" fill="none" stroke="var(--ink3)" stroke-dasharray="5 5"/>`; let i = 0;
       for (let r = 0; r < 8; r++) for (let k = 0; k < 10; k++) { const off = r % 2 ? 11 : 0, x = 36 + k * 23 + off, y = 192 - r * 13; if (x > 262) continue;
         out += i < N ? `<rect x="${x}" y="${y}" width="21" height="11" rx="1.5" fill="${c.isNew(i) ? 'var(--t2i)' : 'var(--t1i)'}" opacity="${c.op(i)}"/>` : `<rect x="${x}" y="${y}" width="21" height="11" rx="1.5" fill="none" stroke="var(--ink3)" stroke-opacity=".5" stroke-dasharray="3 3"/>`; i++; }
@@ -131,28 +114,16 @@ window.NoemaArt = (() => {
     candy: (N, c) => { let out = `<rect x="66" y="92" width="168" height="120" rx="6" fill="var(--t4)"/><path d="M50 98 L150 26 L250 98Z" fill="var(--t4)"/><path d="M50 98 ${Array.from({ length: 10 }, () => 'q10 12 20 0').join(' ')}" fill="none" stroke="var(--paper)" stroke-width="5" stroke-linecap="round"/><path d="M132 212 v-36 a18 18 0 0 1 36 0 v36z" fill="var(--paper)" opacity=".7"/>`;
       const pts = []; for (let r = 0; r < 7; r++) for (let k = 0; k < 9; k++) { const x = 80 + k * 17.5 + (r % 2 ? 8 : 0), y = 114 + r * 14; if (x > 222 || (x > 124 && x < 176 && y > 166)) continue; pts.push([x, y]); }
       for (let r = 0; r < 3; r++) for (let k = 0; k <= 2 * r + 2; k++) pts.push([150 + (k - r - 1) * 17, 52 + r * 15]);
-      pts.slice(0, N).forEach(([x, y], i) => { out += c.item(x, y, (i * 41) % 180, c.col(i), c.op(i)); }); return out; },
+      pts.slice(0, N).forEach(([x, y], i) => { out += c.item(x, y, (i * 41) % 60 - 30, c.col(i), c.op(i)); }); return out; },
     jack: (N, c) => { let out = `<g fill="var(--t4)"><ellipse cx="150" cy="22" rx="70" ry="14"/><ellipse cx="124" cy="14" rx="30" ry="13"/><ellipse cx="178" cy="12" rx="26" ry="12"/></g>`;
       const sx = t => 150 + 42 * Math.sin(t * Math.PI * 3), sy = t => 222 - 196 * t;
       out += `<path d="M${Array.from({ length: 41 }, (_, k) => `${sx(k / 40).toFixed(1)} ${sy(k / 40).toFixed(1)}`).join(' L')}" stroke="var(--t1i)" stroke-opacity=".45" stroke-width="5" fill="none" stroke-linecap="round"/>`;
       const M = Math.max(N, 24); for (let i = 0; i < N; i++) { const t = (i + .5) / M, side = i % 2 ? 1 : -1; out += c.item(+(sx(t) + side * (9 + (i % 3) * 3)).toFixed(1), +sy(t).toFixed(1), side > 0 ? 70 : 20, c.col(i), c.op(i)); }
       return out; },
-    frog: (N, c) => `<ellipse cx="150" cy="138" rx="136" ry="72" fill="var(--t4)"/>` + c.dome(150, 138, 118, 58, N),
-    puss: (N, c) => { let out = ''; const R = [62, 80, 98, 116], per = Math.max(16, Math.ceil(N / 4));
+    puss: (N, c) => { let out = ''; const R = [74, 92, 110, 128], per = Math.max(16, Math.ceil(N / 4));   // all above the hat
       for (let i = 0; i < N; i++) { const r = R[i % 4], a = (-168 + (Math.floor(i / 4) + (i % 4) * .25) * (156 / per)) * Math.PI / 180;
         out += c.item(+(150 + Math.cos(a) * r).toFixed(1), +(150 + Math.sin(a) * r * .8).toFixed(1), Math.round(a * 180 / Math.PI + 90), c.col(i), c.op(i)); }
       return out + `<path d="M98 158 Q100 104 150 100 Q200 104 202 158Z" fill="var(--t1)"/><rect x="99" y="140" width="102" height="10" fill="var(--t2i)" opacity=".5"/><ellipse cx="150" cy="168" rx="132" ry="24" fill="var(--t1)"/><ellipse cx="150" cy="164" rx="60" ry="9" fill="var(--t1i)" opacity=".18"/>`; },
-    wolf: (N, c) => { const TR = [[[20, 212], [110, 70], [196, 212]], [[110, 212], [196, 34], [284, 212]], [[64, 212], [150, 120], [236, 212]]];
-      let out = TR.map((t, k) => `<path d="M${t.map(p => p.join(' ')).join(' L')}Z" fill="${['var(--t1)', 'var(--t4)', 'var(--t1)'][k]}" opacity="${[.8, 1, .9][k]}"/>`).join('') + `<path d="M196 34 L212 62 L202 58 L196 66 L188 58 L180 62Z M110 70 L124 94 L114 90 L106 96 L98 92Z" fill="var(--paper)"/>`;
-      for (let i = 0; i < N; i++) { const [A, B, C] = TR[i % 3]; let u = c.rnd(), v = c.rnd(); if (u + v > 1) { u = 1 - u; v = 1 - v; } v = v * .82;
-        out += c.item(+(A[0] + u * (B[0] - A[0]) + v * (C[0] - A[0])).toFixed(1), +(A[1] + u * (B[1] - A[1]) + v * (C[1] - A[1]) - 6).toFixed(1), 0, c.col(i), c.op(i)); }
-      return out; },
-    eagle: (N, c) => { let out = `<circle cx="150" cy="115" r="106" fill="var(--t1)"/>${[35, 70].map(r => `<circle cx="150" cy="115" r="${r}" fill="none" stroke="var(--t1i)" stroke-opacity=".18"/>`).join('')}<path d="M44 115 H256 M150 9 V221" stroke="var(--t1i)" stroke-opacity=".18"/>`;
-      const pts = Array.from({ length: N }, () => { const a = c.rnd() * 6.283, r = Math.sqrt(c.rnd()) * 96; return [+(150 + Math.cos(a) * r).toFixed(1), +(115 + Math.sin(a) * r).toFixed(1)]; });
-      const nw = pts.filter((_, i) => c.isNew(i)).sort((a, b) => a[0] - b[0]);
-      if (nw.length > 1) out += `<path d="M${nw.map(p => p.join(' ')).join(' L')}" fill="none" stroke="var(--t2i)" stroke-opacity=".5" stroke-width="1.2"/>`;
-      return out + pts.map(([x, y], i) => c.item(x, y, 0, c.isNew(i) ? 'var(--t2i)' : 'var(--t1i)', c.isNew(i) ? .95 : .45)).join(''); },
-    _: (N, c) => `<rect x="140" y="140" width="20" height="80" rx="8" fill="var(--deco2)" stroke="var(--t2i)" stroke-width="1" opacity=".9"/><ellipse cx="150" cy="105" rx="122" ry="84" fill="var(--t1)"/>` + c.dome(150, 105, 108, 70, N) + `<ellipse cx="150" cy="222" rx="70" ry="6" fill="var(--line)"/>`,
   };
   const CAP = { owl: 80, knight: 64, piglet: 80, candy: 70, _: 140 };
   /* ---- the four newer characters: strawberry girl, lab robot, grey heron, prism ---- */
@@ -170,20 +141,14 @@ window.NoemaArt = (() => {
     prism: f => `<path d="M0 -16 L12 6 H-12Z" fill="none" stroke="${f}" stroke-width="2"/><path d="M0 -16 L3 6" stroke="${f}" stroke-width="1.2"/>`,
   });
   Object.assign(ITEM, {
-    berry: (x, y, rot, f, op) => `<g opacity="${op}" transform="rotate(${rot % 50 - 25} ${x} ${y})"><path d="M${x} ${y - 5} C${x - 6} ${y - 6} ${x - 7} ${y + 1} ${x} ${y + 6} C${x + 7} ${y + 1} ${x + 6} ${y - 6} ${x} ${y - 5}Z" fill="${f}"/><path d="M${x - 3.4} ${y - 5} L${x} ${y - 7.4} L${x + 3.4} ${y - 5}" stroke="var(--t2i)" stroke-width="1.3" fill="none" stroke-linecap="round"/></g>`,
     robot: (x, y, rot, f, op) => `<g opacity="${op}"><rect x="${x - 4}" y="${y - 4}" width="8" height="8" rx="1" fill="${f}"/><path d="M${x - 2} ${y - 6}v2M${x + 2} ${y - 6}v2M${x - 2} ${y + 4}v2M${x + 2} ${y + 4}v2" stroke="${f}" stroke-width=".9"/></g>`,
     heron: (x, y, rot, f, op) => `<g opacity="${op}"><path d="M${x} ${y + 7} V${y - 4}" stroke="var(--ink3)" stroke-width=".9"/><rect x="${x - 1.7}" y="${y - 7}" width="3.4" height="6.4" rx="1.7" fill="${f}"/></g>`,
     prism: (x, y, rot, f, op) => `<path d="M${x} ${y - 5} L${x + 4.6} ${y + 3.6} H${x - 4.6}Z" fill="${f}" opacity="${op}" transform="rotate(${rot % 120} ${x} ${y})"/>`,
   });
   Object.assign(COLL, {
-    berry: (N, c) => `<path d="M70 124 Q150 6 230 124" stroke="var(--t2i)" stroke-opacity=".35" stroke-width="7" fill="none" stroke-linecap="round"/>` + c.dome(150, 98, 100, 48, N) + `<path d="M48 120 h204 l-18 86 h-168z" fill="var(--t1)"/><path d="M56 140 h188 M60 160 h180 M64 180 h172" stroke="var(--t1i)" stroke-opacity=".3" stroke-width="2.5"/><path d="M48 120 h204" stroke="var(--t1i)" stroke-opacity=".45" stroke-width="4" stroke-linecap="round"/>`,
     robot: (N, c) => { let out = `<rect x="18" y="18" width="264" height="194" rx="12" fill="var(--t4)"/><g stroke="var(--t4i)" stroke-opacity=".25" stroke-width="2" fill="none"><path d="M18 60 H80 V30 M282 100 H220 V200 M110 212 V170 H190 M18 160 H60 V200"/></g>`; const S = 11, cols = 10;
       for (let k = 0; k < c.cap; k++) { const x = 42 + (k % cols) * 24, y = 40 + Math.floor(k / cols) * 24, have = k < N;
         out += have ? c.item(x, y, 0, c.col(k), c.op(k)) : `<rect x="${x - 4}" y="${y - 4}" width="8" height="8" rx="1" fill="none" stroke="var(--ink3)" stroke-opacity=".4" stroke-dasharray="2 2"/>`; void S; }
-      return out; },
-    heron: (N, c) => { let out = `<ellipse cx="150" cy="206" rx="136" ry="16" fill="var(--t1)"/>`;
-      for (let i = 0; i < N; i++) { const x = +(26 + c.rnd() * 248).toFixed(1), top = +(70 + c.rnd() * 110).toFixed(1), lean = +((c.rnd() - .5) * 10).toFixed(1);
-        out += `<g opacity="${c.op(i)}"><path d="M${x} 204 Q${x} ${(204 + top) / 2} ${x + lean} ${top}" stroke="var(--ink3)" stroke-width="1.1" fill="none"/><rect x="${x + lean - 2}" y="${top - 8}" width="4" height="9" rx="2" fill="${c.col(i)}"/></g>`; }
       return out; },
     prism: (N, c) => { const s = 22, R = 4, tri = []; const h = s * Math.sqrt(3) / 2, cx = 150, cy = 115;
       for (let r = -R; r < R; r++) for (let q = -2 * R; q <= 2 * R; q++) { const up = (q + r) % 2 === 0, x = cx + q * s / 2, y = cy + r * h;
@@ -194,6 +159,82 @@ window.NoemaArt = (() => {
       return tri.map((t, i) => `<path d="M${t.pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L')}Z" ${i < N ? `fill="${c.col(i)}" fill-opacity="${c.op(i)}" stroke="var(--paper)" stroke-width="1.2"` : 'fill="none" stroke="var(--ink3)" stroke-opacity=".25"'}/>`).join(''); },
   });
   Object.assign(CAP, { robot: 70, prism: 96 });
+  /* ---- the collection, redrawn: one item per completed chapter, never one on top of another, and each thing looks like
+     itself (gold coins, cut gems, real fruit, strawberries, flowers, pearls, water lilies). Piles sit above their chest,
+     bowl or basket, so nothing hides behind it. Real-world things keep their real colours; k picks the variety. ---- */
+  const T = (x, y, r, op, body) => `<g transform="translate(${x} ${y})${r ? ` rotate(${r})` : ''}" opacity="${op}">${body}</g>`;
+  const COIN = k => k % 3 === 2
+    ? '<ellipse cy="1.6" rx="7" ry="3.4" fill="#b3841f"/><ellipse rx="7" ry="3.4" fill="#efc44f"/><ellipse rx="4.6" ry="2.1" fill="none" stroke="#c8962a" stroke-width=".7"/><path d="M-4.4 -1.4q2 -1.4 5 -1.5" stroke="#fff6cf" stroke-width=".9" fill="none" stroke-linecap="round"/>'
+    : '<circle r="7" fill="#c08d22"/><circle r="6.1" fill="#efc44f"/><circle r="4.5" fill="none" stroke="#c8962a" stroke-width=".8"/><path d="M0 -2.7L.8 -.9L2.7 -.8L1.2 .5L1.7 2.4L0 1.4L-1.7 2.4L-1.2 .5L-2.7 -.8L-.8 -.9Z" fill="#c8962a"/><path d="M-4.7 -2A5 5 0 0 1 -2 -4.7" stroke="#fff6cf" stroke-width="1.1" fill="none" stroke-linecap="round"/>';
+  const GEMC = [['#d8435a', '#8f1f33'], ['#2e9e6c', '#185c3e'], ['#3d6fd4', '#213f8c'], ['#9a58d4', '#5e2e8f'], ['#f0a52e', '#a8661a'], ['#4cc3d3', '#217c88']];
+  const GEM = k => { const [f, d] = GEMC[k % GEMC.length]; return k % 2
+    ? `<path d="M-4 -6H4L6 -4V4L4 6H-4L-6 4V-4Z" fill="${f}"/><path d="M-2.4 -3.6H2.4L3.6 -2.4V2.4L2.4 3.6H-2.4L-3.6 2.4V-2.4Z" fill="#fff" fill-opacity=".25" stroke="${d}" stroke-width=".5"/><path d="M-4 -6L-2.4 -3.6M4 -6L2.4 -3.6M6 4L3.6 2.4M-6 4L-3.6 2.4M4 6L2.4 3.6M-4 6L-2.4 3.6M6 -4L3.6 -2.4M-6 -4L-3.6 -2.4" stroke="${d}" stroke-width=".5"/><path d="M-6 3V-4L-4 -6H3" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".7"/>`
+    : `<path d="M-4 -5H4L7 -1.5L0 7L-7 -1.5Z" fill="${f}"/><path d="M-4 -5H4L7 -1.5H-7Z" fill="#fff" fill-opacity=".3"/><path d="M0 -1.5H7L0 7Z" fill="${d}" fill-opacity=".35"/><path d="M-7 -1.5H7M-4 -5L-2 -1.5L0 7L2 -1.5L4 -5M-2 -1.5L0 -5L2 -1.5" stroke="${d}" stroke-width=".55" fill="none"/><path d="M-3 -3.7l1.4 1" stroke="#fff" stroke-width=".9" stroke-linecap="round"/>`; };
+  const FRUIT = [
+    '<circle r="6.2" fill="#f08a24"/><circle cx="-2.2" cy="-2" r="1.7" fill="#fff" opacity=".3"/><g fill="#c96a14" opacity=".45"><circle cx="2.2" cy="1" r=".5"/><circle cx="-.8" cy="2.8" r=".5"/><circle cx="3.2" cy="-2.2" r=".5"/><circle cx="-3" cy="1.4" r=".5"/></g><path d="M0 -6q.5 -1.4 0 -2.2" stroke="#6b4a2a" stroke-width="1" fill="none"/><path d="M.3 -7.4q3.8 -2.6 6 0q-3.4 2 -6 0z" fill="#4f9a45"/>',   // a mandarin
+    '<path d="M0 -4.2C-3 -7 -7.4 -5 -7 -.6C-6.6 4 -3.4 7 0 6.2C3.4 7 6.6 4 7 -.6C7.4 -5 3 -7 0 -4.2Z" fill="#d63c3a"/><path d="M-4.6 -2.4q-1 2 .4 4.2" stroke="#fff" stroke-opacity=".45" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M0 -4.2q.4 -2.4 1.6 -3.6" stroke="#6b4a2a" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M1.2 -6.4q3.4 -2.6 5.4 -.4q-3 2 -5.4 .4z" fill="#5aa64b"/>',   // an apple
+    '<path d="M0 -6.4C-2.2 -6.4 -2.6 -3 -3.2 -1C-5.6 1 -5.6 6.8 0 7C5.6 6.8 5.6 1 3.2 -1C2.6 -3 2.2 -6.4 0 -6.4Z" fill="#b8c94a"/><path d="M0 -6.4q.4 -1.6 1.4 -2.2" stroke="#6b4a2a" stroke-width="1" fill="none"/><circle cx="-2.2" cy="2.4" r="1.3" fill="#fff" opacity=".3"/><circle cx="2.6" cy="3.6" r="1" fill="#d99a3a" opacity=".35"/>',   // a pear
+    '<path d="M-3.2 .4Q-1.4 -5.6 2.2 -8M3.4 1.2Q2.8 -4 2.2 -8" stroke="#5c7a2e" stroke-width=".9" fill="none"/><path d="M2.2 -8q2.8 -.8 4 1q-2.6 1 -4 -1z" fill="#5aa64b"/><circle cx="-3.4" cy="3" r="3.4" fill="#b3172d"/><circle cx="3.4" cy="3.8" r="3.4" fill="#cc2138"/><circle cx="-4.4" cy="2" r=".9" fill="#fff" opacity=".5"/><circle cx="2.4" cy="2.8" r=".9" fill="#fff" opacity=".5"/>',   // two cherries
+    '<path d="M0 -5.4V-8" stroke="#6b4a2a" stroke-width="1" fill="none"/><path d="M.2 -7q3 -2 5 .2q-2.8 1.4 -5 -.2z" fill="#5aa64b"/><g fill="#7a4ba3">' + [[-3.4, -3.4], [0, -3.8], [3.4, -3.4], [-1.7, -.4], [1.7, -.4], [-3.4, 2.4], [3.4, 2.4], [0, 2.8], [0, 5.6]].map(([a, b]) => `<circle cx="${a}" cy="${b}" r="2.1" stroke="#5c357f" stroke-width=".4"/>`).join('') + '</g><g fill="#fff" opacity=".35"><circle cx="-.6" cy="-4.4" r=".7"/><circle cx="1.1" cy="-1.4" r=".7"/></g>',   // grapes
+    '<path d="M-7.4 0C-6.6 -.6 -6 -4.6 0 -4.8C6 -4.6 6.6 -.6 7.4 0C6.6 .6 6 4.6 0 4.8C-6 4.6 -6.6 .6 -7.4 0Z" fill="#f1d23b"/><path d="M-3.6 -2.6q2.6 -1.2 5 -.6" stroke="#fff" stroke-opacity=".55" stroke-width="1.1" fill="none" stroke-linecap="round"/>',   // a lemon
+  ];
+  const BERRYI = '<path d="M0 -4.4C-4.2 -6 -7.2 -3 -6.4 .6C-5.6 4 -2.4 7 0 7.6C2.4 7 5.6 4 6.4 .6C7.2 -3 4.2 -6 0 -4.4Z" fill="#e0353f"/><path d="M-4.4 -1.6q-.6 2.6 1.4 5" stroke="#fff" stroke-opacity=".3" stroke-width="1.1" fill="none" stroke-linecap="round"/><g fill="#f6e27a">'
+    + [[-3.4, -1.4], [0, -.6], [3.4, -1.4], [-2, 2], [2, 2], [-4.4, 1.6], [4.4, 1.6], [0, 4], [-1.8, 5.2], [1.8, 5.2]].map(([a, b]) => `<ellipse cx="${a}" cy="${b}" rx=".45" ry=".7"/>`).join('')
+    + '</g><path d="M0 -4.6L-4.8 -6L-2.2 -3.8L-4.4 -2.4L-.8 -3.2L0 -1.4L.8 -3.2L4.4 -2.4L2.2 -3.8L4.8 -6Z" fill="#3f9142"/><path d="M0 -5V-7.8" stroke="#3f9142" stroke-width="1.1" stroke-linecap="round"/>';
+  const FLOWERC = [['#d9453f', '#2e2320'], ['#f6f3ec', '#f2c94c'], ['#5b7fd6', '#2f3f75'], ['#f2c94c', '#c9822a'], ['#e88fb6', '#f2c94c']];   // poppy, daisy, cornflower, buttercup, pink
+  const FLOWER = k => { const [p, m] = FLOWERC[k % FLOWERC.length]; return [0, 72, 144, 216, 288].map(a => `<ellipse cy="-3.5" rx="2.7" ry="3.5" fill="${p}" stroke="#000" stroke-opacity=".14" stroke-width=".5" transform="rotate(${a})"/>`).join('') + `<circle r="2" fill="${m}"/>`; };
+  const LILY = (k, r) => { const a = 18 * Math.PI / 180, P = s => `${(7.4 * Math.cos(s * a)).toFixed(2)} ${(7.4 * Math.sin(s * a)).toFixed(2)}`;
+    let out = `<g transform="rotate(${r})"><path d="M0 0L${P(-1)}A7.4 7.4 0 1 0 ${P(1)}Z" fill="#5d9c47"/><path d="M0 0L-6.6 -1.6M0 0L-5 4.4M0 0L-2 -6.8M0 0L1.6 6.8M0 0L4.6 -5.4M0 0L5 4.8" stroke="#3f7a31" stroke-width=".55" stroke-opacity=".7"/></g>`;
+    if (k % 3 === 0) out += [0, 45, 90, 135, 180, 225, 270, 315].map(t => `<path d="M0 0C-1.8 -1.8 -1.5 -4.4 0 -5.8C1.5 -4.4 1.8 -1.8 0 0Z" fill="#f2a3c3" stroke="#d4769c" stroke-width=".35" transform="rotate(${t + 22})"/>`).join('')
+      + [0, 60, 120, 180, 240, 300].map(t => `<path d="M0 0C-1.2 -1.2 -1 -3 0 -3.8C1 -3 1.2 -1.2 0 0Z" fill="#fbd8e6" transform="rotate(${t})"/>`).join('') + '<circle r="1.3" fill="#f2c94c"/>';
+    return out; };
+  const PEARLC = ['#f1e9de', '#f3e0e2', '#e6e8ec', '#efe4cc'];
+  const PEARL = k => `<circle r="4.8" fill="${PEARLC[k % 4]}"/><path d="M-4.6 1.2A4.8 4.8 0 0 0 4.6 1.2A6 4 0 0 1 -4.6 1.2Z" fill="#000" opacity=".1"/><circle r="4.8" fill="none" stroke="#000" stroke-opacity=".1" stroke-width=".6"/><circle cx="-1.6" cy="-1.8" r="1.5" fill="#fff" opacity=".9"/>`;
+  const LEAF = f => `<path d="M-7 0C-4 -4.4 3 -4.6 7 0C3 4.6 -4 4.4 -7 0Z" fill="${f}"/><path d="M-7 0H6M-3 0l2 -2.4M1 0l2 -2.2M-3 0l2 2.4M1 0l2 2.2" stroke="#fff" stroke-opacity=".45" stroke-width=".6" fill="none"/>`;
+  Object.assign(ITEM, {
+    bear: (x, y, rot, f, op, k = rot | 0) => T(x, y, 0, op, COIN(k)),
+    dragon: (x, y, rot, f, op, k = rot | 0) => T(x, y, rot % 30 - 15, op, GEM(k)),
+    fruit: (x, y, rot, f, op, k = rot | 0) => T(x, y, rot % 40 - 20, op, FRUIT[k % FRUIT.length]),
+    berry: (x, y, rot, f, op) => T(x, y, rot % 50 - 25, op, BERRYI),
+    hood: (x, y, rot, f, op, k = rot | 0) => T(x, y, rot % 72, op, FLOWER(k)),
+    frog: (x, y, rot, f, op, k = rot | 0) => T(x, y, 0, op, LILY(k, rot)),
+    axo: (x, y, rot, f, op, k = rot | 0) => T(x, y, 0, op, PEARL(k)),
+    hedge: (x, y, rot, f, op) => T(x, y, rot, op, LEAF(f)),
+    alien: (x, y, rot, f, op) => T(x, y, 0, op, `<circle r="4.4" fill="${f}"/><path d="M-4.2 1.4A4.4 4.4 0 0 0 4.2 1.4" stroke="#000" stroke-opacity=".15" stroke-width="1.6" fill="none"/>`),
+  });
+  /* a pile rests on its base line (bottom row first, then outwards and upwards); scattered things are spread at random — both on a honeycomb,
+     so two items never overlap */
+  Object.assign(COLL, {
+    bear: (N, c) => '<path d="M62 150L80 92H220L238 150Z" fill="var(--t3)" opacity=".55"/><path d="M80 92H220" stroke="var(--t3i)" stroke-opacity=".4" stroke-width="3"/>'
+      + '<rect x="58" y="148" width="184" height="62" rx="9" fill="var(--t3)"/><path d="M58 164H242" stroke="var(--t3i)" stroke-opacity=".5" stroke-width="3"/><path d="M84 148V210M216 148V210" stroke="var(--t3i)" stroke-opacity=".35" stroke-width="5"/><rect x="141" y="158" width="18" height="22" rx="3" fill="var(--t2i)" opacity=".6"/><circle cx="150" cy="167" r="2.6" fill="var(--t3)"/>'
+      + c.pile(150, 139, 92, 128, N),
+    fruit: (N, c) => '<path d="M34 134Q150 262 266 134Z" fill="var(--t2)"/><path d="M34 134H266" stroke="var(--t2i)" stroke-opacity=".4" stroke-width="4" stroke-linecap="round"/><ellipse cx="150" cy="214" rx="44" ry="6" fill="var(--t2i)" opacity=".25"/>' + c.pile(150, 124, 112, 118, N),
+    berry: (N, c) => '<path d="M64 124Q150 -4 236 124" stroke="var(--t2i)" stroke-opacity=".35" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M44 124h212l-20 84h-172z" fill="var(--t1)"/><path d="M52 144h196M56 164h188M60 184h180" stroke="var(--t1i)" stroke-opacity=".3" stroke-width="2.5"/><path d="M44 124h212" stroke="var(--t1i)" stroke-opacity=".45" stroke-width="4" stroke-linecap="round"/>' + c.pile(150, 114, 104, 108, N),
+    hood: (N, c) => '<path d="M76 142q74 -96 148 0" stroke="var(--t3i)" stroke-opacity=".45" stroke-width="6" fill="none"/><path d="M64 142h172l-18 66h-136z" fill="var(--t3)"/><path d="M74 160h152M78 178h144M82 196h136" stroke="var(--t3i)" stroke-opacity=".35" stroke-width="2"/><path d="M64 142h172" stroke="var(--t3i)" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>' + c.pile(150, 132, 90, 122, N),
+    dragon: (N, c) => '<path d="M22 210Q150 -36 278 210Z" fill="var(--t2)"/><ellipse cx="150" cy="208" rx="132" ry="16" fill="var(--t2i)" opacity=".18"/>' + c.pile(150, 196, 114, 112, N),
+    axo: (N, c) => '<path d="M40 218Q150 168 260 218Z" fill="var(--t3)"/><g stroke="var(--t2i)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".3"><path d="M150 212V128M150 168L120 138M150 152L182 120M120 138L106 108M182 120L196 94"/></g>' + c.pile(150, 200, 116, 150, N, 12),
+    frog: (N, c) => '<ellipse cx="150" cy="134" rx="140" ry="82" fill="var(--t4)"/><ellipse cx="150" cy="134" rx="140" ry="82" fill="none" stroke="var(--t4i)" stroke-opacity=".25" stroke-width="3"/>' + c.scatter(150, 134, 122, 66, N, 17),
+    alien: (N, c) => { const R = [[46, 26], [76, 42], [106, 58], [136, 74]], pts = [];
+      let out = '<circle cx="150" cy="115" r="16" fill="var(--t4)" stroke="var(--t4i)" stroke-opacity=".4"/>' + R.map(([rx, ry]) => `<ellipse cx="150" cy="115" rx="${rx}" ry="${ry}" fill="none" stroke="var(--ink3)" stroke-opacity=".35"/>`).join('');
+      R.forEach(([rx, ry], r) => { const per = Math.floor(Math.PI * (rx + ry) / 14); for (let j = 0; j < per; j++) { const a = (j + r * .37) / per * 6.283; pts.push([+(150 + Math.cos(a) * rx).toFixed(1), +(115 + Math.sin(a) * ry).toFixed(1)]); } });
+      return out + c.place(c.shuffle(pts), N, 0); },
+    eagle: (N, c) => { let out = `<circle cx="150" cy="115" r="106" fill="var(--t1)"/>${[35, 70].map(r => `<circle cx="150" cy="115" r="${r}" fill="none" stroke="var(--t1i)" stroke-opacity=".18"/>`).join('')}<path d="M44 115 H256 M150 9 V221" stroke="var(--t1i)" stroke-opacity=".18"/>`;
+      const pts = c.shuffle(c.grid((x, y) => (x - 150) ** 2 + (y - 115) ** 2 <= 96 * 96, 150, 19, 211, 96, 12)).slice(0, N);
+      const nw = pts.filter((_, i) => c.isNew(i)).sort((a, b) => a[0] - b[0]);
+      if (nw.length > 1) out += `<path d="M${nw.map(p => p.join(' ')).join(' L')}" fill="none" stroke="var(--t2i)" stroke-opacity=".5" stroke-width="1.2"/>`;
+      return out + pts.map(([x, y], i) => c.item(x, y, 0, c.isNew(i) ? 'var(--t2i)' : 'var(--t1i)', c.isNew(i) ? .95 : .45, i)).join(''); },
+    wolf: (N, c) => { const TR = [[[20, 212], [110, 70], [196, 212]], [[110, 212], [196, 34], [284, 212]], [[64, 212], [150, 120], [236, 212]]];
+      const inT = ([A, B, C], x, y) => { const d = (p, q, r) => (p[0] - r[0]) * (q[1] - r[1]) - (q[0] - r[0]) * (p[1] - r[1]), P = [x, y], s1 = d(P, A, B), s2 = d(P, B, C), s3 = d(P, C, A); return !((s1 < 0 || s2 < 0 || s3 < 0) && (s1 > 0 || s2 > 0 || s3 > 0)); };
+      const out = TR.map((t, k) => `<path d="M${t.map(p => p.join(' ')).join(' L')}Z" fill="${['var(--t1)', 'var(--t4)', 'var(--t1)'][k]}" opacity="${[.8, 1, .9][k]}"/>`).join('') + '<path d="M196 34 L212 62 L202 58 L196 66 L188 58 L180 62Z M110 70 L124 94 L114 90 L106 96 L98 92Z" fill="var(--paper)"/>';
+      return out + c.place(c.shuffle(c.grid((x, y) => y < 204 && TR.some(t => inT(t, x - 3, y - 7) && inT(t, x - 3, y + 7) && inT(t, x + 6, y - 3)), 150, 40, 204, 130, 14)), N, 0); },
+    heron: (N, c) => { let out = '<ellipse cx="150" cy="206" rx="136" ry="16" fill="var(--t1)"/>';
+      const xs = c.shuffle(Array.from({ length: 31 }, (_, k) => 30 + k * 8));
+      for (let i = 0; i < Math.min(N, xs.length); i++) { const x = xs[i], top = +(70 + c.rnd() * 110).toFixed(1), lean = +((c.rnd() - .5) * 3).toFixed(1);
+        out += `<g opacity="${c.op(i)}"><path d="M${x} 204 Q${x} ${(204 + top) / 2} ${x + lean} ${top}" stroke="var(--ink3)" stroke-width="1.1" fill="none"/><rect x="${x + lean - 2}" y="${top - 8}" width="4" height="9" rx="2" fill="${c.col(i)}"/></g>`; }
+      return out; },
+    _: (N, c) => '<rect x="140" y="140" width="20" height="80" rx="8" fill="var(--deco2)" stroke="var(--t2i)" stroke-width="1" opacity=".9"/><ellipse cx="150" cy="105" rx="122" ry="84" fill="var(--t1)"/>' + c.scatter(150, 105, 110, 72, N, 15) + '<ellipse cx="150" cy="222" rx="70" ry="6" fill="var(--line)"/>',
+  });
+  Object.assign(CAP, { puss: 64, jack: 28, heron: 31, _: 90 });
   const I2 = {
     back: '<path d="M15 5l-7 7 7 7"/>', close: '<path d="M6 6l12 12M18 6L6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>',
     share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',
@@ -215,7 +256,7 @@ window.NoemaArt = (() => {
     bug: '<rect x="7" y="8" width="10" height="12" rx="5"/><path d="M12 8v12M7 13H3M21 13h-4M8 9 5 6M16 9l3-3M7 18l-3 2M17 18l3 2M9 6a3 3 0 0 1 6 0"/>',
     send: '<path d="M4 12l16-8-6 16-2-6z"/>', filter: '<path d="M4 5h16l-6 8v6l-4-2v-4z"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
     fire: '<path d="M12 21c4 0 7-2.7 7-6.5 0-4-3-6-4-9-1 2-2 3-3.5 3.5C11 6 10 4 10 3c-3 2.5-5 6-5 10 0 4.5 3 8 7 8z"/>',
-    home: '<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>', expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+    home: '<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>', crown: '<path d="M4 18h16M5 15l-1-9 5 4 3-6 3 6 5-4-1 9z"/>', expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
   };
   Object.assign(I, I2);
   const svg = (k, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[k] || ''}</svg>`;
@@ -224,17 +265,32 @@ window.NoemaArt = (() => {
   const face = (m, cls = '') => `<span class="ns-face ${cls}" aria-hidden="true">${mascot(m)}</span>`;
   const land = m => `<svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">${LANDS[m] || LANDS.hedge}</svg>`;
   function glyph(m, x, y, s = 1, fill = 'var(--deco3)', alt = 'var(--deco1)') { return `<g transform="translate(${x} ${y}) scale(${s})">${(GLYPH[m] || GLYPH.hedge)(fill, alt)}</g>`; }
-  function item(m, x, y, rot, fill, op) { return (ITEM[m] || ITEM._)(x, y, rot, fill, op); }
+  function item(m, x, y, rot, fill, op, k) { return (ITEM[m] || ITEM._)(x, y, rot, fill, op, k); }
   /** the collection picture: N items (capped), NEW of them from this week */
   function collection(m, N = 0, NEW = 0) {
     let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     const cap = CAP[m] || CAP._; N = Math.max(0, Math.min(N, cap)); NEW = Math.min(NEW, N);
     const isNew = i => i >= N - NEW;
     const col = i => isNew(i) ? 'var(--t2i)' : ['var(--t1i)', 'var(--t4i)', 'var(--t3i)'][i % 3];
-    const op = i => isNew(i) ? .9 : .4;
-    const it = (x, y, rot, f, o) => item(m, x, y, rot, f, o);
-    const dome = (cx, cy, rx, ry, n) => Array.from({ length: n }, (_, i) => { const a = rnd() * 6.283, r = Math.sqrt(rnd()); return it(+(cx + Math.cos(a) * r * rx).toFixed(1), +(cy + Math.sin(a) * r * ry).toFixed(1), Math.round(rnd() * 180), m === 'hedge' ? (isNew(i) ? 'var(--t2i)' : 'var(--t1i)') : col(i), op(i)); }).join('');
-    return (COLL[m] || COLL._)(N, { rnd, dome, item: it, col, op, isNew, cap });
+    const op = i => isNew(i) ? 1 : .7;
+    const it = (x, y, rot, f, o, k) => item(m, x, y, rot, f, o, k);
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    // the spots of a honeycomb of spacing d (centred on cx, rows from y1 up to y0) that lie inside the shape: items on them never overlap
+    const grid = (inside, cx, y0, y1, half, d) => { const out = [], hh = d * Math.sqrt(3) / 2, K = Math.ceil(half / d) + 1;
+      for (let y = y1, r = 0; y >= y0 - .01; y -= hh, r++) for (let k = -K; k <= K; k++) { const x = cx + (k + (r % 2) / 2) * d; if (inside(x, y)) out.push([+x.toFixed(1), +y.toFixed(1)]); }
+      return out; };
+    const place = (pts, n, jit = 0, sc = 1) => pts.slice(0, n).map(([x, y], i) => { x = +(x + (rnd() - .5) * 2 * jit).toFixed(1); y = +(y + (rnd() - .5) * 2 * jit).toFixed(1);
+      const g = it(x, y, Math.round(rnd() * 180), m === 'hedge' ? (isNew(i) ? 'var(--t2i)' : 'var(--t1i)') : col(i), op(i), i);
+      return sc === 1 ? g : `<g transform="translate(${x} ${y}) scale(${sc}) translate(${-x} ${-y})">${g}</g>`; }).join('');
+    const inEll = (cx, cy, rx, ry) => (x, y) => ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1;
+    // few items are drawn bigger: the largest scale (up to 1.8×) whose honeycomb still has room for them (scattered ones: for twice as many)
+    const sized = (spots, n, room) => { for (const sc of [1.8, 1.6, 1.4, 1.2]) { const pts = spots(sc); if (pts.length >= n * room) return [pts, sc]; } return [spots(1), 1]; };
+    // a pile on the line y = base: the bottom row first, from the middle outwards, then upwards (a mound)
+    const pile = (cx, base, rx, ry, n, d = 16) => { const [pts, sc] = sized(sc => grid(inEll(cx, base - 7.5 * (sc - 1), rx, ry), cx, base - 7.5 * (sc - 1) - ry, base - 7.5 * (sc - 1), rx, d * sc), n, 1);
+      const b = base - 7.5 * (sc - 1); return place(pts.sort((p, q) => Math.hypot((p[0] - cx) / rx, (p[1] - b) / ry) - Math.hypot((q[0] - cx) / rx, (q[1] - b) / ry) || p[0] - q[0]), n, Math.max(0, (d - 15) / 2) * sc, sc); };
+    const scatter = (cx, cy, rx, ry, n, d = 15) => { const [pts, sc] = sized(sc => grid(inEll(cx, cy, rx - 7 * (sc - 1), ry - 7 * (sc - 1)), cx, cy - ry, cy + ry, rx, d * sc), n, 2);
+      return place(shuffle(pts), n, Math.max(0, (d - 14) / 2) * sc, sc); };
+    return (COLL[m] || COLL._)(N, { rnd, dome: scatter, pile, scatter, grid, shuffle, place, item: it, col, op, isNew, cap });
   }
   return { MASCOTS, LANDS, I, svg, mascot, face, land, glyph, item, collection, has: m => !!MASCOTS[m] };
 })();

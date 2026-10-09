@@ -21,7 +21,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 ## 1. Top bar of a subject (T1–T14), banners (B1–B11), 🔔 (N1–N7)
 | Old | New home |
 |---|---|
-| T1 ◆ brand | Today tab; on wide screens the character at the top of the rail |
+| T1 brand | Today tab; on wide screens the character at the top of the rail |
 | T2 subject chip ▾ (switch subject) | ⋮ › Choose a subject (on Today, a subject, the Shelf: "All subjects"); Today › Continue elsewhere |
 | T3 🧭 Map | Crumbs (Roadmap › subject) and ←; the subject page's "Station of …" line; subject ⋮ › Open the map |
 | T4 🧭 Curricula | Knowledge tab |
@@ -111,7 +111,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | ASu1–ASu8 Subjects | Me › My subjects (unchanged), and each subject's ⋮ on the Shelf |
 | AB1–AB10 Backup & restore, AC1–AC13 Cloud | Me › Data and sync (cloud first, then backup and restore) |
 | AH1–AH11 Help | Me › Help (unchanged guides) |
-| — | Me › Character: the gallery of 20 characters, "Try for 5 minutes", a new one every 15 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`) |
+| — | Me › Character: the gallery of 20 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes", a new one every 15 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language |
 | — | Me › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
 
 ## 8. Before a subject: accounts, picker, Shelf, Explore, sharing, Claude (PA, SP, SH, SC, ES, SS, EX, CG, CS)
@@ -125,7 +125,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | SP7–SP9, SH1–SH4, SC1 the Shelf and its chips | Knowledge › 📚 Shelf (a quiet link under the Roadmaps): a list with search; tap to study |
 | SC2 ✏️, SC3 🔗, SC4 🧭 | Each subject's ⋮ on the Shelf: Study · Put it on a map · Edit · Share · Export the package |
 | SP10 ✨ Create with Claude | Discover; Shelf ⋮ |
-| SP11 🌍 Explore | Discover; Shelf ⋮ |
+| SP11 🌍 Explore | Discover; Shelf ⋮. A page (`#/explore/subjects`), in folded sections by domain like the Roadmaps |
 | SP12 📥 Import subject pack | Discover › Import a file; Shelf ⋮ (now .zip too) |
 | SP13 👤 Switch profile | Me; Today ⋮ |
 | ES, SS, EX, CG, CS dialogs | Unchanged; opened from the places above, Discover › Your Claude app, Me › AI |
@@ -135,7 +135,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 |---|---|
 | CL1 ➕ New curriculum | Knowledge › + New Roadmap; Knowledge ⋮; Discover; Today ⋮ |
 | CL2 📥 Import a map | Knowledge ⋮; Discover |
-| CL3 🌍 Explore curricula | Knowledge ⋮ › Roadmaps others share; Discover |
+| CL3 🌍 Explore curricula | Knowledge ⋮ › Roadmaps others share; Discover. A page (`#/explore`): the public Roadmaps in folded sections by domain; typing in the search shows only the results |
 | CL4 invitations | Top of the Knowledge tab, and the share bar |
 | CL5 curriculum card | Roadmap card on Knowledge (progress bar); tap opens the map, or the build progress |
 | CL6 👥 on the card | The card's ⋮ › Share (also: Open the map, Settings, Export .json) |
@@ -153,3 +153,6 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 
 ## 10. Keyboard and gestures
 Unchanged, plus: Esc closes a ⋮ menu or a sheet; ↑ / ↓ move inside a ⋮ menu.
+
+## Wording and icons
+The interface says **Roadmap** (el Οδικός χάρτης, ru дорожная карта, fr parcours) wherever it meant a curriculum or its map; "Map" stays only for the picture of a Roadmap (the Map / List switch). The new frame shows line icons, not emoji: dialogs of the older screens, the Roadmap page and the toasts drop their pictographs when shown inside it (`Noema.plain`). Subjects and chapters keep the icon their pack gives them. Progress counts one item per completed chapter (every section read), drawn so that no two overlap.

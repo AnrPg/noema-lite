@@ -161,8 +161,9 @@ def google_fonts_url():
     fams = json.load(open(os.path.join(ROOT, 'fonts', 'fonts.json'), encoding='utf-8'))
     q = []
     for name, f in fams.items():
-        w = f['weights']
-        if f.get('italic'): spec = 'ital,wght@0,' + ';0,'.join(map(str, w)) + ';1,' + ';1,'.join(map(str, w))
+        w, st = f['weights'], f.get('styles')
+        if st: spec = 'ital,wght@' + ';'.join(f'{i},{x}' for i, k in ((0, 'normal'), (1, 'italic')) for x in sorted(st.get(k, []), key=lambda v: int(v.split()[0])))
+        elif f.get('italic'): spec = 'ital,wght@0,' + ';0,'.join(map(str, w)) + ';1,' + ';1,'.join(map(str, w))
         elif f.get('variable'): spec = f'wght@{min(w)}..{max(w)}'
         else: spec = 'wght@' + ';'.join(map(str, w))
         q.append('family=' + name.replace(' ', '+') + ':' + spec)
@@ -181,10 +182,10 @@ def build_bundle(metas):
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f8d5a' stroke-width='2.4' stroke-linecap='round'><circle cx='5' cy='19' r='2'/><circle cx='19' cy='5' r='2'/><path d='M7 19h7a3.5 3.5 0 0 0 0-7h-4a3.5 3.5 0 0 1 0-7h7'/></svg>">
 <link href="{google_fonts_url()}" rel="stylesheet">
 <style>{css}</style></head>
-<body><div id="noema-splash"><div class="logo">◆</div></div>
+<body><div id="noema-splash"><div class="logo"></div></div>
 <script>{esc(rd("config.js"))}</script>{local}
 <script>window.NOEMA_BUNDLE = true;</script>
 <script>{esc(build_registry(reg_metas))}</script>

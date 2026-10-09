@@ -59,12 +59,12 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- A. a new curriculum built by the Claude app ---------- */
   console.log('— A. a new curriculum, built by the learner’s Claude app');
-  await p.click('.cm-mode:has-text("Curricula")'); await p.locator('.noema-ovbox').last().locator('button:has-text("New curriculum")').click(); await wait(300);
+  await p.click('.cm-mode:has-text("Roadmaps")'); await p.locator('.noema-ovbox').last().locator('button:has-text("New Roadmap")').click(); await wait(300);
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible() && !(await p.locator('.cm-keys').isVisible()), 'cloud account: “💬 Claude app — with your Claude plan (recommended, usually cheaper)” is preselected; no key needed');
   ok(/usually cheaper/i.test(await p.locator('.cm-provider option[value=claudeapp]').innerText()) && /no extra cost beyond your plan/i.test(await p.locator('.cm-appinfo').innerText()), 'the choice says why: no cost beyond the Claude plan, the saving grows with the curriculum');
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await p.selectOption('label:has-text("Depth") select', 'standard');
   await p.click('.cg-go'); await wait(600);
-  ok(/Your Claude app builds the map/.test(await p.locator('.cg-status').innerText()) && await p.locator('.cm-apppanel').isVisible(), 'nothing runs here: “💬 Your Claude app builds the map — follow the steps below”');
+  ok(/Your Claude app builds the Roadmap/.test(await p.locator('.cg-status').innerText()) && await p.locator('.cm-apppanel').isVisible(), 'nothing runs here: “💬 Your Claude app builds the map — follow the steps below”');
   await p.screenshot({ path: SHOTS + '/ca0_waiting.png', fullPage: true });
   const cid = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id)[0].id);
   await p.click('.cm-copymsg'); const msg = await clip();
@@ -93,9 +93,9 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   r = await tool('noema_curriculum_submit', { curriculum_id: cid, task_id: 'expand', result_json: JSON.stringify(F.expand()) });
   ok(!r.error && /step\(s\) still need their chapter plan/.test(r.text), 'the map is complete → chapter plans next');
   // the app picks the answers up by itself
-  ok(await until(async () => /Your curriculum is ready/.test(await p.locator('.cg-status').innerText()), 30000), 'the app picks up the answers by itself (inbox, every 20 s while waiting / ⟳) → “ready”');
+  ok(await until(async () => /Your Roadmap is ready/.test(await p.locator('.cg-status').innerText()), 30000), 'the app picks up the answers by itself (inbox, every 20 s while waiting / ⟳) → “ready”');
   ok(await until(() => inbox(uid).length === 0, 5000) && /💬 Claude app — Agent 2/.test(await p.locator('.cg-log').innerText()), 'applied in order, logged, and removed from the inbox');
-  await p.click('button:has-text("Open the map")'); await wait(500);
+  await p.click('button:has-text("Open the Roadmap")'); await wait(500);
   const nNodes = await p.evaluate(id => Object.keys(NoemaCurriculum.get(Noema.account.id, id).nodes).length, cid);
   ok(nNodes > 15 && /to plan/.test(await p.locator('.cm-appbar').innerText()) && await p.locator('.cm-node:has-text("💬")').count() === nNodes, `the map (${nNodes} steps) is usable at once; the 💬 bar: steps to plan; each unplanned step shows 💬`);
   let batches = 0;
@@ -229,12 +229,12 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- C. an imported map with the learner's PDF ---------- */
   console.log('— C. an imported map with a PDF, planned and prepared by the Claude app');
-  await p.click('.cm-top button:has-text("Curricula")'); await wait(300);
-  await p.click('button:has-text("Import a map")'); await wait(300);
+  await p.click('.cm-top button:has-text("Roadmaps")'); await wait(300);
+  await p.click('button:has-text("Import a Roadmap")'); await wait(300);
   await p.fill('.cm-maptext', '# Cell biology\nBasics → Membranes → Transport\n📎 Files\nMembranes: membranes.pdf pp. 2-3'); await wait(600);
   await p.setInputFiles('.cm-import .cg-drop input[type=file]', [path.join(TF, 'membranes.pdf')]); await wait(800);
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp', 'import: the Claude app is preselected too');
-  await p.click('button:has-text("Import my map")');
+  await p.click('button:has-text("Import my Roadmap")');
   ok(await until(() => p.locator('.cm-apppanel').count(), 15000), 'imported at once (nothing planned here) → the map opens with “💬 Your Claude app” showing what to do');
   await p.screenshot({ path: SHOTS + '/ca4_import.png' });
   const cid2 = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id).find(c => c.title === 'Cell biology').id);
@@ -281,8 +281,8 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- D. without the connector ---------- */
   console.log('— D. by hand: copy a task, paste the answer; a step bundle and its package; re-plan with a wish; one step of an API curriculum');
-  await p.click('.cm-top button:has-text("Curricula")'); await wait(300);
-  await p.click('button:has-text("New curriculum")'); await wait(300);
+  await p.click('.cm-top button:has-text("Roadmaps")'); await wait(300);
+  await p.click('button:has-text("New Roadmap")'); await wait(300);
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference again'); await p.selectOption('label:has-text("Depth") select', 'standard');
   await p.click('.cg-go'); await wait(600);
   await p.click('.cm-manual summary'); await p.screenshot({ path: SHOTS + '/ca5_manual.png', fullPage: true }); await p.click('.cm-copytask'); const task = await clip();
@@ -290,10 +290,10 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   await p.fill('.cm-paste', JSON.stringify(F.dag({ broken: true }))); await p.click('.cm-usepaste'); await wait(300);
   ok(/problem/.test(await p.locator('.cm-pasteout').innerText()) && await p.locator('.cm-pasteout button:has-text("Copy the problems")').count() === 1, 'a wrong answer: its problems, ready to copy back to Claude');
   for (const [i, ans] of [F.dag(), F.audit(), F.expand()].entries()) { await p.fill('.cm-paste', JSON.stringify(ans)); await p.click('.cm-usepaste'); await wait(400); if (!i) ok(/Accepted/.test(await p.locator('.cm-pasteout').innerText()), 'the right answer is accepted'); }
-  ok(await until(async () => /Your curriculum is ready/.test(await p.locator('.cg-status').innerText()), 5000), 'three pasted answers → the map is ready');
+  ok(await until(async () => /Your Roadmap is ready/.test(await p.locator('.cg-status').innerText()), 5000), 'three pasted answers → the map is ready');
   const cid3 = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id).find(c => c.goal === 'Bayesian inference again').id);
   // a step's bundle and its package
-  await p.click('button:has-text("Open the map")'); await wait(500);
+  await p.click('button:has-text("Open the Roadmap")'); await wait(500);
   const st3 = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); const n = NoemaCurriculum.nextUp(Noema.account.id, c)[0]; c.nodes[n].chapters = [{ ref: 'a', title: 'A', goals: ['g'], coverage: ['c'] }]; c.nodes[n].learningGoals = ['x', 'y']; NoemaCurriculum.save(Noema.account.id, c); NoemaCurriculum.Gen.toApp(c, n); return n; }, cid3);
   await p.click(`.cm-node[data-id="${st3}"]`); await wait(300);
   await p.click('.cm-panel button:has-text("How?")'); await wait(300); await p.click('.noema-ovbox:has(.cm-apppanel) .cm-manual summary');
@@ -320,7 +320,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters.length > 0, [cid3, other]), 'its current chapters stay until the new plan arrives');
   // ✨ re-plan the whole curriculum — a Claude-app curriculum: every step not prepared goes to the Claude app (the prepared one keeps its plan)
   await p.evaluate(() => NoemaCurJobs.App.poll()); await wait(300);
-  await p.click('.cm-tools button:has-text("⚙️")'); await wait(300); await p.click('summary:has-text("Re-plan the whole curriculum")');
+  await p.click('.cm-tools button:has-text("⚙️")'); await wait(300); await p.click('summary:has-text("Re-plan the whole Roadmap")');
   ok(/your Claude app/.test(await p.locator('.noema-ovbox:has(.cm-replanall)').innerText()), '⚙️ → ✨ Re-plan the whole curriculum — with the curriculum’s own AI (here: the Claude app)');
   p.once('dialog', d => d.accept()); await p.click('.cm-replanall'); await wait(500);
   ok(/steps wait for your Claude app/.test(await p.locator('.cm-replanlog').innerText()), 'queued for the Claude app');
@@ -332,7 +332,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   await p.locator('.noema-ovbox:has(.cm-replanall) button:has-text("Close")').click(); await wait(200);
   // an API curriculum: one step sent to the Claude app
   const cid4 = await p.evaluate(id => { const a = Noema.account.id; const c = JSON.parse(JSON.stringify(NoemaCurriculum.get(a, id))); c.id = 'capi' + Date.now().toString(36).slice(-4); c.provider = 'gemini'; c.title = 'API one'; for (const n of Object.values(c.nodes)) { delete n.pack; delete n.replan; if (!n.chapters.length) n.chapters = [{ ref: 'a', title: 'A', goals: ['g'], coverage: ['c'] }]; } NoemaCurriculum.save(a, c); return c.id; }, cid3);
-  await p.click('.cm-top button:has-text("Curricula")'); await wait(300); await p.click(`.cm-card:has-text("API one")`); await wait(400);
+  await p.click('.cm-top button:has-text("Roadmaps")'); await wait(300); await p.click(`.cm-card:has-text("API one")`); await wait(400);
   const st4 = await p.evaluate(id => NoemaCurriculum.nextUp(Noema.account.id, NoemaCurriculum.get(Noema.account.id, id))[0], cid4);
   await p.click(`.cm-node[data-id="${st4}"]`); await wait(300);
   ok(await p.locator('.cm-panel .cm-otherways').count() === 1, 'a step of an API / Gemini curriculum: “Other ways to prepare it”');
@@ -345,7 +345,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   /* ---------- E. ❓ Set up Claude → C, phone ---------- */
   console.log('— E. ❓ Set up Claude → way C; phone');
   const sv = await p.evaluate(() => { const d = Noema.claudeSetupView(Noema.account.id, { open: 'C' }); document.body.append(d); const c = d.querySelector('.cg-way-c'); const t = { open: c.open, text: c.innerText, order: [...d.querySelectorAll('.cg-way > summary b')].map(b => b.textContent.slice(0, 2)) }; d.remove(); return t; });
-  ok(sv.open && /recommended for curricula/.test(sv.text) && /usually the cheapest/.test(sv.text) && /Add custom connector/.test(sv.text) && /Copy the message/.test(sv.text) && sv.order.length === 3, '❓ Set up Claude has a 3rd way, C — ⭐ recommended for curricula (usually the cheapest), with its own steps');
+  ok(sv.open && /recommended for Roadmaps/.test(sv.text) && /usually the cheapest/.test(sv.text) && /Add custom connector/.test(sv.text) && /Copy the message/.test(sv.text) && sv.order.length === 3, '❓ Set up Claude has a 3rd way, C — ⭐ recommended for curricula (usually the cheapest), with its own steps');
   const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(id => NoemaCurMap.map(Noema.account.id, id, { appHelp: true }), cid3).catch(() => { }); await wait(800);
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-apppanel, .cm-appbar')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the Claude-app panel fits');

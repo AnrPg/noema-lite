@@ -132,7 +132,7 @@ window.NoemaShell = (() => {
     drawPreview();
   }
   function drawMe() {
-    const a = N()?.account || {}; const emo = a.emoji || (a.name || '?').trim()[0]?.toUpperCase() || '🙂';
+    const a = N()?.account || {}; const emo = a.emoji || (a.name || '?').trim()[0]?.toUpperCase() || '?';
     document.querySelectorAll('.ns-meemo').forEach(x => { x.textContent = emo; });
   }
   function tabsList() {
@@ -194,7 +194,7 @@ window.NoemaShell = (() => {
     const body = h('div', { class: 'ns-shbody' });
     F.layer.replaceChildren(h('div', { class: 'ns-scrim', onclick: close }), h('aside', { class: 'ns-sheet ' + cls, role: 'dialog', 'aria-label': title },
       h('div', { class: 'ns-shhead' }, h('b', {}, title), h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close'))), body));
-    build(body, close); return close;
+    build(body, close); N()?.plain?.watch(body); return close;
   }
 
   /* ---------- 🔔 notifications: shares, invitations, updates that wait for the learner ---------- */
@@ -221,14 +221,14 @@ window.NoemaShell = (() => {
     const sh = items[0], more = items.length > 1 ? h('span', { class: 'tiny' }, '  ' + L('moreInBell', { n: items.length - 1 })) : null;
     const laterBtn = h('button', { class: 'btn small ghost', title: L('decideLater'), onclick: () => { later.add(sh.id); drawShareBar(N().notes.pending); } }, L('later'));
     if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {
-      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await N().notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? L('upToDate', { title: sh.title }) : L('keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast('⚠️ ' + er.message, 5000); b.disabled = false; } };
+      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await N().notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? L('upToDate', { title: sh.title }) : L('keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast(er.message, 5000); b.disabled = false; } };
       bar.append(h('span', { class: 'grow' }, ...N().updateText(sh), more), h('button', { class: 'btn small primary', onclick: act(true) }, N().updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? L('keepCopy') : L('keepMine')), laterBtn);
       return;
     }
     const cur = sh.kind === 'curriculum';
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...rich(cur ? 'invitesYou' : 'wantsShare', { who: sh.from_name || sh.from_email || L('someone'), title: sh.title }), more),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await N().notes.accept(sh); toast(L(cur ? 'joinedToast' : 'addedToast', { title: s.title })); subjCache = null; if (confirm(L('openNow', { title: s.title }))) accepted(s); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, cur ? L('join') : L('accept')),
-      h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, L('reject')), laterBtn);
+    bar.append(h('span', { class: 'grow' }, svg(cur ? 'people' : 'bell'), ' ', ...rich(cur ? 'invitesYou' : 'wantsShare', { who: sh.from_name || sh.from_email || L('someone'), title: sh.title }), more),
+      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await N().notes.accept(sh); toast(L(cur ? 'joinedToast' : 'addedToast', { title: s.title })); subjCache = null; if (confirm(L('openNow', { title: s.title }))) accepted(s); } catch (er) { toast(er.message, 5000); e.target.disabled = false; } } }, cur ? L('join') : L('accept')),
+      h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast(er.message)); } }, L('reject')), laterBtn);
   }
   /* ---------- the sync dot on "Me" (cloud accounts) ---------- */
   function wireSync() {
@@ -276,7 +276,7 @@ window.NoemaShell = (() => {
     F.main.dataset.page = k;
     document.body.classList.remove('ns-mapmode');
     const page = PAGES[k] || PAGES[''];
-    try { page(p.slice(1)); } catch (e) { console.error('[shell]', e); F.main.replaceChildren(h('div', { class: 'ns-view' }, h('p', {}, '⚠️ ' + e.message))); }
+    try { page(p.slice(1)); } catch (e) { console.error('[shell]', e); F.main.replaceChildren(h('div', { class: 'ns-view' }, h('p', {}, e.message))); }
     scrollTo({ top: 0 });
   }
   /** Draw a page into <main>: chrome + content. */
@@ -320,7 +320,7 @@ window.NoemaShell = (() => {
     if (r0) {
       const s = byId[r0.subj] || {}, rm = r0.cid && CU()?.get(acc(), r0.cid);
       box.append(h('button', { class: 'ns-go', onclick: () => open(r0.subj, r0.sid ? '#/s/' + r0.sid : '#/subject') },
-        h('span', { class: 'rm' }, (s.emoji || '📘') + ' ', rm ? rm.title || rm.goal : s.title || r0.title),
+        h('span', { class: 'rm' }, s.emoji ? s.emoji + ' ' : svg(rm ? 'map' : 'book'), ' ', rm ? rm.title || rm.goal : s.title || r0.title),
         h('h2', {}, r0.secTitle || s.title || r0.title),
         h('span', { class: 'meta' }, r0.chNum ? pill(L('chOf', { n: r0.chNum, of: r0.chOf }), 2) : null, r0.secNum ? pill(L('secOf', { n: r0.secNum, of: r0.secOf }), 4) : !r0.sid ? pill(L('start'), 1) : null),
         rm && r0.node ? h('span', { class: 'step wide' }, L('stepIs', { step: rm.nodes?.[r0.node]?.title || r0.node })) : null,
@@ -330,7 +330,7 @@ window.NoemaShell = (() => {
     // continue elsewhere
     const more = rec.slice(1, 4);
     if (more.length) box.append(h('div', {}, h('span', { class: 'ns-label' }, L('continueElsewhere')), h('div', { class: 'ns-list' }, ...more.map(r => { const s = byId[r.subj] || {};
-      return h('button', { class: 'ns-item', onclick: () => open(r.subj, r.sid ? '#/s/' + r.sid : '#/subject') }, icoTxt(s.emoji || '📘', (s.title || '').length % 4 + 1, 'emo'), h('span', { class: 't' }, h('b', {}, s.title || r.title), h('small', {}, [r.chNum ? L('chOf', { n: r.chNum, of: r.chOf }) : null, r.at ? L('lastSeen', { when: ago(r.at) }) : null].filter(Boolean).join(' · '))), chev()); }))));
+      return h('button', { class: 'ns-item', onclick: () => open(r.subj, r.sid ? '#/s/' + r.sid : '#/subject') }, icoTxt(s.emoji || (s.title || r.title || '?').slice(0, 1), (s.title || '').length % 4 + 1, s.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, s.title || r.title), h('small', {}, [r.chNum ? L('chOf', { n: r.chNum, of: r.chOf }) : null, r.at ? L('lastSeen', { when: ago(r.at) }) : null].filter(Boolean).join(' · '))), chev()); }))));
     // due today: review + mistakes, over every subject with progress
     let due = 0, dueFc = 0, duePb = 0, wrong = 0; const per = [];
     for (const s of subs) { if (!fits(s)) continue; const st = stateOf(s.id); if (!st) continue; const d = dueCount(st), wr = wrongCount(st); if (d.fc + d.pb + wr) per.push({ s, ...d, wr }); dueFc += d.fc; duePb += d.pb; wrong += wr; }
@@ -345,7 +345,7 @@ window.NoemaShell = (() => {
   function firstSteps() {
     const curs = CU()?.list(acc()) || [];
     if (curs.length) { const c = curs[0], nx = CU().nextUp?.(acc(), c)?.[0];
-      return h('button', { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, '🧭 ', c.title || c.goal), h('h2', {}, nx ? c.nodes[nx]?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
+      return h('button', { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, svg('map'), ' ', c.title || c.goal), h('h2', {}, nx ? c.nodes[nx]?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
     return h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('h2', {}, L('welcomeTitle')), h('p', { class: 'ns-muted' }, L('welcomeText')),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => go('#/discover') }, L('discover')), h('button', { class: 'btn ghost', onclick: () => go('#/shelf') }, L('shelf'))));
   }
@@ -356,7 +356,7 @@ window.NoemaShell = (() => {
     const dest = x => kind === 'gym' ? '#/mistakes' : x.fc ? '#/cards' : '#/drills';
     if (!list.length) { if (ENGINE) go(kind === 'gym' ? '#/mistakes' : '#/cards'); else tip(kind === 'gym' ? L('gymNone') : L('reviewNone')); return; }
     if (list.length === 1) { open(list[0].s.id, dest(list[0])); return; }
-    sheet(kind === 'gym' ? L('gym') : L('review'), body => body.append(h('p', { class: 'ns-muted' }, L('pickWhere')), h('div', { class: 'ns-list' }, ...list.map(x => h('button', { class: 'ns-item', onclick: () => { F.layer.replaceChildren(); open(x.s.id, dest(x)); } }, icoTxt(x.s.emoji || '📘', 4, 'emo'), h('span', { class: 't' }, h('b', {}, x.s.title), h('small', {}, kind === 'gym' ? L('gymSub', { n: x.wr }) : L('reviewSub', { fc: x.fc, pb: x.pb }))), chev())))));
+    sheet(kind === 'gym' ? L('gym') : L('review'), body => body.append(h('p', { class: 'ns-muted' }, L('pickWhere')), h('div', { class: 'ns-list' }, ...list.map(x => h('button', { class: 'ns-item', onclick: () => { F.layer.replaceChildren(); open(x.s.id, dest(x)); } }, icoTxt(x.s.emoji || (x.s.title || '?').trim()[0].toUpperCase(), 4, 'emo'), h('span', { class: 't' }, h('b', {}, x.s.title), h('small', {}, kind === 'gym' ? L('gymSub', { n: x.wr }) : L('reviewSub', { fc: x.fc, pb: x.pb }))), chev())))));
   }
 
   /* ---------- Knowledge: the Roadmaps (curricula), the Shelf below ---------- */
@@ -369,14 +369,14 @@ window.NoemaShell = (() => {
     const inv = h('div', { class: 'cm-invites' }); v.append(inv); drawInvites(inv);
     if (!list.length) v.append(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('noRoadmaps')), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => CM()?.importMap(acc(), { onStudy }) }, L('importMap')), h('button', { class: 'btn ghost', onclick: () => CM()?.exploreCurricula?.(acc(), { onStudy }) }, L('exploreRoadmaps')))));
     v.append(...list.map((c, i) => roadmapCard(c, i)));
-    const shelfBtn = h('button', { class: 'ns-shelflink', onclick: () => go('#/shelf') }, '📚 ', L('shelf'));
+    const shelfLbl = h('span', {}, L('shelf')), shelfBtn = h('button', { class: 'ns-shelflink', onclick: () => go('#/shelf') }, svg('shelf'), ' ', shelfLbl);
     v.append(h('div', { class: 'ns-shelf' }, shelfBtn));
-    N().shelf?.(acc()).then(l => { shelfBtn.textContent = '📚 ' + L('shelfN', { n: l.length }); }).catch(() => { });
+    N().shelf?.(acc()).then(l => { shelfLbl.textContent = L('shelfN', { n: l.length }); }).catch(() => { });
     const off = CU()?.onChange?.(() => { if (v.isConnected && F.main.dataset.page === 'learn') { clearTimeout(PAGES.learn.t); PAGES.learn.t = setTimeout(() => { if (v.isConnected) PAGES.learn(); }, 300); } else off?.(); });
   };
   function learnMenu() {
     return [{ label: L('newRoadmap'), icon: 'plus', run: () => CM()?.create(acc(), { onStudy }) }, { label: L('importMap'), sub: L('importMapSub'), icon: 'download', run: () => CM()?.importMap(acc(), { onStudy }) },
-      { label: L('exploreRoadmaps'), icon: 'globe', run: () => CM()?.exploreCurricula?.(acc(), { onStudy }) }, '-', { label: L('shelf'), icon: 'shelf', href: '#/shelf' }];
+      { label: L('exploreRoadmaps'), icon: 'globe', href: '#/explore' }, '-', { label: L('shelf'), icon: 'shelf', href: '#/shelf' }];
   }
   async function drawInvites(box) {
     if (N().account?.kind !== 'cloud' || !window.NoemaCurShare || !CM()?.inviteRow) return;
@@ -395,7 +395,7 @@ window.NoemaShell = (() => {
       ready ? { label: L('rmSettings'), sub: L('rmSettingsSub'), icon: 'gear', run: () => { CM()?.mapOpts && (CM().mapOpts.next = { settings: true }); go('#/map/' + encodeURIComponent(c.id)); } } : null,
       { label: L('exportJson'), icon: 'download', run: () => { const b = new Blob([JSON.stringify(CU().get(acc(), c.id), null, 1)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `curriculum-${c.id}.json` }); document.body.append(a); a.click(); a.remove(); } }], { label: L('moreFor', { title: c.title || c.goal }) });
     return h('div', { class: 'ns-rmwrap cm-cardwrap' }, h('button', { class: 'ns-rmcard cm-card', style: { animationDelay: i * 40 + 'ms' }, onclick: openIt },
-      h('div', { class: 'row nowrap' }, icoTxt(sh ? '👥' : c.emoji || '🧭', (i % 4) + 1, 'emo'), h('div', { class: 'grow' }, h('b', { class: 'ttl' }, c.title || c.goal), h('small', { class: 'ns-muted' }, sh ? (sh.role === 'member' ? L('sharedBy', { who: sh.ownerName || '…' }) + ' · ' : L('youShare') + ' · ') : '', sub)), chev()),
+      h('div', { class: 'row nowrap' }, sh ? ico('people', (i % 4) + 1) : c.emoji ? icoTxt(c.emoji, (i % 4) + 1, 'emo') : ico('map', (i % 4) + 1), h('div', { class: 'grow' }, h('b', { class: 'ttl' }, c.title || c.goal), h('small', { class: 'ns-muted' }, sh ? (sh.role === 'member' ? L('sharedBy', { who: sh.ownerName || '…' }) + ' · ' : L('youShare') + ' · ') : '', sub)), chev()),
       s ? bar(s.mastered / Math.max(1, s.total)) : null), menu);
   }
 
@@ -409,7 +409,7 @@ window.NoemaShell = (() => {
     let list = (await N().shelf(acc()).catch(() => [])).filter(s => !isLang(s));
     q.hidden = list.length < 8;
     const hidden = (await subjects(true)).filter(s => s.hidden).length;
-    if (hidden) v.append(h('button', { class: 'ns-shelflink', onclick: () => go('#/me/subjects') }, '🙈 ', L('hiddenN', { n: hidden })));
+    if (hidden) v.append(h('button', { class: 'ns-shelflink', onclick: () => go('#/me/subjects') }, svg('eye'), ' ', L('hiddenN', { n: hidden })));
     function draw() {
       const term = q.value.trim().toLowerCase(), items = list.filter(s => !term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term));
       listBox.replaceChildren(...items.map((s, i) => shelfItem(s, i, async () => { list = (await N().shelf(acc()).catch(() => [])).filter(x => !isLang(x)); draw(); })));
@@ -419,7 +419,7 @@ window.NoemaShell = (() => {
   };
   function shelfMenu() {
     return [{ label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
-      { label: L('exploreShared'), icon: 'globe', run: () => N().explore() }, { label: L('allSubjects'), sub: L('allSubjectsSub'), icon: 'book', run: () => N().openSubjectPicker?.() }];
+      { label: L('exploreShared'), icon: 'globe', href: '#/explore/subjects' }, { label: L('allSubjects'), sub: L('allSubjectsSub'), icon: 'book', run: () => N().openSubjectPicker?.() }];
   }
   function shelfItem(s, i, refresh) {
     const pct = Math.round(subjectPct(s) * 100), own = s.origin !== 'library';   // like the older Shelf chips: everything but the library can be shared
@@ -427,14 +427,14 @@ window.NoemaShell = (() => {
       CM()?.attachDialog ? { label: L('putOnMap'), sub: L('putOnMapSub'), icon: 'map', run: () => CM().attachDialog(acc(), { subject: s, onDone: refresh }) } : null,
       { label: L('editSubject'), sub: L('editSubjectSub'), icon: 'edit', run: () => N().editSubject(s, { onChange: refresh }) },
       own ? { label: L('shareSubject'), sub: L('shareSubjectSub'), icon: 'share', run: () => N().share(s) } : null,
-      { label: L('exportPackage'), sub: L('exportPackageSub'), icon: 'download', run: async () => { try { const p = await N().loadSubject(acc(), s.id); await N().exportPackage(acc(), p); } catch (e) { toast('⚠️ ' + e.message, 4000); } } }], { label: L('moreFor', { title: s.title }) });
-    return h('div', { class: 'ns-itemwrap noema-chipwrap' }, h('button', { class: 'ns-item ns-subj', 'data-subject': s.id, style: { animationDelay: i * 25 + 'ms' }, title: s.description || '', onclick: () => open(s.id) }, icoTxt(s.emoji || '📘', (i % 4) + 1, 'emo'),
-      h('span', { class: 't' }, h('b', {}, s.title, s.updateAvailable ? ' ✨' : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? '🔒' : null].filter(Boolean).join(' · '))),
+      { label: L('exportPackage'), sub: L('exportPackageSub'), icon: 'download', run: async () => { try { const p = await N().loadSubject(acc(), s.id); await N().exportPackage(acc(), p); } catch (e) { toast(e.message, 4000); } } }], { label: L('moreFor', { title: s.title }) });
+    return h('div', { class: 'ns-itemwrap noema-chipwrap' }, h('button', { class: 'ns-item ns-subj', 'data-subject': s.id, style: { animationDelay: i * 25 + 'ms' }, title: s.description || '', onclick: () => open(s.id) }, icoTxt(s.emoji || (s.title || '?').trim()[0].toUpperCase(), (i % 4) + 1, 'emo'),
+      h('span', { class: 't' }, h('b', {}, s.title, s.updateAvailable ? h('span', { class: 'ns-upd', title: L('updateWaiting') }, ' ', svg('spark')) : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? L('privateSubj') : null].filter(Boolean).join(' · '))),
       pct ? pill(pct + '%', 2) : chev()), menu);
   }
   const subjectPct = s => { const st = stateOf(s.id); if (!st || !s.counts?.exercises) return 0; return Math.min(1, Object.values(st.res || {}).filter(r => r.ok > 0).length / s.counts.exercises); };
   function importFile() {
-    const inp = h('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; inp.remove(); if (!f) return; try { const s = await N().importPackFile(acc(), f); landedOpen(s); } catch (er) { toast('⚠️ ' + er.message, 4000); } } });
+    const inp = h('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; inp.remove(); if (!f) return; try { const s = await N().importPackFile(acc(), f); landedOpen(s); } catch (er) { toast(er.message, 4000); } } });
     document.body.append(inp); inp.click();
   }
   function landedOpen(s) { if (!s) return; subjCache = null; toast(L('onShelfNow', { title: s.title || s.id }), 5000); open(s.id); }
@@ -463,14 +463,51 @@ window.NoemaShell = (() => {
       : h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('noLanguages'))));
   };
 
+  /* ---------- Explore: what others share (Roadmaps, or subjects), in one closed section per domain; searching shows only the matches ---------- */
+  PAGES.explore = async ([kind] = []) => {
+    const rm = kind !== 'subjects', title = L(rm ? 'exploreRoadmaps' : 'exploreShared');
+    const v = page({ tab: 'discover', crumbs: [[L('discover'), '#/discover'], [title]], back: '#/discover', corner: true },
+      h('div', {}, h('h1', {}, title), h('p', { class: 'ns-muted' }, L(rm ? 'exploreRoadmapsLead' : 'exploreLead'))));
+    const q = h('input', { class: 'noema-input ns-search', type: 'search', placeholder: L(rm ? 'searchRoadmaps' : 'searchSubjects'), 'aria-label': L(rm ? 'searchRoadmaps' : 'searchSubjects') });
+    const body = h('div', { class: 'ns-exp' }, h('p', { class: 'ns-muted' }, L('loading')));
+    v.append(q, body);
+    let items = [], studyIt = null;
+    try {
+      if (rm) items = await CM().publicRoadmaps(acc());
+      else { const r = await N().publicSubjects(); items = r.all; studyIt = r.study; }
+    } catch (e) { body.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, L('exploreOffline')), h('p', { class: 'ns-muted' }, e.message))); q.hidden = true; return; }
+    const busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (er) { toast(er.message, 5000); } b.disabled = false; };
+    const mk = (x, i) => rm
+      ? h('button', { class: 'ns-item ns-pubitem', 'data-id': x.id, onclick: e => busy(e.currentTarget, () => CM().openPublic(acc(), x, { onOpen: id => go('#/map/' + encodeURIComponent(id)) })) },
+        ico('map', (i % 4) + 1), h('span', { class: 't' }, h('b', {}, x.title), h('small', {}, [x.description, L('rmPubMeta', { who: x.owner_name || '…', n: x.steps, p: x.prepared })].filter(Boolean).join(' · '))),
+        h('span', { class: 'ns-pill' }, L(x.have ? (x.own ? 'rmYours' : 'rmJoined') : 'rmJoin')))
+      : h('button', { class: 'ns-item ns-pubitem', 'data-id': x.id, onclick: e => busy(e.currentTarget, () => studyIt(x, s => open(s.id))) },
+        icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title), x.description ? h('small', {}, x.description) : null), chev());
+    if (!items.length) { q.hidden = true; body.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L(rm ? 'noPublicRoadmaps' : 'noPublicSubjects')))); return; }
+    const DOMS = CU()?.DOMAINS || ['other'];
+    const sections = h('div', { class: 'ns-doms' }, ...DOMS.map(d => [d, items.filter(x => (x.domain || 'other') === d)]).filter(([, l]) => l.length).map(([d, l]) =>
+      h('details', { class: 'ns-dom', 'data-dom': d }, h('summary', {}, h('span', { class: 'ns-domt' }, L('dom_' + d)), h('span', { class: 'ns-pill' }, String(l.length)), h('span', { class: 'ns-domchev', 'aria-hidden': 'true' }, '›')),
+        h('div', { class: 'ns-list' }, ...l.map(mk)))));
+    const results = h('div', { class: 'ns-list ns-results', hidden: true });
+    body.replaceChildren(sections, results);
+    // searching (the field has the focus, or something is typed): only the matches, or nothing; the sections come back when the field is left empty
+    let focused = false;
+    const show = () => { const t = q.value.trim(); sections.hidden = focused || !!t; results.hidden = !t; };
+    q.addEventListener('input', () => {
+      const t = q.value.trim().toLowerCase(), hit = items.filter(x => [x.title, x.description, x.owner_name].join(' ').toLowerCase().includes(t));
+      results.replaceChildren(...(hit.length ? hit.map(mk) : [h('div', { class: 'ns-item ns-muted ns-noresults' }, L('noResults'))])); show();
+    });
+    q.addEventListener('focus', () => { focused = true; show(); }); q.addEventListener('blur', () => { focused = false; show(); });
+  };
+
   /* ---------- Discover: everything that adds something new ---------- */
   PAGES.discover = () => {
     const w = TH()?.world() || 'know', item = (ic, n, title, sub, run, cls = '') => h('button', { class: 'ns-item ' + cls, onclick: run }, typeof ic === 'string' ? ico(ic, n) : ic, h('span', { class: 't' }, h('b', {}, title), h('small', {}, sub)), chev());
     page({ tab: 'discover', crumbs: [[L('discover')]], corner: true },
       h('h1', {}, L('discover')),
       h('div', { class: 'ns-list' },
-        item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => N().explore(), 'ns-explore'),
-        w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => CM()?.exploreCurricula?.(acc(), { onStudy })) : null,
+        item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
+        w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
         w !== 'lang' ? item('map', 1, L('newRoadmap'), L('newRoadmapSub'), () => CM()?.create(acc(), { onStudy }), 'ns-create') : null,
         w !== 'lang' ? item('spark', 2, L('createClaude'), L('createClaudeSub'), () => N().claudeGuide({ onDone: s => landedOpen(s) })) : null,
         w !== 'know' && WORLDS.lang?.create ? item(icoTxt('文A', 3), 3, L('newLanguage'), L('newLanguageSub'), () => WORLDS.lang.create()) : null,
@@ -499,13 +536,13 @@ window.NoemaShell = (() => {
       + days.map((d, i) => `<text x="${stones[i][0]}" y="${stones[i][1] + 28}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink3)">${d.l}</text>`).join('')
       + `<g transform="translate(${Math.max(0, did.lastIndexOf(true)) * 70 + 4} -8)"><g class="breathe">${ART()?.mascot(m, 64, 59) || ''}</g></g></svg>`;
     v.append(h('section', { class: 'ns-panel center' }, h('h2', {}, sn ? L('streakDays', { n: sn }) : L('streakStart')), h('p', { class: 'ns-muted' }, sn ? L('streakKeep') : L('streakStartSub')), h('div', { html: trail })));
-    // the collection: one item per section you have read; this week's shine
+    // the collection: one item per chapter you have completed (every section read); this week's shine
     const subs = await subjects();
-    let read = 0, fcN = 0, boss = 0; for (const s of subs) { const x = stateOf(s.id); if (!x) continue; read += Object.keys(x.read || {}).length; fcN += Object.keys(x.fc || {}).length; boss += Object.keys(x.boss || {}).length; }
-    const wk = weekKey(), cw = jget(`noema1:${acc()}:meta:collweek`, null); let base = cw?.week === wk ? cw.base : read; if (!cw || cw.week !== wk) jset(`noema1:${acc()}:meta:collweek`, { week: wk, base: read });
-    const fresh = Math.max(0, read - base);
-    v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, tx.coll || ''), pill(L('nConcepts', { n: read }), 1)),
-      h('div', { class: 'ns-coll', html: `<svg viewBox="0 0 300 230" role="img" aria-label="${(tx.coll || '').replace(/"/g, '')}: ${read}">${ART()?.collection(m, read, fresh) || ''}</svg>` }),
+    let done = 0, fcN = 0, boss = 0; for (const s of subs) { const x = stateOf(s.id); if (!x) continue; done += chaptersDone(s, x); fcN += Object.keys(x.fc || {}).length; boss += Object.keys(x.boss || {}).length; }
+    const wk = weekKey(), cw = jget(`noema1:${acc()}:meta:collweekch`, null); const base = cw?.week === wk ? cw.base : done; if (!cw || cw.week !== wk) jset(`noema1:${acc()}:meta:collweekch`, { week: wk, base: done });
+    const fresh = Math.max(0, done - base);
+    v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, tx.coll || ''), pill(L('nChapters', { n: done }), 1)),
+      h('div', { class: 'ns-coll', html: `<svg viewBox="0 0 300 230" role="img" aria-label="${(tx.coll || '').replace(/"/g, '')}: ${done}">${ART()?.collection(m, done, fresh) || ''}</svg>` }),
       h('p', { class: 'tiny center' }, L('collNote', { item: tx.item || '', n: fresh }))));
     // the week's XP
     const max = Math.max(settings().goal || 120, ...days.map(d => (st.xpDay || {})[d.k] || 0)), wsum = days.reduce((a, d) => a + ((st.xpDay || {})[d.k] || 0), 0);
@@ -513,11 +550,19 @@ window.NoemaShell = (() => {
       h('div', { class: 'ns-bars' }, ...days.map((d, i) => h('div', {}, h('i', { class: i === 6 ? 'today' : '', style: { height: (((st.xpDay || {})[d.k] || 0) / max * 100) + '%', '--i': i } }), h('span', {}, d.l))))));
     // treasures found (medals)
     const mastered = (CU()?.list(acc()) || []).reduce((a, c) => a + (c.status === 'ready' ? CU().summary(acc(), c).mastered : 0), 0);
-    const MED = [[mastered >= 1, '1', L('medalStep'), 1], [fcN >= 100, '100', L('medalCards', { n: Math.min(fcN, 100) }), 4], [sn >= 7, '7', L('medalWeek', { n: Math.min(sn, 7) }), 2], [boss >= 1, '👑', L('medalBoss'), 3], [(st.xp || 0) >= 1000, '1k', L('medalXp'), 1], [sn >= 30, '30', L('medalMonth', { n: Math.min(sn, 30) }), 2]];
+    const MED = [[mastered >= 1, '1', L('medalStep'), 1], [fcN >= 100, '100', L('medalCards', { n: Math.min(fcN, 100) }), 4], [sn >= 7, '7', L('medalWeek', { n: Math.min(sn, 7) }), 2], [boss >= 1, svg('crown'), L('medalBoss'), 3], [(st.xp || 0) >= 1000, '1k', L('medalXp'), 1], [sn >= 30, '30', L('medalMonth', { n: Math.min(sn, 30) }), 2]];
     v.append(h('section', { class: 'ns-panel' }, h('span', { class: 'ns-label' }, L('treasures')), h('div', { class: 'ns-medals' }, ...MED.map(([ok, x, l, n]) => h('div', { class: 'ns-medal' + (ok ? '' : ' lock') }, h('div', { class: 'm', style: ok ? tone(n) : null }, x), h('small', {}, l))))));
     v.append(h('p', { class: 'tiny' }, L('gameNote'), ' ', h('button', { class: 'linkish', onclick: () => go('#/me/look') }, L('look'))));
     rememberMedals(MED.filter(x => x[0]).length);
   };
+  /** chapters of a subject with every section read (section ids are chNN-sNN); when the subject does not say how many
+      sections its chapters have, a chapter whose test is beaten counts */
+  function chaptersDone(s, x) {
+    const read = {}; Object.keys(x.read || {}).forEach(id => { const c = String(id).split('-s')[0]; read[c] = (read[c] || 0) + 1; });
+    const chs = s.chapters || s.meta?.chapters || [];
+    if (!chs.length) return Object.keys(x.boss || {}).filter(c => x.boss[c]).length;
+    return chs.filter(c => { const id = c.id || 'ch' + String(c.num).padStart(2, '0'), n = typeof c.sections === 'number' ? c.sections : (c.sections || []).length; return n > 0 && (read[id] || 0) >= n; }).length;
+  }
   const weekKey = () => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.toISOString().slice(0, 10); };
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
@@ -531,7 +576,7 @@ window.NoemaShell = (() => {
     const it = (icon, n, title, sub, run, extra = {}) => h('button', { class: 'ns-item', onclick: run, ...extra }, icon, h('span', { class: 't' }, h('b', {}, title), sub ? h('small', {}, sub) : null), chev());
     const w = TH()?.world() || 'know';
     page({ tab: 'me', crumbs: [[L('myAccount')]] },
-      h('div', { class: 'ns-hello' }, h('span', { class: 'ns-me big' }, a.emoji || (a.name || '?')[0]), h('div', { class: 'grow' }, h('h1', {}, L('myAccount')), h('p', { class: 'tiny' }, [a.name, a.kind === 'cloud' ? '☁️ ' + (a.email || '') : L('localProfile')].filter(Boolean).join(' · ')))),
+      h('div', { class: 'ns-hello' }, h('span', { class: 'ns-me big' }, a.emoji || (a.name || '?')[0]), h('div', { class: 'grow' }, h('h1', {}, L('myAccount')), h('p', { class: 'tiny' }, [a.name, a.kind === 'cloud' ? (a.email || '') : L('localProfile')].filter(Boolean).join(' · ')))),
       h('section', { class: 'ns-panel' }, h('span', { class: 'ns-label' }, L('whatILearn')), h('p', { class: 'tiny' }, L('whatILearnSub')),
         h('div', { class: 'ns-seg', role: 'radiogroup', 'aria-label': L('whatILearn') }, ...[['know', L('knowledge')], ['lang', L('languages')], ['both', L('both')]].map(([k, l]) => h('button', { class: w === k ? 'on' : '', role: 'radio', 'aria-checked': String(w === k), onclick: () => { TH().putSettings({ world: k }); drawTabs(); PAGES.me([]); } }, l)))),
       h('div', { class: 'ns-list' },
@@ -591,10 +636,9 @@ window.NoemaShell = (() => {
       h('div', {}, h('span', { class: 'ns-label' }, L('companion')), h('h1', {}, L('character'))),
       h('p', { class: 'ns-muted' }, L('characterIntro')),
       h('p', { class: 'tiny' }, locked ? L('charLockedLong') : can ? L('canChangeNow') : L('changedOn', { date: fmtDate(at), next: fmtDate(TH().nextChangeAt()) })));
-    const gal = h('div', { class: 'ns-gal' }); v.append(gal);
     const sample = { el: 'Αα Καλησπέρα', en: 'Aa Good evening', ru: 'Аа Добрый вечер', fr: 'Aa Bonsoir' }[lang()] || 'Aa';
     for (const g of ['animals', 'tales', 'grown']) {
-      gal.append(h('span', { class: 'ns-label galsep' }, L('group_' + g)));
+      const gal = h('div', { class: 'ns-gal' }); v.append(charGroup(g, gal));
       for (const k of TH().GROUPS[g]) {
         const t = TH().text(k), d = TH().DATA[k], cur = k === own, nm = tv(k).tutor;
         gal.append(h('div', { class: 'ns-gcard' + (cur ? ' cur' : ''), 'data-m': k, 'data-char': k },
@@ -607,6 +651,11 @@ window.NoemaShell = (() => {
       }
     }
   };
+  /** the characters come in three groups, each folded until the learner opens it; its head shows the faces inside */
+  function charGroup(g, body) {
+    return h('details', { class: 'ns-chgrp', 'data-group': g }, h('summary', {}, h('span', { class: 'ns-chgt' }, L('group_' + g)),
+      h('span', { class: 'ns-chfaces', 'aria-hidden': 'true' }, ...TH().GROUPS[g].map(k => faceEl(k))), h('span', { class: 'ns-pill' }, String(TH().GROUPS[g].length)), h('span', { class: 'ns-domchev', 'aria-hidden': 'true' }, '›')), body);
+  }
   /* the 5-minute preview bar */
   function drawPreview() {
     const p = TH()?.preview(); if (!p) { F.pv.replaceChildren(); document.body.classList.remove('ns-previewing'); return; }
@@ -640,7 +689,7 @@ window.NoemaShell = (() => {
       return;
     }
     let sel = TH().owned();
-    const grid = h('div', { class: 'ns-pick' }, ...TH().ORDER.map(k => h('button', { class: k === sel ? 'on' : '', 'data-m': k, 'data-onbm': k, onclick: e => { sel = k; TH().apply(k); grid.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === e.currentTarget)); } }, faceEl(k), h('span', {}, tv(k).tutor))));
+    const grid = h('div', { class: 'ns-pickgroups' }, ...['animals', 'tales', 'grown'].map(g => charGroup(g, h('div', { class: 'ns-pick' }, ...TH().GROUPS[g].map(k => h('button', { class: k === sel ? 'on' : '', 'data-m': k, 'data-onbm': k, onclick: e => { sel = k; TH().apply(k); grid.querySelectorAll('.ns-pick button').forEach(b => b.classList.toggle('on', b === e.currentTarget)); } }, faceEl(k), h('span', {}, tv(k).tutor)))))));
     function finish() { if (!TH().locked()) TH().choose(sel, { force: true }); TH().putSettings({ onboarded: Date.now() }); F.layer.replaceChildren(); route(); setTimeout(() => window.NoemaReact?.big('hello'), 400); }
     modal(h('h1', { class: 'center' }, L('onbWho')), h('p', { class: 'ns-muted center' }, L('onbWhoSub')), grid, h('button', { class: 'btn primary', 'data-onbdone': '1', onclick: finish }, L('onbGo')), h('p', { class: 'tiny center' }, L('onbWhoLater')));
   }
@@ -652,7 +701,7 @@ window.NoemaShell = (() => {
     if (mounted) route();
   }
   /** The subject could not be loaded: say so and stay on the shell's pages. */
-  function noEngine(msg) { pendingEngine = false; toast('⚠️ ' + msg, 6000); if (ENGINE_ROUTES.has((location.hash || '').replace(/^#\/?/, '').split('/')[0])) location.replace('#/'); else route(); }
+  function noEngine(msg) { pendingEngine = false; toast(msg, 6000); if (ENGINE_ROUTES.has((location.hash || '').replace(/^#\/?/, '').split('/')[0])) location.replace('#/'); else route(); }
   /** Small items an engine page shows in the top bar, next to ⋮ (e.g. the focus-sprint clock). */
   function setActs(nodes) { F.acts.prepend(...nodes.filter(Boolean)); }
 

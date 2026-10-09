@@ -35,6 +35,8 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.$$eval('.ns-onb .ns-choice', l => l.length) === 3, 'three choices: knowledge · languages · both');
   await page.click('[data-pick="know"]'); await wait(300);
   ok(await page.$$eval('.ns-pick button', l => l.length) === 20, 'who comes with you: 20 characters');
+  ok(await page.$$eval('.ns-pickgroups .ns-chgrp', l => l.map(d => d.dataset.group + (d.open ? '+' : '')).join(',')) === 'animals,tales,grown', 'three folded groups: pet friends and fruits, fairy tales, serious');
+  await page.click('.ns-chgrp[data-group="grown"] summary'); await wait(200);
   await page.click('[data-onbm="robot"]'); await wait(200);
   ok(await page.evaluate(() => document.documentElement.dataset.m) === 'robot', 'picking one dresses the app at once');
   await page.screenshot({ path: SHOTS + '/sh_a1_onboarding.png' });
@@ -58,13 +60,13 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   console.log('B. Knowledge, the Shelf, a subject');
   await page.click('.ns-tab[data-tab="learn"]'); await wait(500);
   ok(await page.$('.ns-newrm') && await page.$('.ns-shelflink'), 'Knowledge: Roadmaps first (+ New Roadmap), the Shelf as a quiet link');
-  ok((await menuItems(page, '#ns-top .ns-menubtn')).some(t => t.includes('Import a map')), 'Knowledge ⋮: import a map, Roadmaps others share, the Shelf');
+  ok((await menuItems(page, '#ns-top .ns-menubtn')).some(t => t.includes('Import a Roadmap')), 'Knowledge ⋮: import a map, Roadmaps others share, the Shelf');
   await page.click('.ns-shelflink'); await wait(800);
   const shelf = await texts(page, '.ns-subj b');
   ok(['Databricks', 'Demo Physics', 'Secret Notes'].every(t => shelf.some(x => x.startsWith(t))), 'the Shelf lists the subjects on no Roadmap: ' + shelf.join(' | '));
   const sm = await menuItems(page, '.ns-itemwrap:has([data-subject="demo-physics"]) .ns-menubtn'), sm2 = await menuItems(page, '.ns-itemwrap:has([data-subject="secret-notes"]) .ns-menubtn');
-  ok(has(sm, ['Study', 'Put it on a map', 'Edit', 'Export the package']) && !has(sm, ['Share']), 'a library subject’s ⋮ on the Shelf: ' + sm.join(' · '));
-  ok(has(sm2, ['Study', 'Put it on a map', 'Edit', 'Share', 'Export the package']), 'your own subject’s ⋮ adds Share: ' + sm2.join(' · '));
+  ok(has(sm, ['Study', 'Put it on a Roadmap', 'Edit', 'Export the package']) && !has(sm, ['Share']), 'a library subject’s ⋮ on the Shelf: ' + sm.join(' · '));
+  ok(has(sm2, ['Study', 'Put it on a Roadmap', 'Edit', 'Share', 'Export the package']), 'your own subject’s ⋮ adds Share: ' + sm2.join(' · '));
   await page.click('[data-subject="demo-physics"]');
   ok(await until(() => page.$('.subjhead')), 'a subject from the Shelf opens its page (#/subject)');
   ok(await page.evaluate(() => location.hash) === '#/subject', 'address: #/subject');
@@ -77,7 +79,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   const pm = await menuItems(page, '.ns-practicebtn');
   ok(has(pm, ['Mixed practice', 'Flashcards', 'Debug drills', 'Mistakes gym', 'Lightning round', 'Ask Cobalt']), 'Practice ▾: ' + pm.join(' · '));
   const um = await menuItems(page, '#ns-top .ns-menubtn');
-  ok(has(um, ['Search this subject', 'Sources', 'Focus sprint', 'Put it on a map', 'Edit', 'Export the package', 'Choose a subject', 'Reset my progress']) && !has(um, ['Share']), 'the subject’s ⋮ holds the rest (no Share for a library subject): ' + um.join(' · '));
+  ok(has(um, ['Search this subject', 'Sources', 'Focus sprint', 'Put it on a Roadmap', 'Edit', 'Export the package', 'Choose a subject', 'Reset my progress']) && !has(um, ['Share']), 'the subject’s ⋮ holds the rest (no Share for a library subject): ' + um.join(' · '));
   ok(await page.$eval('#ns-fab', b => !b.hidden && b.classList.contains('full')), 'the tutor = the character, full body on the subject page');
   await page.screenshot({ path: SHOTS + '/sh_b1_subject.png' });
 
@@ -151,6 +153,8 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.$$eval('.ns-gcard', l => l.length) === 20 && await page.$('.ns-gcard.cur[data-char="robot"]'), 'the gallery: 20 characters, each in its own clothes; yours marked');
   { const found = await Promise.all(['berry', 'robot', 'heron', 'prism'].map(k => page.locator(`.ns-gcard[data-char="${k}"]`).count()));
     ok(found.every(n => n === 1), 'the four new ones: strawberry, robot, heron, prism'); }
+  ok(await page.$$eval('.ns-chgrp', l => l.length === 3 && l.every(d => !d.open)), 'the gallery: three groups, folded until opened');
+  await page.click('.ns-chgrp[data-group="animals"] summary'); await wait(200);
   await page.click('[data-try="owl"]'); await wait(400);
   ok(await page.$('.ns-preview') && await page.evaluate(() => document.documentElement.dataset.m) === 'owl', 'try anyone for 5 minutes: the preview bar, the app in its clothes');
   await page.click('.ns-preview .btn:not(.primary)'); await wait(300);
@@ -193,7 +197,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.goto(url + '#/me/ai'); await wait(400);
   ok(await page.evaluate(() => /Gemini/.test(document.querySelector('.ns-accbody').textContent) && !/Display & studying/.test(document.querySelector('.ns-accbody').textContent)), 'Me › AI: the AI sections only (appearance has its own page)');
   await page.goto(url + '#/discover'); await wait(400);
-  ok(has(await texts(page, '.ns-view .ns-item b'), ['What others share', 'Roadmaps others share', 'New Roadmap', 'Create a subject with Claude', 'Import a file', 'Import a map', 'Your Claude app', 'Claude API key']), 'Discover: everything that adds something new');
+  ok(has(await texts(page, '.ns-view .ns-item b'), ['What others share', 'Roadmaps others share', 'New Roadmap', 'Create a subject with Claude', 'Import a file', 'Import a Roadmap', 'Your Claude app', 'Claude API key']), 'Discover: everything that adds something new');
   await page.goto(url + '#/'); await wait(500);
   ok(has(await menuItems(page, '#ns-top .ns-menubtn'), ['Choose a subject', 'New Roadmap', 'Focus sprint', 'Switch profile']), 'Today ⋮: choose a subject, a new Roadmap, focus sprint, switch profile');
   await page.click('#bellbtn'); await wait(300);
@@ -217,7 +221,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);
   ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
   ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('.ns-newrm', b => b.textContent)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('.ns-newrm', b => b.textContent)));
-  ok(await page.evaluate(() => [NoemaThemes.tutor('owl').n, NoemaThemes.tutor('candy').n, NoemaThemes.tutor('hedge').n, NoemaShell.L('askTutor')].join('|')) === 'Γλαυκούλα|Γκρέτα και Χανς|Αγκαθούλης|Ρώτα τον Κόβαλτ', 'the tutor’s Greek names, in the right form');
+  ok(await page.evaluate(() => [NoemaThemes.tutor('owl').n, NoemaThemes.tutor('candy').n, NoemaThemes.tutor('hedge').n, NoemaShell.L('askTutor')].join('|')) === 'Γλαυκούλα|Χάνσελ και Γκρέτελ|Αγκαθούλης|Ρώτα τον Κόβαλτ', 'the tutor’s Greek names, in the right form');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: undefined }));
   await page.setViewportSize({ width: 1280, height: 860 }); await page.goto(url + '#/'); await page.reload(); await wait(1200);
   const rail = await page.$eval('.ns-tabs', t => { const r = t.getBoundingClientRect(); return [r.left, r.width, r.height]; });
