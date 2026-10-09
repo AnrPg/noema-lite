@@ -1430,6 +1430,7 @@ function drawTutor() {
     h('div', { class: 'lx-tcomp' }, ta, h('button', { class: 'btn primary small', disabled: aiVendor() ? null : true, onclick: () => { const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } }, '➤')));
   for (const m of hist) msgs.append(tutorMsg(c, m));
   if (!hist.length) msgs.append(h('div', { class: 'lx-tmsg sys' }, aiVendor() ? 'Pick what you want, or just write.' : 'Each button above works once you have added a key.'));
+  box.addEventListener('keydown', e => { if (e.key === 'Escape') closeLangTutor(); });   // keyboard: Esc closes the drawer
   document.body.append(box); msgs.scrollTop = msgs.scrollHeight;
   if (aiVendor()) setTimeout(() => ta.focus(), 50);
 }

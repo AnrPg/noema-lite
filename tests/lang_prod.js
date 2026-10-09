@@ -344,7 +344,8 @@ console.log('— the AI: prompts, checks of its text, the tutor context');
   await page.click('.lx-tutorrow [data-intent=quiz]'); await wait(800);
   const tq = AI.calls[AI.calls.length - 1];
   ok(tq.sys.includes('Quiz this node') && tq.sys.includes('Numbers and the plural'), 'a lesson: “quiz this node” sends the node and its words');
-  await page.click('.lx-tutor button[aria-label="Close the tutor"]');
+  await page.focus('.lx-tutor .lx-tin'); await page.keyboard.press('Escape'); await wait(100);
+  ok(await page.locator('.lx-tutor').count() === 0, 'keyboard: Esc closes the tutor');
 
   // ---------- phone width ----------
   const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); await mockGemini(phone);
