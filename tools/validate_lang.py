@@ -29,6 +29,7 @@ GENERATORS = {  # exercise types a function may ask for (docs/LANGUAGES.md §6)
     'translate', 'rewrite', 'expand', 'guided_compose', 'graded_reader', 'number_words', 'clock', 'date', 'register', 'dialogue_turn',
     'parallel_translate', 'parallel_align', 'which_language', 'cognate_bridge', 'compare_rule',
     'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link'}
+GENERATORS |= {'listen_pick', 'listen_tone', 'dictation', 'listen_meaning', 'shadowing', 'speak'}   # P9 — listening and speaking (§6.8)
 STATUS = {'realized', 'periphrastic', 'absent'}
 W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES = None, {}, set(), [], []
 TYPOLOGIES = {'isolating', 'agglutinating', 'fusional', 'polysynthetic'}   # D10: one path of foundation lessons per type

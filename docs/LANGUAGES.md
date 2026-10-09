@@ -28,7 +28,7 @@
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ✅ 2026-10-09 (`parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; the ⇄ compare lane per concept / function / frame; bridges and false friends on the word card; one polyglot item in every daily session of ≥ 2 languages, confusables side by side; a colour per language; today's languages chosen on the home) |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ✅ 2026-10-09 (✍️ Writing and 📖 Reading lanes per language: translate tiles → typed with deterministic acceptance and an AI-judged fallback, rewrite / expand, guided writing with a rubric, numbers / clock / date, register and dialogue turns, graded readers with questions and AI-written texts checked by the tokenizer; 🎓 the tutor in a language) |
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ✅ 2026-10-09 — ✨ new language course (account course: skeleton, three ways), task kinds `lang.core` · `lang.node` · `lang.function` · `lang.compare` · `lang.refill` with checks in JS and merges, 🌙 night queue, connector tools `noema_lang_*`, skill `LANGUAGES.md` + `lang_course.py` in the toolkit |
-| P9 | Listening and speaking (later) | ⬜ later |
+| P9 | Listening and speaking | ✅ 2026-10-09 (the browser's own speech services, no server, no key: 🔊 on word cards, examples, bank sentences, the intro, feedback, the reader and the compare views; `listen_pick`, `listen_tone` (zh), `dictation`, `listen_meaning`, `shadowing` (MediaRecorder, self-graded), `speak` (SpeechRecognition, compared with the stored forms; shadowing without it); the 🎧 lane per language; voice per language, rate, auto-play, “I can't listen / speak now”; up to two items in the daily session) |
 
 ## 0. Development isolation (until the feature is finished)
 
@@ -144,6 +144,29 @@ Sentence building → expansion → paraphrase → translation (incl. between tw
 Graded texts built from known vocabulary (0 unknown words in drills, at most 1 glossed unknown word per sentence in reading), with tap-to-gloss.
 
 ### 3.9 Listening and speaking — P9
+With the browser's own speech services only — no server of the app, no key. What is heard is always a **stored** word or a
+stored bank sentence; what is said is compared with **stored** forms (D3) — never judged by an AI.
+- **Synthesis** (`speechSynthesis`): every course language has a BCP-47 tag — `speechLang` in `language.json` (optional),
+  else ar-SA, he-IL, zh-CN, de-DE (`langcore.speechTag`). The voice is the one the learner chose for the language in
+  ⚙️ Settings, else the device's best match (`pickVoice`: the same tag, then the same language, local voices first — never a
+  Cantonese zh-HK / zh-MO / yue voice for Mandarin; he = iw). The stored text is sent **as written** (with its vowel marks,
+  not the faded display, §8). Rate: normal (1) or slow (0.7). A language without a voice on this device: its 🔊 says so
+  once (no error) and its audio exercises are not offered.
+- **Recording** (`getUserMedia` + `MediaRecorder`): only for shadowing; the recording lives in memory for the item and is
+  never stored or sent.
+- **Recognition** (`SpeechRecognition` / `webkitSpeechRecognition`; the browser may use its vendor's service — the settings
+  say so): the transcript and its alternatives are compared with the stored forms (`checkSpoken`): word by word through the
+  form index (without vowel marks, the full Hebrew spelling, the Arabic hamza seats / ى / ة folded, any capitals — case is not
+  heard —, digits read as the course's number words), Chinese as the same characters or the same syllables with the same
+  tones (a homophone such as 他 / 她 is right: the ear cannot tell them apart). Where recognition is missing, a speaking item
+  is offered as shadowing.
+- **Chinese tones by ear**: one syllable of a known word, heard through the **whole word's** audio (one syllable alone is
+  unreliable in synthesis) → its **spoken** tone: the dictionary tone, changed only by the sure rules (3 + 3 → 2 + 3 in a
+  word of two or three syllables, the word's stored `toneSandhi` for 一 / 不); a syllable whose spoken tone is not sure
+  (longer runs of third tones, 一 / 不 without a stored spoken form) and a word with several readings (`readings`) are not asked.
+- **Settings** (the course's `prefs`, synced like the other view preferences; a voice is per device — where the chosen voice
+  does not exist the automatic choice is used): a voice per language, the rate, auto-play of new words in the session,
+  “I can't listen now” and “I can't speak now” (for today: no audio items / no speaking items).
 
 ---
 
@@ -756,6 +779,23 @@ A generator's sentences are those listing the function, or `bank: {functions: [.
 |---|---|---|---|
 | `sentence_meaning` | reading a sentence | the sentence → its meaning; distractors = meanings of other bank sentences with similar words | B |
 
+### 6.8 Listening and speaking (P9, §3.9)
+| id | trains | how | src |
+|---|---|---|---|
+| `listen_pick` | hearing words | a met word (≥ learning) is spoken → choose it among written words (kind `hear_word`; met words, the same part of speech / sound first) or its meaning among other words' meanings (`hear_meaning`); a homophone of the answer (`soundKey`: zh the pinyin with tones, ar / he the transliteration, German a sound key that folds length marks, final devoicing and the like) is never a wrong option | D |
+| `listen_tone` | Chinese tones by ear | a known word is spoken whole; one of its syllables (its character marked) → its spoken tone (1–4, neutral) | D (zh) |
+| `dictation` | hearing → spelling | a word (its meaning shown: homophones) or a bank sentence of ≤ 8 words (D19 ⌈30 %⌉ unknown, 🆕 listed; zh with its meaning) is spoken → typed with the keyboards of §8; a word is checked by `checkTyped` (P4), a sentence by `typedAnswer` (P7) against that sentence only — not its `alts`: the voice said this one | D / B |
+| `listen_meaning` | listening comprehension | a bank sentence is spoken, not shown → its meaning among other sentences' meanings (the distractors of `sentence_meaning`); then it is shown with 🆕 | B |
+| `shadowing` | pronunciation | the word or sentence shown and spoken → record yourself, play both (the voice, then you) → self-graded (“✓ close” / “✗ not yet”); not a review of the word | D / B |
+| `speak` | speaking | the word or sentence shown (`read`) — or only a word's meaning (`produce`, words known for production) → say it; the transcript is compared with the stored forms (`checkSpoken`), up to three tries; without recognition the item becomes `shadowing` | D / B |
+
+What an answer records: `listen_pick`, `listen_tone` → the word's R track; `dictation` of a word → its P track; `speak` of a
+word decided right → its P track; a sentence typed or said right → a production review of its known words (as `translate`);
+`listen_meaning` → its function, when it has one. The items are made by `langcore.speechItems(C, L, code, type, opts)` and
+registered as generators (`GEN.<type>`), so a realization may list them (the validator and the task checks of §10.1 accept
+the ids); the device decides what can be offered (`setSpeechCaps`: a voice per language, recognition, recording, the two
+“can't now” switches). Widgets in `engine/lang/98_speech.js`.
+
 ---
 
 ## 7. Making exercises from what the learner knows
@@ -803,6 +843,9 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 4. Two minutes of reading or a polyglot exercise: with ≥ 2 languages in the session, one polyglot item (`which_language` or `parallel_align`, alternating by day; the other when one cannot be made from what is known) — `{kind: "poly", items}` in `planSession`.
 3. One grammar function **using the words just learned** (bank + drills).
 4. Two minutes of reading or a polyglot exercise (the 📖 Reading lane of each language; P7).
+6. **Listening and speaking** (P9): after the new words, up to two items in today's languages that have a voice on the device
+   (taking turns by day): one listening item (`listen_pick`, `listen_meaning` or a word `dictation`, rotating by day) and one
+   speaking item (`speak`, or `shadowing` without recognition); none on a day marked “I can't listen / speak now” (`langcore.speechPlan`).
 
 ---
 
@@ -838,6 +881,13 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   the connector · 📋 copy the task and paste the answer), 🌙 queue every unwritten node for the night, and 🔄 fetch the
   answers the connector left. An account course without its core opens on this page.
 * **Tutor**: language context (function or node + language), known vocabulary of the language (capped list), rule "use known words; at most one new word per sentence, glossed"; intents per button (explain this rule, compare the languages, quiz this node, a conversation with only known words). The 💡 on any part works as elsewhere.
+* **🔊 Listening everywhere** (P9): a 🔊 after the head of every word card, every example and bank sentence shown (word card,
+  grammar page and lesson screens, the reader — with ▶ the whole text —, the compare lane and the polyglot views) and, inside
+  exercises, after the intro of a new word and in the feedback only (never on a prompt it would give away); `r` replays the
+  audio of a listening exercise. Auto-play of new words in the session is a setting.
+* **🎧 Listening & speaking lane** (`#/listen/<lang>`, a row per active language on the home): 🔊 hear and choose, 👂 sentences,
+  ✍️ dictation, 🗣️ shadowing, 🎤 say it, 🎵 tones (zh) — each a short run (`#/listen/<lang>/<set>`); the lane says what the
+  device offers (voice, recognition, recording). ⚙️ Settings → 🎧 Listening & speaking (§3.9).
 * **Tutor**: language context (function or node + language), known vocabulary of the language (capped list), rule "use known words; at most one new word per sentence, glossed"; intents per button (explain this rule, compare the languages, quiz this node, a conversation with only known words). The 💡 on any part works as elsewhere. P7: a drawer of its own in the language UI (the subject engine's tutor is not loaded there) — buttons on the grammar page (📘 explain this rule · ⇄ compare the languages · ❓ quiz), on lesson and node pages (❓ quiz this node · 💬 a conversation at my level), in the home row and the lanes; context = the function's realization in the language (summary, blocks, ask-yourself, traps; for “compare” the other languages' summaries) or the node (its words, its grammar) + the learner's known words (150 at most, production-known first) + the rule + the intent of the button + “never give the answers of the app's exercises”; it writes in `chatLang` (a choice in the drawer, stored in the course's prefs) or `explainLang`. Its answer is `{reply, target}`: every sentence in the language it used is tokenized and checked against the course (🆕 glossed, “not in the course” marked) and set in the language's font and direction. Conversations are kept with the others (`NoemaConvos`, mode `lang-<intent>`). With the learner's own Gemini or Claude key; without one the drawer and its buttons say how to add one.
 
 ---
@@ -1020,11 +1070,22 @@ Existing subjects and curricula must keep working unchanged; the language part i
   folder, answer from a folder), the skill's `LANGUAGES.md` and its toolkit (validate_lang, lang_refcheck, langlib,
   lang_course, the schema, `_typology`, `_phenomena`); `tests/lang_claude.js`.
 
-**P9 — Listening and speaking** (later): speech synthesis for words and sentences, dictation, shadowing; then speech recognition.
+**P9 — Listening and speaking** — ✅ 2026-10-09
+- Speech synthesis for words and sentences, dictation, shadowing; then speech recognition (§3.9, §6.8).
+- ✔ Mocked speech services in Playwright (synthesis, recording, recognition driven by the test); never real audio.
+- Done: `engine/langcore.js` section “P9 — Listening and speaking” — `speechTag`, `pickVoice` / `voicesFor`, `soundKey` /
+  `homophones`, `spokenTones`, `speechItems` and the generators `GEN.listen_pick | listen_tone | dictation | listen_meaning |
+  shadowing | speak`, `checkDictation`, `checkSpoken`, `speechRecord`, `speechPlan` (§7.5 step 6), `setSpeechCaps`;
+  `engine/lang/98_speech.js` + `98_speech.css` (the speech services with a no-voice notice, the 🔊 buttons, the widgets, the
+  🎧 lane `#/listen/<lang>`, the settings, auto-play in the intro, the session step: one line in `50_session.js`); the ids in
+  the validator and the task checks; `tests/lang_speech.js`.
+- Left out: pronunciation scoring beyond the transcript (no phonetic data: an `ipa` parameter is not declared yet), minimal
+  pairs (no data), audio files of real speakers.
 
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-09 — P9 listening and speaking: browser speech synthesis (voice per language, slow rate, text sent as written), 🔊 on cards, examples, sentences, intro, feedback, reader and compare views; `listen_pick`, `listen_tone`, `dictation`, `listen_meaning`, `shadowing`, `speak` (transcript compared with the stored forms, shadowing without recognition); the 🎧 lane, the settings, two items in the daily session (§3.9, §6.8, §7.5, §8, §13).
 - 2026-10-09 — P4 scripts and input: script modules as reference data (`tools/lang_script.py`, §4.9: ar / he alphabets with forms derived from Unicode, zh characters from Make Me a Hanzi + Unihan), the script stage stored in `lang:<L>:script` (§5.5, merged like words), the 🔤 lane and the exercise types of §6.1, keyboards / pinyin input for every typed answer and vowel-mark fading (§8), tokenizer fixes (§7.2: prefix spellings and וָ, لِلْـ, the bank's own Chinese splits).
 - 2026-10-09 — P5 grammar lane: the ten exercise types of §6.3 / §6.4 still missing (paradigm, analyze, morph_build, root_pattern, agree, contrast, parse, gloss, proofread, combine) as generators with widgets, offered automatically where a function's data allows (grammar lane, function page, session; lessons keep their listed generators); proofreading errors only where they break agreement with a partner; feasibility counts sentences by D19 (§7.3); the 📐 grammar lane (§8); the session's grammar step uses the words just learned (§7.5); the validator checks generators and their pools.
 - 2026-10-09 — P5v: vocabulary depth — the remaining §6.2 types made from the stored words and profiles (roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins), as reviews of the word (R or P track), D19 caps on their sentences; 🏋️ practise this word (word card), 🏋️ deepen (node and lesson pages), 1–3 deepening items in the daily session (§6.2, §7.5, §8, §13).

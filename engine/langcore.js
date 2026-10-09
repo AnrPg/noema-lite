@@ -3208,6 +3208,7 @@
       'gender_article', 'principal_parts', 'measure_word', 'root_family', 'compound_split', 'sense_split', 'collocation', 'confusables', 'intensity_scale', 'paradigm', 'inflect', 'analyze', 'morph_build', 'root_pattern', 'agree',
       'build_sentence', 'word_order', 'transform', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'translate', 'rewrite', 'expand', 'guided_compose', 'graded_reader', 'number_words', 'clock', 'date', 'register',
       'dialogue_turn', 'parallel_translate', 'parallel_align', 'which_language', 'cognate_bridge', 'compare_rule', 'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link']);
+    for (const t of ['listen_pick', 'listen_tone', 'dictation', 'listen_meaning', 'shadowing', 'speak']) GENS.add(t);   // P9 — listening and speaking (§6.8)
     const clone = o => JSON.parse(JSON.stringify(o));
     const isObj = x => !!x && typeof x === 'object' && !Array.isArray(x);
     const str = v => typeof v === 'string' && v.trim() !== '';
@@ -3826,6 +3827,276 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
   })();
   API.GEN = GEN;
   Object.assign(API, LANG_P8);   // P8 — Through Claude: account courses, tasks, checks, merges
+  /* ---------- P9 — Listening and speaking: speech synthesis, dictation, shadowing, speech recognition (docs/LANGUAGES.md §3.9, §6.8, §7.5) ----------
+     Pure: the UI owns the browser's speech services and tells this module what the device can do (setSpeechCaps). What is heard is
+     always a stored word or a stored bank sentence; what is said or typed is compared with stored forms — no AI decides anything here. */
+  const SPEECH_TAGS = { ar: 'ar-SA', he: 'he-IL', zh: 'zh-CN', de: 'de-DE', el: 'el-GR', en: 'en-US', ru: 'ru-RU', tr: 'tr-TR', fr: 'fr-FR', es: 'es-ES', it: 'it-IT',
+    pt: 'pt-BR', nl: 'nl-NL', pl: 'pl-PL', ja: 'ja-JP', ko: 'ko-KR', hi: 'hi-IN', fa: 'fa-IR', fi: 'fi-FI', hu: 'hu-HU', sv: 'sv-SE', vi: 'vi-VN', uk: 'uk-UA', id: 'id-ID', sw: 'sw-KE' };
+  const SPEECH_RATE = { normal: 1, slow: 0.7 };
+  const SPEECH_TYPES = ['listen_pick', 'listen_tone', 'dictation', 'listen_meaning', 'shadowing', 'speak'];
+  /** The BCP-47 tag a course language is spoken with: language.json speechLang, else the default of the code. */
+  function speechTag(C, code) { const lj = C?.lang?.[code]?.language || {}; return lj.speechLang || SPEECH_TAGS[code] || code; }
+  const spTagNorm = t => String(t || '').replace(/_/g, '-').toLowerCase().replace(/^iw(?=-|$)/, 'he').replace(/^in(?=-|$)/, 'id');
+  const SP_NOT_SAME = { zh: /^(zh-(hk|mo)|yue)|-(hk|mo)$|yue/ };   // Cantonese voices are not Mandarin ones
+  /** The voices of the device that speak a tag: the same tag first, then the same language (local voices first). */
+  function voicesFor(voices, tag) {
+    const T = spTagNorm(tag), base = T.split('-')[0], bad = SP_NOT_SAME[base] && !SP_NOT_SAME[base].test(T) ? SP_NOT_SAME[base] : null;
+    const all = (voices || []).filter(v => { const l = spTagNorm(v.lang); return (l === T || l.split('-')[0] === base) && !(bad && bad.test(l)); });
+    const score = v => (spTagNorm(v.lang) === T ? 0 : 2) + (v.localService === false ? 1 : 0);
+    return all.map((v, i) => [v, i]).sort((a, b) => score(a[0]) - score(b[0]) || a[1] - b[1]).map(x => x[0]);
+  }
+  /** The voice for a tag: the learner's choice (by name) when the device has it, else the best match; null when none speaks it. */
+  function pickVoice(voices, tag, name) { const vs = voicesFor(voices, tag); return (name && vs.find(v => v.name === name)) || vs[0] || null; }
+  /** The text sent to the voice: the stored text as written (vowel marks included — not the faded display). */
+  const speechText = (C, code, text) => nfc(text).replace(/\s+/g, ' ').trim();
+
+  /* what the device can do (the UI sets it; in Node everything is assumed possible) */
+  let SPEECH_CAPS = null;
+  function setSpeechCaps(caps) { SPEECH_CAPS = caps || null; return SPEECH_CAPS; }
+  const spCap = (v, code) => v === undefined || v === true || (!!v && typeof v === 'object' && !!v[code]);
+  const spCanListen = (caps, code) => !caps || (!caps.noListen && spCap(caps.listen, code));
+  const spCanSpeak = (caps) => !caps || !caps.noSpeak;
+  const spCanRecognize = (caps, code) => !caps || spCap(caps.recognize, code);
+
+  /* ---------- sounds alike? (never a homophone as a wrong option) ---------- */
+  const spDeSound = w => nfc(w).toLowerCase().replace(/ß/g, 's').replace(/ph/g, 'f').replace(/th/g, 't').replace(/dt/g, 't').replace(/ck/g, 'k').replace(/tz/g, 'z').replace(/v/g, 'f')
+    .replace(/äu/g, 'eu').replace(/ai/g, 'ei').replace(/ä/g, 'e').replace(/ie/g, 'i').replace(/([aeiouöü])h/g, '$1').replace(/([aeiouöü])\1/g, '$1')
+    .replace(/([b-df-hj-np-tv-zß])\1/g, '$1').replace(/d\b/g, 't').replace(/b\b/g, 'p').replace(/g\b/g, 'k').replace(/[^\p{L}]+/gu, '');
+  /** A key equal for words that sound the same: zh the pinyin with its tones, ar / he the transliteration, German a sound key, else the plain word. */
+  const SP_SOUND = new WeakMap();   // per language index: lexeme → its sound key (computed once)
+  function soundKey(C, code, lexId) {
+    const X = C.lang[code]; let m = SP_SOUND.get(X); if (!m) { m = new Map(); SP_SOUND.set(X, m); }
+    if (!m.has(lexId)) m.set(lexId, spSoundKey(C, code, lexId));
+    return m.get(lexId);
+  }
+  function spSoundKey(C, code, lexId) {
+    const lx = C.lang[code].lex[lexId]; if (!lx) return '';
+    if (lx.pinyin) return nfc(lx.pinyin).toLowerCase().replace(/[\s'·-]+/g, '');
+    if (lx.translit) return nfc(lx.translit).toLowerCase().replace(/[\s'’ʼ·-]+/g, '');
+    if (code === 'de' || C.lang[code].language.capitalizeFirst) return spDeSound(lx.lemma);
+    return stripMarks(code, nfc(lx.lemma)).toLowerCase();
+  }
+  /** Other words of the course that sound like this one. */
+  function homophones(C, code, lexId) {
+    const X = C.lang[code], k = soundKey(C, code, lexId); let by = SP_SOUND.get(X)?.by;
+    if (!by) { by = new Map(); for (const id of Object.keys(X.lex)) { const key = soundKey(C, code, id); by.set(key, [...(by.get(key) || []), id]); } SP_SOUND.get(X).by = by; }
+    return (by.get(k) || []).filter(id => id !== lexId);
+  }
+
+  /* ---------- Chinese: the tone of each syllable as it is said ---------- */
+  /** A word's tones: {chars, bases, written, spoken, sure: [bool per syllable]} — or null (not all Han, several readings, no pinyin). */
+  function spokenTones(C, code, lexId) {
+    const lx = C.lang[code].lex[lexId]; if (!lx || !lx.pinyin) return null;
+    const chars = [...nfc(lx.lemma)], syl = pinyinSplit(lx.pinyin);
+    if (!chars.length || chars.some(ch => !isHan(ch)) || syl.length !== chars.length) return null;
+    const rd = lx.readings ?? lx.features?.readings; if (Array.isArray(rd) && rd.length > 1) return null;   // 多音字: the voice may read another reading
+    const parsed = syl.map(pinyinTone); if (parsed.some(p => typeof p === 'string')) return null;
+    const bases = parsed.map(p => p[0]), written = parsed.map(p => p[1]);
+    let base = written.slice(), stored = false;
+    const ts = lx.toneSandhi ?? lx.features?.toneSandhi;
+    if (typeof ts === 'string') { const sp = pinyinSplit(ts).map(pinyinTone); if (sp.length === chars.length && sp.every((p, i) => typeof p !== 'string' && p[0] === bases[i])) { base = sp.map(p => p[1]); stored = true; } }
+    const sand = toneSandhi(chars, base), spoken = sand || base;
+    const threes = base.filter(t => t === 3).length, rule33 = threes === 2 && chars.length <= 3;   // the only 3 + 3 case toneSandhi decides
+    const sure = chars.map((ch, i) => {
+      if (chars.length > 1 && ch === '一' && !stored) return false;   // 一 changes by its use: only with the stored spoken form (不 has a sure rule)
+      if (base[i] === 3 && (base[i + 1] === 3 || base[i - 1] === 3) && !rule33) return false;   // longer runs of third tones: depends on the phrasing
+      if (threes >= 3 && base[i] === 3) return false;
+      return true;
+    });
+    return { chars, bases, written, spoken, sure };
+  }
+  const SP_TONE_NAME = { 1: '1st tone', 2: '2nd tone', 3: '3rd tone', 4: '4th tone', 5: 'neutral tone' };
+
+  /* ---------- the items (§6.8) ---------- */
+  const spGloss = (C, code, id) => glossOf(C, code, id);
+  /** Words to hear: met words (≥ learning) with a meaning, the least known first, then shuffled within. */
+  function spWords(C, L, code, k, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random;
+    const pool = (opts.words || [...k.R]).filter(id => X.lex[id] && (X.lex[id].senses || []).length && (!opts.pos || X.lex[id].pos === opts.pos) && (!opts.P || k.P.has(id)));
+    return shuffled(pool, rng);
+  }
+  /** Sentences to hear: D19 (≤ ⌈30 %⌉ unknown words), short enough, fewest unknown first. */
+  function spSentences(C, code, k, opts = {}) {
+    const ss = opts.sentences || selectSentences(C, code, { known: k.R, maxUnknown: 'auto', variants: opts.variants });
+    return ss.filter(s => (s.nwords || 0) >= (opts.minWords || 2) && (s.nwords || 0) <= (opts.maxWords || 8) && s.text);
+  }
+  const spUnknownOf = (s, k) => s.unknown || s.req.filter(l => !k.R.has(l));
+  /** Items of one type for one language → [item]. opts: {k, rng, max, words, sentences, pos, caps (default: setSpeechCaps), fn}. */
+  function speechItems(C, L, code, type, opts = {}) {
+    const X = C.lang[code]; if (!X) return [];
+    const caps = opts.caps !== undefined ? opts.caps : SPEECH_CAPS, rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 8, out = [];
+    const fn = opts.fn ? { fn: opts.fn } : {};
+    const listen = spCanListen(caps, code);
+    if (['listen_pick', 'listen_tone', 'dictation', 'listen_meaning', 'shadowing'].includes(type) && !listen) return [];
+    if ((type === 'shadowing' || type === 'speak') && !spCanSpeak(caps)) return [];
+    const met = Object.keys(X.lex).filter(id => rank(k.state[id]) >= rank('seen') && (X.lex[id].senses || []).length);
+    if (type === 'listen_pick') {
+      const words = spWords(C, L, code, k, { ...opts, rng });
+      words.forEach((id, i) => {
+        if (out.length >= max) return;
+        const lx = X.lex[id], key = soundKey(C, code, id), mine = new Set(lx.senses || []), g = spGloss(C, code, id);
+        const others = met.filter(o => o !== id && soundKey(C, code, o) !== key && !(X.lex[o].senses || []).some(s => mine.has(s)) && nfc(X.lex[o].lemma) !== nfc(lx.lemma));
+        if (i % 2 === 0) {   // hear_word: choose the written word — the same part of speech and a similar sound first
+          const near = o => (X.lex[o].pos === lx.pos ? 0 : 2) + (soundKey(C, code, o)[0] === key[0] ? 0 : 1) + rng();
+          const wrong = uniqStr(others.sort((a, b) => near(a) - near(b)).map(o => nfc(X.lex[o].lemma))).slice(0, 3);
+          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_word', lang: code, lex: id, say: lx.lemma, ask: 'Listen — which word is it?', options: shuffled([nfc(lx.lemma), ...wrong], rng), answer: nfc(lx.lemma), why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
+        } else {   // hear_meaning: choose what it means (no meaning of a word that sounds the same)
+          const same = new Set(homophones(C, code, id).map(o => spGloss(C, code, o)));
+          const wrong = uniqStr(shuffled(others, rng).map(o => spGloss(C, code, o))).filter(x => x && x !== g && !same.has(x)).slice(0, 3);
+          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_meaning', lang: code, lex: id, say: lx.lemma, ask: 'Listen — what does it mean?', options: shuffled([g, ...wrong], rng), answer: g, why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
+        }
+      });
+    } else if (type === 'listen_tone') {
+      if (code !== 'zh' && X.language.romanization !== 'pinyin') return [];
+      for (const id of spWords(C, L, code, k, { ...opts, rng })) {
+        if (out.length >= max) break;
+        const t = spokenTones(C, code, id); if (!t) continue;
+        const ats = t.chars.map((_, i) => i).filter(i => t.sure[i]); if (!ats.length) continue;
+        const changed = ats.filter(i => t.spoken[i] !== t.written[i]), at = changed.length ? changed[0] : ats[Math.floor(rng() * ats.length)];
+        const lx = X.lex[id], said = t.bases.map((b, i) => withTone(b, t.spoken[i])).join(' ');
+        out.push({ type: 'listen_tone', kind: 'tone', lang: code, lex: id, say: lx.lemma, chars: t.chars, at, gloss: spGloss(C, code, id), ask: `Listen — the tone of ${t.chars[at]} (syllable ${at + 1} of ${t.chars.length})?`,
+          options: ['1', '2', '3', '4', '5'], answer: String(t.spoken[at]), written: String(t.written[at]),
+          why: `${lx.lemma} — said ${said}` + (t.spoken[at] !== t.written[at] ? ` (written ${lx.pinyin}: ${t.chars[at]} ${SP_TONE_NAME[t.written[at]]} → ${SP_TONE_NAME[t.spoken[at]]} in speech)` : ` · ${t.chars[at]}: ${SP_TONE_NAME[t.spoken[at]]}`), track: 'r', ...fn });
+      }
+    } else if (type === 'dictation') {
+      const words = spWords(C, L, code, k, { ...opts, rng }).sort((a, b) => (k.P.has(b) ? 1 : 0) - (k.P.has(a) ? 1 : 0)), ss = opts.wordsOnly ? [] : shuffled(spSentences(C, code, k, opts), rng);
+      const hintAll = code === 'zh' || X.language.tokenJoin === 'none';
+      for (let i = 0; out.length < max && (i < words.length || i < ss.length); i++) {
+        if (i < words.length && (i % 2 === 0 || !ss.length || opts.wordsOnly)) { const id = words[i], lx = X.lex[id]; out.push({ type: 'dictation', kind: 'word', lang: code, lex: id, say: lx.lemma, hint: spGloss(C, code, id), answer: nfc(lx.lemma), track: 'p', ...fn }); }
+        else if (i < ss.length && !opts.wordsOnly) { const s = ss[i]; out.push({ type: 'dictation', kind: 'sentence', lang: code, sentence: s.id, say: s.text, hint: hintAll ? s.gloss : null, gloss: s.gloss, answer: s.text, unknown: spUnknownOf(s, k), ...fn }); }
+      }
+    } else if (type === 'listen_meaning') {
+      const all = selectSentences(C, code, { known: k.R, maxUnknown: 'auto' });
+      const ck = new Map(), conceptKey = o => { if (!ck.has(o.id)) ck.set(o.id, o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|')); return ck.get(o.id); };
+      for (const s of shuffled(spSentences(C, code, k, { ...opts, maxWords: opts.maxWords || 10 }), rng)) {
+        if (out.length >= max) break;
+        const key = conceptKey(s), others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
+        const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).filter(x => x !== s.gloss).slice(0, 3);
+        if (wrong.length < 2) continue;
+        out.push({ type: 'listen_meaning', kind: 'hear_sentence', lang: code, sentence: s.id, say: s.text, ask: 'Listen — what does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: spUnknownOf(s, k), ...fn });
+      }
+    } else if (type === 'shadowing' || type === 'speak') {
+      const recog = type === 'speak' && spCanRecognize(caps, code), as = type === 'speak' && !recog ? 'shadowing' : type;
+      if (as === 'shadowing' && !listen) return [];
+      const words = spWords(C, L, code, k, { ...opts, rng }), ss = shuffled(spSentences(C, code, k, { ...opts, maxWords: opts.maxWords || 10 }), rng);
+      for (let i = 0; out.length < max && (i < words.length || i < ss.length); i++) {
+        const useWord = i < words.length && (i % 2 === 0 || !ss.length || opts.wordsOnly);
+        if (useWord) { const id = words[i], lx = X.lex[id], mode = type === 'speak' && k.P.has(id) && i % 4 === 2 ? 'produce' : 'read';
+          out.push({ type: as, kind: 'word', lang: code, lex: id, say: lx.lemma, gloss: spGloss(C, code, id), mode, track: 'p', ...(as !== type ? { from: type } : {}), ...fn }); }
+        else if (i < ss.length && !opts.wordsOnly) { const s = ss[i]; out.push({ type: as, kind: 'sentence', lang: code, sentence: s.id, say: s.text, gloss: s.gloss, mode: 'read', unknown: spUnknownOf(s, k), ...(as !== type ? { from: type } : {}), ...fn }); }
+      }
+    }
+    return out;
+  }
+
+  /* ---------- checking what was typed or said ---------- */
+  /** A dictation answer → {ok, how, diff?, notes?}: a word by checkTyped (P4), a sentence by typedAnswer (P7) against that sentence only. */
+  function checkDictation(C, code, item, text) {
+    if (item.kind === 'word') { const r = checkTyped(C, code, item.lex, text); return { ...r, how: r.ok ? 'exact' : null }; }
+    const s = C.lang[code].sentenceById[item.sentence]; if (!s) return { ok: false, how: null };
+    const r = typedAnswer(C, code, { ...s, alts: [] }, text, []);
+    return { ...r, diff: r.ok ? [] : letterDiff(s.text, nfc(String(text || '').trim())) };
+  }
+  /** Spoken text, folded: no punctuation, no vowel marks, no case; Arabic hamza seats / ى / ة / tatweel and Hebrew maqaf folded. */
+  function spokenFold(code, t) {
+    let x = nfc(t).replace(/[ـ]/g, '').replace(/[־]/g, ' ').replace(/[\p{P}\p{S}]+/gu, ' ').replace(/\s+/g, ' ').trim();
+    x = stripMarks(code, x).toLowerCase();
+    if (code === 'ar') x = x.replace(/[أإآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/[ؤئ]/g, 'ء');
+    return x;
+  }
+  /** Digits in a transcript → the course's number words (recognizers often write 3 for drei / 三). */
+  function spNumbers(C, code, t) {
+    if (!/\d/.test(t)) return [t];
+    const outs = [];
+    for (const g of ['MASC', 'FEM']) { let okAll = true; const r = t.replace(/\d+/g, m => { const w = numberWord(C, code, +m, { gender: g }); if (!w) { okAll = false; return m; } return w.text; }); if (okAll) outs.push(r); }
+    return uniqStr([t, ...outs]);
+  }
+  /** Does one heard word stand for a stored word (lexeme l, cell f)? Spelled like it, or read as it by the form index. */
+  function spHeardIs(C, code, w, k) {
+    if (spokenFold(code, w) === spokenFold(code, k.t)) return true;
+    if (!k.l) return false;
+    const X = C.lang[code], tries = uniqStr([w, ...(X.language.capitalizeFirst ? [capFirst(w), w.toLowerCase()] : [])]);
+    for (const x of tries) {
+      const r = lookup(C, code, x), ms = r.parts ? r.parts[r.parts.length - 1].matches : r.matches;
+      if ((ms || []).some(m => m.l === k.l && (!k.f || !m.f || canon(m.f) === canon(k.f)))) return true;
+    }
+    return false;
+  }
+  const spLexSound = (C, code, l) => l && C.lang[code].lex[l] ? soundKey(C, code, l) : null;
+  /** What the browser heard (its alternatives) against the stored word or sentence → {ok, heard, matched: [bool per stored word], how}. */
+  function checkSpoken(C, code, item, alternatives) {
+    const X = C.lang[code], alts = uniqStr((Array.isArray(alternatives) ? alternatives : [alternatives]).filter(a => a && String(a).trim()).flatMap(a => spNumbers(C, code, String(a))));
+    const s = item.kind === 'sentence' ? X.sentenceById[item.sentence] : null, lx = item.lex ? X.lex[item.lex] : null;
+    const lastPart = k => (k.parts || []).filter(p => p.l).slice(-1)[0] || {};
+    const stored = s ? (s.tokens || []).filter(k => !k.p).map(k => ({ t: k.t, l: k.l || lastPart(k).l || null, f: k.l ? (k.f || null) : (lastPart(k).f || null) })) : lx ? [{ t: lx.lemma, l: lx.id, f: null }] : [];
+    if (!stored.length || !alts.length) return { ok: false, heard: alts[0] || '', matched: stored.map(() => false), how: null };
+    const forms = lx ? uniqStr([lx.lemma, ...Object.values(lx.forms || {}), ...(lx.alts || []), ...(lx.trad ? [lx.trad] : [])].map(f => spokenFold(code, f))) : [];
+    let best = { ok: false, heard: alts[0], matched: stored.map(() => false), how: null, score: -1 };
+    for (const a of alts) {
+      let r;
+      if (X.language.tokenJoin === 'none') {   // Chinese: the same characters, or the same syllables with the same tones
+        const whole = spokenFold(code, a).replace(/\s+/g, ''), want = s ? spokenFold(code, s.text).replace(/\s+/g, '') : null;
+        if (s ? whole === want : forms.includes(whole)) r = { ok: true, matched: stored.map(() => true), how: 'exact' };
+        else {
+          const toks = tokenize(C, code, a).filter(k => !k.p), heardKey = toks.map(k => k.unknown ? '?' : spLexSound(C, code, (k.matches[0] || {}).l) || '?').join('');
+          const wantKey = stored.map(k => spLexSound(C, code, k.l) || spokenFold(code, k.t)).join('');
+          const ok = !heardKey.includes('?') && heardKey === wantKey;
+          r = { ok, matched: stored.map(k => ok || whole.includes(spokenFold(code, k.t))), how: ok ? 'sound' : null };
+        }
+      } else {
+        const heard = spokenFold(code, a).split(' ').filter(Boolean), raw = nfc(a).replace(/[\p{P}\p{S}]+/gu, ' ').split(/\s+/).filter(Boolean);
+        if (lx) {   // one word (a German noun may come with its article)
+          const hit = raw.some(w => forms.includes(spokenFold(code, w)) || spHeardIs(C, code, w, { ...stored[0], f: null })) || forms.includes(heard.join(' '));
+          const ok = hit && heard.length <= lx.lemma.split(' ').length + 1;
+          r = { ok, matched: [ok], how: ok ? 'exact' : null };
+        } else {
+          const matched = stored.map((k, i) => raw[i] != null && spHeardIs(C, code, raw[i], k));
+          const ok = raw.length === stored.length && matched.every(Boolean);
+          r = { ok, matched, how: ok ? (spokenFold(code, a) === spokenFold(code, s.text) ? 'exact' : 'words') : null };
+        }
+      }
+      const score = r.matched.filter(Boolean).length + (r.ok ? 1000 : 0);
+      if (score > best.score) best = { ...r, heard: a, score };
+      if (r.ok) break;
+    }
+    delete best.score; return best;
+  }
+
+  /* ---------- recording an answer, the session ---------- */
+  /** An answer → reviews (§6.8): listen_pick / listen_tone → R; a word dictated or said right → P; a sentence typed / said right → P of its known words. */
+  function speechRecord(C, L, item, ok, day) {
+    const code = item.lang, X = C.lang[code]; if (!X) return [];
+    const done = [], k = known(C, L, code), met = id => rank(k.state[id]) >= rank('seen');
+    const rev = (id, tr, g) => { if (X.lex[id] && met(id)) { review(C, L, code, id, tr, g, day); done.push([id, tr, g]); } };
+    if (item.type === 'listen_pick' || item.type === 'listen_tone') rev(item.lex, 'r', ok ? 'good' : 'again');
+    else if (item.type === 'dictation' && item.kind === 'word') rev(item.lex, 'p', ok ? 'good' : 'again');
+    else if (item.type === 'speak' && item.kind === 'word' && ok) rev(item.lex, 'p', 'good');
+    else if ((item.type === 'dictation' || item.type === 'speak') && item.kind === 'sentence' && ok) { const s = X.sentenceById[item.sentence]; for (const l of s?.req || []) if (k.R.has(l)) rev(l, 'p', 'good'); }
+    return done;
+  }
+  /** The session's listening and speaking step (§7.5 step 6): one listening item and one speaking item, in today's languages that can be heard. */
+  function speechPlan(C, L, { day = 0, languages, n = 2, caps, rng } = {}) {
+    caps = caps !== undefined ? caps : SPEECH_CAPS; rng = rng || seeded(day * 7919 + 13);
+    const langs = (languages || L.settings.languages || C.languages).filter(c => C.lang[c] && spCanListen(caps, c));
+    if (!langs.length || n < 1) return [];
+    const out = [], LISTEN = ['listen_pick', 'listen_meaning', 'dictation'];
+    for (let j = 0; j < langs.length && out.length < 1; j++) {
+      const c = langs[(day + j) % langs.length], k = known(C, L, c);
+      for (let t = 0; t < LISTEN.length && out.length < 1; t++) {
+        const type = LISTEN[(day + t) % LISTEN.length];
+        const it = speechItems(C, L, c, type, { k, rng, max: 1, caps, wordsOnly: type === 'dictation' })[0]; if (it) out.push(it);
+      }
+    }
+    if (n >= 2 && spCanSpeak(caps)) for (let j = 0; j < langs.length && out.length < 2; j++) {
+      const c = langs[(day + 1 + j) % langs.length], it = speechItems(C, L, c, 'speak', { k: known(C, L, c), rng, max: 1, caps })[0];
+      if (it) out.push(it);
+    }
+    return out.slice(0, n);
+  }
+  for (const type of SPEECH_TYPES) GEN[type] = ctx => speechItems(ctx.C, ctx.L, ctx.code, type, { k: ctx.k, rng: ctx.rng, max: ctx.max, fn: ctx.fid,
+    words: ctx.gen?.lemmas || (['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) ? [] : undefined), pos: ctx.gen?.pos, sentences: ['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) && !ctx.gen?.lemmas ? ctx.bank() : undefined, wordsOnly: !!ctx.gen?.lemmas });
+  API.GEN = GEN;
+  Object.assign(API, { SPEECH_TAGS, SPEECH_RATE, SPEECH_TYPES, speechTag, voicesFor, pickVoice, speechText, setSpeechCaps, soundKey, homophones, spokenTones, speechItems, checkDictation, checkSpoken, spokenFold, speechRecord, speechPlan, getSpeechCaps: () => SPEECH_CAPS });   // P9 — listening and speaking
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
