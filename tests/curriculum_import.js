@@ -240,7 +240,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   console.log('— a step with a PDF, built by Claude FROM the file');
   await p.evaluate(([cid]) => { const c = NoemaCurriculum.get(Noema.account.id, cid); NoemaCurriculum.setMastered(Noema.account.id, c, 'prerequisites', 'manual'); }, [c.id]);
   await p.click(`.cm-node[data-id="${dna}"]`); await wait(300);
-  ok(/your material/i.test(await p.locator('.cm-panel').innerText()) && /dna-replication\.pdf/.test(await p.locator('.cm-panel').innerText()), 'the step panel lists “📎 Your material”');
+  { const clip = await p.locator('.cm-panel .cm-clip').first(), lab = await clip.getAttribute('aria-label').catch(() => '');
+    ok(/your material/i.test(await clip.getAttribute('title').catch(() => '')) && /dna-replication\.pdf/.test(lab || '') && !/dna-replication\.pdf/.test(await p.locator('.cm-panel').innerText()), 'the step panel has 📎 next to the title (“Your material” on hover), the file name no longer under it'); }
   await p.click('.cm-panel button:has-text("Review & prepare")'); await wait(400);
   ok(/dna-replication\.pdf/.test(await p.locator('.cm-editor .cm-mat').innerText()), 'the review shows the step’s files');
   await p.click('.cm-editor button:has-text("Looks good")');

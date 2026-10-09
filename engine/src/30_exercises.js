@@ -298,8 +298,11 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
-  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null, givenOf(w)) }, `${TUTOR.avatar} Ask ${TN}`);
-  actions.append(h('span', { class: 'grow' }), hintBtn);
+  const ask = () => askAIAbout(ex, null, givenOf(w));
+  if (SHL()) {   // the frame: "Ask <character>" waits in the card's top corner and shows when you are on the card, like 💡 does
+    const face = window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '';
+    head.append(h('button', { class: 'exask', type: 'button', style: { marginLeft: showSection && SEC[ex.section] ? '8px' : 'auto' }, onclick: ask }, face ? h('span', { class: 'face', html: face, 'aria-hidden': 'true' }) : TUTOR.avatar, SL('askTutor')));
+  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TN}`));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
@@ -325,7 +328,8 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (onDone) onDone(ok, card);
   }
   card._w = w; card._check = doCheck; card._locked = () => locked;
-  setTimeout(() => w.focus?.(), 50);
+  // the answer box gets the focus only when the card is in sight: a lesson with exercises at its end opens at its top
+  setTimeout(() => { if (!card.isConnected) return; const r = card.getBoundingClientRect(); if (r.top >= 0 && r.bottom <= innerHeight) w.focus?.(); }, 50);
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];

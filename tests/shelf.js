@@ -104,7 +104,9 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   console.log('— B. 📦 a subject you have, on a step');
   await p.click('.pick-cur:has-text("Mechanics")'); await wait(900);
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  await p.click('.cm-usesubject'); await wait(500);
+  ok(await p.locator('.cm-panel .cm-usesubject').count() === 0, 'the step panel stays short: “Use a subject I have” is in ✏️ Edit step');
+  await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
+  await p.click('.cm-ownfield .cm-usesubject'); await wait(500);
   ok(await box().locator('.cm-attachchip').count() === 2 && /on the Shelf/.test(await box().locator('.cm-attachchip:has-text("Demo Physics")').innerText()), 'the dialog lists my subjects and where each is (📚 on the Shelf)');
   ok(await p.locator('.cm-attachgo').isDisabled(), 'nothing chosen yet → Attach is disabled');
   await box().locator('.cm-attachchip:has-text("Demo Physics")').click(); await wait(150);

@@ -1276,8 +1276,15 @@
     if ((!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
     if (SHELL()) { try { NoemaShell.mount({ engine: !!meta }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
     if (!meta) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
+    return openEngine(acc, subs, meta);
+  }
+  /** Boot the engine on a subject. background: the frame needs the engine's account pages (Me › Profile, AI, Help…) or the
+      tutor before any subject was opened: the last subject you studied (else the first) loads quietly, without becoming the
+      one you are "in" and without the start-of-day things start() already did. */
+  let engineBoot = null;
+  async function openEngine(acc, subs, meta, { background = false } = {}) {
     KV.subj = meta.id;
-    Noema.setCurrent(acc.id, meta.id);
+    if (!background) Noema.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);
     jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
     if (window.NoemaConvos) {
@@ -1291,8 +1298,9 @@
     Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
-    document.title = `${Noema.subject.title} · ${CFG.appName}`;
-    document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS)
+    if (!background) document.title = `${Noema.subject.title} · ${CFG.appName}`;
+    if (!SHELL() || !NoemaShell.mounted) document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS); in the frame each route sets it
+    if (background) Noema.backgroundEngine = true;
     if (Noema.subject.features?.math) await ensureMath();
     // start the engine
     const inline = document.getElementById('noema-engine-src');
@@ -1300,9 +1308,22 @@
     else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
     document.body.classList.remove('noema-booting');
     document.getElementById('noema-splash')?.remove();
+    if (background) return;
     window.NoemaReact?.dayStart(acc.id);
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(() => { });
   }
+  /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */
+  Noema.ensureEngine = () => {
+    if (window.NoemaShell?.engine) return Promise.resolve(true);
+    return engineBoot || (engineBoot = (async () => {
+      const acc = Noema.account; if (!acc) return false;
+      const subs = await subjectsFor(acc.id); if (!subs.length) return false;
+      const last = window.NoemaShell?.recent?.()?.find?.(r => subs.some(s => s.id === r.subj));
+      const meta = subs.find(s => s.id === last?.subj) || subs[0];
+      await openEngine(acc, subs, meta, { background: true });
+      return !!window.NoemaShell?.engine;
+    })().catch(e => { console.warn('[noema] engine', e); return false; }).finally(() => { engineBoot = null; }));
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

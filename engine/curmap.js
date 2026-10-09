@@ -204,7 +204,7 @@ window.NoemaCurMap = (() => {
             el('div', { class: 'row' }, el('a', { class: 'btn small', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, 'Open Claude ↗'), el('button', { class: 'btn small ghost', onclick: () => setupClaude(acc) }, 'First time? Set up Claude'))),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Paste this message and send it'), tip('Claude asks the connector for the next task, does it and saves the result into your account — the map, the chapter plans, then the queued steps. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.')),
             w.steps.length > 1 ? el('label', { class: 'cg-field' }, 'Steps in this chat', cnt) : null,
-            el('div', { class: 'row' }, el('button', { class: 'btn primary cm-copymsg', onclick: e => copy(J().message(C().get(acc, cid), { count }), e.currentTarget) }, '📋 Copy the message for Claude'))),
+            el('div', { class: 'row' }, el('button', { class: 'btn primary cm-copymsg', onclick: e => { try { localStorage.setItem('noema:appUsed:' + acc, '1'); } catch (x) { } copy(J().message(C().get(acc, cid), { count }), e.currentTarget); } }, '📋 Copy the message for Claude'))),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Come back here')), el('p', { class: 'tiny' }, 'What Claude saves appears here by itself (checked when you return to this page, and every 20 seconds while something waits). ', A.error ? el('span', { class: 'cg-warn' }, '⚠️ ' + A.error + ' ') : null, ago != null ? `Last check: ${ago < 5 ? 'just now' : ago + ' s ago'}. ` : ''),
             el('button', { class: 'btn small cm-checknow', onclick: async e => { e.currentTarget.disabled = true; const n = await A.poll(acc).catch(() => 0); toast(n ? `💬 ${n} result(s) from your Claude app` : '💬 Nothing new yet', 2500); draw(); } }, '⟳ Check now'))),
         w.done ? null : manual(c, w));
@@ -541,6 +541,20 @@ window.NoemaCurMap = (() => {
         try { const r = await E.plan(acc, cid, [id], { instruction: instr.value.trim() }); if (r.queued) { busy.textContent = '💬 Sent to your Claude app: it re-plans this step (copy the message from the 💬 bar of the map). Your current chapters stay until the new plan arrives.'; replan.disabled = false; return; } c = C().get(acc, cid); chapters = c.nodes[id].chapters.map(ch => ({ ...ch })); goals.value = c.nodes[id].learningGoals.join('\n'); drawCh(); busy.textContent = '✓ New plan — check it, change what you like, then save.'; }
         catch (e) { busy.textContent = '⚠️ ' + e.message; } replan.disabled = false;
       } }, c.provider === 'claudeapp' ? '✨ Re-plan with my Claude app' : '✨ Re-plan the chapters with AI');
+      /** 📦 study the step from a subject the learner already has (only this step is re-planned) · ↩ take it off */
+      const ownField = () => {
+        if (!n || mode === 'add' || n.pack?.status === 'generating') return null;
+        const pk = n.pack || {};
+        return el('div', { class: 'cg-field cm-ownfield' }, el('b', {}, pk.assigned ? `📦 Taught by your subject “${pk.title || pk.id}”` : '📦 A subject you already have'),
+          el('p', { class: 'tiny' }, pk.assigned ? 'Its chapters follow that subject; ✨ re-plan them to match it again.' : 'Study this step from it instead: only this step is re-planned.'),
+          el('div', { class: 'row' },
+            el('button', { class: 'btn small cm-usesubject', onclick: () => { if (!save()) return; close(); attachDialog(acc, { cid, nid: id, onDone: () => onDone() }); } }, pk.assigned ? '📦 Use another subject' : '📦 Use a subject I have'),
+            pk.assigned ? el('button', { class: 'btn small ghost cm-detach', onclick: () => {
+              if (!confirm(`Take “${pk.title || pk.id}” off this step?\nThe subject stays (on your 📚 Shelf when no other step uses it). ${n.groupPlan ? 'The step gets the shared plan back, and the version prepared for everybody.' : 'The step is then planned again and prepared the usual way.'}`)) return;
+              const r = C().Edit.detach(acc, cid, id); if (r.error) { toast('⚠️ ' + r.error, 5000); return; }
+              const cc = C().get(acc, cid); if (cc.nodes[id]?.replan && (cc.provider === 'claudeapp' || LLM().pick(acc, cc.provider))) replanNow(acc, cid, id);
+              close(); onDone(); } }, '↩ Take it off this step') : null));
+      };
       const head2 = mode === 'review' ? head('📝 Review this step before it is prepared', 'Change anything you like — the name, the goals, the chapters. When you confirm, the material is generated; after that the chapters can no longer change.')
         : mode === 'add' ? head('➕ Add a step', 'Name it, place it with its prerequisites and dependents; the AI can plan its chapters.')
           : head('✏️ Edit the step', locked ? 'Already prepared: you can rename it, move it and change its links; its chapters are fixed.' : 'Everything can change until the step is prepared.');
@@ -564,15 +578,26 @@ window.NoemaCurMap = (() => {
           el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'What it teaches', summary), el('label', { class: 'cg-field' }, 'Place in the curriculum', role),
           el('div', { class: 'cg-field' }, el('b', {}, '⬅️ Prerequisites (must be mastered first)'), links('prerequisite', () => parents, v => { parents = v; }, possibleP)),
           el('div', { class: 'cg-field' }, el('b', {}, '➡️ Opens these steps'), links('dependent step', () => children, v => { children = v; }, possibleK)),
-          n?.pack?.assigned ? el('div', { class: 'cg-field' }, el('b', {}, `📦 Taught by your subject “${n.pack.title || n.pack.id}”`), el('p', { class: 'tiny' }, 'Its chapters follow that subject; ✨ re-plan them to match it again.')) : null,
-          n && !n.pack?.assigned ? el('div', { class: 'cg-field' }, el('b', {}, '📎 Your material for this step'), tip('Files you give a step are its sources: its chapters are planned from them and its subject is built from them (with Claude: inside its sandbox; with Gemini: from their text) — no web research of the theory. Steps without files are researched as usual.'), matBox) : null,
-          el('label', { class: 'cg-field' }, 'Learning goals' + (locked ? ' (fixed — already prepared)' : ''), goals),
-          el('div', { class: 'cg-field' }, el('b', {}, `📖 Chapters${locked ? ' (fixed — already prepared)' : ''}`), chBox,
-            locked ? null : el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { chapters.push({ title: '', goals: [], coverage: [] }); drawCh(); chBox.querySelector('li:last-child input')?.focus(); } }, '➕ Add a chapter'), replan),
-            locked ? null : instr, busy)),
+          ownField(),
+          n && !n.pack?.assigned && !locked ? el('div', { class: 'cg-field' }, el('b', {}, '📎 Your material for this step'), tip('Files you give a step are its sources: its chapters are planned from them and its subject is built from them (with Claude: inside its sandbox; with Gemini: from their text) — no web research of the theory. Steps without files are researched as usual.'), matBox) : null,
+          // a prepared step's goals and chapters are fixed: not shown here (only what can change is)
+          locked ? null : el('label', { class: 'cg-field' }, 'Learning goals', goals),
+          locked ? null : el('div', { class: 'cg-field' }, el('b', {}, '📖 Chapters'), chBox,
+            el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { chapters.push({ title: '', goals: [], coverage: [] }); drawCh(); chBox.querySelector('li:last-child input')?.focus(); } }, '➕ Add a chapter'), replan),
+            instr),
+          busy),
         err, el('div', { class: 'row noema-ovfoot' }, ...buttons, el('button', { class: 'btn small', onclick: close }, 'Cancel')));
       setTimeout(() => (mode === 'review' ? box.querySelector('.cm-chedit input') : title)?.focus(), 150);
     });
+  }
+  /** A step's summary without the names and pages of its files (the 📎 next to the title has them); what stays, when it is
+      short (e.g. “Path C”, “Foundations”), is shown next to the kind of step. → { path, summary } */
+  const FILEISH = /\.(pdf|md|markdown|txt|docx?|pptx?|zip|html?|epub|ipynb)\b|\bpp?\.\s*\d|\bσσ?\.\s*\d|\d+\s*(pages?|σελ)|📎/i;
+  function splitSummary(text) {
+    const parts = String(text || '').split(/\s+[·|]\s+/).map(x => x.trim()).filter(Boolean), keep = parts.filter(x => !FILEISH.test(x));
+    if (keep.length === parts.length) return { path: '', summary: String(text || '').trim() };
+    const rest = keep.join(' · ');
+    return rest.length <= 48 && !/[.!?;](\s|$)/.test(rest) ? { path: rest, summary: '' } : { path: '', summary: rest };
   }
   async function openMaterial(acc, cid, id, f) {
     const c = C().get(acc, cid); const rec = await C().materialFile(acc, c, id, f).catch(() => null);
@@ -846,7 +871,7 @@ window.NoemaCurMap = (() => {
   /** What the shell asks the next map it opens to do (e.g. { settings: true } from a Roadmap's ⋮). */
   const mapOpts = { next: null };
   const SHL = () => window.NoemaShell?.mounted ? window.NoemaShell : null;
-  const SL = (k, d) => window.NoemaShell ? NoemaShell.L(k) : d;   // the shell's words (engine/i18n_shell.js), English without it
+  const SL = (k, d, v) => window.NoemaShell ? NoemaShell.L(k, v) : d;   // the shell's words (engine/i18n_shell.js), English without it
   const viewKey = 'noema-mapview';
   /** opts.page: draw into this element (a page of the shell) instead of a full-screen overlay; opts.chrome(menu): the page's ⋮ */
   function map(acc, cid, { focus, onStudy, appHelp = false, page = null, chrome = null, settings: openSettings = false } = {}) {
@@ -885,11 +910,22 @@ window.NoemaCurMap = (() => {
           sh.role === 'owner' ? el('button', { class: 'btn small', onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥 People') : null);
       };
       const showApp = (nid = null) => overlay((b2, close2) => b2.append(head('💬 Your Claude app', 'Your own Claude (with your Claude plan) plans and prepares the steps; the results appear on this map by themselves.'), appPanel(acc, cid, { onStudy, nid }), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))));
+      /** 💬 the Claude app has worked on this map already (or the message was copied): the learner knows the way */
+      const appKey = 'noema:appUsed:' + acc;
+      const knowsApp = () => { try { if (localStorage.getItem(appKey)) return true; } catch (e) { }
+        return Object.values(c.nodes || {}).some(n => /^claude-(app|chat)$/.test(n.pack?.via || '') || n.pack?.claimedAt) || (c.log || []).some(l => String(l.m || '').startsWith('💬 Claude app')); };
+      const copyMsg = b => { try { localStorage.setItem(appKey, '1'); } catch (e) { } copy(J().message(C().get(acc, cid), { count: 1 }), b).then(() => { if (!b) toast(SL('copiedForClaude', '📋 Copied: paste it into a Claude chat'), 3500); }); if (page) { dotNow = null; drawMenu(); } };
+      let dotNow = null;
       const drawBar = () => {
         const w = J().work(c); appBar.innerHTML = '';
+        if (page) {   // the shell: no bar; a dot on ⋮ until the learner has used their Claude app once
+          const dot = !w.done && c.provider === 'claudeapp' && !knowsApp();
+          if (dot !== dotNow) { dotNow = dot; drawMenu(); }
+          return;
+        }
         if (w.done) return;
         appBar.append(el('span', {}, '💬 ', el('b', {}, 'For your Claude app: '), [w.toPlan.length ? `${w.toPlan.length} step${w.toPlan.length > 1 ? 's' : ''} to plan` : null, w.steps.length ? `${w.steps.length} to prepare` : null].filter(Boolean).join(' · ')),
-          el('button', { class: 'btn small primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
+          el('button', { class: 'btn small primary', onclick: e => copyMsg(e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
       };
       const study = (s, nid) => { close(); viaStep(acc, cid, nid, s); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
       const addStep = () => editStep(acc, cid, null, { mode: 'add', onDone: nid => { drawMap(); if (nid) { sel = nid; drawMap(); showPanel(nid); scrollToNode(nid); } } });
@@ -898,14 +934,15 @@ window.NoemaCurMap = (() => {
       const showLegend = () => SHL() ? SHL().sheet(SL('mapSigns', 'What the signs mean'), b2 => b2.append(legend())) : overlay((b2, close2) => b2.append(legend(), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))));
       const setList = on => { listMode = on; try { localStorage.setItem(viewKey, on ? 'list' : 'map'); } catch (e) { } drawMap(); drawMenu(); };
       /** the shell's ⋮ for this map: what is not needed all the time */
-      const drawMenu = () => chrome?.(() => [
+      const drawMenu = () => chrome?.(() => { const w = J().work(C().get(acc, cid) || c), waiting = w.toPlan.length + w.steps.length + (w.graph ? 1 : 0); return [
+        c.provider === 'claudeapp' && !w.done ? { label: SL('copyForClaude', 'Copy the message for Claude'), sub: SL('copyForClaudeSub', `${waiting} waiting · paste it into a Claude chat`, { n: waiting }), icon: 'chat', badge: dotNow ? String(waiting) : null, run: () => copyMsg() } : null,
         { label: listMode ? SL('showAsMap', 'Show as a map') : SL('showAsList', 'Show as a list'), icon: listMode ? 'map' : 'list', run: () => setList(!listMode) },
         member ? null : { label: SL('addStep', 'Add a step'), icon: 'plus', run: addStep },
         member ? null : { label: c.shared && !c.shared.ended ? SL('sharing', 'Sharing') : SL('share', 'Share'), sub: SL('shareRmSub', 'Everybody keeps their own progress; the prepared steps are shared'), icon: 'people', run: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) },
         c.provider === 'claudeapp' ? { label: SL('claudeApp', 'Your Claude app'), sub: SL('claudeAppMapSub', 'Copy the message · by hand · import'), icon: 'chat', run: () => showApp() } : null,
         { label: SL('rmSettings', 'Settings'), sub: SL('rmSettingsSubAll', 'Prepare ahead, AI, budget, review, re-plan, delete'), icon: 'gear', run: () => settings() },
         { label: SL('exportJson', 'Export (.json)'), icon: 'download', run: exportJson }, '-',
-        { label: SL('mapSigns', 'What the signs mean'), icon: 'help', run: showLegend }]);
+        { label: SL('mapSigns', 'What the signs mean'), icon: 'help', run: showLegend }]; }, { menuDot: !!dotNow });
       const zoomTo = z => { const r = scroller.getBoundingClientRect(); const cx = (scroller.scrollLeft + r.width / 2) / zoom, cy = (scroller.scrollTop + r.height / 2) / zoom; zoom = Math.max(0.35, Math.min(1.6, z)); drawMap(); scroller.scrollLeft = cx * zoom - r.width / 2; scroller.scrollTop = cy * zoom - r.height / 2; };
       const fit = () => { const r = scroller.getBoundingClientRect(); zoomTo(vert ? Math.min(1, r.width / (+canvas.dataset.w || 1)) : Math.min(r.width / (+canvas.dataset.w || 1), r.height / (+canvas.dataset.h || 1))); };
       const tools = el('div', { class: 'cm-tools' },
@@ -995,7 +1032,7 @@ window.NoemaCurMap = (() => {
           const busyR = replanBusy.has(cid + '/' + id), withAll = C().holding(c) && !n.chapters?.length;
           act.append(el('div', { class: 'cm-live cm-replanning' }, withAll ? `📦 Taught by “${pk.title || pk.id}”` : busyR ? '⏳ Re-planning it to match its subject…' : '🔄 Being re-planned to match its subject',
             el('span', { class: 'tiny' }, withAll ? ' — its chapters are planned from it together with the other steps (▶ Plan the steps now).' : ' — it opens when its new plan is here. The steps after it keep their plans.')),
-            withAll || busyR ? null : c.provider === 'claudeapp' ? el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'))
+            withAll || busyR ? null : c.provider === 'claudeapp' ? el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copyMsg(e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'))
               : el('button', { class: 'btn primary cm-replannow', onclick: () => { replanNow(acc, cid, id); setTimeout(() => showPanel(id), 50); } }, '↻ Re-plan now'));
         }
         else if (st.open || st.mastered) {
@@ -1015,16 +1052,16 @@ window.NoemaCurMap = (() => {
             pk.shared && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `⚡ Prepared by ${rx.by || 'another member'}`) : null,
             pk.own && rx && !rx.mine ? el('p', { class: 'tiny cm-byline' }, `This is your own version — ${rx.by || 'another member'}’s version ${rx.status === 'ready' ? 'is' : 'will be'} the shared one.`) : null);
           else if (pk.status === 'app') act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Waiting for your Claude app', el('span', { class: 'tiny' }, ' — paste the message into a Claude chat; the step appears here by itself.')),
-            el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }),
+            el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copyMsg(e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }),
               el('button', { class: 'btn small ghost', title: 'Take it out of the Claude app’s queue', onclick: () => { G().fromApp(c, id); showPanel(id); } }, '↩ Not now')));
-          else if (c.provider === 'claudeapp' && J().needsPlan(n)) act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Its chapters are planned by your Claude app', el('span', { class: 'tiny' }, ' — copy the message in the 💬 bar into a Claude chat.')), el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand')));
+          else if (c.provider === 'claudeapp' && J().needsPlan(n)) act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Its chapters are planned by your Claude app', el('span', { class: 'tiny' }, ' — paste the message into a Claude chat.')), el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copyMsg(e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand')));
           else if (pk.status === 'generating' || G().busy() === key) act.append(el('div', { class: 'cm-live' }, '⏳ Preparing… ', el('span', { class: 'tiny' }, live?.msg || '')), el('button', { class: 'btn small', onclick: () => { G().stop(); } }, '⏸ Pause'));
           else if (pk.status === 'paused' && pk.budgetHit) { const nb = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(Math.ceil((c.nodeBudget || 8) * 1.5)) }); act.append(el('p', { class: 'tiny' }, '💰 ' + (pk.error || 'The spending limit for this step was reached.')), el('label', { class: 'tiny' }, 'New limit $ ', nb), el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true, raiseBudget: +nb.value || 0 }); showPanel(id); } }, '▶ Continue')); }
           else if (!n.reviewed && !c.autoApprove && pk.status !== 'failed') act.append(el('button', { class: 'btn primary', onclick: () => editStep(acc, cid, id, { mode: 'review', onDone: () => { drawMap(); showPanel(id); } }) }, '📝 Review & prepare this step'), tip('Before the material is generated you can check and change its chapters and goals. After that the chapters are fixed.'));
           else if (c.provider === 'claudeapp') act.append(el('button', { class: 'btn primary', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 Prepare it in my Claude app'), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }));
           else act.append(el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true }); toast?.('⏳ Preparing “' + n.title + '” — it usually takes 5–30 minutes; you can study something else meanwhile.', 5000); showPanel(id); } }, pk.status === 'failed' ? '↻ Try again' : '⚡ Prepare this step now'),
             pk.status === 'failed' ? el('p', { class: 'tiny cg-kstat bad' }, '⚠️ ' + pk.error) : null, appWay());
-          if (!st.mastered) act.append(el('button', { class: 'btn small', onclick: () => test(id) }, '🎓 I already know this'), tip('A 10-question test (from the step’s own exercises when it is prepared). 8 / 10 marks it mastered and opens the next steps.'));
+          if (!st.mastered) act.append(el('button', { class: 'btn small cm-knowit', onclick: () => test(id) }, '🎓 I already know this'));
           else if (st.how === 'test' || st.how === 'manual') act.append(el('button', { class: 'btn small ghost', onclick: () => { C().setMastered(acc, c, id, null); drawMap(); showPanel(id); } }, '↩ Undo “mastered”'));
         } else {
           act.append(el('p', { class: 'cm-lock' }, '🔒 Locked. Master these first: ', ...missing.map((p, i) => [i ? ', ' : '', el('a', { href: '#', onclick: e => { e.preventDefault(); sel = p; drawMap(); showPanel(p); scrollToNode(p); } }, T(p))])));
@@ -1037,15 +1074,17 @@ window.NoemaCurMap = (() => {
         if (window.marked && window.DOMPurify && md) chBox.innerHTML = DOMPurify.sanitize(marked.parse(md)); else chBox.append(el('ol', {}, ...(n.chapters || []).map(ch => el('li', {}, ch.title))));
         // tap a chapter → its teaching goals and coverage
         [...chBox.querySelectorAll('li')].forEach((li, i) => { const ch = n.chapters[i]; if (!ch) return; li.tabIndex = 0; li.title = 'Show the goals of this chapter'; li.addEventListener('click', () => { const open = li.querySelector('.cm-chd'); if (open) { open.remove(); return; } li.append(el('div', { class: 'cm-chd tiny' }, el('div', {}, '🎯 ', (ch.goals || []).join(' · ')), el('div', {}, '📌 ', (ch.coverage || []).join(' · ')))); }); });
+        const sm = splitSummary(n.summary), files = n.material?.files || [];
+        // 📎 the learner's own material: one clip next to the title (hover: what it is; tap: the file, or which file)
+        const clip = files.length ? el('span', { class: 'ns-menu cm-clipwrap' }, el('button', { class: 'cm-clip', 'data-pop': '1', title: 'Your material — this step is taught from it', 'aria-label': 'Your material — this step is taught from it: ' + files.map(f => f.name).join(', '),
+          onclick: e => { e.stopPropagation(); const b = e.currentTarget; if (files.length === 1 || !SHL()?.popMenu) return openMaterial(acc, cid, id, files[0]); SHL().closePops?.(); SHL().popMenu(b, files.map(f => ({ label: f.name, sub: f.range ? `pages ${f.range[0]}–${f.range[1]}` : f.pages ? `${f.pages} pages` : '', icon: '📄', run: () => openMaterial(acc, cid, id, f) }))); } }, '📎')) : null;
         panel.append(el('button', { class: 'btn small ghost cm-pclose', 'aria-label': 'Close the panel', onclick: () => { panel.classList.remove('on'); sel = null; drawMap(); } }, '✕'),
-          el('div', { class: 'cm-ptitle' }, el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('div', {}, el('h3', {}, n.title), el('div', { class: 'tiny' }, ROLE[n.role] + (n.domains?.length ? ' · ' + n.domains.join(', ') : '')))),
-          n.summary ? el('p', {}, n.summary) : null, prog ? el('p', { class: 'tiny' }, prog) : null, act,
+          el('div', { class: 'cm-ptitle' }, el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('div', {}, el('h3', {}, n.title, clip ? ' ' : null, clip), el('div', { class: 'tiny cm-psub' }, [ROLE[n.role], sm.path, n.domains?.length ? n.domains.join(', ') : ''].filter(Boolean).join(' · ')))),
+          sm.summary ? el('p', {}, sm.summary) : null, prog ? el('p', { class: 'tiny' }, prog) : null, act,
           pk.assigned ? el('p', { class: 'tiny cm-byline cm-taughtby' }, `📦 Taught by your subject “${pk.title || pk.id}”`, (() => { const k = C().stepsOf(acc, pk.id).length - 1; return k > 0 ? ` — it also teaches ${k} other step${k === 1 ? '' : 's'} (same progress)` : ''; })()) : null,
           (() => { const from = C().planLocked(n) || member ? [] : st.parents.filter(p => c.nodes[p]?.pack?.assigned && c.nodes[p].assignedAt && (!n.plannedAt || c.nodes[p].assignedAt > n.plannedAt));
             return from.length ? el('p', { class: 'tiny cm-flag' }, `⚑ ${from.map(p => '“' + T(p) + '”').join(', ')} ${from.length === 1 ? 'is' : 'are'} now taught by your own subject — check that this step still fits (✏️ Edit step → ✨ Re-plan).`) : null; })(),
-          n.material?.files?.length ? el('div', { class: 'cm-matpanel' }, el('div', { class: 'nx-lbl' }, '📎 Your material — this step is taught from it'), el('ul', { class: 'cm-matlist' }, ...n.material.files.map(f => el('li', {}, el('button', { class: 'linklike', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), f.pages ? el('span', { class: 'tiny' }, ` · ${f.pages} pages`) : null)))) : null,
           member ? el('div', { class: 'row cm-ownrow' }, ...ownBtns()) : el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small', onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️ Edit step'),
-            ...ownBtns(),
             c.shared?.role === 'owner' && c.remote?.[id] && !c.remote[id].mine ? el('button', { class: 'btn small ghost cm-removestep', title: 'Remove the version another member prepared (the step can then be prepared again)', onclick: async () => { if (!confirm(`Remove the version of “${n.title}” that ${c.remote[id].by || 'another member'} prepared? Everybody can then prepare it again.`)) return; try { await SH().removeStep(acc, cid, id); toast('🗑 Removed — the step can be prepared again'); } catch (e) { toast('⚠️ ' + e.message, 5000); } drawMap(); showPanel(id); } }, `🗑 ${c.remote[id].by || 'Member'}’s ${c.remote[id].status === 'ready' ? 'version' : 'reservation'}`) : null,
             !pk.status && !st.mastered && (n.reviewed || c.autoApprove) && !(st.open) && !c.remote?.[id] ? el('span', { class: 'tiny' }, '✔ reviewed — prepared when it opens') : null),
           n.learningGoals?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '🎯 After this step you can'), el('ul', { class: 'cm-goals' }, ...n.learningGoals.map(g => el('li', {}, g)))) : null,
@@ -1126,7 +1165,13 @@ window.NoemaCurMap = (() => {
       }
       async function test(id) {
         const n = c.nodes[id];
-        overlay(async (b2, close2) => {
+        overlay((b2, close2) => {
+          // first what the test is (nothing is prepared, no AI is asked, until the learner goes on)
+          b2.append(head('🎓 ' + n.title, 'I already know this'),
+            el('p', {}, 'A 10-question test, from the step’s own exercises when it is prepared. 8 of 10 right marks the step as mastered and opens the steps after it.'),
+            el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary cm-teststart', onclick: () => { b2.replaceChildren(); run(b2, close2); } }, 'Proceed'), el('button', { class: 'btn small', onclick: close2 }, 'Go back')));
+        });
+        async function run(b2, close2) {
           b2.append(head('🎓 ' + n.title, 'Placement test — 8 of 10 right marks this step as mastered'), el('p', {}, '⏳ Preparing the questions…'));
           let qs; try { qs = await G().placementTest(c, id); } catch (e) { b2.lastChild.textContent = '⚠️ ' + e.message; b2.append(el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))); return; }
           let i = 0, right = 0; const body = el('div', { class: 'cm-test' }); b2.lastChild.replaceWith(body);
@@ -1143,7 +1188,7 @@ window.NoemaCurMap = (() => {
             body.append(opts);
           };
           ask();
-        });
+        }
       }
       drawMap(); drawMenu(); if (sel) { showPanel(sel); setTimeout(() => scrollToNode(sel), 60); } else { const first = C().nextUp(acc, c)[0]; if (first) setTimeout(() => scrollToNode(first), 60); }
       if (page && !sel && !listMode) requestAnimationFrame(() => { fitted = false; drawMap(); const first = C().nextUp(acc, c)[0]; if (first) scrollToNode(first); });

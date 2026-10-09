@@ -99,7 +99,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   console.log('— 💡 explain any part of the lesson');
   await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); location.hash = '#/s/' + COURSE[0].sections[0].id; }); await wait(700);
   await p.evaluate(() => { const b = [...document.querySelectorAll('.continue button')].find(x => /show all/.test(x.textContent)); b && b.click(); }); await wait(300);
-  const nBlk = await p.locator('.reader .blk').count(), nX = await p.locator('.reader .blk > .xbtn').count();
+  const nBlk = await p.locator('.reader .blk').count(), nX = await p.$$eval('.reader .blk', l => l.filter(b => [...b.querySelectorAll('.xbtn')].some(x => x.parentElement === b || (x.classList.contains('docked') && x.closest('.xable') === b))).length);   // a picture's 💡 sits in its own top row
   ok(nBlk > 0 && nX === nBlk && await p.locator('.sechead > .xbtn').count() === 1, `every part of the lesson has a 💡 (${nX} blocks + the section heading)`);
   const op0 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   await p.hover('.reader .blk >> nth=0'); await wait(250);

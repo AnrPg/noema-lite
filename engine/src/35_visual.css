@@ -94,6 +94,11 @@ a.vx-credit:hover{opacity:1;text-decoration:underline}
 /* figure (theory) */
 .vx-fig{margin:6px 0 4px}
 .vx-figbar{margin-top:6px;gap:8px;align-items:center}
+.vx-labelbar{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+.vx-lblbtn{font-weight:700;background:var(--c-bg,var(--violet-bg));color:var(--c,var(--violet));border:1px solid color-mix(in srgb,var(--c,var(--violet)) 35%,transparent)}
+.vx-lblbtn:hover{border-color:var(--c,var(--violet))}
+.vx-lbltext{font-size:12.5px;color:var(--ink2)}
+@media (max-width:420px){.vx-lbltext{display:none}}
 .vx-tip{position:absolute;z-index:5;transform:translate(-50%,calc(-100% - 14px));max-width:min(280px,80%);padding:8px 11px;border-radius:12px;background:#1f2330;color:#fff;font-size:13px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none !important;transition:opacity .15s}
 .vx-tip.below{transform:translate(-50%,14px)}
 .vx-tip.on{opacity:1}

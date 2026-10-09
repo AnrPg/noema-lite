@@ -44,8 +44,15 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(!(await page.$('.ns-onb')), 'the questions are gone; they do not come back');
   ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","discover","progress"]', 'tabs: Today · Knowledge · Discover · Progress (no Languages for “knowledge”)');
   ok(await page.$('.ns-hello') && await page.$('.ns-duo'), 'Today: hello, review and mistakes gym');
-  ok(await page.$eval('#ns-fab', b => b.hidden), 'no tutor button before a subject is open');
+  ok(await page.$eval('#ns-fab', b => !b.hidden && b.classList.contains('full') && b.textContent.includes('Cobalt')), 'the tutor is there from the start: the whole character, with its name');
+  await page.goto(url + '#/me/profile'); await until(() => page.$('.ns-accbody'), 12000);
+  ok(await page.$('.ns-accbody') && !(await page.$('.ns-view .ns-panel .btn.primary')), 'Me › Profile works before any subject is opened');
+  ok(await page.evaluate(() => document.documentElement.lang) === 'en', 'the page language is the menus’ language on the frame’s pages');
   await page.reload(); await wait(1200);
+  await page.click('#ns-fab'); await until(() => page.$('.drawer.open'), 12000);
+  ok(await page.$('.drawer.open') && await page.evaluate(() => location.hash === '#/me/profile'), 'the tutor opens from any page, even before a subject is opened');
+  await page.evaluate(() => closeTutor());
+  await page.goto(url); await page.reload(); await wait(1200);
   ok(!(await page.$('.ns-onb')) && await page.$('.ns-hello'), 'after a reload the app opens on Today, no picker, no questions');
 
   console.log('B. Knowledge, the Shelf, a subject');
@@ -62,10 +69,11 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await until(() => page.$('.subjhead')), 'a subject from the Shelf opens its page (#/subject)');
   ok(await page.evaluate(() => location.hash) === '#/subject', 'address: #/subject');
   ok((await texts(page, '.ns-crumbs > *')).join(' ').includes('Shelf'), 'crumbs: Shelf › the subject');
-  ok(await page.$('.chlist .chrow') && !(await page.$('.chapters')), 'chapters as a list by default');
-  await page.click('.chviewseg [data-v="cards"]'); await wait(300);
-  ok(await page.$('.chapters .chcard') && await page.evaluate(() => localStorage.getItem('noema-chview')) === 'cards', 'the chapter cards stay as a second view, remembered');
-  await page.click('.chviewseg [data-v="list"]'); await wait(200);
+  ok(await page.$('.chapters .chcard') && !(await page.$('.chlist')), 'chapters as cards by default');
+  ok(await page.$$eval('.subjhead', l => l.length === 1 && !l[0].querySelector('.subjemo')) && !(await page.$('.nodebanner')), 'one plain header (title, one line, one bar): no emoji tile, no second banner');
+  await page.click('.chviewseg [data-v="list"]'); await wait(300);
+  ok(await page.$('.chlist .chrow') && await page.evaluate(() => localStorage.getItem('noema-chview')) === 'list', 'the list stays as a second view, remembered');
+  await page.click('.chviewseg [data-v="cards"]'); await wait(200);
   const pm = await menuItems(page, '.ns-practicebtn');
   ok(has(pm, ['Mixed practice', 'Flashcards', 'Debug drills', 'Mistakes gym', 'Lightning round', 'Ask Cobalt']), 'Practice ▾: ' + pm.join(' · '));
   const um = await menuItems(page, '#ns-top .ns-menubtn');
@@ -82,13 +90,23 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.tabs button:nth-child(3)'); await wait(300);
   ok(await page.evaluate(() => location.hash.endsWith('/traps')), 'Traps: its own tab');
   await page.goto(url + '#/s/' + sec); await until(() => page.$('.reader'));
-  ok(await page.evaluate(() => document.body.classList.contains('ns-reading')) && await page.$eval('#ns-fab', b => !b.classList.contains('full')), 'reading: the compact tutor button');
+  ok(await page.evaluate(() => document.body.classList.contains('ns-reading')) && await page.$eval('#ns-fab', b => !b.hidden && b.classList.contains('full')), 'reading: the tutor stays, whole, with its name');
   await page.evaluate(() => document.querySelector('.continue .btn.ghost')?.click()); await wait(300);
-  if (await page.$('.ns-askbtn')) { const am = await menuItems(page, '.ns-askbtn'); ok(has(am, ['Socratic dialogue on this', 'Debug simulation', 'Interview me', 'A new question']), 'Ask ▾ after the section: ' + am.join(' · ')); }
-  else ok(false, 'Ask ▾ after the section');
+  { const more = await page.evaluate(() => Object.keys(SEC).length > 1), t = await page.$eval('.ns-secnav .secnext', b => b.textContent).catch(() => '');
+    ok(!(await page.$('.ns-askbtn')) && t.includes(more ? 'Next section' : 'Practise the chapter'), 'the section ends with one big button (“Next section”, or the chapter’s practice after the last one), no Ask button: ' + t); }
+  ok(has(await menuItems(page, '#ns-top .ns-menubtn'), ['A new question']), 'section ⋮: a new question');
   await page.click('#ns-fab'); await wait(500);
   ok(await page.$('.drawer.open .avatar.face svg'), 'the tutor opens with the character’s face');
   ok((await page.$eval('.drawer .dh', d => d.textContent)).includes('Cobalt'), 'the tutor has the character’s name');
+  ok((await page.$eval('.drawer .ns-modelabel', d => d.textContent)) === 'How Cobalt helps you' && (await page.$eval('.drawer .ns-modesel', d => d.textContent)).startsWith('Socratic · I ask you'), 'the tutor: “How Cobalt helps you” over one list of the modes');
+  ok(await page.$$eval('.drawer button', l => l.filter(b => b.offsetParent).length) <= 6 && !(await page.$('.drawer .starters, .drawer .modechips, .drawer select')), 'the tutor is quiet: ⋮, ✕, the mode, the chip’s ✕ and send; no starters, chips or pickers');
+  ok((await page.$eval('.drawer .ns-forchip', d => d.textContent)).startsWith('For: ') && (await page.$eval('.drawer .msg.ai', d => d.textContent)).startsWith('Hi '), 'a “For: …” chip and a greeting');
+  await page.click('.drawer .ns-modesel'); await wait(250);
+  ok(has(await page.$$eval('.drawer .ns-pop button', l => l.map(x => x.querySelector('.mt')?.firstChild?.textContent.trim())), ['Socratic', 'Explain', 'Quiz', 'Interview', 'Case simulation']), 'the modes, each with its line');
+  await page.click('.drawer .ns-pop button:has-text("Explain")'); await wait(250);
+  ok((await page.$eval('.drawer .ns-modesel b', d => d.textContent)) === 'Explain' && await page.evaluate(() => T.mode) === 'explain', 'picking a mode');
+  ok(has(await menuItems(page, '.drawer .ns-menubtn'), ['Conversation history', 'New conversation', 'Conversation language']), 'the tutor’s ⋮: history, new, language (export once there is a conversation)');
+  await page.evaluate(() => { T.mode = 'socratic'; });
   await page.evaluate(() => closeTutor());
 
   console.log('D. a Roadmap as a page');
@@ -131,7 +149,8 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.ns-seg [data-v="playful"]'); await wait(200);
   await page.goto(url + '#/character'); await wait(500);
   ok(await page.$$eval('.ns-gcard', l => l.length) === 20 && await page.$('.ns-gcard.cur[data-char="robot"]'), 'the gallery: 20 characters, each in its own clothes; yours marked');
-  ok(['berry', 'robot', 'heron', 'prism'].every(async k => await page.$(`.ns-gcard[data-char="${k}"]`)), 'the four new ones: strawberry, robot, heron, prism');
+  { const found = await Promise.all(['berry', 'robot', 'heron', 'prism'].map(k => page.locator(`.ns-gcard[data-char="${k}"]`).count()));
+    ok(found.every(n => n === 1), 'the four new ones: strawberry, robot, heron, prism'); }
   await page.click('[data-try="owl"]'); await wait(400);
   ok(await page.$('.ns-preview') && await page.evaluate(() => document.documentElement.dataset.m) === 'owl', 'try anyone for 5 minutes: the preview bar, the app in its clothes');
   await page.click('.ns-preview .btn:not(.primary)'); await wait(300);

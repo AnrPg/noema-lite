@@ -149,8 +149,10 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   console.log('— “I already know this” (placement test) opens the next step');
   ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '“Probability basics” is locked (its prerequisite “Sets and events” is not mastered)');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("I already know this")');
-  ok(await until(() => p.locator('.cm-test .cm-opts').count(), 10000), 'a 10-question placement test opens');
+  await p.click('.cm-panel button:has-text("I already know this")'); await wait(200);
+  ok(/8 of 10 right/.test(await p.locator('.noema-ovbox').last().innerText()) && await p.locator('.cm-test').count() === 0, 'first it says what the test is (Proceed / Go back), nothing is prepared yet');
+  await p.click('.cm-teststart');
+  ok(await until(() => p.locator('.cm-test .cm-opts').count(), 10000), 'Proceed → a 10-question placement test opens');
   for (let i = 0; i < 10; i++) { await p.click('.cm-opts button >> nth=0'); await p.click('.cm-test button.primary'); await wait(60); }
   ok(/mastered/.test(await p.locator('.cm-test').innerText()), '10/10 → mastered');
   await p.click('.cm-test button:has-text("OK")'); await wait(500);
@@ -202,7 +204,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   console.log('— editing the map');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
   await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
-  ok(await p.locator('.cm-chedit input[disabled]').count() === 4 && /fixed/.test(await p.locator('.noema-ovbox').last().innerText()), 'a prepared step: its chapters are fixed…');
+  ok(await p.locator('.noema-ovbox .cm-chedit').count() === 0 && await p.locator('.noema-ovbox [disabled]:is(input, textarea, select)').count() === 0 && /fixed/.test(await p.locator('.noema-ovbox').last().innerText()), 'a prepared step: its chapters are fixed, so the window shows only what can change…');
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Sets, events and Venn diagrams'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(400);
   c = await cur(p);
   ok(c.nodes.sets_and_events.title === 'Sets, events and Venn diagrams' && /Sets, events and Venn/.test(await p.evaluate(id => localStorage.getItem(`noema1:${Noema.account.id}:a:subjoverride:${id}`), c.nodes.sets_and_events.pack.id)), '…but it can still be renamed (its subject too)');

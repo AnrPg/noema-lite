@@ -103,12 +103,18 @@ function courseProgress() {
   return { sr: secs.length ? secs.filter(id => S.read[id]).length / secs.length : 0, ex: exN ? Object.values(S.res).filter(r => r.ok > 0).length / exN : 0 };
 }
 /** This subject is a station of a 🧭 Roadmap: which one, its mastery so far, the way back to the map. */
-function nodeBanner() {
+/** The subject as a step of a Roadmap: where, how far to mastery (and the 🎉 once it is mastered). → null when it is not a step */
+function stationInfo() {
   if (!Noema.node || !window.NoemaCurMap) return null;
   const info = NoemaCurMap.nodeInfo(ACCOUNT.id, Noema.node); if (!info) return null;
   const { sr: read, ex: solved } = courseProgress();
   const done = info.st.mastered || (read >= 0.999 && solved >= NoemaCurriculum.PASS);
   if (done && !S.nodeDone) { S.nodeDone = Date.now(); save(); setTimeout(() => window.NoemaReact?.big('node'), 600); }
+  return { info, read, solved, done };
+}
+function nodeBanner() {
+  const st = stationInfo(); if (!st) return null;
+  const { info, read, solved, done } = st;
   return h('div', { class: 'callout key nodebanner' }, h('span', { class: 'ci' }, '🧭'),
     h('div', { class: 'grow' }, h('b', { class: 't' }, SL('stationOf', { title: info.c.title || info.c.goal })),
       h('div', { class: 'tiny' }, done ? SL('stationDone') : SL('stationMastery', { r: Math.round(read * 100), e: Math.round(solved * 100), p: Math.round(NoemaCurriculum.PASS * 100) })),
@@ -166,7 +172,7 @@ function openSearch() {
   modal((box, close) => { box.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results); results.addEventListener('click', e => { if (e.target.closest('.result')) close(); }); setTimeout(() => inp.focus(), 50); });
 }
 const CHVIEW_KEY = 'noema-chview';
-function chapterViewStyle() { try { return localStorage.getItem(CHVIEW_KEY) === 'cards' ? 'cards' : 'list'; } catch (e) { return 'list'; } }
+function chapterViewStyle() { try { return localStorage.getItem(CHVIEW_KEY) === 'list' ? 'list' : 'cards'; } catch (e) { return 'cards'; } }   // cards unless the learner chose the list
 function homeView() {
   setTutorContext(null);
   setAccent(document.body, null);
@@ -177,12 +183,18 @@ function homeView() {
   const body = h('div', { class: 'chbox' });
   let style = chapterViewStyle();
   const seg = h('div', { class: 'ns-seg small chviewseg', role: 'radiogroup', 'aria-label': SL('chView') }, ...[['list', SL('viewList')], ['cards', SL('viewCards')]].map(([k, l]) => h('button', { 'data-v': k, class: style === k ? 'on' : '', role: 'radio', 'aria-checked': String(style === k), onclick: () => { style = k; try { localStorage.setItem(CHVIEW_KEY, k); } catch (e) { } $$('button', seg).forEach(b => { b.classList.toggle('on', b.dataset.v === k); b.setAttribute('aria-checked', String(b.dataset.v === k)); }); draw(); } }, l)));
+  const X = SHL(), st = X ? stationInfo() : null, pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
+  const mantra = SUBJ.hero?.mantra || SUBJ.description;
+  // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
+  const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
+      h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
+    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
+  const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
+  const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
   const v = view(
-    setupBanner(), nodeBanner(),
-    h('section', { class: 'subjhead' },
-      h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title),
-        SUBJ.hero?.mantra || SUBJ.description ? h('p', { class: 'mantra', html: fmt(SUBJ.hero?.mantra || SUBJ.description) }) : null)),
-      h('div', { class: 'subjbar', title: SL('subjProgress', { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) }) }, h('div', { class: 'bar' }, h('i', { style: { width: Math.round((p.sr + p.ex) * 50) + '%' } })), h('span', { class: 'tiny' }, SL('subjProgress', { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) }))),
+    setupBanner(), X ? null : nodeBanner(),
+    h('section', { class: 'subjhead' + (st ? ' station' : '') }, ...top,
+      h('div', { class: 'subjbar', title: barTip }, h('div', { class: 'bar' }, h('i', { style: { width: barW + '%' } })), h('span', { class: 'tiny' }, st?.done ? '✓ ' + SL('stationMastered') : SL('subjProgress', pr))),
       h('div', { class: 'row subjgo' },
         last ? h('button', { class: 'btn primary', onclick: () => go(`#/s/${last.id}`) }, SL('continueSec', { title: last.title }))
           : first ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + first.id) }, SL('startCh1')) : null,
@@ -358,7 +370,8 @@ function chunkBlocks(blocks) {
 }
 const revealedChunks = {};
 function sectionMenu(s) {
-  return () => [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('searchSubject'), icon: 'search', run: openSearch },
+  const fresh = () => { const slot = $('.freshslot'); if (slot) { slot.dispatchEvent(new Event('noema-fresh')); slot.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else go('#/s/' + s.id); };
+  return () => [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, $('.freshslot') ? { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: fresh } : null, { label: SL('searchSubject'), icon: 'search', run: openSearch },
     { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
     '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
 }
@@ -423,12 +436,24 @@ function sectionTail(s, prev, next) {
   const ask = [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('askDebug'), icon: '🔧', run: () => askSection(s, 'debug') },
     { label: SL('askInterview'), icon: '🎤', run: () => askSection(s, 'interview') }, '-', { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: freshQ }];
   const X = SHL();
+  fresh.addEventListener('noema-fresh', freshQ);   // the section's ⋮ › A new question
+  // in the frame the tutor's ways (Socratic, debugging, interview) are in its own window and a new question in the section's ⋮
   zone.append(fresh, h('div', { class: 'row sectools' },
-    X?.menuButton ? X.menuButton(ask, { cls: 'btn ns-askbtn', label: SL('askTutor'), content: h('span', {}, TUTOR.avatar + ' ' + SL('askTutor') + ' ▾') }, ) : h('span', { class: 'row' }, ...ask.filter(a => a !== '-').map(a => h('button', { class: 'btn' + (a.icon === TUTOR.avatar ? ' ai' : ''), onclick: a.run }, `${a.icon} ${a.label}`))),
+    X ? null : h('span', { class: 'row' }, ...ask.filter(a => a !== '-').map(a => h('button', { class: 'btn' + (a.icon === TUTOR.avatar ? ' ai' : ''), onclick: a.run }, `${a.icon} ${a.label}`))),
     exs.length ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
-  zone.append(h('div', { class: 'secnav' },
-    prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
-    next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+  if (!X) {
+    zone.append(h('div', { class: 'secnav' },
+      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
+      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+    return zone;
+  }
+  // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
+  const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
+  zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
+    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' →'), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
+      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' →')),
+    to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
+    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, '← ' + SL('prevSection')) : null));
   return zone;
 }
 

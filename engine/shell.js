@@ -109,7 +109,7 @@ window.NoemaShell = (() => {
     F.railMe = h('button', { class: 'ns-railme', onclick: () => go('#/me') }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', {}, L('me')));
     F.main = document.querySelector('main') || h('main');
     F.main.id = 'ns-main';
-    F.fab = h('button', { class: 'ns-fab', id: 'ns-fab', onclick: () => ENGINE?.openTutor?.() }, h('span', { class: 'ns-fabface' }), h('span', { class: 'nm' }));
+    F.fab = h('button', { class: 'ns-fab full', id: 'ns-fab', onclick: () => ENGINE ? ENGINE.openTutor?.() : Promise.resolve(N().ensureEngine?.()).then(ok => ok ? ENGINE?.openTutor?.() : toast(L('needSubject'), 4000)) }, h('span', { class: 'ns-fabface breathe' }), h('span', { class: 'nm' }));
     F.fx = h('div', { class: 'ns-fx', id: 'ns-fx' });
     F.layer = h('div', { class: 'ns-layer', id: 'ns-layer' });
     document.body.prepend(F.land, F.pv, F.brand, F.top, F.share, F.tabs, F.railMe);
@@ -151,11 +151,10 @@ window.NoemaShell = (() => {
     chromeNow = c;
     F.crumbs.replaceChildren(...(c.crumbs || []).flatMap(([l, href], i) => [i ? h('span', { class: 'sep', 'aria-hidden': 'true' }, '›') : null, href ? h('button', { onclick: () => go(href) }, l) : h('b', {}, l)]).filter(Boolean));
     F.back.classList.toggle('on', !!c.back);
-    F.acts.replaceChildren(...[...(c.acts || []), c.menu && (typeof c.menu === 'function' || c.menu.length) ? menuButton(c.menu, { label: c.menuLabel || L('more') }) : null].filter(Boolean));   // menu: a list, or a function that makes it when opened
+    F.acts.replaceChildren(...[...(c.acts || []), c.menu && (typeof c.menu === 'function' || c.menu.length) ? menuButton(c.menu, { label: c.menuLabel || L('more'), dot: !!c.menuDot }) : null].filter(Boolean));   // menu: a list, or a function that makes it when opened
     document.querySelectorAll('.ns-tab').forEach(t => t.classList.toggle('on', t.dataset.tab === c.tab));
     F.railMe.classList.toggle('on', c.tab === 'me');
-    F.fab.classList.toggle('full', !!c.corner); F.fab.querySelector('.ns-fabface').classList.toggle('breathe', !!c.corner);
-    F.fab.hidden = !ENGINE || c.fab === false;
+    F.fab.hidden = c.fab === false;   // the tutor is always there, whole and alive, with its name (it brings an engine along when needed)
     document.body.classList.toggle('ns-reading', !!c.reading);
     F.top.classList.remove('hide');
   }
@@ -164,8 +163,9 @@ window.NoemaShell = (() => {
   /* ---------- ⋮ menus and small pop-overs ---------- */
   function closePops() { const p = document.querySelectorAll('.ns-pop'); p.forEach(x => x.remove()); document.querySelectorAll('[data-pop][aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false')); return p.length > 0; }
   /** A ⋮ button with a list of actions. Items: { label, sub?, icon?, run, danger?, href? } or null (skipped) or '-' (a line). */
-  function menuButton(items, { label = L('more'), cls = 'ns-iconbtn', content = null, down = true } = {}) {
-    const b = h('button', { class: cls + ' ns-menubtn', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', 'aria-label': label, title: label, onclick: e => { e.stopPropagation(); const had = b.parentElement?.querySelector(':scope > .ns-pop'); closePops(); if (!had) popMenu(b, typeof items === 'function' ? items() : items, { down }); } }, content || svg('dots'));
+  /** dot: something in this menu waits for you (a small dot on ⋮) */
+  function menuButton(items, { label = L('more'), cls = 'ns-iconbtn', content = null, down = true, dot = false } = {}) {
+    const b = h('button', { class: cls + ' ns-menubtn' + (dot ? ' has-dot' : ''), 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', 'aria-label': label, title: label, onclick: e => { e.stopPropagation(); const had = b.parentElement?.querySelector(':scope > .ns-pop'); closePops(); if (!had) popMenu(b, typeof items === 'function' ? items() : items, { down }); } }, content || svg('dots'), dot ? h('i', { class: 'ns-dot', 'aria-hidden': 'true' }) : null);
     return h('span', { class: 'ns-menu' }, b);
   }
   function popMenu(anchor, items, { down = true } = {}) {
@@ -257,13 +257,19 @@ window.NoemaShell = (() => {
     closePops();
     const p = (location.hash || '#/').replace(/^#\/?/, '').split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
     const k = p[0] || '';
+    // <html lang>: the subject's language on its own pages (its text), the menus' language everywhere else
+    const docLang = l => { if (document.documentElement.lang !== l) document.documentElement.lang = l; };
+    [F.top, F.tabs, F.fab, F.layer].forEach(e => { if (e) e.lang = lang(); });   // the frame itself always speaks the menus' language
     if (ENGINE_ROUTES.has(k)) {
+      docLang(N()?.subject?.language || 'en');
       if (!ENGINE && pendingEngine) { chrome({ tab: 'learn', crumbs: [['…']] }); F.main.dataset.page = '@wait'; F.main.replaceChildren(h('div', { class: 'ns-view ns-wait' }, faceEl(undefined, 'breathe'))); return; }
       if (!ENGINE) { location.replace('#/'); return; }
+      if (N()?.backgroundEngine) { N().backgroundEngine = false; N().setCurrent(acc(), subjectId()); }   // a quietly loaded subject you now study is the one a reload reopens
       chrome(subjectChrome());
       ENGINE.route();
       return;
     }
+    docLang(lang());
     if (k === 'lang' && TH()?.world() === 'know') { location.replace('#/'); return; }
     if (k === 'learn' && TH()?.world() === 'lang') { location.replace('#/lang'); return; }
     if (F.main.dataset.page !== k) { F.main.replaceChildren(); }
@@ -438,10 +444,10 @@ window.NoemaShell = (() => {
     const c = CU()?.get(acc(), cid);
     if (!c || !CM()) { page({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn']], back: '#/learn' }, h('p', { class: 'ns-muted' }, L('rmMissing'))); return; }
     const host = h('div', { class: 'ns-maphost' });
-    page({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn'], [shortTitle(c)]], back: '#/learn', cls: 'ns-mapview', fab: true }, host);
+    page({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn'], [shortTitle(c)]], back: '#/learn', cls: 'ns-mapview' }, host);
     document.body.classList.add('ns-mapmode');
     const opts = CM().mapOpts?.next || {}; if (CM().mapOpts) CM().mapOpts.next = null;
-    CM().map(acc(), cid, { focus: nid || null, onStudy, page: host, chrome: m => chrome({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn'], [shortTitle(CU().get(acc(), cid) || c)]], back: '#/learn', menu: m, menuLabel: L('mapMenu'), fab: !!ENGINE }), ...opts });
+    CM().map(acc(), cid, { focus: nid || null, onStudy, page: host, chrome: (m, extra = {}) => chrome({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn'], [shortTitle(CU().get(acc(), cid) || c)]], back: '#/learn', menu: m, menuLabel: L('mapMenu'), ...extra }), ...opts });
   };
 
   /* ---------- Languages (the languages branch registers them; otherwise: language subjects you have) ---------- */
@@ -524,7 +530,7 @@ window.NoemaShell = (() => {
     const changeAt = TH()?.nextChangeAt(), can = TH()?.canChange();
     const it = (icon, n, title, sub, run, extra = {}) => h('button', { class: 'ns-item', onclick: run, ...extra }, icon, h('span', { class: 't' }, h('b', {}, title), sub ? h('small', {}, sub) : null), chev());
     const w = TH()?.world() || 'know';
-    page({ tab: 'me', crumbs: [[L('myAccount')]], fab: false },
+    page({ tab: 'me', crumbs: [[L('myAccount')]] },
       h('div', { class: 'ns-hello' }, h('span', { class: 'ns-me big' }, a.emoji || (a.name || '?')[0]), h('div', { class: 'grow' }, h('h1', {}, L('myAccount')), h('p', { class: 'tiny' }, [a.name, a.kind === 'cloud' ? '☁️ ' + (a.email || '') : L('localProfile')].filter(Boolean).join(' · ')))),
       h('section', { class: 'ns-panel' }, h('span', { class: 'ns-label' }, L('whatILearn')), h('p', { class: 'tiny' }, L('whatILearnSub')),
         h('div', { class: 'ns-seg', role: 'radiogroup', 'aria-label': L('whatILearn') }, ...[['know', L('knowledge')], ['lang', L('languages')], ['both', L('both')]].map(([k, l]) => h('button', { class: w === k ? 'on' : '', role: 'radio', 'aria-checked': String(w === k), onclick: () => { TH().putSettings({ world: k }); drawTabs(); PAGES.me([]); } }, l)))),
@@ -541,8 +547,12 @@ window.NoemaShell = (() => {
   };
   function mePage(sec) {
     const titles = { profile: L('profile'), ai: L('aiTitle'), subjects: L('mySubjects'), backup: L('backup'), cloud: L('data'), data: L('data'), help: L('help') };
-    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [titles[sec]]], back: '#/me', fab: false }, h('h1', {}, titles[sec]));
-    if (!ENGINE?.accView) { v.append(h('div', { class: 'ns-panel' }, h('p', {}, L('needSubject')), h('button', { class: 'btn primary', onclick: () => N().openSubjectPicker?.() }, L('pickSubject')))); return; }
+    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [titles[sec]]], back: '#/me' }, h('h1', {}, titles[sec]));
+    if (!ENGINE?.accView) {   // these pages live in the engine: load it quietly (no subject is opened), else say what is missing
+      const wait = h('div', { class: 'ns-wait' }, faceEl(undefined, 'breathe')); v.append(wait);
+      Promise.resolve(N().ensureEngine?.()).then(ok => { if (!wait.isConnected) return; if (ok && ENGINE?.accView) route(); else wait.replaceWith(h('div', { class: 'ns-panel' }, h('p', {}, L('needSubject')), h('button', { class: 'btn primary', onclick: () => N().openSubjectPicker?.() }, L('pickSubject')))); });
+      return;
+    }
     const body = h('div', { class: 'accbody ns-accbody' }); v.append(body);
     const close = () => go('#/me');
     if (sec === 'data') { ENGINE.accView('cloud', body, close); const b2 = h('div', { class: 'accbody ns-accbody' }); v.append(h('h2', { class: 'ns-h2' }, L('backup')), b2); ENGINE.accView('backup', b2, close); return; }
@@ -551,7 +561,7 @@ window.NoemaShell = (() => {
   /* Language & appearance: menus language, light/dark, how much "game", sound, reading, goal */
   function lookPage() {
     const s = settings(), engineS = window.S?.settings || {};
-    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('look')]], back: '#/me', fab: false }, h('h1', {}, L('look')));
+    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('look')]], back: '#/me' }, h('h1', {}, L('look')));
     const uiL = h('select', { class: 'noema-input', 'aria-label': L('uiLang') }, h('option', { value: '' }, L('uiLangAuto', { lang: (window.NoemaI18n?.LANGS.find(x => x[0] === NoemaI18n.browser()) || [, 'English'])[1] })), ...(window.NoemaI18n?.LANGS || []).map(([k, l]) => h('option', { value: k, selected: s.lang === k || null }, l)));
     const theme = engineS.theme || s.theme || 'auto';
     const seg = (name, cur, opts, onpick) => h('div', { class: 'ns-seg', role: 'radiogroup', 'aria-label': name }, ...opts.map(([k, l]) => h('button', { class: cur === k ? 'on' : '', role: 'radio', 'aria-checked': String(cur === k), 'data-v': k, onclick: e => { [...e.currentTarget.parentElement.children].forEach(b => { b.classList.toggle('on', b === e.currentTarget); b.setAttribute('aria-checked', String(b === e.currentTarget)); }); onpick(k); } }, l)));
@@ -577,7 +587,7 @@ window.NoemaShell = (() => {
   /* ---------- the character gallery: try anyone for 5 minutes, change once every 15 days ---------- */
   PAGES.character = () => {
     const own = TH().owned(), can = TH().canChange(), locked = TH().locked(), at = TH().settings().characterAt;
-    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('character')]], back: '#/me', fab: false },
+    const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('character')]], back: '#/me' },
       h('div', {}, h('span', { class: 'ns-label' }, L('companion')), h('h1', {}, L('character'))),
       h('p', { class: 'ns-muted' }, L('characterIntro')),
       h('p', { class: 'tiny' }, locked ? L('charLockedLong') : can ? L('canChangeNow') : L('changedOn', { date: fmtDate(at), next: fmtDate(TH().nextChangeAt()) })));
@@ -616,7 +626,10 @@ window.NoemaShell = (() => {
     onboarding(1);
   }
   function onboarding(step, picked = {}) {
-    const modal = (...kids) => F.layer.replaceChildren(h('div', { class: 'ns-scrim', 'data-sticky': '1' }), h('div', { class: 'ns-modal ns-onb', role: 'dialog', 'aria-modal': 'true', 'data-sticky': '1' }, ...kids));
+    const modal = (...kids) => {   // the step's heading names the dialog for screen readers
+      const head = kids.find(k => k?.tagName === 'H1'); if (head) head.id = 'ns-onb-title';
+      F.layer.replaceChildren(h('div', { class: 'ns-scrim', 'data-sticky': '1' }), h('div', { class: 'ns-modal ns-onb', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': head ? 'ns-onb-title' : null, 'data-sticky': '1' }, ...kids));
+    };
     if (step === 1) {
       const pick = w => { picked.world = w; TH().putSettings({ world: w }); drawTabs(); TH().locked() ? finish() : onboarding(2, picked); };
       modal(faceEl(undefined, 'breathe'), h('h1', { class: 'center' }, L('onbWhat')),
@@ -635,7 +648,7 @@ window.NoemaShell = (() => {
   /* ======================= for the engine ======================= */
   /** The engine of the open subject calls this once it has booted: from now on its routes are drawn by it. */
   function attachEngine(api) {
-    ENGINE = api; pendingEngine = false; F.fab && (F.fab.hidden = false);
+    ENGINE = api; pendingEngine = false;
     if (mounted) route();
   }
   /** The subject could not be loaded: say so and stay on the shell's pages. */

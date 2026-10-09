@@ -320,6 +320,12 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .xbtn:hover{opacity:1;border-color:var(--violet);box-shadow:0 2px 8px rgba(99,102,241,.25)}
 @media (hover:none){.xbtn{opacity:.4;transform:none;width:26px;height:26px}.xable:not(:has(.xable))>.xbtn{opacity:.5}}
 .b-list li.xable,.terms .term.xable,.compare>div.xable{padding-right:30px}
+/* docked: the 💡 joins a block's own top row (a picture's ⤢, a question set's switch) instead of covering it */
+.xbtn.docked{position:static;flex:none}
+.xable:hover:not(:has(.xable:hover)) .xbtn.docked{opacity:.9;transform:none}
+.vx.full .xbtn.docked{display:none}
+.xable>.pre .lang{right:42px}
+.xable>.reveal>button{padding-right:44px}
 /* 📥 import a map: the preview graph, the step's files, the file table */
 .cm-miniscroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:14px;margin:8px 0;background:var(--bg2,rgba(127,127,127,.04))}
 .cm-mini{position:relative}

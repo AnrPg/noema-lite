@@ -800,6 +800,12 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .xbtn:hover{opacity:1;border-color:var(--violet);box-shadow:0 2px 8px rgba(99,102,241,.25)}
 @media (hover:none){.xbtn{opacity:.4;transform:none;width:26px;height:26px}.xable:not(:has(.xable))>.xbtn{opacity:.5}}
 .b-list li.xable,.terms .term.xable,.compare>div.xable{padding-right:30px}
+/* docked: the 💡 joins a block's own top row (a picture's ⤢, a question set's switch) instead of covering it */
+.xbtn.docked{position:static;flex:none}
+.xable:hover:not(:has(.xable:hover)) .xbtn.docked{opacity:.9;transform:none}
+.vx.full .xbtn.docked{display:none}
+.xable>.pre .lang{right:42px}
+.xable>.reveal>button{padding-right:44px}
 /* 📥 import a map: the preview graph, the step's files, the file table */
 .cm-miniscroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:14px;margin:8px 0;background:var(--bg2,rgba(127,127,127,.04))}
 .cm-mini{position:relative}
@@ -974,6 +980,11 @@ a.vx-credit:hover{opacity:1;text-decoration:underline}
 /* figure (theory) */
 .vx-fig{margin:6px 0 4px}
 .vx-figbar{margin-top:6px;gap:8px;align-items:center}
+.vx-labelbar{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+.vx-lblbtn{font-weight:700;background:var(--c-bg,var(--violet-bg));color:var(--c,var(--violet));border:1px solid color-mix(in srgb,var(--c,var(--violet)) 35%,transparent)}
+.vx-lblbtn:hover{border-color:var(--c,var(--violet))}
+.vx-lbltext{font-size:12.5px;color:var(--ink2)}
+@media (max-width:420px){.vx-lbltext{display:none}}
 .vx-tip{position:absolute;z-index:5;transform:translate(-50%,calc(-100% - 14px));max-width:min(280px,80%);padding:8px 11px;border-radius:12px;background:#1f2330;color:#fff;font-size:13px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none !important;transition:opacity .15s}
 .vx-tip.below{transform:translate(-50%,14px)}
 .vx-tip.on{opacity:1}
@@ -1037,6 +1048,7 @@ body.ns-reading .ns-land,body.ns-mapmode .ns-land{opacity:.35}
 .ns-iconbtn:hover{background:var(--acc-soft)}
 .ns-iconbtn svg{width:21px;height:21px}
 .ns-top .bellbadge{top:2px;right:2px;background:var(--t3i)}
+.ns-menubtn .ns-dot{position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2px var(--paper)}
 .ns-top .bell.has{animation:none}
 .ns-me{position:relative;flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--t2);color:var(--t2i);font-family:var(--display);font-weight:var(--dw);font-size:1.05rem;border:0}
 .ns-me.acchip:hover{transform:none;box-shadow:0 0 0 3px var(--acc-soft)}
@@ -1094,7 +1106,6 @@ body.ns-on .srcdeck{top:56px}
 .ns-say{position:fixed;z-index:26;right:14px;bottom:calc(66px + 100px + env(safe-area-inset-bottom,0px));max-width:220px;padding:8px 12px;border-radius:14px 14px 4px 14px;background:var(--paper);border:1px solid var(--line);font-weight:700;font-size:.92rem;box-shadow:0 8px 24px -14px rgba(0,0,0,.35);animation:ns-pop .25s ease-out}
 @keyframes ns-pop{from{opacity:0;transform:scale(.9) translateY(6px)}}
 @media (max-width:759px){body.celeon .ns-fab{opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}}
-@media (max-width:420px){.ns-fab:not(.full) .nm{display:none} .ns-fab:not(.full){padding:0 6px}}
 
 /* ---------- wide screens: the rail ---------- */
 @media (min-width:760px){
@@ -1330,6 +1341,9 @@ body.ns-on .view{animation:ns-in .35s ease-out}
 body.ns-on .herohead{font-size:1.75rem;margin:0}
 body.ns-on .herohead strong{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--t1i)}
 .subjtop .mantra{margin:6px 0 0;color:var(--ink2);font-size:.98rem}
+.subjhead>.mantra{margin:-6px 0 0;color:var(--ink2);font-size:.98rem}
+.subjkicker{align-self:flex-start;margin-bottom:-8px;padding:0;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t1i);text-align:left}
+.subjkicker:hover{text-decoration:underline}
 .subjbar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
 .subjbar .bar{height:8px}
 .subjgo{gap:10px}
@@ -1396,6 +1410,11 @@ body.ns-on .node .dot{border-radius:var(--ir)}
 .ns-practicebtn,.ns-askbtn{gap:6px}
 body.ns-on .quickzone{margin-top:28px}
 body.ns-on .secnav .btn{min-height:46px}
+.ns-secnav{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin:36px 0 calc(110px + env(safe-area-inset-bottom,0px))}
+body.ns-on .ns-secnav .secnext{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;height:auto;min-height:72px;padding:12px 22px;font-size:1.15rem;text-align:left}
+.ns-secnav .secnext small{font-weight:500;font-size:.88rem;opacity:.9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.ns-secnav .secprev{align-self:flex-start}
+@media (min-width:760px){.ns-secnav{margin-bottom:96px}}
 body.ns-on .runner{max-width:none}
 body.ns-on .pill.c{background:var(--acc-soft);color:var(--t1i)}
 body.ns-on .xpfloat{color:var(--t2i)}
@@ -1414,6 +1433,29 @@ body.ns-on .msg.ai{background:var(--bg)}
 body.ns-on .composer .send{background:var(--acc);color:var(--acc-ink);border-radius:var(--br)}
 body.ns-on .composer textarea:focus,body.ns-on .noema-input:focus{border-color:var(--acc);box-shadow:0 0 0 4px var(--acc-soft)}
 body.ns-on .starters button:hover{border-color:var(--acc);transform:none}
+/* the frame's tutor: face · name · ⋮ · ✕, "How <name> helps you" over the modes, a "For: …" chip, the talk, the box */
+body.ns-on .drawer .ns-dh{padding:16px 18px 18px;gap:12px}
+body.ns-on .drawer .ns-dh .top{gap:12px}
+body.ns-on .drawer .ns-tname{font-family:var(--display);font-weight:var(--dw);font-size:1.18rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.ns-on .drawer .ns-dh .iconbtn{font-size:1.1rem;border:0;background:none;box-shadow:none}
+.ns-modelabel{margin-top:4px;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.ns-modewrap{display:flex;width:100%}
+.ns-modewrap .ns-pop{left:0;right:0;max-width:none}
+.ns-modesel{flex:1;min-width:0;display:flex;align-items:center;gap:4px;padding:12px 16px;border-radius:var(--br,14px);border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.ns-modesel b{font-size:1.02rem;white-space:nowrap}
+.ns-modesel .sub{flex:1;min-width:0;color:var(--ink2);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ns-modesel .caret{flex:none;margin-left:6px;font-size:.8rem;color:var(--ink2)}
+.ns-modesel:hover,.ns-modesel[aria-expanded="true"]{border-color:var(--acc)}
+.ns-forrow{padding:14px 18px 0}
+.ns-forchip{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:6px 8px 6px 14px;border-radius:999px;background:var(--acc-soft);color:var(--t1i);font-size:.9rem}
+.ns-forchip:not(:has(button)){padding-right:14px}
+.ns-forchip button{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:0;background:none;color:inherit;font-size:.95rem;cursor:pointer}
+.ns-forchip button:hover{background:color-mix(in srgb,var(--t1i) 12%,transparent)}
+body.ns-on .drawer .msgs{padding:14px 18px 18px}
+body.ns-on .drawer .msg.ns-greet{font-size:1.02rem}
+body.ns-on .drawer .composer{padding:12px 18px 14px;gap:10px;align-items:center}
+body.ns-on .drawer .composer textarea{min-height:48px;border-radius:var(--br,14px);background:var(--bg)}
+body.ns-on .drawer .composer .send{width:56px;height:48px}
 @media (max-width:759px){
   body.ns-on .drawer{top:auto;left:0;right:0;width:100%;height:88dvh;border-left:0;border-top:1px solid var(--line);border-radius:22px 22px 0 0;transform:translateY(105%)}
   body.ns-on .drawer.open{transform:none}
@@ -1568,3 +1610,10 @@ body.ns-on .cm-edges path.hl{stroke:var(--acc)}
 @media (prefers-reduced-motion:reduce){
   body.ns-on *,body.ns-on *::before,body.ns-on *::after{animation:none!important;transition:none!important}
 }
+/* "Ask <character>" on an exercise: in its top corner, shown while you are on the card (always, faintly, on touch screens) */
+.ex .exask{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:3px 13px 3px 5px;border-radius:999px;border:1px solid color-mix(in srgb,var(--acc) 40%,var(--line));background:var(--paper);color:var(--ink);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;box-shadow:0 3px 10px -6px rgba(0,0,0,.3);opacity:0;transform:translateY(2px);transition:opacity .15s,transform .15s,border-color .15s}
+.ex .exask .face{display:inline-block;width:28px;height:28px;line-height:0}.ex .exask .face svg{width:100%;height:100%;overflow:visible}
+.ex:hover .exask,.ex:focus-within .exask{opacity:1;transform:none}
+.ex .exask:hover{border-color:var(--acc)}
+@media (hover:none){.ex .exask{opacity:.85;transform:none}}
+
