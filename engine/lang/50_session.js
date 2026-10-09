@@ -23,6 +23,7 @@ function runSession(plan, { only = null } = {}) {
       for (const e of cn.langs) queue.push({ kind: 'prod', ...e });
     }
   }
+  if (!only) queue.push(...scriptSessionSteps());   // a few letters / characters in the first weeks (P4, §5.5)
   if (!queue.length) { go('#/'); return; }
   const total = queue.length, stats = { right: 0, wrong: 0, introduced: 0 }, retried = new Set();
   const before = Object.fromEntries(activeLangs().map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
@@ -37,14 +38,15 @@ function runSession(plan, { only = null } = {}) {
     const day = today();
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
-      N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day); save();
+      if (a.kind === 'script' && a.intro) return next();   // a new letter: recorded by its card (P4)
+      if (a.kind !== 'script') N.review(UI.C, UI.L, a.lang, a.lex, a.kind === 'prod' ? 'p' : 'r', ok ? 'good' : 'again', day); save();
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + a.lex;
       if (!ok && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
       const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
-    const ex = a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
+    const ex = a.kind === 'script' ? scriptStep(a, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, { kind: a.kind, lang: a.lang, lex: a.lex });   // for tests and styling
     stage.append(h('div', { class: 'tiny lx-which' }, info(a.lang).flag, ' ', info(a.lang).name, a.review ? ' · review' : '', a.retry ? ' · once more' : ''), ex);
   };

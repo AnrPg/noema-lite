@@ -47,10 +47,10 @@
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": "language.json dir: \"rtl\"; §8 requires lang/dir on every foreign span; the RTL keyboard and script module are phase P4 (not built)."
+    "other": "language.json dir: \"rtl\"; §8 requires lang/dir on every foreign span; the RTL keyboard and script module are phase P4 (not built). P4: the on-screen Arabic keyboard (with the marks), right-to-left answer fields, every view checked at 390 px (tests/lang_script.js)."
    },
    "status": "partial",
-   "gap": "P4: on-screen keyboard and RTL input handling, a short page on bidirectional text (numbers, Latin inside Arabic).",
+   "gap": "A short page on bidirectional text (numbers, Latin inside Arabic).",
    "when": "fd.00"
   },
   {
@@ -83,11 +83,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "language.json vowelMarks: true; forms stored fully vocalized and the plain spelling derived with stripMarks (langcore); fn.overview peculiarities explain it."
+    "exercises": [
+     "transliterate",
+     "vowelize"
+    ],
+    "other": "language.json vowelMarks: true; forms stored fully vocalized and the plain spelling derived with stripMarks (langcore); fn.overview peculiarities explain it. P4: lang/ar/script.json (§4.9) and the letter stage (§5.5, lang:ar:script); the bare skeleton is read when the vowel marks fade (§8)."
    },
-   "status": "partial",
-   "gap": "script/letters.json (§4.9) and the letter stage (§5.5) do not exist yet; nothing trains reading the bare consonant skeleton.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -121,11 +124,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "Rendering is left to the font (Noto Naskh Arabic, §8); glyph_form and trace (§6.1) are listed but not implemented."
+    "exercises": [
+     "glyph_form",
+     "trace"
+    ],
+    "other": "Rendering is left to the font (Noto Naskh Arabic, §8); glyph_form and trace (§6.1) are listed but not implemented. P4: positional forms and joining derived from the Unicode presentation forms (script.json); glyph_form (forms by position, building a word from its letters), trace."
    },
-   "status": "missing",
-   "gap": "letters.json with positional forms and connecting behaviour; glyph_form and trace exercises; letter-stage gating (§5.5).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -165,11 +171,13 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "Produced automatically by the font; nothing teaches or tests it."
+    "exercises": [
+     "glyph_form"
+    ],
+    "other": "Produced automatically by the font; nothing teaches or tests it. P4: لا in script.json (a ligature entry with its forms) and in glyph_form."
    },
-   "status": "missing",
-   "gap": "A letter-module entry and a glyph_form item for لا.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -205,11 +213,13 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "Every cell of every paradigm is vocalized; validate_lang.py rejects a form or lemma without marks; langcore.stripMarks / hasMarks; the tokenizer also reads unvocalized words (loose lookup)."
+    "exercises": [
+     "vowelize"
+    ],
+    "other": "Every cell of every paradigm is vocalized; validate_lang.py rejects a form or lemma without marks; langcore.stripMarks / hasMarks; the tokenizer also reads unvocalized words (loose lookup). P4: the vowelize exercise and the vowel-mark level per language (full · fading by word state · none, §8)."
    },
-   "status": "partial",
-   "gap": "The vowel-mark policy (fully → partially → unvocalized, §3.1, settings) is not implemented; no vowelize exercise.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -252,11 +262,14 @@
      "fn.definite",
      "fn.root.pattern"
     ],
-    "exercises": [],
-    "other": "Stored in every form (U+0651 is one of the marks stripMarks removes)."
+    "exercises": [
+     "vowelize",
+     "spell"
+    ],
+    "other": "Stored in every form (U+0651 is one of the marks stripMarks removes). P4: šadda in vowelize; kept on known words when the marks fade."
    },
-   "status": "partial",
-   "gap": "No exercise contrasts single and doubled consonants (vowelize, spell).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.04"
   },
   {
@@ -421,12 +434,13 @@
      "fn.prep.place"
     ],
     "exercises": [
-     "inflect"
+     "inflect",
+     "spell"
     ],
-    "other": ""
+    "other": "P4: spell flags ى / ي as a near-miss."
    },
    "status": "partial",
-   "gap": "No spelling rule page or spell exercise for ى ↔ ي/ا.",
+   "gap": "No spelling rule page for ى ↔ ي / ا (the spell exercise names the confusion).",
    "when": "fd.11"
   },
   {
@@ -477,11 +491,13 @@
      "fn.root.pattern",
      "fn.object"
     ],
-    "exercises": [],
-    "other": "Spelled in every form; roots write hamza as ء (\"ء ك ل\")."
+    "exercises": [
+     "spell"
+    ],
+    "other": "Spelled in every form; roots write hamza as ء (\"ء ك ل\"). P4: spell with letter-level feedback names hamza and its seat; the keyboard has every seat."
    },
    "status": "partial",
-   "gap": "No rule page for the seats and no spell exercise with letter-level feedback on hamza (§6.1).",
+   "gap": "No rule page for the seats.",
    "when": "fd.07"
   },
   {
@@ -676,10 +692,10 @@
     "exercises": [
      "build_sentence"
     ],
-    "other": "The tokenizer splits any Unicode punctuation; bank sentences use ؟ and ،."
+    "other": "The tokenizer splits any Unicode punctuation; bank sentences use ؟ and ،. P4: ، ؟ ؛ on the on-screen keyboard."
    },
-   "status": "partial",
-   "gap": "On-screen keyboard (P4) for ، ؟ ؛.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.09"
   },
   {
@@ -719,10 +735,10 @@
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": "langcore.lookup reads unvocalized words (loose) and returns every match; nothing uses this for teaching."
+    "other": "langcore.lookup reads unvocalized words (loose) and returns every match; nothing uses this for teaching. P4: the vowel-mark level (fading / none) is set per language."
    },
    "status": "partial",
-   "gap": "A graded reader with reduced marks, a 'which reading?' exercise built from the form index, and the vowel-mark policy setting.",
+   "gap": "A graded reader with reduced marks and a 'which reading?' exercise built from the form index.",
    "when": "later"
   },
   {
@@ -761,11 +777,13 @@
     ],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "language.json romanization: din31635; principalParts shows the transliteration."
+    "exercises": [
+     "transliterate"
+    ],
+    "other": "language.json romanization: din31635; principalParts shows the transliteration. P4: transliterate (letters and words, both ways); the transliteration stays under words until the letter stage is complete."
    },
    "status": "partial",
-   "gap": "Transliteration exists only for lemmas (not forms or sentences); no transliterate exercise.",
+   "gap": "Transliteration exists only for lemmas (not forms or sentences).",
    "when": "fd.00"
   },
   {

@@ -107,7 +107,7 @@
       for (const n of data.nodes) { const f = read(`${base}lexicon/${n.id}.json`); if (f) lexicon[n.id] = f; }   // a node without its file is not prepared yet
       for (const f of data.functions) { const g = read(`${base}grammar/${f.id}.json`); if (g) grammar[f.id] = g; }
       const bank = []; for (const f of list(`${base}bank`)) bank.push(...((read(`${base}bank/${f}`) || {}).sentences || []));
-      data.langs[code] = { language: read(base + 'language.json'), lexicon, grammar, bank };
+      data.langs[code] = { language: read(base + 'language.json'), lexicon, grammar, bank, script: read(base + 'script.json'), chars: read(base + 'chars.json') };   // script modules (§4.9): ar/he letters, zh characters
     }
     const mj = read('core/media/media.json'); if (mj) { data.media = {}; for (const m of mj.items || []) data.media[m.id] = { file: m.file, alt: m.alt, credit: m.credit, license: m.license, url: m.url }; data.mediaBase = 'core/media/'; }
     // D16: the shared typological vocabulary, the profiles of the world's languages, the catalogues of the course languages
@@ -440,16 +440,20 @@
       for (const k of new Set([s, ...(loose ? [stripMarks(code, s)] : []), ...(lj.capitalizeFirst ? [decapFirst(s)] : [])])) for (const m of X.forms.get(k) || []) if (!all.some(x => x.l === m.l && x.f === m.f)) all.push(m);
       return all.length ? all : null;
     };
-    // prefix clitics (ar wa-/bi-…, he ve-/ha-/be-…): up to two, longest first
+    // prefix clitics (ar wa-/bi-…, he ve-/ha-/be-…): up to two, longest first; every written spelling (וּ, וַ …) before the plain letter
     const strip = (s, depth, loose) => {
       if (depth > 2) return null;
-      for (const p of X.prefixes) for (const pre of [p.t, p.plain]) {
-        if (pre && s.startsWith(pre) && s.length > pre.length) {
-          const rest = s.slice(pre.length).replace(/^\p{M}+/u, ''), m = tryWord(rest, loose);   // the plain prefix letter may carry vowel marks of its own
-          if (m) return [{ t: pre, matches: [{ l: p.l, f: null }] }, { t: rest, matches: m }];
-          const deeper = strip(rest, depth + 1, loose);
-          if (deeper) return [{ t: pre, matches: [{ l: p.l, f: null }] }, ...deeper];
-        }
+      for (const plainPass of [false, true]) for (const p of X.prefixes) {
+        const pre = plainPass ? p.plain : p.t;
+        if (!pre || (plainPass && pre === p.t) || !s.startsWith(pre) || s.length <= pre.length) continue;
+        let head = pre, rest = s.slice(pre.length);
+        if (plainPass) { const mk = rest.match(/^\p{M}+/u); if (mk) { head += mk[0]; rest = rest.slice(mk[0].length); } }   // the plain prefix letter carries vowel marks of its own (וָ before a number, וּ)
+        if (!rest) continue;
+        const pm = [{ t: head, matches: [{ l: p.l, f: null }] }];
+        const m = tryWord(rest, loose) || (code === 'ar' && p.plain === 'ل' && rest[0] === 'ل' ? tryWord('ا' + rest, loose) : null);   // لِلْـ = لِ + الْـ (the alif of the article is not written)
+        if (m) return [...pm, { t: rest, matches: m }];
+        const deeper = strip(rest, depth + 1, loose);
+        if (deeper) return [...pm, ...deeper];
       }
       return null;
     };
@@ -467,6 +471,7 @@
     const X = C.lang[code], out = [];
     const pushWord = w => { const r = lookup(C, code, w); out.push({ t: w, matches: r.matches, ...(r.parts ? { parts: r.parts } : {}), unknown: !r.matches.length && !r.parts }); };
     if (X.language.tokenJoin === 'none') {
+      const own = ownSegmentation(C, code, text); if (own) return own;   // a sentence of the bank: its own annotated words (P4)
       const chars = [...nfc(text)]; let i = 0;
       while (i < chars.length) {
         const ch = chars[i];
@@ -474,6 +479,8 @@
         if (PUNCT.test(ch)) { out.push({ t: ch, p: true, matches: [] }); i++; continue; }
         let hit = null;
         for (let n = Math.min(X.maxWord, chars.length - i); n >= 1; n--) { const w = chars.slice(i, i + n).join(''); if (X.forms.has(w)) { hit = w; break; } }
+        const ks = knownSplit(C, code, chars, i, hit ? [...hit].length : 0);   // a longer span the bank always splits this way (P4)
+        if (ks) { for (const w of ks) out.push({ t: w, matches: X.forms.get(w) || [] }); i += ks.join('').length; continue; }
         if (hit) { out.push({ t: hit, matches: X.forms.get(hit) }); i += [...hit].length; }
         else { const prev = out[out.length - 1]; if (prev && prev.unknown && !prev.p) prev.t += ch; else out.push({ t: ch, matches: [], unknown: true }); i++; }   // unknown characters stay together (a name: 小明)
       }
@@ -838,6 +845,7 @@
       for (const [id, it] of Object.entries(S.items)) { const n = X.lex[id]?.node; if (!n) continue; const k = `lang:${code}:node:${n}`; (kv[k] = kv[k] || { items: {} }).items[id] = it; }
       for (const [fid, f] of Object.entries(S.fns)) kv[`lang:${code}:fn:${fid}`] = f;
       for (const [nid, ch] of Object.entries(S.checks || {})) { const k = `lang:${code}:node:${nid}`; (kv[k] = kv[k] || { items: {} }).check = ch; }
+      if (S.script && Object.keys(S.script.items || {}).length) kv[`lang:${code}:script`] = S.script;   // the script stage (§5.5)
     }
     return kv;
   }
@@ -848,6 +856,8 @@
       if (m && C.lang[m[1]]) { Object.assign(ensureLang(L, m[1]).items, v.items || {}); if (v.check) ensureLang(L, m[1]).checks[m[2]] = v.check; continue; }
       m = k.match(/^lang:([^:]+):fn:(.+)$/);
       if (m && C.lang[m[1]]) ensureLang(L, m[1]).fns[m[2]] = v;
+      m = k.match(/^lang:([^:]+):script$/);
+      if (m && C.lang[m[1]] && v && typeof v === 'object') ensureLang(L, m[1]).script = { ...v, items: { ...(v.items || {}) } };
     }
     return L;
   }
@@ -859,7 +869,474 @@
     readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+  /* ---------- P4 — Scripts and input: letters, characters, positional forms, vowel marks, tones, typed answers (§4.9, §5.5, §6.1, §8) ---------- */
+  const ZWJ = '\u200d';
+  const isMark = ch => /\p{M}/u.test(ch);
+  const isLetterCh = ch => /\p{L}/u.test(ch);
+  /** The script module of a language, indexed once: ar/he letters + marks (lang/<L>/script.json), zh characters (lang/zh/chars.json). */
+  function scriptModule(C, code) {
+    const X = C.lang[code]; if (!X) return null;
+    if (X._script !== undefined) return X._script;
+    const src = C.data.langs[code] || {}, s = src.script, z = src.chars;
+    let M = null;
+    if (s && Array.isArray(s.letters)) {
+      const items = {}, byChar = {};
+      for (const x of s.letters) { items[x.ch] = { ...x, key: x.ch, type: 'letter' }; for (const f of Object.values(x.forms || {})) { const b = f.replace(/\u200d/g, ''); if (!byChar[b]) byChar[b] = x.ch; } }
+      for (const m of s.marks || []) items[m.ch] = { ...m, key: m.ch, type: 'mark' };
+      const groups = (s.groups || []).map(g => ({ id: g.id, title: g.title, items: (g.items || []).filter(k => items[k]) }));
+      groups.forEach((g, i) => g.items.forEach(k => { items[k].group = g.id; items[k].groupIndex = i; }));
+      const look = {}; for (const set of s.lookalikes || []) for (const a of set) look[a] = uniqStr([...(look[a] || []), ...set.filter(b => b !== a)]);
+      M = { kind: 'letters', lang: code, dir: s.dir || 'rtl', items, byChar, groups, order: groups.flatMap(g => g.items), marks: (s.marks || []).map(m => m.ch),
+        markInfo: Object.fromEntries((s.marks || []).map(m => [m.ch, m])), baseMarks: new Set(s.baseMarks || []), look, keyboard: s.keyboard || null, raw: s };
+    } else if (z && Array.isArray(z.chars)) {
+      const items = {};
+      for (const e of z.chars) items[e.ch] = { ...e, key: e.ch, type: 'char' };
+      // characters grouped by the first node (in the course order) whose words use them: they come with the lessons
+      const first = {}, groups = [];
+      for (const nid of C.order) for (const id of X.byNode[nid] || []) for (const ch of nfc(X.lex[id].lemma)) if (items[ch] && !first[ch]) {
+        first[ch] = nid; let g = groups[groups.length - 1]; if (!g || g.id !== nid) groups.push(g = { id: nid, title: C.nodes[nid].title, items: [] }); g.items.push(ch);
+      }
+      groups.forEach((g, i) => g.items.forEach(k => { items[k].group = g.id; items[k].groupIndex = i; }));
+      const words = {}; for (const lx of Object.values(X.lex)) for (const ch of new Set(nfc(lx.lemma))) if (items[ch]) (words[ch] = words[ch] || []).push(lx.id);
+      M = { kind: 'chars', lang: code, dir: 'ltr', items, groups, order: groups.flatMap(g => g.items), words, raw: z };
+    }
+    X._script = M; return M;
+  }
+  /** A written word as letters with their marks: [{t, base, marks: [sorted], letter (the module's key), sep?}] — he: the shin / sin dot is part
+   *  of the letter, a dagesh in ב כ פ makes another letter (b k p) but stays a mark to write. */
+  function letterClusters(C, code, text) {
+    const M = scriptModule(C, code), out = [];
+    for (const ch of nfc(text)) {
+      if (isMark(ch) && out.length && !out[out.length - 1].sep) { const c = out[out.length - 1]; c.t += ch; if (M?.baseMarks?.has(ch)) c.base += ch; else c.marks.push(ch); continue; }
+      out.push(isLetterCh(ch) ? { t: ch, base: ch, marks: [] } : { t: ch, base: ch, marks: [], sep: true });
+    }
+    for (const c of out) {
+      c.marks.sort();
+      if (c.sep || !M || M.kind !== 'letters') continue;
+      const dag = c.marks.includes('\u05bc') && M.items[c.base + '\u05bc'] ? c.base + '\u05bc' : null;
+      c.letter = dag || (M.items[c.base] ? c.base : M.byChar[c.base] || c.base);
+    }
+    return out;
+  }
+  /** Arabic: which form every letter of a word takes (isolated, initial, medial, final); Hebrew: regular or final. Lām + alif = one sign. */
+  function glyphPositions(C, code, text) {
+    const M = scriptModule(C, code), cl = letterClusters(C, code, text);
+    const joins = c => c.sep ? 'none' : (M?.items[c.letter]?.joins || M?.items[M?.byChar?.[c.base]]?.joins || 'none');
+    for (let i = 0; i < cl.length; i++) {
+      const c = cl[i]; if (c.sep) continue;
+      if (code === 'he') { const it = M?.items[c.letter]; c.pos = it?.finalOf ? 'final' : 'regular'; continue; }
+      const prev = cl[i - 1], next = cl[i + 1];
+      const fromPrev = !!prev && !prev.sep && joins(prev) === 'dual' && joins(c) !== 'none';
+      const toNext = !!next && !next.sep && joins(c) === 'dual' && joins(next) !== 'none';
+      c.pos = fromPrev ? (toNext ? 'medial' : 'final') : (toNext ? 'initial' : 'isolated');
+      if (c.base === 'ل' && next && /^[اأإآٱ]/.test(next.base)) c.lamAlif = true;
+    }
+    return cl;
+  }
+  /** One letter in one position (ZWJ-joined, so any font shapes it): null when the letter has no such form. */
+  const glyphForm = (C, code, key, pos) => { const it = scriptModule(C, code)?.items[key]; return it?.forms?.[pos] || null; };
+
+  /* the learner's script stage (§5.5): letters / characters with two tracks each, stored in lang:<L>:script */
+  const scriptStore = (L, code) => { const S = ensureLang(L, code); return S.script = S.script || { items: {} }; };
+  function glyphTrackState(it) {
+    if (!it || (it.seen == null && !it.r && !it.p)) return 'ready';
+    if (!it.r && !it.p) return 'seen';
+    if (!trackOk(it.r, 3, 2)) return 'learning';
+    if (!trackOk(it.p, 3, 2)) return 'known_r';
+    if (!trackOk(it.p, 21, 1)) return 'known_p';
+    return 'mastered';
+  }
+  function introduceGlyph(C, L, code, key, day) { const st = scriptStore(L, code), it = st.items[key] = st.items[key] || {}; if (it.seen == null) it.seen = day; return it; }
+  function reviewGlyph(C, L, code, key, track, grade, day) {
+    if (!scriptModule(C, code)?.items[key]) throw new Error(`unknown letter or character ${key} in ${code}`);
+    if (track !== 'r' && track !== 'p') throw new Error('track must be r or p');
+    const it = introduceGlyph(C, L, code, key, day); it[track] = sm2(it[track], grade, day); return it;
+  }
+  /** The state of every letter (ar, he) or character (zh) and the stage: {kind, items: {key: state}, groups: [{id, title, items, state, known}],
+   *  stage (groups fully known), stages, open (the groups to learn now), complete, known, total}. zh: a character is as known as the best
+   *  word that contains it, or its own drills. */
+  function scriptState(C, L, code, k) {
+    const M = scriptModule(C, code); if (!M) return null;
+    const store = L.langs[code]?.script?.items || {}, items = {};
+    let kk = k;
+    for (const key of M.order) {
+      let st = glyphTrackState(store[key]);
+      if (M.kind === 'chars') { kk = kk || known(C, L, code); for (const id of M.words[key] || []) if (rank(kk.state[id]) > rank(st)) st = kk.state[id]; if (st === 'locked') st = 'ready'; }
+      items[key] = st;
+    }
+    const groups = M.groups.map(g => {
+      const sts = g.items.map(x => items[x]), all = s => sts.every(x => rank(x) >= rank(s));
+      return { id: g.id, title: g.title, items: g.items, state: all('known_r') ? 'known' : all('learning') ? 'practised' : sts.some(x => rank(x) >= rank('seen')) ? 'learning' : 'new', known: sts.filter(x => rank(x) >= rank('known_r')).length };
+    });
+    let stage = 0; while (stage < groups.length && groups[stage].state === 'known') stage++;
+    // the groups to learn now: every group up to the first one that is not practised yet (the stage advances as letters become known)
+    const open = []; for (const g of groups) { open.push(g.id); if (g.state !== 'known' && g.state !== 'practised') break; }
+    const total = M.order.length, kn = M.order.filter(x => rank(items[x]) >= rank('known_r')).length;
+    return { kind: M.kind, items, groups, stage, stages: groups.length, open, complete: total > 0 && kn === total, known: kn, total, introduced: M.order.filter(x => rank(items[x]) >= rank('seen')).length };
+  }
+  /** Until the letter stage is complete, words show their transliteration (§5.5). */
+  const needsTranslit = (C, L, code) => { const M = scriptModule(C, code); return !!M && M.kind === 'letters' && !scriptState(C, L, code).complete; };
+
+  /* ---------- vowel marks: full · fading by word state · none (§8) ---------- */
+  const LIGHT_KEEP = { ar: new Set(['\u0651']), he: new Set(['\u05c1', '\u05c2', '\u05bc']) };   // light: ar keeps šadda; he keeps the shin / sin dot and the dagesh
+  /** The marks to show on a word: 'full' | 'light' | 'none'. pref: full | fading | none; fading = full while the word is new, light once
+   *  it is known for reading, none once it is known for writing. */
+  function markLevel(C, L, code, lexId, pref) {
+    if (!C.lang[code]?.language.vowelMarks) return 'full';
+    if (pref === 'none') return 'none';
+    if (pref !== 'fading' || !lexId || !C.lang[code].lex[lexId]) return 'full';
+    const st = itemState(C, L, code, lexId, {});
+    return rank(st) >= rank('known_p') ? 'none' : rank(st) >= rank('known_r') ? 'light' : 'full';
+  }
+  function fadeMarks(code, text, level) {
+    if (level === 'none') return stripMarks(code, text);
+    if (level !== 'light') return text;
+    const t = markTest(code), keep = LIGHT_KEEP[code] || new Set(); let out = '';
+    for (const ch of nfc(text)) if (!t(ch.codePointAt(0)) || keep.has(ch)) out += ch;
+    return out;
+  }
+  /** The mark level of a written text (a word or a phrase without its lexeme): the weakest level of the words it is read as. */
+  function textMarkLevel(C, L, code, text, pref) {
+    if (!C.lang[code]?.language.vowelMarks || pref !== 'fading') return pref === 'none' && C.lang[code]?.language.vowelMarks ? 'none' : 'full';
+    const ids = []; for (const tk of tokenize(C, code, text)) { if (tk.p) continue; const ms = tk.parts ? tk.parts.flatMap(p => p.matches) : tk.matches; if (!ms.length) return 'full'; ids.push(ms[0].l); }
+    if (!ids.length) return 'full';
+    const lv = ids.map(id => markLevel(C, L, code, id, pref)), order = ['full', 'light', 'none'];
+    return lv.reduce((a, b) => order.indexOf(a) < order.indexOf(b) ? a : b);
+  }
+
+  /* ---------- Chinese tones: written and spoken (sandhi) ---------- */
+  /** Spoken tones of a word: 3 + 3 → 2 + 3 (two syllables of the third tone), 不 before a fourth tone → bú. Only these two sure rules
+   *  (一 depends on its use; longer runs of third tones on the phrasing) — null when the word is not one of these cases. */
+  function toneSandhi(chars, tones) {
+    const t = tones.slice(); let changed = false;
+    const threes = tones.filter(x => x === 3).length;
+    for (let i = 0; i < t.length - 1; i++) {
+      if (chars[i] === '不' && t[i] === 4 && t[i + 1] === 4) { t[i] = 2; changed = true; }
+      if (t[i] === 3 && t[i + 1] === 3 && threes === 2 && t.length <= 3) { t[i] = 2; changed = true; }
+    }
+    return changed ? t : null;
+  }
+  const pinyinBase = syl => { const r = pinyinTone(syl); return typeof r === 'string' ? syl : r[0]; };
+  const withTone = (base, tone) => pinyinNumbersToMarks(base + (tone === 5 ? '' : tone));
+
+  /* ---------- pinyin input (§8): tone numbers → marks, the characters to choose ---------- */
+  let SYLS = null;
+  function pinyinSyllables() {
+    if (SYLS) return SYLS;
+    SYLS = new Set();
+    const ini = ['', 'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'];
+    for (const i of ini) for (const f of FINALS) { const s = i + f; if (!pinyinSyllableErrors(s).length) SYLS.add(s); }
+    for (const s of ['yu', 'yue', 'yuan', 'yun', 'ju', 'jue', 'juan', 'jun', 'qu', 'que', 'quan', 'qun', 'xu', 'xue', 'xuan', 'xun', 'lü', 'lüe', 'nü', 'nüe', 'r']) SYLS.add(s);
+    return SYLS;
+  }
+  /** "ni3hao3", "ni hao", "nǐhǎo", "lv4" → [{base, tone|null}] (null when the text is not pinyin). A digit gives the tone of the syllable
+   *  before it; a tone mark the tone of its syllable; no tone = any tone. */
+  function parsePinyin(raw) {
+    const S = pinyinSyllables(), out = [];
+    const txt = nfc(String(raw || '')).toLowerCase().replace(/u:/g, 'ü').replace(/v/g, 'ü');
+    for (const chunk of txt.split(/[\s']+/).filter(Boolean)) {
+      for (const run of chunk.match(/[^\d]+|\d/g) || []) {
+        if (/^\d$/.test(run)) { if (!out.length || +run > 5) return null; out[out.length - 1].tone = +run === 0 ? 5 : +run; continue; }
+        let letters = ''; const toneAt = [];
+        for (const ch of run) { if (TONE[ch]) { toneAt[letters.length] = TONE[ch][1]; letters += TONE[ch][0]; } else if (/[a-zü]/.test(ch)) letters += ch; else return null; }
+        let best = null;
+        const go = (i, acc) => { if (i === letters.length) { best = acc; return true; } for (let n = Math.min(6, letters.length - i); n >= 1; n--) if (S.has(letters.slice(i, i + n)) && go(i + n, [...acc, [i, n]])) return true; return false; };
+        if (!go(0, [])) return null;
+        for (const [i, n] of best) { let tone = null; for (let j = i; j < i + n; j++) if (toneAt[j]) tone = toneAt[j]; out.push({ base: letters.slice(i, i + n), tone }); }
+      }
+    }
+    return out.length ? out : null;
+  }
+  /** What the learner typed in pinyin → {marks: 'nǐ hǎo', candidates: [{text, pinyin, lex?, gloss}]} — the course's words and characters
+   *  whose reading fits (a tone that is not typed fits any tone). */
+  function pinyinCandidates(C, code, raw, opts = {}) {
+    const X = C.lang[code], syl = parsePinyin(raw); if (!syl) return { marks: '', candidates: [] };
+    const marks = syl.map(s => s.tone ? withTone(s.base, s.tone) : s.base).join(' ');
+    const fits = py => { const ps = pinyinSplit(py); if (ps.length !== syl.length) return false; return ps.every((p, i) => { const r = pinyinTone(p); return typeof r !== 'string' && r[0] === syl[i].base && (syl[i].tone == null || r[1] === syl[i].tone || (syl[i].tone === 5 && r[1] === 5)); }); };
+    const K = opts.known || new Set(), out = [], seen = new Set();
+    for (const lx of Object.values(X.lex)) if (lx.pinyin && fits(lx.pinyin) && !seen.has(lx.lemma)) { seen.add(lx.lemma); out.push({ text: lx.lemma, pinyin: lx.pinyin, lex: lx.id, gloss: (lx.senses || [])[0] ? C.concepts[lx.senses[0]]?.gloss || '' : lx.role || '', known: K.has(lx.id) }); }
+    const M = scriptModule(C, code);
+    if (M?.kind === 'chars' && syl.length === 1) for (const e of Object.values(M.items)) if (!seen.has(e.ch) && [...(e.readings || []), ...(e.wordReadings || [])].some(fits)) { seen.add(e.ch); out.push({ text: e.ch, pinyin: (e.readings || e.wordReadings)[0], gloss: e.meaning || '', known: false, char: true }); }
+    out.sort((a, b) => (b.known - a.known) || (!!a.char - !!b.char) || ((M?.words?.[b.text]?.length || 0) - (M?.words?.[a.text]?.length || 0)) || a.text.localeCompare(b.text));
+    return { marks, candidates: out.slice(0, opts.max || 12) };
+  }
+
+  /* ---------- typed answers: letter-level comparison (spell, produce, recall) ---------- */
+  const graphemes = s => { try { return [...new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(s)].map(x => x.segment); } catch (e) { return [...s]; } };
+  /** Letter-level difference: [{t, op: same|wrong|missing|extra, want?}] (wanted vs typed, grapheme by grapheme). */
+  function letterDiff(want, got) {
+    const a = graphemes(nfc(want)), b = graphemes(nfc(got)), D = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+    for (let i = 0; i <= a.length; i++) D[i][0] = i; for (let j = 0; j <= b.length; j++) D[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) D[i][j] = Math.min(D[i - 1][j] + 1, D[i][j - 1] + 1, D[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    const out = []; let i = a.length, j = b.length;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && D[i][j] === D[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)) { out.push(a[i - 1] === b[j - 1] ? { t: b[j - 1], op: 'same' } : { t: b[j - 1], op: 'wrong', want: a[i - 1] }); i--; j--; }
+      else if (i > 0 && D[i][j] === D[i - 1][j] + 1) { out.push({ t: a[i - 1], op: 'missing' }); i--; }
+      else { out.push({ t: b[j - 1], op: 'extra' }); j--; }
+    }
+    return out.reverse();
+  }
+  const NOTE_PAIRS = [
+    [/^[aouAOU]$/, /^[äöüÄÖÜ]$/, 'umlaut: ä ö ü are letters of their own'], [/^s$/, /^ß$/, 'ß (or ss after a long vowel / diphthong)'],
+    [/^[اأإآءؤئ]/, /^[اأإآءؤئ]/, 'hamza and its seat (أ إ آ ء ؤ ئ)'], [/^[هة]/, /^[هة]/, 'tāʾ marbūṭa ة at the end, not هـ'], [/^[يى]/, /^[يى]/, 'alif maqṣūra ى (no dots) vs yāʾ ي'],
+    [/^[כך]/, /^[כך]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[מם]/, /^[מם]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[נן]/, /^[נן]/, 'final form (ך ם ן ף ץ at the end of a word only)'],
+    [/^[פף]/, /^[פף]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[צץ]/, /^[צץ]/, 'final form (ך ם ן ף ץ at the end of a word only)']];
+  /** Is a typed answer the word? → {ok, expected, diff, notes, marksOk}. ar/he: without vowel marks the letters must match (with marks,
+   *  the marks too); de: capitals, umlauts and ß count; zh: the characters (simplified or traditional). */
+  function checkTyped(C, code, lexId, typed, opts = {}) {
+    const X = C.lang[code], lx = X.lex[lexId], t = nfc(String(typed || '').trim().replace(/\s+/g, ' '));
+    const wants = uniqStr([lx.lemma, ...(opts.forms || []), ...(lx.alts || []), ...(code === 'zh' && lx.trad ? [lx.trad] : [])].map(nfc));
+    const vm = !!X.language.vowelMarks, typedMarks = vm && hasMarks(code, t);
+    const plain = w => stripMarks(code, w);
+    let ok = wants.includes(t); const swiss = code === 'de' && !ok && wants.some(w => w.includes('ß') && w.replace(/ß/g, 'ss') === t);
+    if (swiss) ok = true;   // the Swiss spelling: ss for ß (accepted, with a note)
+    if (!ok && vm && !typedMarks) ok = wants.some(w => plain(w) === t) || Object.values(lx.plene || {}).some(p => nfc(p) === t);
+    const expected = wants[0], cmp = vm && !typedMarks ? plain(expected) : expected;
+    const diff = letterDiff(cmp, t), notes = swiss ? ['the Swiss spelling (ss for ß) — elsewhere ß'] : [];
+    if (!ok) {
+      if (vm && typedMarks && wants.some(w => plain(w) === plain(t))) notes.push('the letters are right; a vowel mark is not');
+      if (code === 'de' && t.toLowerCase() === expected.toLowerCase()) notes.push(lx.pos === 'NOUN' ? 'nouns start with a capital letter' : 'capital / small letter');
+      if (code === 'zh' && /^[a-zA-Züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ0-9\s']+$/.test(t)) notes.push('type the pinyin, then choose the characters');
+      for (const d of diff) if (d.op === 'wrong') for (const [x, y, n] of NOTE_PAIRS) if ((x.test(d.want) && y.test(d.t)) || (y.test(d.want) && x.test(d.t))) { if (!notes.includes(n)) notes.push(n); }
+    }
+    return { ok, expected, diff, notes, marksTyped: typedMarks };
+  }
+
+  /* ---------- tokenizer helpers for Chinese (§13.1): a bank sentence keeps its own words; a span the bank always splits stays split ---------- */
+  function ownSegmentation(C, code, text) {
+    const X = C.lang[code];
+    if (!X._byText) { X._byText = new Map(); for (const s of X.sentences) if (!X._byText.has(nfc(s.text))) X._byText.set(nfc(s.text), s); }
+    const s = X._byText.get(nfc(text)); if (!s) return null;
+    return (s.tokens || []).map(k => k.p ? { t: k.t, p: k.p, matches: [] } : k.name || !k.l ? { t: k.t, matches: [], unknown: true }
+      : { t: k.t, matches: [...(X.forms.get(nfc(k.t)) || [])].concat((X.forms.get(nfc(k.t)) || []).some(m => m.l === k.l) ? [] : [{ l: k.l, f: k.f || null }]) });
+  }
+  function maxMatch(X, chars, i) { for (let n = Math.min(X.maxWord, chars.length - i); n >= 1; n--) { const w = chars.slice(i, i + n).join(''); if (X.forms.has(w)) return w; } return null; }
+  function knownSplit(C, code, chars, i, hitLen) {
+    const X = C.lang[code];
+    if (!X._splits) {
+      X._splits = new Map(); const cand = new Map(), whole = new Set();
+      for (const s of X.sentences) {
+        const toks = s.tokens || [], flat = [...nfc(s.text)];
+        if (toks.map(k => k.t).join('') !== nfc(s.text)) continue;
+        const words = []; let pos = 0;
+        for (const k of toks) { const n = [...k.t].length; if (!k.p) { words.push([pos, pos + n, k.t]); whole.add(nfc(k.t)); } pos += n; }
+        // where plain longest matching from a word of the bank would swallow more than that word: how the bank splits the span
+        for (const [a] of words) {
+          const mw = maxMatch(X, flat, a); if (!mw) continue;
+          const end = a + [...mw].length, inside = words.filter(([x, y]) => x >= a && y <= end);
+          if (inside.length > 1 && inside[inside.length - 1][1] === end) { const v = cand.get(mw) || new Set(); v.add(inside.map(w => w[2]).join('|')); cand.set(mw, v); }
+        }
+      }
+      // a span is split in every text only when the bank always splits it the same way and never writes it as one word
+      for (const [span, v] of cand) if (v.size === 1 && !whole.has(span)) { const f = [...span][0]; if (!X._splits.has(f)) X._splits.set(f, []); X._splits.get(f).push({ span, parts: [...v][0].split('|') }); }
+      for (const l of X._splits.values()) l.sort((a, b) => [...b.span].length - [...a.span].length);
+    }
+    const list = X._splits.get(chars[i]); if (!list) return null;
+    for (const { span, parts } of list) { const n = [...span].length; if (n >= hitLen && chars.slice(i, i + n).join('') === span) return parts; }
+    return null;
+  }
+
+  /* ---------- exercise generators (§6.1): every answer comes from the course files and the script module ---------- */
+  const glossOf = (C, code, id) => { const x = C.lang[code].lex[id], c = (x.senses || [])[0]; return c ? C.concepts[c]?.gloss || c : (x.role || ''); };
+  /** Words to read and write in script drills: the learner's words (fewest first-time), else the words of the lessons being learned. */
+  function scriptWords(C, L, code, k, n = 40) {
+    const X = C.lang[code], met = Object.keys(X.lex).filter(id => rank(k.state[id]) >= rank('seen'));
+    let pool = met;
+    if (pool.length < 6) for (const nid of C.order) { if (pool.length >= 12) break; if (['open', 'learning', 'passed'].includes(k.nodes[nid])) pool = uniqStr([...pool, ...(X.byNode[nid] || [])]); }
+    if (pool.length < 6) for (const nid of C.order) { if (pool.length >= 12) break; if (X.prepared[nid]) pool = uniqStr([...pool, ...(X.byNode[nid] || [])]); }
+    return pool.filter(id => X.lex[id] && (X.lex[id].senses || []).length || X.lex[id]?.role).slice(0, n * 4);
+  }
+  /** Letters to drill: those met, else the open groups (ar, he). */
+  function scriptLetters(C, L, code, ss) {
+    const M = scriptModule(C, code); if (!M || M.kind !== 'letters') return [];
+    const met = M.order.filter(x => rank(ss.items[x]) >= rank('seen'));
+    return met.length >= 3 ? met : uniqStr([...met, ...ss.groups.filter(g => ss.open.includes(g.id)).flatMap(g => g.items)]);
+  }
+  function chooseItem(type, kind, code, fields, rng) {
+    const opts = uniqStr([fields.answer, ...fields.wrong.filter(w => w && w !== fields.answer)]).slice(0, 4);
+    if (opts.length < 2) return null;
+    const { wrong, ...rest } = fields;
+    return { type, kind, lang: code, options: shuffled(opts, rng), ...rest };
+  }
+  const GEN_SCRIPT = {
+    glyph_form(ctx) {
+      const { C, code, rng } = ctx, M = scriptModule(C, code); if (!M || M.kind !== 'letters') return [];
+      const ss = scriptState(C, ctx.L, code, ctx.k), out = [];
+      for (const key of scriptLetters(C, ctx.L, code, ss)) {
+        const it = M.items[key]; if (it.type !== 'letter') continue;
+        const forms = it.forms || {}, poss = Object.keys(forms).filter(p => p !== 'isolated' && p !== 'regular');
+        for (const pos of poss) {
+          const wrong = uniqStr([...Object.entries(forms).filter(([p]) => p !== pos).map(([, f]) => f), ...(M.look[key] || []).map(b => M.items[b]?.forms?.[pos]).filter(Boolean)]);
+          const label = { initial: 'at the start of a word (joined to the next letter)', medial: 'in the middle of a word', final: 'at the end of a word' }[pos];
+          const x = chooseItem('glyph_form', 'position', code, { glyph: key, track: 'p', pos, prompt: forms.isolated || forms.regular || key, promptAs: 'glyph', ask: `${it.name}: its form ${label}?`, answer: forms[pos], wrong, optionsAs: 'glyph', why: `${it.name} ${label}: ${forms[pos].replace(/\u200d/g, '')}` }, rng);
+          if (x) out.push(x);
+        }
+      }
+      // building a word from its letters: the learner picks them in order (Arabic joins them as they come; Hebrew needs the final form)
+      for (const id of scriptWords(C, ctx.L, code, ctx.k)) {
+        const lx = C.lang[code].lex[id], plain = stripMarks(code, lx.lemma); if (/\s/.test(plain)) continue;
+        const cl = letterClusters(C, code, plain); if (cl.length < 2 || cl.length > 9 || cl.some(c => c.sep || !M.items[c.letter] && !M.byChar[c.base])) continue;
+        const letters = cl.map(c => c.base);
+        // the other form of a letter with a final form (he) always comes along; then look-alikes
+        const other = code === 'he' ? uniqStr(letters.flatMap(b => Object.values(M.items).filter(x => x.finalOf === b || x.ch === M.items[b]?.finalOf).map(x => x.ch))).filter(b => !letters.includes(b)) : [];
+        const look = uniqStr(letters.flatMap(b => M.look[b] || [])).filter(b => b.length === 1 && !letters.includes(b) && !other.includes(b));
+        out.push({ type: 'glyph_form', kind: 'join', lang: code, lex: id, prompt: glossOf(C, code, id), answer: plain, letters, tiles: shuffled([...letters, ...other.slice(0, 2), ...shuffled(look, rng).slice(0, Math.max(1, 3 - other.length))], rng), why: `${lx.lemma} = ${letters.join(' + ')}` });
+      }
+      return out;
+    },
+    transliterate(ctx) {
+      const { C, code, rng } = ctx, X = C.lang[code], M = scriptModule(C, code), out = [];
+      if (M?.kind === 'letters') {
+        const ss = scriptState(C, ctx.L, code, ctx.k), keys = scriptLetters(C, ctx.L, code, ss), all = M.order.filter(x => M.items[x].type === 'letter' && M.items[x].translit);
+        for (const key of keys) {
+          const it = M.items[key]; if (it.type !== 'letter' || !it.translit) continue;
+          const others = shuffled(all.filter(b => b !== key && M.items[b].translit !== it.translit), rng), look = (M.look[key] || []).filter(b => M.items[b]?.translit && M.items[b].translit !== it.translit);
+          const a = chooseItem('transliterate', 'letter', code, { glyph: key, track: 'r', prompt: key, promptAs: 'glyph', ask: 'How is it written in Latin letters?', answer: it.translit, wrong: [...look.map(b => M.items[b].translit), ...others.map(b => M.items[b].translit)], optionsAs: 'latin', why: `${key} ${it.name}: ${it.translit} [${it.sound}]` }, rng);
+          const b = chooseItem('transliterate', 'letter_rev', code, { glyph: key, track: 'p', prompt: `${it.translit}  [${it.sound}]`, promptAs: 'latin', ask: 'Which letter?', answer: key, wrong: [...look, ...others].filter(x => M.items[x].translit !== it.translit), optionsAs: 'glyph', why: `${it.translit} = ${key} (${it.name})` }, rng);
+          if (a) out.push(a); if (b) out.push(b);
+        }
+      }
+      const words = scriptWords(C, ctx.L, code, ctx.k), rom = id => code === 'zh' ? X.lex[id].pinyin : X.lex[id].translit;
+      const pool = Object.keys(X.lex).filter(id => rom(id));
+      for (const id of words) {
+        const lx = X.lex[id], r = rom(id); if (!r) continue;
+        const same = pool.filter(o => o !== id && rom(o) !== r && X.lex[o].lemma !== lx.lemma);
+        const near = shuffled(same, rng).sort((a, b) => Math.abs(rom(a).length - r.length) - Math.abs(rom(b).length - r.length)).slice(0, 6);
+        let wrong = near.map(rom);
+        if (code === 'zh') {   // the same syllables with other tones are the closest wrong answers
+          const syl = pinyinSplit(r), toneVar = [];
+          for (let i = 0; i < syl.length && toneVar.length < 4; i++) for (const t of [1, 2, 3, 4]) { const b = pinyinBase(syl[i]), cur = pinyinTone(syl[i]); if (typeof cur === 'string' || cur[1] === t) continue; const v = syl.slice(); v[i] = withTone(b, t); toneVar.push(v.join(' ')); }
+          const realOthers = new Set(pool.filter(o => X.lex[o].lemma === lx.lemma).map(rom));
+          wrong = [...shuffled(toneVar.filter(v => !realOthers.has(v)), rng).slice(0, 2), ...wrong];
+        }
+        const a = chooseItem('transliterate', 'word', code, { lex: id, track: 'r', prompt: lx.lemma, promptAs: 'word', ask: code === 'zh' ? 'Its pinyin?' : 'How is it read?', answer: r, wrong, optionsAs: 'latin', why: `${lx.lemma} = ${r} — ${glossOf(C, code, id)}` }, rng);
+        const b = chooseItem('transliterate', 'word_rev', code, { lex: id, prompt: r, promptAs: 'latin', ask: 'Which is it?', answer: lx.lemma, wrong: near.map(o => X.lex[o].lemma).filter(w => w !== lx.lemma), optionsAs: 'word', why: `${r} = ${lx.lemma} — ${glossOf(C, code, id)}` }, rng);
+        if (a) out.push(a); if (b) out.push(b);
+      }
+      if (M?.kind === 'chars') for (const id of words) for (const ch of new Set(X.lex[id].lemma)) {   // a character → its readings
+        const e = M.items[ch]; if (!e) continue; const rd = [...(e.readings || []), ...(e.wordReadings || [])]; if (!rd.length) continue;
+        const syl = pinyinSplit(X.lex[id].pinyin), i = [...X.lex[id].lemma].indexOf(ch), ans = syl[i] && rd.includes(syl[i]) ? syl[i] : rd[0];
+        const wrong = [1, 2, 3, 4].map(t => withTone(pinyinBase(ans), t)).filter(v => !rd.includes(v));
+        const x = chooseItem('transliterate', 'char', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: `Its reading in ${X.lex[id].lemma} (${glossOf(C, code, id)})?`, answer: ans, wrong, optionsAs: 'latin', why: `${ch}: ${rd.join(', ')} — ${e.meaning || ''}` }, rng);
+        if (x) out.push(x);
+      }
+      return out;
+    },
+    vowelize(ctx) {
+      const { C, code } = ctx, M = scriptModule(C, code); if (!M || M.kind !== 'letters' || !C.lang[code].language.vowelMarks) return [];
+      const out = [], palette = M.marks;
+      for (const id of scriptWords(C, ctx.L, code, ctx.k)) {
+        const lx = C.lang[code].lex[id], cl = letterClusters(C, code, lx.lemma);
+        if (cl.filter(c => !c.sep).length < 2 || cl.some(c => c.marks.some(m => !palette.includes(m)))) continue;
+        out.push({ type: 'vowelize', kind: 'vowelize', lang: code, lex: id, prompt: glossOf(C, code, id), text: nfc(lx.lemma), letters: cl.map(c => ({ base: c.base, marks: c.marks, sep: !!c.sep })), palette, why: `${lx.lemma} — ${lx.translit || ''}` });
+      }
+      return out;
+    },
+    tone_mark(ctx) {
+      const { C, code } = ctx, X = C.lang[code]; if (code !== 'zh' && X.language.romanization !== 'pinyin') return [];
+      const out = [];
+      for (const id of scriptWords(C, ctx.L, code, ctx.k)) {
+        const lx = X.lex[id], chars = [...lx.lemma], syl = pinyinSplit(lx.pinyin || ''); if (!syl.length || syl.length !== chars.filter(isHan).length || chars.some(ch => !isHan(ch))) continue;
+        const parsed = syl.map(pinyinTone); if (parsed.some(p => typeof p === 'string')) continue;
+        const tones = parsed.map(p => p[1]), bases = parsed.map(p => p[0]);
+        out.push({ type: 'tone_mark', kind: 'tone_mark', mode: 'written', lang: code, lex: id, prompt: glossOf(C, code, id), chars, bases, answer: tones, why: `${lx.lemma} ${lx.pinyin}` });
+        const sp = toneSandhi(chars, tones);
+        if (sp) out.push({ type: 'tone_mark', kind: 'tone_mark', mode: 'spoken', lang: code, lex: id, prompt: glossOf(C, code, id), chars, bases, written: tones, answer: sp,
+          why: `written ${lx.pinyin}, said ${bases.map((b, i) => withTone(b, sp[i])).join(' ')} (${chars.includes('不') && tones.some((t, i) => chars[i] === '不' && t !== sp[i]) ? '不 before a 4th tone → bú' : '3rd + 3rd → 2nd + 3rd'})` });
+      }
+      return out;
+    },
+    char_compose(ctx) {
+      const { C, code, rng } = ctx, M = scriptModule(C, code); if (!M || M.kind !== 'chars') return [];
+      const out = [], chars = uniqStr(scriptWords(C, ctx.L, code, ctx.k).flatMap(id => [...C.lang[code].lex[id].lemma])).filter(ch => M.items[ch]);
+      const allParts = uniqStr(Object.values(M.items).flatMap(e => idsParts(e.ids)));
+      const radicals = uniqStr(Object.values(M.items).map(e => e.radical).filter(Boolean));
+      for (const ch of chars) {
+        const e = M.items[ch], parts = idsParts(e.ids);
+        if (parts.length >= 2 && parts.length <= 3 && /^[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺]/.test(e.ids || '') && parts.every(p => p !== ch)) {   // overlapping parts (⿻) are not built
+          const wrong = shuffled(allParts.filter(p => !parts.includes(p)), rng).slice(0, 4);
+          out.push({ type: 'char_compose', kind: 'compose', lang: code, glyph: ch, track: 'p', prompt: e.meaning || '', reading: (e.readings || e.wordReadings || [])[0] || '', ids: e.ids, layout: e.ids[0], answer: parts, tiles: shuffled([...parts, ...wrong], rng),
+            hint: e.etymology?.hint || '', why: `${ch} = ${e.ids}${e.etymology?.semantic ? ` · meaning from ${e.etymology.semantic}` : ''}${e.etymology?.phonetic ? ` · sound from ${e.etymology.phonetic}` : ''}` });
+        }
+        if (e.radical && e.radical !== ch) {
+          const x = chooseItem('char_compose', 'radical', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: 'Its radical (the part it is filed under in a dictionary)?', answer: e.radical, wrong: shuffled(radicals.filter(r => r !== e.radical && !idsParts(e.ids).includes(r)), rng), optionsAs: 'word', why: `${ch}: radical ${e.radical}${e.meaning ? ' — ' + e.meaning : ''}` }, rng);
+          if (x) out.push(x);
+        }
+      }
+      return out;
+    },
+    trace(ctx) {
+      const { C, code } = ctx, M = scriptModule(C, code); if (!M) return [];
+      if (M.kind === 'chars') return uniqStr(scriptWords(C, ctx.L, code, ctx.k).flatMap(id => [...C.lang[code].lex[id].lemma])).filter(ch => M.items[ch]?.medians)
+        .map(ch => ({ type: 'trace', kind: 'trace', lang: code, glyph: ch, track: 'p', check: 'medians', medians: M.items[ch].medians, prompt: M.items[ch].meaning || '', reading: (M.items[ch].readings || [])[0] || '', why: `${ch}: ${M.items[ch].medians.length} strokes` }));
+      const ss = scriptState(C, ctx.L, code, ctx.k);
+      return scriptLetters(C, ctx.L, code, ss).filter(k => M.items[k].type === 'letter').map(k => ({ type: 'trace', kind: 'trace', lang: code, glyph: k, track: 'p', check: 'self', prompt: M.items[k].name, reading: M.items[k].translit, why: `${k} — ${M.items[k].name}` }));
+    },
+    spell(ctx) {
+      const { C, code } = ctx, X = C.lang[code];
+      return scriptWords(C, ctx.L, code, ctx.k).filter(id => { const lx = X.lex[id]; return (lx.senses || []).length && [...stripMarks(code, lx.lemma)].length <= 24; })
+        .map(id => ({ type: 'spell', kind: 'spell', lang: code, lex: id, track: 'p', prompt: glossOf(C, code, id), concept: (X.lex[id].senses || [])[0], answer: X.lex[id].lemma,
+          also: uniqStr((X.byConcept[(X.lex[id].senses || [])[0]] || []).filter(o => o !== id).map(o => X.lex[o].lemma)),   // another word for the same idea is right too
+          why: `${X.lex[id].lemma}${X.lex[id].translit ? ' — ' + X.lex[id].translit : X.lex[id].pinyin ? ' — ' + X.lex[id].pinyin : ''}` }));
+    },
+  };
+  /** The parts of an IDS description (⿰女子 → [女, 子]); unknown parts (？) are left out. */
+  const idsParts = ids => [...(ids || '')].filter(ch => !/[⿰-⿿？]/.test(ch));
+  for (const t of Object.keys(GEN_SCRIPT)) GEN[t] = ctx => GEN_SCRIPT[t](ctx).map(x => ({ ...x, fn: ctx.fid })).slice(0, Math.max(ctx.max || 12, 1) * 3);   // as grammar generators: answers count for the function too
+  const SCRIPT_TYPES = { ar: ['glyph_form', 'transliterate', 'vowelize', 'trace', 'spell'], he: ['glyph_form', 'transliterate', 'vowelize', 'trace', 'spell'], zh: ['transliterate', 'tone_mark', 'char_compose', 'trace', 'spell'] };
+  /** Exercise types of the script lane for a language (§6.1): ar/he letters, zh characters; spell for every language. */
+  const scriptTypes = (C, code) => SCRIPT_TYPES[code] || (C.lang[code]?.language.romanization === 'pinyin' ? SCRIPT_TYPES.zh : C.lang[code]?.language.vowelMarks ? SCRIPT_TYPES.ar : ['spell']);
+  /** Script items for a language: one type or a mix. opts: {type, k, rng, max = 10} */
+  function scriptItems(C, L, code, opts = {}) {
+    const rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 10;
+    const types = opts.type ? [opts.type] : scriptTypes(C, code);
+    const pools = types.map(t => shuffled(GEN_SCRIPT[t] ? GEN_SCRIPT[t]({ C, L, code, k, K: k.R, rng, max }) : [], rng)).filter(p => p.length);
+    const out = []; let i = 0;
+    while (out.length < max && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
+    return out;
+  }
+  /** The script part of the daily session (§5.5): in the first weeks (ar, he: until the letter stage is complete; zh: six weeks from the
+   *  first word) a few items — letters due again, then the next new letters with a first question each, then a drill. → [{intro?, item}] */
+  function scriptSession(C, L, code, day, opts = {}) {
+    const M = scriptModule(C, code); if (!M) return [];
+    const n = opts.n ?? 4, rng = opts.rng || Math.random, k = opts.k || known(C, L, code), ss = scriptState(C, L, code, k), store = L.langs[code]?.script?.items || {};
+    const seenDays = Object.values(L.langs[code]?.items || {}).map(it => it.seen).filter(x => x != null);
+    const first = seenDays.length ? Math.min(...seenDays) : null;
+    if (M.kind === 'chars' ? (first == null || day - first > 42) : ss.complete) return [];
+    const out = [];
+    const due = Object.entries(store).filter(([, it]) => ['r', 'p'].some(t => it[t] && it[t].due <= day)).map(([key]) => key);
+    if (M.kind === 'letters') {
+      for (const key of due) { if (out.length >= n) break; const its = scriptItems(C, L, code, { k, rng, max: 30, type: 'transliterate' }).filter(x => x.glyph === key); if (its[0]) out.push({ item: its[0] }); }
+      const fresh = ss.groups.filter(g => ss.open.includes(g.id)).flatMap(g => g.items).filter(x => ss.items[x] === 'ready');
+      for (const key of fresh) { if (out.length >= n) break; out.push({ intro: key }); }
+      if (out.length < n) for (const it of scriptItems(C, L, code, { k, rng, max: n - out.length, type: rng() < 0.5 ? 'glyph_form' : 'transliterate' })) out.push({ item: it });
+    } else {
+      for (const it of scriptItems(C, L, code, { k, rng, max: n })) out.push({ item: it });
+    }
+    return out.slice(0, n);
+  }
+
+  /* ---------- tracing: a drawn stroke against a stroke median (Make Me a Hanzi, 1024 box, y up) ---------- */
+  function resample(pts, n = 16) {
+    if (pts.length < 2) return Array(n).fill(pts[0] || [0, 0]);
+    const d = [0]; for (let i = 1; i < pts.length; i++) d.push(d[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    const L0 = d[d.length - 1] || 1, out = [];
+    for (let k = 0; k < n; k++) { const t = L0 * k / (n - 1); let i = 1; while (i < d.length - 1 && d[i] < t) i++; const f = (t - d[i - 1]) / ((d[i] - d[i - 1]) || 1); out.push([pts[i - 1][0] + f * (pts[i][0] - pts[i - 1][0]), pts[i - 1][1] + f * (pts[i][1] - pts[i - 1][1])]); }
+    return out;
+  }
+  /** Is a drawn stroke (points in the same box, y up) this median? Shape, place and direction: the mean distance of the resampled
+   *  points under a quarter of the box, and the stroke goes the same way. → {ok, dist, reversed} */
+  function strokeMatch(drawn, median, tol = 150) {
+    const a = resample(drawn), b = resample(median);
+    const dist = a.reduce((s, p, i) => s + Math.hypot(p[0] - b[i][0], p[1] - b[i][1]), 0) / a.length;
+    const rev = a.reduce((s, p, i) => s + Math.hypot(p[0] - b[b.length - 1 - i][0], p[1] - b[b.length - 1 - i][1]), 0) / a.length;
+    const len = pts => pts.reduce((s, p, i) => i ? s + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0);
+    const lenOk = len(b) < 60 || (len(a) > len(b) * 0.35 && len(a) < len(b) * 2.8);
+    return { ok: dist <= tol && dist <= rev + 10 && lenOk, dist: Math.round(dist), reversed: rev + 10 < dist };
+  }
+
   API.GEN = GEN;
+  Object.assign(API, { scriptModule, letterClusters, glyphPositions, glyphForm, glyphTrackState, introduceGlyph, reviewGlyph, scriptState, needsTranslit, markLevel, fadeMarks, textMarkLevel, toneSandhi, parsePinyin, pinyinCandidates, letterDiff, checkTyped, scriptTypes, scriptItems, scriptSession, strokeMatch, resample, idsParts, ownSegmentation, knownSplit, GEN_SCRIPT });   // P4 — scripts and input
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

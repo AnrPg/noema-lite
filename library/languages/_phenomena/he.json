@@ -52,12 +52,14 @@
      "fn.overview"
     ],
     "exercises": [
-     "quiz"
+     "quiz",
+     "transliterate",
+     "glyph_form"
     ],
-    "other": "language.json: script “Hebr”, nativeName; the overview (fd.00) describes the alphabet. There is no lang/he/script/letters.json, no letter stage (§5.5) and no script exercise yet (glyph_form, transliterate, trace are P4)."
+    "other": "language.json: script “Hebr”, nativeName; the overview (fd.00) describes the alphabet. There is no lang/he/script/letters.json, no letter stage (§5.5) and no script exercise yet (glyph_form, transliterate, trace are P4). P4: lang/he/script.json (§4.9) and the letter stage (§5.5, lang:he:script)."
    },
-   "status": "partial",
-   "gap": "Write lang/he/script/letters.json (letter, name, sound, final form, confusable shapes, teaching order), the letter stage of §5.5 and the script exercises (transliterate, glyph_form, spell, trace).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00 (P4 script module)"
   },
   {
@@ -89,10 +91,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": "language.json dir “rtl”; the UI and the RTL keyboard are planned for P4."
+    "other": "language.json dir “rtl”; the UI and the RTL keyboard are planned for P4. P4: the Hebrew keyboard with niqqud input, right-to-left answer fields and widgets, every view checked at 390 px (tests/lang_script.js)."
    },
    "status": "partial",
-   "gap": "Bidi isolation of digits and Latin inside sentences and answer fields, a Hebrew keyboard (with niqqud input) and RTL layout checks of every exercise widget (P4).",
+   "gap": "Bidi isolation of digits and Latin inside sentences.",
    "when": "fd.00 (P4)"
   },
   {
@@ -128,11 +130,14 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "The forms are stored correctly in all 476 lexemes and 1241 bank sentences (checked: no final letter inside a word, no non-final letter at the end except the prefix מִ). tools/validate_lang.py does not check it."
+    "exercises": [
+     "glyph_form",
+     "spell"
+    ],
+    "other": "The forms are stored correctly in all 476 lexemes and 1241 bank sentences (checked: no final letter inside a word, no non-final letter at the end except the prefix מִ). tools/validate_lang.py does not check it. P4: the five final forms in script.json; glyph_form (which form at the end; building a word offers both forms); spell flags a regular letter at the end."
    },
    "status": "partial",
-   "gap": "A validator rule (final form only at the end of a word, except prefixes and abbreviations with geresh), letters.json, and the glyph_form exercise.",
+   "gap": "A validator rule: a final form only at the end of a word (except prefixes and abbreviations with geresh).",
    "when": "fd.00 (P4)"
   },
   {
@@ -170,11 +175,13 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "language.json vowelMarks true; the validator requires vowel marks on every form and lemma; langcore HE_MARK / stripMarks derive the bare spelling and the tokenizer reads both. The vowel-mark policy (full → partial → none) of the settings is not implemented."
+    "exercises": [
+     "vowelize"
+    ],
+    "other": "language.json vowelMarks true; the validator requires vowel marks on every form and lemma; langcore HE_MARK / stripMarks derive the bare spelling and the tokenizer reads both. The vowel-mark policy (full → partial → none) of the settings is not implemented. P4: the vowelize exercise and the vowel-mark level per language (full · fading by word state · none, §8)."
    },
-   "status": "partial",
-   "gap": "The vowelize exercise, the fading vowel-mark policy (§3.1) and reading drills without vowels.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00 (P4)"
   },
   {
@@ -210,7 +217,7 @@
     "other": "No cursive font, template or exercise."
    },
    "status": "missing",
-   "gap": "A cursive font or stroke templates in letters.json and the trace exercise (self-checked, §6.1); a recognition drill print ↔ cursive.",
+   "gap": "A cursive font or stroke templates (the trace exercise now uses the print letters, self-checked) and a recognition drill print ↔ cursive.",
    "when": "later (P4 script module)"
   },
   {

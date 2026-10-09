@@ -40,7 +40,7 @@ VIEWS.recall = (v, r) => {
   const c = UI.lang, X = LX(c), k = N.known(UI.C, UI.L, c);
   const words = Object.values(X.lex).filter(x => (x.senses || []).some(s => UI.C.concepts[s]?.field === fid));
   const found = new Map(); let left = 180, timer = null;
-  const input = h('input', { class: 'noema-input lx-recallin', lang: c, dir: X.language.dir, placeholder: `Type a ${info(c).name} word and press Enter…`, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' });
+  const si = scriptInput(c, { cls: 'lx-recallin', placeholder: `Type a ${info(c).name} word and press Enter…` }), input = si.input;   // keyboards / pinyin (P4)
   const clock = h('b', { class: 'lx-clock' }, '3:00'), list = h('div', { class: 'lx-found' }), msg = h('div', { class: 'tiny' });
   const finish = () => {
     clearInterval(timer); input.disabled = true;
@@ -65,7 +65,7 @@ VIEWS.recall = (v, r) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← Back')),
     h('h1', {}, `⏱️ Name all the ${field.title.toLowerCase()} you can — ${info(c).flag} ${info(c).name}`),
     h('p', { class: 'tiny' }, 'Any form counts; without vowel marks, in transliteration or pinyin (tones optional) too. The clock starts with your first word.'),
-    h('div', { class: 'row' }, input, clock, h('button', { class: 'btn small', onclick: finish }, 'Done')), msg, list);
+    h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, 'Done')), msg, list);
   setTimeout(() => input.focus(), 50);
 };
 
@@ -136,6 +136,6 @@ VIEWS.settings = (v) => {
     h('h3', { class: 'lx-h3' }, 'Languages you study now'), langBox,
     h('h3', { class: 'lx-h3' }, 'Languages you already know'), knowsEditor(),
     h('h3', { class: 'lx-h3' }, 'Sessions'), num('New ideas per session', 'batch', 3, 30, 12), num('Minutes per session', 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
-    h('h3', { class: 'lx-h3' }, 'Reading help'), tog('Vowel marks in Arabic and Hebrew', 'marks'), tog('Transliteration under Arabic and Hebrew words', 'translit'), tog('Pinyin under Chinese words', 'pinyin'),
+    h('h3', { class: 'lx-h3' }, 'Reading help'), tog('Vowel marks in Arabic and Hebrew', 'marks'), marksSettings(), tog('Transliteration under Arabic and Hebrew words', 'translit'), tog('Pinyin under Chinese words', 'pinyin'),
     h('p', { class: 'tiny' }, `Explanations are in ${info(UI.C.explainLang).name}: the language chosen when the course was made.`));
 };

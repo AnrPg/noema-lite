@@ -17,6 +17,7 @@ from collections import defaultdict
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from langlib import (pinyin_tone, nfc, canon, cell_errors, cell_parts, UD_POS, strip_marks, has_marks, letters, is_han,
                      pinyin_split, pinyin_syllable_errors, join_tokens, cap_first)
+from lang_script import check as script_check
 
 GENERATORS = {  # exercise types a function may ask for (docs/LANGUAGES.md §6)
     'quiz', 'sentence_meaning',
@@ -643,6 +644,9 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         else: phen = check_phenomena(v, L, pp)
         if 'wordFeatures' not in lj: v.E(f'{lw}/language.json', 'wordFeatures is required: the parameters every word of each part of speech states (D14, §4.5.1)')
         decls = check_decls(v, f'{lw}/language.json', lj.get('wordFeatures') or {}, phen) if 'wordFeatures' in lj else {}
+        # §4.9 (P4): the script module — ar / he: the whole alphabet with its forms; zh: every character of the course's words
+        if L in ('ar', 'he', 'zh'):
+            se, sw = script_check(root, L, strict); v.errors += se; v.warns += sw
         app = {nid for nid, n in nodes.items() if applies(n, L, typ)}
         owner = {}
         for cid, ns in owners.items():
@@ -859,7 +863,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         # sentence bank
         realized = set(); sids = {}; sent_lex = {}; exempt = {}
         grams = {fid: (v.load(f'{lw}/grammar/{fid}.json', required=False) or {}) for fid in functions}
-        def check_token(k, w, first):
+        def check_token(k, w, first, after=None):
             l = k.get('l')
             if l not in lex: v.E(w, f'unknown lexeme “{l}”'); return []
             x = lex[l]; forms = x.get('forms') or {}
@@ -873,6 +877,9 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 want = x.get('lemma')
             got = k.get('t')
             if not f and got in (x.get('alts') or []): return [(l, f)]   # another spelling of an invariant word (וּ for וְ)
+            if x.get('prefix') and not f and got and strip_marks(L, got) == strip_marks(L, want): return [(l, f)]   # an attached prefix takes the vowel the next word asks for (וָ before a number, P4)
+            if L == 'ar' and after and after.get('prefix') and strip_marks(L, after.get('lemma', '')) == 'ل' and want.startswith('ال') and got == want[1:]:
+                return [(l, f)]   # لِلْـ: after لِ the alif of the article is not written (لِلْبَيْتِ = لِ + الْبَيْتِ, P4)
             if L == 'ar' and not first and got != want and len(want) > 2 and want[0] == 'ا' and want[1] in '\u0650\u064f\u064e' and got in ('\u0671' + want[2:], 'ا' + want[2:]):
                 return [(l, f)]   # hamzat al-waṣl: inside a sentence the alif loses its vowel (ٱبْنُ / ابْنُ), at the start it is said with it (اِبْنُ)
             if got != want and not (first and lj.get('capitalizeFirst') and got == cap_first(want)):
@@ -905,7 +912,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                     if k.get('parts'):
                         if ''.join(p.get('t', '') for p in k['parts']) != k.get('t'): v.E(tw, 'the parts do not spell the token')
                         for j, p in enumerate(k['parts']):
-                            if not p.get('name'): used += check_token(p, f'{tw} · part {j + 1}', first and j == 0)
+                            if not p.get('name'): used += check_token(p, f'{tw} · part {j + 1}', first and j == 0, lex.get(k['parts'][j - 1].get('l')) if j else None)
                     else: used += check_token(k, tw, first)
                     first = False
                 sent_lex[sid] = {l for l, _ in used}

@@ -77,11 +77,13 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "Forms are stored in NFC and compared in NFC by the tokenizer (langcore lookup); language.json has no script module for de (vowelMarks false, romanization null). §8 plans umlaut/ß input buttons; the `spell` exercise (§6.1) is not implemented."
+    "exercises": [
+     "spell"
+    ],
+    "other": "Forms are stored in NFC and compared in NFC by the tokenizer (langcore lookup); language.json has no script module for de (vowelMarks false, romanization null). §8 plans umlaut/ß input buttons; the `spell` exercise (§6.1) is not implemented. P4: ä ö ü ß Ä Ö Ü buttons under every typed answer; spell / typed answers flag a / ae for ä as a near-miss (letter-level diff with a note)."
    },
-   "status": "partial",
-   "gap": "Input buttons for ä ö ü ß in typed answers, and the `spell` exercise with a letter-level diff that treats ae/oe/ue/ss as a flagged near-miss rather than plain wrong.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -174,11 +176,13 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "Spelling is only implicit in the stored forms (de:essen V;PST;3;SG aß, V;PRS;3;SG isst); de:Süßkartoffel has the variant Süsskartoffel (CH); fn.overview mentions that Swiss spelling uses ss. de:Brennnessel is spelled correctly; no field marks old spellings."
+    "exercises": [
+     "spell"
+    ],
+    "other": "Spelling is only implicit in the stored forms (de:essen V;PST;3;SG aß, V;PRS;3;SG isst); de:Süßkartoffel has the variant Süsskartoffel (CH); fn.overview mentions that Swiss spelling uses ss. de:Brennnessel is spelled correctly; no field marks old spellings. P4: typed answers accept the Swiss ss for ß (with a note)."
    },
    "status": "partial",
-   "gap": "A rule page (long vowel/diphthong → ß, short vowel → ss) and a spelling drill; typed answers should accept the Swiss ss spelling (a language-level ß≡ss equivalence flag) instead of listing it per lexeme. Old spellings (daß, Schiffahrt) as recognized but flagged variants for reading older texts (tokenizer form index).",
+   "gap": "A rule page (long vowel/diphthong → ß, short vowel → ss). Old spellings (daß, Schiffahrt) as recognized but flagged variants for reading older texts (tokenizer form index).",
    "when": "fd.07"
   },
   {
@@ -229,12 +233,13 @@
      "fn.greetings"
     ],
     "exercises": [
-     "gender_article"
+     "gender_article",
+     "spell"
     ],
-    "other": "language.json capitalizeFirst: true; the validator accepts a capitalized first word, and langcore lookup also tries the small first letter (decapFirst), so a sentence-initial Sie / Ihr is read both ways. Separate lexemes de:sie, de:sie.pl, de:Sie, de:ihr, de:ihr.poss, de:Ihr.poss."
+    "other": "language.json capitalizeFirst: true; the validator accepts a capitalized first word, and langcore lookup also tries the small first letter (decapFirst), so a sentence-initial Sie / Ihr is read both ways. Separate lexemes de:sie, de:sie.pl, de:Sie, de:ihr, de:ihr.poss, de:Ihr.poss. P4: spell grades capitals (a noun with a small letter is wrong, with a note)."
    },
    "status": "partial",
-   "gap": "Nominalization (das Essen, das Gute, beim Kochen) is not taught; no exercise grades capitals (a `spell` / `proofread` item: “find the word that needs a capital”); sentence-initial Sie needs the context to be disambiguated in the tokenizer.",
+   "gap": "Nominalization (das Essen, das Gute, beim Kochen) is not taught; no item asks to find the word that needs a capital (a `proofread` item); sentence-initial Sie needs the context to be disambiguated in the tokenizer.",
    "when": "fd.00"
   },
   {

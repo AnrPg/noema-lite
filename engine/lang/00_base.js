@@ -41,13 +41,12 @@ function conceptPic(cid, cls = 'lx-temoji') {
 }
 
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
-function word(code, text, { lex = null, cls = '', sub = true } = {}) {
-  const X = LX(code), marks = X.language.vowelMarks && UI.prefs.marks === false;
-  const shown = marks ? N.stripMarks(code, text) : text;
+function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {
+  const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
   const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : X.language.vowelMarks && UI.prefs.translit !== false && lex.translit && text === lex.lemma ? lex.translit : null;
+    : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
@@ -63,7 +62,7 @@ function sentenceView(c, s, unknown = []) {
     const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
     if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
     const isNew = un.has(l), el = h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
-      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, X.language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, k.t) : k.t);
+      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]));
     parts.push({ t: k.t, el });
   }
   const sp = X.language.tokenJoin !== 'none';

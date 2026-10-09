@@ -53,12 +53,12 @@ VIEWS.home = (v) => {
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20 });
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
-  const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0;
+  const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0, nScript = scriptSessionSteps().length;   // letters / characters in the first weeks (P4)
   v.append(h('div', { class: 'lx-hero' },
     h('h1', {}, UI.C.data.course.title),
     h('p', { class: 'lx-sub' }, `${UI.C.languages.map(c => info(c).flag + ' ' + info(c).name).join(' · ')} — explained in ${info(UI.C.explainLang).name}`),
     h('div', { class: 'row' },
-      h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew), onclick: () => runSession(plan) }, nRev || nNew ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` : '✅ Nothing due — come back tomorrow'),
+      h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), onclick: () => runSession(plan) }, nRev || nNew || nScript ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` + (nScript ? ` · ${nScript} letters & characters` : '') : '✅ Nothing due — come back tomorrow'),
       learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? '🧱 Your next lesson' : '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
@@ -66,7 +66,7 @@ VIEWS.home = (v) => {
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ Drills: '),
-    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 Principal parts'),
+    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 Principal parts'), ...scriptHomeButtons(),
     ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));

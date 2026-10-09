@@ -61,10 +61,8 @@ function exProduce(c, lid, done) {
   tiles.forEach(tile => pool.append(h('button', { class: 'lx-tile1', onclick: e => { if (over || e.currentTarget.disabled) return; built.push(tile); e.currentTarget.disabled = true; e.currentTarget.dataset.used = built.length; drawSlot(); if (built.length === parts.length) check(); } }, tile.t === ' ' ? '␣' : tile.t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; built.pop(); const b = [...pool.children].find(x => +x.dataset.used === built.length + 1); if (b) { b.disabled = false; delete b.dataset.used; } drawSlot(); } }, '⌫');
   const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); afterWord(false); } } }, 'Show me');
-  // Latin script: typing is allowed too
-  const typed = X.language.script === 'Latn' ? h('input', { class: 'noema-input lx-typein', placeholder: 'or type it…', autocapitalize: 'off', spellcheck: 'false', onkeydown: e => {
-    if (e.key !== 'Enter' || over) return; over = true; const ok = N.nfc(e.target.value.trim()) === N.nfc(me.lemma) || (X.language.capitalizeFirst && N.nfc(e.target.value.trim()).toLowerCase() === N.nfc(me.lemma).toLowerCase() && me.pos !== 'NOUN');
-    slot.textContent = e.target.value.trim(); slot.classList.add(ok ? 'right' : 'wrong'); afterWord(ok); } }) : null;
+  // typing is allowed too, in every script (keyboards, pinyin, umlauts: 90_script.js); ar / he once the letters are known
+  const typed = produceTyping(c, lid, (ok, t) => { if (over) return; over = true; slot.textContent = t; slot.classList.add(ok ? 'right' : 'wrong'); [...pool.children].forEach(b => b.disabled = true); afterWord(ok); });
   drawSlot();
   box.append(slot, pool, h('div', { class: 'row' }, undo, giveUp, typed));
   return box;

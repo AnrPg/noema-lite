@@ -51,11 +51,15 @@
     "grammar": [
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "validate_lang.py requires a lemma of Han characters only (is_han); learn/produce steps of the session offer character tiles; lang/zh/script/chars.json (§4.9) does not exist yet"
+    "exercises": [
+     "transliterate",
+     "char_compose",
+     "trace"
+    ],
+    "other": "validate_lang.py requires a lemma of Han characters only (is_han); learn/produce steps of the session offer character tiles; lang/zh/script/chars.json (§4.9) does not exist yet P4: lang/zh/chars.json (readings, meaning, parts, radical, strokes); a character is known through its words or its own drills (§5.5)."
    },
-   "status": "partial",
-   "gap": "No chars.json: characters are not modelled as units (reading, meaning, frequency, which known words contain them); no character-level script stage (§5.5) and no char_compose / trace exercises (P4).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00 (overview); P4 script module"
   },
   {
@@ -91,11 +95,13 @@
     ],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "only free text in profile.etymology (e.g. 吃: semantic 口 + phonetic 乞)"
+    "exercises": [
+     "char_compose"
+    ],
+    "other": "only free text in profile.etymology (e.g. 吃: semantic 口 + phonetic 乞) P4: IDS, radical and etymology hint per character (Make Me a Hanzi); char_compose (build from parts, find the radical)."
    },
-   "status": "partial",
-   "gap": "Structured components and radicals per character (chars.json, IDS from Unihan / Make Me a Hanzi) and the char_compose exercise.",
+   "status": "covered",
+   "gap": "",
    "when": "P4 (script module), from fd.01"
   },
   {
@@ -129,11 +135,13 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "nothing"
+    "exercises": [
+     "trace"
+    ],
+    "other": "nothing P4: stroke medians (Make Me a Hanzi) in chars.json; trace checks every stroke in order and plays the stroke order."
    },
-   "status": "missing",
-   "gap": "Stroke data (Make Me a Hanzi medians) in chars.json, the trace exercise and a stroke-order explanation in fn.overview or a script lesson.",
+   "status": "covered",
+   "gap": "",
    "when": "P4 (script module)"
   },
   {
@@ -447,11 +455,13 @@
      "fn.tones",
      "fn.overview"
     ],
-    "exercises": [],
-    "other": "langcore/langlib: pinyinSyllableErrors (valid syllables, mark position), pinyinNumbersToMarks / MarksToNumbers; exhaustive_recall accepts pinyin"
+    "exercises": [
+     "transliterate"
+    ],
+    "other": "langcore/langlib: pinyinSyllableErrors (valid syllables, mark position), pinyinNumbersToMarks / MarksToNumbers; exhaustive_recall accepts pinyin P4: transliterate (characters → pinyin and back, tone variants as distractors); pinyin input with tone numbers → marks → characters for every typed answer."
    },
    "status": "partial",
-   "gap": "The transliterate exercise (characters → pinyin and back), a pinyin chart (initials × finals) in S00 and pinyin input with tone numbers (P4).",
+   "gap": "A pinyin chart (initials × finals) in S00.",
    "when": "fd.00"
   },
   {
@@ -541,11 +551,13 @@
     "grammar": [
      "fn.pronoun.subject"
     ],
-    "exercises": [],
-    "other": "pitfalls mention them; no homophone index"
+    "exercises": [
+     "spell"
+    ],
+    "other": "pitfalls mention them; no homophone index P4: the pinyin input lists every word and character with the typed reading (a homophone index); spell = pinyin → choose the characters."
    },
-   "status": "partial",
-   "gap": "A homophone index (same pinyin with tones) and a ‘pick the character’ exercise (spell: pinyin → choose characters, §6.1).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.01; P4"
   },
   {
@@ -662,11 +674,13 @@
     ],
     "paradigm": [],
     "grammar": [],
-    "exercises": [],
-    "other": "recorded for 长, 都, 少, 难, 便宜, 待, 车, 为, 累, 更, 过, 了 (le / liǎo), 男人 (nánrén / nánren), 多少 (duōshao / duōshǎo); meanings() shows each sense’s reading"
+    "exercises": [
+     "transliterate"
+    ],
+    "other": "recorded for 长, 都, 少, 难, 便宜, 待, 车, 为, 累, 更, 过, 了 (le / liǎo), 男人 (nánrén / nánren), 多少 (duōshao / duōshǎo); meanings() shows each sense’s reading P4: every reading per character in chars.json (Make Me a Hanzi + Unihan, and the readings the words use); transliterate asks a character’s reading in a given word."
    },
-   "status": "partial",
-   "gap": "All readings per character (chars.json) and a reading exercise (which reading here?) are missing.",
+   "status": "covered",
+   "gap": "",
    "when": "every lesson"
   },
   {
@@ -709,12 +723,13 @@
      "fn.tones"
     ],
     "exercises": [
-     "quiz"
+     "quiz",
+     "tone_mark"
     ],
-    "other": "wordFeatures declares pinyin (at top) for every part of speech; validator checks tone-mark placement; fn.tones has a tone table and an ‘ask yourself’"
+    "other": "wordFeatures declares pinyin (at top) for every part of speech; validator checks tone-mark placement; fn.tones has a tone table and an ‘ask yourself’ P4: tone_mark (mark the tone of every syllable)."
    },
    "status": "partial",
-   "gap": "The tone_mark exercise (mark the tone of each syllable) and audio (P9); tone minimal pairs from the lexicon.",
+   "gap": "Audio (P9); tone minimal pairs from the lexicon.",
    "when": "fd.00"
   },
   {
@@ -759,11 +774,13 @@
     "grammar": [
      "fn.tones"
     ],
-    "exercises": [],
-    "other": "pinyin stores toneless syllables without a mark (xiè xie)"
+    "exercises": [
+     "tone_mark"
+    ],
+    "other": "pinyin stores toneless syllables without a mark (xiè xie) P4: tone_mark has the neutral tone (5)."
    },
    "status": "partial",
-   "gap": "Regional readings (Taiwan full tones) cannot be stored; no tone_mark exercise.",
+   "gap": "Regional readings (Taiwan full tones) cannot be stored.",
    "when": "fd.00"
   },
   {
@@ -804,12 +821,13 @@
      "fn.tones"
     ],
     "exercises": [
-     "quiz"
+     "quiz",
+     "tone_mark"
     ],
-    "other": "fn.tones rule table; lexemes keep citation tones consistently (你好 nǐ hǎo)"
+    "other": "fn.tones rule table; lexemes keep citation tones consistently (你好 nǐ hǎo) P4: tone_mark “said” items: 3 + 3 → 2 + 3 derived by rule from the lexicon’s citation tones (langcore.toneSandhi)."
    },
-   "status": "partial",
-   "gap": "A drill that shows the spoken tones (tone_mark with ‘written / said’), generated from the lexicon by rule.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -856,12 +874,13 @@
     ],
     "exercises": [
      "quiz",
-     "measure_word"
+     "measure_word",
+     "tone_mark"
     ],
-    "other": "fixed: 不客气 bù kè qi, 打扰一下 dǎ rǎo yī xià, 一会 yī huì, 一样 yī yàng now carry the dictionary tone like 一点, 一些, 一起, 一百, 一千, 等一下; toneSandhi: bú kè qi, yí huì, yì diǎn …; example sentences (py) transcribe the spoken tones"
+    "other": "fixed: 不客气 bù kè qi, 打扰一下 dǎ rǎo yī xià, 一会 yī huì, 一样 yī yàng now carry the dictionary tone like 一点, 一些, 一起, 一百, 一千, 等一下; toneSandhi: bú kè qi, yí huì, yì diǎn …; example sentences (py) transcribe the spoken tones P4: tone_mark “said” items for 不 before a 4th tone (bú)."
    },
    "status": "partial",
-   "gap": "No drill that shows the spoken tones (written / said); bank and example pinyin (py) write the spoken tones while lexeme pinyin writes the dictionary ones — the display does not derive one from the other yet.",
+   "gap": "一 (its tone depends on its use) has no derived spoken tone; the display of example pinyin does not derive one from the other yet.",
    "when": "fd.00 / fd.05"
   },
   {

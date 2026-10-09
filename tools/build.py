@@ -127,7 +127,8 @@ def build_lang_courses():
             b = f'lang/{code}/'
             data['langs'][code] = {'language': J(b + 'language.json'), 'lexicon': {n['id']: J(f'{b}lexicon/{n["id"]}.json') for n in nodes if J(f'{b}lexicon/{n["id"]}.json')},
                                    'grammar': {f['id']: J(f'{b}grammar/{f["id"]}.json') for f in data['functions'] if J(f'{b}grammar/{f["id"]}.json')},
-                                   'bank': [s for f in ls(b + 'bank') for s in J(b + 'bank/' + f).get('sentences', [])]}
+                                   'bank': [s for f in ls(b + 'bank') for s in J(b + 'bank/' + f).get('sentences', [])],
+                                   'script': J(b + 'script.json'), 'chars': J(b + 'chars.json')}   # script modules (§4.9, P4): ar/he letters, zh characters
         # the word profiles (half of the course) go into a second file that the app loads after the course has opened
         profiles = {}
         for L in data['langs'].values():

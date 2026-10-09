@@ -1,4 +1,71 @@
 /* GENERATED from engine/lang/*.css. Do not edit. */
+/* P4 — scripts and input: the 🔤 lane, letter / character drills, keyboards, pinyin input (engine/lang/90_script.js) */
+.lx-glyph{font-size:1.6em;line-height:1.3}
+.lx-w.lx-glyph[lang=ar]{font-size:1.9em}
+.lx-latin{font-family:inherit;font-style:normal;unicode-bidi:isolate}
+.lx-stagemeter .lx-progress{height:10px;margin:8px 0}
+.lx-stagemeter .row{gap:10px;align-items:baseline;flex-wrap:wrap}
+.lx-glyphs{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:10px 0}
+.lx-glyphs.lx-later{opacity:.55}
+.lx-gtile{display:grid;justify-items:center;gap:2px;padding:8px 4px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit;min-width:0}
+.lx-gtile.s-seen,.lx-gtile.s-learning{border-color:var(--info)}.lx-gtile.s-known_r,.lx-gtile.s-known_p{border-color:var(--ok)}.lx-gtile.s-mastered{border-color:var(--warn);background:var(--warn-bg)}.lx-gtile.s-ready{opacity:.75}
+.lx-gname{font-weight:650;font-size:14px}.lx-gsub{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lx-scriptdrills{flex-wrap:wrap;gap:6px;margin:10px 0}
+.lx-glyphcard .lx-prompt{font-size:56px}
+.lx-forms{grid-template-columns:repeat(4,max-content minmax(0,1fr))}
+.lx-forms dd .lx-glyph{font-size:1.5em}
+/* answer fields in any script */
+.lx-input{display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex:1;min-width:0;max-width:100%}
+.lx-input>input{flex:1;min-width:0;font-size:20px;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+.lx-input>input[lang=ar]{font-family:'Noto Naskh Arabic',serif;font-size:24px}.lx-input>input[lang=he]{font-family:'Noto Sans Hebrew',sans-serif}.lx-input>input[lang=zh]{font-family:'Noto Sans SC',sans-serif}
+.lx-kbd{display:flex;flex-direction:column;gap:4px;width:100%;padding:6px;border-radius:12px;background:var(--bg2);border:1px solid var(--line)}
+.lx-kbd[hidden]{display:none}
+.lx-kbdrow{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.lx-kbd-de{flex-direction:row;flex-wrap:wrap;width:auto;padding:4px}
+.lx-key{min-width:34px;height:40px;padding:0 6px;border-radius:9px;background:var(--card);border:1px solid var(--line);font-size:20px;line-height:1;color:inherit}
+.lx-kbd[lang=ar] .lx-key{font-family:'Noto Naskh Arabic',serif;font-size:22px}.lx-kbd[lang=he] .lx-key{font-family:'Noto Sans Hebrew',sans-serif}
+.lx-keywide{min-width:64px}
+.lx-key:focus-visible,.lx-cand:focus-visible,.lx-vletter:focus-visible,.lx-tonebtn:focus-visible{outline:3px solid var(--violet)}
+.lx-pybox{display:flex;gap:6px;align-items:center;width:100%;flex-wrap:wrap}
+.lx-pybox .lx-pyin{flex:1;min-width:0;font-size:16px;padding:6px 10px;border-radius:10px;border:1px dashed var(--line);background:var(--card)}
+.lx-pyprev{color:var(--ink2);font-size:15px}
+.lx-cands{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.lx-cand{padding:6px 10px;border-radius:10px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lx-cand .lx-w{font-size:20px}
+/* vowel marks */
+.lx-vrow{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.lx-vletter{min-width:52px;height:72px;border-radius:12px;background:var(--card);border:2px solid var(--line);font-size:38px;line-height:1.6;color:inherit}
+.lx-vrow[lang=ar] .lx-vletter{font-family:'Noto Naskh Arabic',serif}.lx-vrow[lang=he] .lx-vletter{font-family:'Noto Sans Hebrew',sans-serif}
+.lx-vletter.on{border-color:var(--violet);background:var(--violet-bg)}.lx-vletter.right{border-color:var(--ok);background:var(--ok-bg)}.lx-vletter.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.lx-vpreview{display:block;text-align:center;font-size:44px;min-height:1.6em;margin:4px 0}
+.lx-vsep{align-self:center;font-size:30px;min-width:10px}
+.lx-palette{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}
+.lx-palette .lx-key{height:auto;min-height:40px;padding:4px 8px;font-size:16px;display:inline-flex;align-items:center}
+.lx-palette .lx-key .lx-w{font-size:26px}.lx-palette .lx-k{margin-inline-start:4px}
+/* tones */
+.lx-tones{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+.lx-tonecol{display:grid;justify-items:center;gap:4px;padding:8px;border-radius:12px;border:2px solid transparent}
+.lx-tonecol.on{border-color:var(--violet);background:var(--violet-bg)}
+.lx-tonech{font-size:40px}
+.lx-toneopts{display:flex;gap:3px}
+.lx-tonebtn{width:34px;height:34px;border-radius:8px;background:var(--card);border:1px solid var(--line);font-size:17px;color:inherit}
+.lx-tonebtn.on{background:var(--violet-bg);border-color:var(--violet)}.lx-tonebtn.right{background:var(--ok-bg);border-color:var(--ok)}.lx-tonebtn.wrong{background:var(--bad-bg);border-color:var(--bad)}
+/* tracing */
+.lx-canvaswrap{display:flex;justify-content:center;margin:8px 0}
+.lx-canvas{width:280px;height:280px;max-width:100%;touch-action:none;border-radius:14px;background:var(--card);border:1.5px solid var(--line);cursor:crosshair}
+/* spelling: the letter-level difference */
+.lx-diff{font-size:24px;margin:8px 0;text-align:center}
+.lx-d{padding:0 1px;border-radius:3px}.lx-d.d-wrong{background:var(--bad-bg);text-decoration:underline wavy}.lx-d.d-missing{background:var(--warn-bg)}.lx-d.d-extra{text-decoration:line-through;opacity:.6}
+.lx-marklevels .lx-setrow select{max-width:100%;min-width:0}
+@media (max-width:640px){
+  .lx-glyphs{grid-template-columns:repeat(auto-fill,minmax(70px,1fr))}
+  .lx-key{min-width:28px;height:38px;padding:0 4px;font-size:18px}
+  .lx-kbd[lang=ar] .lx-key{font-size:19px}
+  .lx-vletter{min-width:42px;height:62px;font-size:32px}
+  .lx-tonebtn{width:30px;height:32px}
+  .lx-canvas{width:250px;height:250px}
+  .lx-forms{grid-template-columns:max-content minmax(0,1fr)}
+}
 /* noema-lite · language courses (docs/LANGUAGES.md §8) — built into engine/langui.css */
 body.lx main.lx-main{max-width:1000px}
 .lx-title{max-width:38vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

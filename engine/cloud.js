@@ -123,6 +123,10 @@
       if (isObj(ca) && isObj(cb)) { const n = (ca.day || 0) >= (cb.day || 0) ? ca : cb; out.check = { ...n, best: Math.max(ca.best || 0, cb.best || 0), tries: Math.max(ca.tries || 0, cb.tries || 0) }; }
       return out;
     }
+    if (/:lang:[^:]+:script$/.test(k)) {   // the script stage (letters / characters, P4): per letter and track the later review wins, as for words
+      const items = { ...(b.items || {}) }; for (const [id, it] of Object.entries(a.items || {})) items[id] = mergeLangItem(it, items[id]);
+      return { ...b, ...a, items };
+    }
     if (/:fn:[^:]+$/.test(k)) {
       const by = {}; for (const e of [...(b.log || []), ...(a.log || [])]) if (isObj(e) && (!by[e.day] || (e.n || 0) > (by[e.day].n || 0))) by[e.day] = e;
       return { ...b, ...a, log: Object.values(by).sort((x, y) => x.day - y.day).slice(-60) };

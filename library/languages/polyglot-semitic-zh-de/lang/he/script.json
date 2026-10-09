@@ -1,0 +1,625 @@
+{
+ "format": "noema.langscript/v1",
+ "lang": "he",
+ "script": "Hebr",
+ "dir": "rtl",
+ "kind": "abjad",
+ "about": "Reference data for the Hebrew script: letters (with dagesh where it changes the sound; shin / sin), the five final forms, sounds, the course’s transliteration, the niqqud. Built by tools/lang_script.py.",
+ "sources": [
+  "Unicode Character Database (letter names)",
+  "Wikipedia: Hebrew alphabet; Niqqud; Modern Hebrew phonology"
+ ],
+ "letters": [
+  {
+   "ch": "א",
+   "name": "alef",
+   "translit": "'",
+   "sound": "ʔ",
+   "unicode": "HEBREW LETTER ALEF",
+   "forms": {
+    "regular": "א"
+   },
+   "note": "often silent; carries a vowel"
+  },
+  {
+   "ch": "בּ",
+   "name": "bet",
+   "translit": "b",
+   "sound": "b",
+   "unicode": "HEBREW LETTER BET",
+   "forms": {
+    "regular": "בּ"
+   },
+   "note": "with dagesh"
+  },
+  {
+   "ch": "ב",
+   "name": "vet",
+   "translit": "v",
+   "sound": "v",
+   "unicode": "HEBREW LETTER BET",
+   "forms": {
+    "regular": "ב"
+   },
+   "note": "without dagesh"
+  },
+  {
+   "ch": "ג",
+   "name": "gimel",
+   "translit": "g",
+   "sound": "ɡ",
+   "unicode": "HEBREW LETTER GIMEL",
+   "forms": {
+    "regular": "ג"
+   }
+  },
+  {
+   "ch": "ד",
+   "name": "dalet",
+   "translit": "d",
+   "sound": "d",
+   "unicode": "HEBREW LETTER DALET",
+   "forms": {
+    "regular": "ד"
+   }
+  },
+  {
+   "ch": "ה",
+   "name": "he",
+   "translit": "h",
+   "sound": "h",
+   "unicode": "HEBREW LETTER HE",
+   "forms": {
+    "regular": "ה"
+   },
+   "note": "silent at the end of a word"
+  },
+  {
+   "ch": "ו",
+   "name": "vav",
+   "translit": "v",
+   "sound": "v",
+   "unicode": "HEBREW LETTER VAV",
+   "forms": {
+    "regular": "ו"
+   },
+   "note": "also the vowels וּ u and וֹ o"
+  },
+  {
+   "ch": "ז",
+   "name": "zayin",
+   "translit": "z",
+   "sound": "z",
+   "unicode": "HEBREW LETTER ZAYIN",
+   "forms": {
+    "regular": "ז"
+   }
+  },
+  {
+   "ch": "ח",
+   "name": "chet",
+   "translit": "ch",
+   "sound": "χ",
+   "unicode": "HEBREW LETTER HET",
+   "forms": {
+    "regular": "ח"
+   }
+  },
+  {
+   "ch": "ט",
+   "name": "tet",
+   "translit": "t",
+   "sound": "t",
+   "unicode": "HEBREW LETTER TET",
+   "forms": {
+    "regular": "ט"
+   }
+  },
+  {
+   "ch": "י",
+   "name": "yod",
+   "translit": "y",
+   "sound": "j",
+   "unicode": "HEBREW LETTER YOD",
+   "forms": {
+    "regular": "י"
+   },
+   "note": "also part of the vowels i, e"
+  },
+  {
+   "ch": "כּ",
+   "name": "kaf",
+   "translit": "k",
+   "sound": "k",
+   "unicode": "HEBREW LETTER KAF",
+   "forms": {
+    "regular": "כּ"
+   },
+   "note": "with dagesh"
+  },
+  {
+   "ch": "כ",
+   "name": "khaf",
+   "translit": "ch",
+   "sound": "χ",
+   "unicode": "HEBREW LETTER KAF",
+   "forms": {
+    "regular": "כ",
+    "final": "ך"
+   },
+   "note": "without dagesh"
+  },
+  {
+   "ch": "ל",
+   "name": "lamed",
+   "translit": "l",
+   "sound": "l",
+   "unicode": "HEBREW LETTER LAMED",
+   "forms": {
+    "regular": "ל"
+   }
+  },
+  {
+   "ch": "מ",
+   "name": "mem",
+   "translit": "m",
+   "sound": "m",
+   "unicode": "HEBREW LETTER MEM",
+   "forms": {
+    "regular": "מ",
+    "final": "ם"
+   }
+  },
+  {
+   "ch": "נ",
+   "name": "nun",
+   "translit": "n",
+   "sound": "n",
+   "unicode": "HEBREW LETTER NUN",
+   "forms": {
+    "regular": "נ",
+    "final": "ן"
+   }
+  },
+  {
+   "ch": "ס",
+   "name": "samekh",
+   "translit": "s",
+   "sound": "s",
+   "unicode": "HEBREW LETTER SAMEKH",
+   "forms": {
+    "regular": "ס"
+   }
+  },
+  {
+   "ch": "ע",
+   "name": "ayin",
+   "translit": "'",
+   "sound": "ʔ",
+   "unicode": "HEBREW LETTER AYIN",
+   "forms": {
+    "regular": "ע"
+   },
+   "note": "often silent in Modern Hebrew"
+  },
+  {
+   "ch": "פּ",
+   "name": "pe",
+   "translit": "p",
+   "sound": "p",
+   "unicode": "HEBREW LETTER PE",
+   "forms": {
+    "regular": "פּ"
+   },
+   "note": "with dagesh"
+  },
+  {
+   "ch": "פ",
+   "name": "fe",
+   "translit": "f",
+   "sound": "f",
+   "unicode": "HEBREW LETTER PE",
+   "forms": {
+    "regular": "פ",
+    "final": "ף"
+   },
+   "note": "without dagesh"
+  },
+  {
+   "ch": "צ",
+   "name": "tsadi",
+   "translit": "ts",
+   "sound": "t͡s",
+   "unicode": "HEBREW LETTER TSADI",
+   "forms": {
+    "regular": "צ",
+    "final": "ץ"
+   }
+  },
+  {
+   "ch": "ק",
+   "name": "qof",
+   "translit": "k",
+   "sound": "k",
+   "unicode": "HEBREW LETTER QOF",
+   "forms": {
+    "regular": "ק"
+   }
+  },
+  {
+   "ch": "ר",
+   "name": "resh",
+   "translit": "r",
+   "sound": "ʁ",
+   "unicode": "HEBREW LETTER RESH",
+   "forms": {
+    "regular": "ר"
+   }
+  },
+  {
+   "ch": "שׁ",
+   "name": "shin",
+   "translit": "sh",
+   "sound": "ʃ",
+   "unicode": "HEBREW LETTER SHIN",
+   "forms": {
+    "regular": "שׁ"
+   },
+   "note": "dot on the right"
+  },
+  {
+   "ch": "שׂ",
+   "name": "sin",
+   "translit": "s",
+   "sound": "s",
+   "unicode": "HEBREW LETTER SHIN",
+   "forms": {
+    "regular": "שׂ"
+   },
+   "note": "dot on the left"
+  },
+  {
+   "ch": "ת",
+   "name": "tav",
+   "translit": "t",
+   "sound": "t",
+   "unicode": "HEBREW LETTER TAV",
+   "forms": {
+    "regular": "ת"
+   }
+  },
+  {
+   "ch": "ך",
+   "name": "final khaf",
+   "translit": "ch",
+   "sound": "χ",
+   "unicode": "HEBREW LETTER FINAL KAF",
+   "forms": {
+    "final": "ך"
+   },
+   "finalOf": "כ",
+   "note": "only at the end of a word"
+  },
+  {
+   "ch": "ם",
+   "name": "final mem",
+   "translit": "m",
+   "sound": "m",
+   "unicode": "HEBREW LETTER FINAL MEM",
+   "forms": {
+    "final": "ם"
+   },
+   "finalOf": "מ",
+   "note": "only at the end of a word"
+  },
+  {
+   "ch": "ן",
+   "name": "final nun",
+   "translit": "n",
+   "sound": "n",
+   "unicode": "HEBREW LETTER FINAL NUN",
+   "forms": {
+    "final": "ן"
+   },
+   "finalOf": "נ",
+   "note": "only at the end of a word"
+  },
+  {
+   "ch": "ף",
+   "name": "final fe",
+   "translit": "f",
+   "sound": "f",
+   "unicode": "HEBREW LETTER FINAL PE",
+   "forms": {
+    "final": "ף"
+   },
+   "finalOf": "פ",
+   "note": "only at the end of a word"
+  },
+  {
+   "ch": "ץ",
+   "name": "final tsadi",
+   "translit": "ts",
+   "sound": "t͡s",
+   "unicode": "HEBREW LETTER FINAL TSADI",
+   "forms": {
+    "final": "ץ"
+   },
+   "finalOf": "צ",
+   "note": "only at the end of a word"
+  }
+ ],
+ "marks": [
+  {
+   "ch": "ַ",
+   "name": "patach",
+   "translit": "a",
+   "what": "a",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ָ",
+   "name": "kamatz",
+   "translit": "a",
+   "what": "a (o as kamatz katan)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ְ",
+   "name": "shva",
+   "translit": "e",
+   "what": "e or no vowel",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ִ",
+   "name": "hiriq",
+   "translit": "i",
+   "what": "i",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֵ",
+   "name": "tsere",
+   "translit": "e",
+   "what": "e",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֶ",
+   "name": "segol",
+   "translit": "e",
+   "what": "e",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֹ",
+   "name": "holam",
+   "translit": "o",
+   "what": "o",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֻ",
+   "name": "kubutz",
+   "translit": "u",
+   "what": "u",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֲ",
+   "name": "hataf patach",
+   "translit": "a",
+   "what": "a (short)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֱ",
+   "name": "hataf segol",
+   "translit": "e",
+   "what": "e (short)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ֳ",
+   "name": "hataf kamatz",
+   "translit": "o",
+   "what": "o (short)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ׇ",
+   "name": "kamatz katan",
+   "translit": "o",
+   "what": "o",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ּ",
+   "name": "dagesh",
+   "translit": "",
+   "what": "hardens ב כ פ (b k p), marks וּ (u) and a sounded final ה (mappiq)",
+   "kind": "shadda"
+  }
+ ],
+ "baseMarks": [
+  "ׁ",
+  "ׂ"
+ ],
+ "groups": [
+  {
+   "id": "he.g1",
+   "title": "First letters",
+   "items": [
+    "א",
+    "בּ",
+    "ב",
+    "ג",
+    "ד",
+    "ה"
+   ]
+  },
+  {
+   "id": "he.g2",
+   "title": "The first vowels",
+   "items": [
+    "ַ",
+    "ָ",
+    "ְ",
+    "ִ",
+    "ֵ",
+    "ֶ"
+   ]
+  },
+  {
+   "id": "he.g3",
+   "title": "Thin and tall letters",
+   "items": [
+    "ו",
+    "ז",
+    "ח",
+    "ט",
+    "י"
+   ]
+  },
+  {
+   "id": "he.g4",
+   "title": "Letters with final forms (1)",
+   "items": [
+    "כּ",
+    "כ",
+    "ך",
+    "ל",
+    "מ",
+    "ם",
+    "נ",
+    "ן"
+   ]
+  },
+  {
+   "id": "he.g5",
+   "title": "More vowels and the dagesh",
+   "items": [
+    "ֹ",
+    "ֻ",
+    "ּ",
+    "ֲ",
+    "ֱ",
+    "ֳ",
+    "ׇ"
+   ]
+  },
+  {
+   "id": "he.g6",
+   "title": "Letters with final forms (2)",
+   "items": [
+    "ס",
+    "ע",
+    "פּ",
+    "פ",
+    "ף",
+    "צ",
+    "ץ"
+   ]
+  },
+  {
+   "id": "he.g7",
+   "title": "The last letters",
+   "items": [
+    "ק",
+    "ר",
+    "שׁ",
+    "שׂ",
+    "ת"
+   ]
+  }
+ ],
+ "lookalikes": [
+  [
+   "ב",
+   "כ"
+  ],
+  [
+   "ד",
+   "ר",
+   "ך"
+  ],
+  [
+   "ה",
+   "ח",
+   "ת"
+  ],
+  [
+   "ו",
+   "ז",
+   "ן"
+  ],
+  [
+   "ט",
+   "מ"
+  ],
+  [
+   "ס",
+   "ם"
+  ],
+  [
+   "ג",
+   "נ"
+  ],
+  [
+   "ע",
+   "צ"
+  ],
+  [
+   "י",
+   "ו"
+  ],
+  [
+   "שׁ",
+   "שׂ"
+  ],
+  [
+   "כ",
+   "כּ"
+  ],
+  [
+   "פ",
+   "פּ"
+  ],
+  [
+   "ב",
+   "בּ"
+  ]
+ ],
+ "keyboard": {
+  "rows": [
+   "ק ר א ט ו ן ם פ",
+   "ש ד ג כ ע י ח ל ך ף",
+   "ז ס ב ה נ מ צ ת ץ"
+  ],
+  "marks": [
+   "ַ",
+   "ָ",
+   "ְ",
+   "ִ",
+   "ֵ",
+   "ֶ",
+   "ֹ",
+   "ֻ",
+   "ֲ",
+   "ֱ",
+   "ֳ",
+   "ׇ",
+   "ּ",
+   "ׁ",
+   "ׂ"
+  ],
+  "punct": [
+   ",",
+   ".",
+   "?",
+   "!",
+   "־"
+  ]
+ }
+}
