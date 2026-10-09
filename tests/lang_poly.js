@@ -249,8 +249,8 @@ const tokC = (c, t) => (t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boole
   await open('#/settings');
   await page.selectOption('select[aria-label="How far to go in German"]', '1'); await wait(200);
   await open('#/');
-  const veg2 = await page.locator('.lx-node:has-text("Vegetables II")').first().innerText().catch(() => '');
-  ok(/🇩🇪\s*⤼ skipped/.test(veg2) && !/🇸🇦\s*⤼ skipped/.test(veg2), 'depth 1 for German: Vegetables II skipped in German only');
+  const veg2 = await page.evaluate(() => [...[...document.querySelectorAll('.lx-node')].find(n => n.textContent.includes('Vegetables II'))?.querySelectorAll('.lx-ns') || []].map(x => x.title).join(' | '));   // the map's chips: the words in the tooltip (QA)
+  ok(/German: ⤼ skipped/.test(veg2) && !/Arabic: ⤼ skipped/.test(veg2), 'depth 1 for German: Vegetables II skipped in German only');
   // ---- phones ----
   await page.setViewportSize({ width: 390, height: 844 });
   for (const hsh of ['#/', '#/cmp', '#/cmp/fn/fn.plural.noun', '#/cmp/frame/fr.eat', '#/poly/parallel_align', '#/poly/compare_rule', '#/poly/parallel_translate', '#/w/ar/ar:bayt']) {

@@ -144,7 +144,7 @@ function deepRun(holder, items, { again = null } = {}) {
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
     UI.current = { kind: 'deep', it };
-    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', DEEP_LABEL[it.kind] || it.kind, ' · ', word(it.lang, LX(it.lang).lex[it.lex].lemma, { sub: false })), el);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', DEEP_LABEL[it.kind] || it.kind), el);   // not the word: for some types it is the answer
   };
   document.onkeydown = e => {
     if (!stage.isConnected) { document.onkeydown = null; return; }

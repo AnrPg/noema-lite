@@ -267,6 +267,26 @@ body.lx,body.lx :is(article,main,section,.lx-card,.lx-ex)[lang]:not(.lx-w){--lc:
 .lj-refill .row{margin-top:8px}
 .lj-cmp th{white-space:nowrap}
 @media (max-width:640px){.lj-ways{grid-template-columns:1fr}.lj-box{padding:16px}.lj-cmp th{white-space:normal}}
+/* QA — the home organized, phone-width fixes (docs/LANGUAGES.md §13 QA). Loaded before lang.css (name order): selectors carry body.lx. */
+body.lx .lx-hero .lx-today{margin-top:10px}
+body.lx .lx-prodlanes .lx-lanerow{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px 10px}
+body.lx .lx-prodlanes .lx-lanerow>b{min-width:96px;margin:0}
+body.lx .lx-prodlanes .lx-laneacts{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 320px}
+body.lx .lx-prodlanes .lx-polydrills,body.lx .lx-prodlanes .lx-drills{margin-top:10px;flex-wrap:wrap}
+body.lx .lx-sortfold{display:inline-block}
+body.lx .lx-sortfold>summary{list-style:none;cursor:pointer}
+body.lx .lx-sortfold>summary::-webkit-details-marker{display:none}
+body.lx .lx-sortfold[open]>.row{margin-top:6px}
+body.lx .lx-main .lx-ns .lx-nsi{font-weight:600}
+body.lx .lx-maplegend{margin:0 0 8px}
+body.lx .lx-mapmore{margin-top:10px}
+/* long chips and glosses wrap instead of running out of the screen */
+body.lx .lx-main .chip,body.lx .lx-main .lx-req{max-width:100%;white-space:normal;text-align:start;height:auto;overflow-wrap:anywhere}
+@media (max-width:560px){
+  body.lx .lx-prodlanes .lx-laneacts .btn{padding:5px 9px;font-size:13px}
+  body.lx .lx-prodlanes .lx-lanerow{padding:8px 10px}
+}
+body.lx .lx-nodes .lx-node[hidden]{display:none}
 /* noema-lite · language courses (docs/LANGUAGES.md §8) — built into engine/langui.css */
 body.lx main.lx-main{max-width:1000px}
 .lx-title{max-width:38vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

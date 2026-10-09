@@ -255,7 +255,7 @@ function grammarLaneHome() {
     any = true;
     const n = s => lane.filter(x => x.state === s).length, ready = toPractise(lane);
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
-      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} points · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
+      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} point${lane.length === 1 ? '' : 's'} · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
         h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null,
         h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, 'All →')),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
