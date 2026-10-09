@@ -268,13 +268,16 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const hsh of ['#/deep/de/' + encodeURIComponent(wid), '#/deepen/fd.06/ar', '#/deepen/fd.06/de']) {
     await open(hsh); await page.waitForSelector('.lx-stage .lx-deep', { timeout: 30000 });
-    let worst = 0;
+    let worst = 0, culprit = '';
+    const measure = async () => { const r = await page.evaluate(() => ({ o: document.documentElement.scrollWidth - window.innerWidth, k: NoemaLangUI.UI.current?.it?.kind,
+      e: [...document.querySelectorAll('.lx-main *')].filter(e => e.getBoundingClientRect().right > window.innerWidth + 1).slice(-2).map(e => e.tagName + '.' + [...e.classList].join('.') + ' “' + (e.innerText || '').slice(0, 40).replace(/\n/g, ' ') + '”').join(' | ') }));
+      if (r.o > worst) { worst = r.o; culprit = `${r.k}: ${r.e}`; } };
     for (let i = 0; i < 6; i++) {
-      worst = Math.max(worst, await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth));
-      if (!(await answerDeep(true))) break; worst = Math.max(worst, await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth));
+      await measure();
+      if (!(await answerDeep(true))) break; await measure();
       const nx = await page.$('.lx-stage .lx-next'); if (nx) await nx.click(); else break; await wait(40);
     }
-    ok(worst <= 1, `phone: no sideways scrolling on ${hsh} (${worst}px)`);
+    ok(worst <= 1, `phone: no sideways scrolling on ${hsh} (${worst}px)` + (worst > 1 ? ' — ' + culprit : ''));
   }
   // ---------- the profiles arrive after the start: a direct link waits for them ----------
   await page.setViewportSize({ width: 1280, height: 900 });

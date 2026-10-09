@@ -955,7 +955,7 @@ function runSession(plan, { only = null } = {}) {
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
 function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
-window.NoemaLangUI = { start, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce } };
+window.NoemaLangUI = { start, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
 
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */

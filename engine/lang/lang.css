@@ -115,3 +115,6 @@ img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}im
 .lx-sorthead{font-weight:650;margin-bottom:6px}.lx-sortlist{display:flex;flex-direction:column;gap:4px}
 .lx-shake{animation:lxshake .35s}@keyframes lxshake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .lx-drills,.lx-libraries{flex-wrap:wrap}
+/* phones: long words (German compounds, glosses) wrap instead of pushing the page sideways */
+.lx-stage{overflow-wrap:anywhere;min-width:0}
+.lx-sortbins{grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr))}

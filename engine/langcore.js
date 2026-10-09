@@ -2164,6 +2164,7 @@
       if (!e.text) continue;
       const s = deepSentence(x.C, code, e.text, lx.id, x.K, x.maxUnknown); if (!s.ok || s.target < 0) continue;
       const tg = s.tokens[s.target], ans = tg.form, cap = /^\p{Lu}/u.test(ans) && !/^\p{Lu}/u.test(lx.lemma);
+      if (!ownForms.has(plainOf(code, ans))) continue;   // a form changed by an attached prefix (لِ + الْـ → لِلْـ): no clean gap
       const formOf = y => { if (tg.cell) { const f = y.forms || {}, kk = Object.keys(f).find(c => canon(c) === canon(tg.cell)); return kk ? f[kk] : null; } return Object.keys(y.forms || {}).length ? null : y.lemma; };
       const wrong = uniqStr(ranked.map(formOf).filter(f => f && !ownForms.has(plainOf(code, f)) && plainOf(code, f) !== plainOf(code, ans)).map(f => cap ? capFirst(f) : f)).slice(0, 3);
       if (wrong.length < 2) continue;
