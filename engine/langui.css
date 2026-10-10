@@ -424,6 +424,9 @@ body.ns-on .lx-host .lx-fpanel label.lx-check:not(:has(select)){flex-wrap:nowrap
 .lx-speechset select { max-width: 100%; }
 .lx-speechset .lx-setrow { flex-wrap: wrap; overflow-wrap: anywhere; }
 @media (max-width: 480px) { .lx-tonechars { font-size: 1.8em; } .lx-voicesel { max-width: 60vw; } }
+
+/* a sorted word in a bin: the bin takes the tap (no 🔊 there) */
+.lx-sortbin .lx-spk{display:none}
 /* QA — the home organized, phone-width fixes (docs/LANGUAGES.md §13 QA). Loaded before lang.css (name order): selectors carry body.lx. */
 body.lx .lx-hero .lx-today{margin-top:10px}
 body.lx .lx-prodlanes .lx-lanerow{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px 10px}

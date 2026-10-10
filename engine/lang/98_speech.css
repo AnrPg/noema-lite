@@ -29,3 +29,6 @@
 .lx-speechset select { max-width: 100%; }
 .lx-speechset .lx-setrow { flex-wrap: wrap; overflow-wrap: anywhere; }
 @media (max-width: 480px) { .lx-tonechars { font-size: 1.8em; } .lx-voicesel { max-width: 60vw; } }
+
+/* a sorted word in a bin: the bin takes the tap (no 🔊 there) */
+.lx-sortbin .lx-spk{display:none}
