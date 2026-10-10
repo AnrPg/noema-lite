@@ -326,6 +326,10 @@ const TT = { open: false, ctx: null, hist: {}, busy: false, ids: {} };
 const tutorKey = ctx => [ctx.lang, ctx.fn || ctx.node || 'course', ctx.intent || 'chat'].join('|');
 const INTENT_LABEL = { explain: '📘 Explain this rule', compare: '⇄ Compare the languages', quiz: '❓ Quiz this node', chat: '💬 A conversation at my level' };
 const INTENT_MSG = { explain: 'Explain this rule to me.', compare: 'How does this point work in the other languages of the course?', quiz: 'Quiz me on this.', chat: 'Let’s talk — at my level, please.' };
+/** The tutor is the learner's character (main: NoemaThemes.current() everywhere): its name and face, when the app has characters. */
+function tutorNameNow() { try { return window.NoemaThemes ? NoemaThemes.tutor().n : ''; } catch (e) { return ''; } }
+function tutorFaceNow() { try { return window.NoemaArt && window.NoemaThemes ? h('span', { class: 'lx-tface', html: NoemaArt.mascot(NoemaThemes.current()), 'aria-hidden': 'true' }) : null; } catch (e) { return null; } }
+INTENT_MSG.hint = 'I am on an exercise and want a hint, not the answer.';
 function openLangTutor(ctx) {
   TT.ctx = { lang: ctx.lang || UI.lang, fn: ctx.fn || null, node: ctx.node || null, intent: ctx.intent || 'chat' };
   TT.open = true; drawTutor();
@@ -346,7 +350,7 @@ function drawTutor() {
   const sel = h('select', { class: 'lx-tlang', 'aria-label': 'language of the tutor’s explanations', onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
     ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + langName(x))));
   const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': 'Tutor' },
-    h('div', { class: 'lx-thead' }, h('b', {}, '🎓 Tutor'), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close the tutor', onclick: closeLangTutor }, '✕')),
+    h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 Tutor'), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close the tutor', onclick: closeLangTutor }, '✕')),
     h('div', { class: 'lx-tintents' }, ...intents.map(x => h('button', { class: 'chip' + (x === ctx.intent ? ' on' : ''), 'data-intent': x, onclick: () => {
       if (!aiVendor()) { msgs.prepend(h('div', { class: 'lx-tmsg sys' }, `${INTENT_LABEL[x]} needs an AI key — add one below.`)); return; }
       TT.ctx = { ...ctx, intent: x }; drawTutor(); if (!(TT.hist[tutorKey(TT.ctx)] || []).length) sendTutor(INTENT_MSG[x]);
@@ -395,7 +399,7 @@ async function sendTutor(text) {
   hist.push({ role: 'user', text, t: Date.now() }); TT.busy = true; drawTutor();
   const msgs = document.querySelector('.lx-tmsgs'); msgs?.append(h('div', { class: 'lx-tmsg ai lx-typing' }, '…'));
   try {
-    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf() });
+    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow() });
     const convo = hist.filter(m => m.role !== 'error').map(m => `${m.role === 'user' ? 'Learner' : 'Tutor'}: ${m.text}`).join('\n\n');
     const r = await NoemaLLM.json({ acc: UI.acc, system: task.system, prompt: `The conversation so far:\n\n${convo}\n\nWrite the tutor's next message.`, schema: task.schema, name: task.name, repairs: 1, maxTokens: 6000 });
     const target = (r.data.target || []).filter(x => typeof x === 'string' && x.trim());

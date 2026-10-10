@@ -131,6 +131,15 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   await page.click('.lx-host .lx-fgo'); await wait(800);
   ok(await page.$('.lx-host .lx-session') && await page.$eval('.ns-tabs', t => getComputedStyle(t).display !== 'none'), 'a lesson runs inside the frame, the tabs stay');
   await page.screenshot({ path: SHOTS + '/lf_d_session.png' });
+  // "Ask <character>" on every exercise, as in the rest of the app: the face in the card's corner; it opens the language tutor named after the character
+  await page.evaluate(() => { const U = NoemaLangUI.UI, st = document.createElement('div'); st.className = 'lx-stage lx-asktest'; document.querySelector('.lx-host .lx-main').append(st);
+    st.append(NoemaLangUI.ex.exRecognize('de', Object.keys(U.C.lang.de.lex).find(id => (U.C.lang.de.lex[id].senses || []).length), () => { })); });
+  await wait(300);
+  const ask = await page.evaluate(() => { const b = document.querySelector('.lx-asktest .lx-ex > .exask'); return b ? { label: b.getAttribute('aria-label'), face: !!b.querySelector('.exface svg'), name: NoemaThemes.tutor().n } : null; });
+  ok(ask && ask.face && ask.label === 'Ask ' + ask.name, 'an exercise has the quiet “Ask <character>” with the character’s face: ' + JSON.stringify(ask));
+  await page.click('.lx-asktest .exask', { force: true }); await wait(300);
+  ok(await page.$('.lx-tutor') && (await page.$eval('.lx-tutor .lx-tname', x => x.textContent)) === ask.name, 'it opens the language tutor, named after the character');
+  await page.evaluate(() => { NoemaLangUI.prod.closeLangTutor(); document.querySelector('.lx-asktest')?.remove(); });
 
   console.log('E. Today, the boot');
   await page.click('.ns-tab[data-tab="today"]'); await until(() => page.$('.ns-langgo'));

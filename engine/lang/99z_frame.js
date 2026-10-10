@@ -243,3 +243,22 @@ function frameTidy2(v, r, move) {
 /** A word card over the page (tap on a word): the same quiet card. */
 new MutationObserver(ms => { if (!FR.on) return; for (const m of ms) m.addedNodes.forEach(x => { if (x.nodeType === 1 && x.classList?.contains('lx-pop')) { x.querySelectorAll('article.lx-card').forEach(c => { if (c.querySelector(':scope > .lx-cardtop .lx-lemma')) frameWordCard(c); }); framePlainTree(x); } }); })
   .observe(document.body, { childList: true });
+
+/* "Ask <character>" on every exercise, as in the rest of the app (docs/UI_MAP.md §5): the character's face alone, faint, in the
+   card's top corner; its name on hover or focus. It opens the language tutor with this exercise, for a hint — never the answer. */
+(function () {
+  const inFrame = () => document.body.classList.contains('ns-on');
+  function addAsk(box) {
+    if (box.querySelector(':scope > .exask')) return;
+    const l = 'Ask ' + (tutorNameNow() || 'your tutor'), face = tutorFaceNow();
+    const b = h('button', { class: 'exask lx-exask', type: 'button', title: l, 'aria-label': l, onclick: e => {
+      e.stopPropagation();
+      const a = UI.current || {}, it = a.it || {}, lang = box.dataset.lang || it.lang || a.lang || UI.lang;
+      const q = ((box.querySelector('.lx-q, .lx-deepq, .lx-prompt') || box).innerText || '').replace(/\s+/g, ' ').trim().slice(0, 300);
+      openLangTutor({ lang, fn: it.fn || null, intent: 'hint', auto: false });
+      if (aiVendor()) sendTutor(`I am on this exercise and want a hint, not the answer: «${q}»`);
+    } }, face ? (face.classList.replace('lx-tface', 'exface'), face) : null, h('span', { class: 'lbl' }, l));
+    box.classList.add('has-ask'); box.prepend(b);
+  }
+  new MutationObserver(() => { if (inFrame()) document.querySelectorAll('.lx-stage .lx-ex').forEach(addAsk); }).observe(document.documentElement, { childList: true, subtree: true });
+})();

@@ -3172,7 +3172,7 @@
   }
   function tutorTask(C, L, code, ctx = {}, opts = {}) {
     const t = tutorContext(C, L, code, ctx, opts), lang = opts.chatLang || C.explainLang;
-    const system = `[noema:lang-tutor] You are the tutor of a learner of ${t.langName} (course "${C.data.course.title}"). Explain in the language with code "${lang}"; write ${t.langName} where you give examples or talk in it. ` +
+    const system = `[noema:lang-tutor] You are ${opts.tutorName ? `"${opts.tutorName}", ` : ''}the tutor of a learner of ${t.langName} (course "${C.data.course.title}"). Explain in the language with code "${lang}"; write ${t.langName} where you give examples or talk in it. ` +
       `Describe languages neutrally: no language is the norm.\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
       `THE LEARNER'S KNOWN WORDS in ${t.langName} (${t.words.length} of ${t.total}${t.total > t.words.length ? ', the best known first' : ''}): ${t.words.map(w => `${w.lemma} = ${w.gloss}`).join('; ') || '(none yet — use very simple words and gloss each one)'}\n` +
       (t.context ? '\n' + t.context + '\n' : '') +
