@@ -671,11 +671,23 @@ window.NoemaShell = (() => {
   /* ---------- 🕘 the conversations with the tutor, in every subject: a window in the middle of the screen, grouped by Roadmap and step ---------- */
   const emoBtn = (emo, label, run) => h('button', { class: 'ns-emobtn', type: 'button', title: label, 'aria-label': label, onclick: run }, emo);
   /** A window in the middle of the screen. build({ head, body, close }) */
+  /** A window in the middle of the screen: focus moves into it, Tab stays inside, and closing gives focus back to what opened it. */
   function modal(title, build, { cls = '' } = {}) {
-    const close = () => { F.layer.replaceChildren(); };
+    const opener = document.activeElement;
+    const close = () => { F.layer.replaceChildren(); if (opener?.isConnected) opener.focus?.(); };
     const head = h('div', { class: 'ns-mdhead' }), body = h('div', { class: 'ns-mdbody' });
-    F.layer.replaceChildren(h('div', { class: 'ns-scrim', onclick: close }), h('div', { class: 'ns-modal ns-mdwin ' + cls, role: 'dialog', 'aria-modal': 'true', 'aria-label': title }, head, body));
-    build({ head, body, close }); return close;
+    const win = h('div', { class: 'ns-modal ns-mdwin ' + cls, role: 'dialog', 'aria-modal': 'true', 'aria-label': title, tabindex: '-1', onkeydown: e => {
+      if (e.key === 'Escape') { e.stopPropagation(); close(); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...win.querySelectorAll('button,[href],input,select,textarea,summary')].filter(x => !x.disabled && x.getClientRects().length);
+      if (!f.length) return;
+      const a = document.activeElement;
+      if (e.shiftKey && (a === f[0] || a === win)) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && a === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    } }, head, body);
+    const refocus = () => { if (!win.contains(document.activeElement)) win.focus(); };   // after a re-render dropped the focused button
+    F.layer.replaceChildren(h('div', { class: 'ns-scrim', onclick: close }), win);
+    build({ head, body, close, refocus }); refocus(); return close;
   }
   const cvTitle = r => r.title || String(r.messages.find(m => m.role === 'user')?.content || '').replace(/\s+/g, ' ').slice(0, 60) || L('untitled');
   const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), v = L('mode' + m.charAt(0).toUpperCase() + m.slice(1)); return v.startsWith('sh.') ? m : v; };
@@ -683,7 +695,7 @@ window.NoemaShell = (() => {
   const cvText = t => String(t || '').replace(/<noema-state>[\s\S]*?<\/noema-state>/g, '').trim();
   function cvMd(t) { const d = h('div', { class: 'ns-md' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(cvText(t))); else d.textContent = cvText(t); return d; }
   function download(name, text) { const a = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'text/markdown;charset=utf-8' })), download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
-  const cvMarkdown = r => window.NoemaConvos?.toMarkdown ? NoemaConvos.toMarkdown(r, { tutorName: tv().tutor, tutorAvatar: TH()?.tutor()?.emoji || '' }) : r.messages.map(m => `**${m.role === 'user' ? L('you') : tv().tutor}:** ${cvText(m.content)}`).join('\n\n');
+  const cvMarkdown = r => window.NoemaConvos?.toMarkdown ? NoemaConvos.toMarkdown({ ...r, messages: r.messages.map(m => ({ ...m, content: cvText(m.content) })) }, { tutorName: tv().tutor, tutorAvatar: TH()?.tutor()?.emoji || '' }) : r.messages.map(m => `**${m.role === 'user' ? L('you') : tv().tutor}:** ${cvText(m.content)}`).join('\n\n');
   const slug = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 60) || 'conversation';
   /** Where a subject sits: { group: Roadmap (or "no Roadmap"), step: its step (or the subject itself) } */
   function placeOf(sid, title) {
@@ -694,7 +706,7 @@ window.NoemaShell = (() => {
   function convos() {
     const C = window.NoemaConvos; if (!C || !acc()) return;
     let q = '', allKinds = false;
-    modal(L('activity'), ({ head, body, close }) => {
+    modal(L('activity'), ({ head, body, close, refocus }) => {
       const closeBtn = h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close'));
       const groups = h('div', { class: 'ns-cvgroups' });
       const search = h('input', { class: 'noema-input ns-cvsearch', type: 'search', placeholder: L('convosSearch'), 'aria-label': L('convosSearch'), oninput: e => { q = e.target.value.trim().toLowerCase(); draw(); } });
@@ -708,7 +720,7 @@ window.NoemaShell = (() => {
           rows.length > 3 ? search : null,
           others ? h('label', { class: 'row tiny ns-check' }, h('input', { type: 'checkbox', checked: allKinds, onchange: e => { allKinds = e.target.checked; draw(); } }), L('convosOthers', { n: others })) : null,
           groups].filter(Boolean));   // replaceChildren() would print a null as text
-        draw();
+        draw(); refocus();
       }
       function draw() {
         const shown = rows.filter(r => (allKinds || !r.kind || r.kind === 'tutor') && (!q || (cvTitle(r) + ' ' + cvWhat(r) + ' ' + (r.subject?.title || '') + ' ' + r.messages.map(m => m.content).join(' ')).toLowerCase().includes(q)));
@@ -729,8 +741,8 @@ window.NoemaShell = (() => {
         return h('div', { class: 'ns-cvrow' },
           h('button', { class: 'ns-cvmain', onclick: () => oneView(r) }, tl, h('small', {}, [cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), L('nMessages', { n: r.messages.length })].filter(Boolean).join(' · '))),
           h('span', { class: 'ns-cvacts' },
-            emoBtn('✏️', L('rename'), () => { const inp = h('input', { class: 'noema-input', value: cvTitle(r), 'aria-label': L('rename'), onkeydown: e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { inp.value = cvTitle(r); inp.blur(); } },
-              onblur: async () => { const v = inp.value.trim().slice(0, 80); if (v && v !== cvTitle(r)) { r.title = v; r.titleSource = 'user'; await C.put(acc(), r, { keepUpdatedAt: true }); ENGINE?.convoChanged?.(r.id, { title: v }); } inp.replaceWith(tl); tl.textContent = cvTitle(r); } });
+            emoBtn('✏️', L('rename'), () => { const inp = h('input', { class: 'noema-input', value: cvTitle(r), 'aria-label': L('rename'), onkeydown: e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { e.stopPropagation(); inp.value = cvTitle(r); inp.blur(); } },
+              onblur: async () => { const v = inp.value.trim().slice(0, 80); if (v && v !== cvTitle(r)) { r.title = v; r.titleSource = 'user'; r = await C.put(acc(), r); ENGINE?.convoChanged?.(r.id, { title: v }); /* put() gives it a newer updatedAt, or other devices keep the old title */ } inp.replaceWith(tl); tl.textContent = cvTitle(r); setTimeout(refocus); } });
               tl.replaceWith(inp); inp.focus(); inp.select(); }),
             emoBtn('⬇️', L('exportMd'), () => download(slug(cvTitle(r)) + '.md', cvMarkdown(r))),
             emoBtn('🗑️', L('del'), async e => { const b = e.currentTarget; if (!sure) { sure = true; b.textContent = '❓'; b.title = L('delAgain'); return; } await C.remove(acc(), r.id); ENGINE?.convoChanged?.(r.id, null); listView(); })));
@@ -741,7 +753,7 @@ window.NoemaShell = (() => {
         body.replaceChildren(h('p', { class: 'tiny ns-muted' }, [p.st, cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })].filter(Boolean).join(' · ')),
           h('div', { class: 'ns-cvmsgs' }, ...r.messages.filter(m => cvText(m.content)).map(m => h('div', { class: 'ns-cvmsg ' + (m.role === 'user' ? 'me' : 'ai') }, h('small', {}, m.role === 'user' ? L('you') : tv().tutor), cvMd(m.content)))),
           r.subject?.id && (!r.kind || r.kind === 'tutor') ? h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); goConvo(r); } }, L('convContinue'))) : null);
-        body.scrollTop = 0;
+        body.scrollTop = 0; refocus();
       }
       listView();
     }, { cls: 'ns-convos' });
