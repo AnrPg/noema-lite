@@ -11,7 +11,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const COURSE = 'polyglot-semitic-zh-de', PORT = 54333, URL = `http://localhost:${PORT}/`;
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:${PORT}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 0, askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:${PORT}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 0, askSubjectOnStart: true, shell: false };   // the older screens, like main's suites`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const noFonts = ctx => ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));

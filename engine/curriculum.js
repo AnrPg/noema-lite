@@ -525,6 +525,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
         changed = true;
       }
       if (planLocked(n)) continue;
+      if ((o.pack?.assigned || o.groupPlan) && t(n.assignedAt) > t(o.assignedAt)) continue;   // 📦 the other copy's plan followed a subject this copy has taken off since: it never comes back over the plan the step has now
       if (o.replan && t(o.replanAt) > Math.max(t(n.plannedAt), t(n.replanAt))) {   // a re-plan asked for on the other copy
         n.replan = true; n.replanAt = o.replanAt; if (o.planWish) n.planWish = o.planWish; else delete n.planWish;
         if (c.stage === 'done') c.stage = 'plan'; changed = true; continue;
