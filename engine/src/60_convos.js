@@ -133,12 +133,12 @@ function convoMarkdown(cv, level = 1) {
     `| **Started** | ${fmtDate(cv.created)} |`,
     `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
     `| **Messages** | ${cv.msgs.length} |`,
-    `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
+    `| **Tutor** | ${TUTOR.name} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
     `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
   if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
-    const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TN}`;
+    const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TUTOR.name}`;
     lines.push(`${H}# ${who}${m.t ? ' · ' + fmtDate(m.t).slice(11) : ''}`, '', demoteHeadings(String(m.text).trim(), level + 2), '');
   });
   return lines.join('\n');
@@ -197,7 +197,22 @@ function openConvo(cv) {
   T.showHistory = false; renderTutor();
 }
 
-/* ---------- history panel (inside the tutor drawer) ---------- */
+/** The frame's conversations window asked to continue one of this subject's conversations (engine/shell.js goConvo). */
+function resumeConvo() {
+  let f = null; try { f = JSON.parse(sessionStorage.getItem('noema-device:openConvo') || 'null'); sessionStorage.removeItem('noema-device:openConvo'); } catch (e) { }
+  if (!f || f.acc !== ACCOUNT.id || f.sid !== SUBJ.id) return;
+  const cv = CV.list.find(c => c.id === f.id); if (!cv) return;
+  openTutor(); openConvo(cv);
+}
+/** A conversation renamed or deleted in the frame's window: keep this subject's copy in step. */
+function convoChanged(id, patch) {
+  const cv = CV.list.find(c => c.id === id); if (!cv) return;
+  if (patch) { Object.assign(cv, patch); if (patch.title) { cv.titleSource = 'user'; cv.titledLen = 1e9; } }
+  else { CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } }
+  if (T.open) renderTutor();
+}
+
+/* ---------- history panel (inside the tutor drawer; in the frame the history is a window of its own: NoemaShell.convos) ---------- */
 let histQuery = '', histAllKinds = false;
 function renderConvoHistory(box) {
   const everything = CV.list.filter(c => c.msgs?.length);

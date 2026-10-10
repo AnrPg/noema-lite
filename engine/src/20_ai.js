@@ -135,9 +135,8 @@ const FORMAT = `markdown allowed (**bold**, \`code\`, short lists, fenced code${
 const STYLE = `Formatting: short turns (max ~120 words unless asked), ${FORMAT}`;
 /** For the free, in-depth explanations: the same rules without the short-turn cap. */
 const STYLE_FREE = `Formatting: ${FORMAT}`;
-const TN = TUTOR.name;
 const MODES = {
-  socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
+  socratic: { get label() { return `${TUTOR.avatar} Socratic`; }, sys: `You are "{{tutor}}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
 
 HOW YOU WORK — "elicitation threads"
 A thread = one question you are helping the learner work out. The app tracks every thread (see TUTOR STATE below — it is authoritative).
@@ -158,21 +157,21 @@ MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exact
 <noema-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</noema-state>
 Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
-  explain: { label: '💡 Explain', sys: `You are "${TN}", an expert ${TUTOR.domain} teacher in a FREE CONVERSATION with the learner. Your only goal is that the learner truly UNDERSTANDS. ${LEARNER}
+  explain: { label: '💡 Explain', sys: `You are "{{tutor}}", an expert ${TUTOR.domain} teacher in a FREE CONVERSATION with the learner. Your only goal is that the learner truly UNDERSTANDS. ${LEARNER}
 HOW YOU WORK
 • Explain in depth and as intuitively and insightfully as possible. Do your very best explaining: give the underlying WHY (the mechanism, the cause, the purpose — why it has to be this way), not only the what.
 • Build from what the learner already knows; use a vivid analogy or mental image, a concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or a worked formula' : ''}, a contrast with what it is NOT, and the misconception people typically have — whatever makes the idea click. Prefer one deep, well-built explanation over a checklist.
 • This is NOT a Socratic session and NOT a quiz: do not elicit, do not ask the learner to work things out, do not end with check questions or "what do you think?". Just explain. Answer follow-up questions the same way. Ask something only if the learner's question is truly ambiguous.
 • Length: as long as the idea needs to be really understood (often 200–450 words); short paragraphs, bold the key idea, short lists where they help. You may close with one line pointing to where to go deeper — as a statement, not a question.
 ${STYLE_FREE}` },
-  hint: { label: '🪜 Hint', chip: false, sys: `You are "${TN}", a ${TUTOR.domain} tutor giving HINTS on an exercise the learner is solving right now and has NOT submitted yet. ${LEARNER}
+  hint: { label: '🪜 Hint', chip: false, sys: `You are "{{tutor}}", a ${TUTOR.domain} tutor giving HINTS on an exercise the learner is solving right now and has NOT submitted yet. ${LEARNER}
 The exercise below comes with its correct answer and explanation — they are for YOU only.
 • NEVER reveal the answer: do not name, eliminate or confirm options, values, orders or lines, even when asked directly — say the answer appears when they press Check, and offer a stronger hint instead.
 • One hint per turn, on a ladder: (1) point to the key concept or the question to ask oneself; (2) when they want more, a more specific pointer — which rule or fact from the notes applies and what to look at in the exercise; (3) at most a worked example on a DIFFERENT, analogous case.
 • If the learner shares their reasoning, say whether the REASONING is on track (never whether the final choice is right) and correct any misconception they state.
 • Each hint ≤ 70 words. No long question chains: you may end with one question for them to ask themselves, nothing more.
 ${STYLE}` },
-  quiz: { label: '⚡ Quiz me', sys: `You are "${TN}", a rapid-fire ${TUTOR.domain} quiz master. ${LEARNER}
+  quiz: { label: '⚡ Quiz me', sys: `You are "{{tutor}}", a rapid-fire ${TUTOR.domain} quiz master. ${LEARNER}
 Ask ONE question at a time, varying the format: predict-the-outcome, spot-the-trap, ${SUBJ.features?.code ? 'write-the-syntax, ' : ''}${SUBJ.features?.math ? 'calculate, ' : ''}compare two concepts, "what do you ask yourself first when…". After each answer: verdict (✅/🟡/❌), a 1–3 sentence teaching correction, running score "Score: x/y", then the next, slightly harder question. Focus on traps and reasoning errors. ${STYLE}` },
   interview: { label: '🎤 Interview', sys: `You are ${TUTOR.interviewer}. ${LEARNER}
 Ask ONE realistic question at a time about the context topic (conceptual, scenario or diagnostic). After the learner answers: score /10, what was strong, what was missing, and a crisp model answer in ≤4 sentences. Then ask the next question, mixing in follow-ups ("and what if…?"). ${STYLE}` },
@@ -234,7 +233,7 @@ function ctxLabel() {
     It goes into the instructions of every turn of that conversation (and is kept with it in the history). */
 const INTENT = {
   item: what => `The learner pressed 💡 "Explain this" on ONE ${what} of the lesson (the FOCUS below). Explain exactly that ${what}: first in its own terms and in depth — what it means, why it is so, how it works — then how it fits into the lesson around it. Go beyond the notes whenever it helps understanding (mark it "(beyond the notes)").`,
-  exHint: given => `The learner pressed "Ask ${TN}" on an exercise BEFORE answering it — they want a hint, not the solution.${given ? ` What they have entered so far (not submitted): ${given}` : ''}`,
+  exHint: given => `The learner pressed "Ask ${TUTOR.name}" on an exercise BEFORE answering it — they want a hint, not the solution.${given ? ` What they have entered so far (not submitted): ${given}` : ''}`,
   exSocratic: given => `The learner answered the exercise below WRONG and pressed "Help me get it (Socratic)".${given ? ` Their answer: ${given}.` : ''} They have already seen the correct answer and the explanation of the app. Start from THEIR answer: find out what made it tempting, then guide them until they can say in their own words why the correct answer is correct and why their choice was a trap. Work on this exercise's key idea only — do not drift into a review of the whole topic.`,
   exExplain: given => `The learner answered the exercise below WRONG and pressed "💡 Explain differently".${given ? ` Their answer: ${given}.` : ''} They have already seen the correct answer and the explanation shown by the app (the "Explanation" below) and it did not click. Do exactly what the button says: explain the key idea behind the correct answer in a DIFFERENT way from that explanation — another angle, an analogy, a concrete example — and show precisely why their answer is wrong (what it misses or confuses). Do not ask them questions, do not quiz them and do not ask how they read the exercise: just explain.`,
   secSocratic: `Socratic dialogue on THIS section (the notes below). Cover its key ideas one by one, starting from what the learner already thinks about the first one; prefer the ideas that matter most and the classic traps.`,
@@ -281,7 +280,7 @@ function renderShellTutor(d) {
   const langMenu = btn => X.popMenu(btn, [{ label: SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: !chatLang() ? '✓' : ' ', run: () => { S.settings.chatLang = ''; save(); renderTutor(); } },
     ...CHAT_LANGS.map(([v, l]) => ({ label: l, icon: chatLang() === v ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } }))]);
   const more = X.menuButton(() => [
-    { label: T.showHistory ? SL('chatBack') : SL('chatHistory'), icon: 'clock', run: () => { T.showHistory = !T.showHistory; renderTutor(); } },
+    { label: SL('chatHistory'), icon: 'clock', run: () => SHL().convos() },   // the history is a window in the middle of the screen, every subject grouped by Roadmap and step
     { label: SL('chatNew'), icon: '↺', run: () => { T.showHistory = false; T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } },
     hist.length ? { label: SL('chatExport'), icon: '⬇️', run: () => exportConvo(currentConvo()) } : null,
     { label: SL('chatLangItem'), sub: chatLang() ? CHAT_LANGS.find(l => l[0] === chatLang())?.[1] : SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
@@ -292,7 +291,7 @@ function renderShellTutor(d) {
   const ex = T.ctx?.kind === 'exercise', what = ex ? SL('forExercise') : T.ctx ? ctxLabel().replace(/^\S+\s/, '').replace(/^Ch\d+\s*·\s*/, '') : SL('tutorWhole');
   d.append(
     h('div', { class: 'dh ns-dh', lang: uiLang() },   // the frame's words: capitals and hyphens of the menus' language (the page has the subject's)
-      h('div', { class: 'top' }, tutorFace(), h('b', { class: 'ns-tname grow' }, TN), more,
+      h('div', { class: 'top' }, tutorFace(), h('b', { class: 'ns-tname grow' }, TUTOR.name), more,
         h('button', { class: 'iconbtn', title: X.L('close'), 'aria-label': X.L('close'), onclick: closeTutor }, '✕')),
       h('div', { class: 'ns-modelabel' }, SL(window.NoemaThemes?.tutor?.()?.pl ? 'tutorHelpsPl' : 'tutorHelps')),
       modeWrap),
@@ -326,7 +325,7 @@ function renderTutor() {
   d.append(
     h('div', { class: 'dh' },
       h('div', { class: 'top' }, tutorFace(),
-        h('div', { class: 'grow' }, h('b', {}, TN), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
+        h('div', { class: 'grow' }, h('b', {}, TUTOR.name), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
         ...tutorTools(),
         h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
@@ -340,7 +339,7 @@ function renderTutor() {
   if (T.showHistory) { renderConvoHistory(msgs); return; }
   if (!hist.length) {
     const topic = T.ctx ? ctxLabel().replace(/^\S+\s/, '') : SUBJ.title;
-    msgs.append(h('div', { class: 'msg ai' }, md(`Hi ${ACCOUNT.name || 'there'}! I'm **${TN}** ${TUTOR.avatar}. Mode: **${MODES[T.mode].label}**. Pick a starter or just type.`)),
+    msgs.append(h('div', { class: 'msg ai' }, md(`Hi ${ACCOUNT.name || 'there'}! I'm **${TUTOR.name}** ${TUTOR.avatar}. Mode: **${MODES[T.mode].label}**. Pick a starter or just type.`)),
       h('div', { class: 'starters' },
         ...[
           [`${TUTOR.avatar} Question me Socratically on this`, 'socratic', `Start a Socratic session on: ${topic}. Begin by probing what I already think.`],
@@ -366,7 +365,7 @@ function tutorIntent(key, given) {
 }
 /** The instructions of a tutor turn: the mode, then why the conversation was opened, then the course context. */
 function tutorSystem(intent) {
-  return MODES[T.mode].sys + (intent ? '\n\nWHY THIS CONVERSATION WAS OPENED — your task in it (unless the learner asks for something else):\n' + intent : '') + '\n\n' + tutorContextText();
+  return MODES[T.mode].sys.replaceAll('{{tutor}}', TUTOR.name) + (intent ? '\n\nWHY THIS CONVERSATION WAS OPENED — your task in it (unless the learner asks for something else):\n' + intent : '') + '\n\n' + tutorContextText();
 }
 async function sendTutor(text, hidden = false, opts = {}) {
   if (T.busy) return;

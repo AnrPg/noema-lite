@@ -30,6 +30,14 @@ function openAccountMenu(tab = 'profile') {
   });
 }
 
+/** A subject's name for people: its title, else the Roadmap step it was made for, else its id made readable ("cur-bq29at-prerequisite-round-1-storage-tables-k8jn" → "Prerequisite round 1 storage tables"). */
+function subjectLabel(sid, list = []) {
+  const m = list.find(s => s.id === sid); if (m?.title) return m.title;
+  if (sid === SUBJ.id) return SUBJ.title;
+  const st = window.NoemaCurriculum?.stepsOf?.(ACCOUNT.id, sid)?.[0]; if (st?.c.nodes[st.nid]?.title) return st.c.nodes[st.nid].title;
+  const w = String(sid).replace(/^cur-[a-z0-9]+-/, '').replace(/-[a-z0-9]{4}$/, '').replace(/[-_]+/g, ' ').trim();
+  return w ? w[0].toUpperCase() + w.slice(1) : sid;
+}
 const ACC_VIEWS = {
   /** ⚙️ Settings: the AI (Gemini for the tutor, Claude optionally), how the app looks and studies, this subject. */
   /** opts.only = 'ai': just the AI sections (the shell has its own page for language and appearance). */
@@ -119,12 +127,15 @@ const ACC_VIEWS = {
     const ask = h('input', { type: 'checkbox', checked: set.askSubjectOnStart ?? Noema.config.askSubjectOnStart });
     const pin = h('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: ACCOUNT.pin ? 'New PIN (empty = keep)' : 'Optional PIN' });
     const bySub = Object.entries(Noema.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
+    // each chip names its subject (a Roadmap step's subject by its step), never by its id
+    const xpChips = bySub.map(([sid, xp]) => h('span', { class: 'pill', 'data-sid': sid }, `${subjectLabel(sid)}: ${xp}`));
+    Noema.subjectsFor(ACCOUNT.id).then(list => xpChips.forEach(c => { c.textContent = `${subjectLabel(c.dataset.sid, list)}: ${bySub.find(x => x[0] === c.dataset.sid)[1]}`; })).catch(() => { });
     body.append(
       h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, 'Name'), name), h('div', { class: 'field' }, h('label', {}, 'Emoji'), emoji)),
       h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject) ', tip('Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.')), learner),
       h('label', { class: 'row', style: { margin: '8px 0' } }, ask, 'Show the subject picker every time I open the app'),
       ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { Noema.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
-      bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...bySub.map(([sid, xp]) => h('span', { class: 'pill' }, `${sid}: ${xp}`)))) : null,
+      bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...xpChips)) : null,
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           const patch = { name: name.value.trim() || ACCOUNT.name, emoji: emoji.value.trim() || ACCOUNT.emoji };

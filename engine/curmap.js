@@ -618,6 +618,40 @@ window.NoemaCurMap = (() => {
     window.NoemaViewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title + (f.range ? ` · pages ${f.range[0]}–${f.range[1]}` : ''), page: f.range ? f.range[0] : undefined });
   }
 
+  /** 📚 The sources of a step: the learner's own files (at the step's pages) and the sources of the subject prepared for it. */
+  function stepSources(acc, cid, id) {
+    const c = C().get(acc, cid), n = c?.nodes[id]; if (!n) return;
+    const files = n.material?.files || [], pk = n.pack || {}, SF = window.NoemaSrcFiles;
+    overlay((box, close) => {
+      box.classList.add('cg-box', 'cm-srcbox');
+      const list = el('div', { class: 'cm-srclist' });
+      const row = (ic, title, sub, open) => el('button', { class: 'cm-srcrow', disabled: open ? null : true, onclick: open }, el('span', { class: 'cm-srcic', 'aria-hidden': 'true' }, ic),
+        el('span', { class: 'grow' }, el('b', {}, title), sub ? el('small', {}, sub) : null), open ? el('span', { class: 'cm-srceye', 'aria-hidden': 'true' }, '👁') : null);
+      box.append(el('div', { class: 'row cm-srchead' }, el('h3', { class: 'grow' }, '📚 ' + SL('stepSources', 'Sources of this step')), el('button', { class: 'btn small ghost', 'aria-label': 'Close', onclick: close }, '✕')),
+        el('p', { class: 'tiny' }, n.title), list);
+      for (const f of files) list.append(row('📎', f.name, f.range ? SL('srcPages', 'pages {p}', { p: `${f.range[0]}–${f.range[1]}` }) : '', () => openMaterial(acc, cid, id, f)));
+      const empty = () => { if (!list.children.length) list.append(el('p', { class: 'tiny' }, SL('noSources', 'No sources yet. They show here once the step is prepared.'))); };
+      if (!(pk.id && pk.status === 'ready')) return empty();
+      const wait = el('p', { class: 'tiny' }, '⏳'); list.append(wait);
+      Promise.resolve(window.Noema.loadSubject?.(acc, pk.id)).catch(() => null).then(p => {
+        wait.remove(); const R = p?.sources || {};
+        for (const s of R.sources || []) {
+          if (files.some(f => f.srcId === s.id)) continue;   // already listed, with the step's pages
+          const chs = (p.chapters || []).filter(ch => (R.chapters?.[ch.id] || ch.src) === s.id || (ch.sources || []).some(x => x.id === s.id)).map(ch => ch.title);
+          const av = SF?.available(acc, pk.id, s);
+          list.append(row(s.emoji || '📘', s.title, [s.pages, chs.join(' · '), av ? '' : SL('srcNoFile', 'no file on this device')].filter(Boolean).join(' · '), av ? () => openSrc(acc, pk.id, s, av) : null));
+        }
+        empty();
+      });
+    });
+  }
+  async function openSrc(acc, sid, s, av) {
+    if (av.url && !av.meta) return window.NoemaViewer.open({ url: av.url, title: s.title, subtitle: s.subtitle });
+    const rec = await window.NoemaSrcFiles.get(acc, sid, s.id).catch(() => null);
+    if (!rec?.blob) { toast('⚠️ This file is not on this device and could not be downloaded.', 4000); return; }
+    window.NoemaViewer.open({ blob: rec.blob, name: rec.name, type: rec.type, title: s.title, subtitle: s.subtitle });
+  }
+
   /* ======================= 📥 import a map you already have ======================= */
   function importMap(acc, { onStudy } = {}) {
     const I = window.NoemaCurImport;
@@ -1166,6 +1200,8 @@ window.NoemaCurMap = (() => {
         const live = G().live[key];
         panel.innerHTML = ''; panel.classList.add('on');
         const act = el('div', { class: 'cm-actions' });
+        /** 📚 what the step is taught from: the learner's files and its prepared subject's sources, each one opens in the viewer */
+        const srcBtn = () => (n.material?.files?.length || (pk.id && pk.status === 'ready')) ? el('button', { class: 'btn small cm-emo cm-srcbtn', title: SL('stepSources', 'Sources of this step'), 'aria-label': SL('stepSources', 'Sources of this step'), onclick: () => stepSources(acc, cid, id) }, '📚') : null;
         /** 📦 Use a subject I have · ↩ take it off — on any map, a shared one too (the change is the learner's own there). */
         const ownBtns = () => [
           pk.status !== 'generating' ? el('button', { class: 'btn small cm-usesubject', title: 'Study this step from a subject you already have — only this step is re-planned', onclick: () => attachDialog(acc, { cid, nid: id, onDone: () => { drawMap(); showPanel(id); } }) }, pk.assigned ? '📦 Use another subject' : '📦 Use a subject I have') : null,
@@ -1213,6 +1249,10 @@ window.NoemaCurMap = (() => {
           act.append(el('p', { class: 'cm-lock' }, '🔒 Locked. Master these first: ', ...missing.map((p, i) => [i ? ', ' : '', el('a', { href: '#', onclick: e => { e.preventDefault(); sel = p; drawMap(); showPanel(p); scrollToNode(p); } }, T(p))])));
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 also for a locked step: who prepared / prepares it
           if (rx && !rx.mine) act.append(el('p', { class: 'tiny cm-byline' }, rx.status === 'ready' ? `⚡ Prepared by ${rx.by || 'another member'} — it is yours to study when it opens` : `⏳ ${rx.by || 'Another member'} is preparing this step`));
+          // 📖 a prepared step can be read before it opens; its exercises wait (the subject opens read-only, engine/src/40_views.js stepLock)
+          const readBtn = run => el('button', { class: 'btn small cm-readtheory', title: SL('readTheorySub', 'The exercises open when the step opens'), onclick: run }, '📖 ' + SL('readTheory', 'Read the theory'));
+          if (pk.id && pk.status === 'ready') act.append(readBtn(() => study(pk.id, id)));
+          else if (rx?.status === 'ready') act.append(readBtn(async e => { const b = e.currentTarget; b.disabled = true; try { study(await SH().download(acc, cid, id), id); } catch (er) { toast('⚠️ ' + er.message, 6000); b.disabled = false; } }));
         }
         const prog = st.mastered ? `✅ Mastered${st.how === 'test' ? ' (placement test)' : st.how === 'auto' ? '' : ''}` : pk.status === 'ready' ? `Progress: ${fmtPct(st.read)} read · ${fmtPct(st.score)} of the exercises solved (needs 100 % read + 80 % solved)` : '';
         const md = (n.chapters || []).map((ch, i) => `${i + 1}. **${String(ch.title).replace(/([*_`\\[\]])/g, '\\$1')}**`).join('\n');
@@ -1226,11 +1266,11 @@ window.NoemaCurMap = (() => {
           onclick: e => { e.stopPropagation(); const b = e.currentTarget; if (files.length === 1 || !SHL()?.popMenu) return openMaterial(acc, cid, id, files[0]); SHL().closePops?.(); SHL().popMenu(b, files.map(f => ({ label: f.name, sub: f.range ? `pages ${f.range[0]}–${f.range[1]}` : f.pages ? `${f.pages} pages` : '', icon: '📄', run: () => openMaterial(acc, cid, id, f) }))); } }, '📎')) : null;
         panel.append(el('button', { class: 'btn small ghost cm-pclose', 'aria-label': 'Close the panel', onclick: () => { panel.classList.remove('on'); sel = null; drawMap(); } }, '✕'),
           el('div', { class: 'cm-ptitle' }, el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('div', {}, el('h3', {}, n.title, clip ? ' ' : null, clip), el('div', { class: 'tiny cm-psub' }, [ROLE[n.role], sm.path, n.domains?.length ? n.domains.join(', ') : ''].filter(Boolean).join(' · ')))),
-          sm.summary ? el('p', {}, sm.summary) : null, prog ? el('p', { class: 'tiny' }, prog) : null, act,
+          prog ? el('p', { class: 'tiny' }, prog) : null, act,
           pk.assigned ? el('p', { class: 'tiny cm-byline cm-taughtby' }, `📦 Taught by your subject “${pk.title || pk.id}”`, (() => { const k = C().stepsOf(acc, pk.id).length - 1; return k > 0 ? ` — it also teaches ${k} other step${k === 1 ? '' : 's'} (same progress)` : ''; })()) : null,
           (() => { const from = C().planLocked(n) || member ? [] : st.parents.filter(p => c.nodes[p]?.pack?.assigned && c.nodes[p].assignedAt && (!n.plannedAt || c.nodes[p].assignedAt > n.plannedAt));
-            return from.length ? el('p', { class: 'tiny cm-flag' }, `⚑ ${from.map(p => '“' + T(p) + '”').join(', ')} ${from.length === 1 ? 'is' : 'are'} now taught by your own subject — check that this step still fits (✏️ Edit step → ✨ Re-plan).`) : null; })(),
-          member ? el('div', { class: 'row cm-ownrow' }, ...ownBtns()) : el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small', onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️ Edit step'),
+            return from.length ? el('p', { class: 'tiny cm-flag' }, `⚑ ${from.map(p => '“' + T(p) + '”').join(', ')} ${from.length === 1 ? 'is' : 'are'} now taught by your own subject — check that this step still fits (✏️ → ✨ Re-plan).`) : null; })(),
+          member ? el('div', { class: 'row cm-ownrow' }, srcBtn(), ...ownBtns()) : el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small cm-emo cm-editbtn', title: SL('editStep', 'Edit this step'), 'aria-label': SL('editStep', 'Edit this step'), onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️'), srcBtn(),
             c.shared?.role === 'owner' && c.remote?.[id] && !c.remote[id].mine ? el('button', { class: 'btn small ghost cm-removestep', title: 'Remove the version another member prepared (the step can then be prepared again)', onclick: async () => { if (!confirm(`Remove the version of “${n.title}” that ${c.remote[id].by || 'another member'} prepared? Everybody can then prepare it again.`)) return; try { await SH().removeStep(acc, cid, id); toast('🗑 Removed — the step can be prepared again'); } catch (e) { toast('⚠️ ' + e.message, 5000); } drawMap(); showPanel(id); } }, `🗑 ${c.remote[id].by || 'Member'}’s ${c.remote[id].status === 'ready' ? 'version' : 'reservation'}`) : null,
             !pk.status && !st.mastered && (n.reviewed || c.autoApprove) && !(st.open) && !c.remote?.[id] ? el('span', { class: 'tiny' }, '✔ reviewed — prepared when it opens') : null),
           n.learningGoals?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '🎯 After this step you can'), el('ul', { class: 'cm-goals' }, ...n.learningGoals.map(g => el('li', {}, g)))) : null,
