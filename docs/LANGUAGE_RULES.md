@@ -2,7 +2,7 @@
 
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
-skill (`noema-pack-builder`), the connector's tasks, and anyone merging the `languages` branch. It is the short, binding
+skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
 form of the decisions D1–D19 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
@@ -15,9 +15,9 @@ Where it is enforced: `CLAUDE.md` and `AGENTS.md` (read by code agents), `README
 ## A. Process
 1. **Contract first.** A change to the plan is written in `docs/LANGUAGES.md` (decision table §1, the section it concerns,
    a changelog entry in §14) and in this file **before** the code or content changes.
-2. **Branch.** Language work happens on `languages` (worktree `~/Documents/MyApps/noema-lite-lang`). Push only when the
-   user asks; Netlify publishes `main` only. Merge into `main` only at a usable milestone, with the whole suite green and
-   the user's approval. Never switch the checkout of a worktree someone else is using; commit with plumbing if needed.
+2. **Branch.** The language part lives on `main` (merged with its history on 2026-10-10; the `languages` branch is gone).
+   Netlify publishes `main`, so a change lands there only with the whole suite green; larger work goes on a short-lived
+   branch merged back. Push only when the user asks. Never switch the checkout of a worktree someone else is using.
 3. **Green before commit.** `python3 tools/build.py` and `bash tests/run_e2e.sh` pass; for content: the validator with
    `--strict`, `tools/lang_refcheck.py` (no unresolved disagreement), `tools/lang_phenomena.py` (no ❌).
 4. **No secrets** in files, briefs or commits; never the user's e-mail in requests to other services.

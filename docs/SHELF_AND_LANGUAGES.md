@@ -1,5 +1,7 @@
 # 📚 The Shelf and 🌍 language courses — notes for merging
 
+> **Done.** The `languages` branch was merged into `main` on 2026-10-10 (with its history) and deleted. This note is kept as the record of how the two met.
+
 This file is on both `main` and `languages`, so whoever merges one into the other knows what the Shelf work
 (docs/CURRICULUM.md §9) changes around the language courses (docs/LANGUAGES.md). It applies once the Shelf pull request
 (branch `claude/project-thread-hg3u6n`) is merged into `main`. Nothing in the language courses has to change for it: they

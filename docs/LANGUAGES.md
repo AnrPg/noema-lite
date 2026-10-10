@@ -32,26 +32,22 @@
 | QA | The whole language part end to end: every lane, view and exercise walked through as three learners on 1280 and 390 px; fixes | ✅ 2026-10-09 — the home organized (session · next lesson · lanes per language · grammar · the map near you), the first lesson from the big button, the next lesson offered at the end, answers no longer given away (deepening, principal parts), every foreign script run with its lang, readable reading titles and language names; `tests/lang_walkthrough.js` |
 | P9 | Listening and speaking (later) | ⬜ later |
 
-## 0. Development isolation (until the feature is finished)
+## 0. Development (merged into `main` on 2026-10-10)
 
-The app in use must never be affected or left half-done by this work.
+The language part was developed on its own branch `languages` (worktree `~/Documents/MyApps/noema-lite-lang`) from
+2026-10-07 and merged into `main` on 2026-10-10 with its whole history (a merge commit); the branch was then deleted.
+Work now continues on `main` (or on short-lived branches merged back), under the same rules:
 
-* **Separate branch and folder.** All language work happens on the git branch **`languages`**, checked out as a
-  git worktree in **`~/Documents/MyApps/noema-lite-lang`**. The folder `~/Documents/MyApps/noema-lite` stays on
-  **`main`**: it is the app you use, and it is what Netlify publishes (production branch = `main`).
-* **Pushed only as a backup, when you ask** (first asked 2026-10-08). Netlify branch deploys stay off, so the website
-  never shows it; only `main` is published.
-* **Additive code.** New files for everything (`engine/langcore.js`, `engine/lang/*`, `tools/*lang*`,
-  `library/languages/`, `tests/lang*`). Existing files are touched only at registration points (the build lists,
+* **The app in use is never left half-done.** Netlify publishes `main`: a change lands there only with the whole test
+  suite (old + new) green. Unfinished content stays out of the learner's way (`course.draft`: lessons still being written
+  are shown as ⏳ and never offered).
+* **Additive code.** Language code lives in its own files (`engine/langcore.js`, `engine/lang/*`, `tools/*lang*`,
+  `library/languages/`, `tests/lang*`). Other files are touched only at registration points (the build lists,
   `index.html`, the subject picker, the boot and the frame's `registerWorld('lang', …)` in `engine/loader.js`, two small
   hooks in `engine/shell.js` — §8 *Inside the frame*), and only for courses with `kind: "language"`; ordinary subjects and
   curricula take exactly the same code paths as before.
-* **Own storage namespace.** Learner state lives only in `…:s:<course>:lang:*` keys (§5.6); no existing key changes format.
-  While developing, the branch copy is opened with a local test profile, not the cloud account; automated tests use the
-  Supabase emulator.
-* **Main keeps moving.** Fixes made on `main` are merged into `languages` regularly (`git merge main`), so the merge back is small.
-* **Merging back** only when a usable milestone is complete (P3 at the earliest), the whole test suite (old + new) is
-  green, and you say so. Until then `main` gets no language code.
+* **Own storage namespace.** Learner state lives only in `…:s:lang:<course>:*` keys (§5.6); no existing key changes format.
+  Automated tests use the Supabase emulator, never the cloud account.
 
 ---
 
@@ -1155,6 +1151,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-10 — The branch `languages` merged into `main` with its history (asked by the user) and deleted; §0 and docs/LANGUAGE_RULES.md §A.2 now describe working on `main`.
 - 2026-10-10 — Second declutter pass inside the frame (asked by the user, §8 *Content views, details on demand*): word cards, grammar points, lessons, reader, compare, peculiarities, field maps, node pages and settings show the essentials and fold the rest (tags on tap, three sentences then More, quiet sections, panels); the character a small face while reading on phones; `tests/lang_frame.js` checks it.
 - 2026-10-10 — The course inside the frame in main's calm style (asked by the user, §8 *Style inside the frame*): one primary action per screen, the other actions in ⋮ / Practice ▾ / sheets, the home as the frame's components (one big card, Your languages with a sheet of lanes each, the map as a list), no counts, rings or legends unless asked for, plain chrome, the chosen character's colours, fonts and shapes; `engine/lang/99z_frame.js`, `97_frame.css`; `tests/lang_frame.js` H. With `shell: false` nothing changes.
 - 2026-10-09 — The new frame (`main`: PR #14 the frame, PR #11 the Shelf) merged into the language work, and the courses live inside it (§8 *Inside the frame*): the Languages tab lists every course (library and account) with its languages, progress and what is due; `#/lang/<course>/…` draws a course in the frame with crumbs and ⋮ (settings, ✨ Through Claude, another course), the course's addresses mapped both ways; a "continue" card on Today; + New language; the boot opens `?subject=lang:<id>` or the course you were in at `#/lang/<id>`; the frame's colours; `shell: false` unchanged. Conflicts resolved as docs/NEW_FRAME_AND_LANGUAGES.md and docs/SHELF_AND_LANGUAGES.md say (README, `loader.js`, `tests/curriculum.js`, `tools/build.py`). Tested by `tests/lang_frame.js`.

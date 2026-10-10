@@ -1,5 +1,7 @@
 # 🧭 The new frame and 文A language courses — notes for merging
 
+> **Done.** The `languages` branch was merged into `main` on 2026-10-10 (with its history) and deleted. This note is kept as the record of how the two met.
+
 This file is on both `main` and `languages`. It tells whoever merges one into the other what the new frame (the redesigned
 interface, branch `claude/project-thread-bhkz8b`, docs/UI_MAP.md) changes around the language courses (docs/LANGUAGES.md),
 and how the courses can live inside it. Nothing on the `languages` branch has to change before that merge: the courses keep
