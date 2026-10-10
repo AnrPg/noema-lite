@@ -318,7 +318,7 @@ console.log('— 3 · the app');
   const tr1 = await page.evaluate(() => { const box = document.querySelector('.lx-extrace'), T = box._strokeTest; T.draw(T.med[0].slice().reverse()); return document.querySelector('.lx-tracestatus').textContent; });
   const tr2 = await page.evaluate(() => { const box = document.querySelector('.lx-extrace'), T = box._strokeTest; for (const m of T.med) T.draw(m); return !!document.querySelector('.lx-fb.ok'); });
   ok(/other way round/.test(tr1) && tr2, `trace ${it.glyph}: a reversed stroke is refused, the strokes in order are accepted (1 miss allowed)`);
-  for (let i = 0; i < 8; i++) { await next(); if (await page.evaluate(() => document.querySelector('.lx-extrace')?._strokeTest.med.length >= 3)) break; }
+  for (let i = 0; i < 40; i++) { await next(); if (await page.evaluate(() => document.querySelector('.lx-extrace')?._strokeTest.med.length >= 4)) break; }
   const tr3 = await page.evaluate(() => { const T = document.querySelector('.lx-extrace')._strokeTest;   // the stroke farthest from the first one, drawn twice
     const far = T.med.slice(1).sort((a, b) => NoemaLang.strokeMatch(b, T.med[0]).dist - NoemaLang.strokeMatch(a, T.med[0]).dist)[0]; T.draw(far); T.draw(far); return document.querySelector('.lx-tracestatus').textContent; });
   ok(/not stroke 1/.test(tr3) && /orange/.test(tr3), 'trace: strokes out of order are refused, then the next stroke is shown');
